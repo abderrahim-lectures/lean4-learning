@@ -1,0 +1,53 @@
+## Example: every abelian group is a $\mathbb{Z}$-module
+
+[← Translating into Lean](02-translating-into-lean.md) | [Index](00-index.md) | [Next: Submodules →](04-submodules.md)
+
+---
+
+This is the standard first example, and a good one to actually build
+because the scalar action isn't given data — it has to be *defined*, by
+repeated addition, from the group structure alone.
+
+```lean
+-- n • m for n : Nat, by iterating `op`.
+def natSmul {M : Type} (Grp : Group M) (n : Nat) (m : M) : M :=
+  match n with
+  | Nat.zero => Grp.id
+  | Nat.succ k => Grp.op m (natSmul Grp k m)
+
+-- extend to n : Int by using `inv` on negative n.
+def intSmul {M : Type} (CG : CommGroup M) (n : Int) (m : M) : M :=
+  match n with
+  | Int.ofNat k => natSmul CG.toGroup k m
+  | Int.negSucc k => CG.toGroup.inv (natSmul CG.toGroup (k + 1) m)
+```
+
+`natSmul Grp n m` is literally $m + m + \cdots + m$ ($n$ times), defined by
+recursion on `n` exactly the way `Nat.add` itself was (Chapter 4);
+`intSmul` extends it to negative integers via the group inverse. Given any
+`CG : CommGroup M`, one can then check `intSmul CG` satisfies (M1)–(M4)
+against `intRing` (Chapter 8) — a genuine (if somewhat long) proof by
+induction on the integer scalar, in the same spirit as Chapter 4's
+`my_add_comm`; we leave the full verification as an extended exercise,
+since carrying it out yourself is the best way to see *why* modules over
+$\mathbb{Z}$ are forced, not chosen: `intSmul` is the *unique* action
+making any abelian group into a $\mathbb{Z}$-module, because (M4) plus
+(M1)/(M2) pin down $n \cdot m$ for every integer $n$ by induction, leaving
+no freedom.
+
+**Mathematical reading.** This constructs the canonical $\mathbb{Z}$-action
+on any abelian group, realizing the equivalence of categories
+$\mathbb{Z}\text{-}\mathbf{Mod} \simeq \mathbf{Ab}$. `natSmul` is the
+$\mathbb{N}$-action $n\cdot m = \underbrace{m + \cdots + m}_{n}$ (the
+$n$-fold sum, with $0\cdot m = 0$), and `intSmul` extends it to $\mathbb{Z}$
+by $(-n)\cdot m = -(n\cdot m)$. This is forced: since $\mathbb{Z}$ is the
+*initial* ring, there is a unique ring map $\mathbb{Z} \to
+\mathrm{End}(M)$ for any abelian group $M$ (it must send $1 \mapsto
+\mathrm{id}_M$, hence $n \mapsto n\cdot\mathrm{id}_M$), so the $\mathbb{Z}$-
+module structure is unique — "abelian group" and "$\mathbb{Z}$-module" are
+literally the same notion. The recursion mirrors the definition of
+multiplication-as-iterated-addition.
+
+---
+
+[← Translating into Lean](02-translating-into-lean.md) | [Index](00-index.md) | [Next: Submodules →](04-submodules.md)

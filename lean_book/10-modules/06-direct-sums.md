@@ -1,0 +1,105 @@
+## Direct sums of modules
+
+[← Linear maps](05-linear-maps.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)
+
+---
+
+Given two $R$-modules $M$, $N$, their direct sum $M \oplus N$ has carrier
+$M \times N$, componentwise addition, and componentwise scalar action:
+
+```lean
+structure DirectSum (M N : Type) where
+  fst : M
+  snd : N
+
+def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
+    (ModM : Module R Rg M) (ModN : Module R Rg N) :
+    Module R Rg (DirectSum M N) where
+  addGrp := {
+    toGroup := {
+      op := fun x y => ⟨ModM.addGrp.op x.fst y.fst, ModN.addGrp.op x.snd y.snd⟩
+      id := ⟨ModM.addGrp.toGroup.id, ModN.addGrp.toGroup.id⟩
+      inv := fun x => ⟨ModM.addGrp.toGroup.inv x.fst, ModN.addGrp.toGroup.inv x.snd⟩
+      assoc := by
+        intro x y z
+        show DirectSum.mk _ _ = DirectSum.mk _ _
+        congr 1
+        · exact ModM.addGrp.toGroup.assoc x.fst y.fst z.fst
+        · exact ModN.addGrp.toGroup.assoc x.snd y.snd z.snd
+      id_left := by
+        intro x
+        congr 1
+        · exact ModM.addGrp.toGroup.id_left x.fst
+        · exact ModN.addGrp.toGroup.id_left x.snd
+      id_right := by
+        intro x
+        congr 1
+        · exact ModM.addGrp.toGroup.id_right x.fst
+        · exact ModN.addGrp.toGroup.id_right x.snd
+      inv_left := by
+        intro x
+        congr 1
+        · exact ModM.addGrp.toGroup.inv_left x.fst
+        · exact ModN.addGrp.toGroup.inv_left x.snd
+      inv_right := by
+        intro x
+        congr 1
+        · exact ModM.addGrp.toGroup.inv_right x.fst
+        · exact ModN.addGrp.toGroup.inv_right x.snd
+    }
+    comm := by
+      intro x y
+      congr 1
+      · exact ModM.addGrp.comm x.fst y.fst
+      · exact ModN.addGrp.comm x.snd y.snd
+  }
+  smul := fun r x => ⟨ModM.smul r x.fst, ModN.smul r x.snd⟩
+  smul_add := by
+    intro r x y
+    congr 1
+    · exact ModM.smul_add r x.fst y.fst
+    · exact ModN.smul_add r x.snd y.snd
+  add_smul := by
+    intro r s x
+    congr 1
+    · exact ModM.add_smul r s x.fst
+    · exact ModN.add_smul r s x.snd
+  smul_smul := by
+    intro r s x
+    congr 1
+    · exact ModM.smul_smul r s x.fst
+    · exact ModN.smul_smul r s x.snd
+  one_smul := by
+    intro x
+    congr 1
+    · exact ModM.one_smul x.fst
+    · exact ModN.one_smul x.snd
+```
+
+`congr 1` is a tactic worth calling out since this is its first appearance:
+given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`), `congr 1`
+reduces it to the componentwise goals `a1 = b1` and `a2 = b2` — the
+categorical fact that a product's equality is checked pairwise, made into a
+one-line tactic rather than a hand-unfolded `Prod.ext`-style lemma. Every
+proof obligation above genuinely *is* two independent facts, one from `M`
+and one from `N`, glued by the direct-sum's product structure — `congr 1`
+is the right tool exactly because it exposes that independence directly,
+rather than obscuring it inside a single opaque equality on pairs.
+
+**Mathematical reading.** This builds the **direct sum** $M \oplus N$: its
+carrier is the product $M \times N$, with all structure defined
+componentwise — $(m,n) + (m',n') = (m+m',\, n+n')$, $0 = (0,0)$, $-(m,n) =
+(-m,-n)$, and $r\cdot(m,n) = (r\cdot m,\, r\cdot n)$. Every axiom holds
+because it holds in each coordinate independently, which is exactly what
+`congr 1` exposes: an equation of pairs splits into one equation in $M$ and
+one in $N$. For finitely many summands the direct sum $M \oplus N$ is
+simultaneously the product and the coproduct in $R\text{-}\mathbf{Mod}$ (a
+*biproduct*): the projections $\pi_M, \pi_N$ and inclusions $\iota_M,
+\iota_N$ satisfy $\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$,
+$\pi_M\iota_N = 0$, and $\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$ — the
+defining universal properties, reflecting that $R\text{-}\mathbf{Mod}$ is an
+additive (indeed abelian) category.
+
+---
+
+[← Linear maps](05-linear-maps.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)

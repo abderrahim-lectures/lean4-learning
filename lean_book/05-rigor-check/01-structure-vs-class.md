@@ -1,0 +1,114 @@
+## `structure` versus `class`: why this book delays type classes
+
+[← Index](00-index.md) | [Next: Universes →](02-universes.md)
+
+---
+
+Every algebraic definition in this book — `Group`, `Ring`, `Module` — is
+written as a plain `structure`. Mathlib, the real Lean library, defines
+all of these using `class` instead:
+
+```lean
+-- this book's style
+structure Group (G : Type) where
+  op : G → G → G
+  id : G
+  inv : G → G
+  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
+  id_left : ∀ a : G, op id a = a
+  -- ...
+
+-- Mathlib's style (schematically — not the literal Mathlib source)
+class Group (G : Type) where
+  op : G → G → G
+  id : G
+  inv : G → G
+  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
+  id_left : ∀ a : G, op id a = a
+  -- ...
+```
+
+Syntactically these look almost identical — `class` is very nearly sugar
+for `structure` plus one extra mechanism. Understanding exactly what that
+mechanism is (and why this book avoids it until you've built the
+intuition `class` would otherwise hide) is the point of this section.
+
+### What `class` actually adds: instance search
+
+A `class` is a `structure` whose *inhabitants* Lean is willing to search
+for automatically, via a process called **typeclass resolution** (or
+"instance search"). When you write `class Group (G : Type)`, and then
+register a particular group structure with the keyword `instance` instead
+of `def`:
+
+```lean
+instance : Group Int where
+  op := fun a b => a + b
+  id := 0
+  inv := fun a => -a
+  -- ...
+```
+
+Lean remembers `Int`'s group structure in a global table. From then on,
+any function that takes an *implicit* `[Group G]` argument (square
+brackets, not curly braces — a third kind of argument, an **instance
+argument**) gets it filled in automatically whenever `G` is unified with
+`Int`, with no explicit term needed at the call site:
+
+```lean
+def opTwice [Group G] (x : G) : G :=
+  Group.op x x   -- the `Group G` instance is found automatically
+
+#eval opTwice (3 : Int)   -- Lean infers the `Group Int` instance silently
+```
+
+Compare this to the style used throughout this book, where every theorem
+about groups takes an *explicit* term `Grp : Group G` as a genuine
+function argument:
+
+```lean
+def opTwice (Grp : Group G) (x : G) : G :=
+  Grp.op x x
+
+#eval opTwice intGroup 3   -- you must name the specific Group term
+```
+
+Mathematically, the difference is: `class` + `instance` implements the
+same convention as ordinary mathematical prose, where you write "let $G$
+be a group" once and then simply write $a \cdot b$, $e$, $a^{-1}$
+thereafter — the *specific* group structure is left implicit, tracked by
+context, and never re-named at each use. Lean's typeclass mechanism
+mechanizes exactly that convention; a `structure`-only approach (this
+book's style) is the more pedantic alternative where you *always* carry
+the structure around explicitly, the way you would if a referee demanded
+you never suppress which group operation you mean.
+
+### Why this book deliberately avoids `class`, for now
+
+`class`'s automation is exactly what would make it harder to see, the
+first time through, what is actually happening: every `Grp.op`, every
+`Grp.assoc` in this book's proofs is a visible, traceable term — you can
+always ask "where did this fact come from?" and point at the specific
+argument it's a field of. With `class`, that same information is present
+but resolved silently by the elaborator, which is wonderful once you trust
+it and painful to debug the first time instance resolution picks the
+"wrong" (or an unexpected) instance, or fails to find one at all. Learning
+to read the *explicit* version first — this book's approach — builds the
+mental model that makes debugging *silent* instance-resolution failures
+tractable later, precisely because you already know what data is being
+threaded through even when it's no longer visible in the source text.
+
+### The bridge to Mathlib
+
+Nothing about the *mathematical content* changes between the two styles —
+`Group`'s axioms are the axioms, in either encoding. The type-class version
+additionally usually bundles in the group's `*`, `⁻¹`, `1` as genuine
+*notation* (via further, separate mechanisms — `Mul`, `Inv`, `One` type
+classes that `Group` extends), so that Mathlib code reads as `a * b`
+instead of `Grp.op a b`. Chapter 13's suggested projects include redoing
+this book's `Group`/`Ring` as type classes once you're comfortable — at
+that point, everything in this section is the vocabulary you'll need.
+
+---
+
+[← Index](00-index.md) | [Next: Universes →](02-universes.md)

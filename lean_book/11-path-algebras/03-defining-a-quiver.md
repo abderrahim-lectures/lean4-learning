@@ -1,0 +1,63 @@
+## Defining a quiver in Lean
+
+[← Paths](02-paths.md) | [Index](00-index.md) | [Next: Paths as an inductive type →](04-paths-as-inductive-type.md)
+
+---
+
+We encode a quiver as a `structure`, parameterized by a type of vertices and
+a type of arrows:
+
+```lean
+structure Quiver (V : Type) (A : Type) where
+  source : A → V
+  target : A → V
+```
+
+This is a direct transcription: `V` is the type of vertices, `A` the type of
+arrows, and `source`/`target` are exactly $s$ and $t$ above.
+
+**Mathematical reading.** `Quiver V A` is a quiver $Q = (V, A, s, t)$ — the
+data of two functions $s, t : A \to V$, i.e. a parallel pair of arrows
+$A \rightrightarrows V$ in $\mathbf{Set}$. Equivalently a quiver is a
+diagram on the two-object category $(\bullet \rightrightarrows \bullet)$, so
+the type of quivers is the functor category (presheaf category)
+$\mathbf{Set}^{(\bullet\rightrightarrows\bullet)}$. A quiver is precisely
+the underlying data of a small category *before* imposing composition and
+identities — the raw generators from which the free category (paths) will be
+built.
+
+### Our example quiver, formalized
+
+Encode the three vertices as `Fin 3` (values `0, 1, 2`, standing for
+vertices `1, 2, 3`) and the two nontrivial arrows as an inductive type:
+
+```lean
+inductive ExampleArrow where
+  | alpha : ExampleArrow   -- 0 → 1
+  | beta : ExampleArrow     -- 1 → 2
+
+def exampleQuiver : Quiver (Fin 3) ExampleArrow where
+  source := fun a => match a with
+    | ExampleArrow.alpha => 0
+    | ExampleArrow.beta => 1
+  target := fun a => match a with
+    | ExampleArrow.alpha => 1
+    | ExampleArrow.beta => 2
+```
+
+`inductive ExampleArrow where | alpha : ExampleArrow | beta : ExampleArrow`
+defines a brand-new type with exactly two values, `alpha` and `beta` — this
+is the same `inductive` mechanism that builds `Nat` (Chapter 1) and `Bool`,
+just with two constructors that carry no extra data.
+
+**Mathematical reading.** This is the concrete quiver $Q$ with vertex set
+$V = \{0,1,2\}$ (encoded as $\mathrm{Fin}\,3$) and arrow set $A =
+\{\alpha, \beta\}$, where $s(\alpha)=0,\ t(\alpha)=1$ and $s(\beta)=1,\
+t(\beta)=2$ — the linear $A_3$ quiver $0 \xrightarrow{\alpha} 1
+\xrightarrow{\beta} 2$. The two-element inductive type is the finite set
+$A = \{\alpha,\beta\}$, and the `match`-defined `source`/`target` are the
+functions $s, t : A \to V$ given by their value tables.
+
+---
+
+[← Paths](02-paths.md) | [Index](00-index.md) | [Next: Paths as an inductive type →](04-paths-as-inductive-type.md)

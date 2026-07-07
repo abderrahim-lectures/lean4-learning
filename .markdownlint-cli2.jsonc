@@ -1,0 +1,12 @@
+{
+  "config": {
+    "extends": ".markdownlint.jsonc"
+  },
+  "globs": ["**/*.md"],
+  "ignores": [
+    "**/node_modules/**",
+    "lean_project/.lake/**",
+    "lean_project/build/**",
+    ".claude/**"
+  ]
+}

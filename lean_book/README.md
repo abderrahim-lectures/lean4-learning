@@ -1,4 +1,4 @@
-# Lean 4 from Zero: Groups, Rings, and Path Algebras
+# Lean for Working Algebraists
 
 A guide to Lean 4 for readers who already think in groups, rings, functors,
 and diagrams, but have never written a line of Lean (or any proof
@@ -13,7 +13,9 @@ encoding.
 
 ## How to read this book
 
-Each chapter is a standalone Markdown file in [chapters/](chapters/). LaTeX
+Each chapter is its own folder (e.g. [06-groups/](06-groups/)) containing a
+`00-index.md` overview plus one small Markdown file per section — open the
+chapter's `00-index.md` first, which links to every section in order. LaTeX
 math is written inline as `$...$` and in display blocks as `$$...$$`; render
 with any Markdown viewer that supports MathJax/KaTeX (e.g. VS Code with a
 Markdown+Math extension, or Pandoc).
@@ -25,36 +27,40 @@ run them yourself.
 This book is about more than the constructs it covers — the running goal is
 to build the *skill* of using Lean: reading a goal state, deciding what to
 try next, recovering when a tactic fails, and knowing which proofs to
-derive by hand versus hand off to automation. Chapters 6 and 8 in
+derive by hand versus hand off to automation. Chapters 7 and 9 in
 particular present each theorem as a search process (what to look at, what
 to try, why an attempt fails) rather than only the polished final proof;
-Chapter 10 is dedicated entirely to working efficiently once the underlying
-ideas are understood.
+Chapter 12 is dedicated entirely to working efficiently once the underlying
+ideas are understood. Chapter 5 pauses to address the rigor questions a
+careful mathematician will already be asking by that point — `structure`
+versus `class`, universes, and definitional versus propositional equality —
+before committing to `Group`'s definition in Chapter 6.
 
 ## Table of contents
 
 **Part I — Lean fundamentals**
 
-0. [Setting up Lean 4](chapters/00-setup.md)
-1. [First steps: terms, types, `#eval`](chapters/01-basics.md)
-2. [Functions, definitions, and structures](chapters/02-functions-and-structures.md)
-3. [Propositions as types, and basic proofs](chapters/03-propositions-and-proofs.md)
-4. [Tactics, and how to work a goal you don't know the proof of](chapters/04-tactics.md)
+0. [Setting up Lean 4](00-setup/00-index.md)
+1. [First steps: terms, types, `#eval`](01-basics/00-index.md)
+2. [Functions, definitions, and structures](02-functions-and-structures/00-index.md)
+3. [Propositions as types, and basic proofs](03-propositions-and-proofs/00-index.md)
+4. [Tactics, and how to work a goal you don't know the proof of](04-tactics/00-index.md)
+5. [Rigor check: structures, universes, and equality](05-rigor-check/00-index.md)
 
 **Part II — Algebra, formalized**
 
-5. [Structures and classes: defining a `Group`](chapters/05-groups.md)
-6. [Group examples and basic theorems](chapters/06-group-theorems.md)
-7. [Rings: adding a second operation](chapters/07-rings.md)
-8. [Ring examples and basic theorems](chapters/08-ring-theorems.md)
-9. [Modules over a ring](chapters/09-modules.md)
-10. [Quivers and path algebras](chapters/10-path-algebras.md)
+6. [Structures and classes: defining a `Group`](06-groups/00-index.md)
+7. [Group examples and basic theorems](07-group-theorems/00-index.md)
+8. [Rings: adding a second operation](08-rings/00-index.md)
+9. [Ring examples and basic theorems](09-ring-theorems/00-index.md)
+10. [Modules over a ring](10-modules/00-index.md)
+11. [Quivers and path algebras](11-path-algebras/00-index.md)
 
 **Part III — Working with Lean, and beyond**
 
-11. [Working efficiently in Lean](chapters/11-working-efficiently.md)
-12. [Where to go next](chapters/12-next-steps.md)
-13. [Appendix: Solutions to exercises](chapters/13-appendix-solutions.md)
+12. [Working efficiently in Lean](12-working-efficiently/00-index.md)
+13. [Where to go next](13-next-steps/00-index.md)
+14. [Appendix: Solutions to exercises](14-appendix-solutions/00-index.md)
 
 ## Navigation
 

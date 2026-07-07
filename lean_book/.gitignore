@@ -1,0 +1,4 @@
+# Rendered output if the book is built with Pandoc or similar tools.
+*.pdf
+*.html
+_site/

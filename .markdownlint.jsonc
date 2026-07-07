@@ -1,0 +1,25 @@
+{
+  // Line length: the book uses long prose lines and long Lean code lines
+  // inside fenced blocks (already exempted by default); disable for prose too
+  // since this is a book of flowing paragraphs, not code.
+  "MD013": false,
+  // Allow inline HTML (not currently used, but don't block it if needed later).
+  "MD033": false,
+  // Allow duplicate heading text across different files (e.g. "## Exercises"
+  // repeats in every chapter) — only flag duplicates within the same file.
+  "MD024": { "siblings_only": true },
+  // Allow bare URLs to remain unlinted where used.
+  "MD034": true,
+  // Book chapters are split into folders where each section file
+  // intentionally starts with "## Section Title" (the "#" h1 lives only in
+  // that chapter's 00-index.md) — don't require a top-level heading in
+  // every file.
+  "MD041": false,
+  // The README's table of contents restarts numbering per "Part" (Part I,
+  // II, III) rather than running 1..13 straight through, and uses bold
+  // "**Part N — ...**" labels instead of headings for those part titles —
+  // both are deliberate style choices here, not errors.
+  "MD029": false,
+  "MD036": false,
+  "default": true
+}
