@@ -115,18 +115,24 @@ induction-on-the-scalar pattern and is a good longer independent exercise.
 ```lean
 def multiplesSubmodule (d : Int) : Submodule intRing intZModule where
   carrier := fun m => ∃ k : Int, m = d * k
-  zero_mem := ⟨0, by ring⟩
+  zero_mem := ⟨0, by show (0 : Int) = d * 0; rw [Int.mul_zero]⟩
   add_mem := by
     intro m n ⟨k, hk⟩ ⟨j, hj⟩
-    exact ⟨k + j, by rw [hk, hj]; ring⟩
+    refine ⟨k + j, ?_⟩
+    show m + n = d * (k + j)
+    rw [hk, hj, Int.mul_add]
   smul_mem := by
     intro r m ⟨k, hk⟩
-    exact ⟨r * k, by rw [hk]; ring⟩
+    refine ⟨r * k, ?_⟩
+    show r * m = d * (r * k)
+    rw [hk, ← Int.mul_assoc, Int.mul_comm r d, Int.mul_assoc]
 ```
 
 Identical in shape to `evenSubmodule` (the case `d = 2`) — every `2` in
 that proof is simply replaced by the parameter `d`, and each closure proof
-still reduces to a polynomial identity over `Int`, closed by `ring`.
+still reduces to an `Int` equation, discharged the same way (`show` to
+reveal the goal's `+`/`*`-form, then `rw`), rather than with `ring` (which
+this book doesn't import from Mathlib).
 
 ---
 

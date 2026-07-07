@@ -80,6 +80,8 @@ def isZero (n : Nat) : Prop := n = 0
 
 theorem isZero_zero : isZero 0 := by
   unfold isZero
+  -- Goal after unfold: 0 = 0
+  rfl
 ```
 
 **Mathematical reading.** `unfold isZero` replaces the defined name by its

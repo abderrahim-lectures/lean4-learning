@@ -25,10 +25,13 @@ factor for this pattern before trying anything else.
 ```lean
 theorem neg_one_mul (a : R) :
     Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a := by
-  apply Eq.symm
   apply left_inverse_unique Rg.addGrp.toGroup
   -- Goal: op (mul (inv one) a) a = id
-  conv_lhs => rw [show a = Rg.mul Rg.one a from (Rg.one_mul a).symm]
+  have step : Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a) a =
+      Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a) (Rg.mul Rg.one a) :=
+    congrArg (Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a))
+      (show a = Rg.mul Rg.one a from (Rg.one_mul a).symm)
+  rw [step]
   -- Goal: op (mul (inv one) a) (mul one a) = id
   rw [← Rg.right_distrib]
   -- Goal: mul (op (inv one) one) a = id
@@ -37,14 +40,25 @@ theorem neg_one_mul (a : R) :
   exact mul_zero_left Rg a
 ```
 
-`conv_lhs => rw [...]` deserves a note: plain `rw` would try to rewrite
-*every* occurrence of `a` in the goal, including the one inside
-`mul (inv one) a` that we want to leave alone. `conv_lhs` narrows the
-rewrite to only the left-hand side of the goal's equation — a targeting
-tool, not a new algebraic idea. Whenever a plain `rw` seems like it would
-hit the wrong occurrence of a term, `conv` (or restating the goal with
-`show` first) is the fix; reach for it rather than fighting `rw`'s default
-"rewrite everywhere" behavior.
+Two things worth noting about the proof's shape, both found by actually
+compiling it:
+
+- **No `apply Eq.symm` at the start.** The goal
+  `Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a`
+  already has the exact shape `left_inverse_unique` concludes
+  (`b = Grp.inv a`, with `b` unifying to
+  `Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a`) — flipping it with `Eq.symm`
+  first produces the *wrong* shape, and `apply left_inverse_unique` then
+  fails to unify. When `apply`ing a lemma whose conclusion is an equality,
+  check which side is which *before* reaching for `Eq.symm`, rather than
+  adding it reflexively.
+- **`congrArg`, not `conv_lhs => rw [...]`.** Plain `rw [h]` here would try
+  to rewrite *every* occurrence of `a` in the goal, including the one
+  inside `mul (inv one) a` that must stay put — exactly the same class of
+  problem as Theorem 1's `h2` on the previous page. `congrArg f h` sidesteps
+  it by directly constructing "apply `f` to both sides of `h`" as its own
+  standalone fact (`step`, above), which is then used with a single,
+  unambiguous `rw [step]`.
 
 This proof cites `mul_zero_left`, the mirror of Theorem 1 with
 `right_distrib` in place of `left_distrib` — left as Exercise 1, since

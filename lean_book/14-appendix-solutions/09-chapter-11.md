@@ -45,11 +45,12 @@ unless one imposes relations (an "admissible ideal") on the path algebra.
 theorem append_nil_left {V A : Type} {Q : Quiver V A} {u v : V} (p : Path Q u v) :
     Path.append (Path.nil u) p = p := by
   induction p with
-  | nil v =>
-    -- Goal: Path.append (Path.nil u) (Path.nil v) = Path.nil v
-    -- Here u and v are the same vertex (both goals collapse since nil's
-    -- source and target indices coincide); Path.append unfolds on its
-    -- second argument being `nil`, giving `Path.nil u` on the nose.
+  | nil =>
+    -- Goal: Path.append (Path.nil u) (Path.nil u) = Path.nil u
+    -- (`nil`'s case binds no fresh variable here — the vertex is already
+    -- fixed by p's own type — so there is nothing to name.)
+    -- Path.append unfolds on its second argument being `nil`, giving
+    -- `Path.nil u` on the nose.
     rfl
   | cons a h h' q' ih =>
     -- ih : Path.append (Path.nil u) q' = q'

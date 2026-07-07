@@ -1,1 +1,12 @@
 import LeanProject.Basic
+import LeanProject.Ch01Basics
+import LeanProject.Ch02Structures
+import LeanProject.Ch03Propositions
+import LeanProject.Ch04Tactics
+import LeanProject.Ch05RigorCheck
+import LeanProject.Ch06Groups
+import LeanProject.Ch07GroupTheorems
+import LeanProject.Ch08Rings
+import LeanProject.Ch09RingTheorems
+import LeanProject.Ch10Modules
+import LeanProject.Ch11PathAlgebras

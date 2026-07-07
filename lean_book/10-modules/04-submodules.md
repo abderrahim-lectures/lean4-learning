@@ -37,26 +37,57 @@ monomorphism into $M$.
 
 ### Example: the submodule of even integers, as a $\mathbb{Z}$-submodule of $\mathbb{Z}$
 
+First, the $\mathbb{Z}$-module structure on $\mathbb{Z}$ itself — needed
+below, and only ever described in passing until now:
+
 ```lean
-def evenSubmodule : Submodule intRing (intZModule) where
-  -- (intZModule : Module Int intRing Int would package intSmul from above;
-  -- constructed the same way intCommGroup packaged intGroup in Chapter 8.)
+def intZModule : Module Int intRing Int where
+  addGrp := intCommGroup
+  smul := fun r m => r * m
+  smul_add := by
+    intro r m n
+    exact Int.mul_add r m n
+  add_smul := by
+    intro r s m
+    exact Int.add_mul r s m
+  smul_smul := by
+    intro r s m
+    exact Int.mul_assoc r s m
+  one_smul := by
+    intro m
+    exact Int.one_mul m
+```
+
+```lean
+-- NOTE: `intZModule.addGrp.op`/`.id`/`.smul` are definitionally (but not
+-- syntactically) equal to plain `+`/`0`/`*` on `Int` — true by `rfl`, but
+-- `rw` only fires on syntactic matches, so a bare `rw [...]` (or `ring`,
+-- which this book doesn't import from Mathlib anyway) would leave
+-- an unsolved goal even though the underlying statement is true. `show`
+-- restates the goal in its reduced (defeq) form explicitly first.
+def evenSubmodule : Submodule intRing intZModule where
   carrier := fun m => ∃ k : Int, m = 2 * k
-  zero_mem := ⟨0, by ring⟩
+  zero_mem := ⟨0, rfl⟩
   add_mem := by
     intro m n ⟨k, hk⟩ ⟨j, hj⟩
-    exact ⟨k + j, by rw [hk, hj]; ring⟩
+    refine ⟨k + j, ?_⟩
+    show m + n = 2 * (k + j)
+    rw [hk, hj, Int.mul_add]
   smul_mem := by
     intro r m ⟨k, hk⟩
-    exact ⟨r * k, by rw [hk]; ring⟩
+    refine ⟨r * k, ?_⟩
+    show r * m = 2 * (r * k)
+    rw [hk, ← Int.mul_assoc, Int.mul_comm r 2, Int.mul_assoc]
 ```
 
 Each closure proof follows the same shape: destructure the hypothesis to
 expose its witness (`⟨k, hk⟩` says "`m` is even, with witness `k` and proof
 `hk : m = 2 * k`"), then supply a new witness and discharge the resulting
-polynomial identity with `ring` — a scoped, deliberate use of automation
-exactly as in Chapter 8's matrix example, since every one of these
-side-conditions is a genuine commutative-ring identity over `Int`.
+`Int` equation. `zero_mem`'s witness `0` makes the goal `id = 2 * 0`, true
+by `rfl` directly (both sides compute to `0`); `add_mem` and `smul_mem`
+need `show` first to reveal the goal's `+`/`*`-form before `rw` can find
+anything to rewrite, since `Mod.addGrp.op`/`Mod.smul` don't display as
+plain `+`/`*` even though they compute to exactly that here.
 
 **Mathematical reading.** This is the submodule $2\mathbb{Z} \le \mathbb{Z}$
 of even integers, $2\mathbb{Z} = \{\, m \mid \exists k,\ m = 2k \,\}$ — the

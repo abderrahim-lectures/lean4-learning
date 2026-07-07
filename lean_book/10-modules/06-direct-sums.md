@@ -28,27 +28,32 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
         · exact ModN.addGrp.toGroup.assoc x.snd y.snd z.snd
       id_left := by
         intro x
+        show DirectSum.mk _ _ = DirectSum.mk _ _
         congr 1
         · exact ModM.addGrp.toGroup.id_left x.fst
         · exact ModN.addGrp.toGroup.id_left x.snd
       id_right := by
         intro x
+        show DirectSum.mk _ _ = DirectSum.mk _ _
         congr 1
         · exact ModM.addGrp.toGroup.id_right x.fst
         · exact ModN.addGrp.toGroup.id_right x.snd
       inv_left := by
         intro x
+        show DirectSum.mk _ _ = DirectSum.mk _ _
         congr 1
         · exact ModM.addGrp.toGroup.inv_left x.fst
         · exact ModN.addGrp.toGroup.inv_left x.snd
       inv_right := by
         intro x
+        show DirectSum.mk _ _ = DirectSum.mk _ _
         congr 1
         · exact ModM.addGrp.toGroup.inv_right x.fst
         · exact ModN.addGrp.toGroup.inv_right x.snd
     }
     comm := by
       intro x y
+      show DirectSum.mk _ _ = DirectSum.mk _ _
       congr 1
       · exact ModM.addGrp.comm x.fst y.fst
       · exact ModN.addGrp.comm x.snd y.snd
@@ -56,21 +61,25 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
   smul := fun r x => ⟨ModM.smul r x.fst, ModN.smul r x.snd⟩
   smul_add := by
     intro r x y
+    show DirectSum.mk _ _ = DirectSum.mk _ _
     congr 1
     · exact ModM.smul_add r x.fst y.fst
     · exact ModN.smul_add r x.snd y.snd
   add_smul := by
     intro r s x
+    show DirectSum.mk _ _ = DirectSum.mk _ _
     congr 1
     · exact ModM.add_smul r s x.fst
     · exact ModN.add_smul r s x.snd
   smul_smul := by
     intro r s x
+    show DirectSum.mk _ _ = DirectSum.mk _ _
     congr 1
     · exact ModM.smul_smul r s x.fst
     · exact ModN.smul_smul r s x.snd
   one_smul := by
     intro x
+    show DirectSum.mk _ _ = DirectSum.mk _ _
     congr 1
     · exact ModM.one_smul x.fst
     · exact ModN.one_smul x.snd
@@ -84,7 +93,13 @@ one-line tactic rather than a hand-unfolded `Prod.ext`-style lemma. Every
 proof obligation above genuinely *is* two independent facts, one from `M`
 and one from `N`, glued by the direct-sum's product structure — `congr 1`
 is the right tool exactly because it exposes that independence directly,
-rather than obscuring it inside a single opaque equality on pairs.
+rather than obscuring it inside a single opaque equality on pairs. Note
+the `show DirectSum.mk _ _ = DirectSum.mk _ _` line before each `congr 1`:
+without it, the goal is stated in terms of the anonymous-constructor
+lambda (`op := fun x y => ⟨...⟩`) rather than the visible `DirectSum.mk`
+application, and `congr 1` cannot reliably split a goal it doesn't
+recognize as "one constructor applied to arguments on both sides" — a real
+gap the compiler catches immediately if the `show` line is omitted.
 
 **Mathematical reading.** This builds the **direct sum** $M \oplus N$: its
 carrier is the product $M \times N$, with all structure defined

@@ -17,8 +17,8 @@ theorem or_example {P Q : Prop} (hp : P) : P ∨ Q :=
   Or.inl hp
 
 -- Not, i.e. P → False
-theorem not_example : ¬(1 = 2) :=
-  fun h => Nat.noConfusion h
+theorem not_example : ¬(1 = 2) := by
+  decide
 ```
 
 - `∧` (And) is a structure with two fields `left` and `right`; `⟨hp, hq⟩` is
@@ -38,9 +38,13 @@ $(p,q)$ and `and_left` applies $\pi_1$. Disjunction $P \vee Q$ is the
 the universal property of the coproduct. Negation is $\neg P := (P \to
 \bot)$, a map into the initial object $\bot = \varnothing$; a proof of
 $\neg(1=2)$ is a function turning the (impossible) hypothesis $1 = 2$ into
-an element of $\varnothing$, vacuously, via `Nat.noConfusion` — the fact
-that distinct constructors are disjoint. Note this is *intuitionistic*
-logic: there is no built-in law of excluded middle.
+an element of $\varnothing$, vacuously — here discharged by `decide`, which
+mechanically confirms $1 \neq 2$ since equality of `Nat` literals is
+decidable, but underneath is exactly the same fact used throughout this
+book: distinct constructors of an inductive type (`Nat.succ`, applied a
+different number of times) are disjoint, so `1 = 2` has no proof to begin
+with. Note this is *intuitionistic* logic: there is no built-in law of
+excluded middle.
 
 ---
 

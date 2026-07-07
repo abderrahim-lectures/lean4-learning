@@ -25,6 +25,18 @@ structure Mat2 where
   a21 : Int
   a22 : Int
 
+-- Core Lean 4 does not auto-generate a field-wise extensionality lemma
+-- for a plain `structure` (that convenience is a Mathlib `@[ext]`
+-- attribute); we supply one by hand, using the `mk.injEq` lemma core Lean
+-- *does* generate for every structure, so it can be used below exactly
+-- like an auto-generated `.ext` would be.
+theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
+    (h3 : X.a21 = Y.a21) (h4 : X.a22 = Y.a22) : X = Y := by
+  cases X
+  cases Y
+  rw [Mat2.mk.injEq]
+  exact ⟨h1, h2, h3, h4⟩
+
 def Mat2.add (X Y : Mat2) : Mat2 where
   a11 := X.a11 + Y.a11
   a12 := X.a12 + Y.a12
@@ -101,10 +113,9 @@ def mat2Group : Group Mat2 where
     -- Goal: Mat2.add (Mat2.add X Y) Z = Mat2.add X (Mat2.add Y Z)
     show Mat2.mk _ _ _ _ = Mat2.mk _ _ _ _
     -- Each of the four field-equations reduces to Int addition's
-    -- associativity, entrywise. `Mat2.ext` (the automatically generated
-    -- extensionality lemma: two Mat2's are equal iff all four fields
-    -- match) lets us split the single Mat2 equality into four Int
-    -- equalities.
+    -- associativity, entrywise. `Mat2.ext` (the extensionality lemma
+    -- defined above: two Mat2's are equal iff all four fields match) lets
+    -- us split the single Mat2 equality into four Int equalities.
     apply Mat2.ext <;> exact Int.add_assoc _ _ _
   id_left := by
     intro X
@@ -125,6 +136,15 @@ def mat2CommGroup : CommGroup Mat2 where
     intro X Y
     apply Mat2.ext <;> exact Int.add_comm _ _
 
+-- A reusable shuffle: rearranges (a+b)+(c+d) into (a+c)+(b+d) — exactly
+-- what's needed whenever a "product of sums" expands into four cross
+-- terms that must be regrouped to match the other side.
+theorem add4_reorder (a b c d : Int) : a + b + (c + d) = a + c + (b + d) := by
+  rw [Int.add_assoc a b (c + d)]
+  rw [show b + (c + d) = c + (b + d) from by
+    rw [← Int.add_assoc, Int.add_comm b c, Int.add_assoc]]
+  rw [← Int.add_assoc a c (b + d)]
+
 def mat2Ring : Ring Mat2 where
   addGrp := mat2CommGroup
   mul := Mat2.mul
@@ -135,38 +155,100 @@ def mat2Ring : Ring Mat2 where
     -- *four* products of three matrix entries (vs. Int.mul_assoc's single
     -- rebracketing) — associativity of matrix multiplication is
     -- distributivity-plus-associativity of the underlying ring applied
-    -- four times per entry, not a single lemma call. `ring` (a decision
-    -- procedure for commutative-ring identities, safe to use here since
-    -- each entry equation only involves `Int`, which *is* commutative,
-    -- even though `Mat2` itself is not) closes each resulting Int
-    -- equation in one shot once the entrywise split has been made.
-    apply Mat2.ext <;> ring
+    -- four times per entry, not a single lemma call. Each entry equation
+    -- unfolds (via `Int.add_mul`/`Int.mul_add`/`Int.mul_assoc`) to two
+    -- sums of the same four products in a different order; `add4_reorder`
+    -- is exactly the regrouping needed to match them up.
+    apply Mat2.ext
+    · show (X.a11 * Y.a11 + X.a12 * Y.a21) * Z.a11 + (X.a11 * Y.a12 + X.a12 * Y.a22) * Z.a21
+          = X.a11 * (Y.a11 * Z.a11 + Y.a12 * Z.a21) + X.a12 * (Y.a21 * Z.a11 + Y.a22 * Z.a21)
+      rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
+          Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
+          add4_reorder]
+    · show (X.a11 * Y.a11 + X.a12 * Y.a21) * Z.a12 + (X.a11 * Y.a12 + X.a12 * Y.a22) * Z.a22
+          = X.a11 * (Y.a11 * Z.a12 + Y.a12 * Z.a22) + X.a12 * (Y.a21 * Z.a12 + Y.a22 * Z.a22)
+      rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
+          Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
+          add4_reorder]
+    · show (X.a21 * Y.a11 + X.a22 * Y.a21) * Z.a11 + (X.a21 * Y.a12 + X.a22 * Y.a22) * Z.a21
+          = X.a21 * (Y.a11 * Z.a11 + Y.a12 * Z.a21) + X.a22 * (Y.a21 * Z.a11 + Y.a22 * Z.a21)
+      rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
+          Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
+          add4_reorder]
+    · show (X.a21 * Y.a11 + X.a22 * Y.a21) * Z.a12 + (X.a21 * Y.a12 + X.a22 * Y.a22) * Z.a22
+          = X.a21 * (Y.a11 * Z.a12 + Y.a12 * Z.a22) + X.a22 * (Y.a21 * Z.a12 + Y.a22 * Z.a22)
+      rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
+          Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
+          add4_reorder]
   one_mul := by
     intro X
-    apply Mat2.ext <;> ring
+    apply Mat2.ext
+    · show 1 * X.a11 + 0 * X.a21 = X.a11
+      rw [Int.one_mul, Int.zero_mul, Int.add_zero]
+    · show 1 * X.a12 + 0 * X.a22 = X.a12
+      rw [Int.one_mul, Int.zero_mul, Int.add_zero]
+    · show 0 * X.a11 + 1 * X.a21 = X.a21
+      rw [Int.zero_mul, Int.one_mul, Int.zero_add]
+    · show 0 * X.a12 + 1 * X.a22 = X.a22
+      rw [Int.zero_mul, Int.one_mul, Int.zero_add]
   mul_one := by
     intro X
-    apply Mat2.ext <;> ring
+    apply Mat2.ext
+    · show X.a11 * 1 + X.a12 * 0 = X.a11
+      rw [Int.mul_one, Int.mul_zero, Int.add_zero]
+    · show X.a11 * 0 + X.a12 * 1 = X.a12
+      rw [Int.mul_zero, Int.mul_one, Int.zero_add]
+    · show X.a21 * 1 + X.a22 * 0 = X.a21
+      rw [Int.mul_one, Int.mul_zero, Int.add_zero]
+    · show X.a21 * 0 + X.a22 * 1 = X.a22
+      rw [Int.mul_zero, Int.mul_one, Int.zero_add]
   left_distrib := by
     intro X Y Z
-    apply Mat2.ext <;> ring
+    apply Mat2.ext
+    · show X.a11 * (Y.a11 + Z.a11) + X.a12 * (Y.a21 + Z.a21)
+          = (X.a11 * Y.a11 + X.a12 * Y.a21) + (X.a11 * Z.a11 + X.a12 * Z.a21)
+      rw [Int.mul_add, Int.mul_add, add4_reorder]
+    · show X.a11 * (Y.a12 + Z.a12) + X.a12 * (Y.a22 + Z.a22)
+          = (X.a11 * Y.a12 + X.a12 * Y.a22) + (X.a11 * Z.a12 + X.a12 * Z.a22)
+      rw [Int.mul_add, Int.mul_add, add4_reorder]
+    · show X.a21 * (Y.a11 + Z.a11) + X.a22 * (Y.a21 + Z.a21)
+          = (X.a21 * Y.a11 + X.a22 * Y.a21) + (X.a21 * Z.a11 + X.a22 * Z.a21)
+      rw [Int.mul_add, Int.mul_add, add4_reorder]
+    · show X.a21 * (Y.a12 + Z.a12) + X.a22 * (Y.a22 + Z.a22)
+          = (X.a21 * Y.a12 + X.a22 * Y.a22) + (X.a21 * Z.a12 + X.a22 * Z.a22)
+      rw [Int.mul_add, Int.mul_add, add4_reorder]
   right_distrib := by
     intro X Y Z
-    apply Mat2.ext <;> ring
+    apply Mat2.ext
+    · show (X.a11 + Y.a11) * Z.a11 + (X.a12 + Y.a12) * Z.a21
+          = (X.a11 * Z.a11 + X.a12 * Z.a21) + (Y.a11 * Z.a11 + Y.a12 * Z.a21)
+      rw [Int.add_mul, Int.add_mul, add4_reorder]
+    · show (X.a11 + Y.a11) * Z.a12 + (X.a12 + Y.a12) * Z.a22
+          = (X.a11 * Z.a12 + X.a12 * Z.a22) + (Y.a11 * Z.a12 + Y.a12 * Z.a22)
+      rw [Int.add_mul, Int.add_mul, add4_reorder]
+    · show (X.a21 + Y.a21) * Z.a11 + (X.a22 + Y.a22) * Z.a21
+          = (X.a21 * Z.a11 + X.a22 * Z.a21) + (Y.a21 * Z.a11 + Y.a22 * Z.a21)
+      rw [Int.add_mul, Int.add_mul, add4_reorder]
+    · show (X.a21 + Y.a21) * Z.a12 + (X.a22 + Y.a22) * Z.a22
+          = (X.a21 * Z.a12 + X.a22 * Z.a22) + (Y.a21 * Z.a12 + Y.a22 * Z.a22)
+      rw [Int.add_mul, Int.add_mul, add4_reorder]
 ```
 
 Two points worth pulling out:
 
-1. **`Mat2.ext <;> ring` is a deliberate, scoped use of automation** (unlike
-   the "always spell it out" rule elsewhere in this book) precisely because
-   the underlying per-entry fact — a polynomial identity in `Int`, which
-   *is* a commutative ring — is exactly what `ring` is designed to decide,
-   and hand-deriving it would just be re-proving commutative-ring axioms
-   Lean already has. What's *not* automated is the interesting content: the
-   `Ring Mat2` bundle itself is noncommutative, and no automation is
-   deciding *that* for you — you supplied `mul := Mat2.mul` and the
-   `mul_comm`-shaped fact is simply absent from `Ring`'s fields, exactly as
-   Chapter 8's exercise on `left_distrib`/`right_distrib` anticipated.
+1. **Every proof obligation here is spelled out explicitly, no automation**
+   — matching the rest of the book, and unlike an earlier draft of this
+   section, which reached for Mathlib's `ring` tactic (a decision procedure
+   for commutative-ring identities). Since this book never imports
+   Mathlib, `ring` isn't actually available; each entry equation is instead
+   unfolded by hand via `Int.add_mul`/`Int.mul_add`/`Int.mul_assoc` down to
+   a sum of the same four cross terms in a different order, and
+   `add4_reorder` (proved once, above, and reused twelve times) supplies
+   exactly the regrouping needed to match them. The `Ring Mat2` bundle
+   itself is still noncommutative — nothing here is deciding *that* for
+   you: you supplied `mul := Mat2.mul`, and the `mul_comm`-shaped fact is
+   simply absent from `Ring`'s fields, exactly as Chapter 8's exercise on
+   `left_distrib`/`right_distrib` anticipated.
 2. **This is the general pattern for "ring of $n\times n$ matrices over a
    commutative ring $S$":** the entries live in $S$, every `Ring Mat2`
    proof obligation reduces (via distributivity/associativity in $S$,

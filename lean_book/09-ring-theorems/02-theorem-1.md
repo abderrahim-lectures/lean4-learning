@@ -46,14 +46,22 @@ theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
   have h2 :
       Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul a Rg.addGrp.id)) (Rg.mul a Rg.addGrp.id) =
       Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul a Rg.addGrp.id))
-        (Rg.addGrp.op (Rg.mul a Rg.addGrp.id) (Rg.mul a Rg.addGrp.id)) := by
-    rw [h1]
+        (Rg.addGrp.op (Rg.mul a Rg.addGrp.id) (Rg.mul a Rg.addGrp.id)) :=
+    congrArg (Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul a Rg.addGrp.id))) h1
   rw [Rg.addGrp.toGroup.inv_left] at h2
   rw [← Rg.addGrp.toGroup.assoc] at h2
   rw [Rg.addGrp.toGroup.inv_left] at h2
   rw [Rg.addGrp.toGroup.id_left] at h2
   exact h2.symm
 ```
+
+`h2` is proved with `congrArg`, not `by rw [h1]` — plain `rw [h1]` rewrites
+*every* syntactic occurrence of `h1`'s left-hand side in the goal,
+including copies produced by the substitution itself, so it doesn't land
+on the exact stated goal here. `congrArg f h1` sidesteps this entirely: it
+directly builds "apply `f` to both sides of `h1`," which is precisely
+"add $-x$ to both sides of $x = x+x$" with no occurrence-targeting
+ambiguity.
 
 If you lose track partway through, the recovery move is always the same:
 write the *current* hypothesis (`h1`, then `h2`) in your head using
