@@ -1,4 +1,8 @@
-# Chapter 9: Quivers and path algebras
+# Chapter 10: Quivers and path algebras
+
+[← Ch. 9: Modules](09-modules.md) | [Table of contents](../README.md) | [Ch. 11: Working Efficiently →](11-working-efficiently.md)
+
+---
 
 This chapter combines everything so far — inductive types (Chapter 1),
 structures (Chapter 2), and rings (Chapters 7–8) — to build a genuinely
@@ -187,4 +191,8 @@ the construction; the ring structure on top is bookkeeping once you have it.
 
 ## Next
 
-Continue to [Chapter 10: Working efficiently in Lean](10-working-efficiently.md).
+Continue to [Chapter 11: Working efficiently in Lean](11-working-efficiently.md).
+
+---
+
+[← Ch. 9: Modules](09-modules.md) | [Table of contents](../README.md) | [Ch. 11: Working Efficiently →](11-working-efficiently.md)

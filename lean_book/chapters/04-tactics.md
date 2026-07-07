@@ -1,5 +1,9 @@
 # Chapter 4: Tactics — the toolbox for proving things
 
+[← Ch. 3: Propositions & Proofs](03-propositions-and-proofs.md) | [Table of contents](../README.md) | [Ch. 5: Groups →](05-groups.md)
+
+---
+
 Writing proof *terms* directly (as in Chapter 3) gets unwieldy fast. Instead,
 Lean lets you enter **tactic mode** with `by`, where you manipulate a "goal"
 step by step, similar to how you'd write a proof on paper. This chapter's
@@ -269,3 +273,7 @@ will reuse, slowly and explicitly, for every proof about groups and rings.
 
 With definitions, propositions, and tactics in hand, we're ready for the
 main event: [Chapter 5: Defining a `Group`](05-groups.md).
+
+---
+
+[← Ch. 3: Propositions & Proofs](03-propositions-and-proofs.md) | [Table of contents](../README.md) | [Ch. 5: Groups →](05-groups.md)

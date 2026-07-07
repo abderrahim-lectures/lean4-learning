@@ -1,5 +1,9 @@
 # Chapter 8: Ring examples and basic theorems
 
+[← Ch. 7: Rings](07-rings.md) | [Table of contents](../README.md) | [Ch. 9: Modules →](09-modules.md)
+
+---
+
 As in Chapter 6, the point here is the search process for each proof, not
 just the final term. Ring proofs are a good stress-test of that process
 because the goals get visually noisy fast (nested `addGrp.toGroup.op`
@@ -147,4 +151,8 @@ best way to confirm you actually understand *why* Theorem 1 needed
 
 ## Next
 
-Continue to [Chapter 9: Quivers and path algebras](09-path-algebras.md).
+Continue to [Chapter 9: Modules over a ring](09-modules.md).
+
+---
+
+[← Ch. 7: Rings](07-rings.md) | [Table of contents](../README.md) | [Ch. 9: Modules →](09-modules.md)

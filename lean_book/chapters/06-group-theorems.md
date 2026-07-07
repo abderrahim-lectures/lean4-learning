@@ -1,5 +1,9 @@
 # Chapter 6: Group examples and basic theorems
 
+[← Ch. 5: Groups](05-groups.md) | [Table of contents](../README.md) | [Ch. 7: Rings →](07-rings.md)
+
+---
+
 In this chapter we prove theorems about an *arbitrary* group — given some
 `Grp : Group G` for an unknown `G`, using only the fields from Chapter 5.
 The point of this chapter is less the three theorems themselves (they're
@@ -168,3 +172,7 @@ recognizing on sight rather than re-deriving from scratch each time.
 ## Next
 
 Continue to [Chapter 7: Rings](07-rings.md).
+
+---
+
+[← Ch. 5: Groups](05-groups.md) | [Table of contents](../README.md) | [Ch. 7: Rings →](07-rings.md)

@@ -1,4 +1,8 @@
-# Chapter 10: Working efficiently in Lean
+# Chapter 11: Working efficiently in Lean
+
+[← Ch. 10: Path Algebras](10-path-algebras.md) | [Table of contents](../README.md) | [Ch. 12: Next Steps →](12-next-steps.md)
+
+---
 
 Chapters 6 and 8 were about *finding* a proof by hand, deliberately slowly,
 so the underlying reasoning is never hidden. This chapter is the other
@@ -139,4 +143,8 @@ genuinely separable sub-claim, not preemptively.
 
 ## Next
 
-Continue to [Chapter 11: Where to go next](11-next-steps.md).
+Continue to [Chapter 12: Where to go next](12-next-steps.md).
+
+---
+
+[← Ch. 10: Path Algebras](10-path-algebras.md) | [Table of contents](../README.md) | [Ch. 12: Next Steps →](12-next-steps.md)

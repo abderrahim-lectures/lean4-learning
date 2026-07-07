@@ -1,5 +1,9 @@
 # Chapter 2: Functions, definitions, and structures
 
+[← Ch. 1: Basics](01-basics.md) | [Table of contents](../README.md) | [Ch. 3: Propositions & Proofs →](03-propositions-and-proofs.md)
+
+---
+
 Functions curry as usual (`add : Nat → Nat → Nat` is really
 `Nat → (Nat → Nat)`); nothing here should be surprising if you've used any
 ML-family or dependently-typed language. The interesting part of this
@@ -68,3 +72,7 @@ group fields.
 ## Next
 
 Continue to [Chapter 3: Propositions and proofs](03-propositions-and-proofs.md).
+
+---
+
+[← Ch. 1: Basics](01-basics.md) | [Table of contents](../README.md) | [Ch. 3: Propositions & Proofs →](03-propositions-and-proofs.md)

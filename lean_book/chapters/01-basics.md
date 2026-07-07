@@ -1,5 +1,9 @@
 # Chapter 1: First steps — terms, types, `#eval`
 
+[← Setup](00-setup.md) | [Table of contents](../README.md) | [Ch. 2: Functions & Structures →](02-functions-and-structures.md)
+
+---
+
 ## Everything has a type
 
 In Lean 4, every expression (a **term**) has a **type**, and types are
@@ -46,3 +50,7 @@ parameter" pattern you'd expect from any dependently-typed setting.
 ## Next
 
 Continue to [Chapter 2: Functions and structures](02-functions-and-structures.md).
+
+---
+
+[← Setup](00-setup.md) | [Table of contents](../README.md) | [Ch. 2: Functions & Structures →](02-functions-and-structures.md)

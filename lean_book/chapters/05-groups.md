@@ -1,5 +1,9 @@
 # Chapter 5: Structures and classes — defining a `Group`
 
+[← Ch. 4: Tactics](04-tactics.md) | [Table of contents](../README.md) | [Ch. 6: Group Theorems →](06-group-theorems.md)
+
+---
+
 ## The mathematical definition
 
 A **group** is a set $G$ together with:
@@ -150,3 +154,7 @@ generically, get it for free everywhere.
 
 Continue to [Chapter 6: Group examples and basic theorems](06-group-theorems.md),
 where we prove facts that hold for *every* group, generically.
+
+---
+
+[← Ch. 4: Tactics](04-tactics.md) | [Table of contents](../README.md) | [Ch. 6: Group Theorems →](06-group-theorems.md)

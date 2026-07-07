@@ -1,5 +1,9 @@
 # Chapter 0: Setting up Lean 4
 
+[Table of contents](../README.md) | [Ch. 1: Basics →](01-basics.md)
+
+---
+
 ## Why Lean?
 
 Lean 4 is both a programming language and an interactive theorem prover. You
@@ -55,3 +59,7 @@ you're ready to use the "real" library instead of reinventing it.
 ## Next
 
 Continue to [Chapter 1: First steps](01-basics.md).
+
+---
+
+[Table of contents](../README.md) | [Ch. 1: Basics →](01-basics.md)

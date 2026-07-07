@@ -33,16 +33,31 @@ ideas are understood.
 
 ## Table of contents
 
+**Part I — Lean fundamentals**
+
 0. [Setting up Lean 4](chapters/00-setup.md)
 1. [First steps: terms, types, `#eval`](chapters/01-basics.md)
 2. [Functions, definitions, and structures](chapters/02-functions-and-structures.md)
 3. [Propositions as types, and basic proofs](chapters/03-propositions-and-proofs.md)
 4. [Tactics, and how to work a goal you don't know the proof of](chapters/04-tactics.md)
+
+**Part II — Algebra, formalized**
+
 5. [Structures and classes: defining a `Group`](chapters/05-groups.md)
 6. [Group examples and basic theorems](chapters/06-group-theorems.md)
 7. [Rings: adding a second operation](chapters/07-rings.md)
 8. [Ring examples and basic theorems](chapters/08-ring-theorems.md)
-9. [Quivers and path algebras](chapters/09-path-algebras.md)
-10. [Working efficiently in Lean](chapters/10-working-efficiently.md)
-11. [Where to go next](chapters/11-next-steps.md)
-12. [Appendix: Solutions to exercises](chapters/12-appendix-solutions.md)
+9. [Modules over a ring](chapters/09-modules.md)
+10. [Quivers and path algebras](chapters/10-path-algebras.md)
+
+**Part III — Working with Lean, and beyond**
+
+11. [Working efficiently in Lean](chapters/11-working-efficiently.md)
+12. [Where to go next](chapters/12-next-steps.md)
+13. [Appendix: Solutions to exercises](chapters/13-appendix-solutions.md)
+
+## Navigation
+
+Every chapter file has a navigation strip at the top (link back to this
+menu, plus previous/next chapter) and a matching one at the bottom, so you
+can move through the book without returning here each time.

@@ -1,4 +1,8 @@
-# Chapter 11: Where to go next
+# Chapter 12: Where to go next
+
+[← Ch. 11: Working Efficiently](11-working-efficiently.md) | [Table of contents](../README.md) | [Appendix: Solutions →](13-appendix-solutions.md)
+
+---
 
 ## What we built
 
@@ -9,7 +13,9 @@ principles (no external library):
   (uniqueness of identity, uniqueness of inverses, $(ab)^{-1} = b^{-1}a^{-1}$),
 - a `CommGroup` extending `Group`,
 - a `Ring` structure built on top of `CommGroup`, with theorems for an
-  arbitrary ring ($a \cdot 0 = 0$, $(-1)\cdot a = -a$),
+  arbitrary ring ($a \cdot 0 = 0$, $(-1)\cdot a = -a$), plus a genuinely
+  noncommutative example ($2\times 2$ matrices),
+- a `Module` over a ring, with submodules, linear maps, and direct sums,
 - a `Quiver` and an indexed inductive `Path` type, with path composition,
   as the combinatorial skeleton underlying a path algebra.
 
@@ -32,6 +38,10 @@ already has vastly more general and battle-tested versions of all of this:
   hand, and so that instances are found automatically by typeclass search.
 - `Mathlib.Algebra.Ring.Defs` — `Ring`, `CommRing`, `Field`, and the whole
   hierarchy in between (`Semiring`, `NonUnitalRing`, ...).
+- `Mathlib.Algebra.Module.Defs` — `Module`, vastly more general than
+  Chapter 9's hand-rolled version, with the entire linear-algebra library
+  (`Mathlib.LinearAlgebra.*`: bases, dimension, tensor products, exact
+  sequences) built on top.
 - `Mathlib.Combinatorics.Quiver.Basic` and `Mathlib.Algebra.Category.*` —
   quivers as the underlying data of a category (a category is "a quiver
   plus identities and composition satisfying associativity" — sound
@@ -54,16 +64,27 @@ naming a `Grp` argument in every theorem.
    (`class Group (G : Type) extends ...`) instead of plain `structure`s,
    and notice how theorem statements get shorter once `*`, `⁻¹`, `1` are
    available as notation.
-2. Finish the path-algebra construction sketched in Chapter 9's Exercise 3:
+2. Finish the path-algebra construction sketched in Chapter 10's Exercise 3:
    formal $k$-linear combinations of paths, with multiplication by
-   concatenation (and $0$ when endpoints don't match).
+   concatenation (and $0$ when endpoints don't match) — and notice this is
+   precisely "the free `Module` over $k$ on the set of paths," tying
+   Chapter 9 and Chapter 10 together.
 3. Prove that a quiver with no oriented cycles has a *finite-dimensional*
    path algebra (one polynomial-flavored way to make this precise: bound
-   path length by the number of vertices).
+   path length by the number of vertices) — "finite-dimensional" here means
+   exactly Chapter 9's `Module` notion of a finite spanning/basis set.
 4. Once comfortable, explore Mathlib's `CategoryTheory.Quiver` and compare
    its definitions line-by-line against this book's `Quiver`/`Path`.
+5. Redo `Module`'s "path algebra representations are modules over $kQ$"
+   remark (end of Chapter 9) concretely: build the path algebra $kQ$ for
+   the example quiver, then a small representation of it, as a
+   `Module (PathAlgebraElem ...)`.
 
 ## Solutions
 
 Full worked solutions to every chapter's exercises are in the
-[Appendix](12-appendix-solutions.md).
+[Appendix](13-appendix-solutions.md).
+
+---
+
+[← Ch. 11: Working Efficiently](11-working-efficiently.md) | [Table of contents](../README.md) | [Appendix: Solutions →](13-appendix-solutions.md)

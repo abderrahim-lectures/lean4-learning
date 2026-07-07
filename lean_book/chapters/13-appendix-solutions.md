@@ -1,5 +1,9 @@
 # Appendix: Solutions to exercises
 
+[← Ch. 12: Next Steps](12-next-steps.md) | [Table of contents](../README.md)
+
+---
+
 Solutions are written in the same explicit style as the main text: every
 `rw`/`have`/`intro` is one step, and shortcuts (`simp`, unexplained `rfl`)
 are avoided except where a step is genuinely definitional and there is
@@ -403,3 +407,7 @@ coefficient) is exactly what makes a full formalization a genuine project
 rather than a one-page exercise — this sketch identifies the three `Ring`
 fields that need it (`addGrp`, `mul`, `one`) and why `one` is the subtle
 one when $Q_0$ is infinite.
+
+---
+
+[← Ch. 12: Next Steps](12-next-steps.md) | [Table of contents](../README.md)

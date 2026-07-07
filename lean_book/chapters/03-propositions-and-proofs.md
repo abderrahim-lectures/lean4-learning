@@ -1,5 +1,9 @@
 # Chapter 3: Propositions as types, and basic proofs
 
+[← Ch. 2: Functions & Structures](02-functions-and-structures.md) | [Table of contents](../README.md) | [Ch. 4: Tactics →](04-tactics.md)
+
+---
+
 ## `Prop`: the type of statements
 
 Alongside `Type`, Lean has `Prop`, the type of logical propositions. A term
@@ -104,3 +108,7 @@ its tactic form, `rw`, constantly starting in the next chapter.
 ## Next
 
 Continue to [Chapter 4: Tactics](04-tactics.md).
+
+---
+
+[← Ch. 2: Functions & Structures](02-functions-and-structures.md) | [Table of contents](../README.md) | [Ch. 4: Tactics →](04-tactics.md)
