@@ -24,11 +24,21 @@ Two parts:
 assistant), working interactively with a human collaborator across a
 single extended session. The human directed scope, structure, tone,
 audience, and numerous rounds of revision; Claude wrote the chapter text,
-Lean code, and LaTeX. Nothing here has been reviewed by a Lean expert or
-formally verified by actually running the code against the stated
-toolchain — treat every proof and definition as a *draft* to check
-yourself (Chapter 4 of the book teaches you exactly how) before relying on
-it.
+Lean code, and LaTeX.
+
+**Lean version:** all code targets **Lean 4, toolchain `leanprover/lean4:v4.31.0`**,
+pinned in [`lean_project/lean-toolchain`](lean_project/lean-toolchain);
+`lake` fetches this exact version automatically on first build (see
+[lean_project/README.md](lean_project/README.md)). The code in Chapters
+1–11 has been ported into `lean_project/` and compiled with `lake build`
+against precisely this toolchain (catching and fixing 8 real bugs — see
+the git history), so it is no longer just prose that looks plausible.
+That said, **no Lean expert or mathematician has reviewed this for
+mathematical correctness, pedagogical soundness, or idiomatic style** —
+compiling is a much weaker guarantee than "this is how a Lean expert would
+write or explain it," and the prose explanations, exercise framings, and
+mathematical asides have not been independently checked at all. Treat the
+book as a solid draft, not a finished, expert-reviewed text.
 
 ## Reproducing this book
 
