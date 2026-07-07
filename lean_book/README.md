@@ -20,9 +20,16 @@ math is written inline as `$...$` and in display blocks as `$$...$$`; render
 with any Markdown viewer that supports MathJax/KaTeX (e.g. VS Code with a
 Markdown+Math extension, or Pandoc).
 
-Code blocks are valid Lean 4 (tested against toolchain `v4.31.0`, matching
-`../lean_project`). You're encouraged to copy them into `lean_project` and
-run them yourself.
+Code blocks are valid Lean 4 (toolchain `v4.31.0`, matching
+`../lean_project`). Every code block in Chapters 1–11 has been ported into
+`../lean_project/LeanProject/` (one module per chapter) and verified with
+`lake build` against the real compiler, not just read over — several bugs
+that only surfaced this way (a missing extensionality lemma, a couple of
+`rw` steps that over-rewrote, a reference to an undefined `intZModule`,
+Mathlib's `ring` tactic used without Mathlib ever being imported) have
+been fixed in both the book text and the project. You're encouraged to
+open `lean_project` yourself and run `lake build`/`lake exe lean_project`
+to see it compile.
 
 This book is about more than the constructs it covers — the running goal is
 to build the *skill* of using Lean: reading a goal state, deciding what to
@@ -60,7 +67,11 @@ before committing to `Group`'s definition in Chapter 6.
 
 12. [Working efficiently in Lean](12-working-efficiently/00-index.md)
 13. [Where to go next](13-next-steps/00-index.md)
-14. [Appendix: Solutions to exercises](14-appendix-solutions/00-index.md)
+
+**Appendices**
+
+14. [Appendix A: Solutions to exercises](14-appendix-solutions/00-index.md)
+15. [Appendix B: The λ-calculus underneath Lean](15-lambda-calculus/00-index.md)
 
 ## Navigation
 

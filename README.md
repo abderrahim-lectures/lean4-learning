@@ -8,11 +8,15 @@ Two parts:
   from Lean basics through groups, rings, modules, and quiver path
   algebras, with an emphasis on learning to *use* Lean efficiently —
   reading goal states, searching for lemmas, recovering from failed
-  tactics — not just memorizing syntax. See
+  tactics — not just memorizing syntax. Includes an appendix on the
+  λ-calculus and type theory underlying Lean itself. See
   [lean_book/README.md](lean_book/README.md) for the table of contents.
 - [lean_project/](lean_project/) — a companion Lean 4 project (toolchain
-  `v4.31.0`) for running the book's code examples. See
-  [lean_project/README.md](lean_project/README.md) for setup.
+  `v4.31.0`) containing every code block from the book, ported into one
+  module per chapter and verified to actually compile with `lake build`
+  (see [lean_project/README.md](lean_project/README.md) for setup). This
+  caught and fixed several real bugs in the book's original code — see the
+  git history for specifics.
 
 ## Notice
 

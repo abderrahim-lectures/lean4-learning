@@ -1,6 +1,6 @@
-# Appendix: Solutions to exercises
+# Appendix A: Solutions to exercises
 
-[← Ch. 13: Next Steps](../13-next-steps/00-index.md) | [Table of contents](../README.md)
+[← Ch. 13: Next Steps](../13-next-steps/00-index.md) | [Table of contents](../README.md) | [Appendix B: λ-calculus →](../15-lambda-calculus/00-index.md)
 
 ---
 
@@ -23,4 +23,4 @@ nothing to explain.
 
 ---
 
-[← Ch. 13: Next Steps](../13-next-steps/00-index.md) | [Table of contents](../README.md)
+[← Ch. 13: Next Steps](../13-next-steps/00-index.md) | [Table of contents](../README.md) | [Appendix B: λ-calculus →](../15-lambda-calculus/00-index.md)
