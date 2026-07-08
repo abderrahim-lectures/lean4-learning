@@ -1,6 +1,6 @@
 ## Example: $2\times 2$ matrices — a genuinely noncommutative ring
 
-[← Accessing nested fields](05-accessing-fields.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)
+[← Accessing nested fields](06-accessing-fields.md) | [Index](00-index.md) | [Next: Exercises →](08-exercises.md)
 
 ---
 
@@ -275,4 +275,4 @@ $M_n(S)$ is noncommutative for $n \ge 2$.
 
 ---
 
-[← Accessing nested fields](05-accessing-fields.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)
+[← Accessing nested fields](06-accessing-fields.md) | [Index](00-index.md) | [Next: Exercises →](08-exercises.md)

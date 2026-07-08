@@ -64,8 +64,10 @@ Two theorems about STLC are the entire reason to bother with a type
 system at all:
 
 - **Progress**: a well-typed closed term (no free variables) is either
-  already a value (an abstraction) or can take a β-reduction step. It
-  never "gets stuck" — there's no well-typed analogue of "apply `3` to
+  already a **value** — an abstraction, or (if base types come with their
+  own constants, as `Nat`/`Bool` effectively do) a constant of a base type
+  — or it can take a β-reduction step. It never "gets stuck" partway
+  through evaluation: there's no well-typed analogue of "apply `3` to
   `true`," because (App)'s side condition would have already rejected
   such a term at elaboration time, before any reduction is attempted.
 - **Preservation** (subject reduction): if $\Gamma \vdash t : \tau$ and

@@ -9,6 +9,7 @@
 1. [Everything has a type](01-everything-has-a-type.md)
 2. [`def`, `let`, implicit arguments](02-def-let-implicit.md)
 3. [Dependent types, categorically](03-dependent-types.md)
+4. [Terminology you'll meet before it's fully explained](04-terminology.md)
 
 ---
 

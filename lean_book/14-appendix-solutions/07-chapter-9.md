@@ -4,36 +4,7 @@
 
 ---
 
-**1. `theorem mul_zero_left (Rg : Ring R) (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id`**
-
-```lean
-theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id := by
-  have h0 : Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id = Rg.addGrp.id :=
-    Rg.addGrp.toGroup.id_left Rg.addGrp.id
-  have h1 : Rg.mul (Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id) a =
-      Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a) :=
-    Rg.right_distrib Rg.addGrp.id Rg.addGrp.id a
-  rw [h0] at h1
-  -- h1 : Rg.mul Rg.addGrp.id a = op (mul 0 a) (mul 0 a)
-  have h2 :
-      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a)) (Rg.mul Rg.addGrp.id a) =
-      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))
-        (Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a)) :=
-    congrArg (Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))) h1
-  rw [Rg.addGrp.toGroup.inv_left] at h2
-  rw [← Rg.addGrp.toGroup.assoc] at h2
-  rw [Rg.addGrp.toGroup.inv_left] at h2
-  rw [Rg.addGrp.toGroup.id_left] at h2
-  exact h2.symm
-```
-
-Line for line the mirror of Chapter 9's Theorem 1 (`mul_zero`): instead of
-distributing `a * (0 + 0)` on the left, we distribute `(0 + 0) * a` on the
-right (`right_distrib`), giving `mul 0 a = op (mul 0 a) (mul 0 a)`, and the
-same "add the inverse of `mul 0 a` to both sides" trick isolates
-`Rg.addGrp.id = Rg.mul Rg.addGrp.id a`.
-
-**2. `theorem neg_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)`**
+**1. `theorem neg_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)`**
 
 ```lean
 theorem neg_mul (a b : R) :
@@ -55,8 +26,29 @@ group `Rg.addGrp.toGroup`), it suffices to show
 `Rg.mul (Rg.addGrp.toGroup.inv a) b` is a left additive-inverse of
 `Rg.mul a b`. `right_distrib` (used backwards) merges the two products into
 `Rg.mul (Rg.addGrp.op (Rg.addGrp.toGroup.inv a) a) b`; `inv_left` collapses
-the inner sum to `Rg.addGrp.id`; and `mul_zero_left` (the previous exercise)
-finishes.
+the inner sum to `Rg.addGrp.id`; and `mul_zero_left` (proved in Theorem 2's
+own section, since `neg_one_mul` there needed it too) finishes.
+
+**2. `theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl`**
+
+```lean
+theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl
+```
+
+`rfl` suffices here — and would *not* have sufficed for Theorem 2's
+`neg_one_mul (a : R)`, which took real work — precisely because `7` is a
+concrete numeral, not an unknown variable `a`. `intRing.addGrp.toGroup.inv`
+unfolds (by the `def intGroup` from Chapter 6) to `fun a => -a`, so
+`intRing.addGrp.toGroup.inv 7` reduces directly, by unfolding and
+β-reduction alone, to `-7` — no group axiom, no `left_inverse_unique`,
+no induction needed, since there's nothing to generalize over: both sides
+are already closed, concrete terms that compute. This is the same
+"variable vs. concrete numeral" distinction Chapter 5 draws between
+definitional and propositional equality: `neg_one_mul` is a genuine
+theorem (propositional, needing proof) precisely because it quantifies
+over *every* ring `R` and *every* element `a`, whereas `neg_seven` is true
+by direct computation the moment every symbol involved is a closed,
+already-known term.
 
 ---
 

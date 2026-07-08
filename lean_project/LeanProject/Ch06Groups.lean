@@ -49,6 +49,97 @@ def intGroup : Group Int where
 
 #check intGroup.assoc         -- a proof, for every a b c, of associativity
 
+-- Chapter 6: a non-abelian example, permutations of Fin 3 (S_3)
+structure Perm3 where
+  toFun : Fin 3 → Fin 3
+  invFun : Fin 3 → Fin 3
+  left_inv : ∀ x, invFun (toFun x) = x
+  right_inv : ∀ x, toFun (invFun x) = x
+
+def Perm3.comp (f g : Perm3) : Perm3 where
+  toFun := f.toFun ∘ g.toFun
+  invFun := g.invFun ∘ f.invFun
+  left_inv := by
+    intro x
+    show g.invFun (f.invFun (f.toFun (g.toFun x))) = x
+    rw [f.left_inv]
+    exact g.left_inv x
+  right_inv := by
+    intro x
+    show f.toFun (g.toFun (g.invFun (f.invFun x))) = x
+    rw [g.right_inv]
+    exact f.right_inv x
+
+def Perm3.identity : Perm3 where
+  toFun := fun x => x
+  invFun := fun x => x
+  left_inv := fun _ => rfl
+  right_inv := fun _ => rfl
+
+def Perm3.inv (f : Perm3) : Perm3 where
+  toFun := f.invFun
+  invFun := f.toFun
+  left_inv := f.right_inv
+  right_inv := f.left_inv
+
+def swap01 : Perm3 where
+  toFun := fun x => match x with
+    | 0 => 1 | 1 => 0 | 2 => 2
+  invFun := fun x => match x with
+    | 0 => 1 | 1 => 0 | 2 => 2
+  left_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
+  right_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
+
+def cycle012 : Perm3 where
+  toFun := fun x => match x with
+    | 0 => 1 | 1 => 2 | 2 => 0
+  invFun := fun x => match x with
+    | 0 => 2 | 1 => 0 | 2 => 1
+  left_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
+  right_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
+
+#eval (Perm3.comp swap01 cycle012).toFun 0   -- 0
+#eval (Perm3.comp cycle012 swap01).toFun 0   -- 2
+
+theorem Perm3.ext {f g : Perm3} (h : ∀ x, f.toFun x = g.toFun x)
+    (h' : ∀ x, f.invFun x = g.invFun x) : f = g := by
+  cases f
+  cases g
+  simp only [mk.injEq]
+  constructor
+  · funext x; exact h x
+  · funext x; exact h' x
+
+def perm3Group : Group Perm3 where
+  op := Perm3.comp
+  id := Perm3.identity
+  inv := Perm3.inv
+  assoc := by
+    intro f g h
+    apply Perm3.ext
+    · intro x; rfl
+    · intro x; rfl
+  id_left := by
+    intro f
+    apply Perm3.ext
+    · intro x; rfl
+    · intro x; rfl
+  id_right := by
+    intro f
+    apply Perm3.ext
+    · intro x; rfl
+    · intro x; rfl
+  inv_left := by
+    intro f
+    apply Perm3.ext
+    · intro x; exact f.left_inv x
+    · intro x; exact f.left_inv x
+  inv_right := by
+    intro f
+    apply Perm3.ext
+    · intro x; exact f.right_inv x
+    · intro x; exact f.right_inv x
+
 -- Chapter 6 exercise 1: Bool under xor
 def boolXorGroup : Group Bool where
   op := Bool.xor

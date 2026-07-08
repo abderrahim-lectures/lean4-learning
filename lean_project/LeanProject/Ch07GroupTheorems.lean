@@ -39,6 +39,20 @@ theorem inv_op (a b : G) :
   -- Goal: op (inv b) b = id
   exact Grp.inv_left b
 
+-- The payoff, made concrete: applying inv_op (proved above for an
+-- arbitrary Group G) to Chapter 6's non-abelian perm3Group, with no new
+-- proof required.
+example : perm3Group.inv (perm3Group.op swap01 cycle012) =
+    perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01) :=
+  inv_op perm3Group swap01 cycle012
+
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 0
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 0
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 1
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 1
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 2
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 2
+
 -- Chapter 7 exercises
 theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
   apply Eq.symm

@@ -85,6 +85,20 @@ structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
   map_add : ∀ m n : M, toFun (ModM.addGrp.op m n) = ModN.addGrp.op (toFun m) (toFun n)
   map_smul : ∀ (r : R) (m : M), toFun (ModM.smul r m) = ModN.smul r (toFun m)
 
+-- A concrete linear map: multiplication by a fixed integer.
+def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
+  toFun := fun m => d * m
+  map_add := by
+    intro m n
+    show d * (m + n) = d * m + d * n
+    exact Int.mul_add d m n
+  map_smul := by
+    intro r m
+    show d * (r * m) = r * (d * m)
+    rw [← Int.mul_assoc, Int.mul_comm d r, Int.mul_assoc]
+
+#eval (mulByLinearMap 5).toFun 3   -- 15
+
 structure DirectSum (M N : Type) where
   fst : M
   snd : N
@@ -160,3 +174,16 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
     congr 1
     · exact ModM.one_smul x.fst
     · exact ModN.one_smul x.snd
+
+-- A concrete instance: Z ⊕ Z.
+def zSquaredModule := directSumModule intRing intZModule intZModule
+
+#eval (zSquaredModule.addGrp.op ⟨2, 3⟩ ⟨10, 20⟩ : DirectSum Int Int)
+#eval (zSquaredModule.smul 5 ⟨2, 3⟩ : DirectSum Int Int)
+
+def proj1 : LinearMap intRing zSquaredModule intZModule where
+  toFun := fun x => x.fst
+  map_add := by intro x y; rfl
+  map_smul := by intro r x; rfl
+
+#eval proj1.toFun (⟨7, 100⟩ : DirectSum Int Int)   -- 7

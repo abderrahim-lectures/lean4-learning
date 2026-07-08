@@ -42,11 +42,22 @@ be meaningful, notice a more basic obstruction: `Group Int` is a `Type`
 applied to its parameters is itself a type), but `Group`, the type
 *constructor* itself (before applying it to a carrier `G`), is not a
 `Type` at all — it's a function `Type → Type`, i.e. a term of type
-`Type → Type`, which itself lives in `Type 1` (a function from `Type 0` to
-`Type 0` is bigger than any single `Type 0` term). So the question "is
-`Group` a group" is confusedly stated from the start — `Group` isn't even
-a candidate carrier type for its own construction; it's one universe level
-too high.
+`Type → Type`.
+
+*Why* does `Type → Type` live in `Type 1` rather than back in `Type 0`?
+This isn't just plausible bookkeeping — it follows from the specific
+typing rule Lean uses for building function (Π-)types out of universes:
+forming `A → B` when `A : Type i` and `B : Type j` produces a term of type
+`Type (max i j)`, *unless* `B`'s universe already needs to be at least one
+higher to safely contain "the collection of all functions out of `A`" —
+concretely here, `A := Type` (living in `Type 1`, since `Type : Type 1`)
+and `B := Type` again, so `Type → Type` itself lands in `Type 1`. [Appendix
+B §4](../15-lambda-calculus/04-dependent-types-coc.md) states this rule
+precisely as one line of the calculus of constructions; the short version
+for now is that `Group` isn't even a candidate carrier type for its own
+construction — it's one universe level too high, exactly because it is a
+function *out of* `Type` itself, not out of some ordinary `Type 0` type
+like `Nat`.
 
 This is not merely a technicality to wave away — it is the precise
 type-theoretic reason a naive "category of all groups, where the
@@ -73,6 +84,12 @@ anything larger; Mathlib's actual definitions are universe polymorphic
 throughout, precisely because they must accommodate constructions (like
 "the group of automorphisms of a large category") that genuinely don't fit
 in `Type 0`.
+
+> Read more: [Appendix B §4](../15-lambda-calculus/04-dependent-types-coc.md)
+> states the universe-formation rules precisely, as part of the calculus
+> of constructions. Externally, the "Dependent Type Theory" chapter of
+> the *Theorem Proving in Lean 4* manual covers universes at a similar
+> level of detail with more Lean-specific examples.
 
 ---
 

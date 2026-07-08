@@ -34,6 +34,25 @@ theorem rw_example (a b : Nat) (h : a = b) : a + 1 = b + 1 := by
 `rw [h]` replaces every occurrence of the left-hand side of `h` with its
 right-hand side in the goal.
 
+### `rw [...] at h`: rewrite a hypothesis instead of the goal
+
+```lean
+theorem rw_at_example (a b c : Nat) (h1 : a = b) (h2 : a + c = 10) : b + c = 10 := by
+  rw [h1] at h2
+  -- h2 is now : b + c = 10, exactly the goal
+  exact h2
+```
+
+Every `rw` you've seen so far rewrites the *goal*. Adding `at h` instead
+rewrites a *hypothesis* `h`, in place, using the same left-to-right
+substitution rule. This is exactly as common as rewriting the goal itself
+— Chapter 9's ring proofs, for instance, use `rw [...] at h1`/`at h2`
+repeatedly to massage a hypothesis into the exact shape needed before
+citing it with `exact`. Read `rw [h1] at h2` as "wherever `h1`'s left side
+appears inside `h2`, replace it with `h1`'s right side" — the direction
+and substitution rule are identical to ordinary `rw`, only the *target*
+(a named hypothesis, not the goal) differs.
+
 **Mathematical reading.** Each tactic corresponds to a standard proof move.
 `intro` discharges an implication/universal by the deduction theorem: to
 prove $A \to B$, *assume* $A$ (add $A$ to $\Gamma$) and prove $B$ — the

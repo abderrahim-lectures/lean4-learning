@@ -80,6 +80,14 @@ $\Sigma$-type $\sum_{d : \mathrm{GroupData}(G)} \mathrm{Axioms}(d)$. This is
 the mathematician's "a group is a set with operations *such that* the axioms
 hold": the "such that" is a genuine subobject of the space of raw data.
 
+> Read more: Mathlib's actual `Group` (`Mathlib.Algebra.Group.Defs`) is a
+> `class`, not this book's plain `structure`, and inherits from a chain of
+> smaller classes (`Mul`, `One`, `Inv`, `Monoid`, ...) rather than listing
+> all axioms in one place — see [Chapter 13](../13-next-steps/02-moving-to-mathlib.md)
+> for the bridge between the two styles, and
+> [Chapter 5 §1](../05-rigor-check/01-structure-vs-class.md) for why this
+> book delays that mechanism.
+
 ---
 
 [← Definition](01-definition.md) | [Index](00-index.md) | [Next: Integers example →](03-integers-example.md)

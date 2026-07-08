@@ -109,6 +109,26 @@ instead of `Grp.op a b`. Chapter 13's suggested projects include redoing
 this book's `Group`/`Ring` as type classes once you're comfortable — at
 that point, everything in this section is the vocabulary you'll need.
 
+### A note on `.toGroup`, `.toPoint`, and coercion
+
+Whenever a `structure` extends another (Chapter 2's `Point3D extends Point`,
+this book's `CommGroup extends Group`), Lean generates a field named
+`.toX` projecting back to the parent structure — `cg.toGroup` recovers the
+underlying `Group` from a `CommGroup cg`. Lean also lets you *drop* the
+`.toGroup` and write `cg.op` directly, silently inserting the projection
+for you; this automatic insertion of a "translate from one type to
+another" function is an instance of **coercion**, the general mechanism by
+which Lean lets a term of one type stand in for a term of a related type
+without you writing the conversion explicitly. It is the same general idea
+(though a much simpler case) as coercing `Nat` values into `Int` — the
+literal projection differs, but "insert a conversion function
+automatically so notation reads naturally" is the shared mechanism.
+
+> Read more: TPiL's chapters on "Structures and Records" and "Type
+> Classes" cover both topics in this section directly, including
+> coercions, in more depth and with additional worked examples than this
+> book provides.
+
 ---
 
 [← Index](00-index.md) | [Next: Universes →](02-universes.md)

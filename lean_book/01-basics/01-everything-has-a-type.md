@@ -38,16 +38,26 @@ $$
 $$
 
 — Peano's definition, verbatim; in more set-theoretic language, `Nat` is
-the initial object in the category of "sets equipped with a distinguished
-element and an endomorphism" (a $\mathrm{zero} \in X$ and a map
-$s : X \to X$), which is exactly the universal property that makes
-structural induction valid: a map out of `Nat` is uniquely determined by
-where it sends `zero` and how it commutes with `succ`. This inductive
-presentation is what licenses proof by induction later, and is worth
-keeping in mind: unlike most languages, Lean's numerals are not a primitive
-but a defined inductive family, definitionally the free monoid on one
-generator under successor — i.e. `Nat` $\cong \mathbb{N}$ as the free
-commutative monoid $\langle 1 \rangle$ on a single generator under $+$.
+the **initial object** in the category of "sets equipped with a
+distinguished element and an endomorphism" (a $\mathrm{zero} \in X$ and a
+map $s : X \to X$) — this initiality is exactly the universal property
+that makes structural induction valid: a map out of `Nat` is uniquely
+determined by where it sends `zero` and how it commutes with `succ`. This
+inductive presentation is what licenses proof by induction later, and is
+worth keeping in mind: unlike most languages, Lean's numerals are not a
+primitive but a defined inductive family, built exactly this way.
+
+Separately — and this is a *theorem*, not a definitional fact, worth not
+conflating with the initiality above — once `+` and `0` are *defined* on
+`Nat` by recursion (Chapter 4), one can *prove* $(\mathbb{N}, +, 0)$ is the
+free commutative monoid on one generator: $\mathrm{Nat} \cong \langle 1
+\rangle$, with every natural number $n$ literally being $1 + 1 + \cdots +
+1$ ($n$ times). This is a genuinely different (if closely related)
+universal property from the $(\mathrm{zero}, \mathrm{succ})$-initiality
+above — the first concerns `Nat`'s *inductive structure* directly, the
+second concerns *the monoid built on top of it*, and the "free" claim
+requires an actual argument (by induction, unsurprisingly), not mere
+inspection of definitions.
 
 ---
 

@@ -4,15 +4,19 @@
 
 ---
 
-1. Prove `theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id`
-   by mirroring Theorem 1's proof line by line, swapping `left_distrib` for
-   `right_distrib`. Before writing any Lean, write the two-line paper sketch
-   (à la Theorem 1's `$a \cdot 0 = a\cdot(0+0) = \ldots$`) yourself first.
-2. Prove
+1. Prove
    `theorem neg_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)`.
    Strategy: this is "show $x = -(ab)$," so reduce via `left_inverse_unique`
    to "show $x + ab = 0$," then look for a `right_distrib`-shaped
-   simplification of $(-a)\cdot b + a \cdot b$, exactly as in Theorem 2.
+   simplification of $(-a)\cdot b + a \cdot b$, exactly as in Theorem 2 —
+   you'll need `mul_zero_left` (proved in Theorem 2's section) at the end,
+   the same way Theorem 2 itself did.
+2. Instantiate `left_inverse_unique` (Chapter 7) directly on `intRing`'s
+   additive group to compute a concrete additive inverse — e.g. prove
+   `theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl` and, in
+   a comment, say why `rfl` alone suffices here (compare to Theorem 2's
+   proof, which needed real work precisely because `a` was an unknown
+   variable rather than a concrete numeral).
 
 Solutions: [Appendix, Chapter 9](../14-appendix-solutions/07-chapter-9.md).
 

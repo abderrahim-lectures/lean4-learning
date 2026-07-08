@@ -115,10 +115,10 @@ right orbit) can instead be built into what a term's type *is*, and Lean's
 kernel enforces them the same way it enforces `2 + 2 : Nat` rather than
 `2 + 2 : Bool`.
 
-## Next
-
-Continue to [Chapter 2: Functions and structures](../02-functions-and-structures/00-index.md).
+> Read more: [Appendix B §4](../15-lambda-calculus/04-dependent-types-coc.md)
+> gives Π-types (and Σ-types) their formal typing rules, rather than only
+> the categorical analogy given here.
 
 ---
 
-[← `def`, `let`, implicit arguments](02-def-let-implicit.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 2: Functions & Structures →](../02-functions-and-structures/00-index.md)
+[← `def`, `let`, implicit arguments](02-def-let-implicit.md) | [Index](00-index.md) | [Next: Terminology →](04-terminology.md)

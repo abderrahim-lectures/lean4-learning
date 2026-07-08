@@ -34,6 +34,35 @@ $R\text{-}\mathbf{Mod}$; $\mathrm{Hom}_R(M,N)$ is itself an abelian group
 Hom-bifunctor $R\text{-}\mathbf{Mod}^{\mathrm{op}} \times
 R\text{-}\mathbf{Mod} \to \mathbf{Ab}$.
 
+### A concrete linear map: multiplication by a fixed integer
+
+The abstract definition is easier to trust once you've built one instance
+by hand. Fix $d \in \mathbb{Z}$; multiplication by $d$ is $\mathbb{Z}$-linear
+as a map $\mathbb{Z} \to \mathbb{Z}$:
+
+```lean
+def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
+  toFun := fun m => d * m
+  map_add := by
+    intro m n
+    show d * (m + n) = d * m + d * n
+    exact Int.mul_add d m n
+  map_smul := by
+    intro r m
+    show d * (r * m) = r * (d * m)
+    rw [← Int.mul_assoc, Int.mul_comm d r, Int.mul_assoc]
+
+#eval (mulByLinearMap 5).toFun 3   -- 15
+```
+
+`map_add`'s goal, `d * (m+n) = d*m + d*n`, is exactly distributivity —
+`map_smul`'s goal, `d * (r*m) = r * (d*m)`, holds because $\mathbb{Z}$ is
+commutative, so `d` and `r` can swap past each other. Both fields, in
+other words, are pure `Int`-arithmetic facts once you unfold what `toFun`,
+`ModM.smul`, and `ModM.addGrp.op` all mean here — exactly the "reduce a
+module-theoretic goal to a concrete arithmetic identity" move Chapter 9's
+`evenSubmodule` used, applied again.
+
 ---
 
 [← Submodules](04-submodules.md) | [Index](00-index.md) | [Next: Direct sums →](06-direct-sums.md)

@@ -1,6 +1,6 @@
 ## Example: the integers as a ring
 
-[← Ring](03-ring.md) | [Index](00-index.md) | [Next: Accessing nested fields →](05-accessing-fields.md)
+[← Ring](03-ring.md) | [Index](00-index.md) | [Next: Finite ring example →](05-finite-ring-example.md)
 
 ---
 
@@ -58,4 +58,4 @@ $\mathbb{Z}$-arithmetic fact, so the term is the formal counterpart of
 
 ---
 
-[← Ring](03-ring.md) | [Index](00-index.md) | [Next: Accessing nested fields →](05-accessing-fields.md)
+[← Ring](03-ring.md) | [Index](00-index.md) | [Next: Finite ring example →](05-finite-ring-example.md)

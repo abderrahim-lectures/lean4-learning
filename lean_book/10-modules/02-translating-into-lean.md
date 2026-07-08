@@ -53,6 +53,16 @@ $R \to \mathrm{End}(M)$." The ring $R$ enters as an explicit *parameter*
 because $R\text{-}\mathbf{Mod}$ is a whole category attached to a fixed base
 ring, not extra data on $M$.
 
+> Read more: Mathlib's `Module` (`Mathlib.Algebra.Module.Defs`) is vastly
+> more general — universe-polymorphic, stated for `Semiring` rather than
+> just `Ring`, and integrated with the whole `Mathlib.LinearAlgebra.*`
+> hierarchy (bases, dimension, tensor products); see
+> [Chapter 13](../13-next-steps/02-moving-to-mathlib.md). For the
+> classical theory, any standard module-theory or homological-algebra text
+> (e.g. Dummit & Foote's chapters on modules, or Weibel's *An Introduction
+> to Homological Algebra* for the deeper theory) covers the same axioms
+> from the ground up.
+
 ---
 
 [← The mathematical definition](01-definition.md) | [Index](00-index.md) | [Next: Z-module example →](03-z-module-example.md)

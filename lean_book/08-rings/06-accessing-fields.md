@@ -1,6 +1,6 @@
 ## Accessing nested fields
 
-[← Integers example](04-integers-example.md) | [Index](00-index.md) | [Next: Matrices →](06-matrices.md)
+[← Finite ring example](05-finite-ring-example.md) | [Index](00-index.md) | [Next: Matrices →](07-matrices.md)
 
 ---
 
@@ -22,4 +22,4 @@ these structure-forgetting maps.
 
 ---
 
-[← Integers example](04-integers-example.md) | [Index](00-index.md) | [Next: Matrices →](06-matrices.md)
+[← Finite ring example](05-finite-ring-example.md) | [Index](00-index.md) | [Next: Matrices →](07-matrices.md)

@@ -13,13 +13,15 @@ that just run that algorithm:
   `(7 : Nat) ∣ 21` or `¬ (3 = 5)`. Do not reach for `decide` on propositions
   with free variables or unbounded search — it can time out or, worse,
   produce a correct but useless proof term that reveals nothing.
-- **`omega`** — a decision procedure for linear arithmetic over `Nat`/`Int`
+- **`omega`** — a decision procedure for *linear* arithmetic over `Nat`/`Int`
   (goals built from `+`, subtraction, `≤`, `<`, `=`, and multiplication by
-  literals). If your goal is "some linear inequality/equality about
-  integers," reach for `omega` before hand-deriving it — this is exactly
-  the class of fact that a decision procedure handles better than a
-  bespoke `rw` chain, and hand-deriving it teaches you nothing `omega`'s
-  existence doesn't already convey.
+  *literal constants* only — `omega` handles `3 * n` fine, but not `n * m`
+  for two unknown variables `n`, `m`; genuine variable-times-variable
+  multiplication falls outside what it decides). If your goal is "some
+  linear inequality/equality about integers," reach for `omega` before
+  hand-deriving it — this is exactly the class of fact that a decision
+  procedure handles better than a bespoke `rw` chain, and hand-deriving it
+  teaches you nothing `omega`'s existence doesn't already convey.
 - **`norm_num`** — normalizes and evaluates numerical expressions
   (arithmetic on concrete numerals, including some with `+`, `*`, `^`,
   `≤` on literals).
@@ -43,6 +45,11 @@ first-order theory of $(\mathbb{Z}, +, <)$, which is famously decidable; and
 no free structure to be filled in — a theorem about an arbitrary group has no
 finite truth-table to compute, which is why it must be *proved* from the
 axioms rather than *decided*.
+
+> Read more: the Lean/Mathlib documentation for `decide`, `omega`, and
+> `norm_num` (searchable in the Mathlib docs or via `#help tactic omega`
+> inside a Lean file) covers each tactic's exact decidable fragment and
+> performance characteristics in more depth than this book needs to.
 
 ---
 

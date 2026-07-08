@@ -80,16 +80,32 @@ $$
 
 a pair $\langle a, b\rangle$ with $a : A$ and $b : B(a)$ — the *second*
 component's type is allowed to depend on the *first* component's *value*.
-This is exactly Chapter 3's reading of `∃ x : α, P x` as "a structure: a
-witness value plus a proof that the witness satisfies `P`" — an
-existential *is* a Σ-type, with `P : α → Prop` playing the role of `B`.
-It is also exactly the "structure bundling data + proofs" pattern that
+This is exactly the "structure bundling data + proofs" pattern that
 recurs throughout this book: `Group G`'s `⟨op, id, inv, assoc, ...⟩` is,
 underneath Lean's `structure` sugar, an iterated Σ-type — a witness `op`,
 paired with a witness `id` (whose type doesn't depend on `op`, here), paired
 with `assoc`'s *type* depending on the values of `op` and `id` supplied
 earlier in the same structure. Chapter 2's "structures can bundle proofs
 alongside data" was already, silently, an appeal to Σ.
+
+**A caveat about `∃`, worth being precise about.** Chapter 3 reads
+`∃ x : α, P x` as "a structure: a witness value plus a proof that the
+witness satisfies `P`" — morally a Σ-type, with `P : α → Prop` playing the
+role of `B` — but Lean's actual `Exists` is *not literally* the Σ-type
+`Sigma`. `Exists` is specifically built to land in `Prop`, and by proof
+irrelevance (above), that means you cannot *extract* the witness from an
+`∃`-proof computationally — there is no function
+`Exists.witness : (∃ x, P x) → α`, because doing so would let two
+different (but both valid) choices of witness produce observably
+different results from a "proof-irrelevant" input, contradicting proof
+irrelevance itself. `Sigma` (the actual, `Type`-valued dependent pair,
+matching a `structure`'s bundled data) *does* support projecting out its
+first component, precisely because it does not carry `Exists`'s
+irrelevance guarantee. So: `∃` is the *propositional truncation* of Σ
+— same shape, but living in a universe where the witness is unobservable
+— and the `structure`-based bundling this book uses throughout for
+`Group`/`Ring`/`Module` genuinely is `Sigma`-like (extractable), while an
+`∃`-statement genuinely is not.
 
 ### The calculus of constructions, assembled
 

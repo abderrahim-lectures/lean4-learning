@@ -32,13 +32,20 @@ pinned in [`lean_project/lean-toolchain`](lean_project/lean-toolchain);
 [lean_project/README.md](lean_project/README.md)). The code in Chapters
 1–11 has been ported into `lean_project/` and compiled with `lake build`
 against precisely this toolchain (catching and fixing 8 real bugs — see
-the git history), so it is no longer just prose that looks plausible.
-That said, **no Lean expert or mathematician has reviewed this for
-mathematical correctness, pedagogical soundness, or idiomatic style** —
-compiling is a much weaker guarantee than "this is how a Lean expert would
-write or explain it," and the prose explanations, exercise framings, and
-mathematical asides have not been independently checked at all. Treat the
-book as a solid draft, not a finished, expert-reviewed text.
+the git history), so it is no longer just prose that looks plausible. The
+prose has additionally been through one round of AI-driven expert review
+(prompted to read the whole book as a critical Lean/type-theory/algebra
+reviewer would, looking specifically for under-explained terminology,
+thin worked-example coverage, and factual errors — see the git history for
+the resulting fixes: an expanded Curry–Howard treatment, a terminology
+glossary, several corrected cross-references and one genuinely wrong
+mathematical claim, and new worked examples in half the algebraic
+chapters). That said, **no human Lean expert or mathematician has reviewed
+this** — both the review and the fixes were AI-driven, and compiling code
+plus a self-critique pass is a meaningfully weaker guarantee than actual
+human expert sign-off on correctness, pedagogical soundness, or idiomatic
+style. Treat the book as a solid, self-checked draft, not a
+human-expert-reviewed text.
 
 ## Reproducing this book
 
@@ -144,6 +151,23 @@ shell access to the working directory.
    > everything is settled, make the repository public, and add a notice to
    > the top-level README disclosing that the book was AI-generated, plus
    > this reconstruction-prompt sequence itself.
+
+9. **Port the code and get an expert critique.**
+   > Set up the companion Lean project properly: install the pinned
+   > toolchain, port every code block from the book into it (one module
+   > per chapter), and run `lake build` until it compiles clean, fixing
+   > every real bug the compiler finds — in both the project and the book
+   > text, with a note explaining what was wrong and why the fix works.
+   > Then, separately: act as an expert Lean/type-theory/algebra reviewer
+   > and read through the entire book looking for (a) foundational terms
+   > used repeatedly before they're properly explained, (b) chapters thin
+   > on worked examples relative to their conceptual weight, (c) factual or
+   > technical errors in the prose, and (d) places that would benefit from
+   > a "read more" pointer, either internal or to a standard reference.
+   > Fix what the review finds — expand the thin explanations, add the
+   > missing worked examples (verifying every new one compiles), correct
+   > the errors, and thread the read-more pointers throughout rather than
+   > only in the closing chapters.
 
 A note on process, for anyone replaying this: several steps above
 triggered large mechanical passes (renumbering a dozen chapters and every

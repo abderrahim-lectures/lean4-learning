@@ -61,6 +61,40 @@ performs. Reusing Theorem 2 as a characterization ("to identify an inverse,
 verify the defining equation") is the categorical habit of proving equalities
 via a universal property rather than by direct computation.
 
+### The payoff, made concrete: applying `inv_op` to a real group
+
+Chapter 6 promised that a theorem proved once, generically, is available
+"for free" on every group you build afterward. Here is that promise
+redeemed: `inv_op`, proved above for an *arbitrary* `Grp : Group G`,
+applies immediately to `perm3Group` — Chapter 6's non-abelian permutation
+group — with no new proof required:
+
+```lean
+example : perm3Group.inv (perm3Group.op swap01 cycle012) =
+    perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01) :=
+  inv_op perm3Group swap01 cycle012
+```
+
+That's the entire proof — a single application of the already-proved
+`inv_op`, instantiated at `Grp := perm3Group`, `a := swap01`,
+`b := cycle012`. You can also check it computationally, pointwise, on
+every element of `Fin 3`:
+
+```lean
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 0  -- 0
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 0  -- 0
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 1  -- 2
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 1  -- 2
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 2  -- 1
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 2  -- 1
+```
+
+Both sides agree on every input — exactly what `inv_op`'s proof
+guarantees, now witnessed by direct computation rather than taken on
+faith. This is the concrete content of "prove it once, get it for free
+everywhere": nothing about `swap01`, `cycle012`, or the fact that
+`perm3Group` is non-abelian required revisiting `inv_op`'s proof at all.
+
 ---
 
 [← Theorem 2](03-theorem-2.md) | [Index](00-index.md) | [Next: Exercises →](05-exercises.md)

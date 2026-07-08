@@ -51,6 +51,15 @@ group endomorphism of $(R,+)$. Nesting `addGrp` as a whole substructure
 mirrors the forgetful functor $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to
 its additive group.
 
+> Read more: Mathlib's `Ring` (`Mathlib.Algebra.Ring.Defs`) sits inside a
+> much larger hierarchy — `Semiring`, `NonUnitalRing`, `CommRing`,
+> `DivisionRing`, `Field` — each adding or dropping exactly one axiom
+> relative to its neighbors; see [Chapter 13](../13-next-steps/02-moving-to-mathlib.md).
+> For the classical (non-Lean) statement of these axioms and their
+> standard consequences, Dummit & Foote's *Abstract Algebra* or Aluffi's
+> *Algebra: Chapter 0* (the latter emphasizing the same categorical
+> framing this book uses) are standard references.
+
 ---
 
 [← CommGroup](02-comm-group.md) | [Index](00-index.md) | [Next: Integers example →](04-integers-example.md)

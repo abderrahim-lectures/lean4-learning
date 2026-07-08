@@ -35,6 +35,16 @@ def Path.append {V A : Type} {Q : Quiver V A} {u v w : V}
   | Path.nil _ => p
   | Path.cons a h h' q' => Path.cons a h h' (Path.append p q')
 
+-- A worked instance: rebuilding pathBetaAlpha via append, and confirming
+-- both constructions agree definitionally.
+def pathBetaOnly : Path exampleQuiver 1 2 :=
+  Path.cons ExampleArrow.beta rfl rfl (Path.nil 1)
+
+def pathBetaAlphaViaAppend : Path exampleQuiver 0 2 :=
+  Path.append pathAlpha pathBetaOnly
+
+example : pathBetaAlphaViaAppend = pathBetaAlpha := rfl
+
 -- Chapter 11 exercises
 inductive CyclicArrow where
   | alpha : CyclicArrow   -- 0 → 1

@@ -43,6 +43,25 @@ careful mathematician will already be asking by that point — `structure`
 versus `class`, universes, and definitional versus propositional equality —
 before committing to `Group`'s definition in Chapter 6.
 
+The book has been through an editorial pass specifically checking for
+foundational terms used before they're explained, thin worked-example
+coverage, and outright factual errors — the Curry–Howard correspondence
+(Chapter 3) now gets a full connective-by-connective table rather than a
+one-line slogan; a "Terminology" section (Chapter 1 §4) defines
+*elaborate*, *unify*, *reduce/normal form*, and *motive* the first time
+each is needed, with forward pointers to Appendix B where they're made
+fully precise; every algebraic chapter now has at least one worked
+example beyond the "obvious" one (a genuinely non-abelian finite group in
+Chapter 6, a finite commutative ring in Chapter 8, a concrete linear map
+and direct-sum instance in Chapter 10, a computed path composition in
+Chapter 11), including one place (Chapter 7) where a generic theorem is
+explicitly instantiated on a concrete structure to demonstrate the
+"prove once, use everywhere" payoff rather than only asserting it. "Read
+more" pointers — both internal cross-references and external standard
+references (Mathlib source, *Theorem Proving in Lean 4*, Dummit & Foote,
+Aluffi, and quiver-representation texts) — are threaded throughout rather
+than concentrated only in the closing chapters.
+
 ## Table of contents
 
 **Part I — Lean fundamentals**

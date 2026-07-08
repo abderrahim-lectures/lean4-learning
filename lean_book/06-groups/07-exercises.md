@@ -1,6 +1,6 @@
 ## Exercises
 
-[← Why bundle proofs with data?](05-why-bundle.md) | [Index](00-index.md)
+[← Why bundle proofs with data?](06-why-bundle.md) | [Index](00-index.md)
 
 ---
 
@@ -24,4 +24,4 @@ where we prove facts that hold for *every* group, generically.
 
 ---
 
-[← Why bundle proofs with data?](05-why-bundle.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 7: Group Theorems →](../07-group-theorems/00-index.md)
+[← Why bundle proofs with data?](06-why-bundle.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 7: Group Theorems →](../07-group-theorems/00-index.md)

@@ -18,8 +18,9 @@ There is no `Ring` axiom that directly states this — `mul_zero` isn't a
 field of `Ring` (Chapter 8), it has to be *derived* from `left_distrib` plus
 group cancellation. The generic recipe: *whenever a goal involves `0` (or
 any identity element) somewhere non-trivially, try rewriting it as
-`0 + 0`* — this is exactly analogous to Theorem 6's "pad with the identity"
-trick, but here it's the input to the equation you're trying to prove,
+`0 + 0`* — this is exactly analogous to
+[Chapter 7's Theorem 2](../07-group-theorems/03-theorem-2.md)'s "pad with
+the identity" trick, but here it's the input to the equation you're trying to prove,
 rather than the output.
 
 $$

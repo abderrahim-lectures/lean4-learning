@@ -1,6 +1,6 @@
 ## Exercises
 
-[← Matrices](06-matrices.md) | [Index](00-index.md)
+[← Matrices](07-matrices.md) | [Index](00-index.md)
 
 ---
 
@@ -31,4 +31,4 @@ Continue to [Chapter 9: Ring examples and basic theorems](../09-ring-theorems/00
 
 ---
 
-[← Matrices](06-matrices.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 9: Ring Theorems →](../09-ring-theorems/00-index.md)
+[← Matrices](07-matrices.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 9: Ring Theorems →](../09-ring-theorems/00-index.md)

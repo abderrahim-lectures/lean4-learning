@@ -115,6 +115,41 @@ $\pi_M\iota_N = 0$, and $\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$ — the
 defining universal properties, reflecting that $R\text{-}\mathbf{Mod}$ is an
 additive (indeed abelian) category.
 
+### A concrete instance: $\mathbb{Z} \oplus \mathbb{Z}$
+
+Instantiating the generic construction costs nothing beyond supplying two
+modules — here, `intZModule` twice:
+
+```lean
+def zSquaredModule := directSumModule intRing intZModule intZModule
+
+#eval (zSquaredModule.addGrp.op ⟨2, 3⟩ ⟨10, 20⟩ : DirectSum Int Int)
+-- { fst := 12, snd := 23 }, i.e. (2,3) + (10,20) = (12,23)
+
+#eval (zSquaredModule.smul 5 ⟨2, 3⟩ : DirectSum Int Int)
+-- { fst := 10, snd := 15 }, i.e. 5 · (2,3) = (10,15)
+```
+
+Both outputs are exactly the componentwise formulas from the mathematical
+reading above, computed rather than merely asserted. The first projection
+$\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}$, one of the biproduct's
+defining maps, is itself a `LinearMap` (previous section) built directly
+from `DirectSum`'s own field accessor:
+
+```lean
+def proj1 : LinearMap intRing zSquaredModule intZModule where
+  toFun := fun x => x.fst
+  map_add := by intro x y; rfl
+  map_smul := by intro r x; rfl
+
+#eval proj1.toFun ⟨7, 100⟩   -- 7
+```
+
+Both proof obligations are `rfl` directly: `zSquaredModule.addGrp.op`
+unfolds to componentwise addition (by the construction two sections
+back), so taking `.fst` of a sum is definitionally the same as summing the
+`.fst`s — no arithmetic argument needed, only unfolding.
+
 ---
 
 [← Linear maps](05-linear-maps.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)

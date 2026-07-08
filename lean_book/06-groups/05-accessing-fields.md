@@ -1,6 +1,6 @@
 ## Accessing the fields
 
-[← Integers example](03-integers-example.md) | [Index](00-index.md) | [Next: Why bundle proofs with data? →](05-why-bundle.md)
+[← Permutations example](04-permutations-example.md) | [Index](00-index.md) | [Next: Why bundle proofs with data? →](06-why-bundle.md)
 
 ---
 
@@ -26,4 +26,4 @@ the dependent-pair view, both are just coordinates of the same tuple.
 
 ---
 
-[← Integers example](03-integers-example.md) | [Index](00-index.md) | [Next: Why bundle proofs with data? →](05-why-bundle.md)
+[← Permutations example](04-permutations-example.md) | [Index](00-index.md) | [Next: Why bundle proofs with data? →](06-why-bundle.md)

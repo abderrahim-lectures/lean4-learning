@@ -32,6 +32,18 @@ example : 0 + 2 = 2 := rfl        -- reduces, since `Nat.add` recurses on
 -- example : 2 + 0 = 2 := rfl     -- also rfl (0 + n needs induction, n + 0 doesn't)
 ```
 
+A precision worth having: "reduce to the same normal form" doesn't mean
+Lean necessarily unfolds a term *all the way down* before comparing.
+Checking `a ≡ b` typically only reduces each side as far as its **weak
+head normal form** (WHNF) — far enough to see the outermost constructor
+or function head, no further than needed — and then compares heads,
+recursing into subterms only as required. This is precisely why "`Nat.add`
+recurses on its second argument" is a fact about *evaluation order*: to
+determine whether `0 + n` reduces at all, Lean looks at `n`'s outermost
+shape (its WHNF) — and if `n` is an unknown variable rather than a known
+`zero`/`succ` constructor, there's nothing to see, so no reduction fires
+and the goal is stuck at `0 + n`, exactly as Chapter 4 found.
+
 ### Propositional equality
 
 **Propositional equality**, written `a = b` (the `Eq` type from Chapter 3),
@@ -92,6 +104,26 @@ we never ask "but is this the *same* proof of `assoc`" when comparing two
 `Group` structures on the same carrier with the same operation — the
 proof component is immaterial; only the data (`op`, `id`, `inv`) can
 actually differ.
+
+### A note on structure eta
+
+A companion fact, silently relied on whenever this book (or you) writes
+`⟨x.fst, x.snd⟩ = x` or splits a goal about a `structure`-typed equality
+into one goal per field: Lean's kernel treats a term `x : S` (for `S` a
+`structure`) as **definitionally equal** to
+`S.mk x.field1 x.field2 ...` — rebuilding `x` field-by-field gives back
+*the same term*, by η (eta) for structures, not merely a provably-equal
+one. This is exactly what licenses Chapter 8's `Mat2.mk.injEq`-based
+extensionality reasoning and Chapter 10's `congr 1` splitting a
+`DirectSum.mk _ _ = DirectSum.mk _ _` goal into two field-wise goals: both
+depend on Lean already knowing, definitionally, that every term of a
+structure type *is* (eta-equal to) its constructor applied to its own
+fields.
+
+> Read more: TPiL's chapter on structures discusses eta for structures
+> directly; the "Why bundle proofs with data at all?" discussion in
+> [Chapter 6 §6](../06-groups/06-why-bundle.md) is the payoff this
+> definitional transparency is building toward.
 
 ---
 

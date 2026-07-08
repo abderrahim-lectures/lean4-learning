@@ -17,6 +17,10 @@ theorem apply_example {P Q : Prop} (hpq : P → Q) (hp : P) : Q := by
 theorem rw_example (a b : Nat) (h : a = b) : a + 1 = b + 1 := by
   rw [h]
 
+theorem rw_at_example (a b c : Nat) (h1 : a = b) (h2 : a + c = 10) : b + c = 10 := by
+  rw [h1] at h2
+  exact h2
+
 theorem simp_example (n : Nat) : n + 0 = n := by
   simp
 

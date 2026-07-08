@@ -6,13 +6,16 @@
 
 Every `fun x => ...`, every `∀`, every tactic proof you've written in this
 book compiles down to a term in a single, small formal system: the
-**λ-calculus**, extended with dependent types (making it the **calculus of
-constructions**, the specific type theory Lean is built on). This appendix
-makes that system explicit — the untyped core first, then the typed and
-dependent refinements — so that "elaboration," "reduction," "definitional
-equality" (Chapter 5) and "the `Path` family is a $\Pi$-type" (Chapter 1)
-are statements about a calculus you can hold in your head in its entirety,
-not black-box compiler behavior.
+**λ-calculus**, extended with dependent types (the **calculus of
+constructions**, or CoC) and then further extended with `inductive` types
+and a proof-irrelevant `Prop` (the **calculus of inductive constructions**,
+CIC — the specific type theory Lean is actually built on; CoC is its
+core, dependent-types-only fragment). This appendix makes that system
+explicit — the untyped core first, then the typed and dependent
+refinements — so that "elaboration," "reduction," "definitional equality"
+(Chapter 5) and "the `Path` family is a $\Pi$-type" (Chapter 1) are
+statements about a calculus you can hold in your head in its entirety, not
+black-box compiler behavior.
 
 This material is independent of the main chapters and can be read any
 time after Chapter 5 (Rigor check); it's placed last because it's

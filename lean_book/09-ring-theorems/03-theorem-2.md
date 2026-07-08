@@ -22,6 +22,35 @@ The key recognition step, stated generally: **a goal of the form
 right-to-left**; scan any additive expression of two products sharing a
 factor for this pattern before trying anything else.
 
+The proof below needs $0\cdot a = 0$ — the mirror image of Theorem 1
+($a\cdot 0 = 0$), with `right_distrib` in place of `left_distrib` — so we
+prove that first, mechanically dualizing Theorem 1's proof line by line:
+
+```lean
+theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id := by
+  have h0 : Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id = Rg.addGrp.id :=
+    Rg.addGrp.toGroup.id_left Rg.addGrp.id
+  have h1 : Rg.mul (Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id) a =
+      Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a) :=
+    Rg.right_distrib Rg.addGrp.id Rg.addGrp.id a
+  rw [h0] at h1
+  have h2 :
+      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a)) (Rg.mul Rg.addGrp.id a) =
+      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))
+        (Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a)) :=
+    congrArg (Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))) h1
+  rw [Rg.addGrp.toGroup.inv_left] at h2
+  rw [← Rg.addGrp.toGroup.assoc] at h2
+  rw [Rg.addGrp.toGroup.inv_left] at h2
+  rw [Rg.addGrp.toGroup.id_left] at h2
+  exact h2.symm
+```
+
+Notice this is Theorem 1's proof with every `left_distrib`/`a` swapped for
+`right_distrib`/(argument order reversed) — confirming the "mirror image"
+claim isn't just a figure of speech, it's a literal syntactic duality
+between the two proofs. Now the main theorem:
+
 ```lean
 theorem neg_one_mul (a : R) :
     Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a := by
@@ -59,12 +88,6 @@ compiling it:
   it by directly constructing "apply `f` to both sides of `h`" as its own
   standalone fact (`step`, above), which is then used with a single,
   unambiguous `rw [step]`.
-
-This proof cites `mul_zero_left`, the mirror of Theorem 1 with
-`right_distrib` in place of `left_distrib` — left as Exercise 1, since
-writing it yourself, by mechanically dualizing Theorem 1's proof, is the
-best way to confirm you actually understand *why* Theorem 1 needed
-`left_distrib` and not `right_distrib` in the first place.
 
 **Mathematical reading.** This is the sign rule $(-1)\cdot a = -a$. By
 uniqueness of additive inverses it suffices to check $(-1)\cdot a$ is a left

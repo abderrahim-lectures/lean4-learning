@@ -56,6 +56,36 @@ def intRing : Ring Int where
 #eval intRing.one                 -- 1
 #eval intRing.addGrp.toGroup.inv 5   -- -5
 
+-- A finite commutative ring: Z/3Z via Fin 3, whose axioms are decidable
+-- finite checks rather than needing library lemmas the way Int's did.
+def fin3Group : Group (Fin 3) where
+  op := fun a b => a + b
+  id := 0
+  inv := fun a => -a
+  assoc := by decide
+  id_left := by decide
+  id_right := by decide
+  inv_left := by decide
+  inv_right := by decide
+
+def fin3CommGroup : CommGroup (Fin 3) where
+  toGroup := fin3Group
+  comm := by decide
+
+def fin3Ring : Ring (Fin 3) where
+  addGrp := fin3CommGroup
+  mul := fun a b => a * b
+  one := 1
+  mul_assoc := by decide
+  one_mul := by decide
+  mul_one := by decide
+  left_distrib := by decide
+  right_distrib := by decide
+
+#eval fin3Ring.addGrp.op 2 2          -- 1
+#eval fin3Ring.mul 2 2                 -- 1
+#eval fin3Ring.addGrp.toGroup.inv 1     -- 2
+
 structure Mat2 where
   a11 : Int
   a12 : Int

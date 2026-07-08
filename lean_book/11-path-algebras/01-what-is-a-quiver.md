@@ -4,10 +4,11 @@
 
 ---
 
-A **quiver** (in this algebraic sense — not related to Lean 4's `Mathlib`
-name for something similar, which we are not using) is simply a *directed
-graph*: a set of vertices and a set of directed edges (called **arrows**)
-between them. Formally, a quiver $Q$ consists of:
+A **quiver** is simply a *directed graph*: a set of vertices and a set of
+directed edges (called **arrows**) between them — the same notion Mathlib
+calls `Quiver` (we build our own from scratch, per Chapter 0's "no
+Mathlib" policy, rather than reusing Mathlib's). Formally, a quiver $Q$
+consists of:
 
 - a set of vertices $Q_0$,
 - a set of arrows $Q_1$,

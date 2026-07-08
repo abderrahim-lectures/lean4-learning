@@ -1,6 +1,6 @@
 ## A first example: the integers under addition
 
-[← Translating into Lean](02-translating.md) | [Index](00-index.md) | [Next: Accessing the fields →](04-accessing-fields.md)
+[← Translating into Lean](02-translating.md) | [Index](00-index.md) | [Next: Permutations example →](04-permutations-example.md)
 
 ---
 
@@ -54,4 +54,4 @@ inductions on the integers) made explicit rather than assumed.
 
 ---
 
-[← Translating into Lean](02-translating.md) | [Index](00-index.md) | [Next: Accessing the fields →](04-accessing-fields.md)
+[← Translating into Lean](02-translating.md) | [Index](00-index.md) | [Next: Permutations example →](04-permutations-example.md)

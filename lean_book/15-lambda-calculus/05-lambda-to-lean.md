@@ -18,7 +18,7 @@ previous four sections into one table.
 | simple function type $\tau_1 \to \tau_2$ | `τ1 → τ2` | Chapter 1 |
 | universe hierarchy $\mathtt{Type}\,i$ | `Type`, `Type 1`, ... | Chapter 5 |
 | Π-type $\prod_{x:A} B(x)$ | `(x : A) → B x`, `∀ x : A, B x` | Chapter 1, Chapter 3 |
-| Σ-type $\sum_{x:A} B(x)$ | `∃ x : A, P x`; also `structure` | Chapter 2, Chapter 3 |
+| Σ-type $\sum_{x:A} B(x)$ | `structure` (extractable); `∃ x, P x` is its `Prop`-truncated cousin, not literally Σ | Chapter 2, Appendix B §4 |
 | proof-irrelevant universe | `Prop` | Chapter 3 |
 | inductive data (beyond bare CoC) | `inductive`, `structure` | Chapters 1, 2, 11 |
 | Curry–Howard: propositions-as-types | `Prop`/proof terms | Chapter 3 |

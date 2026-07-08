@@ -21,9 +21,15 @@ theorem and_example {P Q : Prop} (hp : P) (hq : Q) : P ∧ Q :=
 theorem and_left {P Q : Prop} (h : P ∧ Q) : P :=
   h.left
 
+theorem and_comm_term {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
+  ⟨h.right, h.left⟩
+
 -- Or
 theorem or_example {P Q : Prop} (hp : P) : P ∨ Q :=
   Or.inl hp
+
+theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
+  Or.elim h (fun hp => Or.inr hp) (fun hq => Or.inl hq)
 
 -- Not, i.e. P → False
 -- NOTE: the book's term-mode `fun h => Nat.noConfusion h` does not
@@ -33,6 +39,9 @@ theorem or_example {P Q : Prop} (hp : P) : P ∨ Q :=
 -- proposition on `Nat`.
 theorem not_example : ¬(1 = 2) := by
   decide
+
+theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1 : Nat) ≠ 2) : P :=
+  absurd h1 h2
 
 theorem all_nats_ge_zero : ∀ n : Nat, n ≥ 0 :=
   fun n => Nat.zero_le n
