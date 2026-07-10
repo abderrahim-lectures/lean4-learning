@@ -62,6 +62,27 @@ references (Mathlib source, *Theorem Proving in Lean 4*, Dummit & Foote,
 Aluffi, and quiver-representation texts) — are threaded throughout rather
 than concentrated only in the closing chapters.
 
+A second, accessibility-focused pass then audited every chapter against
+that same "no unexplained background" standard, specifically for the
+optional "Mathematical reading" boxes, which had drifted into vocabulary
+well past the book's own promised category-theory baseline (objects,
+morphisms, composition, functors). Terms used repeatedly — *universal
+property*, *initial object*, *forgetful functor*, *subobject/full
+subcategory* — now get one shared definition (Chapter 1 §4) that every
+later use links back to; one-off flourishes past that baseline (adjunction,
+biproduct, presheaf category, proper class/Grothendieck universe) were cut
+outright, since they added precision for readers who already had them and
+nothing for readers who didn't. Appendix B gained a new opening section
+(§0) recapping standard propositional and first-order logic — syntax,
+truth tables, natural deduction, soundness/completeness, and the
+classical/intuitionistic distinction — entirely independent of Lean, for
+readers meeting formal logic for the first time; Chapter 4's proof-theory
+asides now point to it instead of assuming it. Five optional "Programmer's
+corner (Python)" boxes were also added alongside the "Mathematical
+reading" boxes, giving readers with programming background but no formal
+logic a concrete second anchor for ideas like currying, induction-as-
+recursion, decidability, and β-reduction.
+
 ## Table of contents
 
 **Part I — Lean fundamentals**
@@ -90,7 +111,7 @@ than concentrated only in the closing chapters.
 **Appendices**
 
 14. [Appendix A: Solutions to exercises](14-appendix-solutions/00-index.md)
-15. [Appendix B: The λ-calculus underneath Lean](15-lambda-calculus/00-index.md)
+15. [Appendix B: A logic recap, and the λ-calculus underneath Lean](15-lambda-calculus/00-index.md)
 
 ## Navigation
 
