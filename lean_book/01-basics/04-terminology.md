@@ -98,7 +98,7 @@ properties of products, quotients, and free constructions from an algebra
 course — nothing new is meant by the phrase here beyond that. The classic
 picture, for a product $X \times Y$: given any $A$ with maps to both
 factors, there's exactly one map into the product making everything agree
-(the dashed arrow, "$\exists!$" = "there exists a unique"):
+(the dashed arrow):
 
 ```mermaid
 graph TD
@@ -111,10 +111,11 @@ graph TD
 
 | Symbol | Lean |
 | --- | --- |
-| $A$, $X$, $Y$, $P$ | types `A`, `X`, `Y`, `X × Y` |
-| $f$, $g$ | ordinary functions `f : A → X`, `g : A → Y` |
-| $h$ (the dashed arrow) | `fun a => (f a, g a) : A → X × Y` |
-| $\pi_X, \pi_Y$ | `Prod.fst`, `Prod.snd` (`.1`/`.2`, or `.fst`/`.snd`) |
+| $A$, $X$, $Y$, $P$ ("the objects") | types `A`, `X`, `Y`, `X × Y` |
+| $f$, $g$ ("the given maps") | ordinary functions `f : A → X`, `g : A → Y` |
+| $\exists!$ ("there exists a unique") | — no single token; witnessed by supplying `h` and proving it's the only one |
+| $h$ ("the mediating map") | `fun a => (f a, g a) : A → X × Y` |
+| $\pi_X, \pi_Y$ ("the projections") | `Prod.fst`, `Prod.snd` (`.1`/`.2`, or `.fst`/`.snd`) |
 
 Read the diagram as: you're *given* the two solid outer arrows ($f$ and
 $g$); the universal property *asserts* the dashed middle arrow $h$ exists,
@@ -138,8 +139,8 @@ graph LR
 
 | Symbol | Lean |
 | --- | --- |
-| $I$ | `Nat` (in `Type`) or `ℤ` (in `Ring`) |
-| the unique arrow $I \to X$ | for `Nat`: `Nat.rec` — build a value of *any* `X` by giving a `zero` case and a `succ` case, and that recipe is forced by `Nat`'s two constructors, with no other choice possible |
+| $I$ ("the initial object") | `Nat` (in `Type`) or `ℤ` (in `Ring`) |
+| $I \to X$ ("the unique arrow") | for `Nat`: `Nat.rec` — build a value of *any* `X` by giving a `zero` case and a `succ` case, and that recipe is forced by `Nat`'s two constructors, with no other choice possible |
 
 Exactly one arrow leaves $I$ for every object in the category — never
 zero (there's always a map), never more than one (no choice about which).
@@ -162,8 +163,8 @@ graph LR
 
 | Symbol | Lean |
 | --- | --- |
-| `Ring` $\to$ `Group` | `r.toGroup` (or `r.toAddGroup`, depending on naming) for `r : Ring R` |
-| `Group` $\to$ `Set` | `g.carrier`, or simply treating `G : Type` as its own underlying set |
+| `Ring` $\to$ `Group` ("forgets $\cdot$") | `r.toGroup` (or `r.toAddGroup`, depending on naming) for `r : Ring R` |
+| `Group` $\to$ `Set` ("forgets $+$") | `g.carrier`, or simply treating `G : Type` as its own underlying set |
 
 Each arrow keeps *less* structure than the one before it — a `Ring`
 remembers both operations, the `Group` it maps to remembers only
@@ -189,8 +190,8 @@ graph LR
 
 | Symbol | Lean |
 | --- | --- |
-| `CommGroup` $\subseteq$ `Group` | `structure CommGroup (G) extends Group G where comm : ...` |
-| the inclusion itself | `.toGroup`, the field `extends` generates automatically |
+| $\subseteq$ ("subobject inclusion") | `structure CommGroup (G) extends Group G where comm : ...` |
+| $\iota$ ("the inclusion map") | `.toGroup`, the field `extends` generates automatically |
 
 A full subcategory is the category formed by all objects satisfying such
 a condition, together with *all* morphisms between them inherited

@@ -86,9 +86,9 @@ graph LR
 
 | Symbol | Lean |
 | --- | --- |
-| $P \wedge Q$ | `P ∧ Q` |
-| $\langle p, q \rangle$ | `⟨hp, hq⟩` (`and_example`) |
-| $\pi_1, \pi_2$ | `h.left`, `h.right` (`and_left` applies `.left`) |
+| $P \wedge Q$ ("and") | `P ∧ Q` |
+| $\langle p, q \rangle$ ("pairing") | `⟨hp, hq⟩` (`and_example`) |
+| $\pi_1, \pi_2$ ("the projections") | `h.left`, `h.right` (`and_left` applies `.left`) |
 
 Disjunction $P \vee Q$ is the **coproduct** $P \sqcup Q$, the mirror image
 — arrows point *in* rather than *out*, and a proof is a tagged injection:
@@ -101,9 +101,9 @@ graph LR
 
 | Symbol | Lean |
 | --- | --- |
-| $P \vee Q$ | `P ∨ Q` |
-| $\iota_1(p)$ | `Or.inl hp` (`or_example`) |
-| $\iota_2(q)$ | `Or.inr hq` |
+| $P \vee Q$ ("or") | `P ∨ Q` |
+| $\iota_1(p)$ ("left injection") | `Or.inl hp` (`or_example`) |
+| $\iota_2(q)$ ("right injection") | `Or.inr hq` |
 
 To *use* a proof of $P \vee Q$ you case-split by the universal property of
 the coproduct: given a proof `h : P ∨ Q` and a way to reach the same

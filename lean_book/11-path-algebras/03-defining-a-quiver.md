@@ -60,9 +60,9 @@ graph LR
 
 | Symbol | Lean |
 | --- | --- |
-| $0, 1, 2 \in V$ | `(0 : Fin 3)`, `(1 : Fin 3)`, `(2 : Fin 3)` |
-| $\alpha, \beta \in A$ | `ExampleArrow.alpha`, `ExampleArrow.beta` |
-| $s, t : A \to V$ | `exampleQuiver.source`, `exampleQuiver.target` |
+| $0, 1, 2 \in V$ ("vertices") | `(0 : Fin 3)`, `(1 : Fin 3)`, `(2 : Fin 3)` |
+| $\alpha, \beta \in A$ ("arrows") | `ExampleArrow.alpha`, `ExampleArrow.beta` |
+| $s, t : A \to V$ ("source, target") | `exampleQuiver.source`, `exampleQuiver.target` |
 
 The two-element inductive type is the finite set $A = \{\alpha,\beta\}$,
 and the `match`-defined `source`/`target` are the functions $s, t : A \to
