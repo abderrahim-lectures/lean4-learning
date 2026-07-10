@@ -75,9 +75,8 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2)
 
 **Mathematical reading.** These are the constructive readings of the
 connectives as operations on the proof-sets. Conjunction $P \wedge Q$ is
-the **product** $P \times Q$: a proof is a pair $\langle p, q\rangle$, with
-`h.left`/`h.right` the projections $\pi_1, \pi_2$ — so `and_example` builds
-$(p,q)$ and `and_left` applies $\pi_1$:
+the **product** $P \times Q$: a proof is a pair $\langle p, q\rangle$, so
+`and_example` builds $(p,q)$ and `and_left` applies $\pi_1$:
 
 ```mermaid
 graph LR
@@ -85,15 +84,26 @@ graph LR
     PandQ -->|"&pi;2"| Q
 ```
 
+| Symbol | Lean |
+| --- | --- |
+| $P \wedge Q$ | `P ∧ Q` |
+| $\langle p, q \rangle$ | `⟨hp, hq⟩` (`and_example`) |
+| $\pi_1, \pi_2$ | `h.left`, `h.right` (`and_left` applies `.left`) |
+
 Disjunction $P \vee Q$ is the **coproduct** $P \sqcup Q$, the mirror image
-— arrows point *in* rather than *out*, and a proof is a tagged injection
-$\iota_1(p)$ (`Or.inl`) or $\iota_2(q)$ (`Or.inr`):
+— arrows point *in* rather than *out*, and a proof is a tagged injection:
 
 ```mermaid
 graph LR
     P -->|"&iota;1"| PorQ["P&or;Q"]
     Q -->|"&iota;2"| PorQ
 ```
+
+| Symbol | Lean |
+| --- | --- |
+| $P \vee Q$ | `P ∨ Q` |
+| $\iota_1(p)$ | `Or.inl hp` (`or_example`) |
+| $\iota_2(q)$ | `Or.inr hq` |
 
 To *use* a proof of $P \vee Q$ you case-split by the universal property of
 the coproduct: given a proof `h : P ∨ Q` and a way to reach the same
