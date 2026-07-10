@@ -56,10 +56,6 @@ instance : MyGroup Int where
   id_right := by intro a; exact Int.add_zero a
   inv_left := by intro a; exact Int.add_left_neg a
   inv_right := by intro a; exact Int.add_right_neg a
-
-def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x
-
-#eval opTwiceTC (3 : Int)   -- 6, with the Group Int instance found automatically
 ```
 
 Every field of the `instance` is identical, term-for-term, to the earlier
@@ -67,6 +63,20 @@ Every field of the `instance` is identical, term-for-term, to the earlier
 `instance` instead of a plain `def` changes only *how Lean's elaborator
 finds it* (automatically, via unification on `G`), not what data it
 contains.
+
+```lean
+def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x
+
+#eval opTwiceTC (3 : Int)   -- 6, with the Group Int instance found automatically
+```
+
+That difference in *how it's found* is exactly what makes `opTwiceTC`
+possible: it's written once, generically, against the `[MyGroup G]`
+assumption, with no mention of `Int` anywhere. At the `#eval` call site,
+Lean needs a `MyGroup Int` to run `MyGroup.op`, searches the instances it
+has registered, finds the one declared above, and plugs it in
+automatically — which is precisely the lookup a plain `def` would not have
+participated in.
 
 **3. Why `Type → Type` needs `Type 1`**
 
@@ -87,9 +97,14 @@ bumps up a universe level, landing `Type → Type` in `Type 1` rather than
 
 ```lean
 theorem add_one_eq_succ (n : Nat) : n + 1 = Nat.succ n := rfl
--- (this one IS rfl — n + 1 = n + Nat.succ 0 = Nat.succ (n + 0) = Nat.succ n,
---  all by the defining equations of `+`, no induction needed)
+```
 
+This one *is* `rfl`: `n + 1 = n + Nat.succ 0 = Nat.succ (n + 0) = Nat.succ
+n`, all by the defining equations of `+`, no induction needed — because
+recursion is on the second, literal-`1` argument, which unfolds
+immediately regardless of what `n` is.
+
+```lean
 theorem one_add_eq_succ (n : Nat) : 1 + n = Nat.succ n := by
   induction n with
   | zero => rfl
@@ -98,13 +113,15 @@ theorem one_add_eq_succ (n : Nat) : 1 + n = Nat.succ n := by
     rw [Nat.add_succ, ih]
 ```
 
-`n + 1 = Nat.succ n` is `rfl` (recursion is on the second, literal-`1`
-argument, which unfolds immediately). But `1 + n = Nat.succ n`, with the
-variable now on the *second* argument, is exactly the same left/right
-asymmetry as `0 + n = n` from Chapter 4 — `Nat.add`'s recursion doesn't
-touch a variable sitting in the first argument at all, so no amount of
-unfolding closes the goal without an actual induction on `n`, even though
-the statement is (of course) true.
+This is the actual answer to the exercise — a *true* equality that `rfl`
+can't close on its own. With the variable now on the *second* argument,
+`1 + n = Nat.succ n` has exactly the same left/right asymmetry as
+`0 + n = n` from Chapter 4: `Nat.add`'s recursion doesn't touch a variable
+sitting in the first argument at all, so no amount of unfolding closes the
+goal without an actual induction on `n`, even though the statement is (of
+course) true — hence the explicit `induction n with ...` above, contrasted
+against `add_one_eq_succ`'s one-line `rfl` just to make the asymmetry
+concrete.
 
 ---
 

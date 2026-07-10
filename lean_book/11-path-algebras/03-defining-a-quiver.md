@@ -50,10 +50,18 @@ just with two constructors that carry no extra data.
 **Mathematical reading.** This is the concrete quiver $Q$ with vertex set
 $V = \{0,1,2\}$ (encoded as $\mathrm{Fin}\,3$) and arrow set $A =
 \{\alpha, \beta\}$, where $s(\alpha)=0,\ t(\alpha)=1$ and $s(\beta)=1,\
-t(\beta)=2$ — the linear $A_3$ quiver $0 \xrightarrow{\alpha} 1
-\xrightarrow{\beta} 2$. The two-element inductive type is the finite set
-$A = \{\alpha,\beta\}$, and the `match`-defined `source`/`target` are the
-functions $s, t : A \to V$ given by their value tables.
+t(\beta)=2$ — the linear $A_3$ quiver, drawn exactly the way you'd draw it
+on paper:
+
+```text
+    0 ----alpha----> 1 ----beta----> 2
+```
+
+The two-element inductive type is the finite set $A = \{\alpha,\beta\}$,
+and the `match`-defined `source`/`target` are the functions $s, t : A \to
+V$ given by their value tables — `source alpha = 0`, `target alpha = 1`,
+`source beta = 1`, `target beta = 2`, i.e. exactly the arrowheads and
+tails drawn above.
 
 ---
 

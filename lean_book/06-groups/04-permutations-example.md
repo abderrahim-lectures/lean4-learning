@@ -47,18 +47,6 @@ def Perm3.comp (f g : Perm3) : Perm3 where
     show f.toFun (g.toFun (g.invFun (f.invFun x))) = x
     rw [g.right_inv]
     exact f.right_inv x
-
-def Perm3.identity : Perm3 where
-  toFun := fun x => x
-  invFun := fun x => x
-  left_inv := fun _ => rfl
-  right_inv := fun _ => rfl
-
-def Perm3.inv (f : Perm3) : Perm3 where
-  toFun := f.invFun
-  invFun := f.toFun
-  left_inv := f.right_inv
-  right_inv := f.left_inv
 ```
 
 `Perm3.comp f g` composes `f` *after* `g` (apply `g.toFun` first, then
@@ -69,6 +57,30 @@ same "reverse the order" fact Chapter 7's Theorem 3
 (`inv_op`) proves abstractly for every group — here you can see concretely
 *why* it's true: to undo "first $g$, then $f$," you must first undo $f$,
 then undo $g$.
+
+```lean
+def Perm3.identity : Perm3 where
+  toFun := fun x => x
+  invFun := fun x => x
+  left_inv := fun _ => rfl
+  right_inv := fun _ => rfl
+```
+
+`Perm3.identity` is the identity permutation: it fixes every point, so
+both of its proof fields are immediate by `rfl`.
+
+```lean
+def Perm3.inv (f : Perm3) : Perm3 where
+  toFun := f.invFun
+  invFun := f.toFun
+  left_inv := f.right_inv
+  right_inv := f.left_inv
+```
+
+`Perm3.inv` inverts a permutation by swapping its `toFun` and `invFun` —
+and correspondingly swapping which proof field (`left_inv` or
+`right_inv`) plays which role, since inverting a bijection just swaps
+which direction counts as "forward."
 
 ### Two concrete permutations, and a computed proof they don't commute
 
@@ -81,7 +93,12 @@ def swap01 : Perm3 where
     | 0 => 1 | 1 => 0 | 2 => 2
   left_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
   right_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
+```
 
+`swap01` is the permutation that swaps `0` and `1` while leaving `2`
+fixed.
+
+```lean
 -- The 3-cycle 0 → 1 → 2 → 0.
 def cycle012 : Perm3 where
   toFun := fun x => match x with
@@ -90,7 +107,11 @@ def cycle012 : Perm3 where
     | 0 => 2 | 1 => 0 | 2 => 1
   left_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
   right_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
+```
 
+`cycle012` is the 3-cycle sending $0 \to 1 \to 2 \to 0$.
+
+```lean
 #eval (Perm3.comp swap01 cycle012).toFun 0   -- 0
 #eval (Perm3.comp cycle012 swap01).toFun 0   -- 2
 ```

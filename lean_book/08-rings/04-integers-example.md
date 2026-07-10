@@ -12,7 +12,15 @@ def intCommGroup : CommGroup Int where
   comm := by
     intro a b
     exact Int.add_comm a b
+```
 
+`toGroup := intGroup` fills the field inherited from `Group Int` inside
+`CommGroup Int`'s definition — this is how `extends` works mechanically:
+under the hood, `CommGroup G` really has fields `toGroup : Group G` and
+`comm : ...`, and Lean's dot-notation makes `cg.op` mean `cg.toGroup.op`
+automatically.
+
+```lean
 def intRing : Ring Int where
   addGrp := intCommGroup
   mul := fun a b => a * b
@@ -34,17 +42,10 @@ def intRing : Ring Int where
     exact Int.add_mul a b c
 ```
 
-Two things worth noticing:
-
-1. `toGroup := intGroup` fills the field inherited from `Group Int` inside
-   `CommGroup Int`'s definition — this is how `extends` works mechanically:
-   under the hood, `CommGroup G` really has fields `toGroup : Group G` and
-   `comm : ...`, and Lean's dot-notation makes `cg.op` mean
-   `cg.toGroup.op` automatically.
-2. Every proof obligation is again a one-line `exact` naming a specific
-   core-library fact about `Int` (`Int.mul_assoc`, `Int.one_mul`, ...),
-   exactly as in Chapter 6 — we are not proving integer arithmetic from
-   nothing, only assembling already-known facts into the `Ring` bundle.
+Every proof obligation is again a one-line `exact` naming a specific
+core-library fact about `Int` (`Int.mul_assoc`, `Int.one_mul`, ...), exactly
+as in Chapter 6 — we are not proving integer arithmetic from nothing, only
+assembling already-known facts into the `Ring` bundle.
 
 **Mathematical reading.** This exhibits $(\mathbb{Z}, +, \times, 0, 1)$ as
 an object of $\mathbf{Ring}$ — indeed the

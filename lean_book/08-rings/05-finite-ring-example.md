@@ -57,6 +57,26 @@ def fin3Ring : Ring (Fin 3) where
   right_distrib := by decide
 ```
 
+**Programmer's corner (Python).** `by decide` on a goal like `assoc` for
+`Fin 3` is not magic — it's exactly what you'd get from
+
+```python
+domain = range(3)
+all((a + b) + c == a + (b + c) for a in domain for b in domain for c in domain)
+```
+
+brute-force enumerate every combination of the (finitely many) variables
+and check the equation holds for each. The difference isn't the algorithm,
+it's *where* the check lives. `all(...)` is a runtime assertion: it only
+runs if some line of code calls it, and if you forget to call it (or a
+later refactor deletes the call), Python will never notice the property
+broke. `decide` instead runs as part of *type-checking* `fin3Group` itself
+— the definition doesn't elaborate, at all, unless the brute-force check
+succeeds, so there is no such thing as a `fin3Group` value that quietly
+skipped its axiom checks. It's the same enumeration, but promoted from "a
+test you hope someone runs" to a precondition the kernel enforces on
+existence.
+
 ```lean
 #eval fin3Ring.addGrp.op 2 2          -- 1  (2 + 2 = 1 mod 3)
 #eval fin3Ring.mul 2 2                 -- 1  (2 * 2 = 1 mod 3)
@@ -84,26 +104,6 @@ checked here). It is the quotient $\mathbb{Z}/(3)$ by the ideal generated
 by $3$, with `Fin 3`'s built-in wraparound arithmetic implementing
 reduction mod $3$ directly at the level of the representation, rather than
 via an explicit quotient construction.
-
-**Programmer's corner (Python).** `by decide` on a goal like `assoc` for
-`Fin 3` is not magic — it's exactly what you'd get from
-
-```python
-domain = range(3)
-all((a + b) + c == a + (b + c) for a in domain for b in domain for c in domain)
-```
-
-brute-force enumerate every combination of the (finitely many) variables
-and check the equation holds for each. The difference isn't the algorithm,
-it's *where* the check lives. `all(...)` is a runtime assertion: it only
-runs if some line of code calls it, and if you forget to call it (or a
-later refactor deletes the call), Python will never notice the property
-broke. `decide` instead runs as part of *type-checking* `fin3Group` itself
-— the definition doesn't elaborate, at all, unless the brute-force check
-succeeds, so there is no such thing as a `fin3Group` value that quietly
-skipped its axiom checks. It's the same enumeration, but promoted from "a
-test you hope someone runs" to a precondition the kernel enforces on
-existence.
 
 ## Next
 

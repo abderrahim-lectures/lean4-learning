@@ -35,15 +35,28 @@ The previous section built `pathBetaAlpha : Path exampleQuiver 0 2`
 directly, one `Path.cons` at a time. Here it is again, built instead by
 *composing* the shorter path `pathAlpha` with a fresh one-arrow path via
 `Path.append` — and, reassuringly, both constructions produce the exact
-same path:
+same path.
 
 ```lean
 def pathBetaOnly : Path exampleQuiver 1 2 :=
   Path.cons ExampleArrow.beta rfl rfl (Path.nil 1)
+```
 
+`pathBetaOnly` is that fresh one-arrow path: a path from `1` to `2`
+consisting of just the single arrow `beta`, built on its own rather than
+by extending `pathAlpha`.
+
+```lean
 def pathBetaAlphaViaAppend : Path exampleQuiver 0 2 :=
   Path.append pathAlpha pathBetaOnly
+```
 
+`pathBetaAlphaViaAppend` composes the shorter path `pathAlpha` with
+`pathBetaOnly` via `Path.append`, giving a path from `0` to `2` — the same
+endpoints as `pathBetaAlpha`, but assembled by composition instead of by
+chaining `Path.cons` calls directly.
+
+```lean
 example : pathBetaAlphaViaAppend = pathBetaAlpha := rfl
 ```
 

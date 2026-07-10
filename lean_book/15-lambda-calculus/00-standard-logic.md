@@ -123,7 +123,8 @@ $$
 {\vdash p \Rightarrow (q \Rightarrow p)}\ (\Rightarrow\text{-intro})
 $$
 
-Chapter 3 §3 names this exact formula "implication is a function type" and
+[Chapter 3 §3](../03-propositions-and-proofs/03-implication.md) names this
+exact formula "implication is a function type" and
 gives you the corresponding Lean term directly: `fun hp => fun hq => hp`.
 The two are not analogous — under Curry–Howard they are literally the same
 object, described twice.
@@ -196,14 +197,16 @@ Read the first row concretely: $\forall x, P(x)$ becomes a *dependent*
 function type precisely because its return type, $P(x)$, depends on the
 very argument $x$ being fed in — an ordinary (non-dependent) function type
 `α → β` wouldn't be expressive enough, since `β` there is one fixed type,
-not one proposition per `x`. This is exactly Chapter 1 §3's "dependent
+not one proposition per `x`. This is exactly [Chapter 1
+§3](../01-basics/03-dependent-types.md)'s "dependent
 types" made concrete for the special case where the family being depended
 on happens to land in `Prop` instead of `Type`. $\forall$-elim is nothing
 more than ordinary function application (feed the function a specific
 `a`, get back a proof of `P a`) — the natural-deduction rule and the
 programming-language operation are, again, not analogous but *identical*,
-the same fact Chapter 3 §3 already made for modus ponens and plain
-function application.
+the same fact [Chapter 3
+§3](../03-propositions-and-proofs/03-implication.md) already made for
+modus ponens and plain function application.
 
 With this table in hand, the whole of first-order natural deduction —
 every rule stated in this section — is visible as a special case of one
@@ -227,8 +230,10 @@ Intuitionistic logic — the system natural deduction *as given above*
 actually is, with no extra axiom added — rejects it as a general principle:
 $\varphi \vee \neg\varphi$ is not derivable from the rules above for an
 arbitrary $\varphi$, only for specific $\varphi$ you can actually settle one
-way or the other (Chapter 3 §4's `decide` works because `1 = 2` happens to
-be *decidable*, not because excluded middle is assumed).
+way or the other ([Chapter 3
+§4](../03-propositions-and-proofs/04-and-or-not.md)'s `decide` works
+because `1 = 2` happens to be *decidable*, not because excluded middle is
+assumed).
 
 This is not a philosophical aside: it is the precise reason Curry–Howard
 works as cleanly as it does. A type-theoretic proof term is a genuine,
@@ -239,9 +244,10 @@ intuitionistic logic exactly. (Lean's core logic is intuitionistic for
 precisely this reason; Mathlib freely adds classical excluded middle as an
 axiom for propositions where a witness isn't needed, but the base calculus
 this book's Curry–Howard table describes in Chapter 3 does not include it.)
-Keep this fork in mind reading Chapter 3 §4's remark that Lean has "no
-built-in law of excluded middle" — it is this exact distinction, not an
-incidental implementation detail.
+Keep this fork in mind reading [Chapter 3
+§4](../03-propositions-and-proofs/04-and-or-not.md)'s remark that Lean has
+"no built-in law of excluded middle" — it is this exact distinction, not
+an incidental implementation detail.
 
 ## Next
 

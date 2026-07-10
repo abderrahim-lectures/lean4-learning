@@ -36,21 +36,41 @@ theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
   cases Y
   rw [Mat2.mk.injEq]
   exact ⟨h1, h2, h3, h4⟩
+```
 
+**Mathematical reading.** `Mat2` is the free $\mathbb{Z}$-module
+$M_2(\mathbb{Z}) \cong \mathbb{Z}^4$ on the four matrix entries. The
+extensionality lemma `Mat2.ext` — supplied by hand right alongside the
+structure, since it's needed by nearly every proof below — says two `Mat2`
+values are equal exactly when all four entries match.
+
+```lean
 def Mat2.add (X Y : Mat2) : Mat2 where
   a11 := X.a11 + Y.a11
   a12 := X.a12 + Y.a12
   a21 := X.a21 + Y.a21
   a22 := X.a22 + Y.a22
+```
 
+`Mat2.add` is entrywise $+$.
+
+```lean
 def Mat2.neg (X : Mat2) : Mat2 where
   a11 := -X.a11
   a12 := -X.a12
   a21 := -X.a21
   a22 := -X.a22
+```
 
+`Mat2.neg` is entrywise $-$.
+
+```lean
 def Mat2.zero : Mat2 := ⟨0, 0, 0, 0⟩
+```
 
+`Mat2.zero` is the zero matrix.
+
+```lean
 -- (row i, col k) entry of X * Y is Σⱼ X[i,j] * Y[j,k]; with only two
 -- indices this sum is just two terms, written out directly.
 def Mat2.mul (X Y : Mat2) : Mat2 where
@@ -58,18 +78,18 @@ def Mat2.mul (X Y : Mat2) : Mat2 where
   a12 := X.a11 * Y.a12 + X.a12 * Y.a22
   a21 := X.a21 * Y.a11 + X.a22 * Y.a21
   a22 := X.a21 * Y.a12 + X.a22 * Y.a22
+```
 
+`Mat2.mul` is the matrix product with $(XY)_{ik} = \sum_j X_{ij}Y_{jk}$, here
+the two-term sums since $n = 2$.
+
+```lean
 def Mat2.one : Mat2 := ⟨1, 0, 0, 1⟩
 ```
 
-**Mathematical reading.** `Mat2` is the free $\mathbb{Z}$-module
-$M_2(\mathbb{Z}) \cong \mathbb{Z}^4$ on the four matrix entries, and the
-definitions install the usual matrix operations: `Mat2.add` and `Mat2.neg`
-are entrywise $+$ and $-$, `Mat2.zero` is the zero matrix, `Mat2.one` is the
-identity $I = \begin{psmallmatrix}1&0\\0&1\end{psmallmatrix}$, and `Mat2.mul`
-is the matrix product with $(XY)_{ik} = \sum_j X_{ij}Y_{jk}$, here the
-two-term sums since $n = 2$. Together these are the operations of the matrix
-ring $M_2(\mathbb{Z})$.
+`Mat2.one` is the identity $I = \begin{psmallmatrix}1&0\\0&1\end{psmallmatrix}$.
+Together these five definitions are the operations of the matrix ring
+$M_2(\mathbb{Z})$.
 
 ### Why matrix multiplication is noncommutative — check it computationally first
 
@@ -129,13 +149,26 @@ def mat2Group : Group Mat2 where
   inv_right := by
     intro X
     apply Mat2.ext <;> exact Int.add_right_neg _
+```
 
+`mat2Group` verifies that $(M_2(\mathbb{Z}), +)$ is a group: every axiom
+(`assoc`, `id_left`, `id_right`, `inv_left`, `inv_right`) is checked
+entrywise, using `Mat2.ext` to split the single `Mat2` equality into four
+`Int` equalities, each of which is then a direct citation of the matching
+`Int` addition lemma.
+
+```lean
 def mat2CommGroup : CommGroup Mat2 where
   toGroup := mat2Group
   comm := by
     intro X Y
     apply Mat2.ext <;> exact Int.add_comm _ _
+```
 
+`mat2CommGroup` upgrades `mat2Group` to an abelian group by supplying
+commutativity, again entrywise via `Mat2.ext` and `Int.add_comm`.
+
+```lean
 -- A reusable shuffle: rearranges (a+b)+(c+d) into (a+c)+(b+d) — exactly
 -- what's needed whenever a "product of sums" expands into four cross
 -- terms that must be regrouped to match the other side.

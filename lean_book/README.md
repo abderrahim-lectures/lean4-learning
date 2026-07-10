@@ -1,5 +1,7 @@
 # Lean for Working Algebraists
 
+[Changelog](CHANGELOG.md)
+
 A guide to Lean 4 for readers who already think in groups, rings, functors,
 and diagrams, but have never written a line of Lean (or any proof
 assistant). We assume no programming background — only the mathematical
@@ -43,45 +45,20 @@ careful mathematician will already be asking by that point — `structure`
 versus `class`, universes, and definitional versus propositional equality —
 before committing to `Group`'s definition in Chapter 6.
 
-The book has been through an editorial pass specifically checking for
-foundational terms used before they're explained, thin worked-example
-coverage, and outright factual errors — the Curry–Howard correspondence
-(Chapter 3) now gets a full connective-by-connective table rather than a
-one-line slogan; a "Terminology" section (Chapter 1 §4) defines
-*elaborate*, *unify*, *reduce/normal form*, and *motive* the first time
-each is needed, with forward pointers to Appendix B where they're made
-fully precise; every algebraic chapter now has at least one worked
-example beyond the "obvious" one (a genuinely non-abelian finite group in
-Chapter 6, a finite commutative ring in Chapter 8, a concrete linear map
-and direct-sum instance in Chapter 10, a computed path composition in
-Chapter 11), including one place (Chapter 7) where a generic theorem is
-explicitly instantiated on a concrete structure to demonstrate the
-"prove once, use everywhere" payoff rather than only asserting it. "Read
-more" pointers — both internal cross-references and external standard
-references (Mathlib source, *Theorem Proving in Lean 4*, Dummit & Foote,
-Aluffi, and quiver-representation texts) — are threaded throughout rather
-than concentrated only in the closing chapters.
-
-A second, accessibility-focused pass then audited every chapter against
-that same "no unexplained background" standard, specifically for the
-optional "Mathematical reading" boxes, which had drifted into vocabulary
-well past the book's own promised category-theory baseline (objects,
-morphisms, composition, functors). Terms used repeatedly — *universal
-property*, *initial object*, *forgetful functor*, *subobject/full
-subcategory* — now get one shared definition (Chapter 1 §4) that every
-later use links back to; one-off flourishes past that baseline (adjunction,
-biproduct, presheaf category, proper class/Grothendieck universe) were cut
-outright, since they added precision for readers who already had them and
-nothing for readers who didn't. Appendix B gained a new opening section
-(§0) recapping standard propositional and first-order logic — syntax,
-truth tables, natural deduction, soundness/completeness, and the
-classical/intuitionistic distinction — entirely independent of Lean, for
-readers meeting formal logic for the first time; Chapter 4's proof-theory
-asides now point to it instead of assuming it. Five optional "Programmer's
-corner (Python)" boxes were also added alongside the "Mathematical
-reading" boxes, giving readers with programming background but no formal
-logic a concrete second anchor for ideas like currying, induction-as-
-recursion, decidability, and β-reduction.
+The book has been through several editorial passes: a first pass checking
+for foundational terms used before they're explained, thin worked-example
+coverage, and outright factual errors; a second, accessibility-focused
+pass that caught "Mathematical reading" boxes drifting past the book's own
+promised background (a shared glossary now lives at
+[Chapter 1 §4](01-basics/04-terminology.md), and
+[Appendix B §0](15-lambda-calculus/00-standard-logic.md) recaps standard
+logic from scratch for readers meeting it for the first time) and added
+optional "Programmer's corner (Python)" boxes alongside the "Mathematical
+reading" ones; and a third, readability-focused pass that put every worked
+example in its own block immediately followed by its own explanation
+(rather than several examples dumped together, explained afterward all at
+once) and added plain-text category-theory diagrams at the natural spots.
+See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
 
 ## Table of contents
 
