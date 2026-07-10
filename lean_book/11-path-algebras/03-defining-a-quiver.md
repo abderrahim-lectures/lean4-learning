@@ -53,8 +53,9 @@ $V = \{0,1,2\}$ (encoded as $\mathrm{Fin}\,3$) and arrow set $A =
 t(\beta)=2$ — the linear $A_3$ quiver, drawn exactly the way you'd draw it
 on paper:
 
-```text
-    0 ----alpha----> 1 ----beta----> 2
+```mermaid
+graph LR
+    0 -->|&alpha;| 1 -->|&beta;| 2
 ```
 
 The two-element inductive type is the finite set $A = \{\alpha,\beta\}$,

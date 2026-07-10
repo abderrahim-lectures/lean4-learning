@@ -20,7 +20,15 @@ Each chapter is its own folder (e.g. [06-groups/](06-groups/)) containing a
 chapter's `00-index.md` first, which links to every section in order. LaTeX
 math is written inline as `$...$` and in display blocks as `$$...$$`; render
 with any Markdown viewer that supports MathJax/KaTeX (e.g. VS Code with a
-Markdown+Math extension, or Pandoc).
+Markdown+Math extension, or Pandoc). A handful of category-theory diagrams
+(the universal-property/initial-object/forgetful-functor entries in the
+Chapter 1 §4 glossary, the product/coproduct pictures in Chapter 3, the
+running quiver example in Chapter 11) are written as
+[Mermaid](https://mermaid.js.org/) diagrams — these render natively on
+GitHub and in VS Code with the "Markdown Preview Mermaid Support"
+extension; in a viewer without Mermaid support they fall back to a
+readable fenced code block showing the diagram's source instead of a
+rendering error.
 
 Code blocks are valid Lean 4 (toolchain `v4.31.0`, matching
 `../lean_project`). Every code block in Chapters 1–11 has been ported into

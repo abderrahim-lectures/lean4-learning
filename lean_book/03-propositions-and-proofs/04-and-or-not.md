@@ -79,18 +79,20 @@ the **product** $P \times Q$: a proof is a pair $\langle p, q\rangle$, with
 `h.left`/`h.right` the projections $\pi_1, \pi_2$ — so `and_example` builds
 $(p,q)$ and `and_left` applies $\pi_1$:
 
-```text
-    P <---- P∧Q ----> Q
-       π1          π2
+```mermaid
+graph LR
+    PandQ["P&and;Q"] -->|"&pi;1"| P
+    PandQ -->|"&pi;2"| Q
 ```
 
 Disjunction $P \vee Q$ is the **coproduct** $P \sqcup Q$, the mirror image
 — arrows point *in* rather than *out*, and a proof is a tagged injection
 $\iota_1(p)$ (`Or.inl`) or $\iota_2(q)$ (`Or.inr`):
 
-```text
-    P ----> P∨Q <---- Q
-       ι1          ι2
+```mermaid
+graph LR
+    P -->|"&iota;1"| PorQ["P&or;Q"]
+    Q -->|"&iota;2"| PorQ
 ```
 
 To *use* a proof of $P \vee Q$ you case-split by the universal property of
