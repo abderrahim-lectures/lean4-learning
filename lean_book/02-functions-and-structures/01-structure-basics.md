@@ -15,22 +15,43 @@ structure Point where
 def origin : Point := { x := 0, y := 0 }
 
 #eval origin.x        -- 0
+```
 
+Key points:
+
+- `Point.mk` is the automatically generated **constructor** — the function
+  that actually builds a `Point` out of an `x` and a `y`. `{ x := ..., y :=
+  ... }` is sugar for `Point.mk ... ...`, naming each field so you can't
+  mix up the order.
+- There's an even terser spelling: `⟨0, 0⟩` builds the exact same `Point`,
+  just listing the values in field-declaration order instead of naming
+  them. Read `⟨_, _⟩` as **"here are the pieces, in order — you figure out
+  which constructor I mean."** Lean can always figure it out, because the
+  *expected type* (here, `Point`, from `def origin : Point := ...`) tells
+  it exactly which constructor and which fields you must be filling in.
+  That's also where the official name comes from: it's called the
+  **anonymous constructor** because you never write `Point.mk` — you leave
+  it anonymous, and Lean infers it from context. You'll see `⟨_, _⟩` used
+  constantly from Chapter 3 onward, for proofs as much as for data.
+- `p.x` is **field projection** notation, sugar for `Point.x p` —
+  `origin.x` above is exactly this projection applied to `origin`.
+
+```lean
 def shift (p : Point) (dx dy : Nat) : Point :=
   { x := p.x + dx, y := p.y + dy }
 
 #eval (shift origin 3 4).y   -- 4
 ```
 
-Key points:
+`shift` shows a structure used on *both* sides of a function: it takes a
+`Point` in (reading its fields back out with the same `p.x`/`p.y`
+projection notation) and builds a new one out via `{ x := ..., y := ... }`,
+the same field-naming syntax `origin` used above.
 
-- `Point.mk` is the automatically generated **constructor**. `{ x := ..., y := ... }`
-  is anonymous-constructor sugar for `Point.mk ... ...`.
-  `p.x` is **field projection** notation, sugar for `Point.x p`.
-- Structures can bundle *proofs* alongside data, not just data. This is
-  exactly how we'll define a group: a carrier type, an operation, and
-  proofs that the operation satisfies the group axioms — all in one
-  `structure`.
+One more thing worth knowing before we move on: structures can bundle
+*proofs* alongside data, not just data. This is exactly how we'll define a
+group: a carrier type, an operation, and proofs that the operation
+satisfies the group axioms — all in one `structure`.
 
 **Mathematical reading.** `structure Point where x : Nat; y : Nat` is the
 Cartesian product $\mathrm{Point} = \mathbb{N} \times \mathbb{N}$, with `x`

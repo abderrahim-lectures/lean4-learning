@@ -47,7 +47,13 @@ theorem all_nats_ge_zero : ∀ n : Nat, n ≥ 0 :=
   fun n => Nat.zero_le n
 
 theorem exists_even : ∃ n : Nat, n % 2 = 0 :=
-  ⟨0, rfl⟩
+  ⟨2, rfl⟩
+
+@[reducible] def isPrime (n : Nat) : Prop :=
+  n ≥ 2 ∧ ∀ m : Nat, m < n → m ≥ 2 → ¬ (m ∣ n)
+
+theorem exists_prime_gt_three : ∃ p : Nat, p > 3 ∧ isPrime p :=
+  ⟨5, by decide⟩
 
 theorem symm_example {a b : Nat} (h : a = b) : b = a :=
   h.symm

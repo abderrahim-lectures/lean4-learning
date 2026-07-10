@@ -4,18 +4,12 @@
 
 ---
 
-```lean
-def double (n : Nat) : Nat := n * 2
-
-def average (a b : Nat) : Nat :=
-  let sum := a + b
-  sum / 2
-
-def identity {α : Type} (x : α) : α := x
-```
-
 Three short definitions, but every token in them is doing something
 specific. Going through each in full:
+
+```lean
+def double (n : Nat) : Nat := n * 2
+```
 
 **`def double (n : Nat) : Nat := n * 2`**
 
@@ -71,6 +65,12 @@ difference between writing the domain as one arrow `Nat → Nat` or as a
 named binder `(n : Nat) : Nat` — exactly as $f : A \to B,\ f(a) = \ldots$
 and $f = (a \mapsto \ldots) : A \to B$ describe the same function.
 
+```lean
+def average (a b : Nat) : Nat :=
+  let sum := a + b
+  sum / 2
+```
+
 **`def average (a b : Nat) : Nat := let sum := a + b; sum / 2`**
 
 - `(a b : Nat)` — two explicit arguments, both of type `Nat`, written with
@@ -117,6 +117,10 @@ with the caveat that this `average` computes $\lfloor s/2 \rfloor$
 because it's easy to elide in ordinary mathematical prose but Lean forces
 you to confront it (there is no coercion to $\mathbb{Q}$ happening for
 free).
+
+```lean
+def identity {α : Type} (x : α) : α := x
+```
 
 **`def identity {α : Type} (x : α) : α := x`**
 

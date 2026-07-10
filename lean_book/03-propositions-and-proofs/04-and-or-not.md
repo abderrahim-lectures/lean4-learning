@@ -15,7 +15,17 @@ theorem and_left {P Q : Prop} (h : P ∧ Q) : P :=
 -- And is commutative, in term mode (no tactics)
 theorem and_comm_term {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
   ⟨h.right, h.left⟩
+```
 
+- `∧` (And) is a structure with two fields `left` and `right`; `⟨hp, hq⟩`
+  is the same "here are the pieces, in order" anonymous-constructor
+  shorthand from
+  [Chapter 2 §1](../02-functions-and-structures/01-structure-basics.md) —
+  Lean sees the goal is `P ∧ Q`, so it knows
+  `⟨hp, hq⟩` must mean "build the `And` from a proof of `P` and a proof of
+  `Q`," in that order, with no need to spell out `And.intro hp hq`.
+
+```lean
 -- Or
 theorem or_example {P Q : Prop} (hp : P) : P ∨ Q :=
   Or.inl hp
@@ -24,29 +34,33 @@ theorem or_example {P Q : Prop} (hp : P) : P ∨ Q :=
 -- the hypothesis actually is, without the `cases` tactic
 theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
   Or.elim h (fun hp => Or.inr hp) (fun hq => Or.inl hq)
-
--- Not, i.e. P → False
-theorem not_example : ¬(1 = 2) := by
-  decide
-
--- Deriving False from a genuine contradiction, then using `absurd` to
--- close any goal at all once you have one
-theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2) : P :=
-  absurd h1 h2
 ```
 
-- `∧` (And) is a structure with two fields `left` and `right`; `⟨hp, hq⟩` is
-  anonymous-constructor sugar, same as for any structure.
 - `∨` (Or) has two constructors, `Or.inl` and `Or.inr` — a proof of `P ∨ Q`
   is either "here's a proof of `P`" or "here's a proof of `Q`".
-- `¬P` is notation for `P → False`. To prove a negation, assume `P` holds
-  and derive `False`.
 - `Or.elim {P Q R : Prop} (h : P ∨ Q) (hpr : P → R) (hqr : Q → R) : R` is
   the *eliminator* for `Or`: given a proof of `P ∨ Q`, and a way to reach
   the same conclusion `R` from either disjunct separately, you get a proof
   of `R`. `or_comm_term` above uses it directly in term mode — no `cases`,
   no tactic block — supplying `fun hp => Or.inr hp` for the "if it was `P`"
   branch and `fun hq => Or.inl hq` for the "if it was `Q`" branch.
+
+```lean
+-- Not, i.e. P → False
+theorem not_example : ¬(1 = 2) := by
+  decide
+```
+
+- `¬P` is notation for `P → False`. To prove a negation, assume `P` holds
+  and derive `False`.
+
+```lean
+-- Deriving False from a genuine contradiction, then using `absurd` to
+-- close any goal at all once you have one
+theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2) : P :=
+  absurd h1 h2
+```
+
 - `absurd {P Q : Prop} (h1 : P) (h2 : ¬P) : Q` derives *anything at all*
   from a genuine contradiction — a direct proof of `P` together with a
   proof that `P` is impossible. `anything_from_contradiction` shows this
@@ -63,10 +77,27 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2)
 connectives as operations on the proof-sets. Conjunction $P \wedge Q$ is
 the **product** $P \times Q$: a proof is a pair $\langle p, q\rangle$, with
 `h.left`/`h.right` the projections $\pi_1, \pi_2$ — so `and_example` builds
-$(p,q)$ and `and_left` applies $\pi_1$. Disjunction $P \vee Q$ is the
-**coproduct** $P \sqcup Q$: a proof is a tagged injection $\iota_1(p)$
-(`Or.inl`) or $\iota_2(q)$ (`Or.inr`), and to *use* one you case-split by
-the universal property of the coproduct. Negation is $\neg P := (P \to
+$(p,q)$ and `and_left` applies $\pi_1$:
+
+```text
+    P <---- P∧Q ----> Q
+       π1          π2
+```
+
+Disjunction $P \vee Q$ is the **coproduct** $P \sqcup Q$, the mirror image
+— arrows point *in* rather than *out*, and a proof is a tagged injection
+$\iota_1(p)$ (`Or.inl`) or $\iota_2(q)$ (`Or.inr`):
+
+```text
+    P ----> P∨Q <---- Q
+       ι1          ι2
+```
+
+To *use* a proof of $P \vee Q$ you case-split by the universal property of
+the coproduct: given a proof `h : P ∨ Q` and a way to reach the same
+conclusion `R` from either side (`hpr : P → R`, `hqr : Q → R`), there's
+exactly one map `P∨Q → R` agreeing with both — precisely what `or_comm_term`
+above builds via `Or.elim`. Negation is $\neg P := (P \to
 \bot)$, a map into the initial object $\bot = \varnothing$; a proof of
 $\neg(1=2)$ is a function turning the (impossible) hypothesis $1 = 2$ into
 an element of $\varnothing$, vacuously — here discharged by `decide`, which

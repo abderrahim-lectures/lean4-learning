@@ -57,14 +57,17 @@ fails to typecheck, exactly the dependent-type payoff from Chapter 1.
 ```lean
 def pathAlpha : Path exampleQuiver 0 1 :=
   Path.cons ExampleArrow.alpha rfl rfl (Path.nil 0)
-
-def pathBetaAlpha : Path exampleQuiver 0 2 :=
-  Path.cons ExampleArrow.beta rfl rfl pathAlpha
 ```
 
 - `pathAlpha` starts from `Path.nil 0` (the trivial path at vertex `0`) and
   appends `alpha` (source `0`, target `1` — both proved by `rfl` since they
   compute directly from the `match` in `exampleQuiver`'s definition).
+
+```lean
+def pathBetaAlpha : Path exampleQuiver 0 2 :=
+  Path.cons ExampleArrow.beta rfl rfl pathAlpha
+```
+
 - `pathBetaAlpha` appends `beta` (source `1`, target `2`) onto `pathAlpha`,
   giving a path from `0` to `2` — exactly $\beta\alpha$.
 
