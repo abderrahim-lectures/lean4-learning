@@ -61,7 +61,7 @@ theorem symm_example {a b : Nat} (h : a = b) : b = a :=
 theorem trans_example {a b c : Nat} (h1 : a = b) (h2 : b = c) : a = c :=
   h1.trans h2
 
-theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 :=
-  h ▸ rfl
+theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
+  rw [h]
 
 end Ch03Propositions
