@@ -30,7 +30,9 @@ already has vastly more general and battle-tested versions of all of this:
 
 The jump from this book's `structure`-based definitions to Mathlib's
 `class`-based ones is mostly about **ergonomics** (automatic instance
-resolution, shared notation, inheritance diamonds resolved for you) rather
+resolution, shared notation, inheritance diamonds — the ambiguity that
+arises when a structure extends two parents that share a common
+ancestor — resolved for you) rather
 than mathematical content — the axioms you already internalized are the
 same axioms, just packaged so Lean's elaborator can find them without you
 naming a `Grp` argument in every theorem.

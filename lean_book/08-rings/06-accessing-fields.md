@@ -12,7 +12,8 @@
 ```
 
 **Mathematical reading.** The chained projections walk down the tower of
-forgetful functors $\mathbf{Ring} \to \mathbf{Ab} \to \mathbf{Grp}$:
+[forgetful functors](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+$\mathbf{Ring} \to \mathbf{Ab} \to \mathbf{Grp}$:
 `intRing.addGrp` applies $\mathbf{Ring}\to\mathbf{Ab}$ (recover $(\mathbb{Z},
 +)$), and `.toGroup` applies $\mathbf{Ab}\to\mathbf{Grp}$, so
 `intRing.addGrp.toGroup.inv 5` computes the additive inverse $-5$ in the

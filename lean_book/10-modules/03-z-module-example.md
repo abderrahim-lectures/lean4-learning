@@ -36,12 +36,12 @@ making any abelian group into a $\mathbb{Z}$-module, because (M4) plus
 no freedom.
 
 **Mathematical reading.** This constructs the canonical $\mathbb{Z}$-action
-on any abelian group, realizing the equivalence of categories
-$\mathbb{Z}\text{-}\mathbf{Mod} \simeq \mathbf{Ab}$. `natSmul` is the
+on any abelian group. `natSmul` is the
 $\mathbb{N}$-action $n\cdot m = \underbrace{m + \cdots + m}_{n}$ (the
 $n$-fold sum, with $0\cdot m = 0$), and `intSmul` extends it to $\mathbb{Z}$
 by $(-n)\cdot m = -(n\cdot m)$. This is forced: since $\mathbb{Z}$ is the
-*initial* ring, there is a unique ring map $\mathbb{Z} \to
+[initial](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+ring, there is a unique ring map $\mathbb{Z} \to
 \mathrm{End}(M)$ for any abelian group $M$ (it must send $1 \mapsto
 \mathrm{id}_M$, hence $n \mapsto n\cdot\mathrm{id}_M$), so the $\mathbb{Z}$-
 module structure is unique — "abelian group" and "$\mathbb{Z}$-module" are

@@ -1,6 +1,6 @@
 ## Untyped λ-calculus: terms and reduction
 
-[← Index](00-index.md) | [Next: Church encodings →](02-church-encodings.md)
+[← Standard logic recap](00-standard-logic.md) | [Index](00-index.md) | [Next: Church encodings →](02-church-encodings.md)
 
 ---
 
@@ -81,6 +81,23 @@ body that doesn't mention $y$, so it just discards $b$ and leaves $a$.
 This particular term — $\lambda x.\, \lambda y.\, x$, "take two arguments,
 return the first, discard the second" — is important enough to have a
 name, `K`, or `Bool.true`'s implementation, coming up in the next section.
+
+**Programmer's corner (Python).** Python has its own `lambda` keyword, and
+on simple examples it really does β-reduce exactly like the calculus above:
+`(lambda x: x + 1)(5)` reduces to `5 + 1` to `6`, the same substitution step
+as $(\lambda x.\, x + 1)\, 5 \to_\beta 5 + 1$. But Python's `lambda` is a
+deliberately crippled subset of $\lambda x.\, t$: the body `t` must be a
+single *expression* — no `if` statements, no `for` loops, no multiple
+statements, no `return`. Anything with real control flow needs `def`
+instead, which is not the same object at all (`def` binds a name via a
+statement; `lambda` produces a value). The actual untyped λ-calculus has no
+such restriction, because it doesn't need one: `if`, loops, and recursion
+are, as the next section shows, just more terms built from $\lambda$ and
+application, not separate language features bolted on top. So where
+Python drew a line — "expressions get a terse `lambda`, everything else
+needs `def`" — the λ-calculus (and Lean's `fun`, which imposes no such
+restriction either) never needed to, because in the calculus, functions
+already are the entire language.
 
 ### Curried, always
 

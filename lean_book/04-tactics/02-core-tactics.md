@@ -64,6 +64,13 @@ mathematician's "by $f$, it remains to check the hypotheses of $f$." `rw [h]`
 with $h : a = b$ is substitution of equals for equals (Leibniz), rewriting
 $G$ to $G[b/a]$, justified because $a = b$ makes the two goals equivalent.
 
+> Read more: "deduction theorem" and "$\lambda$-abstraction rule" are the
+> $\Rightarrow$-intro rule from natural deduction and its Curry–Howard
+> reading as a Lean `fun`, respectively —
+> [Appendix B §0](../15-lambda-calculus/00-standard-logic.md) states the
+> rule itself; [Appendix B §3](../15-lambda-calculus/03-simply-typed-lambda-calculus.md)
+> gives the typed λ-calculus it corresponds to.
+
 ---
 
 [← Goal state](01-goal-state.md) | [Index](00-index.md) | [Next: Reading a tactic failure →](03-reading-failures.md)

@@ -18,7 +18,7 @@ previous four sections into one table.
 | simple function type $\tau_1 \to \tau_2$ | `τ1 → τ2` | Chapter 1 |
 | universe hierarchy $\mathtt{Type}\,i$ | `Type`, `Type 1`, ... | Chapter 5 |
 | Π-type $\prod_{x:A} B(x)$ | `(x : A) → B x`, `∀ x : A, B x` | Chapter 1, Chapter 3 |
-| Σ-type $\sum_{x:A} B(x)$ | `structure` (extractable); `∃ x, P x` is its `Prop`-truncated cousin, not literally Σ | Chapter 2, Appendix B §4 |
+| Σ-type $\sum_{x:A} B(x)$ | `structure` (extractable); `∃ x, P x` is a *restricted* cousin (no witness-extraction) rather than literally Σ | Chapter 2, Appendix B §4 |
 | proof-irrelevant universe | `Prop` | Chapter 3 |
 | inductive data (beyond bare CoC) | `inductive`, `structure` | Chapters 1, 2, 11 |
 | Curry–Howard: propositions-as-types | `Prop`/proof terms | Chapter 3 |
@@ -43,7 +43,7 @@ literal λ-term/application-tree the tactic script built.
 implicit-argument inference (`identity 5` inferring `α := Nat`) and every
 subsequent "Lean figures it out from context" moment in this book is an
 algorithm — **unification** — solving equations between CIC terms with
-metavariable placeholders, guided by the typing rules from the previous
+metavariables (placeholders for not-yet-known terms), guided by the typing rules from the previous
 two sections. It is a well-understood, terminating (for the fragment Lean
 actually uses) procedure, not an oracle; when it fails, the resulting
 error message (Chapter 4, "reading a tactic failure") is telling you

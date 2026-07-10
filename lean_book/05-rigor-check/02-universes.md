@@ -59,19 +59,6 @@ construction — it's one universe level too high, exactly because it is a
 function *out of* `Type` itself, not out of some ordinary `Type 0` type
 like `Nat`.
 
-This is not merely a technicality to wave away — it is the precise
-type-theoretic reason a naive "category of all groups, where the
-collection of groups is itself considered as an object" runs into
-size issues, mirroring exactly the set-theoretic caution familiar from
-category theory: the collection of all groups is a **proper class**, not a
-set, and $\mathbf{Grp}$ is accordingly a *large* category (one whose
-objects don't form a set/small type) rather than a small one. Lean's
-universe hierarchy is the mechanized version of the same size discipline
-category theorists already carry around informally when they distinguish
-small categories from large ones, or worry about whether a construction
-like "the category of all categories" needs a further Grothendieck
-universe to make sense.
-
 ### Universe polymorphism (a brief note)
 
 You will occasionally see a definition written with an explicit universe

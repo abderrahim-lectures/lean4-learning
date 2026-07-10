@@ -77,8 +77,16 @@ $$
 Because these fields are propositions (proof-irrelevant), `Group G` is
 precisely the *subset* of `GroupData G` cut out by the group axioms — the
 $\Sigma$-type $\sum_{d : \mathrm{GroupData}(G)} \mathrm{Axioms}(d)$. This is
+the same $\Sigma$-type you already met in Chapter 3 as "a witness together
+with a proof about it" — here the witness is a whole bundle of group data
+`d : GroupData G` rather than a single element, and the proof is the
+conjunction of the five axioms about it, but the shape is identical: exactly
+the pairing a `structure` performs when it bundles data fields with proof
+fields, as `Group` itself does above. This is
 the mathematician's "a group is a set with operations *such that* the axioms
-hold": the "such that" is a genuine subobject of the space of raw data.
+hold": the "such that" is a genuine
+[subobject](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+of the space of raw data.
 
 > Read more: Mathlib's actual `Group` (`Mathlib.Algebra.Group.Defs`) is a
 > `class`, not this book's plain `structure`, and inherits from a chain of

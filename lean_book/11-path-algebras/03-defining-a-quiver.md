@@ -18,10 +18,7 @@ arrows, and `source`/`target` are exactly $s$ and $t$ above.
 
 **Mathematical reading.** `Quiver V A` is a quiver $Q = (V, A, s, t)$ — the
 data of two functions $s, t : A \to V$, i.e. a parallel pair of arrows
-$A \rightrightarrows V$ in $\mathbf{Set}$. Equivalently a quiver is a
-diagram on the two-object category $(\bullet \rightrightarrows \bullet)$, so
-the type of quivers is the functor category (presheaf category)
-$\mathbf{Set}^{(\bullet\rightrightarrows\bullet)}$. A quiver is precisely
+$A \rightrightarrows V$ in $\mathbf{Set}$. A quiver is precisely
 the underlying data of a small category *before* imposing composition and
 identities — the raw generators from which the free category (paths) will be
 built.

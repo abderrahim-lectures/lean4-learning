@@ -69,6 +69,31 @@ Each `rw` is one equational step in this chain; the whole proof is the
 standard textbook lemma, with the successor/zero cases that written
 mathematics usually glosses made fully explicit.
 
+**Programmer's corner (Python).** The two cases of `induction b with |
+zero => ... | succ k ih => ...` have exactly the shape of a recursive
+function over the same inductively-defined structure. Compare to a
+hand-rolled Peano type in Python:
+
+```python
+class Zero: pass
+class Succ:
+    def __init__(self, pred): self.pred = pred
+
+def add(a, b):
+    if isinstance(b, Zero):
+        return a                          # base case, like `| zero =>`
+    return Succ(add(a, b.pred))            # recursive call, like `| succ k ih =>`
+```
+
+`add`'s `if isinstance(b, Zero)` branch is the base case; its recursive
+call `add(a, b.pred)` is exactly the role `ih` plays in the `succ` branch —
+"assume it already works for the smaller case, build the answer for one
+`Succ` more." The proof isn't *using* an analogy to recursion — it *is* a
+recursion, just one producing a proof term instead of a `Succ` value, which
+is why Lean can generate `induction`'s two cases automatically straight
+from `Nat`'s definition, the same way Python's `isinstance` cases fall
+straight out of `Nat`'s two constructors.
+
 ---
 
 [← More tactics](04-more-tactics.md) | [Index](00-index.md) | [Next: Exercises →](06-exercises.md)

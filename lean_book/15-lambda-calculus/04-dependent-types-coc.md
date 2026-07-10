@@ -101,9 +101,10 @@ different results from a "proof-irrelevant" input, contradicting proof
 irrelevance itself. `Sigma` (the actual, `Type`-valued dependent pair,
 matching a `structure`'s bundled data) *does* support projecting out its
 first component, precisely because it does not carry `Exists`'s
-irrelevance guarantee. So: `∃` is the *propositional truncation* of Σ
-— same shape, but living in a universe where the witness is unobservable
-— and the `structure`-based bundling this book uses throughout for
+irrelevance guarantee. So: `∃` has the same shape as Σ but lives in a
+universe where the witness is unobservable, which is what makes it a
+*restricted* cousin of Σ rather than literally Σ — and the
+`structure`-based bundling this book uses throughout for
 `Group`/`Ring`/`Module` genuinely is `Sigma`-like (extractable), while an
 `∃`-statement genuinely is not.
 

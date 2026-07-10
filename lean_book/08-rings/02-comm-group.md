@@ -16,12 +16,12 @@ field, `comm`. Anywhere a `Group G` is expected, you can pass a
 
 **Mathematical reading.** `CommGroup G` is an *abelian group* $(G, \cdot, e,
 (-)^{-1})$ with the extra law $\forall a,b,\ a\cdot b = b\cdot a$. Structurally
-$\mathbf{Ab}$ is the full subcategory of $\mathbf{Grp}$ on the groups
-satisfying commutativity, and `extends` realizes exactly this inclusion: the
-forgetful functor $\mathbf{Ab} \hookrightarrow \mathbf{Grp}$ is the coercion
-`.toGroup`, which forgets the `comm` axiom. As a subobject,
-$\mathrm{CommGroup}(G) = \{\, g \in \mathrm{Group}(G) \mid g \text{ is
-commutative}\,\}$.
+$\mathbf{Ab}$ is a
+[full subcategory / subobject](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+of $\mathbf{Grp}$, cut out by the commutativity axiom, and `extends`
+realizes exactly this inclusion: `.toGroup` is the
+[forgetful functor](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+$\mathbf{Ab} \hookrightarrow \mathbf{Grp}$, which forgets the `comm` axiom.
 
 ---
 
