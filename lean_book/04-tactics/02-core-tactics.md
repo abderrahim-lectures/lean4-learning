@@ -55,14 +55,15 @@ and substitution rule are identical to ordinary `rw`, only the *target*
 
 **Mathematical reading.** Each tactic corresponds to a standard proof move.
 `intro` discharges an implication/universal by the deduction theorem: to
-prove $A \to B$, *assume* $A$ (add $A$ to $\Gamma$) and prove $B$ — the
+prove $A \to B$, *assume* $A$ as a new hypothesis and prove $B$ — the
 $\lambda$-abstraction rule. `exact e` supplies a finished term, "this is
 precisely our claim." `apply f` is backward chaining: to prove the
 conclusion of $f : A_1 \to \cdots \to A_n \to G$, it suffices to prove the
 premises $A_1, \ldots, A_n$, which become the new goals — the working
 mathematician's "by $f$, it remains to check the hypotheses of $f$." `rw [h]`
-with $h : a = b$ is substitution of equals for equals (Leibniz), rewriting
-$G$ to $G[b/a]$, justified because $a = b$ makes the two goals equivalent.
+with $h : a = b$ is substitution of equals for equals (Leibniz): every
+occurrence of $a$ in the goal is replaced by $b$, justified because $a = b$
+makes the old and new goals equivalent.
 
 > Read more: "deduction theorem" and "$\lambda$-abstraction rule" are the
 > $\Rightarrow$-intro rule from natural deduction and its Curry–Howard

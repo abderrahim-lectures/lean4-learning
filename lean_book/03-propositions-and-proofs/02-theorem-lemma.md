@@ -14,9 +14,9 @@ theorem add_comm_example : 2 + 3 = 3 + 2 := rfl
 naming convention for "small helper facts."
 
 **Mathematical reading.** A `theorem name : P := proof` is exactly the act
-of naming a proof: it asserts $\vdash P$ and records a specific witness
-$\mathrm{proof} \in P$ under the label $\mathrm{name}$, so that later
-arguments may cite it. This is the informal mathematical move "By
+of naming a proof: it asserts that $P$ is provable, and records a specific
+witness $\mathrm{proof} \in P$ under the label $\mathrm{name}$, so that
+later arguments may cite it. This is the informal mathematical move "By
 Lemma $\mathrm{name}$, $P$ holds," made formal — the distinction between
 `theorem` and `lemma` is purely rhetorical (a lemma is a stepping stone),
 with no logical content, just as in ordinary mathematical writing.
