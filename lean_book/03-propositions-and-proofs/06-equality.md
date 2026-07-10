@@ -24,23 +24,21 @@ reflexivity ($\mathrm{rfl}$) and symmetry above, this says $=$ is an
 equivalence.
 
 ```lean
-theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 :=
-  h ▸ rfl
+theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
+  rw [h]
 ```
 
-`▸` ("substitution") rewrites the goal using an equality proof. You will use
-its tactic form, `rw`, constantly starting in the next chapter.
+`rw` ("rewrite") rewrites the goal using an equality proof: `rw [h]` with
+`h : a = b` finds every occurrence of `a` in the goal and replaces it with
+`b`. Here the goal starts as `a + 1 = b + 1`; after rewriting `a` to `b` it
+becomes `b + 1 = b + 1`, which `rw` then closes automatically by trying
+`rfl` as its last step — you don't need to write that `rfl` yourself.
 
 The congruence `congr_example` is the Leibniz principle: $a = b \Rightarrow
-f(a) = f(b)$ for any function $f$ (here $f(x) = x + 1$).
-Type-theoretically, `h ▸ e` performs what's usually called **transport**:
-given a proof `e` of some statement about `a`, and an equality `h : a = b`,
-it produces the corresponding proof of that same statement about `b`, by
-substituting `b` for `a` wherever `a` appeared. In `congr_example`, `rfl`
-first proves the (trivial) statement "$a + 1 = a + 1$," and `h ▸` carries
-that proof across $h : a = b$ to land on the stated goal "$a + 1 = b + 1$."
-This is the mechanical form of "substitute equals for equals" — exactly
-what the `rw` tactic (starting next chapter) automates for you.
+f(a) = f(b)$ for any function $f$ (here $f(x) = x + 1$) — "substitute
+equals for equals," mechanized. `rw` is your workhorse for this from here
+on: nearly every proof from Chapter 4 onward reaches for it whenever an
+equality hypothesis needs to be used inside a larger goal.
 
 ---
 
