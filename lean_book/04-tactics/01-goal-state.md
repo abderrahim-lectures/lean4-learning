@@ -35,7 +35,14 @@ zero or more simpler sequents whose proofs suffice for it — reading the
 proof bottom-up is exactly the mathematician's "it suffices to show...".
 Closing all goals means the derivation tree is complete, i.e. a term $g : G$
 has been constructed. Here the tree is a single leaf: $\vdash 2+2=4$
-discharged by definitional computation. **Get in the habit of checking the goal
+discharged by definitional computation.
+
+> Read more: if "sequent," "backward inference rule," or "derivation tree"
+> are new, [Appendix B §0](../15-lambda-calculus/00-standard-logic.md)
+> recaps natural deduction — the standard proof system these words
+> describe — from scratch, with no Lean involved.
+
+**Get in the habit of checking the goal
 state after every tactic**, not just at the end. This is the single biggest
 difference between someone who can read a finished Lean proof and someone
 who can write one: writing one means constantly asking "what does the goal

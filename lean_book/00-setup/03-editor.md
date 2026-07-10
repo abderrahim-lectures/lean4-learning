@@ -7,8 +7,10 @@
 Install the **Lean 4** extension for VS Code. It gives you:
 
 - Inline goal state (the "Lean infoview") as you write proofs.
-- Jump-to-definition for anything in core Lean or Mathlib.
-- Red squiggles for errors, exactly like a normal language server.
+- Jump-to-definition (the editor command that takes you to where a name was
+  originally introduced) for anything in core Lean or Mathlib.
+- Red squiggles marking errors inline, plus autocomplete suggestions as you
+  type.
 
 ---
 

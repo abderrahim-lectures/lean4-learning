@@ -24,12 +24,20 @@ it.
 
 ## Sections
 
+0. [A recap of standard logic and logical calculus](00-standard-logic.md)
 1. [Untyped λ-calculus: terms and reduction](01-untyped-lambda-calculus.md)
 2. [Encoding data: Church numerals and booleans](02-church-encodings.md)
 3. [The simply typed λ-calculus](03-simply-typed-lambda-calculus.md)
 4. [Dependent types and the calculus of constructions](04-dependent-types-coc.md)
 5. [From λ-calculus to Lean, term by term](05-lambda-to-lean.md)
 6. [Exercises](06-exercises.md)
+
+Readers with no prior exposure to formal logic (natural deduction, truth
+tables, $\vdash$ vs. $\models$) should start at §0 — it recaps standard
+logic on its own terms, with no Lean or type theory involved, before §§1–4
+build the type-theoretic side that Chapter 3 identifies it with. Readers
+already comfortable with propositional/first-order logic can skip directly
+to §1.
 
 ---
 

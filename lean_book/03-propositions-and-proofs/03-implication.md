@@ -20,9 +20,6 @@ $$
 $$
 is nothing but function application: given $f \in \mathrm{Hom}(P, Q)$ and
 $p \in P$, evaluate to get $f(p) \in Q$. The term `hpq hp` is precisely this
-evaluation $f(p)$. Categorically, this is the counit of the
-$(-\times P) \dashv (P \to -)$ adjunction (evaluation
-$\mathrm{ev} : (P \to Q) \times P \to Q$) restricted to the propositional
-setting.
+evaluation $f(p)$.
 
 [← `theorem`/`lemma`](02-theorem-lemma.md) | [Index](00-index.md) | [Next: And, Or, Not →](04-and-or-not.md)

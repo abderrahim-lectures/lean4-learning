@@ -54,9 +54,14 @@ viewed from two angles: proof simplification and program evaluation are
 the same operation, just narrated differently depending on whether you're
 thinking of the term as "a proof" or "a computation."
 
-> Read more: [Appendix B](../15-lambda-calculus/00-index.md) makes this
-> correspondence fully precise, extending it all the way down to the
-> untyped λ-calculus underneath both proofs and ordinary functions;
+> Read more: if "propositional logic," "$\vdash$," or "natural deduction"
+> above weren't already familiar,
+> [Appendix B §0](../15-lambda-calculus/00-standard-logic.md) recaps
+> standard logic from scratch, with no Lean involved, before this
+> correspondence gets applied to it. Otherwise,
+> [Appendix B](../15-lambda-calculus/00-index.md) makes the correspondence
+> itself fully precise, extending it all the way down to the untyped
+> λ-calculus underneath both proofs and ordinary functions;
 > [Appendix B §3](../15-lambda-calculus/03-simply-typed-lambda-calculus.md)'s
 > progress and preservation theorems are the formal statement of "a proof
 > never reduces to something of the wrong type," i.e. "well-typed proofs

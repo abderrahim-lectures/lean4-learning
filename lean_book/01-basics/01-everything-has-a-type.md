@@ -29,7 +29,27 @@ $3 : \mathtt{Nat}$, ${-3} : \mathtt{Int}$, $\mathtt{Nat} : \mathtt{Type}$.
 `#eval e` instead asks Lean to reduce $e$ to a normal form — the
 computational content of $\beta$-reduction, i.e. following the definitional
 equalities until nothing more can fire, exactly as you'd normalize a term
-in $\lambda$-calculus by hand.
+in $\lambda$-calculus by hand. (Both "normal form" and "$\beta$-reduction"
+get a full treatment in [Chapter 1 §4](04-terminology.md) if this is the
+first time you're meeting them; the short version is "the value you get
+after fully simplifying/running the expression," nothing more exotic.)
+
+**Programmer's corner (Python).** If you've written Python but never Lean:
+`#check e` is *not* `type(e)`. Python's `type()` asks a running value what
+class it happens to belong to, after the fact; Lean's `#check` is closer to
+what a static type checker like `mypy` does with an annotation such as
+`x: int = 3` — it verifies, *before* anything runs, that the expression
+could only ever produce a value of the stated type. `#eval e`, by contrast,
+*is* just `print(e)`: run it, show the result. The reason Lean bothers to
+separate these two commands is the same reason `mypy` exists at all —
+type-checking is a static guarantee that holds for every possible input,
+while evaluating is a one-off fact about this particular expression. The
+one thing Python has no analogue for at all is `Nat` itself: Python's `int`
+is signed and never checked against a "must be non-negative" constraint
+except by your own runtime `if` statements, whereas `Nat` bakes
+non-negativity into the type itself, checked once, statically, for every
+use site — closer to a language with a genuine `unsigned` type (C, Rust)
+than to Python.
 
 `Nat` is the inductive type
 

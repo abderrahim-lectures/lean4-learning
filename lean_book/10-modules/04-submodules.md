@@ -32,8 +32,8 @@ $0 \in N$, $m,n \in N \Rightarrow m+n \in N$, and $r\in R,\, m\in N
 an $R$-submodule — closed under the abelian-group operations and stable
 under scalars — so that $N$ inherits an $R$-module structure and the
 inclusion $N \hookrightarrow M$ is $R$-linear. Categorically this is a
-*subobject* in $R\text{-}\mathbf{Mod}$, the kernel-style data of a
-monomorphism into $M$.
+[subobject](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+of $M$ in $R\text{-}\mathbf{Mod}$.
 
 ### Example: the submodule of even integers, as a $\mathbb{Z}$-submodule of $\mathbb{Z}$
 

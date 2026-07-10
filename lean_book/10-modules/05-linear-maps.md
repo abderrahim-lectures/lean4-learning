@@ -30,9 +30,7 @@ f(m)$, so $f$ intertwines the two $R$-actions). Equivalently, $f$ commutes
 with the representation maps $\rho_M, \rho_N$ of the previous section:
 $f\circ\rho_M(r) = \rho_N(r)\circ f$ for all $r$. These are the morphisms of
 $R\text{-}\mathbf{Mod}$; $\mathrm{Hom}_R(M,N)$ is itself an abelian group
-(and an $R$-module when $R$ is commutative), making $\mathrm{Hom}_R(-,-)$ the
-Hom-bifunctor $R\text{-}\mathbf{Mod}^{\mathrm{op}} \times
-R\text{-}\mathbf{Mod} \to \mathbf{Ab}$.
+(and an $R$-module when $R$ is commutative).
 
 ### A concrete linear map: multiplication by a fixed integer
 

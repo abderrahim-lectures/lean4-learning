@@ -77,6 +77,58 @@ motive Lean builds is well-typed.
 > the recursor/eliminator (e.g. `Nat.rec`) whose own type is literally
 > parameterized by a motive, which is where the name comes from.
 
+### Category-theory terms used beyond the baseline
+
+The README promised that the only category theory assumed going in is
+"objects, morphisms, composition, functors." That's true of the main text,
+but the optional "Mathematical reading" boxes scattered through later
+chapters occasionally reach one notch further, for readers who already
+have a bit more category theory and would enjoy the extra precision. Four
+such terms recur often enough to be worth fixing once here, so that every
+later use can simply point back to this entry instead of re-explaining (or
+worse, silently assuming) each time:
+
+**Universal property.** A characterization of a construction not by what
+it's *made of*, but by what maps *uniquely factor through it* — "$X$ has
+property $U$" meaning "for every $Y$ with the relevant data, there is
+exactly one map $Y \to X$ compatible with that data." This is the
+category-theorist's way of saying "$X$ is the *best possible* solution to
+a mapping problem," and it's the same idea as the familiar universal
+properties of products, quotients, and free constructions from an algebra
+course — nothing new is meant by the phrase here beyond that.
+
+**Initial object.** An object $I$ of a category with a *unique* morphism
+$I \to X$ out to every other object $X$ — the universal property above,
+specialized to "the best possible source." `Nat` (Chapter 1 §1) and
+`ℤ` in `Ring` (Chapter 8) are both flagged as initial objects of the
+relevant category in this sense: any structure-preserving map out of them
+is forced, with no choice involved.
+
+**Forgetful functor.** A functor that takes a structure and *keeps only
+part of it*, discarding the rest — e.g. the map sending a group $G$ to its
+underlying set (forgetting the multiplication), or a `Ring` to its
+underlying `Group` under addition (forgetting multiplication and its
+unit). In this book, every `.toGroup`/`.toAddGroup`-style field generated
+by Lean's `extends` (Chapter 2 §3 onward) *is* a forgetful functor,
+computationally: it's the projection that keeps some of a structure's
+data and drops the rest.
+
+**Subobject / full subcategory.** A subobject of $X$ is (informally) "a
+subset of $X$ cut out by some condition, remembered together with its
+inclusion into $X$" — e.g. `CommGroup` is a subobject of `Group`'s data,
+cut out by the extra commutativity axiom. A full subcategory is the
+category formed by all objects satisfying such a condition, together with
+*all* morphisms between them inherited unchanged from the ambient
+category (nothing is removed at the morphism level, only at the object
+level) — e.g. abelian groups form a full subcategory of all groups.
+
+These four are the ones worth fixing once; if a "Mathematical reading" box
+elsewhere uses a still-more-specialized term (adjunction, biproduct, a
+presheaf category, and the like), treat it as genuinely optional bonus
+content for readers who already know it — nothing later in the book
+depends on it, and the surrounding plain-English explanation always stands
+on its own without it.
+
 ---
 
 [← Dependent types, categorically](03-dependent-types.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 2: Functions & Structures →](../02-functions-and-structures/00-index.md)
