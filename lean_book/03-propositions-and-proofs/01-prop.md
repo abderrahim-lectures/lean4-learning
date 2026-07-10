@@ -54,8 +54,8 @@ viewed from two angles: proof simplification and program evaluation are
 the same operation, just narrated differently depending on whether you're
 thinking of the term as "a proof" or "a computation."
 
-> Read more: if "propositional logic," "$\vdash$," or "natural deduction"
-> above weren't already familiar,
+> Read more: if "propositional logic" or "natural deduction" above weren't
+> already familiar,
 > [Appendix B §0](../15-lambda-calculus/00-standard-logic.md) recaps
 > standard logic from scratch, with no Lean involved, before this
 > correspondence gets applied to it. Otherwise,
@@ -78,15 +78,16 @@ example : 2 + 2 = 4 := rfl
 anonymous, unnamed `theorem`).
 
 **Mathematical reading.** The Curry–Howard correspondence identifies a
-proposition $P$ with the *set of its proofs*: $P$ is inhabited (there
-exists a term $p : P$) exactly when $P$ is true. Thus `Prop` is the
-subuniverse of types that are "propositional" — each has at most one
-element up to proof irrelevance, so a type $P : \mathrm{Prop}$ behaves like
-a truth value $\llbracket P \rrbracket \in \{\varnothing, \{\ast\}\}$.
-Writing $\vdash P$ ("$P$ is provable") is the same as exhibiting an element
-$p \in P$. The proof `rfl : 2 + 2 = 4` is the reflexivity witness
-$\mathrm{refl}_4$ of the equality relation, valid precisely because both
-sides reduce to the same normal form $4$ — equality of terms that are
+proposition $P$ with the *set of its proofs*: $P$ is true exactly when
+that set is nonempty, i.e. when there exists some term $p : P$ ("$P$ is
+inhabited"). This is why `Prop` behaves like a truth value rather than an
+ordinary type: every proposition's proof-set is either empty (false) or,
+up to proof irrelevance, has exactly one element (true) — there's no
+room for a "third" proof genuinely different from the rest. Proving $P$ is
+exactly exhibiting an element $p \in P$; nothing more is meant by
+"provable" than that. The proof `rfl : 2 + 2 = 4` is the reflexivity
+witness $\mathrm{refl}_4$ of the equality relation, valid precisely because
+both sides reduce to the same normal form $4$ — equality of terms that are
 *definitionally* equal, the strictest notion of "$=$".
 
 ---

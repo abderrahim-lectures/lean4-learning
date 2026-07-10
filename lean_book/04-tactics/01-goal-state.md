@@ -27,20 +27,19 @@ see the goal:
 No hypotheses, one goal. After `rfl` closes it, the goal panel shows "No
 goals" — the proof is complete.
 
-**Mathematical reading.** A goal $\Gamma \vdash G$ is a *sequent*: the
-hypotheses $\Gamma = (h_1 : A_1, \ldots, h_n : A_n)$ above the line are the
-ambient assumptions, and $G$ below the line is what remains to be shown. A
-tactic is a backward inference rule that replaces the current sequent with
-zero or more simpler sequents whose proofs suffice for it — reading the
-proof bottom-up is exactly the mathematician's "it suffices to show...".
-Closing all goals means the derivation tree is complete, i.e. a term $g : G$
-has been constructed. Here the tree is a single leaf: $\vdash 2+2=4$
-discharged by definitional computation.
+**Mathematical reading.** A goal is what logicians call a *sequent*: a
+list of hypotheses together with a statement to prove from them. A tactic
+is a *backward inference rule* — it replaces the current goal with zero or
+more simpler goals whose proofs would suffice to prove it, which is
+exactly the mathematician's habit of saying "it suffices to show...".
+Closing every goal means you've built a complete chain of such steps down
+to something already known (here, closed in a single step: `2 + 2 = 4` by
+plain computation).
 
-> Read more: if "sequent," "backward inference rule," or "derivation tree"
-> are new, [Appendix B §0](../15-lambda-calculus/00-standard-logic.md)
-> recaps natural deduction — the standard proof system these words
-> describe — from scratch, with no Lean involved.
+> Read more: if "sequent" or "backward inference rule" are new,
+> [Appendix B §0](../15-lambda-calculus/00-standard-logic.md) recaps
+> natural deduction — the standard proof system these words describe,
+> turnstile notation and all — from scratch, with no Lean involved.
 
 **Get in the habit of checking the goal
 state after every tactic**, not just at the end. This is the single biggest

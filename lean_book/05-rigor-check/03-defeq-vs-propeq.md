@@ -79,7 +79,7 @@ Two practical facts follow directly:
    This is exactly the "failure is information" point from Chapter 4:
    `rfl` failing on `a + b = b + a` is the signal to reach for `induction`,
    not evidence the statement needs abandoning.
-2. **`rw` and `▸` work up to propositional equality, but the resulting
+2. **`rw` works up to propositional equality, but the resulting
    goal is checked up to definitional equality.** When `rw [h]` rewrites a
    goal using `h : a = b`, the *new* goal is a genuinely different term
    (with `b` substituted for `a`), and Lean must still confirm the
