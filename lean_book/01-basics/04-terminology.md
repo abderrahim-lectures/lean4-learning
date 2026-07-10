@@ -109,14 +109,21 @@ graph TD
     P -->|"&pi;Y"| Y
 ```
 
+| Symbol | Lean |
+| --- | --- |
+| $A$, $X$, $Y$, $P$ | types `A`, `X`, `Y`, `X × Y` |
+| $f$, $g$ | ordinary functions `f : A → X`, `g : A → Y` |
+| $h$ (the dashed arrow) | `fun a => (f a, g a) : A → X × Y` |
+| $\pi_X, \pi_Y$ | `Prod.fst`, `Prod.snd` (`.1`/`.2`, or `.fst`/`.snd`) |
+
 Read the diagram as: you're *given* the two solid outer arrows ($f$ and
 $g$); the universal property *asserts* the dashed middle arrow $h$ exists,
 is unique, and makes both triangles commute — $\pi_X \circ h = f$ and
-$\pi_Y \circ h = g$. "Commute" just means: any two paths between the same
-two objects in the diagram compose to the same map. This is exactly what
-`⟨_, _⟩` does for `Pair`/`structure` types (Chapter 2 §1): give it an
-`f`-shaped piece and a `g`-shaped piece, and it hands back the unique `h`
-combining them.
+$\pi_Y \circ h = g$, i.e. `h a |>.1 = f a` and `h a |>.2 = g a` for every
+`a`. "Commute" just means: any two paths between the same two objects in
+the diagram compose to the same map. This is exactly what `⟨_, _⟩` does
+for `Pair`/`structure` types (Chapter 2 §1): give it an `f`-shaped piece
+and a `g`-shaped piece, and it hands back the unique `h` combining them.
 
 **Initial object.** An object $I$ of a category with a *unique* morphism
 $I \to X$ out to every other object $X$ — the universal property above,
@@ -128,6 +135,11 @@ graph LR
     I --> Y
     I --> Z
 ```
+
+| Symbol | Lean |
+| --- | --- |
+| $I$ | `Nat` (in `Type`) or `ℤ` (in `Ring`) |
+| the unique arrow $I \to X$ | for `Nat`: `Nat.rec` — build a value of *any* `X` by giving a `zero` case and a `succ` case, and that recipe is forced by `Nat`'s two constructors, with no other choice possible |
 
 Exactly one arrow leaves $I$ for every object in the category — never
 zero (there's always a map), never more than one (no choice about which).
@@ -147,6 +159,11 @@ graph LR
     Ring["Ring (R,+,&middot;)"] -->|forgetful| Group["Group (R,+)"]
     Group -->|forgetful| Set["Set (R)"]
 ```
+
+| Symbol | Lean |
+| --- | --- |
+| `Ring` $\to$ `Group` | `r.toGroup` (or `r.toAddGroup`, depending on naming) for `r : Ring R` |
+| `Group` $\to$ `Set` | `g.carrier`, or simply treating `G : Type` as its own underlying set |
 
 Each arrow keeps *less* structure than the one before it — a `Ring`
 remembers both operations, the `Group` it maps to remembers only
@@ -169,6 +186,11 @@ graph LR
         CommGroup["CommGroup (abelian)"]
     end
 ```
+
+| Symbol | Lean |
+| --- | --- |
+| `CommGroup` $\subseteq$ `Group` | `structure CommGroup (G) extends Group G where comm : ...` |
+| the inclusion itself | `.toGroup`, the field `extends` generates automatically |
 
 A full subcategory is the category formed by all objects satisfying such
 a condition, together with *all* morphisms between them inherited
