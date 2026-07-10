@@ -3,7 +3,19 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
-## Unreleased — Readability & navigation pass
+## Unreleased — Mermaid diagrams
+
+- **Category-theory diagrams upgraded from plain ASCII art to
+  [Mermaid](https://mermaid.js.org/)** (the universal-property/
+  initial-object/forgetful-functor/subobject entries in the Chapter 1 §4
+  glossary, the product/coproduct pictures in Chapter 3, the running
+  quiver example in Chapter 11) — real boxes and arrows on GitHub and in
+  Mermaid-aware viewers, falling back to a readable code block showing the
+  diagram source everywhere else, still without depending on
+  `tikz-cd`/`amscd`-style LaTeX packages the book's MathJax/KaTeX
+  rendering path doesn't guarantee.
+
+## [Readability & navigation pass](https://github.com/abderrahim-lectures/lean4-learning/commit/fa7b258)
 
 - **One block per example.** Sections that used to dump several `theorem`/
   `def`/`structure` examples into one big code fence, then explain all of
@@ -19,13 +31,11 @@ the commit(s) it corresponds to where one exists.
 - **"Programmer's corner (Python)" boxes** were checked and repositioned
   to sit immediately after the one example each is illustrating, rather
   than trailing at the end of a section that had since grown other content.
-- **ASCII-art category-theory diagrams** added at the natural spots:
-  the shared glossary's universal-property/initial-object/forgetful-functor/
-  subobject entries, the product/coproduct reading of `∧`/`∨`, and a
-  literal arrow diagram for the book's running quiver example — rendered
-  as plain text so they display identically in any Markdown viewer,
-  without depending on `tikz-cd`/`amscd`-style LaTeX packages the book's
-  stated MathJax/KaTeX rendering path doesn't guarantee.
+- **Category-theory diagrams** added at the natural spots: the shared
+  glossary's universal-property/initial-object/forgetful-functor/subobject
+  entries, the product/coproduct reading of `∧`/`∨`, and a literal arrow
+  diagram for the book's running quiver example (originally plain ASCII,
+  later upgraded to Mermaid — see above).
 - **Chapter 3's `∃` section** expanded from one example to two: the
   original `⟨2, rfl⟩` (smallest non-degenerate even number, chosen instead
   of the original `⟨0, rfl⟩` to avoid looking like a trick), plus a second

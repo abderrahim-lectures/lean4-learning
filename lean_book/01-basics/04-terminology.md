@@ -100,14 +100,13 @@ picture, for a product $X \times Y$: given any $A$ with maps to both
 factors, there's exactly one map into the product making everything agree
 (the dashed arrow, "$\exists!$" = "there exists a unique"):
 
-```text
-              A
-            / | \
-         f /  |   \ g
-          /  ∃!h    \
-         v    |      v
-        X <---+------> Y
-           πX     πY
+```mermaid
+graph TD
+    A -->|f| X
+    A -->|g| Y
+    A -.->|"&exist;!h"| P
+    P -->|"&pi;X"| X
+    P -->|"&pi;Y"| Y
 ```
 
 Read the diagram as: you're *given* the two solid outer arrows ($f$ and
@@ -123,16 +122,11 @@ combining them.
 $I \to X$ out to every other object $X$ — the universal property above,
 specialized to "the best possible source":
 
-```text
-        X
-       ^
-      /
-     /
-    I ------> Y
-     \
-      \
-       v
-        Z
+```mermaid
+graph LR
+    I --> X
+    I --> Y
+    I --> Z
 ```
 
 Exactly one arrow leaves $I$ for every object in the category — never
@@ -148,9 +142,10 @@ underlying set (forgetting the multiplication), or a `Ring` to its
 underlying `Group` under addition (forgetting multiplication and its
 unit):
 
-```text
-   Ring  -- forgetful -->  Group  -- forgetful -->  Set
-  (R,+,·)                  (R,+)                     R
+```mermaid
+graph LR
+    Ring["Ring (R,+,&middot;)"] -->|forgetful| Group["Group (R,+)"]
+    Group -->|forgetful| Set["Set (R)"]
 ```
 
 Each arrow keeps *less* structure than the one before it — a `Ring`
@@ -168,9 +163,11 @@ subset of $X$ cut out by some condition, remembered together with its
 inclusion into $X$" — e.g. `CommGroup` is a subobject of `Group`'s data,
 cut out by the extra commutativity axiom:
 
-```text
-    CommGroup   ⊆   Group
-   (abelian)       (all groups)
+```mermaid
+graph LR
+    subgraph Group["Group (all groups)"]
+        CommGroup["CommGroup (abelian)"]
+    end
 ```
 
 A full subcategory is the category formed by all objects satisfying such
