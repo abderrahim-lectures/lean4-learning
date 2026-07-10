@@ -23,7 +23,8 @@ to be.
 is a statement about all rings simultaneously. The recommended mental
 dictionary is just the standard ring notation — `Rg.addGrp.op` $= +$,
 `Rg.addGrp.id` $= 0$, `Rg.addGrp.toGroup.inv` $= -(-)$, `Rg.mul` $= \times$,
-`Rg.one` $= 1$ — recovered by projecting along the forgetful functors, so
+`Rg.one` $= 1$ — recovered by projecting along the
+[forgetful functors](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline), so
 that a qualified name like `Rg.addGrp.toGroup.inv a` is literally "$-a$ in
 the underlying additive group of $R$."
 

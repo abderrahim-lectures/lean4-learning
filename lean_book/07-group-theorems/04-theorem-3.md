@@ -48,9 +48,8 @@ cancelable pair adjacent**, then cancelling. That two-step pattern —
 recognizing on sight rather than re-deriving from scratch each time.
 
 **Mathematical reading.** This is the *shoes-and-socks* law $(a\cdot
-b)^{-1} = b^{-1}\cdot a^{-1}$ (the inverse reverses order, hence
-contravariant — $(-)^{-1}$ is an anti-automorphism of $G$, and an
-isomorphism $G \cong G^{\mathrm{op}}$). By the uniqueness of inverses
+b)^{-1} = b^{-1}\cdot a^{-1}$: the inverse operation reverses the order of
+composition. By the uniqueness of inverses
 (Theorem 2) it suffices to check that $b^{-1}a^{-1}$ is a genuine inverse of
 $ab$, i.e.
 $$
@@ -59,7 +58,8 @@ $$
 which is precisely the "regroup, then cancel" computation the `rw` chain
 performs. Reusing Theorem 2 as a characterization ("to identify an inverse,
 verify the defining equation") is the categorical habit of proving equalities
-via a universal property rather than by direct computation.
+via a [universal property](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+rather than by direct computation.
 
 ### The payoff, made concrete: applying `inv_op` to a real group
 

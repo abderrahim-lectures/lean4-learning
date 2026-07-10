@@ -47,7 +47,9 @@ Two things worth noticing:
    nothing, only assembling already-known facts into the `Ring` bundle.
 
 **Mathematical reading.** This exhibits $(\mathbb{Z}, +, \times, 0, 1)$ as
-an object of $\mathbf{Ring}$ — indeed the *initial* object, since there is a
+an object of $\mathbf{Ring}$ — indeed the
+[*initial* object](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline),
+since there is a
 unique ring homomorphism $\mathbb{Z} \to R$ into any ring. First
 `intCommGroup` upgrades the additive group $(\mathbb{Z},+)$ to an abelian
 group by supplying commutativity ($a + b = b + a$); then `intRing` adds the

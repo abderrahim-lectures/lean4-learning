@@ -43,13 +43,14 @@ $$
 $$
 The field `addGrp` is the *underlying additive abelian group*, so a ring is
 "an abelian group $(R,+)$ carrying a compatible monoid structure
-$(R,\cdot,1)$." The remaining fields say $(R,\cdot,1)$ is a monoid
-(`mul_assoc`, `one_mul`, `mul_one`) and that the two operations interact via
-the two-sided distributive laws — equivalently, that $\cdot$ is $\mathbb{Z}$-
-*bilinear*, i.e. each map $x\mapsto a\cdot x$ and $x\mapsto x\cdot a$ is a
-group endomorphism of $(R,+)$. Nesting `addGrp` as a whole substructure
-mirrors the forgetful functor $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to
-its additive group.
+$(R,\cdot,1)$" — a monoid (a set with an associative operation and identity
+element, i.e. a group without inverses). The remaining fields say
+$(R,\cdot,1)$ is a monoid (`mul_assoc`, `one_mul`, `mul_one`) and that the
+two operations interact via the two-sided distributive laws, i.e.
+multiplication is compatible with addition on both sides. Nesting `addGrp`
+as a whole substructure mirrors the
+[forgetful functor](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+$\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 
 > Read more: Mathlib's `Ring` (`Mathlib.Algebra.Ring.Defs`) sits inside a
 > much larger hierarchy — `Semiring`, `NonUnitalRing`, `CommRing`,

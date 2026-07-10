@@ -36,7 +36,7 @@ they needed hand-built proofs rather than `omega`.
 
 **Mathematical reading.** A proposition $P$ is `Decidable` when there is an
 algorithm computing its truth value — categorically, a map $P \to \{\top,
-\bot\}$ with the two fibers being "proof of $P$" and "proof of $\neg P$" —
+\bot\}$ whose two preimages are "proof of $P$" and "proof of $\neg P$" —
 so `decide` is the constructive statement "$P \vee \neg P$ holds *and* we can
 tell which," available precisely on the decidable fragment (closed numeric
 claims like $7 \mid 21$). `omega` decides *Presburger arithmetic*, the

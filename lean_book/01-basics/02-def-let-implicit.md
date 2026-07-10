@@ -28,9 +28,9 @@ specific. Going through each in full:
   but does *not* bind it to a name — `def` is for the "I want to reuse
   this" case.
 - `double` — the name being bound. Lean has no special naming convention
-  enforced by the compiler (unlike, say, Haskell's mandatory lowercase for
-  values), but lowerCamelCase for `def`s and UpperCamelCase for types is
-  the near-universal community style, which this book follows.
+  enforced by the compiler, but lowerCamelCase for `def`s and
+  UpperCamelCase for types is the near-universal community style, which
+  this book follows.
 - `(n : Nat)` — an explicit argument named `n`, of type `Nat`. "Explicit"
   means a caller must supply it positionally: `double 5` provides `5` for
   `n` directly. This is what makes `double` a function rather than a plain
@@ -97,8 +97,7 @@ and $f = (a \mapsto \ldots) : A \to B$ describe the same function.
   `by`-blocks in tactic mode. `sum / 2` is the `let`'s body: the whole
   two-line construct `let sum := a + b; sum / 2` is itself one term, which
   is then what `average`'s `:=` binds to.
-- `sum / 2` — `Nat` division, which in Lean (as in most systems) is
-  *truncating*: `average 4 10` computes `sum = 14`, then `14 / 2 = 7`
+- `sum / 2` — `Nat` division, which in Lean is *truncating*: `average 4 10` computes `sum = 14`, then `14 / 2 = 7`
   exactly, but e.g. `average 1 2` would compute `sum = 3`, then
   `3 / 2 = 1` (rounded down, since `Nat` has no fractions) — worth knowing
   before relying on this `average` for anything where the rounding matters.

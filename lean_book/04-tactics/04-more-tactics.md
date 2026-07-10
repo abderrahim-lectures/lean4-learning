@@ -36,14 +36,20 @@ theorem and_example (P Q : Prop) (hp : P) (hq : Q) : P ∧ Q := by
 The `·` (focus dot) lets you address each remaining goal one at a time.
 
 **Mathematical reading.** `constructor` invokes the introduction rule of the
-goal's type. For a product/conjunction $P \wedge Q$ it splits the task into
-proving each factor separately — reflecting the universal property of the
-product, "a map into $P \times Q$ is a pair of maps," so proving $P$ and
-proving $Q$ suffices. More generally for any `structure` it reduces the goal
-to one subgoal per field. Dually, `cases` on $h : P \vee Q$ below invokes
-the *elimination* rule of a coproduct: to prove anything from $P \sqcup Q$
-it suffices to prove it from each summand, the case analysis $\iota_1$/
-$\iota_2$.
+goal's type (Appendix B §0's $\wedge$-intro/$\vee$-intro, read more below).
+For a product/conjunction $P \wedge Q$ it splits the task into proving each
+factor separately — reflecting the [universal
+property](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
+of the product, "a map into $P \times Q$ is a pair of maps," so proving $P$
+and proving $Q$ suffices. More generally for any `structure` it reduces the
+goal to one subgoal per field. Dually, `cases` on $h : P \vee Q$ below
+invokes the *elimination* rule of a coproduct (Chapter 3 §4's reading of
+$\vee$ as a coproduct): to prove anything from $P \sqcup Q$ it suffices to
+prove it from each summand, the case analysis $\iota_1$/$\iota_2$.
+
+> Read more: [Appendix B §0](../15-lambda-calculus/00-standard-logic.md)
+> states the introduction/elimination rules for every connective by name,
+> if "introduction rule"/"elimination rule" as general terms are new.
 
 ### `cases`: case-split on an inductive value or hypothesis
 

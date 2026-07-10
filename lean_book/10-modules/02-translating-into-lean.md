@@ -38,20 +38,16 @@ Field by field:
 **Mathematical reading.** `Module R Rg M` is the type of left $R$-module
 structures on the abelian group $M$. The data is an action $R \times M \to
 M$, $(r,m)\mapsto r\cdot m$, and the four axioms say precisely that the
-curried map
-$$
-\rho : R \longrightarrow \mathrm{End}_{\mathbf{Ab}}(M), \qquad
-\rho(r)(m) = r\cdot m,
-$$
-is a **ring homomorphism** into the endomorphism ring of $(M,+)$:
-`smul_add` says each $\rho(r)$ is additive (lands in $\mathrm{End}_{\mathbf{Ab}}(M)$),
-`add_smul` and `smul_smul` say $\rho$ preserves $+$ and $\times$, and
-`one_smul` says $\rho(1) = \mathrm{id}_M$. So a module is exactly a
-representation of $R$ on an abelian group — the categorical definition
-"$M \in R\text{-}\mathbf{Mod}$ is an object of $\mathbf{Ab}$ with a ring map
-$R \to \mathrm{End}(M)$." The ring $R$ enters as an explicit *parameter*
-because $R\text{-}\mathbf{Mod}$ is a whole category attached to a fixed base
-ring, not extra data on $M$.
+curried map $\rho(r)(m) = r\cdot m$ is a **ring homomorphism** from $R$ into
+the ring of endomorphisms of $(M,+)$ — the additive maps $M \to M$, under
+pointwise addition and composition: `smul_add` says each $\rho(r)$ is itself
+additive (a homomorphism $M \to M$ of abelian groups), `add_smul` and
+`smul_smul` say $\rho$ preserves $+$ and $\times$, and `one_smul` says
+$\rho(1)$ is the identity map on $M$. So a module over $R$ is exactly an
+abelian group $M$ equipped with a ring homomorphism from $R$ into its own
+ring of endomorphisms. The ring $R$ enters as an explicit *parameter* rather
+than extra bundled data on $M$, because a module is always a module *over*
+some already-fixed ring.
 
 > Read more: Mathlib's `Module` (`Mathlib.Algebra.Module.Defs`) is vastly
 > more general — universe-polymorphic, stated for `Semiring` rather than

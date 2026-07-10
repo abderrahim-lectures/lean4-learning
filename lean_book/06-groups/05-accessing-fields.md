@@ -22,7 +22,8 @@ and `intGroup.inv` is $(-)^{-1} = -(-)$. The key point is that
 `intGroup.assoc` projects out a *proof* — it is the element of $\forall
 a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)$ that was supplied when building
 the group. Data-fields and proof-fields are accessed uniformly because, in
-the dependent-pair view, both are just coordinates of the same tuple.
+the dependent-pair view (a `structure` is, underneath, exactly this kind of
+dependent pair), both are just coordinates of the same tuple.
 
 ---
 

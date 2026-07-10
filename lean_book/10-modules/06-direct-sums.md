@@ -107,13 +107,11 @@ componentwise — $(m,n) + (m',n') = (m+m',\, n+n')$, $0 = (0,0)$, $-(m,n) =
 (-m,-n)$, and $r\cdot(m,n) = (r\cdot m,\, r\cdot n)$. Every axiom holds
 because it holds in each coordinate independently, which is exactly what
 `congr 1` exposes: an equation of pairs splits into one equation in $M$ and
-one in $N$. For finitely many summands the direct sum $M \oplus N$ is
-simultaneously the product and the coproduct in $R\text{-}\mathbf{Mod}$ (a
-*biproduct*): the projections $\pi_M, \pi_N$ and inclusions $\iota_M,
-\iota_N$ satisfy $\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$,
-$\pi_M\iota_N = 0$, and $\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$ — the
-defining universal properties, reflecting that $R\text{-}\mathbf{Mod}$ is an
-additive (indeed abelian) category.
+one in $N$. For finitely many summands the direct sum $M \oplus N$ is both a product and
+a coproduct at once in $R\text{-}\mathbf{Mod}$: the projections $\pi_M,
+\pi_N$ and inclusions $\iota_M, \iota_N$ satisfy $\pi_M\iota_M =
+\mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N = 0$, and
+$\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$.
 
 ### A concrete instance: $\mathbb{Z} \oplus \mathbb{Z}$
 
@@ -132,9 +130,9 @@ def zSquaredModule := directSumModule intRing intZModule intZModule
 
 Both outputs are exactly the componentwise formulas from the mathematical
 reading above, computed rather than merely asserted. The first projection
-$\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}$, one of the biproduct's
-defining maps, is itself a `LinearMap` (previous section) built directly
-from `DirectSum`'s own field accessor:
+$\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}$, one of the defining maps
+from the product/coproduct structure above, is itself a `LinearMap`
+(previous section) built directly from `DirectSum`'s own field accessor:
 
 ```lean
 def proj1 : LinearMap intRing zSquaredModule intZModule where
