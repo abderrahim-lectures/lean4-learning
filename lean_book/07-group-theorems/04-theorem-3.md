@@ -95,6 +95,36 @@ faith. This is the concrete content of "prove it once, get it for free
 everywhere": nothing about `swap01`, `cycle012`, or the fact that
 `perm3Group` is non-abelian required revisiting `inv_op`'s proof at all.
 
+**Mathlib equivalent.** The "shoes-and-socks" law is not a theorem left to
+(re)prove here — Mathlib already has it, under its own name, `mul_inv_rev`:
+
+```lean
+example {G : Type*} [Group G] (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := mul_inv_rev a b
+```
+
+And the same payoff Chapter 7 draws out concretely for `perm3Group` applies
+here too, against Mathlib's own $S_3$ from Chapter 6 §4 — no new proof, just
+an application of `mul_inv_rev` at `Equiv.Perm (Fin 3)`:
+
+```lean
+example : (swap01' * cycle012')⁻¹ = cycle012'⁻¹ * swap01'⁻¹ :=
+  mul_inv_rev swap01' cycle012'
+
+#eval (swap01' * cycle012')⁻¹ 0    -- 0
+#eval (cycle012'⁻¹ * swap01'⁻¹) 0   -- 0
+#eval (swap01' * cycle012')⁻¹ 1    -- 2
+#eval (cycle012'⁻¹ * swap01'⁻¹) 1   -- 2
+#eval (swap01' * cycle012')⁻¹ 2    -- 1
+#eval (cycle012'⁻¹ * swap01'⁻¹) 2   -- 1
+```
+
+Both sides agree on every input — the same six values, in the same order,
+as the book's own `perm3Group` check above. Where the book's `inv_op`
+needed a five-line `rw` chain (regroup via `assoc`, cancel via `inv_left`,
+regroup again, cancel again), Mathlib's version needs no proof to write at
+all — `mul_inv_rev` is already proved, once, generically over every
+`Group`.
+
 ---
 
 [← Theorem 2](03-theorem-2.md) | [Index](00-index.md) | [Next: Exercises →](05-exercises.md)

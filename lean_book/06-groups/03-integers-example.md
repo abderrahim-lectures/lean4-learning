@@ -52,6 +52,30 @@ terms this is the one-line remark "$\mathbb{Z}$ under addition is an abelian
 group," with the underlying lemmas about $\mathbb{Z}$ (themselves ultimately
 inductions on the integers) made explicit rather than assumed.
 
+**Mathlib equivalent.** Mathlib doesn't need an `intGroup`-style bundle at
+all — `Int` is *already* registered as an `AddCommGroup` instance, and the
+five axioms above are available as free-standing lemmas that apply to
+every additive group, not just `Int`:
+
+```lean
+example : AddCommGroup Int := inferInstance
+
+example (a b c : Int) : (a + b) + c = a + (b + c) := add_assoc a b c
+example (a : Int) : 0 + a = a := zero_add a
+example (a : Int) : a + 0 = a := add_zero a
+example (a : Int) : -a + a = 0 := neg_add_cancel a
+example (a : Int) : a + -a = 0 := add_neg_cancel a
+```
+
+This is the same content as `intGroup` — the same five facts about
+$\mathbb{Z}$ — but where the book *assembles* a `Group Int` term by hand,
+Mathlib's version has nothing to assemble: the instance already exists,
+found automatically by `inferInstance`, and `add_assoc`/`zero_add`/etc.
+are generic lemmas about *any* `AddCommGroup`, so they read a little
+differently from `Int.add_assoc`: they'd apply just as well to Chapter 6's
+`perm3Group`-style examples once those are phrased in Mathlib's
+`Group`/`AddCommGroup` classes (Chapter 6 §4 does exactly that next).
+
 ---
 
 [← Translating into Lean](02-translating.md) | [Index](00-index.md) | [Next: Permutations example →](04-permutations-example.md)

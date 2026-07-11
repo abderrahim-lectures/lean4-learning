@@ -102,6 +102,20 @@ $x \mapsto x\cdot a$ is a group homomorphism, so it commutes with negation:
 $(-1)\cdot a = -(1\cdot a) = -a$. Consequently multiplication by $-1$ *is*
 the negation map, the ring-theoretic source of "$-a = (-1)a$."
 
+**Mathlib equivalent.** Both `mul_zero_left` (the mirror lemma this proof
+depends on) and the sign rule itself are already in Mathlib, again under
+almost the same names:
+
+```lean
+example {R : Type*} [Ring R] (a : R) : 0 * a = 0 := zero_mul a
+example {R : Type*} [Ring R] (a : R) : (-1 : R) * a = -a := neg_one_mul a
+```
+
+`zero_mul` is `mul_zero_left`'s Mathlib name, and `neg_one_mul` is exactly
+Theorem 2 — a multi-step derivation in the book (needing `mul_zero_left`,
+`right_distrib`, and `left_inverse_unique` all at once) reduces to citing
+one already-proved lemma.
+
 ---
 
 [← Theorem 1](02-theorem-1.md) | [Index](00-index.md) | [Next: Exercises →](04-exercises.md)

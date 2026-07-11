@@ -53,6 +53,18 @@ careful mathematician will already be asking by that point — `structure`
 versus `class`, universes, and definitional versus propositional equality —
 before committing to `Group`'s definition in Chapter 6.
 
+This book is, and remains, Mathlib-free by design: every group, ring, and
+path algebra is built from scratch so you see every definition and proof
+obligation explicitly (see [the Mathlib note](00-setup/04-mathlib-note.md)).
+Starting in Chapter 6, though, each worked example is followed by a clearly
+labeled "Mathlib equivalent" box showing the same statement phrased against
+Mathlib's real `Group`/`Ring`/`Module` API. This isn't a contradiction of
+the from-scratch approach — it's a second, parallel track. Seeing the same
+idea twice, once built by hand and once as Mathlib already has it, is how
+you learn both halves of working in Lean at once: the underlying
+mathematics *and* the shape of the library you'll actually use once you
+leave this book. Chapter 13 then completes the handoff to Mathlib in full.
+
 The book has been through several editorial passes: a first pass checking
 for foundational terms used before they're explained, thin worked-example
 coverage, and outright factual errors; a second, accessibility-focused

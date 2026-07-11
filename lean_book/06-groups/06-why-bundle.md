@@ -13,6 +13,23 @@ the whole exercise: prove it once, generically, get it for free
 everywhere — Chapter 7 demonstrates exactly this, applying a generic
 theorem to a concrete group once it's proved.
 
+**Mathlib equivalent.** This "prove it once, get it for free everywhere"
+promise is not something Mathlib defers to a later chapter — it's the
+reason Mathlib's algebra hierarchy is organized around typeclasses at all.
+The *same* lemma name applies unchanged to two utterly different groups:
+
+```lean
+example (a b c : Int) : (a + b) + c = a + (b + c) := add_assoc a b c
+example (f g h : Equiv.Perm (Fin 3)) : (f * g) * h = f * (g * h) := mul_assoc f g h
+```
+
+`add_assoc`/`mul_assoc` were proved exactly once, generically over
+`[AddCommGroup G]`/`[Group G]`, and both `Int` and `Equiv.Perm (Fin 3)`
+get the fact automatically just by having a `Group`/`AddCommGroup`
+instance — nothing about `Int` or permutations is re-proved at either call
+site. This is the library-scale version of the payoff Chapter 7 walks
+through by hand for `perm3Group`.
+
 ---
 
 [← Accessing the fields](05-accessing-fields.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)

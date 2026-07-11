@@ -188,6 +188,33 @@ and a 3-cycle, generating all of $S_3$ between them, exactly as in the
 usual presentation $S_3 = \langle r, s \mid r^3 = s^2 = e,\ srs = r^{-1}
 \rangle$ (with $r = $ `cycle012`, $s = $ `swap01`).
 
+**Mathlib equivalent.** All of `Perm3`/`Perm3.comp`/`Perm3.ext`/
+`perm3Group` above exists to build one thing: "the group of bijections of a
+3-element set." Mathlib's stock model of exactly that is `Equiv.Perm`,
+already a `Group` instance for *any* type:
+
+```lean
+example : Group (Equiv.Perm (Fin 3)) := inferInstance
+
+-- Swap 0 and 1, leave 2 fixed — the Mathlib analogue of `swap01`.
+def swap01' : Equiv.Perm (Fin 3) := Equiv.swap 0 1
+
+-- The 3-cycle 0 → 1 → 2 → 0 — the Mathlib analogue of `cycle012`.
+def cycle012' : Equiv.Perm (Fin 3) := finRotate 3
+
+#eval (swap01' * cycle012') 0   -- 0
+#eval (cycle012' * swap01') 0    -- 2
+```
+
+No `Perm3` bundle, no hand-written extensionality lemma, no field-by-field
+`Group` construction: `Equiv.Perm (Fin 3)` (the type of bijections
+`Fin 3 ≃ Fin 3`) is already known to be a group, `Equiv.swap` and
+`finRotate` are Mathlib's own constructors for a transposition and a
+rotation, and `*` is the already-registered group operation (composition,
+matching `Perm3.comp`'s convention). The two `#eval`s are the same
+"compute a witness of non-commutativity" move as `swap01`/`cycle012`
+above, now against the library's own $S_3$.
+
 ## Next
 
 Continue to [Accessing the fields](05-accessing-fields.md).

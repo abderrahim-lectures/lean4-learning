@@ -13,3 +13,13 @@ A Lean 4 project scaffold (toolchain `v4.31.0`).
    ```
 
 The toolchain version is pinned in `lean-toolchain` and will be fetched automatically by elan/lake on first build.
+
+## Mathlib
+
+This project also depends on Mathlib (pinned to the `v4.31.0` tag, matching
+the toolchain). The from-scratch book code (`Ch06Groups.lean`, ...,
+`Ch11PathAlgebras.lean`) never uses it; the matching `*Mathlib.lean` files
+(`Ch06GroupsMathlib.lean`, ...) are Chapters 6-11's "Mathlib equivalent"
+boxes ported and compiled for real. The first `lake build` after adding
+Mathlib downloads its build cache and can take several minutes — later
+builds are fast.

@@ -70,6 +70,30 @@ V$ given by their value tables — `source alpha = 0`, `target alpha = 1`,
 `source beta = 1`, `target beta = 2`, i.e. exactly the arrowheads and
 tails drawn above.
 
+**Mathlib equivalent.** Mathlib's own `Quiver` class (the one this
+chapter's opening section mentioned building from scratch instead of
+reusing) encodes arrows differently: instead of one flat arrow type `A`
+plus separate `source`/`target : A → V` functions, it bakes the endpoints
+into the arrow's *type* directly, `Hom : V → V → Sort*` (with notation
+`a ⟶ b`), so an arrow from `i` to `j` simply *has type* `i ⟶ j`:
+
+```lean
+inductive MyArrow : Fin 3 → Fin 3 → Type
+  | alpha : MyArrow 0 1
+  | beta : MyArrow 1 2
+
+instance : Quiver (Fin 3) := ⟨MyArrow⟩
+```
+
+`MyArrow 0 1` has exactly the one constructor `alpha`; `MyArrow i j` for
+any other pair `(i, j)` — in particular the "backwards" or "no such arrow"
+cases — has no constructors at all, so it's simply an empty type. There is
+no `source`/`target` to state or prove separately, and no `h : Q.source a = v`
+side-condition to discharge with `rfl` later (Chapter 11 §4): an
+ill-typed composition is rejected by the type checker before you'd even get
+to a proof obligation, one step earlier than the book's own encoding
+catches the same mistake.
+
 ---
 
 [← Paths](02-paths.md) | [Index](00-index.md) | [Next: Paths as an inductive type →](04-paths-as-inductive-type.md)

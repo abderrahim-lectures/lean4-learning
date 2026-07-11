@@ -105,6 +105,26 @@ by $3$, with `Fin 3`'s built-in wraparound arithmetic implementing
 reduction mod $3$ directly at the level of the representation, rather than
 via an explicit quotient construction.
 
+**Mathlib equivalent.** Mathlib's `ZMod 3` *is* $\mathbb{Z}/3\mathbb{Z}$,
+already known to be a commutative ring (in fact a field, since $3$ is
+prime) — no `fin3Group`/`fin3CommGroup`/`fin3Ring` bundle, and no `decide`
+calls needed to re-verify axioms already proved once, generically, for
+every `n`:
+
+```lean
+example : CommRing (ZMod 3) := inferInstance
+
+#eval (2 : ZMod 3) + 2   -- 1
+#eval (2 : ZMod 3) * 2   -- 1
+```
+
+The book's `by decide` on `fin3Ring`'s fields brute-forces exactly the
+finitely many cases needed for *this one* carrier; Mathlib instead proves
+`ZMod n`'s ring axioms once for every `n` (via its construction as
+`Fin n` with wraparound arithmetic, dressed up with the general machinery
+for quotients of $\mathbb{Z}$), so `ZMod 3`'s instance costs nothing further
+to obtain.
+
 ## Next
 
 Continue to [Accessing nested fields](06-accessing-fields.md).

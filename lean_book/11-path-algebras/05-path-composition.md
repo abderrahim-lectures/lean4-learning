@@ -97,6 +97,23 @@ category — the smallest/most general category containing $Q$'s arrows, in
 the sense of a
 [universal property](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline).
 
+**Mathlib equivalent.** `Path.append` is already in Mathlib, as
+`Quiver.Path.comp` — the same recursion (on the *second* path), the same
+"`nil` does nothing, `cons` re-attaches its trailing arrow" shape:
+
+```lean
+def pathBetaOnly' : Path (1 : Fin 3) 2 := Path.cons Path.nil MyArrow.beta
+def pathBetaAlphaViaComp' : Path (0 : Fin 3) 2 := Path.comp pathAlpha' pathBetaOnly'
+
+example : pathBetaAlphaViaComp' = pathBetaAlpha' := rfl
+```
+
+Same closing `rfl` as the book's `pathBetaAlphaViaAppend = pathBetaAlpha`
+check: two paths built via different routes (direct `cons`-chaining versus
+composing two shorter paths) reduce to the identical term, because
+`Quiver.Path.comp` unfolds to exactly the same sequence of `cons`
+applications `Path.append` does.
+
 ### The path algebra
 
 The **path algebra** $kQ$ of a quiver $Q$ over a field (or ring) $k$ is the

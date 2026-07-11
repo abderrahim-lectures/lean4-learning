@@ -1,8 +1,20 @@
 name = "lean_project"
-defaultTargets = ["LeanProject"]
+defaultTargets = ["LeanProject", "LeanProjectMathlib"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.31.0"
 
 [[lean_lib]]
 name = "LeanProject"
+
+# The Mathlib-equivalent modules (Chapters 6-11's "Mathlib equivalent"
+# boxes), as a separate library target from `LeanProject` above — see the
+# comment atop `LeanProjectMathlib.lean` for why they can't share one
+# importing root.
+[[lean_lib]]
+name = "LeanProjectMathlib"
 
 [[lean_exe]]
 name = "lean_project"
