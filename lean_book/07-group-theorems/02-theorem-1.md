@@ -59,6 +59,20 @@ e$ — the standard "two things equal to a common third are equal." (The
 symmetric argument shows a right identity is also unique, so a group's
 identity is unique on the nose.)
 
+**Mathlib equivalent.** Phrased against Mathlib's `Group` class, `Grp.op`/
+`Grp.id`/`Grp.id_right` become the ordinary `*`/`1`/`mul_one`, and the
+whole "third expression" chain collapses to a single `.symm.trans`:
+
+```lean
+example {G : Type*} [Group G] (e' : G) (h : ∀ a : G, e' * a = a) : e' = 1 :=
+  (mul_one e').symm.trans (h 1)
+```
+
+Same proof, same two facts glued at their common value $e'\cdot 1$ — `h 1`
+is the book's `step1` and `mul_one e'` is `step2` — just with `1` written
+for `Grp.id` and no field-projection to spell out, since `*`/`1` already
+mean "whatever this type's `Group` instance says they mean."
+
 ---
 
 [← Setup](01-setup.md) | [Index](00-index.md) | [Next: Theorem 2 →](03-theorem-2.md)

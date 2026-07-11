@@ -83,6 +83,19 @@ Conceptually this says the map $x \mapsto a\cdot x$ is a group homomorphism
 of $(R,+)$, and homomorphisms send the identity to the identity — $0$ absorbs
 because multiplication is additive in each argument.
 
+**Mathlib equivalent.** Where the book spends a full `have`/`congrArg`/`rw`
+derivation getting from `left_distrib` and group cancellation to
+$a\cdot 0=0$, Mathlib already proves this and gives it exactly the same
+name:
+
+```lean
+example {R : Type*} [Ring R] (a : R) : a * 0 = 0 := mul_zero a
+```
+
+Nothing to derive — `mul_zero` is proved once, generically, for every
+`Ring` (indeed every `MulZeroClass`), by essentially the argument above,
+and is then simply *available* rather than re-derived at each use site.
+
 ---
 
 [← Setup](01-setup.md) | [Index](00-index.md) | [Next: Theorem 2 →](03-theorem-2.md)

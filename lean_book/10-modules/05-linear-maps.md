@@ -61,6 +61,27 @@ other words, are pure `Int`-arithmetic facts once you unfold what `toFun`,
 module-theoretic goal to a concrete arithmetic identity" move Chapter 9's
 `evenSubmodule` used, applied again.
 
+**Mathlib equivalent.** Mathlib's own `LinearMap` (notation `M →ₗ[R] N`)
+is built the same way — supply `toFun` plus the two homomorphism proofs —
+but the result is directly interoperable with the rest of the library's
+linear-algebra API:
+
+```lean
+def mulByLinearMap' (d : Int) : Int →ₗ[Int] Int where
+  toFun := fun m => d * m
+  map_add' := fun m n => mul_add d m n
+  map_smul' := fun r m => by simp [mul_left_comm]
+
+#eval mulByLinearMap' 5 3   -- 15
+```
+
+Same shape as `mulByLinearMap` — a `toFun` and two proof obligations,
+`map_add`/`map_smul` becoming Mathlib's `map_add'`/`map_smul'` — the only
+real difference being that `Int →ₗ[Int] Int` is a type the rest of Mathlib
+already knows how to compose, transport along isomorphisms, and package
+into matrices, none of which `LinearMap intRing intZModule intZModule`
+gets for free.
+
 ---
 
 [← Submodules](04-submodules.md) | [Index](00-index.md) | [Next: Direct sums →](06-direct-sums.md)

@@ -62,6 +62,22 @@ one equality in this chain, using the axioms $\lambda_r$ (id_right), $\iota_r$
 (id_left). Together with Theorem 1 this establishes that inverses in a group
 are two-sided and unique, so the notation $a^{-1}$ is unambiguous.
 
+**Mathlib equivalent.** The exact same "pad with the identity, swap it for
+something cancelable" chain, spelled with `*`/`1`/`⁻¹` instead of
+`Grp.op`/`Grp.id`/`Grp.inv`:
+
+```lean
+example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
+  rw [← mul_one b, ← mul_inv_cancel a, ← mul_assoc, h, one_mul]
+```
+
+Read right to left through the `rw` list, this is line-for-line the
+displayed chain above: `← mul_one b` turns `b` into `b * 1`; `← mul_inv_cancel a`
+turns that `1` into `a * a⁻¹`; `← mul_assoc` reassociates; `h` substitutes
+`b * a` for `1`; `one_mul` clears the resulting `1 * a⁻¹`. Same five steps,
+same order, only the names `Grp.assoc`/`Grp.inv_right`/etc. are replaced by
+Mathlib's generic `mul_assoc`/`mul_inv_cancel`/etc.
+
 ---
 
 [← Theorem 1](02-theorem-1.md) | [Index](00-index.md) | [Next: Theorem 3 →](04-theorem-3.md)

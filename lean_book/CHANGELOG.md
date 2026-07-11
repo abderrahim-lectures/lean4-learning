@@ -3,6 +3,24 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Mathlib-equivalent boxes
+
+- **Every worked example in Chapters 6–11 (groups, group theorems, rings,
+  ring theorems, modules, path algebras) is now followed by a "Mathlib
+  equivalent" box**, showing the same statement or construction phrased
+  against Mathlib's real `Group`/`Ring`/`Module`/`Quiver` API. The
+  from-scratch construction stays the primary teaching path (see
+  [the Mathlib note](00-setup/04-mathlib-note.md), updated to explain the
+  framing); the Mathlib box is a deliberate peek ahead, so that Chapter
+  13's move to Mathlib in full isn't the reader's first sight of it.
+- Every added Mathlib snippet is ported into `lean_project/LeanProject/`
+  as a matching `Ch0*Mathlib.lean` module per chapter (kept separate from
+  the from-scratch modules so it's obvious which files pull in the
+  Mathlib dependency) and verified with `lake build` against real
+  Mathlib, not just read over.
+- `lean_project` now depends on Mathlib (pinned to the `v4.31.0` tag,
+  matching the toolchain).
+
 ## Unreleased — Mermaid diagrams
 
 - **Category-theory diagrams upgraded from plain ASCII art to

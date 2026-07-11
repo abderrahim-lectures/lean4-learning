@@ -25,6 +25,24 @@ the group. Data-fields and proof-fields are accessed uniformly because, in
 the dependent-pair view (a `structure` is, underneath, exactly this kind of
 dependent pair), both are just coordinates of the same tuple.
 
+**Mathlib equivalent.** There is no `intGroup.op 3 4`-style field access to
+write at all — once `Int` is known to be an `AddCommGroup`, the ordinary
+`+`/`0`/`-` notations already resolve to that instance's operations
+directly:
+
+```lean
+#eval (3 : Int) + 4
+#eval (0 : Int)
+#eval -(5 : Int)
+#check (add_assoc : ∀ a b c : Int, (a + b) + c = a + (b + c))
+```
+
+This is the same contrast as §3: the book's `intGroup.op`/`.id`/`.inv` are
+projections out of a bundle you built yourself, whereas Mathlib's `+`/`0`/
+`-` are notation that the typeclass system has already wired to the right
+instance — you never see the underlying "which `AddCommGroup` instance is
+this?" bookkeeping unless you go looking for it (e.g. with `#print`).
+
 ---
 
 [← Permutations example](04-permutations-example.md) | [Index](00-index.md) | [Next: Why bundle proofs with data? →](06-why-bundle.md)

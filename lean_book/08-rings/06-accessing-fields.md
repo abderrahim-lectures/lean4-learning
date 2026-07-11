@@ -21,6 +21,23 @@ underlying group, while `intRing.mul`/`intRing.one` read off the
 multiplicative data $\times$ and $1$. Nested dot-access is just evaluation of
 these structure-forgetting maps.
 
+**Mathlib equivalent.** No chain of `.addGrp.toGroup.inv`-style projections
+to write — `+`/`*`/`0`/`1`/`-` already resolve to `Int`'s `CommRing`
+instance directly:
+
+```lean
+#eval (3 : Int) + 4     -- 7
+#eval (3 : Int) * 4      -- 12
+#eval (1 : Int)          -- 1
+#eval -(5 : Int)          -- -5
+```
+
+The book's nested projections walk down a tower of structures you built
+yourself (`Ring → CommGroup → Group`); Mathlib's typeclass resolution walks
+down an analogous tower of instances (`CommRing → Ring → ... → AddCommGroup`)
+automatically, so the notation never needs to name which layer it's coming
+from.
+
 ---
 
 [← Finite ring example](05-finite-ring-example.md) | [Index](00-index.md) | [Next: Matrices →](07-matrices.md)

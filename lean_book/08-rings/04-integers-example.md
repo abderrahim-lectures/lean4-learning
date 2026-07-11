@@ -59,6 +59,24 @@ laws $a(b+c) = ab + ac$ and $(a+b)c = ac + bc$. Each obligation is the named
 $\mathbb{Z}$-arithmetic fact, so the term is the formal counterpart of
 "$\mathbb{Z}$ is a commutative ring."
 
+**Mathlib equivalent.** `Int` is already a `CommRing` instance — no
+`intRing`-style bundle to build. The obligations `intRing` checks by hand
+are, again, generic lemmas that hold for every commutative ring:
+
+```lean
+example : CommRing Int := inferInstance
+
+example (a b c : Int) : (a * b) * c = a * (b * c) := mul_assoc a b c
+example (a : Int) : 1 * a = a := one_mul a
+example (a : Int) : a * 1 = a := mul_one a
+example (a b c : Int) : a * (b + c) = a * b + a * c := mul_add a b c
+example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
+```
+
+`mul_add`/`add_mul` are Mathlib's names for `left_distrib`/`right_distrib` —
+same laws, generic over `[Ring R]` (or the weaker `[Distrib R]`) rather than
+cited per-type as `Int.mul_add`/`Int.add_mul`.
+
 ---
 
 [← Ring](03-ring.md) | [Index](00-index.md) | [Next: Finite ring example →](05-finite-ring-example.md)

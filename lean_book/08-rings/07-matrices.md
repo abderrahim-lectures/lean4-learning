@@ -121,6 +121,20 @@ $$
 so $M_2(\mathbb{Z})$ is a *non*commutative ring. The pair $(X, Y)$ is a
 concrete witness for the existential $\exists X, Y,\ XY \neq YX$.
 
+**Mathlib equivalent.** Mathlib's `Matrix (Fin 2) (Fin 2) Int` is exactly
+$M_2(\mathbb{Z})$, already a (noncommutative) `Ring` instance — no `Mat2`/
+`Mat2.ext`/`add4_reorder` needed, and `decide` works directly here (unlike
+`Mat2`) because `Matrix` over `Int` already has `DecidableEq`:
+
+```lean
+example : Ring (Matrix (Fin 2) (Fin 2) Int) := inferInstance
+
+def X' : Matrix (Fin 2) (Fin 2) Int := !![1, 1; 0, 1]
+def Y' : Matrix (Fin 2) (Fin 2) Int := !![1, 0; 1, 1]
+
+example : X' * Y' ≠ Y' * X' := by decide
+```
+
 ### The additive group and the ring
 
 ```lean
@@ -305,6 +319,30 @@ commutative ring $\mathbb{Z}$ — hence closed by `ring`. The construction
 generalizes verbatim to $M_n(S)$ for any commutative ring $S$: entrywise
 reduction turns each ring axiom into an $S$-polynomial identity, and
 $M_n(S)$ is noncommutative for $n \ge 2$.
+
+**Mathlib equivalent, continued.** Where the book spends the bulk of this
+section deriving `mul_assoc` for `Mat2` by hand (the `add4_reorder` helper,
+reused twelve times across all five axioms), Mathlib already proves
+associativity of matrix multiplication generically — it's simply
+`mul_assoc` again, the same lemma name as every other ring in this
+chapter's Mathlib boxes:
+
+```lean
+example (A B C : Matrix (Fin 2) (Fin 2) Int) : (A * B) * C = A * (B * C) :=
+  mul_assoc A B C
+```
+
+And where the book's `mat2Ring` needs a bespoke `Int`-arithmetic rewrite
+chain for each of `mul_assoc`/`one_mul`/`mul_one`/`left_distrib`/
+`right_distrib`, Mathlib has an automated decision procedure for exactly
+this class of goal, `noncomm_ring` — the noncommutative-ring counterpart
+of the `ring` tactic the book's own note above says isn't available
+without Mathlib:
+
+```lean
+example (A B C : Matrix (Fin 2) (Fin 2) Int) :
+    A * (B + C) = A * B + A * C := by noncomm_ring
+```
 
 ---
 

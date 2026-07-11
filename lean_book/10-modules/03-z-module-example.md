@@ -48,6 +48,22 @@ module structure is unique — "abelian group" and "$\mathbb{Z}$-module" are
 literally the same notion. The recursion mirrors the definition of
 multiplication-as-iterated-addition.
 
+**Mathlib equivalent.** This "every abelian group is (uniquely) a
+$\mathbb{Z}$-module" fact is not left as an exercise in Mathlib — it's
+registered as an instance, available for *any* `AddCommGroup` at all, with
+no `natSmul`/`intSmul` to define or verify by hand:
+
+```lean
+example {M : Type*} [AddCommGroup M] : Module Int M := inferInstance
+```
+
+Where the book builds the action from nothing (`natSmul` by recursion,
+then `intSmul` by extending to negative integers via `inv`) and leaves the
+four-axiom verification as an extended exercise, Mathlib's instance already
+carries that proof — a consequence of exactly the uniqueness argument in
+the mathematical reading above, done once in the library rather than once
+per abelian group encountered.
+
 ---
 
 [← Translating into Lean](02-translating-into-lean.md) | [Index](00-index.md) | [Next: Submodules →](04-submodules.md)

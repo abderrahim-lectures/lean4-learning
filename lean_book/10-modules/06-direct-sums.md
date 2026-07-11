@@ -129,8 +129,29 @@ def zSquaredModule := directSumModule intRing intZModule intZModule
 ```
 
 Both outputs are exactly the componentwise formulas from the mathematical
-reading above, computed rather than merely asserted. The first projection
-$\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}$, one of the defining maps
+reading above, computed rather than merely asserted.
+
+**Mathlib equivalent.** Where the book builds `DirectSum`/`directSumModule`
+field by field (five group axioms, four module axioms, each split
+componentwise via `congr 1`), Mathlib already gives the ordinary product
+type `M × N` a `Module R` instance directly — there is no `DirectSum`
+wrapper to define at all:
+
+```lean
+example {M N : Type*} [AddCommGroup M] [AddCommGroup N]
+    [Module Int M] [Module Int N] : Module Int (M × N) := inferInstance
+
+#eval ((2, 3) + (10, 20) : Int × Int)     -- (12, 23)
+#eval ((5 : Int) • ((2, 3) : Int × Int))   -- (10, 15)
+```
+
+Same componentwise formulas as `zSquaredModule`'s `#eval`s above, but
+`Prod`'s `AddCommGroup`/`Module` instances (and the componentwise `+`/`•`
+they provide) are already in the library, built once for *any* two
+additive groups or modules rather than assembled here for `Int` and `Int`
+specifically.
+
+The first projection $\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}$, one of the defining maps
 from the product/coproduct structure above, is itself a `LinearMap`
 (previous section) built directly from `DirectSum`'s own field accessor:
 
@@ -147,6 +168,16 @@ Both proof obligations are `rfl` directly: `zSquaredModule.addGrp.op`
 unfolds to componentwise addition (by the construction two sections
 back), so taking `.fst` of a sum is definitionally the same as summing the
 `.fst`s — no arithmetic argument needed, only unfolding.
+
+**Mathlib equivalent, continued.** The projection `proj1` is, again, not
+something to build — Mathlib's `LinearMap.fst` already is $\pi_1$, generic
+over any two modules over any ring:
+
+```lean
+def proj1' : (Int × Int) →ₗ[Int] Int := LinearMap.fst Int Int Int
+
+#eval proj1' (7, 100)   -- 7
+```
 
 ---
 

@@ -89,6 +89,24 @@ system refusing to compose non-composable arrows, which in a category is the
 statement that $\circ$ is a *partial* operation defined only when endpoints
 agree.
 
+**Mathlib equivalent.** Mathlib's `Quiver.Path` (building on the
+`MyArrow`/`Quiver (Fin 3)` instance from the previous section) is the same
+inductive family, `nil`/`cons`, just with `cons` taking the shorter path
+*first* and the new arrow second — the mirror image of the book's argument
+order, which takes the arrow first and the path last:
+
+```lean
+open Quiver
+
+def pathAlpha' : Path (0 : Fin 3) 1 := Path.cons Path.nil MyArrow.alpha
+def pathBetaAlpha' : Path (0 : Fin 3) 2 := Path.cons pathAlpha' MyArrow.beta
+```
+
+There is no `h : Q.source a = v`/`h' : Q.target a = w` pair to prove here —
+`MyArrow.alpha : MyArrow 0 1` (i.e. `(0 : Fin 3) ⟶ 1`) already forces the
+endpoints via its type, exactly as flagged in the previous section, so
+`Path.cons` only ever needs the arrow itself, not separate proofs about it.
+
 ---
 
 [← Defining a quiver in Lean](03-defining-a-quiver.md) | [Index](00-index.md) | [Next: Path composition →](05-path-composition.md)
