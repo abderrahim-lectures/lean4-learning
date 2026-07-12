@@ -59,7 +59,7 @@ laws $a(b+c) = ab + ac$ and $(a+b)c = ac + bc$. Each obligation is the named
 $\mathbb{Z}$-arithmetic fact, so the term is the formal counterpart of
 "$\mathbb{Z}$ is a commutative ring."
 
-**Mathlib equivalent.** `Int` is already a `CommRing` instance, so there is no
+**Mathlib equivalent.** `Int` is already a [`CommRing`](https://loogle.lean-lang.org/?q=CommRing) instance, so there is no
 `intRing`-style bundle to build. The obligations `intRing` checks by hand
 are, again, generic lemmas that hold for every commutative ring:
 
@@ -73,7 +73,7 @@ example (a b c : Int) : a * (b + c) = a * b + a * c := mul_add a b c
 example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
 ```
 
-`mul_add`/`add_mul` are Mathlib's names for `left_distrib`/`right_distrib`.
+[`mul_add`](https://loogle.lean-lang.org/?q=mul_add)/[`add_mul`](https://loogle.lean-lang.org/?q=add_mul) are Mathlib's names for `left_distrib`/`right_distrib`.
 They are the same laws, but stated generically over `[Ring R]` (or the weaker
 `[Distrib R]`) instead of being cited per-type as `Int.mul_add`/`Int.add_mul`.
 

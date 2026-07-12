@@ -143,8 +143,8 @@ finitely-supported functions $\{\text{paths}\} \to k$, i.e. the free
 module, which is why only the composition (the category layer) is
 formalized here.
 
-> Read more: [Chapter 10](../10-modules/00-index.md)'s `Module`,
-> `LinearMap`, and direct-sum material is exactly the vocabulary a full
+> Read more: [Chapter 10](../10-modules/00-index.md)'s [`Module`](https://loogle.lean-lang.org/?q=Module),
+> [`LinearMap`](https://loogle.lean-lang.org/?q=LinearMap), and direct-sum material is exactly the vocabulary a full
 > $kQ$-module (i.e. quiver representation) formalization would need.
 > Externally, Assem–Simson–Skowroński's *Elements of the Representation
 > Theory of Associative Algebras* (Vol. 1) and Schiffler's *Quiver

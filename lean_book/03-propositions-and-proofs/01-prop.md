@@ -27,7 +27,7 @@ sections.
 | not $P$ | function type to the empty type | `¬P` (:= `P → False`) |
 | for all $x$, $P(x)$ | dependent function (Π-) type | `∀ x, P x` |
 | there exists $x$ with $P(x)$ | dependent pair (Σ-)type | `∃ x, P x` |
-| proof by cases on a disjunction | pattern match / `cases` | `Or.elim`, `cases h with ...` |
+| proof by cases on a disjunction | pattern match / [`cases`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) | `Or.elim`, `cases h with ...` |
 | a direct proof (construction) | a term built from constructors | `⟨_, _⟩`, `Or.inl _`, `fun x => _` |
 
 Let's read a few rows concretely. "$P$ and $Q$" corresponds to a *product*
@@ -73,7 +73,7 @@ we think of the term as "a proof" or "a computation."
 example : 2 + 2 = 4 := rfl
 ```
 
-`rfl` is the proof "both sides compute to the same thing" (**refl**exivity).
+[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) is the proof "both sides compute to the same thing" (**refl**exivity).
 `example` states a proposition and immediately supplies a proof (an
 anonymous, unnamed `theorem`).
 

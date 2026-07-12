@@ -12,7 +12,7 @@ this chapter's `neg_one_mul` and `neg_mul` all reduce to it, instead of
 re-deriving "uniqueness of inverses" inline. Signs that you should factor
 out a lemma:
 
-- You are about to repeat a `rw` chain you already wrote for a different
+- You are about to repeat a [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain you already wrote for a different
   but structurally identical goal. Stop, and instead state the shared
   shape as its own `theorem`/`have`, then `apply`/`exact` it in both
   places.

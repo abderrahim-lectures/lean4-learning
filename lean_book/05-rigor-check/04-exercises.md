@@ -4,7 +4,7 @@
 
 ---
 
-1. Predict, before running it, whether `example : (2 : Nat) * 3 = 3 + 3 := rfl`
+1. Predict, before running it, whether [`example : (2 : Nat) * 3 = 3 + 3 := rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)
    type-checks. Then predict whether
    `example (n : Nat) : n * 2 = n + n := rfl` type-checks (hint: which
    argument does `Nat.mul` recurse on? Compare with the `Nat.add` recursion

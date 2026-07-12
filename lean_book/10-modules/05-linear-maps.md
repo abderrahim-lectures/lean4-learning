@@ -62,7 +62,7 @@ other words, are pure `Int`-arithmetic facts once you unfold what `toFun`,
 module-theoretic goal to a concrete arithmetic identity" move that
 Chapter 9's `evenSubmodule` used, applied again.
 
-**Mathlib equivalent.** Mathlib's own `LinearMap` (notation `M →ₗ[R] N`)
+**Mathlib equivalent.** Mathlib's own [`LinearMap`](https://loogle.lean-lang.org/?q=LinearMap) (notation `M →ₗ[R] N`)
 is built the same way: supply `toFun` plus the two homomorphism proofs.
 But the result is directly interoperable with the rest of the library's
 linear-algebra API:

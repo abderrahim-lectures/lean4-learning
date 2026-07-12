@@ -32,7 +32,7 @@ def cPathGammaBetaAlpha : Path cyclicQuiver 0 0 :=
   Path.cons CyclicArrow.gamma rfl rfl cPathBetaAlpha
 ```
 
-Each `rfl` again discharges a source/target proof obligation that reduces,
+Each [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) again discharges a source/target proof obligation that reduces,
 by definition, from the `match` in `cyclicQuiver`. Note that
 `cPathGammaBetaAlpha` is a nontrivial *loop* at vertex `0`. The path
 algebra of a quiver with cycles has elements of arbitrarily high "length,"
@@ -59,6 +59,16 @@ theorem append_nil_left {V A : Type} {Q : Quiver V A} {u v : V} (p : Path Q u v)
     rw [ih]
 ```
 
+This is exactly what the editor shows in the `cons` case: the Lean
+Infoview lists every hypothesis the pattern match introduces —
+`Q : Quiver V A`, `h : Q.source a = v`, `h' : Q.target a = wt`,
+`q' : Path Q u vt`, and the induction hypothesis
+`ih : (Path.nil u).append q' = q'` — above the line, with the goal
+`(Path.nil u).append (Path.cons a h h' q') = Path.cons a h h' q'` below
+it:
+
+![The Lean Infoview panel in VS Code, showing the tactic state for the `cons` case of `append_nil_left`'s induction: hypotheses `V A : Type`, `Q : Quiver V A`, `u v vt wt : V`, `a : A`, `h : Q.source a = v`, `h' : Q.target a = wt`, `q' : Path Q u vt`, `ih : (Path.nil u).append q' = q'`, and the goal `(Path.nil u).append (Path.cons a h h' q') = Path.cons a h h' q'`.](../11-path-algebras/images/append-nil-left-infoview.png)
+
 This mirrors `Path.append`'s own recursion, case for case. `Path.append`
 was *defined* by matching on its second argument, so `induction p` (which
 splits into cases on exactly that argument, generating the matching
@@ -66,7 +76,7 @@ induction hypothesis `ih` in the `cons` case) unfolds the definition
 directly. In the `nil` case, both sides are `Path.nil u` by definition. In
 the `cons` case, unfolding `Path.append`'s defining equation turns the goal
 into `Path.cons a h h' (Path.append (Path.nil u) q') = Path.cons a h h' q'`
-(the `show` line makes this explicit rather than leaving it to
+(the [`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) line makes this explicit rather than leaving it to
 elaboration), and `rw [ih]` finishes the job using the induction
 hypothesis.
 

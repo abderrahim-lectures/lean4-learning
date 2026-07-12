@@ -48,7 +48,7 @@ ring of endomorphisms. The ring $R$ enters as an explicit *parameter*, not
 as extra bundled data on $M$, because a module is always a module *over*
 some already-fixed ring.
 
-> Read more: Mathlib's `Module` (`Mathlib.Algebra.Module.Defs`) is much
+> Read more: Mathlib's [`Module`](https://loogle.lean-lang.org/?q=Module) (`Mathlib.Algebra.Module.Defs`) is much
 > more general. It is universe-polymorphic, stated for `Semiring` rather
 > than just `Ring`, and integrated with the whole `Mathlib.LinearAlgebra.*`
 > hierarchy (bases, dimension, tensor products); see

@@ -9,13 +9,13 @@ wire it into `Ring`'s fields), so it doesn't test the fact that `Ring`
 deliberately does *not* assume `mul_comm`. Matrices do: $M_2(\mathbb{Z})$,
 the ring of $2\times 2$ integer matrices under matrix addition and
 multiplication, has $AB \neq BA$ in general. It's also a good test
-of `mul_assoc`, since matrix multiplication's associativity is not a
+of [`mul_assoc`](https://loogle.lean-lang.org/?q=mul_assoc), since matrix multiplication's associativity is not a
 one-line library lemma call. It genuinely takes some work, which is the
 point of walking through it.
 
 We represent a $2 \times 2$ matrix as a `structure` with four entries.
 (There are more scalable representations — `Fin 2 → Fin 2 → Int`, or
-Mathlib's general `Matrix` — but four named fields keep every computation
+Mathlib's general [`Matrix`](https://loogle.lean-lang.org/?q=Matrix) — but four named fields keep every computation
 fully explicit, which is what we want here.)
 
 ```lean
@@ -123,7 +123,7 @@ concrete witness for the existential $\exists X, Y,\ XY \neq YX$.
 
 **Mathlib equivalent.** Mathlib's `Matrix (Fin 2) (Fin 2) Int` is exactly
 $M_2(\mathbb{Z})$, already a (noncommutative) `Ring` instance. There's no `Mat2`/
-`Mat2.ext`/`add4_reorder` needed, and `decide` works directly here (unlike
+`Mat2.ext`/`add4_reorder` needed, and [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) works directly here (unlike
 `Mat2`) because `Matrix` over `Int` already has `DecidableEq`:
 
 ```lean
@@ -335,7 +335,7 @@ example (A B C : Matrix (Fin 2) (Fin 2) Int) : (A * B) * C = A * (B * C) :=
 And where the book's `mat2Ring` needs a custom `Int`-arithmetic rewrite
 chain for each of `mul_assoc`/`one_mul`/`mul_one`/`left_distrib`/
 `right_distrib`, Mathlib has an automated decision procedure for exactly
-this class of goal, `noncomm_ring` — the noncommutative-ring counterpart
+this class of goal, [`noncomm_ring`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) — the noncommutative-ring counterpart
 of the `ring` tactic that the book's own note above says isn't available
 without Mathlib:
 

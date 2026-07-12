@@ -57,7 +57,7 @@ $$
 read "$t$ with $s$ substituted for (every free occurrence of) $x$." This
 is *precisely* what Chapter 5 called **definitional equality** driven by
 "beta-reduction." The term `(fun x => x * 2) 5` reduces, by exactly this
-rule, to `5 * 2`, and Lean's `rfl` succeeds whenever both sides of an
+rule, to `5 * 2`, and Lean's [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) succeeds whenever both sides of an
 equation reduce (via zero or more β-steps, plus unfolding `def`s) to the
 same term. A term with no more β-reductions available is in **normal
 form**. `#eval`, from Chapter 1, is precisely "reduce this term to normal

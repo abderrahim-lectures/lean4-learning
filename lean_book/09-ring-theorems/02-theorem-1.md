@@ -14,7 +14,7 @@ $$
 a \cdot 0 \overset{?}{=} 0
 $$
 
-There is no `Ring` axiom that directly states this. `mul_zero` isn't a
+There is no `Ring` axiom that directly states this. [`mul_zero`](https://loogle.lean-lang.org/?q=mul_zero) isn't a
 field of `Ring` (Chapter 8); it has to be *derived* from `left_distrib` plus
 group cancellation. The general recipe: *whenever a goal involves `0` (or
 any identity element) in a non-trivial way, try rewriting it as

@@ -28,7 +28,7 @@ built-in `+`/`*` already wrap around modulo 3, so `Fin 3`'s arithmetic
 Because `Fin 3` has only three elements, every one of `Group`/`Ring`'s
 axioms is a **finite, decidable** statement — literally "check this
 equation holds for all $3$ (or $3^2$, or $3^3$) choices of its variables."
-That's exactly the kind of goal Chapter 12 recommends handing to `decide` rather
+That's exactly the kind of goal Chapter 12 recommends handing to [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) rather
 than proving by hand:
 
 ```lean
@@ -105,7 +105,7 @@ by $3$, with `Fin 3`'s built-in wraparound arithmetic giving
 reduction mod $3$ directly at the level of the representation, rather than
 through an explicit quotient construction.
 
-**Mathlib equivalent.** Mathlib's `ZMod 3` *is* $\mathbb{Z}/3\mathbb{Z}$,
+**Mathlib equivalent.** Mathlib's [`ZMod 3`](https://loogle.lean-lang.org/?q=ZMod) *is* $\mathbb{Z}/3\mathbb{Z}$,
 already known to be a commutative ring (in fact a field, since $3$ is
 prime). There is no `fin3Group`/`fin3CommGroup`/`fin3Ring` bundle, and no `decide`
 calls needed to re-verify axioms already proved once, generically, for

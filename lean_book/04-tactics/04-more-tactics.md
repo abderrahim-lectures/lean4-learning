@@ -1,4 +1,4 @@
-## More tactics: `simp`, `constructor`, `cases`, `induction`, `unfold`
+## More tactics: [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`constructor`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`cases`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`induction`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`unfold`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)
 
 [← Reading failures](03-reading-failures.md) | [Index](00-index.md) | [Next: Worked example →](05-worked-example.md)
 

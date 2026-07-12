@@ -16,7 +16,7 @@ not a real difference in power:
 - Prefer **tactic mode** once a proof involves several steps in a row,
   case splits, or induction — anything where you would want to check an
   intermediate goal state while writing it. Chapters 6 and 8's multi-step
-  `rw` chains would be hard to read (and much harder to *write*) as raw
+  [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chains would be hard to read (and much harder to *write*) as raw
   terms.
 - `have`/`show`/`suffices` inside tactic mode let you name and restate
   intermediate goals. Use them freely to keep a long proof's shape clear,

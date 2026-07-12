@@ -6,7 +6,7 @@
 
 A **quiver** is simply a *directed graph*: a set of vertices and a set of
 directed edges (called **arrows**) between them. This is the same notion
-Mathlib calls `Quiver` (we build our own from scratch, following Chapter
+Mathlib calls [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) (we build our own from scratch, following Chapter
 0's "no Mathlib" policy, instead of reusing Mathlib's). Formally, a
 quiver $Q$ consists of:
 

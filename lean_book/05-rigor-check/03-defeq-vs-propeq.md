@@ -4,7 +4,7 @@
 
 ---
 
-Chapter 4 introduced `rfl` as "the proof that both sides compute to the
+Chapter 4 introduced [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) as "the proof that both sides compute to the
 same thing," and used it freely without asking exactly what "compute to
 the same thing" means, or whether it is the *only* notion of equality
 Lean has. It is not. Lean has (at least) two, and confusing them is a
@@ -77,9 +77,9 @@ Two practical facts follow directly:
    that is not evidence the statement is false. It only tells you the two
    sides don't share a computed normal form *without further argument*.
    This is exactly the "failure is information" point from Chapter 4:
-   `rfl` failing on `a + b = b + a` is the signal to reach for `induction`,
+   `rfl` failing on `a + b = b + a` is the signal to reach for [`induction`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/),
    not evidence that the statement needs abandoning.
-2. **`rw` works up to propositional equality, but the resulting
+2. **[`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) works up to propositional equality, but the resulting
    goal is checked up to definitional equality.** When `rw [h]` rewrites a
    goal using `h : a = b`, the *new* goal is a genuinely different term
    (with `b` substituted for `a`), and Lean must still confirm the
@@ -114,7 +114,7 @@ into one goal per field. Lean's kernel treats a term `x : S` (for `S` a
 `S.mk x.field1 x.field2 ...`. Rebuilding `x` field-by-field gives back
 *the same term*, by η (eta) for structures, not merely a term that is
 provably equal to it. This is exactly what makes Chapter 8's `Mat2.mk.injEq`-based
-extensionality reasoning work, and Chapter 10's `congr 1`, which splits a
+extensionality reasoning work, and Chapter 10's [`congr 1`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), which splits a
 `DirectSum.mk _ _ = DirectSum.mk _ _` goal into two field-wise goals. Both
 depend on Lean already knowing, definitionally, that every term of a
 structure type *is* (eta-equal to) its constructor applied to its own

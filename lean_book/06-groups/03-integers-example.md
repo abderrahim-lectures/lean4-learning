@@ -53,7 +53,7 @@ group," with the underlying lemmas about $\mathbb{Z}$ (themselves ultimately
 inductions on the integers) written out in full instead of just assumed.
 
 **Mathlib equivalent.** Mathlib doesn't need an `intGroup`-style bundle at
-all. `Int` is *already* registered as an `AddCommGroup` instance, and the
+all. `Int` is *already* registered as an [`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup) instance, and the
 five axioms above are available as free-standing lemmas that apply to
 every additive group, not just `Int`:
 
@@ -70,7 +70,7 @@ example (a : Int) : a + -a = 0 := add_neg_cancel a
 This is the same content as `intGroup`, the same five facts about
 $\mathbb{Z}$. But where the book *assembles* a `Group Int` term by hand,
 Mathlib's version has nothing to assemble: the instance already exists,
-found automatically by `inferInstance`. And `add_assoc`/`zero_add`/etc.
+found automatically by [`inferInstance`](https://loogle.lean-lang.org/?q=inferInstance). And [`add_assoc`](https://loogle.lean-lang.org/?q=add_assoc)/[`zero_add`](https://loogle.lean-lang.org/?q=zero_add)/etc.
 are generic lemmas about *any* `AddCommGroup`, so they read a little
 differently from `Int.add_assoc`: they would apply just as well to Chapter 6's
 `perm3Group`-style examples once those are phrased in Mathlib's

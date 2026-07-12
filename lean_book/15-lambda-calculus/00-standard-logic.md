@@ -234,7 +234,7 @@ given above* actually is, with no extra axiom added — rejects it as a
 general principle: $\varphi \vee \neg\varphi$ is not derivable from the
 rules above for an arbitrary $\varphi$, only for specific $\varphi$ you can
 actually settle one way or the other. ([Chapter 3
-§4](../03-propositions-and-proofs/04-and-or-not.md)'s `decide` works
+§4](../03-propositions-and-proofs/04-and-or-not.md)'s [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) works
 because `1 = 2` happens to be *decidable*, not because excluded middle is
 assumed.)
 

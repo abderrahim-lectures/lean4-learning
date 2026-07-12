@@ -36,7 +36,7 @@ theorem exists_gt_zero : ∃ n : Nat, n > 0 :=
 ```
 
 An `∃`-proof is a witness (`1`) paired with a proof that it satisfies the
-predicate (`1 > 0`). Here `decide` handles that proof, since `1 > 0` on
+predicate (`1 > 0`). Here [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) handles that proof, since `1 > 0` on
 `Nat` is a decidable, closed proposition. We could also write
 `⟨1, Nat.one_pos⟩` or `⟨1, rfl⟩` (since `1 > 0` unfolds to `0 < 1`, i.e.
 `Nat.succ 0 ≤ 1`, which is true by definition).

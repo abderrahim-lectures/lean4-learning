@@ -4,7 +4,7 @@
 
 ---
 
-### `intro`: introduce a hypothesis or variable
+### [`intro`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): introduce a hypothesis or variable
 
 ```lean
 theorem modus_ponens {P Q : Prop} : (P → Q) → P → Q := by
@@ -12,11 +12,11 @@ theorem modus_ponens {P Q : Prop} : (P → Q) → P → Q := by
   exact hpq hp
 ```
 
-### `exact`: close the goal with an exact term
+### [`exact`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): close the goal with an exact term
 
 Used above. If you have a term that proves the goal exactly, `exact` finishes it.
 
-### `apply`: apply a function/lemma, leaving new goals for its arguments
+### [`apply`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): apply a function/lemma, leaving new goals for its arguments
 
 ```lean
 theorem apply_example {P Q : Prop} (hpq : P → Q) (hp : P) : Q := by
@@ -24,7 +24,7 @@ theorem apply_example {P Q : Prop} (hpq : P → Q) (hp : P) : Q := by
   exact hp
 ```
 
-### `rw`: rewrite using an equality
+### [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): rewrite using an equality
 
 ```lean
 theorem rw_example (a b : Nat) (h : a = b) : a + 1 = b + 1 := by

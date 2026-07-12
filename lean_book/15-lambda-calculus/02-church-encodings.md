@@ -85,7 +85,7 @@ booleans, naturals, and (by pairing constructions along the same lines)
 arbitrary tree-shaped data — *before* any type system or `inductive`
 keyword enters the picture. Lean's actual `Bool` and `Nat` (Chapter 1) are
 built with the `inductive` mechanism instead of Church encodings, for
-efficiency and because pattern-matching (`match`, `cases`) is far more
+efficiency and because pattern-matching (`match`, [`cases`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)) is far more
 convenient to write and to reason about than repeated application. But
 the *expressiveness* was never in question; the untyped calculus already
 had it. What Lean's type system adds, starting in the next section, is not

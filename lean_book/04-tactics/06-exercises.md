@@ -5,9 +5,9 @@
 ---
 
 1. Prove `theorem and_comm_tac {P Q : Prop} (h : P ∧ Q) : Q ∧ P := by ...`
-   using `constructor`, `h.left`, `h.right`.
+   using [`constructor`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), `h.left`, `h.right`.
 2. Prove `theorem nat_mul_zero (n : Nat) : n * 0 = 0 := by rfl` — check
-   whether `rfl` alone works, and if not, use `induction`.
+   whether [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) alone works, and if not, use [`induction`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/).
 3. Rewrite the `modus_ponens` proof from Chapter 3 in tactic mode.
 
 Solutions: [Appendix, Chapter 4](../14-appendix-solutions/02-chapter-4.md).

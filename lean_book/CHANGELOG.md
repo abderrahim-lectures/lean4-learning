@@ -3,6 +3,19 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Inline reference links, and a second screenshot
+
+- Every tactic and Mathlib name across the whole book now gets a reference
+  link right next to its first mention in each chapter's own prose (not
+  only on the standalone `tactic-and-library-reference.md` lookup page
+  added earlier) — tactics link to the official Lean 4 Tactic Reference,
+  Mathlib names (in Chapters 6-11's "Mathlib equivalent" boxes) link via
+  Loogle. Care was taken not to link the book's own from-scratch
+  `Group`/`Ring`/`Module`/etc. as if they were the real Mathlib classes.
+- Added a second real VS Code screenshot, in
+  [Appendix A's Chapter 11 solutions](14-appendix-solutions/09-chapter-11.md),
+  showing the Lean Infoview for `append_nil_left`'s `cons` case.
+
 ## Unreleased — PDF: real Mermaid diagrams, Lean syntax highlighting, honest front matter
 
 - Mermaid diagrams now render as real images in the PDF (via

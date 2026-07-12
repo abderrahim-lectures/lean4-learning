@@ -24,7 +24,7 @@ see the goal:
 ⊢ 2 + 2 = 4
 ```
 
-No hypotheses, one goal. After `rfl` closes it, the goal panel shows "No
+No hypotheses, one goal. After [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) closes it, the goal panel shows "No
 goals". The proof is complete.
 
 **Mathematical reading.** A goal is what logicians call a *sequent*: a
@@ -64,7 +64,7 @@ result:
 2. **Look for structure to induct or case-split on.** Both sides mention
    `a` and `b` as `Nat`s, and `Nat` is inductively defined (Chapter 1), so
    induction is the natural move. The question becomes *which* variable to
-   induct on. Try `induction b` (recursion on `+`'s second argument
+   induct on. Try [`induction b`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) (recursion on `+`'s second argument
    suggests `b` is the one that unfolds cleanly).
 3. **Read the two resulting goals.** After `induction b with | zero => _ | succ k ih => _`
    you get a `zero` goal, `a + 0 = 0 + a`, and a `succ` goal,
@@ -85,7 +85,7 @@ result:
 4. **Find the missing lemmas.** You don't need to have `Nat.add_succ` and
    `Nat.zero_add` memorized. In an editor, typing `rw [Nat.add_` and
    using autocomplete lists everything starting that way. Or you can use
-   `exact?` (Chapter 12), which searches the whole environment for something that
+   [`exact?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) (Chapter 12), which searches the whole environment for something that
    closes the current goal outright, and will often name exactly the
    lemma you need even if you can't guess its name.
 

@@ -43,7 +43,7 @@ Walking through the inductive step slowly:
 
 1. We are trying to prove the statement for `b = Nat.succ k`, assuming it
    already holds for `k` (that assumption is `ih : a + k = k + a`).
-2. `rw [Nat.add_succ]` uses the defining equation `a + succ k = succ (a + k)`
+2. [`rw [Nat.add_succ]`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) uses the defining equation `a + succ k = succ (a + k)`
    to rewrite the left-hand side of the goal.
 3. `rw [ih]` uses the induction hypothesis to replace `a + k` with `k + a`
    inside the goal.
@@ -69,8 +69,8 @@ Each `rw` is one equational step in this chain. The whole proof is the
 standard textbook lemma, with the successor/zero cases spelled out in full,
 where written mathematics usually skips over them.
 
-**Programmer's corner (Python).** The two cases of `induction b with |
-zero => ... | succ k ih => ...` have exactly the shape of a recursive
+**Programmer's corner (Python).** The two cases of [`induction b with |
+zero => ... | succ k ih => ...`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) have exactly the shape of a recursive
 function over the same inductively-defined structure. Compare it to a
 hand-rolled Peano type in Python:
 

@@ -33,7 +33,7 @@ the number, then why it works.**
 - `2` is the **witness** — the specific number being claimed even. It's
   the smallest one that actually makes the point (`0` technically works
   too, but looks like a trick — "of course `0` is even").
-- `rfl` is the **proof**, filling in for `P 2`, i.e. for `2 % 2 = 0`. It
+- [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) is the **proof**, filling in for `P 2`, i.e. for `2 % 2 = 0`. It
   works by `rfl` alone (no lemma needed) because `2 % 2` simply *computes*
   to `0` — both sides of the equation are already the same term once
   evaluated, exactly like `2 + 2 = 4` back in [Chapter 3
@@ -68,7 +68,7 @@ why" shape as before, but with two differences worth noticing:
   So the full picture is a witness (`5`) plus a *pair* of facts about it
   (`5 > 3`, and `5` is prime), all packed into the outer `⟨_, _⟩`.
 - The proof isn't `rfl`. `p > 3 ∧ isPrime p` doesn't reduce to a plain
-  equality, so instead the second slot is `by decide` — the same
+  equality, so instead the second slot is by [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) — the same
   brute-force tactic from [Chapter 3 §4](04-and-or-not.md)'s
   `not_example`, which here checks `5 > 3` outright and tries every
   candidate divisor below `5` to confirm none of them divide it.

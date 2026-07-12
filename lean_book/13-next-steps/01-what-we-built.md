@@ -19,7 +19,7 @@ principles (no external library):
 
 Every proof in this book was written with explicit `rw`/`have`/`intro`
 steps, each one marked with the axiom or prior theorem that justified it.
-There is no `simp`, and no unexplained `rfl`. This is exactly the
+There is no [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), and no unexplained [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/). This is exactly the
 discipline you need to carry into reading (or writing) a real Lean
 library: when something goes wrong, you should be able to point at the
 exact lemma responsible.

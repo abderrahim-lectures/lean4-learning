@@ -44,8 +44,8 @@ def boolXorGroup : Group Bool where
 
 Each field reduces to a finite check. `Bool.xor` on two or three concrete
 booleans always computes, so once every variable is replaced by a concrete
-constructor (`false`/`true`) via `cases`, the resulting equation holds by
-definition and `rfl` closes it. `assoc` needs three nested `cases` since
+constructor (`false`/`true`) via [`cases`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), the resulting equation holds by
+definition and [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) closes it. `assoc` needs three nested `cases` since
 it quantifies over three booleans ($2^3 = 8$ cases, matching
 $(a \oplus b) \oplus c = a \oplus (b \oplus c)$ over $\mathbb{Z}/2$). The
 others need only one.

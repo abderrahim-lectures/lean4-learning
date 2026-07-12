@@ -59,8 +59,8 @@ e$: the standard "two things equal to a common third are equal." (The
 same argument in mirror shows a right identity is also unique, so a group's
 identity is unique, full stop.)
 
-**Mathlib equivalent.** Phrased against Mathlib's `Group` class, `Grp.op`/
-`Grp.id`/`Grp.id_right` become the ordinary `*`/`1`/`mul_one`, and the
+**Mathlib equivalent.** Phrased against Mathlib's [`Group`](https://loogle.lean-lang.org/?q=Group) class, `Grp.op`/
+`Grp.id`/`Grp.id_right` become the ordinary `*`/`1`/[`mul_one`](https://loogle.lean-lang.org/?q=mul_one), and the
 whole "third expression" chain collapses into a single `.symm.trans`:
 
 ```lean

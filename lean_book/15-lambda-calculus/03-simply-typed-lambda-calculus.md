@@ -48,14 +48,14 @@ Reading each rule as a Lean fact you already know:
   reports that type. There's nothing to derive.
 - **(Abs)** — to type-check `fun x => t`, extend the context with
   `x : τ1` (a fresh assumption, exactly like a hypothesis introduced by
-  `intro` in Chapter 4), check that `t`'s type is `τ2` under that extended
+  [`intro`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) in Chapter 4), check that `t`'s type is `τ2` under that extended
   context, and conclude the whole abstraction has type `τ1 → τ2`. This
   *is* how Lean checks every `def f (x : τ1) : τ2 := t` you've written
   since Chapter 1.
 - **(App)** — to type-check `t1 t2`, `t1` must have a function type whose
   domain matches `t2`'s type exactly; the result has the codomain type.
   This is exactly the error Chapter 4 discussed under "reading a tactic
-  failure": `exact e` fails with a **type mismatch** precisely when this
+  failure": [`exact`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) `e` fails with a **type mismatch** precisely when this
   rule's side condition (that $\tau_1$ must match on both sides) isn't met.
 
 ### Type preservation and progress: the payoff

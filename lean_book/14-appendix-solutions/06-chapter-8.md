@@ -57,7 +57,7 @@ def bool2Ring : Ring Bool where
 We reuse `boolXorGroup` from Chapter 6's exercise as the additive group
 (`+` = XOR, `0` = `false`), and add `∧` (Boolean and) as multiplication with
 `1 = true`. As with `assoc` in Chapter 6, every axiom is a finite check over
-$2$ or $2^3$ cases, each closed by `rfl` since `Bool.and`/`Bool.xor` compute
+$2$ or $2^3$ cases, each closed by [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) since `Bool.and`/`Bool.xor` compute
 on concrete constructors. This is exactly $\mathbb{Z}/2\mathbb{Z}$: XOR is
 addition mod 2, and AND is multiplication mod 2.
 
