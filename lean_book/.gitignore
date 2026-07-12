@@ -3,6 +3,8 @@
 *.html
 _site/
 _book_combined.md
+build/_book_combined.md
+build/_mermaid_cache/
 *.aux
 *.log
 *.out
