@@ -30,7 +30,9 @@ but never imported from one file:
 - **`LeanProject`** (root `LeanProject.lean`) — the from-scratch book code,
   Chapters 1–11. `Main.lean`/`lake exe lean_project` only use this one.
 - **`LeanProjectMathlib`** (root `LeanProjectMathlib.lean`) — the six
-  `Ch0*Mathlib.lean` files.
+  `Ch0*Mathlib.lean` files, plus `Ch13CapstoneMathlib.lean` (Chapter 13's
+  "Two theorems for free" capstone: `Field (ZMod 3)` and Lagrange's
+  theorem applied to a real subgroup of `Equiv.Perm (Fin 3)`).
 
 They're kept apart on purpose: the from-scratch chapters define their own
 top-level `Group`, `CommGroup`, `Ring`, `Module`, `Submodule`, `LinearMap`,
