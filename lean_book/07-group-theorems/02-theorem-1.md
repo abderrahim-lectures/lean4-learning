@@ -16,10 +16,10 @@ theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
 ```
 
 The goal is `e' = Grp.id`, an equality between two elements of `G` about
-which we know very little individually — `e'` only through `h`, `Grp.id`
+which we individually know very little: `e'` only through `h`, and `Grp.id`
 only through `Grp`'s own axioms. **When a goal is "show two opaque things
-are equal," the standard move is to find a *third* expression both sides
-independently equal, then chain the two equalities.** Ask: is there
+are equal," the standard move is to find a *third* expression that both
+sides equal on their own, then chain the two equalities.** Ask: is there
 anything both `e'` and `Grp.id` can be related to?
 
 `h` lets you compute `Grp.op e' a` for *any* `a` — in particular for
@@ -37,14 +37,14 @@ theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
   exact step1
 ```
 
-Why `rw [← step2]` and not `rw [step2]`: the goal is `e' = Grp.id`, and
+Why `rw [← step2]` and not `rw [step2]`? The goal is `e' = Grp.id`, and
 `step2 : Grp.op e' Grp.id = e'` has `e'` on its *right*. `rw [step2]` would
-rewrite the goal's `Grp.op e' Grp.id` — but the goal doesn't contain that
-term yet, it contains `e'`. `rw [← step2]` rewrites right-to-left, replacing
-`e'` (which the goal *does* contain) with `Grp.op e' Grp.id`. This
-right-to-left orientation choice — "which side of my `have` actually
-appears in the goal right now" — is something to check every time you
-reach for `rw`, not something to guess.
+rewrite the goal's `Grp.op e' Grp.id`, but the goal doesn't contain that
+term yet — it contains `e'`. `rw [← step2]` rewrites right-to-left,
+replacing `e'` (which the goal *does* contain) with `Grp.op e' Grp.id`.
+This right-to-left choice, "which side of my `have` actually appears in
+the goal right now," is something to check every time you reach for `rw`,
+not something to guess.
 
 **Mathematical reading.** This is the classical *uniqueness of the identity*:
 if $e'$ is a left identity ($e'\cdot a = a$ for all $a$) then $e' = e$. The
@@ -54,24 +54,25 @@ e' \overset{\text{id\_right}}{=} e' \cdot e \overset{h}{=} e,
 $$
 evaluating the hypothesis at $a = e$ and comparing with the axiom $e'\cdot e
 = e'$: both compute $e' \cdot e$, so $e' = e$. The two `have`s are these two
-equalities and the `rw`/`exact` glue them at their common expression $e'\cdot
-e$ — the standard "two things equal to a common third are equal." (The
-symmetric argument shows a right identity is also unique, so a group's
-identity is unique on the nose.)
+equalities, and the `rw`/`exact` glue them at their common expression $e'\cdot
+e$: the standard "two things equal to a common third are equal." (The
+same argument in mirror shows a right identity is also unique, so a group's
+identity is unique, full stop.)
 
 **Mathlib equivalent.** Phrased against Mathlib's `Group` class, `Grp.op`/
 `Grp.id`/`Grp.id_right` become the ordinary `*`/`1`/`mul_one`, and the
-whole "third expression" chain collapses to a single `.symm.trans`:
+whole "third expression" chain collapses into a single `.symm.trans`:
 
 ```lean
 example {G : Type*} [Group G] (e' : G) (h : ∀ a : G, e' * a = a) : e' = 1 :=
   (mul_one e').symm.trans (h 1)
 ```
 
-Same proof, same two facts glued at their common value $e'\cdot 1$ — `h 1`
-is the book's `step1` and `mul_one e'` is `step2` — just with `1` written
-for `Grp.id` and no field-projection to spell out, since `*`/`1` already
-mean "whatever this type's `Group` instance says they mean."
+This is the same proof, the same two facts glued at their common value
+$e'\cdot 1$: `h 1` is the book's `step1` and `mul_one e'` is `step2`. The
+only difference is that `1` is written for `Grp.id`, and there's no
+field-projection to spell out, since `*`/`1` already mean "whatever this
+type's `Group` instance says they mean."
 
 ---
 

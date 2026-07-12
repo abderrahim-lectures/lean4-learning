@@ -10,11 +10,11 @@ correspondence**: propositions are types, and proofs are programs.
 
 ### The Curry–Howard correspondence, in full
 
-That one-line slogan is easy to state and easy to under-appreciate on
-first read, so here is the full dictionary it's shorthand for — a
-two-way correspondence between logical connectives and type formers, each
-row of which this book will use repeatedly starting in the next few
-sections:
+That one-line slogan is easy to state, but easy to miss the importance of
+on first read. So here is the full dictionary it stands for: a
+two-way correspondence between logical connectives and type formers. This
+book will use each row repeatedly, starting in the next few
+sections.
 
 | Logic | Type theory | Lean notation |
 | --- | --- | --- |
@@ -30,29 +30,29 @@ sections:
 | proof by cases on a disjunction | pattern match / `cases` | `Or.elim`, `cases h with ...` |
 | a direct proof (construction) | a term built from constructors | `⟨_, _⟩`, `Or.inl _`, `fun x => _` |
 
-Reading a few rows concretely: "$P$ and $Q$" corresponds to a *product*
-type because a proof of $P \wedge Q$ is genuinely a *pair* — a proof of
-$P$ together with a proof of $Q$, exactly the `⟨hp, hq⟩` you'll see in the
-next section. "$P$ or $Q$" corresponds to a *sum* type because a proof of
-$P \vee Q$ is a *choice* — either a proof of $P$ (tagged `Or.inl`) or a
-proof of $Q$ (tagged `Or.inr`), never both, and never neither. "Not $P$"
-being `P → False` says: a proof that $P$ is false is a *procedure* that
-would turn any (hypothetical) proof of $P$ into a proof of the impossible
-proposition `False` — i.e. a witness that no such proof of $P$ could
-exist.
+Let's read a few rows concretely. "$P$ and $Q$" corresponds to a *product*
+type because a proof of $P \wedge Q$ is genuinely a *pair*: a proof of
+$P$ together with a proof of $Q$. This is exactly the `⟨hp, hq⟩` you'll see
+in the next section. "$P$ or $Q$" corresponds to a *sum* type because a
+proof of $P \vee Q$ is a *choice*: either a proof of $P$ (tagged
+`Or.inl`) or a proof of $Q$ (tagged `Or.inr`), never both, and never
+neither. "Not $P$" being `P → False` says: a proof that $P$ is false is a
+*procedure* that would turn any (hypothetical) proof of $P$ into a proof
+of the impossible proposition `False`. In other words, it is a witness
+that no such proof of $P$ could exist.
 
 The correspondence goes deeper than just matching up connectives with
-type formers, though — it extends to *proofs themselves* behaving like
-*programs*: simplifying a proof (removing a detour, such as proving
+type formers, though. It also extends to *proofs themselves* behaving like
+*programs*. Simplifying a proof (removing a detour, such as proving
 $P \wedge Q$ and then immediately taking the left projection to recover a
 proof of $P$) corresponds exactly to a program taking a computation step
 (here, β-reduction eliminating a constructor immediately followed by the
 matching projection). This is why Chapter 4's tactics, which *build*
 proof terms, and Chapter 5's discussion of reduction and definitional
-equality, are really talking about one and the same underlying process
-viewed from two angles: proof simplification and program evaluation are
-the same operation, just narrated differently depending on whether you're
-thinking of the term as "a proof" or "a computation."
+equality, are really talking about one and the same underlying process,
+just seen from two angles. Proof simplification and program evaluation are
+the same operation. We just describe it differently depending on whether
+we think of the term as "a proof" or "a computation."
 
 > Read more: if "propositional logic" or "natural deduction" above weren't
 > already familiar,
@@ -82,13 +82,13 @@ proposition $P$ with the *set of its proofs*: $P$ is true exactly when
 that set is nonempty, i.e. when there exists some term $p : P$ ("$P$ is
 inhabited"). This is why `Prop` behaves like a truth value rather than an
 ordinary type: every proposition's proof-set is either empty (false) or,
-up to proof irrelevance, has exactly one element (true) — there's no
+up to proof irrelevance, has exactly one element (true). There is no
 room for a "third" proof genuinely different from the rest. Proving $P$ is
-exactly exhibiting an element $p \in P$; nothing more is meant by
+exactly exhibiting an element $p \in P$. Nothing more is meant by
 "provable" than that. The proof `rfl : 2 + 2 = 4` is the reflexivity
 witness $\mathrm{refl}_4$ of the equality relation, valid precisely because
-both sides reduce to the same normal form $4$ — equality of terms that are
-*definitionally* equal, the strictest notion of "$=$".
+both sides reduce to the same normal form $4$. This is equality of terms
+that are *definitionally* equal, the strictest notion of "$=$".
 
 ---
 

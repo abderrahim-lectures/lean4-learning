@@ -18,8 +18,8 @@ We proceed by induction on `b`, one step at a time.
 
 - The left side, `a + 0`, reduces to `a` directly from the definition of `+`
   above (this fact is recorded in core Lean as the lemma `Nat.add_zero`).
-- The right side, `0 + a`, is *not* immediate from the definition (the
-  recursion is on the second argument, not the first), so it needs its own
+- The right side, `0 + a`, is *not* immediate from the definition, because the
+  recursion is on the second argument, not the first. So it needs its own
   small lemma, `Nat.zero_add : 0 + a = a`, proved separately by induction on
   `a`.
 - Putting both together: `a + 0 = a` and `0 + a = a`, so `a + 0 = 0 + a`.
@@ -49,7 +49,7 @@ Walking through the inductive step slowly:
    inside the goal.
 4. `rw [Nat.succ_add]` uses the equation `succ k + a = succ (k + a)` to
    rewrite the right-hand side, so both sides now read `succ (k + a)`,
-   literally identical — `rw` closes the goal automatically once the two
+   which are literally identical. `rw` closes the goal automatically once the two
    sides match syntactically.
 
 This is the pattern — base case, inductive step, explicit `ih` — that we
@@ -59,19 +59,19 @@ will reuse, slowly and explicitly, for every proof about groups and rings.
 +)$ is commutative, carried out by induction on the second argument from the
 recursive definition $a + 0 = a$, $a + \mathrm{succ}(k) = \mathrm{succ}(a +
 k)$. Writing $P(b) :\equiv (\forall a,\ a + b = b + a)$: the base case is
-$P(0)$, needing the auxiliary $0 + a = a$ (proved separately since the
-recursion favors the right argument), and the inductive step derives $P(k+1)$
+$P(0)$, which needs the auxiliary fact $0 + a = a$ (proved separately since the
+recursion favors the right argument). The inductive step derives $P(k+1)$
 from $P(k)$ via
 $$
 a + (k{+}1) = (a+k){+}1 \overset{\mathrm{ih}}{=} (k+a){+}1 = (k{+}1)+a.
 $$
-Each `rw` is one equational step in this chain; the whole proof is the
-standard textbook lemma, with the successor/zero cases that written
-mathematics usually glosses made fully explicit.
+Each `rw` is one equational step in this chain. The whole proof is the
+standard textbook lemma, with the successor/zero cases spelled out in full,
+where written mathematics usually skips over them.
 
 **Programmer's corner (Python).** The two cases of `induction b with |
 zero => ... | succ k ih => ...` have exactly the shape of a recursive
-function over the same inductively-defined structure. Compare to a
+function over the same inductively-defined structure. Compare it to a
 hand-rolled Peano type in Python:
 
 ```python
@@ -85,12 +85,12 @@ def add(a, b):
     return Succ(add(a, b.pred))            # recursive call, like `| succ k ih =>`
 ```
 
-`add`'s `if isinstance(b, Zero)` branch is the base case; its recursive
-call `add(a, b.pred)` is exactly the role `ih` plays in the `succ` branch —
+`add`'s `if isinstance(b, Zero)` branch is the base case. Its recursive
+call `add(a, b.pred)` plays exactly the role `ih` plays in the `succ` branch:
 "assume it already works for the smaller case, build the answer for one
-`Succ` more." The proof isn't *using* an analogy to recursion — it *is* a
-recursion, just one producing a proof term instead of a `Succ` value, which
-is why Lean can generate `induction`'s two cases automatically straight
+`Succ` more." The proof isn't just *using* an analogy to recursion, it *is* a
+recursion, just one producing a proof term instead of a `Succ` value. That's
+why Lean can generate `induction`'s two cases automatically straight
 from `Nat`'s definition, the same way Python's `isinstance` cases fall
 straight out of `Nat`'s two constructors.
 

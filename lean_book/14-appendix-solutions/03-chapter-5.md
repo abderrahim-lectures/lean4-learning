@@ -10,29 +10,28 @@
 example : (2 : Nat) * 3 = 3 + 3 := rfl
 ```
 
-This succeeds: `Nat.mul` recurses on its second argument, with base clause
+This succeeds. `Nat.mul` recurses on its second argument, with base clause
 `a * 0 = 0` and step `a * (k+1) = a * k + a`. Since both sides are closed
-numerals, Lean simply evaluates both to `6` and confirms they match — no
-subtlety, both sides compute to the same normal form.
+numerals, Lean just evaluates both to `6` and checks that they match.
+There's no subtlety here: both sides compute to the same normal form.
 
 ```lean
 example (n : Nat) : n * 2 = n + n := rfl
 ```
 
-This *also* succeeds, but for a reason worth being precise about: `2` is
+This *also* succeeds, but the reason is worth spelling out. `2` is
 `Nat.succ (Nat.succ Nat.zero)`, so `n * 2` unfolds via the step clause
 twice: `n * 2 = n * 1 + n = (n * 0 + n) + n = (0 + n) + n`. Since `Nat.add`
-recurses on its *second* argument, `0 + n` is *not* immediately `n`
-definitionally (this was exactly the asymmetry Chapter 4 hinged on for
-`my_add_comm`) — so this reduces to `(0 + n) + n`, which is *not*
+recurses on its *second* argument, `0 + n` is *not* immediately `n` by
+definition (this is the same asymmetry Chapter 4 relied on for
+`my_add_comm`). So this reduces to `(0 + n) + n`, which is *not*
 syntactically `n + n` unless `0 + n` also reduces to `n`. It doesn't,
-definitionally. So contrary to a first guess, **this does *not* type-check
-as `rfl`** in general — try it and confirm `rfl` fails, then confirm
+by definition. So, contrary to a first guess, **this does *not* type-check
+as `rfl`** in general. Try it and confirm `rfl` fails, then confirm that
 `by rw [Nat.two_mul]` (or an explicit induction) succeeds instead. The
-lesson: multiplication by a literal doesn't collapse `rfl`-cheaply the
-moment a general variable `n` is involved on the "wrong" side of an
-asymmetric recursion, exactly as `0 + n = n` needed real induction in
-Chapter 4.
+lesson: multiplying by a literal doesn't collapse to `rfl` for free once a
+general variable `n` sits on the "wrong" side of an asymmetric recursion.
+This is the same reason `0 + n = n` needed real induction in Chapter 4.
 
 **2. `MyGroup` as a type class**
 
@@ -59,10 +58,10 @@ instance : MyGroup Int where
 ```
 
 Every field of the `instance` is identical, term-for-term, to the earlier
-`intGroup : Group Int` `def` from Chapter 6 — registering something as an
-`instance` instead of a plain `def` changes only *how Lean's elaborator
-finds it* (automatically, via unification on `G`), not what data it
-contains.
+`intGroup : Group Int` `def` from Chapter 6. Registering something as an
+`instance` instead of a plain `def` only changes *how Lean's elaborator
+finds it* (automatically, via unification on `G`). It does not change what
+data it contains.
 
 ```lean
 def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x
@@ -71,27 +70,25 @@ def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x
 ```
 
 That difference in *how it's found* is exactly what makes `opTwiceTC`
-possible: it's written once, generically, against the `[MyGroup G]`
+possible. It's written once, in a generic way, against the `[MyGroup G]`
 assumption, with no mention of `Int` anywhere. At the `#eval` call site,
-Lean needs a `MyGroup Int` to run `MyGroup.op`, searches the instances it
-has registered, finds the one declared above, and plugs it in
-automatically — which is precisely the lookup a plain `def` would not have
-participated in.
+Lean needs a `MyGroup Int` to run `MyGroup.op`. It searches the instances
+it has registered, finds the one declared above, and plugs it in
+automatically. A plain `def` would not take part in this kind of lookup.
 
 **3. Why `Type → Type` needs `Type 1`**
 
-If `Type → Type` (the type of `Group` itself, prior to supplying a
+Suppose `Type → Type` (the type of `Group` itself, before we supply a
 carrier) lived in `Type 0` alongside `Nat`, `Bool`, and every other
-ordinary type, then `Type` itself — being an argument type appearing
-inside `Type → Type` — would need to be an element of `Type 0`, i.e. we'd
-need `Type : Type`. But `Type` is supposed to be (something like) the
-type of *all* `Type 0`-level types; if it were itself one such type, you
-could reconstruct Russell's paradox internally (build a self-referential
-type analogous to "the type of all types not containing themselves").
-Lean's kernel avoids this by insisting anything built from `Type 0` (such
-as a function *into or out of* `Type 0`) that isn't itself a small type
-bumps up a universe level, landing `Type → Type` in `Type 1` rather than
-`Type 0`.
+ordinary type. Then `Type` itself — being an argument type appearing
+inside `Type → Type` — would need to be an element of `Type 0`. In other
+words, we'd need `Type : Type`. But `Type` is meant to be (roughly) the
+type of *all* `Type 0`-level types. If it were itself one such type, you
+could rebuild Russell's paradox inside Lean (a self-referential type like
+"the type of all types not containing themselves"). Lean's kernel avoids
+this: anything built from `Type 0` (such as a function *into or out of*
+`Type 0`) that isn't itself a small type must bump up a universe level.
+That is why `Type → Type` lands in `Type 1` rather than `Type 0`.
 
 **4. A true propositional equality not provable by `rfl`**
 
@@ -100,9 +97,9 @@ theorem add_one_eq_succ (n : Nat) : n + 1 = Nat.succ n := rfl
 ```
 
 This one *is* `rfl`: `n + 1 = n + Nat.succ 0 = Nat.succ (n + 0) = Nat.succ
-n`, all by the defining equations of `+`, no induction needed — because
-recursion is on the second, literal-`1` argument, which unfolds
-immediately regardless of what `n` is.
+n`, all by the defining equations of `+`. No induction is needed, because
+the recursion is on the second, literal-`1` argument, which unfolds
+right away no matter what `n` is.
 
 ```lean
 theorem one_add_eq_succ (n : Nat) : 1 + n = Nat.succ n := by
@@ -113,14 +110,14 @@ theorem one_add_eq_succ (n : Nat) : 1 + n = Nat.succ n := by
     rw [Nat.add_succ, ih]
 ```
 
-This is the actual answer to the exercise — a *true* equality that `rfl`
+This is the real answer to the exercise — a *true* equality that `rfl`
 can't close on its own. With the variable now on the *second* argument,
 `1 + n = Nat.succ n` has exactly the same left/right asymmetry as
-`0 + n = n` from Chapter 4: `Nat.add`'s recursion doesn't touch a variable
-sitting in the first argument at all, so no amount of unfolding closes the
-goal without an actual induction on `n`, even though the statement is (of
-course) true — hence the explicit `induction n with ...` above, contrasted
-against `add_one_eq_succ`'s one-line `rfl` just to make the asymmetry
+`0 + n = n` from Chapter 4. `Nat.add`'s recursion never touches a variable
+sitting in the first argument, so no amount of unfolding closes the goal
+without an actual induction on `n`, even though the statement is (of
+course) true. That's why we need the explicit `induction n with ...` above.
+Comparing it with `add_one_eq_succ`'s one-line `rfl` makes the asymmetry
 concrete.
 
 ---

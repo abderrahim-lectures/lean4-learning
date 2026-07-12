@@ -4,10 +4,10 @@
 
 ---
 
-Lean is managed by **elan**, a **version manager**: a small tool that
-installs and switches between different versions of Lean itself, so each
-project can pin the exact version it needs (elan plays the same role for
-Lean that `rustup` plays for Rust, if that comparison is familiar to you).
+Lean is managed by **elan**, a **version manager**. This is a small tool
+that installs and switches between different versions of Lean itself, so
+each project can pin the exact version it needs. (If you know `rustup` from
+Rust, elan plays the same role for Lean.)
 
 1. Install elan: follow the instructions at the official Lean installation
    guide (search "leanprover elan install" or use your package manager).

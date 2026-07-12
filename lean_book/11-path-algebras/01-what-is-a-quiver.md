@@ -5,10 +5,10 @@
 ---
 
 A **quiver** is simply a *directed graph*: a set of vertices and a set of
-directed edges (called **arrows**) between them — the same notion Mathlib
-calls `Quiver` (we build our own from scratch, per Chapter 0's "no
-Mathlib" policy, rather than reusing Mathlib's). Formally, a quiver $Q$
-consists of:
+directed edges (called **arrows**) between them. This is the same notion
+Mathlib calls `Quiver` (we build our own from scratch, following Chapter
+0's "no Mathlib" policy, instead of reusing Mathlib's). Formally, a
+quiver $Q$ consists of:
 
 - a set of vertices $Q_0$,
 - a set of arrows $Q_1$,

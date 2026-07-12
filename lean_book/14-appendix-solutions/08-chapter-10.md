@@ -20,10 +20,10 @@ def idLinearMap {R : Type} (Rg : Ring R) {M : Type} (Mod : Module R Rg M) :
 
 `id : M → M` is `fun x => x`. Both fields reduce to `rfl` because
 `id (Mod.addGrp.op m n)` and `Mod.addGrp.op (id m) (id n)` unfold to the
-literal same term (`id` doesn't change anything), and likewise for
-`map_smul` — the only content in `LinearMap`'s two fields is the
+exact same term (`id` doesn't change anything). The same holds for
+`map_smul`. The only content in `LinearMap`'s two fields is the
 compatibility of `toFun` with `+`/`smul`, and `id` trivially preserves
-everything since it changes nothing.
+everything, since it changes nothing.
 
 **2. Linear maps compose**
 
@@ -50,12 +50,12 @@ def composeLinearMap {R : Type} (Rg : Ring R) {M N P : Type}
 
 `g.toFun ∘ f.toFun` is ordinary function composition. Each field's proof
 first uses `f`'s own compatibility fact (`f.map_add`/`f.map_smul`) to push
-the additive-group operation or scalar action *through* `f`, landing on a
-goal that is now exactly `g`'s compatibility fact — applied to the
-already-transformed points `f.toFun m`, `f.toFun n`. This — plus Exercise 1
-and the associativity of `∘`, both free from ordinary function
-composition — is precisely the data making $R$-modules and $R$-linear maps
-a category, as promised in the chapter text.
+the additive-group operation or scalar action *through* `f`. This leaves a
+goal that is now exactly `g`'s compatibility fact, applied to the
+already-transformed points `f.toFun m`, `f.toFun n`. This, plus Exercise 1
+and the associativity of `∘` (both free from ordinary function
+composition), is exactly the data that makes $R$-modules and $R$-linear
+maps a category, as promised in the chapter text.
 
 **3. Verifying `intSmul` satisfies `Module`'s axioms (partial: `one_smul`, `smul_add`)**
 
@@ -71,8 +71,8 @@ theorem intSmul_one_smul {M : Type} (CG : CommGroup M) (m : M) :
 
 `intSmul CG 1 m` unfolds (since `1 = Int.ofNat 1`) to `natSmul CG.toGroup 1 m`,
 which unfolds (since `1 = Nat.succ Nat.zero`) to
-`CG.toGroup.op m (natSmul CG.toGroup 0 m)`, which unfolds again (the `zero`
-case of `natSmul`) to `CG.toGroup.op m CG.toGroup.id` — exactly the
+`CG.toGroup.op m (natSmul CG.toGroup 0 m)`. This unfolds again (the `zero`
+case of `natSmul`) to `CG.toGroup.op m CG.toGroup.id`, which is exactly the
 `id_right` axiom.
 
 ```lean
@@ -100,15 +100,16 @@ theorem natSmul_add {M : Type} (Grp : Group M) (n : Nat) (m1 m2 : M)
         Grp.assoc]
 ```
 
-The base case is `id = id + id` (an identity is its own double), the mirror
-image of the "element equal to its own double is zero" fact used in
+The base case is `id = id + id` (an identity is its own double). This
+mirrors the "element equal to its own double is zero" fact used in
 Chapter 9's `mul_zero`. The inductive step needs commutativity (`comm`,
 available since we're inside a `CommGroup`) to slide `m2` and
-`natSmul Grp k m1` past each other — this is exactly why `intSmul`
+`natSmul Grp k m1` past each other. This is exactly why `intSmul`
 distributing over `+` requires an *abelian* group, not a general one:
-without `comm`, there's no way to reorder the four terms into matching
+without `comm`, there's no way to reorder the four terms into a matching
 shape. Full verification of `add_smul` and `smul_smul` follows the same
-induction-on-the-scalar pattern and is a good longer independent exercise.
+induction-on-the-scalar pattern, and makes a good longer exercise to try
+on your own.
 
 **4. Submodule of multiples of `d`**
 
@@ -128,9 +129,9 @@ def multiplesSubmodule (d : Int) : Submodule intRing intZModule where
     rw [hk, ← Int.mul_assoc, Int.mul_comm r d, Int.mul_assoc]
 ```
 
-Identical in shape to `evenSubmodule` (the case `d = 2`) — every `2` in
+This has the same shape as `evenSubmodule` (the case `d = 2`). Every `2` in
 that proof is simply replaced by the parameter `d`, and each closure proof
-still reduces to an `Int` equation, discharged the same way (`show` to
+still reduces to an `Int` equation, handled the same way (`show` to
 reveal the goal's `+`/`*`-form, then `rw`), rather than with `ring` (which
 this book doesn't import from Mathlib).
 

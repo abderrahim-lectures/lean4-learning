@@ -110,6 +110,22 @@ See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
 14. [Appendix A: Solutions to exercises](14-appendix-solutions/00-index.md)
 15. [Appendix B: A logic recap, and the λ-calculus underneath Lean](15-lambda-calculus/00-index.md)
 
+## Building a PDF
+
+`python build_pdf.py` concatenates every chapter in reading order and
+builds a single, print-style PDF (`lean-for-working-algebraists.pdf`) via
+Pandoc and XeLaTeX (KOMA-Script `scrbook`, with a title page, numbered
+chapters/sections, and a table of contents). It needs `pandoc` and a
+working XeLaTeX install (e.g. MiKTeX or TeX Live) with the fonts
+Palatino Linotype, Consolas, and Cambria Math available — all three ship
+with Windows/Office; substitute equivalents in `pdf-header.tex` and the
+`-V mainfont`/`-V mathfont` flags in `build_pdf.py` on other platforms.
+Per-file navigation strips and cross-file links don't make sense in one
+linear PDF, so the script strips the former and flattens the latter to
+plain text; Mermaid diagrams fall back to their source text, same as in
+any non-Mermaid Markdown viewer. Released builds of this PDF are attached
+to [GitHub releases](../../releases).
+
 ## Navigation
 
 Every chapter file has a navigation strip at the top (link back to this

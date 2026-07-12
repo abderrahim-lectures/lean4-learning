@@ -5,9 +5,9 @@
 ---
 
 Solutions are written in the same explicit style as the main text: every
-`rw`/`have`/`intro` is one step, and shortcuts (`simp`, unexplained `rfl`)
-are avoided except where a step is genuinely definitional and there is
-nothing to explain.
+`rw`/`have`/`intro` is one step. We avoid shortcuts (`simp`, unexplained
+`rfl`) except when a step is truly definitional and there is nothing left
+to explain.
 
 ## Sections
 

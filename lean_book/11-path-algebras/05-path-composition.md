@@ -26,16 +26,16 @@ Reading the recursion:
   final arrow `a` on top.
 
 This recursion terminates because each recursive call is on the strictly
-shorter path `q'` — the same structural recursion principle behind the
-`induction` tactic from Chapter 4.
+shorter path `q'`. This is the same structural recursion principle behind
+the `induction` tactic from Chapter 4.
 
 ### A worked instance: rebuilding `pathBetaAlpha` via `append`
 
 The previous section built `pathBetaAlpha : Path exampleQuiver 0 2`
 directly, one `Path.cons` at a time. Here it is again, built instead by
-*composing* the shorter path `pathAlpha` with a fresh one-arrow path via
-`Path.append` — and, reassuringly, both constructions produce the exact
-same path.
+*composing* the shorter path `pathAlpha` with a fresh one-arrow path using
+`Path.append`. Reassuringly, both constructions produce the exact same
+path.
 
 ```lean
 def pathBetaOnly : Path exampleQuiver 1 2 :=
@@ -52,15 +52,15 @@ def pathBetaAlphaViaAppend : Path exampleQuiver 0 2 :=
 ```
 
 `pathBetaAlphaViaAppend` composes the shorter path `pathAlpha` with
-`pathBetaOnly` via `Path.append`, giving a path from `0` to `2` — the same
-endpoints as `pathBetaAlpha`, but assembled by composition instead of by
-chaining `Path.cons` calls directly.
+`pathBetaOnly` via `Path.append`, giving a path from `0` to `2`. This has
+the same endpoints as `pathBetaAlpha`, but is assembled by composition
+instead of by chaining `Path.cons` calls directly.
 
 ```lean
 example : pathBetaAlphaViaAppend = pathBetaAlpha := rfl
 ```
 
-That final `rfl` is not a weak or approximate check — it says the two
+That final `rfl` is not a weak or approximate check. It says the two
 constructions are *definitionally* the same term, reducing to an
 identical normal form (Chapter 5), not merely "provably equal after some
 argument." This is the concrete payoff of `Path.append`'s recursive
@@ -71,12 +71,12 @@ applications.
 
 **Mathematical reading.** `Path.append` is **composition in the free
 category** $\mathrm{Free}(Q)$, written throughout this section in *path
-order* — "$p$ then $q$," matching the argument order of `Path.append p q`
-— rather than the function-composition order $q \circ p$ you may be used
-to from category theory texts (the two conventions denote the same
+order*: "$p$ then $q$," matching the argument order of `Path.append p q`.
+This is not the function-composition order $q \circ p$ you may be used
+to from category theory texts. (The two conventions denote the same
 composite; only the order the symbols are written differs, and mixing
 them mid-explanation is a common source of confusion, so this book fixes
-path order throughout). In path order, `Path.append` is the map
+path order throughout.) In path order, `Path.append` is the map
 
 $$
 \mathrm{Hom}(u,v) \times \mathrm{Hom}(v,w) \longrightarrow \mathrm{Hom}(u,w),
@@ -86,33 +86,33 @@ $$
 (the semicolon "$;$" is a common notation for path-order composition,
 distinguishing it from function-order $\circ$). The identity laws, stated
 in path order: `Path.append p (Path.nil v) = p` (appending the trivial
-path *after* `p` changes nothing — the case implemented directly by the
-`nil` branch of the `match` above, since recursion is on `q`) and,
+path *after* `p` changes nothing; this case is implemented directly by the
+`nil` branch of the `match` above, since recursion is on `q`), and,
 separately, `Path.append (Path.nil u) p = p` (appending the trivial path
-*before* `p` also changes nothing — proved as Exercise 2 by induction on
+*before* `p` also changes nothing; proved as Exercise 2 by induction on
 `p`, since the `nil` branch alone doesn't give this one for free). The
 `cons` case of the recursion is exactly associativity of concatenation.
 Together with `nil` as identities, this makes $\mathrm{Free}(Q)$ a genuine
-category — the smallest/most general category containing $Q$'s arrows, in
+category: the smallest/most general category containing $Q$'s arrows, in
 the sense of a
 [universal property](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline).
 
 **Mathlib equivalent.** `Path.append` is already in Mathlib, as
-`Quiver.Path.comp` — the same recursion (on the *second* path), the same
-"`nil` does nothing, `cons` re-attaches its trailing arrow" shape:
+`Quiver.Path.comp`. It is the same recursion (on the *second* path), with
+the same "`nil` does nothing, `cons` re-attaches its trailing arrow" shape:
 
 ```lean
-def pathBetaOnly' : Path (1 : Fin 3) 2 := Path.cons Path.nil MyArrow.beta
-def pathBetaAlphaViaComp' : Path (0 : Fin 3) 2 := Path.comp pathAlpha' pathBetaOnly'
+def pathBetaOnly' : Quiver.Path (1 : Fin 3) 2 := Quiver.Path.cons Quiver.Path.nil MyArrow.beta
+def pathBetaAlphaViaComp' : Quiver.Path (0 : Fin 3) 2 := Quiver.Path.comp pathAlpha' pathBetaOnly'
 
 example : pathBetaAlphaViaComp' = pathBetaAlpha' := rfl
 ```
 
-Same closing `rfl` as the book's `pathBetaAlphaViaAppend = pathBetaAlpha`
-check: two paths built via different routes (direct `cons`-chaining versus
-composing two shorter paths) reduce to the identical term, because
-`Quiver.Path.comp` unfolds to exactly the same sequence of `cons`
-applications `Path.append` does.
+This is the same closing `rfl` as the book's
+`pathBetaAlphaViaAppend = pathBetaAlpha` check: two paths built via
+different routes (direct `cons`-chaining versus composing two shorter
+paths) reduce to the identical term, because `Quiver.Path.comp` unfolds to
+exactly the same sequence of `cons` applications `Path.append` does.
 
 ### The path algebra
 
@@ -121,11 +121,12 @@ ring whose elements are $k$-linear combinations of paths in $Q$, with
 multiplication given by path composition (composing two paths whose
 endpoints don't match gives $0$). Formalizing $kQ$ fully (as a `Ring`, per
 Chapter 8) requires "formal sums of paths with ring coefficients," which is
-a genuinely bigger construction — essentially a finitely-supported function
-from paths to $k$ — and is a great next project once you're comfortable
-with everything above. We stop at "paths and their composition" here
-because that data (the *category* of paths, really) is the beating heart of
-the construction; the ring structure on top is bookkeeping once you have it.
+a genuinely bigger construction: essentially a finitely-supported function
+from paths to $k$. It's a great next project once you're comfortable with
+everything above. We stop at "paths and their composition" here because
+that data (the *category* of paths, really) is the beating heart of the
+construction. The ring structure on top is just bookkeeping once you have
+it.
 
 **Mathematical reading.** The **path algebra** $kQ$ is the free $k$-module
 on the set of all paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with
@@ -135,11 +136,12 @@ q \cdot p = \begin{cases} q\circ p & \text{if } t(p) = s(q),\\ 0 &
 \text{otherwise,}\end{cases}
 $$
 and unit $\sum_{v\in V} e_v$ (the sum of the trivial paths). Equivalently
-$kQ$ is the $k$-linearization of the free category $\mathrm{Free}(Q)$ — its
-*category algebra* — so representations of $Q$ are exactly $kQ$-modules, the
-bridge to Chapter 10 promised there. The construction requires
-finitely-supported functions $\{\text{paths}\} \to k$, i.e. the free module,
-which is why only the composition (the category layer) is formalized here.
+$kQ$ is the $k$-linearization of the free category $\mathrm{Free}(Q)$: its
+*category algebra*. So representations of $Q$ are exactly $kQ$-modules,
+the bridge to Chapter 10 promised there. The construction requires
+finitely-supported functions $\{\text{paths}\} \to k$, i.e. the free
+module, which is why only the composition (the category layer) is
+formalized here.
 
 > Read more: [Chapter 10](../10-modules/00-index.md)'s `Module`,
 > `LinearMap`, and direct-sum material is exactly the vocabulary a full

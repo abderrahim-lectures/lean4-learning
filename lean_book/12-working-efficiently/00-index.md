@@ -4,12 +4,13 @@
 
 ---
 
-Chapters 6 and 8 were about *finding* a proof by hand, deliberately slowly,
+Chapters 6 and 8 were about *finding* a proof by hand, on purpose slowly,
 so the underlying reasoning is never hidden. This chapter is the other
-half: once you understand *why* a proof works, how do you write it (and
-find it) faster in day-to-day use? Efficient Lean is not "type less" — it's
-knowing which automation to trust, when explicitness still pays for itself,
-and how to structure lemmas so you're not re-deriving the same fact twice.
+half. Once you understand *why* a proof works, how do you write it (and
+find it) faster in day-to-day use? Efficient Lean does not mean "type
+less." It means knowing which automation to trust, knowing when it is
+still worth being explicit, and knowing how to structure lemmas so you
+don't derive the same fact twice.
 
 ## Sections
 

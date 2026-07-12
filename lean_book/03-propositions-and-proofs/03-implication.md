@@ -12,9 +12,9 @@ theorem modus_ponens {P Q : Prop} (hpq : P → Q) (hp : P) : Q :=
   hpq hp
 ```
 
-**Mathematical reading.** Under Curry–Howard the implication $P \Rightarrow
+**Mathematical reading.** Under Curry–Howard, the implication $P \Rightarrow
 Q$ *is* the function space $P \to Q$ (the set of proofs of $Q$ parameterized
-by proofs of $P$), so modus ponens
+by proofs of $P$). So modus ponens
 $$
 \frac{P \Rightarrow Q \qquad P}{Q}
 $$
