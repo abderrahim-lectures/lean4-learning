@@ -4,13 +4,13 @@
 
 ---
 
-Writing proof *terms* directly (as in Chapter 3) gets unwieldy fast. Instead,
-Lean lets you enter **tactic mode** with `by`, where you manipulate a "goal"
-step by step, similar to how you'd write a proof on paper. This chapter's
-real subject is not the list of tactics below — it's **how to work a goal
-you don't already know the proof of**, since that is the skill the rest of
-the book exercises. The tactic reference is secondary; read it once, then
-come back to it as needed.
+Writing proof *terms* directly (as in Chapter 3) quickly becomes hard to manage. Instead,
+Lean lets you enter **tactic mode** with `by`, where you work on a "goal"
+step by step, much like how you'd write a proof on paper. This chapter's
+real subject is not the list of tactics below. It's **how to work a goal
+you don't already know the proof of**, because that is the skill the rest of
+the book practices. The tactic reference is secondary. Read it once, then
+come back to it when you need it.
 
 ## Sections
 

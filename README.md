@@ -53,6 +53,25 @@ expert sign-off on correctness, pedagogical soundness, or idiomatic style.
 Treat the book as a solid, self-checked draft, not a human-expert-reviewed
 text.
 
+**Mathlib-equivalent boxes (2026).** Chapters 6–11 (groups, group
+theorems, rings, ring theorems, modules, path algebras) now follow every
+worked example with a labeled "Mathlib equivalent" — the same statement or
+construction phrased against Mathlib's real `Group`/`Ring`/`Module`/
+`Quiver` API. The from-scratch build stays the main teaching path; the
+Mathlib box is a deliberate look ahead, so Chapter 13's move to Mathlib
+isn't the reader's first sight of it. Every added snippet is compiled for
+real: `lean_project` now depends on Mathlib (pinned to the `v4.31.0` tag),
+and each chapter's Mathlib snippets live in a matching `Ch0*Mathlib.lean`
+module, checked with `lake build`.
+
+**Plain-English pass (2026).** The whole book's prose (every chapter and
+the appendix) was rewritten toward roughly CEFR B2 English: shorter
+sentences, plainer words, fewer stacked em-dash asides, so a non-native
+English reader can spend effort on Lean and math instead of on decoding
+vocabulary. No code, math, links, or technical/mathematical terminology
+were touched — only the surrounding English. The shared glossary (Chapter
+1 §4) was also restructured so every term has its own stable link anchor.
+
 ## Reproducing this book
 
 The book was not produced from a single prompt — it emerged from an
@@ -209,6 +228,33 @@ shell access to the working directory.
     > book's full history, built from the git log, and linked from the top
     > of both READMEs; trim the READMEs' own inline history to a short
     > summary pointing at it.
+
+12. **Add a Mathlib-equivalent track alongside the from-scratch one.** (a
+    later session, after the book was otherwise complete)
+    > This book stays Mathlib-free, but I'd like learners to see both
+    > sides. After every worked example in Chapters 6–11, add a clearly
+    > labeled "Mathlib equivalent" box showing the same statement or
+    > construction phrased against Mathlib's real API — the from-scratch
+    > version stays primary, the Mathlib version is a second, parallel
+    > track. Add Mathlib as a dependency of `lean_project`, port every new
+    > snippet into a matching module per chapter, and verify each one with
+    > `lake build` against the real library, not just written and hoped.
+    > Update the README and the Chapter 0 Mathlib note so the framing is
+    > clear: this isn't a contradiction of the "no Mathlib" design, it's a
+    > deliberate peek ahead.
+
+13. **Simplify the English, without touching the math or Lean.** (a later
+    session, focused purely on readability for non-native English readers)
+    > Rewrite the book's prose to roughly CEFR B2 English: shorter
+    > sentences, plainer everyday words, fewer stacked em-dash asides. Do
+    > this across every chapter and the appendix, so a non-native English
+    > reader spends effort on Lean and math, not on decoding vocabulary.
+    > Do not touch code blocks, LaTeX math, links, headers, or any
+    > mathematical/Lean technical term — only the surrounding English
+    > glue, with no loss of content or nuance. While you're at it, make
+    > sure every term in the shared glossary (Chapter 1 §4) has its own
+    > stable link anchor, and update all three READMEs to reflect the
+    > current state of the project.
 
 A note on process, for anyone replaying this: several steps above
 triggered large mechanical passes (renumbering a dozen chapters and every

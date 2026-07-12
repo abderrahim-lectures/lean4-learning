@@ -30,24 +30,25 @@ previous four sections into one table.
 
 **Tactics don't add anything to the calculus.** Chapter 4's entire tactic
 vocabulary (`intro`, `exact`, `rw`, `induction`, ...) is a *user interface*
-for constructing CIC terms incrementally, with the current goal state
+for building CIC terms step by step, with the current goal state
 showing you the type of the "hole" still to be filled. Every finished
 tactic proof elaborates to an ordinary term you *could* have written by
-hand (as Chapter 3 did, before tactics were introduced) — tactics exist
+hand (as Chapter 3 did, before tactics were introduced). Tactics exist
 purely because writing large CIC terms directly is unpleasant, not because
-they access any extra expressive power. You can see this directly: run
-`#print` on any theorem proved with tactics, and Lean shows you the
+they give access to any extra expressive power. You can see this directly:
+run `#print` on any theorem proved with tactics, and Lean shows you the
 literal λ-term/application-tree the tactic script built.
 
 **Elaboration is type inference for CIC, not magic.** Chapter 1's
 implicit-argument inference (`identity 5` inferring `α := Nat`) and every
 subsequent "Lean figures it out from context" moment in this book is an
-algorithm — **unification** — solving equations between CIC terms with
-metavariables (placeholders for not-yet-known terms), guided by the typing rules from the previous
-two sections. It is a well-understood, terminating (for the fragment Lean
-actually uses) procedure, not an oracle; when it fails, the resulting
-error message (Chapter 4, "reading a tactic failure") is telling you
-specifically which unification equation it couldn't solve.
+algorithm called **unification**. It solves equations between CIC terms
+with metavariables (placeholders for not-yet-known terms), guided by the
+typing rules from the previous two sections. It is a well-understood,
+terminating (for the fragment Lean actually uses) procedure, not an
+oracle. When it fails, the resulting error message (Chapter 4, "reading a
+tactic failure") tells you specifically which unification equation it
+couldn't solve.
 
 ## Next
 

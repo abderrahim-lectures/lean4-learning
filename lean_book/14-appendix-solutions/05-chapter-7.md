@@ -15,7 +15,7 @@ theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
 ```
 
 By `left_inverse_unique` (Chapter 7, Theorem 2), to show
-`a = Grp.inv (Grp.inv a)` it suffices to show `a` is a left inverse of
+`a = Grp.inv (Grp.inv a)` it's enough to show `a` is a left inverse of
 `Grp.inv a`, i.e. `Grp.op a (Grp.inv a) = Grp.id` — exactly `Grp.inv_right a`.
 
 **2. `theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c`**
@@ -35,10 +35,10 @@ theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c := by
   exact h1
 ```
 
-We left-multiply both sides of `h` by `Grp.inv a` (step `h1`), regroup with
-associativity so `Grp.inv a` meets `a` on both sides, cancel that pair via
-`inv_left` to `Grp.id`, then strip `Grp.id` via `id_left`, leaving `b = c`
-directly.
+We left-multiply both sides of `h` by `Grp.inv a` (step `h1`), then regroup
+with associativity so `Grp.inv a` meets `a` on both sides. We cancel that
+pair to `Grp.id` via `inv_left`, then strip `Grp.id` via `id_left`, which
+leaves `b = c` directly.
 
 ---
 

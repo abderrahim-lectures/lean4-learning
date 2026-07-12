@@ -9,9 +9,9 @@ returns a `Nat` no matter what `n` you feed it, the same way an ordinary
 function $f : A \to B$ between sets has one fixed target set $B$. Lean's type
 theory allows something more general: a family of types *indexed by* a
 value, and a function whose return type changes depending on its input.
-This is a **dependent type**, and it is the single feature that separates
+This is a **dependent type**. It is the single feature that separates
 Lean (and other proof assistants) from an ordinary typed programming
-language — it is also, not coincidentally, best understood through a
+language. It is also, not by coincidence, best understood through a
 categorical lens you already have.
 
 ### The non-dependent picture, first
@@ -39,7 +39,7 @@ inductive Path {V A : Type} (Q : Quiver V A) : V → V → Type where
       (p : Path Q u v) : Path Q u w
 ```
 
-`Path Q : V → V → Type` is not a single type — it is a **family of types
+`Path Q : V → V → Type` is not a single type. It is a **family of types
 indexed by a pair of vertices** $(u, w) \in V \times V$. In ordinary
 mathematical notation, if $V$ is the vertex set, this family is exactly a
 function
@@ -51,11 +51,11 @@ $$
 (or $\to \mathbf{Type}$, if you want to stay inside Lean's universe of
 types rather than committing to sets specifically) sending a pair of
 vertices $(u, w)$ to the *set of paths from $u$ to $w$* in the quiver $Q$.
-This is precisely the data of an **indexed family of objects** — the same
-notion, dressed differently, as a $V \times V$-indexed family of
+This is precisely the data of an **indexed family of objects**. It's the
+same notion, dressed differently, as a $V \times V$-indexed family of
 $\mathrm{Hom}$-sets $\mathrm{Hom}_{\mathcal{C}}(u, w)$ in a locally small
-category $\mathcal{C}$. In fact that comparison is not an analogy — it *is*
-the same structure: Chapter 11 constructs $\mathrm{Path}_Q$ as exactly the
+category $\mathcal{C}$. In fact that comparison is not an analogy: it *is*
+the same structure. Chapter 11 constructs $\mathrm{Path}_Q$ as exactly the
 free category on the quiver $Q$, so `Path Q u w` literally *is*
 $\mathrm{Hom}_{\mathrm{Free}(Q)}(u, w)$.
 
@@ -73,8 +73,8 @@ def Path.append {V A : Type} {Q : Quiver V A} {u v w : V}
 
 Reading the type signature $u, v, w$-first: for *every* choice of vertices
 $u, v, w$, and every pair of paths $p \in \mathrm{Path}_Q(u,v)$,
-$q \in \mathrm{Path}_Q(v,w)$, we produce an element of $\mathrm{Path}_Q(u,w)$
-— a genuinely dependent statement, since the *type* of the output
+$q \in \mathrm{Path}_Q(v,w)$, we produce an element of $\mathrm{Path}_Q(u,w)$.
+This is a genuinely dependent statement, since the *type* of the output
 (`Path Q u w`) mentions the *values* `u`, `w` bound earlier in the same
 signature. In full dependent-type-theory notation, a dependent function
 type is written with $\Pi$ (a "dependent product," generalizing the
@@ -86,34 +86,34 @@ $$
 
 read "for every $x : A$, an element of the type $B(x)$, which is allowed to
 depend on $x$." When $B(x)$ happens to not depend on $x$ at all, this
-collapses exactly to the ordinary function type $A \to B$ — so $\Pi$-types
+collapses exactly to the ordinary function type $A \to B$. So $\Pi$-types
 strictly generalize function types, the same way a fiber bundle with a
 constant fiber is just a product. Every `∀` you saw in Chapter 3
 (`∀ n : Nat, n ≥ 0`) *is* a $\Pi$-type: a proposition `P n : Prop` is a
 family of types indexed by `n` (recall `Prop`-valued families are
-"propositional," i.e. each fiber has at most one inhabitant up to proof
+"propositional," meaning each fiber has at most one inhabitant up to proof
 irrelevance), and `∀ n, P n` is the dependent function type
-$\prod_{n : \mathtt{Nat}} P(n)$ — a function producing, for each `n`, a
+$\prod_{n : \mathtt{Nat}} P(n)$: a function producing, for each `n`, a
 proof of the (n-dependent) statement `P n`.
 
 ### Why this matters for the rest of the book
 
 Chapter 11's `Path` is the book's running example of a genuinely dependent
 type, and its `cons` constructor is the book's running example of a
-dependent function: the two proof arguments `h : Q.source a = v` and
+dependent function. The two proof arguments `h : Q.source a = v` and
 `h' : Q.target a = w` are exactly what make the construction *type-safe*
-composition-of-arrows, mirroring how a category's composition
+composition-of-arrows. This mirrors how a category's composition
 $\circ : \mathrm{Hom}(v,w) \times \mathrm{Hom}(u,v) \to \mathrm{Hom}(u,w)$
-is only ever applied to pairs of morphisms whose endpoints already match —
-except that in Lean, "the endpoints match" is not a side-condition checked
-externally, it is *encoded in the type itself*, so a term that doesn't
-respect it is not merely wrong, it does not type-check at all. This is the
-payoff dependent types offer a working algebraist: invariants you would
-otherwise state as separate lemmas (associativity of composition only
-makes sense for composable triples; a group action is only defined on the
-right orbit) can instead be built into what a term's type *is*, and Lean's
-kernel enforces them the same way it enforces `2 + 2 : Nat` rather than
-`2 + 2 : Bool`.
+is only ever applied to pairs of morphisms whose endpoints already match.
+The difference is that in Lean, "the endpoints match" is not a
+side-condition checked externally. It is *encoded in the type itself*, so
+a term that doesn't respect it is not merely wrong: it does not
+type-check at all. This is the payoff dependent types offer a working
+algebraist: invariants you would otherwise state as separate lemmas
+(associativity of composition only makes sense for composable triples; a
+group action is only defined on the right orbit) can instead be built
+into what a term's type *is*. Lean's kernel enforces them the same way it
+enforces `2 + 2 : Nat` rather than `2 + 2 : Bool`.
 
 > Read more: [Appendix B §4](../15-lambda-calculus/04-dependent-types-coc.md)
 > gives Π-types (and Σ-types) their formal typing rules, rather than only

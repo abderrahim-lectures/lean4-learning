@@ -12,7 +12,7 @@ theorem and_comm_ex {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
 ```
 
 `h : P ∧ Q` has fields `h.left : P` and `h.right : Q`. A proof of `Q ∧ P` is
-the pair with those two components in the opposite order.
+just the pair with those two components in the opposite order.
 
 **2. `theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P`**
 
@@ -23,10 +23,10 @@ theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
   | Or.inr hq => Or.inl hq
 ```
 
-`Or` has two constructors, so any proof `h : P ∨ Q` was built by one of
-them; `match` recovers which one and the witness it carried. In the
+`Or` has two constructors, so any proof `h : P ∨ Q` was built with one of
+them. `match` finds out which one, and the witness it carried. In the
 `Or.inl hp` case we have `hp : P`, and `Or.inr hp : Q ∨ P` uses it as the
-right disjunct; symmetrically for `Or.inr hq`.
+right disjunct. The `Or.inr hq` case works the same way, just mirrored.
 
 **3. `theorem exists_gt_zero : ∃ n : Nat, n > 0`**
 
@@ -36,9 +36,10 @@ theorem exists_gt_zero : ∃ n : Nat, n > 0 :=
 ```
 
 An `∃`-proof is a witness (`1`) paired with a proof that it satisfies the
-predicate (`1 > 0`), here discharged by `decide` since `1 > 0` on `Nat` is a
-decidable, closed proposition. Equivalently `⟨1, Nat.one_pos⟩` or `⟨1, rfl⟩`
-(as `1 > 0` unfolds to `0 < 1`, i.e. `Nat.succ 0 ≤ 1`, definitionally true).
+predicate (`1 > 0`). Here `decide` handles that proof, since `1 > 0` on
+`Nat` is a decidable, closed proposition. We could also write
+`⟨1, Nat.one_pos⟩` or `⟨1, rfl⟩` (since `1 > 0` unfolds to `0 < 1`, i.e.
+`Nat.succ 0 ≤ 1`, which is true by definition).
 
 ---
 

@@ -5,9 +5,9 @@
 ---
 
 As in Chapter 7, the point here is the search process for each proof, not
-just the final term. Ring proofs are a good stress-test of that process
+just the final term. Ring proofs are a good test of that process
 because the goals get visually noisy fast (nested `addGrp.toGroup.op`
-everywhere) — part of what you're learning is how to not get lost in that
+everywhere). Part of what you're learning is how to not get lost in that
 noise and instead track "what algebraic fact am I one step away from using."
 
 ## Sections

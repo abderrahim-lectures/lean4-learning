@@ -19,7 +19,7 @@ theorem trans_example {a b c : Nat} (h1 : a = b) (h2 : b = c) : a = c :=
   h1.trans h2
 ```
 
-`trans` gives transitivity $a = b,\ b = c \Rightarrow a = c$; combined with
+`trans` gives transitivity $a = b,\ b = c \Rightarrow a = c$. Combined with
 reflexivity ($\mathrm{rfl}$) and symmetry above, this says $=$ is an
 equivalence.
 
@@ -28,17 +28,17 @@ theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
   rw [h]
 ```
 
-`rw` ("rewrite") rewrites the goal using an equality proof: `rw [h]` with
+`rw` ("rewrite") rewrites the goal using an equality proof. `rw [h]` with
 `h : a = b` finds every occurrence of `a` in the goal and replaces it with
-`b`. Here the goal starts as `a + 1 = b + 1`; after rewriting `a` to `b` it
+`b`. Here the goal starts as `a + 1 = b + 1`. After rewriting `a` to `b`, it
 becomes `b + 1 = b + 1`, which `rw` then closes automatically by trying
-`rfl` as its last step — you don't need to write that `rfl` yourself.
+`rfl` as its last step. You don't need to write that `rfl` yourself.
 
 The congruence `congr_example` is the Leibniz principle: $a = b \Rightarrow
-f(a) = f(b)$ for any function $f$ (here $f(x) = x + 1$) — "substitute
-equals for equals," mechanized. `rw` is your workhorse for this from here
-on: nearly every proof from Chapter 4 onward reaches for it whenever an
-equality hypothesis needs to be used inside a larger goal.
+f(a) = f(b)$ for any function $f$ (here $f(x) = x + 1$). This is
+"substitute equals for equals," mechanized. `rw` is your workhorse for this
+from here on: nearly every proof from Chapter 4 onward reaches for it
+whenever an equality hypothesis needs to be used inside a larger goal.
 
 ---
 

@@ -11,8 +11,8 @@
    `f : LinearMap Rg ModM ModN` and `g : LinearMap Rg ModN ModP`, construct
    `LinearMap Rg ModM ModP` with `toFun := g.toFun ∘ f.toFun`. (This,
    together with Exercise 1 and associativity of function composition, is
-   what makes $R$-modules and $R$-linear maps a category — Chapter 1's
-   promised payoff.)
+   what makes $R$-modules and $R$-linear maps a category. This is the
+   payoff that Chapter 1 promised.)
 3. Verify `intSmul` (defined above) satisfies `Module`'s four axioms
    against `intRing`, at least for `one_smul` and `smul_add` — by
    induction on the integer scalar, in the style of Chapter 4.
@@ -25,8 +25,8 @@ Solutions: [Appendix, Chapter 10](../14-appendix-solutions/08-chapter-10.md).
 ## Next
 
 Continue to [Chapter 11: Quivers and path algebras](../11-path-algebras/00-index.md), where
-we return to path algebras — and note, once you've seen $kQ$ constructed,
-that representations of $Q$ are exactly modules over $kQ$, tying this
+we return to path algebras. Once you've seen $kQ$ constructed, notice that
+representations of $Q$ are exactly modules over $kQ$. This ties this
 chapter directly to the next.
 
 ---
