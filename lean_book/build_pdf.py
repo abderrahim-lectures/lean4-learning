@@ -37,7 +37,8 @@ CHAPTERS = [
 NAV_LINE_RE = re.compile(r'^\[.*\]\([^)]*\.md[^)]*\).*$', re.MULTILINE)
 # A lone "---" horizontal rule left dangling after a nav line is stripped too.
 BARE_HR_RE = re.compile(r'\n---\n')
-MD_LINK_RE = re.compile(r'\[([^\]]+)\]\((?!https?://)[^)]*\)')
+MD_LINK_RE = re.compile(r'(?<!!)\[([^\]]+)\]\((?!https?://)[^)]*\)')
+IMAGE_RE = re.compile(r'(!\[[^\]]*\]\()([^)]+)(\))')
 
 
 def chapter_files(folder):
@@ -46,11 +47,23 @@ def chapter_files(folder):
     return [os.path.join(path, n) for n in names]
 
 
-def clean(text):
+def clean(text, source_dir):
     # Drop navigation-strip lines (breadcrumb links to other .md files).
     text = NAV_LINE_RE.sub("", text)
     # Collapse the now-orphaned "---" separators that bordered them.
     text = re.sub(r'\n-{3,}\n\s*\n', '\n\n', text)
+    # Rewrite image paths to absolute (they're relative to each chapter's
+    # own folder, which breaks once every chapter is concatenated into one
+    # combined markdown file living at the book root) *before* stripping
+    # links, since image syntax `![alt](path)` would otherwise also match
+    # the "plain .md link" pattern below.
+    def _abs_image(m):
+        target = m.group(2)
+        if target.startswith("http"):
+            return m.group(0)
+        abs_path = os.path.normpath(os.path.join(source_dir, target)).replace("\\", "/")
+        return f"{m.group(1)}{abs_path}{m.group(3)}"
+    text = IMAGE_RE.sub(_abs_image, text)
     # Any remaining relative .md link becomes plain text (no cross-file
     # jumps make sense inside one linear PDF).
     text = MD_LINK_RE.sub(r'\1', text)
@@ -62,9 +75,10 @@ def clean(text):
 def build_combined_markdown():
     parts = []
     for chapter in CHAPTERS:
+        chapter_dir = os.path.join(BOOK_DIR, chapter)
         for path in chapter_files(chapter):
             with open(path, encoding="utf-8") as fh:
-                parts.append(clean(fh.read()))
+                parts.append(clean(fh.read(), chapter_dir))
     return "\n\n".join(parts)
 
 
