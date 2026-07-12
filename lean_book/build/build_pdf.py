@@ -95,7 +95,11 @@ def replace_mermaid(text):
         if png_path is None:
             return m.group(0)
         png_path = png_path.replace("\\", "/")
-        return f"![]({png_path})"
+        # mermaid-cli renders at -s 3 (3x scale, for crispness) with no
+        # fixed physical size, so left unconstrained the image inserts at
+        # its raw, huge pixel size. Cap the display width so it sits
+        # comfortably on a book page.
+        return f"![]({png_path}){{width=50%}}"
     return MERMAID_RE.sub(_sub, text)
 
 
