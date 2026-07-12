@@ -23,3 +23,18 @@ the toolchain). The from-scratch book code (`Ch06Groups.lean`, ...,
 boxes ported and compiled for real. The first `lake build` after adding
 Mathlib downloads its build cache and can take several minutes — later
 builds are fast.
+
+There are two separate library targets, built by `lake build` together
+but never imported from one file:
+
+- **`LeanProject`** (root `LeanProject.lean`) — the from-scratch book code,
+  Chapters 1–11. `Main.lean`/`lake exe lean_project` only use this one.
+- **`LeanProjectMathlib`** (root `LeanProjectMathlib.lean`) — the six
+  `Ch0*Mathlib.lean` files.
+
+They're kept apart on purpose: the from-scratch chapters define their own
+top-level `Group`, `CommGroup`, `Ring`, `Module`, `Submodule`, `LinearMap`,
+and `Quiver` — names Mathlib also uses at the top level — so one file
+cannot import both without a name clash. To build (or read the output of)
+just one side, run `lake build LeanProject` or `lake build
+LeanProjectMathlib`.

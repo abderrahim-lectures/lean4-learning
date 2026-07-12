@@ -16,10 +16,10 @@ $$
 \end{aligned}
 $$
 
-(Some textbooks don't require a multiplicative identity — that's called a
-*rng* (missing the "i"). We include it, matching the most common convention.)
+(Some textbooks don't require a multiplicative identity. That's called a
+*rng* (missing the "i"). We include it, since that's the most common convention.)
 
-Note (R1) requires **commutative** addition, unlike our general `Group` from
+Note that (R1) requires **commutative** addition, unlike our general `Group` from
 Chapter 6. So before defining `Ring`, we first define what "commutative"
 means as an extension of `Group`.
 

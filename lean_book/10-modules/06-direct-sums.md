@@ -85,21 +85,22 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
     · exact ModN.one_smul x.snd
 ```
 
-`congr 1` is a tactic worth calling out since this is its first appearance:
-given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`), `congr 1`
-reduces it to the componentwise goals `a1 = b1` and `a2 = b2` — the
-categorical fact that a product's equality is checked pairwise, made into a
-one-line tactic rather than a hand-unfolded `Prod.ext`-style lemma. Every
-proof obligation above genuinely *is* two independent facts, one from `M`
-and one from `N`, glued by the direct-sum's product structure — `congr 1`
-is the right tool exactly because it exposes that independence directly,
-rather than obscuring it inside a single opaque equality on pairs. Note
-the `show DirectSum.mk _ _ = DirectSum.mk _ _` line before each `congr 1`:
+`congr 1` is a tactic worth calling out, since this is its first
+appearance. Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
+`congr 1` reduces it to the componentwise goals `a1 = b1` and `a2 = b2`.
+This is the categorical fact that a product's equality is checked
+pairwise, turned into a one-line tactic instead of a hand-unfolded
+`Prod.ext`-style lemma. Every proof obligation above genuinely *is* two
+independent facts, one from `M` and one from `N`, glued together by the
+direct-sum's product structure. `congr 1` is the right tool exactly
+because it exposes that independence directly, instead of hiding it
+inside a single opaque equality on pairs. Note the
+`show DirectSum.mk _ _ = DirectSum.mk _ _` line before each `congr 1`:
 without it, the goal is stated in terms of the anonymous-constructor
 lambda (`op := fun x y => ⟨...⟩`) rather than the visible `DirectSum.mk`
-application, and `congr 1` cannot reliably split a goal it doesn't
-recognize as "one constructor applied to arguments on both sides" — a real
-gap the compiler catches immediately if the `show` line is omitted.
+application. `congr 1` cannot reliably split a goal it doesn't recognize
+as "one constructor applied to arguments on both sides" — a real gap that
+the compiler catches immediately if the `show` line is left out.
 
 **Mathematical reading.** This builds the **direct sum** $M \oplus N$: its
 carrier is the product $M \times N$, with all structure defined
@@ -107,16 +108,16 @@ componentwise — $(m,n) + (m',n') = (m+m',\, n+n')$, $0 = (0,0)$, $-(m,n) =
 (-m,-n)$, and $r\cdot(m,n) = (r\cdot m,\, r\cdot n)$. Every axiom holds
 because it holds in each coordinate independently, which is exactly what
 `congr 1` exposes: an equation of pairs splits into one equation in $M$ and
-one in $N$. For finitely many summands the direct sum $M \oplus N$ is both a product and
-a coproduct at once in $R\text{-}\mathbf{Mod}$: the projections $\pi_M,
-\pi_N$ and inclusions $\iota_M, \iota_N$ satisfy $\pi_M\iota_M =
-\mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N = 0$, and
-$\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$.
+one in $N$. For finitely many summands the direct sum $M \oplus N$ is both
+a product and a coproduct at once in $R\text{-}\mathbf{Mod}$: the
+projections $\pi_M, \pi_N$ and inclusions $\iota_M, \iota_N$ satisfy
+$\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N =
+0$, and $\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$.
 
 ### A concrete instance: $\mathbb{Z} \oplus \mathbb{Z}$
 
 Instantiating the generic construction costs nothing beyond supplying two
-modules — here, `intZModule` twice:
+modules — here, `intZModule` twice.
 
 ```lean
 def zSquaredModule := directSumModule intRing intZModule intZModule
@@ -131,10 +132,10 @@ def zSquaredModule := directSumModule intRing intZModule intZModule
 Both outputs are exactly the componentwise formulas from the mathematical
 reading above, computed rather than merely asserted.
 
-**Mathlib equivalent.** Where the book builds `DirectSum`/`directSumModule`
+**Mathlib equivalent.** The book builds `DirectSum`/`directSumModule`
 field by field (five group axioms, four module axioms, each split
-componentwise via `congr 1`), Mathlib already gives the ordinary product
-type `M × N` a `Module R` instance directly — there is no `DirectSum`
+componentwise via `congr 1`). Mathlib already gives the ordinary product
+type `M × N` a `Module R` instance directly. There is no `DirectSum`
 wrapper to define at all:
 
 ```lean
@@ -145,15 +146,16 @@ example {M N : Type*} [AddCommGroup M] [AddCommGroup N]
 #eval ((5 : Int) • ((2, 3) : Int × Int))   -- (10, 15)
 ```
 
-Same componentwise formulas as `zSquaredModule`'s `#eval`s above, but
-`Prod`'s `AddCommGroup`/`Module` instances (and the componentwise `+`/`•`
-they provide) are already in the library, built once for *any* two
-additive groups or modules rather than assembled here for `Int` and `Int`
-specifically.
+These are the same componentwise formulas as `zSquaredModule`'s `#eval`s
+above. But `Prod`'s `AddCommGroup`/`Module` instances (and the
+componentwise `+`/`•` they provide) are already in the library, built once
+for *any* two additive groups or modules, instead of assembled here for
+`Int` and `Int` specifically.
 
-The first projection $\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}$, one of the defining maps
-from the product/coproduct structure above, is itself a `LinearMap`
-(previous section) built directly from `DirectSum`'s own field accessor:
+The first projection $\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}$,
+one of the defining maps from the product/coproduct structure above, is
+itself a `LinearMap` (previous section), built directly from
+`DirectSum`'s own field accessor:
 
 ```lean
 def proj1 : LinearMap intRing zSquaredModule intZModule where
@@ -167,11 +169,11 @@ def proj1 : LinearMap intRing zSquaredModule intZModule where
 Both proof obligations are `rfl` directly: `zSquaredModule.addGrp.op`
 unfolds to componentwise addition (by the construction two sections
 back), so taking `.fst` of a sum is definitionally the same as summing the
-`.fst`s — no arithmetic argument needed, only unfolding.
+`.fst`s. No arithmetic argument is needed, only unfolding.
 
 **Mathlib equivalent, continued.** The projection `proj1` is, again, not
-something to build — Mathlib's `LinearMap.fst` already is $\pi_1$, generic
-over any two modules over any ring:
+something you need to build. Mathlib's `LinearMap.fst` already is $\pi_1$,
+generic over any two modules over any ring:
 
 ```lean
 def proj1' : (Int × Int) →ₗ[Int] Int := LinearMap.fst Int Int Int

@@ -6,10 +6,10 @@
 
 1. Prove
    `theorem neg_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)`.
-   Strategy: this is "show $x = -(ab)$," so reduce via `left_inverse_unique`
+   Strategy: this is "show $x = -(ab)$," so reduce through `left_inverse_unique`
    to "show $x + ab = 0$," then look for a `right_distrib`-shaped
-   simplification of $(-a)\cdot b + a \cdot b$, exactly as in Theorem 2 —
-   you'll need `mul_zero_left` (proved in Theorem 2's section) at the end,
+   simplification of $(-a)\cdot b + a \cdot b$, exactly as in Theorem 2.
+   You'll need `mul_zero_left` (proved in Theorem 2's section) at the end,
    the same way Theorem 2 itself did.
 2. Instantiate `left_inverse_unique` (Chapter 7) directly on `intRing`'s
    additive group to compute a concrete additive inverse — e.g. prove

@@ -2,3 +2,8 @@
 *.pdf
 *.html
 _site/
+_book_combined.md
+*.aux
+*.log
+*.out
+*.toc

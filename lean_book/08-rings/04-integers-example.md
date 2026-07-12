@@ -15,7 +15,7 @@ def intCommGroup : CommGroup Int where
 ```
 
 `toGroup := intGroup` fills the field inherited from `Group Int` inside
-`CommGroup Int`'s definition — this is how `extends` works mechanically:
+`CommGroup Int`'s definition. This is how `extends` works mechanically:
 under the hood, `CommGroup G` really has fields `toGroup : Group G` and
 `comm : ...`, and Lean's dot-notation makes `cg.op` mean `cg.toGroup.op`
 automatically.
@@ -44,11 +44,11 @@ def intRing : Ring Int where
 
 Every proof obligation is again a one-line `exact` naming a specific
 core-library fact about `Int` (`Int.mul_assoc`, `Int.one_mul`, ...), exactly
-as in Chapter 6 — we are not proving integer arithmetic from nothing, only
-assembling already-known facts into the `Ring` bundle.
+as in Chapter 6. We are not proving integer arithmetic from nothing, only
+putting already-known facts together into the `Ring` bundle.
 
-**Mathematical reading.** This exhibits $(\mathbb{Z}, +, \times, 0, 1)$ as
-an object of $\mathbf{Ring}$ — indeed the
+**Mathematical reading.** This shows $(\mathbb{Z}, +, \times, 0, 1)$ as
+an object of $\mathbf{Ring}$ — in fact the
 [*initial* object](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline),
 since there is a
 unique ring homomorphism $\mathbb{Z} \to R$ into any ring. First
@@ -59,7 +59,7 @@ laws $a(b+c) = ab + ac$ and $(a+b)c = ac + bc$. Each obligation is the named
 $\mathbb{Z}$-arithmetic fact, so the term is the formal counterpart of
 "$\mathbb{Z}$ is a commutative ring."
 
-**Mathlib equivalent.** `Int` is already a `CommRing` instance — no
+**Mathlib equivalent.** `Int` is already a `CommRing` instance, so there is no
 `intRing`-style bundle to build. The obligations `intRing` checks by hand
 are, again, generic lemmas that hold for every commutative ring:
 
@@ -73,9 +73,9 @@ example (a b c : Int) : a * (b + c) = a * b + a * c := mul_add a b c
 example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
 ```
 
-`mul_add`/`add_mul` are Mathlib's names for `left_distrib`/`right_distrib` —
-same laws, generic over `[Ring R]` (or the weaker `[Distrib R]`) rather than
-cited per-type as `Int.mul_add`/`Int.add_mul`.
+`mul_add`/`add_mul` are Mathlib's names for `left_distrib`/`right_distrib`.
+They are the same laws, but stated generically over `[Ring R]` (or the weaker
+`[Distrib R]`) instead of being cited per-type as `Int.mul_add`/`Int.add_mul`.
 
 ---
 

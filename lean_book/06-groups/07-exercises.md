@@ -11,9 +11,9 @@
    for the fields that need a case split, to see exactly which case does
    what.
 2. Convince yourself on paper that `inv_left` and `inv_right` are genuinely
-   different obligations (they coincide automatically only once you've
+   different obligations. They coincide automatically only once you've
    *proved* the group is commutative — this is exactly the content of
-   Chapter 7's first theorem).
+   Chapter 7's first theorem.
 
 Solutions: [Appendix, Chapter 6](../14-appendix-solutions/04-chapter-6.md).
 

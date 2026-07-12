@@ -6,12 +6,12 @@
 
 Before committing to `Group`'s definition in the next chapter, this short
 chapter answers three questions a careful mathematician should already be
-asking: why does this book use plain `structure` instead of Lean's `class`
-mechanism (which is what Mathlib actually uses)? What exactly is `Type`,
+asking. Why does this book use plain `structure` instead of Lean's `class`
+mechanism, which is what Mathlib actually uses? What exactly is `Type`,
 and does `Group (α : Type)` really quantify over *all* types, including
 `Group` itself? And when two proofs both establish `a = b`, in what sense
 are they "the same"? Skipping these would leave exactly the kind of
-unstated assumption a demanding reader is trained to notice and distrust.
+unstated assumption a demanding reader is trained to notice and question.
 
 ## Sections
 

@@ -4,7 +4,7 @@
 
 ---
 
-The untyped calculus has no built-in booleans or numbers — Chapter 1's
+The untyped calculus has no built-in booleans or numbers. Chapter 1's
 promise that `Nat` is "not a primitive but a defined inductive family" has
 an even more extreme ancestor here: in the raw λ-calculus, *everything*,
 including the natural numbers, is a function.
@@ -32,7 +32,7 @@ Check: $\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e
 \longrightarrow_\beta t$ (discarding $e$), and symmetrically
 $\mathrm{false}\, t\, e \longrightarrow_\beta e$. "If-then-else" isn't a
 primitive at all — it's just *application*, once booleans are represented
-this way. This is the sense in which Lean's actual `Bool` (an `inductive`
+this way. This is why Lean's actual `Bool` (an `inductive`
 with two constructors, per Chapter 1) is a *convenience*, not a
 necessity — the calculus itself never needed a booleans primitive to
 express conditional behavior.
@@ -53,9 +53,9 @@ $$
 
 Compare directly to Chapter 1's Peano definition
 $\mathtt{Nat} ::= \mathtt{zero} \mid \mathtt{succ}(n)$: a Church numeral
-$\underline{n}$ *is* "apply $\mathtt{succ}$, $n$ times, to $\mathtt{zero}$"
-— the same inductive shape, represented not as data but as a higher-order
-function that knows how to iterate.
+$\underline{n}$ *is* "apply $\mathtt{succ}$, $n$ times, to $\mathtt{zero}$."
+It's the same inductive shape, represented not as data but as a
+higher-order function that knows how to iterate.
 
 **Successor.** $\mathrm{succ} := \lambda n.\, \lambda f.\, \lambda x.\,
 f\,(n\, f\, x)$ — "apply $f$ one more time than $n$ does":
@@ -68,7 +68,7 @@ $$
 **Addition.** $\mathrm{plus} := \lambda m.\lambda n.\lambda f.\lambda x.\,
 m\, f\,(n\, f\, x)$ — "apply $f$, $m$ times, starting from where $n$
 already applied it $n$ times." This is a direct computational reading of
-$m + n$ = "count up from $n$, $m$ more times," the same recursive
+$m + n$ = "count up from $n$, $m$ more times." It's the same recursive
 definition of `Nat.add` that made `0 + n` and `n + 0` behave asymmetrically
 throughout Chapter 4.
 
@@ -78,15 +78,15 @@ times." Multiplication is literally function composition, iterated.
 
 ### The point of this section
 
-None of this is meant to suggest you should ever program this way — it is
-meant to demonstrate, concretely, that a system with only variables,
+None of this is meant to suggest you should ever program this way. It is
+meant to show, concretely, that a system with only variables,
 abstraction, and application already has the expressive power to build
 booleans, naturals, and (by pairing constructions along the same lines)
 arbitrary tree-shaped data — *before* any type system or `inductive`
 keyword enters the picture. Lean's actual `Bool` and `Nat` (Chapter 1) are
-built with the `inductive` mechanism instead of Church encodings for
-efficiency and because pattern-matching (`match`, `cases`) is vastly more
-convenient to write and to reason about than repeated application — but
+built with the `inductive` mechanism instead of Church encodings, for
+efficiency and because pattern-matching (`match`, `cases`) is far more
+convenient to write and to reason about than repeated application. But
 the *expressiveness* was never in question; the untyped calculus already
 had it. What Lean's type system adds, starting in the next section, is not
 more computational power but *guarantees* — ruling out terms that would
