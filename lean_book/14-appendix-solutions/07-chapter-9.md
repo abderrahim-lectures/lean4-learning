@@ -36,7 +36,7 @@ the proof.
 theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl
 ```
 
-`rfl` suffices here, but it would *not* have sufficed for Theorem 2's
+[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) suffices here, but it would *not* have sufficed for Theorem 2's
 `neg_one_mul (a : R)`, which took real work. The difference is that `7` is
 a concrete numeral, not an unknown variable `a`.
 `intRing.addGrp.toGroup.inv` unfolds (by the `def intGroup` from Chapter 6)

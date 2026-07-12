@@ -8,14 +8,14 @@ Throughout this book, you have imagined hunting for a lemma name by hand.
 In practice, you rarely need to search by memory or by grep. Two tactics
 do this search for you:
 
-- **`exact?`** — searches the whole environment (core Lean, plus anything
+- **[`exact?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)** — searches the whole environment (core Lean, plus anything
   else you have imported) for a term that closes the *current goal
   exactly*. Run it, and it either fails, or suggests a working
   `exact ...` line you can paste in. Use it as soon as you suspect "this
   exact fact must already exist somewhere." For example, this happens
   after you simplify a ring goal down to something that *looks* like a
   named lemma, but you can't recall the name.
-- **`apply?`** — like `exact?`, but for cases where the goal would be
+- **[`apply?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)** — like `exact?`, but for cases where the goal would be
   closed by `apply`ing something that leaves further subgoals, not a
   single exact match.
 

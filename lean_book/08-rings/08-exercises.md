@@ -14,7 +14,7 @@
    not assuming `mul` is commutative.
 3. Using the witness pair `(X, Y)` computed above, state and prove
    `theorem mat2_not_comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X`.
-   Note that `by decide` does *not* work directly here — `Mat2` has no
+   Note that [`by decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) does *not* work directly here — `Mat2` has no
    `DecidableEq` instance, so equality of two `Mat2` terms isn't something
    `decide` can evaluate out of the box (check the error message it gives;
    this is exactly the "read the failure" habit from Chapter 4). Instead,

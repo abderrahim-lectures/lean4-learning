@@ -147,7 +147,7 @@ example {M N : Type*} [AddCommGroup M] [AddCommGroup N]
 ```
 
 These are the same componentwise formulas as `zSquaredModule`'s `#eval`s
-above. But `Prod`'s `AddCommGroup`/`Module` instances (and the
+above. But `Prod`'s `AddCommGroup`/[`Module`](https://loogle.lean-lang.org/?q=Module) instances (and the
 componentwise `+`/`•` they provide) are already in the library, built once
 for *any* two additive groups or modules, instead of assembled here for
 `Int` and `Int` specifically.
@@ -172,7 +172,7 @@ back), so taking `.fst` of a sum is definitionally the same as summing the
 `.fst`s. No arithmetic argument is needed, only unfolding.
 
 **Mathlib equivalent, continued.** The projection `proj1` is, again, not
-something you need to build. Mathlib's `LinearMap.fst` already is $\pi_1$,
+something you need to build. Mathlib's [`LinearMap.fst`](https://loogle.lean-lang.org/?q=LinearMap.fst) already is $\pi_1$,
 generic over any two modules over any ring:
 
 ```lean

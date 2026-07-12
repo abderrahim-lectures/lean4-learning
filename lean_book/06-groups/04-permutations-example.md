@@ -190,8 +190,8 @@ as in the usual presentation $S_3 = \langle r, s \mid r^3 = s^2 = e,\ srs
 
 **Mathlib equivalent.** All of `Perm3`/`Perm3.comp`/`Perm3.ext`/
 `perm3Group` above exists to build one thing: "the group of bijections of a
-3-element set." Mathlib's ready-made model of exactly that is `Equiv.Perm`,
-already a `Group` instance for *any* type:
+3-element set." Mathlib's ready-made model of exactly that is [`Equiv.Perm`](https://loogle.lean-lang.org/?q=Equiv.Perm),
+already a [`Group`](https://loogle.lean-lang.org/?q=Group) instance for *any* type:
 
 ```lean
 example : Group (Equiv.Perm (Fin 3)) := inferInstance
@@ -208,8 +208,8 @@ def cycle012' : Equiv.Perm (Fin 3) := finRotate 3
 
 No `Perm3` bundle, no hand-written extensionality lemma, no field-by-field
 `Group` construction is needed: `Equiv.Perm (Fin 3)` (the type of bijections
-`Fin 3 ≃ Fin 3`) is already known to be a group, `Equiv.swap` and
-`finRotate` are Mathlib's own constructors for a transposition and a
+`Fin 3 ≃ Fin 3`) is already known to be a group, [`Equiv.swap`](https://loogle.lean-lang.org/?q=Equiv.swap) and
+[`finRotate`](https://loogle.lean-lang.org/?q=finRotate) are Mathlib's own constructors for a transposition and a
 rotation, and `*` is the already-registered group operation (composition,
 matching `Perm3.comp`'s convention). The two `#eval`s are the same
 "compute a witness of non-commutativity" move as `swap01`/`cycle012`

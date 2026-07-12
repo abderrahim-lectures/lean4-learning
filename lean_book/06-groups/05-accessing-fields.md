@@ -26,7 +26,7 @@ in the dependent-pair view (a `structure` is, underneath, exactly this kind
 of dependent pair), both are just coordinates of the same tuple.
 
 **Mathlib equivalent.** There is no `intGroup.op 3 4`-style field access to
-write at all. Once `Int` is known to be an `AddCommGroup`, the ordinary
+write at all. Once `Int` is known to be an [`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup), the ordinary
 `+`/`0`/`-` notations already resolve to that instance's operations
 directly:
 

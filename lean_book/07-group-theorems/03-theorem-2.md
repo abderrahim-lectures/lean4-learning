@@ -73,9 +73,9 @@ example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
 ```
 
 Read right to left through the `rw` list, and this is line-for-line the
-displayed chain above: `← mul_one b` turns `b` into `b * 1`; `← mul_inv_cancel a`
-turns that `1` into `a * a⁻¹`; `← mul_assoc` reassociates; `h` substitutes
-`b * a` for `1`; `one_mul` clears the resulting `1 * a⁻¹`. It is the same
+displayed chain above: `←` [`mul_one`](https://loogle.lean-lang.org/?q=mul_one) `b` turns `b` into `b * 1`; `←` [`mul_inv_cancel`](https://loogle.lean-lang.org/?q=mul_inv_cancel) `a`
+turns that `1` into `a * a⁻¹`; `←` [`mul_assoc`](https://loogle.lean-lang.org/?q=mul_assoc) reassociates; `h` substitutes
+`b * a` for `1`; [`one_mul`](https://loogle.lean-lang.org/?q=one_mul) clears the resulting `1 * a⁻¹`. It is the same
 five steps, in the same order — only the names `Grp.assoc`/`Grp.inv_right`
 and so on are replaced by Mathlib's generic `mul_assoc`/`mul_inv_cancel`
 and so on.

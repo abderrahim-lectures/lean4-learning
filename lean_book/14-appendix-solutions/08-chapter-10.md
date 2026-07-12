@@ -18,7 +18,7 @@ def idLinearMap {R : Type} (Rg : Ring R) {M : Type} (Mod : Module R Rg M) :
     rfl
 ```
 
-`id : M → M` is `fun x => x`. Both fields reduce to `rfl` because
+`id : M → M` is `fun x => x`. Both fields reduce to [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) because
 `id (Mod.addGrp.op m n)` and `Mod.addGrp.op (id m) (id n)` unfold to the
 exact same term (`id` doesn't change anything). The same holds for
 `map_smul`. The only content in `LinearMap`'s two fields is the
@@ -131,8 +131,8 @@ def multiplesSubmodule (d : Int) : Submodule intRing intZModule where
 
 This has the same shape as `evenSubmodule` (the case `d = 2`). Every `2` in
 that proof is simply replaced by the parameter `d`, and each closure proof
-still reduces to an `Int` equation, handled the same way (`show` to
-reveal the goal's `+`/`*`-form, then `rw`), rather than with `ring` (which
+still reduces to an `Int` equation, handled the same way ([`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) to
+reveal the goal's `+`/`*`-form, then [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)), rather than with `ring` (which
 this book doesn't import from Mathlib).
 
 ---

@@ -70,7 +70,7 @@ V$ given by their value tables: `source alpha = 0`, `target alpha = 1`,
 `source beta = 1`, `target beta = 2`. This is exactly the arrowheads and
 tails drawn above.
 
-**Mathlib equivalent.** Mathlib's own `Quiver` class (the one this
+**Mathlib equivalent.** Mathlib's own [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) class (the one this
 chapter's opening section mentioned building from scratch instead of
 reusing) encodes arrows differently. Instead of one flat arrow type `A`
 plus separate `source`/`target : A → V` functions, it bakes the endpoints

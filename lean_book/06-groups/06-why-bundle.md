@@ -23,7 +23,7 @@ example (a b c : Int) : (a + b) + c = a + (b + c) := add_assoc a b c
 example (f g h : Equiv.Perm (Fin 3)) : (f * g) * h = f * (g * h) := mul_assoc f g h
 ```
 
-`add_assoc`/`mul_assoc` were proved exactly once, generically over
+[`add_assoc`](https://loogle.lean-lang.org/?q=add_assoc)/[`mul_assoc`](https://loogle.lean-lang.org/?q=mul_assoc) were proved exactly once, generically over
 `[AddCommGroup G]`/`[Group G]`, and both `Int` and `Equiv.Perm (Fin 3)`
 get the fact automatically just by having a `Group`/`AddCommGroup`
 instance. Nothing about `Int` or permutations is re-proved at either call

@@ -29,7 +29,7 @@ previous four sections into one table.
 ### Two points worth dwelling on
 
 **Tactics don't add anything to the calculus.** Chapter 4's entire tactic
-vocabulary (`intro`, `exact`, `rw`, `induction`, ...) is a *user interface*
+vocabulary ([`intro`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`exact`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`induction`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), ...) is a *user interface*
 for building CIC terms step by step, with the current goal state
 showing you the type of the "hole" still to be filled. Every finished
 tactic proof elaborates to an ordinary term you *could* have written by

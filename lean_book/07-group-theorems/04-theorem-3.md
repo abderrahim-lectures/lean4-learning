@@ -98,7 +98,7 @@ everywhere": nothing about `swap01`, `cycle012`, or the fact that
 `perm3Group` is non-abelian required revisiting `inv_op`'s proof at all.
 
 **Mathlib equivalent.** The "shoes-and-socks" law is not a theorem left to
-(re)prove here — Mathlib already has it, under its own name, `mul_inv_rev`:
+(re)prove here — Mathlib already has it, under its own name, [`mul_inv_rev`](https://loogle.lean-lang.org/?q=mul_inv_rev):
 
 ```lean
 example {G : Type*} [Group G] (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := mul_inv_rev a b

@@ -13,7 +13,7 @@ theorem and_comm_tac {P Q : Prop} (h : P ∧ Q) : Q ∧ P := by
   · exact h.left
 ```
 
-`constructor` splits the goal `Q ∧ P` into two subgoals, `Q` and `P`, one for
+[`constructor`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) splits the goal `Q ∧ P` into two subgoals, `Q` and `P`, one for
 each field of `And`. `h.right : Q` closes the first, and `h.left : P`
 closes the second.
 
@@ -24,7 +24,7 @@ theorem nat_mul_zero (n : Nat) : n * 0 = 0 := by
   rfl
 ```
 
-`rfl` *does* work here. `Nat.mul` is defined by recursion on its second
+[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) *does* work here. `Nat.mul` is defined by recursion on its second
 argument, and `n * 0 = 0` is the base clause. So this holds by definition,
 with no induction needed. Compare this with `0 * n = 0`, which is not a
 base clause and does need induction on `n`.

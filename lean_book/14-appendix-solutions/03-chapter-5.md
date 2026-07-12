@@ -27,7 +27,7 @@ definition (this is the same asymmetry Chapter 4 relied on for
 `my_add_comm`). So this reduces to `(0 + n) + n`, which is *not*
 syntactically `n + n` unless `0 + n` also reduces to `n`. It doesn't,
 by definition. So, contrary to a first guess, **this does *not* type-check
-as `rfl`** in general. Try it and confirm `rfl` fails, then confirm that
+as `rfl`** in general. Try it and confirm [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) fails, then confirm that
 `by rw [Nat.two_mul]` (or an explicit induction) succeeds instead. The
 lesson: multiplying by a literal doesn't collapse to `rfl` for free once a
 general variable `n` sits on the "wrong" side of an asymmetric recursion.

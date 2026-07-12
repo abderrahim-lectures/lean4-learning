@@ -90,7 +90,7 @@ type system refusing to compose non-composable arrows, which in a category
 is the statement that $\circ$ is a *partial* operation, defined only when
 endpoints agree.
 
-**Mathlib equivalent.** Mathlib's `Quiver.Path` (building on the
+**Mathlib equivalent.** Mathlib's [`Quiver.Path`](https://loogle.lean-lang.org/?q=Quiver.Path) (building on the
 `MyArrow`/`Quiver (Fin 3)` instance from the previous section) is the same
 inductive family, `nil`/`cons`, just with `cons` taking the shorter path
 *first* and the new arrow second. This is the mirror image of the book's

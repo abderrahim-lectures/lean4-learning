@@ -1,4 +1,4 @@
-## `simp`, now that you understand what it replaces
+## [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), now that you understand what it replaces
 
 [← Decision procedures](02-decision-procedures.md) | [Index](00-index.md) | [Next: Term mode vs tactic mode →](04-term-vs-tactic-mode.md)
 

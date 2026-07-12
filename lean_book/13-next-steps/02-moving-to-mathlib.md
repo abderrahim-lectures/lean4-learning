@@ -9,15 +9,15 @@ could see every moving part. Mathlib, Lean's community mathematics
 library, already has much more general and well-tested versions of all of
 this:
 
-- `Mathlib.Algebra.Group.Defs` — `Group`, `CommGroup`, built with Lean's
+- `Mathlib.Algebra.Group.Defs` — [`Group`](https://loogle.lean-lang.org/?q=Group), `CommGroup`, built with Lean's
   **type class** mechanism (`class ... extends ...`) instead of a plain
   `structure`. This lets notation like `a * b`, `a⁻¹`, `1` work the same
   way across every group, without threading a `Grp :` argument through
   every definition by hand, and lets Lean find instances automatically
   through typeclass search.
-- `Mathlib.Algebra.Ring.Defs` — `Ring`, `CommRing`, `Field`, and the whole
+- `Mathlib.Algebra.Ring.Defs` — [`Ring`](https://loogle.lean-lang.org/?q=Ring), `CommRing`, `Field`, and the whole
   hierarchy in between (`Semiring`, `NonUnitalRing`, ...).
-- `Mathlib.Algebra.Module.Defs` — `Module`, much more general than
+- `Mathlib.Algebra.Module.Defs` — [`Module`](https://loogle.lean-lang.org/?q=Module), much more general than
   Chapter 10's hand-built version, with the entire linear-algebra library
   (`Mathlib.LinearAlgebra.*`: bases, dimension, tensor products, exact
   sequences) built on top.

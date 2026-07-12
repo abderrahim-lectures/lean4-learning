@@ -42,7 +42,7 @@ theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
   the *eliminator* for `Or`. Given a proof of `P ∨ Q`, and a way to reach
   the same conclusion `R` from either disjunct separately, you get a proof
   of `R`. `or_comm_term` above uses it directly in term mode, with no
-  `cases` and no tactic block. It supplies `fun hp => Or.inr hp` for the
+  [`cases`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) and no tactic block. It supplies `fun hp => Or.inr hp` for the
   "if it was `P`" branch and `fun hq => Or.inl hq` for the "if it was `Q`"
   branch.
 
@@ -113,7 +113,7 @@ exactly one map `P∨Q → R` agreeing with both. This is precisely what
 `or_comm_term` above builds via `Or.elim`. Negation is $\neg P := (P \to
 \bot)$, a map into the initial object $\bot = \varnothing$. A proof of
 $\neg(1=2)$ is a function turning the (impossible) hypothesis $1 = 2$ into
-an element of $\varnothing$, vacuously. Here it is discharged by `decide`,
+an element of $\varnothing$, vacuously. Here it is discharged by [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/),
 which mechanically confirms $1 \neq 2$ since equality of `Nat` literals is
 decidable. But underneath is exactly the same fact used throughout this
 book: distinct constructors of an inductive type (`Nat.succ`, applied a

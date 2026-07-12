@@ -1,4 +1,4 @@
-## Decision procedures: `decide`, `omega`, `norm_num`
+## Decision procedures: [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`omega`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`norm_num`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)
 
 [← Search tactics](01-search-tactics.md) | [Index](00-index.md) | [Next: simp →](03-simp.md)
 
@@ -21,7 +21,7 @@ that just run that algorithm:
   together falls outside what it can decide). If your goal is "some
   linear inequality or equality about integers," reach for `omega` before
   deriving it by hand. This is exactly the kind of fact a decision
-  procedure handles better than a custom `rw` chain, and deriving it by
+  procedure handles better than a custom [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain, and deriving it by
   hand teaches you nothing that `omega`'s existence doesn't already tell
   you.
 - **`norm_num`** — normalizes and evaluates numerical expressions

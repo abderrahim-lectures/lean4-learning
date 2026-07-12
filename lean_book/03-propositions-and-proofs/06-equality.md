@@ -28,7 +28,7 @@ theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
   rw [h]
 ```
 
-`rw` ("rewrite") rewrites the goal using an equality proof. `rw [h]` with
+[`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) ("rewrite") rewrites the goal using an equality proof. `rw [h]` with
 `h : a = b` finds every occurrence of `a` in the goal and replaces it with
 `b`. Here the goal starts as `a + 1 = b + 1`. After rewriting `a` to `b`, it
 becomes `b + 1 = b + 1`, which `rw` then closes automatically by trying
