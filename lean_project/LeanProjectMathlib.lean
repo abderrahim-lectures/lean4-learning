@@ -10,3 +10,4 @@ import LeanProject.Ch08RingsMathlib
 import LeanProject.Ch09RingTheoremsMathlib
 import LeanProject.Ch10ModulesMathlib
 import LeanProject.Ch11PathAlgebrasMathlib
+import LeanProject.Ch13CapstoneMathlib

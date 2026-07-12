@@ -3,6 +3,21 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Capstone: two theorems for free
+
+- Added "Two theorems for free" to [Chapter 13 §2](13-next-steps/02-moving-to-mathlib.md):
+  a short capstone proving, for real via Mathlib, two facts this book's
+  own from-scratch definitions explicitly could not state — that
+  `ZMod 3` is a `Field` (Chapter 8 §5 built only a `Ring` and said so
+  outright), and Lagrange's theorem applied to a genuine subgroup of
+  `Equiv.Perm (Fin 3)` (Chapters 6-7's non-abelian example, which never
+  had subgroups defined for it). Ported into `lean_project` as
+  `Ch13CapstoneMathlib.lean` and compiled against real Mathlib — the
+  first attempt's `decide` calls on `Nat.card`/`orderOf` failed to
+  reduce (both are defined via classical choice), fixed by routing
+  through `Nat.card_eq_fintype_card`/`Fintype.card_perm` and
+  `orderOf_eq_prime` instead.
+
 ## Unreleased — Inline reference links, and a second screenshot
 
 - Every tactic and Mathlib name across the whole book now gets a reference
