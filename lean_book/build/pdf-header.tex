@@ -1,5 +1,9 @@
 \usepackage{mathtools}
 \setmonofont{Consolas}
+% Wrap long code lines instead of letting them run off the page edge.
+\usepackage{fvextra}
+\fvset{breaklines=true, breakanywhere=true}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
 \usepackage{newunicodechar}
 \newunicodechar{§}{\S}
 \newunicodechar{¬}{\ensuremath{\neg}}
