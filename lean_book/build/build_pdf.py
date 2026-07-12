@@ -98,8 +98,13 @@ def replace_mermaid(text):
         # mermaid-cli renders at -s 3 (3x scale, for crispness) with no
         # fixed physical size, so left unconstrained the image inserts at
         # its raw, huge pixel size. Cap the display width so it sits
-        # comfortably on a book page.
-        return f"![]({png_path}){{width=50%}}"
+        # comfortably on a book page. A bare image-only paragraph isn't
+        # centered by LaTeX by default (it's inline, so it just sits at
+        # the paragraph's start), so wrap it in a `center`-class Div —
+        # pandoc's LaTeX writer maps that natively to a `center`
+        # environment (a raw `\begin{center}` block doesn't survive
+        # round-tripping through the markdown reader reliably).
+        return f"\n::: center\n![]({png_path}){{width=50%}}\n:::\n"
     return MERMAID_RE.sub(_sub, text)
 
 
