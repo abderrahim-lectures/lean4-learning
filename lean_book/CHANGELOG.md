@@ -3,6 +3,18 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Screenshot and reference links
+
+- Added a real VS Code screenshot of the **Lean Infoview** to
+  [Chapter 4 §1](04-tactics/01-goal-state.md), captured live against
+  `my_add_comm`'s `succ` case, showing the hypotheses/goal split described
+  in the surrounding text rather than only a text mock-up of it.
+- Added [`tactic-and-library-reference.md`](tactic-and-library-reference.md),
+  a lookup table linking every tactic used in the book to the official
+  Lean 4 Tactic Reference, and every Mathlib name used in Chapters 6-11's
+  "Mathlib equivalent" boxes to Loogle/Mathlib4 docs. Linked from the
+  README, Chapter 4, Chapter 6, and Chapter 12.
+
 ## Unreleased — PDF build
 
 - Added `build_pdf.py`, a Pandoc + XeLaTeX pipeline producing a single

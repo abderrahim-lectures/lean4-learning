@@ -14,6 +14,11 @@
 6. [Why bundle proofs with data at all?](06-why-bundle.md)
 7. [Exercises](07-exercises.md)
 
+Starting with this chapter, most examples are followed by a "Mathlib
+equivalent" box (see [00-setup/04-mathlib-note.md](../00-setup/04-mathlib-note.md)).
+For links to the official docs for every Mathlib name used in those
+boxes, see the [tactic and library reference](../tactic-and-library-reference.md).
+
 ---
 
 [← Ch. 5: Rigor Check](../05-rigor-check/00-index.md) | [Table of contents](../README.md) | [Ch. 7: Group Theorems →](../07-group-theorems/00-index.md)

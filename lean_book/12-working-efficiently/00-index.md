@@ -10,7 +10,9 @@ half. Once you understand *why* a proof works, how do you write it (and
 find it) faster in day-to-day use? Efficient Lean does not mean "type
 less." It means knowing which automation to trust, knowing when it is
 still worth being explicit, and knowing how to structure lemmas so you
-don't derive the same fact twice.
+don't derive the same fact twice. (For links to the official docs for
+every tactic and Mathlib name in this book, see the
+[tactic and library reference](../tactic-and-library-reference.md).)
 
 ## Sections
 

@@ -72,6 +72,16 @@ result:
    Neither is `rfl` on the nose (again, check by trying it. If it fails,
    that tells you a helper fact is missing), so each needs its own
    small rewrite, using lemmas about how `+` unfolds on `zero`/`succ`.
+
+   This is exactly what the editor shows you, live, as you work: the
+   cursor sits right before `rw [Nat.add_succ]` in the `succ` case, and
+   the **Lean Infoview** panel on the right lists the hypotheses
+   (`a k : Nat`, `ih : a + k = k + a`) above the line and the current goal
+   (`a + (k + 1) = k + 1 + a`) below it — precisely the "hypotheses above
+   a horizontal line, goal below it" picture described above, not just a
+   text mock-up of it:
+
+   ![The Lean Infoview panel in VS Code, showing the tactic state (hypotheses `a k : Nat`, `ih : a + k = k + a`, goal `a + (k + 1) = k + 1 + a`) for the `succ` case of `my_add_comm`'s induction.](images/goal-state-infoview.png)
 4. **Find the missing lemmas.** You don't need to have `Nat.add_succ` and
    `Nat.zero_add` memorized. In an editor, typing `rw [Nat.add_` and
    using autocomplete lists everything starting that way. Or you can use
