@@ -110,6 +110,12 @@ See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
 14. [Appendix A: Solutions to exercises](14-appendix-solutions/00-index.md)
 15. [Appendix B: A logic recap, and the λ-calculus underneath Lean](15-lambda-calculus/00-index.md)
 
+**Reference**
+
+- [Tactic and library reference](tactic-and-library-reference.md) — every
+  tactic used in the book, and every Mathlib name from Chapters 6-11's
+  "Mathlib equivalent" boxes, each linked to its official documentation.
+
 ## Building a PDF
 
 `python build_pdf.py` concatenates every chapter in reading order and

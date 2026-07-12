@@ -10,7 +10,9 @@ step by step, much like how you'd write a proof on paper. This chapter's
 real subject is not the list of tactics below. It's **how to work a goal
 you don't already know the proof of**, because that is the skill the rest of
 the book practices. The tactic reference is secondary. Read it once, then
-come back to it when you need it.
+come back to it when you need it. (For links to the official docs for
+every tactic named in this chapter, see the
+[tactic and library reference](../tactic-and-library-reference.md).)
 
 ## Sections
 
