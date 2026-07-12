@@ -9,8 +9,8 @@
    (Theorem 2 again)? What single fact about `a` and `Grp.inv a` would let
    you invoke it directly?
 2. Prove `theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c`.
-   Strategy hint: you cannot directly rewrite `b` or `c` in isolation —
-   instead, apply `Grp.op (Grp.inv a)` to *both sides* of `h` first (as a
+   Strategy hint: you cannot directly rewrite `b` or `c` in isolation.
+   Instead, apply `Grp.op (Grp.inv a)` to *both sides* of `h` first (as a
    `have`), then simplify each side down using `assoc`/`inv_left`/`id_left`,
    the same "regroup, then cancel" pattern as Theorem 3.
 

@@ -4,9 +4,10 @@
 
 ---
 
-This chapter combines everything so far — inductive types (Chapter 1),
-structures (Chapter 2), and rings (Chapters 7–8) — to build a genuinely
-interesting example: the **path algebra** of a quiver.
+This chapter combines everything we've covered so far: inductive types
+(Chapter 1), structures (Chapter 2), and rings (Chapters 7–8). We use them
+to build a genuinely interesting example: the **path algebra** of a
+quiver.
 
 ## Sections
 

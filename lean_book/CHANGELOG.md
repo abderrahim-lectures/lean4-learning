@@ -3,6 +3,53 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — PDF build
+
+- Added `build_pdf.py`, a Pandoc + XeLaTeX pipeline producing a single
+  print-style PDF of the whole book (KOMA-Script `scrbook`, title page,
+  numbered chapters, table of contents, syntax-highlighted code blocks).
+  Per-file navigation strips are stripped and cross-file links flattened
+  to plain text, since neither makes sense inside one linear PDF.
+
+## Unreleased — Plain-English pass
+
+- **Rewrote the book's prose to roughly CEFR B2 English** (upper-intermediate)
+  across every chapter and the appendix: shorter sentences, plainer everyday
+  words, fewer stacked em-dash asides. The goal is that a non-native English
+  reader spends effort on Lean and math, not on decoding vocabulary. Code
+  blocks, LaTeX math, links, headers, and the recurring section labels
+  ("Mathematical reading.", "Programmer's corner (Python).", "Read more:",
+  "Mathlib equivalent.") were left untouched — only the surrounding English
+  glue changed, with no loss of technical content or nuance.
+- The shared glossary (Chapter 1 §4) was restructured so every term
+  (Elaborate/elaboration, Unify/unification, Reduce/reduction/normal form,
+  Motive, and the four category-theory terms) has its own heading and a
+  stable link anchor, ready for other chapters to link to on first use.
+- Fixed a real bug surfaced while touching Chapter 11's Mathlib-equivalent
+  boxes: an `open Quiver` in two code samples silently clashed with
+  Mathlib's own root-level `Path` (continuous paths,
+  `Mathlib.Topology.Path`), the same ambiguity already fixed in
+  `lean_project` but never carried back into the book text. Fixed by
+  spelling out `Quiver.Path` throughout instead.
+
+## Unreleased — Mathlib-equivalent boxes
+
+- **Every worked example in Chapters 6–11 (groups, group theorems, rings,
+  ring theorems, modules, path algebras) is now followed by a "Mathlib
+  equivalent" box**, showing the same statement or construction phrased
+  against Mathlib's real `Group`/`Ring`/`Module`/`Quiver` API. The
+  from-scratch construction stays the primary teaching path (see
+  [the Mathlib note](00-setup/04-mathlib-note.md), updated to explain the
+  framing); the Mathlib box is a deliberate peek ahead, so that Chapter
+  13's move to Mathlib in full isn't the reader's first sight of it.
+- Every added Mathlib snippet is ported into `lean_project/LeanProject/`
+  as a matching `Ch0*Mathlib.lean` module per chapter (kept separate from
+  the from-scratch modules so it's obvious which files pull in the
+  Mathlib dependency) and verified with `lake build` against real
+  Mathlib, not just read over.
+- `lean_project` now depends on Mathlib (pinned to the `v4.31.0` tag,
+  matching the toolchain).
+
 ## Unreleased — Mermaid diagrams
 
 - **Category-theory diagrams upgraded from plain ASCII art to

@@ -20,7 +20,7 @@ $$
 \end{aligned}
 $$
 
-That's it — no commutativity required in general (a group where
+That's all — there's no need for commutativity in general (a group where
 $a \cdot b = b \cdot a$ always holds is called **abelian** or
 **commutative**; we'll define that separately).
 

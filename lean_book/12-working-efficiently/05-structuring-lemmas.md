@@ -4,27 +4,28 @@
 
 ---
 
-The single biggest efficiency gain, larger than any tactic choice: **prove
-the general fact once, as its own named lemma, the moment you notice you'd
-otherwise repeat an argument.** Chapter 7's `left_inverse_unique` is the
-running example — Theorem 3 (`inv_op`) and this chapter's `neg_one_mul`,
-`neg_mul` all reduce to it rather than re-deriving "uniqueness of inverses"
-inline. Signs you should factor out a lemma:
+Here is the single biggest efficiency gain, bigger than any tactic choice:
+**prove the general fact once, as its own named lemma, as soon as you
+notice you would otherwise repeat an argument.** Chapter 7's
+`left_inverse_unique` is the running example. Theorem 3 (`inv_op`) and
+this chapter's `neg_one_mul` and `neg_mul` all reduce to it, instead of
+re-deriving "uniqueness of inverses" inline. Signs that you should factor
+out a lemma:
 
-- You find yourself about to repeat a `rw` chain you already wrote for a
-  different (but structurally identical) goal — stop, and instead state
-  the shared shape as its own `theorem`/`have`, then `apply`/`exact` it in
-  both places.
+- You are about to repeat a `rw` chain you already wrote for a different
+  but structurally identical goal. Stop, and instead state the shared
+  shape as its own `theorem`/`have`, then `apply`/`exact` it in both
+  places.
 - A sub-goal deep in a proof would itself be a reasonable, independently
-  statable mathematical fact (e.g. "an element that equals its own double
-  is zero," buried inside Chapter 9's `mul_zero`) — naming it is both more
-  efficient *and* more readable, since the outer proof then reads as a
-  short composition of named facts instead of one long undifferentiated
-  chain.
+  statable mathematical fact (for example, "an element that equals its
+  own double is zero," buried inside Chapter 9's `mul_zero`). Naming it
+  is both more efficient *and* more readable, since the outer proof then
+  reads as a short chain of named facts instead of one long
+  undifferentiated block.
 
-This is the same judgment call you'd make writing ordinary code: extract a
-helper when — and only when — you notice real duplication or a
-genuinely separable sub-claim, not preemptively.
+This is the same judgment call you would make writing ordinary code:
+extract a helper when — and only when — you notice real duplication or a
+genuinely separate sub-claim, not ahead of time "just in case."
 
 ## Next
 
