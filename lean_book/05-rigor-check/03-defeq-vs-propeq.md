@@ -112,7 +112,7 @@ This is a companion fact, relied on silently whenever this book (or you) writes
 into one goal per field. Lean's kernel treats a term `x : S` (for `S` a
 `structure`) as **definitionally equal** to
 `S.mk x.field1 x.field2 ...`. Rebuilding `x` field-by-field gives back
-*the same term*, by η (eta) for structures, not merely a term that is
+*the same term*, by η (eta) for structures, not just a term that is
 provably equal to it. This is exactly what makes Chapter 8's `Mat2.mk.injEq`-based
 extensionality reasoning work, and Chapter 10's [`congr 1`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), which splits a
 `DirectSum.mk _ _ = DirectSum.mk _ _` goal into two field-wise goals. Both

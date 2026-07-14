@@ -26,8 +26,8 @@ Solutions: [Appendix, Chapter 10](../14-appendix-solutions/08-chapter-10.md).
 
 Continue to [Chapter 11: Quivers and path algebras](../11-path-algebras/00-index.md), where
 we return to path algebras. Once you've seen $kQ$ constructed, notice that
-representations of $Q$ are exactly modules over $kQ$. This ties this
-chapter directly to the next.
+representations of $Q$ are exactly modules over $kQ$ — that's what ties
+this chapter directly to the next.
 
 ---
 

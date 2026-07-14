@@ -151,8 +151,7 @@ preserves truth); completeness is the harder theorem. Neither is used
 again in this book, but together they are the reason a working
 mathematician can trust that "prove it" and "it's necessarily true"
 describe the same territory for propositional (and first-order) logic.
-This guarantee stops holding once you move to sufficiently expressive
-systems. (Gödel's *incompleteness* theorems are a different and unrelated
+This guarantee stops holding once you move to expressive enough systems. (Gödel's *incompleteness* theorems are a different and unrelated
 pair of results, despite the similar name — they show arithmetic itself
 cannot be both complete and consistent.)
 
