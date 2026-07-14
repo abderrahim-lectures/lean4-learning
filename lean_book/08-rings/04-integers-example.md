@@ -44,8 +44,8 @@ def intRing : Ring Int where
 
 Every proof obligation is again a one-line `exact` naming a specific
 core-library fact about `Int` (`Int.mul_assoc`, `Int.one_mul`, ...), exactly
-as in Chapter 6. We are not proving integer arithmetic from nothing, only
-putting already-known facts together into the `Ring` bundle.
+as in Chapter 6. Integer arithmetic is not being proved from nothing; rather,
+already-known facts are assembled into the `Ring` bundle.
 
 **Mathematical reading.** This shows $(\mathbb{Z}, +, \times, 0, 1)$ as
 an object of $\mathbf{Ring}$ — in fact the

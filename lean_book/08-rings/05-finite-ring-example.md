@@ -28,7 +28,7 @@ built-in `+`/`*` already wrap around modulo 3, so `Fin 3`'s arithmetic
 Because `Fin 3` has only three elements, every one of `Group`/`Ring`'s
 axioms is a **finite, decidable** statement — literally "check this
 equation holds for all $3$ (or $3^2$, or $3^3$) choices of its variables."
-That's exactly the kind of goal Chapter 12 recommends handing to [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) rather
+This is exactly the kind of goal Chapter 12 recommends handing to [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) rather
 than proving by hand:
 
 ```lean
@@ -58,7 +58,7 @@ def fin3Ring : Ring (Fin 3) where
 ```
 
 **Programmer's corner (Python).** `by decide` on a goal like `assoc` for
-`Fin 3` is not magic. It's exactly what you'd get from
+`Fin 3` is not magic. It is exactly what one would get from
 
 ```python
 domain = range(3)
@@ -66,15 +66,15 @@ all((a + b) + c == a + (b + c) for a in domain for b in domain for c in domain)
 ```
 
 brute-force enumerate every combination of the (finitely many) variables
-and check the equation holds for each. The difference isn't the algorithm,
-it's *where* the check lives. `all(...)` is a runtime assertion: it only
-runs if some line of code calls it. If you forget to call it (or a
-later refactor deletes the call), Python will never notice the property
+and check the equation holds for each. The difference is not the algorithm,
+but *where* the check lives. `all(...)` is a runtime assertion: it only
+runs if some line of code calls it. If the call is omitted (or a
+later refactor deletes it), Python never notices that the property
 broke. `decide` instead runs as part of *type-checking* `fin3Group` itself.
-The definition doesn't elaborate at all unless the brute-force check
+The definition does not elaborate at all unless the brute-force check
 succeeds, so there is no such thing as a `fin3Group` value that quietly
-skipped its axiom checks. It's the same enumeration, but promoted from "a
-test you hope someone runs" to a condition the kernel enforces before the
+skipped its axiom checks. It is the same enumeration, but promoted from "a
+test one hopes someone runs" to a condition the kernel enforces before the
 value can even exist.
 
 ```lean
@@ -92,12 +92,12 @@ concretely enumerable) elements, so they can instead be handled by exhaustive
 case-checking, which is exactly what `decide` automates. Recognizing which
 regime a goal is in — infinite carrier needing a real argument, versus
 finite carrier where brute enumeration is enough — is itself a useful
-instinct to build. See Chapter 12 for more on when `decide` is (and isn't)
+instinct to build. See Chapter 12 for more on when `decide` is (and is not)
 the right tool.
 
 **Mathematical reading.** `fin3Ring` is $\mathbb{Z}/3\mathbb{Z}$, the
-finite field with three elements (though we've only built the `Ring`
-structure here — a `Field` would additionally require every nonzero
+finite field with three elements (though only the `Ring`
+structure has been built here — a `Field` would additionally require every nonzero
 element to be invertible under multiplication, true for $\mathbb{Z}/3$
 precisely because $3$ is prime, but this is not part of `Ring`'s axioms and not
 checked here). It is the quotient $\mathbb{Z}/(3)$ by the ideal generated

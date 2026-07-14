@@ -10,10 +10,10 @@ correspondence**: propositions are types, and proofs are programs.
 
 ### The Curry–Howard correspondence, in full
 
-That one-line slogan is easy to state, but easy to miss the importance of
-on first read. So here is the full dictionary it stands for: a
+That one-line slogan is easy to state, but its importance is easy to miss
+on first read. What follows is the full dictionary it stands for: a
 two-way correspondence between logical connectives and type formers. This
-book will use each row repeatedly, starting in the next few
+book uses each row repeatedly, starting in the next few
 sections.
 
 | Logic | Type theory | Lean notation |
@@ -30,9 +30,9 @@ sections.
 | proof by cases on a disjunction | pattern match / [`cases`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) | `Or.elim`, `cases h with ...` |
 | a direct proof (construction) | a term built from constructors | `⟨_, _⟩`, `Or.inl _`, `fun x => _` |
 
-Let's read a few rows concretely. "$P$ and $Q$" corresponds to a *product*
+Consider a few rows concretely. "$P$ and $Q$" corresponds to a *product*
 type because a proof of $P \wedge Q$ is genuinely a *pair*: a proof of
-$P$ together with a proof of $Q$. This is exactly the `⟨hp, hq⟩` you'll see
+$P$ together with a proof of $Q$. This is exactly the `⟨hp, hq⟩` seen
 in the next section. "$P$ or $Q$" corresponds to a *sum* type because a
 proof of $P \vee Q$ is a *choice*: either a proof of $P$ (tagged
 `Or.inl`) or a proof of $Q$ (tagged `Or.inr`), never both, and never
@@ -51,10 +51,10 @@ matching projection). This is why Chapter 4's tactics, which *build*
 proof terms, and Chapter 5's discussion of reduction and definitional
 equality, are really talking about one and the same underlying process,
 just seen from two angles. Proof simplification and program evaluation are
-the same operation. We just describe it differently depending on whether
-we think of the term as "a proof" or "a computation."
+the same operation, described differently depending on whether the term
+is regarded as "a proof" or "a computation."
 
-> Read more: if "propositional logic" or "natural deduction" above weren't
+> Read more: if "propositional logic" or "natural deduction" above are not
 > already familiar,
 > [Appendix B §0](../15-lambda-calculus/00-standard-logic.md) recaps
 > standard logic from scratch, with no Lean involved, before this
@@ -65,7 +65,7 @@ we think of the term as "a proof" or "a computation."
 > [Appendix B §3](../15-lambda-calculus/03-simply-typed-lambda-calculus.md)'s
 > progress and preservation theorems are the formal statement of "a proof
 > never reduces to something of the wrong type," i.e. "well-typed proofs
-> don't go wrong."
+> do not go wrong."
 
 ```lean
 #check (2 + 2 = 4)     -- 2 + 2 = 4 : Prop
@@ -82,10 +82,10 @@ proposition $P$ with the *set of its proofs*: $P$ is true exactly when
 that set is nonempty, i.e. when there exists some term $p : P$ ("$P$ is
 inhabited"). This is why `Prop` behaves like a truth value rather than an
 ordinary type: every proposition's proof-set is either empty (false) or,
-up to proof irrelevance, has exactly one element (true). There is no
+up to proof irrelevance, has exactly one element (true), with no
 room for a "third" proof genuinely different from the rest. Proving $P$ is
-exactly exhibiting an element $p \in P$. Nothing more is meant by
-"provable" than that. The proof `rfl : 2 + 2 = 4` is the reflexivity
+exactly exhibiting an element $p \in P$; nothing more is meant by
+"provable." The proof `rfl : 2 + 2 = 4` is the reflexivity
 witness $\mathrm{refl}_4$ of the equality relation, valid precisely because
 both sides reduce to the same normal form $4$. This is equality of terms
 that are *definitionally* equal, the strictest notion of "$=$".

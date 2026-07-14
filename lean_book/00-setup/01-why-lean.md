@@ -4,10 +4,10 @@
 
 ---
 
-Lean 4 is both a programming language and an interactive theorem prover. You
-write mathematical definitions and statements as code, and Lean checks your
-proofs the way a compiler checks types. If it type-checks, the proof is
-correct (as long as you trust Lean's small trusted kernel).
+Lean 4 is both a programming language and an interactive theorem prover.
+Mathematical definitions and statements are written as code, and Lean
+checks proofs the way a compiler checks types. If a proof type-checks, it
+is correct, provided one trusts Lean's small trusted kernel.
 
 This book uses abstract algebra (groups, rings) and a bit of category-flavored
 material (path algebras of quivers) as running examples. These topics are

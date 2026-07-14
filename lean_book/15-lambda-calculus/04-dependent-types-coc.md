@@ -11,7 +11,7 @@ side, building up the exact rules rather than the categorical analogy.
 ### Types depending on terms: Π-types
 
 STLC's function type $\tau_1 \to \tau_2$ has a *fixed* codomain $\tau_2$,
-independent of which argument you supply. A **dependent function type**
+independent of which argument is supplied. A **dependent function type**
 (a **Π-type**, "Pi-type") lets the codomain depend on the argument's
 *value*:
 
@@ -20,8 +20,8 @@ $$
 $$
 
 read: "a function that, given $x : A$, returns a term of type $B(x)$ —
-a type allowed to mention $x$." When $B(x)$ doesn't actually depend on
-$x$, $\prod_{x:A} B$ collapses exactly to the ordinary $A \to B$. So
+a type allowed to mention $x$." When $B(x)$ does not actually depend on
+$x$, $\prod_{x:A} B$ collapses exactly to the ordinary $A \to B$. Thus
 Π-types **strictly generalize** function types rather than replacing them.
 This is exactly Chapter 1's `Path Q : V → V → Type` discussion: `Path Q`
 is a family of types indexed by a pair of vertices, and a function whose
@@ -29,10 +29,10 @@ return type is `Path Q u w` for varying `u, w` is a genuine dependent
 function.
 
 Lean's surface syntax `(x : A) → B x` **is** $\prod_{x:A} B(x)$, and `∀`
-is the exact same construct specialized to `B : A → Prop`. So every
-`∀ n : Nat, P n` you wrote starting in Chapter 3 was already a Π-type. You
-were doing dependent type theory from the very first `theorem` in this
-book, whether or not you had the vocabulary for it yet.
+is the exact same construct specialized to `B : A → Prop`. Hence every
+`∀ n : Nat, P n` written starting in Chapter 3 was already a Π-type.
+Dependent type theory was in use from the very first `theorem` in this
+book, whether or not the vocabulary for it was available yet.
 
 ### Universes, revisited as a typing rule
 
@@ -66,8 +66,8 @@ that *a* proof exists. This is what makes Curry–Howard's slogan
 "propositions are types, proofs are terms" more than a slogan:
 `P : Prop` really is a type, `h : P` really is an ordinary term of that
 type built by ordinary $\lambda$/application/Π machinery, and the *only*
-difference from an ordinary `Type` is that Lean doesn't care *which* term
-of `P` you produced — only that you produced one.
+difference from an ordinary `Type` is that Lean does not care *which* term
+of `P` was produced — only that one was produced.
 
 ### Σ-types: the dependent pair, dual to Π
 
@@ -82,18 +82,18 @@ a pair $\langle a, b\rangle$ with $a : A$ and $b : B(a)$ — the *second*
 component's type is allowed to depend on the *first* component's *value*.
 This is exactly the "structure bundling data + proofs" pattern that
 recurs throughout this book: `Group G`'s `⟨op, id, inv, assoc, ...⟩` is,
-underneath Lean's `structure` sugar, an iterated Σ-type. It's a witness
-`op`, paired with a witness `id` (whose type doesn't depend on `op` here),
+underneath Lean's `structure` sugar, an iterated Σ-type. It is a witness
+`op`, paired with a witness `id` (whose type does not depend on `op` here),
 paired with `assoc`, whose *type* depends on the values of `op` and `id`
 supplied earlier in the same structure. Chapter 2's "structures can bundle
 proofs alongside data" was already, silently, an appeal to Σ.
 
-**A caveat about `∃`, worth being precise about.** Chapter 3 reads
+**A caveat about `∃`.** Chapter 3 reads
 `∃ x : α, P x` as "a structure: a witness value plus a proof that the
 witness satisfies `P`" — in effect a Σ-type, with `P : α → Prop` playing
-the role of `B`. But Lean's actual `Exists` is *not literally* the
+the role of `B`. Lean's actual `Exists` is, however, *not literally* the
 Σ-type `Sigma`. `Exists` is specifically built to land in `Prop`, and by
-proof irrelevance (above), that means you cannot *extract* the witness
+proof irrelevance (above), that means the witness cannot be *extracted*
 from an `∃`-proof computationally. There is no function
 `Exists.witness : (∃ x, P x) → α`, because doing so would let two
 different (but both valid) choices of witness produce different
@@ -121,7 +121,7 @@ abstraction, application), plus:
    and the top of this page),
 3. (in Lean's specific extension, the **Calculus of Inductive
    Constructions**, CIC) `inductive` type declarations — `Nat`, `Bool`,
-   `Path` (Chapter 11), and every `structure` you've written — giving you
+   `Path` (Chapter 11), and every `structure` written throughout — giving
    Σ-types and much more (arbitrary recursive data) beyond what bare CoC
    provides,
 4. `Prop` as a distinguished, proof-irrelevant universe (Chapter 3),
@@ -129,7 +129,7 @@ abstraction, application), plus:
 
 Every single Lean construct used in this entire book — `def`, `structure`,
 `theorem`, `∀`, `∃`, tactics (which merely *build* CIC terms, one piece at
-a time, without you writing them by hand) — compiles down to a term in
+a time, without the terms being written by hand) — compiles down to a term in
 exactly this system, checked by Lean's kernel using nothing more than the
 typing rules sketched on this page, applied mechanically. There is no
 extra magic between the code in Chapters 1–13 and this appendix's

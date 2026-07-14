@@ -10,20 +10,19 @@ that just run that algorithm:
 
 - **`decide`** — evaluates a `Decidable` proposition to `true`/`false`
   directly. It works well for small, closed (no free variables)
-  propositions, for example `(7 : Nat) ∣ 21` or `¬ (3 = 5)`. Do not use
-  `decide` on propositions with free variables or unbounded search. It can
+  propositions, for example `(7 : Nat) ∣ 21` or `¬ (3 = 5)`. `decide` should
+  not be used on propositions with free variables or unbounded search: it can
   time out, or worse, produce a correct but useless proof term that
   reveals nothing.
 - **`omega`** — a decision procedure for *linear* arithmetic over `Nat`/`Int`
   (goals built from `+`, subtraction, `≤`, `<`, `=`, and multiplication by
   *literal constants* only — `omega` handles `3 * n` fine, but not `n * m`
   for two unknown variables `n`, `m`; multiplying two unknown variables
-  together falls outside what it can decide). If your goal is "some
-  linear inequality or equality about integers," reach for `omega` before
-  deriving it by hand. This is exactly the kind of fact a decision
-  procedure handles better than a custom [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain, and deriving it by
-  hand teaches you nothing that `omega`'s existence doesn't already tell
-  you.
+  together falls outside what it can decide). For a goal that is "some
+  linear inequality or equality about integers," `omega` should be
+  reached for before deriving the fact by hand. This is exactly the kind of fact a decision
+  procedure handles better than a custom [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain, and a hand-derived
+  proof teaches nothing that `omega`'s existence does not already establish.
 - **`norm_num`** — normalizes and evaluates numerical expressions
   (arithmetic on concrete numerals, including some with `+`, `*`, `^`,
   `≤` on literals).
@@ -47,7 +46,7 @@ decides *Presburger arithmetic*, the first-order theory of $(\mathbb{Z},
 +, <)$, which is famously decidable, and `norm_num` evaluates concrete
 numerals. These apply only to statements with no free structure left to
 fill in. A theorem about an arbitrary group has no finite truth table to
-compute, which is why it must be *proved* from the axioms instead of
+compute, and thus must be *proved* from the axioms instead of
 *decided*.
 
 > Read more: the Lean/Mathlib documentation for `decide`, `omega`, and

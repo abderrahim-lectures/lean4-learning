@@ -19,8 +19,8 @@ This is precisely the categorical picture: $R$-modules and $R$-linear maps
 form a category (composition of linear maps is linear, and the identity
 function is linear — both easy `theorem`s to state and prove from the two
 fields above). Everything in this chapter, including submodules and the
-direct sums below, is best understood as living inside that category, in
-the same way Chapter 1's opening dictionary suggested reading `Type`
+direct sums below, is best understood as living inside that category,
+consistent with Chapter 1's opening dictionary for reading `Type`
 itself.
 
 **Mathematical reading.** `LinearMap Rg ModM ModN` is the set
@@ -35,8 +35,8 @@ $R\text{-}\mathbf{Mod}$. $\mathrm{Hom}_R(M,N)$ is itself an abelian group
 
 ### A concrete linear map: multiplication by a fixed integer
 
-The abstract definition is easier to trust once you've built one instance
-by hand. Fix $d \in \mathbb{Z}$; multiplication by $d$ is $\mathbb{Z}$-linear
+The abstract definition is easier to trust once a single instance has been
+built by hand. Fix $d \in \mathbb{Z}$; multiplication by $d$ is $\mathbb{Z}$-linear
 as a map $\mathbb{Z} \to \mathbb{Z}$:
 
 ```lean
@@ -57,8 +57,8 @@ def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
 `map_add`'s goal, `d * (m+n) = d*m + d*n`, is exactly distributivity.
 `map_smul`'s goal, `d * (r*m) = r * (d*m)`, holds because $\mathbb{Z}$ is
 commutative, so `d` and `r` can swap past each other. Both fields, in
-other words, are pure `Int`-arithmetic facts once you unfold what `toFun`,
-`ModM.smul`, and `ModM.addGrp.op` all mean here. This is the same "reduce a
+other words, are pure `Int`-arithmetic facts once `toFun`,
+`ModM.smul`, and `ModM.addGrp.op` are unfolded to their meanings here. This is the same "reduce a
 module-theoretic goal to a concrete arithmetic identity" move that
 Chapter 9's `evenSubmodule` used, applied again.
 

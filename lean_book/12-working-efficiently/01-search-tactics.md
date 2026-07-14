@@ -1,28 +1,28 @@
-## Search tactics: let Lean find the lemma or the proof
+## Search tactics: letting Lean find the lemma or the proof
 
 [← Index](00-index.md) | [Next: Decision procedures →](02-decision-procedures.md)
 
 ---
 
-Throughout this book, you have imagined hunting for a lemma name by hand.
-In practice, you rarely need to search by memory or by grep. Two tactics
-do this search for you:
+Throughout this book, a lemma name has typically been hunted for by hand.
+In practice, searching by memory or by grep is rarely necessary. Two tactics
+perform this search automatically:
 
 - **[`exact?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)** — searches the whole environment (core Lean, plus anything
-  else you have imported) for a term that closes the *current goal
-  exactly*. Run it, and it either fails, or suggests a working
-  `exact ...` line you can paste in. Use it as soon as you suspect "this
-  exact fact must already exist somewhere." For example, this happens
-  after you simplify a ring goal down to something that *looks* like a
-  named lemma, but you can't recall the name.
+  else imported) for a term that closes the *current goal
+  exactly*. It either fails or suggests a working
+  `exact ...` line that can be pasted in directly. It is best used as soon as
+  a fact is suspected to already exist somewhere — for instance,
+  after simplifying a ring goal down to something that *looks* like a
+  named lemma whose name cannot be recalled.
 - **[`apply?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)** — like `exact?`, but for cases where the goal would be
   closed by `apply`ing something that leaves further subgoals, not a
   single exact match.
 
 Both are search tools, not proof techniques. The proof they find is a
-normal term, exactly like one you could have written by hand. It is
+normal term, exactly like one that could have been written by hand. It is
 completely standard practice to try out a proof with `exact?`/`apply?`,
-look at what it suggests, and paste in the concrete result, rather than
+inspect what it suggests, and paste in the concrete result, rather than
 leaving the search tactic itself in the finished proof. They are slower to
 re-run, and in a growing file, their result can silently change if the
 environment changes.

@@ -4,20 +4,20 @@
 
 ---
 
-This book builds groups, rings, and path algebras **from scratch**, on
-purpose, without importing Mathlib (Lean's giant community math library).
-This is slower, but much better for learning. You'll see every definition
-and every proof obligation explicitly. Chapter 13 points you toward Mathlib
-once you're ready to use the "real" library instead of reinventing it.
+This book builds groups, rings, and path algebras **from scratch**,
+deliberately, without importing Mathlib (Lean's community math library).
+This is slower, but better for learning: every definition and every proof
+obligation is made explicit. Chapter 13 points toward Mathlib for readers
+ready to use the "real" library instead of reinventing it.
 
 Starting in Chapter 6, most worked examples are followed by a small,
-clearly labeled "Mathlib equivalent" box. It shows the same statement
-written against Mathlib's actual `Group`/`Ring`/`Module` API. This doesn't
-replace the from-scratch approach. The hand-built version stays the main
-teaching path, and the Mathlib box is just a peek ahead. Try to hold both
-versions in mind at once: the definition you just derived, and the shape
-the same idea takes in the library you'll eventually use. This builds a
-sharper understanding of both than either one alone would.
+clearly labeled "Mathlib equivalent" box, showing the same statement
+written against Mathlib's actual `Group`/`Ring`/`Module` API. This does not
+replace the from-scratch approach; the hand-built version remains the main
+teaching path, and the Mathlib box is only a preview. Holding both versions
+in mind at once — the definition just derived, and the shape the same idea
+takes in the library used later — builds a sharper understanding of both
+than either alone would.
 
 ## Next
 

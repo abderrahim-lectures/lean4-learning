@@ -1,4 +1,4 @@
-## Terminology you'll meet before it's fully explained
+## Terminology encountered before it is fully explained
 
 [← Dependent types, categorically](03-dependent-types.md) | [Index](00-index.md)
 
@@ -14,14 +14,14 @@ version lives.
 
 ### Elaborate / elaboration
 
-This is the process by which Lean turns the surface syntax you type into
-a fully-explicit, fully-typed internal term: filling in implicit
+This is the process by which Lean turns the surface syntax written by the
+user into a fully-explicit, fully-typed internal term: filling in implicit
 arguments, resolving notation, checking every subterm's type against
-what's expected. When this book says an expression "elaborates to"
-something, it means "after Lean has finished this filling-in process,
-what you actually get is..." For example, `identity 5` *elaborates to*
+what is expected. When this book says an expression "elaborates to"
+something, it means "after Lean has finished this filling-in process, the
+result is..." For example, `identity 5` *elaborates to*
 `@identity Nat 5` (Chapter 1), with `α := Nat` filled in silently.
-Elaboration is not guessing. It's a deterministic algorithm driven by the
+Elaboration is not guessing; it is a deterministic algorithm driven by the
 typing rules of Lean's underlying calculus.
 
 > Read more: [Appendix B §5](../15-lambda-calculus/05-lambda-to-lean.md)
@@ -67,13 +67,13 @@ until `a` itself is known.
 ### Motive
 
 This is the (possibly type-dependent) predicate or type family that a
-tactic like `induction` or `rw` is secretly generalizing your goal over
+tactic like `induction` or `rw` is secretly generalizing the goal over
 before it operates. When `rw [h]` fails with **"motive is not type
-correct,"** here is what it means: to replace one side of `h` with the
-other throughout your goal, Lean first abstracts your goal into a function
+correct,"** the meaning is as follows: to replace one side of `h` with the
+other throughout the goal, Lean first abstracts the goal into a function
 `C` (the motive) taking the rewritten term as a parameter. Here, that
-abstraction produces an ill-typed `C`, typically because the term you're
-rewriting appears inside a dependent type's *index* (as in Chapter 11's
+abstraction produces an ill-typed `C`, typically because the term being
+rewritten appears inside a dependent type's *index* (as in Chapter 11's
 `Path`, whose very type depends on specific vertices) rather than in a
 position that can vary freely. The fix is almost always to restate the
 goal first with `show`, or to generalize the index explicitly, so the
@@ -87,26 +87,26 @@ motive Lean builds is well-typed.
 
 ### Category-theory terms used beyond the baseline
 
-The README promised that the only category theory assumed going in is
-"objects, morphisms, composition, functors." That's true of the main text.
-But the optional "Mathematical reading" boxes scattered through later
-chapters occasionally go one step further, for readers who already have a
-bit more category theory and would enjoy the extra precision. Four such
-terms come up often enough to be worth fixing once here, so every later
-use can simply point back to this entry instead of re-explaining (or
-worse, silently assuming) each time:
+The README states that the only category theory assumed going in is
+"objects, morphisms, composition, functors," which holds true of the main
+text. The optional "Mathematical reading" boxes scattered through later
+chapters occasionally go one step further, for readers who already possess
+a bit more category theory and would appreciate the extra precision. Four
+such terms come up often enough to be worth fixing once here, so every
+later use can simply point back to this entry instead of re-explaining
+(or, worse, silently assuming) each time:
 
 #### Universal property
 
-This is a characterization of a construction not by what it's *made of*,
+This is a characterization of a construction not by what it is *made of*,
 but by what maps *uniquely factor through it*. "$X$ has property $U$"
 means "for every $Y$ with the relevant data, there is exactly one map
 $Y \to X$ compatible with that data." This is the category-theorist's way
 of saying "$X$ is the *best possible* solution to a mapping problem," and
-it's the same idea as the familiar universal properties of products,
-quotients, and free constructions from an algebra course. Nothing new is
+it is the same idea as the familiar universal properties of products,
+quotients, and free constructions from an algebra course; nothing new is
 meant by the phrase here beyond that. Here is the classic picture, for a
-product $X \times Y$: given any $A$ with maps to both factors, there's
+product $X \times Y$: given any $A$ with maps to both factors, there is
 exactly one map into the product making everything agree (the dashed
 arrow):
 
@@ -123,12 +123,12 @@ graph TD
 | --- | --- |
 | $A$, $X$, $Y$, $P$ ("the objects") | types `A`, `X`, `Y`, `X × Y` |
 | $f$, $g$ ("the given maps") | ordinary functions `f : A → X`, `g : A → Y` |
-| $\exists!$ ("there exists a unique") | — no single token; witnessed by supplying `h` and proving it's the only one |
+| $\exists!$ ("there exists a unique") | — no single token; witnessed by supplying `h` and proving it is the only one |
 | $h$ ("the mediating map") | `fun a => (f a, g a) : A → X × Y` |
 | $\pi_X, \pi_Y$ ("the projections") | `Prod.fst`, `Prod.snd` (`.1`/`.2`, or `.fst`/`.snd`) |
 
-Read the diagram like this: you're *given* the two solid outer arrows ($f$
-and $g$). The universal property *asserts* the dashed middle arrow $h$
+Read the diagram as follows: the two solid outer arrows ($f$
+and $g$) are *given*. The universal property *asserts* the dashed middle arrow $h$
 exists, is unique, and makes both triangles commute: $\pi_X \circ h = f$
 and $\pi_Y \circ h = g$, i.e. `h a |>.1 = f a` and `h a |>.2 = g a` for
 every `a`. "Commute" just means any two paths between the same two
@@ -156,7 +156,7 @@ graph LR
 | $I \to X$ ("the unique arrow") | for `Nat`: `Nat.rec` — build a value of *any* `X` by giving a `zero` case and a `succ` case, and that recipe is forced by `Nat`'s two constructors, with no other choice possible |
 
 Exactly one arrow leaves $I$ for every object in the category — never
-zero (there's always a map), never more than one (no choice about which).
+zero (there is always a map), never more than one (no choice about which).
 `Nat` ([Chapter 1 §1](01-everything-has-a-type.md)) and
 `ℤ` in `Ring` (Chapter 8) are both flagged as initial objects of the
 relevant category in this sense: any structure-preserving map out of them
@@ -188,7 +188,7 @@ In this book, every `.toGroup`/`.toAddGroup`-style field generated by
 Lean's `extends`
 ([Chapter 2 §3](../02-functions-and-structures/03-extending-structures.md)
 onward) *is* a forgetful functor,
-computationally: it's the projection that keeps some of a structure's
+computationally: it is the projection that keeps some of a structure's
 data and drops the rest.
 
 #### Subobject / full subcategory

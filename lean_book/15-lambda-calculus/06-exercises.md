@@ -4,8 +4,8 @@
 
 ---
 
-1. By hand, β-reduce $(\lambda x.\lambda y.\, y\, x)\, a\, b$ to normal
-   form, writing out each step. Which of the two named combinators from
+1. β-reduce $(\lambda x.\lambda y.\, y\, x)\, a\, b$ to normal
+   form by hand, writing out each step. Which of the two named combinators from
    Section 1 (recall $K = \lambda x.\lambda y. x$) does
    $\lambda x.\lambda y.\, y\, x$ resemble, and how does it differ?
 2. Using the Church-numeral definitions from Section 2, β-reduce
@@ -20,7 +20,7 @@
    \longrightarrow_\beta a$. (This is the untyped-calculus ancestor of
    Chapter 2's `structure Pair (α β : Type) where fst : α; snd : β` — the
    same idea, before types or a `structure` keyword existed to name it.)
-4. In your own words (a few sentences), explain why
+4. In a few sentences, explain why
    `identity {α : Type} (x : α) : α := x` from Chapter 1 cannot be typed
    in the simply typed λ-calculus of Section 3, but can be typed once
    Π-types (Section 4) are available. Identify exactly which typing rule

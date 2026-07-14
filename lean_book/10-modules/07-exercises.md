@@ -18,15 +18,15 @@
    induction on the integer scalar, in the style of Chapter 4.
 4. Define the submodule of multiples of a fixed integer `d : Int`
    (generalizing `evenSubmodule`, which is the case `d = 2`), and check
-   your three closure proofs generalize verbatim with `2` replaced by `d`.
+   that the three closure proofs generalize verbatim with `2` replaced by `d`.
 
 Solutions: [Appendix, Chapter 10](../14-appendix-solutions/08-chapter-10.md).
 
 ## Next
 
-Continue to [Chapter 11: Quivers and path algebras](../11-path-algebras/00-index.md), where
-we return to path algebras. Once you've seen $kQ$ constructed, notice that
-representations of $Q$ are exactly modules over $kQ$ — that's what ties
+Continue to [Chapter 11: Quivers and path algebras](../11-path-algebras/00-index.md), which
+returns to path algebras. Once $kQ$ has been constructed, observe that
+representations of $Q$ are exactly modules over $kQ$; this is what ties
 this chapter directly to the next.
 
 ---

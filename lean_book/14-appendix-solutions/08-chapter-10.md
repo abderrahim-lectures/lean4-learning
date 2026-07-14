@@ -20,7 +20,7 @@ def idLinearMap {R : Type} (Rg : Ring R) {M : Type} (Mod : Module R Rg M) :
 
 `id : M → M` is `fun x => x`. Both fields reduce to [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) because
 `id (Mod.addGrp.op m n)` and `Mod.addGrp.op (id m) (id n)` unfold to the
-exact same term (`id` doesn't change anything). The same holds for
+same term (`id` changes nothing). The same holds for
 `map_smul`. The only content in `LinearMap`'s two fields is the
 compatibility of `toFun` with `+`/`smul`, and `id` trivially preserves
 everything, since it changes nothing.
@@ -102,14 +102,14 @@ theorem natSmul_add {M : Type} (Grp : Group M) (n : Nat) (m1 m2 : M)
 
 The base case is `id = id + id` (an identity is its own double). This
 mirrors the "element equal to its own double is zero" fact used in
-Chapter 9's `mul_zero`. The inductive step needs commutativity (`comm`,
-available since we're inside a `CommGroup`) to slide `m2` and
+Chapter 9's `mul_zero`. The inductive step requires commutativity (`comm`,
+available since the group is a `CommGroup`) to slide `m2` and
 `natSmul Grp k m1` past each other. This is exactly why `intSmul`
-distributing over `+` requires an *abelian* group, not a general one:
-without `comm`, there's no way to reorder the four terms into a matching
+distributing over `+` requires an abelian group, rather than a general one:
+without `comm`, there is no way to reorder the four terms into a matching
 shape. Full verification of `add_smul` and `smul_smul` follows the same
-induction-on-the-scalar pattern, and makes a good longer exercise to try
-on your own.
+induction-on-the-scalar pattern, and makes a good longer exercise for
+further practice.
 
 **4. Submodule of multiples of `d`**
 
@@ -133,7 +133,7 @@ This has the same shape as `evenSubmodule` (the case `d = 2`). Every `2` in
 that proof is simply replaced by the parameter `d`, and each closure proof
 still reduces to an `Int` equation, handled the same way ([`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) to
 reveal the goal's `+`/`*`-form, then [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)), rather than with `ring` (which
-this book doesn't import from Mathlib).
+this book does not import from Mathlib).
 
 ---
 

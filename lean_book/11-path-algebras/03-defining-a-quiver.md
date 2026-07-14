@@ -4,7 +4,7 @@
 
 ---
 
-We encode a quiver as a `structure`, parameterized by a type of vertices and
+A quiver is encoded as a `structure`, parameterized by a type of vertices and
 a type of arrows:
 
 ```lean
@@ -19,13 +19,13 @@ arrows, and `source`/`target` are exactly $s$ and $t$ above.
 **Mathematical reading.** `Quiver V A` is a quiver $Q = (V, A, s, t)$: the
 data of two functions $s, t : A \to V$, i.e. a parallel pair of arrows
 $A \rightrightarrows V$ in $\mathbf{Set}$. A quiver is precisely
-the underlying data of a small category *before* we impose composition and
-identities. It's the raw generators from which the free category (paths)
-will be built.
+the underlying data of a small category *before* composition and
+identities are imposed: the raw generators from which the free category (paths)
+is built.
 
-### Our example quiver, formalized
+### The example quiver, formalized
 
-Encode the three vertices as `Fin 3` (values `0, 1, 2`, standing for
+The three vertices are encoded as `Fin 3` (values `0, 1, 2`, standing for
 vertices `1, 2, 3`) and the two nontrivial arrows as an inductive type:
 
 ```lean
@@ -50,8 +50,7 @@ just with two constructors that carry no extra data.
 **Mathematical reading.** This is the concrete quiver $Q$ with vertex set
 $V = \{0,1,2\}$ (encoded as $\mathrm{Fin}\,3$) and arrow set $A =
 \{\alpha, \beta\}$, where $s(\alpha)=0,\ t(\alpha)=1$ and $s(\beta)=1,\
-t(\beta)=2$: the linear $A_3$ quiver, drawn exactly the way you'd draw it
-on paper:
+t(\beta)=2$: the linear $A_3$ quiver, drawn exactly as on paper:
 
 ```mermaid
 graph LR
@@ -75,7 +74,7 @@ chapter's opening section mentioned building from scratch instead of
 reusing) encodes arrows differently. Instead of one flat arrow type `A`
 plus separate `source`/`target : A → V` functions, it bakes the endpoints
 into the arrow's *type* directly, `Hom : V → V → Sort*` (with notation
-`a ⟶ b`). So an arrow from `i` to `j` simply *has type* `i ⟶ j`:
+`a ⟶ b`). Thus an arrow from `i` to `j` simply *has type* `i ⟶ j`:
 
 ```lean
 inductive MyArrow : Fin 3 → Fin 3 → Type
@@ -87,11 +86,11 @@ instance : Quiver (Fin 3) := ⟨MyArrow⟩
 
 `MyArrow 0 1` has exactly the one constructor `alpha`. `MyArrow i j` for
 any other pair `(i, j)`, in particular the "backwards" or "no such arrow"
-cases, has no constructors at all, so it's simply an empty type. There is
+cases, has no constructors at all, and is thus simply an empty type. There is
 no `source`/`target` to state or prove separately, and no `h : Q.source a = v`
 side-condition to discharge with `rfl` later (Chapter 11 §4). An
-ill-typed composition is rejected by the type checker before you'd even get
-to a proof obligation, one step earlier than the book's own encoding
+ill-typed composition is rejected by the type checker before a proof
+obligation is even reached, one step earlier than the book's own encoding
 catches the same mistake.
 
 ---

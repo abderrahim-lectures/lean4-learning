@@ -4,7 +4,7 @@
 
 ---
 
-1. Build `boolAndOrRing`? Try it and see why it's surprisingly hard: is
+1. Build `boolAndOrRing`. This is surprisingly difficult: is
    there a natural ring structure on `Bool`? (Hint: think of `Bool` as
    $\mathbb{Z}/2\mathbb{Z}$ — addition is XOR, multiplication is AND. Build
    `intAddGroupMod2 : CommGroup Bool` with `op := Bool.xor`, then a
@@ -15,7 +15,7 @@
 3. Using the witness pair `(X, Y)` computed above, state and prove
    `theorem mat2_not_comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X`.
    Note that [`by decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) does *not* work directly here — `Mat2` has no
-   `DecidableEq` instance, so equality of two `Mat2` terms isn't something
+   `DecidableEq` instance, so equality of two `Mat2` terms is not something
    `decide` can evaluate out of the box (check the error message it gives;
    this is exactly the "read the failure" habit from Chapter 4). Instead,
    assume `h : Mat2.mul X Y = Mat2.mul Y X`, use `Mat2.mk.injEq` to turn

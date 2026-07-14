@@ -7,14 +7,14 @@
 Functions **curry**: `add : Nat → Nat → Nat` is really
 `Nat → (Nat → Nat)`, a function that returns another function. So a
 "two-argument function" is just a one-argument function whose result is
-itself another function. It takes one argument at a time. (If you already
-think categorically: this is the type-theoretic form of the Hom-set
-isomorphism
+itself another function. It takes one argument at a time. (For readers
+already thinking categorically: this is the type-theoretic form of the
+Hom-set isomorphism
 $\mathrm{Hom}(A\times B, C)\cong\mathrm{Hom}(A,\mathrm{Hom}(B,C))$. A
 two-argument map is the same data as a one-argument map into a space of
-maps. But you don't need this to follow along — the plain statement above
-is enough.) The interesting part of this chapter is `structure`, which is
-how we'll package algebraic data.
+maps. This is not needed to follow along — the plain statement above is
+enough.) The interesting part of this chapter is `structure`, which is
+how algebraic data will be packaged.
 
 ## Sections
 

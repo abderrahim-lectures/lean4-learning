@@ -6,9 +6,9 @@
 
 `intGroup` is abelian ($a + b = b + a$), so it never tests the
 distinction between `id_left`/`id_right` or `inv_left`/`inv_right`. In a
-commutative group these coincide, so a reader could wrongly think that
-the left/right split in `Group`'s definition was just being overly
-careful. It isn't: here is a small, fully concrete, genuinely
+commutative group these coincide, which might suggest that
+the left/right split in `Group`'s definition is merely overly
+careful. It is not: the following is a small, fully concrete, genuinely
 **non-abelian** group, built the same way `intGroup` was, field by field.
 
 ### The carrier: bijections of a 3-element set
@@ -27,8 +27,8 @@ structure Perm3 where
 ```
 
 This is the same "bundle data with the proofs that make it well-behaved"
-pattern as `Group` itself. `Perm3` doesn't just carry a function, it
-carries the *proof* that the function is invertible, since an arbitrary
+pattern as `Group` itself. `Perm3` carries not only a function but also
+the *proof* that the function is invertible, since an arbitrary
 `Fin 3 → Fin 3` need not be a bijection at all.
 
 ### The group operation: composition
@@ -54,8 +54,8 @@ def Perm3.comp (f g : Perm3) : Perm3 where
 inverse composes the two inverses in the *opposite* order
 (`g.invFun ∘ f.invFun`), which is exactly $(fg)^{-1} = g^{-1}f^{-1}$, the
 same "reverse the order" fact Chapter 7's Theorem 3
-(`inv_op`) proves abstractly for every group. Here you can see concretely
-*why* it's true: to undo "first $g$, then $f$," you must first undo $f$,
+(`inv_op`) proves abstractly for every group. This construction shows concretely
+why the fact holds: to undo "first $g$, then $f$," one must first undo $f$,
 then undo $g$.
 
 ```lean
@@ -66,7 +66,7 @@ def Perm3.identity : Perm3 where
   right_inv := fun _ => rfl
 ```
 
-`Perm3.identity` is the identity permutation: it fixes every point, so
+`Perm3.identity` is the identity permutation: it fixes every point, hence
 both of its proof fields are immediate by `rfl`.
 
 ```lean
@@ -79,10 +79,10 @@ def Perm3.inv (f : Perm3) : Perm3 where
 
 `Perm3.inv` inverts a permutation by swapping its `toFun` and `invFun`,
 and it correspondingly swaps which proof field (`left_inv` or
-`right_inv`) plays which role, since inverting a bijection just swaps
+`right_inv`) plays which role, since inverting a bijection simply swaps
 which direction counts as "forward."
 
-### Two concrete permutations, and a computed proof they don't commute
+### Two concrete permutations, and a computed proof they do not commute
 
 ```lean
 -- Swap 0 and 1, leave 2 fixed.
@@ -120,11 +120,11 @@ Both compositions send `0` somewhere, but to *different* places: applying
 `cycle012` then `swap01` sends $0 \to 1 \to 0$, while applying `swap01`
 then `cycle012` sends $0 \to 0 \to 1$. Concretely, `#eval` reports `0` for
 the first and `2` for the second. This is **directly computed evidence**
-that `Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01`, in other
-words, that this group is genuinely non-abelian. This is exactly the kind
+that `Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01`; in other
+words, this group is genuinely non-abelian. This is exactly the kind
 of "compute a counterexample" move Chapter 8 uses again for matrices. It
-is cheaper than any hand-written non-commutativity proof, and it hands
-you, for free, the specific pair of elements that fail to commute.
+is cheaper than any hand-written non-commutativity proof, and it yields,
+for free, the specific pair of elements that fail to commute.
 
 ### Assembling `Group Perm3`
 
@@ -173,7 +173,7 @@ def perm3Group : Group Perm3 where
 spirit as Chapter 8's `Mat2.mk.injEq`-based reasoning): two `Perm3`s are
 equal exactly when their `toFun`s agree everywhere *and* their `invFun`s
 agree everywhere, since those are `Perm3`'s only two fields (the proof
-fields don't matter, by proof irrelevance, Chapter 5). Each `Group` field
+fields do not matter, by proof irrelevance, Chapter 5). Each `Group` field
 is then proved by reducing to this extensionality check and confirming
 both functions involved agree pointwise. Most cases are `rfl` directly
 (both sides compute to the same function once unfolded), and `inv_left`/
@@ -206,8 +206,8 @@ def cycle012' : Equiv.Perm (Fin 3) := finRotate 3
 #eval (cycle012' * swap01') 0    -- 2
 ```
 
-No `Perm3` bundle, no hand-written extensionality lemma, no field-by-field
-`Group` construction is needed: `Equiv.Perm (Fin 3)` (the type of bijections
+No `Perm3` bundle, no hand-written extensionality lemma, and no field-by-field
+`Group` construction are needed: `Equiv.Perm (Fin 3)` (the type of bijections
 `Fin 3 ≃ Fin 3`) is already known to be a group, [`Equiv.swap`](https://loogle.lean-lang.org/?q=Equiv.swap) and
 [`finRotate`](https://loogle.lean-lang.org/?q=finRotate) are Mathlib's own constructors for a transposition and a
 rotation, and `*` is the already-registered group operation (composition,

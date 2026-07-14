@@ -8,7 +8,7 @@ Chapter 1 said `Type` is itself a term, of some type. A careful reader
 should immediately ask: *of what type?* If the answer were "`Type` is a
 term of type `Type`," Lean's logic would be inconsistent. This is exactly
 Russell's paradox in type-theoretic form: the type of "all types," if it
-contained itself, would let you rebuild the set-of-all-sets-that-don't-
+contained itself, would permit rebuilding the set-of-all-sets-that-do-not-
 contain-themselves paradox inside the type theory. Lean avoids this with
 a **hierarchy of universes**.
 
@@ -25,9 +25,9 @@ $$
 $$
 
 Each `Type u` is itself a term of `Type (u+1)`, never of itself. This gives
-just enough structure to block the paradox, while still letting you say
-"for every type" (quantifying over some fixed `Type u`) as often as you
-like. `Type` on its own (with no numeral) is notation for `Type 0`, the
+just enough structure to block the paradox, while still permitting "for
+every type" (quantifying over some fixed `Type u`) to be said as often as
+needed. `Type` on its own (with no numeral) is notation for `Type 0`, the
 universe containing "ordinary" types like `Nat`, `Bool`, `Int`, and the
 `Point`/`Pair` structures from Chapter 2.
 
@@ -35,17 +35,17 @@ universe containing "ordinary" types like `Nat`, `Bool`, `Int`, and the
 
 Recall `structure Group (G : Type) where ...` from Chapter 6. This
 signature commits to `G : Type`, meaning `G` lives in the universe `Type 0`.
-Now ask: does `Group` itself have a `Group`-structure? Is `Group Int` an
-element of some `Group (Group Int)`? Set aside whether that would even
-be meaningful, and notice a more basic obstruction. `Group Int` is a `Type`
-(check `#check (Group Int : Type)` — it type-checks, since a `structure`
+The natural question: does `Group` itself have a `Group`-structure? Is `Group Int` an
+element of some `Group (Group Int)`? Setting aside whether that would even
+be meaningful, a more basic obstruction is evident. `Group Int` is a `Type`
+(`#check (Group Int : Type)` type-checks, since a `structure`
 applied to its parameters is itself a type), but `Group`, the type
 *constructor* itself (before applying it to a carrier `G`), is not a
-`Type` at all. It's a function `Type → Type`, that is, a term of type
+`Type` at all. It is a function `Type → Type`, that is, a term of type
 `Type → Type`.
 
 *Why* does `Type → Type` live in `Type 1` rather than back in `Type 0`?
-This isn't just a bookkeeping choice. It follows from the specific
+This is not merely a bookkeeping choice. It follows from the specific
 typing rule Lean uses for building function (Π-)types out of universes:
 forming `A → B` when `A : Type i` and `B : Type j` produces a term of type
 `Type (max i j)`, *unless* `B`'s universe already needs to be at least one
@@ -54,22 +54,22 @@ Concretely here, `A := Type` (living in `Type 1`, since `Type : Type 1`)
 and `B := Type` again, so `Type → Type` itself lands in `Type 1`. [Appendix
 B §4](../15-lambda-calculus/04-dependent-types-coc.md) states this rule
 precisely as one line of the calculus of constructions. The short version
-for now is that `Group` isn't even a candidate carrier type for its own
-construction. It's one universe level too high, exactly because it is a
+is that `Group` is not even a candidate carrier type for its own
+construction. It sits one universe level too high, exactly because it is a
 function *out of* `Type` itself, not out of some ordinary `Type 0` type
 like `Nat`.
 
 ### Universe polymorphism (a brief note)
 
-You will occasionally see a definition written with an explicit universe
+A definition is occasionally written with an explicit universe
 variable, e.g. `structure Group.{u} (G : Type u) where ...`. This makes
 the definition **universe polymorphic**: usable the same way whether `G`
 lives in `Type 0`, `Type 1`, or any level, rather than pinned to `Type 0`
 specifically. This book fixes everything at `Type` (that is, `Type 0`) for
-simplicity, since none of the groups, rings, or modules we build need
+simplicity, since none of the groups, rings, or modules built here need
 anything larger. Mathlib's actual definitions are universe polymorphic
-throughout, exactly because they must accommodate constructions (like
-"the group of automorphisms of a large category") that genuinely don't fit
+throughout, exactly because they must accommodate constructions (such as
+"the group of automorphisms of a large category") that genuinely do not fit
 in `Type 0`.
 
 > Read more: [Appendix B §4](../15-lambda-calculus/04-dependent-types-coc.md)

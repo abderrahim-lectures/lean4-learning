@@ -13,7 +13,7 @@ def origin3D : Point3D := { x := 0, y := 0, z := 0 }
 #eval origin3D.x   -- inherited field, 0
 ```
 
-We'll use `extends` later: a `CommGroup` (commutative group) will `extend`
+`extends` is used later: a `CommGroup` (commutative group) will `extend`
 `Group` with one extra axiom (commutativity), instead of repeating all the
 group fields.
 

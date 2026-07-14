@@ -14,7 +14,7 @@ theorem modus_ponens {P Q : Prop} : (P → Q) → P → Q := by
 
 ### [`exact`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): close the goal with an exact term
 
-Used above. If you have a term that proves the goal exactly, `exact` finishes it.
+Used above. Given a term that proves the goal exactly, `exact` finishes it.
 
 ### [`apply`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): apply a function/lemma, leaving new goals for its arguments
 
@@ -43,13 +43,13 @@ theorem rw_at_example (a b c : Nat) (h1 : a = b) (h2 : a + c = 10) : b + c = 10 
   exact h2
 ```
 
-Every `rw` you've seen so far rewrites the *goal*. Adding `at h` instead
+Every `rw` seen so far rewrites the *goal*. Adding `at h` instead
 rewrites a *hypothesis* `h`, in place, using the same left-to-right
 substitution rule. This is just as common as rewriting the goal itself.
 Chapter 9's ring proofs, for instance, use `rw [...] at h1`/`at h2`
 repeatedly to reshape a hypothesis into the exact form needed before
 citing it with `exact`. Read `rw [h1] at h2` as "wherever `h1`'s left side
-appears inside `h2`, replace it with `h1`'s right side". The direction
+appears inside `h2`, replace it with `h1`'s right side." The direction
 and substitution rule are identical to ordinary `rw`. Only the *target*
 (a named hypothesis, not the goal) is different.
 

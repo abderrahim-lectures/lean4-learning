@@ -4,7 +4,7 @@
 
 ---
 
-We follow the same "data, then axioms" build as `Group` and `Ring`:
+The same "data, then axioms" build used for `Group` and `Ring` applies here:
 
 ```lean
 structure Module (R : Type) (Rg : Ring R) (M : Type) where
@@ -20,9 +20,9 @@ Field by field:
 
 - `addGrp : CommGroup M` — the underlying abelian group of the module,
   exactly as `addGrp` played this role inside `Ring` (Chapter 8). Note that
-  `Module` takes `Rg : Ring R` as an *explicit argument*, not a field. A
-  module is always a module *over* a specific, already-given ring. So `Rg`
-  is a parameter of the whole structure, not data bundled inside it.
+  `Module` takes `Rg : Ring R` as an *explicit argument*, not a field: a
+  module is always a module *over* a specific, already-given ring, so `Rg`
+  is a parameter of the whole structure rather than data bundled inside it.
 - `smul : R → M → M` — the scalar action, `r • m` in ordinary notation.
 - `smul_add`, `add_smul` — the two distributivity laws (M1), (M2). Read
   them as "scalar over module-sum" and "ring-sum over scalar". This is the

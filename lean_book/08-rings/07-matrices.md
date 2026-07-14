@@ -4,19 +4,19 @@
 
 ---
 
-`intRing` above is commutative (`Int.mul_comm` exists, even though we didn't
-wire it into `Ring`'s fields), so it doesn't test the fact that `Ring`
+`intRing` above is commutative (`Int.mul_comm` exists, even though it was not
+wired into `Ring`'s fields), so it does not test the fact that `Ring`
 deliberately does *not* assume `mul_comm`. Matrices do: $M_2(\mathbb{Z})$,
 the ring of $2\times 2$ integer matrices under matrix addition and
-multiplication, has $AB \neq BA$ in general. It's also a good test
+multiplication, has $AB \neq BA$ in general. It is also a good test
 of [`mul_assoc`](https://loogle.lean-lang.org/?q=mul_assoc), since matrix multiplication's associativity is not a
 one-line library lemma call. It genuinely takes some work, which is the
-point of walking through it.
+point of working through it.
 
-We represent a $2 \times 2$ matrix as a `structure` with four entries.
-(There are more scalable representations — `Fin 2 → Fin 2 → Int`, or
+A $2 \times 2$ matrix is represented as a `structure` with four entries.
+(More scalable representations exist — `Fin 2 → Fin 2 → Int`, or
 Mathlib's general [`Matrix`](https://loogle.lean-lang.org/?q=Matrix) — but four named fields keep every computation
-fully explicit, which is what we want here.)
+fully explicit, which is the goal here.)
 
 ```lean
 structure Mat2 where
@@ -93,8 +93,8 @@ $M_2(\mathbb{Z})$.
 
 ### Why matrix multiplication is noncommutative — check it computationally first
 
-Before building the `Ring Mat2` instance, let's confirm the very fact that
-is the reason for using this example at all:
+Before building the `Ring Mat2` instance, consider the very fact that
+motivates this example:
 
 ```lean
 def X : Mat2 := ⟨1, 1, 0, 1⟩
@@ -104,11 +104,11 @@ def Y : Mat2 := ⟨1, 0, 1, 1⟩
 #eval Mat2.mul Y X    -- ⟨1, 1, 1, 2⟩
 ```
 
-`#eval` here is doing real work: it's a two-line proof by computation that
+`#eval` here is doing real work: it is a two-line proof by computation that
 `mul` is not commutative. This is cheaper than any hand-written counterexample
-proof, and it's exactly the kind of thing to try before committing to a
-`theorem`. If you ever *do* want `¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X` as
-a theorem, this computed pair `(X, Y)` is your witness.
+proof, and it is exactly the kind of thing to try before committing to a
+`theorem`. Should `¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X` be needed as
+a theorem, this computed pair `(X, Y)` serves as the witness.
 
 **Mathematical reading.** This is the standard counterexample to
 commutativity of matrix multiplication: with $X =
@@ -122,7 +122,7 @@ so $M_2(\mathbb{Z})$ is a *non*commutative ring. The pair $(X, Y)$ is a
 concrete witness for the existential $\exists X, Y,\ XY \neq YX$.
 
 **Mathlib equivalent.** Mathlib's `Matrix (Fin 2) (Fin 2) Int` is exactly
-$M_2(\mathbb{Z})$, already a (noncommutative) `Ring` instance. There's no `Mat2`/
+$M_2(\mathbb{Z})$, already a (noncommutative) `Ring` instance. There is no `Mat2`/
 `Mat2.ext`/`add4_reorder` needed, and [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) works directly here (unlike
 `Mat2`) because `Matrix` over `Int` already has `DecidableEq`:
 
@@ -281,19 +281,19 @@ def mat2Ring : Ring Mat2 where
       rw [Int.add_mul, Int.add_mul, add4_reorder]
 ```
 
-Two points are worth pulling out:
+Two points are worth noting:
 
 1. **Every proof obligation here is spelled out explicitly, with no automation**
    — matching the rest of the book, and unlike an earlier draft of this
    section, which reached for Mathlib's `ring` tactic (a decision procedure
    for commutative-ring identities). Since this book never imports
-   Mathlib, `ring` isn't actually available. Each entry equation is instead
+   Mathlib, `ring` is not actually available. Each entry equation is instead
    unfolded by hand through `Int.add_mul`/`Int.mul_add`/`Int.mul_assoc` down to
    a sum of the same four cross terms in a different order, and
    `add4_reorder` (proved once, above, and reused twelve times) supplies
    exactly the regrouping needed to match them. The `Ring Mat2` bundle
-   itself is still noncommutative — nothing here is deciding *that* for
-   you. You supplied `mul := Mat2.mul`, and the `mul_comm`-shaped fact is
+   itself is still noncommutative — nothing here decides *that*
+   automatically. `mul := Mat2.mul` is supplied directly, and the `mul_comm`-shaped fact is
    simply absent from `Ring`'s fields, exactly as Chapter 8's exercise on
    `left_distrib`/`right_distrib` anticipated.
 2. **This is the general pattern for "ring of $n\times n$ matrices over a
@@ -304,7 +304,7 @@ Two points are worth pulling out:
    soon as $n \geq 2$, regardless of whether $S$ is commutative. Matrix
    rings are the standard first example that any general ring theory
    (Chapter 9's theorems, Mathlib's `Ring` hierarchy) has to handle
-   *without* assuming commutativity, which is exactly why `Ring` doesn't
+   *without* assuming commutativity, which is exactly why `Ring` does not
    bake in `mul_comm`.
 
 **Mathematical reading.** `mat2Ring` is the ring $M_2(\mathbb{Z})$ assembled
@@ -323,7 +323,7 @@ $M_n(S)$ is noncommutative for $n \ge 2$.
 **Mathlib equivalent, continued.** Where the book spends most of this
 section deriving `mul_assoc` for `Mat2` by hand (the `add4_reorder` helper,
 reused twelve times across all five axioms), Mathlib already proves
-associativity of matrix multiplication generically. It's simply
+associativity of matrix multiplication generically. It is simply
 `mul_assoc` again, the same lemma name as every other ring in this
 chapter's Mathlib boxes:
 
@@ -336,7 +336,7 @@ And where the book's `mat2Ring` needs a custom `Int`-arithmetic rewrite
 chain for each of `mul_assoc`/`one_mul`/`mul_one`/`left_distrib`/
 `right_distrib`, Mathlib has an automated decision procedure for exactly
 this class of goal, [`noncomm_ring`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) — the noncommutative-ring counterpart
-of the `ring` tactic that the book's own note above says isn't available
+of the `ring` tactic that the book's own note above states is not available
 without Mathlib:
 
 ```lean

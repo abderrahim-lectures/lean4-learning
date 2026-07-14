@@ -55,15 +55,15 @@ others need only one.
 For a general (non-abelian) group, `Grp.op (Grp.inv a) a = Grp.id` and
 `Grp.op a (Grp.inv a) = Grp.id` are, in principle, independent statements.
 `op` need not be commutative, so nothing forces "inverse on the left" to
-equal "inverse on the right" unless you state (or prove) both separately.
-Chapter 7, Theorem 2 (`left_inverse_unique`) shows something subtler:
-*given* both axioms hold for the *distinguished* `Grp.inv`, any *other*
+equal "inverse on the right" unless both are stated (or proved) separately.
+Chapter 7, Theorem 2 (`left_inverse_unique`) establishes something subtler:
+given that both axioms hold for the distinguished `Grp.inv`, any other
 element that is merely a left inverse of `a` must already equal
 `Grp.inv a`. In other words, left inverses are automatically unique once
-two-sided inverses are known to exist. That's what lets one-sided
+two-sided inverses are known to exist. This is what lets one-sided
 inverse-uniqueness arguments substitute for commutativity in that specific
 proof. It does not mean `inv_left` and `inv_right` were redundant as
-*axioms* — only that, once both hold, "a" left inverse coincides with
+axioms — only that, once both hold, "a" left inverse coincides with
 "the" two-sided one.
 
 ---

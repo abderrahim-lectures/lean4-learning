@@ -4,17 +4,17 @@
 
 ---
 
-Here is the single biggest efficiency gain, bigger than any tactic choice:
-**prove the general fact once, as its own named lemma, as soon as you
-notice you would otherwise repeat an argument.** Chapter 7's
+The single biggest efficiency gain, greater than any tactic choice, is to
+**prove the general fact once, as its own named lemma, as soon as an
+argument would otherwise be repeated.** Chapter 7's
 `left_inverse_unique` is the running example. Theorem 3 (`inv_op`) and
 this chapter's `neg_one_mul` and `neg_mul` all reduce to it, instead of
-re-deriving "uniqueness of inverses" inline. Signs that you should factor
-out a lemma:
+re-deriving "uniqueness of inverses" inline. Signs that a lemma should be
+factored out:
 
-- You are about to repeat a [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain you already wrote for a different
-  but structurally identical goal. Stop, and instead state the shared
-  shape as its own `theorem`/`have`, then `apply`/`exact` it in both
+- A [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain already written for a different
+  but structurally identical goal is about to be repeated. In that case, the shared
+  shape should instead be stated as its own `theorem`/`have`, then applied via `apply`/`exact` in both
   places.
 - A sub-goal deep in a proof would itself be a reasonable, independently
   statable mathematical fact (for example, "an element that equals its
@@ -23,9 +23,9 @@ out a lemma:
   reads as a short chain of named facts instead of one long
   undifferentiated block.
 
-This is the same judgment call you would make writing ordinary code:
-extract a helper when — and only when — you notice real duplication or a
-genuinely separate sub-claim, not ahead of time "just in case."
+This is the same judgment call made writing ordinary code:
+extract a helper when — and only when — real duplication or a
+genuinely separate sub-claim is present, not ahead of time "just in case."
 
 ## Next
 

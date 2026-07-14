@@ -6,19 +6,18 @@
 
 **Claim.** `Grp.inv (Grp.op a b) = Grp.op (Grp.inv b) (Grp.inv a)`.
 
-**Finding the proof.** This *looks* like it should again be "chain of
-equalities," but there's a shortcut once you recognize that the goal's
-shape matches a theorem you already have. The claim states that some
-element (`Grp.inv (Grp.op a b)`) equals some other expression built from
-`a`, `b`. Theorem 2 already tells you: *to show `x = Grp.inv y`, it's
-enough to show `x` is a left inverse of `y`*. In other words, you can
-reduce an inverse-computation goal to a single equation
-`Grp.op x y = Grp.id`, which is usually easier to attack directly with
-`assoc`/`inv_left`/`inv_right` than staring at `inv (...)`.
-This is a general and reusable move: **once you've proved a
-uniqueness/characterization lemma, use it to turn "compute this thing"
-goals into "verify this thing satisfies the characterizing property"
-goals** — almost always a simpler target.
+**Finding the proof.** This *appears* to again call for a chain of
+equalities, but a shortcut emerges once the goal's shape is recognized to
+match a theorem already in hand. The claim states that some element
+(`Grp.inv (Grp.op a b)`) equals some other expression built from `a`, `b`.
+Theorem 2 already establishes: *to show `x = Grp.inv y`, it suffices to
+show `x` is a left inverse of `y`*. In other words, an inverse-computation
+goal reduces to a single equation `Grp.op x y = Grp.id`, which is usually
+easier to attack directly with `assoc`/`inv_left`/`inv_right` than
+`inv (...)` taken at face value. This is a general and reusable move:
+**once a uniqueness/characterization lemma is proved, it can turn "compute
+this thing" goals into "verify this thing satisfies the characterizing
+property" goals** — almost always a simpler target.
 
 Applying that here (with the goal read backwards, `apply Eq.symm` first, so
 `left_inverse_unique` unifies against the "b" slot), the remaining goal is
@@ -66,10 +65,10 @@ rather than by direct computation.
 ### The payoff, made concrete: applying `inv_op` to a real group
 
 Chapter 6 promised that a theorem proved once, generically, is available
-"for free" on every group you build afterward. Here is that promise
-delivered: `inv_op`, proved above for an *arbitrary* `Grp : Group G`,
-applies immediately to `perm3Group` (Chapter 6's non-abelian permutation
-group), with no new proof required:
+"for free" on every group built afterward. Here is that promise delivered:
+`inv_op`, proved above for an *arbitrary* `Grp : Group G`, applies
+immediately to `perm3Group` (Chapter 6's non-abelian permutation group),
+with no new proof required:
 
 ```lean
 example : perm3Group.inv (perm3Group.op swap01 cycle012) =
@@ -77,9 +76,9 @@ example : perm3Group.inv (perm3Group.op swap01 cycle012) =
   inv_op perm3Group swap01 cycle012
 ```
 
-That's the entire proof: a single application of the already-proved
+This is the entire proof: a single application of the already-proved
 `inv_op`, instantiated at `Grp := perm3Group`, `a := swap01`,
-`b := cycle012`. You can also check it computationally, pointwise, on
+`b := cycle012`. It can also be checked computationally, pointwise, on
 every element of `Fin 3`:
 
 ```lean
@@ -93,7 +92,7 @@ every element of `Fin 3`:
 
 Both sides agree on every input, exactly what `inv_op`'s proof
 guarantees, now witnessed by direct computation rather than taken on
-faith. This is the concrete content of "prove it once, get it for free
+faith. This is the concrete content of "prove it once, obtain it for free
 everywhere": nothing about `swap01`, `cycle012`, or the fact that
 `perm3Group` is non-abelian required revisiting `inv_op`'s proof at all.
 
@@ -105,8 +104,8 @@ example {G : Type*} [Group G] (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := mul_
 ```
 
 And the same payoff Chapter 7 draws out concretely for `perm3Group` applies
-here too, against Mathlib's own $S_3$ from Chapter 6 §4. There's no new
-proof, just an application of `mul_inv_rev` at `Equiv.Perm (Fin 3)`:
+here too, against Mathlib's own $S_3$ from Chapter 6 §4. There is no new
+proof, only an application of `mul_inv_rev` at `Equiv.Perm (Fin 3)`:
 
 ```lean
 example : (swap01' * cycle012')⁻¹ = cycle012'⁻¹ * swap01'⁻¹ :=
@@ -122,10 +121,10 @@ example : (swap01' * cycle012')⁻¹ = cycle012'⁻¹ * swap01'⁻¹ :=
 
 Both sides agree on every input: the same six values, in the same order,
 as the book's own `perm3Group` check above. Where the book's `inv_op`
-needed a five-line `rw` chain (regroup via `assoc`, cancel via `inv_left`,
-regroup again, cancel again), Mathlib's version needs no proof to write at
-all. `mul_inv_rev` is already proved, once, generically over every
-`Group`.
+required a five-line `rw` chain (regroup via `assoc`, cancel via
+`inv_left`, regroup again, cancel again), Mathlib's version requires no
+proof to write at all. `mul_inv_rev` is already proved, once, generically
+over every `Group`.
 
 ---
 

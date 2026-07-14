@@ -6,10 +6,10 @@
 
 Chapter 3 introduced the Curry–Howard correspondence by translating logic
 directly into Lean types. It assumed that "propositional logic," "$\vdash$,"
-and "natural deduction" were at least half-familiar to you. If they
-weren't, this section is the missing prerequisite. It is a self-contained
+and "natural deduction" were at least half-familiar to the reader. If they
+were not, this section is the missing prerequisite. It is a self-contained
 recap of standard mathematical logic — the *pre-Lean, pre-type-theory*
-version, exactly as it's presented in a first logic course — so that
+version, exactly as it is presented in a first logic course — so that
 Chapter 3's table has something concrete on its "Logic" side to refer back
 to. Nothing here mentions Lean, types, or programs; that translation is
 entirely Chapter 3's job, and Appendix B §§1–4 build the calculus those
@@ -18,8 +18,8 @@ types compile down to. This section only fixes what the logic itself is.
 ### Propositional logic: syntax
 
 Fix a set of **propositional variables** (atomic statements) $p, q, r,
-\dots$. These stand for sentences whose internal structure we don't
-analyze — "it is raining," "$n$ is prime," anything with a definite truth
+\dots$. These stand for sentences whose internal structure is not
+analyzed — "it is raining," "$n$ is prime," anything with a definite truth
 value. **Formulas** are built from these using the **connectives**:
 
 $$
@@ -100,21 +100,21 @@ $$
 \text{($\bot$-elim, ex falso)}\ \ \frac{\Gamma \vdash \bot}{\Gamma \vdash \varphi}
 $$
 
-Read $\Rightarrow$-intro out loud: "if, granting $\varphi$ as an extra
-hypothesis, you can derive $\psi$, then (discharging that hypothesis) you
+$\Rightarrow$-intro reads: "if, granting $\varphi$ as an extra
+hypothesis, $\psi$ can be derived, then (discharging that hypothesis) one
 may conclude $\varphi \Rightarrow \psi$ outright." This is exactly the
 ordinary mathematical move "assume $\varphi$; ... ; therefore $\varphi
 \Rightarrow \psi$," turned into an explicit, checkable rule. It is
 *exactly* what Chapter 3 identified with writing a Lean function
 `fun (hp : P) => ...`. Each rule above is stated once so it can be pointed
-to by name. You do not need to memorize the list — just recognize that a
-"natural deduction proof" is a *tree* built by chaining these rules, with
+to by name. The list need not be memorized — the point is to recognize a
+"natural deduction proof" as a *tree* built by chaining these rules, with
 leaves at hypotheses in $\Gamma$ and its root at the conclusion $\varphi$.
 
 **Worked example: proving $p \Rightarrow (q \Rightarrow p)$.** Assume $p$
 as a hypothesis, aiming to apply $\Rightarrow$-intro at the end. Within
 that, assume $q$ too. The conclusion $p$ is now already among the
-hypotheses, so it's derived for free. Discharge the $q$-hypothesis via
+hypotheses, so it is derived for free. Discharge the $q$-hypothesis via
 $\Rightarrow$-intro to get $q \Rightarrow p$, then discharge the
 $p$-hypothesis via $\Rightarrow$-intro again to get
 $p \Rightarrow (q \Rightarrow p)$. As a derivation tree, with hypotheses
@@ -127,7 +127,7 @@ $$
 
 [Chapter 3 §3](../03-propositions-and-proofs/03-implication.md) names this
 exact formula "implication is a function type" and
-gives you the corresponding Lean term directly: `fun hp => fun hq => hp`.
+gives the corresponding Lean term directly: `fun hp => fun hq => hp`.
 The two are not just similar — under Curry–Howard they are literally the
 same object, described twice.
 
@@ -149,9 +149,9 @@ every case" as interchangeable for propositional logic:
 Soundness is usually the easy direction to prove (check that each rule
 preserves truth); completeness is the harder theorem. Neither is used
 again in this book, but together they are the reason a working
-mathematician can trust that "prove it" and "it's necessarily true"
+mathematician can trust that "prove it" and "it is necessarily true"
 describe the same territory for propositional (and first-order) logic.
-This guarantee stops holding once you move to expressive enough systems. (Gödel's *incompleteness* theorems are a different and unrelated
+This guarantee stops holding once expressive enough systems are reached. (Gödel's *incompleteness* theorems are a different and unrelated
 pair of results, despite the similar name — they show arithmetic itself
 cannot be both complete and consistent.)
 
@@ -176,8 +176,8 @@ naming an arbitrary such $x$ and deriving the goal for it. This section's
 job so far has been to show that the *quantifiers themselves*, and the
 rules governing them, are standard first-order logic with no Lean involved
 yet. The translation into Lean is deliberately left for the next
-paragraph, so you can see clearly which half is "ordinary logic you may
-already know" and which half is "Curry–Howard's doing."
+paragraph, so that it is clear which half is "ordinary logic already
+familiar to the reader" and which half is "Curry–Howard's doing."
 
 **First-order logic and Curry–Howard.** Chapter 3's table translated the
 *propositional* connectives ($\wedge, \vee, \Rightarrow, \neg$) into type
@@ -198,7 +198,7 @@ a different proposition for each $x$:
 Read the first row concretely: $\forall x, P(x)$ becomes a *dependent*
 function type precisely because its return type, $P(x)$, depends on the
 very argument $x$ being fed in. An ordinary (non-dependent) function type
-`α → β` wouldn't be expressive enough, since `β` there is one fixed type,
+`α → β` would not be expressive enough, since `β` there is one fixed type,
 not one proposition per `x`. This is exactly [Chapter 1
 §3](../01-basics/03-dependent-types.md)'s "dependent
 types" made concrete for the special case where the family being depended
@@ -231,8 +231,8 @@ regardless of whether you can exhibit a witness or decide the matter
 constructively. Intuitionistic logic — the system natural deduction *as
 given above* actually is, with no extra axiom added — rejects it as a
 general principle: $\varphi \vee \neg\varphi$ is not derivable from the
-rules above for an arbitrary $\varphi$, only for specific $\varphi$ you can
-actually settle one way or the other. ([Chapter 3
+rules above for an arbitrary $\varphi$, only for specific $\varphi$ that
+can actually be settled one way or the other. ([Chapter 3
 §4](../03-propositions-and-proofs/04-and-or-not.md)'s [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) works
 because `1 = 2` happens to be *decidable*, not because excluded middle is
 assumed.)
@@ -240,11 +240,11 @@ assumed.)
 This is not just a side note: it is the precise reason Curry–Howard
 works as cleanly as it does. A type-theoretic proof term is a genuine,
 *constructive* witness. A Lean proof of $\exists x, P\, x$ computes to an
-actual pair `⟨a, h⟩` you could `#eval` and inspect, and that only makes
+actual pair `⟨a, h⟩` that could be inspected via `#eval`, and that only makes
 sense for a logic where "true" means "constructible" — which is exactly
 intuitionistic logic. (Lean's core logic is intuitionistic for
 precisely this reason. Mathlib freely adds classical excluded middle as an
-axiom for propositions where a witness isn't needed, but the base calculus
+axiom for propositions where a witness is not needed, but the base calculus
 this book's Curry–Howard table describes in Chapter 3 does not include it.)
 Keep this fork in mind when reading [Chapter 3
 §4](../03-propositions-and-proofs/04-and-or-not.md)'s remark that Lean has

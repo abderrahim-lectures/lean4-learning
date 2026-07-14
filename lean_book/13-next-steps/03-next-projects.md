@@ -10,14 +10,14 @@
    available as notation.
 2. Finish the path-algebra construction sketched in Chapter 11's Exercise 3:
    formal $k$-linear combinations of paths, with multiplication by
-   concatenation (and $0$ when endpoints don't match) — and notice this is
+   concatenation (and $0$ when endpoints do not match) — observe that this is
    precisely "the free `Module` over $k$ on the set of paths," tying
    Chapter 10 and Chapter 11 together.
 3. Prove that a quiver with no oriented cycles has a *finite-dimensional*
    path algebra (one polynomial-flavored way to make this precise: bound
    path length by the number of vertices) — "finite-dimensional" here means
    exactly Chapter 10's `Module` notion of a finite spanning/basis set.
-4. Once comfortable, explore Mathlib's `CategoryTheory.Quiver` and compare
+4. Once the type-class style is familiar, explore Mathlib's `CategoryTheory.Quiver` and compare
    its definitions line-by-line against this book's `Quiver`/`Path`.
 5. Redo `Module`'s "path algebra representations are modules over $kQ$"
    remark (end of Chapter 10) concretely: build the path algebra $kQ$ for

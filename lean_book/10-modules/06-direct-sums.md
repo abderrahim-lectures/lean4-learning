@@ -85,7 +85,7 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
     · exact ModN.one_smul x.snd
 ```
 
-`congr 1` is a tactic worth calling out, since this is its first
+`congr 1` is a tactic worth noting, as this is its first
 appearance. Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
 `congr 1` reduces it to the componentwise goals `a1 = b1` and `a2 = b2`.
 This is the categorical fact that a product's equality is checked
@@ -98,7 +98,7 @@ inside a single opaque equality on pairs. Note the
 `show DirectSum.mk _ _ = DirectSum.mk _ _` line before each `congr 1`:
 without it, the goal is stated in terms of the anonymous-constructor
 lambda (`op := fun x y => ⟨...⟩`) rather than the visible `DirectSum.mk`
-application. `congr 1` cannot reliably split a goal it doesn't recognize
+application. `congr 1` cannot reliably split a goal it does not recognize
 as "one constructor applied to arguments on both sides" — a real gap that
 the compiler catches immediately if the `show` line is left out.
 
@@ -116,7 +116,7 @@ $\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N =
 
 ### A concrete instance: $\mathbb{Z} \oplus \mathbb{Z}$
 
-Instantiating the generic construction costs nothing beyond supplying two
+Instantiating the generic construction requires nothing beyond supplying two
 modules — here, `intZModule` twice.
 
 ```lean
@@ -172,7 +172,7 @@ back), so taking `.fst` of a sum is definitionally the same as summing the
 `.fst`s. No arithmetic argument is needed, only unfolding.
 
 **Mathlib equivalent, continued.** The projection `proj1` is, again, not
-something you need to build. Mathlib's [`LinearMap.fst`](https://loogle.lean-lang.org/?q=LinearMap.fst) already is $\pi_1$,
+something that needs to be built. Mathlib's [`LinearMap.fst`](https://loogle.lean-lang.org/?q=LinearMap.fst) already is $\pi_1$,
 generic over any two modules over any ring:
 
 ```lean

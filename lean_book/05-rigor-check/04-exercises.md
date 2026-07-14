@@ -17,7 +17,7 @@
    `#eval opTwiceTC (3 : Int)` works with no explicit instance argument.
 3. In one or two sentences, explain why `Type → Type` (the type of `Group`
    itself, before applying it to a carrier) must live in `Type 1` rather
-   than `Type 0` — tie your answer back to the Russell's-paradox
+   than `Type 0` — tie the answer back to the Russell's-paradox
    obstruction this chapter described.
 4. Give an example (distinct from `my_add_comm`) of a true propositional
    equality between two `Nat` expressions that is *not* provable by `rfl`
