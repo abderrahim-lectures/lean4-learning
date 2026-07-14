@@ -7,24 +7,26 @@
 **Claim.**
 `Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a`.
 
-**Finding the proof.** Same reduction move as Theorem 3 of Chapter 7:
-"show $x = -a$" is exactly the shape of `left_inverse_unique`'s conclusion.
-So instead of computing $(-1)\cdot a$ directly, reduce the goal to
-verifying $x$ is a left additive-inverse of $a$, i.e.
-$((-1)\cdot a) + a = 0$. That target is now purely about combining two
-products with a common right factor $a$, which is what `right_distrib`
-(read backwards) is *for*: $((-1)\cdot a) + (1 \cdot a) = ((-1) + 1)\cdot a$.
-Since $(-1) + 1 = 0$ (an additive-group fact, `inv_left`) and $0 \cdot a = 0$
-(the mirror of Theorem 1 — see the exercises), the whole thing collapses.
+**Finding the proof.** This employs the same reduction move as Theorem 3
+of Chapter 7: "show $x = -a$" is exactly the shape of
+`left_inverse_unique`'s conclusion. Thus, instead of computing $(-1)\cdot a$
+directly, we reduce the goal to verifying that $x$ is a left
+additive-inverse of $a$, i.e. $((-1)\cdot a) + a = 0$. That target is now
+purely about combining two products with a common right factor $a$, which
+is what `right_distrib` (read backwards) is for:
+$((-1)\cdot a) + (1 \cdot a) = ((-1) + 1)\cdot a$. Since $(-1) + 1 = 0$ (an
+additive-group fact, `inv_left`) and $0 \cdot a = 0$ (the mirror of
+Theorem 1 — see the exercises), the whole expression collapses.
 
-Stated generally, the key thing to notice is: **a goal of the form
+Stated generally, the pattern to notice is this: **a goal of the form
 `p * a + q * a = ...` is a `right_distrib` target waiting to happen, read
-right-to-left**. Scan any additive expression of two products sharing a
-factor for this pattern before trying anything else.
+right-to-left**. Any additive expression of two products sharing a factor
+should be scanned for this pattern before anything else is attempted.
 
-The proof below needs $0\cdot a = 0$, the mirror image of Theorem 1
-($a\cdot 0 = 0$), with `right_distrib` in place of `left_distrib`. So we
-prove that first, mechanically mirroring Theorem 1's proof line by line:
+The proof below requires $0\cdot a = 0$, the mirror image of Theorem 1
+($a\cdot 0 = 0$), with `right_distrib` in place of `left_distrib`. We
+therefore prove that first, mechanically mirroring Theorem 1's proof line
+by line:
 
 ```lean
 theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id := by
@@ -46,10 +48,10 @@ theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id := by
   exact h2.symm
 ```
 
-Notice this is Theorem 1's proof with every `left_distrib`/`a` swapped for
-`right_distrib`/(argument order reversed). This confirms that the "mirror
-image" claim isn't just a figure of speech — it's a literal, symmetrical
-match between the two proofs. Now the main theorem:
+Observe that this is Theorem 1's proof with every `left_distrib`/`a`
+swapped for `right_distrib`/(argument order reversed). This confirms that
+the "mirror image" claim is not merely a figure of speech, but a literal,
+symmetrical match between the two proofs. The main theorem follows:
 
 ```lean
 theorem neg_one_mul (a : R) :
@@ -69,8 +71,8 @@ theorem neg_one_mul (a : R) :
   exact mul_zero_left Rg a
 ```
 
-Two things are worth noting about the proof's shape, both found by actually
-compiling it:
+Two features of the proof's shape are worth noting, both discovered by
+actually compiling it:
 
 - **No `apply Eq.symm` at the start.** The goal
   `Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a`
@@ -79,11 +81,11 @@ compiling it:
   `Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a`). Flipping it with `Eq.symm`
   first produces the *wrong* shape, and `apply left_inverse_unique` then
   fails to unify. When `apply`ing a lemma whose conclusion is an equality,
-  check which side is which *before* reaching for `Eq.symm`, instead of
-  adding it automatically.
-- **`congrArg`, not `conv_lhs => rw [...]`.** Plain `rw [h]` here would try
-  to rewrite *every* occurrence of `a` in the goal, including the one
-  inside `mul (inv one) a` that must stay put. This is exactly the same kind of
+  one should check which side is which *before* reaching for `Eq.symm`,
+  rather than adding it automatically.
+- **`congrArg`, not `conv_lhs => rw [...]`.** Plain `rw [h]` here would
+  rewrite *every* occurrence of `a` in the goal, including the one inside
+  `mul (inv one) a` that must stay put. This is exactly the same kind of
   problem as Theorem 1's `h2` on the previous page. `congrArg f h` avoids
   it by directly constructing "apply `f` to both sides of `h`" as its own
   standalone fact (`step`, above), which is then used with a single,
@@ -98,9 +100,10 @@ $$
 $$
 using $1\cdot a = a$, `right_distrib` (backwards), $-1 + 1 = 0$, and the
 absorbing law $0\cdot a = 0$. It expresses that left multiplication
-$x \mapsto x\cdot a$ is a group homomorphism, so it commutes with negation:
-$(-1)\cdot a = -(1\cdot a) = -a$. So multiplication by $-1$ *is*
-the negation map, which is the ring-theoretic source of "$-a = (-1)a$."
+$x \mapsto x\cdot a$ is a group homomorphism, hence it commutes with
+negation: $(-1)\cdot a = -(1\cdot a) = -a$. Thus multiplication by $-1$
+*is* the negation map, which is the ring-theoretic source of
+"$-a = (-1)a$."
 
 **Mathlib equivalent.** Both `mul_zero_left` (the mirror lemma this proof
 depends on) and the sign rule itself are already in Mathlib, again under

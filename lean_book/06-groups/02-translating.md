@@ -4,7 +4,7 @@
 
 ---
 
-We build this up piece by piece rather than writing the whole thing at once.
+The construction proceeds piece by piece rather than all at once.
 
 **Step 1 — just the data**, no axioms yet:
 
@@ -55,10 +55,10 @@ Reading this line by line:
   obligation*: whoever constructs a `Group G` must supply a term that
   proves this statement holds for every `a b c`.
 - The remaining four fields are the identity and inverse axioms. They are
-  split into left and right versions because we haven't assumed
-  commutativity.
+  split into left and right versions because commutativity has not been
+  assumed.
 
-This is the general recipe you'll see throughout the book: **a mathematical
+This is the general recipe used throughout the book: **a mathematical
 structure is data plus proofs, bundled together**, and Lean's `structure`
 mechanism is a direct, literal translation of that idea.
 
@@ -78,10 +78,10 @@ $$
 These fields are propositions (proof-irrelevant), so `Group G` is exactly
 the *subset* of `GroupData G` cut out by the group axioms: the
 $\Sigma$-type $\sum_{d : \mathrm{GroupData}(G)} \mathrm{Axioms}(d)$. This is
-the same $\Sigma$-type you already met in Chapter 3 as "a witness together
+the same $\Sigma$-type already encountered in Chapter 3 as "a witness together
 with a proof about it." Here the witness is a whole bundle of group data
 `d : GroupData G` rather than a single element, and the proof is the
-combination of the five axioms about it. But the shape is identical: it's
+combination of the five axioms about it. The shape is identical: it is
 exactly the pairing a `structure` performs when it bundles data fields with
 proof fields, just as `Group` itself does above. This matches
 the mathematician's way of saying "a group is a set with operations *such

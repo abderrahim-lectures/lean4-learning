@@ -4,7 +4,7 @@
 
 ---
 
-Starting from `#eval` and `def`, we built up, entirely from first
+Starting from `#eval` and `def`, this book built up, entirely from first
 principles (no external library):
 
 - a general `Group` structure, with theorems proved for an arbitrary group
@@ -20,9 +20,9 @@ principles (no external library):
 Every proof in this book was written with explicit `rw`/`have`/`intro`
 steps, each one marked with the axiom or prior theorem that justified it.
 There is no [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), and no unexplained [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/). This is exactly the
-discipline you need to carry into reading (or writing) a real Lean
-library: when something goes wrong, you should be able to point at the
-exact lemma responsible.
+discipline required for reading (or writing) a real Lean
+library: when something goes wrong, the exact lemma responsible should be
+identifiable.
 
 ---
 

@@ -32,11 +32,11 @@ theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
 `h : a = b` finds every occurrence of `a` in the goal and replaces it with
 `b`. Here the goal starts as `a + 1 = b + 1`. After rewriting `a` to `b`, it
 becomes `b + 1 = b + 1`, which `rw` then closes automatically by trying
-`rfl` as its last step. You don't need to write that `rfl` yourself.
+`rfl` as its last step; that final `rfl` need not be written explicitly.
 
 The congruence `congr_example` is the Leibniz principle: $a = b \Rightarrow
 f(a) = f(b)$ for any function $f$ (here $f(x) = x + 1$). This is
-"substitute equals for equals," mechanized. `rw` is your workhorse for this
+"substitute equals for equals," mechanized. `rw` is the workhorse for this
 from here on: nearly every proof from Chapter 4 onward reaches for it
 whenever an equality hypothesis needs to be used inside a larger goal.
 

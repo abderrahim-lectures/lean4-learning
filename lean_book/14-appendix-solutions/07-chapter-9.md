@@ -22,7 +22,7 @@ theorem neg_mul (a b : R) :
 ```
 
 By `left_inverse_unique` (Chapter 7, Theorem 2, applied to the additive
-group `Rg.addGrp.toGroup`), it's enough to show that
+group `Rg.addGrp.toGroup`), it suffices to show that
 `Rg.mul (Rg.addGrp.toGroup.inv a) b` is a left additive-inverse of
 `Rg.mul a b`. `right_distrib` (used backwards) merges the two products into
 `Rg.mul (Rg.addGrp.op (Rg.addGrp.toGroup.inv a) a) b`. Then `inv_left`
@@ -36,18 +36,18 @@ the proof.
 theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl
 ```
 
-[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) suffices here, but it would *not* have sufficed for Theorem 2's
-`neg_one_mul (a : R)`, which took real work. The difference is that `7` is
+[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) suffices here, but it would not have sufficed for Theorem 2's
+`neg_one_mul (a : R)`, which required real work. The difference is that `7` is
 a concrete numeral, not an unknown variable `a`.
 `intRing.addGrp.toGroup.inv` unfolds (by the `def intGroup` from Chapter 6)
 to `fun a => -a`, so `intRing.addGrp.toGroup.inv 7` reduces directly, by
 unfolding and β-reduction alone, to `-7`. No group axiom,
-`left_inverse_unique`, or induction is needed, since there's nothing to
+`left_inverse_unique`, or induction is needed, since there is nothing to
 generalize over: both sides are already closed, concrete terms that
 compute. This is the same "variable vs. concrete numeral" distinction
 Chapter 5 draws between definitional and propositional equality.
-`neg_one_mul` is a genuine theorem (propositional, needing proof) precisely
-because it quantifies over *every* ring `R` and *every* element `a`,
+`neg_one_mul` is a genuine theorem (propositional, requiring proof) precisely
+because it quantifies over every ring `R` and every element `a`,
 whereas `neg_seven` is true by direct computation the moment every symbol
 involved is a closed, already-known term.
 

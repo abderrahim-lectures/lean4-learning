@@ -33,11 +33,11 @@ def cPathGammaBetaAlpha : Path cyclicQuiver 0 0 :=
 ```
 
 Each [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) again discharges a source/target proof obligation that reduces,
-by definition, from the `match` in `cyclicQuiver`. Note that
-`cPathGammaBetaAlpha` is a nontrivial *loop* at vertex `0`. The path
+by definition, from the `match` in `cyclicQuiver`. Observe that
+`cPathGammaBetaAlpha` is a nontrivial loop at vertex `0`. The path
 algebra of a quiver with cycles has elements of arbitrarily high "length,"
 which is exactly why such algebras are usually infinite-dimensional unless
-you impose relations (an "admissible ideal") on the path algebra.
+relations (an "admissible ideal") are imposed on the path algebra.
 
 **2. `theorem append_nil_left`**
 
@@ -70,14 +70,14 @@ it:
 ![The Lean Infoview panel in VS Code, showing the tactic state for the `cons` case of `append_nil_left`'s induction: hypotheses `V A : Type`, `Q : Quiver V A`, `u v vt wt : V`, `a : A`, `h : Q.source a = v`, `h' : Q.target a = wt`, `q' : Path Q u vt`, `ih : (Path.nil u).append q' = q'`, and the goal `(Path.nil u).append (Path.cons a h h' q') = Path.cons a h h' q'`.](../11-path-algebras/images/append-nil-left-infoview.png)
 
 This mirrors `Path.append`'s own recursion, case for case. `Path.append`
-was *defined* by matching on its second argument, so `induction p` (which
+was defined by matching on its second argument, so `induction p` (which
 splits into cases on exactly that argument, generating the matching
 induction hypothesis `ih` in the `cons` case) unfolds the definition
 directly. In the `nil` case, both sides are `Path.nil u` by definition. In
 the `cons` case, unfolding `Path.append`'s defining equation turns the goal
 into `Path.cons a h h' (Path.append (Path.nil u) q') = Path.cons a h h' q'`
 (the [`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) line makes this explicit rather than leaving it to
-elaboration), and `rw [ih]` finishes the job using the induction
+elaboration), and `rw [ih]` completes the proof using the induction
 hypothesis.
 
 **3. Sketch of `PathAlgebra`**
@@ -107,8 +107,8 @@ structure PathAlgebraElem (V A : Type) (Q : Quiver V A) (k : Type) where
 The real finiteness/support bookkeeping (tracking which paths have nonzero
 coefficient) is exactly what makes a full formalization a genuine project
 rather than a one-page exercise. This sketch identifies the three `Ring`
-fields that need it (`addGrp`, `mul`, `one`), and shows why `one` is the
-tricky one when $Q_0$ is infinite.
+fields that require it (`addGrp`, `mul`, `one`), and shows why `one` is the
+subtle one when $Q_0$ is infinite.
 
 ---
 

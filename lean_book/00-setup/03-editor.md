@@ -4,13 +4,13 @@
 
 ---
 
-Install the **Lean 4** extension for VS Code. It gives you:
+Install the **Lean 4** extension for VS Code. It provides:
 
-- Inline goal state (the "Lean infoview") as you write proofs.
-- Jump-to-definition (the editor command that takes you to where a name was
+- Inline goal state (the "Lean infoview") while writing proofs.
+- Jump-to-definition (the editor command that navigates to where a name was
   originally introduced) for anything in core Lean or Mathlib.
-- Red squiggles marking errors inline, plus autocomplete suggestions as you
-  type.
+- Red squiggles marking errors inline, plus autocomplete suggestions during
+  typing.
 
 ---
 

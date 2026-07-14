@@ -4,8 +4,8 @@
 
 ---
 
-Because `intGroup` is a term of type `Group Int`, we can project out its
-fields exactly as in Chapter 2:
+Because `intGroup` is a term of type `Group Int`, its
+fields can be projected out exactly as in Chapter 2:
 
 ```lean
 #eval intGroup.op 3 4        -- 7
@@ -38,10 +38,10 @@ directly:
 ```
 
 This is the same contrast as §3: the book's `intGroup.op`/`.id`/`.inv` are
-projections out of a bundle you built yourself, while Mathlib's `+`/`0`/
+projections out of a bundle built by hand, while Mathlib's `+`/`0`/
 `-` are notation that the typeclass system has already wired to the right
-instance. You never see the underlying "which `AddCommGroup` instance is
-this?" bookkeeping unless you go looking for it (for example, with `#print`).
+instance. The underlying "which `AddCommGroup` instance is
+this?" bookkeeping remains invisible unless sought out (for example, with `#print`).
 
 ---
 

@@ -4,7 +4,7 @@
 
 ---
 
-We want to show, for all `a b : Nat`, that `a + b = b + a`. Recall from
+The goal is to show, for all `a b : Nat`, that `a + b = b + a`. Recall from
 Chapter 1 that `Nat` is built from `zero` and `succ` (successor), and that
 `+` is *defined* by recursion on its second argument:
 
@@ -12,17 +12,17 @@ $$
 a + 0 = a, \qquad a + \mathrm{succ}(k) = \mathrm{succ}(a + k)
 $$
 
-We proceed by induction on `b`, one step at a time.
+The proof proceeds by induction on `b`, one step at a time.
 
 **Base case (`b = 0`).** The goal becomes `a + 0 = 0 + a`.
 
 - The left side, `a + 0`, reduces to `a` directly from the definition of `+`
   above (this fact is recorded in core Lean as the lemma `Nat.add_zero`).
-- The right side, `0 + a`, is *not* immediate from the definition, because the
-  recursion is on the second argument, not the first. So it needs its own
+- The right side, `0 + a`, is *not* immediate from the definition, since the
+  recursion is on the second argument, not the first. It therefore needs its own
   small lemma, `Nat.zero_add : 0 + a = a`, proved separately by induction on
   `a`.
-- Putting both together: `a + 0 = a` and `0 + a = a`, so `a + 0 = 0 + a`.
+- Combining both: `a + 0 = a` and `0 + a = a`, hence `a + 0 = 0 + a`.
 
 ```lean
 theorem my_add_comm (a b : Nat) : a + b = b + a := by
@@ -41,7 +41,7 @@ theorem my_add_comm (a b : Nat) : a + b = b + a := by
 
 Walking through the inductive step slowly:
 
-1. We are trying to prove the statement for `b = Nat.succ k`, assuming it
+1. The statement is to be proved for `b = Nat.succ k`, assuming it
    already holds for `k` (that assumption is `ih : a + k = k + a`).
 2. [`rw [Nat.add_succ]`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) uses the defining equation `a + succ k = succ (a + k)`
    to rewrite the left-hand side of the goal.
@@ -52,8 +52,8 @@ Walking through the inductive step slowly:
    which are literally identical. `rw` closes the goal automatically once the two
    sides match syntactically.
 
-This is the pattern — base case, inductive step, explicit `ih` — that we
-will reuse, slowly and explicitly, for every proof about groups and rings.
+This is the pattern — base case, inductive step, explicit `ih` — that
+recurs, slowly and explicitly, for every proof about groups and rings.
 
 **Mathematical reading.** This is the elementary proof that $(\mathbb{N},
 +)$ is commutative, carried out by induction on the second argument from the
@@ -88,8 +88,8 @@ def add(a, b):
 `add`'s `if isinstance(b, Zero)` branch is the base case. Its recursive
 call `add(a, b.pred)` plays exactly the role `ih` plays in the `succ` branch:
 "assume it already works for the smaller case, build the answer for one
-`Succ` more." The proof isn't just *using* an analogy to recursion, it *is* a
-recursion, just one producing a proof term instead of a `Succ` value. That's
+`Succ` more." The proof is not merely *analogous* to recursion, it *is* a
+recursion, one producing a proof term instead of a `Succ` value. This is
 why Lean can generate `induction`'s two cases automatically straight
 from `Nat`'s definition, the same way Python's `isinstance` cases fall
 straight out of `Nat`'s two constructors.

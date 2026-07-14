@@ -13,16 +13,16 @@ theorem simp_example (n : Nat) : n + 0 = n := by
 
 `simp` automatically searches for known "simplification" lemmas and applies
 them, possibly many at once. This is convenient, but it hides *which* facts
-were used and *why* the proof works, which is bad for learning. **In this book we
-avoid `simp` and `rfl`-as-a-shortcut wherever the point is to understand the
-proof.** Instead, we'll use explicit `rw` steps that name exactly which equality
+were used and *why* the proof works, which is bad for learning. **This book
+avoids `simp` and `rfl`-as-a-shortcut wherever the point is to understand the
+proof.** Instead, it uses explicit `rw` steps that name exactly which equality
 justifies each step, and `induction` with a fully spelled-out base case and
-inductive step. Treat `simp` as a tool for your *own* later proofs, once you
-already understand what it would have done by hand.
+inductive step. `simp` should be treated as a tool for later, independent
+proofs, once what it would have done by hand is already understood.
 
 > Read more: [Chapter 12, "`simp`, now that you understand what it
-> replaces"](../12-working-efficiently/03-simp.md) covers when it's the
-> *right* efficient choice, once you no longer need every step spelled out.
+> replaces"](../12-working-efficiently/03-simp.md) covers when it is the
+> *right* efficient choice, once every step no longer needs to be spelled out.
 
 ### `constructor`: build a structure/And/Iff by its constructor
 

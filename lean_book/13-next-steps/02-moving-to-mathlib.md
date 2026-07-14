@@ -4,8 +4,8 @@
 
 ---
 
-Everything here was reinvented on purpose instead of imported, so you
-could see every moving part. Mathlib, Lean's community mathematics
+Everything here was reinvented on purpose instead of imported, so that
+every moving part would be visible. Mathlib, Lean's community mathematics
 library, already has much more general and well-tested versions of all of
 this:
 
@@ -28,22 +28,22 @@ this:
 - Path algebras specifically show up in representation-theory-oriented
   corners of Mathlib and in dedicated Lean projects on quiver
   representations. Searching Mathlib's docs for "quiver" and "path" is a
-  good starting point once you are comfortable with the type-class style.
+  good starting point once the type-class style is familiar.
 
 The jump from this book's `structure`-based definitions to Mathlib's
 `class`-based ones is mostly about **ergonomics**: automatic instance
 resolution, shared notation, and inheritance diamonds (the ambiguity that
-comes up when a structure extends two parents with a common ancestor)
-already resolved for you. It is not really about mathematical content —
-the axioms you already learned are the same axioms, just packaged so
-Lean's elaborator can find them without you naming a `Grp` argument in
+arises when a structure extends two parents with a common ancestor)
+already resolved. It is not really about mathematical content —
+the axioms already learned are the same axioms, merely packaged so
+Lean's elaborator can find them without a `Grp` argument named in
 every theorem.
 
 ### Two theorems for free
 
 Everything above is a promise that Mathlib is *more general*. Here are
 two concrete payoffs — things this book explicitly could not state,
-using exactly the examples you already built.
+using exactly the examples already built.
 
 **`ZMod 3` is a field, not just a ring.** Chapter 8 §5 built `fin3Ring`
 and said in so many words that a `Field` would need every nonzero
@@ -87,14 +87,14 @@ example : Nat.card (Subgroup.zpowers (finRotate 3)) = 3 := by
   · decide
 ```
 
-So $3 \mid 6$ — not asserted, but *derived*, by instantiating a theorem
+Thus $3 \mid 6$ — not asserted, but *derived*, by instantiating a theorem
 Mathlib already proved once, generically, for every group. Neither of
 these two facts required a single new definition: both reuse objects
 this book already built, and both are facts this book's own from-scratch
-`Ring`/`Group` genuinely could not have stated, because it never built
+`Ring`/`Group` genuinely could not have stated, since it never built
 the surrounding machinery (invertibility, subgroups) that Mathlib
 already has. This is the concrete shape of "moving to Mathlib": not
-different mathematics, just a much bigger box of already-proved
+different mathematics, merely a much larger stock of already-proved
 consequences to draw on.
 
 ---

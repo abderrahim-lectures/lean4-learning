@@ -5,7 +5,7 @@
 ---
 
 This is the standard first example, and a good one to build by hand,
-because the scalar action isn't given as data. It has to be *defined*, by
+since the scalar action is not given as data: it must be *defined*, by
 repeated addition, from the group structure alone.
 
 ```lean
@@ -22,14 +22,14 @@ def intSmul {M : Type} (CG : CommGroup M) (n : Int) (m : M) : M :=
   | Int.negSucc k => CG.toGroup.inv (natSmul CG.toGroup (k + 1) m)
 ```
 
-`natSmul Grp n m` is literally $m + m + \cdots + m$ ($n$ times). It's
+`natSmul Grp n m` is literally $m + m + \cdots + m$ ($n$ times). It is
 defined by recursion on `n`, in exactly the way `Nat.add` itself was
 defined (Chapter 4). `intSmul` extends it to negative integers using the
-group inverse. Given any `CG : CommGroup M`, you can then check that
+group inverse. Given any `CG : CommGroup M`, one can then check that
 `intSmul CG` satisfies (M1)–(M4) against `intRing` (Chapter 8). This is a
 genuine, if somewhat long, proof by induction on the integer scalar, in the
-same spirit as Chapter 4's `my_add_comm`. We leave the full verification as
-an extended exercise, since doing it yourself is the best way to see *why*
+same spirit as Chapter 4's `my_add_comm`. The full verification is left as
+an extended exercise, since carrying it out directly is the best way to see *why*
 modules over $\mathbb{Z}$ are forced, not chosen: `intSmul` is the *unique*
 action that turns any abelian group into a $\mathbb{Z}$-module, because
 (M4) plus (M1)/(M2) pin down $n \cdot m$ for every integer $n$ by
@@ -49,7 +49,7 @@ literally the same notion. The recursion mirrors the definition of
 multiplication-as-iterated-addition.
 
 **Mathlib equivalent.** Mathlib does not leave "every abelian group is
-(uniquely) a $\mathbb{Z}$-module" as an exercise. It's registered as an
+(uniquely) a $\mathbb{Z}$-module" as an exercise. It is registered as an
 instance, available for *any* `AddCommGroup` at all, with no
 `natSmul`/`intSmul` to define or verify by hand:
 
@@ -60,8 +60,8 @@ example {M : Type*} [AddCommGroup M] : Module Int M := inferInstance
 The book builds the action from nothing (`natSmul` by recursion, then
 `intSmul` by extending to negative integers via `inv`) and leaves the
 four-axiom verification as an extended exercise. Mathlib's instance already
-carries that proof. This follows from exactly the uniqueness argument in
-the mathematical reading above, done once in the library instead of once
+carries that proof, following exactly the uniqueness argument in
+the mathematical reading above, established once in the library instead of once
 per abelian group encountered.
 
 ---

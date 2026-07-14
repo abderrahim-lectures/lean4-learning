@@ -18,12 +18,12 @@ $$
 $$
 
 for all $r, s \in R$, $m, n \in M$. This is exactly the vector space
-definition, but with "field" replaced by "ring". That extra generality is
-the whole point. $\mathbb{Z}$-modules are abelian groups. $k[x]$-modules
-(for $k$ a field) are vector spaces with a chosen linear endomorphism.
-And, most importantly for this book, a representation of a quiver $Q$ is
-precisely a module over the path algebra $kQ$. This is why we place this
-chapter right before Chapter 11.
+definition, with "field" replaced by "ring". That extra generality is
+the whole point: $\mathbb{Z}$-modules are abelian groups, and $k[x]$-modules
+(for $k$ a field) are vector spaces equipped with a chosen linear endomorphism.
+Most importantly for this book, a representation of a quiver $Q$ is
+precisely a module over the path algebra $kQ$; this is why the present
+chapter is placed immediately before Chapter 11.
 
 ---
 

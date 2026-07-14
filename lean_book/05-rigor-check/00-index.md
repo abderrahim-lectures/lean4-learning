@@ -11,7 +11,8 @@ mechanism, which is what Mathlib actually uses? What exactly is `Type`,
 and does `Group (α : Type)` really quantify over *all* types, including
 `Group` itself? And when two proofs both establish `a = b`, in what sense
 are they "the same"? Skipping these would leave exactly the kind of
-unstated assumption a demanding reader is trained to notice and question.
+unstated assumption a demanding reader is trained to notice and question,
+so they are addressed here, before Chapter 6 proceeds.
 
 ## Sections
 

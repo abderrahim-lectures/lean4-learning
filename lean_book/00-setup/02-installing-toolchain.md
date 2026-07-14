@@ -6,13 +6,13 @@
 
 Lean is managed by **elan**, a **version manager**. This is a small tool
 that installs and switches between different versions of Lean itself, so
-each project can pin the exact version it needs. (If you know `rustup` from
-Rust, elan plays the same role for Lean.)
+each project can pin the exact version it needs. (Readers familiar with
+`rustup` from Rust will recognize elan as playing the same role for Lean.)
 
 1. Install elan: follow the instructions at the official Lean installation
-   guide (search "leanprover elan install" or use your package manager).
+   guide (search "leanprover elan install" or use a package manager).
    On Windows, the recommended path is via VS Code's *Lean 4* extension,
-   which offers to install elan for you.
+   which offers to install elan automatically.
 2. Verify installation:
 
    ```sh
@@ -27,7 +27,7 @@ Rust, elan plays the same role for Lean.)
    lean-toolchain: leanprover/lean4:v4.31.0
    ```
 
-   When you run `lake build` inside `lean_project`, elan will automatically
+   Running `lake build` inside `lean_project` causes elan to automatically
    download and use exactly that toolchain version.
 
 ---

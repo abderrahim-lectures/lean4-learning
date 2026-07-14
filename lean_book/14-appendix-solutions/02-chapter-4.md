@@ -24,10 +24,10 @@ theorem nat_mul_zero (n : Nat) : n * 0 = 0 := by
   rfl
 ```
 
-[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) *does* work here. `Nat.mul` is defined by recursion on its second
-argument, and `n * 0 = 0` is the base clause. So this holds by definition,
-with no induction needed. Compare this with `0 * n = 0`, which is not a
-base clause and does need induction on `n`.
+[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) does succeed here. `Nat.mul` is defined by recursion on its second
+argument, and `n * 0 = 0` is the base clause. Hence this holds by definition,
+with no induction required. Compare this with `0 * n = 0`, which is not a
+base clause and does require induction on `n`.
 
 **3. `modus_ponens` in tactic mode**
 

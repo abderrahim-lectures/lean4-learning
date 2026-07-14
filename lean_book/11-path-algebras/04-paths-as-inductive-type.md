@@ -30,13 +30,13 @@ Reading this carefully:
 - `cons {u v w : V} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w` —
   given an existing path `p` from `u` to `v`, and an arrow `a` whose source
   is (provably, via `h`) `v` and whose target is (provably, via `h'`) `w`,
-  we can extend `p` by appending `a`, producing a path from `u` to `w`.
-  The two proof fields `h` and `h'` are exactly what *prevents* you from
-  building nonsense paths. You cannot `cons` an arrow onto a path unless
-  the arrow's source really does match where the path left off.
+  `p` can be extended by appending `a`, producing a path from `u` to `w`.
+  The two proof fields `h` and `h'` are exactly what *prevents* the
+  construction of nonsense paths: an arrow cannot be `cons`ed onto a path unless
+  its source matches where the path left off.
 
-Note `cons` builds the path by appending the new arrow at the *end*,
-matching how you'd naturally describe "take path `p`, then follow arrow
+Note that `cons` builds the path by appending the new arrow at the *end*,
+matching the natural description "take path `p`, then follow arrow
 `a`."
 
 **Mathematical reading.** `Path Q` is the family of Hom-sets of the **free
@@ -72,11 +72,11 @@ def pathBetaAlpha : Path exampleQuiver 0 2 :=
 - `pathBetaAlpha` appends `beta` (source `1`, target `2`) onto `pathAlpha`,
   giving a path from `0` to `2`, exactly $\beta\alpha$.
 
-If you tried `Path.cons ExampleArrow.beta rfl rfl (Path.nil 0)` instead
+Attempting `Path.cons ExampleArrow.beta rfl rfl (Path.nil 0)` instead
 (appending `beta`, whose source is `1`, directly onto the trivial path at
-`0`), Lean would reject it: the proof obligation `Q.source ExampleArrow.beta = 0`
+`0`) is rejected by Lean: the proof obligation `Q.source ExampleArrow.beta = 0`
 is `1 = 0`, which is false, so no `rfl` (or any other proof) exists. This is
-the type system enforcing "you can't compose arrows that don't match up",
+the type system enforcing "arrows that do not match up cannot compose",
 for free, at compile time.
 
 **Mathematical reading.** `pathBetaAlpha` is the composite morphism

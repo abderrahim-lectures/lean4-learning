@@ -10,9 +10,9 @@
    tempting — instead, for practice, use `cases a with | false => rfl | true => rfl`
    for the fields that need a case split, to see exactly which case does
    what.
-2. Convince yourself on paper that `inv_left` and `inv_right` are genuinely
-   different obligations. They coincide automatically only once you've
-   *proved* the group is commutative — this is exactly the content of
+2. Verify on paper that `inv_left` and `inv_right` are genuinely
+   different obligations. They coincide automatically only once the group has
+   been *proved* commutative — this is exactly the content of
    Chapter 7's first theorem.
 
 Solutions: [Appendix, Chapter 6](../14-appendix-solutions/04-chapter-6.md).

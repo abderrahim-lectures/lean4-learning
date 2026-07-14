@@ -4,8 +4,8 @@
 
 ---
 
-Given a path `p : Path Q u v` and a path `q : Path Q v w`, we can concatenate
-them into a path `Path Q u w`. We define this by recursion on `q`:
+Given a path `p : Path Q u v` and a path `q : Path Q v w`, they can be concatenated
+into a path `Path Q u w`, defined by recursion on `q`:
 
 ```lean
 def Path.append {V A : Type} {Q : Quiver V A} {u v w : V}
@@ -18,7 +18,7 @@ def Path.append {V A : Type} {Q : Quiver V A} {u v w : V}
 Reading the recursion:
 
 - If `q` is trivial (`Path.nil _`, a path of length zero from `v` to `v`),
-  then appending `p` before it just gives back `p` itself (there's nothing
+  then appending `p` before it just gives back `p` itself (there is nothing
   to append).
 - If `q` ends with an arrow `a` (i.e. `q = Path.cons a h h' q'` for some
   shorter path `q'`), then appending `p` before all of `q` is the same as
@@ -52,9 +52,9 @@ def pathBetaAlphaViaAppend : Path exampleQuiver 0 2 :=
 ```
 
 `pathBetaAlphaViaAppend` composes the shorter path `pathAlpha` with
-`pathBetaOnly` via `Path.append`, giving a path from `0` to `2`. This has
+`pathBetaOnly` via `Path.append`, yielding a path from `0` to `2`. This has
 the same endpoints as `pathBetaAlpha`, but is assembled by composition
-instead of by chaining `Path.cons` calls directly.
+rather than by chaining `Path.cons` calls directly.
 
 ```lean
 example : pathBetaAlphaViaAppend = pathBetaAlpha := rfl
@@ -72,11 +72,11 @@ applications.
 **Mathematical reading.** `Path.append` is **composition in the free
 category** $\mathrm{Free}(Q)$, written throughout this section in *path
 order*: "$p$ then $q$," matching the argument order of `Path.append p q`.
-This is not the function-composition order $q \circ p$ you may be used
-to from category theory texts. (The two conventions denote the same
-composite; only the order the symbols are written differs, and mixing
-them mid-explanation is a common source of confusion, so this book fixes
-path order throughout.) In path order, `Path.append` is the map
+This is not the function-composition order $q \circ p$ standard in
+category theory texts. (The two conventions denote the same
+composite; only the order in which the symbols are written differs, and
+mixing them mid-explanation is a common source of confusion, so this book
+fixes path order throughout.) In path order, `Path.append` is the map
 
 $$
 \mathrm{Hom}(u,v) \times \mathrm{Hom}(v,w) \longrightarrow \mathrm{Hom}(u,w),
@@ -90,7 +90,7 @@ path *after* `p` changes nothing; this case is implemented directly by the
 `nil` branch of the `match` above, since recursion is on `q`), and,
 separately, `Path.append (Path.nil u) p = p` (appending the trivial path
 *before* `p` also changes nothing; proved as Exercise 2 by induction on
-`p`, since the `nil` branch alone doesn't give this one for free). The
+`p`, since the `nil` branch alone does not give this one for free). The
 `cons` case of the recursion is exactly associativity of concatenation.
 Together with `nil` as identities, this makes $\mathrm{Free}(Q)$ a genuine
 category: the smallest/most general category containing $Q$'s arrows, in
@@ -119,14 +119,14 @@ exactly the same sequence of `cons` applications `Path.append` does.
 The **path algebra** $kQ$ of a quiver $Q$ over a field (or ring) $k$ is the
 ring whose elements are $k$-linear combinations of paths in $Q$, with
 multiplication given by path composition (composing two paths whose
-endpoints don't match gives $0$). Formalizing $kQ$ fully (as a `Ring`, per
+endpoints do not match gives $0$). Formalizing $kQ$ fully (as a `Ring`, per
 Chapter 8) requires "formal sums of paths with ring coefficients," which is
 a genuinely bigger construction: essentially a finitely-supported function
-from paths to $k$. It's a great next project once you're comfortable with
-everything above. We stop at "paths and their composition" here because
+from paths to $k$. It is a natural next project once the material above is
+well understood. This chapter stops at "paths and their composition" because
 that data (the *category* of paths, really) is the beating heart of the
-construction. The ring structure on top is just bookkeeping once you have
-it.
+construction; the ring structure on top is bookkeeping once it is in
+place.
 
 **Mathematical reading.** The **path algebra** $kQ$ is the free $k$-module
 on the set of all paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with

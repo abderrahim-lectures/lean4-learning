@@ -20,9 +20,9 @@ $$
 \end{aligned}
 $$
 
-That's all — there's no need for commutativity in general (a group where
+No further axiom is required; in particular, commutativity is not assumed in general (a group where
 $a \cdot b = b \cdot a$ always holds is called **abelian** or
-**commutative**; we'll define that separately).
+**commutative**, defined separately below).
 
 ---
 

@@ -4,8 +4,8 @@
 
 ---
 
-Let's package $(\mathbb{Z}, +, 0, -(-))$ as a `Group Int`. We build it field
-by field, proving each obligation with a short, explicit tactic proof.
+Consider packaging $(\mathbb{Z}, +, 0, -(-))$ as a `Group Int`. The construction
+proceeds field by field, proving each obligation with a short, explicit tactic proof.
 
 ```lean
 def intGroup : Group Int where
@@ -36,11 +36,11 @@ def intGroup : Group Int where
 
 Each field is proved separately. Each proof is a single `intro` (to name
 the universally quantified variables) followed by `exact` naming the exact
-core-library lemma that already states this fact about `Int`. We are not
-hiding any steps: `Int.add_assoc`, `Int.zero_add`, and the rest are
+core-library lemma that already states this fact about `Int`. No step is
+hidden: `Int.add_assoc`, `Int.zero_add`, and the rest are
 themselves proved (elsewhere, in Lean's core library) by induction on the
-same `Nat`/`Int` representation you saw in Chapter 4. We simply reuse them
-here instead of re-deriving integer arithmetic from scratch.
+same `Nat`/`Int` representation introduced in Chapter 4. These lemmas are
+reused here rather than re-deriving integer arithmetic from scratch.
 
 **Mathematical reading.** This shows $(\mathbb{Z}, +, 0, -)$ as an object
 of the category $\mathbf{Grp}$. The term `intGroup` is a *proof that
@@ -52,8 +52,8 @@ terms this is the one-line remark "$\mathbb{Z}$ under addition is an abelian
 group," with the underlying lemmas about $\mathbb{Z}$ (themselves ultimately
 inductions on the integers) written out in full instead of just assumed.
 
-**Mathlib equivalent.** Mathlib doesn't need an `intGroup`-style bundle at
-all. `Int` is *already* registered as an [`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup) instance, and the
+**Mathlib equivalent.** Mathlib requires no `intGroup`-style bundle at
+all: `Int` is *already* registered as an [`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup) instance, and the
 five axioms above are available as free-standing lemmas that apply to
 every additive group, not just `Int`:
 
@@ -71,8 +71,8 @@ This is the same content as `intGroup`, the same five facts about
 $\mathbb{Z}$. But where the book *assembles* a `Group Int` term by hand,
 Mathlib's version has nothing to assemble: the instance already exists,
 found automatically by [`inferInstance`](https://loogle.lean-lang.org/?q=inferInstance). And [`add_assoc`](https://loogle.lean-lang.org/?q=add_assoc)/[`zero_add`](https://loogle.lean-lang.org/?q=zero_add)/etc.
-are generic lemmas about *any* `AddCommGroup`, so they read a little
-differently from `Int.add_assoc`: they would apply just as well to Chapter 6's
+are generic lemmas about *any* `AddCommGroup`, so they read somewhat
+differently from `Int.add_assoc`: they apply equally well to Chapter 6's
 `perm3Group`-style examples once those are phrased in Mathlib's
 `Group`/`AddCommGroup` classes (Chapter 6 §4 does exactly that next).
 

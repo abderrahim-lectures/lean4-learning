@@ -30,19 +30,19 @@ a carrier type $G$ to the type of group-structures on $G$.
 
 **Programmer's corner (Python).** Python code like `def identity(x): return
 x` or `class Pair: def __init__(self, fst, snd): ...` is also "generic" in
-the sense that it doesn't mention any particular type. But nothing checks
-that genericity until the code actually runs. Write `identity(3) + "oops"`
-and Python happily runs `identity`, hands back `3`, and only then breaks
-on `3 + "oops"` at runtime. Write a `Pair` and put a `Group (Fin 3)` into
-its `fst` and Python won't complain. The closer analogue is
-`typing.TypeVar`: `def identity(x: T) -> T: return x` *documents* the same
-universally quantified type `identity` has in Lean, but that annotation is
-optional, erased at runtime, and only enforced if you separately run a
-checker like `mypy`. And nothing stops a stray `# type: ignore` from
-silencing it. Lean's `{α : Type} → α → α` is not documentation: it is
-*proved*, once, that `identity` works for every type `α`, and that proof
-is checked before `identity` is ever called. It is not just approximated
-by a linter you might forget to run.
+the sense that it does not mention any particular type. Nothing checks
+that genericity until the code actually runs, however. Writing
+`identity(3) + "oops"` causes Python to happily run `identity`, hand back
+`3`, and only then break on `3 + "oops"` at runtime. Constructing a `Pair`
+and placing a `Group (Fin 3)` into its `fst` draws no complaint from
+Python. The closer analogue is `typing.TypeVar`: `def identity(x: T) -> T:
+return x` *documents* the same universally quantified type `identity` has
+in Lean, but that annotation is optional, erased at runtime, and enforced
+only if a checker such as `mypy` is separately run — and nothing stops a
+stray `# type: ignore` from silencing it. Lean's `{α : Type} → α → α` is
+not documentation: it is *proved*, once, that `identity` works for every
+type `α`, and that proof is checked before `identity` is ever called. It
+is not merely approximated by a linter that might go unrun.
 
 ---
 

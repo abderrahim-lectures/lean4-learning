@@ -5,10 +5,10 @@
 ---
 
 As in Chapter 7, the point here is the search process for each proof, not
-just the final term. Ring proofs are a good test of that process
-because the goals get visually noisy fast (nested `addGrp.toGroup.op`
-everywhere). Part of what you're learning is how to not get lost in that
-noise and instead track "what algebraic fact am I one step away from using."
+just the final term. Ring proofs are a good test of that process,
+because the goals become visually noisy fast (nested `addGrp.toGroup.op`
+everywhere). The skill under development is avoiding getting lost in that
+noise, and instead tracking which algebraic fact is one step away from use.
 
 ## Sections
 

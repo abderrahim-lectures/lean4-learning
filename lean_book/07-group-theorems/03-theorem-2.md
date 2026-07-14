@@ -9,11 +9,10 @@
 
 **Finding the proof.** This has the same shape as Theorem 1: an equality
 between two elements known only through separate facts (`h` about `b`, the
-`Group` axioms about `Grp.inv a`). So the same strategy applies: relate
-both sides to something in common. But here there's no single lemma that
-hands you `Grp.op b Grp.id` the way `Grp.id_right` did in Theorem 1's
-simpler setting. You have to *build* the chain by rewriting `b` itself,
-step by step.
+`Group` axioms about `Grp.inv a`). Hence the same strategy applies: relate
+both sides to something in common. Here, however, no single lemma hands us
+`Grp.op b Grp.id` the way `Grp.id_right` did in Theorem 1's simpler setting.
+We must *build* the chain by rewriting `b` itself, step by step.
 
 The trick worth internalizing: **pad `b` with the identity, then swap the
 identity for something you can cancel.** Concretely:
@@ -26,8 +25,8 @@ Each `=` above is licensed by exactly one `Group` field or the hypothesis
 `h`, in this order: `id_right` (backwards), `inv_right` (backwards),
 `assoc` (backwards), `h`, `id_left`. Writing the *paper* proof first, as a
 chain of equalities, and then reading off which axiom licenses each step,
-is often faster than guessing tactics directly against the goal. Do this
-on scratch paper before opening the editor.
+is often faster than guessing tactics directly against the goal. This
+chain is best worked out on scratch paper before the editor is opened.
 
 ```lean
 theorem left_inverse_unique (a b : G) (h : Grp.op b a = Grp.id) :
@@ -44,11 +43,12 @@ theorem left_inverse_unique (a b : G) (h : Grp.op b a = Grp.id) :
   exact Grp.id_left (Grp.inv a)
 ```
 
-At each `rw`, the goal-state comment records what you'd see in the editor.
-Train yourself to predict that comment *before* running the tactic, then
-check it. When your prediction is wrong, that's the moment worth stopping
-to understand why (usually: the `rw` fired on a different occurrence of the
-pattern than you expected, or in the wrong direction).
+At each `rw`, the goal-state comment records what would appear in the
+editor. It is worth training oneself to predict that comment *before*
+running the tactic, then checking it. When the prediction is wrong, that is
+the moment worth stopping to understand why (usually: the `rw` fired on a
+different occurrence of the pattern than expected, or in the wrong
+direction).
 
 **Mathematical reading.** This is *uniqueness of inverses*: if $b\cdot a =
 e$ then $b = a^{-1}$. The displayed chain
@@ -72,10 +72,10 @@ example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
   rw [← mul_one b, ← mul_inv_cancel a, ← mul_assoc, h, one_mul]
 ```
 
-Read right to left through the `rw` list, and this is line-for-line the
+Reading right to left through the `rw` list gives line-for-line the
 displayed chain above: `←` [`mul_one`](https://loogle.lean-lang.org/?q=mul_one) `b` turns `b` into `b * 1`; `←` [`mul_inv_cancel`](https://loogle.lean-lang.org/?q=mul_inv_cancel) `a`
 turns that `1` into `a * a⁻¹`; `←` [`mul_assoc`](https://loogle.lean-lang.org/?q=mul_assoc) reassociates; `h` substitutes
-`b * a` for `1`; [`one_mul`](https://loogle.lean-lang.org/?q=one_mul) clears the resulting `1 * a⁻¹`. It is the same
+`b * a` for `1`; [`one_mul`](https://loogle.lean-lang.org/?q=one_mul) clears the resulting `1 * a⁻¹`. These are the same
 five steps, in the same order — only the names `Grp.assoc`/`Grp.inv_right`
 and so on are replaced by Mathlib's generic `mul_assoc`/`mul_inv_cancel`
 and so on.

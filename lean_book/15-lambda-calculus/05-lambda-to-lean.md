@@ -28,15 +28,15 @@ previous four sections into one table.
 
 ### Two points worth dwelling on
 
-**Tactics don't add anything to the calculus.** Chapter 4's entire tactic
+**Tactics add nothing to the calculus.** Chapter 4's entire tactic
 vocabulary ([`intro`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`exact`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`induction`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), ...) is a *user interface*
 for building CIC terms step by step, with the current goal state
-showing you the type of the "hole" still to be filled. Every finished
-tactic proof elaborates to an ordinary term you *could* have written by
+showing the type of the "hole" still to be filled. Every finished
+tactic proof elaborates to an ordinary term that *could* have been written by
 hand (as Chapter 3 did, before tactics were introduced). Tactics exist
-purely because writing large CIC terms directly is unpleasant, not because
-they give access to any extra expressive power. You can see this directly:
-run `#print` on any theorem proved with tactics, and Lean shows you the
+purely because writing large CIC terms directly is unwieldy, not because
+they give access to any extra expressive power. This is visible directly:
+running `#print` on any theorem proved with tactics shows the
 literal λ-term/application-tree the tactic script built.
 
 **Elaboration is type inference for CIC, not magic.** Chapter 1's
@@ -47,8 +47,8 @@ with metavariables (placeholders for not-yet-known terms), guided by the
 typing rules from the previous two sections. It is a well-understood,
 terminating (for the fragment Lean actually uses) procedure, not an
 oracle. When it fails, the resulting error message (Chapter 4, "reading a
-tactic failure") tells you specifically which unification equation it
-couldn't solve.
+tactic failure") states specifically which unification equation could
+not be solved.
 
 ## Next
 

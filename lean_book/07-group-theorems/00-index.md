@@ -4,13 +4,13 @@
 
 ---
 
-In this chapter we prove theorems about an *arbitrary* group. We're given
-some `Grp : Group G` for an unknown `G`, and we use only the fields from
-Chapter 6. The point of this chapter is less about the three theorems
-themselves (they're standard) and more about **the search process** for
-finding each proof: given a goal, what do you look at, what do you try, and
-how do you recognize when you're stuck versus one step away. Each theorem
-below is presented as that search, not just its answer.
+This chapter proves theorems about an *arbitrary* group. We are given some
+`Grp : Group G` for an unknown `G`, and we use only the fields from
+Chapter 6. The point of this chapter lies less in the three theorems
+themselves (they are standard) than in **the search process** for finding
+each proof: given a goal, what to examine, what to attempt, and how to
+recognize being stuck versus one step away. Each theorem below is presented
+as that search, not merely its answer.
 
 ## Sections
 
