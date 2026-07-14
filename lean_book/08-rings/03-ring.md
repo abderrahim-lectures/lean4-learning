@@ -46,7 +46,7 @@ The field `addGrp` is the *underlying additive abelian group*, so a ring is
 $(R,\cdot,1)$" — a monoid (a set with an associative operation and identity
 element, i.e. a group without inverses). The remaining fields say
 $(R,\cdot,1)$ is a monoid (`mul_assoc`, `one_mul`, `mul_one`) and that the
-two operations interact through the two-sided distributive laws. In other words
+two operations interact through the two-sided distributive laws. In other words,
 multiplication is compatible with addition on both sides. Nesting `addGrp`
 as a whole substructure mirrors the
 [forgetful functor](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)

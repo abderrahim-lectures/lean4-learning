@@ -10,7 +10,7 @@ automatically apply to `intGroup`, to `perm3Group` (the previous section's
 permutation group), and to every other group we build later (path
 algebras' underlying additive group, and beyond). This is the payoff of
 the whole exercise: prove it once, generically, and get it for free
-everywhere. Chapter 7 demonstrates exactly this, applying a generic
+everywhere. Chapter 7 shows exactly this, applying a generic
 theorem to a concrete group once it's proved.
 
 **Mathlib equivalent.** This "prove it once, get it for free everywhere"

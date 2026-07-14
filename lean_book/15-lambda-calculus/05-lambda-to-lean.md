@@ -41,7 +41,7 @@ literal λ-term/application-tree the tactic script built.
 
 **Elaboration is type inference for CIC, not magic.** Chapter 1's
 implicit-argument inference (`identity 5` inferring `α := Nat`) and every
-subsequent "Lean figures it out from context" moment in this book is an
+later "Lean figures it out from context" moment in this book is an
 algorithm called **unification**. It solves equations between CIC terms
 with metavariables (placeholders for not-yet-known terms), guided by the
 typing rules from the previous two sections. It is a well-understood,
