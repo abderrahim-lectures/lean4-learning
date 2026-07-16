@@ -28,7 +28,9 @@ definition (this is the same asymmetry Chapter 4 relied on for
 syntactically `n + n` unless `0 + n` also reduces to `n`. It does not,
 by definition. Thus, contrary to a first guess, **this does not type-check
 as `rfl`** in general. Confirming this directly, [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) fails, while
-`by rw [Nat.two_mul]` (or an explicit induction) succeeds instead. The
+`by rw [Nat.mul_two]` (or an explicit induction) succeeds instead — note
+this is `Nat.mul_two : n * 2 = n + n`, not `Nat.two_mul : 2 * n = n + n`,
+since the goal has `n` on the left of `*`. The
 lesson: multiplying by a literal does not collapse to `rfl` for free once a
 general variable `n` sits on the "wrong" side of an asymmetric recursion.
 This is the same reason `0 + n = n` required real induction in Chapter 4.

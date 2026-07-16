@@ -30,16 +30,23 @@ environment changes.
 ```lean
 example (a b : Nat) (h : a = b) : b = a := by
   exact?
-  -- suggests: exact h.symm
+  -- reports a working closing term (verified on this book's toolchain to be
+  -- `exact Nat.add_right_cancel (congrFun (congrArg HAdd.hAdd (id (Eq.symm h))) a)`,
+  -- not the shorter `h.symm` a human would write — see below)
 ```
 
 **Mathematical reading.** This is the formal version of "this is standard —
 cite the relevant lemma." The goal $b = a$ under hypothesis $h : a = b$ is
-closed by symmetry of equality, $h^{\mathrm{sym}}$. `exact?` performs a
-library search: it scans the whole collection of proved theorems for a term
-that matches the goal type, and reports the citation, here $\mathrm{Eq.symm}$.
-It automates the citation step of a proof, not the mathematics itself. The
-term it returns is the same one a human would cite.
+closed by symmetry of equality, $h^{\mathrm{sym}}$, and that is what a
+human proof would cite. `exact?` performs a library search: it scans the
+whole collection of proved theorems for a term that matches the goal type,
+and reports *a* citation that works — but its search order does not always
+surface the shortest or most idiomatic one, as the verified output above
+shows (a correct but needlessly roundabout term, found before the simpler
+`Eq.symm` was). It automates *finding a* closing term, not necessarily the
+most readable one; simplifying the reported term by hand (here, to
+`h.symm`) afterward is still worth doing before the proof is considered
+finished.
 
 ---
 
