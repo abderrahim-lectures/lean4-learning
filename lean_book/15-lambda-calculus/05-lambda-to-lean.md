@@ -56,4 +56,12 @@ Continue to [Exercises](06-exercises.md).
 
 ---
 
+### References
+
+- *Theorem Proving in Lean 4*, ["Type Classes"](https://leanprover.github.io/theorem_proving_in_lean4/type_classes.html) and the [Lean 4 documentation](https://lean-lang.org/doc/reference/latest/) generally — for elaboration and unification as actually implemented, beyond what this appendix's simplified rules cover.
+- Frank Pfenning, ["Lecture Notes on Elaboration"](https://www.cs.cmu.edu/~fp/courses/15814-f21/lectures/11-elab.pdf), 15-814 Types and Programming Languages (Carnegie Mellon), and Ulf Norell, *[Towards a Practical Programming Language Based on Dependent Type Theory](https://www.cse.chalmers.se/~ulfn/papers/thesis.pdf)*, PhD thesis, Chalmers, 2007, Ch. 3 — standard treatments of elaboration/unification for dependently typed languages, the general algorithm this section's dictionary points at.
+- Gérard Huet, "Résolution d'équations dans des langages d'ordre 1, 2, ..., ω," PhD thesis, Université Paris VII, 1976 — the original source for higher-order unification, the underlying problem Lean's elaborator solves.
+
+---
+
 [← Dependent types and the calculus of constructions](04-dependent-types-coc.md) | [Index](00-index.md) | [Next: Exercises →](06-exercises.md)

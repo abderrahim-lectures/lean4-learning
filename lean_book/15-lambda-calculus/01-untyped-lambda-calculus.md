@@ -131,4 +131,12 @@ application, and variables.
 
 ---
 
+### References
+
+- Alonzo Church, *[The Calculi of Lambda-Conversion](https://archive.org/details/AnnalsOfMathematicalStudies6ChurchAlonzoTheCalculiOfLambdaConversionPrincetonUniversityPress1941)*, Princeton University Press, 1941 — the original source for the calculus, α-conversion, and β-reduction; the scan above is the public-domain original.
+- Henk Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, revised ed., North-Holland, 1984 — the standard graduate reference, including a full proof of the Church–Rosser (confluence) theorem cited in this section.
+- Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002, Ch. 5 — a gentler, example-driven treatment of the untyped calculus, free/bound variables, and reduction, aimed at readers new to the subject.
+
+---
+
 [← Index](00-index.md) | [Next: Church encodings →](02-church-encodings.md)

@@ -4,16 +4,10 @@
 
 ---
 
-In Lean 4, every expression (a **term**) has a **type**. Types are
-themselves terms of type `Type` (or `Prop` for propositions — Chapter 3).
-It is useful to regard `Type` as (the objects of) a category: a term
-`x : α` is an element of `α`, a function `f : α → β` is a morphism
-$\alpha \to \beta$, `fun x => x` is the identity, and `∘` is genuine
-categorical composition. Associativity and the identity laws hold
-*definitionally*, so Lean checks them automatically. A `structure` bundling
-data and axioms (Chapter 2 onward) is an object of the evident category of
-"structures of that shape," exactly as in any algebra course that presents
-groups or rings as objects of a category.
+In Lean 4, every expression (a **term**) has a **type**. A type answers the
+question "what *kind* of thing is this?" — a number, a boolean, a proof, a
+function from numbers to numbers. Lean checks this question *before*
+running anything, and it never lets a term of the wrong type slip through.
 
 ```lean
 #check 3          -- 3 : Nat
@@ -35,6 +29,24 @@ term in $\lambda$-calculus by hand. (Both "normal form" and
 time; briefly, each denotes the value obtained after fully
 simplifying/running the expression, nothing more exotic.)
 
+Read `#check 3` as "Lean answers the question `3 : ?` with `Nat`." Read
+`#check Nat` as "even `Nat` itself — the type of natural numbers — is a
+term, and *its* type is `Type`." This is the first surprising fact worth
+sitting with: types are not a separate kind of thing bolted onto a
+programming language. In Lean, a type is itself a term, and it has a type
+of its own (`Type`), the same way `3` has a type (`Nat`). This is what
+"everything has a type" means literally, not just for ordinary values.
+
+`#check e` answers the question "what type does `e` have?" without running
+`e`. `#eval e` actually runs `e` and prints the result. These are
+deliberately two different commands, since they answer two different
+questions:
+
+- `#check` is a **static** guarantee — it holds before any particular
+  input is supplied, for every possible run.
+- `#eval` is a **one-off fact** — the result of running this *particular*
+  expression, right now.
+
 **Programmer's corner (Python).** For readers who have written Python but
 not Lean: `#check e` is *not* `type(e)`. Python's `type()` asks a running
 value what class it happens to belong to, after the fact. Lean's `#check`
@@ -51,33 +63,98 @@ runtime `if` statement. `Nat`, by contrast, bakes non-negativity into the
 type itself, checked once, statically, for every use site. This is closer
 to a language with a genuine `unsigned` type (C, Rust) than to Python.
 
-`Nat` is the inductive type
+### Why this matters: types rule things out in advance
+
+Here is the entire point of a type system, made concrete — starting in
+Python, where the failure can actually be watched happening, before seeing
+how Lean rules it out instead.
+
+```python
+# Python: this line is perfectly legal to *write*.
+def add_them(a, b):
+    return a + b
+
+add_them(3, True)   # 4 — Python silently treats True as 1, no error at all
+add_them(3, "oops")  # TypeError: unsupported operand type(s) — but only
+                     # once this exact line actually runs
+```
+
+Nothing stops Python from *writing* `add_them(3, "oops")`. The mistake is
+only discovered the moment that specific line executes — if it sits on a
+rarely-hit branch, it can ship for months undetected. And in the `True`
+case, Python does not even complain: it quietly coerces the boolean to `1`
+and moves on, whether or not that was the intended meaning.
+
+Now the same shape of mistake in Lean:
+
+```lean
+#check 3 + true   -- error: failed to synthesize Add Nat Bool
+```
+
+Lean refuses to even *elaborate* this expression. It never runs it, never
+silently coerces `true` to `1`, never crashes five function calls later
+once the bad value finally reaches code that cannot handle it — it simply
+never accepts the term in the first place, because `+`'s left argument is
+a `Nat` and its right argument is a `Bool`, and no rule connects the two.
+The check happens once, by reading the expression, with no particular
+inputs run at all. Lean's promise is stronger than Python's: if a term
+type-checks, an entire class of "it blew up unexpectedly" bugs is already
+provably impossible for that term, for *every* input, not merely the ones
+a test suite happened to cover.
+
+### `Nat`, concretely
+
+`Nat` is not a built-in primitive the way `int` is in most languages. It is
+defined, in full, as an **inductive type**:
 
 $$
 \mathtt{Nat} ::= \mathtt{zero} \mid \mathtt{succ}\,(n : \mathtt{Nat})
 $$
 
-This is Peano's definition, written out exactly. In more set-theoretic
-language, `Nat` is the **initial object** in the category of "sets
-equipped with a distinguished element and an endomorphism" (a
-$\mathrm{zero} \in X$ and a map $s : X \to X$). This initiality is exactly
-the universal property that makes structural induction valid: a map out of
-`Nat` is uniquely determined by where it sends `zero` and how it commutes
-with `succ`. This inductive presentation is what licenses proof by
-induction later; note that, unlike most languages, Lean's numerals are not
-a primitive but a defined inductive family, built exactly this way.
+Read this as: "a `Nat` is built in exactly one of two ways — it is `zero`,
+or it is `succ n` for some already-built `Nat` called `n`." This is Peano's
+definition, written out exactly. So `3` is not a primitive digit; it is
+shorthand for `succ (succ (succ zero))`. Confirm it directly:
 
-Separately, once `+` and `0` are *defined* on `Nat` by recursion
-(Chapter 4), one can *prove* $(\mathbb{N}, +, 0)$ is the free commutative
-monoid on one generator: $\mathrm{Nat} \cong \langle 1 \rangle$, with every
-natural number $n$ literally being $1 + 1 + \cdots + 1$ ($n$ times). This
-is a *theorem*, not a definitional fact, and must not be confused with the
-initiality above: it is a genuinely different (though closely related)
-universal property from the $(\mathrm{zero}, \mathrm{succ})$-initiality
-above. The first concerns `Nat`'s *inductive structure* directly. The
-second concerns *the monoid built on top of it*, and the "free" claim
-requires an actual argument (by induction, unsurprisingly), not merely
-inspection of the definitions.
+```lean
+#eval Nat.succ (Nat.succ (Nat.succ Nat.zero))  -- 3
+```
+
+Lean prints numerals for readability, but underneath, every `Nat` really is
+built from nothing but `zero` and `succ`, the same way every natural number
+in a first course in logic is built from Peano's axioms. This inductive
+shape is exactly what licenses proof by induction later (Chapter 4): to
+prove something about *every* `Nat`, it suffices to prove it for `zero` and
+show it is preserved by `succ` — because those are, provably, the only two
+ways a `Nat` can ever have been built.
+
+> **Mathematical reading (optional, for readers who already know some
+> category theory).** It is useful to regard `Type` as (the objects of) a
+> category: a term `x : α` is an element of `α`, a function `f : α → β` is
+> a morphism $\alpha \to \beta$, `fun x => x` is the identity, and `∘` is
+> genuine categorical composition, with associativity and the identity
+> laws holding *definitionally* (Lean checks them automatically, at no
+> extra cost). In this language, `Nat` is the **initial object** in the
+> category of "sets equipped with a distinguished element and an
+> endomorphism" ($\mathrm{zero} \in X$ and a map $s : X \to X$): a map out
+> of `Nat` is uniquely determined by where it sends `zero` and how it
+> commutes with `succ`, which is exactly the universal property that makes
+> structural induction valid. None of this is required to use `Nat` — it
+> is offered only because, once `+`/`0` are *defined* on `Nat` (Chapter 4),
+> it becomes provable (not just definitional) that $(\mathbb{N}, +, 0)$ is
+> the free commutative monoid on one generator, a genuinely different
+> universal property from the one above, worth not conflating with it.
+> [Chapter 1 §4](04-terminology.md) fixes the vocabulary ("universal
+> property," "initial object") used here, for any reader meeting it for
+> the first time.
+
+---
+
+### References
+
+- The Lean 4 documentation, ["Basic Types"](https://lean-lang.org/doc/reference/latest/) and the [Lean 4 Theorem Proving guide, Ch. 2](https://leanprover.github.io/theorem_proving_in_lean4/dependent_type_theory.html) — the `#check`/`#eval` distinction and `Nat` as an inductive type, straight from the source.
+- Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002, Ch. 1 — on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
+- nLab, ["initial object"](https://ncatlab.org/nlab/show/initial+object) — the universal-property reading of `Nat` used in the optional box above.
 
 ---
 
