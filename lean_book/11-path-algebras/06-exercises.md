@@ -15,12 +15,13 @@
    what a `structure PathAlgebra (V A : Type) (Q : Quiver V A) (k : Type) (Rg : Ring k)`
    would need to contain to satisfy `Ring`'s fields from Chapter 8.
 
-Solutions: [Appendix, Chapter 11](../14-appendix-solutions/09-chapter-11.md).
+Solutions: [Appendix, Chapter 11](../14-appendix-solutions/10-chapter-11.md).
 
 ## Next
 
-Continue to [Chapter 12: Working efficiently in Lean](../12-working-efficiently/00-index.md).
+Continue to the [checkpoint project](07-checkpoint-project.md), which
+closes out Part II before Chapter 12 begins Part III.
 
 ---
 
-[← Path composition](05-path-composition.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 12: Working Efficiently →](../12-working-efficiently/00-index.md)
+[← Path composition](05-path-composition.md) | [Index](00-index.md) | [Next: Checkpoint project →](07-checkpoint-project.md)

@@ -1,6 +1,6 @@
 ## And, Or, Not
 
-[← Implication](03-implication.md) | [Index](00-index.md) | [Next: Quantifiers →](05-quantifiers.md)
+[← Implication](04-implication.md) | [Index](00-index.md) | [Next: Quantifiers →](06-quantifiers.md)
 
 ---
 
@@ -123,4 +123,4 @@ excluded middle.
 
 ---
 
-[← Implication](03-implication.md) | [Index](00-index.md) | [Next: Quantifiers →](05-quantifiers.md)
+[← Implication](04-implication.md) | [Index](00-index.md) | [Next: Quantifiers →](06-quantifiers.md)

@@ -1,6 +1,6 @@
 ## Chapter 11: Quivers and path algebras
 
-[← Chapter 10](08-chapter-10.md) | [Index](00-index.md)
+[← Chapter 10](09-chapter-10.md) | [Index](00-index.md)
 
 ---
 
@@ -110,6 +110,53 @@ rather than a one-page exercise. This sketch identifies the three `Ring`
 fields that require it (`addGrp`, `mul`, `one`), and shows why `one` is the
 subtle one when $Q_0$ is infinite.
 
+**Checkpoint project: path length, and composition respects it**
+
+```lean
+def Path.length {V A : Type} {Q : Quiver V A} : {u v : V} → Path Q u v → Nat
+  | _, _, Path.nil _ => 0
+  | _, _, Path.cons _ _ _ p => p.length + 1
+
+theorem Path.append_length {V A : Type} {Q : Quiver V A} {u v w : V}
+    (p : Path Q u v) (q : Path Q v w) :
+    (Path.append p q).length = p.length + q.length := by
+  induction q with
+  | nil =>
+    simp only [Path.append, Path.length]
+    rw [Nat.add_zero]
+  | cons a h h' q' ih =>
+    simp only [Path.append, Path.length]
+    rw [ih, Nat.add_assoc]
+
+example : (Path.append pathAlpha pathBetaOnly).length =
+    pathAlpha.length + pathBetaOnly.length :=
+  Path.append_length pathAlpha pathBetaOnly
+
+#eval pathAlpha.length                                    -- 1
+#eval pathBetaAlpha.length                                -- 2
+#eval (Path.append pathAlpha pathBetaOnly).length          -- 2
+```
+
+`Path.length` recurses on the same two constructors as `Path.append`
+itself (§4–§5): `nil` contributes `0`, and each `cons` adds one to the
+length of the shorter path it extends. The proof of `append_length`
+mirrors `Path.append`'s own recursion case for case, exactly as the
+project asked, but with one genuine surprise if `rfl` is tried first in
+either case: it fails. `Path` is *indexed* by both endpoints, and Lean
+compiles a match on an indexed family like this so that its defining
+equations reduce only through their auto-generated equation lemmas, not
+through plain iota-reduction, once an abstract path (`p`, `q'`) is
+involved — concrete, fully closed paths like `pathAlpha` still reduce
+fine under `#eval`, which is why those three checks above work directly,
+but the *general*, universally-quantified theorem does not close by
+`rfl`. `simp only [Path.append, Path.length]` names exactly the two
+definitions being unfolded and nothing else, so it plays the same explicit
+role a `rw` would if these equations were reachable that way — it is not
+standing in for an unknown pile of simp lemmas, only for the two named
+here. This is the same kind of real, verified obstacle Chapter 6 §4's
+`Perm3.ext` ran into with core Lean's lack of a `structure`
+extensionality lemma, now met again with indexed recursion instead.
+
 ---
 
-[← Chapter 10](08-chapter-10.md) | [Index](00-index.md) | [Table of contents](../README.md)
+[← Chapter 10](09-chapter-10.md) | [Index](00-index.md) | [Table of contents](../README.md)

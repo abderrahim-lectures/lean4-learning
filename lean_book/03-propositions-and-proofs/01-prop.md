@@ -1,6 +1,6 @@
 ## `Prop`: the type of statements
 
-[← Index](00-index.md) | [Next: `theorem` and `lemma` →](02-theorem-lemma.md)
+[← Index](00-index.md) | [Next: A recap of standard logic →](02-logic-recap.md)
 
 ---
 
@@ -55,17 +55,15 @@ the same operation, described differently depending on whether the term
 is regarded as "a proof" or "a computation."
 
 > Read more: if "propositional logic" or "natural deduction" above are not
-> already familiar,
-> [Appendix B §0](../15-lambda-calculus/00-standard-logic.md) recaps
-> standard logic from scratch, with no Lean involved, before this
-> correspondence gets applied to it. Otherwise,
-> [Appendix B](../15-lambda-calculus/00-index.md) makes the correspondence
-> itself fully precise, extending it all the way down to the untyped
-> λ-calculus underneath both proofs and ordinary functions;
-> [Appendix B §3](../15-lambda-calculus/03-simply-typed-lambda-calculus.md)'s
-> progress and preservation theorems are the formal statement of "a proof
-> never reduces to something of the wrong type," i.e. "well-typed proofs
-> do not go wrong."
+> already familiar, [the next section](02-logic-recap.md) recaps standard
+> logic from scratch, with no Lean involved, before this correspondence
+> gets applied to it. For the correspondence made fully precise — extending
+> it all the way down to the untyped λ-calculus underneath both proofs and
+> ordinary functions — see [Chapter 1 §4](../01-basics/05-pi-sigma-and-coc.md);
+> [Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md)'s progress
+> and preservation theorems are the formal statement of "a proof never
+> reduces to something of the wrong type," i.e. "well-typed proofs do not
+> go wrong."
 
 ```lean
 #check (2 + 2 = 4)     -- 2 + 2 = 4 : Prop
@@ -92,4 +90,4 @@ that are *definitionally* equal, the strictest notion of "$=$".
 
 ---
 
-[← Index](00-index.md) | [Next: `theorem` and `lemma` →](02-theorem-lemma.md)
+[← Index](00-index.md) | [Next: A recap of standard logic →](02-logic-recap.md)

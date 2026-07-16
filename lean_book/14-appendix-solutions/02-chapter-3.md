@@ -1,6 +1,6 @@
 ## Chapter 3: Propositions and proofs
 
-[← Index](00-index.md) | [Next: Chapter 4 →](02-chapter-4.md)
+[← Index](00-index.md) | [Next: Chapter 4 →](03-chapter-4.md)
 
 ---
 
@@ -43,4 +43,4 @@ predicate (`1 > 0`). Here [`decide`](https://lean-lang.org/doc/reference/latest/
 
 ---
 
-[← Index](00-index.md) | [Next: Chapter 4 →](02-chapter-4.md)
+[← Index](00-index.md) | [Next: Chapter 4 →](03-chapter-4.md)

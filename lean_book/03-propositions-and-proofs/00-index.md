@@ -7,12 +7,13 @@
 ## Sections
 
 1. [`Prop`: the type of statements](01-prop.md)
-2. [`theorem` and `lemma`](02-theorem-lemma.md)
-3. [Implication is a function type](03-implication.md)
-4. [And, Or, Not](04-and-or-not.md)
-5. [Universal and existential quantifiers](05-quantifiers.md)
-6. [Equality reasoning](06-equality.md)
-7. [Exercises](07-exercises.md)
+2. [A recap of standard logic and logical calculus](02-logic-recap.md)
+3. [`theorem` and `lemma`](03-theorem-lemma.md)
+4. [Implication is a function type](04-implication.md)
+5. [And, Or, Not](05-and-or-not.md)
+6. [Universal and existential quantifiers](06-quantifiers.md)
+7. [Equality reasoning](07-equality.md)
+8. [Exercises](08-exercises.md)
 
 ---
 

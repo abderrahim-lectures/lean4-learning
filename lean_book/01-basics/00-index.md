@@ -8,8 +8,10 @@
 
 1. [Everything has a type](01-everything-has-a-type.md)
 2. [`def`, `let`, implicit arguments](02-def-let-implicit.md)
-3. [Dependent types, categorically](03-dependent-types.md)
+3. [Dependent types, with examples](03-dependent-types.md)
 4. [Terminology encountered before it is fully explained](04-terminology.md)
+5. [Π/Σ-types and the calculus of constructions](05-pi-sigma-and-coc.md)
+6. [Exercises](06-exercises.md)
 
 ---
 

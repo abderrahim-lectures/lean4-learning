@@ -14,7 +14,7 @@
    `have`), then simplify each side using `assoc`/`inv_left`/`id_left`, the
    same "regroup, then cancel" pattern as Theorem 3.
 
-Solutions: [Appendix, Chapter 7](../14-appendix-solutions/05-chapter-7.md).
+Solutions: [Appendix, Chapter 7](../14-appendix-solutions/06-chapter-7.md).
 
 ## Next
 

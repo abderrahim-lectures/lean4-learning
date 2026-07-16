@@ -15,7 +15,7 @@
    been *proved* commutative — this is exactly the content of
    Chapter 7's first theorem.
 
-Solutions: [Appendix, Chapter 6](../14-appendix-solutions/04-chapter-6.md).
+Solutions: [Appendix, Chapter 6](../14-appendix-solutions/05-chapter-6.md).
 
 ## Next
 

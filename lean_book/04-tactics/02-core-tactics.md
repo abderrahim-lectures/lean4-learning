@@ -68,8 +68,8 @@ makes the old and new goals equivalent.
 > Read more: "deduction theorem" and "$\lambda$-abstraction rule" are the
 > $\Rightarrow$-intro rule from natural deduction and its Curry–Howard
 > reading as a Lean `fun`, respectively —
-> [Appendix B §0](../15-lambda-calculus/00-standard-logic.md) states the
-> rule itself; [Appendix B §3](../15-lambda-calculus/03-simply-typed-lambda-calculus.md)
+> [Chapter 3 §2](../03-propositions-and-proofs/02-logic-recap.md) states the
+> rule itself; [Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md)
 > gives the typed λ-calculus it corresponds to.
 
 ---
