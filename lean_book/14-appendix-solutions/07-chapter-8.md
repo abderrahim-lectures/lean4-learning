@@ -73,6 +73,26 @@ while `mul_zero_left` (its mirror, an exercise) needs `right_distrib`
 instead, precisely because there is no `mul_comm` field to convert one
 into the other.
 
+**3. `theorem mat2_not_comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X`**
+
+```lean
+theorem mat2_not_comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X := by
+  refine ⟨X, Y, fun h => ?_⟩
+  rw [Mat2.mk.injEq] at h
+  exact absurd h.1 (by decide)
+```
+
+`X` and `Y` are the witness pair already computed in the chapter (`Mat2.mul
+X Y` evaluates to `⟨2, 1, 1, 1⟩`, `Mat2.mul Y X` to `⟨1, 1, 1, 2⟩`), so
+`refine ⟨X, Y, fun h => ?_⟩` only needs to derive `False` from an assumed
+equality `h : Mat2.mul X Y = Mat2.mul Y X`. As the exercise's hint notes,
+`by decide` cannot attack `h` directly — `Mat2` has no `DecidableEq`
+instance — so `Mat2.mk.injEq` first turns `h` into a conjunction of four
+`Int` equalities, one per field. `h.1`, the first conjunct, states
+`2 = 1` (the two matrices' `a11` entries), which `Int` *does* have
+decidable equality for; `by decide` refutes it directly, and `absurd`
+combines the false hypothesis with its refutation to close the goal.
+
 ---
 
 [← Chapter 7](06-chapter-7.md) | [Index](00-index.md) | [Next: Chapter 9 →](08-chapter-9.md)

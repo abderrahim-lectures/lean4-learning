@@ -68,6 +68,12 @@ conditions**: a structure `{ data : D, proof : P data }` is the dependent
 pair (subset) $\{\, d \in D \mid P(d) \,\}$, categorically a subobject of
 $D$.
 
+### References
+
+- The [Lean 4 documentation on `structure`](https://lean-lang.org/doc/reference/latest/) — the constructor/projection/anonymous-constructor mechanics described above.
+- Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002, Ch. 11 — records and products as the standard language-theoretic account of what `structure` implements.
+- nLab, ["product"](https://ncatlab.org/nlab/show/product) — the universal-property reading of `structure` used in the "Mathematical reading" box above.
+
 ---
 
 [← Index](00-index.md) | [Next: Structures with type parameters →](02-type-parameters.md)

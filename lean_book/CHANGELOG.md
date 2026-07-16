@@ -3,6 +3,67 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Full-book review pass (Chapters 2, 4, 6–13, solutions appendix)
+
+Applied the same verification discipline used for the type-theory rewrite
+(every Lean snippet re-run against the pinned toolchain via `lake env
+lean`/`lake build`; every factual and cross-reference claim checked) to
+every remaining chapter. Found and fixed several real bugs a read-through
+alone would have missed:
+
+- **Wrong lemma name in a solution.** [Appendix, Chapter
+  5](14-appendix-solutions/04-chapter-5.md)'s exercise 1 solution claimed
+  `rw [Nat.two_mul]` closes `n * 2 = n + n`; running it fails, since
+  `Nat.two_mul : 2 * n = n + n` has the arguments in the other order.
+  Fixed to the correct `Nat.mul_two : n * 2 = n + n`.
+- **A tool-output claim that didn't match the real toolchain.** [Chapter 12
+  §1](12-working-efficiently/01-search-tactics.md) claimed `exact?` suggests
+  `exact h.symm` for a simple symmetry goal; run against this book's pinned
+  toolchain, it instead returns a correct but far less readable term.
+  Rewrote the section to show the verified actual output and make the
+  point honestly (search tactics find *a* closing term, not necessarily
+  the most idiomatic one).
+- **A missing exercise solution.** [Appendix, Chapter
+  8](14-appendix-solutions/07-chapter-8.md) had solutions for exercises 1–2
+  but not 3 (`mat2_not_comm`), even though the theorem was already proved
+  and verified in the companion Lean project. Added the missing solution
+  and explanation.
+- **Repeated chapter mislabeling.** [Chapter
+  12](12-working-efficiently/00-index.md) attributed the "find the proof
+  by search, not just present the answer" discipline and its multi-step
+  `rw`/`have` proofs to "Chapters 6 and 8" in five places across four
+  files; that framing and those proofs are actually in Chapters 7 and 9
+  (6 and 8 are the *definition* chapters). Corrected throughout.
+- **A stale cross-reference.** [Chapter 10 §5](10-modules/05-linear-maps.md)
+  attributed `evenSubmodule` to "Chapter 9"; it's defined earlier in the
+  same chapter, in §4. Fixed to point to §4 directly.
+- **An overclaim about the book's own tactic usage.** [Chapter
+  13](13-next-steps/01-what-we-built.md) claimed "there is no `simp`"
+  anywhere in the book; [Chapter 6 §4](06-groups/04-permutations-example.md)'s
+  `Perm3.ext` genuinely uses `simp only [mk.injEq]`, since core Lean
+  generates no field-wise extensionality lemma for a plain `structure`.
+  Softened the claim and named the one explained exception.
+- Added **References** sections (real, verified sources) to chapters that
+  were missing them despite making external, checkable claims: [Chapter
+  2](02-functions-and-structures/01-structure-basics.md) (structure-as-product,
+  parametric polymorphism, forgetful functors), [Chapter
+  8 §3](08-rings/03-ring.md) (Dummit & Foote, Aluffi), [Chapter 10
+  §2](10-modules/02-translating-into-lean.md) (Dummit & Foote, Weibel), and
+  [Chapter 11 §5](11-path-algebras/05-path-composition.md)
+  (Assem–Simson–Skowroński, Schiffler).
+- Fixed a stale "first used" location for `sorry` in the
+  [tactic and library reference](tactic-and-library-reference.md) (claimed
+  Chapter 7; it's actually introduced in Chapter 4 §3).
+- Re-verified every Lean code block in Chapters 6–11 and 13 (both the
+  from-scratch and "Mathlib equivalent" boxes) by rebuilding the entire
+  companion `lean_project` — including its `LeanProjectMathlib` modules —
+  against the pinned `v4.31.0` toolchain; confirmed every book code block
+  still matches its ported module exactly, with no drift.
+- Ran a full site-wide Markdown link-integrity sweep; the only unresolved
+  link is a pre-existing, intentionally preserved historical reference in
+  this changelog (see above, "09-chapter-11.md" predates the Appendix B
+  renumbering).
+
 ## Unreleased — Type-theory chapters rewritten, Appendix B eliminated
 
 - Rewrote [Chapter 1 §1](01-basics/01-everything-has-a-type.md) and

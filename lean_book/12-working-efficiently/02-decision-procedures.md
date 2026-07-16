@@ -32,7 +32,7 @@ falls entirely inside its decidable fragment; use explicit `rw`/`have`
 reasoning whenever the goal is about a *general*, unspecified structure**
 (like an arbitrary `Group G` or `Ring R`). No decision procedure applies
 there, because there is no concrete computation to run, only axioms to
-combine. Chapters 6 and 8's group/ring theorems are all of this second
+combine. Chapters 7 and 9's group/ring theorems are all of this second
 kind, which is exactly why they needed hand-built proofs instead of
 `omega`.
 

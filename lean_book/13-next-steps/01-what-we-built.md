@@ -17,12 +17,16 @@ principles (no external library):
 - a `Quiver` and an indexed inductive `Path` type, with path composition,
   as the combinatorial skeleton underlying a path algebra.
 
-Every proof in this book was written with explicit `rw`/`have`/`intro`
-steps, each one marked with the axiom or prior theorem that justified it.
-There is no [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), and no unexplained [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/). This is exactly the
-discipline required for reading (or writing) a real Lean
-library: when something goes wrong, the exact lemma responsible should be
-identifiable.
+Nearly every proof in this book was written with explicit
+`rw`/`have`/`intro` steps, each one marked with the axiom or prior theorem
+that justified it, and no unexplained [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/). [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) itself is
+used exactly once outside Chapter 12's own discussion of it — Chapter 6's
+`Perm3.ext` reaches for `simp only [mk.injEq]` because core Lean generates
+no field-wise extensionality lemma for a plain `structure`, and unfolding
+that equation by hand is not worth the detour it would take from the
+chapter's real point. Every other proof avoids it, precisely to keep the
+discipline required for reading (or writing) a real Lean library: when
+something goes wrong, the exact lemma responsible should be identifiable.
 
 ---
 

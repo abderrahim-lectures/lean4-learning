@@ -45,7 +45,7 @@ Two general links used throughout this page:
 | `omega` | Ch. 12 §2 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 | `norm_num` | Ch. 12 §2 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 | `noncomm_ring` | Ch. 8 (Mathlib equivalent) | [Loogle](https://loogle.lean-lang.org/?q=noncomm_ring) |
-| `sorry` | Ch. 7 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `sorry` | Ch. 4 §3 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 
 ## Mathlib names (Chapters 6-11's "Mathlib equivalent" boxes)
 

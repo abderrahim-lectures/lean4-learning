@@ -61,6 +61,11 @@ $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 > *Algebra: Chapter 0* (the latter using the same categorical
 > framing this book uses) are standard references.
 
+### References
+
+- David S. Dummit and Richard M. Foote, *[Abstract Algebra](https://www.wiley.com/en-us/Abstract+Algebra,+3rd+Edition-p-9780471433347)*, 3rd ed., Wiley, 2003 — the standard classical (non-Lean) reference for the ring axioms (R1)–(R4) and their consequences.
+- Paolo Aluffi, *[Algebra: Chapter 0](https://bookstore.ams.org/gsm-104)*, Graduate Studies in Mathematics vol. 104, American Mathematical Society, 2009 — a ring-theory treatment using the same categorical framing (forgetful functors, universal properties) this book uses.
+
 ---
 
 [← CommGroup](02-comm-group.md) | [Index](00-index.md) | [Next: Integers example →](04-integers-example.md)

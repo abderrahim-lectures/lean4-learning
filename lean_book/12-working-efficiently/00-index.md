@@ -4,7 +4,7 @@
 
 ---
 
-Chapters 6 and 8 were about *finding* a proof by hand, deliberately slowly,
+Chapters 7 and 9 were about *finding* a proof by hand, deliberately slowly,
 so the underlying reasoning is never hidden. This chapter addresses the
 other half: once the reason a proof works is understood, how is it written
 (and found) faster in day-to-day use? Efficient Lean does not mean "type
