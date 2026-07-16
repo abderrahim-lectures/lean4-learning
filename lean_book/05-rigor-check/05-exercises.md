@@ -28,8 +28,9 @@ Solutions: [Appendix, Chapter 5](../14-appendix-solutions/04-chapter-5.md).
 
 ## Next
 
-Continue to [Chapter 6: Structures and classes — defining a `Group`](../06-groups/00-index.md).
+Continue to the [checkpoint project](06-checkpoint-project.md), which
+closes out Part I before Chapter 6 begins Part II.
 
 ---
 
-[← Definitional vs propositional equality](04-defeq-vs-propeq.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 6: Groups →](../06-groups/00-index.md)
+[← Definitional vs propositional equality](04-defeq-vs-propeq.md) | [Index](00-index.md) | [Next: Checkpoint project →](06-checkpoint-project.md)

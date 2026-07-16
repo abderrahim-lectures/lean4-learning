@@ -4,25 +4,179 @@
 
 ---
 
-1. Redo `Group`/`Ring` from this book as Lean **type classes**
-   (`class Group (G : Type) extends ...`) instead of plain `structure`s,
-   and notice how theorem statements get shorter once `*`, `⁻¹`, `1` are
-   available as notation.
-2. Finish the path-algebra construction sketched in Chapter 11's Exercise 3:
-   formal $k$-linear combinations of paths, with multiplication by
-   concatenation (and $0$ when endpoints do not match) — observe that this is
-   precisely "the free `Module` over $k$ on the set of paths," tying
-   Chapter 10 and Chapter 11 together.
-3. Prove that a quiver with no oriented cycles has a *finite-dimensional*
-   path algebra (one polynomial-flavored way to make this precise: bound
-   path length by the number of vertices) — "finite-dimensional" here means
-   exactly Chapter 10's `Module` notion of a finite spanning/basis set.
-4. Once the type-class style is familiar, explore Mathlib's `CategoryTheory.Quiver` and compare
-   its definitions line-by-line against this book's `Quiver`/`Path`.
-5. Redo `Module`'s "path algebra representations are modules over $kQ$"
-   remark (end of Chapter 10) concretely: build the path algebra $kQ$ for
-   the example quiver, then a small representation of it, as a
-   `Module (PathAlgebraElem ...)`.
+Each project below follows the same shape as the checkpoint projects after
+Chapters 5 and 11: learning objectives, prerequisites, milestones, a
+concrete deliverable, and a self-verification step. Unlike the checkpoint
+projects, none of these are worked solutions — they are genuinely open,
+for the reader to carry out, with no appendix entry.
+
+### 1. Redo `Group`/`Ring` as type classes
+
+**Learning objectives.** Feel directly what Chapter 13 §2 only described:
+the ergonomic difference between this book's plain `structure`s and
+Mathlib's `class`-based hierarchy, and Lean's typeclass/instance search
+mechanism.
+
+**Prerequisites.** Chapter 5 §1 (`structure` vs `class`), Chapter 6
+(`Group`), Chapter 8 (`Ring`). The Chapter 5 appendix's `MyGroup` (exercise
+2) is a smaller version of the first milestone below and a good warm-up.
+
+**Milestones.**
+
+1. Declare `class Group (G : Type) where` with the same five fields this
+   book's `Group` structure has, then `class Ring (R : Type) where`
+   similarly (deciding whether `Ring` extends an `AddCommGroup`/`CommGroup`
+   class, as Mathlib does, or still nests one as a field).
+2. Register at least two instances per class (e.g. `Int` and `Bool`,
+   reusing `intGroup`/`boolXorGroup`'s proofs from Chapters 6–8).
+3. Redo one theorem generically — `id_unique` (Chapter 7) is the smallest
+   — against the `[Group G]` assumption instead of a `Grp : Group G`
+   argument, and notice which parts of the statement got shorter.
+
+**Deliverable.** `class Group`, `class Ring`, at least two instances of
+each, and one theorem restated in the type-class style.
+
+**Self-verification.** The restated theorem should type-check with no
+explicit `Grp`/`Rg` argument threaded through — `#check` its statement and
+confirm Lean finds the right instance automatically at each of the two
+concrete types with no extra proof supplied at the call site.
+
+### 2. Finish the path-algebra construction
+
+**Learning objectives.** Finitely-supported functions as a `Ring`'s
+underlying data, and connecting Chapter 10's `Module` vocabulary forward
+to Chapter 11's `Quiver`/`Path`.
+
+**Prerequisites.** Chapter 8 (`Ring`), Chapter 10 (`Module`), Chapter 11
+(`Path`), Chapter 11's checkpoint project (`Path.length`) as a warm-up, and
+Chapter 11's Exercise 3 sketch of `PathAlgebraElem`.
+
+**Milestones.**
+
+1. Restrict first to a quiver with finitely many paths total — the
+   example quiver from Chapter 11 §3 has exactly six (`e_0, e_1, e_2,
+   alpha, beta, beta∘alpha`) — so "finitely supported" can start as a
+   plain function on a finite index rather than needing Mathlib's
+   `Finsupp`.
+2. Define pointwise addition on this finite carrier and prove it forms a
+   `CommGroup` (Chapter 8 §2).
+3. Define multiplication by path composition, `0` on any pair whose
+   endpoints do not match (as the chapter text describes), and prove the
+   monoid laws (`mul_assoc`/`one_mul`/`mul_one`) using the sum of trivial
+   paths as `one`.
+4. Assemble `Ring (PathAlgebraElem exampleQuiver k)` for a small, fully
+   concrete `k` (Chapter 8 §5's `fin3Ring`, `Fin 3`, is a good first
+   choice, since `decide` can then check the ring axioms outright).
+
+**Deliverable.** A `Ring` instance on a finite path algebra for a
+concretely chosen `k`.
+
+**Self-verification.** `#eval` the product of two hand-chosen path-algebra
+elements and check it against a hand computation of the same product; if
+`k` is fully decidable (as `Fin 3` is), the ring axioms can additionally be
+discharged by `decide` rather than by hand, the same shortcut Chapter 8 §5
+took for `fin3Ring`.
+
+### 3. Acyclic quivers have finite-dimensional path algebras
+
+**Learning objectives.** Combinatorial reasoning about `Path.length`
+(Chapter 11's checkpoint project), and connecting it to Chapter 10's
+`Module` notion of a finite spanning set.
+
+**Prerequisites.** Chapter 10 (`Module`), Chapter 11, the `Path.length`
+checkpoint project (a prerequisite in substance, not just in reading
+order: this project is exactly the "harder" continuation its own
+self-verification note gestures at).
+
+**Milestones.**
+
+1. Define what "acyclic" means for a `Quiver`: no nontrivial path from any
+   vertex back to itself (`∀ v, ∀ p : Path Q v v, <p is the trivial path>`
+   is one natural phrasing).
+2. Prove that in an acyclic quiver with a finite vertex type, every path's
+   `Path.length` is bounded by the number of vertices — the idea being
+   that a path visiting more vertices than exist must repeat one, forcing
+   a nontrivial cycle.
+3. Instantiate the bound on `exampleQuiver` (acyclic, from Chapter 11 §3)
+   and on `cyclicQuiver` (Chapter 11 Exercise 1, which has a cycle) to see
+   the argument apply in the first case and correctly fail to apply in the
+   second.
+4. Conclude finite-dimensionality: an acyclic quiver on finitely many
+   vertices has only finitely many paths (bounded length, finitely many
+   arrows to choose at each step), hence Project 2's path algebra is a
+   finite-dimensional `Module` over `k` in Chapter 10's sense.
+
+**Deliverable.** A stated and proved length bound for acyclic quivers,
+checked against both example quivers.
+
+**Self-verification.** `#eval` every path's length in `exampleQuiver` and
+confirm none exceeds the vertex count (`3`); separately, in `cyclicQuiver`
+(Chapter 11 appendix, Exercise 1), build a path that goes around the cycle
+`gamma ∘ beta ∘ alpha` twice (by `Path.append`ing `cPathGammaBetaAlpha` to
+itself), confirm its length exceeds `3`, and confirm the bound's proof
+genuinely does not apply there, as it must not for a cyclic quiver.
+
+### 4. Compare against Mathlib's `CategoryTheory.Quiver`
+
+**Learning objectives.** Reading real Mathlib source, and recognizing this
+book's own constructions inside a more general, abstract presentation.
+
+**Prerequisites.** Chapter 11 (this book's `Quiver`/`Path`), Project 1
+above (comfort with the type-class style Mathlib uses throughout).
+
+**Milestones.**
+
+1. Read `Mathlib.Combinatorics.Quiver.Basic`'s `Quiver` class (already
+   introduced in Chapter 11 §1's "Mathlib equivalent" box) and
+   `Mathlib.CategoryTheory.Quiver`'s extension of it with identities and
+   composition, comparing field-for-field against this book's plain
+   `Quiver`/`Path`.
+2. Find Mathlib's `Prefunctor` (a quiver homomorphism) and, separately,
+   define a `structure QuiverHom` by hand for two of this book's own
+   quivers (`exampleQuiver`, `cyclicQuiver` from Chapter 11's exercises),
+   mapping vertices to vertices and arrows to paths.
+3. Write the identity `QuiverHom` and composition of two `QuiverHom`s,
+   noticing the parallel to Chapter 10's `LinearMap` exercises (identity
+   and composition being exactly what make a class of structures into a
+   category, Chapter 10 Exercise 2).
+
+**Deliverable.** A hand-written `QuiverHom` between two of this book's own
+quivers, with its Mathlib `Prefunctor` counterpart identified by name.
+
+**Self-verification.** `#check @Prefunctor` and compare its fields,
+one-by-one in a comment, against `QuiverHom`'s own fields.
+
+### 5. A concrete `kQ`-module
+
+**Learning objectives.** Turn Chapter 11 §5's closing remark —
+"representations of $Q$ are exactly $kQ$-modules" — into an actual, if
+small, worked example.
+
+**Prerequisites.** Chapter 10 (`Module`), Chapter 11, and Project 2 above
+(at least its first two milestones: a concrete, finite path algebra to be
+a module *over*).
+
+**Milestones.**
+
+1. Using the example quiver and Project 2's finite path algebra, assign a
+   small carrier module to each vertex (e.g. `Fin 3` under Chapter 8 §5's
+   `fin3Ring`-flavored addition) and a linear map to each arrow, exactly
+   the data of a quiver representation (Chapter 11 §5's remark, made
+   concrete).
+2. Package this data as a genuine `Module (PathAlgebraElem exampleQuiver
+   k) (SomeCarrier)` instance (Chapter 10 §2's `Module` structure), using
+   Project 2's `Ring` as the scalar ring `Rg`.
+3. Confirm the module axioms hold by checking that the scalar action of a
+   path-algebra element on a carrier element agrees with manually
+   composing the linear maps assigned to that path's arrows.
+
+**Deliverable.** One concrete `Module` instance realizing a representation
+of the example quiver.
+
+**Self-verification.** `#eval` the action of a length-2 path-algebra
+element (e.g. the class of $\beta\alpha$) on a chosen carrier element, and
+confirm it matches applying the two arrows' assigned linear maps in
+sequence by hand.
 
 ### Aside: Church encodings — data from nothing but functions
 

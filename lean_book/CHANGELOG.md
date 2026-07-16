@@ -3,6 +3,41 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Project-Based Learning components
+
+Distributed PBL scaffolding through the book instead of leaving it only at
+the very end:
+
+- Added a new **checkpoint project** at the end of Part I,
+  [05-rigor-check/06-checkpoint-project.md](05-rigor-check/06-checkpoint-project.md):
+  build a `Monoid` from scratch (`Group` minus inverses) and prove identity
+  uniqueness for it, one chapter ahead of `Group` itself. Full worked
+  solution (with a second instance) added to
+  [Appendix, Chapter 5](14-appendix-solutions/04-chapter-5.md).
+- Added a second **checkpoint project** at the end of Part II,
+  [11-path-algebras/07-checkpoint-project.md](11-path-algebras/07-checkpoint-project.md):
+  define `Path.length` and prove `Path.append` respects it. This surfaced
+  a real, verified fact about Lean worth documenting directly — functions
+  matching on an *indexed* inductive type like `Path` reduce only through
+  their equation lemmas (`simp only [...]`), not plain `rfl`, once an
+  abstract argument is involved. Full worked solution added to
+  [Appendix, Chapter 11](14-appendix-solutions/10-chapter-11.md); [Chapter
+  13's "What we built"](13-next-steps/01-what-we-built.md) updated to name
+  this as a second explained exception to the book's no-`simp` discipline
+  (alongside Chapter 6's `Perm3.ext`), rather than leave the claim
+  overstated.
+- Both new chapters' `00-index.md` and their exercises files' navigation
+  updated to include the checkpoint project as the chapter's closing
+  section.
+- Expanded [Chapter 13 §3](13-next-steps/03-next-projects.md)'s five
+  one-line "suggested next projects" into full scaffolds (learning
+  objectives, prerequisites, milestones, a concrete deliverable, and a
+  self-verification step the reader can run), modeled on §2's "Two
+  theorems for free" capstone rigor. These remain genuinely open — no
+  appendix solutions were added for them, unlike the two checkpoint
+  projects, since they were never worked exercises with answers in the
+  first place.
+
 ## Unreleased — Full-book review pass (Chapters 2, 4, 6–13, solutions appendix)
 
 Applied the same verification discipline used for the type-theory rewrite

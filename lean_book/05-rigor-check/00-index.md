@@ -21,6 +21,7 @@ so they are addressed here, before Chapter 6 proceeds.
 3. [Typing rules and safety](03-typing-rules-and-safety.md)
 4. [Definitional versus propositional equality](04-defeq-vs-propeq.md)
 5. [Exercises](05-exercises.md)
+6. [Checkpoint project: a `Monoid` from scratch](06-checkpoint-project.md)
 
 ---
 

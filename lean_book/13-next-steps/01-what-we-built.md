@@ -20,13 +20,19 @@ principles (no external library):
 Nearly every proof in this book was written with explicit
 `rw`/`have`/`intro` steps, each one marked with the axiom or prior theorem
 that justified it, and no unexplained [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/). [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) itself is
-used exactly once outside Chapter 12's own discussion of it — Chapter 6's
-`Perm3.ext` reaches for `simp only [mk.injEq]` because core Lean generates
-no field-wise extensionality lemma for a plain `structure`, and unfolding
-that equation by hand is not worth the detour it would take from the
-chapter's real point. Every other proof avoids it, precisely to keep the
-discipline required for reading (or writing) a real Lean library: when
-something goes wrong, the exact lemma responsible should be identifiable.
+used sparingly outside Chapter 12's own discussion of it, and only when a
+genuine technical obstacle makes the explicit alternative not worth the
+detour: Chapter 6's `Perm3.ext` reaches for `simp only [mk.injEq]` because
+core Lean generates no field-wise extensionality lemma for a plain
+`structure`, and Chapter 11's checkpoint project reaches for
+`simp only [Path.append, Path.length]` because a match on an *indexed*
+inductive type like `Path` reduces only through its equation lemmas, not
+plain `rfl`, once an abstract path is involved. Both name only the exact
+definitions being unfolded, standing in for a specific, known step rather
+than an unknown pile of lemmas. Every other proof avoids `simp` entirely,
+precisely to keep the discipline required for reading (or writing) a real
+Lean library: when something goes wrong, the exact lemma responsible
+should be identifiable.
 
 ---
 

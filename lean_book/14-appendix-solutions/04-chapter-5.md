@@ -122,6 +122,50 @@ course true. This is why the explicit `induction n with ...` above is
 required. Comparing it with `add_one_eq_succ`'s one-line `rfl` makes the asymmetry
 concrete.
 
+**Checkpoint project: a `Monoid` from scratch**
+
+```lean
+structure Monoid (M : Type) where
+  op : M → M → M
+  id : M
+  assoc : ∀ a b c : M, op (op a b) c = op a (op b c)
+  id_left : ∀ a : M, op id a = a
+  id_right : ∀ a : M, op a id = a
+
+def listMonoid (α : Type) : Monoid (List α) where
+  op := List.append
+  id := []
+  assoc := by intro a b c; exact List.append_assoc a b c
+  id_left := by intro a; exact List.nil_append a
+  id_right := by intro a; exact List.append_nil a
+
+def natMulMonoid : Monoid Nat where
+  op := fun a b => a * b
+  id := 1
+  assoc := by intro a b c; exact Nat.mul_assoc a b c
+  id_left := by intro a; exact Nat.one_mul a
+  id_right := by intro a; exact Nat.mul_one a
+
+theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
+    (h : ∀ a : M, Mn.op e' a = a) : e' = Mn.id := by
+  have step1 : Mn.op e' Mn.id = Mn.id := h Mn.id
+  have step2 : Mn.op e' Mn.id = e' := Mn.id_right e'
+  rw [← step2]
+  exact step1
+```
+
+Both instances are one field-by-field build, exactly `intGroup`'s style
+(Chapter 6 §3) minus the two inverse fields: each proof obligation is a
+single `intro` plus a one-line `exact` naming a core-library fact
+(`List.append_assoc`/`List.nil_append`/`List.append_nil` for the list
+instance, `Nat.mul_assoc`/`Nat.one_mul`/`Nat.mul_one` for the natural-number
+one). `monoid_id_unique`'s proof is `id_unique` (Chapter 7, Theorem 1)
+copied verbatim with every `Grp.` replaced by `Mn.` and `Group` weakened to
+`Monoid` — every step used only `id_right` and the hypothesis `h`, never an
+inverse, which is exactly why the proof survives dropping `inv` entirely.
+The theorem applies unchanged to both instances built above, the same
+"prove once, get it for free" payoff Chapter 6 §6 promises for `Group`.
+
 ---
 
 [← Chapter 4](03-chapter-4.md) | [Index](00-index.md) | [Next: Chapter 6 →](05-chapter-6.md)
