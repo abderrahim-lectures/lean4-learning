@@ -71,8 +71,8 @@ coverage, and outright factual errors; a second, accessibility-focused
 pass that caught "Mathematical reading" boxes drifting past the book's own
 promised background (a shared glossary now lives at
 [Chapter 1 §4](01-basics/04-terminology.md), and
-[Appendix B §0](15-lambda-calculus/00-standard-logic.md) recaps standard
-logic from scratch for readers meeting it for the first time) and added
+[Chapter 3 §2](03-propositions-and-proofs/02-logic-recap.md) recaps
+standard logic from scratch for readers meeting it for the first time) and added
 optional "Programmer's corner (Python)" boxes alongside the "Mathematical
 reading" ones; and a third, readability-focused pass that put every worked
 example in its own block immediately followed by its own explanation
@@ -105,16 +105,18 @@ See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
 12. [Working efficiently in Lean](12-working-efficiently/00-index.md)
 13. [Where to go next](13-next-steps/00-index.md)
 
-**Appendices**
+**Appendix**
 
-14. [Appendix A: Solutions to exercises](14-appendix-solutions/00-index.md)
-15. [Appendix B: A logic recap, and the λ-calculus underneath Lean](15-lambda-calculus/00-index.md)
+14. [Solutions to exercises](14-appendix-solutions/00-index.md)
 
 **Reference**
 
 - [Tactic and library reference](tactic-and-library-reference.md) — every
   tactic used in the book, and every Mathlib name from Chapters 6-11's
   "Mathlib equivalent" boxes, each linked to its official documentation.
+- [λ-calculus / type theory to Lean dictionary](lambda-calculus-dictionary.md) —
+  a lookup table connecting the formal notation in this book's
+  "Mathematical reading" boxes back to Lean syntax, term by term.
 
 ## Building a PDF
 
