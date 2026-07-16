@@ -37,7 +37,7 @@ to something already known. Here, that chain is just one step: `2 + 2 = 4` by
 plain computation.
 
 > Read more: if "sequent" or "backward inference rule" are new,
-> [Appendix B §0](../15-lambda-calculus/00-standard-logic.md) recaps
+> [Chapter 3 §2](../03-propositions-and-proofs/02-logic-recap.md) recaps
 > natural deduction — the standard proof system these words describe,
 > turnstile notation and all — from scratch, with no Lean involved.
 

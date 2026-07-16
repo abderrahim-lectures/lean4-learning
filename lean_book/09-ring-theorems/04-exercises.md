@@ -18,7 +18,7 @@
    proof, which required real work precisely because `a` was an unknown
    variable rather than a concrete numeral).
 
-Solutions: [Appendix, Chapter 9](../14-appendix-solutions/07-chapter-9.md).
+Solutions: [Appendix, Chapter 9](../14-appendix-solutions/08-chapter-9.md).
 
 ## Next
 

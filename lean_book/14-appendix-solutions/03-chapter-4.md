@@ -1,6 +1,6 @@
 ## Chapter 4: Tactics
 
-[← Chapter 3](01-chapter-3.md) | [Index](00-index.md) | [Next: Chapter 5 →](03-chapter-5.md)
+[← Chapter 3](02-chapter-3.md) | [Index](00-index.md) | [Next: Chapter 5 →](04-chapter-5.md)
 
 ---
 
@@ -42,4 +42,4 @@ This leaves a new goal `P`, which `exact hp` closes.
 
 ---
 
-[← Chapter 3](01-chapter-3.md) | [Index](00-index.md) | [Next: Chapter 5 →](03-chapter-5.md)
+[← Chapter 3](02-chapter-3.md) | [Index](00-index.md) | [Next: Chapter 5 →](04-chapter-5.md)

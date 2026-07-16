@@ -1,6 +1,6 @@
 ## Chapter 6: Groups
 
-[← Chapter 5](03-chapter-5.md) | [Index](00-index.md) | [Next: Chapter 7 →](05-chapter-7.md)
+[← Chapter 5](04-chapter-5.md) | [Index](00-index.md) | [Next: Chapter 7 →](06-chapter-7.md)
 
 ---
 
@@ -68,4 +68,4 @@ axioms — only that, once both hold, "a" left inverse coincides with
 
 ---
 
-[← Chapter 5](03-chapter-5.md) | [Index](00-index.md) | [Next: Chapter 7 →](05-chapter-7.md)
+[← Chapter 5](04-chapter-5.md) | [Index](00-index.md) | [Next: Chapter 7 →](06-chapter-7.md)

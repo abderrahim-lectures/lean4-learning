@@ -1,6 +1,6 @@
 ## Equality reasoning
 
-[← Quantifiers](05-quantifiers.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)
+[← Quantifiers](06-quantifiers.md) | [Index](00-index.md) | [Next: Exercises →](08-exercises.md)
 
 ---
 
@@ -42,4 +42,4 @@ whenever an equality hypothesis needs to be used inside a larger goal.
 
 ---
 
-[← Quantifiers](05-quantifiers.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)
+[← Quantifiers](06-quantifiers.md) | [Index](00-index.md) | [Next: Exercises →](08-exercises.md)

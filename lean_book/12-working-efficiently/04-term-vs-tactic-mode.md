@@ -15,12 +15,12 @@ not a real difference in power:
   `fun a => Int.add_assoc a b c` would have been.
 - **Tactic mode** is preferable once a proof involves several steps in a
   row, case splits, or induction — anything where checking an
-  intermediate goal state while writing is desirable. Chapters 6 and 8's multi-step
+  intermediate goal state while writing is desirable. Chapters 7 and 9's multi-step
   [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chains would be hard to read (and much harder to *write*) as raw
   terms.
 - `have`/`show`/`suffices` inside tactic mode allow naming and restating
   intermediate goals. These should be used freely to keep a long proof's shape clear,
-  exactly as Chapters 6 and 8 did throughout.
+  exactly as Chapters 7 and 9 did throughout.
 
 ---
 

@@ -10,7 +10,7 @@
    whether [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) alone works, and if not, use [`induction`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/).
 3. Rewrite the `modus_ponens` proof from Chapter 3 in tactic mode.
 
-Solutions: [Appendix, Chapter 4](../14-appendix-solutions/02-chapter-4.md).
+Solutions: [Appendix, Chapter 4](../14-appendix-solutions/03-chapter-4.md).
 
 With definitions, propositions, and tactics in hand, we pause for a brief
 rigor check before diving into groups. Continue to

@@ -17,12 +17,22 @@ principles (no external library):
 - a `Quiver` and an indexed inductive `Path` type, with path composition,
   as the combinatorial skeleton underlying a path algebra.
 
-Every proof in this book was written with explicit `rw`/`have`/`intro`
-steps, each one marked with the axiom or prior theorem that justified it.
-There is no [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), and no unexplained [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/). This is exactly the
-discipline required for reading (or writing) a real Lean
-library: when something goes wrong, the exact lemma responsible should be
-identifiable.
+Nearly every proof in this book was written with explicit
+`rw`/`have`/`intro` steps, each one marked with the axiom or prior theorem
+that justified it, and no unexplained [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/). [`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) itself is
+used sparingly outside Chapter 12's own discussion of it, and only when a
+genuine technical obstacle makes the explicit alternative not worth the
+detour: Chapter 6's `Perm3.ext` reaches for `simp only [mk.injEq]` because
+core Lean generates no field-wise extensionality lemma for a plain
+`structure`, and Chapter 11's checkpoint project reaches for
+`simp only [Path.append, Path.length]` because a match on an *indexed*
+inductive type like `Path` reduces only through its equation lemmas, not
+plain `rfl`, once an abstract path is involved. Both name only the exact
+definitions being unfolded, standing in for a specific, known step rather
+than an unknown pile of lemmas. Every other proof avoids `simp` entirely,
+precisely to keep the discipline required for reading (or writing) a real
+Lean library: when something goes wrong, the exact lemma responsible
+should be identifiable.
 
 ---
 

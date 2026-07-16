@@ -20,7 +20,7 @@
    (generalizing `evenSubmodule`, which is the case `d = 2`), and check
    that the three closure proofs generalize verbatim with `2` replaced by `d`.
 
-Solutions: [Appendix, Chapter 10](../14-appendix-solutions/08-chapter-10.md).
+Solutions: [Appendix, Chapter 10](../14-appendix-solutions/09-chapter-10.md).
 
 ## Next
 
