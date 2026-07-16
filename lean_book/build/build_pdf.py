@@ -44,7 +44,6 @@ CHAPTERS = [
     "12-working-efficiently",
     "13-next-steps",
     "14-appendix-solutions",
-    "15-lambda-calculus",
 ]
 
 NAV_LINE_RE = re.compile(r'^\[.*\]\([^)]*\.md[^)]*\).*$', re.MULTILINE)

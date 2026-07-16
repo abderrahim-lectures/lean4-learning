@@ -3,6 +3,47 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Type-theory chapters rewritten, Appendix B eliminated
+
+- Rewrote [Chapter 1 §1](01-basics/01-everything-has-a-type.md) and
+  [§3](01-basics/03-dependent-types.md) to lead with concrete,
+  toolchain-verified examples (`Fin`, `Vec`/`Vec.replicate`/`Vec.head`/
+  `Vec.dot`, `Sigma`, proof irrelevance) and Python-first comparisons
+  before the categorical/formal framing, addressing confusion with the
+  prior dependent-types explanation. Added a References section, citing
+  real, checked sources, to every chapter touched by this pass.
+- **Eliminated Appendix B entirely**, merging its ~9,000 words of formal
+  λ-calculus/CoC material directly into the main chapters that already
+  pointed to it, rather than leaving it as backmatter most readers would
+  skip:
+  - The standard-logic recap (natural deduction, soundness/completeness,
+    classical vs. intuitionistic) is now [Chapter 3
+    §2](03-propositions-and-proofs/02-logic-recap.md), immediately after
+    the Curry–Howard table that motivates it, renumbering §2-§7 to §3-§8.
+  - The untyped λ-calculus recap (grammar, α/β-reduction, currying,
+    Church–Rosser, the $K$ combinator) is woven directly into [Chapter 1
+    §4](01-basics/04-terminology.md)'s "Reduce/reduction" glossary entry.
+  - Π-types, `Prop` irrelevance, Σ-types, and the CoC/CIC summary are now
+    [Chapter 1 §5](01-basics/05-pi-sigma-and-coc.md); the simply typed
+    λ-calculus's typing judgments/progress/preservation and the
+    universe-formation typing rule are now a new [Chapter 5
+    §3](05-rigor-check/03-typing-rules-and-safety.md), extending §2's
+    informal universe discussion.
+  - Church encodings (booleans, numerals) became a self-contained aside
+    in [Chapter 13](13-next-steps/03-next-projects.md), since nothing
+    else in the book depended on them.
+  - The λ-calculus/Lean dictionary table is now a standalone
+    [reference page](lambda-calculus-dictionary.md), sibling to
+    `tactic-and-library-reference.md`.
+  - Added a new Chapter 1 exercises section
+    ([01-basics/06-exercises.md](01-basics/06-exercises.md)) with
+    solutions, and renumbered the solutions appendix (`14-appendix-solutions/`)
+    throughout to make room for it.
+  - Every cross-reference into this content, in both directions, was
+    rewritten to point at its new home; a full link-integrity sweep
+    across every `.md` file in the book found zero broken internal links
+    after the `15-lambda-calculus/` directory was removed.
+
 ## Unreleased — Capstone: two theorems for free
 
 - Added "Two theorems for free" to [Chapter 13 §2](13-next-steps/02-moving-to-mathlib.md):
