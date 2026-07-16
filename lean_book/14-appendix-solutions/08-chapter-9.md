@@ -1,6 +1,6 @@
 ## Chapter 9: Ring examples and basic theorems
 
-[← Chapter 8](06-chapter-8.md) | [Index](00-index.md) | [Next: Chapter 10 →](08-chapter-10.md)
+[← Chapter 8](07-chapter-8.md) | [Index](00-index.md) | [Next: Chapter 10 →](09-chapter-10.md)
 
 ---
 
@@ -53,4 +53,4 @@ involved is a closed, already-known term.
 
 ---
 
-[← Chapter 8](06-chapter-8.md) | [Index](00-index.md) | [Next: Chapter 10 →](08-chapter-10.md)
+[← Chapter 8](07-chapter-8.md) | [Index](00-index.md) | [Next: Chapter 10 →](09-chapter-10.md)

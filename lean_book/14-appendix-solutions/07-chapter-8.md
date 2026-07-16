@@ -1,6 +1,6 @@
 ## Chapter 8: Rings
 
-[← Chapter 7](05-chapter-7.md) | [Index](00-index.md) | [Next: Chapter 9 →](07-chapter-9.md)
+[← Chapter 7](06-chapter-7.md) | [Index](00-index.md) | [Next: Chapter 9 →](08-chapter-9.md)
 
 ---
 
@@ -75,4 +75,4 @@ into the other.
 
 ---
 
-[← Chapter 7](05-chapter-7.md) | [Index](00-index.md) | [Next: Chapter 9 →](07-chapter-9.md)
+[← Chapter 7](06-chapter-7.md) | [Index](00-index.md) | [Next: Chapter 9 →](08-chapter-9.md)

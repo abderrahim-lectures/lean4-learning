@@ -172,4 +172,4 @@ expresses.
 
 ---
 
-[← Everything has a type](01-everything-has-a-type.md) | [Index](00-index.md) | [Next: Dependent types, categorically →](03-dependent-types.md)
+[← Everything has a type](01-everything-has-a-type.md) | [Index](00-index.md) | [Next: Dependent types, with examples →](03-dependent-types.md)

@@ -279,11 +279,11 @@ it is the identical idea, with a richer index.
 > $\mathrm{Hom}$-set to every pair of objects in a category — a Π-type
 > over such a family is a **dependent product**, a term of $\sum_{x:A}
 > B(x)$ (Σ-type, next covered formally in
-> [Appendix B §4](../15-lambda-calculus/04-dependent-types-coc.md)) is a
+> [§5](05-pi-sigma-and-coc.md)) is a
 > **dependent sum**, and both are literal categorical limits/colimits in
 > the appropriate indexed sense — not merely named after them by analogy.
 
-> Read more: [Appendix B §4](../15-lambda-calculus/04-dependent-types-coc.md)
+> Read more: [§5](05-pi-sigma-and-coc.md)
 > gives Π-types (and Σ-types) their formal typing rules, with more worked
 > examples, rather than only the walkthrough given here.
 

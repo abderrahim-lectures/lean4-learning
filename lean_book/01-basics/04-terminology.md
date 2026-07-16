@@ -1,16 +1,19 @@
 ## Terminology encountered before it is fully explained
 
-[← Dependent types, categorically](03-dependent-types.md) | [Index](00-index.md)
+[← Dependent types, with examples](03-dependent-types.md) | [Index](00-index.md) | [Next: Π/Σ-types and the calculus of constructions →](05-pi-sigma-and-coc.md)
 
 ---
 
 Four words are going to come up constantly from here on, well before this
-book gives any of them a full formal treatment. That treatment lives in
-[Appendix B](../15-lambda-calculus/00-index.md), which most readers will
-want to save for after finishing the main chapters. Rather than leave
-these words undefined until the very end, here is a working definition of
-each, good enough to use right away, with a pointer to where the precise
-version lives.
+book gives any of them a full formal treatment. Rather than leave these
+words undefined until they are needed, here is a working definition of
+each, good enough to use right away, with pointers to where a fuller
+formal treatment lives — [§5 of this chapter](05-pi-sigma-and-coc.md) for
+Π/Σ-types and the calculus of constructions, [Chapter 3
+§2](../03-propositions-and-proofs/02-logic-recap.md) for the logic
+underneath Curry–Howard, and [Chapter 5
+§3](../05-rigor-check/03-typing-rules-and-safety.md) for typing rules and
+why Lean's guarantees can be trusted.
 
 ### Elaborate / elaboration
 
@@ -21,12 +24,11 @@ what is expected. When this book says an expression "elaborates to"
 something, it means "after Lean has finished this filling-in process, the
 result is..." For example, `identity 5` *elaborates to*
 `@identity Nat 5` (Chapter 1), with `α := Nat` filled in silently.
-Elaboration is not guessing; it is a deterministic algorithm driven by the
-typing rules of Lean's underlying calculus.
-
-> Read more: [Appendix B §5](../15-lambda-calculus/05-lambda-to-lean.md)
-> describes elaboration precisely as type inference for the calculus of
-> constructions.
+Elaboration is not guessing: it is **type inference for the calculus of
+constructions** ([§5](05-pi-sigma-and-coc.md) makes this system precise),
+a deterministic algorithm driven by that calculus's own typing rules, not
+black-box compiler behavior. Every "Lean figures it out from context"
+moment since the very first `identity 5` is this same algorithm at work.
 
 ### Unify / unification
 
@@ -37,9 +39,19 @@ the type of `5` (namely `Nat`) with the placeholder `α`, concluding
 `α := Nat`. Unification is what makes implicit-argument inference
 (Chapter 1), `apply`'s subgoal-matching (Chapter 4), and typeclass
 instance search (Chapter 5) all work. In each case, Lean is solving an
-equation between two (possibly partially unknown) terms.
+equation between two (possibly partially unknown) terms — a
+well-understood, terminating (for the fragment Lean actually uses)
+procedure, not an oracle. When it fails, the resulting error message
+(Chapter 4, "reading a tactic failure") states specifically which
+unification equation could not be solved.
 
-> Read more: [Appendix B §5](../15-lambda-calculus/05-lambda-to-lean.md).
+> **Tactics do not add anything to the underlying calculus.** Every tactic
+> from Chapter 4 onward ([`intro`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`exact`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), [`induction`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), ...) is a
+> *user interface* for building terms of this same calculus step by step,
+> with the goal state showing the type of the "hole" still to be filled.
+> Every finished tactic proof elaborates to an ordinary term that could
+> have been written by hand; running `#print` on any tactic-proved theorem
+> shows the literal term the tactic script built.
 
 ### Reduce / reduction, normal form
 
@@ -60,9 +72,65 @@ free" and which needs an explicit inductive argument. Lean only unfolds
 unknown `a` in the position `Nat.add` recurses on, does not reduce at all
 until `a` itself is known.
 
-> Read more: [Appendix B §1](../15-lambda-calculus/01-untyped-lambda-calculus.md)
-> defines β-reduction and normal forms precisely, in the untyped setting
-> where the idea is easiest to see in isolation.
+**Where β-reduction comes from, precisely.** Every `fun x => ...` in this
+book compiles down to one small formal system, the **λ-calculus**: a
+variable `x`, an abstraction `fun x => t` (written $\lambda x.\, t$), or
+an application `t1 t2`, and nothing else — no built-in numbers, booleans,
+`if`, or recursion; every one of those is *encoded* as a term built from
+these three constructs alone. In $\lambda x.\, t$, occurrences of `x`
+inside `t` are **bound**; any other variable is **free** — exactly Lean's
+ordinary lexical scoping. Two abstractions differing only in a bound
+variable's name (`fun a => a` vs. `fun x => x`) are considered the *same*
+term (**α-conversion**); Lean's elaborator treats them as interchangeable
+without comment. The one computation rule, **β-reduction**, is applying an
+abstraction to an argument by substitution:
+$$
+(\lambda x.\, t)\, s \;\longrightarrow_\beta\; t[x := s]
+$$
+— precisely definitional equality's engine: `(fun x => x * 2) 5` reduces,
+by exactly this rule, to `5 * 2`. Every abstraction takes exactly *one*
+argument; a "two-argument function" `fun x y => t` is really `fun x => fun
+y => t`, a function returning a function — this is **currying**, why
+`Nat → Nat → Nat` is genuinely `Nat → (Nat → Nat)`, one argument at a
+time, with no separate multi-argument mechanism underneath. Finally, the
+**Church–Rosser theorem** guarantees that if a term has several possible
+next reduction steps, reducing them in any order that terminates reaches
+the *same* normal form — the theoretical bedrock under never having to
+worry that elaborating an expression "the wrong order" gives a different
+answer than "the right order."
+
+**Worked example.** Reduce $(\lambda x.\, \lambda y.\, x)\, a\, b$
+(application associates to the left, so this is
+$((\lambda x.\, \lambda y.\, x)\, a)\, b$):
+$$
+(\lambda x.\, \lambda y.\, x)\, a\, b
+\;\longrightarrow_\beta\; (\lambda y.\, a)\, b
+\;\longrightarrow_\beta\; a
+$$
+The first step substitutes $a$ for $x$ in $\lambda y.\, x$, giving
+$\lambda y.\, a$ — note $a$ is now *free* inside this abstraction, since
+the original body never mentioned $y$ at all. The second step substitutes
+$b$ for $y$ in a body that does not mention $y$, so it simply discards
+$b$ and leaves $a$. This particular term — $\lambda x.\, \lambda y.\, x$,
+"take two arguments, return the first, discard the second" — is important
+enough to have its own name, $K$, and it becomes `Bool.true`'s
+implementation once booleans are encoded this way (as in Chapter 13's
+Church-encoding aside).
+
+> **Programmer's corner (Python).** Python's own `lambda` really does
+> β-reduce exactly like the calculus above on simple examples —
+> `(lambda x: x + 1)(5)` reduces to `5 + 1` to `6`, the same substitution
+> step as $(\lambda x.\, x + 1)\, 5 \to_\beta 5 + 1$ — but Python's
+> `lambda` is a deliberately limited subset: its body must be a single
+> *expression*, no `if`/`for`/multiple statements. The actual untyped
+> λ-calculus has no such restriction, because none is needed: conditionals
+> and recursion are just more terms built from abstraction and
+> application, not separate features bolted on top. Lean's `fun` matches
+> the unrestricted calculus, not Python's narrower `lambda`.
+
+Chapter 1 §5 extends exactly this calculus with dependent types (Π/Σ,
+universes) to reach the system Lean's kernel actually runs — the
+**calculus of constructions**.
 
 ### Motive
 
@@ -79,11 +147,11 @@ position that can vary freely. The fix is almost always to restate the
 goal first with `show`, or to generalize the index explicitly, so the
 motive Lean builds is well-typed.
 
-> Read more: [Chapter 5 §3](../05-rigor-check/03-defeq-vs-propeq.md)
+> Read more: [Chapter 5 §4](../05-rigor-check/04-defeq-vs-propeq.md)
 > revisits "motive is not type correct" alongside definitional equality;
-> [Appendix B §4](../15-lambda-calculus/04-dependent-types-coc.md) shows
-> the recursor/eliminator (e.g. `Nat.rec`) whose own type is literally
-> parameterized by a motive, which is where the name comes from.
+> [§5 of this chapter](05-pi-sigma-and-coc.md) shows the recursor/eliminator
+> (e.g. `Nat.rec`) whose own type is literally parameterized by a motive,
+> which is where the name comes from.
 
 ### Category-theory terms used beyond the baseline
 
@@ -225,4 +293,4 @@ on its own without it.
 
 ---
 
-[← Dependent types, categorically](03-dependent-types.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 2: Functions & Structures →](../02-functions-and-structures/00-index.md)
+[← Dependent types, with examples](03-dependent-types.md) | [Index](00-index.md) | [Next: Π/Σ-types and the calculus of constructions →](05-pi-sigma-and-coc.md)

@@ -1,6 +1,6 @@
 ## Chapter 11: Quivers and path algebras
 
-[← Chapter 10](08-chapter-10.md) | [Index](00-index.md)
+[← Chapter 10](09-chapter-10.md) | [Index](00-index.md)
 
 ---
 
@@ -112,4 +112,4 @@ subtle one when $Q_0$ is infinite.
 
 ---
 
-[← Chapter 10](08-chapter-10.md) | [Index](00-index.md) | [Table of contents](../README.md)
+[← Chapter 10](09-chapter-10.md) | [Index](00-index.md) | [Table of contents](../README.md)
