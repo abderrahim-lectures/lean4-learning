@@ -17,6 +17,7 @@ quiver.
 4. [Paths as an inductive type indexed by source and target](04-paths-as-inductive-type.md)
 5. [Path composition](05-path-composition.md)
 6. [Exercises](06-exercises.md)
+7. [Checkpoint project: path length, and composition respects it](07-checkpoint-project.md)
 
 ---
 
