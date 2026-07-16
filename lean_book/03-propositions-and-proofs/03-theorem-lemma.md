@@ -1,6 +1,6 @@
 ## `theorem` and `lemma`
 
-[← `Prop`](01-prop.md) | [Index](00-index.md) | [Next: Implication →](03-implication.md)
+[← A recap of standard logic](02-logic-recap.md) | [Index](00-index.md) | [Next: Implication →](04-implication.md)
 
 ---
 
@@ -23,4 +23,4 @@ It has no logical content, just as in ordinary mathematical writing.
 
 ---
 
-[← `Prop`](01-prop.md) | [Index](00-index.md) | [Next: Implication →](03-implication.md)
+[← A recap of standard logic](02-logic-recap.md) | [Index](00-index.md) | [Next: Implication →](04-implication.md)

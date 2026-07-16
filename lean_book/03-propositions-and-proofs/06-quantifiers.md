@@ -1,6 +1,6 @@
 ## Universal and existential quantifiers
 
-[← And, Or, Not](04-and-or-not.md) | [Index](00-index.md) | [Next: Equality reasoning →](06-equality.md)
+[← And, Or, Not](05-and-or-not.md) | [Index](00-index.md) | [Next: Equality reasoning →](07-equality.md)
 
 ---
 
@@ -26,7 +26,7 @@ theorem exists_even : ∃ n : Nat, n % 2 = 0 :=
 in order" anonymous-constructor shorthand from
 [Chapter 2 §1](../02-functions-and-structures/01-structure-basics.md).
 It was already reused for `∧`
-([Chapter 3 §4](04-and-or-not.md)'s `⟨hp, hq⟩`), and here it builds an
+([Chapter 3 §5](05-and-or-not.md)'s `⟨hp, hq⟩`), and here it builds an
 `∃`-proof in one line instead of two. The pattern to remember: **first
 the number, then why it works.**
 
@@ -69,7 +69,7 @@ why" shape as before, but with two differences worth noting:
   (`5 > 3`, and `5` is prime), all packed into the outer `⟨_, _⟩`.
 - The proof is not `rfl`. `p > 3 ∧ isPrime p` does not reduce to a plain
   equality, so instead the second slot is by [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) — the same
-  brute-force tactic from [Chapter 3 §4](04-and-or-not.md)'s
+  brute-force tactic from [Chapter 3 §5](05-and-or-not.md)'s
   `not_example`, which here checks `5 > 3` outright and tries every
   candidate divisor below `5` to confirm none of them divide it.
 
@@ -128,4 +128,4 @@ now the "tag" is which element of $\alpha$ was chosen.
 
 ---
 
-[← And, Or, Not](04-and-or-not.md) | [Index](00-index.md) | [Next: Equality reasoning →](06-equality.md)
+[← And, Or, Not](05-and-or-not.md) | [Index](00-index.md) | [Next: Equality reasoning →](07-equality.md)

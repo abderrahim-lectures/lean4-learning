@@ -1,6 +1,6 @@
 ## Implication is a function type
 
-[← `theorem`/`lemma`](02-theorem-lemma.md) | [Index](00-index.md) | [Next: And, Or, Not →](04-and-or-not.md)
+[← `theorem`/`lemma`](03-theorem-lemma.md) | [Index](00-index.md) | [Next: And, Or, Not →](05-and-or-not.md)
 
 ---
 
@@ -22,4 +22,4 @@ is nothing but function application: given $f \in \mathrm{Hom}(P, Q)$ and
 $p \in P$, evaluate to get $f(p) \in Q$. The term `hpq hp` is precisely this
 evaluation $f(p)$.
 
-[← `theorem`/`lemma`](02-theorem-lemma.md) | [Index](00-index.md) | [Next: And, Or, Not →](04-and-or-not.md)
+[← `theorem`/`lemma`](03-theorem-lemma.md) | [Index](00-index.md) | [Next: And, Or, Not →](05-and-or-not.md)
