@@ -98,4 +98,12 @@ Continue to [The simply typed λ-calculus](03-simply-typed-lambda-calculus.md).
 
 ---
 
+### References
+
+- Alonzo Church, *[The Calculi of Lambda-Conversion](https://archive.org/details/AnnalsOfMathematicalStudies6ChurchAlonzoTheCalculiOfLambdaConversionPrincetonUniversityPress1941)*, Princeton University Press, 1941 — the source of the numeral encoding this section presents.
+- Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002, §5.2 — a worked, step-by-step derivation of Church booleans and numerals, including `succ`/`plus`, matching the presentation used here.
+- Raúl Rojas, ["A Tutorial Introduction to the Lambda Calculus"](https://arxiv.org/abs/1503.09060), 2015 — a freely available, worked-example-heavy walkthrough of the same encodings, useful for seeing more reduction sequences spelled out in full.
+
+---
+
 [← Untyped λ-calculus](01-untyped-lambda-calculus.md) | [Index](00-index.md) | [Next: Simply typed λ-calculus →](03-simply-typed-lambda-calculus.md)

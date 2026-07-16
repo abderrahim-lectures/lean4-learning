@@ -26,6 +26,34 @@ built from base types and arrows. There is not yet any way to quantify over
 *all* types the way Chapter 1's `identity {α : Type} (x : α) : α := x` did.
 That extra generality is exactly what is added in the next section.
 
+**Programmer's corner (Python), before the formal rules.** Python's own
+type hints plus `mypy` are a light version of exactly this system, worth
+seeing first since it runs today, without any Lean installation at all:
+
+```python
+def apply_twice(f: int, x: int) -> int:  # pretend f is Callable[[int], int]
+    ...
+
+def to_str(n: int) -> str:
+    return str(n)
+
+# mypy accepts this: to_str's declared input type (int) matches what
+# it is given (an int literal).
+to_str(5)
+
+# mypy rejects this with an error, WITHOUT running anything:
+# error: Argument 1 to "to_str" has incompatible type "str"; expected "int"
+to_str("already a string")
+```
+
+`mypy`'s check on `to_str("already a string")` is exactly the (App) rule
+below, refusing to combine a function with an argument of the wrong type,
+caught by reading the code rather than running it. The difference is that
+Python's hints are optional and only checked when `mypy` is run at all;
+Lean's type system is not optional, is checked on every single elaboration,
+and is a real part of the language's meaning rather than an add-on linter.
+STLC below is what is actually going on, underneath both.
+
 ### Typing judgments and rules
 
 A **typing judgment** $\Gamma \vdash t : \tau$ reads "in context $\Gamma$
@@ -90,14 +118,53 @@ STLC cannot type `identity` from Chapter 1 *polymorphically*. One could
 write `identity_Nat : Nat → Nat` and separately `identity_Bool : Bool → Bool`,
 one arrow-type definition per base type. But there is no single term of a
 single STLC type that captures "the identity function, at every type."
-This is precisely the gap the next section closes: **dependent types** let
-a type itself depend on a term (here, the type argument `α`). That is
-exactly the extra generality `identity {α : Type} (x : α) : α := x` uses,
-and it is unavailable in STLC as described above.
+
+**Programmer's corner (Python), on the same limitation.** Plain Python
+never runs into this, because it has no static types to begin with — `def
+identity(x): return x` already works on anything, at runtime, with zero
+declarations. But the instant type hints are added, wanting `mypy` to
+check the *general* claim "this returns whatever type it was given"
+requires a dedicated feature, `TypeVar`, precisely because bare hints have
+the same limitation as STLC:
+
+```python
+from typing import TypeVar
+T = TypeVar("T")
+
+def identity(x: T) -> T:   # one signature, valid at every type
+    return x
+
+identity(5)        # T := int
+identity("hello")  # T := str
+```
+
+Without `TypeVar`, the only option would be writing `identity_int(x: int)
+-> int` and `identity_str(x: str) -> str` separately — exactly STLC's
+one-arrow-type-per-base-type wall. `TypeVar` is Python typing's escape
+hatch for this specific gap, and it is a useful anchor: a much lighter
+version of the same extra generality Lean's `identity {α : Type} (x : α) :
+α := x` uses, where `α` is filled in silently every call, the same way
+`mypy` silently solves `T := int` above.
+
+This is precisely the gap the next section closes properly: **dependent
+types** let a type itself depend on a term (here, the type argument `α`).
+That is exactly the extra generality `identity {α : Type} (x : α) : α := x`
+uses, and it is unavailable in STLC (or in Python's `TypeVar`, which is
+real but considerably less powerful — it cannot let a *return type* depend
+on an ordinary *value* argument the way Chapter 1 §3's `Vec.replicate`
+does) as described above.
 
 ## Next
 
 Continue to [Dependent types and the calculus of constructions](04-dependent-types-coc.md).
+
+---
+
+### References
+
+- Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002, Ch. 9–11 — the standard reference for STLC, including the (Var)/(Abs)/(App) rules and full proofs of progress and preservation, in the exact form used in this section.
+- Robin Milner, "[A Theory of Type Polymorphism in Programming](https://doi.org/10.1016/0022-0000(78)90014-4)," *Journal of Computer and System Sciences*, 17(3), 1978, 348–375 — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`, motivating the extension the next section makes.
+- Python `typing` module documentation, [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar), and the [mypy documentation](https://mypy.readthedocs.io/) — for the Python-side comparison used in this section's boxes.
 
 ---
 
