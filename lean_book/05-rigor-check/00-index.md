@@ -18,8 +18,9 @@ so they are addressed here, before Chapter 6 proceeds.
 
 1. [`structure` versus `class`: why this book delays type classes](01-structure-vs-class.md)
 2. [Universes: `Type`, `Type 1`, and why `Group` isn't a `Group`](02-universes.md)
-3. [Definitional versus propositional equality](03-defeq-vs-propeq.md)
-4. [Exercises](04-exercises.md)
+3. [Typing rules and safety](03-typing-rules-and-safety.md)
+4. [Definitional versus propositional equality](04-defeq-vs-propeq.md)
+5. [Exercises](05-exercises.md)
 
 ---
 

@@ -1,6 +1,6 @@
 ## Chapter 5: Rigor check — structures, universes, and equality
 
-[← Chapter 4](02-chapter-4.md) | [Index](00-index.md) | [Next: Chapter 6 →](04-chapter-6.md)
+[← Chapter 4](03-chapter-4.md) | [Index](00-index.md) | [Next: Chapter 6 →](05-chapter-6.md)
 
 ---
 
@@ -122,4 +122,4 @@ concrete.
 
 ---
 
-[← Chapter 4](02-chapter-4.md) | [Index](00-index.md) | [Next: Chapter 6 →](04-chapter-6.md)
+[← Chapter 4](03-chapter-4.md) | [Index](00-index.md) | [Next: Chapter 6 →](05-chapter-6.md)

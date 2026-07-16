@@ -1,6 +1,6 @@
 ## Universes: `Type`, `Type 1`, and why `Group` isn't a `Group`
 
-[← `structure` vs `class`](01-structure-vs-class.md) | [Index](00-index.md) | [Next: Definitional vs propositional equality →](03-defeq-vs-propeq.md)
+[← `structure` vs `class`](01-structure-vs-class.md) | [Index](00-index.md) | [Next: Typing rules and safety →](03-typing-rules-and-safety.md)
 
 ---
 
@@ -51,9 +51,9 @@ forming `A → B` when `A : Type i` and `B : Type j` produces a term of type
 `Type (max i j)`, *unless* `B`'s universe already needs to be at least one
 level higher to safely contain "the collection of all functions out of `A`".
 Concretely here, `A := Type` (living in `Type 1`, since `Type : Type 1`)
-and `B := Type` again, so `Type → Type` itself lands in `Type 1`. [Appendix
-B §4](../15-lambda-calculus/04-dependent-types-coc.md) states this rule
-precisely as one line of the calculus of constructions. The short version
+and `B := Type` again, so `Type → Type` itself lands in `Type 1`.
+[Chapter 5 §3](03-typing-rules-and-safety.md) states this rule precisely
+as one line of the calculus of constructions. The short version
 is that `Group` is not even a candidate carrier type for its own
 construction. It sits one universe level too high, exactly because it is a
 function *out of* `Type` itself, not out of some ordinary `Type 0` type
@@ -72,12 +72,12 @@ throughout, exactly because they must accommodate constructions (such as
 "the group of automorphisms of a large category") that genuinely do not fit
 in `Type 0`.
 
-> Read more: [Appendix B §4](../15-lambda-calculus/04-dependent-types-coc.md)
-> states the universe-formation rules precisely, as part of the calculus
-> of constructions. Externally, the "Dependent Type Theory" chapter of
+> Read more: [Chapter 5 §3](03-typing-rules-and-safety.md) states the
+> universe-formation rules precisely, as part of the calculus of
+> constructions. Externally, the "Dependent Type Theory" chapter of
 > the *Theorem Proving in Lean 4* manual covers universes at a similar
 > level of detail with more Lean-specific examples.
 
 ---
 
-[← `structure` vs `class`](01-structure-vs-class.md) | [Index](00-index.md) | [Next: Definitional vs propositional equality →](03-defeq-vs-propeq.md)
+[← `structure` vs `class`](01-structure-vs-class.md) | [Index](00-index.md) | [Next: Typing rules and safety →](03-typing-rules-and-safety.md)

@@ -9,7 +9,7 @@
    `Or.elim` or pattern matching with `match`).
 3. Prove `theorem exists_gt_zero : ∃ n : Nat, n > 0`.
 
-Solutions: [Appendix, Chapter 3](../14-appendix-solutions/01-chapter-3.md).
+Solutions: [Appendix, Chapter 3](../14-appendix-solutions/02-chapter-3.md).
 
 ## Next
 

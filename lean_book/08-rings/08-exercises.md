@@ -23,7 +23,7 @@
    first (false) one with `by decide` at the `Int`-equality level, where a
    `DecidableEq` instance really does exist.
 
-Solutions: [Appendix, Chapter 8](../14-appendix-solutions/06-chapter-8.md).
+Solutions: [Appendix, Chapter 8](../14-appendix-solutions/07-chapter-8.md).
 
 ## Next
 

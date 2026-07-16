@@ -15,7 +15,7 @@
    what a `structure PathAlgebra (V A : Type) (Q : Quiver V A) (k : Type) (Rg : Ring k)`
    would need to contain to satisfy `Ring`'s fields from Chapter 8.
 
-Solutions: [Appendix, Chapter 11](../14-appendix-solutions/09-chapter-11.md).
+Solutions: [Appendix, Chapter 11](../14-appendix-solutions/10-chapter-11.md).
 
 ## Next
 

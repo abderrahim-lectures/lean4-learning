@@ -1,6 +1,6 @@
 ## Chapter 7: Group examples and basic theorems
 
-[← Chapter 6](04-chapter-6.md) | [Index](00-index.md) | [Next: Chapter 8 →](06-chapter-8.md)
+[← Chapter 6](05-chapter-6.md) | [Index](00-index.md) | [Next: Chapter 8 →](07-chapter-8.md)
 
 ---
 
@@ -42,4 +42,4 @@ leaves `b = c` directly.
 
 ---
 
-[← Chapter 6](04-chapter-6.md) | [Index](00-index.md) | [Next: Chapter 8 →](06-chapter-8.md)
+[← Chapter 6](05-chapter-6.md) | [Index](00-index.md) | [Next: Chapter 8 →](07-chapter-8.md)

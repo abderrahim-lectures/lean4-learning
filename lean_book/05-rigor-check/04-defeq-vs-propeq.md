@@ -1,6 +1,6 @@
 ## Definitional versus propositional equality
 
-[← Universes](02-universes.md) | [Index](00-index.md) | [Next: Exercises →](04-exercises.md)
+[← Typing rules and safety](03-typing-rules-and-safety.md) | [Index](00-index.md) | [Next: Exercises →](05-exercises.md)
 
 ---
 
@@ -127,4 +127,4 @@ fields.
 
 ---
 
-[← Universes](02-universes.md) | [Index](00-index.md) | [Next: Exercises →](04-exercises.md)
+[← Typing rules and safety](03-typing-rules-and-safety.md) | [Index](00-index.md) | [Next: Exercises →](05-exercises.md)

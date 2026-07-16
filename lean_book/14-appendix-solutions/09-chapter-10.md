@@ -1,6 +1,6 @@
 ## Chapter 10: Modules over a ring
 
-[← Chapter 9](07-chapter-9.md) | [Index](00-index.md) | [Next: Chapter 11 →](09-chapter-11.md)
+[← Chapter 9](08-chapter-9.md) | [Index](00-index.md) | [Next: Chapter 11 →](10-chapter-11.md)
 
 ---
 
@@ -137,4 +137,4 @@ this book does not import from Mathlib).
 
 ---
 
-[← Chapter 9](07-chapter-9.md) | [Index](00-index.md) | [Next: Chapter 11 →](09-chapter-11.md)
+[← Chapter 9](08-chapter-9.md) | [Index](00-index.md) | [Next: Chapter 11 →](10-chapter-11.md)

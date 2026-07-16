@@ -1,6 +1,6 @@
 ## Exercises
 
-[← Definitional vs propositional equality](03-defeq-vs-propeq.md) | [Index](00-index.md)
+[← Definitional vs propositional equality](04-defeq-vs-propeq.md) | [Index](00-index.md)
 
 ---
 
@@ -24,7 +24,7 @@
    alone, and identify which of the two sides' recursive structure is the
    obstruction.
 
-Solutions: [Appendix, Chapter 5](../14-appendix-solutions/03-chapter-5.md).
+Solutions: [Appendix, Chapter 5](../14-appendix-solutions/04-chapter-5.md).
 
 ## Next
 
@@ -32,4 +32,4 @@ Continue to [Chapter 6: Structures and classes — defining a `Group`](../06-gro
 
 ---
 
-[← Definitional vs propositional equality](03-defeq-vs-propeq.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 6: Groups →](../06-groups/00-index.md)
+[← Definitional vs propositional equality](04-defeq-vs-propeq.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 6: Groups →](../06-groups/00-index.md)
