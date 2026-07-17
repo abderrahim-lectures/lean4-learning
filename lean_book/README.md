@@ -126,6 +126,9 @@ See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
 - [λ-calculus / type theory to Lean dictionary](lambda-calculus-dictionary.md) —
   a lookup table connecting the formal notation in this book's
   "Mathematical reading" boxes back to Lean syntax, term by term.
+- [Notation reference](notation-reference.md) — the ordinary logic/algebra
+  symbols used throughout the main text (∀, ∃, ∈, ∘, •, ⟨_, _⟩, ...), each
+  matched to its Lean syntax.
 - [Bibliography](bibliography.md) — every external source cited in any
   chapter's "References" section, consolidated into one list with one
   citation style; each chapter links back to the entries it uses.

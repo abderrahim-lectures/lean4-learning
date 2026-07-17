@@ -21,7 +21,8 @@ Path Algebras in Lean~4\par}
 
 \vfill
 
-{\normalfont\large\itshape "Every proof in this book was verified against a real Lean~4 toolchain --- \\
+{\normalfont\large\itshape "Every proof in this book was verified against
+a real Lean~4 toolchain --- \\
 not just described."\par}
 
 \vspace{1.5cm}
@@ -29,6 +30,38 @@ not just described."\par}
 {\normalfont\small Lean toolchain \texttt{v4.31.0}\par}
 
 \end{titlepage}
+
+% ===================================================================
+% Preface
+% ===================================================================
+\chapter*{Preface}
+
+This is a guide to Lean~4 for readers who already think in groups, rings,
+functors, and diagrams, but have never written a line of Lean --- or any
+proof assistant. No programming background is assumed, only the
+mathematical maturity of someone comfortable with abstract algebra and the
+basic language of category theory: objects, morphisms, composition,
+functors. The book builds up Lean~4 syntax and tactics only as far as
+needed to formalize groups, rings, and quiver path algebras; the
+categorical viewpoint --- a quiver's path category, a ring as a one-object
+preadditive category, and so on --- is called out explicitly wherever it
+clarifies what the Lean code is really encoding.
+
+This book is, and remains, Mathlib-free by design through Chapter~5: every
+group, ring, and path algebra is built from scratch, so every definition
+and proof obligation stays visible. Starting in Chapter~6, each worked
+example is followed by a ``Mathlib equivalent'' box showing the same
+statement phrased against Mathlib's real API --- not a contradiction of
+the from-scratch approach, but a second, parallel track. Seeing the same
+idea twice, once built by hand and once as a library already has it, is
+how both halves of working in Lean get learned at once: the mathematics
+itself, and the shape of the library a reader will actually use
+afterward. Chapter~13 completes the handoff to Mathlib in full.
+
+The running goal throughout is more than the constructs covered: it is
+the \emph{skill} of using Lean --- reading a goal state, deciding what to
+try next, recovering when a tactic fails, and knowing which proofs to
+derive by hand versus hand off to automation.
 
 % ===================================================================
 % About this book
@@ -45,5 +78,42 @@ project's README and CHANGELOG (every code block compiled against a real
 Lean~4 toolchain, plus several AI-driven review passes). Treat it as a
 self-checked draft produced through human-directed AI authorship, not a
 traditionally peer-reviewed text.
+
+% ===================================================================
+% How to read this book
+% ===================================================================
+\chapter*{How to read this book}
+
+Not every reader needs every chapter in order. The Learning paths chapter
+just after this one lays out a chapter-dependency graph and a handful of
+named paths through the book --- already know Lean? already know algebra?
+want the formal foundations first? --- for readers who would rather not
+start cover to cover.
+
+Each chapter is divided into short, numbered sections building on one
+another. Every code listing is valid Lean~4 (toolchain
+\texttt{v4.31.0}). Every code block in Chapters~1--11 has additionally
+been ported into a companion Lean project and verified with
+\texttt{lake build} against the real compiler, not merely read over ---
+several bugs that only surfaced this way (a missing extensionality
+lemma, a couple of \texttt{rw} steps that over-rewrote, a reference to an
+undefined name, a tactic used without its library ever being imported)
+have been fixed in both the book and the project.
+
+This book is about more than the constructs it covers. Chapters~7 and~9
+present each theorem as a search process --- what to look at, what to
+try, why an attempt fails --- rather than only the polished final proof;
+Chapter~12 is dedicated entirely to working efficiently once the
+underlying ideas are understood. Chapter~5 pauses to address the rigor
+questions a careful mathematician will already be asking by that point
+--- \texttt{structure} versus \texttt{class}, universes, and definitional
+versus propositional equality --- before Chapter~6 commits to
+\texttt{Group}'s definition.
+
+A notation reference follows this section, for quick lookup as unfamiliar
+symbols are encountered; two further lookup tables --- a tactic and
+library reference, and a $\lambda$-calculus-to-Lean dictionary --- sit at
+the back of the book, after the last chapter, to be consulted as needed
+rather than read start to finish.
 
 \tableofcontents

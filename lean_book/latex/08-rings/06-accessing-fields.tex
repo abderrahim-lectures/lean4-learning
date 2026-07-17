@@ -9,12 +9,10 @@
 
 \begin{mathreading}
 
-The chained projections walk down the tower of
+The chained projections walk down the tower of \hyperref[sec:01-basics:04-terminology:1]{forgetful functors} \(\mathbf{Ring} \to \mathbf{Ab} \to \mathbf{Grp}\): \texttt{intRing.addGrp} applies \(\mathbf{Ring}\to\mathbf{Ab}\) (recovering \((\mathbb{Z},
++)\)), and \texttt{.toGroup} applies \(\mathbf{Ab}\to\mathbf{Grp}\). Thus, \texttt{intRing.addGrp.toGroup.inv 5} computes the additive inverse \(-5\) in the underlying group, while \texttt{intRing.mul}/\texttt{intRing.one} read off the multiplicative data \(\times\) and \(1\). Nested dot-access is just evaluating these structure-forgetting maps.
 
 \end{mathreading}
-
-\(\mathbf{Ring} \to \mathbf{Ab} \to \mathbf{Grp}\): \texttt{intRing.addGrp} applies \(\mathbf{Ring}\to\mathbf{Ab}\) (recovering \((\mathbb{Z},
-+)\)), and \texttt{.toGroup} applies \(\mathbf{Ab}\to\mathbf{Grp}\). Thus, \texttt{intRing.addGrp.toGroup.inv 5} computes the additive inverse \(-5\) in the underlying group, while \texttt{intRing.mul}/\texttt{intRing.one} read off the multiplicative data \(\times\) and \(1\). Nested dot-access is just evaluating these structure-forgetting maps.
 
 \textbf{Mathlib equivalent.} There is no chain of \texttt{.addGrp.toGroup.inv}-style projections to write --- \texttt{+}/\texttt{*}/\texttt{0}/\texttt{1}/\texttt{-} already resolve to \texttt{Int}'s \texttt{CommRing} instance directly:
 

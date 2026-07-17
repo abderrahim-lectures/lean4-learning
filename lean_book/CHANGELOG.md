@@ -3,6 +3,65 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Preface, notation reference, and a KOMA-Script (Springer-style) class
+
+Added the front matter a reader expects before Chapter 1, and switched
+the LaTeX manuscript to a nicer, better-typeset class:
+
+- **Preface** and **How to read this book** as their own front-matter
+  chapters in `latex/frontmatter.tex` (hand-authored, adapted from the
+  README's opening/reading-guide prose but rewritten in book-preface
+  voice — no "this repo"/GitHub-specific wording, since the PDF is read
+  outside that context).
+- **Notation reference**: a new `notation-reference.md`, split into two
+  one-page tables ("Logic and quantifiers," "Algebra, structure, and
+  diagrams") connecting this book's mathematical notation to its Lean
+  syntax — distinct from the existing tactic/library reference and
+  λ-calculus dictionary, which deliberately don't cover this ground.
+  Linked from the README's Reference list and built into the LaTeX front
+  matter, right after Learning paths.
+- **Chapter numbering now matches each chapter's own title text.**
+  Previously, Learning paths/Notation reference/the tactic and library
+  reference/the λ-calculus dictionary were auto-numbered like real
+  chapters, silently consuming `\thechapter` slots and shifting Chapter
+  0's LaTeX-internal number away from the "0" embedded in its own title
+  (the Table of Contents showed "3 Chapter 0: Setting up Lean 4"). These
+  reference pages are now unnumbered chapters with a manual
+  `\addcontentsline` (still listed in the Table of Contents, still
+  cross-reference by their own positional labels, just no longer eating a
+  numbered slot), and `\setcounter{chapter}{-1}` before Chapter 0 makes
+  its LaTeX number genuinely 0, matching the book's own numbering exactly
+  through Chapter 13.
+- **Switched `\documentclass` from plain `book` to KOMA-Script `scrbook`**,
+  configured (`DIV=12,BCOR=8mm`) toward the type-area proportions of a
+  Springer Monographs in Mathematics volume. This is *not* Springer's
+  actual `svmono`/`svmult` class — that file is distributed directly from
+  Springer's author-guidelines page, not via CTAN/MiKTeX, so it isn't
+  something this pipeline can fetch or install; an actual Springer
+  submission would swap in the real class file later. `titlesec` (which
+  conflicts with KOMA's own heading machinery) was replaced with KOMA's
+  native `\RedeclareSectionCommand`/`\chapterlinesformat` to keep the same
+  chapter-rule/section-color styling.
+- Fixed a real, pre-existing content bug found while authoring the new
+  notation-reference page: `build_latex.py`'s nav-line stripper
+  (`NAV_LINE_RE`) matched *any* line starting with a link to a `.md` file,
+  which silently deleted whole sentences (link and all, plus whatever
+  trailing text shared that physical line) across more than 20 generated
+  files whenever a body-text link happened to word-wrap onto its own
+  line — e.g. 06-groups/02-translating.md's "...is a genuine
+  [subobject](...)\nof the space of raw data." lost the word "subobject"
+  and its link entirely, and 09-ring-theorems/01-setup.md's "recovered by
+  projecting along the\n[forgetful functors](...), so that..." lost that
+  whole clause. Replaced with `strip_nav_lines()`, which only strips a
+  link-only line when it sits directly against a `---` rule (the actual,
+  provably-unique signature of a real nav line in this book) instead of
+  guessing from line content alone.
+- Added a missing `\newunicodechar{⊆}{\ensuremath{\subseteq}}` mapping
+  (found via the new notation table's own "Subset" row).
+- Verification habit reinforced from the previous rendering-fixes pass:
+  full rebuild stayed at zero `Overfull \hbox` and zero `Missing
+  character` warnings throughout every change in this entry.
+
 ## Unreleased — LaTeX rendering fixes: table overflow, Python listings, learning-paths diagram
 
 Three rendering bugs found while proofreading the compiled PDF, all fixed
