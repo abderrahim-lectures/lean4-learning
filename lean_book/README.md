@@ -159,3 +159,7 @@ of this PDF are attached to [GitHub releases](../../releases).
 Every chapter file has a navigation strip at the top (link back to this
 menu, plus previous/next chapter) and a matching one at the bottom, so you
 can move through the book without returning here each time.
+
+## License
+
+MIT — see [LICENSE](../LICENSE).
