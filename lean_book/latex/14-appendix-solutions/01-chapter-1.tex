@@ -33,16 +33,21 @@ def anotherSigma : Σ n : Nat, Fin n := ⟨5, ⟨0, by decide⟩⟩
 
 \texttt{Path.append : \{u v w : V\} → Path Q u v → Path Q v w → Path Q u w}, treating the implicit binders as outer Π's, unfolds one binder at a time:
 
-\begin{tabular}{llll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+}
 \toprule
 Level & \(A\) & \(B(\cdot)\) & Dependent? \\
 \midrule
-\bottomrule
 1 (binds \(u\)) & \(V\) & \(\prod_{v:V}\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)\) & Yes --- mentions \(u\) \\
 2 (binds \(v\)) & \(V\) & \(\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)\) & Yes --- mentions \(v\) \\
 3 (binds \(w\)) & \(V\) & \(\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w\) & Yes --- mentions \(w\) \\
 4 (binds \(p\)) & \(\mathrm{Path}_Q\,u\,v\) & \(\mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w\) & No --- constant in \(p\) \\
 5 (binds \(q\)) & \(\mathrm{Path}_Q\,v\,w\) & \(\mathrm{Path}_Q\,u\,w\) & No --- constant in \(q\) \\
+\bottomrule
 \end{tabular}
 
 

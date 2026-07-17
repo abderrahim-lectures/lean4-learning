@@ -21,15 +21,22 @@ read: a propositional variable, ``true,'' ``false,'' ``not \(\varphi\),'' ``\(\v
 
 A propositional variable's truth value is given by a \textbf{valuation} \(v : \{\text{variables}\} \to \{0, 1\}\) (an assignment of true or false to each atom). Every valuation extends uniquely to all formulas by the familiar truth tables:
 
-\begin{tabular}{llllll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+}
 \toprule
 \(\varphi\) & \(\psi\) & \(\varphi \wedge \psi\) & \(\varphi \vee \psi\) & \(\varphi \Rightarrow \psi\) & \(\neg \varphi\) \\
 \midrule
-\bottomrule
 0 & 0 & 0 & 0 & 1 & 1 \\
 0 & 1 & 0 & 1 & 1 & 1 \\
 1 & 0 & 0 & 1 & 0 & 0 \\
 1 & 1 & 1 & 1 & 1 & 0 \\
+\bottomrule
 \end{tabular}
 
 
@@ -105,17 +112,21 @@ with natural deduction rules that generalize \(\wedge\)/\(\vee\)'s rules in the 
 
 \textbf{First-order logic and Curry--Howard.} §1's table translated the \emph{propositional} connectives (\(\wedge, \vee, \Rightarrow, \neg\)) into type formers. Quantifiers extend the same table, and this is the one place where the translation genuinely needs \emph{dependent} types rather than ordinary ones, because \(P(x)\) --- the very thing being quantified over --- is a different proposition for each \(x\):
 
-\begin{tabular}{lll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+}
 \toprule
 Logic & Type theory & Lean notation \\
 \midrule
-\bottomrule
 \(\forall x{:}\alpha,\ P(x)\) & dependent function (\(\Pi\)-)type & \texttt{∀ x, P x} \\
 \(\exists x{:}\alpha,\ P(x)\) & dependent pair (\(\Sigma\)-)type & \texttt{∃ x, P x} \\
 \(\forall\)-intro (arbitrary \(x\), derive \(\varphi\)) & \texttt{fun x => ...} & building a term of \texttt{∀ x, P x} \\
 \(\forall\)-elim (instantiate at \(a\)) & function application & \texttt{(h : ∀ x, P x) a : P a} \\
 \(\exists\)-intro (witness \(a\), proof \(h\)) & anonymous constructor & \texttt{⟨a, h⟩ : ∃ x, P x} \\
 \(\exists\)-elim (unpack witness + proof) & pattern match / projection & \texttt{obtain ⟨a, h⟩ := ...}, \texttt{.1}/\texttt{.2} \\
+\bottomrule
 \end{tabular}
 
 

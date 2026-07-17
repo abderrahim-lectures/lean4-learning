@@ -13,8 +13,9 @@ by Chapter 6 — the dependency structure only really branches in Part I.
 
 ```mermaid
 graph TD
-    C0["0. Setup"] --> C1["1. Basics"]
-    C1 --> C2["2. Functions & structures"]
+    C0["0. Setup"] --> C1a["1. Basics §1-3"]
+    C1a --> C1b["1. Basics §4-5"]
+    C1b --> C2["2. Functions & structures"]
     C2 --> C3["3. Propositions & proofs"]
     C3 --> C4["4. Tactics"]
     C4 --> C5["5. Rigor check"]
@@ -28,12 +29,18 @@ graph TD
     C11 --> CP2{{"Checkpoint: Path.length"}}
     CP2 --> C12["12. Working efficiently"]
     C12 --> C13["13. Next steps"]
+    C1a -.->|already know Lean| C2
+    C4 -.->|already know Lean| C6
+    C0 -.->|fastest path| C6
 ```
 
 Solid arrows are hard prerequisites (each chapter's Lean code and proofs
 genuinely build on the one before it). The two checkpoint projects are
 optional but recommended waypoints, not prerequisites — nothing later
-in the book requires having done them.
+in the book requires having done them. Dashed arrows are the two named
+paths below that actually skip material outright, rather than just
+reading it faster; the other two named paths change *how* a chapter is
+read, not which chapters are read, so they have no edge of their own.
 
 Chapter 5 is the one true fork: it exists to answer rigor questions
 (`structure` vs `class`, universes, definitional vs propositional
