@@ -2,6 +2,13 @@
 
 A Lean 4 project scaffold (toolchain `v4.31.0`).
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/abderrahim-lectures/lean4-learning)
+
+Opening a Codespace installs the pinned toolchain and runs `lake build`
+automatically (see `.devcontainer/devcontainer.json` at the repository
+root); the first build downloads Mathlib's build cache and can take
+several minutes.
+
 ## Setup
 
 1. Install [elan](https://github.com/leanprover/elan) if not already installed.
