@@ -21,9 +21,9 @@ Consider each field in turn:
 \item
   \texttt{mul}, \texttt{one} --- the multiplicative operation and its identity, \texttt{1}.
 \item
-  \texttt{mul\_assoc}, \texttt{one\_mul}, \texttt{mul\_one} --- multiplication is associative and has a two-sided identity. Note, however, that \texttt{mul} is \textbf{not} required to be commutative or to have inverses. General rings need neither. (A commutative ring would add a \texttt{mul\_comm} field, the same way \texttt{CommGroup} added \texttt{comm} to \texttt{Group}.)
+  \texttt{mul\_\allowbreak{}assoc}, \texttt{one\_\allowbreak{}mul}, \texttt{mul\_\allowbreak{}one} --- multiplication is associative and has a two-sided identity. Note, however, that \texttt{mul} is \textbf{not} required to be commutative or to have inverses. General rings need neither. (A commutative ring would add a \texttt{mul\_\allowbreak{}comm} field, the same way \texttt{CommGroup} added \texttt{comm} to \texttt{Group}.)
 \item
-  \texttt{left\_distrib}, \texttt{right\_distrib} --- multiplication distributes over addition on both sides. Both are needed precisely because \texttt{mul} is not assumed to be commutative.
+  \texttt{left\_\allowbreak{}distrib}, \texttt{right\_\allowbreak{}distrib} --- multiplication distributes over addition on both sides. Both are needed precisely because \texttt{mul} is not assumed to be commutative.
 \end{itemize}
 
 \texttt{addGrp.op} will be written constantly below; notation-free helper abbreviations could be defined later. For now everything is spelled out so each usage is traceable to the definition above.
@@ -33,7 +33,7 @@ Consider each field in turn:
 \texttt{Ring R} is exactly the textbook definition of a (unital, not-necessarily-commutative) ring, presented as a tuple \[
 \Big(\,(R,+,0,-)\in\mathbf{Ab},\ \cdot : R\times R\to R,\ 1\in R,\
 \text{proofs of }(\mathrm{R2}),(\mathrm{R3}),(\mathrm{R4})\,\Big).
-\] The field \texttt{addGrp} is the \emph{underlying additive abelian group}, so a ring is ``an abelian group \((R,+)\) carrying a compatible monoid structure \((R,\cdot,1)\)'' --- a monoid (a set with an associative operation and identity element, i.e.~a group without inverses). The remaining fields say \((R,\cdot,1)\) is a monoid (\texttt{mul\_assoc}, \texttt{one\_mul}, \texttt{mul\_one}) and that the two operations interact through the two-sided distributive laws --- that is, multiplication is compatible with addition on both sides. Nesting \texttt{addGrp} as a whole substructure mirrors the \hyperref[sec:01-basics:04-terminology:1]{forgetful functor} \(\mathbf{Ring}\to\mathbf{Ab}\) sending a ring to its additive group.
+\] The field \texttt{addGrp} is the \emph{underlying additive abelian group}, so a ring is ``an abelian group \((R,+)\) carrying a compatible monoid structure \((R,\cdot,1)\)'' --- a monoid (a set with an associative operation and identity element, i.e.~a group without inverses). The remaining fields say \((R,\cdot,1)\) is a monoid (\texttt{mul\_\allowbreak{}assoc}, \texttt{one\_\allowbreak{}mul}, \texttt{mul\_\allowbreak{}one}) and that the two operations interact through the two-sided distributive laws --- that is, multiplication is compatible with addition on both sides. Nesting \texttt{addGrp} as a whole substructure mirrors the \hyperref[sec:01-basics:04-terminology:1]{forgetful functor} \(\mathbf{Ring}\to\mathbf{Ab}\) sending a ring to its additive group.
 
 \end{mathreading}
 

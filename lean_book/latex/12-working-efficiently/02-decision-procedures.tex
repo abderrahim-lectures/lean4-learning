@@ -9,7 +9,7 @@ For goals that are \emph{decidable} --- where ``true or false'' can be settled b
 \item
   \textbf{\texttt{omega}} --- a decision procedure for \emph{linear} arithmetic over \texttt{Nat}/\texttt{Int} (goals built from \texttt{+}, subtraction, \texttt{≤}, \texttt{<}, \texttt{=}, and multiplication by \emph{literal constants} only --- \texttt{omega} handles \texttt{3 * n} fine, but not \texttt{n * m} for two unknown variables \texttt{n}, \texttt{m}; multiplying two unknown variables together falls outside what it can decide). For a goal that is ``some linear inequality or equality about integers,'' \texttt{omega} should be reached for before deriving the fact by hand. This is exactly the kind of fact a decision procedure handles better than a custom \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}} chain, and a hand-derived proof teaches nothing that \texttt{omega}'s existence does not already establish.
 \item
-  \textbf{\texttt{norm\_num}} --- normalizes and evaluates numerical expressions (arithmetic on concrete numerals, including some with \texttt{+}, \texttt{*}, \texttt{\^}, \texttt{≤} on literals).
+  \textbf{\texttt{norm\_\allowbreak{}num}} --- normalizes and evaluates numerical expressions (arithmetic on concrete numerals, including some with \texttt{+}, \texttt{*}, \texttt{\^}, \texttt{≤} on literals).
 \end{itemize}
 
 Here is the judgment call: \textbf{use a decision procedure whenever the goal falls entirely inside its decidable fragment; use explicit \texttt{rw}/\texttt{have} reasoning whenever the goal is about a \emph{general}, unspecified structure} (like an arbitrary \texttt{Group G} or \texttt{Ring R}). No decision procedure applies there, because there is no concrete computation to run, only axioms to combine. Chapters 7 and 9's group/ring theorems are all of this second kind, which is exactly why they needed hand-built proofs instead of \texttt{omega}.
@@ -18,10 +18,10 @@ Here is the judgment call: \textbf{use a decision procedure whenever the goal fa
 
 A proposition \(P\) is \texttt{Decidable} when there is an algorithm that computes its truth value. In categorical terms, this is a map \(P \to \{\top, \bot\}\) whose two preimages are ``proof of \(P\)'' and ``proof of \(\neg P\).'' So \texttt{decide} is the constructive statement ``\(P \vee
 \neg P\) holds \emph{and} we can tell which one,'' available exactly on the decidable fragment (closed numeric claims like \(7 \mid 21\)). \texttt{omega} decides \emph{Presburger arithmetic}, the first-order theory of \((\mathbb{Z},
-+, <)\), which is famously decidable, and \texttt{norm\_num} evaluates concrete numerals. These apply only to statements with no free structure left to fill in. A theorem about an arbitrary group has no finite truth table to compute, and thus must be \emph{proved} from the axioms instead of \emph{decided}.
++, <)\), which is famously decidable, and \texttt{norm\_\allowbreak{}num} evaluates concrete numerals. These apply only to statements with no free structure left to fill in. A theorem about an arbitrary group has no finite truth table to compute, and thus must be \emph{proved} from the axioms instead of \emph{decided}.
 
 \end{mathreading}
 
 \begin{quote}
-Read more: the Lean/Mathlib documentation for \texttt{decide}, \texttt{omega}, and \texttt{norm\_num} (searchable in the Mathlib docs or via \texttt{\#help tactic omega} inside a Lean file) covers each tactic's exact decidable fragment and performance in more depth than this book needs.
+Read more: the Lean/Mathlib documentation for \texttt{decide}, \texttt{omega}, and \texttt{norm\_\allowbreak{}num} (searchable in the Mathlib docs or via \texttt{\#help tactic omega} inside a Lean file) covers each tactic's exact decidable fragment and performance in more depth than this book needs.
 \end{quote}

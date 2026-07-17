@@ -42,18 +42,18 @@ def average (a b : Nat) : Nat :=
   sum / 2
 \end{lstlisting}
 
-\textbf{\texttt{def average (a b : Nat) : Nat := let sum := a + b; sum / 2}}
+\textbf{\texttt{def average (a b : Nat) : Nat := let sum := a + b; sum /\allowbreak{} 2}}
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{(a b : Nat)} --- two explicit arguments, both of type \texttt{Nat}, written with a single shared type annotation. This is pure surface-syntax sugar for \texttt{(a : Nat) (b : Nat)}; Lean expands it identically either way. This shorthand is standard style whenever several consecutive parameters share a type, and costs nothing.
 \item
-  \texttt{let sum := a + b} --- introduces a \emph{local} definition, visible only in the rest of this particular body, as opposed to \texttt{def}'s \emph{global} one. \texttt{let} does not need (though it can take) a type annotation, since the type of \texttt{a + b} is already fully determined by \texttt{a} and \texttt{b}'s types, so Lean infers it. Operationally, \texttt{let sum := a + b; sum / 2} means exactly the same thing as substituting \texttt{a + b} for every occurrence of \texttt{sum} in \texttt{sum / 2}. A \texttt{let} is definitionally transparent, so \texttt{average a b} and \texttt{(a + b) / 2} elaborate to the same normal form. The reason to write it as a \texttt{let} anyway, rather than inlining \texttt{(a + b) / 2} directly, is purely for the human reader: naming an intermediate quantity documents what it means, and in a longer proof or definition, it prevents repeating a nontrivial subexpression (and therefore repeating a mistake in it) in several places.
+  \texttt{let sum := a + b} --- introduces a \emph{local} definition, visible only in the rest of this particular body, as opposed to \texttt{def}'s \emph{global} one. \texttt{let} does not need (though it can take) a type annotation, since the type of \texttt{a + b} is already fully determined by \texttt{a} and \texttt{b}'s types, so Lean infers it. Operationally, \texttt{let sum := a + b; sum /\allowbreak{} 2} means exactly the same thing as substituting \texttt{a + b} for every occurrence of \texttt{sum} in \texttt{sum /\allowbreak{} 2}. A \texttt{let} is definitionally transparent, so \texttt{average a b} and \texttt{(a + b) /\allowbreak{} 2} elaborate to the same normal form. The reason to write it as a \texttt{let} anyway, rather than inlining \texttt{(a + b) /\allowbreak{} 2} directly, is purely for the human reader: naming an intermediate quantity documents what it means, and in a longer proof or definition, it prevents repeating a nontrivial subexpression (and therefore repeating a mistake in it) in several places.
 \item
-  The line break between \texttt{let sum := a + b} and \texttt{sum / 2} is whitespace, not two separate statements needing a semicolon. Lean's parser uses indentation-sensitive layout for \texttt{let}-chains, the same way it does for \texttt{by}-blocks in tactic mode. \texttt{sum / 2} is the \texttt{let}'s body: the whole two-line construct \texttt{let sum := a + b; sum / 2} is itself one term, which is then what \texttt{average}'s \texttt{:=} binds to.
+  The line break between \texttt{let sum := a + b} and \texttt{sum /\allowbreak{} 2} is whitespace, not two separate statements needing a semicolon. Lean's parser uses indentation-sensitive layout for \texttt{let}-chains, the same way it does for \texttt{by}-blocks in tactic mode. \texttt{sum /\allowbreak{} 2} is the \texttt{let}'s body: the whole two-line construct \texttt{let sum := a + b; sum /\allowbreak{} 2} is itself one term, which is then what \texttt{average}'s \texttt{:=} binds to.
 \item
-  \texttt{sum / 2} --- \texttt{Nat} division, which in Lean is \emph{truncating}. \texttt{average 4 10} computes \texttt{sum = 14}, then \texttt{14 / 2 = 7} exactly. But \texttt{average 1 2} would compute \texttt{sum = 3}, then \texttt{3 / 2 = 1} (rounded down, since \texttt{Nat} has no fractions). This should be noted before relying on this \texttt{average} for anything where the rounding matters.
+  \texttt{sum /\allowbreak{} 2} --- \texttt{Nat} division, which in Lean is \emph{truncating}. \texttt{average 4 10} computes \texttt{sum = 14}, then \texttt{14 /\allowbreak{} 2 = 7} exactly. But \texttt{average 1 2} would compute \texttt{sum = 3}, then \texttt{3 /\allowbreak{} 2 = 1} (rounded down, since \texttt{Nat} has no fractions). This should be noted before relying on this \texttt{average} for anything where the rounding matters.
 \end{itemize}
 
 \begin{mathreading}

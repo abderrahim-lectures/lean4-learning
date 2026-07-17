@@ -18,7 +18,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \item
   Register at least two instances per class (e.g.~\texttt{Int} and \texttt{Bool}, reusing \texttt{intGroup}/\texttt{boolXorGroup}'s proofs from Chapters 6--8).
 \item
-  Redo one theorem generically --- \texttt{id\_unique} (Chapter 7) is the smallest --- against the \texttt{[Group G]} assumption instead of a \texttt{Grp : Group G} argument, and notice which parts of the statement got shorter.
+  Redo one theorem generically --- \texttt{id\_\allowbreak{}unique} (Chapter 7) is the smallest --- against the \texttt{[Group G]} assumption instead of a \texttt{Grp : Group G} argument, and notice which parts of the statement got shorter.
 \end{enumerate}
 
 \textbf{Deliverable.} \texttt{class Group}, \texttt{class Ring}, at least two instances of each, and one theorem restated in the type-class style.
@@ -37,11 +37,11 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Restrict first to a quiver with finitely many paths total --- the example quiver from Chapter 11 §3 has exactly six (\texttt{e\_0, e\_1, e\_2, alpha, beta, beta∘alpha}) --- so ``finitely supported'' can start as a plain function on a finite index rather than needing Mathlib's \texttt{Finsupp}.
+  Restrict first to a quiver with finitely many paths total --- the example quiver from Chapter 11 §3 has exactly six (\texttt{e\_\allowbreak{}0, e\_\allowbreak{}1, e\_\allowbreak{}2, alpha, beta, beta∘alpha}) --- so ``finitely supported'' can start as a plain function on a finite index rather than needing Mathlib's \texttt{Finsupp}.
 \item
   Define pointwise addition on this finite carrier and prove it forms a \texttt{CommGroup} (Chapter 8 §2).
 \item
-  Define multiplication by path composition, \texttt{0} on any pair whose endpoints do not match (as the chapter text describes), and prove the monoid laws (\texttt{mul\_assoc}/\texttt{one\_mul}/\texttt{mul\_one}) using the sum of trivial paths as \texttt{one}.
+  Define multiplication by path composition, \texttt{0} on any pair whose endpoints do not match (as the chapter text describes), and prove the monoid laws (\texttt{mul\_\allowbreak{}assoc}/\texttt{one\_\allowbreak{}mul}/\texttt{mul\_\allowbreak{}one}) using the sum of trivial paths as \texttt{one}.
 \item
   Assemble \texttt{Ring (PathAlgebraElem exampleQuiver k)} for a small, fully concrete \texttt{k} (Chapter 8 §5's \texttt{fin3Ring}, \texttt{Fin 3}, is a good first choice, since \texttt{decide} can then check the ring axioms outright).
 \end{enumerate}

@@ -8,7 +8,7 @@ theorem all_nats_ge_zero : ∀ n : Nat, n ≥ 0 :=
 \begin{itemize}
 \tightlist
 \item
-  \texttt{∀ x : α, P x} is again just a (dependent) function type: given any \texttt{x}, produce a proof of \texttt{P x}. \texttt{all\_nats\_ge\_zero} is literally a function taking any \texttt{n} and returning a proof that \texttt{n ≥ 0} --- here, \texttt{Nat.zero\_le n} already proves exactly that for whichever \texttt{n} gets passed in.
+  \texttt{∀ x : α, P x} is again just a (dependent) function type: given any \texttt{x}, produce a proof of \texttt{P x}. \texttt{all\_\allowbreak{}nats\_\allowbreak{}ge\_\allowbreak{}zero} is literally a function taking any \texttt{n} and returning a proof that \texttt{n ≥ 0} --- here, \texttt{Nat.zero\_\allowbreak{}le n} already proves exactly that for whichever \texttt{n} gets passed in.
 \end{itemize}
 
 \begin{lstlisting}
@@ -46,19 +46,19 @@ theorem exists_prime_gt_three : ∃ p : Nat, p > 3 ∧ isPrime p :=
   ⟨5, by decide⟩
 \end{lstlisting}
 
-\textbf{A second example: there is always a bigger prime.} \texttt{exists\_prime\_gt\_three} is one concrete instance of a classical fact: no matter which number is chosen, there is a prime bigger than it (here the chosen number is \texttt{3}, and \texttt{5} is a prime that beats it). It follows the exact same ``number, then why'' shape as before, but with two differences worth noting:
+\textbf{A second example: there is always a bigger prime.} \texttt{exists\_\allowbreak{}prime\_\allowbreak{}gt\_\allowbreak{}three} is one concrete instance of a classical fact: no matter which number is chosen, there is a prime bigger than it (here the chosen number is \texttt{3}, and \texttt{5} is a prime that beats it). It follows the exact same ``number, then why'' shape as before, but with two differences worth noting:
 
 \begin{itemize}
 \tightlist
 \item
-  The \emph{property} being witnessed, \texttt{p > 3 ∧ isPrime p}, is itself an \texttt{∧}. So the full picture is a witness (\texttt{5}) plus a \emph{pair} of facts about it (\texttt{5 > 3}, and \texttt{5} is prime), all packed into the outer \texttt{⟨\_, \_⟩}.
+  The \emph{property} being witnessed, \texttt{p > 3 ∧ isPrime p}, is itself an \texttt{∧}. So the full picture is a witness (\texttt{5}) plus a \emph{pair} of facts about it (\texttt{5 > 3}, and \texttt{5} is prime), all packed into the outer \texttt{⟨\_\allowbreak{}, \_\allowbreak{}⟩}.
 \item
-  The proof is not \texttt{rfl}. \texttt{p > 3 ∧ isPrime p} does not reduce to a plain equality, so instead the second slot is by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} --- the same brute-force tactic from \hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s \texttt{not\_example}, which here checks \texttt{5 > 3} outright and tries every candidate divisor below \texttt{5} to confirm none of them divide it.
+  The proof is not \texttt{rfl}. \texttt{p > 3 ∧ isPrime p} does not reduce to a plain equality, so instead the second slot is by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} --- the same brute-force tactic from \hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s \texttt{not\_\allowbreak{}example}, which here checks \texttt{5 > 3} outright and tries every candidate divisor below \texttt{5} to confirm none of them divide it.
 \end{itemize}
 
 Read \texttt{⟨5, by decide⟩} exactly as before: \texttt{5} is still just the witness, \texttt{by decide} is still just the proof, filled in by a tactic block instead of \texttt{rfl} because \emph{this} proof happens to need one. The witness-then-proof shape never changes; only \emph{how} the proof half gets produced does.
 
-This one example only shows \emph{a} prime past \texttt{3}. It does not yet show that this works for \emph{every} number that could have been chosen instead of \texttt{3}. That stronger claim, \(\forall n,\ \exists p > n,\ \mathrm{isPrime}\ p\) (Euclid's theorem, first proved around 300 BCE), needs an argument that works uniformly for an \emph{arbitrary} \texttt{n}. That means induction, not yet introduced. \hyperref[sec:04-tactics:00-index:1]{Chapter 4} covers the tactics that make an argument like that possible. A fully formalized proof of Euclid's theorem lives in Mathlib as \texttt{Nat.exists\_infinite\_primes}, one of the ``Read more'' pointers once \hyperref[sec:13-next-steps:00-index:1]{Chapter 13} introduces Mathlib itself.
+This one example only shows \emph{a} prime past \texttt{3}. It does not yet show that this works for \emph{every} number that could have been chosen instead of \texttt{3}. That stronger claim, \(\forall n,\ \exists p > n,\ \mathrm{isPrime}\ p\) (Euclid's theorem, first proved around 300 BCE), needs an argument that works uniformly for an \emph{arbitrary} \texttt{n}. That means induction, not yet introduced. \hyperref[sec:04-tactics:00-index:1]{Chapter 4} covers the tactics that make an argument like that possible. A fully formalized proof of Euclid's theorem lives in Mathlib as \texttt{Nat.exists\_\allowbreak{}infinite\_\allowbreak{}primes}, one of the ``Read more'' pointers once \hyperref[sec:13-next-steps:00-index:1]{Chapter 13} introduces Mathlib itself.
 
 \textbf{Remark (a more formal restatement).} The bullet points above already state everything needed to use \texttt{∃} and \texttt{∀}. This paragraph and the ``Mathematical reading'' box below only restate the same facts in more formal language, for readers who want the connection made fully explicit. \texttt{∃ x : α, P x} being ``a witness plus a proof'' is, formally, saying it is a \textbf{dependent pair type}: the type of the second component (the proof) depends on the \emph{value} chosen for the first (the witness). It would be \texttt{P 2} for witness \texttt{2}, but \texttt{P 1} for witness \texttt{1}, a genuinely different type each time. This dependency is exactly why \texttt{∃} cannot be built from the ordinary (non-dependent) pairing used for \texttt{∧}, and why Lean needs a dedicated \texttt{Exists} former for it.
 
@@ -66,7 +66,7 @@ This one example only shows \emph{a} prime past \texttt{3}. It does not yet show
 
 The two quantifiers are the ``indexed'' versions of the product and sum seen for \(\wedge\) and \(\vee\) in the previous section. Instead of combining two fixed propositions \(P\) and \(Q\), they combine a whole \emph{family} of propositions \(P(x)\), one for each \(x \in \alpha\). Universal quantification is the (\(\Pi\)-)type \[
 \forall x{:}\alpha,\ P(x) \;=\; \prod_{x : \alpha} P(x),
-\] literally an \(\alpha\)-indexed product: a proof is a function assigning to each \(x\) a proof of \(P(x)\), so \texttt{all\_nats\_ge\_zero} is the map \(n \mapsto (0
+\] literally an \(\alpha\)-indexed product: a proof is a function assigning to each \(x\) a proof of \(P(x)\), so \texttt{all\_\allowbreak{}nats\_\allowbreak{}ge\_\allowbreak{}zero} is the map \(n \mapsto (0
 \le n)\). This exactly generalizes how a proof of \(P \wedge Q\) was a pair \((p, q)\), one component per conjunct, except now there is one component per element of \(\alpha\) rather than just two. Existential quantification is the (\(\Sigma\)-)type \[
 \exists x{:}\alpha,\ P(x) \;=\; \sum_{x : \alpha} P(x),
 \] an \(\alpha\)-indexed sum: a proof is a dependent pair \(\langle a, h\rangle\) with \(a \in \alpha\) the witness and \(h : P(a)\). Here \(\langle 2,

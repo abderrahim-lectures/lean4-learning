@@ -7,10 +7,13 @@
 % backmatter.tex (both hand-written, not generated from Markdown).
 \input{preamble.tex}
 \begin{document}
+\pagenumbering{roman}
 \input{frontmatter.tex}
 \input{learning-paths.tex}
 \input{notation-reference.tex}
 \setcounter{chapter}{-1}
+\clearpage
+\pagenumbering{arabic}
 \input{00-setup/00-index.tex}
 \input{01-basics/00-index.tex}
 \input{02-functions-and-structures/00-index.tex}

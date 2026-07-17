@@ -7,7 +7,7 @@
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \emph{\texttt{intGroup} never tests the difference between \texttt{id\_left}/\texttt{id\_right} or \texttt{inv\_left}/\texttt{inv\_right}, since \texttt{Int} addition is commutative. Does that mean the split is only there for generality's sake, with no concrete example that actually needs it?} No --- \texttt{perm3Group} needs it for real: composing permutations is genuinely non-commutative, so \texttt{id\_left} and \texttt{id\_right} are two separate proof obligations there, not a single fact proved twice.
+  \emph{\texttt{intGroup} never tests the difference between \texttt{id\_\allowbreak{}left}/\texttt{id\_\allowbreak{}right} or \texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right}, since \texttt{Int} addition is commutative. Does that mean the split is only there for generality's sake, with no concrete example that actually needs it?} No --- \texttt{perm3Group} needs it for real: composing permutations is genuinely non-commutative, so \texttt{id\_\allowbreak{}left} and \texttt{id\_\allowbreak{}right} are two separate proof obligations there, not a single fact proved twice.
 \item
   \emph{\texttt{GroupData} (op, id, inv, no axioms) type-checks for any choice of the three fields, including nonsense ones. What is the smallest change that turns ``any \texttt{GroupData}'' into ``only genuine groups''?} Nothing about the \emph{data} fields changes at all --- five more fields are added, each a proof obligation. \texttt{Group} is exactly \texttt{GroupData} plus those five proofs; the type of a term goes from ``some operation and two elements'' to ``an operation and two elements \emph{together with evidence} they behave correctly.''
 \item
@@ -15,7 +15,7 @@
 \item
   Build \texttt{boolXorGroup : Group Bool} where \texttt{op} is boolean XOR (\texttt{Bool.xor}), \texttt{id := false}, and \texttt{inv := fun a => a} (every element is its own inverse). Prove each field using \texttt{by intro a; cases a <;> rfl} is tempting --- instead, for practice, use \texttt{cases a with | false => rfl | true => rfl} for the fields that need a case split, to see exactly which case does what.
 \item
-  Verify on paper that \texttt{inv\_left} and \texttt{inv\_right} are genuinely different obligations. They coincide automatically only once the group has been \emph{proved} commutative --- this is exactly the content of Chapter 7's first theorem.
+  Verify on paper that \texttt{inv\_\allowbreak{}left} and \texttt{inv\_\allowbreak{}right} are genuinely different obligations. They coincide automatically only once the group has been \emph{proved} commutative --- this is exactly the content of Chapter 7's first theorem.
 \end{enumerate}
 
 Solutions: \hyperref[sec:14-appendix-solutions:05-chapter-6:1]{Appendix, Chapter 6}.
