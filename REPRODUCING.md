@@ -1,0 +1,194 @@
+# Reproducing this book
+
+The book was not produced from a single prompt — it emerged from an
+iterative conversation, with the structure and constraints tightening
+over many turns. Below is a cleaned-up, standalone version of that prompt
+sequence: following it in order with a capable coding assistant should
+reproduce a book with the same shape, level, and constraints (though not
+identical text). Each step assumes the assistant has file read/write and
+shell access to the working directory.
+
+1. **Scaffold the two project folders.**
+   > In this folder create two subfolders: `lean_book`, an absolute-beginners
+   > guide to Lean 4 written in Markdown with LaTeX math, focused on groups,
+   > rings, and path algebras as running examples; and `lean_project`, a Lean
+   > 4 project using the latest stable toolchain. Set up `lean_project` with
+   > a proper `lake` scaffold (`lakefile.toml`, `lean-toolchain` pinned to the
+   > latest release, a library module, and an executable), and start
+   > `lean_book` with a README table of contents and chapters covering Lean
+   > basics through groups and rings, ending with quiver path algebras.
+
+2. **Correct the audience and pedagogical stance** (issued as the draft
+   developed — sequence these as separate follow-up instructions, not one
+   prompt):
+   > Do not use Mathlib in the book — build every definition (groups, rings,
+   > path algebras) from scratch so every proof obligation is visible.
+   >
+   > Use very simple steps with explanation in every proof, and avoid
+   > shortcuts like unexplained `rfl` or `simp` — spell out which axiom or
+   > prior lemma justifies each rewrite.
+   >
+   > The audience is mathematicians with a category-theory background who
+   > already have programming experience — cut beginner-programmer
+   > explanations (what a function is, what a compiler does) and speak
+   > directly in the language of algebra and category theory instead.
+   >
+   > The book must be complete, with a solutions appendix covering every
+   > exercise.
+
+3. **Reframe the book's actual goal.**
+   > The most important thing is that the book teaches how to *use* Lean
+   > efficiently and how to *think* in it — not just definitions to
+   > memorize. Rework the tactics chapter and the group/ring theorem
+   > chapters so each proof is presented as a search process (what to look
+   > at in the goal state, what to try, why an attempt fails, how to find
+   > the next step) rather than only the finished, polished proof. Add a
+   > dedicated chapter on working efficiently once the basics are
+   > understood: `exact?`/`apply?` as lemma search, decision procedures
+   > (`omega`, `decide`, `norm_num`) and when they're appropriate versus
+   > hand-deriving a proof, term-mode versus tactic-mode tradeoffs, and when
+   > to factor out a reusable lemma.
+
+4. **Expand mathematical content.**
+   > Add a worked example of a ring of matrices (something genuinely
+   > noncommutative, unlike the integers) and a chapter introducing modules
+   > over a ring, with submodules, linear maps, and direct sums — placed so
+   > it connects naturally to the path-algebra chapter (representations of a
+   > quiver are modules over its path algebra).
+
+5. **Restructure for navigability.**
+   > Add a navigation strip (link back to a table-of-contents menu, plus
+   > previous/next chapter) at the top and bottom of every chapter file.
+   > Then: any chapter file longer than about 150 lines should become its
+   > own folder containing a `00-index.md` (chapter title, intro, links to
+   > each section) plus one small file per section, each with its own local
+   > prev/next navigation — apply this to every chapter, including short
+   > ones, for consistency. Afterward, flatten every chapter folder up one
+   > level so chapters live directly under the book's root instead of inside
+   > a `chapters/` subdirectory, and remove that now-empty subdirectory.
+   > Fix every internal link after each restructuring pass, and verify with
+   > a markdown linter (add one — `markdownlint-cli2` with a project config
+   > — and confirm zero errors) plus a check that every relative link
+   > actually resolves to an existing file.
+
+6. **Raise the rigor bar.**
+   > When presenting any nontrivial Lean code, explain every keyword and
+   > token in it and *why* it's there, not just what it does — e.g. for a
+   > `def`, cover the keyword, the naming convention, explicit vs. implicit
+   > arguments, the return-type annotation, and the body, each with its
+   > reasoning. Then add a chapter — placed before the first serious
+   > algebraic definition — addressing the rigor questions a careful
+   > mathematician would ask before trusting the rest of the book: why
+   > `structure` instead of Lean's `class`/type-class mechanism (which the
+   > real Mathlib library actually uses), what a universe (`Type`,
+   > `Type 1`, ...) is and why it matters for a definition like `Group`, and
+   > the difference between definitional and propositional equality.
+   > Renumber later chapters and every cross-reference accordingly.
+
+7. **Add a parallel mathematical reading of every code block.**
+   > For every significant Lean code block in the book, add a short
+   > "Mathematical reading" paragraph immediately after its existing prose
+   > explanation, translating the Lean into the standard notation a working
+   > algebraist would recognize from a textbook — real LaTeX, not just a
+   > restatement in words — including the categorical reading (functors,
+   > universal properties, Hom-sets) wherever it clarifies what the code is
+   > really encoding.
+
+8. **Polish presentation and ship it.**
+   > Pick a short, precise title for the book reflecting its actual
+   > audience and content. Set up per-project `.gitignore` files (one inside
+   > `lean_book/`, one inside `lean_project/`, not a single root-level one).
+   > Initialize git, commit, create a GitHub repository, and push. Once
+   > everything is settled, make the repository public, and add a notice to
+   > the top-level README disclosing that the book was AI-generated, plus
+   > this reconstruction-prompt sequence itself.
+
+9. **Port the code and get an expert critique.**
+   > Set up the companion Lean project properly: install the pinned
+   > toolchain, port every code block from the book into it (one module
+   > per chapter), and run `lake build` until it compiles clean, fixing
+   > every real bug the compiler finds — in both the project and the book
+   > text, with a note explaining what was wrong and why the fix works.
+   > Then, separately: act as an expert Lean/type-theory/algebra reviewer
+   > and read through the entire book looking for (a) foundational terms
+   > used repeatedly before they're properly explained, (b) chapters thin
+   > on worked examples relative to their conceptual weight, (c) factual or
+   > technical errors in the prose, and (d) places that would benefit from
+   > a "read more" pointer, either internal or to a standard reference.
+   > Fix what the review finds — expand the thin explanations, add the
+   > missing worked examples (verifying every new one compiles), correct
+   > the errors, and thread the read-more pointers throughout rather than
+   > only in the closing chapters.
+
+10. **Audit for audience accessibility.** (a later session, treating the
+    book as something to be reviewed by a human editor rather than only
+    generated)
+    > Read every chapter against the book's own promised audience: readers
+    > with algebra and basic category-theory background (objects,
+    > morphisms, composition, functors), but zero prior exposure to
+    > programming, formal logic, type theory, or category theory beyond
+    > that baseline. Flag every place a "Mathematical reading" box or aside
+    > uses a term past that baseline with no definition — then fix it: add
+    > one shared glossary entry for terms that recur, cut one-off jargon
+    > flourishes that add nothing for this audience, and write a
+    > from-scratch recap of standard logic (propositional/first-order,
+    > natural deduction) for readers meeting it for the first time. Also
+    > add an optional "Programmer's corner" box alongside the existing
+    > "Mathematical reading" box at a handful of good spots, giving readers
+    > with programming background but no formal-logic background a second
+    > concrete anchor.
+
+11. **Polish for readability and navigation.** (a further session, acting
+    as a human reviewer reading the book start to finish)
+    > Wherever a section presents several worked examples in one code
+    > block and then explains all of them together afterward, restructure
+    > it so each example gets its own small block immediately followed by
+    > its own explanation — except where two examples are a deliberate
+    > side-by-side contrast, or one is a helper immediately consumed by the
+    > next, where splitting them would hurt more than help. Add plain-text
+    > diagrams (no LaTeX diagram packages, since the rendering path doesn't
+    > guarantee them) at the spots where a picture of a category-theory
+    > construction — a universal property, an initial object, a quiver —
+    > would clarify faster than prose alone. Turn every bare "Chapter *N*
+    > §*M*" text mention into an actual link. Add a changelog covering the
+    > book's full history, built from the git log, and linked from the top
+    > of both READMEs; trim the READMEs' own inline history to a short
+    > summary pointing at it.
+
+12. **Add a Mathlib-equivalent track alongside the from-scratch one.** (a
+    later session, after the book was otherwise complete)
+    > This book stays Mathlib-free, but I'd like learners to see both
+    > sides. After every worked example in Chapters 6–11, add a clearly
+    > labeled "Mathlib equivalent" box showing the same statement or
+    > construction phrased against Mathlib's real API — the from-scratch
+    > version stays primary, the Mathlib version is a second, parallel
+    > track. Add Mathlib as a dependency of `lean_project`, port every new
+    > snippet into a matching module per chapter, and verify each one with
+    > `lake build` against the real library, not just written and hoped.
+    > Update the README and the Chapter 0 Mathlib note so the framing is
+    > clear: this isn't a contradiction of the "no Mathlib" design, it's a
+    > deliberate peek ahead.
+
+13. **Simplify the English, without touching the math or Lean.** (a later
+    session, focused purely on readability for non-native English readers)
+    > Rewrite the book's prose to roughly CEFR B2 English: shorter
+    > sentences, plainer everyday words, fewer stacked em-dash asides. Do
+    > this across every chapter and the appendix, so a non-native English
+    > reader spends effort on Lean and math, not on decoding vocabulary.
+    > Do not touch code blocks, LaTeX math, links, headers, or any
+    > mathematical/Lean technical term — only the surrounding English
+    > glue, with no loss of content or nuance. While you're at it, make
+    > sure every term in the shared glossary (Chapter 1 §4) has its own
+    > stable link anchor, and update all three READMEs to reflect the
+    > current state of the project.
+
+A note on process, for anyone replaying this: several steps above
+triggered large mechanical passes (renumbering a dozen chapters and every
+cross-reference, splitting long files into folders, adding an annotation
+to every code block across ~90 files). Doing this reliably took explicit
+verification after each pass — a link-resolution check confirming every
+`[text](path.md)` reference resolves to a real file, and a markdown lint
+pass — rather than trusting the edits were correct by construction. If you
+delegate a similarly large mechanical pass to a subagent, verify its
+output the same way before moving on; don't assume a returned "done"
+summary reflects what actually landed on disk.

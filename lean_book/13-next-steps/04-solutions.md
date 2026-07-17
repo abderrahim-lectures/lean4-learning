@@ -21,9 +21,9 @@
    useful outcome of reaching this page, and that gap is usually exactly
    where a project pays off most.
 3. *This book verified every Lean snippet against a real toolchain rather
-   than merely describing what should happen. Now that the training
-   wheels of a guided worked example are gone, what is the equivalent
-   habit to carry forward alone?* Trying the cheap thing first, reading
+   than merely describing what should happen. Now that the book no
+   longer supplies guided worked examples, what is the equivalent habit
+   to carry forward alone?* Trying the cheap thing first, reading
    why it failed, and checking the goal state after every step rather
    than only at the end — the same loop Chapter 4 introduced, now
    without a book supplying the next line.

@@ -23,7 +23,7 @@ a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)\) that was supplied when building t
 #eval (3 : Int) + 4
 #eval (0 : Int)
 #eval -(5 : Int)
-#check (add_assoc : ∀ a b c : Int, (a + b) + c = a + (b + c))
+#check (add_assoc : (*$\forall$*) a b c : Int, (a + b) + c = a + (b + c))
 \end{lstlisting}
 
 This is the same contrast as §3: the book's \texttt{intGroup.op}/\texttt{.id}/\texttt{.inv} are projections out of a bundle built by hand, while Mathlib's \texttt{+}/\texttt{0}/ \texttt{-\allowbreak{}} are notation that the typeclass system has already wired to the right instance. The underlying ``which \texttt{AddCommGroup} instance is this?'' bookkeeping remains invisible unless sought out (for example, with \texttt{\#print}).

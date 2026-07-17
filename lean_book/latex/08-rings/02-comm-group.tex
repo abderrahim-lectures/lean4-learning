@@ -2,7 +2,7 @@
 
 \begin{lstlisting}
 structure CommGroup (G : Type) extends Group G where
-  comm : ∀ a b : G, op a b = op b a
+  comm : (*$\forall$*) a b : G, op a b = op b a
 \end{lstlisting}
 
 Recall \texttt{extends} from Chapter 2: a \texttt{CommGroup G} \emph{is} a \texttt{Group G} (it has every field \texttt{Group G} has --- \texttt{op}, \texttt{id}, \texttt{inv}, \texttt{assoc}, etc.) plus one more field, \texttt{comm}. Anywhere Lean expects a \texttt{Group G}, a \texttt{CommGroup G} may be passed instead (via \texttt{.toGroup}).

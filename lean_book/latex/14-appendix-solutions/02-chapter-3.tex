@@ -3,8 +3,8 @@
 \textbf{1. \texttt{theorem and\_\allowbreak{}comm\_\allowbreak{}ex \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}}
 
 \begin{lstlisting}
-theorem and_comm_ex {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
-  ⟨h.right, h.left⟩
+theorem and_comm_ex {P Q : Prop} (h : P (*$\wedge$*) Q) : Q (*$\wedge$*) P :=
+  (*$\langle$*)h.right, h.left(*$\rangle$*)
 \end{lstlisting}
 
 \texttt{h : P ∧ Q} has fields \texttt{h.left : P} and \texttt{h.right : Q}. A proof of \texttt{Q ∧ P} is just the pair with those two components in the opposite order.
@@ -12,7 +12,7 @@ theorem and_comm_ex {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
 \textbf{2. \texttt{theorem or\_\allowbreak{}comm\_\allowbreak{}ex \{P Q : Prop\} (h : P ∨ Q) : Q ∨ P}}
 
 \begin{lstlisting}
-theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
+theorem or_comm_ex {P Q : Prop} (h : P (*$\vee$*) Q) : Q (*$\vee$*) P :=
   match h with
   | Or.inl hp => Or.inr hp
   | Or.inr hq => Or.inl hq
@@ -23,8 +23,8 @@ theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
 \textbf{3. \texttt{theorem exists\_\allowbreak{}gt\_\allowbreak{}zero : ∃ n : Nat, n > 0}}
 
 \begin{lstlisting}
-theorem exists_gt_zero : ∃ n : Nat, n > 0 :=
-  ⟨1, by decide⟩
+theorem exists_gt_zero : (*$\exists$*) n : Nat, n > 0 :=
+  (*$\langle$*)1, by decide(*$\rangle$*)
 \end{lstlisting}
 
 An \texttt{∃}-proof is a witness (\texttt{1}) paired with a proof that it satisfies the predicate (\texttt{1 > 0}). Here \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} handles that proof, since \texttt{1 > 0} on \texttt{Nat} is a decidable, closed proposition. We could also write \texttt{⟨1, Nat.one\_\allowbreak{}pos⟩} or \texttt{⟨1, rfl⟩} (since \texttt{1 > 0} unfolds to \texttt{0 < 1}, i.e. \texttt{Nat.succ 0 ≤ 1}, which is true by definition).

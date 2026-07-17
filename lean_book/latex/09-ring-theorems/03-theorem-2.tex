@@ -22,7 +22,7 @@ theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id := by
         (Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a)) :=
     congrArg (Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))) h1
   rw [Rg.addGrp.toGroup.inv_left] at h2
-  rw [← Rg.addGrp.toGroup.assoc] at h2
+  rw [(*$\leftarrow$*) Rg.addGrp.toGroup.assoc] at h2
   rw [Rg.addGrp.toGroup.inv_left] at h2
   rw [Rg.addGrp.toGroup.id_left] at h2
   exact h2.symm
@@ -41,7 +41,7 @@ theorem neg_one_mul (a : R) :
       (show a = Rg.mul Rg.one a from (Rg.one_mul a).symm)
   rw [step]
   -- Goal: op (mul (inv one) a) (mul one a) = id
-  rw [← Rg.right_distrib]
+  rw [(*$\leftarrow$*) Rg.right_distrib]
   -- Goal: mul (op (inv one) one) a = id
   rw [Rg.addGrp.toGroup.inv_left]
   -- Goal: mul Rg.addGrp.id a = id, i.e. 0 * a = 0

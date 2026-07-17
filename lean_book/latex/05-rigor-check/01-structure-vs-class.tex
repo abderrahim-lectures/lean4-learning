@@ -5,20 +5,20 @@ Every algebraic definition in this book --- \texttt{Group}, \texttt{Ring}, \text
 \begin{lstlisting}
 -- this book's style
 structure Group (G : Type) where
-  op : G → G → G
+  op : G (*$\rightarrow$*) G (*$\rightarrow$*) G
   id : G
-  inv : G → G
-  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
-  id_left : ∀ a : G, op id a = a
+  inv : G (*$\rightarrow$*) G
+  assoc : (*$\forall$*) a b c : G, op (op a b) c = op a (op b c)
+  id_left : (*$\forall$*) a : G, op id a = a
   -- ...
 
--- Mathlib's style (schematically — not the literal Mathlib source)
+-- Mathlib's style (schematically (*\textemdash{}*) not the literal Mathlib source)
 class Group (G : Type) where
-  op : G → G → G
+  op : G (*$\rightarrow$*) G (*$\rightarrow$*) G
   id : G
-  inv : G → G
-  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
-  id_left : ∀ a : G, op id a = a
+  inv : G (*$\rightarrow$*) G
+  assoc : (*$\forall$*) a b c : G, op (op a b) c = op a (op b c)
+  id_left : (*$\forall$*) a : G, op id a = a
   -- ...
 \end{lstlisting}
 
@@ -54,7 +54,7 @@ def opTwice (Grp : Group G) (x : G) : G :=
 #eval opTwice intGroup 3   -- the specific Group term must be named
 \end{lstlisting}
 
-Mathematically, the difference is this: \texttt{class} + \texttt{instance} implements the same convention as ordinary mathematical prose, in which one writes ``let \(G\) be a group'' once and then simply writes \(a \cdot b\), \(e\), \(a^{-1}\) thereafter. The \emph{specific} group structure is left implicit, tracked by context, and never re-named at each use. Lean's typeclass mechanism automates exactly that convention. A \texttt{structure}-only approach (this book's style) is the more careful alternative in which the structure is \emph{always} carried around explicitly, the way a referee demanding that the group operation never be left unstated would require.
+Mathematically, the difference is this: \texttt{class} + \texttt{instance} implements the same convention as ordinary mathematical prose, in which one writes ``let \(G\) be a group'' once and then simply writes \(a \cdot b\), \(e\), \(a^{-1}\) thereafter. The \emph{specific} group structure is left implicit, tracked by context, and never re-named at each use. Lean's typeclass mechanism automates exactly that convention. A \texttt{structure}-only approach (this book's style) requires the structure to always be carried around explicitly, so the group operation is never left unstated.
 
 \subsection{\texorpdfstring{Why this book deliberately avoids \texttt{class}, for now}{Why this book deliberately avoids class, for now}}\label{sec:05-rigor-check:01-structure-vs-class:3}
 
