@@ -15,11 +15,11 @@ Part I is now complete: terms and types, structures, propositions and proofs, ta
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Define \texttt{structure Monoid (M : Type) where} with fields \texttt{op}, \texttt{id}, and proof obligations \texttt{assoc}, \texttt{id\_left}, \texttt{id\_right} --- exactly \texttt{Group}'s fields (Chapter 6 §2), minus \texttt{inv}/\texttt{inv\_left}/\texttt{inv\_right}.
+  Define \texttt{structure Monoid (M : Type) where} with fields \texttt{op}, \texttt{id}, and proof obligations \texttt{assoc}, \texttt{id\_\allowbreak{}left}, \texttt{id\_\allowbreak{}right} --- exactly \texttt{Group}'s fields (Chapter 6 §2), minus \texttt{inv}/\texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right}.
 \item
   Build at least one concrete instance. Two natural choices, both reusing facts already available from core Lean: \texttt{List α} under \texttt{++}/\texttt{[]}, or \texttt{Nat} under \texttt{*}/\texttt{1}.
 \item
-  Prove a generic theorem for an arbitrary \texttt{Mn : Monoid M}: \emph{the identity is unique} --- if \texttt{e' : M} satisfies \texttt{∀ a, Mn.op e' a = a}, then \texttt{e' = Mn.id}. This is exactly Chapter 7's Theorem 1 (\texttt{id\_unique}) carried out one chapter early, and --- worth checking directly --- its proof never needs an inverse, so nothing about lacking one gets in the way.
+  Prove a generic theorem for an arbitrary \texttt{Mn : Monoid M}: \emph{the identity is unique} --- if \texttt{e' : M} satisfies \texttt{∀ a, Mn.op e' a = a}, then \texttt{e' = Mn.id}. This is exactly Chapter 7's Theorem 1 (\texttt{id\_\allowbreak{}unique}) carried out one chapter early, and --- worth checking directly --- its proof never needs an inverse, so nothing about lacking one gets in the way.
 \end{enumerate}
 
 \textbf{Deliverable.} \texttt{structure Monoid}, at least one concrete instance (with all three proof obligations discharged), and the generic uniqueness theorem, applied to that instance.
@@ -54,6 +54,6 @@ theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
 #check monoid_id_unique (listMonoid Nat) [] (fun a => List.nil_append a)
 \end{lstlisting}
 
-If this compiles (\texttt{lake env lean} on a file containing it, or pasted into \texttt{lean\_project}), the project is done. A full worked solution, including a second instance, is in \hyperref[sec:14-appendix-solutions:04-chapter-5:1]{Appendix, Chapter 5}.
+If this compiles (\texttt{lake env lean} on a file containing it, or pasted into \texttt{lean\_\allowbreak{}project}), the project is done. A full worked solution, including a second instance, is in \hyperref[sec:14-appendix-solutions:04-chapter-5:1]{Appendix, Chapter 5}.
 
 \end{pblproject}

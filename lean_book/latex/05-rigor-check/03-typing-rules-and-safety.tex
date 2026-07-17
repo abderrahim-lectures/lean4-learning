@@ -34,7 +34,7 @@ to_str(5)
 to_str("already a string")
 \end{lstlisting}
 
-\texttt{mypy}'s check on \texttt{to\_str("already a string")} is exactly the (App) rule below, refusing to combine a function with an argument of the wrong type, caught by reading the code rather than running it. The difference is that Python's hints are optional and only checked when \texttt{mypy} is run at all; Lean's type system is not optional, is checked on every single elaboration, and is a real part of the language's meaning rather than an add-on linter. STLC below is what is actually going on, underneath both.
+\texttt{mypy}'s check on \texttt{to\_\allowbreak{}str("already a string")} is exactly the (App) rule below, refusing to combine a function with an argument of the wrong type, caught by reading the code rather than running it. The difference is that Python's hints are optional and only checked when \texttt{mypy} is run at all; Lean's type system is not optional, is checked on every single elaboration, and is a real part of the language's meaning rather than an add-on linter. STLC below is what is actually going on, underneath both.
 
 \subsection{Typing judgments and rules}\label{sec:05-rigor-check:03-typing-rules-and-safety:3}
 
@@ -76,7 +76,7 @@ Together, progress and preservation are the formal content of ``well-typed progr
 
 \subsection{What STLC still cannot do}\label{sec:05-rigor-check:03-typing-rules-and-safety:5}
 
-STLC cannot type \texttt{identity} from Chapter 1 \emph{polymorphically}. One could write \texttt{identity\_Nat : Nat → Nat} and separately \texttt{identity\_Bool : Bool → Bool}, one arrow-type definition per base type. But there is no single term of a single STLC type that captures ``the identity function, at every type.''
+STLC cannot type \texttt{identity} from Chapter 1 \emph{polymorphically}. One could write \texttt{identity\_\allowbreak{}Nat : Nat → Nat} and separately \texttt{identity\_\allowbreak{}Bool : Bool → Bool}, one arrow-type definition per base type. But there is no single term of a single STLC type that captures ``the identity function, at every type.''
 
 \begin{progcorner}
 
@@ -95,7 +95,7 @@ identity(5)        # T := int
 identity("hello")  # T := str
 \end{lstlisting}
 
-Without \texttt{TypeVar}, the only option would be writing \texttt{identity\_int(x: int) -> int} and \texttt{identity\_str(x: str) -> str} separately --- exactly STLC's one-arrow-type-per-base-type wall. \texttt{TypeVar} is Python typing's escape hatch for this specific gap, and it is a useful anchor: a much lighter version of the same extra generality Lean's \texttt{identity \{α : Type\} (x : α) : α := x} uses, where \texttt{α} is filled in silently every call, the same way \texttt{mypy} silently solves \texttt{T := int} above.
+Without \texttt{TypeVar}, the only option would be writing \texttt{identity\_\allowbreak{}int(x: int) -\allowbreak{}> int} and \texttt{identity\_\allowbreak{}str(x: str) -\allowbreak{}> str} separately --- exactly STLC's one-arrow-type-per-base-type wall. \texttt{TypeVar} is Python typing's escape hatch for this specific gap, and it is a useful anchor: a much lighter version of the same extra generality Lean's \texttt{identity \{α : Type\} (x : α) : α := x} uses, where \texttt{α} is filled in silently every call, the same way \texttt{mypy} silently solves \texttt{T := int} above.
 
 This is precisely the gap \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter 1 §5} already closed: \textbf{dependent types} let a type itself depend on a term (here, the type argument \texttt{α}). That is exactly the extra generality \texttt{identity \{α : Type\} (x : α) : α := x} uses, and it is unavailable in STLC (or in Python's \texttt{TypeVar}, which is real but considerably less powerful --- it cannot let a \emph{return type} depend on an ordinary \emph{value} argument the way Chapter 1 §3's \texttt{Vec.replicate} does).
 

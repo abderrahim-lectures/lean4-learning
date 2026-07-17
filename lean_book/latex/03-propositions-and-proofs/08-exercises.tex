@@ -13,15 +13,12 @@
 \item
   \emph{\texttt{∃ n, n > 0} was proved with a witness and a decided fact about it. What would go wrong trying to prove \texttt{∀ n, n > 0} the same way, by picking one \texttt{n} and checking it?} A single witness proves only that \emph{some} \texttt{n} works --- universal quantification demands the property hold for \emph{every} \texttt{n} at once, which no finite number of individual checks can establish; it needs a genuine argument (an inductive proof, starting in Chapter 4) that works uniformly.
 \item
-  Prove \texttt{theorem and\_comm\_ex \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}.
+  Prove \texttt{theorem and\_\allowbreak{}comm\_\allowbreak{}ex \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}.
 \item
-  Prove \texttt{theorem or\_comm\_ex \{P Q : Prop\} (h : P ∨ Q) : Q ∨ P} (hint: use \texttt{Or.elim} or pattern matching with \texttt{match}).
+  Prove \texttt{theorem or\_\allowbreak{}comm\_\allowbreak{}ex \{P Q : Prop\} (h : P ∨ Q) : Q ∨ P} (hint: use \texttt{Or.elim} or pattern matching with \texttt{match}).
 \item
-  Prove \texttt{theorem exists\_gt\_zero : ∃ n : Nat, n > 0}.
+  Prove \texttt{theorem exists\_\allowbreak{}gt\_\allowbreak{}zero : ∃ n : Nat, n > 0}.
 \end{enumerate}
 
 Solutions: \hyperref[sec:14-appendix-solutions:02-chapter-3:1]{Appendix, Chapter 3}.
 
-\section{Next}\label{sec:03-propositions-and-proofs:08-exercises:2}
-
-Continue to \hyperref[sec:04-tactics:00-index:1]{Chapter 4: Tactics}.

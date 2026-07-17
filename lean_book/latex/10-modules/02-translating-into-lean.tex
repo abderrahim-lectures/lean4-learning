@@ -21,17 +21,17 @@ Field by field:
 \item
   \texttt{smul : R → M → M} --- the scalar action, \texttt{r • m} in ordinary notation.
 \item
-  \texttt{smul\_add}, \texttt{add\_smul} --- the two distributivity laws (M1), (M2). Read them as ``scalar over module-sum'' and ``ring-sum over scalar''. This is the same left/right split used for \texttt{Ring}'s \texttt{left\_distrib}/\texttt{right\_distrib}, but here the split is based on \emph{which} addition (\texttt{Rg.addGrp.op} vs. \texttt{addGrp.op}) is involved, not on which side \texttt{mul} is applied.
+  \texttt{smul\_\allowbreak{}add}, \texttt{add\_\allowbreak{}smul} --- the two distributivity laws (M1), (M2). Read them as ``scalar over module-sum'' and ``ring-sum over scalar''. This is the same left/right split used for \texttt{Ring}'s \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib}, but here the split is based on \emph{which} addition (\texttt{Rg.addGrp.op} vs. \texttt{addGrp.op}) is involved, not on which side \texttt{mul} is applied.
 \item
-  \texttt{smul\_smul} --- (M3), compatibility of the ring's multiplication with iterated scalar action.
+  \texttt{smul\_\allowbreak{}smul} --- (M3), compatibility of the ring's multiplication with iterated scalar action.
 \item
-  \texttt{one\_smul} --- (M4), the ring's multiplicative identity acts as the identity scalar.
+  \texttt{one\_\allowbreak{}smul} --- (M4), the ring's multiplicative identity acts as the identity scalar.
 \end{itemize}
 
 \begin{mathreading}
 
 \texttt{Module R Rg M} is the type of left \(R\)-module structures on the abelian group \(M\). The data is an action \(R \times M \to
-M\), \((r,m)\mapsto r\cdot m\). The four axioms say precisely that the curried map \(\rho(r)(m) = r\cdot m\) is a \textbf{ring homomorphism} from \(R\) into the ring of endomorphisms of \((M,+)\): the additive maps \(M \to M\), under pointwise addition and composition. \texttt{smul\_add} says each \(\rho(r)\) is itself additive (a homomorphism \(M \to M\) of abelian groups). \texttt{add\_smul} and \texttt{smul\_smul} say \(\rho\) preserves \(+\) and \(\times\). And \texttt{one\_smul} says \(\rho(1)\) is the identity map on \(M\). So a module over \(R\) is exactly an abelian group \(M\) equipped with a ring homomorphism from \(R\) into its own ring of endomorphisms. The ring \(R\) enters as an explicit \emph{parameter}, not as extra bundled data on \(M\), because a module is always a module \emph{over} some already-fixed ring.
+M\), \((r,m)\mapsto r\cdot m\). The four axioms say precisely that the curried map \(\rho(r)(m) = r\cdot m\) is a \textbf{ring homomorphism} from \(R\) into the ring of endomorphisms of \((M,+)\): the additive maps \(M \to M\), under pointwise addition and composition. \texttt{smul\_\allowbreak{}add} says each \(\rho(r)\) is itself additive (a homomorphism \(M \to M\) of abelian groups). \texttt{add\_\allowbreak{}smul} and \texttt{smul\_\allowbreak{}smul} say \(\rho\) preserves \(+\) and \(\times\). And \texttt{one\_\allowbreak{}smul} says \(\rho(1)\) is the identity map on \(M\). So a module over \(R\) is exactly an abelian group \(M\) equipped with a ring homomorphism from \(R\) into its own ring of endomorphisms. The ring \(R\) enters as an explicit \emph{parameter}, not as extra bundled data on \(M\), because a module is always a module \emph{over} some already-fixed ring.
 
 \end{mathreading}
 

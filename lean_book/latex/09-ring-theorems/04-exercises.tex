@@ -1,25 +1,22 @@
 \section{Exercises}\label{sec:09-ring-theorems:04-exercises:1}
 
-\textbf{Key points.} \(a\cdot 0=0\) and \((-1)\cdot a=-a\) are theorems, not axioms --- both derived from distributivity plus additive cancellation, following the same ``pad with \(0=0+0\), then cancel'' pattern each time. A concrete numeral (\texttt{neg\_seven}) can close by \texttt{rfl} where the general statement about an unknown \texttt{a} genuinely cannot, mirroring Chapter 5's defeq-vs-propeq distinction.
+\textbf{Key points.} \(a\cdot 0=0\) and \((-1)\cdot a=-a\) are theorems, not axioms --- both derived from distributivity plus additive cancellation, following the same ``pad with \(0=0+0\), then cancel'' pattern each time. A concrete numeral (\texttt{neg\_\allowbreak{}seven}) can close by \texttt{rfl} where the general statement about an unknown \texttt{a} genuinely cannot, mirroring Chapter 5's defeq-vs-propeq distinction.
 
 \textbf{Socratic questions.}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \emph{\(a \cdot 0 = 0\) is proved from distributivity and cancellation, not assumed. Could a ring exist where this fails?} Not among Lean's \texttt{Ring}s --- the proof uses only \texttt{left\_distrib} and the additive group axioms, which every \texttt{Ring} supplies by definition, so the conclusion is forced. A structure lacking it would simply not satisfy \texttt{Ring}'s own fields, whatever else it looked like.
+  \emph{\(a \cdot 0 = 0\) is proved from distributivity and cancellation, not assumed. Could a ring exist where this fails?} Not among Lean's \texttt{Ring}s --- the proof uses only \texttt{left\_\allowbreak{}distrib} and the additive group axioms, which every \texttt{Ring} supplies by definition, so the conclusion is forced. A structure lacking it would simply not satisfy \texttt{Ring}'s own fields, whatever else it looked like.
 \item
   \emph{The proof of \(a \cdot 0 = 0\) starts from \(0 = 0 + 0\) --- an identity that looks almost too trivial to be useful. Why does such a trivial-looking fact do real work?} Because it converts a goal \emph{about} \(0\) into a goal about \(x = x + x\) for \(x := a \cdot 0\), which is exactly the shape ``an additive-group element equal to its own double is the identity'' already known how to cancel. Trivial identities are frequently the hinge a whole proof turns on, not padding.
 \item
-  \emph{\texttt{neg\_seven} closes by \texttt{rfl}; the general \texttt{neg\_one\_mul (a : R)} needed a five-line proof for the }same* underlying fact. What exactly is different about the general statement?* \texttt{neg\_seven} names one concrete, already-computed integer --- both sides reduce to \texttt{-7} directly. \texttt{neg\_one\_mul} quantifies over \emph{every} ring \texttt{R} and element \texttt{a}; there is no concrete value to reduce, so the equality must be established from the axioms rather than read off by computation.
+  \emph{\texttt{neg\_\allowbreak{}seven} closes by \texttt{rfl}; the general \texttt{neg\_\allowbreak{}one\_\allowbreak{}mul (a : R)} needed a five-line proof for the }same* underlying fact. What exactly is different about the general statement?* \texttt{neg\_\allowbreak{}seven} names one concrete, already-computed integer --- both sides reduce to \texttt{-\allowbreak{}7} directly. \texttt{neg\_\allowbreak{}one\_\allowbreak{}mul} quantifies over \emph{every} ring \texttt{R} and element \texttt{a}; there is no concrete value to reduce, so the equality must be established from the axioms rather than read off by computation.
 \item
-  Prove \texttt{theorem neg\_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)}. Strategy: this is ``show \(x = -(ab)\),'' hence reduce through \texttt{left\_inverse\_unique} to ``show \(x + ab = 0\),'' then look for a \texttt{right\_distrib}-shaped simplification of \((-a)\cdot b + a \cdot b\), exactly as in Theorem 2. \texttt{mul\_zero\_left} (proved in Theorem 2's section) is required at the end, the same way Theorem 2 itself used it.
+  Prove \texttt{theorem neg\_\allowbreak{}mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)}. Strategy: this is ``show \(x = -(ab)\),'' hence reduce through \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} to ``show \(x + ab = 0\),'' then look for a \texttt{right\_\allowbreak{}distrib}-shaped simplification of \((-a)\cdot b + a \cdot b\), exactly as in Theorem 2. \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left} (proved in Theorem 2's section) is required at the end, the same way Theorem 2 itself used it.
 \item
-  Instantiate \texttt{left\_inverse\_unique} (Chapter 7) directly on \texttt{intRing}'s additive group to compute a concrete additive inverse --- e.g.~prove \texttt{theorem neg\_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl} and, in a comment, state why \texttt{rfl} alone suffices here (compare to Theorem 2's proof, which required real work precisely because \texttt{a} was an unknown variable rather than a concrete numeral).
+  Instantiate \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 7) directly on \texttt{intRing}'s additive group to compute a concrete additive inverse --- e.g.~prove \texttt{theorem neg\_\allowbreak{}seven : intRing.addGrp.toGroup.inv 7 = -\allowbreak{}7 := rfl} and, in a comment, state why \texttt{rfl} alone suffices here (compare to Theorem 2's proof, which required real work precisely because \texttt{a} was an unknown variable rather than a concrete numeral).
 \end{enumerate}
 
 Solutions: \hyperref[sec:14-appendix-solutions:08-chapter-9:1]{Appendix, Chapter 9}.
 
-\section{Next}\label{sec:09-ring-theorems:04-exercises:2}
-
-Continue to \hyperref[sec:10-modules:00-index:1]{Chapter 10: Modules over a ring}.

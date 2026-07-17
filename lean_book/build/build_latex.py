@@ -275,6 +275,37 @@ def unnumber_chapter(tex):
     )
 
 
+def unnumber_sections(tex):
+    """Companion to unnumber_chapter(): every \\section{...} inside an
+    unnumbered front-/back-matter chapter would otherwise display as
+    "0.1", "0.2", etc. -- \\thesection there is \\thechapter.N, and
+    \\thechapter reads 0 (its parent \\chapter* never having stepped the
+    counter), which looks like these pages belong to a nonexistent
+    "Chapter 0" rather than being front/back matter. Converts every
+    \\section{...} in the file to \\section*{...} plus a manual
+    \\addcontentsline, so it still appears in the Table of Contents
+    (unnumbered, like a real book's front-matter subsections) instead of
+    showing a misleading chapter-less "0.N"."""
+    out = []
+    i = 0
+    marker = "\\section{"
+    while True:
+        j = tex.find(marker, i)
+        if j == -1:
+            out.append(tex[i:])
+            break
+        out.append(tex[i:j])
+        content, after = _read_braced_group(tex, j + len("\\section"))
+        if content.startswith("\\texorpdfstring{"):
+            formatted, after_fmt = _read_braced_group(content, len("\\texorpdfstring"))
+            plain, _ = _read_braced_group(content, after_fmt)
+        else:
+            formatted = plain = content
+        out.append(f"\\section*{{{formatted}}}\n\\addcontentsline{{toc}}{{section}}{{{plain}}}")
+        i = after
+    return "".join(out)
+
+
 def fix_cross_links(tex, citing_chapter):
     """Post-Pandoc: Pandoc already converts a Markdown link to a known
     in-book .md file into \\href{target}{text}, correctly rendering any
@@ -540,9 +571,19 @@ def fix_inline_code(tex):
     a literal unescaped `#`), so it is used as-is; re-escaping it here
     (an earlier version of this function did, via escape_latex_text)
     double-escapes every special character (e.g. `\#` becomes
-    `\textbackslash{}\#eval`, a literal backslash glyph in the output)."""
+    `\textbackslash{}\#eval`, a literal backslash glyph in the output).
+
+    \texttt content has no natural break points for TeX's line breaker --
+    unlike a real word, a path/identifier like `lean_project/lean-toolchain`
+    contains no space for the algorithm to break at, so a long one just
+    overflows the right margin instead of wrapping. Inserting \allowbreak
+    (a breakpoint with no visible mark, unlike \- which prints a hyphen)
+    after each `/`, escaped underscore, and `-` gives the line breaker
+    somewhere to wrap a long inline path/identifier without changing how
+    it looks when it doesn't need to."""
     def _sub(m):
         content = m.group(2)
+        content = re.sub(r'(/|\\_|-)', r'\1\\allowbreak{}', content)
         return "\\texttt{" + content + "}"
 
     pattern = re.compile(r'\\passthrough\{\\lstinline(.)(.*?)\1\}')
@@ -559,6 +600,19 @@ def renumber_labels(tex, chapter, stem):
         return f"\\label{{sec:{chap}:{stem}:{n}}}"
 
     return re.sub(r'\\label\{[^}]*\}', _sub, tex)
+
+
+NEXT_SECTION_RE = re.compile(r'\\(?:sub)*section\{Next\}\\label\{sec:[^}]*\}.*\Z', re.DOTALL)
+
+
+def strip_next_section(tex):
+    """Drop the trailing "## Next -- Continue to [...](...)." section
+    present in 13 chapter files: a web/GitHub navigation aid pointing to
+    the next file, meaningless in a printed/PDF book where the reader
+    just turns the page. Always the last heading in its source file
+    (immediately before the bottom nav strip, already removed by
+    strip_nav_lines()), so it's safe to drop through to end of string."""
+    return NEXT_SECTION_RE.sub('', tex)
 
 
 def strip_hypertargets(tex):
@@ -631,8 +685,10 @@ def convert_file(chapter, name):
     tex = fix_cross_links(tex, chapter)
     tex = fix_inline_code(tex)
     tex = renumber_labels(tex, chapter, stem)
+    tex = strip_next_section(tex)
     if not chapter or (chapter == "14-appendix-solutions" and name == "00-index.md"):
         tex = unnumber_chapter(tex)
+        tex = unnumber_sections(tex)
     # listings' language names are case-sensitive; its built-in Python
     # support is registered as "Python", and Pandoc always capitalizes the
     # fence's info string to match (regardless of how it's written in this
@@ -677,6 +733,11 @@ def write_main_driver():
         "% backmatter.tex (both hand-written, not generated from Markdown).\n",
         "\\input{preamble.tex}\n",
         "\\begin{document}\n",
+        # Professional-book convention: front matter (title page through
+        # Notation reference) is paginated with lowercase roman numerals,
+        # switching to arabic starting at Chapter 0 -- matches every real
+        # print book's front-matter/body-matter page-numbering split.
+        "\\pagenumbering{roman}\n",
         "\\input{frontmatter.tex}\n",
     ]
     for name in FRONT_MATTER_FILES:
@@ -687,6 +748,13 @@ def write_main_driver():
     # first real chapter (00-setup) becomes \thechapter=0, matching this
     # book's own "Chapter 0" numbering instead of LaTeX's default 1-index.
     lines.append("\\setcounter{chapter}{-1}\n")
+    # \pagenumbering resets \thepage on whatever page is still open in
+    # TeX's page builder, not on the next page that will actually start --
+    # without forcing a break here first, the switch to arabic landed
+    # retroactively on whatever page Notation reference's last section
+    # happened to still be finishing, not cleanly at Chapter 0.
+    lines.append("\\clearpage\n")
+    lines.append("\\pagenumbering{arabic}\n")
     for chapter in CHAPTERS:
         lines.append(f"\\input{{{chapter}/00-index.tex}}\n")
     for name in ROOT_FILES:

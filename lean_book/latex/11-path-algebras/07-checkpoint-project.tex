@@ -19,10 +19,10 @@ Part II closes here, having built groups, rings, modules, and now quivers and pa
 \item
   Compute a couple of lengths by hand and check them with \texttt{\#eval} against §4's example paths (\texttt{pathAlpha}, \texttt{pathBetaAlpha}).
 \item
-  Prove \texttt{Path.append\_length : (Path.append p q).length = p.length + q.length} by induction on \texttt{q}, mirroring \texttt{Path.append}'s own \texttt{nil}/\texttt{cons} cases. Predict, before running it, whether each case closes by \texttt{rfl} --- then discover (as the note above flags) that it does not, and that \texttt{simp only [Path.append, Path.length]} is needed to unfold one step, exactly as \texttt{rfl} needs the \emph{equation lemmas} Lean generates for an indexed match, not raw iota-reduction, once an abstract path is involved.
+  Prove \texttt{Path.append\_\allowbreak{}length : (Path.append p q).length = p.length + q.length} by induction on \texttt{q}, mirroring \texttt{Path.append}'s own \texttt{nil}/\texttt{cons} cases. Predict, before running it, whether each case closes by \texttt{rfl} --- then discover (as the note above flags) that it does not, and that \texttt{simp only [Path.append, Path.length]} is needed to unfold one step, exactly as \texttt{rfl} needs the \emph{equation lemmas} Lean generates for an indexed match, not raw iota-reduction, once an abstract path is involved.
 \end{enumerate}
 
-\textbf{Deliverable.} \texttt{Path.length} and the proved theorem \texttt{Path.append\_length}, checked against at least one concrete instance.
+\textbf{Deliverable.} \texttt{Path.length} and the proved theorem \texttt{Path.append\_\allowbreak{}length}, checked against at least one concrete instance.
 
 \textbf{Self-verification.}
 

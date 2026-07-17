@@ -60,7 +60,7 @@ brute-force enumerate every combination of the (finitely many) variables and che
 #eval fin3Ring.addGrp.toGroup.inv 1     -- 2  (-1 = 2 mod 3)
 \end{lstlisting}
 
-Compare this construction style directly with \texttt{intRing} (previous section) and \texttt{mat2Ring} (next section): \texttt{intRing}'s axioms needed \texttt{Int.add\_assoc}-style library citations because \texttt{Int} is infinite. There is no way to ``check all cases'' of a statement about \emph{every} integer. \texttt{Fin 3}'s axioms are statements about only finitely many (and concretely enumerable) elements, so they can instead be handled by exhaustive case-checking, which is exactly what \texttt{decide} automates. Recognizing which regime a goal is in --- infinite carrier needing a real argument, versus finite carrier where brute enumeration is enough --- is itself a useful instinct to build. See Chapter 12 for more on when \texttt{decide} is (and is not) the right tool.
+Compare this construction style directly with \texttt{intRing} (previous section) and \texttt{mat2Ring} (next section): \texttt{intRing}'s axioms needed \texttt{Int.add\_\allowbreak{}assoc}-style library citations because \texttt{Int} is infinite. There is no way to ``check all cases'' of a statement about \emph{every} integer. \texttt{Fin 3}'s axioms are statements about only finitely many (and concretely enumerable) elements, so they can instead be handled by exhaustive case-checking, which is exactly what \texttt{decide} automates. Recognizing which regime a goal is in --- infinite carrier needing a real argument, versus finite carrier where brute enumeration is enough --- is itself a useful instinct to build. See Chapter 12 for more on when \texttt{decide} is (and is not) the right tool.
 
 \begin{mathreading}
 
@@ -79,6 +79,3 @@ example : CommRing (ZMod 3) := inferInstance
 
 The book's \texttt{by decide} on \texttt{fin3Ring}'s fields brute-forces exactly the finitely many cases needed for \emph{this one} carrier. Mathlib instead proves \texttt{ZMod n}'s ring axioms once for every \texttt{n} (through its construction as \texttt{Fin n} with wraparound arithmetic, combined with the general machinery for quotients of \(\mathbb{Z}\)), so \texttt{ZMod 3}'s instance costs nothing further to obtain.
 
-\section{Next}\label{sec:08-rings:05-finite-ring-example:4}
-
-Continue to \hyperref[sec:08-rings:06-accessing-fields:1]{Accessing nested fields}.
