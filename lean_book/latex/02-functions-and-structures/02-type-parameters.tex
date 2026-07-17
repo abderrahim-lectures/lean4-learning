@@ -1,9 +1,9 @@
 \section{Structures with type parameters}\label{sec:02-functions-and-structures:02-type-parameters:1}
 
 \begin{lstlisting}
-structure Pair (α β : Type) where
-  fst : α
-  snd : β
+structure Pair ((*$\alpha$*) (*$\beta$*) : Type) where
+  fst : (*$\alpha$*)
+  snd : (*$\beta$*)
 
 def p : Pair Nat String := { fst := 1, snd := "one" }
 

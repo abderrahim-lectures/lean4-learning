@@ -5,11 +5,11 @@ The same ``data, then axioms'' build used for \texttt{Group} and \texttt{Ring} a
 \begin{lstlisting}
 structure Module (R : Type) (Rg : Ring R) (M : Type) where
   addGrp : CommGroup M
-  smul : R → M → M
-  smul_add : ∀ (r : R) (m n : M), smul r (addGrp.op m n) = addGrp.op (smul r m) (smul r n)
-  add_smul : ∀ (r s : R) (m : M), smul (Rg.addGrp.op r s) m = addGrp.op (smul r m) (smul s m)
-  smul_smul : ∀ (r s : R) (m : M), smul (Rg.mul r s) m = smul r (smul s m)
-  one_smul : ∀ m : M, smul Rg.one m = m
+  smul : R (*$\rightarrow$*) M (*$\rightarrow$*) M
+  smul_add : (*$\forall$*) (r : R) (m n : M), smul r (addGrp.op m n) = addGrp.op (smul r m) (smul r n)
+  add_smul : (*$\forall$*) (r s : R) (m : M), smul (Rg.addGrp.op r s) m = addGrp.op (smul r m) (smul s m)
+  smul_smul : (*$\forall$*) (r s : R) (m : M), smul (Rg.mul r s) m = smul r (smul s m)
+  one_smul : (*$\forall$*) m : M, smul Rg.one m = m
 \end{lstlisting}
 
 Field by field:

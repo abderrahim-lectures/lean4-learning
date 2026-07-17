@@ -4,10 +4,10 @@ A \textbf{submodule} of \(M\) is a subset closed under \(+\), containing \(0\), 
 
 \begin{lstlisting}
 structure Submodule {R : Type} (Rg : Ring R) {M : Type} (Mod : Module R Rg M) where
-  carrier : M → Prop
+  carrier : M (*$\rightarrow$*) Prop
   zero_mem : carrier Mod.addGrp.toGroup.id
-  add_mem : ∀ {m n : M}, carrier m → carrier n → carrier (Mod.addGrp.op m n)
-  smul_mem : ∀ (r : R) {m : M}, carrier m → carrier (Mod.smul r m)
+  add_mem : (*$\forall$*) {m n : M}, carrier m (*$\rightarrow$*) carrier n (*$\rightarrow$*) carrier (Mod.addGrp.op m n)
+  smul_mem : (*$\forall$*) (r : R) {m : M}, carrier m (*$\rightarrow$*) carrier (Mod.smul r m)
 \end{lstlisting}
 
 \texttt{carrier : M → Prop} is the subset, viewed as its membership predicate (\texttt{carrier m} reads ``\texttt{m} is in the submodule''). This is the standard Lean idiom for ``subobject of \texttt{X}'': not a \texttt{Set X} wrapped separately, but a predicate directly, since \texttt{carrier m} \emph{is} a proposition usable directly as a hypothesis.
@@ -43,24 +43,24 @@ def intZModule : Module Int intRing Int where
 
 \begin{lstlisting}
 -- NOTE: `intZModule.addGrp.op`/`.id`/`.smul` are definitionally (but not
--- syntactically) equal to plain `+`/`0`/`*` on `Int` — true by `rfl`, but
+-- syntactically) equal to plain `+`/`0`/`*` on `Int` (*\textemdash{}*) true by `rfl`, but
 -- `rw` only fires on syntactic matches, so a bare `rw [...]` (or `ring`,
 -- which this book doesn't import from Mathlib anyway) would leave
 -- an unsolved goal even though the underlying statement is true. `show`
 -- restates the goal in its reduced (defeq) form explicitly first.
 def evenSubmodule : Submodule intRing intZModule where
-  carrier := fun m => ∃ k : Int, m = 2 * k
-  zero_mem := ⟨0, rfl⟩
+  carrier := fun m => (*$\exists$*) k : Int, m = 2 * k
+  zero_mem := (*$\langle$*)0, rfl(*$\rangle$*)
   add_mem := by
-    intro m n ⟨k, hk⟩ ⟨j, hj⟩
-    refine ⟨k + j, ?_⟩
+    intro m n (*$\langle$*)k, hk(*$\rangle$*) (*$\langle$*)j, hj(*$\rangle$*)
+    refine (*$\langle$*)k + j, ?_(*$\rangle$*)
     show m + n = 2 * (k + j)
     rw [hk, hj, Int.mul_add]
   smul_mem := by
-    intro r m ⟨k, hk⟩
-    refine ⟨r * k, ?_⟩
+    intro r m (*$\langle$*)k, hk(*$\rangle$*)
+    refine (*$\langle$*)r * k, ?_(*$\rangle$*)
     show r * m = 2 * (r * k)
-    rw [hk, ← Int.mul_assoc, Int.mul_comm r 2, Int.mul_assoc]
+    rw [hk, (*$\leftarrow$*) Int.mul_assoc, Int.mul_comm r 2, Int.mul_assoc]
 \end{lstlisting}
 
 Each closure proof follows the same shape: destructure the hypothesis to expose its witness (\texttt{⟨k, hk⟩} denotes ``\texttt{m} is even, with witness \texttt{k} and proof \texttt{hk : m = 2 * k}''), then supply a new witness and discharge the resulting \texttt{Int} equation. \texttt{zero\_\allowbreak{}mem}'s witness \texttt{0} makes the goal \texttt{id = 2 * 0}, true by \texttt{rfl} directly (both sides compute to \texttt{0}). \texttt{add\_\allowbreak{}mem} and \texttt{smul\_\allowbreak{}mem} require \texttt{show} first to reveal the goal's \texttt{+}/\texttt{*}-form before \texttt{rw} can find anything to rewrite, since \texttt{Mod.addGrp.op}/\texttt{Mod.smul} do not display as plain \texttt{+}/\texttt{*}, even though they compute to exactly that here.
@@ -76,7 +76,7 @@ This is the submodule \(2\mathbb{Z} \le \mathbb{Z}\) of even integers, \(2\mathb
 \begin{lstlisting}
 def evenSubmodule' : Submodule Int Int := Submodule.span Int {(2 : Int)}
 
-example : (2 : Int) ∈ evenSubmodule' := Submodule.subset_span rfl
+example : (2 : Int) (*$\in$*) evenSubmodule' := Submodule.subset_span rfl
 \end{lstlisting}
 
 \texttt{Submodule.span R s} is, by construction, the smallest submodule containing \texttt{s}. \href{https://loogle.lean-lang.org/?q=Submodule.subset_span}{\texttt{Submodule.subset\_\allowbreak{}span}} is the one fact that does all the work here: ``the generators are always members'', proved once, generically, instead of the book's custom \texttt{zero\_\allowbreak{}mem}/\texttt{add\_\allowbreak{}mem}/\texttt{smul\_\allowbreak{}mem} triple for this specific subset.

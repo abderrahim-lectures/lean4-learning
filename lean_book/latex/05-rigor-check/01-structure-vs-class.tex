@@ -5,20 +5,20 @@ Every algebraic definition in this book --- \texttt{Group}, \texttt{Ring}, \text
 \begin{lstlisting}
 -- this book's style
 structure Group (G : Type) where
-  op : G → G → G
+  op : G (*$\rightarrow$*) G (*$\rightarrow$*) G
   id : G
-  inv : G → G
-  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
-  id_left : ∀ a : G, op id a = a
+  inv : G (*$\rightarrow$*) G
+  assoc : (*$\forall$*) a b c : G, op (op a b) c = op a (op b c)
+  id_left : (*$\forall$*) a : G, op id a = a
   -- ...
 
--- Mathlib's style (schematically — not the literal Mathlib source)
+-- Mathlib's style (schematically (*\textemdash{}*) not the literal Mathlib source)
 class Group (G : Type) where
-  op : G → G → G
+  op : G (*$\rightarrow$*) G (*$\rightarrow$*) G
   id : G
-  inv : G → G
-  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
-  id_left : ∀ a : G, op id a = a
+  inv : G (*$\rightarrow$*) G
+  assoc : (*$\forall$*) a b c : G, op (op a b) c = op a (op b c)
+  id_left : (*$\forall$*) a : G, op id a = a
   -- ...
 \end{lstlisting}
 

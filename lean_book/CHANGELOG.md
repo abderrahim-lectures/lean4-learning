@@ -3,6 +3,35 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Fix scrambled Unicode symbols in code listings (`{α` → `α{`, etc.)
+
+Found while proofreading a rendered page: Chapter 1's
+`def identity {α : Type} (x : α) : α := x` example rendered as
+`identity α{ : Type} ...` -- the opening brace and the following symbol
+visually swapped. Isolating this in minimal standalone test files (same
+technique used for the two `listings` bugs below) showed it's much
+broader than that one example: `listings`, under XeTeX, scrambles
+character order and drops surrounding whitespace whenever two of this
+book's `newunicodechar`-mapped symbols sit near each other with nothing
+but a space between them and no plain ASCII character in between --
+e.g. `α → Vec` (from Chapter 1's `Vec.replicate` example) rendered as
+`α→  Vec`. This reproduced identically regardless of `columns=fixed` vs
+`flexible` (the previous entry's fix), regardless of whether the
+substitution went through `newunicodechar` or a `listings` `literate`
+rule, and even with a font that has native glyphs for these symbols and
+no substitution mechanism at all -- so it's a `listings`/XeTeX column-
+bookkeeping bug specific to non-ASCII characters, not fixable by tuning
+any of `listings`' own options.
+
+The fix: every occurrence of one of these symbols inside a
+`\begin{lstlisting}` body is now routed through `listings`'
+`escapeinside={(*}{*)}` as real LaTeX (e.g. `α` becomes
+`(*$\alpha$*)`), so `listings` treats it as an opaque pre-rendered span
+instead of a character it measures and positions itself --
+`build_latex.py`'s new `escape_lstlisting_unicode()`. `newunicodechar`
+remains in place for every other context (inline `` `code` `` spans,
+table cells), where it already worked correctly.
+
 ## Unreleased — Fix missing space after arrows/logic symbols in code listings
 
 Found during a full review pass: every Lean type signature using an
