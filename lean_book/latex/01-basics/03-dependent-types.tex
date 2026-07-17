@@ -11,9 +11,7 @@ def dot(xs, ys):
     return sum(x * y for x, y in zip(xs, ys))
 
 dot([1, 2, 3], [4, 5, 6])   # 32 — correct
-dot([1, 2, 3], [4, 5])      # 14 — no error, no warning, just a silently
-                            # wrong answer: zip() truncates to the shorter
-                            # list without any indication
+dot([1, 2, 3], [4, 5])      # 14 — silently wrong: zip() truncates to the shorter list
 \end{lstlisting}
 
 This is worse than a crash. \texttt{dot([1, 2, 3], [4, 5])} does not raise anything --- \texttt{zip} just quietly drops the third element of \texttt{xs} and hands back a number that \emph{looks} like a perfectly good answer. The bug (calling \texttt{dot} on two lists of different lengths, which is mathematically nonsensical) is never caught, not by Python, not by a test that happens not to cover this call site, not by anything short of a human noticing the number looks off.

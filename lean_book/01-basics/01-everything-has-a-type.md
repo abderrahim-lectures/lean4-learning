@@ -74,9 +74,8 @@ how Lean rules it out instead.
 def add_them(a, b):
     return a + b
 
-add_them(3, True)   # 4 — Python silently treats True as 1, no error at all
-add_them(3, "oops")  # TypeError: unsupported operand type(s) — but only
-                     # once this exact line actually runs
+add_them(3, True)    # 4 — Python silently treats True as 1, no error at all
+add_them(3, "oops")  # TypeError: unsupported operand type(s), but only once this exact line runs
 ```
 
 Nothing stops Python from *writing* `add_them(3, "oops")`. The mistake is

@@ -33,11 +33,11 @@ def anotherSigma : Σ n : Nat, Fin n := ⟨5, ⟨0, by decide⟩⟩
 
 \texttt{Path.append : \{u v w : V\} → Path Q u v → Path Q v w → Path Q u w}, treating the implicit binders as outer Π's, unfolds one binder at a time:
 
-\begin{tabular}{
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+{\small\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1800}}
 }
 \toprule
 Level & \(A\) & \(B(\cdot)\) & Dependent? \\
@@ -48,7 +48,7 @@ Level & \(A\) & \(B(\cdot)\) & Dependent? \\
 4 (binds \(p\)) & \(\mathrm{Path}_Q\,u\,v\) & \(\mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w\) & No --- constant in \(p\) \\
 5 (binds \(q\)) & \(\mathrm{Path}_Q\,v\,w\) & \(\mathrm{Path}_Q\,u\,w\) & No --- constant in \(q\) \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 
 
 The first three levels are genuinely dependent Π-types: each \(B\) mentions the vertex just bound, since it appears as an index into \texttt{Path} later in the signature. The last two levels are Π-types that happen to collapse to ordinary arrows: once \(u, v, w\) are fixed, \texttt{Path Q u w}'s \emph{type} no longer depends on the specific \emph{proof term} \texttt{p} or \texttt{q} supplied, only on the vertices already bound --- exactly the ``\(B(x)\) not depending on \(x\)'' collapse case from Chapter 1 §3/§5.
