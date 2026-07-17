@@ -8,11 +8,11 @@ Two related pages cover notation this one deliberately leaves out: the \hyperref
 
 \section{Logic and quantifiers}\label{sec:root:notation-reference:2}
 
-\begin{tabular}{
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+{\small\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1800}}
 }
 \toprule
 Meaning & Math notation & Lean syntax & First appears \\
@@ -28,16 +28,16 @@ Disjunction (``or'') & \(P \vee Q\) & \texttt{P ∨ Q} (\texttt{Or}) & Chapter 3
 Not equal & \(a \neq b\) & \texttt{a ≠ b} & Chapter 3 \\
 Turnstile (``the goal to prove'') & \(\Gamma \vdash P\) & the goal-state display (not typed by the user) & Chapter 4 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 
 
 \section{Algebra, structure, and diagrams}\label{sec:root:notation-reference:3}
 
-\begin{tabular}{
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+{\small\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1800}}
 }
 \toprule
 Meaning & Math notation & Lean syntax & First appears \\
@@ -55,5 +55,5 @@ Cartesian product & \(A \times B\) & \texttt{A × B} & Chapter 1 \\
 Long/derivation arrow (diagrams) & \(A \longrightarrow B\) & \texttt{⟶} (diagram labels only, not ordinary code) & Chapter 1 §4 \\
 Projections out of a product & \(\pi_X, \pi_Y\) & \texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd} & Chapter 1 §4 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 
