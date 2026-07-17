@@ -23,8 +23,9 @@ this:
   sequences) built on top.
 - `Mathlib.Combinatorics.Quiver.Basic` and `Mathlib.Algebra.Category.*` —
   quivers as the underlying data of a category (a category is "a quiver
-  plus identities and composition satisfying associativity" — sound
-  familiar?), and `Mathlib.CategoryTheory` more broadly.
+  plus identities and composition satisfying associativity," the same
+  free-category construction from Chapter 11), and `Mathlib.CategoryTheory`
+  more broadly.
 - Path algebras specifically show up in representation-theory-oriented
   corners of Mathlib and in dedicated Lean projects on quiver
   representations. Searching Mathlib's docs for "quiver" and "path" is a
