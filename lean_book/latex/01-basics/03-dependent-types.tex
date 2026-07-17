@@ -27,7 +27,7 @@ Here is the smallest genuine example of a dependent type, and it is already sitt
 #check Fin 5   -- Fin 5 : Type
 \end{lstlisting}
 
-\texttt{Fin} itself is not one type. It is a \textbf{recipe that produces a type once handed a number}: \texttt{Fin 3} and \texttt{Fin 5} are both genuine types, but they are \emph{different} types --- \texttt{Fin 3} has exactly three inhabitants (the numbers \texttt{0}, \texttt{1}, \texttt{2}) and \texttt{Fin 5} has exactly five. Compare this to something already known not to be dependent, \texttt{List α}: \texttt{List Nat} and \texttt{List Bool} are different types too, but only because \texttt{Nat} and \texttt{Bool} are different \emph{types} fed in for \texttt{α}. \texttt{Fin} is a different kind of thing. \texttt{Fin 3} and \texttt{Fin 5} differ even though \texttt{3} and \texttt{5} are both perfectly ordinary terms of the exact same type, \texttt{Nat}. The type \texttt{Fin} produces depends on which \emph{value} it is given, not just which type. That value-dependence is the entire definition of ``dependent type,'' and \texttt{Fin} gives it in the smallest possible dose.
+\texttt{Fin} itself is not one type. It is a \textbf{recipe that produces a type once handed a number}: \texttt{Fin 3} and \texttt{Fin 5} are both genuine types, but they are \emph{different} types --- \texttt{Fin 3} has exactly three inhabitants (the numbers \texttt{0}, \texttt{1}, \texttt{2}) and \texttt{Fin 5} has exactly five. Compare this to something already known not to be dependent, \texttt{List α}: \texttt{List Nat} and \texttt{List Bool} are different types too, but only because \texttt{Nat} and \texttt{Bool} are different \emph{types} fed in for \texttt{α}. \texttt{Fin} is a different kind of thing. \texttt{Fin 3} and \texttt{Fin 5} differ even though \texttt{3} and \texttt{5} are both perfectly ordinary terms of the exact same type, \texttt{Nat}. The type \texttt{Fin} produces depends on which \emph{value} it is given, not just which type. That value-dependence is the entire definition of ``dependent type,'' and \texttt{Fin} is the simplest possible example of one.
 
 The construction of \texttt{Fin} can be inspected directly:
 
@@ -97,7 +97,7 @@ in the application
 
 Nothing about ``index out of range'' happens at runtime, because the bad call is not a well-typed term in the first place --- the same ``ruled out before running'' guarantee from \hyperref[sec:01-basics:01-everything-has-a-type:1]{§1}, now enforced by an invariant (non-emptiness) that an ordinary, non-dependent type could not have expressed at all. \texttt{List α} has no way to say ``and this one is non-empty'' as part of its type; \texttt{Vec α (n+1)} says exactly that, for free, using only the machinery already on the table.
 
-\textbf{Now close the loop on the Python example from the start of this section.} Here is \texttt{dot}, rewritten for \texttt{Vec} instead of Python's \texttt{list}, with both arguments required to share the \emph{same} length \texttt{n}:
+\textbf{Return to the Python example from the start of this section.} Here is \texttt{dot}, rewritten for \texttt{Vec} instead of Python's \texttt{list}, with both arguments required to share the \emph{same} length \texttt{n}:
 
 \begin{lstlisting}
 def Vec.dot : Vec Nat n (*$\rightarrow$*) Vec Nat n (*$\rightarrow$*) Nat
