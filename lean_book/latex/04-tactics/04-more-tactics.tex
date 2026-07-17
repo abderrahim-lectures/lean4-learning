@@ -1,0 +1,80 @@
+\section{\texorpdfstring{More tactics: \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{simp}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{unfold}}}{More tactics: simp, constructor, cases, induction, unfold}}\label{sec:04-tactics:04-more-tactics:1}
+
+\subsection{\texorpdfstring{\texttt{simp}: simplify using known simplification lemmas}{simp: simplify using known simplification lemmas}}\label{sec:04-tactics:04-more-tactics:2}
+
+\begin{lstlisting}
+theorem simp_example (n : Nat) : n + 0 = n := by
+  simp
+\end{lstlisting}
+
+\texttt{simp} automatically searches for known ``simplification'' lemmas and applies them, possibly many at once. This is convenient, but it hides \emph{which} facts were used and \emph{why} the proof works, which is bad for learning. \textbf{This book avoids \texttt{simp} and \texttt{rfl}-as-a-shortcut wherever the point is to understand the proof.} Instead, it uses explicit \texttt{rw} steps that name exactly which equality justifies each step, and \texttt{induction} with a fully spelled-out base case and inductive step. \texttt{simp} should be treated as a tool for later, independent proofs, once what it would have done by hand is already understood.
+
+\begin{quote}
+Read more: \hyperref[sec:12-working-efficiently:03-simp:1]{Chapter 12, ``\texttt{simp}, now that you understand what it replaces''} covers when it is the \emph{right} efficient choice, once every step no longer needs to be spelled out.
+\end{quote}
+
+\subsection{\texorpdfstring{\texttt{constructor}: build a structure/And/Iff by its constructor}{constructor: build a structure/And/Iff by its constructor}}\label{sec:04-tactics:04-more-tactics:3}
+
+\begin{lstlisting}
+theorem and_example (P Q : Prop) (hp : P) (hq : Q) : P ∧ Q := by
+  constructor
+  · exact hp
+  · exact hq
+\end{lstlisting}
+
+The \texttt{·} (focus dot) lets you address each remaining goal one at a time.
+
+\begin{mathreading}
+
+\texttt{constructor} invokes the introduction rule of the goal's type (\hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3 §2}'s \(\wedge\)-intro/\(\vee\)-intro, read more below). For a product/conjunction \(P \wedge Q\) it splits the task into proving each factor separately. This reflects the \hyperref[sec:01-basics:04-terminology:1]{universal property} of the product, ``a map into \(P \times Q\) is a pair of maps,'' so proving \(P\) and proving \(Q\) is enough. More generally, for any \texttt{structure} it reduces the goal to one subgoal per field. In a dual way, \texttt{cases} on \(h : P \vee Q\) below invokes the \emph{elimination} rule of a coproduct (\hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s reading of \(\vee\) as a coproduct): to prove anything from \(P \sqcup Q\) it suffices to prove it from each summand, the case analysis \(\iota_1\)/\(\iota_2\).
+
+\end{mathreading}
+
+\begin{quote}
+Read more: \hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3 §2} states the introduction/elimination rules for every connective by name, if ``introduction rule''/``elimination rule'' as general terms are new.
+\end{quote}
+
+\subsection{\texorpdfstring{\texttt{cases}: case-split on an inductive value or hypothesis}{cases: case-split on an inductive value or hypothesis}}\label{sec:04-tactics:04-more-tactics:4}
+
+\begin{lstlisting}
+theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P := by
+  cases h with
+  | inl hp => exact Or.inr hp
+  | inr hq => exact Or.inl hq
+\end{lstlisting}
+
+\subsection{\texorpdfstring{\texttt{induction}: proof by induction on a \texttt{Nat} (or other inductive type)}{induction: proof by induction on a Nat (or other inductive type)}}\label{sec:04-tactics:04-more-tactics:5}
+
+\begin{lstlisting}
+theorem add_zero_left (n : Nat) : 0 + n = n := by
+  induction n with
+  | zero => rfl
+  | succ k ih =>
+    show 0 + (k + 1) = k + 1
+    rw [Nat.add_succ, ih]
+\end{lstlisting}
+
+This mirrors the mathematical principle of induction:
+
+\[
+P(0) \;\land\; \big(\forall k,\ P(k) \to P(k+1)\big) \;\implies\; \forall n,\ P(n)
+\]
+
+\texttt{ih} (induction hypothesis) is exactly \(P(k)\), available to prove \(P(k+1)\).
+
+\subsection{\texorpdfstring{\texttt{unfold}: unfold a definition}{unfold: unfold a definition}}\label{sec:04-tactics:04-more-tactics:6}
+
+\begin{lstlisting}
+def isZero (n : Nat) : Prop := n = 0
+
+theorem isZero_zero : isZero 0 := by
+  unfold isZero
+  -- Goal after unfold: 0 = 0
+  rfl
+\end{lstlisting}
+
+\begin{mathreading}
+
+\texttt{unfold isZero} replaces the defined name with its definiens, exposing \(\mathrm{isZero}(0) = (0 = 0)\). This uses a \emph{definitional} equality: \(\mathrm{isZero} := (n \mapsto n = 0)\) means the two are interchangeable by definition (like unwinding ``\(n\) is even'' to ``\(\exists k,\ n = 2k\)'' in a proof). So the goal becomes the tautology \(0 = 0\), closed by reflexivity.
+
+\end{mathreading}

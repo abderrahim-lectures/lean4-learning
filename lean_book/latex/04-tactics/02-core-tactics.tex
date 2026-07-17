@@ -1,0 +1,51 @@
+\section{Core tactics}\label{sec:04-tactics:02-core-tactics:1}
+
+\subsection{\texorpdfstring{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{intro}}: introduce a hypothesis or variable}{intro: introduce a hypothesis or variable}}\label{sec:04-tactics:02-core-tactics:2}
+
+\begin{lstlisting}
+theorem modus_ponens {P Q : Prop} : (P → Q) → P → Q := by
+  intro hpq hp
+  exact hpq hp
+\end{lstlisting}
+
+\subsection{\texorpdfstring{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{exact}}: close the goal with an exact term}{exact: close the goal with an exact term}}\label{sec:04-tactics:02-core-tactics:3}
+
+Used above. Given a term that proves the goal exactly, \texttt{exact} finishes it.
+
+\subsection{\texorpdfstring{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{apply}}: apply a function/lemma, leaving new goals for its arguments}{apply: apply a function/lemma, leaving new goals for its arguments}}\label{sec:04-tactics:02-core-tactics:4}
+
+\begin{lstlisting}
+theorem apply_example {P Q : Prop} (hpq : P → Q) (hp : P) : Q := by
+  apply hpq
+  exact hp
+\end{lstlisting}
+
+\subsection{\texorpdfstring{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}}: rewrite using an equality}{rw: rewrite using an equality}}\label{sec:04-tactics:02-core-tactics:5}
+
+\begin{lstlisting}
+theorem rw_example (a b : Nat) (h : a = b) : a + 1 = b + 1 := by
+  rw [h]
+\end{lstlisting}
+
+\texttt{rw [h]} replaces every occurrence of the left-hand side of \texttt{h} with its right-hand side in the goal.
+
+\subsection{\texorpdfstring{\texttt{rw\ {[}...{]}\ at\ h}: rewrite a hypothesis instead of the goal}{rw {[}...{]} at h: rewrite a hypothesis instead of the goal}}\label{sec:04-tactics:02-core-tactics:6}
+
+\begin{lstlisting}
+theorem rw_at_example (a b c : Nat) (h1 : a = b) (h2 : a + c = 10) : b + c = 10 := by
+  rw [h1] at h2
+  -- h2 is now : b + c = 10, exactly the goal
+  exact h2
+\end{lstlisting}
+
+Every \texttt{rw} seen so far rewrites the \emph{goal}. Adding \texttt{at h} instead rewrites a \emph{hypothesis} \texttt{h}, in place, using the same left-to-right substitution rule. This is just as common as rewriting the goal itself. Chapter 9's ring proofs, for instance, use \texttt{rw [...] at h1}/\texttt{at h2} repeatedly to reshape a hypothesis into the exact form needed before citing it with \texttt{exact}. Read \texttt{rw [h1] at h2} as ``wherever \texttt{h1}'s left side appears inside \texttt{h2}, replace it with \texttt{h1}'s right side.'' The direction and substitution rule are identical to ordinary \texttt{rw}. Only the \emph{target} (a named hypothesis, not the goal) is different.
+
+\begin{mathreading}
+
+Each tactic corresponds to a standard proof move. \texttt{intro} discharges an implication/universal by the deduction theorem: to prove \(A \to B\), \emph{assume} \(A\) as a new hypothesis and prove \(B\). This is the \(\lambda\)-abstraction rule. \texttt{exact e} supplies a finished term: ``this is precisely our claim.'' \texttt{apply f} is backward chaining: to prove the conclusion of \(f : A_1 \to \cdots \to A_n \to G\), it suffices to prove the premises \(A_1, \ldots, A_n\), which become the new goals. This is the working mathematician's ``by \(f\), it remains to check the hypotheses of \(f\).'' \texttt{rw [h]} with \(h : a = b\) is substitution of equals for equals (Leibniz): every occurrence of \(a\) in the goal is replaced by \(b\). This is justified because \(a = b\) makes the old and new goals equivalent.
+
+\end{mathreading}
+
+\begin{quote}
+Read more: ``deduction theorem'' and ``\(\lambda\)-abstraction rule'' are the \(\Rightarrow\)-intro rule from natural deduction and its Curry--Howard reading as a Lean \texttt{fun}, respectively --- \hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3 §2} states the rule itself; \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} gives the typed λ-calculus it corresponds to.
+\end{quote}

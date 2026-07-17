@@ -15,6 +15,12 @@ encoding.
 
 ## How to read this book
 
+Not every reader needs every chapter in order — see
+[Learning paths](learning-paths.md) for a chapter-dependency graph and a
+handful of named paths through the book (already know Lean? already know
+algebra? want the formal foundations first?) before committing to reading
+start to finish.
+
 Each chapter is its own folder (e.g. [06-groups/](06-groups/)) containing a
 `00-index.md` overview plus one small Markdown file per section — open the
 chapter's `00-index.md` first, which links to every section in order. LaTeX
@@ -23,7 +29,8 @@ with any Markdown viewer that supports MathJax/KaTeX (e.g. VS Code with a
 Markdown+Math extension, or Pandoc). A handful of category-theory diagrams
 (the universal-property/initial-object/forgetful-functor entries in the
 Chapter 1 §4 glossary, the product/coproduct pictures in Chapter 3, the
-running quiver example in Chapter 11) are written as
+running quiver example in Chapter 11, and the chapter-dependency graph in
+[Learning paths](learning-paths.md)) are written as
 [Mermaid](https://mermaid.js.org/) diagrams — these render natively on
 GitHub and in VS Code with the "Markdown Preview Mermaid Support"
 extension; in a viewer without Mermaid support they fall back to a
@@ -111,6 +118,8 @@ See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
 
 **Reference**
 
+- [Learning paths](learning-paths.md) — a chapter-dependency graph and
+  named reading paths for different starting points.
 - [Tactic and library reference](tactic-and-library-reference.md) — every
   tactic used in the book, and every Mathlib name from Chapters 6-11's
   "Mathlib equivalent" boxes, each linked to its official documentation.

@@ -1,0 +1,15 @@
+\section{Setup}\label{sec:09-ring-theorems:01-setup:1}
+
+\begin{lstlisting}
+variable {R : Type} (Rg : Ring R)
+\end{lstlisting}
+
+Fully-qualified field names (\texttt{Rg.addGrp.toGroup.inv}, etc.) are written out in every proof, precisely so that it is always clear which structure a fact came from. When reading a goal, however, it helps to mentally abbreviate \texttt{Rg.addGrp.op} as \texttt{+}, \texttt{Rg.addGrp.id} as \texttt{0}, \texttt{Rg.addGrp.toGroup.inv} as unary \texttt{-}, \texttt{Rg.mul} as \texttt{*}, \texttt{Rg.one} as \texttt{1}. Performing that translation first, finding the proof in ordinary ring notation, and only then translating back to the fully-qualified names, is considerably more tractable than attempting to pattern-match on the qualified names directly.
+
+\begin{mathreading}
+
+``Let \((R, +, \times, 0, 1)\) be a ring.'' The \texttt{variable} fixes an arbitrary object of \(\mathbf{Ring}\); every theorem below is a statement about all rings at once. The recommended mental dictionary is just the standard ring notation --- \texttt{Rg.addGrp.op} \(= +\), \texttt{Rg.addGrp.id} \(= 0\), \texttt{Rg.addGrp.toGroup.inv} \(= -(-)\), \texttt{Rg.mul} \(= \times\), \texttt{Rg.one} \(= 1\) --- recovered by projecting along the
+
+\end{mathreading}
+
+that a qualified name like \texttt{Rg.addGrp.toGroup.inv a} is literally ``\(-a\) in the underlying additive group of \(R\).''

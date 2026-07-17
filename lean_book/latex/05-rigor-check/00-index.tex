@@ -1,0 +1,32 @@
+\chapter{Chapter 5: Rigor check --- structures, universes, and equality}\label{sec:05-rigor-check:00-index:1}
+
+Before committing to \texttt{Group}'s definition in the next chapter, this short chapter answers three questions a careful mathematician should already be asking. Why does this book use plain \texttt{structure} instead of Lean's \texttt{class} mechanism, which is what Mathlib actually uses? What exactly is \texttt{Type}, and does \texttt{Group (α : Type)} really quantify over \emph{all} types, including \texttt{Group} itself? And when two proofs both establish \texttt{a = b}, in what sense are they ``the same''? Skipping these would leave exactly the kind of unstated assumption a demanding reader is trained to notice and question, so they are addressed here, before Chapter 6 proceeds.
+
+\textbf{Learning objectives.} By the end of this chapter, explain why this book delays \texttt{class} in favor of \texttt{structure}, state the STLC typing rules and why \texttt{Type} itself needs a universe hierarchy, and distinguish definitional from propositional equality (and predict, correctly, when \texttt{rfl} alone will and will not close a goal).
+
+\section{Sections}\label{sec:05-rigor-check:00-index:2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \hyperref[sec:05-rigor-check:01-structure-vs-class:1]{\texttt{structure} versus \texttt{class}: why this book delays type classes}
+\item
+  \hyperref[sec:05-rigor-check:02-universes:1]{Universes: \texttt{Type}, \texttt{Type 1}, and why \texttt{Group} isn't a \texttt{Group}}
+\item
+  \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Typing rules and safety}
+\item
+  \hyperref[sec:05-rigor-check:04-defeq-vs-propeq:1]{Definitional versus propositional equality}
+\item
+  \hyperref[sec:05-rigor-check:05-exercises:1]{Exercises}
+\item
+  \hyperref[sec:05-rigor-check:06-checkpoint-project:1]{Checkpoint project: a \texttt{Monoid} from scratch}
+\end{enumerate}
+
+% Auto-appended: input every other section in order.
+\input{05-rigor-check/01-structure-vs-class.tex}
+\input{05-rigor-check/02-universes.tex}
+\input{05-rigor-check/03-typing-rules-and-safety.tex}
+\input{05-rigor-check/04-defeq-vs-propeq.tex}
+\input{05-rigor-check/05-exercises.tex}
+\input{05-rigor-check/06-checkpoint-project.tex}
