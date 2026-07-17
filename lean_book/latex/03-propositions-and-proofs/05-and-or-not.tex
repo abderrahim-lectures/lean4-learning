@@ -2,15 +2,15 @@
 
 \begin{lstlisting}
 -- And
-theorem and_example {P Q : Prop} (hp : P) (hq : Q) : P ∧ Q :=
-  ⟨hp, hq⟩
+theorem and_example {P Q : Prop} (hp : P) (hq : Q) : P (*$\wedge$*) Q :=
+  (*$\langle$*)hp, hq(*$\rangle$*)
 
-theorem and_left {P Q : Prop} (h : P ∧ Q) : P :=
+theorem and_left {P Q : Prop} (h : P (*$\wedge$*) Q) : P :=
   h.left
 
 -- And is commutative, in term mode (no tactics)
-theorem and_comm_term {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
-  ⟨h.right, h.left⟩
+theorem and_comm_term {P Q : Prop} (h : P (*$\wedge$*) Q) : Q (*$\wedge$*) P :=
+  (*$\langle$*)h.right, h.left(*$\rangle$*)
 \end{lstlisting}
 
 \begin{itemize}
@@ -21,12 +21,12 @@ theorem and_comm_term {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
 
 \begin{lstlisting}
 -- Or
-theorem or_example {P Q : Prop} (hp : P) : P ∨ Q :=
+theorem or_example {P Q : Prop} (hp : P) : P (*$\vee$*) Q :=
   Or.inl hp
 
 -- Or is commutative too, using Or.elim to case-split on *which* disjunct
 -- the hypothesis actually is, without the `cases` tactic
-theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
+theorem or_comm_term {P Q : Prop} (h : P (*$\vee$*) Q) : Q (*$\vee$*) P :=
   Or.elim h (fun hp => Or.inr hp) (fun hq => Or.inl hq)
 \end{lstlisting}
 
@@ -39,8 +39,8 @@ theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
 \end{itemize}
 
 \begin{lstlisting}
--- Not, i.e. P → False
-theorem not_example : ¬(1 = 2) := by
+-- Not, i.e. P (*$\rightarrow$*) False
+theorem not_example : (*$\neg$*)(1 = 2) := by
   decide
 \end{lstlisting}
 
@@ -53,7 +53,7 @@ theorem not_example : ¬(1 = 2) := by
 \begin{lstlisting}
 -- Deriving False from a genuine contradiction, then using `absurd` to
 -- close any goal at all once you have one
-theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2) : P :=
+theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) (*$\neq$*) 2) : P :=
   absurd h1 h2
 \end{lstlisting}
 

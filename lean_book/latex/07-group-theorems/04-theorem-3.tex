@@ -14,7 +14,7 @@ theorem inv_op (a b : G) :
   -- Goal: op (op (inv b) (inv a)) (op a b) = id
   rw [Grp.assoc]
   -- Goal: op (inv b) (op (inv a) (op a b)) = id
-  rw [← Grp.assoc (Grp.inv a) a b]
+  rw [(*$\leftarrow$*) Grp.assoc (Grp.inv a) a b]
   -- Goal: op (inv b) (op (op (inv a) a) b) = id
   rw [Grp.inv_left]
   -- Goal: op (inv b) (op id b) = id
@@ -60,21 +60,21 @@ Both sides agree on every input, exactly what \texttt{inv\_\allowbreak{}op}'s pr
 \textbf{Mathlib equivalent.} The ``shoes-and-socks'' law is not a theorem left to (re)prove here --- Mathlib already has it, under its own name, \href{https://loogle.lean-lang.org/?q=mul_inv_rev}{\texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev}}:
 
 \begin{lstlisting}
-example {G : Type*} [Group G] (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := mul_inv_rev a b
+example {G : Type*} [Group G] (a b : G) : (a * b)(*${}^-$*)(*\textsuperscript{1}*) = b(*${}^-$*)(*\textsuperscript{1}*) * a(*${}^-$*)(*\textsuperscript{1}*) := mul_inv_rev a b
 \end{lstlisting}
 
 And the same payoff Chapter 7 draws out concretely for \texttt{perm3Group} applies here too, against Mathlib's own \(S_3\) from Chapter 6 §4. There is no new proof, only an application of \texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} at \texttt{Equiv.Perm (Fin 3)}:
 
 \begin{lstlisting}
-example : (swap01' * cycle012')⁻¹ = cycle012'⁻¹ * swap01'⁻¹ :=
+example : (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) = cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*) :=
   mul_inv_rev swap01' cycle012'
 
-#eval (swap01' * cycle012')⁻¹ 0    -- 0
-#eval (cycle012'⁻¹ * swap01'⁻¹) 0   -- 0
-#eval (swap01' * cycle012')⁻¹ 1    -- 2
-#eval (cycle012'⁻¹ * swap01'⁻¹) 1   -- 2
-#eval (swap01' * cycle012')⁻¹ 2    -- 1
-#eval (cycle012'⁻¹ * swap01'⁻¹) 2   -- 1
+#eval (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) 0    -- 0
+#eval (cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*)) 0   -- 0
+#eval (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) 1    -- 2
+#eval (cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*)) 1   -- 2
+#eval (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) 2    -- 1
+#eval (cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*)) 2   -- 1
 \end{lstlisting}
 
 Both sides agree on every input: the same six values, in the same order, as the book's own \texttt{perm3Group} check above. Where the book's \texttt{inv\_\allowbreak{}op} required a five-line \texttt{rw} chain (regroup via \texttt{assoc}, cancel via \texttt{inv\_\allowbreak{}left}, regroup again, cancel again), Mathlib's version requires no proof to write at all. \texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} is already proved, once, generically over every \texttt{Group}.

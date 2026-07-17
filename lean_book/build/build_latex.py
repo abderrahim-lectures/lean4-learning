@@ -590,6 +590,78 @@ def fix_inline_code(tex):
     return pattern.sub(_sub, tex)
 
 
+LSTLISTING_RE = re.compile(r'\\begin\{lstlisting\}.*?\\end\{lstlisting\}', re.DOTALL)
+
+# Mirrors preamble.tex's \newunicodechar table -- but newunicodechar's
+# active-character substitution is only safe *outside* lstlisting. Inside
+# it, `listings` visually scrambles character order and swallows spaces
+# around any of these symbols (confirmed via isolated minimal test files:
+# `{α` renders as `α{`, and even plain `α → Nat` renders as `α→  Nat`, the
+# space dropped and relocated -- reproducible with plain raw glyphs and no
+# newunicodechar involved at all, so it's a `listings`/XeTeX column-
+# bookkeeping bug for non-ASCII characters, not a newunicodechar artifact,
+# and unaffected by columns=fixed/flexible or a `literate` rule). The fix
+# that actually works: never let these reach `listings` as raw characters
+# inside a listing -- route them through escapeinside instead, so
+# `listings` treats each as an opaque, pre-rendered LaTeX span rather than
+# a character it measures and positions itself.
+LSTLISTING_UNICODE_MAP = {
+    "§": "\\S",
+    "¬": "$\\neg$",
+    "·": "$\\cdot$",
+    "¹": "\\textsuperscript{1}",
+    "×": "$\\times$",
+    "Π": "$\\Pi$",
+    "Σ": "$\\Sigma$",
+    "α": "$\\alpha$",
+    "β": "$\\beta$",
+    "λ": "$\\lambda$",
+    "•": "$\\bullet$",
+    "⁻": "${}^-$",
+    "ₗ": "${}_l$",
+    "ⱼ": "${}_j$",
+    "∀": "$\\forall$",
+    "∃": "$\\exists$",
+    "∈": "$\\in$",
+    "∘": "$\\circ$",
+    "∣": "$\\mid$",
+    "∧": "$\\wedge$",
+    "∨": "$\\vee$",
+    "≃": "$\\simeq$",
+    "≠": "$\\neq$",
+    "≡": "$\\equiv$",
+    "≥": "$\\geq$",
+    "⊆": "$\\subseteq$",
+    "⊢": "$\\vdash$",
+    "⟨": "$\\langle$",
+    "⟩": "$\\rangle$",
+    "⟶": "$\\longrightarrow$",
+    "→": "$\\rightarrow$",
+    "↦": "$\\mapsto$",
+    "←": "$\\leftarrow$",
+    "ℤ": "$\\mathbb{Z}$",
+    "—": "\\textemdash{}",
+}
+_LSTLISTING_UNICODE_RE = re.compile('|'.join(re.escape(c) for c in LSTLISTING_UNICODE_MAP))
+
+
+def escape_lstlisting_unicode(tex):
+    """Replace every raw occurrence of a newunicodechar-mapped symbol
+    inside a \\begin{lstlisting}...\\end{lstlisting} body with its LaTeX
+    macro, wrapped in listings' escapeinside delimiters (see
+    lean-listings.tex) -- e.g. `α` becomes `(*$\\alpha$*)`. Requires
+    escapeinside={(*}{*)} on both the lean and python listings styles.
+    Lean's own comment/string delimiters never contain the literal
+    substring `(*`, so this can't collide with real code."""
+    def _sub_symbol(m):
+        return "(*" + LSTLISTING_UNICODE_MAP[m.group(0)] + "*)"
+
+    def _sub_listing(m):
+        return _LSTLISTING_UNICODE_RE.sub(_sub_symbol, m.group(0))
+
+    return LSTLISTING_RE.sub(_sub_listing, tex)
+
+
 def renumber_labels(tex, chapter, stem):
     counter = {"i": 0}
 
@@ -684,6 +756,7 @@ def convert_file(chapter, name):
     tex = fix_image_paths(tex, chapter)
     tex = fix_cross_links(tex, chapter)
     tex = fix_inline_code(tex)
+    tex = escape_lstlisting_unicode(tex)
     tex = renumber_labels(tex, chapter, stem)
     tex = strip_next_section(tex)
     if not chapter or (chapter == "14-appendix-solutions" and name == "00-index.md"):

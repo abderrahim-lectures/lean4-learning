@@ -8,10 +8,10 @@ The symmetric group \(S_3\) consists of all bijections (permutations) of a 3-ele
 
 \begin{lstlisting}
 structure Perm3 where
-  toFun : Fin 3 → Fin 3
-  invFun : Fin 3 → Fin 3
-  left_inv : ∀ x, invFun (toFun x) = x
-  right_inv : ∀ x, toFun (invFun x) = x
+  toFun : Fin 3 (*$\rightarrow$*) Fin 3
+  invFun : Fin 3 (*$\rightarrow$*) Fin 3
+  left_inv : (*$\forall$*) x, invFun (toFun x) = x
+  right_inv : (*$\forall$*) x, toFun (invFun x) = x
 \end{lstlisting}
 
 This is the same ``bundle data with the proofs that make it well-behaved'' pattern as \texttt{Group} itself. \texttt{Perm3} carries not only a function but also the \emph{proof} that the function is invertible, since an arbitrary \texttt{Fin 3 → Fin 3} need not be a bijection at all.
@@ -20,8 +20,8 @@ This is the same ``bundle data with the proofs that make it well-behaved'' patte
 
 \begin{lstlisting}
 def Perm3.comp (f g : Perm3) : Perm3 where
-  toFun := f.toFun ∘ g.toFun
-  invFun := g.invFun ∘ f.invFun
+  toFun := f.toFun (*$\circ$*) g.toFun
+  invFun := g.invFun (*$\circ$*) f.invFun
   left_inv := by
     intro x
     show g.invFun (f.invFun (f.toFun (g.toFun x))) = x
@@ -72,7 +72,7 @@ def swap01 : Perm3 where
 \texttt{swap01} is the permutation that swaps \texttt{0} and \texttt{1} while leaving \texttt{2} fixed.
 
 \begin{lstlisting}
--- The 3-cycle 0 → 1 → 2 → 0.
+-- The 3-cycle 0 (*$\rightarrow$*) 1 (*$\rightarrow$*) 2 (*$\rightarrow$*) 0.
 def cycle012 : Perm3 where
   toFun := fun x => match x with
     | 0 => 1 | 1 => 2 | 2 => 0
@@ -94,14 +94,14 @@ Both compositions send \texttt{0} somewhere, but to \emph{different} places: app
 \subsection{\texorpdfstring{Assembling \texttt{Group\ Perm3}}{Assembling Group Perm3}}\label{sec:06-groups:04-permutations-example:5}
 
 \begin{lstlisting}
-theorem Perm3.ext {f g : Perm3} (h : ∀ x, f.toFun x = g.toFun x)
-    (h' : ∀ x, f.invFun x = g.invFun x) : f = g := by
+theorem Perm3.ext {f g : Perm3} (h : (*$\forall$*) x, f.toFun x = g.toFun x)
+    (h' : (*$\forall$*) x, f.invFun x = g.invFun x) : f = g := by
   cases f
   cases g
   simp only [mk.injEq]
   constructor
-  · funext x; exact h x
-  · funext x; exact h' x
+  (*$\cdot$*) funext x; exact h x
+  (*$\cdot$*) funext x; exact h' x
 
 def perm3Group : Group Perm3 where
   op := Perm3.comp
@@ -110,28 +110,28 @@ def perm3Group : Group Perm3 where
   assoc := by
     intro f g h
     apply Perm3.ext
-    · intro x; rfl
-    · intro x; rfl
+    (*$\cdot$*) intro x; rfl
+    (*$\cdot$*) intro x; rfl
   id_left := by
     intro f
     apply Perm3.ext
-    · intro x; rfl
-    · intro x; rfl
+    (*$\cdot$*) intro x; rfl
+    (*$\cdot$*) intro x; rfl
   id_right := by
     intro f
     apply Perm3.ext
-    · intro x; rfl
-    · intro x; rfl
+    (*$\cdot$*) intro x; rfl
+    (*$\cdot$*) intro x; rfl
   inv_left := by
     intro f
     apply Perm3.ext
-    · intro x; exact f.left_inv x
-    · intro x; exact f.left_inv x
+    (*$\cdot$*) intro x; exact f.left_inv x
+    (*$\cdot$*) intro x; exact f.left_inv x
   inv_right := by
     intro f
     apply Perm3.ext
-    · intro x; exact f.right_inv x
-    · intro x; exact f.right_inv x
+    (*$\cdot$*) intro x; exact f.right_inv x
+    (*$\cdot$*) intro x; exact f.right_inv x
 \end{lstlisting}
 
 \texttt{Perm3.ext} is a small helper (an \emph{extensionality} lemma, in the same spirit as Chapter 8's \texttt{Mat2.mk.injEq}-based reasoning): two \texttt{Perm3}s are equal exactly when their \texttt{toFun}s agree everywhere \emph{and} their \texttt{invFun}s agree everywhere, since those are \texttt{Perm3}'s only two fields (the proof fields do not matter, by proof irrelevance, Chapter 5). Each \texttt{Group} field is then proved by reducing to this extensionality check and confirming both functions involved agree pointwise. Most cases are \texttt{rfl} directly (both sides compute to the same function once unfolded), and \texttt{inv\_\allowbreak{}left}/ \texttt{inv\_\allowbreak{}right} cite exactly \texttt{f.left\_\allowbreak{}inv}/\texttt{f.right\_\allowbreak{}inv}, the proof obligations already bundled into \texttt{Perm3} itself.
@@ -148,10 +148,10 @@ def perm3Group : Group Perm3 where
 \begin{lstlisting}
 example : Group (Equiv.Perm (Fin 3)) := inferInstance
 
--- Swap 0 and 1, leave 2 fixed — the Mathlib analogue of `swap01`.
+-- Swap 0 and 1, leave 2 fixed (*\textemdash{}*) the Mathlib analogue of `swap01`.
 def swap01' : Equiv.Perm (Fin 3) := Equiv.swap 0 1
 
--- The 3-cycle 0 → 1 → 2 → 0 — the Mathlib analogue of `cycle012`.
+-- The 3-cycle 0 (*$\rightarrow$*) 1 (*$\rightarrow$*) 2 (*$\rightarrow$*) 0 (*\textemdash{}*) the Mathlib analogue of `cycle012`.
 def cycle012' : Equiv.Perm (Fin 3) := finRotate 3
 
 #eval (swap01' * cycle012') 0   -- 0
