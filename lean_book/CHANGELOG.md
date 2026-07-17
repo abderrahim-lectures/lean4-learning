@@ -3,6 +3,15 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Second-opinion prose review: 2 more passages
+
+Follow-up to the two prior plain-academic-prose passes. An independent
+second review, cast against a wider set of criteria (casual
+interjections, rhetorical asides used as a stylistic tic, hedging
+phrases), found two more instances: "Reassuringly" in the path-algebras
+chapter, and a "sound familiar?" rhetorical aside in the Mathlib
+chapter. Both rewritten as direct statements.
+
 ## Unreleased — Add a Python companion notebook
 
 Added `lean_book/python-companion/python_companion.ipynb`, collecting
