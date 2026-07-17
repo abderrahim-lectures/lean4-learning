@@ -24,7 +24,7 @@ This recursion terminates because each recursive call is on the strictly shorter
 
 \subsection{\texorpdfstring{A worked instance: rebuilding \texttt{pathBetaAlpha} via \texttt{append}}{A worked instance: rebuilding pathBetaAlpha via append}}\label{sec:11-path-algebras:05-path-composition:2}
 
-The previous section built \texttt{pathBetaAlpha : Path exampleQuiver 0 2} directly, one \texttt{Path.cons} at a time. Here it is again, built instead by \emph{composing} the shorter path \texttt{pathAlpha} with a fresh one-arrow path using \texttt{Path.append}. Reassuringly, both constructions produce the exact same path.
+The previous section built \texttt{pathBetaAlpha : Path exampleQuiver 0 2} directly, one \texttt{Path.cons} at a time. Here it is again, built instead by \emph{composing} the shorter path \texttt{pathAlpha} with a fresh one-arrow path using \texttt{Path.append}. Both constructions produce the exact same path.
 
 \begin{lstlisting}
 def pathBetaOnly : Path exampleQuiver 1 2 :=
