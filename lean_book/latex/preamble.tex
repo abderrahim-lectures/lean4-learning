@@ -11,6 +11,12 @@
 \documentclass[12pt,twoside]{book}
 \usepackage[margin=1in,bindingoffset=0.3in]{geometry}
 
+% Book version, shown on the title page (frontmatter.tex) -- update this
+% to match the git tag each time a release is cut, so the compiled PDF
+% itself states which version a reader has, not just the GitHub release
+% page it came from.
+\newcommand{\bookversion}{v1.4.5}
+
 \usepackage{fontspec}
 \setmonofont{Consolas}
 \setmainfont{Palatino Linotype}
@@ -28,6 +34,7 @@
 \usepackage{mathtools}
 
 \usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{booktabs}

@@ -1,6 +1,6 @@
 \section{A non-abelian example: permutations of three elements}\label{sec:06-groups:04-permutations-example:1}
 
-\texttt{intGroup} is abelian (\(a + b = b + a\)), so it never tests the distinction between \texttt{id\_left}/\texttt{id\_right} or \texttt{inv\_left}/\texttt{inv\_right}. In a commutative group these coincide, which might suggest that the left/right split in \texttt{Group}'s definition is merely overly careful. It is not: the following is a small, fully concrete, genuinely \textbf{non-abelian} group, built the same way \texttt{intGroup} was, field by field.
+\texttt{intGroup} is abelian (\(a + b = b + a\)), so it never tests the distinction between \texttt{id\_\allowbreak{}left}/\texttt{id\_\allowbreak{}right} or \texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right}. In a commutative group these coincide, which might suggest that the left/right split in \texttt{Group}'s definition is merely overly careful. It is not: the following is a small, fully concrete, genuinely \textbf{non-abelian} group, built the same way \texttt{intGroup} was, field by field.
 
 \subsection{The carrier: bijections of a 3-element set}\label{sec:06-groups:04-permutations-example:2}
 
@@ -34,7 +34,7 @@ def Perm3.comp (f g : Perm3) : Perm3 where
     exact f.right_inv x
 \end{lstlisting}
 
-\texttt{Perm3.comp f g} composes \texttt{f} \emph{after} \texttt{g} (apply \texttt{g.toFun} first, then \texttt{f.toFun}). This is the standard function-composition convention. Its inverse composes the two inverses in the \emph{opposite} order (\texttt{g.invFun ∘ f.invFun}), which is exactly \((fg)^{-1} = g^{-1}f^{-1}\), the same ``reverse the order'' fact Chapter 7's Theorem 3 (\texttt{inv\_op}) proves abstractly for every group. This construction shows concretely why the fact holds: to undo ``first \(g\), then \(f\),'' one must first undo \(f\), then undo \(g\).
+\texttt{Perm3.comp f g} composes \texttt{f} \emph{after} \texttt{g} (apply \texttt{g.toFun} first, then \texttt{f.toFun}). This is the standard function-composition convention. Its inverse composes the two inverses in the \emph{opposite} order (\texttt{g.invFun ∘ f.invFun}), which is exactly \((fg)^{-1} = g^{-1}f^{-1}\), the same ``reverse the order'' fact Chapter 7's Theorem 3 (\texttt{inv\_\allowbreak{}op}) proves abstractly for every group. This construction shows concretely why the fact holds: to undo ``first \(g\), then \(f\),'' one must first undo \(f\), then undo \(g\).
 
 \begin{lstlisting}
 def Perm3.identity : Perm3 where
@@ -54,7 +54,7 @@ def Perm3.inv (f : Perm3) : Perm3 where
   right_inv := f.left_inv
 \end{lstlisting}
 
-\texttt{Perm3.inv} inverts a permutation by swapping its \texttt{toFun} and \texttt{invFun}, and it correspondingly swaps which proof field (\texttt{left\_inv} or \texttt{right\_inv}) plays which role, since inverting a bijection simply swaps which direction counts as ``forward.''
+\texttt{Perm3.inv} inverts a permutation by swapping its \texttt{toFun} and \texttt{invFun}, and it correspondingly swaps which proof field (\texttt{left\_\allowbreak{}inv} or \texttt{right\_\allowbreak{}inv}) plays which role, since inverting a bijection simply swaps which direction counts as ``forward.''
 
 \subsection{Two concrete permutations, and a computed proof they do not commute}\label{sec:06-groups:04-permutations-example:4}
 
@@ -134,7 +134,7 @@ def perm3Group : Group Perm3 where
     · intro x; exact f.right_inv x
 \end{lstlisting}
 
-\texttt{Perm3.ext} is a small helper (an \emph{extensionality} lemma, in the same spirit as Chapter 8's \texttt{Mat2.mk.injEq}-based reasoning): two \texttt{Perm3}s are equal exactly when their \texttt{toFun}s agree everywhere \emph{and} their \texttt{invFun}s agree everywhere, since those are \texttt{Perm3}'s only two fields (the proof fields do not matter, by proof irrelevance, Chapter 5). Each \texttt{Group} field is then proved by reducing to this extensionality check and confirming both functions involved agree pointwise. Most cases are \texttt{rfl} directly (both sides compute to the same function once unfolded), and \texttt{inv\_left}/ \texttt{inv\_right} cite exactly \texttt{f.left\_inv}/\texttt{f.right\_inv}, the proof obligations already bundled into \texttt{Perm3} itself.
+\texttt{Perm3.ext} is a small helper (an \emph{extensionality} lemma, in the same spirit as Chapter 8's \texttt{Mat2.mk.injEq}-based reasoning): two \texttt{Perm3}s are equal exactly when their \texttt{toFun}s agree everywhere \emph{and} their \texttt{invFun}s agree everywhere, since those are \texttt{Perm3}'s only two fields (the proof fields do not matter, by proof irrelevance, Chapter 5). Each \texttt{Group} field is then proved by reducing to this extensionality check and confirming both functions involved agree pointwise. Most cases are \texttt{rfl} directly (both sides compute to the same function once unfolded), and \texttt{inv\_\allowbreak{}left}/ \texttt{inv\_\allowbreak{}right} cite exactly \texttt{f.left\_\allowbreak{}inv}/\texttt{f.right\_\allowbreak{}inv}, the proof obligations already bundled into \texttt{Perm3} itself.
 
 \begin{mathreading}
 
