@@ -123,10 +123,10 @@ endpoints do not match gives $0$). Formalizing $kQ$ fully (as a `Ring`, per
 Chapter 8) requires "formal sums of paths with ring coefficients," which is
 a genuinely bigger construction: essentially a finitely-supported function
 from paths to $k$. It is a natural next project once the material above is
-well understood. This chapter stops at "paths and their composition" because
-that data (the *category* of paths, really) is the beating heart of the
-construction; the ring structure on top is bookkeeping once it is in
-place.
+well understood. This chapter stops at "paths and their composition"
+because that data (the *category* of paths, really) is the essential
+content of the construction; once it is in place, the ring structure on
+top is routine to add.
 
 **Mathematical reading.** The **path algebra** $kQ$ is the free $k$-module
 on the set of all paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with

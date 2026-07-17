@@ -35,8 +35,8 @@ Chapter 13.
    book is not merely to *use* a group in Lean, but to see exactly what a
    group *is* to Lean: every field, every proof obligation, with nothing
    hidden behind someone else's typeclass hierarchy. A library saves
-   effort precisely by hiding that machinery — which is exactly the wrong
-   thing to hide from a first encounter.
+   effort by hiding that machinery, and this book's purpose is for the
+   reader to see it on a first encounter, not have it hidden.
 2. *`elan` pins one exact Lean version per project via `lean-toolchain`.
    What would go wrong without that pin, on a machine with several Lean
    projects at once?* A later toolchain update to one project could
@@ -45,12 +45,13 @@ Chapter 13.
    `leanprover/lean4:v4.31.0` is that every code block in this book stays
    reproducible regardless of what else is installed system-wide.
 3. *If Mathlib is Mathlib-free by design through Chapter 11, why does
-   Chapter 6 onward show Mathlib code at all?* Because "from scratch" and
-   "never see the real library" are different promises — this book keeps
-   the first and deliberately breaks the second, by pairing every
-   hand-built definition with a labeled preview of its Mathlib
-   counterpart, so the transition in Chapter 13 is a recognition, not a
-   cold start.
+   Chapter 6 onward show Mathlib code at all?* Because "built from
+   scratch" and "never shown the real library" are different design
+   choices, and this book only commits to the first. Every hand-built
+   definition from Chapter 6 onward is paired with a labeled preview of
+   its Mathlib counterpart, so that the transition to Mathlib in
+   Chapter 13 is a recognition of material already seen, not a cold
+   start.
 
 ## Next
 

@@ -3,6 +3,21 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Full-book review pass for plain academic prose
+
+Follow-up to the "Why Lean?" rewording: a full read-through of every
+chapter's prose turned up 7 further passages using a simile, metaphor,
+or rhetorical framing in place of a direct statement of fact — a
+"smallest possible dose" metaphor for `Fin` being a minimal dependent
+type, a "referee" simile for why this book uses `structure` instead of
+`class`, a "beating heart" metaphor for the path category being the
+essential content of the path-algebra construction, a "training wheels"
+metaphor for exercises without worked-example guidance, and two
+rhetorical framings ("exactly the wrong thing to hide," "keeps... and
+deliberately breaks...") in the Mathlib note. Each was rewritten as a
+plain, direct statement. Everything else in the book was already in
+this register.
+
 ## Unreleased — Plainer prose in "Why Lean?"
 
 Reworded the opening paragraph of Chapter 0 §2 ("Why Lean?"), which used
