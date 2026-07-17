@@ -15,7 +15,7 @@ Reading the recursion:
 \begin{itemize}
 \tightlist
 \item
-  If \texttt{q} is trivial (\texttt{Path.nil \_}, a path of length zero from \texttt{v} to \texttt{v}), then appending \texttt{p} before it just gives back \texttt{p} itself (there is nothing to append).
+  If \texttt{q} is trivial (\texttt{Path.nil \_\allowbreak{}}, a path of length zero from \texttt{v} to \texttt{v}), then appending \texttt{p} before it just gives back \texttt{p} itself (there is nothing to append).
 \item
   If \texttt{q} ends with an arrow \texttt{a} (i.e.~\texttt{q = Path.cons a h h' q'} for some shorter path \texttt{q'}), then appending \texttt{p} before all of \texttt{q} is the same as appending \texttt{p} before the shorter \texttt{q'}, and then re-attaching the same final arrow \texttt{a} on top.
 \end{itemize}

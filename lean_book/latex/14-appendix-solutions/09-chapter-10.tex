@@ -14,7 +14,7 @@ def idLinearMap {R : Type} (Rg : Ring R) {M : Type} (Mod : Module R Rg M) :
     rfl
 \end{lstlisting}
 
-\texttt{id : M → M} is \texttt{fun x => x}. Both fields reduce to \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} because \texttt{id (Mod.addGrp.op m n)} and \texttt{Mod.addGrp.op (id m) (id n)} unfold to the same term (\texttt{id} changes nothing). The same holds for \texttt{map\_smul}. The only content in \texttt{LinearMap}'s two fields is the compatibility of \texttt{toFun} with \texttt{+}/\texttt{smul}, and \texttt{id} trivially preserves everything, since it changes nothing.
+\texttt{id : M → M} is \texttt{fun x => x}. Both fields reduce to \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} because \texttt{id (Mod.addGrp.op m n)} and \texttt{Mod.addGrp.op (id m) (id n)} unfold to the same term (\texttt{id} changes nothing). The same holds for \texttt{map\_\allowbreak{}smul}. The only content in \texttt{LinearMap}'s two fields is the compatibility of \texttt{toFun} with \texttt{+}/\texttt{smul}, and \texttt{id} trivially preserves everything, since it changes nothing.
 
 \textbf{2. Linear maps compose}
 
@@ -39,9 +39,9 @@ def composeLinearMap {R : Type} (Rg : Ring R) {M N P : Type}
     exact g.map_smul r (f.toFun m)
 \end{lstlisting}
 
-\texttt{g.toFun ∘ f.toFun} is ordinary function composition. Each field's proof first uses \texttt{f}'s own compatibility fact (\texttt{f.map\_add}/\texttt{f.map\_smul}) to push the additive-group operation or scalar action \emph{through} \texttt{f}. This leaves a goal that is now exactly \texttt{g}'s compatibility fact, applied to the already-transformed points \texttt{f.toFun m}, \texttt{f.toFun n}. This, plus Exercise 1 and the associativity of \texttt{∘} (both free from ordinary function composition), is exactly the data that makes \(R\)-modules and \(R\)-linear maps a category, as promised in the chapter text.
+\texttt{g.toFun ∘ f.toFun} is ordinary function composition. Each field's proof first uses \texttt{f}'s own compatibility fact (\texttt{f.map\_\allowbreak{}add}/\texttt{f.map\_\allowbreak{}smul}) to push the additive-group operation or scalar action \emph{through} \texttt{f}. This leaves a goal that is now exactly \texttt{g}'s compatibility fact, applied to the already-transformed points \texttt{f.toFun m}, \texttt{f.toFun n}. This, plus Exercise 1 and the associativity of \texttt{∘} (both free from ordinary function composition), is exactly the data that makes \(R\)-modules and \(R\)-linear maps a category, as promised in the chapter text.
 
-\textbf{3. Verifying \texttt{intSmul} satisfies \texttt{Module}'s axioms (partial: \texttt{one\_smul}, \texttt{smul\_add})}
+\textbf{3. Verifying \texttt{intSmul} satisfies \texttt{Module}'s axioms (partial: \texttt{one\_\allowbreak{}smul}, \texttt{smul\_\allowbreak{}add})}
 
 \begin{lstlisting}
 -- one_smul: intSmul CG 1 m = m
@@ -53,7 +53,7 @@ theorem intSmul_one_smul {M : Type} (CG : CommGroup M) (m : M) :
   exact CG.toGroup.id_right m
 \end{lstlisting}
 
-\texttt{intSmul CG 1 m} unfolds (since \texttt{1 = Int.ofNat 1}) to \texttt{natSmul CG.toGroup 1 m}, which unfolds (since \texttt{1 = Nat.succ Nat.zero}) to \texttt{CG.toGroup.op m (natSmul CG.toGroup 0 m)}. This unfolds again (the \texttt{zero} case of \texttt{natSmul}) to \texttt{CG.toGroup.op m CG.toGroup.id}, which is exactly the \texttt{id\_right} axiom.
+\texttt{intSmul CG 1 m} unfolds (since \texttt{1 = Int.ofNat 1}) to \texttt{natSmul CG.toGroup 1 m}, which unfolds (since \texttt{1 = Nat.succ Nat.zero}) to \texttt{CG.toGroup.op m (natSmul CG.toGroup 0 m)}. This unfolds again (the \texttt{zero} case of \texttt{natSmul}) to \texttt{CG.toGroup.op m CG.toGroup.id}, which is exactly the \texttt{id\_\allowbreak{}right} axiom.
 
 \begin{lstlisting}
 -- smul_add, restricted to natural-number scalars, by induction on n
@@ -80,7 +80,7 @@ theorem natSmul_add {M : Type} (Grp : Group M) (n : Nat) (m1 m2 : M)
         Grp.assoc]
 \end{lstlisting}
 
-The base case is \texttt{id = id + id} (an identity is its own double). This mirrors the ``element equal to its own double is zero'' fact used in Chapter 9's \texttt{mul\_zero}. The inductive step requires commutativity (\texttt{comm}, available since the group is a \texttt{CommGroup}) to slide \texttt{m2} and \texttt{natSmul Grp k m1} past each other. This is exactly why \texttt{intSmul} distributing over \texttt{+} requires an abelian group, rather than a general one: without \texttt{comm}, there is no way to reorder the four terms into a matching shape. Full verification of \texttt{add\_smul} and \texttt{smul\_smul} follows the same induction-on-the-scalar pattern, and makes a good longer exercise for further practice.
+The base case is \texttt{id = id + id} (an identity is its own double). This mirrors the ``element equal to its own double is zero'' fact used in Chapter 9's \texttt{mul\_\allowbreak{}zero}. The inductive step requires commutativity (\texttt{comm}, available since the group is a \texttt{CommGroup}) to slide \texttt{m2} and \texttt{natSmul Grp k m1} past each other. This is exactly why \texttt{intSmul} distributing over \texttt{+} requires an abelian group, rather than a general one: without \texttt{comm}, there is no way to reorder the four terms into a matching shape. Full verification of \texttt{add\_\allowbreak{}smul} and \texttt{smul\_\allowbreak{}smul} follows the same induction-on-the-scalar pattern, and makes a good longer exercise for further practice.
 
 \textbf{4. Submodule of multiples of \texttt{d}}
 

@@ -3,6 +3,58 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Drop web-navigation-only "Next" sections from the PDF
+
+Every chapter's trailing "## Next — Continue to [Chapter N: ...](...)."
+section (13 files) was a GitHub/web reading aid pointing at the next
+Markdown file — meaningless in a printed/PDF book, where the reader just
+turns the page. `build_latex.py` now drops these via a new
+`strip_next_section()` (Markdown source is untouched, so the web/GitHub
+reading experience is unaffected). One file
+(`04-tactics/06-exercises.md`) phrased the same transition inline rather
+than under its own heading — hand-edited to drop just the "Continue
+to..." clause, keeping the rest of its closing sentence.
+
+## Unreleased — Front-matter polish: page numbering, author bio, license/source link
+
+- **Fixed a genuine page/section-numbering bug**: front-matter reference
+  pages (Learning paths, Notation reference) showed their subsections as
+  "0.1", "0.2" etc., since their parent `\chapter*` never steps the
+  chapter counter and `\thesection` (= `\thechapter.N`) read that
+  counter's untouched initial value of 0 -- making them look like
+  sections of a nonexistent "Chapter 0". Their `\section`s are now
+  unnumbered (`\section*` + a manual `\addcontentsline`, so they still
+  appear in the Table of Contents).
+- **Front matter now uses lowercase roman-numeral page numbers**
+  (i, ii, iii, ...), switching to arabic starting fresh at Chapter 0 --
+  standard practice in printed books, previously this manuscript numbered
+  every page in one continuous arabic sequence. (Fixed a follow-on bug in
+  the same change: naively calling `\pagenumbering{arabic}` mid-stream
+  renumbers whatever page TeX's output routine still has open, not the
+  next page that starts — without an explicit `\clearpage` first, the
+  switch landed one page early, retroactively renumbering the tail of
+  Notation reference's own last table instead of Chapter 0.)
+- Long unbroken inline paths/identifiers (e.g. `lean_project/lean-toolchain`)
+  could overflow the page margin, since monospace text has no natural
+  line-break point. `fix_inline_code()` now inserts `\allowbreak` (an
+  invisible break opportunity, not a hyphen) after every `/`, escaped
+  `\_`, and `-` in auto-generated inline code.
+- Added the author's academic affiliation (Faculty of Sciences, Rabat;
+  Faculty of Educational Sciences, Rabat, Morocco) to the title page and
+  "About this book"; reworded the "About this book" AI-authorship
+  disclosure, which previously read as if no mathematician had reviewed
+  the content at all -- it now correctly states that the author (himself
+  a mathematician) has reviewed the mathematical and Lean content
+  directly, and that it's *additional, independent* review that hasn't
+  happened yet.
+- Added a copyright/license page (verso of the title page): MIT License
+  notice and the source-repository URL, also linked directly on the title
+  page itself.
+- Tried, then reverted, decorative cover art (first a generic
+  concentric-arc pattern, then a redesigned quiver/commutative-diagram
+  motif tied to the book's actual category-theory content) -- neither
+  landed; the title page and back cover are plain again.
+
 ## Unreleased — Revert KOMA-Script scrbook back to plain `book`
 
 KOMA-Script `scrbook` (adopted to chase a Springer-Monographs-in-Mathematics

@@ -17,7 +17,7 @@ a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)\) that was supplied when building t
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} There is no \texttt{intGroup.op 3 4}-style field access to write at all. Once \texttt{Int} is known to be an \href{https://loogle.lean-lang.org/?q=AddCommGroup}{\texttt{AddCommGroup}}, the ordinary \texttt{+}/\texttt{0}/\texttt{-} notations already resolve to that instance's operations directly:
+\textbf{Mathlib equivalent.} There is no \texttt{intGroup.op 3 4}-style field access to write at all. Once \texttt{Int} is known to be an \href{https://loogle.lean-lang.org/?q=AddCommGroup}{\texttt{AddCommGroup}}, the ordinary \texttt{+}/\texttt{0}/\texttt{-\allowbreak{}} notations already resolve to that instance's operations directly:
 
 \begin{lstlisting}
 #eval (3 : Int) + 4
@@ -26,4 +26,4 @@ a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)\) that was supplied when building t
 #check (add_assoc : ∀ a b c : Int, (a + b) + c = a + (b + c))
 \end{lstlisting}
 
-This is the same contrast as §3: the book's \texttt{intGroup.op}/\texttt{.id}/\texttt{.inv} are projections out of a bundle built by hand, while Mathlib's \texttt{+}/\texttt{0}/ \texttt{-} are notation that the typeclass system has already wired to the right instance. The underlying ``which \texttt{AddCommGroup} instance is this?'' bookkeeping remains invisible unless sought out (for example, with \texttt{\#print}).
+This is the same contrast as §3: the book's \texttt{intGroup.op}/\texttt{.id}/\texttt{.inv} are projections out of a bundle built by hand, while Mathlib's \texttt{+}/\texttt{0}/ \texttt{-\allowbreak{}} are notation that the typeclass system has already wired to the right instance. The underlying ``which \texttt{AddCommGroup} instance is this?'' bookkeeping remains invisible unless sought out (for example, with \texttt{\#print}).
