@@ -70,7 +70,7 @@ The \texttt{let} is exactly a ``let \(s := a + b\) in \(\ldots\)'' clause of the
 One caveat: this \texttt{average} computes \(\lfloor s/2 \rfloor\) (floor division) rather than the true rational average \(s/2\), since \texttt{Nat}'s division is truncating. This gap is easy to overlook in ordinary mathematical prose, but Lean forces it to be confronted explicitly: there is no coercion to \(\mathbb{Q}\) happening for free.
 
 \begin{lstlisting}
-def identity {α : Type} (x : α) : α := x
+def identity {(*$\alpha$*) : Type} (x : (*$\alpha$*)) : (*$\alpha$*) := x
 \end{lstlisting}
 
 \textbf{\texttt{def identity \{α : Type\} (x : α) : α := x}}

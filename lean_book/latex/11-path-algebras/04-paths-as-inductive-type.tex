@@ -3,7 +3,7 @@
 The key idea for formalizing ``paths compose head-to-tail'' is to make \texttt{Path} an inductive type \emph{indexed} by its own source and target vertex. Lean tracks, in the type itself, which vertex a path starts and ends at. This is the dependent-types idea previewed all the way back in \hyperref[sec:01-basics:03-dependent-types:1]{Chapter 1}: \texttt{Path Q} is a family of types indexed by pairs of vertices, exactly the categorical \(\mathrm{Hom}\)-set family \(\mathrm{Hom}_{\mathrm{Free}(Q)}(u,w)\) of the free category on \(Q\).
 
 \begin{lstlisting}
-inductive Path {V A : Type} (Q : Quiver V A) : V → V → Type where
+inductive Path {V A : Type} (Q : Quiver V A) : V (*$\rightarrow$*) V (*$\rightarrow$*) Type where
   | nil (v : V) : Path Q v v
   | cons {u v w : V} (a : A) (h : Q.source a = v) (h' : Q.target a = w)
       (p : Path Q u v) : Path Q u w
@@ -66,7 +66,7 @@ Attempting \texttt{Path.cons ExampleArrow.beta rfl rfl (Path.nil 0)} instead (ap
 \textbf{Mathlib equivalent.} Mathlib's \href{https://loogle.lean-lang.org/?q=Quiver.Path}{\texttt{Quiver.Path}} (building on the \texttt{MyArrow}/\texttt{Quiver (Fin 3)} instance from the previous section) is the same inductive family, \texttt{nil}/\texttt{cons}, just with \texttt{cons} taking the shorter path \emph{first} and the new arrow second. This is the mirror image of the book's argument order, which takes the arrow first and the path last:
 
 \begin{lstlisting}
--- NOTE: deliberately *not* `open Quiver` — Mathlib also has a root-level
+-- NOTE: deliberately *not* `open Quiver` (*\textemdash{}*) Mathlib also has a root-level
 -- `Path` (a continuous path between two points of a topological space,
 -- `Mathlib.Topology.Path`), so an opened `Quiver.Path` would clash with
 -- it. Spelling out `Quiver.Path` throughout avoids that.

@@ -7,8 +7,8 @@
 \texttt{Fin 3} is Lean's type of ``naturals less than 3,'' i.e.~\(\{0, 1, 2\}\). Its built-in \texttt{+}/\texttt{*} already wrap around modulo 3, so \texttt{Fin 3}'s arithmetic \emph{is} \(\mathbb{Z}/3\mathbb{Z}\)'s arithmetic:
 
 \begin{lstlisting}
-#eval (2 : Fin 3) + 2   -- 1   (2 + 2 = 4 ≡ 1 mod 3)
-#eval (2 : Fin 3) * 2   -- 1   (2 * 2 = 4 ≡ 1 mod 3)
+#eval (2 : Fin 3) + 2   -- 1   (2 + 2 = 4 (*$\equiv$*) 1 mod 3)
+#eval (2 : Fin 3) * 2   -- 1   (2 * 2 = 4 (*$\equiv$*) 1 mod 3)
 \end{lstlisting}
 
 \subsection{\texorpdfstring{Building \texttt{Group\ (Fin\ 3)}, \texttt{CommGroup\ (Fin\ 3)}, \texttt{Ring\ (Fin\ 3)}}{Building Group (Fin 3), CommGroup (Fin 3), Ring (Fin 3)}}\label{sec:08-rings:05-finite-ring-example:3}

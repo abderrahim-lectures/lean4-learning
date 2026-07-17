@@ -16,10 +16,10 @@ Read more: \hyperref[sec:12-working-efficiently:03-simp:1]{Chapter 12, ``\texttt
 \subsection{\texorpdfstring{\texttt{constructor}: build a structure/And/Iff by its constructor}{constructor: build a structure/And/Iff by its constructor}}\label{sec:04-tactics:04-more-tactics:3}
 
 \begin{lstlisting}
-theorem and_example (P Q : Prop) (hp : P) (hq : Q) : P ∧ Q := by
+theorem and_example (P Q : Prop) (hp : P) (hq : Q) : P (*$\wedge$*) Q := by
   constructor
-  · exact hp
-  · exact hq
+  (*$\cdot$*) exact hp
+  (*$\cdot$*) exact hq
 \end{lstlisting}
 
 The \texttt{·} (focus dot) lets you address each remaining goal one at a time.
@@ -37,7 +37,7 @@ Read more: \hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3 
 \subsection{\texorpdfstring{\texttt{cases}: case-split on an inductive value or hypothesis}{cases: case-split on an inductive value or hypothesis}}\label{sec:04-tactics:04-more-tactics:4}
 
 \begin{lstlisting}
-theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P := by
+theorem or_comm_ex {P Q : Prop} (h : P (*$\vee$*) Q) : Q (*$\vee$*) P := by
   cases h with
   | inl hp => exact Or.inr hp
   | inr hq => exact Or.inl hq
