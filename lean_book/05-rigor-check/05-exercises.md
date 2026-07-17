@@ -4,6 +4,14 @@
 
 ---
 
+**Key points.** This book delays `class` for `structure` so every proof
+obligation stays explicit; `class` only changes *how* Lean finds an
+instance, not what data it holds. `Type`'s own type must live one universe
+up (`Type 1`), or `Type : Type` reintroduces Russell's paradox. `rfl`
+proves only *definitional* equality — reduction to the same normal form —
+which is not every true propositional equality (an asymmetric recursion
+like `Nat.add`'s is exactly where the two can diverge).
+
 1. Predict, before running it, whether [`example : (2 : Nat) * 3 = 3 + 3 := rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)
    type-checks. Then predict whether
    `example (n : Nat) : n * 2 = n + n := rfl` type-checks (hint: which

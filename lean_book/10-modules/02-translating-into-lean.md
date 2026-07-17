@@ -60,8 +60,13 @@ some already-fixed ring.
 
 ### References
 
-- David S. Dummit and Richard M. Foote, *[Abstract Algebra](https://www.wiley.com/en-us/Abstract+Algebra,+3rd+Edition-p-9780471433347)*, 3rd ed., Wiley, 2003 — the module axioms (M1)–(M4) from the classical, non-Lean point of view.
-- Charles A. Weibel, *[An Introduction to Homological Algebra](https://www.cambridge.org/core/books/an-introduction-to-homological-algebra/AAA3F16482097015CD12D4376D505282)*, Cambridge Studies in Advanced Mathematics 38, Cambridge University Press, 1994 — the deeper module/homological theory this section's "Read more" points toward.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Dummit and Foote ([DummitFoote2003]) — the module axioms (M1)–(M4) from the classical, non-Lean point of view.
+- Weibel ([Weibel1994]) — the deeper module/homological theory this section's "Read more" points toward.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
+[Weibel1994]: ../bibliography.md#weibel1994
 
 ---
 

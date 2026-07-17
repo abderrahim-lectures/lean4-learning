@@ -217,12 +217,22 @@ at all, because nothing checks proofs against it.
 
 ### References
 
-- Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002, Ch. 9–11 — the standard reference for STLC, including the (Var)/(Abs)/(App) rules and full proofs of progress and preservation, in the exact form used in this section.
-- Robin Milner, "[A Theory of Type Polymorphism in Programming](https://doi.org/10.1016/0022-0000(78)90014-4)," *Journal of Computer and System Sciences*, 17(3), 1978, 348–375 — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
-- Python `typing` module documentation, [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar), and the [mypy documentation](https://mypy.readthedocs.io/) — for the Python-side comparison used in this section's boxes.
-- Thierry Coquand and Gérard Huet, "[The Calculus of Constructions](https://doi.org/10.1016/0890-5401(88)90005-3)," *Information and Computation*, 76(2–3), 1988, 95–120 — the original paper defining CoC, whose universe-formation rule is stated above.
-- Jean-Yves Girard, "Une extension de l'interprétation de Gödel à l'analyse, et son application à l'élimination des coupures dans l'analyse et la théorie des types," in *Proceedings of the Second Scandinavian Logic Symposium*, Studies in Logic and the Foundations of Mathematics vol. 63, North-Holland, 1971, 63–92 — the source of "Girard's paradox," the inconsistency `Type : Type` would introduce.
-- *Theorem Proving in Lean 4*, ["Dependent Types"](https://leanprover.github.io/theorem_proving_in_lean4/dependent_type_theory.html) — Lean's own documentation on universes, matching the presentation here.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Pierce ([Pierce2002]), Ch. 9–11 — the standard reference for STLC, including the (Var)/(Abs)/(App) rules and full proofs of progress and preservation, in the exact form used in this section.
+- Milner ([Milner1978]) — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
+- Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's boxes.
+- Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC, whose universe-formation rule is stated above.
+- Girard ([Girard1971]) — the source of "Girard's paradox," the inconsistency `Type : Type` would introduce.
+- *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" — Lean's own documentation on universes, matching the presentation here.
+
+[Pierce2002]: ../bibliography.md#pierce2002
+[Milner1978]: ../bibliography.md#milner1978
+[PythonTyping]: ../bibliography.md#pythontyping
+[MypyDocs]: ../bibliography.md#mypydocs
+[CoquandHuet1988]: ../bibliography.md#coquandhuet1988
+[Girard1971]: ../bibliography.md#girard1971
+[TPIL4]: ../bibliography.md#tpil4
 
 ---
 

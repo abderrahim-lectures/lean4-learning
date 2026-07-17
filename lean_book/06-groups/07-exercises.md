@@ -4,6 +4,13 @@
 
 ---
 
+**Key points.** A group is data (`op`, `id`, `inv`) plus proof obligations
+(`assoc`, two-sided `id`/`inv` laws), bundled in one `structure`. The
+left/right split on `id`/`inv` is not overcaution — a genuinely
+non-abelian example (`perm3Group`) needs both. Any theorem proved once,
+generically, against `Grp : Group G` applies to every concrete group
+built afterward at no extra cost.
+
 1. Build `boolXorGroup : Group Bool` where `op` is boolean XOR (`Bool.xor`),
    `id := false`, and `inv := fun a => a` (every element is its own
    inverse). Prove each field using `by intro a; cases a <;> rfl` is

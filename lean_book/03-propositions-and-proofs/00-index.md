@@ -4,6 +4,12 @@
 
 ---
 
+**Learning objectives.** By the end of this chapter, read `Prop` as the
+type of statements and a proof as an ordinary term, state natural
+deduction's introduction/elimination rules for `∧`/`∨`/`¬`/`→`, write and
+prove `theorem`/`lemma`s directly as terms, and reason about `∀`/`∃` and
+equality via the anonymous constructor and `rfl`.
+
 ## Sections
 
 1. [`Prop`: the type of statements](01-prop.md)

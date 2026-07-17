@@ -248,9 +248,15 @@ f\, a\, b$) and check by hand that projecting back out a component
 
 #### References
 
-- Alonzo Church, *[The Calculi of Lambda-Conversion](https://archive.org/details/AnnalsOfMathematicalStudies6ChurchAlonzoTheCalculiOfLambdaConversionPrincetonUniversityPress1941)*, Princeton University Press, 1941 — the original source of this encoding.
-- Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002, §5.2 — a worked, step-by-step derivation of Church booleans and numerals, including `succ`/`plus`, matching the presentation above.
-- Raúl Rojas, ["A Tutorial Introduction to the Lambda Calculus"](https://arxiv.org/abs/1503.09060), 2015 — a freely available, worked-example-heavy walkthrough of the same encodings, with more reduction sequences spelled out in full.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Church ([Church1941]) — the original source of this encoding.
+- Pierce ([Pierce2002]), §5.2 — a worked, step-by-step derivation of Church booleans and numerals, including `succ`/`plus`, matching the presentation above.
+- Rojas ([Rojas2015]) — a freely available, worked-example-heavy walkthrough of the same encodings, with more reduction sequences spelled out in full.
+
+[Church1941]: ../bibliography.md#church1941
+[Pierce2002]: ../bibliography.md#pierce2002
+[Rojas2015]: ../bibliography.md#rojas2015
 
 ---
 

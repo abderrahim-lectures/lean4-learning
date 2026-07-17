@@ -4,6 +4,13 @@
 
 ---
 
+**Key points.** A ring bundles an additive `CommGroup` with a
+multiplicative monoid and two distributive laws, `left_distrib` and
+`right_distrib` genuinely independent since `mul` need not commute. A
+finite carrier (`Fin 3`) lets every axiom be checked by `decide`; an
+infinite one (`Int`, matrices over `Int`) needs a real proof, or a
+computed counterexample (`#eval`) to refute commutativity outright.
+
 1. Build `boolAndOrRing`. This is surprisingly difficult: is
    there a natural ring structure on `Bool`? (Hint: think of `Bool` as
    $\mathbb{Z}/2\mathbb{Z}$ — addition is XOR, multiplication is AND. Build
