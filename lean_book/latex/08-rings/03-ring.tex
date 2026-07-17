@@ -3,13 +3,13 @@
 \begin{lstlisting}
 structure Ring (R : Type) where
   addGrp : CommGroup R
-  mul : R → R → R
+  mul : R (*$\rightarrow$*) R (*$\rightarrow$*) R
   one : R
-  mul_assoc : ∀ a b c : R, mul (mul a b) c = mul a (mul b c)
-  one_mul : ∀ a : R, mul one a = a
-  mul_one : ∀ a : R, mul a one = a
-  left_distrib : ∀ a b c : R, mul a (addGrp.op b c) = addGrp.op (mul a b) (mul a c)
-  right_distrib : ∀ a b c : R, mul (addGrp.op a b) c = addGrp.op (mul a c) (mul b c)
+  mul_assoc : (*$\forall$*) a b c : R, mul (mul a b) c = mul a (mul b c)
+  one_mul : (*$\forall$*) a : R, mul one a = a
+  mul_one : (*$\forall$*) a : R, mul a one = a
+  left_distrib : (*$\forall$*) a b c : R, mul a (addGrp.op b c) = addGrp.op (mul a b) (mul a c)
+  right_distrib : (*$\forall$*) a b c : R, mul (addGrp.op a b) c = addGrp.op (mul a c) (mul b c)
 \end{lstlisting}
 
 Consider each field in turn:
