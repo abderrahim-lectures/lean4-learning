@@ -1,8 +1,6 @@
 \section{Paths as an inductive type indexed by source and target}\label{sec:11-path-algebras:04-paths-as-inductive-type:1}
 
-The key idea for formalizing ``paths compose head-to-tail'' is to make \texttt{Path} an inductive type \emph{indexed} by its own source and target vertex. Lean tracks, in the type itself, which vertex a path starts and ends at. This is the dependent-types idea previewed all the way back in
-
-types indexed by pairs of vertices, exactly the categorical \(\mathrm{Hom}\)-set family \(\mathrm{Hom}_{\mathrm{Free}(Q)}(u,w)\) of the free category on \(Q\).
+The key idea for formalizing ``paths compose head-to-tail'' is to make \texttt{Path} an inductive type \emph{indexed} by its own source and target vertex. Lean tracks, in the type itself, which vertex a path starts and ends at. This is the dependent-types idea previewed all the way back in \hyperref[sec:01-basics:03-dependent-types:1]{Chapter 1}: \texttt{Path Q} is a family of types indexed by pairs of vertices, exactly the categorical \(\mathrm{Hom}\)-set family \(\mathrm{Hom}_{\mathrm{Free}(Q)}(u,w)\) of the free category on \(Q\).
 
 \begin{lstlisting}
 inductive Path {V A : Type} (Q : Quiver V A) : V → V → Type where

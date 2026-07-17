@@ -20,13 +20,11 @@ def intSmul {M : Type} (CG : CommGroup M) (n : Int) (m : M) : M :=
 
 \begin{mathreading}
 
-This constructs the canonical \(\mathbb{Z}\)-action on any abelian group. \texttt{natSmul} is the \(\mathbb{N}\)-action \(n\cdot m = \underbrace{m + \cdots + m}_{n}\) (the \(n\)-fold sum, with \(0\cdot m = 0\)), and \texttt{intSmul} extends it to \(\mathbb{Z}\) by \((-n)\cdot m = -(n\cdot m)\). This is forced: since \(\mathbb{Z}\) is the
-
-\end{mathreading}
-
-ring, there is a unique ring map \(\mathbb{Z} \to
+This constructs the canonical \(\mathbb{Z}\)-action on any abelian group. \texttt{natSmul} is the \(\mathbb{N}\)-action \(n\cdot m = \underbrace{m + \cdots + m}_{n}\) (the \(n\)-fold sum, with \(0\cdot m = 0\)), and \texttt{intSmul} extends it to \(\mathbb{Z}\) by \((-n)\cdot m = -(n\cdot m)\). This is forced: since \(\mathbb{Z}\) is the \hyperref[sec:01-basics:04-terminology:1]{initial} ring, there is a unique ring map \(\mathbb{Z} \to
 \mathrm{End}(M)\) for any abelian group \(M\) (it must send \(1 \mapsto
 \mathrm{id}_M\), hence \(n \mapsto n\cdot\mathrm{id}_M\)). So the \(\mathbb{Z}\)- module structure is unique. ``Abelian group'' and ``\(\mathbb{Z}\)-module'' are literally the same notion. The recursion mirrors the definition of multiplication-as-iterated-addition.
+
+\end{mathreading}
 
 \textbf{Mathlib equivalent.} Mathlib does not leave ``every abelian group is (uniquely) a \(\mathbb{Z}\)-module'' as an exercise. It is registered as an instance, available for \emph{any} \texttt{AddCommGroup} at all, with no \texttt{natSmul}/\texttt{intSmul} to define or verify by hand:
 

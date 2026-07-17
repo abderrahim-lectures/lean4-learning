@@ -10,10 +10,6 @@ Recall \texttt{extends} from Chapter 2: a \texttt{CommGroup G} \emph{is} a \text
 \begin{mathreading}
 
 \texttt{CommGroup G} is an \emph{abelian group} \((G, \cdot, e,
-(-)^{-1})\) with the extra law \(\forall a,b,\ a\cdot b = b\cdot a\). Structurally \(\mathbf{Ab}\) is a
+(-)^{-1})\) with the extra law \(\forall a,b,\ a\cdot b = b\cdot a\). Structurally \(\mathbf{Ab}\) is a \hyperref[sec:01-basics:04-terminology:1]{full subcategory / subobject} of \(\mathbf{Grp}\), cut out by the commutativity axiom, and \texttt{extends} builds exactly this inclusion: \texttt{.toGroup} is the \hyperref[sec:01-basics:04-terminology:1]{forgetful functor} \(\mathbf{Ab} \hookrightarrow \mathbf{Grp}\), which forgets the \texttt{comm} axiom.
 
 \end{mathreading}
-
-of \(\mathbf{Grp}\), cut out by the commutativity axiom, and \texttt{extends} builds exactly this inclusion: \texttt{.toGroup} is the
-
-\(\mathbf{Ab} \hookrightarrow \mathbf{Grp}\), which forgets the \texttt{comm} axiom.

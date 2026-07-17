@@ -1,0 +1,59 @@
+\chapter*{Notation reference}
+\addcontentsline{toc}{chapter}{Notation reference}
+\setcounter{section}{0}\label{sec:root:notation-reference:1}
+
+A lookup table connecting the mathematical notation used in this book's prose to the corresponding Lean syntax used in its code. This page is a quick reference, not something to read start to finish --- every row is built up and explained properly the first time it is needed, at the chapter cited in the last column.
+
+Two related pages cover notation this one deliberately leaves out: the \hyperref[sec:root:tactic-and-library-reference:1]{tactic and library reference} (tactics and Mathlib declaration names) and the \hyperref[sec:root:lambda-calculus-dictionary:1]{λ-calculus / type theory to Lean dictionary} (formal type-theory notation from the optional ``Mathematical reading'' boxes). This page is just the ordinary logic/algebra symbols used throughout the main text and code.
+
+\section{Logic and quantifiers}\label{sec:root:notation-reference:2}
+
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+}
+\toprule
+Meaning & Math notation & Lean syntax & First appears \\
+\midrule
+Function type / implication & \(A \to B\) & \texttt{A → B} & Chapter 1 \\
+Universal quantifier (``for all'') & \(\forall x, P\, x\) & \texttt{∀ x, P x} & Chapter 3 \\
+Existential quantifier (``there exists'') & \(\exists x, P\, x\) & \texttt{∃ x, P x} & Chapter 3 \\
+Unique existence (``there exists a unique'') & \(\exists!\, x, P\, x\) & no single token --- witnessed by supplying the value and a proof it is the only one & Chapter 1 §4 \\
+Set/type membership & \(x \in A\) & \texttt{x ∈ A} & Chapter 1 \\
+Negation & \(\neg P\) & \texttt{¬P} & Chapter 3 \\
+Conjunction (``and'') & \(P \wedge Q\) & \texttt{P ∧ Q} (\texttt{And}) & Chapter 3 \\
+Disjunction (``or'') & \(P \vee Q\) & \texttt{P ∨ Q} (\texttt{Or}) & Chapter 3 \\
+Not equal & \(a \neq b\) & \texttt{a ≠ b} & Chapter 3 \\
+Turnstile (``the goal to prove'') & \(\Gamma \vdash P\) & the goal-state display (not typed by the user) & Chapter 4 \\
+\bottomrule
+\end{tabular}
+
+
+\section{Algebra, structure, and diagrams}\label{sec:root:notation-reference:3}
+
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+}
+\toprule
+Meaning & Math notation & Lean syntax & First appears \\
+\midrule
+Definitional equality & \(t \equiv t'\) & \texttt{rfl} closes the goal & Chapter 5 §4 \\
+Isomorphism / equivalence & \(A \simeq B\) & \texttt{A ≃ B} (\texttt{Equiv}) & Chapter 10 \\
+Anonymous-constructor pairing & \(\langle a, b \rangle\) & \texttt{⟨a, b⟩} & Chapter 2 §1 \\
+Function composition & \(g \circ f\) & \texttt{g ∘ f} & Chapter 1 \\
+Scalar/group action, or a generic infix operation & \(a \cdot b\) & \texttt{a • b} (\texttt{SMul}) & Chapter 10 \\
+Inverse & \(a^{-1}\) & \texttt{a⁻¹} & Chapter 6 \\
+Lambda abstraction (``sends to'') & \(x \mapsto e\) & \texttt{fun x => e} & Chapter 1 \\
+Divisibility & \(a \mid b\) & \texttt{a ∣ b} & Chapter 9 \\
+Subset & \(A \subseteq B\) & \texttt{A ⊆ B} & Chapter 10 \\
+Cartesian product & \(A \times B\) & \texttt{A × B} & Chapter 1 \\
+Long/derivation arrow (diagrams) & \(A \longrightarrow B\) & \texttt{⟶} (diagram labels only, not ordinary code) & Chapter 1 §4 \\
+Projections out of a product & \(\pi_X, \pi_Y\) & \texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd} & Chapter 1 §4 \\
+\bottomrule
+\end{tabular}
+
