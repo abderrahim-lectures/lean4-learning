@@ -10,8 +10,8 @@ Before any Lean syntax, here is the actual problem dependent types solve, in a l
 def dot(xs, ys):
     return sum(x * y for x, y in zip(xs, ys))
 
-dot([1, 2, 3], [4, 5, 6])   # 32 — correct
-dot([1, 2, 3], [4, 5])      # 14 — silently wrong: zip() truncates to the shorter list
+dot([1, 2, 3], [4, 5, 6])   # 32 (*\textemdash{}*) correct
+dot([1, 2, 3], [4, 5])      # 14 (*\textemdash{}*) silently wrong: zip() truncates to the shorter list
 \end{lstlisting}
 
 This is worse than a crash. \texttt{dot([1, 2, 3], [4, 5])} does not raise anything --- \texttt{zip} just quietly drops the third element of \texttt{xs} and hands back a number that \emph{looks} like a perfectly good answer. The bug (calling \texttt{dot} on two lists of different lengths, which is mathematically nonsensical) is never caught, not by Python, not by a test that happens not to cover this call site, not by anything short of a human noticing the number looks off.
@@ -46,9 +46,9 @@ So a term of \texttt{Fin n} is literally a pair: a \texttt{Nat} value, plus a \e
 Now for the companion idea: a \textbf{dependent function}, one whose return type depends on the specific \emph{value} of its argument, not just the argument's type. Define fixed-length vectors from scratch, the standard first example in any dependent-type-theory course:
 
 \begin{lstlisting}
-inductive Vec (α : Type) : Nat → Type where
-  | nil  : Vec α 0
-  | cons : α → Vec α n → Vec α (n + 1)
+inductive Vec ((*$\alpha$*) : Type) : Nat (*$\rightarrow$*) Type where
+  | nil  : Vec (*$\alpha$*) 0
+  | cons : (*$\alpha$*) (*$\rightarrow$*) Vec (*$\alpha$*) n (*$\rightarrow$*) Vec (*$\alpha$*) (n + 1)
 \end{lstlisting}
 
 Read this exactly like \texttt{Nat}'s two-constructor definition from the previous section, with one new ingredient: \texttt{Vec α} is not a single type, it is a \textbf{family of types indexed by a \texttt{Nat}} --- \texttt{Vec α 0}, \texttt{Vec α 1}, \texttt{Vec α 2}, \ldots{} are all different types, one per length, and the length is tracked \emph{in the type itself}, not just at runtime. \texttt{nil} builds the unique length-\texttt{0} vector; \texttt{cons} takes an element and a length-\texttt{n} vector and produces a length-\texttt{(n+1)} vector --- the \texttt{n} used on both sides of \texttt{cons}'s arrow is the \emph{same} \texttt{n}, so the constructor itself enforces ``one longer than whatever it started with.''
@@ -56,12 +56,12 @@ Read this exactly like \texttt{Nat}'s two-constructor definition from the previo
 Here is a function that \emph{builds} one of these, and its type is the dependent-function payoff:
 
 \begin{lstlisting}
-def Vec.replicate (a : α) : (n : Nat) → Vec α n
+def Vec.replicate (a : (*$\alpha$*)) : (n : Nat) (*$\rightarrow$*) Vec (*$\alpha$*) n
   | 0     => Vec.nil
   | n + 1 => Vec.cons a (Vec.replicate a n)
 
 #check @Vec.replicate
--- @Vec.replicate : {α : Type} → α → (n : Nat) → Vec α n
+-- @Vec.replicate : {(*$\alpha$*) : Type} (*$\rightarrow$*) (*$\alpha$*) (*$\rightarrow$*) (n : Nat) (*$\rightarrow$*) Vec (*$\alpha$*) n
 
 #eval (Vec.replicate 7 3 : Vec Nat 3)
 -- Vec.cons 7 (Vec.cons 7 (Vec.cons 7 Vec.nil))
@@ -74,7 +74,7 @@ Look closely at the type \texttt{(n : Nat) → Vec α n}. The \texttt{n} that ap
 The payoff is not just bookkeeping. Because the length lives in the type, Lean can rule out a whole class of mistakes \emph{before running anything at all}. Define a function that reads a vector's first element, which only makes sense for a \emph{non-empty} vector:
 
 \begin{lstlisting}
-def Vec.head : Vec α (n + 1) → α
+def Vec.head : Vec (*$\alpha$*) (n + 1) (*$\rightarrow$*) (*$\alpha$*)
   | Vec.cons a _ => a
 \end{lstlisting}
 
@@ -100,7 +100,7 @@ Nothing about ``index out of range'' happens at runtime, because the bad call is
 \textbf{Return to the Python example from the start of this section.} Here is \texttt{dot}, rewritten for \texttt{Vec} instead of Python's \texttt{list}, with both arguments required to share the \emph{same} length \texttt{n}:
 
 \begin{lstlisting}
-def Vec.dot : Vec Nat n → Vec Nat n → Nat
+def Vec.dot : Vec Nat n (*$\rightarrow$*) Vec Nat n (*$\rightarrow$*) Nat
   | Vec.nil, Vec.nil => 0
   | Vec.cons x xs, Vec.cons y ys => x * y + Vec.dot xs ys
 \end{lstlisting}

@@ -6,9 +6,9 @@ The construction proceeds piece by piece rather than all at once.
 
 \begin{lstlisting}
 structure GroupData (G : Type) where
-  op : G → G → G
+  op : G (*$\rightarrow$*) G (*$\rightarrow$*) G
   id : G
-  inv : G → G
+  inv : G (*$\rightarrow$*) G
 \end{lstlisting}
 
 This says: to build a \texttt{GroupData G}, supply an operation, an identity element, and an inverse function. Lean does not check any axioms yet. A \texttt{GroupData} could still be complete nonsense (for example, an \texttt{op} that ignores its arguments). We fix that next.
@@ -26,14 +26,14 @@ This says: to build a \texttt{GroupData G}, supply an operation, an identity ele
 
 \begin{lstlisting}
 structure Group (G : Type) where
-  op : G → G → G
+  op : G (*$\rightarrow$*) G (*$\rightarrow$*) G
   id : G
-  inv : G → G
-  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
-  id_left : ∀ a : G, op id a = a
-  id_right : ∀ a : G, op a id = a
-  inv_left : ∀ a : G, op (inv a) a = id
-  inv_right : ∀ a : G, op a (inv a) = id
+  inv : G (*$\rightarrow$*) G
+  assoc : (*$\forall$*) a b c : G, op (op a b) c = op a (op b c)
+  id_left : (*$\forall$*) a : G, op id a = a
+  id_right : (*$\forall$*) a : G, op a id = a
+  inv_left : (*$\forall$*) a : G, op (inv a) a = id
+  inv_right : (*$\forall$*) a : G, op a (inv a) = id
 \end{lstlisting}
 
 Reading this line by line:

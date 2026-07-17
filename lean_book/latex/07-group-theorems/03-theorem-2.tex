@@ -18,9 +18,9 @@ theorem left_inverse_unique (a b : G) (h : Grp.op b a = Grp.id) :
   have e1 : b = Grp.op b Grp.id := (Grp.id_right b).symm
   rw [e1]
   -- Goal: op b id = inv a
-  rw [← Grp.inv_right a]
+  rw [(*$\leftarrow$*) Grp.inv_right a]
   -- Goal: op b (op a (inv a)) = inv a
-  rw [← Grp.assoc b a (Grp.inv a)]
+  rw [(*$\leftarrow$*) Grp.assoc b a (Grp.inv a)]
   -- Goal: op (op b a) (inv a) = inv a
   rw [h]
   -- Goal: op id (inv a) = inv a
@@ -42,8 +42,8 @@ b = b\cdot e = b\cdot(a\cdot a^{-1}) = (b\cdot a)\cdot a^{-1} = e\cdot a^{-1}
 \textbf{Mathlib equivalent.} The exact same ``pad with the identity, swap it for something cancelable'' chain, written with \texttt{*}/\texttt{1}/\texttt{⁻¹} instead of \texttt{Grp.op}/\texttt{Grp.id}/\texttt{Grp.inv}:
 
 \begin{lstlisting}
-example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
-  rw [← mul_one b, ← mul_inv_cancel a, ← mul_assoc, h, one_mul]
+example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a(*${}^-$*)(*\textsuperscript{1}*) := by
+  rw [(*$\leftarrow$*) mul_one b, (*$\leftarrow$*) mul_inv_cancel a, (*$\leftarrow$*) mul_assoc, h, one_mul]
 \end{lstlisting}
 
 Reading right to left through the \texttt{rw} list gives line-for-line the displayed chain above: \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_one}{\texttt{mul\_\allowbreak{}one}} \texttt{b} turns \texttt{b} into \texttt{b * 1}; \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_inv_cancel}{\texttt{mul\_\allowbreak{}inv\_\allowbreak{}cancel}} \texttt{a} turns that \texttt{1} into \texttt{a * a⁻¹}; \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\_\allowbreak{}assoc}} reassociates; \texttt{h} substitutes \texttt{b * a} for \texttt{1}; \href{https://loogle.lean-lang.org/?q=one_mul}{\texttt{one\_\allowbreak{}mul}} clears the resulting \texttt{1 * a⁻¹}. These are the same five steps, in the same order --- only the names \texttt{Grp.assoc}/\texttt{Grp.inv\_\allowbreak{}right} and so on are replaced by Mathlib's generic \texttt{mul\_\allowbreak{}assoc}/\texttt{mul\_\allowbreak{}inv\_\allowbreak{}cancel} and so on.

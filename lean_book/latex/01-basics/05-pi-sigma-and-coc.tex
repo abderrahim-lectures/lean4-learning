@@ -20,7 +20,7 @@ Even Python's \texttt{TypeVar} (its own fix for generic functions like \texttt{i
 from typing import TypeVar
 T = TypeVar("T")
 
-def identity(x: T) -> T:      # generic over a TYPE — fine, this is TypeVar's job
+def identity(x: T) -> T:      # generic over a TYPE (*\textemdash{}*) fine, this is TypeVar's job
     return x
 
 # There is no Python type-hint equivalent of:
@@ -76,7 +76,7 @@ This shape has already appeared, without the name: §3's \texttt{Fin n} is, unde
 a \texttt{Nat} value \texttt{val}, paired with a proof \texttt{isLt} whose \emph{statement} (\texttt{val < n}) mentions \texttt{val} itself. That is \(\Sigma\), concretely: the second field's type depends on the value of the first. Here is the general construct, spelled out with Lean's actual \texttt{Sigma}, pairing a bound with an actual number below it:
 
 \begin{lstlisting}
-def mySigma : Σ n : Nat, Fin n := ⟨3, ⟨2, by decide⟩⟩
+def mySigma : (*$\Sigma$*) n : Nat, Fin n := (*$\langle$*)3, (*$\langle$*)2, by decide(*$\rangle$*)(*$\rangle$*)
 #eval mySigma.fst        -- 3
 #eval mySigma.snd.val    -- 2
 \end{lstlisting}
@@ -88,7 +88,7 @@ This dependent-pair shape is also the ``structure bundling data + proofs'' patte
 \textbf{A caveat about \texttt{∃}, worth being precise about.} Chapter 3 reads \texttt{∃ x : α, P x} as ``a structure: a witness value plus a proof that the witness satisfies \texttt{P}'' --- in effect a Σ-type, with \texttt{P : α → Prop} playing the role of \texttt{B}. Lean's actual \texttt{Exists} is, however, \emph{not literally} the Σ-type \texttt{Sigma}. \texttt{Exists} is specifically built to land in \texttt{Prop}, and by proof irrelevance (above), that means the witness cannot be \emph{extracted} from an \texttt{∃}-proof computationally:
 
 \begin{lstlisting}
-def bad (h : ∃ n : Nat, n > 0) : Nat := h.1
+def bad (h : (*$\exists$*) n : Nat, n > 0) : Nat := h.1
 \end{lstlisting}
 
 \begin{lstlisting}
@@ -98,7 +98,7 @@ value of non-propositional type
 from the expression
   h
 which has propositional type
-  ∃ n, n > 0
+  (*$\exists$*) n, n > 0
 \end{lstlisting}
 
 Compare this directly to \texttt{mySigma.fst} two paragraphs up, which worked with no error at all --- same pair-shape, different universe, and that difference is exactly why one extracts and the other does not. If \texttt{∃} \emph{did} allow extracting a witness, two different (but both equally valid) choices of witness could produce different results from a ``proof-irrelevant'' input, contradicting proof irrelevance itself. \texttt{Sigma} (the actual, \texttt{Type}-valued dependent pair, matching a \texttt{structure}'s bundled data) \emph{does} support projecting out its first component, precisely because it does not carry \texttt{Exists}'s irrelevance guarantee. So: \texttt{∃} has the same shape as Σ but lives in a universe where the witness is unobservable. That is what makes it a \emph{restricted} cousin of Σ rather than literally Σ. The \texttt{structure}-based bundling this book uses throughout for \texttt{Group}/\texttt{Ring}/\texttt{Module} genuinely is \texttt{Sigma}-like (extractable), while an \texttt{∃}-statement genuinely is not.
