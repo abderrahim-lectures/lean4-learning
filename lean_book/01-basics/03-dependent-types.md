@@ -68,8 +68,8 @@ are different types too, but only because `Nat` and `Bool` are different
 `Fin 5` differ even though `3` and `5` are both perfectly ordinary terms
 of the exact same type, `Nat`. The type `Fin` produces depends on which
 *value* it is given, not just which type. That value-dependence is the
-entire definition of "dependent type," and `Fin` gives it in the smallest
-possible dose.
+entire definition of "dependent type," and `Fin` is the simplest possible
+example of one.
 
 The construction of `Fin` can be inspected directly:
 
@@ -179,9 +179,9 @@ type could not have expressed at all. `List α` has no way to say "and
 this one is non-empty" as part of its type; `Vec α (n+1)` says exactly
 that, for free, using only the machinery already on the table.
 
-**Now close the loop on the Python example from the start of this
-section.** Here is `dot`, rewritten for `Vec` instead of Python's `list`,
-with both arguments required to share the *same* length `n`:
+**Return to the Python example from the start of this section.** Here is
+`dot`, rewritten for `Vec` instead of Python's `list`, with both
+arguments required to share the *same* length `n`:
 
 ```lean
 def Vec.dot : Vec Nat n → Vec Nat n → Nat
