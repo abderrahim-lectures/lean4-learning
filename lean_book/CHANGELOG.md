@@ -3,6 +3,68 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — LaTeX manuscript generation, and a learning-paths page
+
+- Added [`learning-paths.md`](learning-paths.md): a chapter-dependency
+  graph plus four named reading paths for readers starting from different
+  backgrounds (already know Lean, already know algebra, want the formal
+  foundations first, or want to see Lean prove real theorems as fast as
+  possible), linked from the README and "How to read this book."
+- Added **`build/build_latex.py`**, generating a full LaTeX manuscript
+  from the finished Markdown into a new `lean_book/latex/` tree — one
+  `.tex` per Markdown section file (108 in total, mirroring the source
+  layout exactly), a driver per chapter, and a top-level `main.tex`. This
+  phase stops at `.tex`; no PDF is produced by the script itself (a
+  Springer submission wants LaTeX source, not a pre-rendered PDF), though
+  the whole tree was compiled end to end via `xelatex`+`biber` repeatedly
+  during development to verify it actually works (219 pages, zero errors,
+  zero missing characters, zero unresolved cross-references in the final
+  pass) — that verification PDF is not committed.
+- **Every Mermaid diagram hand-translated to native `tikz-cd`** (8 in
+  total: the universal-property/initial-object/forgetful-functor/subobject
+  diagrams in Chapter 1 §4, the product/coproduct diagrams in Chapter 3
+  §5, the quiver diagram in Chapter 11 §3, and the new chapter-dependency
+  graph), each with its own standalone compile smoke-test in
+  `lean_book/latex/smoketest/`.
+- **Consolidated bibliography** carried over as `references.bib`
+  (BibTeX, one entry per `bibliography.md` source, same keys), cited via
+  `\cite{}`/biblatex — not a second, hand-maintained copy.
+- **Custom `amsthm` environments** for the book's recurring boxes:
+  `mathreading` ("Mathematical reading"), `progcorner` ("Programmer's
+  corner (Python)"), and `pblproject` (the two checkpoint projects,
+  wrapped whole).
+- **Lean and Python code via `listings`**, not Pandoc's default
+  Skylighting output: `lean-listings.tex` defines a `lean` language for
+  `listings` (keywords and tactics carried over from `build/lean4.xml`,
+  the same syntax definition the PDF-build pipeline uses) and a matching
+  `python` style, styled identically (font, frame, colors).
+- Cross-chapter references (`[Chapter 5 §2](../05-rigor-check/...)`)
+  become working `\hyperref[...]{...}` links, not literal prose text —
+  every section gets a unique, hand-assigned label
+  (`sec:<chapter>:<file>:<n>`) rather than relying on Pandoc's own
+  auto-slugged labels, which collide across chapters (nearly every
+  chapter has a heading literally titled "Exercises"). **Known
+  simplification:** links with a `#fragment` anchor resolve to the
+  *file's* first heading, not the exact sub-heading; every such link
+  still lands on the correct section, just not the precise paragraph.
+- Real bugs hit and fixed while building the pipeline, each worth noting
+  since they'd recur for any similar Pandoc-fragment-mode LaTeX
+  generation: Pandoc's `\passthrough`/`\tightlist`/`\real` helper macros
+  are normally supplied by its own `--standalone` template, which this
+  per-section pipeline doesn't use, so they're provided by hand in
+  `preamble.tex`; `\lstinline` (used for Pandoc's inline code spans)
+  breaks on this book's Unicode math operators even without any other
+  interference, so inline code renders as escaped `\texttt{}` instead;
+  Pandoc's `longtable`+`caption` output for small lookup tables errored
+  under a `caption`/`longtable` counter interaction with no `--standalone`
+  template to configure it, so tables are simplified to plain `tabular`;
+  and `\input` paths are resolved relative to `main.tex`'s own directory,
+  not the including section file's, which affects every diagram and image
+  reference.
+- Do not adopt Springer's `svmult`/`svmono` class files in this pass —
+  a separate, later decision — `lean_book/latex/` uses plain, portable
+  LaTeX throughout.
+
 ## Unreleased — Learning objectives, key points, and a consolidated bibliography
 
 - Added a short **"Learning objectives"** paragraph to every chapter's

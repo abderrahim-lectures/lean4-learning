@@ -1,0 +1,12 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\begin{document}
+% Universal property of the product: A -> X (f), A -> Y (g), and a unique
+% mediating h : A -> P making both triangles commute.
+% Source: 01-basics/04-terminology.md, "universal property" glossary entry.
+\begin{tikzcd}
+  & A \arrow[dl, "f"'] \arrow[dr, "g"] \arrow[d, dashed, "\exists ! h"] & \\
+  X & P \arrow[l, "\pi_X"] \arrow[r, "\pi_Y"'] & Y
+\end{tikzcd}
+\end{document}

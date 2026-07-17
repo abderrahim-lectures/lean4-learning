@@ -1,0 +1,105 @@
+\section{And, Or, Not}\label{sec:03-propositions-and-proofs:05-and-or-not:1}
+
+\begin{lstlisting}
+-- And
+theorem and_example {P Q : Prop} (hp : P) (hq : Q) : P ∧ Q :=
+  ⟨hp, hq⟩
+
+theorem and_left {P Q : Prop} (h : P ∧ Q) : P :=
+  h.left
+
+-- And is commutative, in term mode (no tactics)
+theorem and_comm_term {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
+  ⟨h.right, h.left⟩
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{∧} (And) is a structure with two fields \texttt{left} and \texttt{right}. \texttt{⟨hp, hq⟩} is the same ``here are the pieces, in order'' anonymous-constructor shorthand from \hyperref[sec:02-functions-and-structures:01-structure-basics:1]{Chapter 2 §1}. Since the goal is \texttt{P ∧ Q}, Lean infers that \texttt{⟨hp, hq⟩} must mean ``build the \texttt{And} from a proof of \texttt{P} and a proof of \texttt{Q},'' in that order, with no need to spell out \texttt{And.intro hp hq}.
+\end{itemize}
+
+\begin{lstlisting}
+-- Or
+theorem or_example {P Q : Prop} (hp : P) : P ∨ Q :=
+  Or.inl hp
+
+-- Or is commutative too, using Or.elim to case-split on *which* disjunct
+-- the hypothesis actually is, without the `cases` tactic
+theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
+  Or.elim h (fun hp => Or.inr hp) (fun hq => Or.inl hq)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{∨} (Or) has two constructors, \texttt{Or.inl} and \texttt{Or.inr}. A proof of \texttt{P ∨ Q} is either ``a proof of \texttt{P}'' or ``a proof of \texttt{Q}''.
+\item
+  \texttt{Or.elim \textbackslash{}\{P Q R : Prop\textbackslash{}\} (h : P ∨ Q) (hpr : P → R) (hqr : Q → R) : R} is the \emph{eliminator} for \texttt{Or}. Given a proof of \texttt{P ∨ Q}, and a way to reach the same conclusion \texttt{R} from either disjunct separately, one obtains a proof of \texttt{R}. \texttt{or\textbackslash{}\_comm\textbackslash{}\_term} above uses it directly in term mode, with no \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}} and no tactic block. It supplies \texttt{fun hp => Or.inr hp} for the ``if it was \texttt{P}'' branch and \texttt{fun hq => Or.inl hq} for the ``if it was \texttt{Q}'' branch.
+\end{itemize}
+
+\begin{lstlisting}
+-- Not, i.e. P → False
+theorem not_example : ¬(1 = 2) := by
+  decide
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{¬P} is notation for \texttt{P → False}. To prove a negation, assume \texttt{P} holds and derive \texttt{False}.
+\end{itemize}
+
+\begin{lstlisting}
+-- Deriving False from a genuine contradiction, then using `absurd` to
+-- close any goal at all once you have one
+theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2) : P :=
+  absurd h1 h2
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{absurd \textbackslash{}\{P Q : Prop\textbackslash{}\} (h1 : P) (h2 : ¬P) : Q} derives \emph{anything at all} from a genuine contradiction: a direct proof of \texttt{P} together with a proof that \texttt{P} is impossible. \texttt{anything\textbackslash{}\_from\textbackslash{}\_contradiction} shows this concretely. From \texttt{1 = 2} and \texttt{1 ≠ 2} (contradictory hypotheses that could never both hold, but which Lean happily accepts as \emph{given} hypotheses in a signature --- nothing prevents assuming something false; it only prevents \emph{proving} it from nothing), one may conclude literally any proposition \texttt{P} whatsoever. This is the ``ex falso quodlibet'' principle from classical logic, made concrete. Once a contradiction is present among the hypotheses, the goal being proved stops mattering.
+\end{itemize}
+
+\begin{mathreading}
+
+These are the constructive readings of the connectives as operations on the proof-sets. Conjunction \(P \wedge Q\) is the \textbf{product} \(P \times Q\): a proof is a pair \(\langle p, q\rangle\), so \texttt{and\textbackslash{}\_example} builds \((p,q)\) and \texttt{and\textbackslash{}\_left} applies \(\pi_1\):
+
+\end{mathreading}
+
+\begin{center}
+\input{diagrams/and-product.tex}
+\end{center}
+
+\begin{tabular}{ll}
+\toprule
+Symbol & Lean \\
+\midrule
+\bottomrule
+\(P \wedge Q\) (``and'') & \texttt{P ∧ Q} \\
+\(\langle p, q \rangle\) (``pairing'') & \texttt{⟨hp, hq⟩} (\texttt{and\textbackslash{}\_example}) \\
+\(\pi_1, \pi_2\) (``the projections'') & \texttt{h.left}, \texttt{h.right} (\texttt{and\textbackslash{}\_left} applies \texttt{.left}) \\
+\end{tabular}
+
+
+Disjunction \(P \vee Q\) is the \textbf{coproduct} \(P \sqcup Q\), the mirror image: arrows point \emph{in} rather than \emph{out}, and a proof is a tagged injection.
+
+\begin{center}
+\input{diagrams/or-coproduct.tex}
+\end{center}
+
+\begin{tabular}{ll}
+\toprule
+Symbol & Lean \\
+\midrule
+\bottomrule
+\(P \vee Q\) (``or'') & \texttt{P ∨ Q} \\
+\(\iota_1(p)\) (``left injection'') & \texttt{Or.inl hp} (\texttt{or\textbackslash{}\_example}) \\
+\(\iota_2(q)\) (``right injection'') & \texttt{Or.inr hq} \\
+\end{tabular}
+
+
+To \emph{use} a proof of \(P \vee Q\), one case-splits by the universal property of the coproduct: given a proof \texttt{h : P ∨ Q} and a way to reach the same conclusion \texttt{R} from either side (\texttt{hpr : P → R}, \texttt{hqr : Q → R}), there is exactly one map \texttt{P∨Q → R} agreeing with both. This is precisely what \texttt{or\textbackslash{}\_comm\textbackslash{}\_term} above builds via \texttt{Or.elim}. Negation is \(\neg P := (P \to
+\bot)\), a map into the initial object \(\bot = \varnothing\). A proof of \(\neg(1=2)\) is a function turning the (impossible) hypothesis \(1 = 2\) into an element of \(\varnothing\), vacuously. Here it is discharged by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}}, which mechanically confirms \(1 \neq 2\) since equality of \texttt{Nat} literals is decidable. Underlying this is exactly the same fact used throughout this book: distinct constructors of an inductive type (\texttt{Nat.succ}, applied a different number of times) are disjoint, so \texttt{1 = 2} has no proof to begin with. Observe that this is \emph{intuitionistic} logic: there is no built-in law of excluded middle.

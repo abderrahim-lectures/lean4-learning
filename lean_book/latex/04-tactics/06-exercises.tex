@@ -1,0 +1,18 @@
+\section{Exercises}\label{sec:04-tactics:06-exercises:1}
+
+\textbf{Key points.} A goal is hypotheses above a line, a statement to prove below it; a tactic replaces it with zero or more simpler goals. The core loop is: try the cheapest tactic, read why it failed, find structure to split or induct on, locate the specific lemma that matches. \texttt{induction} generates one case (and hypothesis \texttt{ih}) per constructor, exactly mirroring a recursive function over the same type.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prove \texttt{theorem and\textbackslash{}\_comm\textbackslash{}\_tac \textbackslash{}\{P Q : Prop\textbackslash{}\} (h : P ∧ Q) : Q ∧ P := by ...} using \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}}, \texttt{h.left}, \texttt{h.right}.
+\item
+  Prove \texttt{theorem nat\textbackslash{}\_mul\textbackslash{}\_zero (n : Nat) : n * 0 = 0 := by rfl} --- check whether \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} alone works, and if not, use \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction}}.
+\item
+  Rewrite the \texttt{modus\textbackslash{}\_ponens} proof from Chapter 3 in tactic mode.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:03-chapter-4:1]{Appendix, Chapter 4}.
+
+With definitions, propositions, and tactics in hand, we pause for a brief rigor check before diving into groups. Continue to

@@ -1,0 +1,23 @@
+\section{What is a quiver?}\label{sec:11-path-algebras:01-what-is-a-quiver:1}
+
+A \textbf{quiver} is a \emph{directed graph}: a set of vertices and a set of directed edges (called \textbf{arrows}) between them. This is the same notion Mathlib calls \href{https://loogle.lean-lang.org/?q=Quiver}{\texttt{Quiver}} (built here from scratch, following Chapter 0's ``no Mathlib'' policy, rather than reusing Mathlib's). Formally, a quiver \(Q\) consists of:
+
+\begin{itemize}
+\tightlist
+\item
+  a set of vertices \(Q_0\),
+\item
+  a set of arrows \(Q_1\),
+\item
+  two functions \(s, t : Q_1 \to Q_0\) giving each arrow's \textbf{source} and \textbf{target}.
+\end{itemize}
+
+Picture an arrow \(\alpha : i \to j\) as a literal arrow drawn from vertex \(i\) to vertex \(j\); \(s(\alpha) = i\) and \(t(\alpha) = j\).
+
+\subsection{Example quiver}\label{sec:11-path-algebras:01-what-is-a-quiver:2}
+
+Take vertices \(\{1, 2, 3\}\) and arrows
+
+\[
+\alpha : 1 \to 2, \qquad \beta : 2 \to 3
+\]

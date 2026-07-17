@@ -1,0 +1,106 @@
+\section{Chapter 5: Rigor check --- structures, universes, and equality}\label{sec:14-appendix-solutions:04-chapter-5:1}
+
+\textbf{1. \texttt{rfl} predictions}
+
+\begin{lstlisting}
+example : (2 : Nat) * 3 = 3 + 3 := rfl
+\end{lstlisting}
+
+This succeeds. \texttt{Nat.mul} recurses on its second argument, with base clause \texttt{a * 0 = 0} and step \texttt{a * (k+1) = a * k + a}. Since both sides are closed numerals, Lean evaluates both to \texttt{6} and checks that they match. Both sides compute to the same normal form, so no subtlety arises.
+
+\begin{lstlisting}
+example (n : Nat) : n * 2 = n + n := rfl
+\end{lstlisting}
+
+This also succeeds, though the reason requires elaboration. \texttt{2} is \texttt{Nat.succ (Nat.succ Nat.zero)}, so \texttt{n * 2} unfolds via the step clause twice: \texttt{n * 2 = n * 1 + n = (n * 0 + n) + n = (0 + n) + n}. Since \texttt{Nat.add} recurses on its \emph{second} argument, \texttt{0 + n} is not immediately \texttt{n} by definition (this is the same asymmetry Chapter 4 relied on for \texttt{my\textbackslash{}\_add\textbackslash{}\_comm}). Hence this reduces to \texttt{(0 + n) + n}, which is not syntactically \texttt{n + n} unless \texttt{0 + n} also reduces to \texttt{n}. It does not, by definition. Thus, contrary to a first guess, \textbf{this does not type-check as \texttt{rfl}} in general. Confirming this directly, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} fails, while \texttt{by rw [Nat.mul\textbackslash{}\_two]} (or an explicit induction) succeeds instead --- note this is \texttt{Nat.mul\textbackslash{}\_two : n * 2 = n + n}, not \texttt{Nat.two\textbackslash{}\_mul : 2 * n = n + n}, since the goal has \texttt{n} on the left of \texttt{*}. The lesson: multiplying by a literal does not collapse to \texttt{rfl} for free once a general variable \texttt{n} sits on the ``wrong'' side of an asymmetric recursion. This is the same reason \texttt{0 + n = n} required real induction in Chapter 4.
+
+\textbf{2. \texttt{MyGroup} as a type class}
+
+\begin{lstlisting}
+class MyGroup (G : Type) where
+  op : G → G → G
+  id : G
+  inv : G → G
+  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
+  id_left : ∀ a : G, op id a = a
+  id_right : ∀ a : G, op a id = a
+  inv_left : ∀ a : G, op (inv a) a = id
+  inv_right : ∀ a : G, op a (inv a) = id
+
+instance : MyGroup Int where
+  op := fun a b => a + b
+  id := 0
+  inv := fun a => -a
+  assoc := by intro a b c; exact Int.add_assoc a b c
+  id_left := by intro a; exact Int.zero_add a
+  id_right := by intro a; exact Int.add_zero a
+  inv_left := by intro a; exact Int.add_left_neg a
+  inv_right := by intro a; exact Int.add_right_neg a
+\end{lstlisting}
+
+Every field of the \texttt{instance} is identical, term-for-term, to the earlier \texttt{intGroup : Group Int} \texttt{def} from Chapter 6. Registering something as an \texttt{instance} instead of a plain \texttt{def} only changes \emph{how Lean's elaborator finds it} (automatically, via unification on \texttt{G}). It does not change what data it contains.
+
+\begin{lstlisting}
+def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x
+
+#eval opTwiceTC (3 : Int)   -- 6, with the Group Int instance found automatically
+\end{lstlisting}
+
+That difference in how it is found is exactly what makes \texttt{opTwiceTC} possible. It is written once, in a generic way, against the \texttt{[MyGroup G]} assumption, with no mention of \texttt{Int} anywhere. At the \texttt{\textbackslash{}\#eval} call site, Lean needs a \texttt{MyGroup Int} to run \texttt{MyGroup.op}. It searches the instances it has registered, finds the one declared above, and plugs it in automatically. A plain \texttt{def} would not take part in this kind of lookup.
+
+\textbf{3. Why \texttt{Type → Type} needs \texttt{Type 1}}
+
+Suppose \texttt{Type → Type} (the type of \texttt{Group} itself, before we supply a carrier) lived in \texttt{Type 0} alongside \texttt{Nat}, \texttt{Bool}, and every other ordinary type. Then \texttt{Type} itself --- being an argument type appearing inside \texttt{Type → Type} --- would need to be an element of \texttt{Type 0}. In other words, this would require \texttt{Type : Type}. But \texttt{Type} is meant to be (roughly) the type of \emph{all} \texttt{Type 0}-level types. If it were itself one such type, one could rebuild Russell's paradox inside Lean (a self-referential type such as ``the type of all types not containing themselves''). Lean's kernel avoids this: anything built from \texttt{Type 0} (such as a function \emph{into or out of} \texttt{Type 0}) that is not itself a small type must bump up a universe level. That is why \texttt{Type → Type} lands in \texttt{Type 1} rather than \texttt{Type 0}.
+
+\textbf{4. A true propositional equality not provable by \texttt{rfl}}
+
+\begin{lstlisting}
+theorem add_one_eq_succ (n : Nat) : n + 1 = Nat.succ n := rfl
+\end{lstlisting}
+
+This one is indeed \texttt{rfl}: \texttt{n + 1 = n + Nat.succ 0 = Nat.succ (n + 0) = Nat.succ n}, all by the defining equations of \texttt{+}. No induction is needed, because the recursion is on the second, literal-\texttt{1} argument, which unfolds immediately regardless of \texttt{n}.
+
+\begin{lstlisting}
+theorem one_add_eq_succ (n : Nat) : 1 + n = Nat.succ n := by
+  induction n with
+  | zero => rfl
+  | succ k ih =>
+    show 1 + Nat.succ k = Nat.succ (Nat.succ k)
+    rw [Nat.add_succ, ih]
+\end{lstlisting}
+
+This is the substantive answer to the exercise --- a true equality that \texttt{rfl} cannot close on its own. With the variable now on the \emph{second} argument, \texttt{1 + n = Nat.succ n} has exactly the same left/right asymmetry as \texttt{0 + n = n} from Chapter 4. \texttt{Nat.add}'s recursion never touches a variable sitting in the first argument, so no amount of unfolding closes the goal without an actual induction on \texttt{n}, even though the statement is of course true. This is why the explicit \texttt{induction n with ...} above is required. Comparing it with \texttt{add\textbackslash{}\_one\textbackslash{}\_eq\textbackslash{}\_succ}'s one-line \texttt{rfl} makes the asymmetry concrete.
+
+\textbf{Checkpoint project: a \texttt{Monoid} from scratch}
+
+\begin{lstlisting}
+structure Monoid (M : Type) where
+  op : M → M → M
+  id : M
+  assoc : ∀ a b c : M, op (op a b) c = op a (op b c)
+  id_left : ∀ a : M, op id a = a
+  id_right : ∀ a : M, op a id = a
+
+def listMonoid (α : Type) : Monoid (List α) where
+  op := List.append
+  id := []
+  assoc := by intro a b c; exact List.append_assoc a b c
+  id_left := by intro a; exact List.nil_append a
+  id_right := by intro a; exact List.append_nil a
+
+def natMulMonoid : Monoid Nat where
+  op := fun a b => a * b
+  id := 1
+  assoc := by intro a b c; exact Nat.mul_assoc a b c
+  id_left := by intro a; exact Nat.one_mul a
+  id_right := by intro a; exact Nat.mul_one a
+
+theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
+    (h : ∀ a : M, Mn.op e' a = a) : e' = Mn.id := by
+  have step1 : Mn.op e' Mn.id = Mn.id := h Mn.id
+  have step2 : Mn.op e' Mn.id = e' := Mn.id_right e'
+  rw [← step2]
+  exact step1
+\end{lstlisting}
+
+Both instances are one field-by-field build, exactly \texttt{intGroup}'s style (Chapter 6 §3) minus the two inverse fields: each proof obligation is a single \texttt{intro} plus a one-line \texttt{exact} naming a core-library fact (\texttt{List.append\textbackslash{}\_assoc}/\texttt{List.nil\textbackslash{}\_append}/\texttt{List.append\textbackslash{}\_nil} for the list instance, \texttt{Nat.mul\textbackslash{}\_assoc}/\texttt{Nat.one\textbackslash{}\_mul}/\texttt{Nat.mul\textbackslash{}\_one} for the natural-number one). \texttt{monoid\textbackslash{}\_id\textbackslash{}\_unique}'s proof is \texttt{id\textbackslash{}\_unique} (Chapter 7, Theorem 1) copied verbatim with every \texttt{Grp.} replaced by \texttt{Mn.} and \texttt{Group} weakened to \texttt{Monoid} --- every step used only \texttt{id\textbackslash{}\_right} and the hypothesis \texttt{h}, never an inverse, which is exactly why the proof survives dropping \texttt{inv} entirely. The theorem applies unchanged to both instances built above, the same ``prove once, get it for free'' payoff Chapter 6 §6 promises for \texttt{Group}.

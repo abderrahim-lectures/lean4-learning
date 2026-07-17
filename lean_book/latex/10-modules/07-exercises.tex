@@ -1,0 +1,22 @@
+\section{Exercises}\label{sec:10-modules:07-exercises:1}
+
+\textbf{Key points.} A module is an abelian group with a scalar action satisfying four axioms, equivalently a ring homomorphism into the ring of the group's own endomorphisms. A submodule is a membership predicate plus closure proofs, a linear map is a function preserving \texttt{+} and the scalar action, and a direct sum's five/four axioms each split, via \texttt{congr 1}, into one independent fact per summand.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prove that the identity function is a linear map: for any \texttt{Mod : Module R Rg M}, construct \texttt{idLinearMap : LinearMap Rg Mod Mod} with \texttt{toFun := id}.
+\item
+  Prove that linear maps compose: given \texttt{f : LinearMap Rg ModM ModN} and \texttt{g : LinearMap Rg ModN ModP}, construct \texttt{LinearMap Rg ModM ModP} with \texttt{toFun := g.toFun ∘ f.toFun}. (This, together with Exercise 1 and associativity of function composition, is what makes \(R\)-modules and \(R\)-linear maps a category. This is the payoff that Chapter 1 promised.)
+\item
+  Verify \texttt{intSmul} (defined above) satisfies \texttt{Module}'s four axioms against \texttt{intRing}, at least for \texttt{one\textbackslash{}\_smul} and \texttt{smul\textbackslash{}\_add} --- by induction on the integer scalar, in the style of Chapter 4.
+\item
+  Define the submodule of multiples of a fixed integer \texttt{d : Int} (generalizing \texttt{evenSubmodule}, which is the case \texttt{d = 2}), and check that the three closure proofs generalize verbatim with \texttt{2} replaced by \texttt{d}.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:09-chapter-10:1]{Appendix, Chapter 10}.
+
+\section{Next}\label{sec:10-modules:07-exercises:2}
+
+Continue to \hyperref[sec:11-path-algebras:00-index:1]{Chapter 11: Quivers and path algebras}, which returns to path algebras. Once \(kQ\) has been constructed, observe that representations of \(Q\) are exactly modules over \(kQ\); this is what ties this chapter directly to the next.

@@ -1,0 +1,19 @@
+\section{Structuring lemmas for reuse}\label{sec:12-working-efficiently:05-structuring-lemmas:1}
+
+The single biggest efficiency gain, greater than any tactic choice, is to \textbf{prove the general fact once, as its own named lemma, as soon as an argument would otherwise be repeated.} Chapter 7's \texttt{left\textbackslash{}\_inverse\textbackslash{}\_unique} is the running example. Theorem 3 (\texttt{inv\textbackslash{}\_op}) and Chapter 9's \texttt{neg\textbackslash{}\_one\textbackslash{}\_mul} and \texttt{neg\textbackslash{}\_mul} all reduce to it, instead of re-deriving ``uniqueness of inverses'' inline. Signs that a lemma should be factored out:
+
+\begin{itemize}
+\tightlist
+\item
+  A \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}} chain already written for a different but structurally identical goal is about to be repeated. In that case, the shared shape should instead be stated as its own \texttt{theorem}/\texttt{have}, then applied via \texttt{apply}/\texttt{exact} in both places.
+\item
+  A sub-goal deep in a proof would itself be a reasonable, independently statable mathematical fact (for example, ``an element that equals its own double is zero,'' buried inside Chapter 9's \texttt{mul\textbackslash{}\_zero}). Naming it is both more efficient \emph{and} more readable, since the outer proof then reads as a short chain of named facts instead of one long undifferentiated block.
+\end{itemize}
+
+This is the same judgment call made writing ordinary code: extract a helper when --- and only when --- real duplication or a genuinely separate sub-claim is present, not ahead of time ``just in case.''
+
+\textbf{Key points.} \texttt{exact?}/\texttt{apply?} search for a closing term but do not always find the shortest one; \texttt{decide}/\texttt{omega}/\texttt{norm\textbackslash{}\_num} replace a hand proof exactly on their decidable fragment, never on a goal about a generic, unspecified structure; \texttt{simp} trades traceability for speed, so this book reaches for it only when a genuine technical obstacle makes the explicit alternative not worth the detour; and a repeated \texttt{rw} chain or an independently-statable sub-goal is a lemma waiting to be named.
+
+\section{Next}\label{sec:12-working-efficiently:05-structuring-lemmas:2}
+
+Continue to \hyperref[sec:13-next-steps:00-index:1]{Chapter 13: Where to go next}.

@@ -1,0 +1,27 @@
+\section{Equality reasoning}\label{sec:03-propositions-and-proofs:07-equality:1}
+
+The three properties below are the standard ones making \(=\) an equivalence relation together with substitutivity.
+
+\begin{lstlisting}
+theorem symm_example {a b : Nat} (h : a = b) : b = a :=
+  h.symm
+\end{lstlisting}
+
+\texttt{symm} gives symmetry \(a = b \Rightarrow b = a\).
+
+\begin{lstlisting}
+theorem trans_example {a b c : Nat} (h1 : a = b) (h2 : b = c) : a = c :=
+  h1.trans h2
+\end{lstlisting}
+
+\texttt{trans} gives transitivity \(a = b,\ b = c \Rightarrow a = c\). Combined with reflexivity (\(\mathrm{rfl}\)) and symmetry above, this says \(=\) is an equivalence.
+
+\begin{lstlisting}
+theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
+  rw [h]
+\end{lstlisting}
+
+\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}} (``rewrite'') rewrites the goal using an equality proof. \texttt{rw [h]} with \texttt{h : a = b} finds every occurrence of \texttt{a} in the goal and replaces it with \texttt{b}. Here the goal starts as \texttt{a + 1 = b + 1}. After rewriting \texttt{a} to \texttt{b}, it becomes \texttt{b + 1 = b + 1}, which \texttt{rw} then closes automatically by trying \texttt{rfl} as its last step; that final \texttt{rfl} need not be written explicitly.
+
+The congruence \texttt{congr\textbackslash{}\_example} is the Leibniz principle: \(a = b \Rightarrow
+f(a) = f(b)\) for any function \(f\) (here \(f(x) = x + 1\)). This is ``substitute equals for equals,'' mechanized. \texttt{rw} is the workhorse for this from here on: nearly every proof from Chapter 4 onward reaches for it whenever an equality hypothesis needs to be used inside a larger goal.

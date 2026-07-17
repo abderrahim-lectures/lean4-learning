@@ -1,0 +1,20 @@
+\section{Exercises}\label{sec:03-propositions-and-proofs:08-exercises:1}
+
+\textbf{Key points.} \texttt{Prop} is the type of statements, and a proof is just an ordinary term of that type (Curry--Howard). \texttt{∧}/\texttt{∨}/\texttt{→}/\texttt{∀}/\texttt{∃} each have their own introduction and elimination rule, mirrored directly by Lean syntax: the anonymous constructor, \texttt{Or.inl}/\texttt{Or.inr}/\texttt{match}, \texttt{fun}/ application, and \texttt{fun}/anonymous-constructor again. \texttt{rfl} proves equality by checking both sides reduce to the same normal form.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prove \texttt{theorem and\textbackslash{}\_comm\textbackslash{}\_ex \textbackslash{}\{P Q : Prop\textbackslash{}\} (h : P ∧ Q) : Q ∧ P}.
+\item
+  Prove \texttt{theorem or\textbackslash{}\_comm\textbackslash{}\_ex \textbackslash{}\{P Q : Prop\textbackslash{}\} (h : P ∨ Q) : Q ∨ P} (hint: use \texttt{Or.elim} or pattern matching with \texttt{match}).
+\item
+  Prove \texttt{theorem exists\textbackslash{}\_gt\textbackslash{}\_zero : ∃ n : Nat, n > 0}.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:02-chapter-3:1]{Appendix, Chapter 3}.
+
+\section{Next}\label{sec:03-propositions-and-proofs:08-exercises:2}
+
+Continue to \hyperref[sec:04-tactics:00-index:1]{Chapter 4: Tactics}.

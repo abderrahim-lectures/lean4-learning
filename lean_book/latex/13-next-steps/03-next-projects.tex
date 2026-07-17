@@ -1,0 +1,183 @@
+\section{Suggested next projects}\label{sec:13-next-steps:03-next-projects:1}
+
+Each project below follows the same shape as the checkpoint projects after Chapters 5 and 11: learning objectives, prerequisites, milestones, a concrete deliverable, and a self-verification step. Unlike the checkpoint projects, none of these are worked solutions --- they are genuinely open, for the reader to carry out, with no appendix entry.
+
+\subsection{\texorpdfstring{1. Redo \texttt{Group}/\texttt{Ring} as type classes}{1. Redo Group/Ring as type classes}}\label{sec:13-next-steps:03-next-projects:2}
+
+\textbf{Learning objectives.} Feel directly what Chapter 13 §2 only described: the ergonomic difference between this book's plain \texttt{structure}s and Mathlib's \texttt{class}-based hierarchy, and Lean's typeclass/instance search mechanism.
+
+\textbf{Prerequisites.} Chapter 5 §1 (\texttt{structure} vs \texttt{class}), Chapter 6 (\texttt{Group}), Chapter 8 (\texttt{Ring}). The Chapter 5 appendix's \texttt{MyGroup} (exercise 2) is a smaller version of the first milestone below and a good warm-up.
+
+\textbf{Milestones.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Declare \texttt{class Group (G : Type) where} with the same five fields this book's \texttt{Group} structure has, then \texttt{class Ring (R : Type) where} similarly (deciding whether \texttt{Ring} extends an \texttt{AddCommGroup}/\texttt{CommGroup} class, as Mathlib does, or still nests one as a field).
+\item
+  Register at least two instances per class (e.g.~\texttt{Int} and \texttt{Bool}, reusing \texttt{intGroup}/\texttt{boolXorGroup}'s proofs from Chapters 6--8).
+\item
+  Redo one theorem generically --- \texttt{id\textbackslash{}\_unique} (Chapter 7) is the smallest --- against the \texttt{[Group G]} assumption instead of a \texttt{Grp : Group G} argument, and notice which parts of the statement got shorter.
+\end{enumerate}
+
+\textbf{Deliverable.} \texttt{class Group}, \texttt{class Ring}, at least two instances of each, and one theorem restated in the type-class style.
+
+\textbf{Self-verification.} The restated theorem should type-check with no explicit \texttt{Grp}/\texttt{Rg} argument threaded through --- \texttt{\textbackslash{}\#check} its statement and confirm Lean finds the right instance automatically at each of the two concrete types with no extra proof supplied at the call site.
+
+\subsection{2. Finish the path-algebra construction}\label{sec:13-next-steps:03-next-projects:3}
+
+\textbf{Learning objectives.} Finitely-supported functions as a \texttt{Ring}'s underlying data, and connecting Chapter 10's \texttt{Module} vocabulary forward to Chapter 11's \texttt{Quiver}/\texttt{Path}.
+
+\textbf{Prerequisites.} Chapter 8 (\texttt{Ring}), Chapter 10 (\texttt{Module}), Chapter 11 (\texttt{Path}), Chapter 11's checkpoint project (\texttt{Path.length}) as a warm-up, and Chapter 11's Exercise 3 sketch of \texttt{PathAlgebraElem}.
+
+\textbf{Milestones.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Restrict first to a quiver with finitely many paths total --- the example quiver from Chapter 11 §3 has exactly six (\texttt{e\textbackslash{}\_0, e\textbackslash{}\_1, e\textbackslash{}\_2, alpha, beta, beta∘alpha}) --- so ``finitely supported'' can start as a plain function on a finite index rather than needing Mathlib's \texttt{Finsupp}.
+\item
+  Define pointwise addition on this finite carrier and prove it forms a \texttt{CommGroup} (Chapter 8 §2).
+\item
+  Define multiplication by path composition, \texttt{0} on any pair whose endpoints do not match (as the chapter text describes), and prove the monoid laws (\texttt{mul\textbackslash{}\_assoc}/\texttt{one\textbackslash{}\_mul}/\texttt{mul\textbackslash{}\_one}) using the sum of trivial paths as \texttt{one}.
+\item
+  Assemble \texttt{Ring (PathAlgebraElem exampleQuiver k)} for a small, fully concrete \texttt{k} (Chapter 8 §5's \texttt{fin3Ring}, \texttt{Fin 3}, is a good first choice, since \texttt{decide} can then check the ring axioms outright).
+\end{enumerate}
+
+\textbf{Deliverable.} A \texttt{Ring} instance on a finite path algebra for a concretely chosen \texttt{k}.
+
+\textbf{Self-verification.} \texttt{\textbackslash{}\#eval} the product of two hand-chosen path-algebra elements and check it against a hand computation of the same product; if \texttt{k} is fully decidable (as \texttt{Fin 3} is), the ring axioms can additionally be discharged by \texttt{decide} rather than by hand, the same shortcut Chapter 8 §5 took for \texttt{fin3Ring}.
+
+\subsection{3. Acyclic quivers have finite-dimensional path algebras}\label{sec:13-next-steps:03-next-projects:4}
+
+\textbf{Learning objectives.} Combinatorial reasoning about \texttt{Path.length} (Chapter 11's checkpoint project), and connecting it to Chapter 10's \texttt{Module} notion of a finite spanning set.
+
+\textbf{Prerequisites.} Chapter 10 (\texttt{Module}), Chapter 11, the \texttt{Path.length} checkpoint project (a prerequisite in substance, not just in reading order: this project is exactly the ``harder'' continuation its own self-verification note gestures at).
+
+\textbf{Milestones.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Define what ``acyclic'' means for a \texttt{Quiver}: no nontrivial path from any vertex back to itself (\texttt{∀ v, ∀ p : Path Q v v, <p is the trivial path>} is one natural phrasing).
+\item
+  Prove that in an acyclic quiver with a finite vertex type, every path's \texttt{Path.length} is bounded by the number of vertices --- the idea being that a path visiting more vertices than exist must repeat one, forcing a nontrivial cycle.
+\item
+  Instantiate the bound on \texttt{exampleQuiver} (acyclic, from Chapter 11 §3) and on \texttt{cyclicQuiver} (Chapter 11 Exercise 1, which has a cycle) to see the argument apply in the first case and correctly fail to apply in the second.
+\item
+  Conclude finite-dimensionality: an acyclic quiver on finitely many vertices has only finitely many paths (bounded length, finitely many arrows to choose at each step), hence Project 2's path algebra is a finite-dimensional \texttt{Module} over \texttt{k} in Chapter 10's sense.
+\end{enumerate}
+
+\textbf{Deliverable.} A stated and proved length bound for acyclic quivers, checked against both example quivers.
+
+\textbf{Self-verification.} \texttt{\textbackslash{}\#eval} every path's length in \texttt{exampleQuiver} and confirm none exceeds the vertex count (\texttt{3}); separately, in \texttt{cyclicQuiver} (Chapter 11 appendix, Exercise 1), build a path that goes around the cycle \texttt{gamma ∘ beta ∘ alpha} twice (by \texttt{Path.append}ing \texttt{cPathGammaBetaAlpha} to itself), confirm its length exceeds \texttt{3}, and confirm the bound's proof genuinely does not apply there, as it must not for a cyclic quiver.
+
+\subsection{\texorpdfstring{4. Compare against Mathlib's \texttt{CategoryTheory.Quiver}}{4. Compare against Mathlib's CategoryTheory.Quiver}}\label{sec:13-next-steps:03-next-projects:5}
+
+\textbf{Learning objectives.} Reading real Mathlib source, and recognizing this book's own constructions inside a more general, abstract presentation.
+
+\textbf{Prerequisites.} Chapter 11 (this book's \texttt{Quiver}/\texttt{Path}), Project 1 above (comfort with the type-class style Mathlib uses throughout).
+
+\textbf{Milestones.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Read \texttt{Mathlib.Combinatorics.Quiver.Basic}'s \texttt{Quiver} class (already introduced in Chapter 11 §1's ``Mathlib equivalent'' box) and \texttt{Mathlib.CategoryTheory.Quiver}'s extension of it with identities and composition, comparing field-for-field against this book's plain \texttt{Quiver}/\texttt{Path}.
+\item
+  Find Mathlib's \texttt{Prefunctor} (a quiver homomorphism) and, separately, define a \texttt{structure QuiverHom} by hand for two of this book's own quivers (\texttt{exampleQuiver}, \texttt{cyclicQuiver} from Chapter 11's exercises), mapping vertices to vertices and arrows to paths.
+\item
+  Write the identity \texttt{QuiverHom} and composition of two \texttt{QuiverHom}s, noticing the parallel to Chapter 10's \texttt{LinearMap} exercises (identity and composition being exactly what make a class of structures into a category, Chapter 10 Exercise 2).
+\end{enumerate}
+
+\textbf{Deliverable.} A hand-written \texttt{QuiverHom} between two of this book's own quivers, with its Mathlib \texttt{Prefunctor} counterpart identified by name.
+
+\textbf{Self-verification.} \texttt{\textbackslash{}\#check @Prefunctor} and compare its fields, one-by-one in a comment, against \texttt{QuiverHom}'s own fields.
+
+\subsection{\texorpdfstring{5. A concrete \texttt{kQ}-module}{5. A concrete kQ-module}}\label{sec:13-next-steps:03-next-projects:6}
+
+\textbf{Learning objectives.} Turn Chapter 11 §5's closing remark --- ``representations of \(Q\) are exactly \(kQ\)-modules'' --- into an actual, if small, worked example.
+
+\textbf{Prerequisites.} Chapter 10 (\texttt{Module}), Chapter 11, and Project 2 above (at least its first two milestones: a concrete, finite path algebra to be a module \emph{over}).
+
+\textbf{Milestones.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Using the example quiver and Project 2's finite path algebra, assign a small carrier module to each vertex (e.g.~\texttt{Fin 3} under Chapter 8 §5's \texttt{fin3Ring}-flavored addition) and a linear map to each arrow, exactly the data of a quiver representation (Chapter 11 §5's remark, made concrete).
+\item
+  Package this data as a genuine `Module (PathAlgebraElem exampleQuiver
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \setcounter{enumii}{10}
+  \tightlist
+  \item
+    (SomeCarrier)\texttt{instance (Chapter 10 §2's}Module\texttt{structure), using Project 2's}Ring\texttt{as the scalar ring}Rg`.
+  \end{enumerate}
+\item
+  Confirm the module axioms hold by checking that the scalar action of a path-algebra element on a carrier element agrees with manually composing the linear maps assigned to that path's arrows.
+\end{enumerate}
+
+\textbf{Deliverable.} One concrete \texttt{Module} instance realizing a representation of the example quiver.
+
+\textbf{Self-verification.} \texttt{\textbackslash{}\#eval} the action of a length-2 path-algebra element (e.g.~the class of \(\beta\alpha\)) on a chosen carrier element, and confirm it matches applying the two arrows' assigned linear maps in sequence by hand.
+
+\subsection{Aside: Church encodings --- data from nothing but functions}\label{sec:13-next-steps:03-next-projects:7}
+
+Everything in this book is built from Lean's \texttt{inductive} mechanism: \texttt{Nat}, \texttt{Bool}, \texttt{Path}, every \texttt{structure}. It is worth knowing, purely as a curiosity, that none of that machinery was ever strictly necessary. The untyped λ-calculus --- variables, \texttt{fun x => t}-style abstraction, and application, nothing else --- is already expressive enough to build booleans, numbers, and arbitrary data by encoding them as functions.
+
+\textbf{Church booleans.} Define \[
+\mathrm{true} := \lambda x.\, \lambda y.\, x
+\qquad
+\mathrm{false} := \lambda x.\, \lambda y.\, y
+\] A boolean, in this encoding, \emph{is} a choice function --- to use one, apply it to the two branches of an if-expression: \[
+\mathrm{if}\; b \;\mathrm{then}\; t \;\mathrm{else}\; e \;:=\; b\, t\, e
+\] Check: \(\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e
+\longrightarrow_\beta t\) (discarding \(e\)), and symmetrically \(\mathrm{false}\, t\, e \longrightarrow_\beta e\). ``If-then-else'' is not a primitive at all --- it is just \emph{application}, once booleans are represented this way. Lean's actual \texttt{Bool} (an \texttt{inductive} with two constructors) is a \emph{convenience}, not a necessity --- the calculus itself never needed a booleans primitive to express conditional behavior.
+
+\textbf{Church numerals.} Represent the natural number \(n\) as ``apply a function \(n\) times'': \[
+\underline{0} := \lambda f.\, \lambda x.\, x
+\qquad
+\underline{1} := \lambda f.\, \lambda x.\, f\, x
+\qquad
+\underline{2} := \lambda f.\, \lambda x.\, f\,(f\, x)
+\qquad
+\underline{n} := \lambda f.\, \lambda x.\, f^n\, x
+\] Compare directly to \texttt{Nat}'s own Peano definition \(\mathtt{Nat} ::= \mathtt{zero} \mid \mathtt{succ}(n)\) (Chapter 1): a Church numeral \(\underline{n}\) \emph{is} ``apply \(\mathtt{succ}\), \(n\) times, to \(\mathtt{zero}\)'' --- the same inductive shape, represented not as data but as a higher-order function that knows how to iterate.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Successor:} \(\mathrm{succ} := \lambda n.\, \lambda f.\, \lambda x.\,
+  f\,(n\, f\, x)\) --- ``apply \(f\) one more time than \(n\) does.''
+\item
+  \textbf{Addition:} \(\mathrm{plus} := \lambda m.\lambda n.\lambda f.\lambda x.\,
+  m\, f\,(n\, f\, x)\) --- ``apply \(f\), \(m\) times, starting from where \(n\) already applied it \(n\) times,'' the same recursive shape that makes \texttt{Nat.add} recurse on its second argument (Chapter 4).
+\item
+  \textbf{Multiplication} is even more striking: \(\mathrm{mult} := \lambda m.
+  \lambda n.\lambda f.\, m\,(n\, f)\) --- ``apply \emph{`apply \(f\), \(n\) times'}, \(m\) times.'' Multiplication is literally function composition, iterated.
+\end{itemize}
+
+None of this is meant to suggest that one should ever program this way. It shows, concretely, that a system with only variables, abstraction, and application already has the expressive power to build booleans, naturals, and (by pairing constructions along the same lines) arbitrary tree-shaped data --- before any type system or \texttt{inductive} keyword enters the picture. Lean's actual \texttt{Bool} and \texttt{Nat} use \texttt{inductive} instead, for efficiency and because pattern-matching (\texttt{match}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}) is far more convenient to write and reason about than repeated application --- the \emph{expressiveness} was never in question. If this is interesting, a next step is to encode pairs the same way (\(\mathrm{pair} := \lambda a.\lambda b.\lambda f.\,
+f\, a\, b\)) and check by hand that projecting back out a component β-reduces correctly.
+
+\subsubsection{References}\label{sec:13-next-steps:03-next-projects:8}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  Church (\cite{Church1941}) --- the original source of this encoding.
+\item
+  Pierce (\cite{Pierce2002}), §5.2 --- a worked, step-by-step derivation of Church booleans and numerals, including \texttt{succ}/\texttt{plus}, matching the presentation above.
+\item
+  Rojas (\cite{Rojas2015}) --- a freely available, worked-example-heavy walkthrough of the same encodings, with more reduction sequences spelled out in full.
+\end{itemize}
