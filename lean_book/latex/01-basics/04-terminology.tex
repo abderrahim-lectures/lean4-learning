@@ -59,16 +59,19 @@ This is a characterization of a construction not by what it is \emph{made of}, b
 \input{diagrams/universal-property.tex}
 \end{center}
 
-\begin{tabular}{ll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+}
 \toprule
 Symbol & Lean \\
 \midrule
-\bottomrule
 \(A\), \(X\), \(Y\), \(P\) (``the objects'') & types \texttt{A}, \texttt{X}, \texttt{Y}, \texttt{X × Y} \\
 \(f\), \(g\) (``the given maps'') & ordinary functions \texttt{f : A → X}, \texttt{g : A → Y} \\
 \(\exists!\) (``there exists a unique'') & --- no single token; witnessed by supplying \texttt{h} and proving it is the only one \\
 \(h\) (``the mediating map'') & \texttt{fun a => (f a, g a) : A → X × Y} \\
 \(\pi_X, \pi_Y\) (``the projections'') & \texttt{Prod.fst}, \texttt{Prod.snd} (\texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd}) \\
+\bottomrule
 \end{tabular}
 
 
@@ -82,13 +85,16 @@ This is an object \(I\) of a category with a \emph{unique} morphism \(I \to X\) 
 \input{diagrams/initial-object.tex}
 \end{center}
 
-\begin{tabular}{ll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+}
 \toprule
 Symbol & Lean \\
 \midrule
-\bottomrule
 \(I\) (``the initial object'') & \texttt{Nat} (in \texttt{Type}) or \texttt{ℤ} (in \texttt{Ring}) \\
 \(I \to X\) (``the unique arrow'') & for \texttt{Nat}: \texttt{Nat.rec} --- build a value of \emph{any} \texttt{X} by giving a \texttt{zero} case and a \texttt{succ} case, and that recipe is forced by \texttt{Nat}'s two constructors, with no other choice possible \\
+\bottomrule
 \end{tabular}
 
 
@@ -102,13 +108,16 @@ This is a functor that takes a structure and \emph{keeps only part of it}, disca
 \input{diagrams/forgetful-functor-chain.tex}
 \end{center}
 
-\begin{tabular}{ll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+}
 \toprule
 Symbol & Lean \\
 \midrule
-\bottomrule
 \texttt{Ring} \(\to\) \texttt{Group} (``forgets \(\cdot\)'') & \texttt{r.toGroup} (or \texttt{r.toAddGroup}, depending on naming) for \texttt{r : Ring R} \\
 \texttt{Group} \(\to\) \texttt{Set} (``forgets \(+\)'') & \texttt{g.carrier}, or simply treating \texttt{G : Type} as its own underlying set \\
+\bottomrule
 \end{tabular}
 
 
@@ -122,13 +131,16 @@ A subobject of \(X\) is (informally) ``a subset of \(X\) cut out by some conditi
 \input{diagrams/subobject-commgroup.tex}
 \end{center}
 
-\begin{tabular}{ll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+}
 \toprule
 Symbol & Lean \\
 \midrule
-\bottomrule
 \(\subseteq\) (``subobject inclusion'') & \texttt{structure CommGroup (G) extends Group G where comm : ...} \\
 \(\iota\) (``the inclusion map'') & \texttt{.toGroup}, the field \texttt{extends} generates automatically \\
+\bottomrule
 \end{tabular}
 
 
