@@ -42,8 +42,7 @@ mirroring a recursive function over the same type.
 Solutions: [Appendix, Chapter 4](../14-appendix-solutions/03-chapter-4.md).
 
 With definitions, propositions, and tactics in hand, we pause for a brief
-rigor check before diving into groups. Continue to
-[Chapter 5: Rigor check](../05-rigor-check/00-index.md).
+rigor check before diving into groups.
 
 ---
 

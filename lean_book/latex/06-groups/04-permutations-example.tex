@@ -160,6 +160,3 @@ def cycle012' : Equiv.Perm (Fin 3) := finRotate 3
 
 No \texttt{Perm3} bundle, no hand-written extensionality lemma, and no field-by-field \texttt{Group} construction are needed: \texttt{Equiv.Perm (Fin 3)} (the type of bijections \texttt{Fin 3 ≃ Fin 3}) is already known to be a group, \href{https://loogle.lean-lang.org/?q=Equiv.swap}{\texttt{Equiv.swap}} and \href{https://loogle.lean-lang.org/?q=finRotate}{\texttt{finRotate}} are Mathlib's own constructors for a transposition and a rotation, and \texttt{*} is the already-registered group operation (composition, matching \texttt{Perm3.comp}'s convention). The two \texttt{\#eval}s are the same ``compute a witness of non-commutativity'' move as \texttt{swap01}/\texttt{cycle012} above, now applied to the library's own \(S_3\).
 
-\section{Next}\label{sec:06-groups:04-permutations-example:6}
-
-Continue to \hyperref[sec:06-groups:05-accessing-fields:1]{Accessing the fields}.
