@@ -3,6 +3,14 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Plainer prose in "Why Lean?"
+
+Reworded the opening paragraph of Chapter 0 §2 ("Why Lean?"), which used
+a simile ("the way a compiler checks types") in place of a direct
+statement — flagged as reading as performative rather than academic.
+Rewritten as a plain, direct statement of what Lean is and how proof
+checking works.
+
 ## Unreleased — Fix missing space after arrows/logic symbols in code listings
 
 Found during a full review pass: every Lean type signature using an
