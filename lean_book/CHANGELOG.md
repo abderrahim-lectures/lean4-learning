@@ -3,7 +3,7 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
-## Unreleased — Second-opinion prose review: 2 more passages
+## v1.4.9 — Second-opinion prose review: 2 more passages
 
 Follow-up to the two prior plain-academic-prose passes. An independent
 second review, cast against a wider set of criteria (casual
@@ -12,7 +12,7 @@ phrases), found two more instances: "Reassuringly" in the path-algebras
 chapter, and a "sound familiar?" rhetorical aside in the Mathlib
 chapter. Both rewritten as direct statements.
 
-## Unreleased — Add a Python companion notebook
+## v1.4.8 — Add a Python companion notebook
 
 Added `lean_book/python-companion/python_companion.ipynb`, collecting
 every "Programmer's corner (Python)" snippet in the book (8 snippets
@@ -21,7 +21,7 @@ Google Colab, no Lean installation required. Each snippet is verified to
 run and produce the output the book's comments claim. Linked from the
 book's README reference list.
 
-## Unreleased — Full-book review pass for plain academic prose
+## v1.4.8 — Full-book review pass for plain academic prose
 
 Follow-up to the "Why Lean?" rewording: a full read-through of every
 chapter's prose turned up 7 further passages using a simile, metaphor,
@@ -36,7 +36,7 @@ deliberately breaks...") in the Mathlib note. Each was rewritten as a
 plain, direct statement. Everything else in the book was already in
 this register.
 
-## Unreleased — Plainer prose in "Why Lean?"
+## v1.4.8 — Plainer prose in "Why Lean?"
 
 Reworded the opening paragraph of Chapter 0 §2 ("Why Lean?"), which used
 a simile ("the way a compiler checks types") in place of a direct
@@ -44,7 +44,7 @@ statement — flagged as reading as performative rather than academic.
 Rewritten as a plain, direct statement of what Lean is and how proof
 checking works.
 
-## Unreleased — Fix scrambled Unicode symbols in code listings (`{α` → `α{`, etc.)
+## v1.4.8 — Fix scrambled Unicode symbols in code listings (`{α` → `α{`, etc.)
 
 Found while proofreading a rendered page: Chapter 1's
 `def identity {α : Type} (x : α) : α := x` example rendered as
@@ -73,7 +73,7 @@ instead of a character it measures and positions itself --
 remains in place for every other context (inline `` `code` `` spans,
 table cells), where it already worked correctly.
 
-## Unreleased — Fix missing space after arrows/logic symbols in code listings
+## v1.4.7 — Fix missing space after arrows/logic symbols in code listings
 
 Found during a full review pass: every Lean type signature using an
 arrow or logic/relation symbol (`→`, `∀`, `∃`, `∈`, `∘`, `∧`, `∨`, `≃`,
@@ -93,7 +93,7 @@ fixed the actual root cause instead: switched `columns=flexible` to
 `columns=fixed` in both the `lean` and `python` listings styles. No
 newunicodechar mapping needed to change at all.
 
-## Unreleased — Drop web-navigation-only "Next" sections from the PDF
+## v1.4.6 — Drop web-navigation-only "Next" sections from the PDF
 
 Every chapter's trailing "## Next — Continue to [Chapter N: ...](...)."
 section (13 files) was a GitHub/web reading aid pointing at the next
@@ -105,7 +105,7 @@ reading experience is unaffected). One file
 than under its own heading — hand-edited to drop just the "Continue
 to..." clause, keeping the rest of its closing sentence.
 
-## Unreleased — Front-matter polish: page numbering, author bio, license/source link
+## v1.4.6 — Front-matter polish: page numbering, author bio, license/source link
 
 - **Fixed a genuine page/section-numbering bug**: front-matter reference
   pages (Learning paths, Notation reference) showed their subsections as
@@ -145,7 +145,7 @@ to..." clause, keeping the rest of its closing sentence.
   motif tied to the book's actual category-theory content) -- neither
   landed; the title page and back cover are plain again.
 
-## Unreleased — Revert KOMA-Script scrbook back to plain `book`
+## v1.4.4 — Revert KOMA-Script scrbook back to plain `book`
 
 KOMA-Script `scrbook` (adopted to chase a Springer-Monographs-in-Mathematics
 look) caused more churn than it was worth: it conflicts with `titlesec`
@@ -174,7 +174,7 @@ of KOMA options:
 235 pages on A4, compiled clean: zero errors, zero `Overfull \hbox`, zero
 `Missing character` warnings.
 
-## Unreleased — Typography pass: bigger font, more paragraph spacing
+## v1.4.4 — Typography pass: bigger font, more paragraph spacing
 
 Follow-up to the KOMA-Script switch: the default 11pt/dense-paragraph
 look read too small and cramped.
@@ -209,7 +209,7 @@ look read too small and cramped.
     table in this book remains a non-breaking block, making its
     per-page fit sensitive to exactly this kind of column-width tuning.
 
-## Unreleased — Preface, notation reference, and a KOMA-Script (Springer-style) class
+## v1.4.2 — Preface, notation reference, and a KOMA-Script (Springer-style) class
 
 Added the front matter a reader expects before Chapter 1, and switched
 the LaTeX manuscript to a nicer, better-typeset class:
@@ -268,7 +268,7 @@ the LaTeX manuscript to a nicer, better-typeset class:
   full rebuild stayed at zero `Overfull \hbox` and zero `Missing
   character` warnings throughout every change in this entry.
 
-## Unreleased — LaTeX rendering fixes: table overflow, Python listings, learning-paths diagram
+## v1.4.1 — LaTeX rendering fixes: table overflow, Python listings, learning-paths diagram
 
 Three rendering bugs found while proofreading the compiled PDF, all fixed
 at the generator level (`build/build_latex.py`) rather than by hand-patching
@@ -315,7 +315,7 @@ generated `.tex`:
   spot-checking rendered pages by eye. All large-magnitude overflows
   (previously up to ~600pt, from the table bug above) are now gone.
 
-## Unreleased — Socratic questions at the end of every chapter
+## v1.4.0 — Socratic questions at the end of every chapter
 
 Added a **"Socratic questions"** block to every chapter (14 in total),
 positioned between the existing "Key points" recap and that chapter's
@@ -348,7 +348,7 @@ Caught and fixed two real bugs during this pass:
   Consolas reported a missing-glyph warning. Added
   `\newunicodechar{↦}{\ensuremath{\mapsto}}`.
 
-## Unreleased — Professional LaTeX styling; retire the old PDF pipeline
+## v1.4.0 — Professional LaTeX styling; retire the old PDF pipeline
 
 - **Renamed the top-level LaTeX driver** from the generic `main.tex` to
   `lean-for-working-algebraists.tex`, matching the book's own name.
@@ -396,7 +396,7 @@ Caught and fixed two real bugs during this pass:
   compile error): the checkpoint-project title moved from that bracket
   to a bold first line inside the box body instead.
 
-## Unreleased — LaTeX manuscript generation, and a learning-paths page
+## v1.4.0 — LaTeX manuscript generation, and a learning-paths page
 
 - Added [`learning-paths.md`](learning-paths.md): a chapter-dependency
   graph plus four named reading paths for readers starting from different
@@ -459,7 +459,7 @@ Caught and fixed two real bugs during this pass:
   a separate, later decision — `lean_book/latex/` uses plain, portable
   LaTeX throughout.
 
-## Unreleased — Learning objectives, key points, and a consolidated bibliography
+## v1.4.0 — Learning objectives, key points, and a consolidated bibliography
 
 - Added a short **"Learning objectives"** paragraph to every chapter's
   `00-index.md` (Chapters 0–13), stating what a reader should be able to
@@ -484,7 +484,7 @@ Caught and fixed two real bugs during this pass:
 - No Lean code was touched in this pass; `lake build` on the companion
   `lean_project` re-confirmed unaffected.
 
-## Unreleased — Project-Based Learning components
+## v1.4.0 — Project-Based Learning components
 
 Distributed PBL scaffolding through the book instead of leaving it only at
 the very end:
@@ -519,7 +519,7 @@ the very end:
   projects, since they were never worked exercises with answers in the
   first place.
 
-## Unreleased — Full-book review pass (Chapters 2, 4, 6–13, solutions appendix)
+## v1.4.0 — Full-book review pass (Chapters 2, 4, 6–13, solutions appendix)
 
 Applied the same verification discipline used for the type-theory rewrite
 (every Lean snippet re-run against the pinned toolchain via `lake env
@@ -580,7 +580,7 @@ alone would have missed:
   this changelog (see above, "09-chapter-11.md" predates the Appendix B
   renumbering).
 
-## Unreleased — Type-theory chapters rewritten, Appendix B eliminated
+## v1.4.0 — Type-theory chapters rewritten, Appendix B eliminated
 
 - Rewrote [Chapter 1 §1](01-basics/01-everything-has-a-type.md) and
   [§3](01-basics/03-dependent-types.md) to lead with concrete,
@@ -621,7 +621,7 @@ alone would have missed:
     across every `.md` file in the book found zero broken internal links
     after the `15-lambda-calculus/` directory was removed.
 
-## Unreleased — Capstone: two theorems for free
+## v1.2.0 — Capstone: two theorems for free
 
 - Added "Two theorems for free" to [Chapter 13 §2](13-next-steps/02-moving-to-mathlib.md):
   a short capstone proving, for real via Mathlib, two facts this book's
@@ -636,7 +636,7 @@ alone would have missed:
   through `Nat.card_eq_fintype_card`/`Fintype.card_perm` and
   `orderOf_eq_prime` instead.
 
-## Unreleased — Inline reference links, and a second screenshot
+## v1.1.0 — Inline reference links, and a second screenshot
 
 - Every tactic and Mathlib name across the whole book now gets a reference
   link right next to its first mention in each chapter's own prose (not
@@ -649,7 +649,7 @@ alone would have missed:
   [Appendix A's Chapter 11 solutions](14-appendix-solutions/09-chapter-11.md),
   showing the Lean Infoview for `append_nil_left`'s `cons` case.
 
-## Unreleased — PDF: real Mermaid diagrams, Lean syntax highlighting, honest front matter
+## v1.1.0 — PDF: real Mermaid diagrams, Lean syntax highlighting, honest front matter
 
 - Mermaid diagrams now render as real images in the PDF (via
   `@mermaid-js/mermaid-cli`), not fenced source text — previously every
@@ -667,7 +667,7 @@ alone would have missed:
   `pdf-metadata.yaml`, `lean4.xml`) moved into a dedicated `build/`
   folder instead of sitting loose at the book root.
 
-## Unreleased — Screenshot and reference links
+## v1.1.0 — Screenshot and reference links
 
 - Added a real VS Code screenshot of the **Lean Infoview** to
   [Chapter 4 §1](04-tactics/01-goal-state.md), captured live against
@@ -679,7 +679,7 @@ alone would have missed:
   "Mathlib equivalent" boxes to Loogle/Mathlib4 docs. Linked from the
   README, Chapter 4, Chapter 6, and Chapter 12.
 
-## Unreleased — PDF build
+## v1.0.0 — PDF build
 
 - Added `build_pdf.py`, a Pandoc + XeLaTeX pipeline producing a single
   print-style PDF of the whole book (KOMA-Script `scrbook`, title page,
@@ -687,7 +687,7 @@ alone would have missed:
   Per-file navigation strips are stripped and cross-file links flattened
   to plain text, since neither makes sense inside one linear PDF.
 
-## Unreleased — Plain-English pass
+## v1.0.0 — Plain-English pass
 
 - **Rewrote the book's prose to roughly CEFR B2 English** (upper-intermediate)
   across every chapter and the appendix: shorter sentences, plainer everyday
@@ -708,7 +708,7 @@ alone would have missed:
   `lean_project` but never carried back into the book text. Fixed by
   spelling out `Quiver.Path` throughout instead.
 
-## Unreleased — Mathlib-equivalent boxes
+## v1.0.0 — Mathlib-equivalent boxes
 
 - **Every worked example in Chapters 6–11 (groups, group theorems, rings,
   ring theorems, modules, path algebras) is now followed by a "Mathlib
@@ -726,7 +726,7 @@ alone would have missed:
 - `lean_project` now depends on Mathlib (pinned to the `v4.31.0` tag,
   matching the toolchain).
 
-## Unreleased — Mermaid diagrams
+## v1.0.0 — Mermaid diagrams
 
 - **Category-theory diagrams upgraded from plain ASCII art to
   [Mermaid](https://mermaid.js.org/)** (the universal-property/
