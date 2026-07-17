@@ -27,11 +27,11 @@ def Vec.toList : Vec α n → List α
 def anotherSigma : Σ n : Nat, Fin n := ⟨5, ⟨0, by decide⟩⟩
 \end{lstlisting}
 
-(\texttt{0 : Fin 5} is valid since \(0 < 5\); any pair \texttt{⟨k, ⟨i, h⟩⟩} with \texttt{i < k} works.) \texttt{Σ n : Nat, n > 0} fails to type-check because \texttt{n > 0 : Prop} (\texttt{Sort 0}), while Lean's \texttt{Sigma} is declared as \texttt{structure Sigma \textbackslash{}\{α : Type u\textbackslash{}\} (β : α → Type v)} --- the second component's \emph{family} must land in some \texttt{Type v} (\texttt{Sort (v+1)} for \texttt{v ≥ 0}), which \texttt{Prop} (\texttt{Sort 0}) is not. \texttt{Fin n : Type} clears that bar; \texttt{n > 0 : Prop} does not. This is exactly why \texttt{∃} exists as \texttt{Sigma}'s \texttt{Prop}-restricted cousin (Chapter 1 §5) rather than everyone just writing \texttt{Σ} everywhere.
+(\texttt{0 : Fin 5} is valid since \(0 < 5\); any pair \texttt{⟨k, ⟨i, h⟩⟩} with \texttt{i < k} works.) \texttt{Σ n : Nat, n > 0} fails to type-check because \texttt{n > 0 : Prop} (\texttt{Sort 0}), while Lean's \texttt{Sigma} is declared as \texttt{structure Sigma \{α : Type u\} (β : α → Type v)} --- the second component's \emph{family} must land in some \texttt{Type v} (\texttt{Sort (v+1)} for \texttt{v ≥ 0}), which \texttt{Prop} (\texttt{Sort 0}) is not. \texttt{Fin n : Type} clears that bar; \texttt{n > 0 : Prop} does not. This is exactly why \texttt{∃} exists as \texttt{Sigma}'s \texttt{Prop}-restricted cousin (Chapter 1 §5) rather than everyone just writing \texttt{Σ} everywhere.
 
 \textbf{4. \texttt{Path.append}'s signature as nested Π-types}
 
-\texttt{Path.append : \textbackslash{}\{u v w : V\textbackslash{}\} → Path Q u v → Path Q v w → Path Q u w}, treating the implicit binders as outer Π's, unfolds one binder at a time:
+\texttt{Path.append : \{u v w : V\} → Path Q u v → Path Q v w → Path Q u w}, treating the implicit binders as outer Π's, unfolds one binder at a time:
 
 \begin{tabular}{llll}
 \toprule

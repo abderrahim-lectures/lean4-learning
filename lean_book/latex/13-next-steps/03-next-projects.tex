@@ -18,12 +18,12 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \item
   Register at least two instances per class (e.g.~\texttt{Int} and \texttt{Bool}, reusing \texttt{intGroup}/\texttt{boolXorGroup}'s proofs from Chapters 6--8).
 \item
-  Redo one theorem generically --- \texttt{id\textbackslash{}\_unique} (Chapter 7) is the smallest --- against the \texttt{[Group G]} assumption instead of a \texttt{Grp : Group G} argument, and notice which parts of the statement got shorter.
+  Redo one theorem generically --- \texttt{id\_unique} (Chapter 7) is the smallest --- against the \texttt{[Group G]} assumption instead of a \texttt{Grp : Group G} argument, and notice which parts of the statement got shorter.
 \end{enumerate}
 
 \textbf{Deliverable.} \texttt{class Group}, \texttt{class Ring}, at least two instances of each, and one theorem restated in the type-class style.
 
-\textbf{Self-verification.} The restated theorem should type-check with no explicit \texttt{Grp}/\texttt{Rg} argument threaded through --- \texttt{\textbackslash{}\#check} its statement and confirm Lean finds the right instance automatically at each of the two concrete types with no extra proof supplied at the call site.
+\textbf{Self-verification.} The restated theorem should type-check with no explicit \texttt{Grp}/\texttt{Rg} argument threaded through --- \texttt{\#check} its statement and confirm Lean finds the right instance automatically at each of the two concrete types with no extra proof supplied at the call site.
 
 \subsection{2. Finish the path-algebra construction}\label{sec:13-next-steps:03-next-projects:3}
 
@@ -37,18 +37,18 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Restrict first to a quiver with finitely many paths total --- the example quiver from Chapter 11 §3 has exactly six (\texttt{e\textbackslash{}\_0, e\textbackslash{}\_1, e\textbackslash{}\_2, alpha, beta, beta∘alpha}) --- so ``finitely supported'' can start as a plain function on a finite index rather than needing Mathlib's \texttt{Finsupp}.
+  Restrict first to a quiver with finitely many paths total --- the example quiver from Chapter 11 §3 has exactly six (\texttt{e\_0, e\_1, e\_2, alpha, beta, beta∘alpha}) --- so ``finitely supported'' can start as a plain function on a finite index rather than needing Mathlib's \texttt{Finsupp}.
 \item
   Define pointwise addition on this finite carrier and prove it forms a \texttt{CommGroup} (Chapter 8 §2).
 \item
-  Define multiplication by path composition, \texttt{0} on any pair whose endpoints do not match (as the chapter text describes), and prove the monoid laws (\texttt{mul\textbackslash{}\_assoc}/\texttt{one\textbackslash{}\_mul}/\texttt{mul\textbackslash{}\_one}) using the sum of trivial paths as \texttt{one}.
+  Define multiplication by path composition, \texttt{0} on any pair whose endpoints do not match (as the chapter text describes), and prove the monoid laws (\texttt{mul\_assoc}/\texttt{one\_mul}/\texttt{mul\_one}) using the sum of trivial paths as \texttt{one}.
 \item
   Assemble \texttt{Ring (PathAlgebraElem exampleQuiver k)} for a small, fully concrete \texttt{k} (Chapter 8 §5's \texttt{fin3Ring}, \texttt{Fin 3}, is a good first choice, since \texttt{decide} can then check the ring axioms outright).
 \end{enumerate}
 
 \textbf{Deliverable.} A \texttt{Ring} instance on a finite path algebra for a concretely chosen \texttt{k}.
 
-\textbf{Self-verification.} \texttt{\textbackslash{}\#eval} the product of two hand-chosen path-algebra elements and check it against a hand computation of the same product; if \texttt{k} is fully decidable (as \texttt{Fin 3} is), the ring axioms can additionally be discharged by \texttt{decide} rather than by hand, the same shortcut Chapter 8 §5 took for \texttt{fin3Ring}.
+\textbf{Self-verification.} \texttt{\#eval} the product of two hand-chosen path-algebra elements and check it against a hand computation of the same product; if \texttt{k} is fully decidable (as \texttt{Fin 3} is), the ring axioms can additionally be discharged by \texttt{decide} rather than by hand, the same shortcut Chapter 8 §5 took for \texttt{fin3Ring}.
 
 \subsection{3. Acyclic quivers have finite-dimensional path algebras}\label{sec:13-next-steps:03-next-projects:4}
 
@@ -73,7 +73,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 \textbf{Deliverable.} A stated and proved length bound for acyclic quivers, checked against both example quivers.
 
-\textbf{Self-verification.} \texttt{\textbackslash{}\#eval} every path's length in \texttt{exampleQuiver} and confirm none exceeds the vertex count (\texttt{3}); separately, in \texttt{cyclicQuiver} (Chapter 11 appendix, Exercise 1), build a path that goes around the cycle \texttt{gamma ∘ beta ∘ alpha} twice (by \texttt{Path.append}ing \texttt{cPathGammaBetaAlpha} to itself), confirm its length exceeds \texttt{3}, and confirm the bound's proof genuinely does not apply there, as it must not for a cyclic quiver.
+\textbf{Self-verification.} \texttt{\#eval} every path's length in \texttt{exampleQuiver} and confirm none exceeds the vertex count (\texttt{3}); separately, in \texttt{cyclicQuiver} (Chapter 11 appendix, Exercise 1), build a path that goes around the cycle \texttt{gamma ∘ beta ∘ alpha} twice (by \texttt{Path.append}ing \texttt{cPathGammaBetaAlpha} to itself), confirm its length exceeds \texttt{3}, and confirm the bound's proof genuinely does not apply there, as it must not for a cyclic quiver.
 
 \subsection{\texorpdfstring{4. Compare against Mathlib's \texttt{CategoryTheory.Quiver}}{4. Compare against Mathlib's CategoryTheory.Quiver}}\label{sec:13-next-steps:03-next-projects:5}
 
@@ -96,7 +96,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 \textbf{Deliverable.} A hand-written \texttt{QuiverHom} between two of this book's own quivers, with its Mathlib \texttt{Prefunctor} counterpart identified by name.
 
-\textbf{Self-verification.} \texttt{\textbackslash{}\#check @Prefunctor} and compare its fields, one-by-one in a comment, against \texttt{QuiverHom}'s own fields.
+\textbf{Self-verification.} \texttt{\#check @Prefunctor} and compare its fields, one-by-one in a comment, against \texttt{QuiverHom}'s own fields.
 
 \subsection{\texorpdfstring{5. A concrete \texttt{kQ}-module}{5. A concrete kQ-module}}\label{sec:13-next-steps:03-next-projects:6}
 
@@ -127,7 +127,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 \textbf{Deliverable.} One concrete \texttt{Module} instance realizing a representation of the example quiver.
 
-\textbf{Self-verification.} \texttt{\textbackslash{}\#eval} the action of a length-2 path-algebra element (e.g.~the class of \(\beta\alpha\)) on a chosen carrier element, and confirm it matches applying the two arrows' assigned linear maps in sequence by hand.
+\textbf{Self-verification.} \texttt{\#eval} the action of a length-2 path-algebra element (e.g.~the class of \(\beta\alpha\)) on a chosen carrier element, and confirm it matches applying the two arrows' assigned linear maps in sequence by hand.
 
 \subsection{Aside: Church encodings --- data from nothing but functions}\label{sec:13-next-steps:03-next-projects:7}
 

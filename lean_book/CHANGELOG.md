@@ -3,6 +3,54 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Professional LaTeX styling; retire the old PDF pipeline
+
+- **Renamed the top-level LaTeX driver** from the generic `main.tex` to
+  `lean-for-working-algebraists.tex`, matching the book's own name.
+- **Moved `learning-paths.tex` into the front matter**, input right after
+  "About this book" and before Chapter 0 — a reader should see the
+  reading paths before starting, not find them buried in the back matter
+  after every chapter.
+- **Retired the old Pandoc-direct-to-PDF pipeline entirely**:
+  `build/build_pdf.py`, `build/pdf-header.tex`, `build/pdf-metadata.yaml`,
+  and `build/lean4.xml` are removed (`lean4.xml`'s keyword lists live on,
+  transcribed into `latex/lean-listings.tex`). `build/build_latex.py` is
+  now the book's only build pipeline. README's "Building a PDF" section
+  replaced with "Building the LaTeX manuscript," describing the
+  `xelatex`+`biber` compile sequence directly.
+- **Real title page and back cover**, replacing the bare `\maketitle`:
+  a designed title page (title, subtitle, decorative rules, author,
+  toolchain version) in `frontmatter.tex`, and a new `backmatter.tex`
+  with a back-cover-style blurb, highlights, and author line, input at
+  the very end of the document.
+- **Professional chapter/section styling** via `titlesec` (ruled chapter
+  openings, colored section headings) and running headers/footers via
+  `fancyhdr`. The book's recurring boxes (`mathreading`, `progcorner`,
+  `pblproject`) are now colored, bordered `tcolorbox`es instead of plain
+  `amsthm` remarks.
+- **Fixed a real chapter-numbering bug** introduced by the styling pass:
+  `\thechapter` (LaTeX's automatic counter, incrementing once per
+  `\chapter{}` call including the unnumbered Appendix) does not line up
+  with the book's own chapter numbers (Chapter 0 for `00-setup/`, etc.),
+  so Chapter 6's opening page showed both "Chapter 8" (wrong, automatic)
+  and "Chapter 6: ..." (correct, from the title text itself) stacked on
+  top of each other. Fixed by dropping the automatic number entirely —
+  every chapter's title already states its own correct number as prose.
+- **Fixed a pervasive double-escaping bug**: Pandoc's `--listings` output
+  already LaTeX-escapes inline code content (`` `#eval x` `` becomes
+  `\lstinline!\#eval x!`, already correctly escaped), but this pipeline's
+  conversion to `\texttt{}` was escaping it *again*, turning every
+  inline-code `#`, `_`, and `&` into a visible literal backslash
+  character (e.g. `norm\_num` displaying with the backslash showing,
+  instead of rendering as `norm_num`) — affected essentially every
+  inline code reference in the entire book. Verified directly against
+  Pandoc's actual output before fixing, not assumed.
+- `\newtcolorbox`'s own optional-argument bracket is reserved for its
+  key=value options and cannot take a plain title string containing a
+  comma (a second real bug, caught immediately since it's a hard
+  compile error): the checkpoint-project title moved from that bracket
+  to a bold first line inside the box body instead.
+
 ## Unreleased — LaTeX manuscript generation, and a learning-paths page
 
 - Added [`learning-paths.md`](learning-paths.md): a chapter-dependency
@@ -13,7 +61,8 @@ the commit(s) it corresponds to where one exists.
 - Added **`build/build_latex.py`**, generating a full LaTeX manuscript
   from the finished Markdown into a new `lean_book/latex/` tree — one
   `.tex` per Markdown section file (108 in total, mirroring the source
-  layout exactly), a driver per chapter, and a top-level `main.tex`. This
+  layout exactly), a driver per chapter, and a top-level
+  `lean-for-working-algebraists.tex`. This
   phase stops at `.tex`; no PDF is produced by the script itself (a
   Springer submission wants LaTeX source, not a pre-rendered PDF), though
   the whole tree was compiled end to end via `xelatex`+`biber` repeatedly
@@ -58,9 +107,9 @@ the commit(s) it corresponds to where one exists.
   Pandoc's `longtable`+`caption` output for small lookup tables errored
   under a `caption`/`longtable` counter interaction with no `--standalone`
   template to configure it, so tables are simplified to plain `tabular`;
-  and `\input` paths are resolved relative to `main.tex`'s own directory,
-  not the including section file's, which affects every diagram and image
-  reference.
+  and `\input` paths are resolved relative to the top-level driver's own
+  directory, not the including section file's, which affects every
+  diagram and image reference.
 - Do not adopt Springer's `svmult`/`svmono` class files in this pass —
   a separate, later decision — `lean_book/latex/` uses plain, portable
   LaTeX throughout.

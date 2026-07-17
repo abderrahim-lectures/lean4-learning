@@ -8,7 +8,7 @@
 \item
   Add a third arrow \texttt{gamma : ExampleArrow} with \texttt{source gamma = 2} and \texttt{target gamma = 0}, creating a cycle \texttt{0 → 1 → 2 → 0}. Build the path \texttt{gamma ∘ beta ∘ alpha : Path exampleQuiver 0 0}.
 \item
-  Prove \texttt{theorem append\textbackslash{}\_nil\textbackslash{}\_left \textbackslash{}\{V A\textbackslash{}\} \textbackslash{}\{Q : Quiver V A\textbackslash{}\} \textbackslash{}\{u v\textbackslash{}\} (p : Path Q u v) : Path.append (Path.nil u) p = p} by induction on \texttt{p} (mirroring the structure of \texttt{Path.append}'s own recursion), spelling out the base (\texttt{Path.nil}) and inductive (\texttt{Path.cons}) cases as in Chapter 4's \texttt{induction} examples.
+  Prove \texttt{theorem append\_nil\_left \{V A\} \{Q : Quiver V A\} \{u v\} (p : Path Q u v) : Path.append (Path.nil u) p = p} by induction on \texttt{p} (mirroring the structure of \texttt{Path.append}'s own recursion), spelling out the base (\texttt{Path.nil}) and inductive (\texttt{Path.cons}) cases as in Chapter 4's \texttt{induction} examples.
 \item
   (Optional, harder) Sketch --- in comments, no need to complete the Lean --- what a \texttt{structure PathAlgebra (V A : Type) (Q : Quiver V A) (k : Type) (Rg : Ring k)} would need to contain to satisfy \texttt{Ring}'s fields from Chapter 8.
 \end{enumerate}

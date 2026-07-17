@@ -8,13 +8,13 @@
 a \cdot 0 \overset{?}{=} 0
 \]
 
-No \texttt{Ring} axiom directly states this. \href{https://loogle.lean-lang.org/?q=mul_zero}{\texttt{mul\textbackslash{}\_zero}} is not a field of \texttt{Ring} (Chapter 8); it must instead be \emph{derived} from \texttt{left\textbackslash{}\_distrib} plus group cancellation. The general recipe: whenever a goal involves \texttt{0} (or any identity element) in a non-trivial way, attempt rewriting it as \texttt{0 + 0}. This is exactly \hyperref[sec:07-group-theorems:03-theorem-2:1]{Chapter 7's Theorem 2}'s ``pad with the identity'' trick, but here it is applied to the input of the equation to be proved, rather than to the output.
+No \texttt{Ring} axiom directly states this. \href{https://loogle.lean-lang.org/?q=mul_zero}{\texttt{mul\_zero}} is not a field of \texttt{Ring} (Chapter 8); it must instead be \emph{derived} from \texttt{left\_distrib} plus group cancellation. The general recipe: whenever a goal involves \texttt{0} (or any identity element) in a non-trivial way, attempt rewriting it as \texttt{0 + 0}. This is exactly \hyperref[sec:07-group-theorems:03-theorem-2:1]{Chapter 7's Theorem 2}'s ``pad with the identity'' trick, but here it is applied to the input of the equation to be proved, rather than to the output.
 
 \[
 a \cdot 0 = a \cdot (0 + 0) = a\cdot 0 + a \cdot 0
 \]
 
-using \texttt{left\textbackslash{}\_distrib} on the last step. Writing \(x := a \cdot 0\), this shows \(x = x + x\). The goal has thereby become ``an additive-group element that equals its own double is zero'' --- a pure group fact, provable by adding \(-x\) to both sides and using associativity/cancellation exactly as in Chapter 7. \textbf{Recognizing that the ring-shaped goal reduces to a group-shaped goal already known to be solvable} is the real insight; everything thereafter is mechanical \texttt{rw}.
+using \texttt{left\_distrib} on the last step. Writing \(x := a \cdot 0\), this shows \(x = x + x\). The goal has thereby become ``an additive-group element that equals its own double is zero'' --- a pure group fact, provable by adding \(-x\) to both sides and using associativity/cancellation exactly as in Chapter 7. \textbf{Recognizing that the ring-shaped goal reduces to a group-shaped goal already known to be solvable} is the real insight; everything thereafter is mechanical \texttt{rw}.
 
 \begin{lstlisting}
 theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
@@ -45,14 +45,14 @@ If progress is lost partway through, the recovery move is always the same: trans
 
 This is the absorbing law \(a\cdot 0 = 0\), which is \emph{not} an axiom but a consequence of distributivity plus additive cancellation. Writing \(x = a\cdot 0\): \[
 x = a\cdot 0 = a\cdot(0+0) = a\cdot 0 + a\cdot 0 = x + x,
-\] using \(0 = 0+0\) and \texttt{left\textbackslash{}\_distrib}; adding \(-x\) and cancelling gives \(0 = x\). Conceptually this says the map \(x \mapsto a\cdot x\) is a group homomorphism of \((R,+)\), and homomorphisms send the identity to the identity. \(0\) absorbs because multiplication is additive in each argument.
+\] using \(0 = 0+0\) and \texttt{left\_distrib}; adding \(-x\) and cancelling gives \(0 = x\). Conceptually this says the map \(x \mapsto a\cdot x\) is a group homomorphism of \((R,+)\), and homomorphisms send the identity to the identity. \(0\) absorbs because multiplication is additive in each argument.
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} Where the book spends a full \texttt{have}/\texttt{congrArg}/\texttt{rw} derivation getting from \texttt{left\textbackslash{}\_distrib} and group cancellation to \(a\cdot 0=0\), Mathlib already proves this and gives it exactly the same name:
+\textbf{Mathlib equivalent.} Where the book spends a full \texttt{have}/\texttt{congrArg}/\texttt{rw} derivation getting from \texttt{left\_distrib} and group cancellation to \(a\cdot 0=0\), Mathlib already proves this and gives it exactly the same name:
 
 \begin{lstlisting}
 example {R : Type*} [Ring R] (a : R) : a * 0 = 0 := mul_zero a
 \end{lstlisting}
 
-There is nothing to derive --- \texttt{mul\textbackslash{}\_zero} is proved once, generically, for every \texttt{Ring} (indeed every \texttt{MulZeroClass}), by essentially the argument above, and is then simply \emph{available} rather than re-derived at each use site.
+There is nothing to derive --- \texttt{mul\_zero} is proved once, generically, for every \texttt{Ring} (indeed every \texttt{MulZeroClass}), by essentially the argument above, and is then simply \emph{available} rather than re-derived at each use site.

@@ -20,7 +20,7 @@ Reading this carefully:
 \item
   \texttt{nil (v : V) : Path Q v v} --- the trivial path at \texttt{v}, going from \texttt{v} to \texttt{v} in zero steps. This is \(e_v\) from the math above.
 \item
-  \texttt{cons \textbackslash{}\{u v w : V\textbackslash{}\} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w} --- given an existing path \texttt{p} from \texttt{u} to \texttt{v}, and an arrow \texttt{a} whose source is (provably, via \texttt{h}) \texttt{v} and whose target is (provably, via \texttt{h'}) \texttt{w}, \texttt{p} can be extended by appending \texttt{a}, producing a path from \texttt{u} to \texttt{w}. The two proof fields \texttt{h} and \texttt{h'} are exactly what \emph{prevents} the construction of nonsense paths: an arrow cannot be \texttt{cons}ed onto a path unless its source matches where the path left off.
+  \texttt{cons \{u v w : V\} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w} --- given an existing path \texttt{p} from \texttt{u} to \texttt{v}, and an arrow \texttt{a} whose source is (provably, via \texttt{h}) \texttt{v} and whose target is (provably, via \texttt{h'}) \texttt{w}, \texttt{p} can be extended by appending \texttt{a}, producing a path from \texttt{u} to \texttt{w}. The two proof fields \texttt{h} and \texttt{h'} are exactly what \emph{prevents} the construction of nonsense paths: an arrow cannot be \texttt{cons}ed onto a path unless its source matches where the path left off.
 \end{itemize}
 
 Note that \texttt{cons} builds the path by appending the new arrow at the \emph{end}, matching the natural description ``take path \texttt{p}, then follow arrow \texttt{a}.''

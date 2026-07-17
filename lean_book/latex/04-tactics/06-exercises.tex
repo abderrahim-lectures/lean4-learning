@@ -6,11 +6,11 @@
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Prove \texttt{theorem and\textbackslash{}\_comm\textbackslash{}\_tac \textbackslash{}\{P Q : Prop\textbackslash{}\} (h : P ∧ Q) : Q ∧ P := by ...} using \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}}, \texttt{h.left}, \texttt{h.right}.
+  Prove \texttt{theorem and\_comm\_tac \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P := by ...} using \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}}, \texttt{h.left}, \texttt{h.right}.
 \item
-  Prove \texttt{theorem nat\textbackslash{}\_mul\textbackslash{}\_zero (n : Nat) : n * 0 = 0 := by rfl} --- check whether \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} alone works, and if not, use \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction}}.
+  Prove \texttt{theorem nat\_mul\_zero (n : Nat) : n * 0 = 0 := by rfl} --- check whether \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} alone works, and if not, use \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction}}.
 \item
-  Rewrite the \texttt{modus\textbackslash{}\_ponens} proof from Chapter 3 in tactic mode.
+  Rewrite the \texttt{modus\_ponens} proof from Chapter 3 in tactic mode.
 \end{enumerate}
 
 Solutions: \hyperref[sec:14-appendix-solutions:03-chapter-4:1]{Appendix, Chapter 4}.
