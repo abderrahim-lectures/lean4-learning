@@ -28,13 +28,13 @@ Part I is now complete: terms and types, structures, propositions and proofs, ta
 
 \begin{lstlisting}
 structure Monoid (M : Type) where
-  op : M → M → M
+  op : M (*$\rightarrow$*) M (*$\rightarrow$*) M
   id : M
-  assoc : ∀ a b c : M, op (op a b) c = op a (op b c)
-  id_left : ∀ a : M, op id a = a
-  id_right : ∀ a : M, op a id = a
+  assoc : (*$\forall$*) a b c : M, op (op a b) c = op a (op b c)
+  id_left : (*$\forall$*) a : M, op id a = a
+  id_right : (*$\forall$*) a : M, op a id = a
 
-def listMonoid (α : Type) : Monoid (List α) where
+def listMonoid ((*$\alpha$*) : Type) : Monoid (List (*$\alpha$*)) where
   op := List.append
   id := []
   assoc := by intro a b c; exact List.append_assoc a b c
@@ -42,15 +42,15 @@ def listMonoid (α : Type) : Monoid (List α) where
   id_right := by intro a; exact List.append_nil a
 
 theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
-    (h : ∀ a : M, Mn.op e' a = a) : e' = Mn.id := by
+    (h : (*$\forall$*) a : M, Mn.op e' a = a) : e' = Mn.id := by
   have step1 : Mn.op e' Mn.id = Mn.id := h Mn.id
   have step2 : Mn.op e' Mn.id = e' := Mn.id_right e'
-  rw [← step2]
+  rw [(*$\leftarrow$*) step2]
   exact step1
 
 -- Applying the generic theorem to the concrete instance costs nothing
--- beyond naming it — the same "prove once, use everywhere" payoff
--- Chapter 6 §6 promises for Group, delivered here one chapter early.
+-- beyond naming it (*\textemdash{}*) the same "prove once, use everywhere" payoff
+-- Chapter 6 (*\S*)6 promises for Group, delivered here one chapter early.
 #check monoid_id_unique (listMonoid Nat) [] (fun a => List.nil_append a)
 \end{lstlisting}
 

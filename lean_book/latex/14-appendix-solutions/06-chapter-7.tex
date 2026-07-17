@@ -18,9 +18,9 @@ By \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 7, Theorem 
 theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c := by
   have h1 : Grp.op (Grp.inv a) (Grp.op a b) = Grp.op (Grp.inv a) (Grp.op a c) := by
     rw [h]
-  rw [← Grp.assoc (Grp.inv a) a b] at h1
+  rw [(*$\leftarrow$*) Grp.assoc (Grp.inv a) a b] at h1
   -- h1 : op (op (inv a) a) b = op (inv a) (op a c)
-  rw [← Grp.assoc (Grp.inv a) a c] at h1
+  rw [(*$\leftarrow$*) Grp.assoc (Grp.inv a) a c] at h1
   -- h1 : op (op (inv a) a) b = op (op (inv a) a) c
   rw [Grp.inv_left] at h1
   -- h1 : op id b = op id c

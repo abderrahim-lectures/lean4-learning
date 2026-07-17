@@ -27,7 +27,7 @@ Part II closes here, having built groups, rings, modules, and now quivers and pa
 \textbf{Self-verification.}
 
 \begin{lstlisting}
-def Path.length {V A : Type} {Q : Quiver V A} : {u v : V} → Path Q u v → Nat
+def Path.length {V A : Type} {Q : Quiver V A} : {u v : V} (*$\rightarrow$*) Path Q u v (*$\rightarrow$*) Nat
   | _, _, Path.nil _ => 0
   | _, _, Path.cons _ _ _ p => p.length + 1
 
@@ -45,7 +45,7 @@ theorem Path.append_length {V A : Type} {Q : Quiver V A} {u v w : V}
     simp only [Path.append, Path.length]
     rw [ih, Nat.add_assoc]
 
--- The concrete check: pathBetaAlpha was §5's own worked example of
+-- The concrete check: pathBetaAlpha was (*\S*)5's own worked example of
 -- Path.append; its length should be pathAlpha.length + pathBetaOnly.length.
 example : (Path.append pathAlpha pathBetaOnly).length =
     pathAlpha.length + pathBetaOnly.length :=

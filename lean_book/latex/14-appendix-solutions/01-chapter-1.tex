@@ -14,7 +14,7 @@ The result is \textbf{not} simply one of the two inputs, the way \(K\)'s result 
 \textbf{2. \texttt{Vec.toList : Vec α n → List α}}
 
 \begin{lstlisting}
-def Vec.toList : Vec α n → List α
+def Vec.toList : Vec (*$\alpha$*) n (*$\rightarrow$*) List (*$\alpha$*)
   | Vec.nil => []
   | Vec.cons a rest => a :: Vec.toList rest
 \end{lstlisting}
@@ -24,7 +24,7 @@ def Vec.toList : Vec α n → List α
 \textbf{3. A second \texttt{Σ n : Nat, Fin n}, and why \texttt{Σ n : Nat, n > 0} fails}
 
 \begin{lstlisting}
-def anotherSigma : Σ n : Nat, Fin n := ⟨5, ⟨0, by decide⟩⟩
+def anotherSigma : (*$\Sigma$*) n : Nat, Fin n := (*$\langle$*)5, (*$\langle$*)0, by decide(*$\rangle$*)(*$\rangle$*)
 \end{lstlisting}
 
 (\texttt{0 : Fin 5} is valid since \(0 < 5\); any pair \texttt{⟨k, ⟨i, h⟩⟩} with \texttt{i < k} works.) \texttt{Σ n : Nat, n > 0} fails to type-check because \texttt{n > 0 : Prop} (\texttt{Sort 0}), while Lean's \texttt{Sigma} is declared as \texttt{structure Sigma \{α : Type u\} (β : α → Type v)} --- the second component's \emph{family} must land in some \texttt{Type v} (\texttt{Sort (v+1)} for \texttt{v ≥ 0}), which \texttt{Prop} (\texttt{Sort 0}) is not. \texttt{Fin n : Type} clears that bar; \texttt{n > 0 : Prop} does not. This is exactly why \texttt{∃} exists as \texttt{Sigma}'s \texttt{Prop}-restricted cousin (Chapter 1 §5) rather than everyone just writing \texttt{Σ} everywhere.
