@@ -132,6 +132,10 @@ See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
 - [Bibliography](bibliography.md) — every external source cited in any
   chapter's "References" section, consolidated into one list with one
   citation style; each chapter links back to the entries it uses.
+- [Python companion](python-companion/python_companion.ipynb) — every
+  "Programmer's corner (Python)" snippet in the book, collected into one
+  runnable notebook that opens directly in Google Colab, no Lean
+  installation required.
 
 ## Building the LaTeX manuscript
 
