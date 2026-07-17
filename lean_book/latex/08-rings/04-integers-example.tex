@@ -34,7 +34,7 @@ def intRing : Ring Int where
     exact Int.add_mul a b c
 \end{lstlisting}
 
-Every proof obligation is again a one-line \texttt{exact} naming a specific core-library fact about \texttt{Int} (\texttt{Int.mul\textbackslash{}\_assoc}, \texttt{Int.one\textbackslash{}\_mul}, \ldots), exactly as in Chapter 6. Integer arithmetic is not being proved from nothing; rather, already-known facts are assembled into the \texttt{Ring} bundle.
+Every proof obligation is again a one-line \texttt{exact} naming a specific core-library fact about \texttt{Int} (\texttt{Int.mul\_assoc}, \texttt{Int.one\_mul}, \ldots), exactly as in Chapter 6. Integer arithmetic is not being proved from nothing; rather, already-known facts are assembled into the \texttt{Ring} bundle.
 
 \begin{mathreading}
 
@@ -56,4 +56,4 @@ example (a b c : Int) : a * (b + c) = a * b + a * c := mul_add a b c
 example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
 \end{lstlisting}
 
-\href{https://loogle.lean-lang.org/?q=mul_add}{\texttt{mul\textbackslash{}\_add}}/\href{https://loogle.lean-lang.org/?q=add_mul}{\texttt{add\textbackslash{}\_mul}} are Mathlib's names for \texttt{left\textbackslash{}\_distrib}/\texttt{right\textbackslash{}\_distrib}. They are the same laws, but stated generically over \texttt{[Ring R]} (or the weaker \texttt{[Distrib R]}) instead of being cited per-type as \texttt{Int.mul\textbackslash{}\_add}/\texttt{Int.add\textbackslash{}\_mul}.
+\href{https://loogle.lean-lang.org/?q=mul_add}{\texttt{mul\_add}}/\href{https://loogle.lean-lang.org/?q=add_mul}{\texttt{add\_mul}} are Mathlib's names for \texttt{left\_distrib}/\texttt{right\_distrib}. They are the same laws, but stated generically over \texttt{[Ring R]} (or the weaker \texttt{[Distrib R]}) instead of being cited per-type as \texttt{Int.mul\_add}/\texttt{Int.add\_mul}.

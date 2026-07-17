@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Generate a LaTeX manuscript from the book's Markdown, one .tex file per
-Markdown section file, mirroring the source layout exactly. Unlike
-`build_pdf.py`, this script does not invoke a LaTeX engine and produces no
-PDF -- it stops at emitting `.tex`, per this project's Phase 5 plan (a
-Springer submission wants `.tex` source, not a pre-rendered PDF).
+Markdown section file, mirroring the source layout exactly. This script
+does not invoke a LaTeX engine and produces no PDF -- it stops at
+emitting `.tex`, per this project's Phase 5 plan (a Springer submission
+wants `.tex` source, not a pre-rendered PDF). This is the book's only
+build pipeline; the previous Pandoc-direct-to-PDF script has been retired.
 
 Run from anywhere: `python build/build_latex.py`. Requires `pandoc` on
 PATH; does not require a LaTeX distribution to run (only to later compile
@@ -13,8 +14,9 @@ Design, in short:
 - Every chapter directory becomes `latex/<chapter>/`, containing one
   `.tex` per source `.md` (same stem) plus a `00-index.tex` driver that
   `\input`s them in order.
-- `main.tex` `\input`s every chapter driver in reading order, plus the
-  three root-level reference pages and a generated bibliography chapter.
+- `lean-for-working-algebraists.tex` (the top-level driver) `\input`s
+  every chapter driver in reading order, plus the three root-level
+  reference pages and a generated bibliography chapter.
 - Every heading gets a hand-assigned, positionally unique LaTeX label
   (`sec:<chapter>:<stem>:<n>`), overriding Pandoc's own auto-slug labels,
   so that identical headings in different chapters (nearly every chapter
@@ -34,7 +36,7 @@ Design, in short:
   touches Mermaid source at all in this pipeline.
 - Code fences convert via Pandoc's `--listings` flag to `\begin{lstlisting}`,
   styled by `lean-listings.tex` (Lean) and plain `language=Python`
-  (Python), both `\input` from `main.tex`.
+  (Python), both `\input` from the top-level driver.
 - "**Mathematical reading.**"/"**Programmer's corner (Python).**"
   lead-in paragraphs become `mathreading`/`progcorner` environments
   (single-paragraph scope -- a following code block or list is not
@@ -49,6 +51,7 @@ import sys
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
 BOOK_DIR = os.path.dirname(BUILD_DIR)
 LATEX_DIR = os.path.join(BOOK_DIR, "latex")
+MAIN_TEX_NAME = "lean-for-working-algebraists.tex"
 
 CHAPTERS = [
     "00-setup",
@@ -68,11 +71,16 @@ CHAPTERS = [
     "14-appendix-solutions",
 ]
 
-# Root-level reference pages, converted the same way but with no
-# sub-sections/chapter driver of their own -- each is one .tex file
-# directly under latex/, input from main.tex's back-matter.
-ROOT_FILES = [
+# Root-level pages, converted the same way but with no sub-sections/chapter
+# driver of their own -- each is one .tex file directly under latex/.
+# FRONT_MATTER_FILES are input right after frontmatter.tex, before Chapter 0
+# -- a reader should see the learning paths before starting, not after
+# finishing every chapter. ROOT_FILES are back-matter reference pages,
+# input after the last chapter.
+FRONT_MATTER_FILES = [
     "learning-paths.md",
+]
+ROOT_FILES = [
     "tactic-and-library-reference.md",
     "lambda-calculus-dictionary.md",
 ]
@@ -143,7 +151,7 @@ def build_registry():
                 continue
             stem = name[:-3]
             registry[f"{chapter}/{name}"] = primary_label(chapter, stem)
-    for name in ROOT_FILES + ["bibliography.md"]:
+    for name in FRONT_MATTER_FILES + ROOT_FILES + ["bibliography.md"]:
         stem = name[:-3]
         registry[name] = primary_label("", stem)
     return registry
@@ -274,17 +282,20 @@ def wrap_reading_boxes(text):
 
 def wrap_pblproject_tex(tex, relkey, title):
     """Post-Pandoc: wrap the whole file in a pblproject box, dropping its
-    own \\section{...} heading (the box's bracket-title already names it)
-    but keeping that heading's \\label so cross-references into this file
-    still resolve. Operates on the rendered .tex, not the source Markdown,
-    so it can see (and strip) Pandoc's actual \\section command."""
+    own \\section{...} heading (the box supplies its own auto-numbered
+    "Checkpoint Project N" title; this file's specific title becomes a
+    bold first line inside the box body instead -- tcolorbox's own
+    optional-argument bracket is reserved for its key=value options and
+    cannot take a plain string containing a comma) but keeping that
+    heading's \\label so cross-references into this file still resolve.
+    Operates on the rendered .tex, not the source Markdown, so it can see
+    (and strip) Pandoc's actual \\section command."""
     if relkey not in PBLPROJECT_FILES:
         return tex
-    # amsthm's optional bracket-title argument is plain text, not a place
-    # to nest \texttt{}; drop Markdown backticks rather than convert them.
-    title = title.replace("`", "")
+    title = escape_latex_text(title.replace("`", ""))
+    title_line = f"\\textbf{{\\large {title}}}\\par\\smallskip\n"
     if not tex.startswith("\\section{"):
-        return f"\\begin{{pblproject}}[{title}]\n{tex}\n\\end{{pblproject}}\n"
+        return f"\\begin{{pblproject}}\n{title_line}{tex}\n\\end{{pblproject}}\n"
     # \section{...} may itself contain nested braces (e.g. \texorpdfstring{A}{B}),
     # so a non-greedy regex up to the first "}" cuts it short; match braces
     # by hand to find where \section{...} actually ends.
@@ -305,7 +316,7 @@ def wrap_pblproject_tex(tex, relkey, title):
     if label_match:
         label = label_match.group(1)
         rest = rest[label_match.end():]
-    return f"\\begin{{pblproject}}[{title}]\n{label}\n{rest}\n\\end{{pblproject}}\n"
+    return f"\\begin{{pblproject}}\n{label}\n{title_line}{rest}\n\\end{{pblproject}}\n"
 
 
 LATEX_SPECIAL_RE = re.compile(r'([\\#$%&_{}~^])')
@@ -367,8 +378,8 @@ def simplify_tables(tex):
 def fix_image_paths(tex, chapter):
     """Pandoc emits \\includegraphics{...} with the path exactly as
     written in the source Markdown (chapter-relative, e.g.
-    "images/foo.png"). \\input resolves paths relative to main.tex's own
-    directory (latex/), not the including sub-file's, so that path needs
+    "images/foo.png"). \\input resolves paths relative to the top-level
+    driver's own directory (latex/), not the including sub-file's, so that path needs
     "../<chapter>/" prepended to reach the original image in the
     Markdown source tree (images are not duplicated into latex/)."""
     if not chapter:
@@ -391,13 +402,16 @@ def fix_inline_code(tex):
     breaks on plain Sigma/arrows even without any other interference) --
     unlike the block-level \\begin{lstlisting} environment, which handles
     the same characters (via newunicodechar) without issue. Convert every
-    inline occurrence to \\texttt{...} instead, escaping LaTeX-special
-    characters by hand since \\lstinline's content arrives unescaped
-    (verbatim-read) while \\texttt{} is ordinary text mode."""
+    inline occurrence to \\texttt{...} instead. Pandoc has *already*
+    LaTeX-escaped this content for text mode (\\#, \\_, \\&, etc. --
+    verified directly: `` `#eval x` `` becomes `\lstinline!\#eval x!`, not
+    a literal unescaped `#`), so it is used as-is; re-escaping it here
+    (an earlier version of this function did, via escape_latex_text)
+    double-escapes every special character (e.g. `\#` becomes
+    `\textbackslash{}\#eval`, a literal backslash glyph in the output)."""
     def _sub(m):
-        delim = m.group(1)
         content = m.group(2)
-        return "\\texttt{" + escape_latex_text(content) + "}"
+        return "\\texttt{" + content + "}"
 
     pattern = re.compile(r'\\passthrough\{\\lstinline(.)(.*?)\1\}')
     return pattern.sub(_sub, tex)
@@ -518,21 +532,28 @@ def write_chapter_driver(chapter, stems):
 
 
 def write_main_driver():
-    out_path = os.path.join(LATEX_DIR, "main.tex")
+    out_path = os.path.join(LATEX_DIR, MAIN_TEX_NAME)
     lines = [
-        "% Auto-generated top-level driver. Inputs every chapter driver in\n"
-        "% reading order, plus the root-level reference pages and the\n"
-        "% generated bibliography. Preamble lives in preamble.tex.\n",
+        "% Auto-generated top-level driver. Inputs the front matter (title\n"
+        "% page, About this book, then the learning-paths page), every\n"
+        "% chapter driver in reading order, the back-matter reference pages,\n"
+        "% the generated bibliography, and a back-cover page. Preamble lives\n"
+        "% in preamble.tex; front matter in frontmatter.tex; back cover in\n"
+        "% backmatter.tex (both hand-written, not generated from Markdown).\n",
         "\\input{preamble.tex}\n",
         "\\begin{document}\n",
         "\\input{frontmatter.tex}\n",
     ]
+    for name in FRONT_MATTER_FILES:
+        stem = name[:-3]
+        lines.append(f"\\input{{{stem}.tex}}\n")
     for chapter in CHAPTERS:
         lines.append(f"\\input{{{chapter}/00-index.tex}}\n")
     for name in ROOT_FILES:
         stem = name[:-3]
         lines.append(f"\\input{{{stem}.tex}}\n")
     lines.append("\\input{bibliography.tex}\n")
+    lines.append("\\input{backmatter.tex}\n")
     lines.append("\\end{document}\n")
     with open(out_path, "w", encoding="utf-8") as fh:
         fh.writelines(lines)
@@ -561,13 +582,13 @@ def main():
             total += 1
             print(f"  {chapter}/{name} -> latex/{chapter}/{stem}.tex")
         write_chapter_driver(chapter, stems)
-    for name in ROOT_FILES:
+    for name in FRONT_MATTER_FILES + ROOT_FILES:
         convert_file("", name)
         total += 1
         print(f"  {name} -> latex/{name[:-3]}.tex")
     write_bibliography_chapter()
     write_main_driver()
-    print(f"Converted {total} section files. Wrote latex/main.tex.")
+    print(f"Converted {total} section files. Wrote latex/{MAIN_TEX_NAME}.")
 
 
 if __name__ == "__main__":

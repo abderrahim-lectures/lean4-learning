@@ -11,7 +11,7 @@ theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
 
 The goal is \texttt{e' = Grp.id}, an equality between two elements of \texttt{G} about which we individually know very little: \texttt{e'} only through \texttt{h}, and \texttt{Grp.id} only through \texttt{Grp}'s own axioms. \textbf{When a goal is ``show two opaque things are equal,'' the standard move is to find a \emph{third} expression that both sides equal on their own, then chain the two equalities.} We ask: is there anything both \texttt{e'} and \texttt{Grp.id} can be related to?
 
-\texttt{h} lets us compute \texttt{Grp.op e' a} for \emph{any} \texttt{a} --- in particular for \texttt{a := Grp.id}, giving \texttt{Grp.op e' Grp.id = Grp.id}. Separately, \texttt{Grp.id\textbackslash{}\_right} (a field of \texttt{Group}, so available for free) says \texttt{Grp.op e' Grp.id = e'} (instantiating its universal quantifier at \texttt{e'}). Both describe \texttt{Grp.op e' Grp.id} --- that is the third expression. Once this is noticed, the proof is a matter of bookkeeping:
+\texttt{h} lets us compute \texttt{Grp.op e' a} for \emph{any} \texttt{a} --- in particular for \texttt{a := Grp.id}, giving \texttt{Grp.op e' Grp.id = Grp.id}. Separately, \texttt{Grp.id\_right} (a field of \texttt{Group}, so available for free) says \texttt{Grp.op e' Grp.id = e'} (instantiating its universal quantifier at \texttt{e'}). Both describe \texttt{Grp.op e' Grp.id} --- that is the third expression. Once this is noticed, the proof is a matter of bookkeeping:
 
 \begin{lstlisting}
 theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
@@ -33,11 +33,11 @@ e\): the standard ``two things equal to a common third are equal.'' (The same ar
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} Phrased against Mathlib's \href{https://loogle.lean-lang.org/?q=Group}{\texttt{Group}} class, \texttt{Grp.op}/ \texttt{Grp.id}/\texttt{Grp.id\textbackslash{}\_right} become the ordinary \texttt{*}/\texttt{1}/\href{https://loogle.lean-lang.org/?q=mul_one}{\texttt{mul\textbackslash{}\_one}}, and the whole ``third expression'' chain collapses into a single \texttt{.symm.trans}:
+\textbf{Mathlib equivalent.} Phrased against Mathlib's \href{https://loogle.lean-lang.org/?q=Group}{\texttt{Group}} class, \texttt{Grp.op}/ \texttt{Grp.id}/\texttt{Grp.id\_right} become the ordinary \texttt{*}/\texttt{1}/\href{https://loogle.lean-lang.org/?q=mul_one}{\texttt{mul\_one}}, and the whole ``third expression'' chain collapses into a single \texttt{.symm.trans}:
 
 \begin{lstlisting}
 example {G : Type*} [Group G] (e' : G) (h : ∀ a : G, e' * a = a) : e' = 1 :=
   (mul_one e').symm.trans (h 1)
 \end{lstlisting}
 
-This is the same proof, the same two facts glued at their common value \(e'\cdot 1\): \texttt{h 1} is the book's \texttt{step1} and \texttt{mul\textbackslash{}\_one e'} is \texttt{step2}. The only difference is that \texttt{1} is written for \texttt{Grp.id}, and there is no field-projection to spell out, since \texttt{*}/\texttt{1} already mean ``whatever this type's \texttt{Group} instance says they mean.''
+This is the same proof, the same two facts glued at their common value \(e'\cdot 1\): \texttt{h 1} is the book's \texttt{step1} and \texttt{mul\_one e'} is \texttt{step2}. The only difference is that \texttt{1} is written for \texttt{Grp.id}, and there is no field-projection to spell out, since \texttt{*}/\texttt{1} already mean ``whatever this type's \texttt{Group} instance says they mean.''
