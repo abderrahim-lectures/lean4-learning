@@ -7,7 +7,7 @@ theorem neg_mul (a b : R) :
     Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b) := by
   apply left_inverse_unique Rg.addGrp.toGroup (Rg.mul a b) (Rg.mul (Rg.addGrp.toGroup.inv a) b)
   -- Goal: op (mul (inv a) b) (mul a b) = id
-  rw [← Rg.right_distrib]
+  rw [(*$\leftarrow$*) Rg.right_distrib]
   -- justified by right_distrib, read backwards: combines the two products
   -- mul (inv a) b and mul a b into mul (op (inv a) a) b.
   -- Goal: mul (op (inv a) a) b = id

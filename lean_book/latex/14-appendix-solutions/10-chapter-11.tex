@@ -4,9 +4,9 @@
 
 \begin{lstlisting}
 inductive CyclicArrow where
-  | alpha : CyclicArrow   -- 0 → 1
-  | beta : CyclicArrow     -- 1 → 2
-  | gamma : CyclicArrow    -- 2 → 0
+  | alpha : CyclicArrow   -- 0 (*$\rightarrow$*) 1
+  | beta : CyclicArrow     -- 1 (*$\rightarrow$*) 2
+  | gamma : CyclicArrow    -- 2 (*$\rightarrow$*) 0
 
 def cyclicQuiver : Quiver (Fin 3) CyclicArrow where
   source := fun a => match a with
@@ -38,8 +38,8 @@ theorem append_nil_left {V A : Type} {Q : Quiver V A} {u v : V} (p : Path Q u v)
   induction p with
   | nil =>
     -- Goal: Path.append (Path.nil u) (Path.nil u) = Path.nil u
-    -- (`nil`'s case binds no fresh variable here — the vertex is already
-    -- fixed by p's own type — so there is nothing to name.)
+    -- (`nil`'s case binds no fresh variable here (*\textemdash{}*) the vertex is already
+    -- fixed by p's own type (*\textemdash{}*) so there is nothing to name.)
     -- Path.append unfolds on its second argument being `nil`, giving
     -- `Path.nil u` on the nose.
     rfl
@@ -68,7 +68,7 @@ This mirrors \texttt{Path.append}'s own recursion, case for case. \texttt{Path.a
 -- the honest way to do this; a simplified sketch:
 structure PathAlgebraElem (V A : Type) (Q : Quiver V A) (k : Type) where
   -- coeff p = the coefficient of path p, for finitely many nonzero p
-  coeff : {u v : V} → Path Q u v → k
+  coeff : {u v : V} (*$\rightarrow$*) Path Q u v (*$\rightarrow$*) k
   -- (a finiteness/support condition would be required here in a full
   -- development, e.g. via Mathlib's `Finsupp`)
 
@@ -76,10 +76,10 @@ structure PathAlgebraElem (V A : Type) (Q : Quiver V A) (k : Type) where
 --   addGrp : CommGroup (PathAlgebraElem V A Q k)   -- pointwise addition of coefficients
 --   mul    : concatenate paths, multiplying and summing coefficients over
 --            all ways two paths compose (zero when endpoints don't match)
---   one    : the sum, over all vertices v, of 1 · (trivial path at v)
+--   one    : the sum, over all vertices v, of 1 (*$\cdot$*) (trivial path at v)
 --            (an idempotent identity, since Q may have infinitely many
 --            vertices this "one" is only literally an element when Q0 is
---            finite — for infinite Q the path algebra is typically only
+--            finite (*\textemdash{}*) for infinite Q the path algebra is typically only
 --            a "ring with local units," a subtlety Mathlib's category-
 --            theoretic treatment handles more gracefully than a bare Ring)
 \end{lstlisting}
@@ -89,7 +89,7 @@ The real finiteness/support bookkeeping (tracking which paths have nonzero coeff
 \textbf{Checkpoint project: path length, and composition respects it}
 
 \begin{lstlisting}
-def Path.length {V A : Type} {Q : Quiver V A} : {u v : V} → Path Q u v → Nat
+def Path.length {V A : Type} {Q : Quiver V A} : {u v : V} (*$\rightarrow$*) Path Q u v (*$\rightarrow$*) Nat
   | _, _, Path.nil _ => 0
   | _, _, Path.cons _ _ _ p => p.length + 1
 

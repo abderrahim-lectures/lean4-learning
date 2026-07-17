@@ -21,7 +21,7 @@ theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
   cases X
   cases Y
   rw [Mat2.mk.injEq]
-  exact ⟨h1, h2, h3, h4⟩
+  exact (*$\langle$*)h1, h2, h3, h4(*$\rangle$*)
 \end{lstlisting}
 
 \begin{mathreading}
@@ -51,13 +51,13 @@ def Mat2.neg (X : Mat2) : Mat2 where
 \texttt{Mat2.neg} is entrywise \(-\).
 
 \begin{lstlisting}
-def Mat2.zero : Mat2 := ⟨0, 0, 0, 0⟩
+def Mat2.zero : Mat2 := (*$\langle$*)0, 0, 0, 0(*$\rangle$*)
 \end{lstlisting}
 
 \texttt{Mat2.zero} is the zero matrix.
 
 \begin{lstlisting}
--- (row i, col k) entry of X * Y is Σⱼ X[i,j] * Y[j,k]; with only two
+-- (row i, col k) entry of X * Y is (*$\Sigma$*)(*${}_j$*) X[i,j] * Y[j,k]; with only two
 -- indices this sum is just two terms, written out directly.
 def Mat2.mul (X Y : Mat2) : Mat2 where
   a11 := X.a11 * Y.a11 + X.a12 * Y.a21
@@ -69,7 +69,7 @@ def Mat2.mul (X Y : Mat2) : Mat2 where
 \texttt{Mat2.mul} is the matrix product with \((XY)_{ik} = \sum_j X_{ij}Y_{jk}\), here the two-term sums since \(n = 2\).
 
 \begin{lstlisting}
-def Mat2.one : Mat2 := ⟨1, 0, 0, 1⟩
+def Mat2.one : Mat2 := (*$\langle$*)1, 0, 0, 1(*$\rangle$*)
 \end{lstlisting}
 
 \texttt{Mat2.one} is the identity \(I = \begin{psmallmatrix}1&0\\0&1\end{psmallmatrix}\). Together these five definitions are the operations of the matrix ring \(M_2(\mathbb{Z})\).
@@ -79,11 +79,11 @@ def Mat2.one : Mat2 := ⟨1, 0, 0, 1⟩
 Before building the \texttt{Ring Mat2} instance, consider the very fact that motivates this example:
 
 \begin{lstlisting}
-def X : Mat2 := ⟨1, 1, 0, 1⟩
-def Y : Mat2 := ⟨1, 0, 1, 1⟩
+def X : Mat2 := (*$\langle$*)1, 1, 0, 1(*$\rangle$*)
+def Y : Mat2 := (*$\langle$*)1, 0, 1, 1(*$\rangle$*)
 
-#eval Mat2.mul X Y   -- ⟨2, 1, 1, 1⟩
-#eval Mat2.mul Y X    -- ⟨1, 1, 1, 2⟩
+#eval Mat2.mul X Y   -- (*$\langle$*)2, 1, 1, 1(*$\rangle$*)
+#eval Mat2.mul Y X    -- (*$\langle$*)1, 1, 1, 2(*$\rangle$*)
 \end{lstlisting}
 
 \texttt{\#eval} here is doing real work: it is a two-line proof by computation that \texttt{mul} is not commutative. This is cheaper than any hand-written counterexample proof, and it is exactly the kind of thing to try before committing to a \texttt{theorem}. Should \texttt{¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X} be needed as a theorem, this computed pair \texttt{(X, Y)} serves as the witness.
@@ -107,7 +107,7 @@ example : Ring (Matrix (Fin 2) (Fin 2) Int) := inferInstance
 def X' : Matrix (Fin 2) (Fin 2) Int := !![1, 1; 0, 1]
 def Y' : Matrix (Fin 2) (Fin 2) Int := !![1, 0; 1, 1]
 
-example : X' * Y' ≠ Y' * X' := by decide
+example : X' * Y' (*$\neq$*) Y' * X' := by decide
 \end{lstlisting}
 
 \subsection{The additive group and the ring}\label{sec:08-rings:07-matrices:3}
@@ -153,14 +153,14 @@ def mat2CommGroup : CommGroup Mat2 where
 \texttt{mat2CommGroup} upgrades \texttt{mat2Group} to an abelian group by supplying commutativity, again entrywise via \texttt{Mat2.ext} and \texttt{Int.add\_\allowbreak{}comm}.
 
 \begin{lstlisting}
--- A reusable shuffle: rearranges (a+b)+(c+d) into (a+c)+(b+d) — exactly
+-- A reusable shuffle: rearranges (a+b)+(c+d) into (a+c)+(b+d) (*\textemdash{}*) exactly
 -- what's needed whenever a "product of sums" expands into four cross
 -- terms that must be regrouped to match the other side.
 theorem add4_reorder (a b c d : Int) : a + b + (c + d) = a + c + (b + d) := by
   rw [Int.add_assoc a b (c + d)]
   rw [show b + (c + d) = c + (b + d) from by
-    rw [← Int.add_assoc, Int.add_comm b c, Int.add_assoc]]
-  rw [← Int.add_assoc a c (b + d)]
+    rw [(*$\leftarrow$*) Int.add_assoc, Int.add_comm b c, Int.add_assoc]]
+  rw [(*$\leftarrow$*) Int.add_assoc a c (b + d)]
 
 def mat2Ring : Ring Mat2 where
   addGrp := mat2CommGroup
@@ -170,29 +170,29 @@ def mat2Ring : Ring Mat2 where
     intro X Y Z
     -- Unlike addition, each entry of (X * Y) * Z expands to a sum of
     -- *four* products of three matrix entries (vs. Int.mul_assoc's single
-    -- rebracketing) — associativity of matrix multiplication is
+    -- rebracketing) (*\textemdash{}*) associativity of matrix multiplication is
     -- distributivity-plus-associativity of the underlying ring applied
     -- four times per entry, not a single lemma call. Each entry equation
     -- unfolds (via `Int.add_mul`/`Int.mul_add`/`Int.mul_assoc`) to two
     -- sums of the same four products in a different order; `add4_reorder`
     -- is exactly the regrouping needed to match them up.
     apply Mat2.ext
-    · show (X.a11 * Y.a11 + X.a12 * Y.a21) * Z.a11 + (X.a11 * Y.a12 + X.a12 * Y.a22) * Z.a21
+    (*$\cdot$*) show (X.a11 * Y.a11 + X.a12 * Y.a21) * Z.a11 + (X.a11 * Y.a12 + X.a12 * Y.a22) * Z.a21
           = X.a11 * (Y.a11 * Z.a11 + Y.a12 * Z.a21) + X.a12 * (Y.a21 * Z.a11 + Y.a22 * Z.a21)
       rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
           Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
           add4_reorder]
-    · show (X.a11 * Y.a11 + X.a12 * Y.a21) * Z.a12 + (X.a11 * Y.a12 + X.a12 * Y.a22) * Z.a22
+    (*$\cdot$*) show (X.a11 * Y.a11 + X.a12 * Y.a21) * Z.a12 + (X.a11 * Y.a12 + X.a12 * Y.a22) * Z.a22
           = X.a11 * (Y.a11 * Z.a12 + Y.a12 * Z.a22) + X.a12 * (Y.a21 * Z.a12 + Y.a22 * Z.a22)
       rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
           Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
           add4_reorder]
-    · show (X.a21 * Y.a11 + X.a22 * Y.a21) * Z.a11 + (X.a21 * Y.a12 + X.a22 * Y.a22) * Z.a21
+    (*$\cdot$*) show (X.a21 * Y.a11 + X.a22 * Y.a21) * Z.a11 + (X.a21 * Y.a12 + X.a22 * Y.a22) * Z.a21
           = X.a21 * (Y.a11 * Z.a11 + Y.a12 * Z.a21) + X.a22 * (Y.a21 * Z.a11 + Y.a22 * Z.a21)
       rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
           Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
           add4_reorder]
-    · show (X.a21 * Y.a11 + X.a22 * Y.a21) * Z.a12 + (X.a21 * Y.a12 + X.a22 * Y.a22) * Z.a22
+    (*$\cdot$*) show (X.a21 * Y.a11 + X.a22 * Y.a21) * Z.a12 + (X.a21 * Y.a12 + X.a22 * Y.a22) * Z.a22
           = X.a21 * (Y.a11 * Z.a12 + Y.a12 * Z.a22) + X.a22 * (Y.a21 * Z.a12 + Y.a22 * Z.a22)
       rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
           Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
@@ -200,53 +200,53 @@ def mat2Ring : Ring Mat2 where
   one_mul := by
     intro X
     apply Mat2.ext
-    · show 1 * X.a11 + 0 * X.a21 = X.a11
+    (*$\cdot$*) show 1 * X.a11 + 0 * X.a21 = X.a11
       rw [Int.one_mul, Int.zero_mul, Int.add_zero]
-    · show 1 * X.a12 + 0 * X.a22 = X.a12
+    (*$\cdot$*) show 1 * X.a12 + 0 * X.a22 = X.a12
       rw [Int.one_mul, Int.zero_mul, Int.add_zero]
-    · show 0 * X.a11 + 1 * X.a21 = X.a21
+    (*$\cdot$*) show 0 * X.a11 + 1 * X.a21 = X.a21
       rw [Int.zero_mul, Int.one_mul, Int.zero_add]
-    · show 0 * X.a12 + 1 * X.a22 = X.a22
+    (*$\cdot$*) show 0 * X.a12 + 1 * X.a22 = X.a22
       rw [Int.zero_mul, Int.one_mul, Int.zero_add]
   mul_one := by
     intro X
     apply Mat2.ext
-    · show X.a11 * 1 + X.a12 * 0 = X.a11
+    (*$\cdot$*) show X.a11 * 1 + X.a12 * 0 = X.a11
       rw [Int.mul_one, Int.mul_zero, Int.add_zero]
-    · show X.a11 * 0 + X.a12 * 1 = X.a12
+    (*$\cdot$*) show X.a11 * 0 + X.a12 * 1 = X.a12
       rw [Int.mul_zero, Int.mul_one, Int.zero_add]
-    · show X.a21 * 1 + X.a22 * 0 = X.a21
+    (*$\cdot$*) show X.a21 * 1 + X.a22 * 0 = X.a21
       rw [Int.mul_one, Int.mul_zero, Int.add_zero]
-    · show X.a21 * 0 + X.a22 * 1 = X.a22
+    (*$\cdot$*) show X.a21 * 0 + X.a22 * 1 = X.a22
       rw [Int.mul_zero, Int.mul_one, Int.zero_add]
   left_distrib := by
     intro X Y Z
     apply Mat2.ext
-    · show X.a11 * (Y.a11 + Z.a11) + X.a12 * (Y.a21 + Z.a21)
+    (*$\cdot$*) show X.a11 * (Y.a11 + Z.a11) + X.a12 * (Y.a21 + Z.a21)
           = (X.a11 * Y.a11 + X.a12 * Y.a21) + (X.a11 * Z.a11 + X.a12 * Z.a21)
       rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a11 * (Y.a12 + Z.a12) + X.a12 * (Y.a22 + Z.a22)
+    (*$\cdot$*) show X.a11 * (Y.a12 + Z.a12) + X.a12 * (Y.a22 + Z.a22)
           = (X.a11 * Y.a12 + X.a12 * Y.a22) + (X.a11 * Z.a12 + X.a12 * Z.a22)
       rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a21 * (Y.a11 + Z.a11) + X.a22 * (Y.a21 + Z.a21)
+    (*$\cdot$*) show X.a21 * (Y.a11 + Z.a11) + X.a22 * (Y.a21 + Z.a21)
           = (X.a21 * Y.a11 + X.a22 * Y.a21) + (X.a21 * Z.a11 + X.a22 * Z.a21)
       rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a21 * (Y.a12 + Z.a12) + X.a22 * (Y.a22 + Z.a22)
+    (*$\cdot$*) show X.a21 * (Y.a12 + Z.a12) + X.a22 * (Y.a22 + Z.a22)
           = (X.a21 * Y.a12 + X.a22 * Y.a22) + (X.a21 * Z.a12 + X.a22 * Z.a22)
       rw [Int.mul_add, Int.mul_add, add4_reorder]
   right_distrib := by
     intro X Y Z
     apply Mat2.ext
-    · show (X.a11 + Y.a11) * Z.a11 + (X.a12 + Y.a12) * Z.a21
+    (*$\cdot$*) show (X.a11 + Y.a11) * Z.a11 + (X.a12 + Y.a12) * Z.a21
           = (X.a11 * Z.a11 + X.a12 * Z.a21) + (Y.a11 * Z.a11 + Y.a12 * Z.a21)
       rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a11 + Y.a11) * Z.a12 + (X.a12 + Y.a12) * Z.a22
+    (*$\cdot$*) show (X.a11 + Y.a11) * Z.a12 + (X.a12 + Y.a12) * Z.a22
           = (X.a11 * Z.a12 + X.a12 * Z.a22) + (Y.a11 * Z.a12 + Y.a12 * Z.a22)
       rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a21 + Y.a21) * Z.a11 + (X.a22 + Y.a22) * Z.a21
+    (*$\cdot$*) show (X.a21 + Y.a21) * Z.a11 + (X.a22 + Y.a22) * Z.a21
           = (X.a21 * Z.a11 + X.a22 * Z.a21) + (Y.a21 * Z.a11 + Y.a22 * Z.a21)
       rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a21 + Y.a21) * Z.a12 + (X.a22 + Y.a22) * Z.a22
+    (*$\cdot$*) show (X.a21 + Y.a21) * Z.a12 + (X.a22 + Y.a22) * Z.a22
           = (X.a21 * Z.a12 + X.a22 * Z.a22) + (Y.a21 * Z.a12 + Y.a22 * Z.a22)
       rw [Int.add_mul, Int.add_mul, add4_reorder]
 \end{lstlisting}

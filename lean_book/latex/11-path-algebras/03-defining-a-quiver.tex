@@ -4,8 +4,8 @@ A quiver is encoded as a \texttt{structure}, parameterized by a type of vertices
 
 \begin{lstlisting}
 structure Quiver (V : Type) (A : Type) where
-  source : A → V
-  target : A → V
+  source : A (*$\rightarrow$*) V
+  target : A (*$\rightarrow$*) V
 \end{lstlisting}
 
 This is a direct transcription: \texttt{V} is the type of vertices, \texttt{A} the type of arrows, and \texttt{source}/\texttt{target} are exactly \(s\) and \(t\) above.
@@ -22,8 +22,8 @@ The three vertices are encoded as \texttt{Fin 3} (values \texttt{0, 1, 2}, stand
 
 \begin{lstlisting}
 inductive ExampleArrow where
-  | alpha : ExampleArrow   -- 0 → 1
-  | beta : ExampleArrow     -- 1 → 2
+  | alpha : ExampleArrow   -- 0 (*$\rightarrow$*) 1
+  | beta : ExampleArrow     -- 1 (*$\rightarrow$*) 2
 
 def exampleQuiver : Quiver (Fin 3) ExampleArrow where
   source := fun a => match a with
@@ -68,11 +68,11 @@ V\) given by their value tables: \texttt{source alpha = 0}, \texttt{target alpha
 \textbf{Mathlib equivalent.} Mathlib's own \href{https://loogle.lean-lang.org/?q=Quiver}{\texttt{Quiver}} class (the one this chapter's opening section mentioned building from scratch instead of reusing) encodes arrows differently. Instead of one flat arrow type \texttt{A} plus separate \texttt{source}/\texttt{target : A → V} functions, it bakes the endpoints into the arrow's \emph{type} directly, \texttt{Hom : V → V → Sort*} (with notation \texttt{a ⟶ b}). Thus an arrow from \texttt{i} to \texttt{j} simply \emph{has type} \texttt{i ⟶ j}:
 
 \begin{lstlisting}
-inductive MyArrow : Fin 3 → Fin 3 → Type
+inductive MyArrow : Fin 3 (*$\rightarrow$*) Fin 3 (*$\rightarrow$*) Type
   | alpha : MyArrow 0 1
   | beta : MyArrow 1 2
 
-instance : Quiver (Fin 3) := ⟨MyArrow⟩
+instance : Quiver (Fin 3) := (*$\langle$*)MyArrow(*$\rangle$*)
 \end{lstlisting}
 
 \texttt{MyArrow 0 1} has exactly the one constructor \texttt{alpha}. \texttt{MyArrow i j} for any other pair \texttt{(i, j)}, in particular the ``backwards'' or ``no such arrow'' cases, has no constructors at all, and is thus simply an empty type. There is no \texttt{source}/\texttt{target} to state or prove separately, and no \texttt{h : Q.source a = v} side-condition to discharge with \texttt{rfl} later (Chapter 11 §4). An ill-typed composition is rejected by the type checker before a proof obligation is even reached, one step earlier than the book's own encoding catches the same mistake.

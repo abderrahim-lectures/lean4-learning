@@ -1,7 +1,7 @@
 \section{Universal and existential quantifiers}\label{sec:03-propositions-and-proofs:06-quantifiers:1}
 
 \begin{lstlisting}
-theorem all_nats_ge_zero : ∀ n : Nat, n ≥ 0 :=
+theorem all_nats_ge_zero : (*$\forall$*) n : Nat, n (*$\geq$*) 0 :=
   fun n => Nat.zero_le n
 \end{lstlisting}
 
@@ -12,8 +12,8 @@ theorem all_nats_ge_zero : ∀ n : Nat, n ≥ 0 :=
 \end{itemize}
 
 \begin{lstlisting}
-theorem exists_even : ∃ n : Nat, n % 2 = 0 :=
-  ⟨2, rfl⟩
+theorem exists_even : (*$\exists$*) n : Nat, n % 2 = 0 :=
+  (*$\langle$*)2, rfl(*$\rangle$*)
 \end{lstlisting}
 
 \begin{itemize}
@@ -40,10 +40,10 @@ So \texttt{⟨2, rfl⟩ : ∃ n : Nat, n \% 2 = 0} reads as ``2 works, and here 
 -- divides it. `@[reducible]` lets `decide` below see straight through
 -- this definition, instead of needing a separate `unfold` step first.
 @[reducible] def isPrime (n : Nat) : Prop :=
-  n ≥ 2 ∧ ∀ m : Nat, m < n → m ≥ 2 → ¬ (m ∣ n)
+  n (*$\geq$*) 2 (*$\wedge$*) (*$\forall$*) m : Nat, m < n (*$\rightarrow$*) m (*$\geq$*) 2 (*$\rightarrow$*) (*$\neg$*) (m (*$\mid$*) n)
 
-theorem exists_prime_gt_three : ∃ p : Nat, p > 3 ∧ isPrime p :=
-  ⟨5, by decide⟩
+theorem exists_prime_gt_three : (*$\exists$*) p : Nat, p > 3 (*$\wedge$*) isPrime p :=
+  (*$\langle$*)5, by decide(*$\rangle$*)
 \end{lstlisting}
 
 \textbf{A second example: there is always a bigger prime.} \texttt{exists\_\allowbreak{}prime\_\allowbreak{}gt\_\allowbreak{}three} is one concrete instance of a classical fact: no matter which number is chosen, there is a prime bigger than it (here the chosen number is \texttt{3}, and \texttt{5} is a prime that beats it). It follows the exact same ``number, then why'' shape as before, but with two differences worth noting:

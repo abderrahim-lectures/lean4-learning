@@ -79,9 +79,8 @@ be a group" once and then simply writes $a \cdot b$, $e$, $a^{-1}$
 thereafter. The *specific* group structure is left implicit, tracked by
 context, and never re-named at each use. Lean's typeclass mechanism
 automates exactly that convention. A `structure`-only approach (this
-book's style) is the more careful alternative in which the
-structure is *always* carried around explicitly, the way a referee
-demanding that the group operation never be left unstated would require.
+book's style) requires the structure to always be carried around
+explicitly, so the group operation is never left unstated.
 
 ### Why this book deliberately avoids `class`, for now
 
