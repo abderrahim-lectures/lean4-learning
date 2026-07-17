@@ -6,11 +6,14 @@ Alongside \texttt{Type}, Lean has \texttt{Prop}, the type of logical proposition
 
 That one-line slogan is easy to state, but its importance is easy to miss on first read. What follows is the full dictionary it stands for: a two-way correspondence between logical connectives and type formers. This book uses each row repeatedly, starting in the next few sections.
 
-\begin{tabular}{lll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+}
 \toprule
 Logic & Type theory & Lean notation \\
 \midrule
-\bottomrule
 proposition \(P\) & type \(P\) & \texttt{P : Prop} \\
 proof of \(P\) & term of type \(P\) & \texttt{p : P} \\
 \(P\) implies \(Q\) & function type & \texttt{P → Q} \\
@@ -22,6 +25,7 @@ for all \(x\), \(P(x)\) & dependent function (Π-) type & \texttt{∀ x, P x} \\
 there exists \(x\) with \(P(x)\) & dependent pair (Σ-)type & \texttt{∃ x, P x} \\
 proof by cases on a disjunction & pattern match / \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}} & \texttt{Or.elim}, \texttt{cases h with ...} \\
 a direct proof (construction) & a term built from constructors & \texttt{⟨\_, \_⟩}, \texttt{Or.inl \_}, \texttt{fun x => \_} \\
+\bottomrule
 \end{tabular}
 
 

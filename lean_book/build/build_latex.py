@@ -347,6 +347,29 @@ MINIPAGE_CELL_RE = re.compile(
     r'\\begin\{minipage\}\[b\]\{\\linewidth\}\\raggedright\n(.*?)\n\\end\{minipage\}',
     re.DOTALL,
 )
+def _extract_colspec_entries(colspec_block):
+    """Split Pandoc's `>{...}p{...}` column-spec entries out of a longtable
+    colspec, brace-depth aware -- a naive `[^}]*` regex breaks here because
+    the `p{...}` width expression itself contains a nested brace group
+    (`\\real{0.5000}`), so a non-nested pattern stops at that inner `}`
+    instead of the outer one."""
+    entries = []
+    i = 0
+    n = len(colspec_block)
+    while i < n:
+        if colspec_block[i] == '>' and colspec_block[i + 1:i + 2] == '{':
+            start = i
+            _, after_gt_group = _read_braced_group(colspec_block, i + 1)
+            j = after_gt_group
+            while j < n and colspec_block[j] in ' \t\n':
+                j += 1
+            if j < n and colspec_block[j] == 'p' and colspec_block[j + 1:j + 2] == '{':
+                _, after_p_group = _read_braced_group(colspec_block, j + 1)
+                entries.append(colspec_block[start:after_p_group])
+                i = after_p_group
+                continue
+        i += 1
+    return entries
 
 
 def simplify_tables(tex):
@@ -356,20 +379,38 @@ def simplify_tables(tex):
     all small, single-page lookup tables with no captions, so none of
     that machinery is needed; converting to plain `tabular` sidesteps a
     `caption`/`longtable` counter interaction that otherwise errors out
-    in fragment mode (no Pandoc --standalone template to configure it)."""
+    in fragment mode (no Pandoc --standalone template to configure it).
+    The column widths/wrapping and the bottom rule's position are still
+    preserved (see below) -- only the longtable/caption machinery is
+    dropped, not the table's actual layout."""
     def _sub(m):
         colspec_block, body = m.group(1), m.group(2)
-        if "p{" in colspec_block:
-            ncols = colspec_block.count("p{")
+        entries = _extract_colspec_entries(colspec_block)
+        if entries:
+            # Pandoc already computed wrapping p{...} column widths as a
+            # fraction of \linewidth -- keep them verbatim instead of
+            # collapsing to non-wrapping `l` columns (which let long cells
+            # overflow the page margin instead of wrapping).
+            colspec = "\n  " + "\n  ".join(entries) + "\n"
         else:
-            # Abbreviated form, e.g. "ll" -- one letter per column.
-            ncols = len(re.sub(r'[^a-zA-Z]', '', colspec_block))
-        colspec = "l" * max(ncols, 1)
+            # Abbreviated form, e.g. "ll" -- one letter per column, no
+            # width info from Pandoc. Fall back to equal-width wrapping
+            # columns so the table still wraps instead of overflowing.
+            ncols = max(len(re.sub(r'[^a-zA-Z]', '', colspec_block)), 1)
+            frac = 1.0 / ncols
+            entry = (r'>{\raggedright\arraybackslash}p{(\linewidth - '
+                      r'2\tabcolsep) * \real{%.4f}}' % frac)
+            colspec = "\n  " + "\n  ".join([entry] * ncols) + "\n"
         body = MINIPAGE_CELL_RE.sub(lambda cm: cm.group(1), body)
         body = re.sub(r'\\toprule\\noalign\{\}', r'\\toprule', body)
         body = re.sub(r'\\midrule\\noalign\{\}', r'\\midrule', body)
-        body = re.sub(r'\\bottomrule\\noalign\{\}', r'\\bottomrule', body)
+        # Pandoc's longtable declares \bottomrule as part of \endlastfoot,
+        # right after the header row/before the body -- that's where it
+        # sits in the raw output, not at the table's actual bottom. Drop it
+        # from there and re-attach it after the last body row below.
+        body = re.sub(r'\\bottomrule(?:\\noalign\{\})?\n?', '', body)
         body = body.replace("\\endhead\n", "").replace("\\endlastfoot\n", "")
+        body = body.rstrip("\n") + "\n\\bottomrule\n"
         return f"\\begin{{tabular}}{{{colspec}}}\n{body}\\end{{tabular}}\n"
 
     return LONGTABLE_RE.sub(_sub, tex)
@@ -500,10 +541,10 @@ def convert_file(chapter, name):
     tex = fix_inline_code(tex)
     tex = renumber_labels(tex, chapter, stem)
     # listings' language names are case-sensitive; its built-in Python
-    # support is registered as "Python", but Pandoc emits the fence's info
-    # string verbatim ("python", lowercase, as written in this book's
-    # Markdown source).
-    tex = tex.replace("[language=python]", "[language=Python,style=python]")
+    # support is registered as "Python", and Pandoc always capitalizes the
+    # fence's info string to match (regardless of how it's written in this
+    # book's Markdown source, e.g. lowercase ```python).
+    tex = tex.replace("[language=Python]", "[language=Python,style=python]")
     tex = wrap_pblproject_tex(tex, relkey, title)
 
     out_dir = os.path.join(LATEX_DIR, chapter) if chapter else LATEX_DIR
