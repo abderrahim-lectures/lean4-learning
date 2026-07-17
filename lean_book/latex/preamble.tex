@@ -1,34 +1,26 @@
 % Preamble for "Lean for Working Algebraists" -- LaTeX manuscript,
 % generated from lean_book/*.md by build/build_latex.py.
 %
-% Class: KOMA-Script scrbook, tuned toward the look of a Springer
-% Monographs in Mathematics volume -- NOT Springer's actual svmono.cls
-% (that file is distributed directly from Springer's own author-guidelines
-% page, not via CTAN/MiKTeX, so it isn't something this pipeline can fetch
-% or install; swapping in the real class for an actual submission remains
-% a separate, later decision). Standard A4 paper (a smaller custom trim
-% was tried and reverted -- not worth the added table/code-listing
-% wrapping risk it brought at every page-width change). `DIV=calc` lets
-% KOMA's typearea compute the type area that actually matches the chosen
-% font size (a fixed DIV value here previously triggered KOMA's own
-% "no optimal type area settings" warning). `fontsize=13pt` (KOMA allows
-% non-standard sizes, unlike plain book's fixed 10/11/12pt) and
-% `parskip=half` (a visible gap between paragraphs, not just first-line
-% indent) are both direct responses to earlier feedback that the default
-% 11pt/dense-paragraph look read too small and cramped. chapterprefix=false
-% keeps KOMA from adding its own "Chapter N" line, since this book's own
-% chapter titles already embed "Chapter N:" as prose (see the
-% chapter/section styling block below for why the *numeric* label is
-% suppressed there too).
-\documentclass[twoside,openright,chapterprefix=false,parskip=half,
-  fontsize=13pt,DIV=calc,BCOR=8mm,paper=A4]{scrbook}
+% Class: plain LaTeX `book`, on standard A4 -- KOMA-Script scrbook was
+% tried (aiming for a Springer-Monographs-in-Mathematics look) but caused
+% more problems than it solved: it conflicts with titlesec, its DIV/trim
+% tuning had to be re-derived from scratch at every page-size change, and
+% chasing "does every table/code listing still fit" across several trim
+% sizes cost more than the nicer typearea math was worth. Back to the
+% plain class this book used before that detour.
+\documentclass[12pt,twoside]{book}
+\usepackage[margin=1in,bindingoffset=0.3in]{geometry}
 
 \usepackage{fontspec}
 \setmonofont{Consolas}
 \setmainfont{Palatino Linotype}
-% Extra leading on top of the larger base size and parskip gap above --
-% Palatino at 13pt with 1.0 spacing still reads tight line-to-line.
+% A bigger base size (12pt) plus extra leading and a paragraph gap below
+% are direct responses to feedback that the original 11pt/no-gap look
+% read too small and cramped.
 \linespread{1.15}
+% Keep the first-line indent (unlike the `parskip` package, which drops
+% it) but also add a visible gap between paragraphs, not indent alone.
+\setlength{\parskip}{0.5\baselineskip}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -110,14 +102,10 @@
 \usepackage[capitalize]{cleveref}
 
 % ---------------------------------------------------------------------
-% Chapter/section styling -- KOMA-Script's own heading commands, not
-% titlesec (titlesec's \titleformat conflicts with KOMA's internal
-% chapter/section machinery: "No format for this command" errors as soon
-% as a real \chapter is typeset).
+% Chapter/section styling
 % ---------------------------------------------------------------------
+\usepackage{titlesec}
 \definecolor{ruleblue}{RGB}{40,70,120}
-\newcommand{\bookrule}[1]{\par\noindent{\color{ruleblue}\rule{\linewidth}{#1}}\par}
-
 % No chapter-number label here: every chapter's title text already
 % embeds its own "Chapter N:" (the book's own numbering, e.g. Chapter 0
 % for 00-setup/, Chapter 6 for 06-groups/), which does not line up with
@@ -125,15 +113,17 @@
 % \chapter{} call including the 00-setup chapter and the unnumbered
 % Appendix, so it runs one or more ahead of the book's own numbers) --
 % showing both would be redundant at best, contradictory at worst.
-\renewcommand*{\chapterformat}{}
-\RedeclareSectionCommand[beforeskip=0pt, afterskip=30pt]{chapter}
-\renewcommand*{\chapterlinesformat}[3]{%
-  \bookrule{1pt}\vspace{10pt}%
-  \par\normalfont\bfseries\Huge#3\par%
-  \vspace{4pt}\bookrule{0.5pt}%
-}
-\RedeclareSectionCommand[font=\normalfont\Large\bfseries\color{ruleblue}]{section}
-\RedeclareSectionCommand[font=\normalfont\large\bfseries]{subsection}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {}
+  {0pt}
+  {{\color{ruleblue}\titlerule[1pt]}\vspace{10pt}\Huge}
+  [{\vspace{4pt}\color{ruleblue}\titlerule[0.5pt]}]
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{ruleblue}}{\thesection}{0.8em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{0.8em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{30pt}
 
 % ---------------------------------------------------------------------
 % Running headers/footers
