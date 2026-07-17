@@ -3,6 +3,15 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Add a Python companion notebook
+
+Added `lean_book/python-companion/python_companion.ipynb`, collecting
+every "Programmer's corner (Python)" snippet in the book (8 snippets
+across 6 chapters) into one runnable notebook that opens directly in
+Google Colab, no Lean installation required. Each snippet is verified to
+run and produce the output the book's comments claim. Linked from the
+book's README reference list.
+
 ## Unreleased — Full-book review pass for plain academic prose
 
 Follow-up to the "Why Lean?" rewording: a full read-through of every
