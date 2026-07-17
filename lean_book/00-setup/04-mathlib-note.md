@@ -26,6 +26,32 @@ Chapter 11's from-scratch constructions; Mathlib appears only in the
 "Mathlib equivalent" boxes from Chapter 6 onward, and in full starting
 Chapter 13.
 
+**Socratic questions.**
+
+1. *`lean_project` already has Mathlib installed as a dependency (it is
+   what powers the "Mathlib equivalent" boxes from Chapter 6 onward) —
+   so why not just import it everywhere from page one, instead of
+   building `Group`/`Ring` from scratch first?* Because the point of this
+   book is not merely to *use* a group in Lean, but to see exactly what a
+   group *is* to Lean: every field, every proof obligation, with nothing
+   hidden behind someone else's typeclass hierarchy. A library saves
+   effort precisely by hiding that machinery — which is exactly the wrong
+   thing to hide from a first encounter.
+2. *`elan` pins one exact Lean version per project via `lean-toolchain`.
+   What would go wrong without that pin, on a machine with several Lean
+   projects at once?* A later toolchain update to one project could
+   silently change how another project's code elaborates or even fails
+   to compile — the entire point of `lean_project/lean-toolchain` reading
+   `leanprover/lean4:v4.31.0` is that every code block in this book stays
+   reproducible regardless of what else is installed system-wide.
+3. *If Mathlib is Mathlib-free by design through Chapter 11, why does
+   Chapter 6 onward show Mathlib code at all?* Because "from scratch" and
+   "never see the real library" are different promises — this book keeps
+   the first and deliberately breaks the second, by pairing every
+   hand-built definition with a labeled preview of its Mathlib
+   counterpart, so the transition in Chapter 13 is a recognition, not a
+   cold start.
+
 ## Next
 
 Continue to [Chapter 1: First steps](../01-basics/00-index.md).

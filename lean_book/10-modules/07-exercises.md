@@ -11,6 +11,32 @@ closure proofs, a linear map is a function preserving `+` and the scalar
 action, and a direct sum's five/four axioms each split, via `congr 1`,
 into one independent fact per summand.
 
+**Socratic questions.**
+
+1. *A module is called "an abelian group with a scalar action," but also
+   "a ring homomorphism into the group's own endomorphism ring." Are
+   these two descriptions actually saying the same thing?* Yes — a
+   scalar action assigning `r ↦ (m ↦ r • m)` to each ring element is
+   exactly a function from `R` into the (additive, composable) maps
+   `M → M`; the four module axioms are precisely what make that
+   assignment respect `R`'s own `+` and `×`, i.e. a ring homomorphism.
+   Same fact, two vocabularies.
+2. *`Submodule` is defined by a membership predicate plus closure proofs,
+   not by "a subset." Why does that distinction matter in Lean
+   specifically?* Because a bare `Set M` carries no evidence of closure —
+   any subset could be handed over, checked or not. Bundling the closure
+   proofs *into* the structure means a term of type `Submodule Rg Mod`
+   is, by construction, already verified closed under `+` and the scalar
+   action; there is no separate step where that gets forgotten or
+   skipped.
+3. *`congr 1` split a direct sum's group axioms into one fact per summand.
+   What would go wrong trying to prove `directSumModule`'s axioms without
+   it, working with the pair as a single opaque value?* Nothing would be
+   *wrong*, exactly, but every axiom would need its own ad-hoc unfolding
+   of what equality of pairs means — `congr 1` names the one fact (a
+   product's equality is checked componentwise) that makes all five/four
+   proofs uniform instead of five/four bespoke arguments.
+
 1. Prove that the identity function is a linear map: for any
    `Mod : Module R Rg M`, construct
    `idLinearMap : LinearMap Rg Mod Mod` with `toFun := id`.
