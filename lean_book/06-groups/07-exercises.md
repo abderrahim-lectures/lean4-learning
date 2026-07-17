@@ -11,6 +11,31 @@ non-abelian example (`perm3Group`) needs both. Any theorem proved once,
 generically, against `Grp : Group G` applies to every concrete group
 built afterward at no extra cost.
 
+**Socratic questions.**
+
+1. *`intGroup` never tests the difference between `id_left`/`id_right`
+   or `inv_left`/`inv_right`, since `Int` addition is commutative. Does
+   that mean the split is only there for generality's sake, with no
+   concrete example that actually needs it?* No — `perm3Group` needs it
+   for real: composing permutations is genuinely non-commutative, so
+   `id_left` and `id_right` are two separate proof obligations there,
+   not a single fact proved twice.
+2. *`GroupData` (op, id, inv, no axioms) type-checks for any choice of
+   the three fields, including nonsense ones. What is the smallest change
+   that turns "any `GroupData`" into "only genuine groups"?* Nothing
+   about the *data* fields changes at all — five more fields are added,
+   each a proof obligation. `Group` is exactly `GroupData` plus those
+   five proofs; the type of a term goes from "some operation and two
+   elements" to "an operation and two elements *together with evidence*
+   they behave correctly."
+3. *`perm3Group`'s three-line `#eval` computation showed
+   `swap01 ∘ cycle012 ≠ cycle012 ∘ swap01`. Why is that a complete proof
+   of non-commutativity, rather than just suggestive evidence?* Because
+   disproving a universal claim (`∀ f g, f ∘ g = g ∘ f`) needs only one
+   counterexample, and the two sides of that one inequality were
+   computed, not estimated — `#eval` is exact here, not approximate,
+   since `Perm3` composition is finite and decidable.
+
 1. Build `boolXorGroup : Group Bool` where `op` is boolean XOR (`Bool.xor`),
    `id := false`, and `inv := fun a => a` (every element is its own
    inverse). Prove each field using `by intro a; cases a <;> rfl` is

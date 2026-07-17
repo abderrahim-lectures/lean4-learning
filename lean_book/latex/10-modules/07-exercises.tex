@@ -2,9 +2,16 @@
 
 \textbf{Key points.} A module is an abelian group with a scalar action satisfying four axioms, equivalently a ring homomorphism into the ring of the group's own endomorphisms. A submodule is a membership predicate plus closure proofs, a linear map is a function preserving \texttt{+} and the scalar action, and a direct sum's five/four axioms each split, via \texttt{congr 1}, into one independent fact per summand.
 
+\textbf{Socratic questions.}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
+\item
+  \emph{A module is called ``an abelian group with a scalar action,'' but also ``a ring homomorphism into the group's own endomorphism ring.'' Are these two descriptions actually saying the same thing?} Yes --- a scalar action assigning \texttt{r ↦ (m ↦ r • m)} to each ring element is exactly a function from \texttt{R} into the (additive, composable) maps \texttt{M → M}; the four module axioms are precisely what make that assignment respect \texttt{R}'s own \texttt{+} and \texttt{×}, i.e.~a ring homomorphism. Same fact, two vocabularies.
+\item
+  \emph{\texttt{Submodule} is defined by a membership predicate plus closure proofs, not by ``a subset.'' Why does that distinction matter in Lean specifically?} Because a bare \texttt{Set M} carries no evidence of closure --- any subset could be handed over, checked or not. Bundling the closure proofs \emph{into} the structure means a term of type \texttt{Submodule Rg Mod} is, by construction, already verified closed under \texttt{+} and the scalar action; there is no separate step where that gets forgotten or skipped.
+\item
+  \emph{\texttt{congr 1} split a direct sum's group axioms into one fact per summand. What would go wrong trying to prove \texttt{directSumModule}'s axioms without it, working with the pair as a single opaque value?} Nothing would be \emph{wrong}, exactly, but every axiom would need its own ad-hoc unfolding of what equality of pairs means --- \texttt{congr 1} names the one fact (a product's equality is checked componentwise) that makes all five/four proofs uniform instead of five/four bespoke arguments.
 \item
   Prove that the identity function is a linear map: for any \texttt{Mod : Module R Rg M}, construct \texttt{idLinearMap : LinearMap Rg Mod Mod} with \texttt{toFun := id}.
 \item

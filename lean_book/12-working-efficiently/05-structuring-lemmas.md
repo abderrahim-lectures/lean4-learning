@@ -35,6 +35,32 @@ this book reaches for it only when a genuine technical obstacle makes the
 explicit alternative not worth the detour; and a repeated `rw` chain or an
 independently-statable sub-goal is a lemma waiting to be named.
 
+**Socratic questions.**
+
+1. *`exact?` sometimes returns a working but needlessly roundabout term
+   instead of the shortest one (Chapter 12 §1's own worked example).
+   Does that make it a poor tool to reach for?* No — it still guarantees
+   a *correct* closing term, found automatically; simplifying what it
+   returns by hand afterward is a small, separate step, cheaper than
+   deriving the whole thing from nothing.
+2. *`decide` and a hand-written proof can close the exact same goal on a
+   finite carrier like `Fin 3`. If the end result is identical, why does
+   this book insist on the hand-written version through Chapter 11, only
+   endorsing `decide` here in Chapter 12?* Because the *goal* of those
+   earlier chapters was building the skill of finding a proof, which a
+   decision procedure bypasses entirely. Once that skill is in hand,
+   reaching for `decide` on a goal that is genuinely inside its decidable
+   fragment is not a shortcut around understanding — it is applying
+   understanding efficiently.
+3. *A repeated `rw` chain is a sign a lemma should be factored out. Is
+   the reverse also true — should every proof be split into the smallest
+   possible named lemmas, just in case one gets reused later?* No —
+   speculative extraction with no present duplication is the same
+   mistake in the opposite direction: three similar lines are better
+   than a premature abstraction. The signal to extract is an actual
+   repeated shape or an actual independently-statable sub-claim, not the
+   mere possibility of future reuse.
+
 ## Next
 
 Continue to [Chapter 13: Where to go next](../13-next-steps/00-index.md).

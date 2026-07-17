@@ -2,9 +2,16 @@
 
 \textbf{Key points.} \texttt{Prop} is the type of statements, and a proof is just an ordinary term of that type (Curry--Howard). \texttt{∧}/\texttt{∨}/\texttt{→}/\texttt{∀}/\texttt{∃} each have their own introduction and elimination rule, mirrored directly by Lean syntax: the anonymous constructor, \texttt{Or.inl}/\texttt{Or.inr}/\texttt{match}, \texttt{fun}/ application, and \texttt{fun}/anonymous-constructor again. \texttt{rfl} proves equality by checking both sides reduce to the same normal form.
 
+\textbf{Socratic questions.}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
+\item
+  \emph{\texttt{P ∧ Q} and \texttt{P ∨ Q} are both built from two propositions. Why does \texttt{∧} need only one constructor (the anonymous pair) while \texttt{∨} needs two (\texttt{Or.inl}, \texttt{Or.inr})?} A proof of \texttt{P ∧ Q} must supply \emph{both} a proof of \texttt{P} and a proof of \texttt{Q} at once --- one shape suffices. A proof of \texttt{P ∨ Q} supplies \emph{only one} of the two, so the proof itself must record which side was chosen --- hence two distinct constructors rather than one.
+\item
+  \emph{\texttt{rfl} closes \texttt{2 + 2 = 4} immediately. Why can it not, by the same reasoning, close \texttt{∀ n, n + 0 = n}?} \texttt{rfl} checks that both sides already reduce to the same closed term --- \texttt{2 + 2} and \texttt{4} both compute to the literal \texttt{4}. But \texttt{n} is a free variable, not a number to compute with; \texttt{n + 0 = n} is true for every \texttt{n}, yet no single reduction sequence turns \texttt{n + 0} into \texttt{n} without first knowing which \texttt{n} it is. That gap between ``true'' and ``reduces to the same term'' is exactly why proofs, not mere computation, exist.
+\item
+  \emph{\texttt{∃ n, n > 0} was proved with a witness and a decided fact about it. What would go wrong trying to prove \texttt{∀ n, n > 0} the same way, by picking one \texttt{n} and checking it?} A single witness proves only that \emph{some} \texttt{n} works --- universal quantification demands the property hold for \emph{every} \texttt{n} at once, which no finite number of individual checks can establish; it needs a genuine argument (an inductive proof, starting in Chapter 4) that works uniformly.
 \item
   Prove \texttt{theorem and\_comm\_ex \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}.
 \item

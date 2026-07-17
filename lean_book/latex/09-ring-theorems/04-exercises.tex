@@ -2,9 +2,16 @@
 
 \textbf{Key points.} \(a\cdot 0=0\) and \((-1)\cdot a=-a\) are theorems, not axioms --- both derived from distributivity plus additive cancellation, following the same ``pad with \(0=0+0\), then cancel'' pattern each time. A concrete numeral (\texttt{neg\_seven}) can close by \texttt{rfl} where the general statement about an unknown \texttt{a} genuinely cannot, mirroring Chapter 5's defeq-vs-propeq distinction.
 
+\textbf{Socratic questions.}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
+\item
+  \emph{\(a \cdot 0 = 0\) is proved from distributivity and cancellation, not assumed. Could a ring exist where this fails?} Not among Lean's \texttt{Ring}s --- the proof uses only \texttt{left\_distrib} and the additive group axioms, which every \texttt{Ring} supplies by definition, so the conclusion is forced. A structure lacking it would simply not satisfy \texttt{Ring}'s own fields, whatever else it looked like.
+\item
+  \emph{The proof of \(a \cdot 0 = 0\) starts from \(0 = 0 + 0\) --- an identity that looks almost too trivial to be useful. Why does such a trivial-looking fact do real work?} Because it converts a goal \emph{about} \(0\) into a goal about \(x = x + x\) for \(x := a \cdot 0\), which is exactly the shape ``an additive-group element equal to its own double is the identity'' already known how to cancel. Trivial identities are frequently the hinge a whole proof turns on, not padding.
+\item
+  \emph{\texttt{neg\_seven} closes by \texttt{rfl}; the general \texttt{neg\_one\_mul (a : R)} needed a five-line proof for the }same* underlying fact. What exactly is different about the general statement?* \texttt{neg\_seven} names one concrete, already-computed integer --- both sides reduce to \texttt{-7} directly. \texttt{neg\_one\_mul} quantifies over \emph{every} ring \texttt{R} and element \texttt{a}; there is no concrete value to reduce, so the equality must be established from the axioms rather than read off by computation.
 \item
   Prove \texttt{theorem neg\_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)}. Strategy: this is ``show \(x = -(ab)\),'' hence reduce through \texttt{left\_inverse\_unique} to ``show \(x + ab = 0\),'' then look for a \texttt{right\_distrib}-shaped simplification of \((-a)\cdot b + a \cdot b\), exactly as in Theorem 2. \texttt{mul\_zero\_left} (proved in Theorem 2's section) is required at the end, the same way Theorem 2 itself used it.
 \item
