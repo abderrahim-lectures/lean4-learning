@@ -6,7 +6,7 @@ Alongside \texttt{Type}, Lean has \texttt{Prop}, the type of logical proposition
 
 That one-line slogan is easy to state, but its importance is easy to miss on first read. What follows is the full dictionary it stands for: a two-way correspondence between logical connectives and type formers. This book uses each row repeatedly, starting in the next few sections.
 
-\begin{tabular}{
+{\small\begin{tabular}{
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
@@ -26,7 +26,7 @@ there exists \(x\) with \(P(x)\) & dependent pair (Σ-)type & \texttt{∃ x, P x
 proof by cases on a disjunction & pattern match / \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}} & \texttt{Or.elim}, \texttt{cases h with ...} \\
 a direct proof (construction) & a term built from constructors & \texttt{⟨\_, \_⟩}, \texttt{Or.inl \_}, \texttt{fun x => \_} \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 
 
 Consider a few rows concretely. ``\(P\) and \(Q\)'' corresponds to a \emph{product} type because a proof of \(P \wedge Q\) is genuinely a \emph{pair}: a proof of \(P\) together with a proof of \(Q\). This is exactly the \texttt{⟨hp, hq⟩} seen in the next section. ``\(P\) or \(Q\)'' corresponds to a \emph{sum} type because a proof of \(P \vee Q\) is a \emph{choice}: either a proof of \(P\) (tagged \texttt{Or.inl}) or a proof of \(Q\) (tagged \texttt{Or.inr}), never both, and never neither. ``Not \(P\)'' being \texttt{P → False} says: a proof that \(P\) is false is a \emph{procedure} that would turn any (hypothetical) proof of \(P\) into a proof of the impossible proposition \texttt{False}. In other words, it is a witness that no such proof of \(P\) could exist.

@@ -73,7 +73,7 @@ These are the constructive readings of the connectives as operations on the proo
 \input{diagrams/and-product.tex}
 \end{center}
 
-\begin{tabular}{
+{\small\begin{tabular}{
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
 }
@@ -84,7 +84,7 @@ Symbol & Lean \\
 \(\langle p, q \rangle\) (``pairing'') & \texttt{⟨hp, hq⟩} (\texttt{and\_example}) \\
 \(\pi_1, \pi_2\) (``the projections'') & \texttt{h.left}, \texttt{h.right} (\texttt{and\_left} applies \texttt{.left}) \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 
 
 Disjunction \(P \vee Q\) is the \textbf{coproduct} \(P \sqcup Q\), the mirror image: arrows point \emph{in} rather than \emph{out}, and a proof is a tagged injection.
@@ -93,7 +93,7 @@ Disjunction \(P \vee Q\) is the \textbf{coproduct} \(P \sqcup Q\), the mirror im
 \input{diagrams/or-coproduct.tex}
 \end{center}
 
-\begin{tabular}{
+{\small\begin{tabular}{
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
 }
@@ -104,7 +104,7 @@ Symbol & Lean \\
 \(\iota_1(p)\) (``left injection'') & \texttt{Or.inl hp} (\texttt{or\_example}) \\
 \(\iota_2(q)\) (``right injection'') & \texttt{Or.inr hq} \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 
 
 To \emph{use} a proof of \(P \vee Q\), one case-splits by the universal property of the coproduct: given a proof \texttt{h : P ∨ Q} and a way to reach the same conclusion \texttt{R} from either side (\texttt{hpr : P → R}, \texttt{hqr : Q → R}), there is exactly one map \texttt{P∨Q → R} agreeing with both. This is precisely what \texttt{or\_comm\_term} above builds via \texttt{Or.elim}. Negation is \(\neg P := (P \to

@@ -26,9 +26,7 @@ that asks Lean to check exactly this and fail loudly if it does not hold.
 
 ```lean
 example : 2 + 2 = 4 := rfl        -- 2 + 2 reduces to 4 definitionally
-example : 0 + 2 = 2 := rfl        -- reduces, since `Nat.add` recurses on
-                                   -- its second argument and 2 + 0 = 2
-                                   -- is the base clause
+example : 0 + 2 = 2 := rfl        -- Nat.add recurses on its 2nd arg; 2 + 0 = 2 is the base case
 -- example : 2 + 0 = 2 := rfl     -- also rfl (0 + n needs induction, n + 0 doesn't)
 ```
 

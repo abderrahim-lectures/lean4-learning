@@ -6,17 +6,29 @@
 % (that file is distributed directly from Springer's own author-guidelines
 % page, not via CTAN/MiKTeX, so it isn't something this pipeline can fetch
 % or install; swapping in the real class for an actual submission remains
-% a separate, later decision). `DIV`/`BCOR` set a classic book type-area
-% via KOMA's built-in typearea rather than book class's plain fixed
-% margins; chapterprefix=false keeps KOMA from adding its own "Chapter N"
-% line, since this book's own chapter titles already embed "Chapter N:"
-% as prose (see the chapter/section styling block below for why the
-% *numeric* label is suppressed there too).
-\documentclass[11pt,twoside,openright,chapterprefix=false,DIV=12,BCOR=8mm]{scrbook}
+% a separate, later decision). Standard A4 paper (a smaller custom trim
+% was tried and reverted -- not worth the added table/code-listing
+% wrapping risk it brought at every page-width change). `DIV=calc` lets
+% KOMA's typearea compute the type area that actually matches the chosen
+% font size (a fixed DIV value here previously triggered KOMA's own
+% "no optimal type area settings" warning). `fontsize=13pt` (KOMA allows
+% non-standard sizes, unlike plain book's fixed 10/11/12pt) and
+% `parskip=half` (a visible gap between paragraphs, not just first-line
+% indent) are both direct responses to earlier feedback that the default
+% 11pt/dense-paragraph look read too small and cramped. chapterprefix=false
+% keeps KOMA from adding its own "Chapter N" line, since this book's own
+% chapter titles already embed "Chapter N:" as prose (see the
+% chapter/section styling block below for why the *numeric* label is
+% suppressed there too).
+\documentclass[twoside,openright,chapterprefix=false,parskip=half,
+  fontsize=13pt,DIV=calc,BCOR=8mm,paper=A4]{scrbook}
 
 \usepackage{fontspec}
 \setmonofont{Consolas}
 \setmainfont{Palatino Linotype}
+% Extra leading on top of the larger base size and parskip gap above --
+% Palatino at 13pt with 1.0 spacing still reads tight line-to-line.
+\linespread{1.15}
 
 \usepackage{amsmath}
 \usepackage{amssymb}

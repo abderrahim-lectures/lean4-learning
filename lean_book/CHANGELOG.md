@@ -3,6 +3,41 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Typography pass: bigger font, more paragraph spacing
+
+Follow-up to the KOMA-Script switch: the default 11pt/dense-paragraph
+look read too small and cramped.
+
+- Bumped to `fontsize=13pt`, `parskip=half` (a visible gap between
+  paragraphs, not just first-line indent), and `\linespread{1.15}`.
+- Switched `DIV` from a hand-picked value to `DIV=calc`, letting KOMA's
+  typearea compute the type area that actually matches the chosen font
+  size — a fixed `DIV` was triggering KOMA's own "no optimal type area
+  settings" warning and produced a narrower-than-intended text column.
+- A smaller physical trim size (first A5, then Springer's actual 155mm x
+  235mm monograph trim) was tried, on the theory that a fixed-layout PDF
+  page shrinks as a whole to fit a phone/tablet screen, so a smaller
+  page-to-margin ratio reads larger once shrunk. Reverted back to
+  standard A4 — every trim change reopened the "does every table/code
+  listing still fit" question from scratch, which wasn't worth it here.
+- Along the way, fixed two things a narrower page made newly visible:
+  - Three Lean/Python code blocks used manual leading-space alignment to
+    visually continue a trailing comment onto a second line (a trick
+    that only holds up on a wide page); with `breaklines=true` on a
+    narrower measure, each wrapped line's leading spaces compounded into
+    a progressively cascading rightward drift. Rewrote each as a single
+    plain trailing comment that wraps normally instead.
+  - The two notation-reference tables' four columns were split evenly
+    (25% each), which was fine on a wide page but made the long
+    "Meaning" column wrap onto far more lines than necessary once the
+    page narrowed. `simplify_tables()` now gives 4-column tables an
+    asymmetric 34/20/28/18 split, and wraps every table in `\small` — a
+    real page-spanning `longtable` turned out to be broken in this
+    toolchain's `booktabs`+`longtable` combination even in total
+    isolation (confirmed with a minimal, unrelated test file), so every
+    table in this book remains a non-breaking block, making its
+    per-page fit sensitive to exactly this kind of column-width tuning.
+
 ## Unreleased — Preface, notation reference, and a KOMA-Script (Springer-style) class
 
 Added the front matter a reader expects before Chapter 1, and switched
