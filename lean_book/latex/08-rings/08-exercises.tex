@@ -1,0 +1,20 @@
+\section{Exercises}\label{sec:08-rings:08-exercises:1}
+
+\textbf{Key points.} A ring bundles an additive \texttt{CommGroup} with a multiplicative monoid and two distributive laws, \texttt{left\textbackslash{}\_distrib} and \texttt{right\textbackslash{}\_distrib} genuinely independent since \texttt{mul} need not commute. A finite carrier (\texttt{Fin 3}) lets every axiom be checked by \texttt{decide}; an infinite one (\texttt{Int}, matrices over \texttt{Int}) needs a real proof, or a computed counterexample (\texttt{\textbackslash{}\#eval}) to refute commutativity outright.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Build \texttt{boolAndOrRing}. This is surprisingly difficult: is there a natural ring structure on \texttt{Bool}? (Hint: think of \texttt{Bool} as \(\mathbb{Z}/2\mathbb{Z}\) --- addition is XOR, multiplication is AND. Build \texttt{intAddGroupMod2 : CommGroup Bool} with \texttt{op := Bool.xor}, then a \texttt{Ring Bool} using \texttt{mul := Bool.and}, \texttt{one := true}.)
+\item
+  State (in words, no Lean needed yet) why we needed \emph{both} \texttt{left\textbackslash{}\_distrib} and \texttt{right\textbackslash{}\_distrib} as separate axioms, tying it back to not assuming \texttt{mul} is commutative.
+\item
+  Using the witness pair \texttt{(X, Y)} computed above, state and prove \texttt{theorem mat2\textbackslash{}\_not\textbackslash{}\_comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X}. Note that \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{by decide}} does \emph{not} work directly here --- \texttt{Mat2} has no \texttt{DecidableEq} instance, so equality of two \texttt{Mat2} terms is not something \texttt{decide} can evaluate out of the box (check the error message it gives; this is exactly the ``read the failure'' habit from Chapter 4). Instead, assume \texttt{h : Mat2.mul X Y = Mat2.mul Y X}, use \texttt{Mat2.mk.injEq} to turn \texttt{h} into a conjunction of \texttt{Int} equalities, and derive \texttt{False} from the first (false) one with \texttt{by decide} at the \texttt{Int}-equality level, where a \texttt{DecidableEq} instance really does exist.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:07-chapter-8:1]{Appendix, Chapter 8}.
+
+\section{Next}\label{sec:08-rings:08-exercises:2}
+
+Continue to \hyperref[sec:09-ring-theorems:00-index:1]{Chapter 9: Ring examples and basic theorems}.

@@ -1,0 +1,18 @@
+\section{Exercises}\label{sec:01-basics:06-exercises:1}
+
+\textbf{Key points.} \texttt{\textbackslash{}\#check} reports a type without running anything; \texttt{\textbackslash{}\#eval} runs. A type is \emph{dependent} when a later type mentions an earlier \emph{value} (\texttt{Vec α n}, \texttt{Fin n}), not merely an earlier type. \texttt{Prop} is proof-irrelevant, which is exactly why \texttt{∃} (landing in \texttt{Prop}) cannot extract its witness the way \texttt{Sigma} (landing in \texttt{Type}) can. Both Π- and Σ-types, plus \texttt{Prop}, assemble into the calculus of constructions underlying every Lean declaration seen so far.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  β-reduce \((\lambda x.\lambda y.\, y\, x)\, a\, b\) to normal form by hand, writing out each step. §4's untyped-λ-calculus recap named \(K = \lambda x.\lambda y.\, x\) (``take two arguments, return the first''). Which existing named term does \(\lambda x.\lambda y.\, y\, x\) resemble, and how does it differ?
+\item
+  Write \texttt{Vec.toList : Vec α n → List α}, converting a length-indexed vector to an ordinary list by forgetting its length. Contrast its type with \texttt{Vec.replicate}'s from §3: which one is a genuinely \emph{dependent} function (its return type mentions the argument's value), and which one is an ordinary function that merely happens to take a value of a dependent type as input?
+\item
+  Construct a term of type \texttt{Σ n : Nat, Fin n} other than the text's \texttt{⟨3, ⟨2, by decide⟩⟩} example. Then, in a sentence or two, explain why \texttt{Σ n : Nat, n > 0} fails to type-check in Lean at all (hint: check what \emph{sort} \texttt{n > 0} lives in, and compare to \texttt{Sigma}'s own signature).
+\item
+  Chapter 11's \texttt{Path Q : V → V → Type} was described as ``a family of types indexed by a pair of vertices.'' Write down the Π-type expression \(\prod_{x:A} B(x)\) instantiated so that it matches \texttt{Path.append}'s signature \texttt{\textbackslash{}\{u v w : V\textbackslash{}\} → Path Q u v → Path Q v w → Path Q u w} (treat the implicit \texttt{\textbackslash{}\{u v w : V\textbackslash{}\}} as outer Π-binders). Identify \(A\) and \(B\) explicitly at each nesting level.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:01-chapter-1:1]{Appendix, Chapter 1}.

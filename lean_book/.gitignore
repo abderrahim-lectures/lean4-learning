@@ -9,3 +9,13 @@ build/_mermaid_cache/
 *.log
 *.out
 *.toc
+
+# LaTeX build artifacts from compiling lean_book/latex/ (biblatex/biber and
+# the standalone tikz-cd diagram smoke-tests) -- only .tex source is committed.
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.fdb_latexmk
+*.fls
+*.synctex.gz

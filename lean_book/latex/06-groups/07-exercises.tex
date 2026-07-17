@@ -1,0 +1,18 @@
+\section{Exercises}\label{sec:06-groups:07-exercises:1}
+
+\textbf{Key points.} A group is data (\texttt{op}, \texttt{id}, \texttt{inv}) plus proof obligations (\texttt{assoc}, two-sided \texttt{id}/\texttt{inv} laws), bundled in one \texttt{structure}. The left/right split on \texttt{id}/\texttt{inv} is not overcaution --- a genuinely non-abelian example (\texttt{perm3Group}) needs both. Any theorem proved once, generically, against \texttt{Grp : Group G} applies to every concrete group built afterward at no extra cost.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Build \texttt{boolXorGroup : Group Bool} where \texttt{op} is boolean XOR (\texttt{Bool.xor}), \texttt{id := false}, and \texttt{inv := fun a => a} (every element is its own inverse). Prove each field using \texttt{by intro a; cases a <;> rfl} is tempting --- instead, for practice, use \texttt{cases a with | false => rfl | true => rfl} for the fields that need a case split, to see exactly which case does what.
+\item
+  Verify on paper that \texttt{inv\textbackslash{}\_left} and \texttt{inv\textbackslash{}\_right} are genuinely different obligations. They coincide automatically only once the group has been \emph{proved} commutative --- this is exactly the content of Chapter 7's first theorem.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:05-chapter-6:1]{Appendix, Chapter 6}.
+
+\section{Next}\label{sec:06-groups:07-exercises:2}
+
+Continue to \hyperref[sec:07-group-theorems:00-index:1]{Chapter 7: Group examples and basic theorems}, where we prove facts that hold for \emph{every} group, generically.

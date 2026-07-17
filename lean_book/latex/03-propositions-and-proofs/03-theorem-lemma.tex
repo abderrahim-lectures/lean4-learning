@@ -1,0 +1,15 @@
+\section{\texorpdfstring{\texttt{theorem} and \texttt{lemma}}{theorem and lemma}}\label{sec:03-propositions-and-proofs:03-theorem-lemma:1}
+
+\begin{lstlisting}
+theorem two_plus_two : 2 + 2 = 4 := rfl
+
+theorem add_comm_example : 2 + 3 = 3 + 2 := rfl
+\end{lstlisting}
+
+\texttt{theorem} and \texttt{lemma} are the same thing syntactically. \texttt{lemma} is just a naming convention for ``small helper facts.''
+
+\begin{mathreading}
+
+A \texttt{theorem name : P := proof} is exactly the act of naming a proof. It asserts that \(P\) is provable, and records a specific witness \(\mathrm{proof} \in P\) under the label \(\mathrm{name}\), so that later arguments can cite it. This is the informal mathematical move ``By Lemma \(\mathrm{name}\), \(P\) holds,'' made formal. The distinction between \texttt{theorem} and \texttt{lemma} is purely rhetorical (a lemma is a stepping stone). It has no logical content, just as in ordinary mathematical writing.
+
+\end{mathreading}

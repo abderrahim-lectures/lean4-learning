@@ -1,0 +1,91 @@
+% Preamble for "Lean for Working Algebraists" -- LaTeX manuscript,
+% generated from lean_book/*.md by build/build_latex.py. Plain, portable
+% LaTeX (no Springer class file yet -- that is a separate later decision;
+% see the Phase 5 CHANGELOG entry).
+\documentclass[11pt]{book}
+
+\usepackage{fontspec}
+\setmonofont{Consolas}
+\setmainfont{Palatino Linotype}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{caption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\input{lean-listings.tex}
+% Pandoc's --listings output wraps every inline code span in
+% \passthrough{\lstinline!...!}; this macro is normally supplied by
+% Pandoc's own --standalone template, which this fragment-based pipeline
+% does not use.
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% Pandoc's longtable output computes column widths as e.g.
+% "(\linewidth - 2\tabcolsep) * \real{0.5000}"; \real is normally supplied
+% by Pandoc's own --standalone template (which this fragment-based
+% pipeline does not use) as a trivial pass-through of its numeric argument.
+\providecommand{\real}[1]{#1}
+% Pandoc wraps every image in \pandocbounded{...} to constrain it to the
+% text width/height; normally defined by Pandoc's --standalone template.
+\providecommand{\pandocbounded}[1]{#1}
+
+% Unicode symbols used verbatim inside Lean/Python `lstlisting` blocks.
+% listings itself does not know these; newunicodechar maps each raw
+% character, at the XeTeX input level, to the equivalent LaTeX command,
+% independent of any particular font's glyph coverage.
+\usepackage{newunicodechar}
+\newunicodechar{§}{\S}
+\newunicodechar{¬}{\ensuremath{\neg}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{¹}{\textsuperscript{1}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{Π}{\ensuremath{\Pi}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{•}{\ensuremath{\bullet}}
+\newunicodechar{⁻}{\ensuremath{{}^-}}
+\newunicodechar{ₗ}{\ensuremath{{}_l}}
+\newunicodechar{ⱼ}{\ensuremath{{}_j}}
+\newunicodechar{∀}{\ensuremath{\forall}}
+\newunicodechar{∃}{\ensuremath{\exists}}
+\newunicodechar{∈}{\ensuremath{\in}}
+\newunicodechar{∘}{\ensuremath{\circ}}
+\newunicodechar{∣}{\ensuremath{\mid}}
+\newunicodechar{∧}{\ensuremath{\wedge}}
+\newunicodechar{∨}{\ensuremath{\vee}}
+\newunicodechar{≃}{\ensuremath{\simeq}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{≡}{\ensuremath{\equiv}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{⊢}{\ensuremath{\vdash}}
+\newunicodechar{⟨}{\ensuremath{\langle}}
+\newunicodechar{⟩}{\ensuremath{\rangle}}
+\newunicodechar{⟶}{\ensuremath{\longrightarrow}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{ℤ}{\ensuremath{\mathbb{Z}}}
+\newunicodechar{—}{\textemdash}
+
+% Custom environments for the book's recurring boxes.
+\theoremstyle{remark}
+\newtheorem*{mathreading}{Mathematical reading}
+\newtheorem*{progcorner}{Programmer's corner (Python)}
+\newtheorem{pblproject}{Checkpoint Project}[chapter]
+
+\usepackage[backend=biber,style=numeric,sorting=nyt]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[capitalize]{cleveref}

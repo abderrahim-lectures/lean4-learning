@@ -1,0 +1,49 @@
+\section{Theorem 2: left inverses equal right inverses}\label{sec:07-group-theorems:03-theorem-2:1}
+
+\textbf{Claim.} If \texttt{Grp.op b a = Grp.id} for some \texttt{a b : G}, then \texttt{b = Grp.inv a}.
+
+\textbf{Finding the proof.} This has the same shape as Theorem 1: an equality between two elements known only through separate facts (\texttt{h} about \texttt{b}, the \texttt{Group} axioms about \texttt{Grp.inv a}). Hence the same strategy applies: relate both sides to something in common. Here, however, no single lemma hands us \texttt{Grp.op b Grp.id} the way \texttt{Grp.id\textbackslash{}\_right} did in Theorem 1's simpler setting. We must \emph{build} the chain by rewriting \texttt{b} itself, step by step.
+
+The trick worth internalizing: \textbf{pad \texttt{b} with the identity, then swap the identity for something you can cancel.} Concretely:
+
+\[
+b \;=\; b \cdot e \;=\; b \cdot (a \cdot a^{-1}) \;=\; (b \cdot a) \cdot a^{-1} \;=\; e \cdot a^{-1} \;=\; a^{-1}
+\]
+
+Each \texttt{=} above is licensed by exactly one \texttt{Group} field or the hypothesis \texttt{h}, in this order: \texttt{id\textbackslash{}\_right} (backwards), \texttt{inv\textbackslash{}\_right} (backwards), \texttt{assoc} (backwards), \texttt{h}, \texttt{id\textbackslash{}\_left}. Writing the \emph{paper} proof first, as a chain of equalities, and then reading off which axiom licenses each step, is often faster than guessing tactics directly against the goal. This chain is best worked out on scratch paper before the editor is opened.
+
+\begin{lstlisting}
+theorem left_inverse_unique (a b : G) (h : Grp.op b a = Grp.id) :
+    b = Grp.inv a := by
+  have e1 : b = Grp.op b Grp.id := (Grp.id_right b).symm
+  rw [e1]
+  -- Goal: op b id = inv a
+  rw [← Grp.inv_right a]
+  -- Goal: op b (op a (inv a)) = inv a
+  rw [← Grp.assoc b a (Grp.inv a)]
+  -- Goal: op (op b a) (inv a) = inv a
+  rw [h]
+  -- Goal: op id (inv a) = inv a
+  exact Grp.id_left (Grp.inv a)
+\end{lstlisting}
+
+At each \texttt{rw}, the goal-state comment records what would appear in the editor. It is worth training oneself to predict that comment \emph{before} running the tactic, then checking it. When the prediction is wrong, that is the moment worth stopping to understand why (usually: the \texttt{rw} fired on a different occurrence of the pattern than expected, or in the wrong direction).
+
+\begin{mathreading}
+
+This is \emph{uniqueness of inverses}: if \(b\cdot a =
+e\) then \(b = a^{-1}\). The displayed chain \[
+b = b\cdot e = b\cdot(a\cdot a^{-1}) = (b\cdot a)\cdot a^{-1} = e\cdot a^{-1}
+= a^{-1}
+\] is the textbook proof: insert \(e = a\cdot a^{-1}\), reassociate, apply the hypothesis \(b\cdot a = e\), then cancel the identity. Each \texttt{rw} performs exactly one equality in this chain, using the axioms \(\lambda_r\) (id\_right), \(\iota_r\) (inv\_right), \(\alpha\) (assoc), the hypothesis \(h\), and \(\lambda_\ell\) (id\_left). Together with Theorem 1 this establishes that inverses in a group are two-sided and unique, so the notation \(a^{-1}\) is unambiguous.
+
+\end{mathreading}
+
+\textbf{Mathlib equivalent.} The exact same ``pad with the identity, swap it for something cancelable'' chain, written with \texttt{*}/\texttt{1}/\texttt{⁻¹} instead of \texttt{Grp.op}/\texttt{Grp.id}/\texttt{Grp.inv}:
+
+\begin{lstlisting}
+example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
+  rw [← mul_one b, ← mul_inv_cancel a, ← mul_assoc, h, one_mul]
+\end{lstlisting}
+
+Reading right to left through the \texttt{rw} list gives line-for-line the displayed chain above: \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_one}{\texttt{mul\textbackslash{}\_one}} \texttt{b} turns \texttt{b} into \texttt{b * 1}; \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_inv_cancel}{\texttt{mul\textbackslash{}\_inv\textbackslash{}\_cancel}} \texttt{a} turns that \texttt{1} into \texttt{a * a⁻¹}; \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\textbackslash{}\_assoc}} reassociates; \texttt{h} substitutes \texttt{b * a} for \texttt{1}; \href{https://loogle.lean-lang.org/?q=one_mul}{\texttt{one\textbackslash{}\_mul}} clears the resulting \texttt{1 * a⁻¹}. These are the same five steps, in the same order --- only the names \texttt{Grp.assoc}/\texttt{Grp.inv\textbackslash{}\_right} and so on are replaced by Mathlib's generic \texttt{mul\textbackslash{}\_assoc}/\texttt{mul\textbackslash{}\_inv\textbackslash{}\_cancel} and so on.

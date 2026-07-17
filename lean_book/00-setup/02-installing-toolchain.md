@@ -7,12 +7,14 @@
 Lean is managed by **elan**, a **version manager**. This is a small tool
 that installs and switches between different versions of Lean itself, so
 each project can pin the exact version it needs. (Readers familiar with
-`rustup` from Rust will recognize elan as playing the same role for Lean.)
+`uv`'s Python-version management (`uv python install`) will recognize
+elan as playing the same role for Lean.)
 
 1. Install elan: follow the instructions at the official Lean installation
    guide (search "leanprover elan install" or use a package manager).
-   On Windows, the recommended path is via VS Code's *Lean 4* extension,
-   which offers to install elan automatically.
+   On Windows, Linux, and macOS alike, the recommended path is via VS
+   Code's *Lean 4* extension, which offers to install elan automatically
+   through a platform-specific setup script for whichever OS it detects.
 2. Verify installation:
 
    ```sh
