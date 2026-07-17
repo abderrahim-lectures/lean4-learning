@@ -12,6 +12,28 @@ extract its witness the way `Sigma` (landing in `Type`) can. Both Π- and
 Σ-types, plus `Prop`, assemble into the calculus of constructions
 underlying every Lean declaration seen so far.
 
+**Socratic questions.**
+
+1. *`Vec.replicate`'s return type mentions its `Nat` argument's value; a
+   plain function like `Nat.succ` does not. Is `Nat.succ`'s type
+   `Nat → Nat` therefore *not* a Π-type?* It still is — `∀ n : Nat, Nat`
+   is a Π-type whose body happens not to mention the bound variable. Every
+   ordinary function type is a Π-type in the degenerate case; "dependent"
+   describes the *interesting* instances, not a separate kind of arrow.
+2. *`Σ n : Nat, Fin n` type-checks, but `Σ n : Nat, n > 0` does not, even
+   though `n > 0` is a perfectly good proposition about `n`. What is the
+   one-sentence reason, stated as a rule rather than an example?*
+   `Sigma`'s second component must be `Type`-valued, and `Prop` is a
+   different universe (`Sort 0`) from `Type` (`Sort 1` and up) — no
+   proposition, however true, is itself a `Type`.
+3. *`∃ x, P x` and `Σ x, P x` have exactly the same shape — a witness plus
+   a proof. What is lost by writing the existential instead of the
+   Sigma?* Extractability. `Exists` lives in `Prop`, and proof
+   irrelevance means two proofs of the same proposition are
+   indistinguishable to the kernel — so there is no way to pull the
+   witness back out computationally, only to use it inside another proof.
+   `Sigma`'s witness, landing in `Type`, has no such restriction.
+
 1. β-reduce $(\lambda x.\lambda y.\, y\, x)\, a\, b$ to normal form by
    hand, writing out each step. §4's untyped-λ-calculus recap named
    $K = \lambda x.\lambda y.\, x$ ("take two arguments, return the

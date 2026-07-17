@@ -32,6 +32,19 @@ Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
 
 \textbf{Key points.} A \texttt{structure} bundles data (and optionally proofs) under one name, built via the anonymous constructor \texttt{⟨...⟩} and read back out via field projection \texttt{.field}. \texttt{extends} builds a new structure containing everything an existing one has, plus more, generating a \texttt{.toX} forgetful projection for free --- the exact mechanism \texttt{CommGroup} uses to add commutativity to \texttt{Group} in Chapter 6.
 
+\textbf{Socratic questions.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{\texttt{⟨0, 0⟩} and \texttt{\{ x := 0, y := 0 \}} build the identical \texttt{Point}. Since the named form says more, why does the anonymous form ever get used?} Because the \emph{expected type} already says which fields are which --- \texttt{def origin : Point := ⟨0, 0⟩} cannot be ambiguous, since Lean already knows a \texttt{Point} is being built and in what field order. The named form earns its keep only when that context is not enough to make the assignment obvious to a reader.
+\item
+  \emph{\texttt{Point3D extends Point} generates \texttt{.toPoint} automatically. What would have to be written by hand instead, if \texttt{extends} did not exist?} A separate function \texttt{Point3D.toPoint : Point3D → Point} projecting out the shared fields one at a time --- exactly what a forgetful functor does explicitly, which is the whole reason \texttt{extends} is read categorically rather than as a mere convenience keyword.
+\item
+  \emph{A \texttt{structure} can bundle proofs as fields, not only data. What changes about }checking* that a term has the right type, once one of its fields is a proof rather than a number?* Nothing about the mechanism --- Lean still checks the field has the stated type --- but the stated type is now a proposition, so supplying that field means supplying a proof, checked once at construction time. This is exactly what makes \texttt{Group} (Chapter 6) impossible to build carelessly: the axiom fields cannot be filled in with nonsense that happens to type-check as data can.
+\end{enumerate}
+
 \section{Next}\label{sec:02-functions-and-structures:03-extending-structures:3}
 
 Continue to \hyperref[sec:03-propositions-and-proofs:00-index:1]{Chapter 3: Propositions and proofs}.
