@@ -27,6 +27,40 @@ library efficiently, and choose between term-mode and tactic-mode proofs;
 and translate a from-scratch algebraic construction into its Mathlib
 equivalent.
 
+## Pedagogical approach
+
+The book uses several recurring devices, applied consistently across all
+14 chapters:
+
+- **Learning objectives and key points.** Each chapter opens with a
+  learning-objectives statement and closes with a key-points recap before
+  its exercises.
+- **Mathematical reading.** Most Lean code blocks are followed by a
+  "Mathematical reading" box translating the code into the standard
+  notation a working algebraist would recognize from a textbook,
+  including the categorical reading (functors, universal properties,
+  Hom-sets) where it clarifies what the code encodes.
+- **Programmer's corner (Python).** At several points, an optional box
+  compares a Lean construct to its nearest Python analogue, for readers
+  with programming background but no prior exposure to formal logic or
+  type theory.
+- **Mathlib equivalent.** Starting in Chapter 6, each worked example is
+  followed by a box showing the same statement phrased against Mathlib's
+  real API, so the from-scratch construction and the library a reader
+  will use afterward are both covered.
+- **Socratic questions.** Each chapter includes reflective "why X, not
+  Y?" questions with their answers, distinct from the recap and the
+  exercises.
+- **Checkpoint projects.** Two projects, placed after Chapter 5 and
+  after Chapter 11, apply material from all preceding chapters to a
+  single self-contained construction, each with a self-verification step
+  and a full solution in the appendix.
+- **Exercises with full solutions.** Every chapter's exercises have a
+  complete worked solution in the [appendix](lean_book/14-appendix-solutions/00-index.md),
+  and every Lean snippet in the book (main text and solutions) is
+  verified against the pinned toolchain, not merely written and assumed
+  correct.
+
 ## Contents
 
 - [lean_book/](lean_book/) — the book itself. See
@@ -37,4 +71,11 @@ equivalent.
   module per chapter and verified to compile with `lake build` (see
   [lean_project/README.md](lean_project/README.md) for setup). This
   caught and fixed several real bugs in the book's original code — see
-  the git history for specifics.
+  the git history for specifics. Opens directly in a
+  [GitHub Codespace](https://codespaces.new/abderrahim-lectures/lean4-learning),
+  toolchain and dependencies installed automatically.
+- [lean_book/python-companion/](lean_book/python-companion/) — every
+  "Programmer's corner (Python)" snippet in the book, collected into one
+  notebook that opens directly in
+  [Google Colab](https://colab.research.google.com/github/abderrahim-lectures/lean4-learning/blob/master/lean_book/python-companion/python_companion.ipynb),
+  no installation required.
