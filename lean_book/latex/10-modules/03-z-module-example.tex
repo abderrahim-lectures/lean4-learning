@@ -3,7 +3,7 @@
 This is the standard first example, and a good one to build by hand, since the scalar action is not given as data: it must be \emph{defined}, by repeated addition, from the group structure alone.
 
 \begin{lstlisting}
--- n • m for n : Nat, by iterating `op`.
+-- n (*$\bullet$*) m for n : Nat, by iterating `op`.
 def natSmul {M : Type} (Grp : Group M) (n : Nat) (m : M) : M :=
   match n with
   | Nat.zero => Grp.id

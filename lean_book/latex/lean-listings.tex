@@ -45,6 +45,14 @@
   % correctly under `columns=fixed`) -- every arrow/logic/relation symbol
   % in this book's Lean code was silently missing its trailing space.
   columns=fixed,
+  % Even under columns=fixed, `listings` scrambles character order and
+  % swallows surrounding spaces around raw non-ASCII symbols (e.g. `{α`
+  % renders as `α{`, `α → Nat` renders as `α→  Nat`) -- a listings/XeTeX
+  % column-bookkeeping bug, not a newunicodechar artifact. build_latex.py's
+  % escape_lstlisting_unicode() routes every such symbol through this
+  % escape instead of leaving it as a raw character for listings to
+  % measure and position itself.
+  escapeinside={(*}{*)},
   frame=single,
   framerule=0.3pt,
   rulecolor=\color{black!30},
@@ -63,6 +71,7 @@
   breaklines=true,
   breakautoindent=true,
   columns=fixed,
+  escapeinside={(*}{*)},
   frame=single,
   framerule=0.3pt,
   rulecolor=\color{black!30},

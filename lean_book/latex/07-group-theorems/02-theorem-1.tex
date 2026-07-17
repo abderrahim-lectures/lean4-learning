@@ -5,7 +5,7 @@
 \textbf{Finding the proof.} We begin by stating the goal and examining what is available:
 
 \begin{lstlisting}
-theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
+theorem id_unique (e' : G) (h : (*$\forall$*) a : G, Grp.op e' a = a) : e' = Grp.id := by
   sorry
 \end{lstlisting}
 
@@ -14,10 +14,10 @@ The goal is \texttt{e' = Grp.id}, an equality between two elements of \texttt{G}
 \texttt{h} lets us compute \texttt{Grp.op e' a} for \emph{any} \texttt{a} --- in particular for \texttt{a := Grp.id}, giving \texttt{Grp.op e' Grp.id = Grp.id}. Separately, \texttt{Grp.id\_\allowbreak{}right} (a field of \texttt{Group}, so available for free) says \texttt{Grp.op e' Grp.id = e'} (instantiating its universal quantifier at \texttt{e'}). Both describe \texttt{Grp.op e' Grp.id} --- that is the third expression. Once this is noticed, the proof is a matter of bookkeeping:
 
 \begin{lstlisting}
-theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
+theorem id_unique (e' : G) (h : (*$\forall$*) a : G, Grp.op e' a = a) : e' = Grp.id := by
   have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
   have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
-  rw [← step2]
+  rw [(*$\leftarrow$*) step2]
   exact step1
 \end{lstlisting}
 
@@ -36,7 +36,7 @@ e\): the standard ``two things equal to a common third are equal.'' (The same ar
 \textbf{Mathlib equivalent.} Phrased against Mathlib's \href{https://loogle.lean-lang.org/?q=Group}{\texttt{Group}} class, \texttt{Grp.op}/ \texttt{Grp.id}/\texttt{Grp.id\_\allowbreak{}right} become the ordinary \texttt{*}/\texttt{1}/\href{https://loogle.lean-lang.org/?q=mul_one}{\texttt{mul\_\allowbreak{}one}}, and the whole ``third expression'' chain collapses into a single \texttt{.symm.trans}:
 
 \begin{lstlisting}
-example {G : Type*} [Group G] (e' : G) (h : ∀ a : G, e' * a = a) : e' = 1 :=
+example {G : Type*} [Group G] (e' : G) (h : (*$\forall$*) a : G, e' * a = a) : e' = 1 :=
   (mul_one e').symm.trans (h 1)
 \end{lstlisting}
 

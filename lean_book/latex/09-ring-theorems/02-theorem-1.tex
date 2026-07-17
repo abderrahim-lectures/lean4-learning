@@ -31,7 +31,7 @@ theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
         (Rg.addGrp.op (Rg.mul a Rg.addGrp.id) (Rg.mul a Rg.addGrp.id)) :=
     congrArg (Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul a Rg.addGrp.id))) h1
   rw [Rg.addGrp.toGroup.inv_left] at h2
-  rw [← Rg.addGrp.toGroup.assoc] at h2
+  rw [(*$\leftarrow$*) Rg.addGrp.toGroup.assoc] at h2
   rw [Rg.addGrp.toGroup.inv_left] at h2
   rw [Rg.addGrp.toGroup.id_left] at h2
   exact h2.symm
