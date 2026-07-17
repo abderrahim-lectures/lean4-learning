@@ -34,8 +34,7 @@ the `induction` tactic from Chapter 4.
 The previous section built `pathBetaAlpha : Path exampleQuiver 0 2`
 directly, one `Path.cons` at a time. Here it is again, built instead by
 *composing* the shorter path `pathAlpha` with a fresh one-arrow path using
-`Path.append`. Reassuringly, both constructions produce the exact same
-path.
+`Path.append`. Both constructions produce the exact same path.
 
 ```lean
 def pathBetaOnly : Path exampleQuiver 1 2 :=
