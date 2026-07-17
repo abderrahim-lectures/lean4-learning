@@ -1,6 +1,17 @@
 # lean4-learning
 
+## [📖 Read the book (PDF)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest/download/lean-for-working-algebraists.pdf)
+
 [Notice](NOTICE.md) | [Reproducing this book](REPRODUCING.md)
+
+The book is a single PDF — the link above downloads the latest version
+directly, no account or software installation required. The rest of this
+page describes the book and its companion material for readers who also
+want to run the Lean code or the Python examples on their own machine or
+in a browser.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/abderrahim-lectures/lean4-learning)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abderrahim-lectures/lean4-learning/blob/master/lean_book/python-companion/python_companion.ipynb)
 
 ## Summary
 
