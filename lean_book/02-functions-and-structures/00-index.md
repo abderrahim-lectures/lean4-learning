@@ -16,6 +16,11 @@ maps. This is not needed to follow along — the plain statement above is
 enough.) The interesting part of this chapter is `structure`, which is
 how algebraic data will be packaged.
 
+**Learning objectives.** By the end of this chapter, bundle data (and
+proofs) into a `structure`, use field projection and the anonymous
+constructor, parameterize a `structure` by a type, and extend one
+`structure` with another via `extends`.
+
 ## Sections
 
 1. [`structure`: bundling data together](01-structure-basics.md)

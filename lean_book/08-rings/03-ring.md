@@ -63,8 +63,13 @@ $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 
 ### References
 
-- David S. Dummit and Richard M. Foote, *[Abstract Algebra](https://www.wiley.com/en-us/Abstract+Algebra,+3rd+Edition-p-9780471433347)*, 3rd ed., Wiley, 2003 — the standard classical (non-Lean) reference for the ring axioms (R1)–(R4) and their consequences.
-- Paolo Aluffi, *[Algebra: Chapter 0](https://bookstore.ams.org/gsm-104)*, Graduate Studies in Mathematics vol. 104, American Mathematical Society, 2009 — a ring-theory treatment using the same categorical framing (forgetful functors, universal properties) this book uses.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for the ring axioms (R1)–(R4) and their consequences.
+- Aluffi ([Aluffi2009]) — a ring-theory treatment using the same categorical framing (forgetful functors, universal properties) this book uses.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
+[Aluffi2009]: ../bibliography.md#aluffi2009
 
 ---
 

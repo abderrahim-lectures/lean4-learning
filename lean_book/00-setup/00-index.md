@@ -4,6 +4,12 @@
 
 ---
 
+**Learning objectives.** By the end of this chapter, know why Lean (rather
+than another proof assistant) is this book's choice, have a working
+`lake`/Lean 4 toolchain and editor set up, and understand why this book
+builds everything from scratch instead of importing Mathlib from the
+start.
+
 ## Sections
 
 1. [Why Lean?](01-why-lean.md)

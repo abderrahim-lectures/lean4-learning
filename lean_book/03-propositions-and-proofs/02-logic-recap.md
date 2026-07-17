@@ -257,10 +257,17 @@ detail.
 
 ### References
 
-- Gerhard Gentzen, "Untersuchungen über das logische Schließen," *Mathematische Zeitschrift*, 1935 — the original natural-deduction system, with introduction/elimination rules for each connective.
-- Dirk van Dalen, *[Logic and Structure](https://doi.org/10.1007/978-1-4471-4558-5)*, 5th ed., Springer, 2013 — a standard, widely used textbook covering propositional/first-order natural deduction, soundness, and completeness in the form used in this section.
-- Kurt Gödel, "Die Vollständigkeit der Axiome des logischen Funktionenkalküls," 1930 — the original completeness theorem for first-order logic.
-- Benjamin C. Pierce et al., *Software Foundations, Volume 1: Logical Foundations*, [softwarefoundations.cis.upenn.edu](https://softwarefoundations.cis.upenn.edu/) — a free, mechanized treatment of propositional/first-order natural deduction and the classical/intuitionistic distinction, in a proof assistant (Coq) closely comparable to Lean.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Gentzen ([Gentzen1935]) — the original natural-deduction system, with introduction/elimination rules for each connective.
+- van Dalen ([VanDalen2013]) — a standard, widely used textbook covering propositional/first-order natural deduction, soundness, and completeness in the form used in this section.
+- Gödel ([Godel1930]) — the original completeness theorem for first-order logic.
+- Pierce et al. ([PierceSF]) — a free, mechanized treatment of propositional/first-order natural deduction and the classical/intuitionistic distinction, in a proof assistant (Coq) closely comparable to Lean.
+
+[Gentzen1935]: ../bibliography.md#gentzen1935
+[VanDalen2013]: ../bibliography.md#vandalen2013
+[Godel1930]: ../bibliography.md#godel1930
+[PierceSF]: ../bibliography.md#piercesf
 
 ---
 

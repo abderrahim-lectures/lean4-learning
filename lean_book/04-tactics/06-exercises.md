@@ -4,6 +4,13 @@
 
 ---
 
+**Key points.** A goal is hypotheses above a line, a statement to prove
+below it; a tactic replaces it with zero or more simpler goals. The core
+loop is: try the cheapest tactic, read why it failed, find structure to
+split or induct on, locate the specific lemma that matches. `induction`
+generates one case (and hypothesis `ih`) per constructor, exactly
+mirroring a recursive function over the same type.
+
 1. Prove `theorem and_comm_tac {P Q : Prop} (h : P ∧ Q) : Q ∧ P := by ...`
    using [`constructor`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/), `h.left`, `h.right`.
 2. Prove `theorem nat_mul_zero (n : Nat) : n * 0 = 0 := by rfl` — check

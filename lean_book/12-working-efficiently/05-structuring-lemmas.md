@@ -27,6 +27,14 @@ This is the same judgment call made writing ordinary code:
 extract a helper when — and only when — real duplication or a
 genuinely separate sub-claim is present, not ahead of time "just in case."
 
+**Key points.** `exact?`/`apply?` search for a closing term but do not
+always find the shortest one; `decide`/`omega`/`norm_num` replace a hand
+proof exactly on their decidable fragment, never on a goal about a
+generic, unspecified structure; `simp` trades traceability for speed, so
+this book reaches for it only when a genuine technical obstacle makes the
+explicit alternative not worth the detour; and a repeated `rw` chain or an
+independently-statable sub-goal is a lemma waiting to be named.
+
 ## Next
 
 Continue to [Chapter 13: Where to go next](../13-next-steps/00-index.md).

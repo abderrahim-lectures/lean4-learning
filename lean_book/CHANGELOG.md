@@ -3,6 +3,31 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Learning objectives, key points, and a consolidated bibliography
+
+- Added a short **"Learning objectives"** paragraph to every chapter's
+  `00-index.md` (Chapters 0–13), stating what a reader should be able to
+  do by the end of that chapter.
+- Added a brief **"Key points"** recap immediately before each chapter's
+  exercises (or, for the three chapters without an exercises file —
+  Chapters 0, 2, 12 — at the end of the chapter's last section). Chapter
+  13 was left without one, since [01-what-we-built.md](13-next-steps/01-what-we-built.md)
+  already serves as a whole-book recap.
+- **Consolidated every chapter's References section into one
+  [Bibliography](bibliography.md)**, de-duplicating first: Pierce's *Types
+  and Programming Languages* alone was cited in full, with slightly
+  different text, in five different chapters, and several other sources
+  (Dummit & Foote, the Python `typing`/mypy docs, Milner 1978, the CoC
+  paper, *Theorem Proving in Lean 4*) were repeated at least once. Every
+  source now has exactly one full citation, on the bibliography page;
+  each chapter's own References section keeps only a short pointer plus
+  the section-specific reason for citing it. Three sources missed by the
+  original per-chapter passes (Gentzen 1935, Gödel 1930, Martin-Löf 1984)
+  were folded in during this consolidation. Added to the README's
+  Reference list.
+- No Lean code was touched in this pass; `lake build` on the companion
+  `lean_project` re-confirmed unaffected.
+
 ## Unreleased — Project-Based Learning components
 
 Distributed PBL scaffolding through the book instead of leaving it only at
