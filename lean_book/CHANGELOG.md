@@ -3,6 +3,35 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Revert KOMA-Script scrbook back to plain `book`
+
+KOMA-Script `scrbook` (adopted to chase a Springer-Monographs-in-Mathematics
+look) caused more churn than it was worth: it conflicts with `titlesec`
+(had to be replaced with KOMA's own heading commands), its `DIV`/trim
+tuning had to be re-derived at every page-size change, and each of those
+changes reopened "does every table/code listing still fit" from scratch.
+Reverted `preamble.tex` to plain `book`, keeping the typographic
+improvements from the previous entry via plain-LaTeX equivalents instead
+of KOMA options:
+
+- `\documentclass[12pt,twoside]{book}` + `\usepackage[margin=1in,
+  bindingoffset=0.3in]{geometry}` in place of `scrbook`'s `fontsize=`/
+  `DIV=`/`paper=` options.
+- `\setlength{\parskip}{0.5\baselineskip}` (keeps `\parindent`, unlike the
+  `parskip` package) in place of KOMA's `parskip=half`.
+- `\linespread{1.15}` carried over unchanged.
+- Chapter/section styling reverted to the original `titlesec`-based
+  `\titleformat` rules (the same visual result: a colored rule above/below
+  the chapter title, no numeric chapter label, colored section headings)
+  instead of KOMA's `\RedeclareSectionCommand`/`\chapterlinesformat`.
+- The unnumbered-front-matter-chapter mechanism (`unnumber_chapter()` in
+  `build_latex.py`, `\setcounter{chapter}{-1}` before Chapter 0) and the
+  table column-ratio/`\small` fix from the previous entries are
+  class-independent and needed no changes.
+
+235 pages on A4, compiled clean: zero errors, zero `Overfull \hbox`, zero
+`Missing character` warnings.
+
 ## Unreleased — Typography pass: bigger font, more paragraph spacing
 
 Follow-up to the KOMA-Script switch: the default 11pt/dense-paragraph
