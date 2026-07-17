@@ -33,11 +33,9 @@ Consider each field in turn:
 \texttt{Ring R} is exactly the textbook definition of a (unital, not-necessarily-commutative) ring, presented as a tuple \[
 \Big(\,(R,+,0,-)\in\mathbf{Ab},\ \cdot : R\times R\to R,\ 1\in R,\
 \text{proofs of }(\mathrm{R2}),(\mathrm{R3}),(\mathrm{R4})\,\Big).
-\] The field \texttt{addGrp} is the \emph{underlying additive abelian group}, so a ring is ``an abelian group \((R,+)\) carrying a compatible monoid structure \((R,\cdot,1)\)'' --- a monoid (a set with an associative operation and identity element, i.e.~a group without inverses). The remaining fields say \((R,\cdot,1)\) is a monoid (\texttt{mul\_assoc}, \texttt{one\_mul}, \texttt{mul\_one}) and that the two operations interact through the two-sided distributive laws --- that is, multiplication is compatible with addition on both sides. Nesting \texttt{addGrp} as a whole substructure mirrors the
+\] The field \texttt{addGrp} is the \emph{underlying additive abelian group}, so a ring is ``an abelian group \((R,+)\) carrying a compatible monoid structure \((R,\cdot,1)\)'' --- a monoid (a set with an associative operation and identity element, i.e.~a group without inverses). The remaining fields say \((R,\cdot,1)\) is a monoid (\texttt{mul\_assoc}, \texttt{one\_mul}, \texttt{mul\_one}) and that the two operations interact through the two-sided distributive laws --- that is, multiplication is compatible with addition on both sides. Nesting \texttt{addGrp} as a whole substructure mirrors the \hyperref[sec:01-basics:04-terminology:1]{forgetful functor} \(\mathbf{Ring}\to\mathbf{Ab}\) sending a ring to its additive group.
 
 \end{mathreading}
-
-\(\mathbf{Ring}\to\mathbf{Ab}\) sending a ring to its additive group.
 
 \begin{quote}
 Read more: Mathlib's \texttt{Ring} (\texttt{Mathlib.Algebra.Ring.Defs}) sits inside a much larger hierarchy --- \texttt{Semiring}, \texttt{NonUnitalRing}, \texttt{CommRing}, \texttt{DivisionRing}, \texttt{Field} --- each adding or dropping exactly one axiom compared to its neighbors; see \hyperref[sec:13-next-steps:02-moving-to-mathlib:1]{Chapter 13}. For the classical (non-Lean) statement of these axioms and their standard consequences, Dummit \& Foote's \emph{Abstract Algebra} or Aluffi's \emph{Algebra: Chapter 0} (the latter using the same categorical framing this book uses) are standard references.

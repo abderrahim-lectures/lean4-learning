@@ -1,6 +1,7 @@
 % Auto-generated top-level driver. Inputs the front matter (title
-% page, About this book, then the learning-paths page), every
-% chapter driver in reading order, the back-matter reference pages,
+% page, Preface, About this book, How to read this book, then the
+% learning-paths and notation-reference pages), every chapter
+% driver in reading order, the back-matter reference pages,
 % the generated bibliography, and a back-cover page. Preamble lives
 % in preamble.tex; front matter in frontmatter.tex; back cover in
 % backmatter.tex (both hand-written, not generated from Markdown).
@@ -8,6 +9,8 @@
 \begin{document}
 \input{frontmatter.tex}
 \input{learning-paths.tex}
+\input{notation-reference.tex}
+\setcounter{chapter}{-1}
 \input{00-setup/00-index.tex}
 \input{01-basics/00-index.tex}
 \input{02-functions-and-structures/00-index.tex}

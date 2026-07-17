@@ -79,6 +79,7 @@ CHAPTERS = [
 # input after the last chapter.
 FRONT_MATTER_FILES = [
     "learning-paths.md",
+    "notation-reference.md",
 ]
 ROOT_FILES = [
     "tactic-and-library-reference.md",
@@ -115,7 +116,42 @@ DIAGRAM_MAP = {
     ],
 }
 
-NAV_LINE_RE = re.compile(r'^\[.*\]\([^)]*\.md[^)]*\).*$', re.MULTILINE)
+## A nav line is one or more `[text](url)` links, optionally `| `-separated
+## ("[<- Prev](a.md) | [Index](00-index.md) | ..."), and nothing else on
+## the line -- but that shape alone is not enough to identify one: a line
+## consisting of a single body-text link (no surrounding words) is
+## syntactically identical to a genuine one-link nav line like
+## "[Table of contents](README.md)" (see e.g. 06-groups/02-translating.md's
+## "...is a genuine\n[subobject](...)\nof the space of raw data.", where the
+## link is just this book's own wrapping of an ordinary sentence). The
+## actual distinguishing feature, true of every nav line this book inserts
+## and false of every such accidental body line, is *position*: nav lines
+## always sit directly against a `---` rule (the top one, right after the
+## title, or the bottom one, right before EOF) with only blank lines
+## possibly between. strip_nav_lines() below uses that adjacency instead
+## of guessing from line content alone.
+NAV_LINE_ONLY_RE = re.compile(r'^(?:\[[^\]]*\]\([^)]*\)\s*(?:\|\s*)?)+$')
+
+
+def strip_nav_lines(text):
+    lines = text.split("\n")
+    is_rule = [line.strip() == "---" for line in lines]
+    is_link_only = [bool(NAV_LINE_ONLY_RE.match(line)) for line in lines]
+    keep = [True] * len(lines)
+    for i, link_only in enumerate(is_link_only):
+        if not link_only:
+            continue
+        j = i - 1
+        while j >= 0 and lines[j].strip() == "":
+            j -= 1
+        j_rule = j >= 0 and is_rule[j]
+        k = i + 1
+        while k < len(lines) and lines[k].strip() == "":
+            k += 1
+        k_rule = k < len(lines) and is_rule[k]
+        if j_rule or k_rule:
+            keep[i] = False
+    return "\n".join(line for i, line in enumerate(lines) if keep[i])
 MERMAID_RE = re.compile(r'```mermaid\n(.*?)\n```', re.DOTALL)
 BIB_CITE_RE = None  # built after bibliography keys are known
 
@@ -206,6 +242,37 @@ def _read_braced_group(s, start):
             if depth == 0:
                 return s[start + 1:j], j + 1
     raise ValueError("unbalanced braces")
+
+
+def unnumber_chapter(tex):
+    """Convert Pandoc's numbered '\\chapter{...}' (as emitted for an H1
+    heading) into an unnumbered '\\chapter*{...}' with a manual
+    \\addcontentsline, so it still appears in the Table of Contents but
+    without consuming a \\thechapter slot. Used for front-/back-matter
+    reference pages (Learning paths, Notation reference, the tactic and
+    library reference, the lambda-calculus dictionary, the appendix) --
+    none of these are part of the book's own "Chapter N" sequence, so
+    letting them eat numbered-chapter slots would shift every real
+    chapter's LaTeX-internal number away from the number it states about
+    itself in its own title text."""
+    assert tex.startswith("\\chapter{"), tex[:40]
+    content, after = _read_braced_group(tex, len("\\chapter"))
+    if content.startswith("\\texorpdfstring{"):
+        formatted, after_fmt = _read_braced_group(content, len("\\texorpdfstring"))
+        plain, _ = _read_braced_group(content, after_fmt)
+    else:
+        formatted = plain = content
+    return (
+        f"\\chapter*{{{formatted}}}\n"
+        f"\\addcontentsline{{toc}}{{chapter}}{{{plain}}}\n"
+        # \chapter* never steps the chapter counter, so it never triggers
+        # the usual "stepping a counter resets its children" reset of
+        # \thesection either -- without this, this file's own subsections
+        # would keep counting up from whatever the *previous* unnumbered
+        # chapter left off, instead of starting fresh at .1.
+        f"\\setcounter{{section}}{{0}}"
+        + tex[after:]
+    )
 
 
 def fix_cross_links(tex, citing_chapter):
@@ -497,7 +564,7 @@ def convert_file(chapter, name):
     with open(src_path, encoding="utf-8") as fh:
         text = fh.read()
 
-    text = NAV_LINE_RE.sub("", text)
+    text = strip_nav_lines(text)
     text = re.sub(r'\n-{3,}\n\s*\n', '\n\n', text)
     text = replace_mermaid(text, relkey)
     text = replace_bib_cites(text)
@@ -540,6 +607,8 @@ def convert_file(chapter, name):
     tex = fix_cross_links(tex, chapter)
     tex = fix_inline_code(tex)
     tex = renumber_labels(tex, chapter, stem)
+    if not chapter or (chapter == "14-appendix-solutions" and name == "00-index.md"):
+        tex = unnumber_chapter(tex)
     # listings' language names are case-sensitive; its built-in Python
     # support is registered as "Python", and Pandoc always capitalizes the
     # fence's info string to match (regardless of how it's written in this
@@ -576,8 +645,9 @@ def write_main_driver():
     out_path = os.path.join(LATEX_DIR, MAIN_TEX_NAME)
     lines = [
         "% Auto-generated top-level driver. Inputs the front matter (title\n"
-        "% page, About this book, then the learning-paths page), every\n"
-        "% chapter driver in reading order, the back-matter reference pages,\n"
+        "% page, Preface, About this book, How to read this book, then the\n"
+        "% learning-paths and notation-reference pages), every chapter\n"
+        "% driver in reading order, the back-matter reference pages,\n"
         "% the generated bibliography, and a back-cover page. Preamble lives\n"
         "% in preamble.tex; front matter in frontmatter.tex; back cover in\n"
         "% backmatter.tex (both hand-written, not generated from Markdown).\n",
@@ -588,6 +658,11 @@ def write_main_driver():
     for name in FRONT_MATTER_FILES:
         stem = name[:-3]
         lines.append(f"\\input{{{stem}.tex}}\n")
+    # Front matter above is unnumbered (unnumber_chapter()), so the chapter
+    # counter is still at its initial value here -- reset it to -1 so the
+    # first real chapter (00-setup) becomes \thechapter=0, matching this
+    # book's own "Chapter 0" numbering instead of LaTeX's default 1-index.
+    lines.append("\\setcounter{chapter}{-1}\n")
     for chapter in CHAPTERS:
         lines.append(f"\\input{{{chapter}/00-index.tex}}\n")
     for name in ROOT_FILES:
