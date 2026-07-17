@@ -42,9 +42,8 @@ Here is the entire point of a type system, made concrete --- starting in Python,
 def add_them(a, b):
     return a + b
 
-add_them(3, True)   # 4 — Python silently treats True as 1, no error at all
-add_them(3, "oops")  # TypeError: unsupported operand type(s) — but only
-                     # once this exact line actually runs
+add_them(3, True)    # 4 — Python silently treats True as 1, no error at all
+add_them(3, "oops")  # TypeError: unsupported operand type(s), but only once this exact line runs
 \end{lstlisting}
 
 Nothing stops Python from \emph{writing} \texttt{add\_them(3, "oops")}. The mistake is only discovered the moment that specific line executes --- if it sits on a rarely-hit branch, it can ship for months undetected. And in the \texttt{True} case, Python does not even complain: it quietly coerces the boolean to \texttt{1} and moves on, whether or not that was the intended meaning.

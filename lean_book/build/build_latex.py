@@ -453,7 +453,21 @@ def simplify_tables(tex):
     def _sub(m):
         colspec_block, body = m.group(1), m.group(2)
         entries = _extract_colspec_entries(colspec_block)
-        if entries:
+        if len(entries) == 4:
+            # Pandoc always splits columns equally (25% each here), but
+            # this book's only 4-column tables (the notation-reference
+            # ones) have a long "Meaning" column and a short "First
+            # appears" one -- equal widths make "Meaning" wrap onto many
+            # more lines than necessary. Skew toward the columns that
+            # actually need the room instead.
+            fracs = [0.34, 0.20, 0.28, 0.18]
+            entries = [
+                r'>{\raggedright\arraybackslash}p{(\linewidth - '
+                r'8\tabcolsep) * \real{%.4f}}' % f
+                for f in fracs
+            ]
+            colspec = "\n  " + "\n  ".join(entries) + "\n"
+        elif entries:
             # Pandoc already computed wrapping p{...} column widths as a
             # fraction of \linewidth -- keep them verbatim instead of
             # collapsing to non-wrapping `l` columns (which let long cells
@@ -478,7 +492,17 @@ def simplify_tables(tex):
         body = re.sub(r'\\bottomrule(?:\\noalign\{\})?\n?', '', body)
         body = body.replace("\\endhead\n", "").replace("\\endlastfoot\n", "")
         body = body.rstrip("\n") + "\n\\bottomrule\n"
-        return f"\\begin{{tabular}}{{{colspec}}}\n{body}\\end{{tabular}}\n"
+        # \small keeps reference tables compact -- a standard convention
+        # for lookup tables in printed books, and this book's tables are
+        # non-breaking (a real, page-spanning longtable turned out to be
+        # broken in this toolchain's booktabs+longtable combination even
+        # in total isolation, unrelated to anything in this pipeline), so
+        # every row's height directly determines whether a table still
+        # fits on one page at a given trim size.
+        return (
+            f"{{\\small\\begin{{tabular}}{{{colspec}}}\n{body}"
+            f"\\end{{tabular}}}}\n"
+        )
 
     return LONGTABLE_RE.sub(_sub, tex)
 

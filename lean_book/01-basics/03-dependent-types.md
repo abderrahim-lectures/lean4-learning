@@ -24,9 +24,7 @@ def dot(xs, ys):
     return sum(x * y for x, y in zip(xs, ys))
 
 dot([1, 2, 3], [4, 5, 6])   # 32 — correct
-dot([1, 2, 3], [4, 5])      # 14 — no error, no warning, just a silently
-                            # wrong answer: zip() truncates to the shorter
-                            # list without any indication
+dot([1, 2, 3], [4, 5])      # 14 — silently wrong: zip() truncates to the shorter list
 ```
 
 This is worse than a crash. `dot([1, 2, 3], [4, 5])` does not raise
