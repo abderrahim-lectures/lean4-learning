@@ -10,7 +10,7 @@
 \item
   Prove that linear maps compose: given \texttt{f : LinearMap Rg ModM ModN} and \texttt{g : LinearMap Rg ModN ModP}, construct \texttt{LinearMap Rg ModM ModP} with \texttt{toFun := g.toFun ∘ f.toFun}. (This, together with Exercise 1 and associativity of function composition, is what makes \(R\)-modules and \(R\)-linear maps a category. This is the payoff that Chapter 1 promised.)
 \item
-  Verify \texttt{intSmul} (defined above) satisfies \texttt{Module}'s four axioms against \texttt{intRing}, at least for \texttt{one\textbackslash{}\_smul} and \texttt{smul\textbackslash{}\_add} --- by induction on the integer scalar, in the style of Chapter 4.
+  Verify \texttt{intSmul} (defined above) satisfies \texttt{Module}'s four axioms against \texttt{intRing}, at least for \texttt{one\_smul} and \texttt{smul\_add} --- by induction on the integer scalar, in the style of Chapter 4.
 \item
   Define the submodule of multiples of a fixed integer \texttt{d : Int} (generalizing \texttt{evenSubmodule}, which is the case \texttt{d = 2}), and check that the three closure proofs generalize verbatim with \texttt{2} replaced by \texttt{d}.
 \end{enumerate}

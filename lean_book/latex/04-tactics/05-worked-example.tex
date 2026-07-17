@@ -13,9 +13,9 @@ The proof proceeds by induction on \texttt{b}, one step at a time.
 \begin{itemize}
 \tightlist
 \item
-  The left side, \texttt{a + 0}, reduces to \texttt{a} directly from the definition of \texttt{+} above (this fact is recorded in core Lean as the lemma \texttt{Nat.add\textbackslash{}\_zero}).
+  The left side, \texttt{a + 0}, reduces to \texttt{a} directly from the definition of \texttt{+} above (this fact is recorded in core Lean as the lemma \texttt{Nat.add\_zero}).
 \item
-  The right side, \texttt{0 + a}, is \emph{not} immediate from the definition, since the recursion is on the second argument, not the first. It therefore needs its own small lemma, \texttt{Nat.zero\textbackslash{}\_add : 0 + a = a}, proved separately by induction on \texttt{a}.
+  The right side, \texttt{0 + a}, is \emph{not} immediate from the definition, since the recursion is on the second argument, not the first. It therefore needs its own small lemma, \texttt{Nat.zero\_add : 0 + a = a}, proved separately by induction on \texttt{a}.
 \item
   Combining both: \texttt{a + 0 = a} and \texttt{0 + a = a}, hence \texttt{a + 0 = 0 + a}.
 \end{itemize}
@@ -43,11 +43,11 @@ Walking through the inductive step slowly:
 \item
   The statement is to be proved for \texttt{b = Nat.succ k}, assuming it already holds for \texttt{k} (that assumption is \texttt{ih : a + k = k + a}).
 \item
-  \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw [Nat.add\textbackslash{}\_succ]}} uses the defining equation \texttt{a + succ k = succ (a + k)} to rewrite the left-hand side of the goal.
+  \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw [Nat.add\_succ]}} uses the defining equation \texttt{a + succ k = succ (a + k)} to rewrite the left-hand side of the goal.
 \item
   \texttt{rw [ih]} uses the induction hypothesis to replace \texttt{a + k} with \texttt{k + a} inside the goal.
 \item
-  \texttt{rw [Nat.succ\textbackslash{}\_add]} uses the equation \texttt{succ k + a = succ (k + a)} to rewrite the right-hand side, so both sides now read \texttt{succ (k + a)}, which are literally identical. \texttt{rw} closes the goal automatically once the two sides match syntactically.
+  \texttt{rw [Nat.succ\_add]} uses the equation \texttt{succ k + a = succ (k + a)} to rewrite the right-hand side, so both sides now read \texttt{succ (k + a)}, which are literally identical. \texttt{rw} closes the goal automatically once the two sides match syntactically.
 \end{enumerate}
 
 This is the pattern --- base case, inductive step, explicit \texttt{ih} --- that recurs, slowly and explicitly, for every proof about groups and rings.

@@ -8,11 +8,11 @@
 \item
   Predict, before running it, whether \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{example : (2 : Nat) * 3 = 3 + 3 := rfl}} type-checks. Then predict whether \texttt{example (n : Nat) : n * 2 = n + n := rfl} type-checks (hint: which argument does \texttt{Nat.mul} recurse on? Compare with the \texttt{Nat.add} recursion pattern from Chapter 4).
 \item
-  Rewrite \texttt{opTwice} (from the \texttt{structure} vs \texttt{class} section) as a type class version yourself: declare \texttt{class MyGroup (G : Type) where ...} with the same fields as this book's \texttt{Group}, register \texttt{instance : MyGroup Int where ...}, and write \texttt{def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x}. Confirm \texttt{\textbackslash{}\#eval opTwiceTC (3 : Int)} works with no explicit instance argument.
+  Rewrite \texttt{opTwice} (from the \texttt{structure} vs \texttt{class} section) as a type class version yourself: declare \texttt{class MyGroup (G : Type) where ...} with the same fields as this book's \texttt{Group}, register \texttt{instance : MyGroup Int where ...}, and write \texttt{def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x}. Confirm \texttt{\#eval opTwiceTC (3 : Int)} works with no explicit instance argument.
 \item
   In one or two sentences, explain why \texttt{Type → Type} (the type of \texttt{Group} itself, before applying it to a carrier) must live in \texttt{Type 1} rather than \texttt{Type 0} --- tie the answer back to the Russell's-paradox obstruction this chapter described.
 \item
-  Give an example (distinct from \texttt{my\textbackslash{}\_add\textbackslash{}\_comm}) of a true propositional equality between two \texttt{Nat} expressions that is \emph{not} provable by \texttt{rfl} alone, and identify which of the two sides' recursive structure is the obstruction.
+  Give an example (distinct from \texttt{my\_add\_comm}) of a true propositional equality between two \texttt{Nat} expressions that is \emph{not} provable by \texttt{rfl} alone, and identify which of the two sides' recursive structure is the obstruction.
 \end{enumerate}
 
 Solutions: \hyperref[sec:14-appendix-solutions:04-chapter-5:1]{Appendix, Chapter 5}.

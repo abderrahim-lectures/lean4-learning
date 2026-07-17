@@ -1,6 +1,6 @@
 \section{Chapter 3: Propositions and proofs}\label{sec:14-appendix-solutions:02-chapter-3:1}
 
-\textbf{1. \texttt{theorem and\textbackslash{}\_comm\textbackslash{}\_ex \textbackslash{}\{P Q : Prop\textbackslash{}\} (h : P ∧ Q) : Q ∧ P}}
+\textbf{1. \texttt{theorem and\_comm\_ex \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}}
 
 \begin{lstlisting}
 theorem and_comm_ex {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
@@ -9,7 +9,7 @@ theorem and_comm_ex {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
 
 \texttt{h : P ∧ Q} has fields \texttt{h.left : P} and \texttt{h.right : Q}. A proof of \texttt{Q ∧ P} is just the pair with those two components in the opposite order.
 
-\textbf{2. \texttt{theorem or\textbackslash{}\_comm\textbackslash{}\_ex \textbackslash{}\{P Q : Prop\textbackslash{}\} (h : P ∨ Q) : Q ∨ P}}
+\textbf{2. \texttt{theorem or\_comm\_ex \{P Q : Prop\} (h : P ∨ Q) : Q ∨ P}}
 
 \begin{lstlisting}
 theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
@@ -20,11 +20,11 @@ theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
 
 \texttt{Or} has two constructors, so any proof \texttt{h : P ∨ Q} was built with one of them. \texttt{match} finds out which one, and the witness it carried. In the \texttt{Or.inl hp} case we have \texttt{hp : P}, and \texttt{Or.inr hp : Q ∨ P} uses it as the right disjunct. The \texttt{Or.inr hq} case works the same way, just mirrored.
 
-\textbf{3. \texttt{theorem exists\textbackslash{}\_gt\textbackslash{}\_zero : ∃ n : Nat, n > 0}}
+\textbf{3. \texttt{theorem exists\_gt\_zero : ∃ n : Nat, n > 0}}
 
 \begin{lstlisting}
 theorem exists_gt_zero : ∃ n : Nat, n > 0 :=
   ⟨1, by decide⟩
 \end{lstlisting}
 
-An \texttt{∃}-proof is a witness (\texttt{1}) paired with a proof that it satisfies the predicate (\texttt{1 > 0}). Here \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} handles that proof, since \texttt{1 > 0} on \texttt{Nat} is a decidable, closed proposition. We could also write \texttt{⟨1, Nat.one\textbackslash{}\_pos⟩} or \texttt{⟨1, rfl⟩} (since \texttt{1 > 0} unfolds to \texttt{0 < 1}, i.e. \texttt{Nat.succ 0 ≤ 1}, which is true by definition).
+An \texttt{∃}-proof is a witness (\texttt{1}) paired with a proof that it satisfies the predicate (\texttt{1 > 0}). Here \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} handles that proof, since \texttt{1 > 0} on \texttt{Nat} is a decidable, closed proposition. We could also write \texttt{⟨1, Nat.one\_pos⟩} or \texttt{⟨1, rfl⟩} (since \texttt{1 > 0} unfolds to \texttt{0 < 1}, i.e. \texttt{Nat.succ 0 ≤ 1}, which is true by definition).

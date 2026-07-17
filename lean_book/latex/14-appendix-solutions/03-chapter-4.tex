@@ -1,6 +1,6 @@
 \section{Chapter 4: Tactics}\label{sec:14-appendix-solutions:03-chapter-4:1}
 
-\textbf{1. \texttt{theorem and\textbackslash{}\_comm\textbackslash{}\_tac \textbackslash{}\{P Q : Prop\textbackslash{}\} (h : P ∧ Q) : Q ∧ P}}
+\textbf{1. \texttt{theorem and\_comm\_tac \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}}
 
 \begin{lstlisting}
 theorem and_comm_tac {P Q : Prop} (h : P ∧ Q) : Q ∧ P := by
@@ -11,7 +11,7 @@ theorem and_comm_tac {P Q : Prop} (h : P ∧ Q) : Q ∧ P := by
 
 \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}} splits the goal \texttt{Q ∧ P} into two subgoals, \texttt{Q} and \texttt{P}, one for each field of \texttt{And}. \texttt{h.right : Q} closes the first, and \texttt{h.left : P} closes the second.
 
-\textbf{2. \texttt{theorem nat\textbackslash{}\_mul\textbackslash{}\_zero (n : Nat) : n * 0 = 0}}
+\textbf{2. \texttt{theorem nat\_mul\_zero (n : Nat) : n * 0 = 0}}
 
 \begin{lstlisting}
 theorem nat_mul_zero (n : Nat) : n * 0 = 0 := by
@@ -20,7 +20,7 @@ theorem nat_mul_zero (n : Nat) : n * 0 = 0 := by
 
 \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} does succeed here. \texttt{Nat.mul} is defined by recursion on its second argument, and \texttt{n * 0 = 0} is the base clause. Hence this holds by definition, with no induction required. Compare this with \texttt{0 * n = 0}, which is not a base clause and does require induction on \texttt{n}.
 
-\textbf{3. \texttt{modus\textbackslash{}\_ponens} in tactic mode}
+\textbf{3. \texttt{modus\_ponens} in tactic mode}
 
 \begin{lstlisting}
 theorem modus_ponens_tac {P Q : Prop} (hpq : P → Q) (hp : P) : Q := by

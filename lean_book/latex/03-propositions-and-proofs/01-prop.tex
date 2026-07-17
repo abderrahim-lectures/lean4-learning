@@ -21,7 +21,7 @@ not \(P\) & function type to the empty type & \texttt{¬P} (:= \texttt{P → Fal
 for all \(x\), \(P(x)\) & dependent function (Π-) type & \texttt{∀ x, P x} \\
 there exists \(x\) with \(P(x)\) & dependent pair (Σ-)type & \texttt{∃ x, P x} \\
 proof by cases on a disjunction & pattern match / \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}} & \texttt{Or.elim}, \texttt{cases h with ...} \\
-a direct proof (construction) & a term built from constructors & \texttt{⟨\textbackslash{}\_, \textbackslash{}\_⟩}, \texttt{Or.inl \textbackslash{}\_}, \texttt{fun x => \textbackslash{}\_} \\
+a direct proof (construction) & a term built from constructors & \texttt{⟨\_, \_⟩}, \texttt{Or.inl \_}, \texttt{fun x => \_} \\
 \end{tabular}
 
 
