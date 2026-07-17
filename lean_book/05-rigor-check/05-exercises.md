@@ -12,6 +12,32 @@ proves only *definitional* equality — reduction to the same normal form —
 which is not every true propositional equality (an asymmetric recursion
 like `Nat.add`'s is exactly where the two can diverge).
 
+**Socratic questions.**
+
+1. *`class` only changes how Lean finds an instance, not what data it
+   holds. If that is true, why does Mathlib bother with the whole
+   `class` hierarchy at all, instead of using plain `structure`s like
+   this book does?* Because "how it is found" is exactly the ergonomic
+   payoff a huge shared library needs: automatic instance resolution
+   means `+`/`*`/`1` just work at every registered type with no
+   `Grp : Group G` argument threaded through every theorem by hand. This
+   book delays that payoff on purpose, so the underlying data is seen
+   plainly first.
+2. *`Type : Type` would make Lean's own type system inconsistent. Given
+   that, why does `Type 1 : Type 2`, `Type 2 : Type 3`, and so on not
+   cause the exact same problem one level up?* Because the paradox needs
+   a type containing *itself* — `Type i : Type (i+1)` is always one
+   level higher than what it classifies, so no universe ever contains
+   its own code. The hierarchy is infinite specifically so this
+   containment can never close the loop.
+3. *`rfl` and `decide` both look like they "just work" without argument.
+   Are they doing the same thing?* No — `rfl` checks that two terms
+   reduce to an identical normal form; `decide` runs a `Decidable`
+   instance's algorithm to compute `true`/`false` outright. They overlap
+   on simple closed arithmetic (both close `2 + 2 = 4`), but only
+   `decide` can settle something like `¬ (3 ∣ 10)`, which is not a
+   reduction question at all.
+
 1. Predict, before running it, whether [`example : (2 : Nat) * 3 = 3 + 3 := rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)
    type-checks. Then predict whether
    `example (n : Nat) : n * 2 = n + n := rfl` type-checks (hint: which

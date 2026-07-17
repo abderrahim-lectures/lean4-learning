@@ -3,6 +3,39 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Socratic questions at the end of every chapter
+
+Added a **"Socratic questions"** block to every chapter (14 in total),
+positioned between the existing "Key points" recap and that chapter's
+exercises (or, for Chapter 13, as a reflective close to the whole book,
+right before the pointer to the solutions appendix). These are
+deliberately a different genre from both neighbors: "Key points" states
+facts; exercises ask the reader to prove something new; a Socratic
+question poses a "why does X, not Y?" or "what would break if...?"
+prompt with its own answer immediately following, aimed at surfacing a
+plausible misconception before confirming or correcting it — closer to
+oral-exam questioning than either a recap or a problem set. Each
+chapter's three questions are specific to that chapter's own material
+(e.g. Chapter 6 asks why the Group axioms split `id_left`/`id_right` when
+`intGroup` never exercises the difference; Chapter 9 asks why `neg_seven`
+closes by `rfl` when the general `neg_one_mul` needs five lines for the
+"same" fact), not a generic template repeated fourteen times.
+
+Caught and fixed two real bugs during this pass:
+- **A Markdown nested-emphasis bug**: two questions wrapped their entire
+  text in `*...*` and *also* emphasized one inner word the same way
+  (`*...how Lean *finds* an instance...*`). CommonMark does not nest
+  identical-delimiter emphasis reliably, and Pandoc's LaTeX output showed
+  it directly — a stray literal asterisk mid-sentence in the compiled
+  PDF, caught only by actually rendering the page, not by reading the
+  source Markdown. Fixed by dropping the redundant inner emphasis in both
+  places (`05-rigor-check/05-exercises.md`, `06-groups/07-exercises.md`).
+- **A missing Unicode mapping**: one new question's inline code used ↦
+  (maps-to), the first use of that character inside a code span anywhere
+  in the book; `preamble.tex` had no `newunicodechar` entry for it, so
+  Consolas reported a missing-glyph warning. Added
+  `\newunicodechar{↦}{\ensuremath{\mapsto}}`.
+
 ## Unreleased — Professional LaTeX styling; retire the old PDF pipeline
 
 - **Renamed the top-level LaTeX driver** from the generic `main.tex` to

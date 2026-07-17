@@ -12,6 +12,32 @@ recursion on the second, and the path algebra $kQ$ — sketched but not
 fully built here — is the free $k$-module on the set of paths, with
 multiplication by composition.
 
+**Socratic questions.**
+
+1. *`Quiver.Path`'s composability check (an arrow's source must match the
+   path's current endpoint) is enforced by Lean at compile time. What
+   would the equivalent check look like in an ordinary, non-dependently
+   typed program, and when would it fire?* At runtime, as an
+   `if`-check or assertion inside whatever function tries to append —
+   discovered the moment that specific composition executes, not before.
+   Here, an ill-typed `Path.cons` simply has no proof term to supply,
+   so the program that would have contained the bug never compiles at
+   all.
+2. *A quiver with a genuine cycle (Exercise 1's `gamma`) has infinitely
+   many distinct paths (go around the loop any number of times). Does
+   that mean `Path Q u v` is an infinite *type*, for such a `Q`?* For at
+   least one pair `u = v` on the cycle, yes — infinitely many distinct
+   terms inhabit that one type, one per lap. This is exactly why a
+   quiver's path algebra $kQ$ is typically infinite-dimensional once it
+   has a cycle, unless further relations are imposed.
+3. *The path algebra $kQ$ is described as "the free $k$-module on the set
+   of paths," but this chapter builds only the paths and their
+   composition, not $kQ$ itself. What is the one piece of extra
+   machinery still missing?* Finitely-supported functions from paths to
+   $k$ — the ability to form a $k$-linear combination of *finitely many*
+   paths at once, which is genuinely more than what an inductive `Path`
+   type alone provides.
+
 1. Add a third arrow `gamma : ExampleArrow` with `source gamma = 2` and
    `target gamma = 0`, creating a cycle `0 → 1 → 2 → 0`. Build the path
    `gamma ∘ beta ∘ alpha : Path exampleQuiver 0 0`.
