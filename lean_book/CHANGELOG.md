@@ -3,6 +3,14 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Plainer prose in "Why Lean?"
+
+Reworded the opening paragraph of Chapter 0 §2 ("Why Lean?"), which used
+a simile ("the way a compiler checks types") in place of a direct
+statement — flagged as reading as performative rather than academic.
+Rewritten as a plain, direct statement of what Lean is and how proof
+checking works.
+
 ## Unreleased — Fix scrambled Unicode symbols in code listings (`{α` → `α{`, etc.)
 
 Found while proofreading a rendered page: Chapter 1's
