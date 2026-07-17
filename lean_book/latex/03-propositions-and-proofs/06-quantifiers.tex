@@ -22,9 +22,7 @@ theorem exists_even : ∃ n : Nat, n % 2 = 0 :=
   \texttt{∃ x : α, P x} is a structure: a \textbf{witness} value plus a proof that the witness satisfies \texttt{P}.
 \end{itemize}
 
-\textbf{Reading the shortcut \texttt{⟨2, rfl⟩}.} This is the same ``here are the pieces, in order'' anonymous-constructor shorthand from
-
-It was already reused for \texttt{∧} (\hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s \texttt{⟨hp, hq⟩}), and here it builds an \texttt{∃}-proof in one line instead of two. The pattern to remember: \textbf{first the number, then why it works.}
+\textbf{Reading the shortcut \texttt{⟨2, rfl⟩}.} This is the same ``here are the pieces, in order'' anonymous-constructor shorthand from \hyperref[sec:02-functions-and-structures:01-structure-basics:1]{Chapter 2 §1}. It was already reused for \texttt{∧} (\hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s \texttt{⟨hp, hq⟩}), and here it builds an \texttt{∃}-proof in one line instead of two. The pattern to remember: \textbf{first the number, then why it works.}
 
 \begin{itemize}
 \tightlist

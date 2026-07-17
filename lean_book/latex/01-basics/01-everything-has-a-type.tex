@@ -11,11 +11,9 @@ In Lean 4, every expression (a \textbf{term}) has a \textbf{type}. A type answer
 
 \begin{mathreading}
 
-\texttt{\#check e} is the judgment \(e : \tau\) from type theory. It is literally the same typing judgment used in a lecture on the simply-typed (or dependently-typed) \(\lambda\)-calculus: \(3 : \mathtt{Nat}\), \({-3} : \mathtt{Int}\), \(\mathtt{Nat} : \mathtt{Type}\). \texttt{\#eval e} instead asks Lean to reduce \(e\) to a normal form. This is the computational content of \(\beta\)-reduction: Lean follows the definitional equalities until nothing more can fire, exactly as one would normalize a term in \(\lambda\)-calculus by hand. (Both ``normal form'' and ``\(\beta\)-reduction'' receive a full treatment in
+\texttt{\#check e} is the judgment \(e : \tau\) from type theory. It is literally the same typing judgment used in a lecture on the simply-typed (or dependently-typed) \(\lambda\)-calculus: \(3 : \mathtt{Nat}\), \({-3} : \mathtt{Int}\), \(\mathtt{Nat} : \mathtt{Type}\). \texttt{\#eval e} instead asks Lean to reduce \(e\) to a normal form. This is the computational content of \(\beta\)-reduction: Lean follows the definitional equalities until nothing more can fire, exactly as one would normalize a term in \(\lambda\)-calculus by hand. (Both ``normal form'' and ``\(\beta\)-reduction'' receive a full treatment in \hyperref[sec:01-basics:04-terminology:1]{Chapter 1 §4} for readers meeting them for the first time; briefly, each denotes the value obtained after fully simplifying/running the expression, nothing more exotic.)
 
 \end{mathreading}
-
-time; briefly, each denotes the value obtained after fully simplifying/running the expression, nothing more exotic.)
 
 Read \texttt{\#check 3} as ``Lean answers the question \texttt{3 : ?} with \texttt{Nat}.'' Read \texttt{\#check Nat} as ``even \texttt{Nat} itself --- the type of natural numbers --- is a term, and \emph{its} type is \texttt{Type}.'' This is the first surprising fact worth sitting with: types are not a separate kind of thing bolted onto a programming language. In Lean, a type is itself a term, and it has a type of its own (\texttt{Type}), the same way \texttt{3} has a type (\texttt{Nat}). This is what ``everything has a type'' means literally, not just for ordinary values.
 

@@ -38,11 +38,9 @@ Every proof obligation is again a one-line \texttt{exact} naming a specific core
 
 \begin{mathreading}
 
-This shows \((\mathbb{Z}, +, \times, 0, 1)\) as an object of \(\mathbf{Ring}\) --- in fact the
+This shows \((\mathbb{Z}, +, \times, 0, 1)\) as an object of \(\mathbf{Ring}\) --- in fact the \hyperref[sec:01-basics:04-terminology:1]{\emph{initial} object}, since there is a unique ring homomorphism \(\mathbb{Z} \to R\) into any ring. First \texttt{intCommGroup} upgrades the additive group \((\mathbb{Z},+)\) to an abelian group by supplying commutativity (\(a + b = b + a\)); then \texttt{intRing} adds the multiplicative monoid \((\mathbb{Z}, \times, 1)\) and checks the distributive laws \(a(b+c) = ab + ac\) and \((a+b)c = ac + bc\). Each obligation is the named \(\mathbb{Z}\)-arithmetic fact, so the term is the formal counterpart of ``\(\mathbb{Z}\) is a commutative ring.''
 
 \end{mathreading}
-
-since there is a unique ring homomorphism \(\mathbb{Z} \to R\) into any ring. First \texttt{intCommGroup} upgrades the additive group \((\mathbb{Z},+)\) to an abelian group by supplying commutativity (\(a + b = b + a\)); then \texttt{intRing} adds the multiplicative monoid \((\mathbb{Z}, \times, 1)\) and checks the distributive laws \(a(b+c) = ab + ac\) and \((a+b)c = ac + bc\). Each obligation is the named \(\mathbb{Z}\)-arithmetic fact, so the term is the formal counterpart of ``\(\mathbb{Z}\) is a commutative ring.''
 
 \textbf{Mathlib equivalent.} \texttt{Int} is already a \href{https://loogle.lean-lang.org/?q=CommRing}{\texttt{CommRing}} instance, so there is no \texttt{intRing}-style bundle to build. The obligations \texttt{intRing} checks by hand are, again, generic lemmas that hold for every commutative ring:
 
