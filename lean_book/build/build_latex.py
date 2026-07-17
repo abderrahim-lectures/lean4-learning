@@ -602,6 +602,19 @@ def renumber_labels(tex, chapter, stem):
     return re.sub(r'\\label\{[^}]*\}', _sub, tex)
 
 
+NEXT_SECTION_RE = re.compile(r'\\(?:sub)*section\{Next\}\\label\{sec:[^}]*\}.*\Z', re.DOTALL)
+
+
+def strip_next_section(tex):
+    """Drop the trailing "## Next -- Continue to [...](...)." section
+    present in 13 chapter files: a web/GitHub navigation aid pointing to
+    the next file, meaningless in a printed/PDF book where the reader
+    just turns the page. Always the last heading in its source file
+    (immediately before the bottom nav strip, already removed by
+    strip_nav_lines()), so it's safe to drop through to end of string."""
+    return NEXT_SECTION_RE.sub('', tex)
+
+
 def strip_hypertargets(tex):
     # Pandoc wraps headings as \hypertarget{slug}{\subsection{...}\label{slug}} --
     # drop the \hypertarget{...}{ ... } wrapper, keep the inner heading command.
@@ -672,6 +685,7 @@ def convert_file(chapter, name):
     tex = fix_cross_links(tex, chapter)
     tex = fix_inline_code(tex)
     tex = renumber_labels(tex, chapter, stem)
+    tex = strip_next_section(tex)
     if not chapter or (chapter == "14-appendix-solutions" and name == "00-index.md"):
         tex = unnumber_chapter(tex)
         tex = unnumber_sections(tex)

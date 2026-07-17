@@ -79,6 +79,3 @@ example : CommRing (ZMod 3) := inferInstance
 
 The book's \texttt{by decide} on \texttt{fin3Ring}'s fields brute-forces exactly the finitely many cases needed for \emph{this one} carrier. Mathlib instead proves \texttt{ZMod n}'s ring axioms once for every \texttt{n} (through its construction as \texttt{Fin n} with wraparound arithmetic, combined with the general machinery for quotients of \(\mathbb{Z}\)), so \texttt{ZMod 3}'s instance costs nothing further to obtain.
 
-\section{Next}\label{sec:08-rings:05-finite-ring-example:4}
-
-Continue to \hyperref[sec:08-rings:06-accessing-fields:1]{Accessing nested fields}.

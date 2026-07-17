@@ -3,6 +3,18 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Drop web-navigation-only "Next" sections from the PDF
+
+Every chapter's trailing "## Next — Continue to [Chapter N: ...](...)."
+section (13 files) was a GitHub/web reading aid pointing at the next
+Markdown file — meaningless in a printed/PDF book, where the reader just
+turns the page. `build_latex.py` now drops these via a new
+`strip_next_section()` (Markdown source is untouched, so the web/GitHub
+reading experience is unaffected). One file
+(`04-tactics/06-exercises.md`) phrased the same transition inline rather
+than under its own heading — hand-edited to drop just the "Continue
+to..." clause, keeping the rest of its closing sentence.
+
 ## Unreleased — Front-matter polish: page numbering, author bio, license/source link
 
 - **Fixed a genuine page/section-numbering bug**: front-matter reference
