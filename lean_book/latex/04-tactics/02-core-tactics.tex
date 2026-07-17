@@ -3,7 +3,7 @@
 \subsection{\texorpdfstring{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{intro}}: introduce a hypothesis or variable}{intro: introduce a hypothesis or variable}}\label{sec:04-tactics:02-core-tactics:2}
 
 \begin{lstlisting}
-theorem modus_ponens {P Q : Prop} : (P → Q) → P → Q := by
+theorem modus_ponens {P Q : Prop} : (P (*$\rightarrow$*) Q) (*$\rightarrow$*) P (*$\rightarrow$*) Q := by
   intro hpq hp
   exact hpq hp
 \end{lstlisting}
@@ -15,7 +15,7 @@ Used above. Given a term that proves the goal exactly, \texttt{exact} finishes i
 \subsection{\texorpdfstring{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{apply}}: apply a function/lemma, leaving new goals for its arguments}{apply: apply a function/lemma, leaving new goals for its arguments}}\label{sec:04-tactics:02-core-tactics:4}
 
 \begin{lstlisting}
-theorem apply_example {P Q : Prop} (hpq : P → Q) (hp : P) : Q := by
+theorem apply_example {P Q : Prop} (hpq : P (*$\rightarrow$*) Q) (hp : P) : Q := by
   apply hpq
   exact hp
 \end{lstlisting}

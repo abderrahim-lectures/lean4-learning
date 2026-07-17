@@ -23,7 +23,7 @@ def composeLinearMap {R : Type} (Rg : Ring R) {M N P : Type}
     {ModM : Module R Rg M} {ModN : Module R Rg N} {ModP : Module R Rg P}
     (f : LinearMap Rg ModM ModN) (g : LinearMap Rg ModN ModP) :
     LinearMap Rg ModM ModP where
-  toFun := g.toFun ∘ f.toFun
+  toFun := g.toFun (*$\circ$*) f.toFun
   map_add := by
     intro m n
     show g.toFun (f.toFun (ModM.addGrp.op m n)) =
@@ -58,7 +58,7 @@ theorem intSmul_one_smul {M : Type} (CG : CommGroup M) (m : M) :
 \begin{lstlisting}
 -- smul_add, restricted to natural-number scalars, by induction on n
 theorem natSmul_add {M : Type} (Grp : Group M) (n : Nat) (m1 m2 : M)
-    (comm : ∀ a b : M, Grp.op a b = Grp.op b a) :
+    (comm : (*$\forall$*) a b : M, Grp.op a b = Grp.op b a) :
     natSmul Grp n (Grp.op m1 m2) = Grp.op (natSmul Grp n m1) (natSmul Grp n m2) := by
   induction n with
   | zero =>
@@ -76,7 +76,7 @@ theorem natSmul_add {M : Type} (Grp : Group M) (n : Nat) (m1 m2 : M)
     -- and ordered differently; regroup with `assoc` and swap the middle two
     -- terms using `comm`, exactly the "regroup, then rearrange" pattern
     -- from Chapter 7.
-    rw [← Grp.assoc, Grp.assoc m1 m2, comm m2 (natSmul Grp k m1), ← Grp.assoc m1,
+    rw [(*$\leftarrow$*) Grp.assoc, Grp.assoc m1 m2, comm m2 (natSmul Grp k m1), (*$\leftarrow$*) Grp.assoc m1,
         Grp.assoc]
 \end{lstlisting}
 
@@ -86,18 +86,18 @@ The base case is \texttt{id = id + id} (an identity is its own double). This mir
 
 \begin{lstlisting}
 def multiplesSubmodule (d : Int) : Submodule intRing intZModule where
-  carrier := fun m => ∃ k : Int, m = d * k
-  zero_mem := ⟨0, by show (0 : Int) = d * 0; rw [Int.mul_zero]⟩
+  carrier := fun m => (*$\exists$*) k : Int, m = d * k
+  zero_mem := (*$\langle$*)0, by show (0 : Int) = d * 0; rw [Int.mul_zero](*$\rangle$*)
   add_mem := by
-    intro m n ⟨k, hk⟩ ⟨j, hj⟩
-    refine ⟨k + j, ?_⟩
+    intro m n (*$\langle$*)k, hk(*$\rangle$*) (*$\langle$*)j, hj(*$\rangle$*)
+    refine (*$\langle$*)k + j, ?_(*$\rangle$*)
     show m + n = d * (k + j)
     rw [hk, hj, Int.mul_add]
   smul_mem := by
-    intro r m ⟨k, hk⟩
-    refine ⟨r * k, ?_⟩
+    intro r m (*$\langle$*)k, hk(*$\rangle$*)
+    refine (*$\langle$*)r * k, ?_(*$\rangle$*)
     show r * m = d * (r * k)
-    rw [hk, ← Int.mul_assoc, Int.mul_comm r d, Int.mul_assoc]
+    rw [hk, (*$\leftarrow$*) Int.mul_assoc, Int.mul_comm r d, Int.mul_assoc]
 \end{lstlisting}
 
 This has the same shape as \texttt{evenSubmodule} (the case \texttt{d = 2}). Every \texttt{2} in that proof is simply replaced by the parameter \texttt{d}, and each closure proof still reduces to an \texttt{Int} equation, handled the same way (\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{show}} to reveal the goal's \texttt{+}/\texttt{*}-form, then \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}}), rather than with \texttt{ring} (which this book does not import from Mathlib).

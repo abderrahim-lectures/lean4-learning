@@ -3,7 +3,7 @@
 \(P \to Q\) (read ``\(P\) implies \(Q\)'') is literally a function type: a proof of \(P \to Q\) is a function that turns any proof of \(P\) into a proof of \(Q\).
 
 \begin{lstlisting}
-theorem modus_ponens {P Q : Prop} (hpq : P → Q) (hp : P) : Q :=
+theorem modus_ponens {P Q : Prop} (hpq : P (*$\rightarrow$*) Q) (hp : P) : Q :=
   hpq hp
 \end{lstlisting}
 

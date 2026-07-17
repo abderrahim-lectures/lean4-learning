@@ -18,14 +18,14 @@ This also succeeds, though the reason requires elaboration. \texttt{2} is \textt
 
 \begin{lstlisting}
 class MyGroup (G : Type) where
-  op : G → G → G
+  op : G (*$\rightarrow$*) G (*$\rightarrow$*) G
   id : G
-  inv : G → G
-  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
-  id_left : ∀ a : G, op id a = a
-  id_right : ∀ a : G, op a id = a
-  inv_left : ∀ a : G, op (inv a) a = id
-  inv_right : ∀ a : G, op a (inv a) = id
+  inv : G (*$\rightarrow$*) G
+  assoc : (*$\forall$*) a b c : G, op (op a b) c = op a (op b c)
+  id_left : (*$\forall$*) a : G, op id a = a
+  id_right : (*$\forall$*) a : G, op a id = a
+  inv_left : (*$\forall$*) a : G, op (inv a) a = id
+  inv_right : (*$\forall$*) a : G, op a (inv a) = id
 
 instance : MyGroup Int where
   op := fun a b => a + b
@@ -75,13 +75,13 @@ This is the substantive answer to the exercise --- a true equality that \texttt{
 
 \begin{lstlisting}
 structure Monoid (M : Type) where
-  op : M → M → M
+  op : M (*$\rightarrow$*) M (*$\rightarrow$*) M
   id : M
-  assoc : ∀ a b c : M, op (op a b) c = op a (op b c)
-  id_left : ∀ a : M, op id a = a
-  id_right : ∀ a : M, op a id = a
+  assoc : (*$\forall$*) a b c : M, op (op a b) c = op a (op b c)
+  id_left : (*$\forall$*) a : M, op id a = a
+  id_right : (*$\forall$*) a : M, op a id = a
 
-def listMonoid (α : Type) : Monoid (List α) where
+def listMonoid ((*$\alpha$*) : Type) : Monoid (List (*$\alpha$*)) where
   op := List.append
   id := []
   assoc := by intro a b c; exact List.append_assoc a b c
@@ -96,10 +96,10 @@ def natMulMonoid : Monoid Nat where
   id_right := by intro a; exact Nat.mul_one a
 
 theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
-    (h : ∀ a : M, Mn.op e' a = a) : e' = Mn.id := by
+    (h : (*$\forall$*) a : M, Mn.op e' a = a) : e' = Mn.id := by
   have step1 : Mn.op e' Mn.id = Mn.id := h Mn.id
   have step2 : Mn.op e' Mn.id = e' := Mn.id_right e'
-  rw [← step2]
+  rw [(*$\leftarrow$*) step2]
   exact step1
 \end{lstlisting}
 
