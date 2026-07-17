@@ -4,6 +4,13 @@
 
 ---
 
+**Key points.** Three facts now hold for *every* group: the identity is
+unique, a left inverse equals the (unique) two-sided inverse, and
+$(ab)^{-1}=b^{-1}a^{-1}$. The recurring proof pattern is relating both
+sides of a goal to a common third expression, or padding with the
+identity and cancelling; once a uniqueness fact is proved, later goals
+can be *characterized* by it instead of computed directly.
+
 1. Prove `theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a`. Before writing
    any tactics, consider: does this match the shape of a lemma already in
    hand (Theorem 2 again)? What single fact about `a` and `Grp.inv a` would

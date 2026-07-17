@@ -4,6 +4,13 @@
 
 ---
 
+**Key points.** A module is an abelian group with a scalar action
+satisfying four axioms, equivalently a ring homomorphism into the ring of
+the group's own endomorphisms. A submodule is a membership predicate plus
+closure proofs, a linear map is a function preserving `+` and the scalar
+action, and a direct sum's five/four axioms each split, via `congr 1`,
+into one independent fact per summand.
+
 1. Prove that the identity function is a linear map: for any
    `Mod : Module R Rg M`, construct
    `idLinearMap : LinearMap Rg Mod Mod` with `toFun := id`.

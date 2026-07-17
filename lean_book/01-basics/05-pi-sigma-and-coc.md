@@ -227,11 +227,18 @@ by name above.
 
 ### References
 
-- Thierry Coquand and Gérard Huet, "[The Calculus of Constructions](https://doi.org/10.1016/0890-5401(88)90005-3)," *Information and Computation*, 76(2–3), 1988, 95–120 — the original paper defining CoC, the system this section formalizes.
-- The Univalent Foundations Program, *Homotopy Type Theory: Univalent Foundations of Mathematics*, 2013, free online at [homotopytypetheory.org/book](https://homotopytypetheory.org/book/) — Ch. 1 gives a careful, from-scratch treatment of Π-types, Σ-types, and universes, in notation closely matching this section's.
-- Per Martin-Löf, *Intuitionistic Type Theory*, Bibliopolis, 1984 — the foundational source for dependent Π/Σ types and universes predating CoC, for readers wanting the idea in its original, non-CoC-specific form.
-- *Theorem Proving in Lean 4*, ["Dependent Types"](https://leanprover.github.io/theorem_proving_in_lean4/dependent_type_theory.html) and ["Propositions and Proofs"](https://leanprover.github.io/theorem_proving_in_lean4/propositions_and_proofs.html) — Lean's own documentation on `Prop`, proof irrelevance, and universes, matching the presentation here.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC, the system this section formalizes.
+- The Univalent Foundations Program ([HoTT2013]) — Ch. 1 gives a careful, from-scratch treatment of Π-types, Σ-types, and universes, in notation closely matching this section's.
+- Martin-Löf ([MartinLof1984]) — the foundational source for dependent Π/Σ types and universes predating CoC, for readers wanting the idea in its original, non-CoC-specific form.
+- *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" and "Propositions and Proofs" — Lean's own documentation on `Prop`, proof irrelevance, and universes, matching the presentation here.
 - All Lean code in this section was checked directly against the toolchain pinned in this repository's `lean_project/lean-toolchain` rather than only described; the `#print Fin` output and both error messages shown are copied from real `lake env lean` runs.
+
+[CoquandHuet1988]: ../bibliography.md#coquandhuet1988
+[HoTT2013]: ../bibliography.md#hott2013
+[MartinLof1984]: ../bibliography.md#martinlof1984
+[TPIL4]: ../bibliography.md#tpil4
 
 ---
 

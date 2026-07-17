@@ -291,10 +291,17 @@ it is the identical idea, with a richer index.
 
 ### References
 
-- *Theorem Proving in Lean 4*, ["Dependent Types"](https://leanprover.github.io/theorem_proving_in_lean4/dependent_type_theory.html) — the official Lean documentation's own introduction to dependent types, using this same length-indexed-vector example.
-- The Lean 4 source / [Lean 4 API documentation](https://leanprover-community.github.io/mathlib4_docs/) for `Fin` and `Vector` — confirmed directly in this section via `#print Fin` against the actual toolchain pinned in this repository's `lean_project/lean-toolchain`.
-- Simon Thompson, *[Type Theory and Functional Programming](https://kar.kent.ac.uk/20998/1/ttfp.pdf)*, Addison-Wesley, 1991 (freely available from the author's institutional repository) — a from-scratch treatment of dependent types and Π/Σ, independent of any one proof assistant.
-- Adam Chlipala, *Certified Programming with Dependent Types*, MIT Press, 2013, [free online edition](http://adam.chlipala.net/cpdt/) — Ch. 2–3 build the same length-indexed-vector idea in Coq, a useful second angle on the identical concept.
+Full citations in the [Bibliography](../bibliography.md).
+
+- *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" — the official Lean documentation's own introduction to dependent types, using this same length-indexed-vector example.
+- The Lean 4 source / [Mathlib4 API documentation][Mathlib4Docs] for `Fin` and `Vector` — confirmed directly in this section via `#print Fin` against the actual toolchain pinned in this repository's `lean_project/lean-toolchain`.
+- Thompson ([Thompson1991]) — a from-scratch treatment of dependent types and Π/Σ, independent of any one proof assistant.
+- Chlipala ([Chlipala2013]) — Ch. 2–3 build the same length-indexed-vector idea in Coq, a useful second angle on the identical concept.
+
+[TPIL4]: ../bibliography.md#tpil4
+[Mathlib4Docs]: ../bibliography.md#mathlib4docs
+[Thompson1991]: ../bibliography.md#thompson1991
+[Chlipala2013]: ../bibliography.md#chlipala2013
 
 ---
 

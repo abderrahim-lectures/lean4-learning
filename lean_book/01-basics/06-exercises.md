@@ -4,6 +4,14 @@
 
 ---
 
+**Key points.** `#check` reports a type without running anything; `#eval`
+runs. A type is *dependent* when a later type mentions an earlier
+*value* (`Vec α n`, `Fin n`), not merely an earlier type. `Prop` is
+proof-irrelevant, which is exactly why `∃` (landing in `Prop`) cannot
+extract its witness the way `Sigma` (landing in `Type`) can. Both Π- and
+Σ-types, plus `Prop`, assemble into the calculus of constructions
+underlying every Lean declaration seen so far.
+
 1. β-reduce $(\lambda x.\lambda y.\, y\, x)\, a\, b$ to normal form by
    hand, writing out each step. §4's untyped-λ-calculus recap named
    $K = \lambda x.\lambda y.\, x$ ("take two arguments, return the

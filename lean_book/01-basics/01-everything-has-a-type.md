@@ -152,9 +152,16 @@ ways a `Nat` can ever have been built.
 
 ### References
 
-- The Lean 4 documentation, ["Basic Types"](https://lean-lang.org/doc/reference/latest/) and the [Lean 4 Theorem Proving guide, Ch. 2](https://leanprover.github.io/theorem_proving_in_lean4/dependent_type_theory.html) — the `#check`/`#eval` distinction and `Nat` as an inductive type, straight from the source.
-- Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002, Ch. 1 — on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
-- nLab, ["initial object"](https://ncatlab.org/nlab/show/initial+object) — the universal-property reading of `Nat` used in the optional box above.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Lean 4 documentation, "Basic Types," and *Theorem Proving in Lean 4*, Ch. 2 ([LeanDocs], [TPIL4]) — the `#check`/`#eval` distinction and `Nat` as an inductive type, straight from the source.
+- Pierce ([Pierce2002]), Ch. 1 — on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
+- nLab, "initial object" ([NLabInitial]) — the universal-property reading of `Nat` used in the optional box above.
+
+[LeanDocs]: ../bibliography.md#leandocs
+[TPIL4]: ../bibliography.md#tpil4
+[Pierce2002]: ../bibliography.md#pierce2002
+[NLabInitial]: ../bibliography.md#nlabinitial
 
 ---
 

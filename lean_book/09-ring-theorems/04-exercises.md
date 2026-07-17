@@ -4,6 +4,13 @@
 
 ---
 
+**Key points.** $a\cdot 0=0$ and $(-1)\cdot a=-a$ are theorems, not axioms
+— both derived from distributivity plus additive cancellation, following
+the same "pad with $0=0+0$, then cancel" pattern each time. A concrete
+numeral (`neg_seven`) can close by `rfl` where the general statement about
+an unknown `a` genuinely cannot, mirroring Chapter 5's defeq-vs-propeq
+distinction.
+
 1. Prove
    `theorem neg_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)`.
    Strategy: this is "show $x = -(ab)$," hence reduce through
