@@ -2,7 +2,7 @@
 
 \textbf{Claim.} If \texttt{Grp.op b a = Grp.id} for some \texttt{a b : G}, then \texttt{b = Grp.inv a}.
 
-\textbf{Finding the proof.} This has the same shape as Theorem 1: an equality between two elements known only through separate facts (\texttt{h} about \texttt{b}, the \texttt{Group} axioms about \texttt{Grp.inv a}). Hence the same strategy applies: relate both sides to something in common. Here, however, no single lemma hands us \texttt{Grp.op b Grp.id} the way \texttt{Grp.id\textbackslash{}\_right} did in Theorem 1's simpler setting. We must \emph{build} the chain by rewriting \texttt{b} itself, step by step.
+\textbf{Finding the proof.} This has the same shape as Theorem 1: an equality between two elements known only through separate facts (\texttt{h} about \texttt{b}, the \texttt{Group} axioms about \texttt{Grp.inv a}). Hence the same strategy applies: relate both sides to something in common. Here, however, no single lemma hands us \texttt{Grp.op b Grp.id} the way \texttt{Grp.id\_right} did in Theorem 1's simpler setting. We must \emph{build} the chain by rewriting \texttt{b} itself, step by step.
 
 The trick worth internalizing: \textbf{pad \texttt{b} with the identity, then swap the identity for something you can cancel.} Concretely:
 
@@ -10,7 +10,7 @@ The trick worth internalizing: \textbf{pad \texttt{b} with the identity, then sw
 b \;=\; b \cdot e \;=\; b \cdot (a \cdot a^{-1}) \;=\; (b \cdot a) \cdot a^{-1} \;=\; e \cdot a^{-1} \;=\; a^{-1}
 \]
 
-Each \texttt{=} above is licensed by exactly one \texttt{Group} field or the hypothesis \texttt{h}, in this order: \texttt{id\textbackslash{}\_right} (backwards), \texttt{inv\textbackslash{}\_right} (backwards), \texttt{assoc} (backwards), \texttt{h}, \texttt{id\textbackslash{}\_left}. Writing the \emph{paper} proof first, as a chain of equalities, and then reading off which axiom licenses each step, is often faster than guessing tactics directly against the goal. This chain is best worked out on scratch paper before the editor is opened.
+Each \texttt{=} above is licensed by exactly one \texttt{Group} field or the hypothesis \texttt{h}, in this order: \texttt{id\_right} (backwards), \texttt{inv\_right} (backwards), \texttt{assoc} (backwards), \texttt{h}, \texttt{id\_left}. Writing the \emph{paper} proof first, as a chain of equalities, and then reading off which axiom licenses each step, is often faster than guessing tactics directly against the goal. This chain is best worked out on scratch paper before the editor is opened.
 
 \begin{lstlisting}
 theorem left_inverse_unique (a b : G) (h : Grp.op b a = Grp.id) :
@@ -46,4 +46,4 @@ example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
   rw [← mul_one b, ← mul_inv_cancel a, ← mul_assoc, h, one_mul]
 \end{lstlisting}
 
-Reading right to left through the \texttt{rw} list gives line-for-line the displayed chain above: \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_one}{\texttt{mul\textbackslash{}\_one}} \texttt{b} turns \texttt{b} into \texttt{b * 1}; \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_inv_cancel}{\texttt{mul\textbackslash{}\_inv\textbackslash{}\_cancel}} \texttt{a} turns that \texttt{1} into \texttt{a * a⁻¹}; \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\textbackslash{}\_assoc}} reassociates; \texttt{h} substitutes \texttt{b * a} for \texttt{1}; \href{https://loogle.lean-lang.org/?q=one_mul}{\texttt{one\textbackslash{}\_mul}} clears the resulting \texttt{1 * a⁻¹}. These are the same five steps, in the same order --- only the names \texttt{Grp.assoc}/\texttt{Grp.inv\textbackslash{}\_right} and so on are replaced by Mathlib's generic \texttt{mul\textbackslash{}\_assoc}/\texttt{mul\textbackslash{}\_inv\textbackslash{}\_cancel} and so on.
+Reading right to left through the \texttt{rw} list gives line-for-line the displayed chain above: \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_one}{\texttt{mul\_one}} \texttt{b} turns \texttt{b} into \texttt{b * 1}; \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_inv_cancel}{\texttt{mul\_inv\_cancel}} \texttt{a} turns that \texttt{1} into \texttt{a * a⁻¹}; \texttt{←} \href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\_assoc}} reassociates; \texttt{h} substitutes \texttt{b * a} for \texttt{1}; \href{https://loogle.lean-lang.org/?q=one_mul}{\texttt{one\_mul}} clears the resulting \texttt{1 * a⁻¹}. These are the same five steps, in the same order --- only the names \texttt{Grp.assoc}/\texttt{Grp.inv\_right} and so on are replaced by Mathlib's generic \texttt{mul\_assoc}/\texttt{mul\_inv\_cancel} and so on.

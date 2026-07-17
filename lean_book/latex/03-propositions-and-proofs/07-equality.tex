@@ -23,5 +23,5 @@ theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
 
 \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}} (``rewrite'') rewrites the goal using an equality proof. \texttt{rw [h]} with \texttt{h : a = b} finds every occurrence of \texttt{a} in the goal and replaces it with \texttt{b}. Here the goal starts as \texttt{a + 1 = b + 1}. After rewriting \texttt{a} to \texttt{b}, it becomes \texttt{b + 1 = b + 1}, which \texttt{rw} then closes automatically by trying \texttt{rfl} as its last step; that final \texttt{rfl} need not be written explicitly.
 
-The congruence \texttt{congr\textbackslash{}\_example} is the Leibniz principle: \(a = b \Rightarrow
+The congruence \texttt{congr\_example} is the Leibniz principle: \(a = b \Rightarrow
 f(a) = f(b)\) for any function \(f\) (here \(f(x) = x + 1\)). This is ``substitute equals for equals,'' mechanized. \texttt{rw} is the workhorse for this from here on: nearly every proof from Chapter 4 onward reaches for it whenever an equality hypothesis needs to be used inside a larger goal.

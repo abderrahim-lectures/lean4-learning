@@ -11,27 +11,27 @@ In Lean 4, every expression (a \textbf{term}) has a \textbf{type}. A type answer
 
 \begin{mathreading}
 
-\texttt{\textbackslash{}\#check e} is the judgment \(e : \tau\) from type theory. It is literally the same typing judgment used in a lecture on the simply-typed (or dependently-typed) \(\lambda\)-calculus: \(3 : \mathtt{Nat}\), \({-3} : \mathtt{Int}\), \(\mathtt{Nat} : \mathtt{Type}\). \texttt{\textbackslash{}\#eval e} instead asks Lean to reduce \(e\) to a normal form. This is the computational content of \(\beta\)-reduction: Lean follows the definitional equalities until nothing more can fire, exactly as one would normalize a term in \(\lambda\)-calculus by hand. (Both ``normal form'' and ``\(\beta\)-reduction'' receive a full treatment in
+\texttt{\#check e} is the judgment \(e : \tau\) from type theory. It is literally the same typing judgment used in a lecture on the simply-typed (or dependently-typed) \(\lambda\)-calculus: \(3 : \mathtt{Nat}\), \({-3} : \mathtt{Int}\), \(\mathtt{Nat} : \mathtt{Type}\). \texttt{\#eval e} instead asks Lean to reduce \(e\) to a normal form. This is the computational content of \(\beta\)-reduction: Lean follows the definitional equalities until nothing more can fire, exactly as one would normalize a term in \(\lambda\)-calculus by hand. (Both ``normal form'' and ``\(\beta\)-reduction'' receive a full treatment in
 
 \end{mathreading}
 
 time; briefly, each denotes the value obtained after fully simplifying/running the expression, nothing more exotic.)
 
-Read \texttt{\textbackslash{}\#check 3} as ``Lean answers the question \texttt{3 : ?} with \texttt{Nat}.'' Read \texttt{\textbackslash{}\#check Nat} as ``even \texttt{Nat} itself --- the type of natural numbers --- is a term, and \emph{its} type is \texttt{Type}.'' This is the first surprising fact worth sitting with: types are not a separate kind of thing bolted onto a programming language. In Lean, a type is itself a term, and it has a type of its own (\texttt{Type}), the same way \texttt{3} has a type (\texttt{Nat}). This is what ``everything has a type'' means literally, not just for ordinary values.
+Read \texttt{\#check 3} as ``Lean answers the question \texttt{3 : ?} with \texttt{Nat}.'' Read \texttt{\#check Nat} as ``even \texttt{Nat} itself --- the type of natural numbers --- is a term, and \emph{its} type is \texttt{Type}.'' This is the first surprising fact worth sitting with: types are not a separate kind of thing bolted onto a programming language. In Lean, a type is itself a term, and it has a type of its own (\texttt{Type}), the same way \texttt{3} has a type (\texttt{Nat}). This is what ``everything has a type'' means literally, not just for ordinary values.
 
-\texttt{\textbackslash{}\#check e} answers the question ``what type does \texttt{e} have?'' without running \texttt{e}. \texttt{\textbackslash{}\#eval e} actually runs \texttt{e} and prints the result. These are deliberately two different commands, since they answer two different questions:
+\texttt{\#check e} answers the question ``what type does \texttt{e} have?'' without running \texttt{e}. \texttt{\#eval e} actually runs \texttt{e} and prints the result. These are deliberately two different commands, since they answer two different questions:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{\textbackslash{}\#check} is a \textbf{static} guarantee --- it holds before any particular input is supplied, for every possible run.
+  \texttt{\#check} is a \textbf{static} guarantee --- it holds before any particular input is supplied, for every possible run.
 \item
-  \texttt{\textbackslash{}\#eval} is a \textbf{one-off fact} --- the result of running this \emph{particular} expression, right now.
+  \texttt{\#eval} is a \textbf{one-off fact} --- the result of running this \emph{particular} expression, right now.
 \end{itemize}
 
 \begin{progcorner}
 
-For readers who have written Python but not Lean: \texttt{\textbackslash{}\#check e} is \emph{not} \texttt{type(e)}. Python's \texttt{type()} asks a running value what class it happens to belong to, after the fact. Lean's \texttt{\textbackslash{}\#check} is closer to what a static type checker like \texttt{mypy} does with an annotation such as \texttt{x: int = 3}: it verifies, \emph{before} anything runs, that the expression could only ever produce a value of the stated type. \texttt{\textbackslash{}\#eval e}, on the other hand, \emph{is} just \texttt{print(e)}: run it, show the result. Lean separates these two commands for the same reason \texttt{mypy} exists at all: type-checking is a static guarantee that holds for every possible input, while evaluating is a one-off fact about this particular expression. Python's \texttt{int} has no genuine analogue of \texttt{Nat}: it is signed and never checked against a ``must be non-negative'' rule, except by an explicit runtime \texttt{if} statement. \texttt{Nat}, by contrast, bakes non-negativity into the type itself, checked once, statically, for every use site. This is closer to a language with a genuine \texttt{unsigned} type (C, Rust) than to Python.
+For readers who have written Python but not Lean: \texttt{\#check e} is \emph{not} \texttt{type(e)}. Python's \texttt{type()} asks a running value what class it happens to belong to, after the fact. Lean's \texttt{\#check} is closer to what a static type checker like \texttt{mypy} does with an annotation such as \texttt{x: int = 3}: it verifies, \emph{before} anything runs, that the expression could only ever produce a value of the stated type. \texttt{\#eval e}, on the other hand, \emph{is} just \texttt{print(e)}: run it, show the result. Lean separates these two commands for the same reason \texttt{mypy} exists at all: type-checking is a static guarantee that holds for every possible input, while evaluating is a one-off fact about this particular expression. Python's \texttt{int} has no genuine analogue of \texttt{Nat}: it is signed and never checked against a ``must be non-negative'' rule, except by an explicit runtime \texttt{if} statement. \texttt{Nat}, by contrast, bakes non-negativity into the type itself, checked once, statically, for every use site. This is closer to a language with a genuine \texttt{unsigned} type (C, Rust) than to Python.
 
 \end{progcorner}
 
@@ -49,7 +49,7 @@ add_them(3, "oops")  # TypeError: unsupported operand type(s) — but only
                      # once this exact line actually runs
 \end{lstlisting}
 
-Nothing stops Python from \emph{writing} \texttt{add\textbackslash{}\_them(3, "oops")}. The mistake is only discovered the moment that specific line executes --- if it sits on a rarely-hit branch, it can ship for months undetected. And in the \texttt{True} case, Python does not even complain: it quietly coerces the boolean to \texttt{1} and moves on, whether or not that was the intended meaning.
+Nothing stops Python from \emph{writing} \texttt{add\_them(3, "oops")}. The mistake is only discovered the moment that specific line executes --- if it sits on a rarely-hit branch, it can ship for months undetected. And in the \texttt{True} case, Python does not even complain: it quietly coerces the boolean to \texttt{1} and moves on, whether or not that was the intended meaning.
 
 Now the same shape of mistake in Lean:
 
@@ -86,7 +86,7 @@ Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
 \begin{itemize}
 \tightlist
 \item
-  Lean 4 documentation, ``Basic Types,'' and \emph{Theorem Proving in Lean 4}, Ch. 2 (\cite{LeanDocs}, \cite{TPIL4}) --- the \texttt{\textbackslash{}\#check}/\texttt{\textbackslash{}\#eval} distinction and \texttt{Nat} as an inductive type, straight from the source.
+  Lean 4 documentation, ``Basic Types,'' and \emph{Theorem Proving in Lean 4}, Ch. 2 (\cite{LeanDocs}, \cite{TPIL4}) --- the \texttt{\#check}/\texttt{\#eval} distinction and \texttt{Nat} as an inductive type, straight from the source.
 \item
   Pierce (\cite{Pierce2002}), Ch. 1 --- on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
 \item

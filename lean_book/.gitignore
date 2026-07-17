@@ -1,10 +1,8 @@
-# Rendered output if the book is built with Pandoc or similar tools.
+# Rendered/compiled output -- the LaTeX source under latex/ is committed,
+# not any PDF compiled from it.
 *.pdf
 *.html
 _site/
-_book_combined.md
-build/_book_combined.md
-build/_mermaid_cache/
 *.aux
 *.log
 *.out

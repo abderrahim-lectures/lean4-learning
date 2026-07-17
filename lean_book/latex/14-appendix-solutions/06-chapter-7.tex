@@ -1,6 +1,6 @@
 \section{Chapter 7: Group examples and basic theorems}\label{sec:14-appendix-solutions:06-chapter-7:1}
 
-\textbf{1. \texttt{theorem inv\textbackslash{}\_inv (a : G) : Grp.inv (Grp.inv a) = a}}
+\textbf{1. \texttt{theorem inv\_inv (a : G) : Grp.inv (Grp.inv a) = a}}
 
 \begin{lstlisting}
 theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
@@ -10,9 +10,9 @@ theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
   exact Grp.inv_right a
 \end{lstlisting}
 
-By \texttt{left\textbackslash{}\_inverse\textbackslash{}\_unique} (Chapter 7, Theorem 2), to show \texttt{a = Grp.inv (Grp.inv a)} it suffices to show \texttt{a} is a left inverse of \texttt{Grp.inv a}, i.e.~\texttt{Grp.op a (Grp.inv a) = Grp.id} --- exactly \texttt{Grp.inv\textbackslash{}\_right a}.
+By \texttt{left\_inverse\_unique} (Chapter 7, Theorem 2), to show \texttt{a = Grp.inv (Grp.inv a)} it suffices to show \texttt{a} is a left inverse of \texttt{Grp.inv a}, i.e.~\texttt{Grp.op a (Grp.inv a) = Grp.id} --- exactly \texttt{Grp.inv\_right a}.
 
-\textbf{2. \texttt{theorem cancel\textbackslash{}\_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}}
+\textbf{2. \texttt{theorem cancel\_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}}
 
 \begin{lstlisting}
 theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c := by
@@ -29,4 +29,4 @@ theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c := by
   exact h1
 \end{lstlisting}
 
-Both sides of \texttt{h} are left-multiplied by \texttt{Grp.inv a} (step \texttt{h1}), then regrouped with associativity so that \texttt{Grp.inv a} meets \texttt{a} on both sides. That pair cancels to \texttt{Grp.id} via \texttt{inv\textbackslash{}\_left}, and \texttt{Grp.id} is then stripped via \texttt{id\textbackslash{}\_left}, which leaves \texttt{b = c} directly.
+Both sides of \texttt{h} are left-multiplied by \texttt{Grp.inv a} (step \texttt{h1}), then regrouped with associativity so that \texttt{Grp.inv a} meets \texttt{a} on both sides. That pair cancels to \texttt{Grp.id} via \texttt{inv\_left}, and \texttt{Grp.id} is then stripped via \texttt{id\_left}, which leaves \texttt{b = c} directly.

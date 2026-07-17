@@ -12,7 +12,7 @@ theorem ex2 (n : Nat) : n + 0 = n := by
   simp
 \end{lstlisting}
 
-A good habit: the \emph{first} time a new kind of cancellation or identity simplification is encountered, it should be done by hand with named lemmas, as this book does throughout. After that, \texttt{simp} (optionally \texttt{simp [specific\textbackslash{}\_lemma]} to narrow it, or \texttt{simp only [...]} to restrict exactly which lemmas fire) is the right everyday tool. Using \texttt{simp} from the start is how proofs end up compiling without anyone, including the author, being able to explain them a week later.
+A good habit: the \emph{first} time a new kind of cancellation or identity simplification is encountered, it should be done by hand with named lemmas, as this book does throughout. After that, \texttt{simp} (optionally \texttt{simp [specific\_lemma]} to narrow it, or \texttt{simp only [...]} to restrict exactly which lemmas fire) is the right everyday tool. Using \texttt{simp} from the start is how proofs end up compiling without anyone, including the author, being able to explain them a week later.
 
 \begin{mathreading}
 
