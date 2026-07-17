@@ -1,0 +1,75 @@
+\section{Defining a quiver in Lean}\label{sec:11-path-algebras:03-defining-a-quiver:1}
+
+A quiver is encoded as a \texttt{structure}, parameterized by a type of vertices and a type of arrows:
+
+\begin{lstlisting}
+structure Quiver (V : Type) (A : Type) where
+  source : A → V
+  target : A → V
+\end{lstlisting}
+
+This is a direct transcription: \texttt{V} is the type of vertices, \texttt{A} the type of arrows, and \texttt{source}/\texttt{target} are exactly \(s\) and \(t\) above.
+
+\begin{mathreading}
+
+\texttt{Quiver V A} is a quiver \(Q = (V, A, s, t)\): the data of two functions \(s, t : A \to V\), i.e.~a parallel pair of arrows \(A \rightrightarrows V\) in \(\mathbf{Set}\). A quiver is precisely the underlying data of a small category \emph{before} composition and identities are imposed: the raw generators from which the free category (paths) is built.
+
+\end{mathreading}
+
+\subsection{The example quiver, formalized}\label{sec:11-path-algebras:03-defining-a-quiver:2}
+
+The three vertices are encoded as \texttt{Fin 3} (values \texttt{0, 1, 2}, standing for vertices \texttt{1, 2, 3}) and the two nontrivial arrows as an inductive type:
+
+\begin{lstlisting}
+inductive ExampleArrow where
+  | alpha : ExampleArrow   -- 0 → 1
+  | beta : ExampleArrow     -- 1 → 2
+
+def exampleQuiver : Quiver (Fin 3) ExampleArrow where
+  source := fun a => match a with
+    | ExampleArrow.alpha => 0
+    | ExampleArrow.beta => 1
+  target := fun a => match a with
+    | ExampleArrow.alpha => 1
+    | ExampleArrow.beta => 2
+\end{lstlisting}
+
+\texttt{inductive ExampleArrow where | alpha : ExampleArrow | beta : ExampleArrow} defines a brand-new type with exactly two values, \texttt{alpha} and \texttt{beta}. This is the same \texttt{inductive} mechanism that builds \texttt{Nat} (Chapter 1) and \texttt{Bool}, just with two constructors that carry no extra data.
+
+\begin{mathreading}
+
+This is the concrete quiver \(Q\) with vertex set \(V = \{0,1,2\}\) (encoded as \(\mathrm{Fin}\,3\)) and arrow set \(A =
+\{\alpha, \beta\}\), where \(s(\alpha)=0,\ t(\alpha)=1\) and \(s(\beta)=1,\
+t(\beta)=2\): the linear \(A_3\) quiver, drawn exactly as on paper:
+
+\end{mathreading}
+
+\begin{center}
+\input{diagrams/quiver-example.tex}
+\end{center}
+
+\begin{tabular}{ll}
+\toprule
+Symbol & Lean \\
+\midrule
+\bottomrule
+\(0, 1, 2 \in V\) (``vertices'') & \texttt{(0 : Fin 3)}, \texttt{(1 : Fin 3)}, \texttt{(2 : Fin 3)} \\
+\(\alpha, \beta \in A\) (``arrows'') & \texttt{ExampleArrow.alpha}, \texttt{ExampleArrow.beta} \\
+\(s, t : A \to V\) (``source, target'') & \texttt{exampleQuiver.source}, \texttt{exampleQuiver.target} \\
+\end{tabular}
+
+
+The two-element inductive type is the finite set \(A = \{\alpha,\beta\}\), and the \texttt{match}-defined \texttt{source}/\texttt{target} are the functions \(s, t : A \to
+V\) given by their value tables: \texttt{source alpha = 0}, \texttt{target alpha = 1}, \texttt{source beta = 1}, \texttt{target beta = 2}. This is exactly the arrowheads and tails drawn above.
+
+\textbf{Mathlib equivalent.} Mathlib's own \href{https://loogle.lean-lang.org/?q=Quiver}{\texttt{Quiver}} class (the one this chapter's opening section mentioned building from scratch instead of reusing) encodes arrows differently. Instead of one flat arrow type \texttt{A} plus separate \texttt{source}/\texttt{target : A → V} functions, it bakes the endpoints into the arrow's \emph{type} directly, \texttt{Hom : V → V → Sort*} (with notation \texttt{a ⟶ b}). Thus an arrow from \texttt{i} to \texttt{j} simply \emph{has type} \texttt{i ⟶ j}:
+
+\begin{lstlisting}
+inductive MyArrow : Fin 3 → Fin 3 → Type
+  | alpha : MyArrow 0 1
+  | beta : MyArrow 1 2
+
+instance : Quiver (Fin 3) := ⟨MyArrow⟩
+\end{lstlisting}
+
+\texttt{MyArrow 0 1} has exactly the one constructor \texttt{alpha}. \texttt{MyArrow i j} for any other pair \texttt{(i, j)}, in particular the ``backwards'' or ``no such arrow'' cases, has no constructors at all, and is thus simply an empty type. There is no \texttt{source}/\texttt{target} to state or prove separately, and no \texttt{h : Q.source a = v} side-condition to discharge with \texttt{rfl} later (Chapter 11 §4). An ill-typed composition is rejected by the type checker before a proof obligation is even reached, one step earlier than the book's own encoding catches the same mistake.

@@ -1,0 +1,36 @@
+\chapter{Chapter 8: Rings --- adding a second operation}\label{sec:08-rings:00-index:1}
+
+\textbf{Learning objectives.} By the end of this chapter, translate the ring axioms into a Lean \texttt{structure} built on top of \texttt{CommGroup}, build both a commutative (\texttt{Int}, \texttt{Fin 3}) and a genuinely noncommutative (\(2\times 2\) matrices) example from scratch, and recognize when a finite carrier lets \texttt{decide} replace a hand-written proof.
+
+\section{Sections}\label{sec:08-rings:00-index:2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \hyperref[sec:08-rings:01-definition:1]{The mathematical definition}
+\item
+  \hyperref[sec:08-rings:02-comm-group:1]{\texttt{CommGroup}: extending \texttt{Group} with one extra axiom}
+\item
+  \hyperref[sec:08-rings:03-ring:1]{\texttt{Ring}: bundling an additive \texttt{CommGroup} with multiplication}
+\item
+  \hyperref[sec:08-rings:04-integers-example:1]{Example: the integers as a ring}
+\item
+  \hyperref[sec:08-rings:05-finite-ring-example:1]{Example: a finite commutative ring, \(\mathbb{Z}/3\mathbb{Z}\)}
+\item
+  \hyperref[sec:08-rings:06-accessing-fields:1]{Accessing nested fields}
+\item
+  \hyperref[sec:08-rings:07-matrices:1]{Example: 2×2 matrices --- a genuinely noncommutative ring}
+\item
+  \hyperref[sec:08-rings:08-exercises:1]{Exercises}
+\end{enumerate}
+
+% Auto-appended: input every other section in order.
+\input{08-rings/01-definition.tex}
+\input{08-rings/02-comm-group.tex}
+\input{08-rings/03-ring.tex}
+\input{08-rings/04-integers-example.tex}
+\input{08-rings/05-finite-ring-example.tex}
+\input{08-rings/06-accessing-fields.tex}
+\input{08-rings/07-matrices.tex}
+\input{08-rings/08-exercises.tex}

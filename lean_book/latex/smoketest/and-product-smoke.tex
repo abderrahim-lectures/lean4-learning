@@ -1,0 +1,11 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\begin{document}
+% P \wedge Q as a categorical product, with its two projections.
+% Source: 03-propositions-and-proofs/05-and-or-not.md.
+\begin{tikzcd}
+  & P \wedge Q \arrow[dl, "\pi_1"'] \arrow[dr, "\pi_2"] & \\
+  P & & Q
+\end{tikzcd}
+\end{document}

@@ -1,0 +1,58 @@
+\begin{pblproject}[Checkpoint project: a Monoid from scratch]
+\label{sec:05-rigor-check:06-checkpoint-project:1}
+
+
+Part I is now complete: terms and types, structures, propositions and proofs, tactics, and the rigor questions just answered. Before Chapter 6 builds \texttt{Group}, this project asks for a smaller, self-contained version of exactly that construction --- a \textbf{monoid}: a set with an associative operation and a two-sided identity, but \emph{no} inverses. Everything needed is already in hand from Chapters 1--5 alone; nothing here depends on \texttt{Group}, so it previews the next chapter's construction rather than spoiling it.
+
+\textbf{Learning objectives.} Practice bundling data with proof obligations in a \texttt{structure} (Chapter 2), writing tactic-mode proofs for a genuine algebraic axiom set (Chapter 4), and building a small ``prove it once, generically'' theorem in the style Chapter 7 will use for \texttt{Group} --- here done for the weaker \texttt{Monoid} first.
+
+\textbf{Prerequisites.} Chapters 1--5 only.
+
+\textbf{Milestones.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Define \texttt{structure Monoid (M : Type) where} with fields \texttt{op}, \texttt{id}, and proof obligations \texttt{assoc}, \texttt{id\textbackslash{}\_left}, \texttt{id\textbackslash{}\_right} --- exactly \texttt{Group}'s fields (Chapter 6 §2), minus \texttt{inv}/\texttt{inv\textbackslash{}\_left}/\texttt{inv\textbackslash{}\_right}.
+\item
+  Build at least one concrete instance. Two natural choices, both reusing facts already available from core Lean: \texttt{List α} under \texttt{++}/\texttt{[]}, or \texttt{Nat} under \texttt{*}/\texttt{1}.
+\item
+  Prove a generic theorem for an arbitrary \texttt{Mn : Monoid M}: \emph{the identity is unique} --- if \texttt{e' : M} satisfies \texttt{∀ a, Mn.op e' a = a}, then \texttt{e' = Mn.id}. This is exactly Chapter 7's Theorem 1 (\texttt{id\textbackslash{}\_unique}) carried out one chapter early, and --- worth checking directly --- its proof never needs an inverse, so nothing about lacking one gets in the way.
+\end{enumerate}
+
+\textbf{Deliverable.} \texttt{structure Monoid}, at least one concrete instance (with all three proof obligations discharged), and the generic uniqueness theorem, applied to that instance.
+
+\textbf{Self-verification.}
+
+\begin{lstlisting}
+structure Monoid (M : Type) where
+  op : M → M → M
+  id : M
+  assoc : ∀ a b c : M, op (op a b) c = op a (op b c)
+  id_left : ∀ a : M, op id a = a
+  id_right : ∀ a : M, op a id = a
+
+def listMonoid (α : Type) : Monoid (List α) where
+  op := List.append
+  id := []
+  assoc := by intro a b c; exact List.append_assoc a b c
+  id_left := by intro a; exact List.nil_append a
+  id_right := by intro a; exact List.append_nil a
+
+theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
+    (h : ∀ a : M, Mn.op e' a = a) : e' = Mn.id := by
+  have step1 : Mn.op e' Mn.id = Mn.id := h Mn.id
+  have step2 : Mn.op e' Mn.id = e' := Mn.id_right e'
+  rw [← step2]
+  exact step1
+
+-- Applying the generic theorem to the concrete instance costs nothing
+-- beyond naming it — the same "prove once, use everywhere" payoff
+-- Chapter 6 §6 promises for Group, delivered here one chapter early.
+#check monoid_id_unique (listMonoid Nat) [] (fun a => List.nil_append a)
+\end{lstlisting}
+
+If this compiles (\texttt{lake env lean} on a file containing it, or pasted into \texttt{lean\textbackslash{}\_project}), the project is done. A full worked solution, including a second instance, is in \hyperref[sec:14-appendix-solutions:04-chapter-5:1]{Appendix, Chapter 5}.
+
+\end{pblproject}

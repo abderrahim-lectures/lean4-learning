@@ -1,0 +1,56 @@
+\section{\texorpdfstring{\texttt{structure}: bundling data together}{structure: bundling data together}}\label{sec:02-functions-and-structures:01-structure-basics:1}
+
+A \texttt{structure} groups several pieces of data under one name. We will use this Lean feature constantly once we define groups and rings.
+
+\begin{lstlisting}
+structure Point where
+  x : Nat
+  y : Nat
+
+def origin : Point := { x := 0, y := 0 }
+
+#eval origin.x        -- 0
+\end{lstlisting}
+
+Key points:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Point.mk} is the automatically generated \textbf{constructor}. This is the function that actually builds a \texttt{Point} out of an \texttt{x} and a \texttt{y}. \texttt{\textbackslash{}\{ x := ..., y := ... \textbackslash{}\}} is shorthand for \texttt{Point.mk ... ...}. It names each field so the order cannot be mixed up.
+\item
+  There is an even shorter way to write this: \texttt{⟨0, 0⟩} builds the exact same \texttt{Point}. It simply lists the values in field-declaration order instead of naming them. Read \texttt{⟨\textbackslash{}\_, \textbackslash{}\_⟩} as \textbf{``here are the pieces, in order --- the constructor is to be inferred from context.''} Lean can always determine it, because the \emph{expected type} (here, \texttt{Point}, from \texttt{def origin : Point := ...}) indicates exactly which constructor and which fields must be filled in. This is also where the official name comes from: it is called the \textbf{anonymous constructor}, because \texttt{Point.mk} is never written explicitly --- it remains anonymous, and Lean infers it from context. \texttt{⟨\textbackslash{}\_, \textbackslash{}\_⟩} recurs constantly from Chapter 3 onward, for proofs as much as for data.
+\item
+  \texttt{p.x} is \textbf{field projection} notation, shorthand for \texttt{Point.x p}. \texttt{origin.x} above is exactly this projection applied to \texttt{origin}.
+\end{itemize}
+
+\begin{lstlisting}
+def shift (p : Point) (dx dy : Nat) : Point :=
+  { x := p.x + dx, y := p.y + dy }
+
+#eval (shift origin 3 4).y   -- 4
+\end{lstlisting}
+
+\texttt{shift} shows a structure used on \emph{both} sides of a function: it takes a \texttt{Point} in (reading its fields back out with the same \texttt{p.x}/\texttt{p.y} projection notation) and builds a new one via \texttt{\textbackslash{}\{ x := ..., y := ... \textbackslash{}\}}, the same field-naming syntax \texttt{origin} used above.
+
+Note also that structures can bundle \emph{proofs} alongside data, not just data. This is exactly how a group will be defined later --- a carrier type, an operation, and proofs that the operation satisfies the group axioms, all in one \texttt{structure}.
+
+\begin{mathreading}
+
+\texttt{structure Point where x : Nat; y : Nat} is the Cartesian product \(\mathrm{Point} = \mathbb{N} \times \mathbb{N}\), with \texttt{x} and \texttt{y} playing the role of the two projections \(\pi_1, \pi_2 : \mathrm{Point} \to \mathbb{N}\). Here \texttt{p.x} computes \(\pi_1(p)\), \texttt{p.y} computes \(\pi_2(p)\), and \texttt{\textbackslash{}\{ x := ..., y := ... \textbackslash{}\}} builds an element via the universal property of the product (a pair of maps into the factors determines a unique map into the product). More generally, a \texttt{structure} with fields of types \(A_1, \ldots, A_n\) is the \(n\)-fold product \(A_1 \times \cdots \times A_n\). Once fields are allowed to be \emph{proofs} (propositions), the same construction becomes a \textbf{subset cut out by conditions}: a structure \texttt{\textbackslash{}\{ data : D, proof : P data \textbackslash{}\}} is the dependent pair (subset) \(\{\, d \in D \mid P(d) \,\}\), categorically a subobject of \(D\).
+
+\end{mathreading}
+
+\subsection{References}\label{sec:02-functions-and-structures:01-structure-basics:2}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  Lean 4 documentation (\cite{LeanDocs}) --- the constructor/projection/anonymous-constructor mechanics described above.
+\item
+  Pierce (\cite{Pierce2002}), Ch. 11 --- records and products as the standard language-theoretic account of what \texttt{structure} implements.
+\item
+  nLab, ``product'' (\cite{NLabProduct}) --- the universal-property reading of \texttt{structure} used in the ``Mathematical reading'' box above.
+\end{itemize}

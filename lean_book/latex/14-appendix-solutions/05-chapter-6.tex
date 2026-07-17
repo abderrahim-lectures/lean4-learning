@@ -1,0 +1,45 @@
+\section{Chapter 6: Groups}\label{sec:14-appendix-solutions:05-chapter-6:1}
+
+\textbf{1. \texttt{boolXorGroup : Group Bool}}
+
+\begin{lstlisting}
+def boolXorGroup : Group Bool where
+  op := Bool.xor
+  id := false
+  inv := fun a => a
+  assoc := by
+    intro a b c
+    cases a with
+    | false => cases b with
+      | false => cases c with | false => rfl | true => rfl
+      | true => cases c with | false => rfl | true => rfl
+    | true => cases b with
+      | false => cases c with | false => rfl | true => rfl
+      | true => cases c with | false => rfl | true => rfl
+  id_left := by
+    intro a
+    cases a with
+    | false => rfl
+    | true => rfl
+  id_right := by
+    intro a
+    cases a with
+    | false => rfl
+    | true => rfl
+  inv_left := by
+    intro a
+    cases a with
+    | false => rfl
+    | true => rfl
+  inv_right := by
+    intro a
+    cases a with
+    | false => rfl
+    | true => rfl
+\end{lstlisting}
+
+Each field reduces to a finite check. \texttt{Bool.xor} on two or three concrete booleans always computes, so once every variable is replaced by a concrete constructor (\texttt{false}/\texttt{true}) via \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}, the resulting equation holds by definition and \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} closes it. \texttt{assoc} needs three nested \texttt{cases} since it quantifies over three booleans (\(2^3 = 8\) cases, matching \((a \oplus b) \oplus c = a \oplus (b \oplus c)\) over \(\mathbb{Z}/2\)). The others need only one.
+
+\textbf{2. \texttt{inv\textbackslash{}\_left}/\texttt{inv\textbackslash{}\_right} are genuinely different obligations}
+
+For a general (non-abelian) group, \texttt{Grp.op (Grp.inv a) a = Grp.id} and \texttt{Grp.op a (Grp.inv a) = Grp.id} are, in principle, independent statements. \texttt{op} need not be commutative, so nothing forces ``inverse on the left'' to equal ``inverse on the right'' unless both are stated (or proved) separately. Chapter 7, Theorem 2 (\texttt{left\textbackslash{}\_inverse\textbackslash{}\_unique}) establishes something subtler: given that both axioms hold for the distinguished \texttt{Grp.inv}, any other element that is merely a left inverse of \texttt{a} must already equal \texttt{Grp.inv a}. In other words, left inverses are automatically unique once two-sided inverses are known to exist. This is what lets one-sided inverse-uniqueness arguments substitute for commutativity in that specific proof. It does not mean \texttt{inv\textbackslash{}\_left} and \texttt{inv\textbackslash{}\_right} were redundant as axioms --- only that, once both hold, ``a'' left inverse coincides with ``the'' two-sided one.

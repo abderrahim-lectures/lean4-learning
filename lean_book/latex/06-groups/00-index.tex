@@ -1,0 +1,35 @@
+\chapter{\texorpdfstring{Chapter 6: Structures and classes --- defining a \texttt{Group}}{Chapter 6: Structures and classes --- defining a Group}}\label{sec:06-groups:00-index:1}
+
+\textbf{Learning objectives.} By the end of this chapter, translate the mathematical definition of a group into a Lean \texttt{structure} field by field, build both an abelian (\texttt{Int}) and a genuinely non-abelian (permutations of \texttt{Fin 3}) example from scratch, and articulate why bundling data with proof obligations pays off once theorems are proved generically (Chapter 7).
+
+\section{Sections}\label{sec:06-groups:00-index:2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \hyperref[sec:06-groups:01-definition:1]{The mathematical definition}
+\item
+  \hyperref[sec:06-groups:02-translating:1]{Translating the definition into a Lean \texttt{structure}}
+\item
+  \hyperref[sec:06-groups:03-integers-example:1]{A first example: the integers under addition}
+\item
+  \hyperref[sec:06-groups:04-permutations-example:1]{A non-abelian example: permutations of three elements}
+\item
+  \hyperref[sec:06-groups:05-accessing-fields:1]{Accessing the fields}
+\item
+  \hyperref[sec:06-groups:06-why-bundle:1]{Why bundle proofs with data at all?}
+\item
+  \hyperref[sec:06-groups:07-exercises:1]{Exercises}
+\end{enumerate}
+
+Starting with this chapter, most examples are followed by a ``Mathlib equivalent'' box (see \hyperref[sec:00-setup:04-mathlib-note:1]{00-setup/04-mathlib-note.md}). For links to the official docs for every Mathlib name used in those boxes, see the \hyperref[sec:root:tactic-and-library-reference:1]{tactic and library reference}.
+
+% Auto-appended: input every other section in order.
+\input{06-groups/01-definition.tex}
+\input{06-groups/02-translating.tex}
+\input{06-groups/03-integers-example.tex}
+\input{06-groups/04-permutations-example.tex}
+\input{06-groups/05-accessing-fields.tex}
+\input{06-groups/06-why-bundle.tex}
+\input{06-groups/07-exercises.tex}

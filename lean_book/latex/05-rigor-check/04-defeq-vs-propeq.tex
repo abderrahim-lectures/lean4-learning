@@ -1,0 +1,52 @@
+\section{Definitional versus propositional equality}\label{sec:05-rigor-check:04-defeq-vs-propeq:1}
+
+Chapter 4 introduced \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} as ``the proof that both sides compute to the same thing,'' using it freely without asking exactly what ``compute to the same thing'' means, or whether it is the \emph{only} notion of equality Lean has. It is not. Lean has (at least) two, and confusing them is a common source of real confusion once proofs get more intricate. They are worth separating out clearly now.
+
+\subsection{Definitional equality}\label{sec:05-rigor-check:04-defeq-vs-propeq:2}
+
+Two terms are \textbf{definitionally equal} (\(a \equiv b\), sometimes written \(a \equiv_\beta b\) to stress that it is driven by reduction) if they reduce to the same normal form by unfolding definitions, beta-reduction (substituting a lambda's argument into its body), and the built-in computation rules of inductive types (a \texttt{match} on a constructor reduces immediately). This is a \emph{judgment the type-checker computes}, not a proposition you prove. There is no term of type \texttt{a ≡ b}. Either Lean's kernel confirms it during elaboration (silently, whenever it needs to check that two types or terms match) or it does not, and \texttt{rfl} is the tactic that asks Lean to check exactly this and fail loudly if it does not hold.
+
+\begin{lstlisting}
+example : 2 + 2 = 4 := rfl        -- 2 + 2 reduces to 4 definitionally
+example : 0 + 2 = 2 := rfl        -- reduces, since `Nat.add` recurses on
+                                   -- its second argument and 2 + 0 = 2
+                                   -- is the base clause
+-- example : 2 + 0 = 2 := rfl     -- also rfl (0 + n needs induction, n + 0 doesn't)
+\end{lstlisting}
+
+One precise point worth noting: ``reduce to the same normal form'' does not mean Lean necessarily unfolds a term \emph{all the way down} before comparing. Checking \texttt{a ≡ b} typically only reduces each side as far as its \textbf{weak head normal form} (WHNF): far enough to see the outermost constructor or function head, no further than needed. It then compares heads, recursing into subterms only as required. This is exactly why ``\texttt{Nat.add} recurses on its second argument'' is a fact about \emph{evaluation order}. To determine whether \texttt{0 + n} reduces at all, Lean examines \texttt{n}'s outermost shape (its WHNF). If \texttt{n} is an unknown variable rather than a known \texttt{zero}/\texttt{succ} constructor, there is nothing to see, so no reduction fires and the goal is stuck at \texttt{0 + n}, exactly as Chapter 4 found.
+
+\subsection{Propositional equality}\label{sec:05-rigor-check:04-defeq-vs-propeq:3}
+
+\textbf{Propositional equality}, written \texttt{a = b} (the \texttt{Eq} type from Chapter 3), is an ordinary proposition, a \texttt{Prop}, that must be \emph{proved}, the way any other statement is proved. Definitional equality is only the easiest possible case (\texttt{rfl} is a proof of \texttt{a = b} precisely by showing that \texttt{a ≡ b}). But \texttt{a = b} can hold \emph{propositionally} even when \texttt{a} and \texttt{b} are \textbf{not} definitionally equal. For instance, Chapter 4's \texttt{my\textbackslash{}\_add\textbackslash{}\_comm : ∀ a b, a + b = b + a} proves a propositional equality that is \emph{not} witnessed by \texttt{rfl} (indeed, \texttt{rfl} fails on \texttt{a + b = b + a} for variable \texttt{a}, \texttt{b}, precisely because \texttt{Nat.add} only reduces on its second argument, so the two sides do not share a common reduct without the induction Chapter 4 walked through).
+
+\[
+a \equiv b \ \implies\ a = b, \qquad\text{but not conversely.}
+\]
+
+This is the exact type-theoretic counterpart of a distinction every mathematician already makes without naming it: ``\(2+2\) and \(4\) are the same symbol after simplification'' versus ``\(a+b\) and \(b+a\) denote the same number, which requires an argument (commutativity) to establish, not mere inspection.'' Definitional equality is inspection. Propositional equality is (potentially) a theorem.
+
+\subsection{Why the distinction has real consequences}\label{sec:05-rigor-check:04-defeq-vs-propeq:4}
+
+Two practical facts follow directly:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\texttt{rfl} only ever proves definitional equalities.} When \texttt{rfl} fails, that is not evidence the statement is false. It only indicates the two sides do not share a computed normal form \emph{without further argument}. This is exactly the ``failure is information'' point from Chapter 4: \texttt{rfl} failing on \texttt{a + b = b + a} is the signal to reach for \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction}}, not evidence that the statement should be abandoned.
+\item
+  \textbf{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}} works up to propositional equality, but the resulting goal is checked up to definitional equality.} When \texttt{rw [h]} rewrites a goal using \texttt{h : a = b}, the \emph{new} goal is a genuinely different term (with \texttt{b} substituted for \texttt{a}), and Lean must still confirm the surrounding structure of the goal stays well-typed after the substitution. This subtlety occasionally shows up as the ``motive is not type correct'' error mentioned in Chapter 4, which is exactly a case where propositional substitution runs into a definitional-equality check it cannot discharge automatically (common when the term being rewritten appears inside a dependent type's index, as in Chapter 11's \texttt{Path}).
+\end{enumerate}
+
+\subsection{A note on proof irrelevance}\label{sec:05-rigor-check:04-defeq-vs-propeq:5}
+
+One more fact worth having, since it explains why this book never worries about ``which proof'' fills a \texttt{Prop}-valued field: Lean treats all proofs of the same proposition as \emph{interchangeable} (this is called \textbf{proof irrelevance} for \texttt{Prop}). If \texttt{h1 h2 : a = b} are two different proof \emph{terms} of the same propositional equality, \texttt{h1} and \texttt{h2} are definitionally equal to each other, even if they were built by completely different tactic scripts. This is why the question ``is this the \emph{same} proof of \texttt{assoc}'' never arises, throughout this book, when comparing two \texttt{Group} structures on the same carrier with the same operation. The proof component does not matter; only the data (\texttt{op}, \texttt{id}, \texttt{inv}) can actually differ.
+
+\subsection{A note on structure eta}\label{sec:05-rigor-check:04-defeq-vs-propeq:6}
+
+This is a companion fact, relied on silently whenever this book (or the reader) writes \texttt{⟨x.fst, x.snd⟩ = x} or splits a goal about a \texttt{structure}-typed equality into one goal per field. Lean's kernel treats a term \texttt{x : S} (for \texttt{S} a \texttt{structure}) as \textbf{definitionally equal} to \texttt{S.mk x.field1 x.field2 ...}. Rebuilding \texttt{x} field-by-field gives back \emph{the same term}, by η (eta) for structures, not just a term that is provably equal to it. This is exactly what makes Chapter 8's \texttt{Mat2.mk.injEq}-based extensionality reasoning work, and Chapter 10's \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{congr 1}}, which splits a \texttt{DirectSum.mk \textbackslash{}\_ \textbackslash{}\_ = DirectSum.mk \textbackslash{}\_ \textbackslash{}\_} goal into two field-wise goals. Both depend on Lean already knowing, definitionally, that every term of a structure type \emph{is} (eta-equal to) its constructor applied to its own fields.
+
+\begin{quote}
+Read more: TPiL's chapter on structures discusses eta for structures directly; the ``Why bundle proofs with data at all?'' discussion in \hyperref[sec:06-groups:06-why-bundle:1]{Chapter 6 §6} is the payoff this definitional transparency is building toward.
+\end{quote}

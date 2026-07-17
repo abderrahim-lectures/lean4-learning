@@ -1,0 +1,12 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\begin{document}
+% Initial object I: exactly one arrow from I to every other object.
+% Source: 01-basics/04-terminology.md, "initial object" glossary entry.
+\begin{tikzcd}
+  & X \\
+  I \arrow[ur] \arrow[r] \arrow[dr] & Y \\
+  & Z
+\end{tikzcd}
+\end{document}

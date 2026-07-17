@@ -1,0 +1,22 @@
+\section{Exercises}\label{sec:05-rigor-check:05-exercises:1}
+
+\textbf{Key points.} This book delays \texttt{class} for \texttt{structure} so every proof obligation stays explicit; \texttt{class} only changes \emph{how} Lean finds an instance, not what data it holds. \texttt{Type}'s own type must live one universe up (\texttt{Type 1}), or \texttt{Type : Type} reintroduces Russell's paradox. \texttt{rfl} proves only \emph{definitional} equality --- reduction to the same normal form --- which is not every true propositional equality (an asymmetric recursion like \texttt{Nat.add}'s is exactly where the two can diverge).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Predict, before running it, whether \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{example : (2 : Nat) * 3 = 3 + 3 := rfl}} type-checks. Then predict whether \texttt{example (n : Nat) : n * 2 = n + n := rfl} type-checks (hint: which argument does \texttt{Nat.mul} recurse on? Compare with the \texttt{Nat.add} recursion pattern from Chapter 4).
+\item
+  Rewrite \texttt{opTwice} (from the \texttt{structure} vs \texttt{class} section) as a type class version yourself: declare \texttt{class MyGroup (G : Type) where ...} with the same fields as this book's \texttt{Group}, register \texttt{instance : MyGroup Int where ...}, and write \texttt{def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x}. Confirm \texttt{\textbackslash{}\#eval opTwiceTC (3 : Int)} works with no explicit instance argument.
+\item
+  In one or two sentences, explain why \texttt{Type → Type} (the type of \texttt{Group} itself, before applying it to a carrier) must live in \texttt{Type 1} rather than \texttt{Type 0} --- tie the answer back to the Russell's-paradox obstruction this chapter described.
+\item
+  Give an example (distinct from \texttt{my\textbackslash{}\_add\textbackslash{}\_comm}) of a true propositional equality between two \texttt{Nat} expressions that is \emph{not} provable by \texttt{rfl} alone, and identify which of the two sides' recursive structure is the obstruction.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:04-chapter-5:1]{Appendix, Chapter 5}.
+
+\section{Next}\label{sec:05-rigor-check:05-exercises:2}
+
+Continue to the \hyperref[sec:05-rigor-check:06-checkpoint-project:1]{checkpoint project}, which closes out Part I before Chapter 6 begins Part II.

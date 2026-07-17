@@ -1,0 +1,25 @@
+\section{The mathematical definition}\label{sec:06-groups:01-definition:1}
+
+A \textbf{group} is a set \(G\) together with:
+
+\begin{itemize}
+\tightlist
+\item
+  a binary operation \(\cdot : G \times G \to G\),
+\item
+  a distinguished element \(e \in G\) (the identity),
+\item
+  an inverse function \((-)^{-1} : G \to G\),
+\end{itemize}
+
+satisfying three axioms, for all \(a, b, c \in G\):
+
+\[
+\begin{aligned}
+\text{(associativity)} &\quad (a \cdot b) \cdot c = a \cdot (b \cdot c) \\
+\text{(identity)} &\quad e \cdot a = a \quad\text{and}\quad a \cdot e = a \\
+\text{(inverse)} &\quad a^{-1} \cdot a = e \quad\text{and}\quad a \cdot a^{-1} = e
+\end{aligned}
+\]
+
+No further axiom is required; in particular, commutativity is not assumed in general (a group where \(a \cdot b = b \cdot a\) always holds is called \textbf{abelian} or \textbf{commutative}, defined separately below).
