@@ -4,6 +4,14 @@
 
 ---
 
+**Key points.** A quiver is just vertices, arrows, and source/target
+functions; a path is an inductive type indexed by its own endpoints, so an
+ill-typed composition (arrow source ≠ path's current endpoint) is rejected
+before any proof is attempted. `Path.append` composes two paths by
+recursion on the second, and the path algebra $kQ$ — sketched but not
+fully built here — is the free $k$-module on the set of paths, with
+multiplication by composition.
+
 1. Add a third arrow `gamma : ExampleArrow` with `source gamma = 2` and
    `target gamma = 0`, creating a cycle `0 → 1 → 2 → 0`. Build the path
    `gamma ∘ beta ∘ alpha : Path exampleQuiver 0 0`.

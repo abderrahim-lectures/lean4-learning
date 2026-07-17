@@ -14,6 +14,12 @@ return to it as needed. (For links to the official docs for
 every tactic named in this chapter, see the
 [tactic and library reference](../tactic-and-library-reference.md).)
 
+**Learning objectives.** By the end of this chapter, read a Lean goal
+state, use `intro`/`exact`/`apply`/`rw` to work a goal one step at a time,
+diagnose a failed tactic from its error message, use `induction`/`cases`/
+`constructor`/`unfold` on inductively-defined data, and carry out a full
+inductive proof (`Nat.add`'s commutativity) from scratch.
+
 ## Sections
 
 1. [The goal state, and a worked strategy session](01-goal-state.md)

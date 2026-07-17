@@ -14,6 +14,13 @@ same fact is not derived twice. (For links to the official docs for
 every tactic and Mathlib name in this book, see the
 [tactic and library reference](../tactic-and-library-reference.md).)
 
+**Learning objectives.** By the end of this chapter, use `exact?`/`apply?`
+to search for a known lemma or proof, recognize when a goal falls inside
+`decide`/`omega`/`norm_num`'s decidable fragment versus needing a genuine
+hand proof, know what `simp` trades away for speed, choose between term
+mode and tactic mode for a given proof, and recognize when a sub-goal
+deserves its own named lemma.
+
 ## Sections
 
 1. [Search tactics: letting Lean find the lemma or the proof](01-search-tactics.md)

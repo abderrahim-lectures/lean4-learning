@@ -4,6 +4,12 @@
 
 ---
 
+**Learning objectives.** By the end of this chapter, describe what this
+book built entirely from scratch, translate that construction into
+Mathlib's `class`-based idiom and see two genuinely new facts it delivers
+for free, and pick a next project — from the five scaffolded here, or the
+Church-encodings aside — that extends material already in hand.
+
 ## Sections
 
 1. [What we built](01-what-we-built.md)

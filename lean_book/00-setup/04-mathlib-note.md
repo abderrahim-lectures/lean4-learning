@@ -19,6 +19,13 @@ in mind at once — the definition just derived, and the shape the same idea
 takes in the library used later — builds a sharper understanding of both
 than either alone would.
 
+**Key points.** Lean 4 plus `lake`, an editor with the Lean extension, and
+a pinned toolchain (matching `lean_project/lean-toolchain`) are all that
+is needed to follow along. This book is Mathlib-free by design through
+Chapter 11's from-scratch constructions; Mathlib appears only in the
+"Mathlib equivalent" boxes from Chapter 6 onward, and in full starting
+Chapter 13.
+
 ## Next
 
 Continue to [Chapter 1: First steps](../01-basics/00-index.md).

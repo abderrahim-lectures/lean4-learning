@@ -46,8 +46,14 @@ is not merely approximated by a linter that might go unrun.
 
 ### References
 
-- Python `typing` module documentation, [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar), and the [mypy documentation](https://mypy.readthedocs.io/) — for the Python-side comparison used in this section's box.
-- Robin Milner, "[A Theory of Type Polymorphism in Programming](https://doi.org/10.1016/0022-0000(78)90014-4)," *Journal of Computer and System Sciences*, 17(3), 1978, 348–375 — the theoretical account of parametric polymorphism that `TypeVar`, and Lean's `{α : Type} → ...`, both implement to different degrees.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's box.
+- Milner ([Milner1978]) — the theoretical account of parametric polymorphism that `TypeVar`, and Lean's `{α : Type} → ...`, both implement to different degrees.
+
+[PythonTyping]: ../bibliography.md#pythontyping
+[MypyDocs]: ../bibliography.md#mypydocs
+[Milner1978]: ../bibliography.md#milner1978
 
 ---
 

@@ -153,8 +153,13 @@ formalized here.
 
 ### References
 
-- Ibrahim Assem, Daniel Simson, and Andrzej Skowroński, *[Elements of the Representation Theory of Associative Algebras, Vol. 1: Techniques of Representation Theory](https://www.cambridge.org/us/academic/subjects/mathematics/algebra/elements-representation-theory-associative-algebras-techniques-representation-theory-volume-1)*, London Mathematical Society Student Texts 65, Cambridge University Press, 2006 — the standard graduate reference for quivers, path algebras, and their representations, developed from scratch as in this chapter.
-- Ralf Schiffler, *[Quiver Representations](https://link.springer.com/book/10.1007/978-3-319-09204-1)*, CMS Books in Mathematics, Springer, 2014 — an elementary, textbook-level treatment of the same material, pitched at advanced undergraduates/beginning graduate students.
+Full citations in the [Bibliography](../bibliography.md).
+
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]) — the standard graduate reference for quivers, path algebras, and their representations, developed from scratch as in this chapter.
+- Schiffler ([Schiffler2014]) — an elementary, textbook-level treatment of the same material, pitched at advanced undergraduates/beginning graduate students.
+
+[AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006
+[Schiffler2014]: ../bibliography.md#schiffler2014
 
 ---
 
