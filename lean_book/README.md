@@ -1,6 +1,6 @@
 # Lean for Working Algebraists
 
-[Changelog](CHANGELOG.md)
+[Changelog](CHANGELOG.md) | [Latest release (PDF)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest)
 
 A guide to Lean 4 for readers who already think in groups, rings, functors,
 and diagrams, but have never written a line of Lean (or any proof
