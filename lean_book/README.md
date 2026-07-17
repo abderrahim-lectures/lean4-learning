@@ -95,7 +95,7 @@ See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
 1. [First steps: terms, types, `#eval`](01-basics/00-index.md)
 2. [Functions, definitions, and structures](02-functions-and-structures/00-index.md)
 3. [Propositions as types, and basic proofs](03-propositions-and-proofs/00-index.md)
-4. [Tactics, and how to work a goal you don't know the proof of](04-tactics/00-index.md)
+4. [Tactics — the toolbox for proving things](04-tactics/00-index.md)
 5. [Rigor check: structures, universes, and equality](05-rigor-check/00-index.md)
 
 **Part II — Algebra, formalized**
