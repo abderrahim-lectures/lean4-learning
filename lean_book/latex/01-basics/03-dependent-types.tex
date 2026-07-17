@@ -6,7 +6,7 @@ Every function seen so far has a \emph{fixed} codomain: \texttt{double : Nat →
 
 Before any Lean syntax, here is the actual problem dependent types solve, in a language with no type checker enforcing anything at all. Suppose a dot-product function is written over two lists:
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python,style=python]
 def dot(xs, ys):
     return sum(x * y for x, y in zip(xs, ys))
 

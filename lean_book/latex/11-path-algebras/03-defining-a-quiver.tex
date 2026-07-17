@@ -48,14 +48,17 @@ t(\beta)=2\): the linear \(A_3\) quiver, drawn exactly as on paper:
 \input{diagrams/quiver-example.tex}
 \end{center}
 
-\begin{tabular}{ll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+}
 \toprule
 Symbol & Lean \\
 \midrule
-\bottomrule
 \(0, 1, 2 \in V\) (``vertices'') & \texttt{(0 : Fin 3)}, \texttt{(1 : Fin 3)}, \texttt{(2 : Fin 3)} \\
 \(\alpha, \beta \in A\) (``arrows'') & \texttt{ExampleArrow.alpha}, \texttt{ExampleArrow.beta} \\
 \(s, t : A \to V\) (``source, target'') & \texttt{exampleQuiver.source}, \texttt{exampleQuiver.target} \\
+\bottomrule
 \end{tabular}
 
 

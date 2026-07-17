@@ -2,11 +2,14 @@
 
 A direct dictionary connecting the formal λ-calculus/type-theory notation used in a few ``Mathematical reading'' boxes throughout this book back to the Lean syntax it corresponds to. This page is a lookup table, not something to read start to finish --- \hyperref[sec:01-basics:04-terminology:1]{Chapter 1 §4} and \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{§5}, \hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3 §2}, and \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} are where each row is actually built up and explained.
 
-\begin{tabular}{lll}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+}
 \toprule
 λ-calculus / type theory & Lean syntax & Where in this book \\
 \midrule
-\bottomrule
 variable \(x\) & \texttt{x} & Chapter 1 \\
 abstraction \(\lambda x.\, t\) & \texttt{fun x => t} & Chapter 1 \\
 application \(t_1\, t_2\) & \texttt{t1 t2} & Chapter 1 \\
@@ -23,6 +26,7 @@ Curry--Howard: propositions-as-types & \texttt{Prop}/proof terms & Chapter 3 \\
 progress + preservation & Lean's kernel type-checker & Chapter 5 §3 \\
 Church numerals (encoded data) & \texttt{Nat} (but built via \texttt{inductive}, not encoded) & Chapter 1 §4, Chapter 13 (aside) \\
 Church booleans / if-then-else via application & \texttt{Bool}, \texttt{if}/\texttt{match} (but native, not encoded) & Chapter 13 (aside) \\
+\bottomrule
 \end{tabular}
 
 
