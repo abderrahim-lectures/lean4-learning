@@ -38,7 +38,13 @@
   showstringspaces=false,
   breaklines=true,
   breakautoindent=true,
-  columns=flexible,
+  % `columns=flexible` silently dropped the literal space immediately
+  % following any newunicodechar-substituted symbol (confirmed by
+  % isolating this in a minimal test file: "M -> M" rendered as "M ->M"
+  % regardless of how the substitution itself was written, but rendered
+  % correctly under `columns=fixed`) -- every arrow/logic/relation symbol
+  % in this book's Lean code was silently missing its trailing space.
+  columns=fixed,
   frame=single,
   framerule=0.3pt,
   rulecolor=\color{black!30},
@@ -56,7 +62,7 @@
   showstringspaces=false,
   breaklines=true,
   breakautoindent=true,
-  columns=flexible,
+  columns=fixed,
   frame=single,
   framerule=0.3pt,
   rulecolor=\color{black!30},

@@ -3,6 +3,26 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Fix missing space after arrows/logic symbols in code listings
+
+Found during a full review pass: every Lean type signature using an
+arrow or logic/relation symbol (`→`, `∀`, `∃`, `∈`, `∘`, `∧`, `∨`, `≃`,
+etc.) was silently missing the space that follows it in the source --
+`M → M → M` rendered as `M →M →M` throughout the book. Root-caused to
+`lean-listings.tex`'s `columns=flexible` listings option: it drops the
+literal space immediately following any `newunicodechar`-substituted
+symbol, confirmed by isolating this in a minimal test file with no
+relation to this book's other packages. An earlier attempt at this fix
+patched the symbol *mapping* itself (forcing a trailing space into every
+`\newunicodechar` replacement), which happened to also fix the listings
+case but broke the *other* place these same symbols appear --
+standalone inline references like `` `→` `` in prose lists (e.g. "rules
+for `∧`/`∨`/`¬`/`→`, write..."), where the forced space then showed up
+as an unwanted gap before the following punctuation. Reverted that, and
+fixed the actual root cause instead: switched `columns=flexible` to
+`columns=fixed` in both the `lean` and `python` listings styles. No
+newunicodechar mapping needed to change at all.
+
 ## Unreleased — Drop web-navigation-only "Next" sections from the PDF
 
 Every chapter's trailing "## Next — Continue to [Chapter N: ...](...)."
