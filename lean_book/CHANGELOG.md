@@ -3,6 +3,18 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Fix three logic/reference errors found during review
+
+A user-caught wording bug ("If Mathlib is Mathlib-free by design...", the
+subject should be the book, not Mathlib itself) prompted a wider pass for
+the same class of error: sentences that don't actually parse, or
+contradict something stated elsewhere. Found and fixed two more: Chapter
+8's finite-ring example cited "Chapter 7's matrix example" for content
+that is actually this chapter's own §7; and a Chapter 12 Socratic question
+claimed the book "insist[ed] on the hand-written version through Chapter
+11," contradicted by Chapter 8's own `fin3Group`/`fin3Ring`, which already
+used `decide`.
+
 ## v1.4.10 — Formally cite and define the remaining type-theory notions
 
 Follow-up to the "judgment" fix: audited the whole book for other

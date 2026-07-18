@@ -44,7 +44,7 @@ Chapter 13.
    to compile — the entire point of `lean_project/lean-toolchain` reading
    `leanprover/lean4:v4.31.0` is that every code block in this book stays
    reproducible regardless of what else is installed system-wide.
-3. *If Mathlib is Mathlib-free by design through Chapter 11, why does
+3. *If this book is Mathlib-free by design through Chapter 11, why does
    Chapter 6 onward show Mathlib code at all?* Because "built from
    scratch" and "never shown the real library" are different design
    choices, and this book only commits to the first. Every hand-built
