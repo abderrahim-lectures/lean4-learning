@@ -28,8 +28,8 @@ multiplication by composition.
    that mean `Path Q u v` is an infinite *type*, for such a `Q`?* For at
    least one pair `u = v` on the cycle, yes — infinitely many distinct
    terms inhabit that one type, one per lap. This is exactly why a
-   quiver's path algebra $kQ$ is typically infinite-dimensional once it
-   has a cycle, unless further relations are imposed.
+   quiver's path algebra $kQ$ is typically infinite-dimensional once the
+   quiver has a cycle, unless further relations are imposed.
 3. *The path algebra $kQ$ is described as "the free $k$-module on the set
    of paths," but this chapter builds only the paths and their
    composition, not $kQ$ itself. What is the one piece of extra
