@@ -75,8 +75,20 @@ in `Type 0`.
 > Read more: [Chapter 5 §3](03-typing-rules-and-safety.md) states the
 > universe-formation rules precisely, as part of the calculus of
 > constructions. Externally, the "Dependent Type Theory" chapter of
-> the *Theorem Proving in Lean 4* manual covers universes at a similar
-> level of detail with more Lean-specific examples.
+> the *Theorem Proving in Lean 4* manual ([TPIL4]) covers universes at a
+> similar level of detail with more Lean-specific examples.
+
+---
+
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" — Lean's own documentation on the universe hierarchy, matching the presentation here.
+- Girard ([Girard1971]) — the original source of the paradox this stratified hierarchy is built to avoid (named "Girard's paradox" in [Chapter 5 §3](03-typing-rules-and-safety.md)).
+
+[TPIL4]: ../bibliography.md#tpil4
+[Girard1971]: ../bibliography.md#girard1971
 
 ---
 

@@ -3,6 +3,20 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Formally cite and define the remaining type-theory notions
+
+Follow-up to the "judgment" fix: audited the whole book for other
+type-theory notions introduced or used without a formal definition and a
+citation to a source. Fixed five: definitional/propositional equality and
+the universe hierarchy (both already had good definitions/examples, just
+no References section — added citations to Pierce, Martin-Löf, Girard,
+and TPIL4); the Curry–Howard correspondence (added a citation to Howard's
+1980 paper, newly added to the Bibliography, plus TPIL4); "eliminator"/
+"recursor," used twice with a formal treatment explicitly promised in
+Chapter 1 §4 but never delivered (added the promised definition and a
+`Nat.rec` worked example to Chapter 1 §5, cross-linked from Chapter 3 §5's
+`Or.elim`); and decidability (added a Pierce/TAPL citation).
+
 ## Unreleased — Formally define "judgment" at its first use, with an example
 
 Chapter 1 §1 used the type-theoretic term "judgment" (`#check e` is the

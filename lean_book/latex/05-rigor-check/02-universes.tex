@@ -27,5 +27,17 @@ Recall \texttt{structure Group (G : Type) where ...} from Chapter 6. This signat
 A definition is occasionally written with an explicit universe variable, e.g.~\texttt{structure Group.\{u\} (G : Type u) where ...}. This makes the definition \textbf{universe polymorphic}: usable the same way whether \texttt{G} lives in \texttt{Type 0}, \texttt{Type 1}, or any level, rather than pinned to \texttt{Type 0} specifically. This book fixes everything at \texttt{Type} (that is, \texttt{Type 0}) for simplicity, since none of the groups, rings, or modules built here need anything larger. Mathlib's actual definitions are universe polymorphic throughout, exactly because they must accommodate constructions (such as ``the group of automorphisms of a large category'') that genuinely do not fit in \texttt{Type 0}.
 
 \begin{quote}
-Read more: \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} states the universe-formation rules precisely, as part of the calculus of constructions. Externally, the ``Dependent Type Theory'' chapter of the \emph{Theorem Proving in Lean 4} manual covers universes at a similar level of detail with more Lean-specific examples.
+Read more: \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} states the universe-formation rules precisely, as part of the calculus of constructions. Externally, the ``Dependent Type Theory'' chapter of the \emph{Theorem Proving in Lean 4} manual (\cite{TPIL4}) covers universes at a similar level of detail with more Lean-specific examples.
 \end{quote}
+
+\subsection{References}\label{sec:05-rigor-check:02-universes:5}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), ``Dependent Types'' --- Lean's own documentation on the universe hierarchy, matching the presentation here.
+\item
+  Girard (\cite{Girard1971}) --- the original source of the paradox this stratified hierarchy is built to avoid (named ``Girard's paradox'' in \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3}).
+\end{itemize}
