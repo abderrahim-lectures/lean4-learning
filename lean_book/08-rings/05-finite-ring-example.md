@@ -7,7 +7,7 @@
 `intRing` is commutative, infinite, and — being $\mathbb{Z}$ itself — the
 initial ring (Chapter 7's Theorem 1/2 hold for it as easily as
 possible, since it has essentially the "obvious" ring structure).
-Chapter 7's matrix example shows a genuinely *noncommutative* ring. This
+[This chapter's matrix example](07-matrices.md) shows a genuinely *noncommutative* ring. This
 section shows the other direction the axioms can specialize to: a
 **commutative, finite** ring, small enough to check every axiom by direct
 computation rather than by citing library lemmas.
