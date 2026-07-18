@@ -44,14 +44,17 @@ independently-statable sub-goal is a lemma waiting to be named.
    returns by hand afterward is a small, separate step, cheaper than
    deriving the whole thing from nothing.
 2. *`decide` and a hand-written proof can close the exact same goal on a
-   finite carrier like `Fin 3`. If the end result is identical, why does
-   this book insist on the hand-written version through Chapter 11, only
-   endorsing `decide` here in Chapter 12?* Because the *goal* of those
-   earlier chapters was building the skill of finding a proof, which a
-   decision procedure bypasses entirely. Once that skill is in hand,
-   reaching for `decide` on a goal that is genuinely inside its decidable
-   fragment is not a shortcut around understanding — it is applying
-   understanding efficiently.
+   finite carrier like `Fin 3` — Chapter 8's `fin3Group`/`fin3Ring` already
+   used `decide` this way. If it was already in use back then, what does
+   this chapter actually add?* Chapter 8 used `decide` on one specific
+   example, without stopping to say *why* it applied there. This chapter
+   turns that one-off use into a general principle: recognizing which
+   regime a goal is in — a finite, concretely enumerable carrier where
+   `decide` applies, versus a general, unspecified structure (an arbitrary
+   `Group G` or `Ring R`, as in Chapters 7 and 9) where no decision
+   procedure applies and a hand-built proof is the only option. Knowing
+   *when* to reach for `decide` is the skill; using it once, correctly, is
+   not yet that skill.
 3. *A repeated `rw` chain is a sign a lemma should be factored out. Is
    the reverse also true — should every proof be split into the smallest
    possible named lemmas, just in case one gets reused later?* No —
