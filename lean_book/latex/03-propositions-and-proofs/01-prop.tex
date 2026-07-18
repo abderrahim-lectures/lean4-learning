@@ -1,6 +1,6 @@
 \section{\texorpdfstring{\texttt{Prop}: the type of statements}{Prop: the type of statements}}\label{sec:03-propositions-and-proofs:01-prop:1}
 
-Alongside \texttt{Type}, Lean has \texttt{Prop}, the type of logical propositions. A term of type \texttt{P : Prop} is a \textbf{proof} of \texttt{P}. This is the \textbf{Curry--Howard correspondence}: propositions are types, and proofs are programs.
+Alongside \texttt{Type}, Lean has \texttt{Prop}, the type of logical propositions. A term of type \texttt{P : Prop} is a \textbf{proof} of \texttt{P}. This is the \textbf{Curry--Howard correspondence} (Howard, \cite{Howard1980}): propositions are types, and proofs are programs.
 
 \subsection{The Curry--Howard correspondence, in full}\label{sec:03-propositions-and-proofs:01-prop:2}
 
@@ -50,3 +50,15 @@ example : 2 + 2 = 4 := rfl
 The Curry--Howard correspondence identifies a proposition \(P\) with the \emph{set of its proofs}: \(P\) is true exactly when that set is nonempty, i.e.~when there exists some term \(p : P\) (``\(P\) is inhabited''). This is why \texttt{Prop} behaves like a truth value rather than an ordinary type: every proposition's proof-set is either empty (false) or, up to proof irrelevance, has exactly one element (true), with no room for a ``third'' proof genuinely different from the rest. Proving \(P\) is exactly exhibiting an element \(p \in P\); nothing more is meant by ``provable.'' The proof \texttt{rfl : 2 + 2 = 4} is the reflexivity witness \(\mathrm{refl}_4\) of the equality relation, valid precisely because both sides reduce to the same normal form \(4\). This is equality of terms that are \emph{definitionally} equal, the strictest notion of ``\(=\)''.
 
 \end{mathreading}
+
+\subsection{References}\label{sec:03-propositions-and-proofs:01-prop:3}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  Howard (\cite{Howard1980}) --- the original source of the correspondence this section is named for (circulated privately from 1969, published 1980).
+\item
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), ``Propositions and Proofs'' --- Lean's own treatment of the correspondence, matching the dictionary above.
+\end{itemize}
