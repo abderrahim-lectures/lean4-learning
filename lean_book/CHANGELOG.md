@@ -3,6 +3,12 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Disambiguate "it" in Chapter 1 §1
+
+Reader-caught: in the sentence simplified in the prior entry, "impossible
+for it" read ambiguously as referring to Lean rather than to the term
+that type-checked. Changed to "impossible for that term."
+
 ## Unreleased — Simplify a wordy sentence in Chapter 1 §1
 
 Reader-requested simplification of the closing sentence of "Why this
