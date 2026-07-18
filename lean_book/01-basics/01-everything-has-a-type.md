@@ -111,8 +111,8 @@ never accepts the term in the first place, because `+`'s left argument is
 a `Nat` and its right argument is a `Bool`, and no rule connects the two.
 The check happens once, by reading the expression, without running it on
 any input. Lean's guarantee is stronger than Python's: once a term
-type-checks, this entire class of runtime error is impossible for it, on
-*every* input, not just the ones a test suite happened to run.
+type-checks, this entire class of runtime error is impossible for that
+term, on *every* input, not just the ones a test suite happened to run.
 
 ### `Nat`, concretely
 
