@@ -109,11 +109,10 @@ silently coerces `true` to `1`, never crashes five function calls later
 once the bad value finally reaches code that cannot handle it — it simply
 never accepts the term in the first place, because `+`'s left argument is
 a `Nat` and its right argument is a `Bool`, and no rule connects the two.
-The check happens once, by reading the expression, with no particular
-inputs run at all. Lean's promise is stronger than Python's: if a term
-type-checks, an entire class of "it blew up unexpectedly" bugs is already
-provably impossible for that term, for *every* input, not merely the ones
-a test suite happened to cover.
+The check happens once, by reading the expression, without running it on
+any input. Lean's guarantee is stronger than Python's: once a term
+type-checks, this entire class of runtime error is impossible for it, on
+*every* input, not just the ones a test suite happened to run.
 
 ### `Nat`, concretely
 
