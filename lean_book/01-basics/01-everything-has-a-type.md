@@ -71,7 +71,7 @@ e`, on the other hand, *is* just `print(e)`: run it, show the result. Lean
 separates these two commands for the same reason `mypy` exists at all:
 type-checking is a static guarantee that holds for every possible input,
 while evaluating is a one-off fact about this particular expression.
-Python's `int` has no genuine analogue of `Nat`: it is signed and never
+Python's `int` has no genuine analogue of `Nat`: `int` is signed and never
 checked against a "must be non-negative" rule, except by an explicit
 runtime `if` statement. `Nat`, by contrast, bakes non-negativity into the
 type itself, checked once, statically, for every use site. This is closer
