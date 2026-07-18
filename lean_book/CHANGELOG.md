@@ -3,6 +3,12 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Simplify a wordy sentence in Chapter 1 §1
+
+Reader-requested simplification of the closing sentence of "Why this
+matters: types rule things out in advance" — tightened without changing
+the claim.
+
 ## Unreleased — Fix "the calculus" used with no antecedent
 
 Reader-caught: the judgment definition added to Chapter 1 §1 (PR #67/#69)
