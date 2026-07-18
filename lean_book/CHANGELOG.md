@@ -3,6 +3,17 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Full-book sweep for ambiguous "it"
+
+Follow-up to the Chapter 1 §1 "it" fix: reviewed the whole book for the
+same class of bug (a possessive noun phrase, or another plausible
+singular noun, sitting right before "it" with a different intended
+referent) and fixed five more instances: a quiver/path-algebra mixup
+(Ch. 11 §6), Nat/Python's-int mixup (Ch. 1 §1), rw/its-effect mixup
+(Ch. 11 §7), a Lean's-guarantees/Chapter-5 mixup (learning-paths.md), and
+a this-system/Python's-tooling mixup (Ch. 5 §3). Left the thousands of
+unambiguous "it"s in the book untouched.
+
 ## Unreleased — Disambiguate "it" in Chapter 1 §1
 
 Reader-caught: in the sentence simplified in the prior entry, "impossible

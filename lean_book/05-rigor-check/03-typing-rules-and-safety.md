@@ -34,7 +34,8 @@ extra generality is exactly Chapter 1 §5's Π-types, already covered.
 
 **Programmer's corner (Python), before the formal rules.** Python's own
 type hints plus `mypy` are a light version of exactly this system, worth
-seeing first since it runs today, without any Lean installation at all:
+seeing first since this Python tooling runs today, without any Lean
+installation at all:
 
 ```python
 def apply_twice(f: int, x: int) -> int:  # pretend f is Callable[[int], int]

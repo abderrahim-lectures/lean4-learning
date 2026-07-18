@@ -20,7 +20,7 @@ it (both `Path.append` and the `Path.length` built here) do not reduce by
 bare `rfl` once an abstract path variable is involved — only their
 auto-generated equation lemmas do. This is worth discovering directly
 rather than being told, the same way §5's own worked proofs are best
-understood by predicting each `rw`'s effect before running it.
+understood by predicting what each `rw` will do before running it.
 
 **Prerequisites.** Chapters 1–11, specifically §4 (`Path`) and §5
 (`Path.append`).
