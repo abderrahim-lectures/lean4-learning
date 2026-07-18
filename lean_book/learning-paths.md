@@ -45,8 +45,8 @@ read, not which chapters are read, so they have no edge of their own.
 Chapter 5 is the one true fork: it exists to answer rigor questions
 (`structure` vs `class`, universes, definitional vs propositional
 equality) that a careful reader will already be asking by Chapter 4, but
-a reader willing to take Lean's guarantees on faith for now can skip it
-on a first pass and come back once something in Chapter 6 onward
+a reader willing to take Lean's guarantees on faith for now can skip
+Chapter 5 on a first pass and come back once something in Chapter 6 onward
 prompts the question directly (each chapter's "Read more" boxes still
 point back to the relevant §).
 
