@@ -33,6 +33,8 @@ and are indexed separately in the
 
 <a id="girard1971"></a>**[Girard1971]** Jean-Yves Girard, "Une extension de l'interprétation de Gödel à l'analyse, et son application à l'élimination des coupures dans l'analyse et la théorie des types," in *Proceedings of the Second Scandinavian Logic Symposium*, Studies in Logic and the Foundations of Mathematics vol. 63, North-Holland, 1971, 63–92.
 
+<a id="howard1980"></a>**[Howard1980]** William A. Howard, "The Formulae-as-Types Notion of Construction," in *To H.B. Curry: Essays on Combinatory Logic, Lambda Calculus and Formalism*, Academic Press, 1980, 479–490. (Circulated privately since 1969.)
+
 <a id="hott2013"></a>**[HoTT2013]** The Univalent Foundations Program, *Homotopy Type Theory: Univalent Foundations of Mathematics*, 2013. [Free online](https://homotopytypetheory.org/book/).
 
 <a id="leandocs"></a>**[LeanDocs]** Lean 4 documentation, ["Basic Types"](https://lean-lang.org/doc/reference/latest/) and the [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/).

@@ -125,4 +125,18 @@ fields.
 
 ---
 
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Pierce ([Pierce2002]), Ch. 3, 11–12 — operational semantics and reduction, and the general distinction between checking equality by computation versus by proof that this section specializes to Lean's `rfl`/`=`.
+- Martin-Löf ([MartinLof1984]) — the original source distinguishing definitional (judgmental) equality from propositional equality, the exact distinction this section works through.
+- *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" — Lean's own documentation on `rfl` and definitional equality, matching the presentation here.
+
+[Pierce2002]: ../bibliography.md#pierce2002
+[MartinLof1984]: ../bibliography.md#martinlof1984
+[TPIL4]: ../bibliography.md#tpil4
+
+---
+
 [← Typing rules and safety](03-typing-rules-and-safety.md) | [Index](00-index.md) | [Next: Exercises →](05-exercises.md)
