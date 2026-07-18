@@ -20,10 +20,15 @@ running anything, and it never lets a term of the wrong type slip through.
 **judgment**: a statement made *about* the calculus from the outside,
 established by applying inference rules, not a proposition proved *inside*
 the calculus. Following Martin-Löf ([MartinLof1984]), the judgment used
-here has the form $e : \tau$, read "$e$ is a term of type $\tau$." `#check
-e` is exactly this judgment, and it is literally the same typing judgment
-used in a lecture on the simply-typed (or dependently-typed)
-$\lambda$-calculus:
+here has the form $e : \tau$, read "$e$ is a term of type $\tau$." For
+example, $3 : \mathtt{Nat}$ is one such judgment: it asserts, from outside
+the calculus, that the term $3$ has type $\mathtt{Nat}$ — not a fact
+proved *by* the calculus, but a fact established *about* it, the same way
+a type-checking algorithm's output is a claim about a program, not a
+theorem proved inside the program. `#check e` asks Lean to establish
+exactly this kind of judgment for a given `e`, and it is literally the
+same typing judgment used in a lecture on the simply-typed (or
+dependently-typed) $\lambda$-calculus:
 $3 : \mathtt{Nat}$, ${-3} : \mathtt{Int}$, $\mathtt{Nat} : \mathtt{Type}$.
 `#eval e` instead asks Lean to reduce $e$ to a normal form. This is the
 computational content of $\beta$-reduction: Lean follows the definitional
