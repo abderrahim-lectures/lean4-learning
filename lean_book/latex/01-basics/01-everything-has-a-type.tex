@@ -54,7 +54,7 @@ Now the same shape of mistake in Lean:
 #check 3 + true   -- error: failed to synthesize Add Nat Bool
 \end{lstlisting}
 
-Lean refuses to even \emph{elaborate} this expression. It never runs it, never silently coerces \texttt{true} to \texttt{1}, never crashes five function calls later once the bad value finally reaches code that cannot handle it --- it simply never accepts the term in the first place, because \texttt{+}'s left argument is a \texttt{Nat} and its right argument is a \texttt{Bool}, and no rule connects the two. The check happens once, by reading the expression, without running it on any input. Lean's guarantee is stronger than Python's: once a term type-checks, this entire class of runtime error is impossible for it, on \emph{every} input, not just the ones a test suite happened to run.
+Lean refuses to even \emph{elaborate} this expression. It never runs it, never silently coerces \texttt{true} to \texttt{1}, never crashes five function calls later once the bad value finally reaches code that cannot handle it --- it simply never accepts the term in the first place, because \texttt{+}'s left argument is a \texttt{Nat} and its right argument is a \texttt{Bool}, and no rule connects the two. The check happens once, by reading the expression, without running it on any input. Lean's guarantee is stronger than Python's: once a term type-checks, this entire class of runtime error is impossible for that term, on \emph{every} input, not just the ones a test suite happened to run.
 
 \subsection{\texorpdfstring{\texttt{Nat}, concretely}{Nat, concretely}}\label{sec:01-basics:01-everything-has-a-type:3}
 
