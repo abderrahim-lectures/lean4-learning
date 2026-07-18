@@ -17,14 +17,18 @@ running anything, and it never lets a term of the wrong type slip through.
 ```
 
 **Mathematical reading.** Type theory's basic unit of assertion is the
-**judgment**: a statement made *about* the calculus from the outside,
-established by applying inference rules, not a proposition proved *inside*
-the calculus. Following Martin-Löf ([MartinLof1984]), the judgment used
-here has the form $e : \tau$, read "$e$ is a term of type $\tau$." For
-example, $3 : \mathtt{Nat}$ is one such judgment: it asserts, from outside
-the calculus, that the term $3$ has type $\mathtt{Nat}$ — not a fact
-proved *by* the calculus, but a fact established *about* it, the same way
-a type-checking algorithm's output is a claim about a program, not a
+**judgment**: a statement made *about* a formal system of terms and
+inference rules — the **calculus** — from the outside, not a proposition
+proved *inside* that calculus. (For Lean, the calculus in question is
+made concrete a few sentences below as the $\lambda$-calculus, and named
+precisely as the **calculus of constructions** in
+[Chapter 1 §5](05-pi-sigma-and-coc.md); nothing here depends on that name
+yet.) Following Martin-Löf ([MartinLof1984]), the judgment used here has
+the form $e : \tau$, read "$e$ is a term of type $\tau$." For example,
+$3 : \mathtt{Nat}$ is one such judgment: it asserts, from outside the
+calculus, that the term $3$ has type $\mathtt{Nat}$ — not a fact proved
+*by* the calculus, but a fact established *about* it, the same way a
+type-checking algorithm's output is a claim about a program, not a
 theorem proved inside the program. `#check e` asks Lean to establish
 exactly this kind of judgment for a given `e`, and it is literally the
 same typing judgment used in a lecture on the simply-typed (or
