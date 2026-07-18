@@ -3,6 +3,15 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Formally define "judgment" at its first use
+
+Chapter 1 §1 used the type-theoretic term "judgment" (`#check e` is the
+judgment $e : \tau$) without ever formally defining it — the term-first,
+citation-never treatment that had crept in. Added a short formal
+definition, cited to Martin-Löf's *Intuitionistic Type Theory*, right
+before the term's first use, and a matching Bibliography entry/reference
+link.
+
 ## v1.4.9 — Second-opinion prose review: 2 more passages
 
 Follow-up to the two prior plain-academic-prose passes. An independent
