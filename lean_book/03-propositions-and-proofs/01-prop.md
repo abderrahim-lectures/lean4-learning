@@ -6,7 +6,8 @@
 
 Alongside `Type`, Lean has `Prop`, the type of logical propositions. A term
 of type `P : Prop` is a **proof** of `P`. This is the **Curry–Howard
-correspondence**: propositions are types, and proofs are programs.
+correspondence** (Howard, [Howard1980]): propositions are types, and
+proofs are programs.
 
 ### The Curry–Howard correspondence, in full
 
@@ -87,6 +88,18 @@ exactly exhibiting an element $p \in P$; nothing more is meant by
 witness $\mathrm{refl}_4$ of the equality relation, valid precisely because
 both sides reduce to the same normal form $4$. This is equality of terms
 that are *definitionally* equal, the strictest notion of "$=$".
+
+---
+
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Howard ([Howard1980]) — the original source of the correspondence this section is named for (circulated privately from 1969, published 1980).
+- *Theorem Proving in Lean 4* ([TPIL4]), "Propositions and Proofs" — Lean's own treatment of the correspondence, matching the dictionary above.
+
+[Howard1980]: ../bibliography.md#howard1980
+[TPIL4]: ../bibliography.md#tpil4
 
 ---
 

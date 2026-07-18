@@ -56,4 +56,14 @@ compute, and thus must be *proved* from the axioms instead of
 
 ---
 
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Pierce ([Pierce2002]) — the standard reference for `Decidable` as a type-theoretic notion (a type witnessing that a proposition's truth value is computable), the formal counterpart of the informal definition above.
+
+[Pierce2002]: ../bibliography.md#pierce2002
+
+---
+
 [← Search tactics](01-search-tactics.md) | [Index](00-index.md) | [Next: simp →](03-simp.md)

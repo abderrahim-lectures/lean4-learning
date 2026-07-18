@@ -191,6 +191,45 @@ literally Σ. The `structure`-based bundling this book uses throughout for
 `Group`/`Ring`/`Module` genuinely is `Sigma`-like (extractable), while an
 `∃`-statement genuinely is not.
 
+### Recursors and eliminators, named
+
+[§4](04-terminology.md) promised a formal treatment of the **recursor**
+(also called an **eliminator**) once Π/Σ-types were available; here it is.
+For an inductive type like `Nat`, with constructors `zero : Nat` and
+`succ : Nat → Nat`, the **recursor** `Nat.rec` is the single term that
+makes "define a function, or prove a statement, by giving one case per
+constructor" precise:
+
+```lean
+#check @Nat.rec
+-- {motive : Nat → Sort u}
+--   → motive Nat.zero
+--   → ((n : Nat) → motive n → motive n.succ)
+--   → (t : Nat) → motive t
+```
+
+Read `Nat.rec`'s own type as a Π-type over a **motive**
+`motive : Nat → Sort u` (§4's "motive," spelled out in full): supply a
+"zero case" (a term of `motive Nat.zero`), a "succ case" (a function
+turning a value/proof for `n` into one for `n.succ`), and `Nat.rec`
+produces a term of `motive t` for *any* `t : Nat`. This is structural
+induction/recursion stated as one Π-typed term rather than as a separate
+principle bolted onto the language: proving something for `zero` and
+showing it is preserved by `succ` is *literally* supplying `Nat.rec`'s two
+remaining arguments.
+
+An **eliminator** is the general name for this same pattern applied to
+*any* inductive type: the single term that "uses" a value of that type by
+case-splitting on which constructor built it, with a motive tracking what
+is being proved or built in each case. `Nat.rec` above is `Nat`'s
+eliminator; [Chapter 3 §5](../03-propositions-and-proofs/05-and-or-not.md)'s
+`Or.elim {P Q R : Prop} (h : P ∨ Q) (hpr : P →
+R) (hqr : Q → R) : R` is `Or`'s — a case for `Or.inl` and a case for
+`Or.inr`, with the (non-dependent, here) motive fixed to the constant type
+`R`. Every `match`/`cases`/`induction` used from here on compiles down to
+exactly this: an application of the relevant inductive type's eliminator,
+built automatically rather than written out by hand.
+
 ### The calculus of constructions, named
 
 Putting the pieces together, the **calculus of constructions** (CoC,
@@ -229,13 +268,15 @@ by name above.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC, the system this section formalizes.
+- Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC, the system this section formalizes, including the inductive-type extension (CIC) that gives rise to recursors/eliminators like `Nat.rec`.
+- Pierce ([Pierce2002]) — a general treatment of eliminators/case-analysis principles for inductive types in a dependently-typed setting.
 - The Univalent Foundations Program ([HoTT2013]) — Ch. 1 gives a careful, from-scratch treatment of Π-types, Σ-types, and universes, in notation closely matching this section's.
 - Martin-Löf ([MartinLof1984]) — the foundational source for dependent Π/Σ types and universes predating CoC, for readers wanting the idea in its original, non-CoC-specific form.
 - *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" and "Propositions and Proofs" — Lean's own documentation on `Prop`, proof irrelevance, and universes, matching the presentation here.
 - All Lean code in this section was checked directly against the toolchain pinned in this repository's `lean_project/lean-toolchain` rather than only described; the `#print Fin` output and both error messages shown are copied from real `lake env lean` runs.
 
 [CoquandHuet1988]: ../bibliography.md#coquandhuet1988
+[Pierce2002]: ../bibliography.md#pierce2002
 [HoTT2013]: ../bibliography.md#hott2013
 [MartinLof1984]: ../bibliography.md#martinlof1984
 [TPIL4]: ../bibliography.md#tpil4

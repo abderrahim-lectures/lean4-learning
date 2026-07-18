@@ -39,7 +39,10 @@ theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
 - `∨` (Or) has two constructors, `Or.inl` and `Or.inr`. A proof of `P ∨ Q`
   is either "a proof of `P`" or "a proof of `Q`".
 - `Or.elim {P Q R : Prop} (h : P ∨ Q) (hpr : P → R) (hqr : Q → R) : R` is
-  the *eliminator* for `Or`. Given a proof of `P ∨ Q`, and a way to reach
+  the *eliminator* for `Or` — see
+  [Chapter 1 §5](../01-basics/05-pi-sigma-and-coc.md) for what "eliminator"
+  means formally (the general pattern `Nat.rec` illustrates for `Nat`).
+  Given a proof of `P ∨ Q`, and a way to reach
   the same conclusion `R` from either disjunct separately, one obtains a proof
   of `R`. `or_comm_term` above uses it directly in term mode, with no
   [`cases`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) and no tactic block. It supplies `fun hp => Or.inr hp` for the

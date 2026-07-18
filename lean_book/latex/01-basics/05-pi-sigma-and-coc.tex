@@ -103,7 +103,23 @@ which has propositional type
 
 Compare this directly to \texttt{mySigma.fst} two paragraphs up, which worked with no error at all --- same pair-shape, different universe, and that difference is exactly why one extracts and the other does not. If \texttt{∃} \emph{did} allow extracting a witness, two different (but both equally valid) choices of witness could produce different results from a ``proof-irrelevant'' input, contradicting proof irrelevance itself. \texttt{Sigma} (the actual, \texttt{Type}-valued dependent pair, matching a \texttt{structure}'s bundled data) \emph{does} support projecting out its first component, precisely because it does not carry \texttt{Exists}'s irrelevance guarantee. So: \texttt{∃} has the same shape as Σ but lives in a universe where the witness is unobservable. That is what makes it a \emph{restricted} cousin of Σ rather than literally Σ. The \texttt{structure}-based bundling this book uses throughout for \texttt{Group}/\texttt{Ring}/\texttt{Module} genuinely is \texttt{Sigma}-like (extractable), while an \texttt{∃}-statement genuinely is not.
 
-\subsection{The calculus of constructions, named}\label{sec:01-basics:05-pi-sigma-and-coc:5}
+\subsection{Recursors and eliminators, named}\label{sec:01-basics:05-pi-sigma-and-coc:5}
+
+\hyperref[sec:01-basics:04-terminology:1]{§4} promised a formal treatment of the \textbf{recursor} (also called an \textbf{eliminator}) once Π/Σ-types were available; here it is. For an inductive type like \texttt{Nat}, with constructors \texttt{zero : Nat} and \texttt{succ : Nat → Nat}, the \textbf{recursor} \texttt{Nat.rec} is the single term that makes ``define a function, or prove a statement, by giving one case per constructor'' precise:
+
+\begin{lstlisting}
+#check @Nat.rec
+-- {motive : Nat (*$\rightarrow$*) Sort u}
+--   (*$\rightarrow$*) motive Nat.zero
+--   (*$\rightarrow$*) ((n : Nat) (*$\rightarrow$*) motive n (*$\rightarrow$*) motive n.succ)
+--   (*$\rightarrow$*) (t : Nat) (*$\rightarrow$*) motive t
+\end{lstlisting}
+
+Read \texttt{Nat.rec}'s own type as a Π-type over a \textbf{motive} \texttt{motive : Nat → Sort u} (§4's ``motive,'' spelled out in full): supply a ``zero case'' (a term of \texttt{motive Nat.zero}), a ``succ case'' (a function turning a value/proof for \texttt{n} into one for \texttt{n.succ}), and \texttt{Nat.rec} produces a term of \texttt{motive t} for \emph{any} \texttt{t : Nat}. This is structural induction/recursion stated as one Π-typed term rather than as a separate principle bolted onto the language: proving something for \texttt{zero} and showing it is preserved by \texttt{succ} is \emph{literally} supplying \texttt{Nat.rec}'s two remaining arguments.
+
+An \textbf{eliminator} is the general name for this same pattern applied to \emph{any} inductive type: the single term that ``uses'' a value of that type by case-splitting on which constructor built it, with a motive tracking what is being proved or built in each case. \texttt{Nat.rec} above is \texttt{Nat}'s eliminator; \hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s \texttt{Or.elim \{P Q R : Prop\} (h : P ∨ Q) (hpr : P → R) (hqr : Q → R) : R} is \texttt{Or}'s --- a case for \texttt{Or.inl} and a case for \texttt{Or.inr}, with the (non-dependent, here) motive fixed to the constant type \texttt{R}. Every \texttt{match}/\texttt{cases}/\texttt{induction} used from here on compiles down to exactly this: an application of the relevant inductive type's eliminator, built automatically rather than written out by hand.
+
+\subsection{The calculus of constructions, named}\label{sec:01-basics:05-pi-sigma-and-coc:6}
 
 Putting the pieces together, the \textbf{calculus of constructions} (CoC, Coquand--Huet) --- the core type theory underlying Lean, Coq, and similar systems --- is a small formal system built from a variable, a function abstraction, and function application, plus:
 
@@ -123,14 +139,16 @@ Putting the pieces together, the \textbf{calculus of constructions} (CoC, Coquan
 
 Every single Lean construct used in this book --- \texttt{def}, \texttt{structure}, \texttt{theorem}, \texttt{∀}, \texttt{∃}, tactics (which merely \emph{build} CIC terms, one piece at a time, without the terms being written by hand) --- compiles down to a term in exactly this system, checked by Lean's kernel using nothing more than typing rules like the ones sketched here and in Chapter 5, applied mechanically. \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} completes the picture with the simply typed λ-calculus's typing judgments and its progress/preservation theorems --- the formal reason ``well-typed proofs do not go wrong'' --- plus the universe-formation rule only sketched by name above.
 
-\subsection{References}\label{sec:01-basics:05-pi-sigma-and-coc:6}
+\subsection{References}\label{sec:01-basics:05-pi-sigma-and-coc:7}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
 
 \begin{itemize}
 \tightlist
 \item
-  Coquand and Huet (\cite{CoquandHuet1988}) --- the original paper defining CoC, the system this section formalizes.
+  Coquand and Huet (\cite{CoquandHuet1988}) --- the original paper defining CoC, the system this section formalizes, including the inductive-type extension (CIC) that gives rise to recursors/eliminators like \texttt{Nat.rec}.
+\item
+  Pierce (\cite{Pierce2002}) --- a general treatment of eliminators/case-analysis principles for inductive types in a dependently-typed setting.
 \item
   The Univalent Foundations Program (\cite{HoTT2013}) --- Ch. 1 gives a careful, from-scratch treatment of Π-types, Σ-types, and universes, in notation closely matching this section's.
 \item
