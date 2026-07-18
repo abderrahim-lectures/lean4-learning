@@ -3,6 +3,14 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Fix "the calculus" used with no antecedent
+
+Reader-caught: the judgment definition added to Chapter 1 §1 (PR #67/#69)
+referred to "the calculus" before any calculus had been named in the
+text. Clarified that it means the underlying formal system generally,
+made concrete a few sentences later as the λ-calculus and named precisely
+as the calculus of constructions in Chapter 1 §5.
+
 ## Unreleased — Fix three logic/reference errors found during review
 
 A user-caught wording bug ("If Mathlib is Mathlib-free by design...", the
