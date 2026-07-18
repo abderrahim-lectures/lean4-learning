@@ -16,9 +16,14 @@ running anything, and it never lets a term of the wrong type slip through.
 #eval 2 ^ 10        -- 1024 (evaluates; #check only elaborates)
 ```
 
-**Mathematical reading.** `#check e` is the judgment $e : \tau$ from type
-theory. It is literally the same typing judgment used in a lecture on the
-simply-typed (or dependently-typed) $\lambda$-calculus:
+**Mathematical reading.** Type theory's basic unit of assertion is the
+**judgment**: a statement made *about* the calculus from the outside,
+established by applying inference rules, not a proposition proved *inside*
+the calculus. Following Martin-Löf ([MartinLof1984]), the judgment used
+here has the form $e : \tau$, read "$e$ is a term of type $\tau$." `#check
+e` is exactly this judgment, and it is literally the same typing judgment
+used in a lecture on the simply-typed (or dependently-typed)
+$\lambda$-calculus:
 $3 : \mathtt{Nat}$, ${-3} : \mathtt{Int}$, $\mathtt{Nat} : \mathtt{Type}$.
 `#eval e` instead asks Lean to reduce $e$ to a normal form. This is the
 computational content of $\beta$-reduction: Lean follows the definitional
@@ -154,11 +159,13 @@ ways a `Nat` can ever have been built.
 Full citations in the [Bibliography](../bibliography.md).
 
 - Lean 4 documentation, "Basic Types," and *Theorem Proving in Lean 4*, Ch. 2 ([LeanDocs], [TPIL4]) — the `#check`/`#eval` distinction and `Nat` as an inductive type, straight from the source.
+- Martin-Löf ([MartinLof1984]) — the formal definition of "judgment" used above.
 - Pierce ([Pierce2002]), Ch. 1 — on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
 - nLab, "initial object" ([NLabInitial]) — the universal-property reading of `Nat` used in the optional box above.
 
 [LeanDocs]: ../bibliography.md#leandocs
 [TPIL4]: ../bibliography.md#tpil4
+[MartinLof1984]: ../bibliography.md#martinlof1984
 [Pierce2002]: ../bibliography.md#pierce2002
 [NLabInitial]: ../bibliography.md#nlabinitial
 
