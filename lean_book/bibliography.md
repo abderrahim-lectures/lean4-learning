@@ -51,6 +51,8 @@ and are indexed separately in the
 
 <a id="nlabinitial"></a>**[NLabInitial]** nLab, ["initial object"](https://ncatlab.org/nlab/show/initial+object).
 
+<a id="nlabinitialalgebra"></a>**[NLabInitialAlgebra]** nLab, ["initial algebra of an endofunctor"](https://ncatlab.org/nlab/show/initial+algebra+of+an+endofunctor).
+
 <a id="nlabnno"></a>**[NLabNNO]** nLab, ["natural numbers object"](https://ncatlab.org/nlab/show/natural+numbers+object).
 
 <a id="nlabproduct"></a>**[NLabProduct]** nLab, ["product"](https://ncatlab.org/nlab/show/product).
