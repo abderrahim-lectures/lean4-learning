@@ -250,7 +250,7 @@ f\, a\, b$) and check by hand that projecting back out a component
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Church ([Church1941]) — the original source of this encoding.
+- Church ([Church1941]), §8 — the original source of this encoding, verified present: the symbol index confirms §8 formally defines "1, 2, 3, S" (the positive integers and successor function as iterating functions), matching Ch. 19 §19's later gloss "the positive integers... are certain functions of functions, namely the finite powers of a function in the sense of iteration."
 - Pierce ([Pierce2002]), §5.2 — a worked, step-by-step derivation of Church booleans and numerals, including `succ`/`plus`, matching the presentation above.
 - Rojas ([Rojas2015]) — a freely available, worked-example-heavy walkthrough of the same encodings, with more reduction sequences spelled out in full.
 
