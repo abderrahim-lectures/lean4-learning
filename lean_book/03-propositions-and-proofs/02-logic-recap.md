@@ -259,10 +259,10 @@ detail.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Gentzen ([Gentzen1935]) — the original natural-deduction system, with introduction/elimination rules for each connective.
-- van Dalen ([VanDalen2013]) — a standard, widely used textbook covering propositional/first-order natural deduction, soundness, and completeness in the form used in this section.
-- Gödel ([Godel1930]) — the original completeness theorem for first-order logic.
-- Pierce et al. ([PierceSF]) — a free, mechanized treatment of propositional/first-order natural deduction and the classical/intuitionistic distinction, in a proof assistant (Coq) closely comparable to Lean.
+- Gentzen ([Gentzen1935]), Section II "Le calcul de la déduction naturelle" (French translation by R. Feys and J. Ladrière, *Recherches sur la déduction logique*, Presses Universitaires de France, 1955) — the original natural-deduction system, with introduction/elimination rules for each connective, verified verbatim against the translated text.
+- van Dalen ([VanDalen2013]), §2.4 "Natural Deduction" (Definition 2.4.1, propositional rules), §2.5 "Completeness" (Lemma 2.5.1 Soundness, Theorem 2.5.13 Completeness), §3.8 "Natural Deduction" (first-order ∀-rules, Lemma 3.8.2), §4.1 "The Completeness Theorem" (Theorem 4.1.3) — verified verbatim, exactly the soundness/completeness statements used above.
+- Gödel — **Gap:** the original 1930 completeness paper is not held in either notebook (see `NOTEBOOK-SOURCE-GAPS.md`); van Dalen's Theorem 4.1.3 above states the same result and is independently verified.
+- Pierce et al. ([PierceSF]) — **Note:** only the *Software Foundations* series homepage is available in the notebook, not chapter content, so the specific natural-deduction/classical-vs-intuitionistic treatment claimed here could not be verified verbatim.
 
 [Gentzen1935]: ../bibliography.md#gentzen1935
 [VanDalen2013]: ../bibliography.md#vandalen2013
