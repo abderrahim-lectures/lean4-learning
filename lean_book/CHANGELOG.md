@@ -3,6 +3,32 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Link nLab citations directly, add chapter specificity
+
+Standing convention going forward: web-hosted references (nLab) get the
+cited term hyperlinked directly to its exact page, not only referenced
+via the bracket citation. Applied to "initial object"/"natural numbers
+object" in Chapter 1 §1. Also added chapter/section specificity to the
+Martin-Löf citation there ("Ch. 1, 'Judgements and their explanations'"),
+matching the specificity most other book citations already had.
+
+## Unreleased — Cite the Nat-as-initial-object construction
+
+Added nLab's "natural numbers object" entry to the bibliography (both
+bibliography.md and the LaTeX-side references.bib, kept in sync this
+time) and cited it in Chapter 1 §1's categorical box and References
+list — the standard name for the construction described there.
+
+## Unreleased — Rewrite the Ch. 1 §1 categorical "Mathematical reading" box
+
+A series of reader questions (functor vs. morphism, "zero" reused as a
+generic distinguished element, "set" vs. "type" inconsistency) revealed
+this box had accumulated patch-on-patch edits into one dense, imprecise
+paragraph. Rewrote it as three clearly separated paragraphs: Type-as-
+category, Nat-as-initial-object (a properly defined second category,
+consistently using "type" not "set"), and the distinct free-monoid
+universal property.
+
 ## Unreleased — Make explicit that f : α → β is a morphism, not a functor
 
 Reader question prompted a clarity fix: Chapter 1 §1's categorical
