@@ -3,6 +3,13 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Gloss α/β at first use in Chapter 1 §1
+
+Reader-caught: the optional categorical "Mathematical reading" box in
+Chapter 1 §1 used `α`/`β` as type variables before that convention is
+explained (in §2, the next section). Added a brief gloss and forward
+link at first use.
+
 ## Unreleased — Add CONTRIBUTING.md and PROJECT-HISTORY.md
 
 Added root-level CONTRIBUTING.md (how to report a problem or propose a
