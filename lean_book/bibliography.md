@@ -51,9 +51,8 @@ and are indexed separately in the
 
 <a id="mypydocs"></a>**[MypyDocs]** [mypy documentation](https://mypy.readthedocs.io/).
 
-<a id="nlabforgetful"></a>**[NLabForgetful]** nLab, ["forgetful functor"](https://ncatlab.org/nlab/show/forgetful+functor). (Retained pending a book-source replacement — Chapter 2 has not yet been reviewed against the notebooks.)
 
-<a id="nlabproduct"></a>**[NLabProduct]** nLab, ["product"](https://ncatlab.org/nlab/show/product).
+<a id="pareigis1970"></a>**[Pareigis1970]** Bodo Pareigis, *Categories and Functors*, Pure and Applied Mathematics vol. 39, Academic Press, 1970.
 
 <a id="pierce2002"></a>**[Pierce2002]** Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002.
 
