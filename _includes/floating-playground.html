@@ -7,19 +7,21 @@
     bottom: 24px;
     right: 24px;
     z-index: 1001;
-    width: 56px;
-    height: 56px;
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
-    background: #157878;
-    color: #fff;
-    border: none;
-    font-size: 24px;
-    line-height: 56px;
-    text-align: center;
+    background: #fff;
+    border: 3px solid #157878;
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 14px rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
   }
-  #lean-fab:hover { background: #1a8f8f; }
+  #lean-fab:hover { background: #eef7f7; transform: scale(1.04); }
+  #lean-fab img { width: 56px; height: 56px; pointer-events: none; }
+  #lean-fab.open { border-color: #0d4f4f; box-shadow: 0 2px 14px rgba(0,0,0,0.5), 0 0 0 3px rgba(21,120,120,0.25); }
 
   #lean-playground-panel {
     position: fixed;
@@ -65,11 +67,13 @@
   }
 </style>
 
-<button id="lean-fab" title="Open Lean playground" aria-label="Open Lean playground">&#9654;</button>
+<button id="lean-fab" title="Open Lean playground" aria-label="Open Lean playground">
+  <img src="https://leanprover-community.github.io/img/lean_logo.svg" alt="Lean logo">
+</button>
 
 <div id="lean-playground-panel">
   <div id="lean-playground-header">
-    <span>Lean playground</span>
+    <span>Lean playground &middot; <span id="lean-book-version">v1.4.14</span></span>
     <span>
       <a href="https://live.lean-lang.org/" target="_blank" rel="noopener" title="Open in full tab">&#8599;</a>
       &nbsp;&nbsp;
@@ -94,13 +98,15 @@
       loaded = true;
     }
     panel.classList.add('open');
-    fab.innerHTML = '&times;';
+    fab.classList.add('open');
     fab.title = 'Close Lean playground';
+    fab.setAttribute('aria-label', 'Close Lean playground');
   }
   function close() {
     panel.classList.remove('open');
-    fab.innerHTML = '&#9654;';
+    fab.classList.remove('open');
     fab.title = 'Open Lean playground';
+    fab.setAttribute('aria-label', 'Open Lean playground');
   }
   fab.addEventListener('click', function () {
     panel.classList.contains('open') ? close() : open();
