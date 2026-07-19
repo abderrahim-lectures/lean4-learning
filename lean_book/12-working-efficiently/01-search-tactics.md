@@ -40,10 +40,10 @@ cite the relevant lemma." The goal $b = a$ under hypothesis $h : a = b$ is
 closed by symmetry of equality, $h^{\mathrm{sym}}$, and that is what a
 human proof would cite. `exact?` performs a library search: it scans the
 whole collection of proved theorems for a term that matches the goal type,
-and reports *a* citation that works — but its search order does not always
-surface the shortest or most idiomatic one, as the verified output above
-shows (a correct but needlessly roundabout term, found before the simpler
-`Eq.symm` was). It automates *finding a* closing term, not necessarily the
+and reports *a* citation that works. But its search order does not always
+surface the shortest or most idiomatic one. The verified output above
+shows this directly: a correct but needlessly roundabout term, found
+before the simpler `Eq.symm` was. It automates *finding a* closing term, not necessarily the
 most readable one; simplifying the reported term by hand (here, to
 `h.symm`) afterward is still worth doing before the proof is considered
 finished.

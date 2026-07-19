@@ -159,10 +159,10 @@ Both instances are one field-by-field build, exactly `intGroup`'s style
 single `intro` plus a one-line `exact` naming a core-library fact
 (`List.append_assoc`/`List.nil_append`/`List.append_nil` for the list
 instance, `Nat.mul_assoc`/`Nat.one_mul`/`Nat.mul_one` for the natural-number
-one). `monoid_id_unique`'s proof is `id_unique` (Chapter 7, Theorem 1)
-copied verbatim with every `Grp.` replaced by `Mn.` and `Group` weakened to
-`Monoid` — every step used only `id_right` and the hypothesis `h`, never an
-inverse, which is exactly why the proof survives dropping `inv` entirely.
+one). `monoid_id_unique`'s proof is `id_unique` (Chapter 7, Theorem 1) copied
+verbatim, with every `Grp.` replaced by `Mn.` and `Group` weakened to
+`Monoid`. Every step used only `id_right` and the hypothesis `h`, never an
+inverse — which is exactly why the proof survives dropping `inv` entirely.
 The theorem applies unchanged to both instances built above, the same
 "prove once, get it for free" payoff Chapter 6 §6 promises for `Group`.
 
