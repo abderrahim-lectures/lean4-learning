@@ -64,7 +64,7 @@ and are indexed separately in the
 
 <a id="schiffler2014"></a>**[Schiffler2014]** Ralf Schiffler, *[Quiver Representations](https://link.springer.com/book/10.1007/978-3-319-09204-1)*, CMS Books in Mathematics, Springer, 2014.
 
-<a id="thompson1991"></a>**[Thompson1991]** Simon Thompson, *[Type Theory and Functional Programming](https://kar.kent.ac.uk/20998/1/ttfp.pdf)*, Addison-Wesley, 1991. Freely available from the author's institutional repository.
+<a id="thompson1991"></a>**[Thompson1991]** Simon Thompson, *[Type Theory and Functional Programming](https://kar.kent.ac.uk/20998/1/ttfp.pdf)*, Addison-Wesley, 1991. Freely available from the author's institutional repository. (⚠ Link check 2026-07-19: `kar.kent.ac.uk` failed to complete a TLS handshake while the parent `kent.ac.uk` domain and unrelated control sites responded normally — possibly a dead/misconfigured host for the Kent Academic Repository subdomain specifically. Worth a manual check before relying on this link.)
 
 <a id="tpil4"></a>**[TPIL4]** *Theorem Proving in Lean 4*, ["Dependent Type Theory"](https://leanprover.github.io/theorem_proving_in_lean4/Dependent-Type-Theory/) (§2.1 "Simple Type Theory," §2.8 "What makes dependent type theory dependent?") and ["Propositions and Proofs"](https://leanprover.github.io/theorem_proving_in_lean4/Propositions-and-Proofs/) (§3.1 "Propositions as Types"). (URLs verified 2026-07-19; the book's original links used a stale pre-rewrite URL scheme — `dependent_type_theory.html` etc. — which now 404s.)
 
