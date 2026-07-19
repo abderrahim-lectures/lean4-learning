@@ -168,7 +168,9 @@ ways a `Nat` can ever have been built.
 > applied to wherever `n` was sent. That forced uniqueness is exactly the
 > universal property that makes structural induction valid: to define a
 > function, or prove a statement, for every `Nat`, it suffices to say
-> what happens at `zero` and how it is preserved by `succ`.
+> what happens at `zero` and how it is preserved by `succ`. This
+> construction has a standard name: `Nat`, viewed this way, is a
+> **natural numbers object** ([NLabNNO]) of `Type`.
 >
 > None of this is required to use `Nat`. It is offered only because,
 > once `+`/`0` are *defined* on `Nat` (Chapter 4), a second and different
@@ -189,12 +191,14 @@ Full citations in the [Bibliography](../bibliography.md).
 - Martin-Löf ([MartinLof1984]) — the formal definition of "judgment" used above.
 - Pierce ([Pierce2002]), Ch. 1 — on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
 - nLab, "initial object" ([NLabInitial]) — the universal-property reading of `Nat` used in the optional box above.
+- nLab, "natural numbers object" ([NLabNNO]) — the standard name for exactly the construction in the optional box's second paragraph: `Nat` as the initial algebra for the "one chosen element plus one self-map" structure.
 
 [LeanDocs]: ../bibliography.md#leandocs
 [TPIL4]: ../bibliography.md#tpil4
 [MartinLof1984]: ../bibliography.md#martinlof1984
 [Pierce2002]: ../bibliography.md#pierce2002
 [NLabInitial]: ../bibliography.md#nlabinitial
+[NLabNNO]: ../bibliography.md#nlabnno
 
 ---
 
