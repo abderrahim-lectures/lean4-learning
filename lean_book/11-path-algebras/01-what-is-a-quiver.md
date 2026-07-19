@@ -28,4 +28,16 @@ $$
 
 ---
 
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]) — the standard graduate reference for the quiver definition above.
+- Schiffler ([Schiffler2014]) — an elementary, textbook-level treatment of the same definition.
+
+[AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006
+[Schiffler2014]: ../bibliography.md#schiffler2014
+
+---
+
 [← Index](00-index.md) | [Next: Paths →](02-paths.md)

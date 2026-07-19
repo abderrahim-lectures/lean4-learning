@@ -117,4 +117,14 @@ this specific subset.
 
 ---
 
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for submodules and their axioms.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
+
+---
+
 [← Z-module example](03-z-module-example.md) | [Index](00-index.md) | [Next: Linear maps →](05-linear-maps.md)
