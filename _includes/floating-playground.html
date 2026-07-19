@@ -2,30 +2,69 @@
      Site-wide (included from _layouts/default.html), so it appears on
      every page and stays put while the reader scrolls the article. -->
 <style>
-  #lean-fab {
+  #lean-fab-wrap {
     position: fixed;
     bottom: 24px;
     right: 24px;
     z-index: 1001;
-    width: 84px;
-    height: 84px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #lean-fab-label {
+    background: #157878;
+    color: #fff;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 20px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.35);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  #lean-fab {
+    position: relative;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     background: #fff;
-    border: 3px solid #157878;
+    border: 4px solid #157878;
     cursor: pointer;
-    box-shadow: 0 2px 14px rgba(0,0,0,0.35);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.45);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
+    animation: lean-fab-pulse 2.4s ease-in-out infinite;
   }
-  #lean-fab:hover { background: #eef7f7; transform: scale(1.04); }
-  #lean-fab img { width: 56px; height: 56px; pointer-events: none; }
-  #lean-fab.open { border-color: #0d4f4f; box-shadow: 0 2px 14px rgba(0,0,0,0.5), 0 0 0 3px rgba(21,120,120,0.25); }
+  #lean-fab::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 3px solid rgba(21,120,120,0.55);
+    animation: lean-fab-ring 2.4s ease-out infinite;
+  }
+  #lean-fab:hover { background: #eef7f7; transform: scale(1.06); }
+  #lean-fab img { width: 64px; height: 64px; pointer-events: none; }
+  #lean-fab.open { border-color: #0d4f4f; animation: none; box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 0 0 4px rgba(21,120,120,0.3); }
+  #lean-fab.open::after { animation: none; border: none; }
+  @keyframes lean-fab-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  @keyframes lean-fab-ring {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.25); }
+  }
+  @media (max-width: 700px) {
+    #lean-fab-label { display: none; }
+  }
 
   #lean-playground-panel {
     position: fixed;
-    bottom: 92px;
+    bottom: 132px;
     right: 24px;
     z-index: 1000;
     width: min(45vw, 640px);
@@ -67,9 +106,12 @@
   }
 </style>
 
-<button id="lean-fab" title="Open Lean playground" aria-label="Open Lean playground">
-  <img src="https://leanprover-community.github.io/img/lean_logo.svg" alt="Lean logo">
-</button>
+<div id="lean-fab-wrap">
+  <span id="lean-fab-label">Try Lean</span>
+  <button id="lean-fab" title="Open Lean playground" aria-label="Open Lean playground">
+    <img src="https://leanprover-community.github.io/img/lean_logo.svg" alt="Lean logo">
+  </button>
+</div>
 
 <div id="lean-playground-panel">
   <div id="lean-playground-header">
@@ -87,6 +129,7 @@
 <script>
 (function () {
   var fab = document.getElementById('lean-fab');
+  var label = document.getElementById('lean-fab-label');
   var panel = document.getElementById('lean-playground-panel');
   var closeBtn = document.getElementById('lean-playground-close');
   var iframe = document.getElementById('lean-playground-iframe');
@@ -101,12 +144,14 @@
     fab.classList.add('open');
     fab.title = 'Close Lean playground';
     fab.setAttribute('aria-label', 'Close Lean playground');
+    label.style.display = 'none';
   }
   function close() {
     panel.classList.remove('open');
     fab.classList.remove('open');
     fab.title = 'Open Lean playground';
     fab.setAttribute('aria-label', 'Open Lean playground');
+    label.style.display = '';
   }
   fab.addEventListener('click', function () {
     panel.classList.contains('open') ? close() : open();
