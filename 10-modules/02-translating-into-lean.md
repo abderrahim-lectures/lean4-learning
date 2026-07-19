@@ -6,15 +6,9 @@
 
 The same "data, then axioms" build used for `Group` and `Ring` applies here:
 
-```lean
-structure Module (R : Type) (Rg : Ring R) (M : Type) where
-  addGrp : CommGroup M
-  smul : R → M → M
-  smul_add : ∀ (r : R) (m n : M), smul r (addGrp.op m n) = addGrp.op (smul r m) (smul r n)
-  add_smul : ∀ (r s : R) (m : M), smul (Rg.addGrp.op r s) m = addGrp.op (smul r m) (smul s m)
-  smul_smul : ∀ (r s : R) (m : M), smul (Rg.mul r s) m = smul r (smul s m)
-  one_smul : ∀ m : M, smul Rg.one m = m
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20Module%20%28R%20%3A%20Type%29%20%28Rg%20%3A%20Ring%20R%29%20%28M%20%3A%20Type%29%20where%0A%20%20addGrp%20%3A%20CommGroup%20M%0A%20%20smul%20%3A%20R%20%E2%86%92%20M%20%E2%86%92%20M%0A%20%20smul_add%20%3A%20%E2%88%80%20%28r%20%3A%20R%29%20%28m%20n%20%3A%20M%29%2C%20smul%20r%20%28addGrp.op%20m%20n%29%20%3D%20addGrp.op%20%28smul%20r%20m%29%20%28smul%20r%20n%29%0A%20%20add_smul%20%3A%20%E2%88%80%20%28r%20s%20%3A%20R%29%20%28m%20%3A%20M%29%2C%20smul%20%28Rg.addGrp.op%20r%20s%29%20m%20%3D%20addGrp.op%20%28smul%20r%20m%29%20%28smul%20s%20m%29%0A%20%20smul_smul%20%3A%20%E2%88%80%20%28r%20s%20%3A%20R%29%20%28m%20%3A%20M%29%2C%20smul%20%28Rg.mul%20r%20s%29%20m%20%3D%20smul%20r%20%28smul%20s%20m%29%0A%20%20one_smul%20%3A%20%E2%88%80%20m%20%3A%20M%2C%20smul%20Rg.one%20m%20%3D%20m" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20Module%20%28R%20%3A%20Type%29%20%28Rg%20%3A%20Ring%20R%29%20%28M%20%3A%20Type%29%20where%0A%20%20addGrp%20%3A%20CommGroup%20M%0A%20%20smul%20%3A%20R%20%E2%86%92%20M%20%E2%86%92%20M%0A%20%20smul_add%20%3A%20%E2%88%80%20%28r%20%3A%20R%29%20%28m%20n%20%3A%20M%29%2C%20smul%20r%20%28addGrp.op%20m%20n%29%20%3D%20addGrp.op%20%28smul%20r%20m%29%20%28smul%20r%20n%29%0A%20%20add_smul%20%3A%20%E2%88%80%20%28r%20s%20%3A%20R%29%20%28m%20%3A%20M%29%2C%20smul%20%28Rg.addGrp.op%20r%20s%29%20m%20%3D%20addGrp.op%20%28smul%20r%20m%29%20%28smul%20s%20m%29%0A%20%20smul_smul%20%3A%20%E2%88%80%20%28r%20s%20%3A%20R%29%20%28m%20%3A%20M%29%2C%20smul%20%28Rg.mul%20r%20s%29%20m%20%3D%20smul%20r%20%28smul%20s%20m%29%0A%20%20one_smul%20%3A%20%E2%88%80%20m%20%3A%20M%2C%20smul%20Rg.one%20m%20%3D%20m" title="Lean playground" loading="lazy" style="width:100%;height:193px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Field by field:
 

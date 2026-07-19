@@ -8,12 +8,9 @@ The construction proceeds piece by piece rather than all at once.
 
 **Step 1 — just the data**, no axioms yet:
 
-```lean
-structure GroupData (G : Type) where
-  op : G → G → G
-  id : G
-  inv : G → G
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20GroupData%20%28G%20%3A%20Type%29%20where%0A%20%20op%20%3A%20G%20%E2%86%92%20G%20%E2%86%92%20G%0A%20%20id%20%3A%20G%0A%20%20inv%20%3A%20G%20%E2%86%92%20G" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20GroupData%20%28G%20%3A%20Type%29%20where%0A%20%20op%20%3A%20G%20%E2%86%92%20G%20%E2%86%92%20G%0A%20%20id%20%3A%20G%0A%20%20inv%20%3A%20G%20%E2%86%92%20G" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 This says: to build a `GroupData G`, supply an operation, an identity
 element, and an inverse function. Lean does not check any axioms yet. A
@@ -34,17 +31,9 @@ below pick out the genuine group structures as a subset.
 field of a structure, just like data can. We add one field per axiom, each
 of type "a proposition that must hold for every element":
 
-```lean
-structure Group (G : Type) where
-  op : G → G → G
-  id : G
-  inv : G → G
-  assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
-  id_left : ∀ a : G, op id a = a
-  id_right : ∀ a : G, op a id = a
-  inv_left : ∀ a : G, op (inv a) a = id
-  inv_right : ∀ a : G, op a (inv a) = id
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20Group%20%28G%20%3A%20Type%29%20where%0A%20%20op%20%3A%20G%20%E2%86%92%20G%20%E2%86%92%20G%0A%20%20id%20%3A%20G%0A%20%20inv%20%3A%20G%20%E2%86%92%20G%0A%20%20assoc%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20G%2C%20op%20%28op%20a%20b%29%20c%20%3D%20op%20a%20%28op%20b%20c%29%0A%20%20id_left%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20op%20id%20a%20%3D%20a%0A%20%20id_right%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20op%20a%20id%20%3D%20a%0A%20%20inv_left%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20op%20%28inv%20a%29%20a%20%3D%20id%0A%20%20inv_right%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20op%20a%20%28inv%20a%29%20%3D%20id" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20Group%20%28G%20%3A%20Type%29%20where%0A%20%20op%20%3A%20G%20%E2%86%92%20G%20%E2%86%92%20G%0A%20%20id%20%3A%20G%0A%20%20inv%20%3A%20G%20%E2%86%92%20G%0A%20%20assoc%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20G%2C%20op%20%28op%20a%20b%29%20c%20%3D%20op%20a%20%28op%20b%20c%29%0A%20%20id_left%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20op%20id%20a%20%3D%20a%0A%20%20id_right%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20op%20a%20id%20%3D%20a%0A%20%20inv_left%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20op%20%28inv%20a%29%20a%20%3D%20id%0A%20%20inv_right%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20op%20a%20%28inv%20a%29%20%3D%20id" title="Lean playground" loading="lazy" style="width:100%;height:231px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Reading this line by line:
 

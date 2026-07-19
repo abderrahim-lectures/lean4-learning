@@ -18,25 +18,9 @@ A $2 \times 2$ matrix is represented as a `structure` with four entries.
 Mathlib's general [`Matrix`](https://loogle.lean-lang.org/?q=Matrix) — but four named fields keep every computation
 fully explicit, which is the goal here.)
 
-```lean
-structure Mat2 where
-  a11 : Int
-  a12 : Int
-  a21 : Int
-  a22 : Int
-
--- Core Lean 4 does not auto-generate a field-wise extensionality lemma
--- for a plain `structure` (that convenience is a Mathlib `@[ext]`
--- attribute); we supply one by hand, using the `mk.injEq` lemma core Lean
--- *does* generate for every structure, so it can be used below exactly
--- like an auto-generated `.ext` would be.
-theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
-    (h3 : X.a21 = Y.a21) (h4 : X.a22 = Y.a22) : X = Y := by
-  cases X
-  cases Y
-  rw [Mat2.mk.injEq]
-  exact ⟨h1, h2, h3, h4⟩
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20Mat2%20where%0A%20%20a11%20%3A%20Int%0A%20%20a12%20%3A%20Int%0A%20%20a21%20%3A%20Int%0A%20%20a22%20%3A%20Int%0A%0A--%20Core%20Lean%204%20does%20not%20auto-generate%20a%20field-wise%20extensionality%20lemma%0A--%20for%20a%20plain%20%60structure%60%20%28that%20convenience%20is%20a%20Mathlib%20%60%40%5Bext%5D%60%0A--%20attribute%29%3B%20we%20supply%20one%20by%20hand%2C%20using%20the%20%60mk.injEq%60%20lemma%20core%20Lean%0A--%20%2Adoes%2A%20generate%20for%20every%20structure%2C%20so%20it%20can%20be%20used%20below%20exactly%0A--%20like%20an%20auto-generated%20%60.ext%60%20would%20be.%0Atheorem%20Mat2.ext%20%7BX%20Y%20%3A%20Mat2%7D%20%28h1%20%3A%20X.a11%20%3D%20Y.a11%29%20%28h2%20%3A%20X.a12%20%3D%20Y.a12%29%0A%20%20%20%20%28h3%20%3A%20X.a21%20%3D%20Y.a21%29%20%28h4%20%3A%20X.a22%20%3D%20Y.a22%29%20%3A%20X%20%3D%20Y%20%3A%3D%20by%0A%20%20cases%20X%0A%20%20cases%20Y%0A%20%20rw%20%5BMat2.mk.injEq%5D%0A%20%20exact%20%E2%9F%A8h1%2C%20h2%2C%20h3%2C%20h4%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20Mat2%20where%0A%20%20a11%20%3A%20Int%0A%20%20a12%20%3A%20Int%0A%20%20a21%20%3A%20Int%0A%20%20a22%20%3A%20Int%0A%0A--%20Core%20Lean%204%20does%20not%20auto-generate%20a%20field-wise%20extensionality%20lemma%0A--%20for%20a%20plain%20%60structure%60%20%28that%20convenience%20is%20a%20Mathlib%20%60%40%5Bext%5D%60%0A--%20attribute%29%3B%20we%20supply%20one%20by%20hand%2C%20using%20the%20%60mk.injEq%60%20lemma%20core%20Lean%0A--%20%2Adoes%2A%20generate%20for%20every%20structure%2C%20so%20it%20can%20be%20used%20below%20exactly%0A--%20like%20an%20auto-generated%20%60.ext%60%20would%20be.%0Atheorem%20Mat2.ext%20%7BX%20Y%20%3A%20Mat2%7D%20%28h1%20%3A%20X.a11%20%3D%20Y.a11%29%20%28h2%20%3A%20X.a12%20%3D%20Y.a12%29%0A%20%20%20%20%28h3%20%3A%20X.a21%20%3D%20Y.a21%29%20%28h4%20%3A%20X.a22%20%3D%20Y.a22%29%20%3A%20X%20%3D%20Y%20%3A%3D%20by%0A%20%20cases%20X%0A%20%20cases%20Y%0A%20%20rw%20%5BMat2.mk.injEq%5D%0A%20%20exact%20%E2%9F%A8h1%2C%20h2%2C%20h3%2C%20h4%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:383px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **Mathematical reading.** `Mat2` is the free $\mathbb{Z}$-module
 $M_2(\mathbb{Z}) \cong \mathbb{Z}^4$ on the four matrix entries. The
@@ -44,48 +28,34 @@ extensionality lemma `Mat2.ext` — supplied by hand right alongside the
 structure, since almost every proof below needs it — says two `Mat2`
 values are equal exactly when all four entries match.
 
-```lean
-def Mat2.add (X Y : Mat2) : Mat2 where
-  a11 := X.a11 + Y.a11
-  a12 := X.a12 + Y.a12
-  a21 := X.a21 + Y.a21
-  a22 := X.a22 + Y.a22
-```
+<p><a href="https://live.lean-lang.org/#code=def%20Mat2.add%20%28X%20Y%20%3A%20Mat2%29%20%3A%20Mat2%20where%0A%20%20a11%20%3A%3D%20X.a11%20%2B%20Y.a11%0A%20%20a12%20%3A%3D%20X.a12%20%2B%20Y.a12%0A%20%20a21%20%3A%3D%20X.a21%20%2B%20Y.a21%0A%20%20a22%20%3A%3D%20X.a22%20%2B%20Y.a22" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20Mat2.add%20%28X%20Y%20%3A%20Mat2%29%20%3A%20Mat2%20where%0A%20%20a11%20%3A%3D%20X.a11%20%2B%20Y.a11%0A%20%20a12%20%3A%3D%20X.a12%20%2B%20Y.a12%0A%20%20a21%20%3A%3D%20X.a21%20%2B%20Y.a21%0A%20%20a22%20%3A%3D%20X.a22%20%2B%20Y.a22" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `Mat2.add` is entrywise $+$.
 
-```lean
-def Mat2.neg (X : Mat2) : Mat2 where
-  a11 := -X.a11
-  a12 := -X.a12
-  a21 := -X.a21
-  a22 := -X.a22
-```
+<p><a href="https://live.lean-lang.org/#code=def%20Mat2.neg%20%28X%20%3A%20Mat2%29%20%3A%20Mat2%20where%0A%20%20a11%20%3A%3D%20-X.a11%0A%20%20a12%20%3A%3D%20-X.a12%0A%20%20a21%20%3A%3D%20-X.a21%0A%20%20a22%20%3A%3D%20-X.a22" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20Mat2.neg%20%28X%20%3A%20Mat2%29%20%3A%20Mat2%20where%0A%20%20a11%20%3A%3D%20-X.a11%0A%20%20a12%20%3A%3D%20-X.a12%0A%20%20a21%20%3A%3D%20-X.a21%0A%20%20a22%20%3A%3D%20-X.a22" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `Mat2.neg` is entrywise $-$.
 
-```lean
-def Mat2.zero : Mat2 := ⟨0, 0, 0, 0⟩
-```
+<p><a href="https://live.lean-lang.org/#code=def%20Mat2.zero%20%3A%20Mat2%20%3A%3D%20%E2%9F%A80%2C%200%2C%200%2C%200%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20Mat2.zero%20%3A%20Mat2%20%3A%3D%20%E2%9F%A80%2C%200%2C%200%2C%200%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `Mat2.zero` is the zero matrix.
 
-```lean
--- (row i, col k) entry of X * Y is Σⱼ X[i,j] * Y[j,k]; with only two
--- indices this sum is just two terms, written out directly.
-def Mat2.mul (X Y : Mat2) : Mat2 where
-  a11 := X.a11 * Y.a11 + X.a12 * Y.a21
-  a12 := X.a11 * Y.a12 + X.a12 * Y.a22
-  a21 := X.a21 * Y.a11 + X.a22 * Y.a21
-  a22 := X.a21 * Y.a12 + X.a22 * Y.a22
-```
+<p><a href="https://live.lean-lang.org/#code=--%20%28row%20i%2C%20col%20k%29%20entry%20of%20X%20%2A%20Y%20is%20%CE%A3%E2%B1%BC%20X%5Bi%2Cj%5D%20%2A%20Y%5Bj%2Ck%5D%3B%20with%20only%20two%0A--%20indices%20this%20sum%20is%20just%20two%20terms%2C%20written%20out%20directly.%0Adef%20Mat2.mul%20%28X%20Y%20%3A%20Mat2%29%20%3A%20Mat2%20where%0A%20%20a11%20%3A%3D%20X.a11%20%2A%20Y.a11%20%2B%20X.a12%20%2A%20Y.a21%0A%20%20a12%20%3A%3D%20X.a11%20%2A%20Y.a12%20%2B%20X.a12%20%2A%20Y.a22%0A%20%20a21%20%3A%3D%20X.a21%20%2A%20Y.a11%20%2B%20X.a22%20%2A%20Y.a21%0A%20%20a22%20%3A%3D%20X.a21%20%2A%20Y.a12%20%2B%20X.a22%20%2A%20Y.a22" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20%28row%20i%2C%20col%20k%29%20entry%20of%20X%20%2A%20Y%20is%20%CE%A3%E2%B1%BC%20X%5Bi%2Cj%5D%20%2A%20Y%5Bj%2Ck%5D%3B%20with%20only%20two%0A--%20indices%20this%20sum%20is%20just%20two%20terms%2C%20written%20out%20directly.%0Adef%20Mat2.mul%20%28X%20Y%20%3A%20Mat2%29%20%3A%20Mat2%20where%0A%20%20a11%20%3A%3D%20X.a11%20%2A%20Y.a11%20%2B%20X.a12%20%2A%20Y.a21%0A%20%20a12%20%3A%3D%20X.a11%20%2A%20Y.a12%20%2B%20X.a12%20%2A%20Y.a22%0A%20%20a21%20%3A%3D%20X.a21%20%2A%20Y.a11%20%2B%20X.a22%20%2A%20Y.a21%0A%20%20a22%20%3A%3D%20X.a21%20%2A%20Y.a12%20%2B%20X.a22%20%2A%20Y.a22" title="Lean playground" loading="lazy" style="width:100%;height:193px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `Mat2.mul` is the matrix product with $(XY)_{ik} = \sum_j X_{ij}Y_{jk}$, here
 the two-term sums since $n = 2$.
 
-```lean
-def Mat2.one : Mat2 := ⟨1, 0, 0, 1⟩
-```
+<p><a href="https://live.lean-lang.org/#code=def%20Mat2.one%20%3A%20Mat2%20%3A%3D%20%E2%9F%A81%2C%200%2C%200%2C%201%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20Mat2.one%20%3A%20Mat2%20%3A%3D%20%E2%9F%A81%2C%200%2C%200%2C%201%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `Mat2.one` is the identity $I = \begin{psmallmatrix}1&0\\0&1\end{psmallmatrix}$.
 Together these five definitions are the operations of the matrix ring
@@ -96,13 +66,9 @@ $M_2(\mathbb{Z})$.
 Before building the `Ring Mat2` instance, consider the very fact that
 motivates this example:
 
-```lean
-def X : Mat2 := ⟨1, 1, 0, 1⟩
-def Y : Mat2 := ⟨1, 0, 1, 1⟩
-
-#eval Mat2.mul X Y   -- ⟨2, 1, 1, 1⟩
-#eval Mat2.mul Y X    -- ⟨1, 1, 1, 2⟩
-```
+<p><a href="https://live.lean-lang.org/#code=def%20X%20%3A%20Mat2%20%3A%3D%20%E2%9F%A81%2C%201%2C%200%2C%201%E2%9F%A9%0Adef%20Y%20%3A%20Mat2%20%3A%3D%20%E2%9F%A81%2C%200%2C%201%2C%201%E2%9F%A9%0A%0A%23eval%20Mat2.mul%20X%20Y%20%20%20--%20%E2%9F%A82%2C%201%2C%201%2C%201%E2%9F%A9%0A%23eval%20Mat2.mul%20Y%20X%20%20%20%20--%20%E2%9F%A81%2C%201%2C%201%2C%202%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20X%20%3A%20Mat2%20%3A%3D%20%E2%9F%A81%2C%201%2C%200%2C%201%E2%9F%A9%0Adef%20Y%20%3A%20Mat2%20%3A%3D%20%E2%9F%A81%2C%200%2C%201%2C%201%E2%9F%A9%0A%0A%23eval%20Mat2.mul%20X%20Y%20%20%20--%20%E2%9F%A82%2C%201%2C%201%2C%201%E2%9F%A9%0A%23eval%20Mat2.mul%20Y%20X%20%20%20%20--%20%E2%9F%A81%2C%201%2C%201%2C%202%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `#eval` here is doing real work: it is a two-line proof by computation that
 `mul` is not commutative. This is cheaper than any hand-written counterexample
@@ -126,44 +92,15 @@ $M_2(\mathbb{Z})$, already a (noncommutative) `Ring` instance. There is no `Mat2
 `Mat2.ext`/`add4_reorder` needed, and [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) works directly here (unlike
 `Mat2`) because `Matrix` over `Int` already has `DecidableEq`:
 
-```lean
-example : Ring (Matrix (Fin 2) (Fin 2) Int) := inferInstance
-
-def X' : Matrix (Fin 2) (Fin 2) Int := !![1, 1; 0, 1]
-def Y' : Matrix (Fin 2) (Fin 2) Int := !![1, 0; 1, 1]
-
-example : X' * Y' ≠ Y' * X' := by decide
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%3A%20Ring%20%28Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%29%20%3A%3D%20inferInstance%0A%0Adef%20X%27%20%3A%20Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%20%3A%3D%20%21%21%5B1%2C%201%3B%200%2C%201%5D%0Adef%20Y%27%20%3A%20Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%20%3A%3D%20%21%21%5B1%2C%200%3B%201%2C%201%5D%0A%0Aexample%20%3A%20X%27%20%2A%20Y%27%20%E2%89%A0%20Y%27%20%2A%20X%27%20%3A%3D%20by%20decide" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%3A%20Ring%20%28Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%29%20%3A%3D%20inferInstance%0A%0Adef%20X%27%20%3A%20Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%20%3A%3D%20%21%21%5B1%2C%201%3B%200%2C%201%5D%0Adef%20Y%27%20%3A%20Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%20%3A%3D%20%21%21%5B1%2C%200%3B%201%2C%201%5D%0A%0Aexample%20%3A%20X%27%20%2A%20Y%27%20%E2%89%A0%20Y%27%20%2A%20X%27%20%3A%3D%20by%20decide" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 ### The additive group and the ring
 
-```lean
-def mat2Group : Group Mat2 where
-  op := Mat2.add
-  id := Mat2.zero
-  inv := Mat2.neg
-  assoc := by
-    intro X Y Z
-    -- Goal: Mat2.add (Mat2.add X Y) Z = Mat2.add X (Mat2.add Y Z)
-    show Mat2.mk _ _ _ _ = Mat2.mk _ _ _ _
-    -- Each of the four field-equations reduces to Int addition's
-    -- associativity, entrywise. `Mat2.ext` (the extensionality lemma
-    -- defined above: two Mat2's are equal iff all four fields match) lets
-    -- us split the single Mat2 equality into four Int equalities.
-    apply Mat2.ext <;> exact Int.add_assoc _ _ _
-  id_left := by
-    intro X
-    apply Mat2.ext <;> exact Int.zero_add _
-  id_right := by
-    intro X
-    apply Mat2.ext <;> exact Int.add_zero _
-  inv_left := by
-    intro X
-    apply Mat2.ext <;> exact Int.add_left_neg _
-  inv_right := by
-    intro X
-    apply Mat2.ext <;> exact Int.add_right_neg _
-```
+<p><a href="https://live.lean-lang.org/#code=def%20mat2Group%20%3A%20Group%20Mat2%20where%0A%20%20op%20%3A%3D%20Mat2.add%0A%20%20id%20%3A%3D%20Mat2.zero%0A%20%20inv%20%3A%3D%20Mat2.neg%0A%20%20assoc%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%20Z%0A%20%20%20%20--%20Goal%3A%20Mat2.add%20%28Mat2.add%20X%20Y%29%20Z%20%3D%20Mat2.add%20X%20%28Mat2.add%20Y%20Z%29%0A%20%20%20%20show%20Mat2.mk%20_%20_%20_%20_%20%3D%20Mat2.mk%20_%20_%20_%20_%0A%20%20%20%20--%20Each%20of%20the%20four%20field-equations%20reduces%20to%20Int%20addition%27s%0A%20%20%20%20--%20associativity%2C%20entrywise.%20%60Mat2.ext%60%20%28the%20extensionality%20lemma%0A%20%20%20%20--%20defined%20above%3A%20two%20Mat2%27s%20are%20equal%20iff%20all%20four%20fields%20match%29%20lets%0A%20%20%20%20--%20us%20split%20the%20single%20Mat2%20equality%20into%20four%20Int%20equalities.%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_assoc%20_%20_%20_%0A%20%20id_left%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.zero_add%20_%0A%20%20id_right%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_zero%20_%0A%20%20inv_left%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_left_neg%20_%0A%20%20inv_right%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_right_neg%20_" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20mat2Group%20%3A%20Group%20Mat2%20where%0A%20%20op%20%3A%3D%20Mat2.add%0A%20%20id%20%3A%3D%20Mat2.zero%0A%20%20inv%20%3A%3D%20Mat2.neg%0A%20%20assoc%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%20Z%0A%20%20%20%20--%20Goal%3A%20Mat2.add%20%28Mat2.add%20X%20Y%29%20Z%20%3D%20Mat2.add%20X%20%28Mat2.add%20Y%20Z%29%0A%20%20%20%20show%20Mat2.mk%20_%20_%20_%20_%20%3D%20Mat2.mk%20_%20_%20_%20_%0A%20%20%20%20--%20Each%20of%20the%20four%20field-equations%20reduces%20to%20Int%20addition%27s%0A%20%20%20%20--%20associativity%2C%20entrywise.%20%60Mat2.ext%60%20%28the%20extensionality%20lemma%0A%20%20%20%20--%20defined%20above%3A%20two%20Mat2%27s%20are%20equal%20iff%20all%20four%20fields%20match%29%20lets%0A%20%20%20%20--%20us%20split%20the%20single%20Mat2%20equality%20into%20four%20Int%20equalities.%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_assoc%20_%20_%20_%0A%20%20id_left%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.zero_add%20_%0A%20%20id_right%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_zero%20_%0A%20%20inv_left%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_left_neg%20_%0A%20%20inv_right%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_right_neg%20_" title="Lean playground" loading="lazy" style="width:100%;height:535px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `mat2Group` verifies that $(M_2(\mathbb{Z}), +)$ is a group: every axiom
 (`assoc`, `id_left`, `id_right`, `inv_left`, `inv_right`) is checked
@@ -171,115 +108,16 @@ entrywise, using `Mat2.ext` to split the single `Mat2` equality into four
 `Int` equalities, each of which is then a direct citation of the matching
 `Int` addition lemma.
 
-```lean
-def mat2CommGroup : CommGroup Mat2 where
-  toGroup := mat2Group
-  comm := by
-    intro X Y
-    apply Mat2.ext <;> exact Int.add_comm _ _
-```
+<p><a href="https://live.lean-lang.org/#code=def%20mat2CommGroup%20%3A%20CommGroup%20Mat2%20where%0A%20%20toGroup%20%3A%3D%20mat2Group%0A%20%20comm%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_comm%20_%20_" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20mat2CommGroup%20%3A%20CommGroup%20Mat2%20where%0A%20%20toGroup%20%3A%3D%20mat2Group%0A%20%20comm%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%0A%20%20%20%20apply%20Mat2.ext%20%3C%3B%3E%20exact%20Int.add_comm%20_%20_" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `mat2CommGroup` upgrades `mat2Group` to an abelian group by supplying
 commutativity, again entrywise via `Mat2.ext` and `Int.add_comm`.
 
-```lean
--- A reusable shuffle: rearranges (a+b)+(c+d) into (a+c)+(b+d) — exactly
--- what's needed whenever a "product of sums" expands into four cross
--- terms that must be regrouped to match the other side.
-theorem add4_reorder (a b c d : Int) : a + b + (c + d) = a + c + (b + d) := by
-  rw [Int.add_assoc a b (c + d)]
-  rw [show b + (c + d) = c + (b + d) from by
-    rw [← Int.add_assoc, Int.add_comm b c, Int.add_assoc]]
-  rw [← Int.add_assoc a c (b + d)]
-
-def mat2Ring : Ring Mat2 where
-  addGrp := mat2CommGroup
-  mul := Mat2.mul
-  one := Mat2.one
-  mul_assoc := by
-    intro X Y Z
-    -- Unlike addition, each entry of (X * Y) * Z expands to a sum of
-    -- *four* products of three matrix entries (vs. Int.mul_assoc's single
-    -- rebracketing) — associativity of matrix multiplication is
-    -- distributivity-plus-associativity of the underlying ring applied
-    -- four times per entry, not a single lemma call. Each entry equation
-    -- unfolds (via `Int.add_mul`/`Int.mul_add`/`Int.mul_assoc`) to two
-    -- sums of the same four products in a different order; `add4_reorder`
-    -- is exactly the regrouping needed to match them up.
-    apply Mat2.ext
-    · show (X.a11 * Y.a11 + X.a12 * Y.a21) * Z.a11 + (X.a11 * Y.a12 + X.a12 * Y.a22) * Z.a21
-          = X.a11 * (Y.a11 * Z.a11 + Y.a12 * Z.a21) + X.a12 * (Y.a21 * Z.a11 + Y.a22 * Z.a21)
-      rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
-          Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
-          add4_reorder]
-    · show (X.a11 * Y.a11 + X.a12 * Y.a21) * Z.a12 + (X.a11 * Y.a12 + X.a12 * Y.a22) * Z.a22
-          = X.a11 * (Y.a11 * Z.a12 + Y.a12 * Z.a22) + X.a12 * (Y.a21 * Z.a12 + Y.a22 * Z.a22)
-      rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
-          Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
-          add4_reorder]
-    · show (X.a21 * Y.a11 + X.a22 * Y.a21) * Z.a11 + (X.a21 * Y.a12 + X.a22 * Y.a22) * Z.a21
-          = X.a21 * (Y.a11 * Z.a11 + Y.a12 * Z.a21) + X.a22 * (Y.a21 * Z.a11 + Y.a22 * Z.a21)
-      rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
-          Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
-          add4_reorder]
-    · show (X.a21 * Y.a11 + X.a22 * Y.a21) * Z.a12 + (X.a21 * Y.a12 + X.a22 * Y.a22) * Z.a22
-          = X.a21 * (Y.a11 * Z.a12 + Y.a12 * Z.a22) + X.a22 * (Y.a21 * Z.a12 + Y.a22 * Z.a22)
-      rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
-          Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
-          add4_reorder]
-  one_mul := by
-    intro X
-    apply Mat2.ext
-    · show 1 * X.a11 + 0 * X.a21 = X.a11
-      rw [Int.one_mul, Int.zero_mul, Int.add_zero]
-    · show 1 * X.a12 + 0 * X.a22 = X.a12
-      rw [Int.one_mul, Int.zero_mul, Int.add_zero]
-    · show 0 * X.a11 + 1 * X.a21 = X.a21
-      rw [Int.zero_mul, Int.one_mul, Int.zero_add]
-    · show 0 * X.a12 + 1 * X.a22 = X.a22
-      rw [Int.zero_mul, Int.one_mul, Int.zero_add]
-  mul_one := by
-    intro X
-    apply Mat2.ext
-    · show X.a11 * 1 + X.a12 * 0 = X.a11
-      rw [Int.mul_one, Int.mul_zero, Int.add_zero]
-    · show X.a11 * 0 + X.a12 * 1 = X.a12
-      rw [Int.mul_zero, Int.mul_one, Int.zero_add]
-    · show X.a21 * 1 + X.a22 * 0 = X.a21
-      rw [Int.mul_one, Int.mul_zero, Int.add_zero]
-    · show X.a21 * 0 + X.a22 * 1 = X.a22
-      rw [Int.mul_zero, Int.mul_one, Int.zero_add]
-  left_distrib := by
-    intro X Y Z
-    apply Mat2.ext
-    · show X.a11 * (Y.a11 + Z.a11) + X.a12 * (Y.a21 + Z.a21)
-          = (X.a11 * Y.a11 + X.a12 * Y.a21) + (X.a11 * Z.a11 + X.a12 * Z.a21)
-      rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a11 * (Y.a12 + Z.a12) + X.a12 * (Y.a22 + Z.a22)
-          = (X.a11 * Y.a12 + X.a12 * Y.a22) + (X.a11 * Z.a12 + X.a12 * Z.a22)
-      rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a21 * (Y.a11 + Z.a11) + X.a22 * (Y.a21 + Z.a21)
-          = (X.a21 * Y.a11 + X.a22 * Y.a21) + (X.a21 * Z.a11 + X.a22 * Z.a21)
-      rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a21 * (Y.a12 + Z.a12) + X.a22 * (Y.a22 + Z.a22)
-          = (X.a21 * Y.a12 + X.a22 * Y.a22) + (X.a21 * Z.a12 + X.a22 * Z.a22)
-      rw [Int.mul_add, Int.mul_add, add4_reorder]
-  right_distrib := by
-    intro X Y Z
-    apply Mat2.ext
-    · show (X.a11 + Y.a11) * Z.a11 + (X.a12 + Y.a12) * Z.a21
-          = (X.a11 * Z.a11 + X.a12 * Z.a21) + (Y.a11 * Z.a11 + Y.a12 * Z.a21)
-      rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a11 + Y.a11) * Z.a12 + (X.a12 + Y.a12) * Z.a22
-          = (X.a11 * Z.a12 + X.a12 * Z.a22) + (Y.a11 * Z.a12 + Y.a12 * Z.a22)
-      rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a21 + Y.a21) * Z.a11 + (X.a22 + Y.a22) * Z.a21
-          = (X.a21 * Z.a11 + X.a22 * Z.a21) + (Y.a21 * Z.a11 + Y.a22 * Z.a21)
-      rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a21 + Y.a21) * Z.a12 + (X.a22 + Y.a22) * Z.a22
-          = (X.a21 * Z.a12 + X.a22 * Z.a22) + (Y.a21 * Z.a12 + Y.a22 * Z.a22)
-      rw [Int.add_mul, Int.add_mul, add4_reorder]
-```
+<p><a href="https://live.lean-lang.org/#code=--%20A%20reusable%20shuffle%3A%20rearranges%20%28a%2Bb%29%2B%28c%2Bd%29%20into%20%28a%2Bc%29%2B%28b%2Bd%29%20%E2%80%94%20exactly%0A--%20what%27s%20needed%20whenever%20a%20%22product%20of%20sums%22%20expands%20into%20four%20cross%0A--%20terms%20that%20must%20be%20regrouped%20to%20match%20the%20other%20side.%0Atheorem%20add4_reorder%20%28a%20b%20c%20d%20%3A%20Int%29%20%3A%20a%20%2B%20b%20%2B%20%28c%20%2B%20d%29%20%3D%20a%20%2B%20c%20%2B%20%28b%20%2B%20d%29%20%3A%3D%20by%0A%20%20rw%20%5BInt.add_assoc%20a%20b%20%28c%20%2B%20d%29%5D%0A%20%20rw%20%5Bshow%20b%20%2B%20%28c%20%2B%20d%29%20%3D%20c%20%2B%20%28b%20%2B%20d%29%20from%20by%0A%20%20%20%20rw%20%5B%E2%86%90%20Int.add_assoc%2C%20Int.add_comm%20b%20c%2C%20Int.add_assoc%5D%5D%0A%20%20rw%20%5B%E2%86%90%20Int.add_assoc%20a%20c%20%28b%20%2B%20d%29%5D%0A%0Adef%20mat2Ring%20%3A%20Ring%20Mat2%20where%0A%20%20addGrp%20%3A%3D%20mat2CommGroup%0A%20%20mul%20%3A%3D%20Mat2.mul%0A%20%20one%20%3A%3D%20Mat2.one%0A%20%20mul_assoc%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%20Z%0A%20%20%20%20--%20Unlike%20addition%2C%20each%20entry%20of%20%28X%20%2A%20Y%29%20%2A%20Z%20expands%20to%20a%20sum%20of%0A%20%20%20%20--%20%2Afour%2A%20products%20of%20three%20matrix%20entries%20%28vs.%20Int.mul_assoc%27s%20single%0A%20%20%20%20--%20rebracketing%29%20%E2%80%94%20associativity%20of%20matrix%20multiplication%20is%0A%20%20%20%20--%20distributivity-plus-associativity%20of%20the%20underlying%20ring%20applied%0A%20%20%20%20--%20four%20times%20per%20entry%2C%20not%20a%20single%20lemma%20call.%20Each%20entry%20equation%0A%20%20%20%20--%20unfolds%20%28via%20%60Int.add_mul%60%2F%60Int.mul_add%60%2F%60Int.mul_assoc%60%29%20to%20two%0A%20%20%20%20--%20sums%20of%20the%20same%20four%20products%20in%20a%20different%20order%3B%20%60add4_reorder%60%0A%20%20%20%20--%20is%20exactly%20the%20regrouping%20needed%20to%20match%20them%20up.%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%20%28X.a11%20%2A%20Y.a11%20%2B%20X.a12%20%2A%20Y.a21%29%20%2A%20Z.a11%20%2B%20%28X.a11%20%2A%20Y.a12%20%2B%20X.a12%20%2A%20Y.a22%29%20%2A%20Z.a21%0A%20%20%20%20%20%20%20%20%20%20%3D%20X.a11%20%2A%20%28Y.a11%20%2A%20Z.a11%20%2B%20Y.a12%20%2A%20Z.a21%29%20%2B%20X.a12%20%2A%20%28Y.a21%20%2A%20Z.a11%20%2B%20Y.a22%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20Int.mul_add%2C%20Int.mul_add%2C%0A%20%20%20%20%20%20%20%20%20%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%0A%20%20%20%20%20%20%20%20%20%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a11%20%2A%20Y.a11%20%2B%20X.a12%20%2A%20Y.a21%29%20%2A%20Z.a12%20%2B%20%28X.a11%20%2A%20Y.a12%20%2B%20X.a12%20%2A%20Y.a22%29%20%2A%20Z.a22%0A%20%20%20%20%20%20%20%20%20%20%3D%20X.a11%20%2A%20%28Y.a11%20%2A%20Z.a12%20%2B%20Y.a12%20%2A%20Z.a22%29%20%2B%20X.a12%20%2A%20%28Y.a21%20%2A%20Z.a12%20%2B%20Y.a22%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20Int.mul_add%2C%20Int.mul_add%2C%0A%20%20%20%20%20%20%20%20%20%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%0A%20%20%20%20%20%20%20%20%20%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a21%20%2A%20Y.a11%20%2B%20X.a22%20%2A%20Y.a21%29%20%2A%20Z.a11%20%2B%20%28X.a21%20%2A%20Y.a12%20%2B%20X.a22%20%2A%20Y.a22%29%20%2A%20Z.a21%0A%20%20%20%20%20%20%20%20%20%20%3D%20X.a21%20%2A%20%28Y.a11%20%2A%20Z.a11%20%2B%20Y.a12%20%2A%20Z.a21%29%20%2B%20X.a22%20%2A%20%28Y.a21%20%2A%20Z.a11%20%2B%20Y.a22%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20Int.mul_add%2C%20Int.mul_add%2C%0A%20%20%20%20%20%20%20%20%20%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%0A%20%20%20%20%20%20%20%20%20%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a21%20%2A%20Y.a11%20%2B%20X.a22%20%2A%20Y.a21%29%20%2A%20Z.a12%20%2B%20%28X.a21%20%2A%20Y.a12%20%2B%20X.a22%20%2A%20Y.a22%29%20%2A%20Z.a22%0A%20%20%20%20%20%20%20%20%20%20%3D%20X.a21%20%2A%20%28Y.a11%20%2A%20Z.a12%20%2B%20Y.a12%20%2A%20Z.a22%29%20%2B%20X.a22%20%2A%20%28Y.a21%20%2A%20Z.a12%20%2B%20Y.a22%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20Int.mul_add%2C%20Int.mul_add%2C%0A%20%20%20%20%20%20%20%20%20%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%0A%20%20%20%20%20%20%20%20%20%20add4_reorder%5D%0A%20%20one_mul%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%201%20%2A%20X.a11%20%2B%200%20%2A%20X.a21%20%3D%20X.a11%0A%20%20%20%20%20%20rw%20%5BInt.one_mul%2C%20Int.zero_mul%2C%20Int.add_zero%5D%0A%20%20%20%20%C2%B7%20show%201%20%2A%20X.a12%20%2B%200%20%2A%20X.a22%20%3D%20X.a12%0A%20%20%20%20%20%20rw%20%5BInt.one_mul%2C%20Int.zero_mul%2C%20Int.add_zero%5D%0A%20%20%20%20%C2%B7%20show%200%20%2A%20X.a11%20%2B%201%20%2A%20X.a21%20%3D%20X.a21%0A%20%20%20%20%20%20rw%20%5BInt.zero_mul%2C%20Int.one_mul%2C%20Int.zero_add%5D%0A%20%20%20%20%C2%B7%20show%200%20%2A%20X.a12%20%2B%201%20%2A%20X.a22%20%3D%20X.a22%0A%20%20%20%20%20%20rw%20%5BInt.zero_mul%2C%20Int.one_mul%2C%20Int.zero_add%5D%0A%20%20mul_one%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%20X.a11%20%2A%201%20%2B%20X.a12%20%2A%200%20%3D%20X.a11%0A%20%20%20%20%20%20rw%20%5BInt.mul_one%2C%20Int.mul_zero%2C%20Int.add_zero%5D%0A%20%20%20%20%C2%B7%20show%20X.a11%20%2A%200%20%2B%20X.a12%20%2A%201%20%3D%20X.a12%0A%20%20%20%20%20%20rw%20%5BInt.mul_zero%2C%20Int.mul_one%2C%20Int.zero_add%5D%0A%20%20%20%20%C2%B7%20show%20X.a21%20%2A%201%20%2B%20X.a22%20%2A%200%20%3D%20X.a21%0A%20%20%20%20%20%20rw%20%5BInt.mul_one%2C%20Int.mul_zero%2C%20Int.add_zero%5D%0A%20%20%20%20%C2%B7%20show%20X.a21%20%2A%200%20%2B%20X.a22%20%2A%201%20%3D%20X.a22%0A%20%20%20%20%20%20rw%20%5BInt.mul_zero%2C%20Int.mul_one%2C%20Int.zero_add%5D%0A%20%20left_distrib%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%20Z%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%20X.a11%20%2A%20%28Y.a11%20%2B%20Z.a11%29%20%2B%20X.a12%20%2A%20%28Y.a21%20%2B%20Z.a21%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a11%20%2A%20Y.a11%20%2B%20X.a12%20%2A%20Y.a21%29%20%2B%20%28X.a11%20%2A%20Z.a11%20%2B%20X.a12%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.mul_add%2C%20Int.mul_add%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20X.a11%20%2A%20%28Y.a12%20%2B%20Z.a12%29%20%2B%20X.a12%20%2A%20%28Y.a22%20%2B%20Z.a22%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a11%20%2A%20Y.a12%20%2B%20X.a12%20%2A%20Y.a22%29%20%2B%20%28X.a11%20%2A%20Z.a12%20%2B%20X.a12%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.mul_add%2C%20Int.mul_add%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20X.a21%20%2A%20%28Y.a11%20%2B%20Z.a11%29%20%2B%20X.a22%20%2A%20%28Y.a21%20%2B%20Z.a21%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a21%20%2A%20Y.a11%20%2B%20X.a22%20%2A%20Y.a21%29%20%2B%20%28X.a21%20%2A%20Z.a11%20%2B%20X.a22%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.mul_add%2C%20Int.mul_add%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20X.a21%20%2A%20%28Y.a12%20%2B%20Z.a12%29%20%2B%20X.a22%20%2A%20%28Y.a22%20%2B%20Z.a22%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a21%20%2A%20Y.a12%20%2B%20X.a22%20%2A%20Y.a22%29%20%2B%20%28X.a21%20%2A%20Z.a12%20%2B%20X.a22%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.mul_add%2C%20Int.mul_add%2C%20add4_reorder%5D%0A%20%20right_distrib%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%20Z%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%20%28X.a11%20%2B%20Y.a11%29%20%2A%20Z.a11%20%2B%20%28X.a12%20%2B%20Y.a12%29%20%2A%20Z.a21%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a11%20%2A%20Z.a11%20%2B%20X.a12%20%2A%20Z.a21%29%20%2B%20%28Y.a11%20%2A%20Z.a11%20%2B%20Y.a12%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a11%20%2B%20Y.a11%29%20%2A%20Z.a12%20%2B%20%28X.a12%20%2B%20Y.a12%29%20%2A%20Z.a22%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a11%20%2A%20Z.a12%20%2B%20X.a12%20%2A%20Z.a22%29%20%2B%20%28Y.a11%20%2A%20Z.a12%20%2B%20Y.a12%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a21%20%2B%20Y.a21%29%20%2A%20Z.a11%20%2B%20%28X.a22%20%2B%20Y.a22%29%20%2A%20Z.a21%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a21%20%2A%20Z.a11%20%2B%20X.a22%20%2A%20Z.a21%29%20%2B%20%28Y.a21%20%2A%20Z.a11%20%2B%20Y.a22%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a21%20%2B%20Y.a21%29%20%2A%20Z.a12%20%2B%20%28X.a22%20%2B%20Y.a22%29%20%2A%20Z.a22%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a21%20%2A%20Z.a12%20%2B%20X.a22%20%2A%20Z.a22%29%20%2B%20%28Y.a21%20%2A%20Z.a12%20%2B%20Y.a22%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20add4_reorder%5D" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20A%20reusable%20shuffle%3A%20rearranges%20%28a%2Bb%29%2B%28c%2Bd%29%20into%20%28a%2Bc%29%2B%28b%2Bd%29%20%E2%80%94%20exactly%0A--%20what%27s%20needed%20whenever%20a%20%22product%20of%20sums%22%20expands%20into%20four%20cross%0A--%20terms%20that%20must%20be%20regrouped%20to%20match%20the%20other%20side.%0Atheorem%20add4_reorder%20%28a%20b%20c%20d%20%3A%20Int%29%20%3A%20a%20%2B%20b%20%2B%20%28c%20%2B%20d%29%20%3D%20a%20%2B%20c%20%2B%20%28b%20%2B%20d%29%20%3A%3D%20by%0A%20%20rw%20%5BInt.add_assoc%20a%20b%20%28c%20%2B%20d%29%5D%0A%20%20rw%20%5Bshow%20b%20%2B%20%28c%20%2B%20d%29%20%3D%20c%20%2B%20%28b%20%2B%20d%29%20from%20by%0A%20%20%20%20rw%20%5B%E2%86%90%20Int.add_assoc%2C%20Int.add_comm%20b%20c%2C%20Int.add_assoc%5D%5D%0A%20%20rw%20%5B%E2%86%90%20Int.add_assoc%20a%20c%20%28b%20%2B%20d%29%5D%0A%0Adef%20mat2Ring%20%3A%20Ring%20Mat2%20where%0A%20%20addGrp%20%3A%3D%20mat2CommGroup%0A%20%20mul%20%3A%3D%20Mat2.mul%0A%20%20one%20%3A%3D%20Mat2.one%0A%20%20mul_assoc%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%20Z%0A%20%20%20%20--%20Unlike%20addition%2C%20each%20entry%20of%20%28X%20%2A%20Y%29%20%2A%20Z%20expands%20to%20a%20sum%20of%0A%20%20%20%20--%20%2Afour%2A%20products%20of%20three%20matrix%20entries%20%28vs.%20Int.mul_assoc%27s%20single%0A%20%20%20%20--%20rebracketing%29%20%E2%80%94%20associativity%20of%20matrix%20multiplication%20is%0A%20%20%20%20--%20distributivity-plus-associativity%20of%20the%20underlying%20ring%20applied%0A%20%20%20%20--%20four%20times%20per%20entry%2C%20not%20a%20single%20lemma%20call.%20Each%20entry%20equation%0A%20%20%20%20--%20unfolds%20%28via%20%60Int.add_mul%60%2F%60Int.mul_add%60%2F%60Int.mul_assoc%60%29%20to%20two%0A%20%20%20%20--%20sums%20of%20the%20same%20four%20products%20in%20a%20different%20order%3B%20%60add4_reorder%60%0A%20%20%20%20--%20is%20exactly%20the%20regrouping%20needed%20to%20match%20them%20up.%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%20%28X.a11%20%2A%20Y.a11%20%2B%20X.a12%20%2A%20Y.a21%29%20%2A%20Z.a11%20%2B%20%28X.a11%20%2A%20Y.a12%20%2B%20X.a12%20%2A%20Y.a22%29%20%2A%20Z.a21%0A%20%20%20%20%20%20%20%20%20%20%3D%20X.a11%20%2A%20%28Y.a11%20%2A%20Z.a11%20%2B%20Y.a12%20%2A%20Z.a21%29%20%2B%20X.a12%20%2A%20%28Y.a21%20%2A%20Z.a11%20%2B%20Y.a22%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20Int.mul_add%2C%20Int.mul_add%2C%0A%20%20%20%20%20%20%20%20%20%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%0A%20%20%20%20%20%20%20%20%20%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a11%20%2A%20Y.a11%20%2B%20X.a12%20%2A%20Y.a21%29%20%2A%20Z.a12%20%2B%20%28X.a11%20%2A%20Y.a12%20%2B%20X.a12%20%2A%20Y.a22%29%20%2A%20Z.a22%0A%20%20%20%20%20%20%20%20%20%20%3D%20X.a11%20%2A%20%28Y.a11%20%2A%20Z.a12%20%2B%20Y.a12%20%2A%20Z.a22%29%20%2B%20X.a12%20%2A%20%28Y.a21%20%2A%20Z.a12%20%2B%20Y.a22%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20Int.mul_add%2C%20Int.mul_add%2C%0A%20%20%20%20%20%20%20%20%20%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%0A%20%20%20%20%20%20%20%20%20%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a21%20%2A%20Y.a11%20%2B%20X.a22%20%2A%20Y.a21%29%20%2A%20Z.a11%20%2B%20%28X.a21%20%2A%20Y.a12%20%2B%20X.a22%20%2A%20Y.a22%29%20%2A%20Z.a21%0A%20%20%20%20%20%20%20%20%20%20%3D%20X.a21%20%2A%20%28Y.a11%20%2A%20Z.a11%20%2B%20Y.a12%20%2A%20Z.a21%29%20%2B%20X.a22%20%2A%20%28Y.a21%20%2A%20Z.a11%20%2B%20Y.a22%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20Int.mul_add%2C%20Int.mul_add%2C%0A%20%20%20%20%20%20%20%20%20%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%0A%20%20%20%20%20%20%20%20%20%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a21%20%2A%20Y.a11%20%2B%20X.a22%20%2A%20Y.a21%29%20%2A%20Z.a12%20%2B%20%28X.a21%20%2A%20Y.a12%20%2B%20X.a22%20%2A%20Y.a22%29%20%2A%20Z.a22%0A%20%20%20%20%20%20%20%20%20%20%3D%20X.a21%20%2A%20%28Y.a11%20%2A%20Z.a12%20%2B%20Y.a12%20%2A%20Z.a22%29%20%2B%20X.a22%20%2A%20%28Y.a21%20%2A%20Z.a12%20%2B%20Y.a22%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20Int.mul_add%2C%20Int.mul_add%2C%0A%20%20%20%20%20%20%20%20%20%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%20Int.mul_assoc%2C%0A%20%20%20%20%20%20%20%20%20%20add4_reorder%5D%0A%20%20one_mul%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%201%20%2A%20X.a11%20%2B%200%20%2A%20X.a21%20%3D%20X.a11%0A%20%20%20%20%20%20rw%20%5BInt.one_mul%2C%20Int.zero_mul%2C%20Int.add_zero%5D%0A%20%20%20%20%C2%B7%20show%201%20%2A%20X.a12%20%2B%200%20%2A%20X.a22%20%3D%20X.a12%0A%20%20%20%20%20%20rw%20%5BInt.one_mul%2C%20Int.zero_mul%2C%20Int.add_zero%5D%0A%20%20%20%20%C2%B7%20show%200%20%2A%20X.a11%20%2B%201%20%2A%20X.a21%20%3D%20X.a21%0A%20%20%20%20%20%20rw%20%5BInt.zero_mul%2C%20Int.one_mul%2C%20Int.zero_add%5D%0A%20%20%20%20%C2%B7%20show%200%20%2A%20X.a12%20%2B%201%20%2A%20X.a22%20%3D%20X.a22%0A%20%20%20%20%20%20rw%20%5BInt.zero_mul%2C%20Int.one_mul%2C%20Int.zero_add%5D%0A%20%20mul_one%20%3A%3D%20by%0A%20%20%20%20intro%20X%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%20X.a11%20%2A%201%20%2B%20X.a12%20%2A%200%20%3D%20X.a11%0A%20%20%20%20%20%20rw%20%5BInt.mul_one%2C%20Int.mul_zero%2C%20Int.add_zero%5D%0A%20%20%20%20%C2%B7%20show%20X.a11%20%2A%200%20%2B%20X.a12%20%2A%201%20%3D%20X.a12%0A%20%20%20%20%20%20rw%20%5BInt.mul_zero%2C%20Int.mul_one%2C%20Int.zero_add%5D%0A%20%20%20%20%C2%B7%20show%20X.a21%20%2A%201%20%2B%20X.a22%20%2A%200%20%3D%20X.a21%0A%20%20%20%20%20%20rw%20%5BInt.mul_one%2C%20Int.mul_zero%2C%20Int.add_zero%5D%0A%20%20%20%20%C2%B7%20show%20X.a21%20%2A%200%20%2B%20X.a22%20%2A%201%20%3D%20X.a22%0A%20%20%20%20%20%20rw%20%5BInt.mul_zero%2C%20Int.mul_one%2C%20Int.zero_add%5D%0A%20%20left_distrib%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%20Z%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%20X.a11%20%2A%20%28Y.a11%20%2B%20Z.a11%29%20%2B%20X.a12%20%2A%20%28Y.a21%20%2B%20Z.a21%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a11%20%2A%20Y.a11%20%2B%20X.a12%20%2A%20Y.a21%29%20%2B%20%28X.a11%20%2A%20Z.a11%20%2B%20X.a12%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.mul_add%2C%20Int.mul_add%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20X.a11%20%2A%20%28Y.a12%20%2B%20Z.a12%29%20%2B%20X.a12%20%2A%20%28Y.a22%20%2B%20Z.a22%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a11%20%2A%20Y.a12%20%2B%20X.a12%20%2A%20Y.a22%29%20%2B%20%28X.a11%20%2A%20Z.a12%20%2B%20X.a12%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.mul_add%2C%20Int.mul_add%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20X.a21%20%2A%20%28Y.a11%20%2B%20Z.a11%29%20%2B%20X.a22%20%2A%20%28Y.a21%20%2B%20Z.a21%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a21%20%2A%20Y.a11%20%2B%20X.a22%20%2A%20Y.a21%29%20%2B%20%28X.a21%20%2A%20Z.a11%20%2B%20X.a22%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.mul_add%2C%20Int.mul_add%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20X.a21%20%2A%20%28Y.a12%20%2B%20Z.a12%29%20%2B%20X.a22%20%2A%20%28Y.a22%20%2B%20Z.a22%29%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a21%20%2A%20Y.a12%20%2B%20X.a22%20%2A%20Y.a22%29%20%2B%20%28X.a21%20%2A%20Z.a12%20%2B%20X.a22%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.mul_add%2C%20Int.mul_add%2C%20add4_reorder%5D%0A%20%20right_distrib%20%3A%3D%20by%0A%20%20%20%20intro%20X%20Y%20Z%0A%20%20%20%20apply%20Mat2.ext%0A%20%20%20%20%C2%B7%20show%20%28X.a11%20%2B%20Y.a11%29%20%2A%20Z.a11%20%2B%20%28X.a12%20%2B%20Y.a12%29%20%2A%20Z.a21%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a11%20%2A%20Z.a11%20%2B%20X.a12%20%2A%20Z.a21%29%20%2B%20%28Y.a11%20%2A%20Z.a11%20%2B%20Y.a12%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a11%20%2B%20Y.a11%29%20%2A%20Z.a12%20%2B%20%28X.a12%20%2B%20Y.a12%29%20%2A%20Z.a22%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a11%20%2A%20Z.a12%20%2B%20X.a12%20%2A%20Z.a22%29%20%2B%20%28Y.a11%20%2A%20Z.a12%20%2B%20Y.a12%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a21%20%2B%20Y.a21%29%20%2A%20Z.a11%20%2B%20%28X.a22%20%2B%20Y.a22%29%20%2A%20Z.a21%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a21%20%2A%20Z.a11%20%2B%20X.a22%20%2A%20Z.a21%29%20%2B%20%28Y.a21%20%2A%20Z.a11%20%2B%20Y.a22%20%2A%20Z.a21%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20add4_reorder%5D%0A%20%20%20%20%C2%B7%20show%20%28X.a21%20%2B%20Y.a21%29%20%2A%20Z.a12%20%2B%20%28X.a22%20%2B%20Y.a22%29%20%2A%20Z.a22%0A%20%20%20%20%20%20%20%20%20%20%3D%20%28X.a21%20%2A%20Z.a12%20%2B%20X.a22%20%2A%20Z.a22%29%20%2B%20%28Y.a21%20%2A%20Z.a12%20%2B%20Y.a22%20%2A%20Z.a22%29%0A%20%20%20%20%20%20rw%20%5BInt.add_mul%2C%20Int.add_mul%2C%20add4_reorder%5D" title="Lean playground" loading="lazy" style="width:100%;height:650px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Two points are worth noting:
 
@@ -328,10 +166,9 @@ associativity of matrix multiplication generically. It is simply
 `mul_assoc` again, the same lemma name as every other ring in this
 chapter's Mathlib boxes:
 
-```lean
-example (A B C : Matrix (Fin 2) (Fin 2) Int) : (A * B) * C = A * (B * C) :=
-  mul_assoc A B C
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%28A%20B%20C%20%3A%20Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%29%20%3A%20%28A%20%2A%20B%29%20%2A%20C%20%3D%20A%20%2A%20%28B%20%2A%20C%29%20%3A%3D%0A%20%20mul_assoc%20A%20B%20C" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%28A%20B%20C%20%3A%20Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%29%20%3A%20%28A%20%2A%20B%29%20%2A%20C%20%3D%20A%20%2A%20%28B%20%2A%20C%29%20%3A%3D%0A%20%20mul_assoc%20A%20B%20C" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 And where the book's `mat2Ring` needs a custom `Int`-arithmetic rewrite
 chain for each of `mul_assoc`/`one_mul`/`mul_one`/`left_distrib`/
@@ -340,10 +177,9 @@ this class of goal, [`noncomm_ring`](https://lean-lang.org/doc/reference/latest/
 of the `ring` tactic that the book's own note above states is not available
 without Mathlib:
 
-```lean
-example (A B C : Matrix (Fin 2) (Fin 2) Int) :
-    A * (B + C) = A * B + A * C := by noncomm_ring
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%28A%20B%20C%20%3A%20Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%29%20%3A%0A%20%20%20%20A%20%2A%20%28B%20%2B%20C%29%20%3D%20A%20%2A%20B%20%2B%20A%20%2A%20C%20%3A%3D%20by%20noncomm_ring" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%28A%20B%20C%20%3A%20Matrix%20%28Fin%202%29%20%28Fin%202%29%20Int%29%20%3A%0A%20%20%20%20A%20%2A%20%28B%20%2B%20C%29%20%3D%20A%20%2A%20B%20%2B%20A%20%2A%20C%20%3A%3D%20by%20noncomm_ring" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 ---
 

@@ -4,16 +4,9 @@
 
 ---
 
-```lean
-structure Pair (α β : Type) where
-  fst : α
-  snd : β
-
-def p : Pair Nat String := { fst := 1, snd := "one" }
-
-#eval p.fst    -- 1
-#eval p.snd     -- "one"
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20Pair%20%28%CE%B1%20%CE%B2%20%3A%20Type%29%20where%0A%20%20fst%20%3A%20%CE%B1%0A%20%20snd%20%3A%20%CE%B2%0A%0Adef%20p%20%3A%20Pair%20Nat%20String%20%3A%3D%20%7B%20fst%20%3A%3D%201%2C%20snd%20%3A%3D%20%22one%22%20%7D%0A%0A%23eval%20p.fst%20%20%20%20--%201%0A%23eval%20p.snd%20%20%20%20%20--%20%22one%22" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20Pair%20%28%CE%B1%20%CE%B2%20%3A%20Type%29%20where%0A%20%20fst%20%3A%20%CE%B1%0A%20%20snd%20%3A%20%CE%B2%0A%0Adef%20p%20%3A%20Pair%20Nat%20String%20%3A%3D%20%7B%20fst%20%3A%3D%201%2C%20snd%20%3A%3D%20%22one%22%20%7D%0A%0A%23eval%20p.fst%20%20%20%20--%201%0A%23eval%20p.snd%20%20%20%20%20--%20%22one%22" title="Lean playground" loading="lazy" style="width:100%;height:212px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 This generalizes directly to how we will write, e.g., `structure Group (α : Type)`.
 

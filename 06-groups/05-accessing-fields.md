@@ -7,13 +7,9 @@
 Because `intGroup` is a term of type `Group Int`, its
 fields can be projected out exactly as in Chapter 2:
 
-```lean
-#eval intGroup.op 3 4        -- 7
-#eval intGroup.id             -- 0
-#eval intGroup.inv 5          -- -5
-
-#check intGroup.assoc         -- a proof, for every a b c, of associativity
-```
+<p><a href="https://live.lean-lang.org/#code=%23eval%20intGroup.op%203%204%20%20%20%20%20%20%20%20--%207%0A%23eval%20intGroup.id%20%20%20%20%20%20%20%20%20%20%20%20%20--%200%0A%23eval%20intGroup.inv%205%20%20%20%20%20%20%20%20%20%20--%20-5%0A%0A%23check%20intGroup.assoc%20%20%20%20%20%20%20%20%20--%20a%20proof%2C%20for%20every%20a%20b%20c%2C%20of%20associativity" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23eval%20intGroup.op%203%204%20%20%20%20%20%20%20%20--%207%0A%23eval%20intGroup.id%20%20%20%20%20%20%20%20%20%20%20%20%20--%200%0A%23eval%20intGroup.inv%205%20%20%20%20%20%20%20%20%20%20--%20-5%0A%0A%23check%20intGroup.assoc%20%20%20%20%20%20%20%20%20--%20a%20proof%2C%20for%20every%20a%20b%20c%2C%20of%20associativity" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **Mathematical reading.** The projections recover the individual components
 of the structure: `intGroup.op` is the multiplication $\cdot$ (so
@@ -30,12 +26,9 @@ write at all. Once `Int` is known to be an [`AddCommGroup`](https://loogle.lean-
 `+`/`0`/`-` notations already resolve to that instance's operations
 directly:
 
-```lean
-#eval (3 : Int) + 4
-#eval (0 : Int)
-#eval -(5 : Int)
-#check (add_assoc : ∀ a b c : Int, (a + b) + c = a + (b + c))
-```
+<p><a href="https://live.lean-lang.org/#code=%23eval%20%283%20%3A%20Int%29%20%2B%204%0A%23eval%20%280%20%3A%20Int%29%0A%23eval%20-%285%20%3A%20Int%29%0A%23check%20%28add_assoc%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20Int%2C%20%28a%20%2B%20b%29%20%2B%20c%20%3D%20a%20%2B%20%28b%20%2B%20c%29%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23eval%20%283%20%3A%20Int%29%20%2B%204%0A%23eval%20%280%20%3A%20Int%29%0A%23eval%20-%285%20%3A%20Int%29%0A%23check%20%28add_assoc%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20Int%2C%20%28a%20%2B%20b%29%20%2B%20c%20%3D%20a%20%2B%20%28b%20%2B%20c%29%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 This is the same contrast as §3: the book's `intGroup.op`/`.id`/`.inv` are
 projections out of a bundle built by hand, while Mathlib's `+`/`0`/

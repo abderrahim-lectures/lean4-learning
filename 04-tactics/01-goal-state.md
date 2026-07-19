@@ -12,10 +12,9 @@ equivalent but easier-to-handle shape. Proving something in Lean is
 mostly the skill of examining the current goal and asking: *what
 tactic changes this into something closer to solved?*
 
-```lean
-theorem two_plus_two : 2 + 2 = 4 := by
-  rfl
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20two_plus_two%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20by%0A%20%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20two_plus_two%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20by%0A%20%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Placing the cursor after `by` in an editor with the Lean extension shows
 the goal:

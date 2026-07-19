@@ -4,17 +4,9 @@
 
 ---
 
-```lean
-structure Ring (R : Type) where
-  addGrp : CommGroup R
-  mul : R → R → R
-  one : R
-  mul_assoc : ∀ a b c : R, mul (mul a b) c = mul a (mul b c)
-  one_mul : ∀ a : R, mul one a = a
-  mul_one : ∀ a : R, mul a one = a
-  left_distrib : ∀ a b c : R, mul a (addGrp.op b c) = addGrp.op (mul a b) (mul a c)
-  right_distrib : ∀ a b c : R, mul (addGrp.op a b) c = addGrp.op (mul a c) (mul b c)
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20Ring%20%28R%20%3A%20Type%29%20where%0A%20%20addGrp%20%3A%20CommGroup%20R%0A%20%20mul%20%3A%20R%20%E2%86%92%20R%20%E2%86%92%20R%0A%20%20one%20%3A%20R%0A%20%20mul_assoc%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20R%2C%20mul%20%28mul%20a%20b%29%20c%20%3D%20mul%20a%20%28mul%20b%20c%29%0A%20%20one_mul%20%3A%20%E2%88%80%20a%20%3A%20R%2C%20mul%20one%20a%20%3D%20a%0A%20%20mul_one%20%3A%20%E2%88%80%20a%20%3A%20R%2C%20mul%20a%20one%20%3D%20a%0A%20%20left_distrib%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20R%2C%20mul%20a%20%28addGrp.op%20b%20c%29%20%3D%20addGrp.op%20%28mul%20a%20b%29%20%28mul%20a%20c%29%0A%20%20right_distrib%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20R%2C%20mul%20%28addGrp.op%20a%20b%29%20c%20%3D%20addGrp.op%20%28mul%20a%20c%29%20%28mul%20b%20c%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20Ring%20%28R%20%3A%20Type%29%20where%0A%20%20addGrp%20%3A%20CommGroup%20R%0A%20%20mul%20%3A%20R%20%E2%86%92%20R%20%E2%86%92%20R%0A%20%20one%20%3A%20R%0A%20%20mul_assoc%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20R%2C%20mul%20%28mul%20a%20b%29%20c%20%3D%20mul%20a%20%28mul%20b%20c%29%0A%20%20one_mul%20%3A%20%E2%88%80%20a%20%3A%20R%2C%20mul%20one%20a%20%3D%20a%0A%20%20mul_one%20%3A%20%E2%88%80%20a%20%3A%20R%2C%20mul%20a%20one%20%3D%20a%0A%20%20left_distrib%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20R%2C%20mul%20a%20%28addGrp.op%20b%20c%29%20%3D%20addGrp.op%20%28mul%20a%20b%29%20%28mul%20a%20c%29%0A%20%20right_distrib%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20R%2C%20mul%20%28addGrp.op%20a%20b%29%20c%20%3D%20addGrp.op%20%28mul%20a%20c%29%20%28mul%20b%20c%29" title="Lean playground" loading="lazy" style="width:100%;height:231px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Consider each field in turn:
 

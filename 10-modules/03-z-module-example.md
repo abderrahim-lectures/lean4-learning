@@ -8,19 +8,9 @@ This is the standard first example, and a good one to build by hand,
 since the scalar action is not given as data: it must be *defined*, by
 repeated addition, from the group structure alone.
 
-```lean
--- n • m for n : Nat, by iterating `op`.
-def natSmul {M : Type} (Grp : Group M) (n : Nat) (m : M) : M :=
-  match n with
-  | Nat.zero => Grp.id
-  | Nat.succ k => Grp.op m (natSmul Grp k m)
-
--- extend to n : Int by using `inv` on negative n.
-def intSmul {M : Type} (CG : CommGroup M) (n : Int) (m : M) : M :=
-  match n with
-  | Int.ofNat k => natSmul CG.toGroup k m
-  | Int.negSucc k => CG.toGroup.inv (natSmul CG.toGroup (k + 1) m)
-```
+<p><a href="https://live.lean-lang.org/#code=--%20n%20%E2%80%A2%20m%20for%20n%20%3A%20Nat%2C%20by%20iterating%20%60op%60.%0Adef%20natSmul%20%7BM%20%3A%20Type%7D%20%28Grp%20%3A%20Group%20M%29%20%28n%20%3A%20Nat%29%20%28m%20%3A%20M%29%20%3A%20M%20%3A%3D%0A%20%20match%20n%20with%0A%20%20%7C%20Nat.zero%20%3D%3E%20Grp.id%0A%20%20%7C%20Nat.succ%20k%20%3D%3E%20Grp.op%20m%20%28natSmul%20Grp%20k%20m%29%0A%0A--%20extend%20to%20n%20%3A%20Int%20by%20using%20%60inv%60%20on%20negative%20n.%0Adef%20intSmul%20%7BM%20%3A%20Type%7D%20%28CG%20%3A%20CommGroup%20M%29%20%28n%20%3A%20Int%29%20%28m%20%3A%20M%29%20%3A%20M%20%3A%3D%0A%20%20match%20n%20with%0A%20%20%7C%20Int.ofNat%20k%20%3D%3E%20natSmul%20CG.toGroup%20k%20m%0A%20%20%7C%20Int.negSucc%20k%20%3D%3E%20CG.toGroup.inv%20%28natSmul%20CG.toGroup%20%28k%20%2B%201%29%20m%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20n%20%E2%80%A2%20m%20for%20n%20%3A%20Nat%2C%20by%20iterating%20%60op%60.%0Adef%20natSmul%20%7BM%20%3A%20Type%7D%20%28Grp%20%3A%20Group%20M%29%20%28n%20%3A%20Nat%29%20%28m%20%3A%20M%29%20%3A%20M%20%3A%3D%0A%20%20match%20n%20with%0A%20%20%7C%20Nat.zero%20%3D%3E%20Grp.id%0A%20%20%7C%20Nat.succ%20k%20%3D%3E%20Grp.op%20m%20%28natSmul%20Grp%20k%20m%29%0A%0A--%20extend%20to%20n%20%3A%20Int%20by%20using%20%60inv%60%20on%20negative%20n.%0Adef%20intSmul%20%7BM%20%3A%20Type%7D%20%28CG%20%3A%20CommGroup%20M%29%20%28n%20%3A%20Int%29%20%28m%20%3A%20M%29%20%3A%20M%20%3A%3D%0A%20%20match%20n%20with%0A%20%20%7C%20Int.ofNat%20k%20%3D%3E%20natSmul%20CG.toGroup%20k%20m%0A%20%20%7C%20Int.negSucc%20k%20%3D%3E%20CG.toGroup.inv%20%28natSmul%20CG.toGroup%20%28k%20%2B%201%29%20m%29" title="Lean playground" loading="lazy" style="width:100%;height:269px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `natSmul Grp n m` is literally $m + m + \cdots + m$ ($n$ times). It is
 defined by recursion on `n`, in exactly the way `Nat.add` itself was
@@ -53,9 +43,9 @@ multiplication-as-iterated-addition.
 instance, available for *any* `AddCommGroup` at all, with no
 `natSmul`/`intSmul` to define or verify by hand:
 
-```lean
-example {M : Type*} [AddCommGroup M] : Module Int M := inferInstance
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%7BM%20%3A%20Type%2A%7D%20%5BAddCommGroup%20M%5D%20%3A%20Module%20Int%20M%20%3A%3D%20inferInstance" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%7BM%20%3A%20Type%2A%7D%20%5BAddCommGroup%20M%5D%20%3A%20Module%20Int%20M%20%3A%3D%20inferInstance" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 The book builds the action from nothing (`natSmul` by recursion, then
 `intSmul` by extending to negative integers via `inv`) and leaves the

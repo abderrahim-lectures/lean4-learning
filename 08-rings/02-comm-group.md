@@ -4,10 +4,9 @@
 
 ---
 
-```lean
-structure CommGroup (G : Type) extends Group G where
-  comm : ∀ a b : G, op a b = op b a
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20CommGroup%20%28G%20%3A%20Type%29%20extends%20Group%20G%20where%0A%20%20comm%20%3A%20%E2%88%80%20a%20b%20%3A%20G%2C%20op%20a%20b%20%3D%20op%20b%20a" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20CommGroup%20%28G%20%3A%20Type%29%20extends%20Group%20G%20where%0A%20%20comm%20%3A%20%E2%88%80%20a%20b%20%3A%20G%2C%20op%20a%20b%20%3D%20op%20b%20a" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Recall `extends` from Chapter 2: a `CommGroup G` *is* a `Group G` (it has
 every field `Group G` has — `op`, `id`, `inv`, `assoc`, etc.) plus one more

@@ -7,32 +7,9 @@
 Consider packaging $(\mathbb{Z}, +, 0, -(-))$ as a `Group Int`. The construction
 proceeds field by field, proving each obligation with a short, explicit tactic proof.
 
-```lean
-def intGroup : Group Int where
-  op := fun a b => a + b
-  id := 0
-  inv := fun a => -a
-  assoc := by
-    intro a b c
-    -- Goal: (a + b) + c = a + (b + c)
-    exact Int.add_assoc a b c
-  id_left := by
-    intro a
-    -- Goal: 0 + a = a
-    exact Int.zero_add a
-  id_right := by
-    intro a
-    -- Goal: a + 0 = a
-    exact Int.add_zero a
-  inv_left := by
-    intro a
-    -- Goal: (-a) + a = 0
-    exact Int.add_left_neg a
-  inv_right := by
-    intro a
-    -- Goal: a + (-a) = 0
-    exact Int.add_right_neg a
-```
+<p><a href="https://live.lean-lang.org/#code=def%20intGroup%20%3A%20Group%20Int%20where%0A%20%20op%20%3A%3D%20fun%20a%20b%20%3D%3E%20a%20%2B%20b%0A%20%20id%20%3A%3D%200%0A%20%20inv%20%3A%3D%20fun%20a%20%3D%3E%20-a%0A%20%20assoc%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20--%20Goal%3A%20%28a%20%2B%20b%29%20%2B%20c%20%3D%20a%20%2B%20%28b%20%2B%20c%29%0A%20%20%20%20exact%20Int.add_assoc%20a%20b%20c%0A%20%20id_left%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20--%20Goal%3A%200%20%2B%20a%20%3D%20a%0A%20%20%20%20exact%20Int.zero_add%20a%0A%20%20id_right%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20--%20Goal%3A%20a%20%2B%200%20%3D%20a%0A%20%20%20%20exact%20Int.add_zero%20a%0A%20%20inv_left%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20--%20Goal%3A%20%28-a%29%20%2B%20a%20%3D%200%0A%20%20%20%20exact%20Int.add_left_neg%20a%0A%20%20inv_right%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20--%20Goal%3A%20a%20%2B%20%28-a%29%20%3D%200%0A%20%20%20%20exact%20Int.add_right_neg%20a" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20intGroup%20%3A%20Group%20Int%20where%0A%20%20op%20%3A%3D%20fun%20a%20b%20%3D%3E%20a%20%2B%20b%0A%20%20id%20%3A%3D%200%0A%20%20inv%20%3A%3D%20fun%20a%20%3D%3E%20-a%0A%20%20assoc%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20--%20Goal%3A%20%28a%20%2B%20b%29%20%2B%20c%20%3D%20a%20%2B%20%28b%20%2B%20c%29%0A%20%20%20%20exact%20Int.add_assoc%20a%20b%20c%0A%20%20id_left%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20--%20Goal%3A%200%20%2B%20a%20%3D%20a%0A%20%20%20%20exact%20Int.zero_add%20a%0A%20%20id_right%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20--%20Goal%3A%20a%20%2B%200%20%3D%20a%0A%20%20%20%20exact%20Int.add_zero%20a%0A%20%20inv_left%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20--%20Goal%3A%20%28-a%29%20%2B%20a%20%3D%200%0A%20%20%20%20exact%20Int.add_left_neg%20a%0A%20%20inv_right%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20--%20Goal%3A%20a%20%2B%20%28-a%29%20%3D%200%0A%20%20%20%20exact%20Int.add_right_neg%20a" title="Lean playground" loading="lazy" style="width:100%;height:516px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Each field is proved separately. Each proof is a single `intro` (to name
 the universally quantified variables) followed by `exact` naming the exact
@@ -57,15 +34,9 @@ all: `Int` is *already* registered as an [`AddCommGroup`](https://loogle.lean-la
 five axioms above are available as free-standing lemmas that apply to
 every additive group, not just `Int`:
 
-```lean
-example : AddCommGroup Int := inferInstance
-
-example (a b c : Int) : (a + b) + c = a + (b + c) := add_assoc a b c
-example (a : Int) : 0 + a = a := zero_add a
-example (a : Int) : a + 0 = a := add_zero a
-example (a : Int) : -a + a = 0 := neg_add_cancel a
-example (a : Int) : a + -a = 0 := add_neg_cancel a
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%3A%20AddCommGroup%20Int%20%3A%3D%20inferInstance%0A%0Aexample%20%28a%20b%20c%20%3A%20Int%29%20%3A%20%28a%20%2B%20b%29%20%2B%20c%20%3D%20a%20%2B%20%28b%20%2B%20c%29%20%3A%3D%20add_assoc%20a%20b%20c%0Aexample%20%28a%20%3A%20Int%29%20%3A%200%20%2B%20a%20%3D%20a%20%3A%3D%20zero_add%20a%0Aexample%20%28a%20%3A%20Int%29%20%3A%20a%20%2B%200%20%3D%20a%20%3A%3D%20add_zero%20a%0Aexample%20%28a%20%3A%20Int%29%20%3A%20-a%20%2B%20a%20%3D%200%20%3A%3D%20neg_add_cancel%20a%0Aexample%20%28a%20%3A%20Int%29%20%3A%20a%20%2B%20-a%20%3D%200%20%3A%3D%20add_neg_cancel%20a" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%3A%20AddCommGroup%20Int%20%3A%3D%20inferInstance%0A%0Aexample%20%28a%20b%20c%20%3A%20Int%29%20%3A%20%28a%20%2B%20b%29%20%2B%20c%20%3D%20a%20%2B%20%28b%20%2B%20c%29%20%3A%3D%20add_assoc%20a%20b%20c%0Aexample%20%28a%20%3A%20Int%29%20%3A%200%20%2B%20a%20%3D%20a%20%3A%3D%20zero_add%20a%0Aexample%20%28a%20%3A%20Int%29%20%3A%20a%20%2B%200%20%3D%20a%20%3A%3D%20add_zero%20a%0Aexample%20%28a%20%3A%20Int%29%20%3A%20-a%20%2B%20a%20%3D%200%20%3A%3D%20neg_add_cancel%20a%0Aexample%20%28a%20%3A%20Int%29%20%3A%20a%20%2B%20-a%20%3D%200%20%3A%3D%20add_neg_cancel%20a" title="Lean playground" loading="lazy" style="width:100%;height:193px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 This is the same content as `intGroup`, the same five facts about
 $\mathbb{Z}$. But where the book *assembles* a `Group Int` term by hand,

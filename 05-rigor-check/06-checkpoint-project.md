@@ -42,33 +42,9 @@ theorem, applied to that instance.
 
 **Self-verification.**
 
-```lean
-structure Monoid (M : Type) where
-  op : M → M → M
-  id : M
-  assoc : ∀ a b c : M, op (op a b) c = op a (op b c)
-  id_left : ∀ a : M, op id a = a
-  id_right : ∀ a : M, op a id = a
-
-def listMonoid (α : Type) : Monoid (List α) where
-  op := List.append
-  id := []
-  assoc := by intro a b c; exact List.append_assoc a b c
-  id_left := by intro a; exact List.nil_append a
-  id_right := by intro a; exact List.append_nil a
-
-theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
-    (h : ∀ a : M, Mn.op e' a = a) : e' = Mn.id := by
-  have step1 : Mn.op e' Mn.id = Mn.id := h Mn.id
-  have step2 : Mn.op e' Mn.id = e' := Mn.id_right e'
-  rw [← step2]
-  exact step1
-
--- Applying the generic theorem to the concrete instance costs nothing
--- beyond naming it — the same "prove once, use everywhere" payoff
--- Chapter 6 §6 promises for Group, delivered here one chapter early.
-#check monoid_id_unique (listMonoid Nat) [] (fun a => List.nil_append a)
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20Monoid%20%28M%20%3A%20Type%29%20where%0A%20%20op%20%3A%20M%20%E2%86%92%20M%20%E2%86%92%20M%0A%20%20id%20%3A%20M%0A%20%20assoc%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20M%2C%20op%20%28op%20a%20b%29%20c%20%3D%20op%20a%20%28op%20b%20c%29%0A%20%20id_left%20%3A%20%E2%88%80%20a%20%3A%20M%2C%20op%20id%20a%20%3D%20a%0A%20%20id_right%20%3A%20%E2%88%80%20a%20%3A%20M%2C%20op%20a%20id%20%3D%20a%0A%0Adef%20listMonoid%20%28%CE%B1%20%3A%20Type%29%20%3A%20Monoid%20%28List%20%CE%B1%29%20where%0A%20%20op%20%3A%3D%20List.append%0A%20%20id%20%3A%3D%20%5B%5D%0A%20%20assoc%20%3A%3D%20by%20intro%20a%20b%20c%3B%20exact%20List.append_assoc%20a%20b%20c%0A%20%20id_left%20%3A%3D%20by%20intro%20a%3B%20exact%20List.nil_append%20a%0A%20%20id_right%20%3A%3D%20by%20intro%20a%3B%20exact%20List.append_nil%20a%0A%0Atheorem%20monoid_id_unique%20%7BM%20%3A%20Type%7D%20%28Mn%20%3A%20Monoid%20M%29%20%28e%27%20%3A%20M%29%0A%20%20%20%20%28h%20%3A%20%E2%88%80%20a%20%3A%20M%2C%20Mn.op%20e%27%20a%20%3D%20a%29%20%3A%20e%27%20%3D%20Mn.id%20%3A%3D%20by%0A%20%20have%20step1%20%3A%20Mn.op%20e%27%20Mn.id%20%3D%20Mn.id%20%3A%3D%20h%20Mn.id%0A%20%20have%20step2%20%3A%20Mn.op%20e%27%20Mn.id%20%3D%20e%27%20%3A%3D%20Mn.id_right%20e%27%0A%20%20rw%20%5B%E2%86%90%20step2%5D%0A%20%20exact%20step1%0A%0A--%20Applying%20the%20generic%20theorem%20to%20the%20concrete%20instance%20costs%20nothing%0A--%20beyond%20naming%20it%20%E2%80%94%20the%20same%20%22prove%20once%2C%20use%20everywhere%22%20payoff%0A--%20Chapter%206%20%C2%A76%20promises%20for%20Group%2C%20delivered%20here%20one%20chapter%20early.%0A%23check%20monoid_id_unique%20%28listMonoid%20Nat%29%20%5B%5D%20%28fun%20a%20%3D%3E%20List.nil_append%20a%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20Monoid%20%28M%20%3A%20Type%29%20where%0A%20%20op%20%3A%20M%20%E2%86%92%20M%20%E2%86%92%20M%0A%20%20id%20%3A%20M%0A%20%20assoc%20%3A%20%E2%88%80%20a%20b%20c%20%3A%20M%2C%20op%20%28op%20a%20b%29%20c%20%3D%20op%20a%20%28op%20b%20c%29%0A%20%20id_left%20%3A%20%E2%88%80%20a%20%3A%20M%2C%20op%20id%20a%20%3D%20a%0A%20%20id_right%20%3A%20%E2%88%80%20a%20%3A%20M%2C%20op%20a%20id%20%3D%20a%0A%0Adef%20listMonoid%20%28%CE%B1%20%3A%20Type%29%20%3A%20Monoid%20%28List%20%CE%B1%29%20where%0A%20%20op%20%3A%3D%20List.append%0A%20%20id%20%3A%3D%20%5B%5D%0A%20%20assoc%20%3A%3D%20by%20intro%20a%20b%20c%3B%20exact%20List.append_assoc%20a%20b%20c%0A%20%20id_left%20%3A%3D%20by%20intro%20a%3B%20exact%20List.nil_append%20a%0A%20%20id_right%20%3A%3D%20by%20intro%20a%3B%20exact%20List.append_nil%20a%0A%0Atheorem%20monoid_id_unique%20%7BM%20%3A%20Type%7D%20%28Mn%20%3A%20Monoid%20M%29%20%28e%27%20%3A%20M%29%0A%20%20%20%20%28h%20%3A%20%E2%88%80%20a%20%3A%20M%2C%20Mn.op%20e%27%20a%20%3D%20a%29%20%3A%20e%27%20%3D%20Mn.id%20%3A%3D%20by%0A%20%20have%20step1%20%3A%20Mn.op%20e%27%20Mn.id%20%3D%20Mn.id%20%3A%3D%20h%20Mn.id%0A%20%20have%20step2%20%3A%20Mn.op%20e%27%20Mn.id%20%3D%20e%27%20%3A%3D%20Mn.id_right%20e%27%0A%20%20rw%20%5B%E2%86%90%20step2%5D%0A%20%20exact%20step1%0A%0A--%20Applying%20the%20generic%20theorem%20to%20the%20concrete%20instance%20costs%20nothing%0A--%20beyond%20naming%20it%20%E2%80%94%20the%20same%20%22prove%20once%2C%20use%20everywhere%22%20payoff%0A--%20Chapter%206%20%C2%A76%20promises%20for%20Group%2C%20delivered%20here%20one%20chapter%20early.%0A%23check%20monoid_id_unique%20%28listMonoid%20Nat%29%20%5B%5D%20%28fun%20a%20%3D%3E%20List.nil_append%20a%29" title="Lean playground" loading="lazy" style="width:100%;height:535px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 If this compiles (`lake env lean` on a file containing it, or pasted into
 `lean_project`), the project is done. A full worked solution, including a

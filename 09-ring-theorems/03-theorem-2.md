@@ -28,48 +28,18 @@ The proof below requires $0\cdot a = 0$, the mirror image of Theorem 1
 therefore prove that first, mechanically mirroring Theorem 1's proof line
 by line:
 
-```lean
-theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id := by
-  have h0 : Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id = Rg.addGrp.id :=
-    Rg.addGrp.toGroup.id_left Rg.addGrp.id
-  have h1 : Rg.mul (Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id) a =
-      Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a) :=
-    Rg.right_distrib Rg.addGrp.id Rg.addGrp.id a
-  rw [h0] at h1
-  have h2 :
-      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a)) (Rg.mul Rg.addGrp.id a) =
-      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))
-        (Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a)) :=
-    congrArg (Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))) h1
-  rw [Rg.addGrp.toGroup.inv_left] at h2
-  rw [← Rg.addGrp.toGroup.assoc] at h2
-  rw [Rg.addGrp.toGroup.inv_left] at h2
-  rw [Rg.addGrp.toGroup.id_left] at h2
-  exact h2.symm
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20mul_zero_left%20%28a%20%3A%20R%29%20%3A%20Rg.mul%20Rg.addGrp.id%20a%20%3D%20Rg.addGrp.id%20%3A%3D%20by%0A%20%20have%20h0%20%3A%20Rg.addGrp.op%20Rg.addGrp.id%20Rg.addGrp.id%20%3D%20Rg.addGrp.id%20%3A%3D%0A%20%20%20%20Rg.addGrp.toGroup.id_left%20Rg.addGrp.id%0A%20%20have%20h1%20%3A%20Rg.mul%20%28Rg.addGrp.op%20Rg.addGrp.id%20Rg.addGrp.id%29%20a%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.mul%20Rg.addGrp.id%20a%29%20%28Rg.mul%20Rg.addGrp.id%20a%29%20%3A%3D%0A%20%20%20%20Rg.right_distrib%20Rg.addGrp.id%20Rg.addGrp.id%20a%0A%20%20rw%20%5Bh0%5D%20at%20h1%0A%20%20have%20h2%20%3A%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20Rg.addGrp.id%20a%29%29%20%28Rg.mul%20Rg.addGrp.id%20a%29%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20Rg.addGrp.id%20a%29%29%0A%20%20%20%20%20%20%20%20%28Rg.addGrp.op%20%28Rg.mul%20Rg.addGrp.id%20a%29%20%28Rg.mul%20Rg.addGrp.id%20a%29%29%20%3A%3D%0A%20%20%20%20congrArg%20%28Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20Rg.addGrp.id%20a%29%29%29%20h1%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%20at%20h2%0A%20%20rw%20%5B%E2%86%90%20Rg.addGrp.toGroup.assoc%5D%20at%20h2%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%20at%20h2%0A%20%20rw%20%5BRg.addGrp.toGroup.id_left%5D%20at%20h2%0A%20%20exact%20h2.symm" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20mul_zero_left%20%28a%20%3A%20R%29%20%3A%20Rg.mul%20Rg.addGrp.id%20a%20%3D%20Rg.addGrp.id%20%3A%3D%20by%0A%20%20have%20h0%20%3A%20Rg.addGrp.op%20Rg.addGrp.id%20Rg.addGrp.id%20%3D%20Rg.addGrp.id%20%3A%3D%0A%20%20%20%20Rg.addGrp.toGroup.id_left%20Rg.addGrp.id%0A%20%20have%20h1%20%3A%20Rg.mul%20%28Rg.addGrp.op%20Rg.addGrp.id%20Rg.addGrp.id%29%20a%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.mul%20Rg.addGrp.id%20a%29%20%28Rg.mul%20Rg.addGrp.id%20a%29%20%3A%3D%0A%20%20%20%20Rg.right_distrib%20Rg.addGrp.id%20Rg.addGrp.id%20a%0A%20%20rw%20%5Bh0%5D%20at%20h1%0A%20%20have%20h2%20%3A%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20Rg.addGrp.id%20a%29%29%20%28Rg.mul%20Rg.addGrp.id%20a%29%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20Rg.addGrp.id%20a%29%29%0A%20%20%20%20%20%20%20%20%28Rg.addGrp.op%20%28Rg.mul%20Rg.addGrp.id%20a%29%20%28Rg.mul%20Rg.addGrp.id%20a%29%29%20%3A%3D%0A%20%20%20%20congrArg%20%28Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20Rg.addGrp.id%20a%29%29%29%20h1%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%20at%20h2%0A%20%20rw%20%5B%E2%86%90%20Rg.addGrp.toGroup.assoc%5D%20at%20h2%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%20at%20h2%0A%20%20rw%20%5BRg.addGrp.toGroup.id_left%5D%20at%20h2%0A%20%20exact%20h2.symm" title="Lean playground" loading="lazy" style="width:100%;height:383px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Observe that this is Theorem 1's proof with every `left_distrib`/`a`
 swapped for `right_distrib`/(argument order reversed). This confirms that
 the "mirror image" claim is not merely a figure of speech, but a literal,
 symmetrical match between the two proofs. The main theorem follows:
 
-```lean
-theorem neg_one_mul (a : R) :
-    Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a := by
-  apply left_inverse_unique Rg.addGrp.toGroup
-  -- Goal: op (mul (inv one) a) a = id
-  have step : Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a) a =
-      Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a) (Rg.mul Rg.one a) :=
-    congrArg (Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a))
-      (show a = Rg.mul Rg.one a from (Rg.one_mul a).symm)
-  rw [step]
-  -- Goal: op (mul (inv one) a) (mul one a) = id
-  rw [← Rg.right_distrib]
-  -- Goal: mul (op (inv one) one) a = id
-  rw [Rg.addGrp.toGroup.inv_left]
-  -- Goal: mul Rg.addGrp.id a = id, i.e. 0 * a = 0
-  exact mul_zero_left Rg a
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20neg_one_mul%20%28a%20%3A%20R%29%20%3A%0A%20%20%20%20Rg.mul%20%28Rg.addGrp.toGroup.inv%20Rg.one%29%20a%20%3D%20Rg.addGrp.toGroup.inv%20a%20%3A%3D%20by%0A%20%20apply%20left_inverse_unique%20Rg.addGrp.toGroup%0A%20%20--%20Goal%3A%20op%20%28mul%20%28inv%20one%29%20a%29%20a%20%3D%20id%0A%20%20have%20step%20%3A%20Rg.addGrp.op%20%28Rg.mul%20%28Rg.addGrp.toGroup.inv%20Rg.one%29%20a%29%20a%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.mul%20%28Rg.addGrp.toGroup.inv%20Rg.one%29%20a%29%20%28Rg.mul%20Rg.one%20a%29%20%3A%3D%0A%20%20%20%20congrArg%20%28Rg.addGrp.op%20%28Rg.mul%20%28Rg.addGrp.toGroup.inv%20Rg.one%29%20a%29%29%0A%20%20%20%20%20%20%28show%20a%20%3D%20Rg.mul%20Rg.one%20a%20from%20%28Rg.one_mul%20a%29.symm%29%0A%20%20rw%20%5Bstep%5D%0A%20%20--%20Goal%3A%20op%20%28mul%20%28inv%20one%29%20a%29%20%28mul%20one%20a%29%20%3D%20id%0A%20%20rw%20%5B%E2%86%90%20Rg.right_distrib%5D%0A%20%20--%20Goal%3A%20mul%20%28op%20%28inv%20one%29%20one%29%20a%20%3D%20id%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%0A%20%20--%20Goal%3A%20mul%20Rg.addGrp.id%20a%20%3D%20id%2C%20i.e.%200%20%2A%20a%20%3D%200%0A%20%20exact%20mul_zero_left%20Rg%20a" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20neg_one_mul%20%28a%20%3A%20R%29%20%3A%0A%20%20%20%20Rg.mul%20%28Rg.addGrp.toGroup.inv%20Rg.one%29%20a%20%3D%20Rg.addGrp.toGroup.inv%20a%20%3A%3D%20by%0A%20%20apply%20left_inverse_unique%20Rg.addGrp.toGroup%0A%20%20--%20Goal%3A%20op%20%28mul%20%28inv%20one%29%20a%29%20a%20%3D%20id%0A%20%20have%20step%20%3A%20Rg.addGrp.op%20%28Rg.mul%20%28Rg.addGrp.toGroup.inv%20Rg.one%29%20a%29%20a%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.mul%20%28Rg.addGrp.toGroup.inv%20Rg.one%29%20a%29%20%28Rg.mul%20Rg.one%20a%29%20%3A%3D%0A%20%20%20%20congrArg%20%28Rg.addGrp.op%20%28Rg.mul%20%28Rg.addGrp.toGroup.inv%20Rg.one%29%20a%29%29%0A%20%20%20%20%20%20%28show%20a%20%3D%20Rg.mul%20Rg.one%20a%20from%20%28Rg.one_mul%20a%29.symm%29%0A%20%20rw%20%5Bstep%5D%0A%20%20--%20Goal%3A%20op%20%28mul%20%28inv%20one%29%20a%29%20%28mul%20one%20a%29%20%3D%20id%0A%20%20rw%20%5B%E2%86%90%20Rg.right_distrib%5D%0A%20%20--%20Goal%3A%20mul%20%28op%20%28inv%20one%29%20one%29%20a%20%3D%20id%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%0A%20%20--%20Goal%3A%20mul%20Rg.addGrp.id%20a%20%3D%20id%2C%20i.e.%200%20%2A%20a%20%3D%200%0A%20%20exact%20mul_zero_left%20Rg%20a" title="Lean playground" loading="lazy" style="width:100%;height:345px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Two features of the proof's shape are worth noting, both discovered by
 actually compiling it:
@@ -109,10 +79,9 @@ negation: $(-1)\cdot a = -(1\cdot a) = -a$. Thus multiplication by $-1$
 depends on) and the sign rule itself are already in Mathlib, again under
 almost the same names:
 
-```lean
-example {R : Type*} [Ring R] (a : R) : 0 * a = 0 := zero_mul a
-example {R : Type*} [Ring R] (a : R) : (-1 : R) * a = -a := neg_one_mul a
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%7BR%20%3A%20Type%2A%7D%20%5BRing%20R%5D%20%28a%20%3A%20R%29%20%3A%200%20%2A%20a%20%3D%200%20%3A%3D%20zero_mul%20a%0Aexample%20%7BR%20%3A%20Type%2A%7D%20%5BRing%20R%5D%20%28a%20%3A%20R%29%20%3A%20%28-1%20%3A%20R%29%20%2A%20a%20%3D%20-a%20%3A%3D%20neg_one_mul%20a" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%7BR%20%3A%20Type%2A%7D%20%5BRing%20R%5D%20%28a%20%3A%20R%29%20%3A%200%20%2A%20a%20%3D%200%20%3A%3D%20zero_mul%20a%0Aexample%20%7BR%20%3A%20Type%2A%7D%20%5BRing%20R%5D%20%28a%20%3A%20R%29%20%3A%20%28-1%20%3A%20R%29%20%2A%20a%20%3D%20-a%20%3A%3D%20neg_one_mul%20a" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 [`zero_mul`](https://loogle.lean-lang.org/?q=zero_mul) is `mul_zero_left`'s Mathlib name, and [`neg_one_mul`](https://loogle.lean-lang.org/?q=neg_one_mul) is exactly
 Theorem 2. A multi-step derivation in the book (needing `mul_zero_left`,

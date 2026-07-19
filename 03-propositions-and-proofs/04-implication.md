@@ -7,10 +7,9 @@
 $P \to Q$ (read "$P$ implies $Q$") is literally a function type: a proof of
 $P \to Q$ is a function that turns any proof of $P$ into a proof of $Q$.
 
-```lean
-theorem modus_ponens {P Q : Prop} (hpq : P → Q) (hp : P) : Q :=
-  hpq hp
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20modus_ponens%20%7BP%20Q%20%3A%20Prop%7D%20%28hpq%20%3A%20P%20%E2%86%92%20Q%29%20%28hp%20%3A%20P%29%20%3A%20Q%20%3A%3D%0A%20%20hpq%20hp" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20modus_ponens%20%7BP%20Q%20%3A%20Prop%7D%20%28hpq%20%3A%20P%20%E2%86%92%20Q%29%20%28hp%20%3A%20P%29%20%3A%20Q%20%3A%3D%0A%20%20hpq%20hp" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **Mathematical reading.** Under Curry–Howard, the implication $P \Rightarrow
 Q$ *is* the function space $P \to Q$ (the set of proofs of $Q$ parameterized

@@ -24,20 +24,9 @@ The proof proceeds by induction on `b`, one step at a time.
   `a`.
 - Combining both: `a + 0 = a` and `0 + a = a`, hence `a + 0 = 0 + a`.
 
-```lean
-theorem my_add_comm (a b : Nat) : a + b = b + a := by
-  induction b with
-  | zero =>
-    -- Goal: a + 0 = 0 + a
-    rw [Nat.add_zero]   -- rewrites `a + 0` to `a`. Goal: a = 0 + a
-    rw [Nat.zero_add]    -- rewrites `0 + a` to `a`. Goal: a = a, closed by rw automatically
-  | succ k ih =>
-    -- ih : a + k = k + a
-    -- Goal: a + Nat.succ k = Nat.succ k + a
-    rw [Nat.add_succ]     -- a + succ k  ~>  succ (a + k). Goal: succ (a + k) = succ k + a
-    rw [ih]                -- use the induction hypothesis: a + k ~> k + a. Goal: succ (k + a) = succ k + a
-    rw [Nat.succ_add]      -- succ k + a  ~>  succ (k + a). Goal: succ (k + a) = succ (k + a), closed
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20my_add_comm%20%28a%20b%20%3A%20Nat%29%20%3A%20a%20%2B%20b%20%3D%20b%20%2B%20a%20%3A%3D%20by%0A%20%20induction%20b%20with%0A%20%20%7C%20zero%20%3D%3E%0A%20%20%20%20--%20Goal%3A%20a%20%2B%200%20%3D%200%20%2B%20a%0A%20%20%20%20rw%20%5BNat.add_zero%5D%20%20%20--%20rewrites%20%60a%20%2B%200%60%20to%20%60a%60.%20Goal%3A%20a%20%3D%200%20%2B%20a%0A%20%20%20%20rw%20%5BNat.zero_add%5D%20%20%20%20--%20rewrites%20%600%20%2B%20a%60%20to%20%60a%60.%20Goal%3A%20a%20%3D%20a%2C%20closed%20by%20rw%20automatically%0A%20%20%7C%20succ%20k%20ih%20%3D%3E%0A%20%20%20%20--%20ih%20%3A%20a%20%2B%20k%20%3D%20k%20%2B%20a%0A%20%20%20%20--%20Goal%3A%20a%20%2B%20Nat.succ%20k%20%3D%20Nat.succ%20k%20%2B%20a%0A%20%20%20%20rw%20%5BNat.add_succ%5D%20%20%20%20%20--%20a%20%2B%20succ%20k%20%20~%3E%20%20succ%20%28a%20%2B%20k%29.%20Goal%3A%20succ%20%28a%20%2B%20k%29%20%3D%20succ%20k%20%2B%20a%0A%20%20%20%20rw%20%5Bih%5D%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20--%20use%20the%20induction%20hypothesis%3A%20a%20%2B%20k%20~%3E%20k%20%2B%20a.%20Goal%3A%20succ%20%28k%20%2B%20a%29%20%3D%20succ%20k%20%2B%20a%0A%20%20%20%20rw%20%5BNat.succ_add%5D%20%20%20%20%20%20--%20succ%20k%20%2B%20a%20%20~%3E%20%20succ%20%28k%20%2B%20a%29.%20Goal%3A%20succ%20%28k%20%2B%20a%29%20%3D%20succ%20%28k%20%2B%20a%29%2C%20closed" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20my_add_comm%20%28a%20b%20%3A%20Nat%29%20%3A%20a%20%2B%20b%20%3D%20b%20%2B%20a%20%3A%3D%20by%0A%20%20induction%20b%20with%0A%20%20%7C%20zero%20%3D%3E%0A%20%20%20%20--%20Goal%3A%20a%20%2B%200%20%3D%200%20%2B%20a%0A%20%20%20%20rw%20%5BNat.add_zero%5D%20%20%20--%20rewrites%20%60a%20%2B%200%60%20to%20%60a%60.%20Goal%3A%20a%20%3D%200%20%2B%20a%0A%20%20%20%20rw%20%5BNat.zero_add%5D%20%20%20%20--%20rewrites%20%600%20%2B%20a%60%20to%20%60a%60.%20Goal%3A%20a%20%3D%20a%2C%20closed%20by%20rw%20automatically%0A%20%20%7C%20succ%20k%20ih%20%3D%3E%0A%20%20%20%20--%20ih%20%3A%20a%20%2B%20k%20%3D%20k%20%2B%20a%0A%20%20%20%20--%20Goal%3A%20a%20%2B%20Nat.succ%20k%20%3D%20Nat.succ%20k%20%2B%20a%0A%20%20%20%20rw%20%5BNat.add_succ%5D%20%20%20%20%20--%20a%20%2B%20succ%20k%20%20~%3E%20%20succ%20%28a%20%2B%20k%29.%20Goal%3A%20succ%20%28a%20%2B%20k%29%20%3D%20succ%20k%20%2B%20a%0A%20%20%20%20rw%20%5Bih%5D%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20--%20use%20the%20induction%20hypothesis%3A%20a%20%2B%20k%20~%3E%20k%20%2B%20a.%20Goal%3A%20succ%20%28k%20%2B%20a%29%20%3D%20succ%20k%20%2B%20a%0A%20%20%20%20rw%20%5BNat.succ_add%5D%20%20%20%20%20%20--%20succ%20k%20%2B%20a%20%20~%3E%20%20succ%20%28k%20%2B%20a%29.%20Goal%3A%20succ%20%28k%20%2B%20a%29%20%3D%20succ%20%28k%20%2B%20a%29%2C%20closed" title="Lean playground" loading="lazy" style="width:100%;height:288px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Walking through the inductive step slowly:
 

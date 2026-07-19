@@ -10,15 +10,9 @@ example, "additive identity/inverse cancellation," as in Chapter 9),
 `simp` is the efficient way to apply a whole *set* of these known-safe
 rewrites at once, instead of spelling out each one:
 
-```lean
--- Chapter 9 style (explicit, for learning):
-theorem ex1 (n : Nat) : n + 0 = n := by
-  exact Nat.add_zero n
-
--- Once the fact class is understood, in later proofs:
-theorem ex2 (n : Nat) : n + 0 = n := by
-  simp
-```
+<p><a href="https://live.lean-lang.org/#code=--%20Chapter%209%20style%20%28explicit%2C%20for%20learning%29%3A%0Atheorem%20ex1%20%28n%20%3A%20Nat%29%20%3A%20n%20%2B%200%20%3D%20n%20%3A%3D%20by%0A%20%20exact%20Nat.add_zero%20n%0A%0A--%20Once%20the%20fact%20class%20is%20understood%2C%20in%20later%20proofs%3A%0Atheorem%20ex2%20%28n%20%3A%20Nat%29%20%3A%20n%20%2B%200%20%3D%20n%20%3A%3D%20by%0A%20%20simp" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20Chapter%209%20style%20%28explicit%2C%20for%20learning%29%3A%0Atheorem%20ex1%20%28n%20%3A%20Nat%29%20%3A%20n%20%2B%200%20%3D%20n%20%3A%3D%20by%0A%20%20exact%20Nat.add_zero%20n%0A%0A--%20Once%20the%20fact%20class%20is%20understood%2C%20in%20later%20proofs%3A%0Atheorem%20ex2%20%28n%20%3A%20Nat%29%20%3A%20n%20%2B%200%20%3D%20n%20%3A%3D%20by%0A%20%20simp" title="Lean playground" loading="lazy" style="width:100%;height:193px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 A good habit: the *first* time a new kind of cancellation or
 identity simplification is encountered, it should be done by hand with named lemmas, as this book

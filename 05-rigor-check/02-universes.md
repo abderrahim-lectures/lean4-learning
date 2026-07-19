@@ -14,11 +14,9 @@ a **hierarchy of universes**.
 
 ### The hierarchy
 
-```lean
-#check (Nat : Type)        -- Nat itself lives in Type
-#check (Type : Type 1)      -- Type lives one level up, in Type 1
-#check (Type 1 : Type 2)    -- and so on, forever
-```
+<p><a href="https://live.lean-lang.org/#code=%23check%20%28Nat%20%3A%20Type%29%20%20%20%20%20%20%20%20--%20Nat%20itself%20lives%20in%20Type%0A%23check%20%28Type%20%3A%20Type%201%29%20%20%20%20%20%20--%20Type%20lives%20one%20level%20up%2C%20in%20Type%201%0A%23check%20%28Type%201%20%3A%20Type%202%29%20%20%20%20--%20and%20so%20on%2C%20forever" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23check%20%28Nat%20%3A%20Type%29%20%20%20%20%20%20%20%20--%20Nat%20itself%20lives%20in%20Type%0A%23check%20%28Type%20%3A%20Type%201%29%20%20%20%20%20%20--%20Type%20lives%20one%20level%20up%2C%20in%20Type%201%0A%23check%20%28Type%201%20%3A%20Type%202%29%20%20%20%20--%20and%20so%20on%2C%20forever" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 $$
 \mathtt{Nat} : \mathtt{Type} : \mathtt{Type}\ 1 : \mathtt{Type}\ 2 : \cdots

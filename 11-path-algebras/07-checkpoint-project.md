@@ -46,33 +46,9 @@ understood by predicting what each `rw` will do before running it.
 
 **Self-verification.**
 
-```lean
-def Path.length {V A : Type} {Q : Quiver V A} : {u v : V} → Path Q u v → Nat
-  | _, _, Path.nil _ => 0
-  | _, _, Path.cons _ _ _ p => p.length + 1
-
-#eval pathAlpha.length        -- 1
-#eval pathBetaAlpha.length    -- 2
-
-theorem Path.append_length {V A : Type} {Q : Quiver V A} {u v w : V}
-    (p : Path Q u v) (q : Path Q v w) :
-    (Path.append p q).length = p.length + q.length := by
-  induction q with
-  | nil =>
-    simp only [Path.append, Path.length]
-    rw [Nat.add_zero]
-  | cons a h h' q' ih =>
-    simp only [Path.append, Path.length]
-    rw [ih, Nat.add_assoc]
-
--- The concrete check: pathBetaAlpha was §5's own worked example of
--- Path.append; its length should be pathAlpha.length + pathBetaOnly.length.
-example : (Path.append pathAlpha pathBetaOnly).length =
-    pathAlpha.length + pathBetaOnly.length :=
-  Path.append_length pathAlpha pathBetaOnly
-
-#eval (Path.append pathAlpha pathBetaOnly).length   -- 2
-```
+<p><a href="https://live.lean-lang.org/#code=def%20Path.length%20%7BV%20A%20%3A%20Type%7D%20%7BQ%20%3A%20Quiver%20V%20A%7D%20%3A%20%7Bu%20v%20%3A%20V%7D%20%E2%86%92%20Path%20Q%20u%20v%20%E2%86%92%20Nat%0A%20%20%7C%20_%2C%20_%2C%20Path.nil%20_%20%3D%3E%200%0A%20%20%7C%20_%2C%20_%2C%20Path.cons%20_%20_%20_%20p%20%3D%3E%20p.length%20%2B%201%0A%0A%23eval%20pathAlpha.length%20%20%20%20%20%20%20%20--%201%0A%23eval%20pathBetaAlpha.length%20%20%20%20--%202%0A%0Atheorem%20Path.append_length%20%7BV%20A%20%3A%20Type%7D%20%7BQ%20%3A%20Quiver%20V%20A%7D%20%7Bu%20v%20w%20%3A%20V%7D%0A%20%20%20%20%28p%20%3A%20Path%20Q%20u%20v%29%20%28q%20%3A%20Path%20Q%20v%20w%29%20%3A%0A%20%20%20%20%28Path.append%20p%20q%29.length%20%3D%20p.length%20%2B%20q.length%20%3A%3D%20by%0A%20%20induction%20q%20with%0A%20%20%7C%20nil%20%3D%3E%0A%20%20%20%20simp%20only%20%5BPath.append%2C%20Path.length%5D%0A%20%20%20%20rw%20%5BNat.add_zero%5D%0A%20%20%7C%20cons%20a%20h%20h%27%20q%27%20ih%20%3D%3E%0A%20%20%20%20simp%20only%20%5BPath.append%2C%20Path.length%5D%0A%20%20%20%20rw%20%5Bih%2C%20Nat.add_assoc%5D%0A%0A--%20The%20concrete%20check%3A%20pathBetaAlpha%20was%20%C2%A75%27s%20own%20worked%20example%20of%0A--%20Path.append%3B%20its%20length%20should%20be%20pathAlpha.length%20%2B%20pathBetaOnly.length.%0Aexample%20%3A%20%28Path.append%20pathAlpha%20pathBetaOnly%29.length%20%3D%0A%20%20%20%20pathAlpha.length%20%2B%20pathBetaOnly.length%20%3A%3D%0A%20%20Path.append_length%20pathAlpha%20pathBetaOnly%0A%0A%23eval%20%28Path.append%20pathAlpha%20pathBetaOnly%29.length%20%20%20--%202" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20Path.length%20%7BV%20A%20%3A%20Type%7D%20%7BQ%20%3A%20Quiver%20V%20A%7D%20%3A%20%7Bu%20v%20%3A%20V%7D%20%E2%86%92%20Path%20Q%20u%20v%20%E2%86%92%20Nat%0A%20%20%7C%20_%2C%20_%2C%20Path.nil%20_%20%3D%3E%200%0A%20%20%7C%20_%2C%20_%2C%20Path.cons%20_%20_%20_%20p%20%3D%3E%20p.length%20%2B%201%0A%0A%23eval%20pathAlpha.length%20%20%20%20%20%20%20%20--%201%0A%23eval%20pathBetaAlpha.length%20%20%20%20--%202%0A%0Atheorem%20Path.append_length%20%7BV%20A%20%3A%20Type%7D%20%7BQ%20%3A%20Quiver%20V%20A%7D%20%7Bu%20v%20w%20%3A%20V%7D%0A%20%20%20%20%28p%20%3A%20Path%20Q%20u%20v%29%20%28q%20%3A%20Path%20Q%20v%20w%29%20%3A%0A%20%20%20%20%28Path.append%20p%20q%29.length%20%3D%20p.length%20%2B%20q.length%20%3A%3D%20by%0A%20%20induction%20q%20with%0A%20%20%7C%20nil%20%3D%3E%0A%20%20%20%20simp%20only%20%5BPath.append%2C%20Path.length%5D%0A%20%20%20%20rw%20%5BNat.add_zero%5D%0A%20%20%7C%20cons%20a%20h%20h%27%20q%27%20ih%20%3D%3E%0A%20%20%20%20simp%20only%20%5BPath.append%2C%20Path.length%5D%0A%20%20%20%20rw%20%5Bih%2C%20Nat.add_assoc%5D%0A%0A--%20The%20concrete%20check%3A%20pathBetaAlpha%20was%20%C2%A75%27s%20own%20worked%20example%20of%0A--%20Path.append%3B%20its%20length%20should%20be%20pathAlpha.length%20%2B%20pathBetaOnly.length.%0Aexample%20%3A%20%28Path.append%20pathAlpha%20pathBetaOnly%29.length%20%3D%0A%20%20%20%20pathAlpha.length%20%2B%20pathBetaOnly.length%20%3A%3D%0A%20%20Path.append_length%20pathAlpha%20pathBetaOnly%0A%0A%23eval%20%28Path.append%20pathAlpha%20pathBetaOnly%29.length%20%20%20--%202" title="Lean playground" loading="lazy" style="width:100%;height:535px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 If this compiles and the `#eval`s match, the project is done. A full
 worked solution is in

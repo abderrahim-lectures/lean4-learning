@@ -9,12 +9,9 @@ question "what *kind* of thing is this?" — a number, a boolean, a proof, a
 function from numbers to numbers. Lean checks this question *before*
 running anything, and it never lets a term of the wrong type slip through.
 
-```lean
-#check 3          -- 3 : Nat
-#check -3         -- -3 : Int
-#check Nat        -- Nat : Type
-#eval 2 ^ 10        -- 1024 (evaluates; #check only elaborates)
-```
+<p><a href="https://live.lean-lang.org/#code=%23check%203%20%20%20%20%20%20%20%20%20%20--%203%20%3A%20Nat%0A%23check%20-3%20%20%20%20%20%20%20%20%20--%20-3%20%3A%20Int%0A%23check%20Nat%20%20%20%20%20%20%20%20--%20Nat%20%3A%20Type%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%20%28evaluates%3B%20%23check%20only%20elaborates%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23check%203%20%20%20%20%20%20%20%20%20%20--%203%20%3A%20Nat%0A%23check%20-3%20%20%20%20%20%20%20%20%20--%20-3%20%3A%20Int%0A%23check%20Nat%20%20%20%20%20%20%20%20--%20Nat%20%3A%20Type%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%20%28evaluates%3B%20%23check%20only%20elaborates%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **Mathematical reading.** Type theory's basic unit of assertion is the
 **judgment**: a statement made *about* an underlying formal system, called
@@ -105,9 +102,9 @@ and moves on, whether or not that was the intended meaning.
 
 Now the same shape of mistake in Lean:
 
-```lean
-#check 3 + true   -- error: failed to synthesize Add Nat Bool
-```
+<p><a href="https://live.lean-lang.org/#code=%23check%203%20%2B%20true%20%20%20--%20error%3A%20failed%20to%20synthesize%20Add%20Nat%20Bool" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23check%203%20%2B%20true%20%20%20--%20error%3A%20failed%20to%20synthesize%20Add%20Nat%20Bool" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Lean refuses to even *elaborate* this expression. It never runs it, never
 silently coerces `true` to `1`, never crashes five function calls later
@@ -133,9 +130,9 @@ or it is `succ n` for some already-built `Nat` called `n`." This is Peano's
 definition, written out exactly. So `3` is not a primitive digit; it is
 shorthand for `succ (succ (succ zero))`. Confirm it directly:
 
-```lean
-#eval Nat.succ (Nat.succ (Nat.succ Nat.zero))  -- 3
-```
+<p><a href="https://live.lean-lang.org/#code=%23eval%20Nat.succ%20%28Nat.succ%20%28Nat.succ%20Nat.zero%29%29%20%20--%203" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23eval%20Nat.succ%20%28Nat.succ%20%28Nat.succ%20Nat.zero%29%29%20%20--%203" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Lean prints numerals for readability, but underneath, every `Nat` really is
 built from nothing but `zero` and `succ`, the same way every natural number

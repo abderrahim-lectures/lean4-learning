@@ -35,26 +35,9 @@ Chapter 7. **Recognizing that the ring-shaped goal reduces to a
 group-shaped goal already known to be solvable** is the real insight;
 everything thereafter is mechanical `rw`.
 
-```lean
-theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
-  have h0 : Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id = Rg.addGrp.id :=
-    Rg.addGrp.toGroup.id_left Rg.addGrp.id
-  have h1 : Rg.mul a (Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id) =
-      Rg.addGrp.op (Rg.mul a Rg.addGrp.id) (Rg.mul a Rg.addGrp.id) :=
-    Rg.left_distrib a Rg.addGrp.id Rg.addGrp.id
-  rw [h0] at h1
-  -- h1 : Rg.mul a Rg.addGrp.id = op (mul a 0) (mul a 0), i.e. x = x + x
-  have h2 :
-      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul a Rg.addGrp.id)) (Rg.mul a Rg.addGrp.id) =
-      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul a Rg.addGrp.id))
-        (Rg.addGrp.op (Rg.mul a Rg.addGrp.id) (Rg.mul a Rg.addGrp.id)) :=
-    congrArg (Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul a Rg.addGrp.id))) h1
-  rw [Rg.addGrp.toGroup.inv_left] at h2
-  rw [← Rg.addGrp.toGroup.assoc] at h2
-  rw [Rg.addGrp.toGroup.inv_left] at h2
-  rw [Rg.addGrp.toGroup.id_left] at h2
-  exact h2.symm
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20mul_zero%20%28a%20%3A%20R%29%20%3A%20Rg.mul%20a%20Rg.addGrp.id%20%3D%20Rg.addGrp.id%20%3A%3D%20by%0A%20%20have%20h0%20%3A%20Rg.addGrp.op%20Rg.addGrp.id%20Rg.addGrp.id%20%3D%20Rg.addGrp.id%20%3A%3D%0A%20%20%20%20Rg.addGrp.toGroup.id_left%20Rg.addGrp.id%0A%20%20have%20h1%20%3A%20Rg.mul%20a%20%28Rg.addGrp.op%20Rg.addGrp.id%20Rg.addGrp.id%29%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.mul%20a%20Rg.addGrp.id%29%20%28Rg.mul%20a%20Rg.addGrp.id%29%20%3A%3D%0A%20%20%20%20Rg.left_distrib%20a%20Rg.addGrp.id%20Rg.addGrp.id%0A%20%20rw%20%5Bh0%5D%20at%20h1%0A%20%20--%20h1%20%3A%20Rg.mul%20a%20Rg.addGrp.id%20%3D%20op%20%28mul%20a%200%29%20%28mul%20a%200%29%2C%20i.e.%20x%20%3D%20x%20%2B%20x%0A%20%20have%20h2%20%3A%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20a%20Rg.addGrp.id%29%29%20%28Rg.mul%20a%20Rg.addGrp.id%29%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20a%20Rg.addGrp.id%29%29%0A%20%20%20%20%20%20%20%20%28Rg.addGrp.op%20%28Rg.mul%20a%20Rg.addGrp.id%29%20%28Rg.mul%20a%20Rg.addGrp.id%29%29%20%3A%3D%0A%20%20%20%20congrArg%20%28Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20a%20Rg.addGrp.id%29%29%29%20h1%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%20at%20h2%0A%20%20rw%20%5B%E2%86%90%20Rg.addGrp.toGroup.assoc%5D%20at%20h2%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%20at%20h2%0A%20%20rw%20%5BRg.addGrp.toGroup.id_left%5D%20at%20h2%0A%20%20exact%20h2.symm" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20mul_zero%20%28a%20%3A%20R%29%20%3A%20Rg.mul%20a%20Rg.addGrp.id%20%3D%20Rg.addGrp.id%20%3A%3D%20by%0A%20%20have%20h0%20%3A%20Rg.addGrp.op%20Rg.addGrp.id%20Rg.addGrp.id%20%3D%20Rg.addGrp.id%20%3A%3D%0A%20%20%20%20Rg.addGrp.toGroup.id_left%20Rg.addGrp.id%0A%20%20have%20h1%20%3A%20Rg.mul%20a%20%28Rg.addGrp.op%20Rg.addGrp.id%20Rg.addGrp.id%29%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.mul%20a%20Rg.addGrp.id%29%20%28Rg.mul%20a%20Rg.addGrp.id%29%20%3A%3D%0A%20%20%20%20Rg.left_distrib%20a%20Rg.addGrp.id%20Rg.addGrp.id%0A%20%20rw%20%5Bh0%5D%20at%20h1%0A%20%20--%20h1%20%3A%20Rg.mul%20a%20Rg.addGrp.id%20%3D%20op%20%28mul%20a%200%29%20%28mul%20a%200%29%2C%20i.e.%20x%20%3D%20x%20%2B%20x%0A%20%20have%20h2%20%3A%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20a%20Rg.addGrp.id%29%29%20%28Rg.mul%20a%20Rg.addGrp.id%29%20%3D%0A%20%20%20%20%20%20Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20a%20Rg.addGrp.id%29%29%0A%20%20%20%20%20%20%20%20%28Rg.addGrp.op%20%28Rg.mul%20a%20Rg.addGrp.id%29%20%28Rg.mul%20a%20Rg.addGrp.id%29%29%20%3A%3D%0A%20%20%20%20congrArg%20%28Rg.addGrp.op%20%28Rg.addGrp.toGroup.inv%20%28Rg.mul%20a%20Rg.addGrp.id%29%29%29%20h1%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%20at%20h2%0A%20%20rw%20%5B%E2%86%90%20Rg.addGrp.toGroup.assoc%5D%20at%20h2%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%20at%20h2%0A%20%20rw%20%5BRg.addGrp.toGroup.id_left%5D%20at%20h2%0A%20%20exact%20h2.symm" title="Lean playground" loading="lazy" style="width:100%;height:402px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `h2` is proved with `congrArg`, not `by rw [h1]`. Plain `rw [h1]` rewrites
 *every* syntactic occurrence of `h1`'s left-hand side in the goal,
@@ -88,9 +71,9 @@ derivation getting from `left_distrib` and group cancellation to
 $a\cdot 0=0$, Mathlib already proves this and gives it exactly the same
 name:
 
-```lean
-example {R : Type*} [Ring R] (a : R) : a * 0 = 0 := mul_zero a
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%7BR%20%3A%20Type%2A%7D%20%5BRing%20R%5D%20%28a%20%3A%20R%29%20%3A%20a%20%2A%200%20%3D%200%20%3A%3D%20mul_zero%20a" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%7BR%20%3A%20Type%2A%7D%20%5BRing%20R%5D%20%28a%20%3A%20R%29%20%3A%20a%20%2A%200%20%3D%200%20%3A%3D%20mul_zero%20a" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 There is nothing to derive — `mul_zero` is proved once, generically, for
 every `Ring` (indeed every `MulZeroClass`), by essentially the argument

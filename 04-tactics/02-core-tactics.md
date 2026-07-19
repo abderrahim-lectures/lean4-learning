@@ -6,11 +6,9 @@
 
 ### [`intro`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): introduce a hypothesis or variable
 
-```lean
-theorem modus_ponens {P Q : Prop} : (P → Q) → P → Q := by
-  intro hpq hp
-  exact hpq hp
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20modus_ponens%20%7BP%20Q%20%3A%20Prop%7D%20%3A%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20P%20%E2%86%92%20Q%20%3A%3D%20by%0A%20%20intro%20hpq%20hp%0A%20%20exact%20hpq%20hp" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20modus_ponens%20%7BP%20Q%20%3A%20Prop%7D%20%3A%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20P%20%E2%86%92%20Q%20%3A%3D%20by%0A%20%20intro%20hpq%20hp%0A%20%20exact%20hpq%20hp" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 ### [`exact`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): close the goal with an exact term
 
@@ -18,30 +16,24 @@ Used above. Given a term that proves the goal exactly, `exact` finishes it.
 
 ### [`apply`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): apply a function/lemma, leaving new goals for its arguments
 
-```lean
-theorem apply_example {P Q : Prop} (hpq : P → Q) (hp : P) : Q := by
-  apply hpq
-  exact hp
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20apply_example%20%7BP%20Q%20%3A%20Prop%7D%20%28hpq%20%3A%20P%20%E2%86%92%20Q%29%20%28hp%20%3A%20P%29%20%3A%20Q%20%3A%3D%20by%0A%20%20apply%20hpq%0A%20%20exact%20hp" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20apply_example%20%7BP%20Q%20%3A%20Prop%7D%20%28hpq%20%3A%20P%20%E2%86%92%20Q%29%20%28hp%20%3A%20P%29%20%3A%20Q%20%3A%3D%20by%0A%20%20apply%20hpq%0A%20%20exact%20hp" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 ### [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/): rewrite using an equality
 
-```lean
-theorem rw_example (a b : Nat) (h : a = b) : a + 1 = b + 1 := by
-  rw [h]
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20rw_example%20%28a%20b%20%3A%20Nat%29%20%28h%20%3A%20a%20%3D%20b%29%20%3A%20a%20%2B%201%20%3D%20b%20%2B%201%20%3A%3D%20by%0A%20%20rw%20%5Bh%5D" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20rw_example%20%28a%20b%20%3A%20Nat%29%20%28h%20%3A%20a%20%3D%20b%29%20%3A%20a%20%2B%201%20%3D%20b%20%2B%201%20%3A%3D%20by%0A%20%20rw%20%5Bh%5D" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `rw [h]` replaces every occurrence of the left-hand side of `h` with its
 right-hand side in the goal.
 
 ### `rw [...] at h`: rewrite a hypothesis instead of the goal
 
-```lean
-theorem rw_at_example (a b c : Nat) (h1 : a = b) (h2 : a + c = 10) : b + c = 10 := by
-  rw [h1] at h2
-  -- h2 is now : b + c = 10, exactly the goal
-  exact h2
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20rw_at_example%20%28a%20b%20c%20%3A%20Nat%29%20%28h1%20%3A%20a%20%3D%20b%29%20%28h2%20%3A%20a%20%2B%20c%20%3D%2010%29%20%3A%20b%20%2B%20c%20%3D%2010%20%3A%3D%20by%0A%20%20rw%20%5Bh1%5D%20at%20h2%0A%20%20--%20h2%20is%20now%20%3A%20b%20%2B%20c%20%3D%2010%2C%20exactly%20the%20goal%0A%20%20exact%20h2" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20rw_at_example%20%28a%20b%20c%20%3A%20Nat%29%20%28h1%20%3A%20a%20%3D%20b%29%20%28h2%20%3A%20a%20%2B%20c%20%3D%2010%29%20%3A%20b%20%2B%20c%20%3D%2010%20%3A%3D%20by%0A%20%20rw%20%5Bh1%5D%20at%20h2%0A%20%20--%20h2%20is%20now%20%3A%20b%20%2B%20c%20%3D%2010%2C%20exactly%20the%20goal%0A%20%20exact%20h2" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Every `rw` seen so far rewrites the *goal*. Adding `at h` instead
 rewrites a *hypothesis* `h`, in place, using the same left-to-right

@@ -4,20 +4,18 @@
 
 ---
 
-```lean
-theorem all_nats_ge_zero : ∀ n : Nat, n ≥ 0 :=
-  fun n => Nat.zero_le n
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20all_nats_ge_zero%20%3A%20%E2%88%80%20n%20%3A%20Nat%2C%20n%20%E2%89%A5%200%20%3A%3D%0A%20%20fun%20n%20%3D%3E%20Nat.zero_le%20n" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20all_nats_ge_zero%20%3A%20%E2%88%80%20n%20%3A%20Nat%2C%20n%20%E2%89%A5%200%20%3A%3D%0A%20%20fun%20n%20%3D%3E%20Nat.zero_le%20n" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 - `∀ x : α, P x` is again just a (dependent) function type: given any `x`,
   produce a proof of `P x`. `all_nats_ge_zero` is literally a function
   taking any `n` and returning a proof that `n ≥ 0` — here, `Nat.zero_le n`
   already proves exactly that for whichever `n` gets passed in.
 
-```lean
-theorem exists_even : ∃ n : Nat, n % 2 = 0 :=
-  ⟨2, rfl⟩
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20exists_even%20%3A%20%E2%88%83%20n%20%3A%20Nat%2C%20n%20%25%202%20%3D%200%20%3A%3D%0A%20%20%E2%9F%A82%2C%20rfl%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20exists_even%20%3A%20%E2%88%83%20n%20%3A%20Nat%2C%20n%20%25%202%20%3D%200%20%3A%3D%0A%20%20%E2%9F%A82%2C%20rfl%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 - `∃ x : α, P x` is a structure: a **witness** value plus a proof that the
   witness satisfies `P`.
@@ -46,17 +44,9 @@ claimed to exist, and `p` is *why* it satisfies the property. They are
 packed together because that is exactly the two pieces of data an
 existence proof needs.
 
-```lean
--- A minimal, self-contained primality check (no Mathlib import needed):
--- `n` is prime if it's at least 2 and no number strictly between 2 and n
--- divides it. `@[reducible]` lets `decide` below see straight through
--- this definition, instead of needing a separate `unfold` step first.
-@[reducible] def isPrime (n : Nat) : Prop :=
-  n ≥ 2 ∧ ∀ m : Nat, m < n → m ≥ 2 → ¬ (m ∣ n)
-
-theorem exists_prime_gt_three : ∃ p : Nat, p > 3 ∧ isPrime p :=
-  ⟨5, by decide⟩
-```
+<p><a href="https://live.lean-lang.org/#code=--%20A%20minimal%2C%20self-contained%20primality%20check%20%28no%20Mathlib%20import%20needed%29%3A%0A--%20%60n%60%20is%20prime%20if%20it%27s%20at%20least%202%20and%20no%20number%20strictly%20between%202%20and%20n%0A--%20divides%20it.%20%60%40%5Breducible%5D%60%20lets%20%60decide%60%20below%20see%20straight%20through%0A--%20this%20definition%2C%20instead%20of%20needing%20a%20separate%20%60unfold%60%20step%20first.%0A%40%5Breducible%5D%20def%20isPrime%20%28n%20%3A%20Nat%29%20%3A%20Prop%20%3A%3D%0A%20%20n%20%E2%89%A5%202%20%E2%88%A7%20%E2%88%80%20m%20%3A%20Nat%2C%20m%20%3C%20n%20%E2%86%92%20m%20%E2%89%A5%202%20%E2%86%92%20%C2%AC%20%28m%20%E2%88%A3%20n%29%0A%0Atheorem%20exists_prime_gt_three%20%3A%20%E2%88%83%20p%20%3A%20Nat%2C%20p%20%3E%203%20%E2%88%A7%20isPrime%20p%20%3A%3D%0A%20%20%E2%9F%A85%2C%20by%20decide%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20A%20minimal%2C%20self-contained%20primality%20check%20%28no%20Mathlib%20import%20needed%29%3A%0A--%20%60n%60%20is%20prime%20if%20it%27s%20at%20least%202%20and%20no%20number%20strictly%20between%202%20and%20n%0A--%20divides%20it.%20%60%40%5Breducible%5D%60%20lets%20%60decide%60%20below%20see%20straight%20through%0A--%20this%20definition%2C%20instead%20of%20needing%20a%20separate%20%60unfold%60%20step%20first.%0A%40%5Breducible%5D%20def%20isPrime%20%28n%20%3A%20Nat%29%20%3A%20Prop%20%3A%3D%0A%20%20n%20%E2%89%A5%202%20%E2%88%A7%20%E2%88%80%20m%20%3A%20Nat%2C%20m%20%3C%20n%20%E2%86%92%20m%20%E2%89%A5%202%20%E2%86%92%20%C2%AC%20%28m%20%E2%88%A3%20n%29%0A%0Atheorem%20exists_prime_gt_three%20%3A%20%E2%88%83%20p%20%3A%20Nat%2C%20p%20%3E%203%20%E2%88%A7%20isPrime%20p%20%3A%3D%0A%20%20%E2%9F%A85%2C%20by%20decide%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:231px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **A second example: there is always a bigger prime.** `exists_prime_gt_three`
 is one concrete instance of a classical fact: no matter which number is

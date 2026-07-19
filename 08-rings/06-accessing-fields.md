@@ -4,12 +4,9 @@
 
 ---
 
-```lean
-#eval intRing.addGrp.op 3 4     -- 7  (addition, via the nested CommGroup)
-#eval intRing.mul 3 4            -- 12 (multiplication)
-#eval intRing.one                 -- 1
-#eval intRing.addGrp.toGroup.inv 5   -- -5  (additive inverse, via Group inside CommGroup)
-```
+<p><a href="https://live.lean-lang.org/#code=%23eval%20intRing.addGrp.op%203%204%20%20%20%20%20--%207%20%20%28addition%2C%20via%20the%20nested%20CommGroup%29%0A%23eval%20intRing.mul%203%204%20%20%20%20%20%20%20%20%20%20%20%20--%2012%20%28multiplication%29%0A%23eval%20intRing.one%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20--%201%0A%23eval%20intRing.addGrp.toGroup.inv%205%20%20%20--%20-5%20%20%28additive%20inverse%2C%20via%20Group%20inside%20CommGroup%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23eval%20intRing.addGrp.op%203%204%20%20%20%20%20--%207%20%20%28addition%2C%20via%20the%20nested%20CommGroup%29%0A%23eval%20intRing.mul%203%204%20%20%20%20%20%20%20%20%20%20%20%20--%2012%20%28multiplication%29%0A%23eval%20intRing.one%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20--%201%0A%23eval%20intRing.addGrp.toGroup.inv%205%20%20%20--%20-5%20%20%28additive%20inverse%2C%20via%20Group%20inside%20CommGroup%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **Mathematical reading.** The chained projections walk down the tower of
 [forgetful functors](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
@@ -25,12 +22,9 @@ these structure-forgetting maps.
 to write — `+`/`*`/`0`/`1`/`-` already resolve to `Int`'s `CommRing`
 instance directly:
 
-```lean
-#eval (3 : Int) + 4     -- 7
-#eval (3 : Int) * 4      -- 12
-#eval (1 : Int)          -- 1
-#eval -(5 : Int)          -- -5
-```
+<p><a href="https://live.lean-lang.org/#code=%23eval%20%283%20%3A%20Int%29%20%2B%204%20%20%20%20%20--%207%0A%23eval%20%283%20%3A%20Int%29%20%2A%204%20%20%20%20%20%20--%2012%0A%23eval%20%281%20%3A%20Int%29%20%20%20%20%20%20%20%20%20%20--%201%0A%23eval%20-%285%20%3A%20Int%29%20%20%20%20%20%20%20%20%20%20--%20-5" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23eval%20%283%20%3A%20Int%29%20%2B%204%20%20%20%20%20--%207%0A%23eval%20%283%20%3A%20Int%29%20%2A%204%20%20%20%20%20%20--%2012%0A%23eval%20%281%20%3A%20Int%29%20%20%20%20%20%20%20%20%20%20--%201%0A%23eval%20-%285%20%3A%20Int%29%20%20%20%20%20%20%20%20%20%20--%20-5" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 The book's nested projections walk down a tower of structures built
 by hand (`Ring → CommGroup → Group`). Mathlib's typeclass resolution walks

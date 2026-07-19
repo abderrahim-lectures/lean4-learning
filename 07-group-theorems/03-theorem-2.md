@@ -28,20 +28,9 @@ chain of equalities, and then reading off which axiom licenses each step,
 is often faster than guessing tactics directly against the goal. This
 chain is best worked out on scratch paper before the editor is opened.
 
-```lean
-theorem left_inverse_unique (a b : G) (h : Grp.op b a = Grp.id) :
-    b = Grp.inv a := by
-  have e1 : b = Grp.op b Grp.id := (Grp.id_right b).symm
-  rw [e1]
-  -- Goal: op b id = inv a
-  rw [← Grp.inv_right a]
-  -- Goal: op b (op a (inv a)) = inv a
-  rw [← Grp.assoc b a (Grp.inv a)]
-  -- Goal: op (op b a) (inv a) = inv a
-  rw [h]
-  -- Goal: op id (inv a) = inv a
-  exact Grp.id_left (Grp.inv a)
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20left_inverse_unique%20%28a%20b%20%3A%20G%29%20%28h%20%3A%20Grp.op%20b%20a%20%3D%20Grp.id%29%20%3A%0A%20%20%20%20b%20%3D%20Grp.inv%20a%20%3A%3D%20by%0A%20%20have%20e1%20%3A%20b%20%3D%20Grp.op%20b%20Grp.id%20%3A%3D%20%28Grp.id_right%20b%29.symm%0A%20%20rw%20%5Be1%5D%0A%20%20--%20Goal%3A%20op%20b%20id%20%3D%20inv%20a%0A%20%20rw%20%5B%E2%86%90%20Grp.inv_right%20a%5D%0A%20%20--%20Goal%3A%20op%20b%20%28op%20a%20%28inv%20a%29%29%20%3D%20inv%20a%0A%20%20rw%20%5B%E2%86%90%20Grp.assoc%20b%20a%20%28Grp.inv%20a%29%5D%0A%20%20--%20Goal%3A%20op%20%28op%20b%20a%29%20%28inv%20a%29%20%3D%20inv%20a%0A%20%20rw%20%5Bh%5D%0A%20%20--%20Goal%3A%20op%20id%20%28inv%20a%29%20%3D%20inv%20a%0A%20%20exact%20Grp.id_left%20%28Grp.inv%20a%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20left_inverse_unique%20%28a%20b%20%3A%20G%29%20%28h%20%3A%20Grp.op%20b%20a%20%3D%20Grp.id%29%20%3A%0A%20%20%20%20b%20%3D%20Grp.inv%20a%20%3A%3D%20by%0A%20%20have%20e1%20%3A%20b%20%3D%20Grp.op%20b%20Grp.id%20%3A%3D%20%28Grp.id_right%20b%29.symm%0A%20%20rw%20%5Be1%5D%0A%20%20--%20Goal%3A%20op%20b%20id%20%3D%20inv%20a%0A%20%20rw%20%5B%E2%86%90%20Grp.inv_right%20a%5D%0A%20%20--%20Goal%3A%20op%20b%20%28op%20a%20%28inv%20a%29%29%20%3D%20inv%20a%0A%20%20rw%20%5B%E2%86%90%20Grp.assoc%20b%20a%20%28Grp.inv%20a%29%5D%0A%20%20--%20Goal%3A%20op%20%28op%20b%20a%29%20%28inv%20a%29%20%3D%20inv%20a%0A%20%20rw%20%5Bh%5D%0A%20%20--%20Goal%3A%20op%20id%20%28inv%20a%29%20%3D%20inv%20a%0A%20%20exact%20Grp.id_left%20%28Grp.inv%20a%29" title="Lean playground" loading="lazy" style="width:100%;height:288px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 At each `rw`, the goal-state comment records what would appear in the
 editor. It is worth training oneself to predict that comment *before*
@@ -67,10 +56,9 @@ are two-sided and unique, so the notation $a^{-1}$ is unambiguous.
 something cancelable" chain, written with `*`/`1`/`⁻¹` instead of
 `Grp.op`/`Grp.id`/`Grp.inv`:
 
-```lean
-example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
-  rw [← mul_one b, ← mul_inv_cancel a, ← mul_assoc, h, one_mul]
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%7BG%20%3A%20Type%2A%7D%20%5BGroup%20G%5D%20%28a%20b%20%3A%20G%29%20%28h%20%3A%20b%20%2A%20a%20%3D%201%29%20%3A%20b%20%3D%20a%E2%81%BB%C2%B9%20%3A%3D%20by%0A%20%20rw%20%5B%E2%86%90%20mul_one%20b%2C%20%E2%86%90%20mul_inv_cancel%20a%2C%20%E2%86%90%20mul_assoc%2C%20h%2C%20one_mul%5D" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%7BG%20%3A%20Type%2A%7D%20%5BGroup%20G%5D%20%28a%20b%20%3A%20G%29%20%28h%20%3A%20b%20%2A%20a%20%3D%201%29%20%3A%20b%20%3D%20a%E2%81%BB%C2%B9%20%3A%3D%20by%0A%20%20rw%20%5B%E2%86%90%20mul_one%20b%2C%20%E2%86%90%20mul_inv_cancel%20a%2C%20%E2%86%90%20mul_assoc%2C%20h%2C%20one_mul%5D" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Reading right to left through the `rw` list gives line-for-line the
 displayed chain above: `←` [`mul_one`](https://loogle.lean-lang.org/?q=mul_one) `b` turns `b` into `b * 1`; `←` [`mul_inv_cancel`](https://loogle.lean-lang.org/?q=mul_inv_cancel) `a`

@@ -7,83 +7,9 @@
 Given two $R$-modules $M$, $N$, their direct sum $M \oplus N$ has carrier
 $M \times N$, componentwise addition, and componentwise scalar action:
 
-```lean
-structure DirectSum (M N : Type) where
-  fst : M
-  snd : N
-
-def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
-    (ModM : Module R Rg M) (ModN : Module R Rg N) :
-    Module R Rg (DirectSum M N) where
-  addGrp := {
-    toGroup := {
-      op := fun x y => ⟨ModM.addGrp.op x.fst y.fst, ModN.addGrp.op x.snd y.snd⟩
-      id := ⟨ModM.addGrp.toGroup.id, ModN.addGrp.toGroup.id⟩
-      inv := fun x => ⟨ModM.addGrp.toGroup.inv x.fst, ModN.addGrp.toGroup.inv x.snd⟩
-      assoc := by
-        intro x y z
-        show DirectSum.mk _ _ = DirectSum.mk _ _
-        congr 1
-        · exact ModM.addGrp.toGroup.assoc x.fst y.fst z.fst
-        · exact ModN.addGrp.toGroup.assoc x.snd y.snd z.snd
-      id_left := by
-        intro x
-        show DirectSum.mk _ _ = DirectSum.mk _ _
-        congr 1
-        · exact ModM.addGrp.toGroup.id_left x.fst
-        · exact ModN.addGrp.toGroup.id_left x.snd
-      id_right := by
-        intro x
-        show DirectSum.mk _ _ = DirectSum.mk _ _
-        congr 1
-        · exact ModM.addGrp.toGroup.id_right x.fst
-        · exact ModN.addGrp.toGroup.id_right x.snd
-      inv_left := by
-        intro x
-        show DirectSum.mk _ _ = DirectSum.mk _ _
-        congr 1
-        · exact ModM.addGrp.toGroup.inv_left x.fst
-        · exact ModN.addGrp.toGroup.inv_left x.snd
-      inv_right := by
-        intro x
-        show DirectSum.mk _ _ = DirectSum.mk _ _
-        congr 1
-        · exact ModM.addGrp.toGroup.inv_right x.fst
-        · exact ModN.addGrp.toGroup.inv_right x.snd
-    }
-    comm := by
-      intro x y
-      show DirectSum.mk _ _ = DirectSum.mk _ _
-      congr 1
-      · exact ModM.addGrp.comm x.fst y.fst
-      · exact ModN.addGrp.comm x.snd y.snd
-  }
-  smul := fun r x => ⟨ModM.smul r x.fst, ModN.smul r x.snd⟩
-  smul_add := by
-    intro r x y
-    show DirectSum.mk _ _ = DirectSum.mk _ _
-    congr 1
-    · exact ModM.smul_add r x.fst y.fst
-    · exact ModN.smul_add r x.snd y.snd
-  add_smul := by
-    intro r s x
-    show DirectSum.mk _ _ = DirectSum.mk _ _
-    congr 1
-    · exact ModM.add_smul r s x.fst
-    · exact ModN.add_smul r s x.snd
-  smul_smul := by
-    intro r s x
-    show DirectSum.mk _ _ = DirectSum.mk _ _
-    congr 1
-    · exact ModM.smul_smul r s x.fst
-    · exact ModN.smul_smul r s x.snd
-  one_smul := by
-    intro x
-    show DirectSum.mk _ _ = DirectSum.mk _ _
-    congr 1
-    · exact ModM.one_smul x.fst
-    · exact ModN.one_smul x.snd
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20DirectSum%20%28M%20N%20%3A%20Type%29%20where%0A%20%20fst%20%3A%20M%0A%20%20snd%20%3A%20N%0A%0Adef%20directSumModule%20%7BR%20%3A%20Type%7D%20%28Rg%20%3A%20Ring%20R%29%20%7BM%20N%20%3A%20Type%7D%0A%20%20%20%20%28ModM%20%3A%20Module%20R%20Rg%20M%29%20%28ModN%20%3A%20Module%20R%20Rg%20N%29%20%3A%0A%20%20%20%20Module%20R%20Rg%20%28DirectSum%20M%20N%29%20where%0A%20%20addGrp%20%3A%3D%20%7B%0A%20%20%20%20toGroup%20%3A%3D%20%7B%0A%20%20%20%20%20%20op%20%3A%3D%20fun%20x%20y%20%3D%3E%20%E2%9F%A8ModM.addGrp.op%20x.fst%20y.fst%2C%20ModN.addGrp.op%20x.snd%20y.snd%E2%9F%A9%0A%20%20%20%20%20%20id%20%3A%3D%20%E2%9F%A8ModM.addGrp.toGroup.id%2C%20ModN.addGrp.toGroup.id%E2%9F%A9%0A%20%20%20%20%20%20inv%20%3A%3D%20fun%20x%20%3D%3E%20%E2%9F%A8ModM.addGrp.toGroup.inv%20x.fst%2C%20ModN.addGrp.toGroup.inv%20x.snd%E2%9F%A9%0A%20%20%20%20%20%20assoc%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%20y%20z%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.assoc%20x.fst%20y.fst%20z.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.assoc%20x.snd%20y.snd%20z.snd%0A%20%20%20%20%20%20id_left%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.id_left%20x.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.id_left%20x.snd%0A%20%20%20%20%20%20id_right%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.id_right%20x.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.id_right%20x.snd%0A%20%20%20%20%20%20inv_left%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.inv_left%20x.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.inv_left%20x.snd%0A%20%20%20%20%20%20inv_right%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.inv_right%20x.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.inv_right%20x.snd%0A%20%20%20%20%7D%0A%20%20%20%20comm%20%3A%3D%20by%0A%20%20%20%20%20%20intro%20x%20y%0A%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.comm%20x.fst%20y.fst%0A%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.comm%20x.snd%20y.snd%0A%20%20%7D%0A%20%20smul%20%3A%3D%20fun%20r%20x%20%3D%3E%20%E2%9F%A8ModM.smul%20r%20x.fst%2C%20ModN.smul%20r%20x.snd%E2%9F%A9%0A%20%20smul_add%20%3A%3D%20by%0A%20%20%20%20intro%20r%20x%20y%0A%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20congr%201%0A%20%20%20%20%C2%B7%20exact%20ModM.smul_add%20r%20x.fst%20y.fst%0A%20%20%20%20%C2%B7%20exact%20ModN.smul_add%20r%20x.snd%20y.snd%0A%20%20add_smul%20%3A%3D%20by%0A%20%20%20%20intro%20r%20s%20x%0A%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20congr%201%0A%20%20%20%20%C2%B7%20exact%20ModM.add_smul%20r%20s%20x.fst%0A%20%20%20%20%C2%B7%20exact%20ModN.add_smul%20r%20s%20x.snd%0A%20%20smul_smul%20%3A%3D%20by%0A%20%20%20%20intro%20r%20s%20x%0A%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20congr%201%0A%20%20%20%20%C2%B7%20exact%20ModM.smul_smul%20r%20s%20x.fst%0A%20%20%20%20%C2%B7%20exact%20ModN.smul_smul%20r%20s%20x.snd%0A%20%20one_smul%20%3A%3D%20by%0A%20%20%20%20intro%20x%0A%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20congr%201%0A%20%20%20%20%C2%B7%20exact%20ModM.one_smul%20x.fst%0A%20%20%20%20%C2%B7%20exact%20ModN.one_smul%20x.snd" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20DirectSum%20%28M%20N%20%3A%20Type%29%20where%0A%20%20fst%20%3A%20M%0A%20%20snd%20%3A%20N%0A%0Adef%20directSumModule%20%7BR%20%3A%20Type%7D%20%28Rg%20%3A%20Ring%20R%29%20%7BM%20N%20%3A%20Type%7D%0A%20%20%20%20%28ModM%20%3A%20Module%20R%20Rg%20M%29%20%28ModN%20%3A%20Module%20R%20Rg%20N%29%20%3A%0A%20%20%20%20Module%20R%20Rg%20%28DirectSum%20M%20N%29%20where%0A%20%20addGrp%20%3A%3D%20%7B%0A%20%20%20%20toGroup%20%3A%3D%20%7B%0A%20%20%20%20%20%20op%20%3A%3D%20fun%20x%20y%20%3D%3E%20%E2%9F%A8ModM.addGrp.op%20x.fst%20y.fst%2C%20ModN.addGrp.op%20x.snd%20y.snd%E2%9F%A9%0A%20%20%20%20%20%20id%20%3A%3D%20%E2%9F%A8ModM.addGrp.toGroup.id%2C%20ModN.addGrp.toGroup.id%E2%9F%A9%0A%20%20%20%20%20%20inv%20%3A%3D%20fun%20x%20%3D%3E%20%E2%9F%A8ModM.addGrp.toGroup.inv%20x.fst%2C%20ModN.addGrp.toGroup.inv%20x.snd%E2%9F%A9%0A%20%20%20%20%20%20assoc%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%20y%20z%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.assoc%20x.fst%20y.fst%20z.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.assoc%20x.snd%20y.snd%20z.snd%0A%20%20%20%20%20%20id_left%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.id_left%20x.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.id_left%20x.snd%0A%20%20%20%20%20%20id_right%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.id_right%20x.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.id_right%20x.snd%0A%20%20%20%20%20%20inv_left%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.inv_left%20x.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.inv_left%20x.snd%0A%20%20%20%20%20%20inv_right%20%3A%3D%20by%0A%20%20%20%20%20%20%20%20intro%20x%0A%20%20%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.toGroup.inv_right%20x.fst%0A%20%20%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.toGroup.inv_right%20x.snd%0A%20%20%20%20%7D%0A%20%20%20%20comm%20%3A%3D%20by%0A%20%20%20%20%20%20intro%20x%20y%0A%20%20%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20%20%20congr%201%0A%20%20%20%20%20%20%C2%B7%20exact%20ModM.addGrp.comm%20x.fst%20y.fst%0A%20%20%20%20%20%20%C2%B7%20exact%20ModN.addGrp.comm%20x.snd%20y.snd%0A%20%20%7D%0A%20%20smul%20%3A%3D%20fun%20r%20x%20%3D%3E%20%E2%9F%A8ModM.smul%20r%20x.fst%2C%20ModN.smul%20r%20x.snd%E2%9F%A9%0A%20%20smul_add%20%3A%3D%20by%0A%20%20%20%20intro%20r%20x%20y%0A%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20congr%201%0A%20%20%20%20%C2%B7%20exact%20ModM.smul_add%20r%20x.fst%20y.fst%0A%20%20%20%20%C2%B7%20exact%20ModN.smul_add%20r%20x.snd%20y.snd%0A%20%20add_smul%20%3A%3D%20by%0A%20%20%20%20intro%20r%20s%20x%0A%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20congr%201%0A%20%20%20%20%C2%B7%20exact%20ModM.add_smul%20r%20s%20x.fst%0A%20%20%20%20%C2%B7%20exact%20ModN.add_smul%20r%20s%20x.snd%0A%20%20smul_smul%20%3A%3D%20by%0A%20%20%20%20intro%20r%20s%20x%0A%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20congr%201%0A%20%20%20%20%C2%B7%20exact%20ModM.smul_smul%20r%20s%20x.fst%0A%20%20%20%20%C2%B7%20exact%20ModN.smul_smul%20r%20s%20x.snd%0A%20%20one_smul%20%3A%3D%20by%0A%20%20%20%20intro%20x%0A%20%20%20%20show%20DirectSum.mk%20_%20_%20%3D%20DirectSum.mk%20_%20_%0A%20%20%20%20congr%201%0A%20%20%20%20%C2%B7%20exact%20ModM.one_smul%20x.fst%0A%20%20%20%20%C2%B7%20exact%20ModN.one_smul%20x.snd" title="Lean playground" loading="lazy" style="width:100%;height:650px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `congr 1` is a tactic worth noting, as this is its first
 appearance. Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
@@ -119,15 +45,9 @@ $\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N =
 Instantiating the generic construction requires nothing beyond supplying two
 modules — here, `intZModule` twice.
 
-```lean
-def zSquaredModule := directSumModule intRing intZModule intZModule
-
-#eval (zSquaredModule.addGrp.op ⟨2, 3⟩ ⟨10, 20⟩ : DirectSum Int Int)
--- { fst := 12, snd := 23 }, i.e. (2,3) + (10,20) = (12,23)
-
-#eval (zSquaredModule.smul 5 ⟨2, 3⟩ : DirectSum Int Int)
--- { fst := 10, snd := 15 }, i.e. 5 · (2,3) = (10,15)
-```
+<p><a href="https://live.lean-lang.org/#code=def%20zSquaredModule%20%3A%3D%20directSumModule%20intRing%20intZModule%20intZModule%0A%0A%23eval%20%28zSquaredModule.addGrp.op%20%E2%9F%A82%2C%203%E2%9F%A9%20%E2%9F%A810%2C%2020%E2%9F%A9%20%3A%20DirectSum%20Int%20Int%29%0A--%20%7B%20fst%20%3A%3D%2012%2C%20snd%20%3A%3D%2023%20%7D%2C%20i.e.%20%282%2C3%29%20%2B%20%2810%2C20%29%20%3D%20%2812%2C23%29%0A%0A%23eval%20%28zSquaredModule.smul%205%20%E2%9F%A82%2C%203%E2%9F%A9%20%3A%20DirectSum%20Int%20Int%29%0A--%20%7B%20fst%20%3A%3D%2010%2C%20snd%20%3A%3D%2015%20%7D%2C%20i.e.%205%20%C2%B7%20%282%2C3%29%20%3D%20%2810%2C15%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20zSquaredModule%20%3A%3D%20directSumModule%20intRing%20intZModule%20intZModule%0A%0A%23eval%20%28zSquaredModule.addGrp.op%20%E2%9F%A82%2C%203%E2%9F%A9%20%E2%9F%A810%2C%2020%E2%9F%A9%20%3A%20DirectSum%20Int%20Int%29%0A--%20%7B%20fst%20%3A%3D%2012%2C%20snd%20%3A%3D%2023%20%7D%2C%20i.e.%20%282%2C3%29%20%2B%20%2810%2C20%29%20%3D%20%2812%2C23%29%0A%0A%23eval%20%28zSquaredModule.smul%205%20%E2%9F%A82%2C%203%E2%9F%A9%20%3A%20DirectSum%20Int%20Int%29%0A--%20%7B%20fst%20%3A%3D%2010%2C%20snd%20%3A%3D%2015%20%7D%2C%20i.e.%205%20%C2%B7%20%282%2C3%29%20%3D%20%2810%2C15%29" title="Lean playground" loading="lazy" style="width:100%;height:193px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Both outputs are exactly the componentwise formulas from the mathematical
 reading above, computed rather than merely asserted.
@@ -138,13 +58,9 @@ componentwise via `congr 1`). Mathlib already gives the ordinary product
 type `M × N` a `Module R` instance directly. There is no `DirectSum`
 wrapper to define at all:
 
-```lean
-example {M N : Type*} [AddCommGroup M] [AddCommGroup N]
-    [Module Int M] [Module Int N] : Module Int (M × N) := inferInstance
-
-#eval ((2, 3) + (10, 20) : Int × Int)     -- (12, 23)
-#eval ((5 : Int) • ((2, 3) : Int × Int))   -- (10, 15)
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%7BM%20N%20%3A%20Type%2A%7D%20%5BAddCommGroup%20M%5D%20%5BAddCommGroup%20N%5D%0A%20%20%20%20%5BModule%20Int%20M%5D%20%5BModule%20Int%20N%5D%20%3A%20Module%20Int%20%28M%20%C3%97%20N%29%20%3A%3D%20inferInstance%0A%0A%23eval%20%28%282%2C%203%29%20%2B%20%2810%2C%2020%29%20%3A%20Int%20%C3%97%20Int%29%20%20%20%20%20--%20%2812%2C%2023%29%0A%23eval%20%28%285%20%3A%20Int%29%20%E2%80%A2%20%28%282%2C%203%29%20%3A%20Int%20%C3%97%20Int%29%29%20%20%20--%20%2810%2C%2015%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%7BM%20N%20%3A%20Type%2A%7D%20%5BAddCommGroup%20M%5D%20%5BAddCommGroup%20N%5D%0A%20%20%20%20%5BModule%20Int%20M%5D%20%5BModule%20Int%20N%5D%20%3A%20Module%20Int%20%28M%20%C3%97%20N%29%20%3A%3D%20inferInstance%0A%0A%23eval%20%28%282%2C%203%29%20%2B%20%2810%2C%2020%29%20%3A%20Int%20%C3%97%20Int%29%20%20%20%20%20--%20%2812%2C%2023%29%0A%23eval%20%28%285%20%3A%20Int%29%20%E2%80%A2%20%28%282%2C%203%29%20%3A%20Int%20%C3%97%20Int%29%29%20%20%20--%20%2810%2C%2015%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 These are the same componentwise formulas as `zSquaredModule`'s `#eval`s
 above. But `Prod`'s `AddCommGroup`/[`Module`](https://loogle.lean-lang.org/?q=Module) instances (and the
@@ -157,14 +73,9 @@ one of the defining maps from the product/coproduct structure above, is
 itself a `LinearMap` (previous section), built directly from
 `DirectSum`'s own field accessor:
 
-```lean
-def proj1 : LinearMap intRing zSquaredModule intZModule where
-  toFun := fun x => x.fst
-  map_add := by intro x y; rfl
-  map_smul := by intro r x; rfl
-
-#eval proj1.toFun ⟨7, 100⟩   -- 7
-```
+<p><a href="https://live.lean-lang.org/#code=def%20proj1%20%3A%20LinearMap%20intRing%20zSquaredModule%20intZModule%20where%0A%20%20toFun%20%3A%3D%20fun%20x%20%3D%3E%20x.fst%0A%20%20map_add%20%3A%3D%20by%20intro%20x%20y%3B%20rfl%0A%20%20map_smul%20%3A%3D%20by%20intro%20r%20x%3B%20rfl%0A%0A%23eval%20proj1.toFun%20%E2%9F%A87%2C%20100%E2%9F%A9%20%20%20--%207" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20proj1%20%3A%20LinearMap%20intRing%20zSquaredModule%20intZModule%20where%0A%20%20toFun%20%3A%3D%20fun%20x%20%3D%3E%20x.fst%0A%20%20map_add%20%3A%3D%20by%20intro%20x%20y%3B%20rfl%0A%20%20map_smul%20%3A%3D%20by%20intro%20r%20x%3B%20rfl%0A%0A%23eval%20proj1.toFun%20%E2%9F%A87%2C%20100%E2%9F%A9%20%20%20--%207" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Both proof obligations are `rfl` directly: `zSquaredModule.addGrp.op`
 unfolds to componentwise addition (by the construction two sections
@@ -175,11 +86,9 @@ back), so taking `.fst` of a sum is definitionally the same as summing the
 something that needs to be built. Mathlib's [`LinearMap.fst`](https://loogle.lean-lang.org/?q=LinearMap.fst) already is $\pi_1$,
 generic over any two modules over any ring:
 
-```lean
-def proj1' : (Int × Int) →ₗ[Int] Int := LinearMap.fst Int Int Int
-
-#eval proj1' (7, 100)   -- 7
-```
+<p><a href="https://live.lean-lang.org/#code=def%20proj1%27%20%3A%20%28Int%20%C3%97%20Int%29%20%E2%86%92%E2%82%97%5BInt%5D%20Int%20%3A%3D%20LinearMap.fst%20Int%20Int%20Int%0A%0A%23eval%20proj1%27%20%287%2C%20100%29%20%20%20--%207" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20proj1%27%20%3A%20%28Int%20%C3%97%20Int%29%20%E2%86%92%E2%82%97%5BInt%5D%20Int%20%3A%3D%20LinearMap.fst%20Int%20Int%20Int%0A%0A%23eval%20proj1%27%20%287%2C%20100%29%20%20%20--%207" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 ---
 

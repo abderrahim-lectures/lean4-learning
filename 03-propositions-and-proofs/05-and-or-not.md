@@ -4,18 +4,9 @@
 
 ---
 
-```lean
--- And
-theorem and_example {P Q : Prop} (hp : P) (hq : Q) : P ∧ Q :=
-  ⟨hp, hq⟩
-
-theorem and_left {P Q : Prop} (h : P ∧ Q) : P :=
-  h.left
-
--- And is commutative, in term mode (no tactics)
-theorem and_comm_term {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
-  ⟨h.right, h.left⟩
-```
+<p><a href="https://live.lean-lang.org/#code=--%20And%0Atheorem%20and_example%20%7BP%20Q%20%3A%20Prop%7D%20%28hp%20%3A%20P%29%20%28hq%20%3A%20Q%29%20%3A%20P%20%E2%88%A7%20Q%20%3A%3D%0A%20%20%E2%9F%A8hp%2C%20hq%E2%9F%A9%0A%0Atheorem%20and_left%20%7BP%20Q%20%3A%20Prop%7D%20%28h%20%3A%20P%20%E2%88%A7%20Q%29%20%3A%20P%20%3A%3D%0A%20%20h.left%0A%0A--%20And%20is%20commutative%2C%20in%20term%20mode%20%28no%20tactics%29%0Atheorem%20and_comm_term%20%7BP%20Q%20%3A%20Prop%7D%20%28h%20%3A%20P%20%E2%88%A7%20Q%29%20%3A%20Q%20%E2%88%A7%20P%20%3A%3D%0A%20%20%E2%9F%A8h.right%2C%20h.left%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20And%0Atheorem%20and_example%20%7BP%20Q%20%3A%20Prop%7D%20%28hp%20%3A%20P%29%20%28hq%20%3A%20Q%29%20%3A%20P%20%E2%88%A7%20Q%20%3A%3D%0A%20%20%E2%9F%A8hp%2C%20hq%E2%9F%A9%0A%0Atheorem%20and_left%20%7BP%20Q%20%3A%20Prop%7D%20%28h%20%3A%20P%20%E2%88%A7%20Q%29%20%3A%20P%20%3A%3D%0A%20%20h.left%0A%0A--%20And%20is%20commutative%2C%20in%20term%20mode%20%28no%20tactics%29%0Atheorem%20and_comm_term%20%7BP%20Q%20%3A%20Prop%7D%20%28h%20%3A%20P%20%E2%88%A7%20Q%29%20%3A%20Q%20%E2%88%A7%20P%20%3A%3D%0A%20%20%E2%9F%A8h.right%2C%20h.left%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:250px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 - `∧` (And) is a structure with two fields `left` and `right`. `⟨hp, hq⟩`
   is the same "here are the pieces, in order" anonymous-constructor
@@ -25,16 +16,9 @@ theorem and_comm_term {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
   `⟨hp, hq⟩` must mean "build the `And` from a proof of `P` and a proof of
   `Q`," in that order, with no need to spell out `And.intro hp hq`.
 
-```lean
--- Or
-theorem or_example {P Q : Prop} (hp : P) : P ∨ Q :=
-  Or.inl hp
-
--- Or is commutative too, using Or.elim to case-split on *which* disjunct
--- the hypothesis actually is, without the `cases` tactic
-theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
-  Or.elim h (fun hp => Or.inr hp) (fun hq => Or.inl hq)
-```
+<p><a href="https://live.lean-lang.org/#code=--%20Or%0Atheorem%20or_example%20%7BP%20Q%20%3A%20Prop%7D%20%28hp%20%3A%20P%29%20%3A%20P%20%E2%88%A8%20Q%20%3A%3D%0A%20%20Or.inl%20hp%0A%0A--%20Or%20is%20commutative%20too%2C%20using%20Or.elim%20to%20case-split%20on%20%2Awhich%2A%20disjunct%0A--%20the%20hypothesis%20actually%20is%2C%20without%20the%20%60cases%60%20tactic%0Atheorem%20or_comm_term%20%7BP%20Q%20%3A%20Prop%7D%20%28h%20%3A%20P%20%E2%88%A8%20Q%29%20%3A%20Q%20%E2%88%A8%20P%20%3A%3D%0A%20%20Or.elim%20h%20%28fun%20hp%20%3D%3E%20Or.inr%20hp%29%20%28fun%20hq%20%3D%3E%20Or.inl%20hq%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20Or%0Atheorem%20or_example%20%7BP%20Q%20%3A%20Prop%7D%20%28hp%20%3A%20P%29%20%3A%20P%20%E2%88%A8%20Q%20%3A%3D%0A%20%20Or.inl%20hp%0A%0A--%20Or%20is%20commutative%20too%2C%20using%20Or.elim%20to%20case-split%20on%20%2Awhich%2A%20disjunct%0A--%20the%20hypothesis%20actually%20is%2C%20without%20the%20%60cases%60%20tactic%0Atheorem%20or_comm_term%20%7BP%20Q%20%3A%20Prop%7D%20%28h%20%3A%20P%20%E2%88%A8%20Q%29%20%3A%20Q%20%E2%88%A8%20P%20%3A%3D%0A%20%20Or.elim%20h%20%28fun%20hp%20%3D%3E%20Or.inr%20hp%29%20%28fun%20hq%20%3D%3E%20Or.inl%20hq%29" title="Lean playground" loading="lazy" style="width:100%;height:212px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 - `∨` (Or) has two constructors, `Or.inl` and `Or.inr`. A proof of `P ∨ Q`
   is either "a proof of `P`" or "a proof of `Q`".
@@ -49,21 +33,16 @@ theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
   "if it was `P`" branch and `fun hq => Or.inl hq` for the "if it was `Q`"
   branch.
 
-```lean
--- Not, i.e. P → False
-theorem not_example : ¬(1 = 2) := by
-  decide
-```
+<p><a href="https://live.lean-lang.org/#code=--%20Not%2C%20i.e.%20P%20%E2%86%92%20False%0Atheorem%20not_example%20%3A%20%C2%AC%281%20%3D%202%29%20%3A%3D%20by%0A%20%20decide" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20Not%2C%20i.e.%20P%20%E2%86%92%20False%0Atheorem%20not_example%20%3A%20%C2%AC%281%20%3D%202%29%20%3A%3D%20by%0A%20%20decide" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 - `¬P` is notation for `P → False`. To prove a negation, assume `P` holds
   and derive `False`.
 
-```lean
--- Deriving False from a genuine contradiction, then using `absurd` to
--- close any goal at all once you have one
-theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2) : P :=
-  absurd h1 h2
-```
+<p><a href="https://live.lean-lang.org/#code=--%20Deriving%20False%20from%20a%20genuine%20contradiction%2C%20then%20using%20%60absurd%60%20to%0A--%20close%20any%20goal%20at%20all%20once%20you%20have%20one%0Atheorem%20anything_from_contradiction%20%7BP%20%3A%20Prop%7D%20%28h1%20%3A%201%20%3D%202%29%20%28h2%20%3A%20%281%3ANat%29%20%E2%89%A0%202%29%20%3A%20P%20%3A%3D%0A%20%20absurd%20h1%20h2" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=--%20Deriving%20False%20from%20a%20genuine%20contradiction%2C%20then%20using%20%60absurd%60%20to%0A--%20close%20any%20goal%20at%20all%20once%20you%20have%20one%0Atheorem%20anything_from_contradiction%20%7BP%20%3A%20Prop%7D%20%28h1%20%3A%201%20%3D%202%29%20%28h2%20%3A%20%281%3ANat%29%20%E2%89%A0%202%29%20%3A%20P%20%3A%3D%0A%20%20absurd%20h1%20h2" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 - `absurd {P Q : Prop} (h1 : P) (h2 : ¬P) : Q` derives *anything at all*
   from a genuine contradiction: a direct proof of `P` together with a

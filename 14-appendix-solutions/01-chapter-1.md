@@ -28,11 +28,9 @@ behavior from $K$, not just a relabeling of it.
 
 **2. `Vec.toList : Vec α n → List α`**
 
-```lean
-def Vec.toList : Vec α n → List α
-  | Vec.nil => []
-  | Vec.cons a rest => a :: Vec.toList rest
-```
+<p><a href="https://live.lean-lang.org/#code=def%20Vec.toList%20%3A%20Vec%20%CE%B1%20n%20%E2%86%92%20List%20%CE%B1%0A%20%20%7C%20Vec.nil%20%3D%3E%20%5B%5D%0A%20%20%7C%20Vec.cons%20a%20rest%20%3D%3E%20a%20%3A%3A%20Vec.toList%20rest" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20Vec.toList%20%3A%20Vec%20%CE%B1%20n%20%E2%86%92%20List%20%CE%B1%0A%20%20%7C%20Vec.nil%20%3D%3E%20%5B%5D%0A%20%20%7C%20Vec.cons%20a%20rest%20%3D%3E%20a%20%3A%3A%20Vec.toList%20rest" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `Vec.replicate`'s type, `(n : Nat) → Vec α n`, is genuinely dependent: the
 *return* type `Vec α n` mentions `n`, the value just supplied as the
@@ -47,9 +45,9 @@ a plain `List α`.
 
 **3. A second `Σ n : Nat, Fin n`, and why `Σ n : Nat, n > 0` fails**
 
-```lean
-def anotherSigma : Σ n : Nat, Fin n := ⟨5, ⟨0, by decide⟩⟩
-```
+<p><a href="https://live.lean-lang.org/#code=def%20anotherSigma%20%3A%20%CE%A3%20n%20%3A%20Nat%2C%20Fin%20n%20%3A%3D%20%E2%9F%A85%2C%20%E2%9F%A80%2C%20by%20decide%E2%9F%A9%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20anotherSigma%20%3A%20%CE%A3%20n%20%3A%20Nat%2C%20Fin%20n%20%3A%3D%20%E2%9F%A85%2C%20%E2%9F%A80%2C%20by%20decide%E2%9F%A9%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 (`0 : Fin 5` is valid since $0 < 5$; any pair `⟨k, ⟨i, h⟩⟩` with `i < k`
 works.) `Σ n : Nat, n > 0` fails to type-check because `n > 0 : Prop`

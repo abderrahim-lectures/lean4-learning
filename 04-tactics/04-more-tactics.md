@@ -6,10 +6,9 @@
 
 ### `simp`: simplify using known simplification lemmas
 
-```lean
-theorem simp_example (n : Nat) : n + 0 = n := by
-  simp
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20simp_example%20%28n%20%3A%20Nat%29%20%3A%20n%20%2B%200%20%3D%20n%20%3A%3D%20by%0A%20%20simp" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20simp_example%20%28n%20%3A%20Nat%29%20%3A%20n%20%2B%200%20%3D%20n%20%3A%3D%20by%0A%20%20simp" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `simp` automatically searches for known "simplification" lemmas and applies
 them, possibly many at once. This is convenient, but it hides *which* facts
@@ -26,12 +25,9 @@ proofs, once what it would have done by hand is already understood.
 
 ### `constructor`: build a structure/And/Iff by its constructor
 
-```lean
-theorem and_example (P Q : Prop) (hp : P) (hq : Q) : P ∧ Q := by
-  constructor
-  · exact hp
-  · exact hq
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20and_example%20%28P%20Q%20%3A%20Prop%29%20%28hp%20%3A%20P%29%20%28hq%20%3A%20Q%29%20%3A%20P%20%E2%88%A7%20Q%20%3A%3D%20by%0A%20%20constructor%0A%20%20%C2%B7%20exact%20hp%0A%20%20%C2%B7%20exact%20hq" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20and_example%20%28P%20Q%20%3A%20Prop%29%20%28hp%20%3A%20P%29%20%28hq%20%3A%20Q%29%20%3A%20P%20%E2%88%A7%20Q%20%3A%3D%20by%0A%20%20constructor%0A%20%20%C2%B7%20exact%20hp%0A%20%20%C2%B7%20exact%20hq" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 The `·` (focus dot) lets you address each remaining goal one at a time.
 
@@ -55,23 +51,15 @@ prove it from each summand, the case analysis $\iota_1$/$\iota_2$.
 
 ### `cases`: case-split on an inductive value or hypothesis
 
-```lean
-theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P := by
-  cases h with
-  | inl hp => exact Or.inr hp
-  | inr hq => exact Or.inl hq
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20or_comm_ex%20%7BP%20Q%20%3A%20Prop%7D%20%28h%20%3A%20P%20%E2%88%A8%20Q%29%20%3A%20Q%20%E2%88%A8%20P%20%3A%3D%20by%0A%20%20cases%20h%20with%0A%20%20%7C%20inl%20hp%20%3D%3E%20exact%20Or.inr%20hp%0A%20%20%7C%20inr%20hq%20%3D%3E%20exact%20Or.inl%20hq" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20or_comm_ex%20%7BP%20Q%20%3A%20Prop%7D%20%28h%20%3A%20P%20%E2%88%A8%20Q%29%20%3A%20Q%20%E2%88%A8%20P%20%3A%3D%20by%0A%20%20cases%20h%20with%0A%20%20%7C%20inl%20hp%20%3D%3E%20exact%20Or.inr%20hp%0A%20%20%7C%20inr%20hq%20%3D%3E%20exact%20Or.inl%20hq" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 ### `induction`: proof by induction on a `Nat` (or other inductive type)
 
-```lean
-theorem add_zero_left (n : Nat) : 0 + n = n := by
-  induction n with
-  | zero => rfl
-  | succ k ih =>
-    show 0 + (k + 1) = k + 1
-    rw [Nat.add_succ, ih]
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20add_zero_left%20%28n%20%3A%20Nat%29%20%3A%200%20%2B%20n%20%3D%20n%20%3A%3D%20by%0A%20%20induction%20n%20with%0A%20%20%7C%20zero%20%3D%3E%20rfl%0A%20%20%7C%20succ%20k%20ih%20%3D%3E%0A%20%20%20%20show%200%20%2B%20%28k%20%2B%201%29%20%3D%20k%20%2B%201%0A%20%20%20%20rw%20%5BNat.add_succ%2C%20ih%5D" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20add_zero_left%20%28n%20%3A%20Nat%29%20%3A%200%20%2B%20n%20%3D%20n%20%3A%3D%20by%0A%20%20induction%20n%20with%0A%20%20%7C%20zero%20%3D%3E%20rfl%0A%20%20%7C%20succ%20k%20ih%20%3D%3E%0A%20%20%20%20show%200%20%2B%20%28k%20%2B%201%29%20%3D%20k%20%2B%201%0A%20%20%20%20rw%20%5BNat.add_succ%2C%20ih%5D" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 This mirrors the mathematical principle of induction:
 
@@ -83,14 +71,9 @@ $$
 
 ### `unfold`: unfold a definition
 
-```lean
-def isZero (n : Nat) : Prop := n = 0
-
-theorem isZero_zero : isZero 0 := by
-  unfold isZero
-  -- Goal after unfold: 0 = 0
-  rfl
-```
+<p><a href="https://live.lean-lang.org/#code=def%20isZero%20%28n%20%3A%20Nat%29%20%3A%20Prop%20%3A%3D%20n%20%3D%200%0A%0Atheorem%20isZero_zero%20%3A%20isZero%200%20%3A%3D%20by%0A%20%20unfold%20isZero%0A%20%20--%20Goal%20after%20unfold%3A%200%20%3D%200%0A%20%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20isZero%20%28n%20%3A%20Nat%29%20%3A%20Prop%20%3A%3D%20n%20%3D%200%0A%0Atheorem%20isZero_zero%20%3A%20isZero%200%20%3A%3D%20by%0A%20%20unfold%20isZero%0A%20%20--%20Goal%20after%20unfold%3A%200%20%3D%200%0A%20%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **Mathematical reading.** `unfold isZero` replaces the defined name with its
 definiens, exposing $\mathrm{isZero}(0) = (0 = 0)$. This uses a

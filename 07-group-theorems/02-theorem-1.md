@@ -10,10 +10,9 @@
 **Finding the proof.** We begin by stating the goal and examining what is
 available:
 
-```lean
-theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
-  sorry
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20id_unique%20%28e%27%20%3A%20G%29%20%28h%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20Grp.op%20e%27%20a%20%3D%20a%29%20%3A%20e%27%20%3D%20Grp.id%20%3A%3D%20by%0A%20%20sorry" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20id_unique%20%28e%27%20%3A%20G%29%20%28h%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20Grp.op%20e%27%20a%20%3D%20a%29%20%3A%20e%27%20%3D%20Grp.id%20%3A%3D%20by%0A%20%20sorry" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 The goal is `e' = Grp.id`, an equality between two elements of `G` about
 which we individually know very little: `e'` only through `h`, and `Grp.id`
@@ -29,13 +28,9 @@ anything both `e'` and `Grp.id` can be related to?
 `Grp.op e' Grp.id` — that is the third expression. Once this is noticed, the
 proof is a matter of bookkeeping:
 
-```lean
-theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
-  have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
-  have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
-  rw [← step2]
-  exact step1
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20id_unique%20%28e%27%20%3A%20G%29%20%28h%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20Grp.op%20e%27%20a%20%3D%20a%29%20%3A%20e%27%20%3D%20Grp.id%20%3A%3D%20by%0A%20%20have%20step1%20%3A%20Grp.op%20e%27%20Grp.id%20%3D%20Grp.id%20%3A%3D%20h%20Grp.id%0A%20%20have%20step2%20%3A%20Grp.op%20e%27%20Grp.id%20%3D%20e%27%20%3A%3D%20Grp.id_right%20e%27%0A%20%20rw%20%5B%E2%86%90%20step2%5D%0A%20%20exact%20step1" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20id_unique%20%28e%27%20%3A%20G%29%20%28h%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20Grp.op%20e%27%20a%20%3D%20a%29%20%3A%20e%27%20%3D%20Grp.id%20%3A%3D%20by%0A%20%20have%20step1%20%3A%20Grp.op%20e%27%20Grp.id%20%3D%20Grp.id%20%3A%3D%20h%20Grp.id%0A%20%20have%20step2%20%3A%20Grp.op%20e%27%20Grp.id%20%3D%20e%27%20%3A%3D%20Grp.id_right%20e%27%0A%20%20rw%20%5B%E2%86%90%20step2%5D%0A%20%20exact%20step1" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Why `rw [← step2]` and not `rw [step2]`? The goal is `e' = Grp.id`, and
 `step2 : Grp.op e' Grp.id = e'` has `e'` on its *right*. `rw [step2]` would
@@ -63,10 +58,9 @@ identity is unique, full stop.)
 `Grp.id`/`Grp.id_right` become the ordinary `*`/`1`/[`mul_one`](https://loogle.lean-lang.org/?q=mul_one), and the
 whole "third expression" chain collapses into a single `.symm.trans`:
 
-```lean
-example {G : Type*} [Group G] (e' : G) (h : ∀ a : G, e' * a = a) : e' = 1 :=
-  (mul_one e').symm.trans (h 1)
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%7BG%20%3A%20Type%2A%7D%20%5BGroup%20G%5D%20%28e%27%20%3A%20G%29%20%28h%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20e%27%20%2A%20a%20%3D%20a%29%20%3A%20e%27%20%3D%201%20%3A%3D%0A%20%20%28mul_one%20e%27%29.symm.trans%20%28h%201%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%7BG%20%3A%20Type%2A%7D%20%5BGroup%20G%5D%20%28e%27%20%3A%20G%29%20%28h%20%3A%20%E2%88%80%20a%20%3A%20G%2C%20e%27%20%2A%20a%20%3D%20a%29%20%3A%20e%27%20%3D%201%20%3A%3D%0A%20%20%28mul_one%20e%27%29.symm.trans%20%28h%201%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 This is the same proof, the same two facts glued at their common value
 $e'\cdot 1$: `h 1` is the book's `step1` and `mul_one e'` is `step2`. The

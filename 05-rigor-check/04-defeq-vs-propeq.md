@@ -24,11 +24,9 @@ kernel confirms it during elaboration (silently, whenever it needs to
 check that two types or terms match) or it does not, and `rfl` is the tactic
 that asks Lean to check exactly this and fail loudly if it does not hold.
 
-```lean
-example : 2 + 2 = 4 := rfl        -- 2 + 2 reduces to 4 definitionally
-example : 0 + 2 = 2 := rfl        -- Nat.add recurses on its 2nd arg; 2 + 0 = 2 is the base case
--- example : 2 + 0 = 2 := rfl     -- also rfl (0 + n needs induction, n + 0 doesn't)
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%20%20%20%20%20%20%20%20--%202%20%2B%202%20reduces%20to%204%20definitionally%0Aexample%20%3A%200%20%2B%202%20%3D%202%20%3A%3D%20rfl%20%20%20%20%20%20%20%20--%20Nat.add%20recurses%20on%20its%202nd%20arg%3B%202%20%2B%200%20%3D%202%20is%20the%20base%20case%0A--%20example%20%3A%202%20%2B%200%20%3D%202%20%3A%3D%20rfl%20%20%20%20%20--%20also%20rfl%20%280%20%2B%20n%20needs%20induction%2C%20n%20%2B%200%20doesn%27t%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%20%20%20%20%20%20%20%20--%202%20%2B%202%20reduces%20to%204%20definitionally%0Aexample%20%3A%200%20%2B%202%20%3D%202%20%3A%3D%20rfl%20%20%20%20%20%20%20%20--%20Nat.add%20recurses%20on%20its%202nd%20arg%3B%202%20%2B%200%20%3D%202%20is%20the%20base%20case%0A--%20example%20%3A%202%20%2B%200%20%3D%202%20%3A%3D%20rfl%20%20%20%20%20--%20also%20rfl%20%280%20%2B%20n%20needs%20induction%2C%20n%20%2B%200%20doesn%27t%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 One precise point worth noting: "reduce to the same normal form" does not mean
 Lean necessarily unfolds a term *all the way down* before comparing.

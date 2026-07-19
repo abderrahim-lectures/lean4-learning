@@ -6,41 +6,9 @@
 
 **1. `boolXorGroup : Group Bool`**
 
-```lean
-def boolXorGroup : Group Bool where
-  op := Bool.xor
-  id := false
-  inv := fun a => a
-  assoc := by
-    intro a b c
-    cases a with
-    | false => cases b with
-      | false => cases c with | false => rfl | true => rfl
-      | true => cases c with | false => rfl | true => rfl
-    | true => cases b with
-      | false => cases c with | false => rfl | true => rfl
-      | true => cases c with | false => rfl | true => rfl
-  id_left := by
-    intro a
-    cases a with
-    | false => rfl
-    | true => rfl
-  id_right := by
-    intro a
-    cases a with
-    | false => rfl
-    | true => rfl
-  inv_left := by
-    intro a
-    cases a with
-    | false => rfl
-    | true => rfl
-  inv_right := by
-    intro a
-    cases a with
-    | false => rfl
-    | true => rfl
-```
+<p><a href="https://live.lean-lang.org/#code=def%20boolXorGroup%20%3A%20Group%20Bool%20where%0A%20%20op%20%3A%3D%20Bool.xor%0A%20%20id%20%3A%3D%20false%0A%20%20inv%20%3A%3D%20fun%20a%20%3D%3E%20a%0A%20%20assoc%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20id_left%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20rfl%0A%20%20id_right%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20rfl%0A%20%20inv_left%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20rfl%0A%20%20inv_right%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20boolXorGroup%20%3A%20Group%20Bool%20where%0A%20%20op%20%3A%3D%20Bool.xor%0A%20%20id%20%3A%3D%20false%0A%20%20inv%20%3A%3D%20fun%20a%20%3D%3E%20a%0A%20%20assoc%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20id_left%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20rfl%0A%20%20id_right%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20rfl%0A%20%20inv_left%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20rfl%0A%20%20inv_right%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:650px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Each field reduces to a finite check. `Bool.xor` on two or three concrete
 booleans always computes, so once every variable is replaced by a concrete

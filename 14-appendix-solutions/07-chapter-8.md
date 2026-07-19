@@ -6,53 +6,9 @@
 
 **1. `boolAndOrRing` (the ring $\mathbb{Z}/2\mathbb{Z}$ on `Bool`)**
 
-```lean
-def bool2CommGroup : CommGroup Bool where
-  toGroup := boolXorGroup
-  comm := by
-    intro a b
-    cases a with
-    | false => cases b with | false => rfl | true => rfl
-    | true => cases b with | false => rfl | true => rfl
-
-def bool2Ring : Ring Bool where
-  addGrp := bool2CommGroup
-  mul := Bool.and
-  one := true
-  mul_assoc := by
-    intro a b c
-    cases a with
-    | false => cases b with
-      | false => cases c with | false => rfl | true => rfl
-      | true => cases c with | false => rfl | true => rfl
-    | true => cases b with
-      | false => cases c with | false => rfl | true => rfl
-      | true => cases c with | false => rfl | true => rfl
-  one_mul := by
-    intro a
-    cases a with | false => rfl | true => rfl
-  mul_one := by
-    intro a
-    cases a with | false => rfl | true => rfl
-  left_distrib := by
-    intro a b c
-    cases a with
-    | false => cases b with
-      | false => cases c with | false => rfl | true => rfl
-      | true => cases c with | false => rfl | true => rfl
-    | true => cases b with
-      | false => cases c with | false => rfl | true => rfl
-      | true => cases c with | false => rfl | true => rfl
-  right_distrib := by
-    intro a b c
-    cases a with
-    | false => cases b with
-      | false => cases c with | false => rfl | true => rfl
-      | true => cases c with | false => rfl | true => rfl
-    | true => cases b with
-      | false => cases c with | false => rfl | true => rfl
-      | true => cases c with | false => rfl | true => rfl
-```
+<p><a href="https://live.lean-lang.org/#code=def%20bool2CommGroup%20%3A%20CommGroup%20Bool%20where%0A%20%20toGroup%20%3A%3D%20boolXorGroup%0A%20%20comm%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%0Adef%20bool2Ring%20%3A%20Ring%20Bool%20where%0A%20%20addGrp%20%3A%3D%20bool2CommGroup%0A%20%20mul%20%3A%3D%20Bool.and%0A%20%20one%20%3A%3D%20true%0A%20%20mul_assoc%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20one_mul%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20mul_one%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20left_distrib%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20right_distrib%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20bool2CommGroup%20%3A%20CommGroup%20Bool%20where%0A%20%20toGroup%20%3A%3D%20boolXorGroup%0A%20%20comm%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%0Adef%20bool2Ring%20%3A%20Ring%20Bool%20where%0A%20%20addGrp%20%3A%3D%20bool2CommGroup%0A%20%20mul%20%3A%3D%20Bool.and%0A%20%20one%20%3A%3D%20true%0A%20%20mul_assoc%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20one_mul%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20mul_one%20%3A%3D%20by%0A%20%20%20%20intro%20a%0A%20%20%20%20cases%20a%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20left_distrib%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20right_distrib%20%3A%3D%20by%0A%20%20%20%20intro%20a%20b%20c%0A%20%20%20%20cases%20a%20with%0A%20%20%20%20%7C%20false%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%7C%20true%20%3D%3E%20cases%20b%20with%0A%20%20%20%20%20%20%7C%20false%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl%0A%20%20%20%20%20%20%7C%20true%20%3D%3E%20cases%20c%20with%20%7C%20false%20%3D%3E%20rfl%20%7C%20true%20%3D%3E%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:650px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 We reuse `boolXorGroup` from Chapter 6's exercise as the additive group
 (`+` = XOR, `0` = `false`), and add `∧` (Boolean and) as multiplication with
@@ -75,12 +31,9 @@ into the other.
 
 **3. `theorem mat2_not_comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X`**
 
-```lean
-theorem mat2_not_comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X := by
-  refine ⟨X, Y, fun h => ?_⟩
-  rw [Mat2.mk.injEq] at h
-  exact absurd h.1 (by decide)
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20mat2_not_comm%20%3A%20%E2%88%83%20X%20Y%20%3A%20Mat2%2C%20Mat2.mul%20X%20Y%20%E2%89%A0%20Mat2.mul%20Y%20X%20%3A%3D%20by%0A%20%20refine%20%E2%9F%A8X%2C%20Y%2C%20fun%20h%20%3D%3E%20%3F_%E2%9F%A9%0A%20%20rw%20%5BMat2.mk.injEq%5D%20at%20h%0A%20%20exact%20absurd%20h.1%20%28by%20decide%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20mat2_not_comm%20%3A%20%E2%88%83%20X%20Y%20%3A%20Mat2%2C%20Mat2.mul%20X%20Y%20%E2%89%A0%20Mat2.mul%20Y%20X%20%3A%3D%20by%0A%20%20refine%20%E2%9F%A8X%2C%20Y%2C%20fun%20h%20%3D%3E%20%3F_%E2%9F%A9%0A%20%20rw%20%5BMat2.mk.injEq%5D%20at%20h%0A%20%20exact%20absurd%20h.1%20%28by%20decide%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `X` and `Y` are the witness pair already computed in the chapter (`Mat2.mul
 X Y` evaluates to `⟨2, 1, 1, 1⟩`, `Mat2.mul Y X` to `⟨1, 1, 1, 2⟩`), so

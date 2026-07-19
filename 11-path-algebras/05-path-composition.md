@@ -7,13 +7,9 @@
 Given a path `p : Path Q u v` and a path `q : Path Q v w`, they can be concatenated
 into a path `Path Q u w`, defined by recursion on `q`:
 
-```lean
-def Path.append {V A : Type} {Q : Quiver V A} {u v w : V}
-    (p : Path Q u v) (q : Path Q v w) : Path Q u w :=
-  match q with
-  | Path.nil _ => p
-  | Path.cons a h h' q' => Path.cons a h h' (Path.append p q')
-```
+<p><a href="https://live.lean-lang.org/#code=def%20Path.append%20%7BV%20A%20%3A%20Type%7D%20%7BQ%20%3A%20Quiver%20V%20A%7D%20%7Bu%20v%20w%20%3A%20V%7D%0A%20%20%20%20%28p%20%3A%20Path%20Q%20u%20v%29%20%28q%20%3A%20Path%20Q%20v%20w%29%20%3A%20Path%20Q%20u%20w%20%3A%3D%0A%20%20match%20q%20with%0A%20%20%7C%20Path.nil%20_%20%3D%3E%20p%0A%20%20%7C%20Path.cons%20a%20h%20h%27%20q%27%20%3D%3E%20Path.cons%20a%20h%20h%27%20%28Path.append%20p%20q%27%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20Path.append%20%7BV%20A%20%3A%20Type%7D%20%7BQ%20%3A%20Quiver%20V%20A%7D%20%7Bu%20v%20w%20%3A%20V%7D%0A%20%20%20%20%28p%20%3A%20Path%20Q%20u%20v%29%20%28q%20%3A%20Path%20Q%20v%20w%29%20%3A%20Path%20Q%20u%20w%20%3A%3D%0A%20%20match%20q%20with%0A%20%20%7C%20Path.nil%20_%20%3D%3E%20p%0A%20%20%7C%20Path.cons%20a%20h%20h%27%20q%27%20%3D%3E%20Path.cons%20a%20h%20h%27%20%28Path.append%20p%20q%27%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Reading the recursion:
 
@@ -36,28 +32,26 @@ directly, one `Path.cons` at a time. Here it is again, built instead by
 *composing* the shorter path `pathAlpha` with a fresh one-arrow path using
 `Path.append`. Both constructions produce the exact same path.
 
-```lean
-def pathBetaOnly : Path exampleQuiver 1 2 :=
-  Path.cons ExampleArrow.beta rfl rfl (Path.nil 1)
-```
+<p><a href="https://live.lean-lang.org/#code=def%20pathBetaOnly%20%3A%20Path%20exampleQuiver%201%202%20%3A%3D%0A%20%20Path.cons%20ExampleArrow.beta%20rfl%20rfl%20%28Path.nil%201%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20pathBetaOnly%20%3A%20Path%20exampleQuiver%201%202%20%3A%3D%0A%20%20Path.cons%20ExampleArrow.beta%20rfl%20rfl%20%28Path.nil%201%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `pathBetaOnly` is that fresh one-arrow path: a path from `1` to `2`
 consisting of just the single arrow `beta`, built on its own rather than
 by extending `pathAlpha`.
 
-```lean
-def pathBetaAlphaViaAppend : Path exampleQuiver 0 2 :=
-  Path.append pathAlpha pathBetaOnly
-```
+<p><a href="https://live.lean-lang.org/#code=def%20pathBetaAlphaViaAppend%20%3A%20Path%20exampleQuiver%200%202%20%3A%3D%0A%20%20Path.append%20pathAlpha%20pathBetaOnly" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20pathBetaAlphaViaAppend%20%3A%20Path%20exampleQuiver%200%202%20%3A%3D%0A%20%20Path.append%20pathAlpha%20pathBetaOnly" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `pathBetaAlphaViaAppend` composes the shorter path `pathAlpha` with
 `pathBetaOnly` via `Path.append`, yielding a path from `0` to `2`. This has
 the same endpoints as `pathBetaAlpha`, but is assembled by composition
 rather than by chaining `Path.cons` calls directly.
 
-```lean
-example : pathBetaAlphaViaAppend = pathBetaAlpha := rfl
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%3A%20pathBetaAlphaViaAppend%20%3D%20pathBetaAlpha%20%3A%3D%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%3A%20pathBetaAlphaViaAppend%20%3D%20pathBetaAlpha%20%3A%3D%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 That final `rfl` is not a weak or approximate check. It says the two
 constructions are *definitionally* the same term, reducing to an
@@ -100,12 +94,9 @@ the sense of a
 `Quiver.Path.comp`. It is the same recursion (on the *second* path), with
 the same "`nil` does nothing, `cons` re-attaches its trailing arrow" shape:
 
-```lean
-def pathBetaOnly' : Quiver.Path (1 : Fin 3) 2 := Quiver.Path.cons Quiver.Path.nil MyArrow.beta
-def pathBetaAlphaViaComp' : Quiver.Path (0 : Fin 3) 2 := Quiver.Path.comp pathAlpha' pathBetaOnly'
-
-example : pathBetaAlphaViaComp' = pathBetaAlpha' := rfl
-```
+<p><a href="https://live.lean-lang.org/#code=def%20pathBetaOnly%27%20%3A%20Quiver.Path%20%281%20%3A%20Fin%203%29%202%20%3A%3D%20Quiver.Path.cons%20Quiver.Path.nil%20MyArrow.beta%0Adef%20pathBetaAlphaViaComp%27%20%3A%20Quiver.Path%20%280%20%3A%20Fin%203%29%202%20%3A%3D%20Quiver.Path.comp%20pathAlpha%27%20pathBetaOnly%27%0A%0Aexample%20%3A%20pathBetaAlphaViaComp%27%20%3D%20pathBetaAlpha%27%20%3A%3D%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20pathBetaOnly%27%20%3A%20Quiver.Path%20%281%20%3A%20Fin%203%29%202%20%3A%3D%20Quiver.Path.cons%20Quiver.Path.nil%20MyArrow.beta%0Adef%20pathBetaAlphaViaComp%27%20%3A%20Quiver.Path%20%280%20%3A%20Fin%203%29%202%20%3A%3D%20Quiver.Path.comp%20pathAlpha%27%20pathBetaOnly%27%0A%0Aexample%20%3A%20pathBetaAlphaViaComp%27%20%3D%20pathBetaAlpha%27%20%3A%3D%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 This is the same closing `rfl` as the book's
 `pathBetaAlphaViaAppend = pathBetaAlpha` check: two paths built via

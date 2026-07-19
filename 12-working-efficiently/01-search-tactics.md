@@ -27,13 +27,9 @@ leaving the search tactic itself in the finished proof. They are slower to
 re-run, and in a growing file, their result can silently change if the
 environment changes.
 
-```lean
-example (a b : Nat) (h : a = b) : b = a := by
-  exact?
-  -- reports a working closing term (verified on this book's toolchain to be
-  -- `exact Nat.add_right_cancel (congrFun (congrArg HAdd.hAdd (id (Eq.symm h))) a)`,
-  -- not the shorter `h.symm` a human would write — see below)
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%28a%20b%20%3A%20Nat%29%20%28h%20%3A%20a%20%3D%20b%29%20%3A%20b%20%3D%20a%20%3A%3D%20by%0A%20%20exact%3F%0A%20%20--%20reports%20a%20working%20closing%20term%20%28verified%20on%20this%20book%27s%20toolchain%20to%20be%0A%20%20--%20%60exact%20Nat.add_right_cancel%20%28congrFun%20%28congrArg%20HAdd.hAdd%20%28id%20%28Eq.symm%20h%29%29%29%20a%29%60%2C%0A%20%20--%20not%20the%20shorter%20%60h.symm%60%20a%20human%20would%20write%20%E2%80%94%20see%20below%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%28a%20b%20%3A%20Nat%29%20%28h%20%3A%20a%20%3D%20b%29%20%3A%20b%20%3D%20a%20%3A%3D%20by%0A%20%20exact%3F%0A%20%20--%20reports%20a%20working%20closing%20term%20%28verified%20on%20this%20book%27s%20toolchain%20to%20be%0A%20%20--%20%60exact%20Nat.add_right_cancel%20%28congrFun%20%28congrArg%20HAdd.hAdd%20%28id%20%28Eq.symm%20h%29%29%29%20a%29%60%2C%0A%20%20--%20not%20the%20shorter%20%60h.symm%60%20a%20human%20would%20write%20%E2%80%94%20see%20below%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **Mathematical reading.** This is the formal version of "this is standard —
 cite the relevant lemma." The goal $b = a$ under hypothesis $h : a = b$ is

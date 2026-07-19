@@ -6,20 +6,9 @@
 
 **1. `theorem neg_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)`**
 
-```lean
-theorem neg_mul (a b : R) :
-    Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b) := by
-  apply left_inverse_unique Rg.addGrp.toGroup (Rg.mul a b) (Rg.mul (Rg.addGrp.toGroup.inv a) b)
-  -- Goal: op (mul (inv a) b) (mul a b) = id
-  rw [← Rg.right_distrib]
-  -- justified by right_distrib, read backwards: combines the two products
-  -- mul (inv a) b and mul a b into mul (op (inv a) a) b.
-  -- Goal: mul (op (inv a) a) b = id
-  rw [Rg.addGrp.toGroup.inv_left]
-  -- justified by inv_left of the additive group: op (inv a) a = id.
-  -- Goal: mul Rg.addGrp.id b = id
-  exact mul_zero_left Rg b
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20neg_mul%20%28a%20b%20%3A%20R%29%20%3A%0A%20%20%20%20Rg.mul%20%28Rg.addGrp.toGroup.inv%20a%29%20b%20%3D%20Rg.addGrp.toGroup.inv%20%28Rg.mul%20a%20b%29%20%3A%3D%20by%0A%20%20apply%20left_inverse_unique%20Rg.addGrp.toGroup%20%28Rg.mul%20a%20b%29%20%28Rg.mul%20%28Rg.addGrp.toGroup.inv%20a%29%20b%29%0A%20%20--%20Goal%3A%20op%20%28mul%20%28inv%20a%29%20b%29%20%28mul%20a%20b%29%20%3D%20id%0A%20%20rw%20%5B%E2%86%90%20Rg.right_distrib%5D%0A%20%20--%20justified%20by%20right_distrib%2C%20read%20backwards%3A%20combines%20the%20two%20products%0A%20%20--%20mul%20%28inv%20a%29%20b%20and%20mul%20a%20b%20into%20mul%20%28op%20%28inv%20a%29%20a%29%20b.%0A%20%20--%20Goal%3A%20mul%20%28op%20%28inv%20a%29%20a%29%20b%20%3D%20id%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%0A%20%20--%20justified%20by%20inv_left%20of%20the%20additive%20group%3A%20op%20%28inv%20a%29%20a%20%3D%20id.%0A%20%20--%20Goal%3A%20mul%20Rg.addGrp.id%20b%20%3D%20id%0A%20%20exact%20mul_zero_left%20Rg%20b" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20neg_mul%20%28a%20b%20%3A%20R%29%20%3A%0A%20%20%20%20Rg.mul%20%28Rg.addGrp.toGroup.inv%20a%29%20b%20%3D%20Rg.addGrp.toGroup.inv%20%28Rg.mul%20a%20b%29%20%3A%3D%20by%0A%20%20apply%20left_inverse_unique%20Rg.addGrp.toGroup%20%28Rg.mul%20a%20b%29%20%28Rg.mul%20%28Rg.addGrp.toGroup.inv%20a%29%20b%29%0A%20%20--%20Goal%3A%20op%20%28mul%20%28inv%20a%29%20b%29%20%28mul%20a%20b%29%20%3D%20id%0A%20%20rw%20%5B%E2%86%90%20Rg.right_distrib%5D%0A%20%20--%20justified%20by%20right_distrib%2C%20read%20backwards%3A%20combines%20the%20two%20products%0A%20%20--%20mul%20%28inv%20a%29%20b%20and%20mul%20a%20b%20into%20mul%20%28op%20%28inv%20a%29%20a%29%20b.%0A%20%20--%20Goal%3A%20mul%20%28op%20%28inv%20a%29%20a%29%20b%20%3D%20id%0A%20%20rw%20%5BRg.addGrp.toGroup.inv_left%5D%0A%20%20--%20justified%20by%20inv_left%20of%20the%20additive%20group%3A%20op%20%28inv%20a%29%20a%20%3D%20id.%0A%20%20--%20Goal%3A%20mul%20Rg.addGrp.id%20b%20%3D%20id%0A%20%20exact%20mul_zero_left%20Rg%20b" title="Lean playground" loading="lazy" style="width:100%;height:288px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 By `left_inverse_unique` (Chapter 7, Theorem 2, applied to the additive
 group `Rg.addGrp.toGroup`), it suffices to show that
@@ -32,9 +21,9 @@ the proof.
 
 **2. `theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl`**
 
-```lean
-theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl
-```
+<p><a href="https://live.lean-lang.org/#code=theorem%20neg_seven%20%3A%20intRing.addGrp.toGroup.inv%207%20%3D%20-7%20%3A%3D%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=theorem%20neg_seven%20%3A%20intRing.addGrp.toGroup.inv%207%20%3D%20-7%20%3A%3D%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) suffices here, but it would not have sufficed for Theorem 2's
 `neg_one_mul (a : R)`, which required real work. The difference is that `7` is

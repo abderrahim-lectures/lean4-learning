@@ -4,9 +4,9 @@
 
 ---
 
-```lean
-variable {G : Type} (Grp : Group G)
-```
+<p><a href="https://live.lean-lang.org/#code=variable%20%7BG%20%3A%20Type%7D%20%28Grp%20%3A%20Group%20G%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=variable%20%7BG%20%3A%20Type%7D%20%28Grp%20%3A%20Group%20G%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `variable` adds `{G : Type} (Grp : Group G)` silently to every following
 declaration that mentions `G` or `Grp`.

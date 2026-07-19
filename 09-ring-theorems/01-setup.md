@@ -4,9 +4,9 @@
 
 ---
 
-```lean
-variable {R : Type} (Rg : Ring R)
-```
+<p><a href="https://live.lean-lang.org/#code=variable%20%7BR%20%3A%20Type%7D%20%28Rg%20%3A%20Ring%20R%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=variable%20%7BR%20%3A%20Type%7D%20%28Rg%20%3A%20Ring%20R%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Fully-qualified field names (`Rg.addGrp.toGroup.inv`, etc.) are written out
 in every proof, precisely so that it is always clear which structure a

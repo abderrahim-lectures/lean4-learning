@@ -18,10 +18,9 @@ computation rather than by citing library lemmas.
 built-in `+`/`*` already wrap around modulo 3, so `Fin 3`'s arithmetic
 *is* $\mathbb{Z}/3\mathbb{Z}$'s arithmetic:
 
-```lean
-#eval (2 : Fin 3) + 2   -- 1   (2 + 2 = 4 ≡ 1 mod 3)
-#eval (2 : Fin 3) * 2   -- 1   (2 * 2 = 4 ≡ 1 mod 3)
-```
+<p><a href="https://live.lean-lang.org/#code=%23eval%20%282%20%3A%20Fin%203%29%20%2B%202%20%20%20--%201%20%20%20%282%20%2B%202%20%3D%204%20%E2%89%A1%201%20mod%203%29%0A%23eval%20%282%20%3A%20Fin%203%29%20%2A%202%20%20%20--%201%20%20%20%282%20%2A%202%20%3D%204%20%E2%89%A1%201%20mod%203%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23eval%20%282%20%3A%20Fin%203%29%20%2B%202%20%20%20--%201%20%20%20%282%20%2B%202%20%3D%204%20%E2%89%A1%201%20mod%203%29%0A%23eval%20%282%20%3A%20Fin%203%29%20%2A%202%20%20%20--%201%20%20%20%282%20%2A%202%20%3D%204%20%E2%89%A1%201%20mod%203%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 ### Building `Group (Fin 3)`, `CommGroup (Fin 3)`, `Ring (Fin 3)`
 
@@ -31,31 +30,9 @@ equation holds for all $3$ (or $3^2$, or $3^3$) choices of its variables."
 This is exactly the kind of goal Chapter 12 recommends handing to [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) rather
 than proving by hand:
 
-```lean
-def fin3Group : Group (Fin 3) where
-  op := fun a b => a + b
-  id := 0
-  inv := fun a => -a
-  assoc := by decide
-  id_left := by decide
-  id_right := by decide
-  inv_left := by decide
-  inv_right := by decide
-
-def fin3CommGroup : CommGroup (Fin 3) where
-  toGroup := fin3Group
-  comm := by decide
-
-def fin3Ring : Ring (Fin 3) where
-  addGrp := fin3CommGroup
-  mul := fun a b => a * b
-  one := 1
-  mul_assoc := by decide
-  one_mul := by decide
-  mul_one := by decide
-  left_distrib := by decide
-  right_distrib := by decide
-```
+<p><a href="https://live.lean-lang.org/#code=def%20fin3Group%20%3A%20Group%20%28Fin%203%29%20where%0A%20%20op%20%3A%3D%20fun%20a%20b%20%3D%3E%20a%20%2B%20b%0A%20%20id%20%3A%3D%200%0A%20%20inv%20%3A%3D%20fun%20a%20%3D%3E%20-a%0A%20%20assoc%20%3A%3D%20by%20decide%0A%20%20id_left%20%3A%3D%20by%20decide%0A%20%20id_right%20%3A%3D%20by%20decide%0A%20%20inv_left%20%3A%3D%20by%20decide%0A%20%20inv_right%20%3A%3D%20by%20decide%0A%0Adef%20fin3CommGroup%20%3A%20CommGroup%20%28Fin%203%29%20where%0A%20%20toGroup%20%3A%3D%20fin3Group%0A%20%20comm%20%3A%3D%20by%20decide%0A%0Adef%20fin3Ring%20%3A%20Ring%20%28Fin%203%29%20where%0A%20%20addGrp%20%3A%3D%20fin3CommGroup%0A%20%20mul%20%3A%3D%20fun%20a%20b%20%3D%3E%20a%20%2A%20b%0A%20%20one%20%3A%3D%201%0A%20%20mul_assoc%20%3A%3D%20by%20decide%0A%20%20one_mul%20%3A%3D%20by%20decide%0A%20%20mul_one%20%3A%3D%20by%20decide%0A%20%20left_distrib%20%3A%3D%20by%20decide%0A%20%20right_distrib%20%3A%3D%20by%20decide" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=def%20fin3Group%20%3A%20Group%20%28Fin%203%29%20where%0A%20%20op%20%3A%3D%20fun%20a%20b%20%3D%3E%20a%20%2B%20b%0A%20%20id%20%3A%3D%200%0A%20%20inv%20%3A%3D%20fun%20a%20%3D%3E%20-a%0A%20%20assoc%20%3A%3D%20by%20decide%0A%20%20id_left%20%3A%3D%20by%20decide%0A%20%20id_right%20%3A%3D%20by%20decide%0A%20%20inv_left%20%3A%3D%20by%20decide%0A%20%20inv_right%20%3A%3D%20by%20decide%0A%0Adef%20fin3CommGroup%20%3A%20CommGroup%20%28Fin%203%29%20where%0A%20%20toGroup%20%3A%3D%20fin3Group%0A%20%20comm%20%3A%3D%20by%20decide%0A%0Adef%20fin3Ring%20%3A%20Ring%20%28Fin%203%29%20where%0A%20%20addGrp%20%3A%3D%20fin3CommGroup%0A%20%20mul%20%3A%3D%20fun%20a%20b%20%3D%3E%20a%20%2A%20b%0A%20%20one%20%3A%3D%201%0A%20%20mul_assoc%20%3A%3D%20by%20decide%0A%20%20one_mul%20%3A%3D%20by%20decide%0A%20%20mul_one%20%3A%3D%20by%20decide%0A%20%20left_distrib%20%3A%3D%20by%20decide%0A%20%20right_distrib%20%3A%3D%20by%20decide" title="Lean playground" loading="lazy" style="width:100%;height:497px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 **Programmer's corner (Python).** `by decide` on a goal like `assoc` for
 `Fin 3` is not magic. It is exactly what one would get from
@@ -77,11 +54,9 @@ skipped its axiom checks. It is the same enumeration, but promoted from "a
 test one hopes someone runs" to a condition the kernel enforces before the
 value can even exist.
 
-```lean
-#eval fin3Ring.addGrp.op 2 2          -- 1  (2 + 2 = 1 mod 3)
-#eval fin3Ring.mul 2 2                 -- 1  (2 * 2 = 1 mod 3)
-#eval fin3Ring.addGrp.toGroup.inv 1     -- 2  (-1 = 2 mod 3)
-```
+<p><a href="https://live.lean-lang.org/#code=%23eval%20fin3Ring.addGrp.op%202%202%20%20%20%20%20%20%20%20%20%20--%201%20%20%282%20%2B%202%20%3D%201%20mod%203%29%0A%23eval%20fin3Ring.mul%202%202%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20--%201%20%20%282%20%2A%202%20%3D%201%20mod%203%29%0A%23eval%20fin3Ring.addGrp.toGroup.inv%201%20%20%20%20%20--%202%20%20%28-1%20%3D%202%20mod%203%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=%23eval%20fin3Ring.addGrp.op%202%202%20%20%20%20%20%20%20%20%20%20--%201%20%20%282%20%2B%202%20%3D%201%20mod%203%29%0A%23eval%20fin3Ring.mul%202%202%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20--%201%20%20%282%20%2A%202%20%3D%201%20mod%203%29%0A%23eval%20fin3Ring.addGrp.toGroup.inv%201%20%20%20%20%20--%202%20%20%28-1%20%3D%202%20mod%203%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 Compare this construction style directly with `intRing` (previous
 section) and `mat2Ring` (next section): `intRing`'s axioms needed
@@ -111,12 +86,9 @@ prime). There is no `fin3Group`/`fin3CommGroup`/`fin3Ring` bundle, and no `decid
 calls needed to re-verify axioms already proved once, generically, for
 every `n`:
 
-```lean
-example : CommRing (ZMod 3) := inferInstance
-
-#eval (2 : ZMod 3) + 2   -- 1
-#eval (2 : ZMod 3) * 2   -- 1
-```
+<p><a href="https://live.lean-lang.org/#code=example%20%3A%20CommRing%20%28ZMod%203%29%20%3A%3D%20inferInstance%0A%0A%23eval%20%282%20%3A%20ZMod%203%29%20%2B%202%20%20%20--%201%0A%23eval%20%282%20%3A%20ZMod%203%29%20%2A%202%20%20%20--%201" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=example%20%3A%20CommRing%20%28ZMod%203%29%20%3A%3D%20inferInstance%0A%0A%23eval%20%282%20%3A%20ZMod%203%29%20%2B%202%20%20%20--%201%0A%23eval%20%282%20%3A%20ZMod%203%29%20%2A%202%20%20%20--%201" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 The book's `by decide` on `fin3Ring`'s fields brute-forces exactly the
 finitely many cases needed for *this one* carrier. Mathlib instead proves

@@ -4,14 +4,9 @@
 
 ---
 
-```lean
-structure Point3D extends Point where
-  z : Nat
-
-def origin3D : Point3D := { x := 0, y := 0, z := 0 }
-
-#eval origin3D.x   -- inherited field, 0
-```
+<p><a href="https://live.lean-lang.org/#code=structure%20Point3D%20extends%20Point%20where%0A%20%20z%20%3A%20Nat%0A%0Adef%20origin3D%20%3A%20Point3D%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%2C%20z%20%3A%3D%200%20%7D%0A%0A%23eval%20origin3D.x%20%20%20--%20inherited%20field%2C%200" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=structure%20Point3D%20extends%20Point%20where%0A%20%20z%20%3A%20Nat%0A%0Adef%20origin3D%20%3A%20Point3D%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%2C%20z%20%3A%3D%200%20%7D%0A%0A%23eval%20origin3D.x%20%20%20--%20inherited%20field%2C%200" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+</iframe>
 
 `extends` is used later: a `CommGroup` (commutative group) will `extend`
 `Group` with one extra axiom (commutativity), instead of repeating all the
