@@ -31,8 +31,10 @@ examples of how past issues were scoped.
    source under `lean_book/<chapter>/` — the LaTeX/PDF pipeline
    (`lean_book/build/build_latex.py`) regenerates `lean_book/latex/`
    from Markdown automatically; don't hand-edit the `.tex` files.
-3. Add a `lean_book/CHANGELOG.md` entry describing what changed and why,
-   following the existing entries' format.
+3. Add a `## Unreleased — <title>` entry to
+   `lean_book/changelog/<current-unreleased-version>.md` describing what
+   changed and why, following the existing entries' format (see
+   `lean_book/changelog/README.md` for the index).
 4. Open a pull request. Reference the issue it addresses with
    "Closes #N" (or "Fixes #N") so GitHub links and auto-closes it on
    merge.

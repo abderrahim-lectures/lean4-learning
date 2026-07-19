@@ -2,19 +2,28 @@
 
 <img src="lean_book/images/cover.png" alt="Lean for Working Algebraists — book cover" width="280" align="right">
 
-## [📖 Read the book (PDF)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest/download/lean-for-working-algebraists.pdf)
+## [📖 Read the book (in your browser)](https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fabderrahim-lectures%2Flean4-learning%2Freleases%2Flatest%2Fdownload%2Flean-for-working-algebraists.pdf&embedded=true)
 
-[View in browser (no download)](https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fabderrahim-lectures%2Flean4-learning%2Freleases%2Flatest%2Fdownload%2Flean-for-working-algebraists.pdf&embedded=true) | [Notice](NOTICE.md) | [Reproducing this book](REPRODUCING.md)
+[![Download PDF](https://img.shields.io/badge/Download-PDF-blue?logo=adobeacrobatreader&logoColor=white)](https://github.com/abderrahim-lectures/lean4-learning/releases/download/v1.4.14/lean-for-working-algebraists-v1.4.14.pdf)
+[Notice](NOTICE.md) | [Reproducing this book](REPRODUCING.md)
 
-The book is a single PDF — the link above downloads the latest version
-directly, no account or software installation required; use "View in
-browser" instead to read it without downloading anything. The rest of
-this page describes the book and its companion material for readers who
-also want to run the Lean code or the Python examples on their own
-machine or in a browser.
+The book is a single PDF — the link above opens it directly in your
+browser via Google's viewer, no account or software installation
+required; use the "Download PDF" badge instead to save a copy (its
+filename always includes the release version). The rest of this page
+describes the book and its companion material for readers who also want
+to run the Lean code or the Python examples on their own machine or in a
+browser.
+
+[![License](https://img.shields.io/github/license/abderrahim-lectures/lean4-learning)](https://github.com/abderrahim-lectures/lean4-learning/blob/master/NOTICE.md)
+[![Latest release](https://img.shields.io/github/v/release/abderrahim-lectures/lean4-learning)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest)
+[![Last commit](https://img.shields.io/github/last-commit/abderrahim-lectures/lean4-learning)](https://github.com/abderrahim-lectures/lean4-learning/commits/master)
+[![Issues](https://img.shields.io/github/issues/abderrahim-lectures/lean4-learning)](https://github.com/abderrahim-lectures/lean4-learning/issues)
+[![Stars](https://img.shields.io/github/stars/abderrahim-lectures/lean4-learning?style=social)](https://github.com/abderrahim-lectures/lean4-learning/stargazers)
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/abderrahim-lectures/lean4-learning)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abderrahim-lectures/lean4-learning/blob/master/lean_book/python-companion/python_companion.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/abderrahim-lectures/lean4-learning/master?filepath=lean_book%2Fpython-companion%2Fpython_companion.ipynb)
 
 ## Summary
 
@@ -91,7 +100,8 @@ The book uses several recurring devices, applied consistently across all
 - [lean_book/python-companion/](lean_book/python-companion/) — every
   "Programmer's corner (Python)" snippet in the book, collected into one
   notebook that opens directly in
-  [Google Colab](https://colab.research.google.com/github/abderrahim-lectures/lean4-learning/blob/master/lean_book/python-companion/python_companion.ipynb),
+  [Google Colab](https://colab.research.google.com/github/abderrahim-lectures/lean4-learning/blob/master/lean_book/python-companion/python_companion.ipynb)
+  or [Binder](https://mybinder.org/v2/gh/abderrahim-lectures/lean4-learning/master?filepath=lean_book%2Fpython-companion%2Fpython_companion.ipynb),
   no installation required.
 
 ## Contributing
@@ -106,5 +116,5 @@ Every change to this repository — bug fix, new feature, or content
 revision — is tracked as its own GitHub issue, closed by the pull request
 that addresses it. See [PROJECT-HISTORY.md](PROJECT-HISTORY.md) for a
 summary of all issues and pull requests to date, and
-[lean_book/CHANGELOG.md](lean_book/CHANGELOG.md) for the reader-facing
-summary of what changed in each release.
+[lean_book/changelog/](lean_book/changelog/README.md) for the
+reader-facing summary of what changed in each release.
