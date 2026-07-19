@@ -134,13 +134,23 @@ $$
 q \cdot p = \begin{cases} q\circ p & \text{if } t(p) = s(q),\\ 0 &
 \text{otherwise,}\end{cases}
 $$
-and unit $\sum_{v\in V} e_v$ (the sum of the trivial paths). Equivalently
-$kQ$ is the $k$-linearization of the free category $\mathrm{Free}(Q)$: its
-*category algebra*. So representations of $Q$ are exactly $kQ$-modules,
-the bridge to Chapter 10 promised there. The construction requires
-finitely-supported functions $\{\text{paths}\} \to k$, i.e. the free
-module, which is why only the composition (the category layer) is
-formalized here.
+and unit $\sum_{v\in V} e_v$ (the sum of the trivial paths) — well-defined
+as a finite sum, hence a genuine identity element, precisely when $Q_0$ is
+finite; see [AssemSimsonSkowronski2006], Definition 1.2, remark following.
+So representations of $Q$ are exactly $kQ$-modules, the bridge to
+Chapter 10 promised there. The construction requires finitely-supported
+functions $\{\text{paths}\} \to k$, i.e. the free module, which is why
+only the composition (the category layer) is formalized here.
+
+> **Not independently verified.** The description of $kQ$ as "the
+> $k$-linearization of the free category $\mathrm{Free}(Q)$, its category
+> algebra" is standard category-theory folklore, but it is *not* stated
+> verbatim in either of this chapter's two cited sources
+> ([AssemSimsonSkowronski2006], [Schiffler2014]) — both define $kQ$
+> directly by basis-and-multiplication, as above, without naming it a
+> "category algebra." Treat that equivalence as a remark, not a cited
+> fact, until a source stating it explicitly is added to the
+> bibliography.
 
 > Read more: [Chapter 10](../10-modules/00-index.md)'s [`Module`](https://loogle.lean-lang.org/?q=Module),
 > [`LinearMap`](https://loogle.lean-lang.org/?q=LinearMap), and direct-sum material is exactly the vocabulary a full
@@ -154,8 +164,8 @@ formalized here.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]) — the standard graduate reference for quivers, path algebras, and their representations, developed from scratch as in this chapter.
-- Schiffler ([Schiffler2014]) — an elementary, textbook-level treatment of the same material, pitched at advanced undergraduates/beginning graduate students.
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), **Definition 1.2** (Chapter II, §1) — the path algebra $kQ$: basis = all paths (including stationary ones), product of two basis paths equal to their concatenation if endpoints match, else $0$, extended by distributivity. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*.
+- Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2) — same construction; unit given explicitly as $1 = \sum_{i\in Q_0} e_i$ in the lemma immediately following (Lemma 4.3 in that source's numbering).
 
 [AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006
 [Schiffler2014]: ../bibliography.md#schiffler2014
