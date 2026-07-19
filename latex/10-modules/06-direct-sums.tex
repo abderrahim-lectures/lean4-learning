@@ -1,0 +1,150 @@
+\section{Direct sums of modules}\label{sec:10-modules:06-direct-sums:1}
+
+Given two \(R\)-modules \(M\), \(N\), their direct sum \(M \oplus N\) has carrier \(M \times N\), componentwise addition, and componentwise scalar action:
+
+\begin{lstlisting}
+structure DirectSum (M N : Type) where
+  fst : M
+  snd : N
+
+def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
+    (ModM : Module R Rg M) (ModN : Module R Rg N) :
+    Module R Rg (DirectSum M N) where
+  addGrp := {
+    toGroup := {
+      op := fun x y => (*$\langle$*)ModM.addGrp.op x.fst y.fst, ModN.addGrp.op x.snd y.snd(*$\rangle$*)
+      id := (*$\langle$*)ModM.addGrp.toGroup.id, ModN.addGrp.toGroup.id(*$\rangle$*)
+      inv := fun x => (*$\langle$*)ModM.addGrp.toGroup.inv x.fst, ModN.addGrp.toGroup.inv x.snd(*$\rangle$*)
+      assoc := by
+        intro x y z
+        show DirectSum.mk _ _ = DirectSum.mk _ _
+        congr 1
+        (*$\cdot$*) exact ModM.addGrp.toGroup.assoc x.fst y.fst z.fst
+        (*$\cdot$*) exact ModN.addGrp.toGroup.assoc x.snd y.snd z.snd
+      id_left := by
+        intro x
+        show DirectSum.mk _ _ = DirectSum.mk _ _
+        congr 1
+        (*$\cdot$*) exact ModM.addGrp.toGroup.id_left x.fst
+        (*$\cdot$*) exact ModN.addGrp.toGroup.id_left x.snd
+      id_right := by
+        intro x
+        show DirectSum.mk _ _ = DirectSum.mk _ _
+        congr 1
+        (*$\cdot$*) exact ModM.addGrp.toGroup.id_right x.fst
+        (*$\cdot$*) exact ModN.addGrp.toGroup.id_right x.snd
+      inv_left := by
+        intro x
+        show DirectSum.mk _ _ = DirectSum.mk _ _
+        congr 1
+        (*$\cdot$*) exact ModM.addGrp.toGroup.inv_left x.fst
+        (*$\cdot$*) exact ModN.addGrp.toGroup.inv_left x.snd
+      inv_right := by
+        intro x
+        show DirectSum.mk _ _ = DirectSum.mk _ _
+        congr 1
+        (*$\cdot$*) exact ModM.addGrp.toGroup.inv_right x.fst
+        (*$\cdot$*) exact ModN.addGrp.toGroup.inv_right x.snd
+    }
+    comm := by
+      intro x y
+      show DirectSum.mk _ _ = DirectSum.mk _ _
+      congr 1
+      (*$\cdot$*) exact ModM.addGrp.comm x.fst y.fst
+      (*$\cdot$*) exact ModN.addGrp.comm x.snd y.snd
+  }
+  smul := fun r x => (*$\langle$*)ModM.smul r x.fst, ModN.smul r x.snd(*$\rangle$*)
+  smul_add := by
+    intro r x y
+    show DirectSum.mk _ _ = DirectSum.mk _ _
+    congr 1
+    (*$\cdot$*) exact ModM.smul_add r x.fst y.fst
+    (*$\cdot$*) exact ModN.smul_add r x.snd y.snd
+  add_smul := by
+    intro r s x
+    show DirectSum.mk _ _ = DirectSum.mk _ _
+    congr 1
+    (*$\cdot$*) exact ModM.add_smul r s x.fst
+    (*$\cdot$*) exact ModN.add_smul r s x.snd
+  smul_smul := by
+    intro r s x
+    show DirectSum.mk _ _ = DirectSum.mk _ _
+    congr 1
+    (*$\cdot$*) exact ModM.smul_smul r s x.fst
+    (*$\cdot$*) exact ModN.smul_smul r s x.snd
+  one_smul := by
+    intro x
+    show DirectSum.mk _ _ = DirectSum.mk _ _
+    congr 1
+    (*$\cdot$*) exact ModM.one_smul x.fst
+    (*$\cdot$*) exact ModN.one_smul x.snd
+\end{lstlisting}
+
+\texttt{congr 1} is a tactic worth noting, as this is its first appearance. Given a goal \texttt{f a1 a2 = f b1 b2} (here \texttt{f} is \texttt{DirectSum.mk}), \texttt{congr 1} reduces it to the componentwise goals \texttt{a1 = b1} and \texttt{a2 = b2}. This is the categorical fact that a product's equality is checked pairwise, turned into a one-line tactic instead of a hand-unfolded \texttt{Prod.ext}-style lemma. Every proof obligation above genuinely \emph{is} two independent facts, one from \texttt{M} and one from \texttt{N}, glued together by the direct-sum's product structure. \texttt{congr 1} is the right tool exactly because it exposes that independence directly, instead of hiding it inside a single opaque equality on pairs. Note the \texttt{show DirectSum.mk \_\allowbreak{} \_\allowbreak{} = DirectSum.mk \_\allowbreak{} \_\allowbreak{}} line before each \texttt{congr 1}: without it, the goal is stated in terms of the anonymous-constructor lambda (\texttt{op := fun x y => ⟨...⟩}) rather than the visible \texttt{DirectSum.mk} application. \texttt{congr 1} cannot reliably split a goal it does not recognize as ``one constructor applied to arguments on both sides'' --- a real gap that the compiler catches immediately if the \texttt{show} line is left out.
+
+\begin{mathreading}
+
+This builds the \textbf{direct sum} \(M \oplus N\): its carrier is the product \(M \times N\), with all structure defined componentwise --- \((m,n) + (m',n') = (m+m',\, n+n')\), \(0 = (0,0)\), \(-(m,n) =
+(-m,-n)\), and \(r\cdot(m,n) = (r\cdot m,\, r\cdot n)\). Every axiom holds because it holds in each coordinate independently, which is exactly what \texttt{congr 1} exposes: an equation of pairs splits into one equation in \(M\) and one in \(N\). For finitely many summands the direct sum \(M \oplus N\) is both a product and a coproduct at once in \(R\text{-}\mathbf{Mod}\): the projections \(\pi_M, \pi_N\) and inclusions \(\iota_M, \iota_N\) satisfy \(\pi_M\iota_M = \mathrm{id}\), \(\pi_N\iota_N = \mathrm{id}\), \(\pi_M\iota_N =
+0\), and \(\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}\).
+
+\end{mathreading}
+
+\subsection{\texorpdfstring{A concrete instance: \(\mathbb{Z} \oplus \mathbb{Z}\)}{A concrete instance: \textbackslash mathbb\{Z\} \textbackslash oplus \textbackslash mathbb\{Z\}}}\label{sec:10-modules:06-direct-sums:2}
+
+Instantiating the generic construction requires nothing beyond supplying two modules --- here, \texttt{intZModule} twice.
+
+\begin{lstlisting}
+def zSquaredModule := directSumModule intRing intZModule intZModule
+
+#eval (zSquaredModule.addGrp.op (*$\langle$*)2, 3(*$\rangle$*) (*$\langle$*)10, 20(*$\rangle$*) : DirectSum Int Int)
+-- { fst := 12, snd := 23 }, i.e. (2,3) + (10,20) = (12,23)
+
+#eval (zSquaredModule.smul 5 (*$\langle$*)2, 3(*$\rangle$*) : DirectSum Int Int)
+-- { fst := 10, snd := 15 }, i.e. 5 (*$\cdot$*) (2,3) = (10,15)
+\end{lstlisting}
+
+Both outputs are exactly the componentwise formulas from the mathematical reading above, computed rather than merely asserted.
+
+\textbf{Mathlib equivalent.} The book builds \texttt{DirectSum}/\texttt{directSumModule} field by field (five group axioms, four module axioms, each split componentwise via \texttt{congr 1}). Mathlib already gives the ordinary product type \texttt{M × N} a \texttt{Module R} instance directly. There is no \texttt{DirectSum} wrapper to define at all:
+
+\begin{lstlisting}
+example {M N : Type*} [AddCommGroup M] [AddCommGroup N]
+    [Module Int M] [Module Int N] : Module Int (M (*$\times$*) N) := inferInstance
+
+#eval ((2, 3) + (10, 20) : Int (*$\times$*) Int)     -- (12, 23)
+#eval ((5 : Int) (*$\bullet$*) ((2, 3) : Int (*$\times$*) Int))   -- (10, 15)
+\end{lstlisting}
+
+These are the same componentwise formulas as \texttt{zSquaredModule}'s \texttt{\#eval}s above. But \texttt{Prod}'s \texttt{AddCommGroup}/\href{https://loogle.lean-lang.org/?q=Module}{\texttt{Module}} instances (and the componentwise \texttt{+}/\texttt{•} they provide) are already in the library, built once for \emph{any} two additive groups or modules, instead of assembled here for \texttt{Int} and \texttt{Int} specifically.
+
+The first projection \(\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}\), one of the defining maps from the product/coproduct structure above, is itself a \texttt{LinearMap} (previous section), built directly from \texttt{DirectSum}'s own field accessor:
+
+\begin{lstlisting}
+def proj1 : LinearMap intRing zSquaredModule intZModule where
+  toFun := fun x => x.fst
+  map_add := by intro x y; rfl
+  map_smul := by intro r x; rfl
+
+#eval proj1.toFun (*$\langle$*)7, 100(*$\rangle$*)   -- 7
+\end{lstlisting}
+
+Both proof obligations are \texttt{rfl} directly: \texttt{zSquaredModule.addGrp.op} unfolds to componentwise addition (by the construction two sections back), so taking \texttt{.fst} of a sum is definitionally the same as summing the \texttt{.fst}s. No arithmetic argument is needed, only unfolding.
+
+\textbf{Mathlib equivalent, continued.} The projection \texttt{proj1} is, again, not something that needs to be built. Mathlib's \href{https://loogle.lean-lang.org/?q=LinearMap.fst}{\texttt{LinearMap.fst}} already is \(\pi_1\), generic over any two modules over any ring:
+
+\begin{lstlisting}
+def proj1' : (Int (*$\times$*) Int) (*$\rightarrow$*)(*${}_l$*)[Int] Int := LinearMap.fst Int Int Int
+
+#eval proj1' (7, 100)   -- 7
+\end{lstlisting}
+
+\subsection{References}\label{sec:10-modules:06-direct-sums:3}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  Dummit and Foote (\cite{DummitFoote2003}) --- the standard classical (non-Lean) reference for direct sums of modules and their universal property.
+\end{itemize}

@@ -1,0 +1,19 @@
+\section{What we built}\label{sec:13-next-steps:01-what-we-built:1}
+
+Starting from \texttt{\#eval} and \texttt{def}, this book built up, entirely from first principles (no external library):
+
+\begin{itemize}
+\tightlist
+\item
+  a general \texttt{Group} structure, with theorems proved for an arbitrary group (uniqueness of identity, uniqueness of inverses, \((ab)^{-1} = b^{-1}a^{-1}\)),
+\item
+  a \texttt{CommGroup} extending \texttt{Group},
+\item
+  a \texttt{Ring} structure built on top of \texttt{CommGroup}, with theorems for an arbitrary ring (\(a \cdot 0 = 0\), \((-1)\cdot a = -a\)), plus a genuinely noncommutative example (\(2\times 2\) matrices),
+\item
+  a \texttt{Module} over a ring, with submodules, linear maps, and direct sums,
+\item
+  a \texttt{Quiver} and an indexed inductive \texttt{Path} type, with path composition, as the combinatorial skeleton underlying a path algebra.
+\end{itemize}
+
+Nearly every proof in this book was written with explicit \texttt{rw}/\texttt{have}/\texttt{intro} steps, each one marked with the axiom or prior theorem that justified it, and no unexplained \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}}. \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{simp}} itself is used sparingly outside Chapter 12's own discussion of it, and only when a genuine technical obstacle makes the explicit alternative not worth the detour: Chapter 6's \texttt{Perm3.ext} reaches for \texttt{simp only [mk.injEq]} because core Lean generates no field-wise extensionality lemma for a plain \texttt{structure}, and Chapter 11's checkpoint project reaches for \texttt{simp only [Path.append, Path.length]} because a match on an \emph{indexed} inductive type like \texttt{Path} reduces only through its equation lemmas, not plain \texttt{rfl}, once an abstract path is involved. Both name only the exact definitions being unfolded, standing in for a specific, known step rather than an unknown pile of lemmas. Every other proof avoids \texttt{simp} entirely, precisely to keep the discipline required for reading (or writing) a real Lean library: when something goes wrong, the exact lemma responsible should be identifiable.

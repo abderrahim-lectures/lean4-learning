@@ -1,0 +1,35 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\begin{document}
+% Chapter dependency graph: a single chain, Chapter 0 through 13, with the
+% two checkpoint projects as waypoints (diamond nodes) after Chapters 5
+% and 11, plus two dashed skip edges for the named paths that actually
+% bypass material (as opposed to the two paths that just change how a
+% chapter is read). Source: learning-paths.md.
+\begin{tikzcd}[column sep=huge, row sep=small]
+\text{0. Setup} \arrow[d] \\
+\text{1. Basics \S1-3} \arrow[d] \\
+\text{1. Basics \S4-5} \arrow[d] \\
+\text{2. Functions \& structures} \arrow[d] \\
+\text{3. Propositions \& proofs} \arrow[d] \\
+\text{4. Tactics} \arrow[d] \\
+\text{5. Rigor check} \arrow[d] \\
+\langle\text{Checkpoint: Monoid}\rangle \arrow[d] \\
+\text{6. Groups} \arrow[d] \\
+\text{7. Group theorems} \arrow[d] \\
+\text{8. Rings} \arrow[d] \\
+\text{9. Ring theorems} \arrow[d] \\
+\text{10. Modules} \arrow[d] \\
+\text{11. Path algebras} \arrow[d] \\
+\langle\text{Checkpoint: Path.length}\rangle \arrow[d] \\
+\text{12. Working efficiently} \arrow[d] \\
+\text{13. Next steps}
+\arrow["\text{already know Lean}"{sloped}, dashed,
+  bend right=80, looseness=3, from=2-1, to=4-1]
+\arrow["\text{already know Lean}"{sloped}, dashed,
+  bend right=70, looseness=2.5, from=6-1, to=9-1]
+\arrow["\text{fastest path}"{sloped}, dashed,
+  bend left=55, looseness=1.8, from=1-1, to=9-1]
+\end{tikzcd}
+\end{document}

@@ -1,0 +1,32 @@
+\chapter{Chapter 4: Tactics --- the toolbox for proving things}\label{sec:04-tactics:00-index:1}
+
+Writing proof \emph{terms} directly (as in Chapter 3) quickly becomes hard to manage. Instead, Lean provides \textbf{tactic mode}, entered with \texttt{by}, in which a ``goal'' is worked step by step, much as one would write a proof on paper. This chapter's real subject is not the list of tactics below, but \textbf{how to work a goal whose proof is not yet known}, since that is the skill the rest of the book practices. The tactic reference is secondary: read it once, then return to it as needed. (For links to the official docs for every tactic named in this chapter, see the \hyperref[sec:root:tactic-and-library-reference:1]{tactic and library reference}.)
+
+\textbf{Learning objectives.} By the end of this chapter, read a Lean goal state, use \texttt{intro}/\texttt{exact}/\texttt{apply}/\texttt{rw} to work a goal one step at a time, diagnose a failed tactic from its error message, use \texttt{induction}/\texttt{cases}/ \texttt{constructor}/\texttt{unfold} on inductively-defined data, and carry out a full inductive proof (\texttt{Nat.add}'s commutativity) from scratch.
+
+\section{Sections}\label{sec:04-tactics:00-index:2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \hyperref[sec:04-tactics:01-goal-state:1]{The goal state, and a worked strategy session}
+\item
+  \hyperref[sec:04-tactics:02-core-tactics:1]{Core tactics}
+\item
+  \hyperref[sec:04-tactics:03-reading-failures:1]{Reading a tactic failure, and \texttt{sorry}}
+\item
+  \hyperref[sec:04-tactics:04-more-tactics:1]{More tactics: \texttt{simp}, \texttt{constructor}, \texttt{cases}, \texttt{induction}, \texttt{unfold}}
+\item
+  \hyperref[sec:04-tactics:05-worked-example:1]{Worked example: proving \texttt{Nat.add} is commutative from scratch}
+\item
+  \hyperref[sec:04-tactics:06-exercises:1]{Exercises}
+\end{enumerate}
+
+% Auto-appended: input every other section in order.
+\input{04-tactics/01-goal-state.tex}
+\input{04-tactics/02-core-tactics.tex}
+\input{04-tactics/03-reading-failures.tex}
+\input{04-tactics/04-more-tactics.tex}
+\input{04-tactics/05-worked-example.tex}
+\input{04-tactics/06-exercises.tex}

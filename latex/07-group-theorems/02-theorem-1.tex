@@ -1,0 +1,43 @@
+\section{Theorem 1: the identity is unique}\label{sec:07-group-theorems:02-theorem-1:1}
+
+\textbf{Claim.} If \texttt{e' : G} also satisfies \texttt{∀ a, Grp.op e' a = a}, then \texttt{e' = Grp.id}.
+
+\textbf{Finding the proof.} We begin by stating the goal and examining what is available:
+
+\begin{lstlisting}
+theorem id_unique (e' : G) (h : (*$\forall$*) a : G, Grp.op e' a = a) : e' = Grp.id := by
+  sorry
+\end{lstlisting}
+
+The goal is \texttt{e' = Grp.id}, an equality between two elements of \texttt{G} about which we individually know very little: \texttt{e'} only through \texttt{h}, and \texttt{Grp.id} only through \texttt{Grp}'s own axioms. \textbf{When a goal is ``show two opaque things are equal,'' the standard move is to find a \emph{third} expression that both sides equal on their own, then chain the two equalities.} We ask: is there anything both \texttt{e'} and \texttt{Grp.id} can be related to?
+
+\texttt{h} lets us compute \texttt{Grp.op e' a} for \emph{any} \texttt{a} --- in particular for \texttt{a := Grp.id}, giving \texttt{Grp.op e' Grp.id = Grp.id}. Separately, \texttt{Grp.id\_\allowbreak{}right} (a field of \texttt{Group}, so available for free) says \texttt{Grp.op e' Grp.id = e'} (instantiating its universal quantifier at \texttt{e'}). Both describe \texttt{Grp.op e' Grp.id} --- that is the third expression. Once this is noticed, the proof is a matter of bookkeeping:
+
+\begin{lstlisting}
+theorem id_unique (e' : G) (h : (*$\forall$*) a : G, Grp.op e' a = a) : e' = Grp.id := by
+  have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
+  have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
+  rw [(*$\leftarrow$*) step2]
+  exact step1
+\end{lstlisting}
+
+Why \texttt{rw [← step2]} and not \texttt{rw [step2]}? The goal is \texttt{e' = Grp.id}, and \texttt{step2 : Grp.op e' Grp.id = e'} has \texttt{e'} on its \emph{right}. \texttt{rw [step2]} would rewrite the goal's \texttt{Grp.op e' Grp.id}, but the goal does not yet contain that term --- it contains \texttt{e'}. \texttt{rw [← step2]} rewrites right-to-left, replacing \texttt{e'} (which the goal \emph{does} contain) with \texttt{Grp.op e' Grp.id}. This right-to-left choice, ``which side of the \texttt{have} actually appears in the goal at present,'' is something to check every time \texttt{rw} is invoked, not something to guess.
+
+\begin{mathreading}
+
+This is the classical \emph{uniqueness of the identity}: if \(e'\) is a left identity (\(e'\cdot a = a\) for all \(a\)) then \(e' = e\). The one-line proof is \[
+e' \overset{\text{id\_right}}{=} e' \cdot e \overset{h}{=} e,
+\] evaluating the hypothesis at \(a = e\) and comparing with the axiom \(e'\cdot e
+= e'\): both compute \(e' \cdot e\), so \(e' = e\). The two \texttt{have}s are these two equalities, and the \texttt{rw}/\texttt{exact} glue them at their common expression \(e'\cdot
+e\): the standard ``two things equal to a common third are equal.'' (The same argument in mirror shows a right identity is also unique, so a group's identity is unique, full stop.)
+
+\end{mathreading}
+
+\textbf{Mathlib equivalent.} Phrased against Mathlib's \href{https://loogle.lean-lang.org/?q=Group}{\texttt{Group}} class, \texttt{Grp.op}/ \texttt{Grp.id}/\texttt{Grp.id\_\allowbreak{}right} become the ordinary \texttt{*}/\texttt{1}/\href{https://loogle.lean-lang.org/?q=mul_one}{\texttt{mul\_\allowbreak{}one}}, and the whole ``third expression'' chain collapses into a single \texttt{.symm.trans}:
+
+\begin{lstlisting}
+example {G : Type*} [Group G] (e' : G) (h : (*$\forall$*) a : G, e' * a = a) : e' = 1 :=
+  (mul_one e').symm.trans (h 1)
+\end{lstlisting}
+
+This is the same proof, the same two facts glued at their common value \(e'\cdot 1\): \texttt{h 1} is the book's \texttt{step1} and \texttt{mul\_\allowbreak{}one e'} is \texttt{step2}. The only difference is that \texttt{1} is written for \texttt{Grp.id}, and there is no field-projection to spell out, since \texttt{*}/\texttt{1} already mean ``whatever this type's \texttt{Group} instance says they mean.''

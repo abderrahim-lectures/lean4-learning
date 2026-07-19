@@ -1,0 +1,13 @@
+\section{Term mode vs tactic mode}\label{sec:12-working-efficiently:04-term-vs-tactic-mode:1}
+
+Every tactic-mode proof compiles down to a term (Chapter 3's style). The choice between them is about which is more \emph{readable} for a given proof, not a real difference in power:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Term mode} is preferable for short proofs that are naturally a single expression: \texttt{theorem foo := h.symm}, \texttt{theorem bar := ⟨x, hx⟩}. Chapter 6's one-line group-axiom proofs are a good example of where tactic mode (\texttt{by intro a; exact ...}) is arguably \emph{more} verbose than the term \texttt{fun a => Int.add\_\allowbreak{}assoc a b c} would have been.
+\item
+  \textbf{Tactic mode} is preferable once a proof involves several steps in a row, case splits, or induction --- anything where checking an intermediate goal state while writing is desirable. Chapters 7 and 9's multi-step \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}} chains would be hard to read (and much harder to \emph{write}) as raw terms.
+\item
+  \texttt{have}/\texttt{show}/\texttt{suffices} inside tactic mode allow naming and restating intermediate goals. These should be used freely to keep a long proof's shape clear, exactly as Chapters 7 and 9 did throughout.
+\end{itemize}

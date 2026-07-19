@@ -1,0 +1,22 @@
+\section{Exercises}\label{sec:06-groups:07-exercises:1}
+
+\textbf{Key points.} A group is data (\texttt{op}, \texttt{id}, \texttt{inv}) plus proof obligations (\texttt{assoc}, two-sided \texttt{id}/\texttt{inv} laws), bundled in one \texttt{structure}. The left/right split on \texttt{id}/\texttt{inv} is not overcaution --- a genuinely non-abelian example (\texttt{perm3Group}) needs both. Any theorem proved once, generically, against \texttt{Grp : Group G} applies to every concrete group built afterward at no extra cost.
+
+\textbf{Socratic questions.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{\texttt{intGroup} never tests the difference between \texttt{id\_\allowbreak{}left}/\texttt{id\_\allowbreak{}right} or \texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right}, since \texttt{Int} addition is commutative. Does that mean the split is only there for generality's sake, with no concrete example that actually needs it?} No --- \texttt{perm3Group} needs it for real: composing permutations is genuinely non-commutative, so \texttt{id\_\allowbreak{}left} and \texttt{id\_\allowbreak{}right} are two separate proof obligations there, not a single fact proved twice.
+\item
+  \emph{\texttt{GroupData} (op, id, inv, no axioms) type-checks for any choice of the three fields, including nonsense ones. What is the smallest change that turns ``any \texttt{GroupData}'' into ``only genuine groups''?} Nothing about the \emph{data} fields changes at all --- five more fields are added, each a proof obligation. \texttt{Group} is exactly \texttt{GroupData} plus those five proofs; the type of a term goes from ``some operation and two elements'' to ``an operation and two elements \emph{together with evidence} they behave correctly.''
+\item
+  \emph{\texttt{perm3Group}'s three-line \texttt{\#eval} computation showed \texttt{swap01 ∘ cycle012 ≠ cycle012 ∘ swap01}. Why is that a complete proof of non-commutativity, rather than just suggestive evidence?} Because disproving a universal claim (\texttt{∀ f g, f ∘ g = g ∘ f}) needs only one counterexample, and the two sides of that one inequality were computed, not estimated --- \texttt{\#eval} is exact here, not approximate, since \texttt{Perm3} composition is finite and decidable.
+\item
+  Build \texttt{boolXorGroup : Group Bool} where \texttt{op} is boolean XOR (\texttt{Bool.xor}), \texttt{id := false}, and \texttt{inv := fun a => a} (every element is its own inverse). Prove each field using \texttt{by intro a; cases a <;> rfl} is tempting --- instead, for practice, use \texttt{cases a with | false => rfl | true => rfl} for the fields that need a case split, to see exactly which case does what.
+\item
+  Verify on paper that \texttt{inv\_\allowbreak{}left} and \texttt{inv\_\allowbreak{}right} are genuinely different obligations. They coincide automatically only once the group has been \emph{proved} commutative --- this is exactly the content of Chapter 7's first theorem.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:05-chapter-6:1]{Appendix, Chapter 6}.
+

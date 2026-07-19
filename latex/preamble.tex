@@ -1,0 +1,199 @@
+% Preamble for "Lean for Working Algebraists" -- LaTeX manuscript,
+% generated from lean_book/*.md by build/build_latex.py.
+%
+% Class: plain LaTeX `book`, on standard A4 -- KOMA-Script scrbook was
+% tried (aiming for a Springer-Monographs-in-Mathematics look) but caused
+% more problems than it solved: it conflicts with titlesec, its DIV/trim
+% tuning had to be re-derived from scratch at every page-size change, and
+% chasing "does every table/code listing still fit" across several trim
+% sizes cost more than the nicer typearea math was worth. Back to the
+% plain class this book used before that detour.
+\documentclass[12pt,twoside]{book}
+\usepackage[margin=1in,bindingoffset=0.3in]{geometry}
+
+% Book version, shown on the title page (frontmatter.tex) -- update this
+% to match the git tag each time a release is cut, so the compiled PDF
+% itself states which version a reader has, not just the GitHub release
+% page it came from.
+\newcommand{\bookversion}{v1.4.14}
+
+\usepackage{fontspec}
+% Consolas/Palatino Linotype (proprietary Microsoft fonts) replaced with
+% free, metric-similar equivalents bundled with any standard TeX Live
+% install, so the manuscript builds on any machine without requiring
+% fonts licensed only via Windows/Office.
+\setmonofont{DejaVu Sans Mono}
+\setmainfont{TeX Gyre Pagella}
+% A bigger base size (12pt) plus extra leading and a paragraph gap below
+% are direct responses to feedback that the original 11pt/no-gap look
+% read too small and cramped.
+\linespread{1.15}
+% Keep the first-line indent (unlike the `parskip` package, which drops
+% it) but also add a visible gap between paragraphs, not indent alone.
+\setlength{\parskip}{0.5\baselineskip}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\usepackage{graphicx}
+% For full-bleed front/back cover page backgrounds (see
+% lean-for-working-algebraists.tex): places images during shipout,
+% independent of \newgeometry/margins, so it can't disturb pagination.
+\usepackage{eso-pic}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{caption}
+
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+\input{lean-listings.tex}
+% Pandoc's --listings output wraps every inline code span in
+% \passthrough{\lstinline!...!}; this macro is normally supplied by
+% Pandoc's own --standalone template, which this fragment-based pipeline
+% does not use.
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% Pandoc's longtable output computes column widths as e.g.
+% "(\linewidth - 2\tabcolsep) * \real{0.5000}"; \real is normally supplied
+% by Pandoc's own --standalone template (which this fragment-based
+% pipeline does not use) as a trivial pass-through of its numeric argument.
+\providecommand{\real}[1]{#1}
+% Pandoc wraps every image in \pandocbounded{...} to constrain it to the
+% text width/height; normally defined by Pandoc's --standalone template.
+\providecommand{\pandocbounded}[1]{#1}
+
+% Unicode symbols used verbatim inside Lean/Python `lstlisting` blocks.
+% listings itself does not know these; newunicodechar maps each raw
+% character, at the XeTeX input level, to the equivalent LaTeX command,
+% independent of any particular font's glyph coverage.
+\usepackage{newunicodechar}
+\newunicodechar{§}{\S}
+\newunicodechar{¬}{\ensuremath{\neg}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{¹}{\textsuperscript{1}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{Π}{\ensuremath{\Pi}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{•}{\ensuremath{\bullet}}
+\newunicodechar{⁻}{\ensuremath{{}^-}}
+\newunicodechar{ₗ}{\ensuremath{{}_l}}
+\newunicodechar{ⱼ}{\ensuremath{{}_j}}
+\newunicodechar{∀}{\ensuremath{\forall}}
+\newunicodechar{∃}{\ensuremath{\exists}}
+\newunicodechar{∈}{\ensuremath{\in}}
+\newunicodechar{∘}{\ensuremath{\circ}}
+\newunicodechar{∣}{\ensuremath{\mid}}
+\newunicodechar{∧}{\ensuremath{\wedge}}
+\newunicodechar{∨}{\ensuremath{\vee}}
+\newunicodechar{≃}{\ensuremath{\simeq}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{≡}{\ensuremath{\equiv}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{⊆}{\ensuremath{\subseteq}}
+\newunicodechar{⊢}{\ensuremath{\vdash}}
+\newunicodechar{⟨}{\ensuremath{\langle}}
+\newunicodechar{⟩}{\ensuremath{\rangle}}
+\newunicodechar{⟶}{\ensuremath{\longrightarrow}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{↦}{\ensuremath{\mapsto}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{ℤ}{\ensuremath{\mathbb{Z}}}
+\newunicodechar{—}{\textemdash}
+
+\usepackage[backend=biber,style=numeric,sorting=nyt]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage[colorlinks=true,linkcolor=Maroon,citecolor=Maroon,
+  urlcolor=NavyBlue]{hyperref}
+\usepackage[capitalize]{cleveref}
+
+% ---------------------------------------------------------------------
+% Chapter/section styling
+% ---------------------------------------------------------------------
+\usepackage{titlesec}
+\definecolor{ruleblue}{RGB}{40,70,120}
+% No chapter-number label here: every chapter's title text already
+% embeds its own "Chapter N:" (the book's own numbering, e.g. Chapter 0
+% for 00-setup/, Chapter 6 for 06-groups/), which does not line up with
+% LaTeX's automatic \thechapter counter (that counter increments once per
+% \chapter{} call including the 00-setup chapter and the unnumbered
+% Appendix, so it runs one or more ahead of the book's own numbers) --
+% showing both would be redundant at best, contradictory at worst.
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {}
+  {0pt}
+  {{\color{ruleblue}\titlerule[1pt]}\vspace{10pt}\Huge}
+  [{\vspace{4pt}\color{ruleblue}\titlerule[0.5pt]}]
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{ruleblue}}{\thesection}{0.8em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{0.8em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{30pt}
+
+% ---------------------------------------------------------------------
+% Running headers/footers
+% ---------------------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\fancyhead[LE]{\small\textsc{\nouppercase{\leftmark}}}
+\fancyhead[RO]{\small\textsc{\nouppercase{\rightmark}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% book class's default \cleardoublepage (used before every \chapter, since
+% book defaults to openright) pads to an odd page with a bare \hbox{}+\newpage
+% but does NOT set \thispagestyle{empty} on that inserted page, so it still
+% shows the fancyhdr header rule and page-number footer despite having no
+% content -- fix it to render genuinely blank.
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+% ---------------------------------------------------------------------
+% Custom environments for the book's recurring boxes, as colored,
+% bordered tcolorboxes rather than plain amsthm remarks.
+% ---------------------------------------------------------------------
+\usepackage[most]{tcolorbox}
+\newtcolorbox[auto counter]{mathreadingbox}{
+  colback=NavyBlue!5, colframe=NavyBlue!70!black, coltitle=white,
+  fonttitle=\bfseries, title=Mathematical Reading, breakable,
+  boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+\newenvironment{mathreading}{\begin{mathreadingbox}}{\end{mathreadingbox}}
+
+\newtcolorbox{progcornerbox}{
+  colback=OliveGreen!5, colframe=OliveGreen!60!black, coltitle=white,
+  fonttitle=\bfseries, title=Programmer's Corner (Python), breakable,
+  boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+\newenvironment{progcorner}{\begin{progcornerbox}}{\end{progcornerbox}}
+
+% Title is fixed to "Checkpoint Project N" (auto-numbered); the specific
+% project's own title is set as a bold first line inside the box body by
+% build_latex.py, rather than passed through tcolorbox's own optional
+% argument -- that bracket is reserved for tcolorbox's key=value options
+% and chokes on a plain string containing a comma.
+\newtcolorbox[auto counter,number within=chapter]{pblproject}{
+  colback=Dandelion!8, colframe=Sepia!80!black, coltitle=white,
+  fonttitle=\bfseries, title=Checkpoint Project~\thetcbcounter,
+  breakable, boxrule=0.7pt, arc=2pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+}

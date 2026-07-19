@@ -1,0 +1,32 @@
+\section{Chapter 7: Group examples and basic theorems}\label{sec:14-appendix-solutions:06-chapter-7:1}
+
+\textbf{1. \texttt{theorem inv\_\allowbreak{}inv (a : G) : Grp.inv (Grp.inv a) = a}}
+
+\begin{lstlisting}
+theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
+  apply Eq.symm
+  apply left_inverse_unique Grp (Grp.inv a) a
+  -- Goal: op a (inv a) = id
+  exact Grp.inv_right a
+\end{lstlisting}
+
+By \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 7, Theorem 2), to show \texttt{a = Grp.inv (Grp.inv a)} it suffices to show \texttt{a} is a left inverse of \texttt{Grp.inv a}, i.e.~\texttt{Grp.op a (Grp.inv a) = Grp.id} --- exactly \texttt{Grp.inv\_\allowbreak{}right a}.
+
+\textbf{2. \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}}
+
+\begin{lstlisting}
+theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c := by
+  have h1 : Grp.op (Grp.inv a) (Grp.op a b) = Grp.op (Grp.inv a) (Grp.op a c) := by
+    rw [h]
+  rw [(*$\leftarrow$*) Grp.assoc (Grp.inv a) a b] at h1
+  -- h1 : op (op (inv a) a) b = op (inv a) (op a c)
+  rw [(*$\leftarrow$*) Grp.assoc (Grp.inv a) a c] at h1
+  -- h1 : op (op (inv a) a) b = op (op (inv a) a) c
+  rw [Grp.inv_left] at h1
+  -- h1 : op id b = op id c
+  rw [Grp.id_left, Grp.id_left] at h1
+  -- h1 : b = c
+  exact h1
+\end{lstlisting}
+
+Both sides of \texttt{h} are left-multiplied by \texttt{Grp.inv a} (step \texttt{h1}), then regrouped with associativity so that \texttt{Grp.inv a} meets \texttt{a} on both sides. That pair cancels to \texttt{Grp.id} via \texttt{inv\_\allowbreak{}left}, and \texttt{Grp.id} is then stripped via \texttt{id\_\allowbreak{}left}, which leaves \texttt{b = c} directly.

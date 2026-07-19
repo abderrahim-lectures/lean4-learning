@@ -1,0 +1,15 @@
+\section{\texorpdfstring{\texttt{CommGroup}: extending \texttt{Group} with one extra axiom}{CommGroup: extending Group with one extra axiom}}\label{sec:08-rings:02-comm-group:1}
+
+\begin{lstlisting}
+structure CommGroup (G : Type) extends Group G where
+  comm : (*$\forall$*) a b : G, op a b = op b a
+\end{lstlisting}
+
+Recall \texttt{extends} from Chapter 2: a \texttt{CommGroup G} \emph{is} a \texttt{Group G} (it has every field \texttt{Group G} has --- \texttt{op}, \texttt{id}, \texttt{inv}, \texttt{assoc}, etc.) plus one more field, \texttt{comm}. Anywhere Lean expects a \texttt{Group G}, a \texttt{CommGroup G} may be passed instead (via \texttt{.toGroup}).
+
+\begin{mathreading}
+
+\texttt{CommGroup G} is an \emph{abelian group} \((G, \cdot, e,
+(-)^{-1})\) with the extra law \(\forall a,b,\ a\cdot b = b\cdot a\). Structurally \(\mathbf{Ab}\) is a \hyperref[sec:01-basics:04-terminology:1]{full subcategory / subobject} of \(\mathbf{Grp}\), cut out by the commutativity axiom, and \texttt{extends} builds exactly this inclusion: \texttt{.toGroup} is the \hyperref[sec:01-basics:04-terminology:1]{forgetful functor} \(\mathbf{Ab} \hookrightarrow \mathbf{Grp}\), which forgets the \texttt{comm} axiom.
+
+\end{mathreading}

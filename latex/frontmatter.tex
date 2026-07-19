@@ -1,0 +1,148 @@
+% ===================================================================
+% Title page
+% ===================================================================
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+{\color{ruleblue}\rule{0.6\textwidth}{1.2pt}}\par
+\vspace{0.6cm}
+
+{\normalfont\Huge\bfseries Lean for Working Algebraists\par}
+\vspace{0.5cm}
+{\normalfont\Large\itshape A Guide to Formalizing Groups, Rings, and\\[2pt]
+Path Algebras in Lean~4\par}
+
+\vspace{0.6cm}
+{\color{ruleblue}\rule{0.6\textwidth}{1.2pt}}\par
+
+\vspace{2.5cm}
+{\normalfont\Large Abderrahim Adrabi\par}
+\vspace{0.2cm}
+{\normalfont\normalsize\itshape Faculty of Sciences, Rabat, Morocco\\
+Faculty of Educational Sciences, Rabat, Morocco\par}
+
+\vfill
+
+{\normalfont\large\itshape "Every proof in this book was verified against
+a real Lean~4 toolchain --- \\
+not just described."\par}
+
+\vspace{1.5cm}
+{\normalfont\normalsize \today\ --- \bookversion\par}
+{\normalfont\small Lean toolchain \texttt{v4.31.0}\par}
+\vspace{0.3cm}
+{\normalfont\small Source code:
+\url{https://github.com/abderrahim-lectures/lean4-learning}\par}
+
+\end{titlepage}
+
+% ===================================================================
+% Copyright / license page (verso of the title page)
+% ===================================================================
+\clearpage
+\thispagestyle{empty}
+\null\vfill
+\begin{center}
+{\normalfont\small
+Copyright \textcopyright\ 2026 Abderrahim Adrabi\par
+\vspace{0.4cm}
+Licensed under the MIT License. See the \texttt{LICENSE} file in the
+source repository for the full license text.\par
+\vspace{0.4cm}
+Source code, issue tracker, and the latest release:\\
+\url{https://github.com/abderrahim-lectures/lean4-learning}\par
+}
+\end{center}
+\vfill\null
+\clearpage
+
+% ===================================================================
+% Preface
+% ===================================================================
+\chapter*{Preface}
+
+This is a guide to Lean~4 for readers who already think in groups, rings,
+functors, and diagrams, but have never written a line of Lean --- or any
+proof assistant. No programming background is assumed, only the
+mathematical maturity of someone comfortable with abstract algebra and the
+basic language of category theory: objects, morphisms, composition,
+functors. The book builds up Lean~4 syntax and tactics only as far as
+needed to formalize groups, rings, and quiver path algebras; the
+categorical viewpoint --- a quiver's path category, a ring as a one-object
+preadditive category, and so on --- is called out explicitly wherever it
+clarifies what the Lean code is really encoding.
+
+This book is, and remains, Mathlib-free by design through Chapter~5: every
+group, ring, and path algebra is built from scratch, so every definition
+and proof obligation stays visible. Starting in Chapter~6, each worked
+example is followed by a ``Mathlib equivalent'' box showing the same
+statement phrased against Mathlib's real API --- not a contradiction of
+the from-scratch approach, but a second, parallel track. Seeing the same
+idea twice, once built by hand and once as a library already has it, is
+how both halves of working in Lean get learned at once: the mathematics
+itself, and the shape of the library a reader will actually use
+afterward. Chapter~13 completes the handoff to Mathlib in full.
+
+The running goal throughout is more than the constructs covered: it is
+the \emph{skill} of using Lean --- reading a goal state, deciding what to
+try next, recovering when a tactic fails, and knowing which proofs to
+derive by hand versus hand off to automation.
+
+% ===================================================================
+% About this book
+% ===================================================================
+\chapter*{About this book}
+This book was written as an experiment in using Claude Code (Anthropic's
+AI coding agent) to produce a complete technical book: the author,
+Abderrahim Adrabi --- a mathematician (PhD) and techno-pedagogical
+engineer affiliated with the Faculty of Sciences, Rabat, and the Faculty
+of Educational Sciences, Rabat, Morocco --- directed the scope,
+structure, and audience, and has reviewed the mathematical and Lean
+content directly, chapter by chapter, across every round of revision;
+Claude wrote the chapter text, Lean code, and LaTeX. No additional,
+independent mathematician or Lean expert has reviewed the content beyond
+the author's own review and the automated checks described in the
+project's README and CHANGELOG (every code block compiled against a real
+Lean~4 toolchain, plus several AI-driven review passes). Treat it as an
+author-reviewed draft produced through human-directed AI authorship, not
+a traditionally peer-reviewed text.
+
+% ===================================================================
+% How to read this book
+% ===================================================================
+\chapter*{How to read this book}
+
+Not every reader needs every chapter in order. The Learning paths chapter
+just after this one lays out a chapter-dependency graph and a handful of
+named paths through the book --- already know Lean? already know algebra?
+want the formal foundations first? --- for readers who would rather not
+start cover to cover.
+
+Each chapter is divided into short, numbered sections building on one
+another. Every code listing is valid Lean~4 (toolchain
+\texttt{v4.31.0}). Every code block in Chapters~1--11 has additionally
+been ported into a companion Lean project and verified with
+\texttt{lake build} against the real compiler, not merely read over ---
+several bugs that only surfaced this way (a missing extensionality
+lemma, a couple of \texttt{rw} steps that over-rewrote, a reference to an
+undefined name, a tactic used without its library ever being imported)
+have been fixed in both the book and the project.
+
+This book is about more than the constructs it covers. Chapters~7 and~9
+present each theorem as a search process --- what to look at, what to
+try, why an attempt fails --- rather than only the polished final proof;
+Chapter~12 is dedicated entirely to working efficiently once the
+underlying ideas are understood. Chapter~5 pauses to address the rigor
+questions a careful mathematician will already be asking by that point
+--- \texttt{structure} versus \texttt{class}, universes, and definitional
+versus propositional equality --- before Chapter~6 commits to
+\texttt{Group}'s definition.
+
+A notation reference follows this section, for quick lookup as unfamiliar
+symbols are encountered; two further lookup tables --- a tactic and
+library reference, and a $\lambda$-calculus-to-Lean dictionary --- sit at
+the back of the book, after the last chapter, to be consulted as needed
+rather than read start to finish.
+
+\tableofcontents

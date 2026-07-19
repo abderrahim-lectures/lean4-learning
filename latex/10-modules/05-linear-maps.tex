@@ -1,0 +1,54 @@
+\section{Linear maps}\label{sec:10-modules:05-linear-maps:1}
+
+A \textbf{linear map} (module homomorphism) \(f : M \to N\) between \(R\)-modules satisfies \(f(m+n) = f(m) + f(n)\) and \(f(r \cdot m) = r \cdot f(m)\):
+
+\begin{lstlisting}
+structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
+    (ModM : Module R Rg M) (ModN : Module R Rg N) where
+  toFun : M (*$\rightarrow$*) N
+  map_add : (*$\forall$*) m n : M, toFun (ModM.addGrp.op m n) = ModN.addGrp.op (toFun m) (toFun n)
+  map_smul : (*$\forall$*) (r : R) (m : M), toFun (ModM.smul r m) = ModN.smul r (toFun m)
+\end{lstlisting}
+
+This is precisely the categorical picture: \(R\)-modules and \(R\)-linear maps form a category (composition of linear maps is linear, and the identity function is linear --- both easy \texttt{theorem}s to state and prove from the two fields above). Everything in this chapter, including submodules and the direct sums below, is best understood as living inside that category, consistent with Chapter 1's opening dictionary for reading \texttt{Type} itself.
+
+\begin{mathreading}
+
+\texttt{LinearMap Rg ModM ModN} is the set \(\mathrm{Hom}_R(M, N)\) of \(R\)-module homomorphisms: functions \(f : M \to N\) that are additive (\(f(m+n) = f(m)+f(n)\), so \(f\) is a group homomorphism of the underlying abelian groups) and \(R\)-equivariant (\(f(r\cdot m) = r\cdot
+f(m)\), so \(f\) intertwines the two \(R\)-actions). Equivalently, \(f\) commutes with the representation maps \(\rho_M, \rho_N\) of the previous section: \(f\circ\rho_M(r) = \rho_N(r)\circ f\) for all \(r\). These are the morphisms of \(R\text{-}\mathbf{Mod}\). \(\mathrm{Hom}_R(M,N)\) is itself an abelian group (and an \(R\)-module when \(R\) is commutative).
+
+\end{mathreading}
+
+\subsection{A concrete linear map: multiplication by a fixed integer}\label{sec:10-modules:05-linear-maps:2}
+
+The abstract definition is easier to trust once a single instance has been built by hand. Fix \(d \in \mathbb{Z}\); multiplication by \(d\) is \(\mathbb{Z}\)-linear as a map \(\mathbb{Z} \to \mathbb{Z}\):
+
+\begin{lstlisting}
+def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
+  toFun := fun m => d * m
+  map_add := by
+    intro m n
+    show d * (m + n) = d * m + d * n
+    exact Int.mul_add d m n
+  map_smul := by
+    intro r m
+    show d * (r * m) = r * (d * m)
+    rw [(*$\leftarrow$*) Int.mul_assoc, Int.mul_comm d r, Int.mul_assoc]
+
+#eval (mulByLinearMap 5).toFun 3   -- 15
+\end{lstlisting}
+
+\texttt{map\_\allowbreak{}add}'s goal, \texttt{d * (m+n) = d*m + d*n}, is exactly distributivity. \texttt{map\_\allowbreak{}smul}'s goal, \texttt{d * (r*m) = r * (d*m)}, holds because \(\mathbb{Z}\) is commutative, so \texttt{d} and \texttt{r} can swap past each other. Both fields, in other words, are pure \texttt{Int}-arithmetic facts once \texttt{toFun}, \texttt{ModM.smul}, and \texttt{ModM.addGrp.op} are unfolded to their meanings here. This is the same ``reduce a module-theoretic goal to a concrete arithmetic identity'' move that §4's \texttt{evenSubmodule} used, applied again.
+
+\textbf{Mathlib equivalent.} Mathlib's own \href{https://loogle.lean-lang.org/?q=LinearMap}{\texttt{LinearMap}} (notation \texttt{M →ₗ[R] N}) is built the same way: supply \texttt{toFun} plus the two homomorphism proofs. But the result is directly interoperable with the rest of the library's linear-algebra API:
+
+\begin{lstlisting}
+def mulByLinearMap' (d : Int) : Int (*$\rightarrow$*)(*${}_l$*)[Int] Int where
+  toFun := fun m => d * m
+  map_add' := fun m n => mul_add d m n
+  map_smul' := fun r m => by simp [mul_left_comm]
+
+#eval mulByLinearMap' 5 3   -- 15
+\end{lstlisting}
+
+This has the same shape as \texttt{mulByLinearMap}: a \texttt{toFun} and two proof obligations, with \texttt{map\_\allowbreak{}add}/\texttt{map\_\allowbreak{}smul} becoming Mathlib's \texttt{map\_\allowbreak{}add'}/\texttt{map\_\allowbreak{}smul'}. The real difference is that \texttt{Int →ₗ[Int] Int} is a type the rest of Mathlib already knows how to compose, transport along isomorphisms, and package into matrices. \texttt{LinearMap intRing intZModule intZModule} gets none of that for free.

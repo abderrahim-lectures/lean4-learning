@@ -1,0 +1,41 @@
+title: "Lean for Working Algebraists"
+description: >-
+  A Lean 4 introduction for mathematicians: build groups, rings, modules,
+  and quiver path algebras from scratch, no programming background assumed.
+url: "https://abderrahim-lectures.github.io"
+baseurl: "/lean4-learning"
+
+theme: jekyll-theme-cayman
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-titles-from-headings
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+relative_links:
+  enabled: true
+  collections: false
+
+optional_front_matter:
+  remove_originals: false
+
+readme_index:
+  remove_originals: false
+  with_frontmatter: false
+
+titles_from_headings:
+  enabled: true
+  strip_title: true
+  collections: false
+
+exclude:
+  - latex/
+  - build/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

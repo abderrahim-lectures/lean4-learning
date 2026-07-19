@@ -1,0 +1,80 @@
+\section{Theorem 3: inverse of a product}\label{sec:07-group-theorems:04-theorem-3:1}
+
+\textbf{Claim.} \texttt{Grp.inv (Grp.op a b) = Grp.op (Grp.inv b) (Grp.inv a)}.
+
+\textbf{Finding the proof.} This \emph{appears} to again call for a chain of equalities, but a shortcut emerges once the goal's shape is recognized to match a theorem already in hand. The claim states that some element (\texttt{Grp.inv (Grp.op a b)}) equals some other expression built from \texttt{a}, \texttt{b}. Theorem 2 already establishes: \emph{to show \texttt{x = Grp.inv y}, it suffices to show \texttt{x} is a left inverse of \texttt{y}}. In other words, an inverse-computation goal reduces to a single equation \texttt{Grp.op x y = Grp.id}, which is usually easier to attack directly with \texttt{assoc}/\texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right} than \texttt{inv (...)} taken at face value. This is a general and reusable move: \textbf{once a uniqueness/characterization lemma is proved, it can turn ``compute this thing'' goals into ``verify this thing satisfies the characterizing property'' goals} --- almost always a simpler target.
+
+Applying that here (with the goal read backwards, \texttt{apply Eq.symm} first, so \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} unifies against the ``b'' slot), the remaining goal is \texttt{Grp.op (Grp.op (Grp.inv b) (Grp.inv a)) (Grp.op a b) = Grp.id}. This is pure cancellation: regroup with \texttt{assoc} until \texttt{Grp.inv a} sits next to \texttt{a}, cancel via \texttt{inv\_\allowbreak{}left}, then regroup until \texttt{Grp.inv b} sits next to \texttt{b}, and cancel again.
+
+\begin{lstlisting}
+theorem inv_op (a b : G) :
+    Grp.inv (Grp.op a b) = Grp.op (Grp.inv b) (Grp.inv a) := by
+  apply Eq.symm
+  apply left_inverse_unique
+  -- Goal: op (op (inv b) (inv a)) (op a b) = id
+  rw [Grp.assoc]
+  -- Goal: op (inv b) (op (inv a) (op a b)) = id
+  rw [(*$\leftarrow$*) Grp.assoc (Grp.inv a) a b]
+  -- Goal: op (inv b) (op (op (inv a) a) b) = id
+  rw [Grp.inv_left]
+  -- Goal: op (inv b) (op id b) = id
+  rw [Grp.id_left]
+  -- Goal: op (inv b) b = id
+  exact Grp.inv_left b
+\end{lstlisting}
+
+Notice how much of this \texttt{rw} chain is \textbf{regrouping via \texttt{assoc} to bring a cancelable pair next to each other}, then cancelling. That two-step pattern, \emph{regroup, then cancel}, comes up constantly in algebra and is worth recognizing on sight rather than re-deriving from scratch each time.
+
+\begin{mathreading}
+
+This is the \emph{shoes-and-socks} law \((a\cdot
+b)^{-1} = b^{-1}\cdot a^{-1}\): the inverse operation reverses the order of composition. By the uniqueness of inverses (Theorem 2) it suffices to check that \(b^{-1}a^{-1}\) is a genuine inverse of \(ab\), i.e. \[
+(b^{-1}a^{-1})(ab) = b^{-1}(a^{-1}a)b = b^{-1}eb = b^{-1}b = e,
+\] which is precisely the ``regroup, then cancel'' computation the \texttt{rw} chain performs. Reusing Theorem 2 as a characterization (``to identify an inverse, verify the defining equation'') is the categorical habit of proving equalities via a \hyperref[sec:01-basics:04-terminology:1]{universal property} rather than by direct computation.
+
+\end{mathreading}
+
+\subsection{\texorpdfstring{The payoff, made concrete: applying \texttt{inv\_op} to a real group}{The payoff, made concrete: applying inv\_op to a real group}}\label{sec:07-group-theorems:04-theorem-3:2}
+
+Chapter 6 promised that a theorem proved once, generically, is available ``for free'' on every group built afterward. Here is that promise delivered: \texttt{inv\_\allowbreak{}op}, proved above for an \emph{arbitrary} \texttt{Grp : Group G}, applies immediately to \texttt{perm3Group} (Chapter 6's non-abelian permutation group), with no new proof required:
+
+\begin{lstlisting}
+example : perm3Group.inv (perm3Group.op swap01 cycle012) =
+    perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01) :=
+  inv_op perm3Group swap01 cycle012
+\end{lstlisting}
+
+This is the entire proof: a single application of the already-proved \texttt{inv\_\allowbreak{}op}, instantiated at \texttt{Grp := perm3Group}, \texttt{a := swap01}, \texttt{b := cycle012}. It can also be checked computationally, pointwise, on every element of \texttt{Fin 3}:
+
+\begin{lstlisting}
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 0  -- 0
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 0  -- 0
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 1  -- 2
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 1  -- 2
+#eval (perm3Group.inv (perm3Group.op swap01 cycle012)).toFun 2  -- 1
+#eval (perm3Group.op (perm3Group.inv cycle012) (perm3Group.inv swap01)).toFun 2  -- 1
+\end{lstlisting}
+
+Both sides agree on every input, exactly what \texttt{inv\_\allowbreak{}op}'s proof guarantees, now witnessed by direct computation rather than taken on faith. This is the concrete content of ``prove it once, obtain it for free everywhere'': nothing about \texttt{swap01}, \texttt{cycle012}, or the fact that \texttt{perm3Group} is non-abelian required revisiting \texttt{inv\_\allowbreak{}op}'s proof at all.
+
+\textbf{Mathlib equivalent.} The ``shoes-and-socks'' law is not a theorem left to (re)prove here --- Mathlib already has it, under its own name, \href{https://loogle.lean-lang.org/?q=mul_inv_rev}{\texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev}}:
+
+\begin{lstlisting}
+example {G : Type*} [Group G] (a b : G) : (a * b)(*${}^-$*)(*\textsuperscript{1}*) = b(*${}^-$*)(*\textsuperscript{1}*) * a(*${}^-$*)(*\textsuperscript{1}*) := mul_inv_rev a b
+\end{lstlisting}
+
+And the same payoff Chapter 7 draws out concretely for \texttt{perm3Group} applies here too, against Mathlib's own \(S_3\) from Chapter 6 §4. There is no new proof, only an application of \texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} at \texttt{Equiv.Perm (Fin 3)}:
+
+\begin{lstlisting}
+example : (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) = cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*) :=
+  mul_inv_rev swap01' cycle012'
+
+#eval (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) 0    -- 0
+#eval (cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*)) 0   -- 0
+#eval (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) 1    -- 2
+#eval (cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*)) 1   -- 2
+#eval (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) 2    -- 1
+#eval (cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*)) 2   -- 1
+\end{lstlisting}
+
+Both sides agree on every input: the same six values, in the same order, as the book's own \texttt{perm3Group} check above. Where the book's \texttt{inv\_\allowbreak{}op} required a five-line \texttt{rw} chain (regroup via \texttt{assoc}, cancel via \texttt{inv\_\allowbreak{}left}, regroup again, cancel again), Mathlib's version requires no proof to write at all. \texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} is already proved, once, generically over every \texttt{Group}.

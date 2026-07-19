@@ -1,0 +1,45 @@
+% Auto-generated top-level driver. Inputs the front matter (title
+% page, Preface, About this book, How to read this book, then the
+% learning-paths and notation-reference pages), every chapter
+% driver in reading order, the back-matter reference pages,
+% the generated bibliography, and a back-cover page. Preamble lives
+% in preamble.tex; front matter in frontmatter.tex; back cover in
+% backmatter.tex (both hand-written, not generated from Markdown).
+\input{preamble.tex}
+\begin{document}
+\AddToShipoutPictureBG*{\AtPageCenter{\makebox(0,0){\includegraphics[width=\paperwidth,keepaspectratio]{../images/cover.png}}}}
+\thispagestyle{empty}
+\null
+\clearpage
+\ClearShipoutPictureBG
+\pagenumbering{roman}
+\input{frontmatter.tex}
+\input{learning-paths.tex}
+\input{notation-reference.tex}
+\setcounter{chapter}{-1}
+\clearpage
+\pagenumbering{arabic}
+\input{00-setup/00-index.tex}
+\input{01-basics/00-index.tex}
+\input{02-functions-and-structures/00-index.tex}
+\input{03-propositions-and-proofs/00-index.tex}
+\input{04-tactics/00-index.tex}
+\input{05-rigor-check/00-index.tex}
+\input{06-groups/00-index.tex}
+\input{07-group-theorems/00-index.tex}
+\input{08-rings/00-index.tex}
+\input{09-ring-theorems/00-index.tex}
+\input{10-modules/00-index.tex}
+\input{11-path-algebras/00-index.tex}
+\input{12-working-efficiently/00-index.tex}
+\input{13-next-steps/00-index.tex}
+\input{14-appendix-solutions/00-index.tex}
+\input{tactic-and-library-reference.tex}
+\input{lambda-calculus-dictionary.tex}
+\input{bibliography.tex}
+\input{backmatter.tex}
+\clearpage
+\AddToShipoutPictureBG*{\AtPageCenter{\makebox(0,0){\includegraphics[width=\paperwidth,keepaspectratio]{../images/back-cover.png}}}}
+\thispagestyle{empty}
+\null
+\end{document}

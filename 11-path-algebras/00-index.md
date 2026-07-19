@@ -1,0 +1,31 @@
+# Chapter 11: Quivers and path algebras
+
+[← Ch. 10: Modules](../10-modules/00-index.md) | [Table of contents](../README.md) | [Ch. 12: Working Efficiently →](../12-working-efficiently/00-index.md)
+
+---
+
+This chapter combines everything covered so far: inductive types
+(Chapter 1), structures (Chapter 2), and rings (Chapters 7–8), used
+to build a genuinely interesting example: the **path algebra** of a
+quiver.
+
+**Learning objectives.** By the end of this chapter, encode a quiver as a
+`structure` of vertices/arrows/source/target, define `Path` as an
+inductive type indexed by its own endpoints, compose paths via
+`Path.append` and predict when the composability side-conditions block a
+nonsensical composition, and explain in what sense a path algebra $kQ$
+extends the `Ring`/`Module` machinery of Chapters 8 and 10.
+
+## Sections
+
+1. [What is a quiver?](01-what-is-a-quiver.md)
+2. [Paths](02-paths.md)
+3. [Defining a quiver in Lean](03-defining-a-quiver.md)
+4. [Paths as an inductive type indexed by source and target](04-paths-as-inductive-type.md)
+5. [Path composition](05-path-composition.md)
+6. [Exercises](06-exercises.md)
+7. [Checkpoint project: path length, and composition respects it](07-checkpoint-project.md)
+
+---
+
+[← Ch. 10: Modules](../10-modules/00-index.md) | [Table of contents](../README.md) | [Ch. 12: Working Efficiently →](../12-working-efficiently/00-index.md)

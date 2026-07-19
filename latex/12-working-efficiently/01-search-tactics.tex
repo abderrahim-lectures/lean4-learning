@@ -1,0 +1,27 @@
+\section{Search tactics: letting Lean find the lemma or the proof}\label{sec:12-working-efficiently:01-search-tactics:1}
+
+Throughout this book, a lemma name has typically been hunted for by hand. In practice, searching by memory or by grep is rarely necessary. Two tactics perform this search automatically:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{exact?}}} --- searches the whole environment (core Lean, plus anything else imported) for a term that closes the \emph{current goal exactly}. It either fails or suggests a working \texttt{exact ...} line that can be pasted in directly. It is best used as soon as a fact is suspected to already exist somewhere --- for instance, after simplifying a ring goal down to something that \emph{looks} like a named lemma whose name cannot be recalled.
+\item
+  \textbf{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{apply?}}} --- like \texttt{exact?}, but for cases where the goal would be closed by \texttt{apply}ing something that leaves further subgoals, not a single exact match.
+\end{itemize}
+
+Both are search tools, not proof techniques. The proof they find is a normal term, exactly like one that could have been written by hand. It is completely standard practice to try out a proof with \texttt{exact?}/\texttt{apply?}, inspect what it suggests, and paste in the concrete result, rather than leaving the search tactic itself in the finished proof. They are slower to re-run, and in a growing file, their result can silently change if the environment changes.
+
+\begin{lstlisting}
+example (a b : Nat) (h : a = b) : b = a := by
+  exact?
+  -- reports a working closing term (verified on this book's toolchain to be
+  -- `exact Nat.add_right_cancel (congrFun (congrArg HAdd.hAdd (id (Eq.symm h))) a)`,
+  -- not the shorter `h.symm` a human would write (*\textemdash{}*) see below)
+\end{lstlisting}
+
+\begin{mathreading}
+
+This is the formal version of ``this is standard --- cite the relevant lemma.'' The goal \(b = a\) under hypothesis \(h : a = b\) is closed by symmetry of equality, \(h^{\mathrm{sym}}\), and that is what a human proof would cite. \texttt{exact?} performs a library search: it scans the whole collection of proved theorems for a term that matches the goal type, and reports \emph{a} citation that works. But its search order does not always surface the shortest or most idiomatic one. The verified output above shows this directly: a correct but needlessly roundabout term, found before the simpler \texttt{Eq.symm} was. It automates \emph{finding a} closing term, not necessarily the most readable one; simplifying the reported term by hand (here, to \texttt{h.symm}) afterward is still worth doing before the proof is considered finished.
+
+\end{mathreading}

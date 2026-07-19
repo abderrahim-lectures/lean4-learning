@@ -1,0 +1,19 @@
+# Rendered/compiled output -- the LaTeX source under latex/ is committed,
+# not any PDF compiled from it.
+*.pdf
+*.html
+_site/
+*.aux
+*.log
+*.out
+*.toc
+
+# LaTeX build artifacts from compiling lean_book/latex/ (biblatex/biber and
+# the standalone tikz-cd diagram smoke-tests) -- only .tex source is committed.
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.fdb_latexmk
+*.fls
+*.synctex.gz

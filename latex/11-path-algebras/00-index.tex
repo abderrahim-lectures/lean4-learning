@@ -1,0 +1,35 @@
+\chapter{Chapter 11: Quivers and path algebras}\label{sec:11-path-algebras:00-index:1}
+
+This chapter combines everything covered so far: inductive types (Chapter 1), structures (Chapter 2), and rings (Chapters 7--8), used to build a genuinely interesting example: the \textbf{path algebra} of a quiver.
+
+\textbf{Learning objectives.} By the end of this chapter, encode a quiver as a \texttt{structure} of vertices/arrows/source/target, define \texttt{Path} as an inductive type indexed by its own endpoints, compose paths via \texttt{Path.append} and predict when the composability side-conditions block a nonsensical composition, and explain in what sense a path algebra \(kQ\) extends the \texttt{Ring}/\texttt{Module} machinery of Chapters 8 and 10.
+
+\section{Sections}\label{sec:11-path-algebras:00-index:2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \hyperref[sec:11-path-algebras:01-what-is-a-quiver:1]{What is a quiver?}
+\item
+  \hyperref[sec:11-path-algebras:02-paths:1]{Paths}
+\item
+  \hyperref[sec:11-path-algebras:03-defining-a-quiver:1]{Defining a quiver in Lean}
+\item
+  \hyperref[sec:11-path-algebras:04-paths-as-inductive-type:1]{Paths as an inductive type indexed by source and target}
+\item
+  \hyperref[sec:11-path-algebras:05-path-composition:1]{Path composition}
+\item
+  \hyperref[sec:11-path-algebras:06-exercises:1]{Exercises}
+\item
+  \hyperref[sec:11-path-algebras:07-checkpoint-project:1]{Checkpoint project: path length, and composition respects it}
+\end{enumerate}
+
+% Auto-appended: input every other section in order.
+\input{11-path-algebras/01-what-is-a-quiver.tex}
+\input{11-path-algebras/02-paths.tex}
+\input{11-path-algebras/03-defining-a-quiver.tex}
+\input{11-path-algebras/04-paths-as-inductive-type.tex}
+\input{11-path-algebras/05-path-composition.tex}
+\input{11-path-algebras/06-exercises.tex}
+\input{11-path-algebras/07-checkpoint-project.tex}

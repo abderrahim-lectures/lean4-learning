@@ -1,0 +1,28 @@
+\section{Chapter 9: Ring examples and basic theorems}\label{sec:14-appendix-solutions:08-chapter-9:1}
+
+\textbf{1. \texttt{theorem neg\_\allowbreak{}mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)}}
+
+\begin{lstlisting}
+theorem neg_mul (a b : R) :
+    Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b) := by
+  apply left_inverse_unique Rg.addGrp.toGroup (Rg.mul a b) (Rg.mul (Rg.addGrp.toGroup.inv a) b)
+  -- Goal: op (mul (inv a) b) (mul a b) = id
+  rw [(*$\leftarrow$*) Rg.right_distrib]
+  -- justified by right_distrib, read backwards: combines the two products
+  -- mul (inv a) b and mul a b into mul (op (inv a) a) b.
+  -- Goal: mul (op (inv a) a) b = id
+  rw [Rg.addGrp.toGroup.inv_left]
+  -- justified by inv_left of the additive group: op (inv a) a = id.
+  -- Goal: mul Rg.addGrp.id b = id
+  exact mul_zero_left Rg b
+\end{lstlisting}
+
+By \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 7, Theorem 2, applied to the additive group \texttt{Rg.addGrp.toGroup}), it suffices to show that \texttt{Rg.mul (Rg.addGrp.toGroup.inv a) b} is a left additive-inverse of \texttt{Rg.mul a b}. \texttt{right\_\allowbreak{}distrib} (used backwards) merges the two products into \texttt{Rg.mul (Rg.addGrp.op (Rg.addGrp.toGroup.inv a) a) b}. Then \texttt{inv\_\allowbreak{}left} collapses the inner sum to \texttt{Rg.addGrp.id}, and \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left} (proved in Theorem 2's own section, since \texttt{neg\_\allowbreak{}one\_\allowbreak{}mul} there needed it too) finishes the proof.
+
+\textbf{2. \texttt{theorem neg\_\allowbreak{}seven : intRing.addGrp.toGroup.inv 7 = -\allowbreak{}7 := rfl}}
+
+\begin{lstlisting}
+theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl
+\end{lstlisting}
+
+\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} suffices here, but it would not have sufficed for Theorem 2's \texttt{neg\_\allowbreak{}one\_\allowbreak{}mul (a : R)}, which required real work. The difference is that \texttt{7} is a concrete numeral, not an unknown variable \texttt{a}. \texttt{intRing.addGrp.toGroup.inv} unfolds (by the \texttt{def intGroup} from Chapter 6) to \texttt{fun a => -\allowbreak{}a}, so \texttt{intRing.addGrp.toGroup.inv 7} reduces directly, by unfolding and β-reduction alone, to \texttt{-\allowbreak{}7}. No group axiom, \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique}, or induction is needed, since there is nothing to generalize over: both sides are already closed, concrete terms that compute. This is the same ``variable vs.~concrete numeral'' distinction Chapter 5 draws between definitional and propositional equality. \texttt{neg\_\allowbreak{}one\_\allowbreak{}mul} is a genuine theorem (propositional, requiring proof) precisely because it quantifies over every ring \texttt{R} and every element \texttt{a}, whereas \texttt{neg\_\allowbreak{}seven} is true by direct computation the moment every symbol involved is a closed, already-known term.

@@ -1,0 +1,82 @@
+\section{\texorpdfstring{Worked example: proving \texttt{Nat.add} is commutative from scratch}{Worked example: proving Nat.add is commutative from scratch}}\label{sec:04-tactics:05-worked-example:1}
+
+The goal is to show, for all \texttt{a b : Nat}, that \texttt{a + b = b + a}. Recall from Chapter 1 that \texttt{Nat} is built from \texttt{zero} and \texttt{succ} (successor), and that \texttt{+} is \emph{defined} by recursion on its second argument:
+
+\[
+a + 0 = a, \qquad a + \mathrm{succ}(k) = \mathrm{succ}(a + k)
+\]
+
+The proof proceeds by induction on \texttt{b}, one step at a time.
+
+\textbf{Base case (\texttt{b = 0}).} The goal becomes \texttt{a + 0 = 0 + a}.
+
+\begin{itemize}
+\tightlist
+\item
+  The left side, \texttt{a + 0}, reduces to \texttt{a} directly from the definition of \texttt{+} above (this fact is recorded in core Lean as the lemma \texttt{Nat.add\_\allowbreak{}zero}).
+\item
+  The right side, \texttt{0 + a}, is \emph{not} immediate from the definition, since the recursion is on the second argument, not the first. It therefore needs its own small lemma, \texttt{Nat.zero\_\allowbreak{}add : 0 + a = a}, proved separately by induction on \texttt{a}.
+\item
+  Combining both: \texttt{a + 0 = a} and \texttt{0 + a = a}, hence \texttt{a + 0 = 0 + a}.
+\end{itemize}
+
+\begin{lstlisting}
+theorem my_add_comm (a b : Nat) : a + b = b + a := by
+  induction b with
+  | zero =>
+    -- Goal: a + 0 = 0 + a
+    rw [Nat.add_zero]   -- rewrites `a + 0` to `a`. Goal: a = 0 + a
+    rw [Nat.zero_add]    -- rewrites `0 + a` to `a`. Goal: a = a, closed by rw automatically
+  | succ k ih =>
+    -- ih : a + k = k + a
+    -- Goal: a + Nat.succ k = Nat.succ k + a
+    rw [Nat.add_succ]     -- a + succ k  ~>  succ (a + k). Goal: succ (a + k) = succ k + a
+    rw [ih]                -- use the induction hypothesis: a + k ~> k + a. Goal: succ (k + a) = succ k + a
+    rw [Nat.succ_add]      -- succ k + a  ~>  succ (k + a). Goal: succ (k + a) = succ (k + a), closed
+\end{lstlisting}
+
+Walking through the inductive step slowly:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The statement is to be proved for \texttt{b = Nat.succ k}, assuming it already holds for \texttt{k} (that assumption is \texttt{ih : a + k = k + a}).
+\item
+  \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw [Nat.add\_\allowbreak{}succ]}} uses the defining equation \texttt{a + succ k = succ (a + k)} to rewrite the left-hand side of the goal.
+\item
+  \texttt{rw [ih]} uses the induction hypothesis to replace \texttt{a + k} with \texttt{k + a} inside the goal.
+\item
+  \texttt{rw [Nat.succ\_\allowbreak{}add]} uses the equation \texttt{succ k + a = succ (k + a)} to rewrite the right-hand side, so both sides now read \texttt{succ (k + a)}, which are literally identical. \texttt{rw} closes the goal automatically once the two sides match syntactically.
+\end{enumerate}
+
+This is the pattern --- base case, inductive step, explicit \texttt{ih} --- that recurs, slowly and explicitly, for every proof about groups and rings.
+
+\begin{mathreading}
+
+This is the elementary proof that \((\mathbb{N},
++)\) is commutative, carried out by induction on the second argument from the recursive definition \(a + 0 = a\), \(a + \mathrm{succ}(k) = \mathrm{succ}(a +
+k)\). Writing \(P(b) :\equiv (\forall a,\ a + b = b + a)\): the base case is \(P(0)\), which needs the auxiliary fact \(0 + a = a\) (proved separately since the recursion favors the right argument). The inductive step derives \(P(k+1)\) from \(P(k)\) via \[
+a + (k{+}1) = (a+k){+}1 \overset{\mathrm{ih}}{=} (k+a){+}1 = (k{+}1)+a.
+\] Each \texttt{rw} is one equational step in this chain. The whole proof is the standard textbook lemma, with the successor/zero cases spelled out in full, where written mathematics usually skips over them.
+
+\end{mathreading}
+
+\begin{progcorner}
+
+The two cases of \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction b with | zero => ... | succ k ih => ...}} have exactly the shape of a recursive function over the same inductively-defined structure. Compare it to a hand-rolled Peano type in Python:
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+class Zero: pass
+class Succ:
+    def __init__(self, pred): self.pred = pred
+
+def add(a, b):
+    if isinstance(b, Zero):
+        return a                          # base case, like `| zero =>`
+    return Succ(add(a, b.pred))            # recursive call, like `| succ k ih =>`
+\end{lstlisting}
+
+\texttt{add}'s \texttt{if isinstance(b, Zero)} branch is the base case. Its recursive call \texttt{add(a, b.pred)} plays exactly the role \texttt{ih} plays in the \texttt{succ} branch: ``assume it already works for the smaller case, build the answer for one \texttt{Succ} more.'' The proof is not merely \emph{analogous} to recursion, it \emph{is} a recursion, one producing a proof term instead of a \texttt{Succ} value. This is why Lean can generate \texttt{induction}'s two cases automatically straight from \texttt{Nat}'s definition, the same way Python's \texttt{isinstance} cases fall straight out of \texttt{Nat}'s two constructors.

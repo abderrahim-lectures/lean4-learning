@@ -1,0 +1,23 @@
+\chapter{Chapter 2: Functions, definitions, and structures}\label{sec:02-functions-and-structures:00-index:1}
+
+Functions \textbf{curry}: \texttt{add : Nat → Nat → Nat} is really \texttt{Nat → (Nat → Nat)}, a function that returns another function. So a ``two-argument function'' is just a one-argument function whose result is itself another function. It takes one argument at a time. (For readers already thinking categorically: this is the type-theoretic form of the Hom-set isomorphism \(\mathrm{Hom}(A\times B, C)\cong\mathrm{Hom}(A,\mathrm{Hom}(B,C))\). A two-argument map is the same data as a one-argument map into a space of maps. This is not needed to follow along --- the plain statement above is enough.) The interesting part of this chapter is \texttt{structure}, which is how algebraic data will be packaged.
+
+\textbf{Learning objectives.} By the end of this chapter, bundle data (and proofs) into a \texttt{structure}, use field projection and the anonymous constructor, parameterize a \texttt{structure} by a type, and extend one \texttt{structure} with another via \texttt{extends}.
+
+\section{Sections}\label{sec:02-functions-and-structures:00-index:2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \hyperref[sec:02-functions-and-structures:01-structure-basics:1]{\texttt{structure}: bundling data together}
+\item
+  \hyperref[sec:02-functions-and-structures:02-type-parameters:1]{Structures with type parameters}
+\item
+  \hyperref[sec:02-functions-and-structures:03-extending-structures:1]{Extending structures}
+\end{enumerate}
+
+% Auto-appended: input every other section in order.
+\input{02-functions-and-structures/01-structure-basics.tex}
+\input{02-functions-and-structures/02-type-parameters.tex}
+\input{02-functions-and-structures/03-extending-structures.tex}

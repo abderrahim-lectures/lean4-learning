@@ -1,0 +1,94 @@
+\section{\texorpdfstring{\texttt{def}, \texttt{let}, implicit arguments}{def, let, implicit arguments}}\label{sec:01-basics:02-def-let-implicit:1}
+
+Consider three short definitions. Every token in them is doing something specific; each is examined in full below.
+
+\begin{lstlisting}
+def double (n : Nat) : Nat := n * 2
+\end{lstlisting}
+
+\textbf{\texttt{def double (n : Nat) : Nat := n * 2}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{def} --- the keyword that introduces a new global definition into the environment: a name, permanently available afterward, standing for a fixed term. This is different from a hypothesis or a local variable. Once elaborated, \texttt{double} is a completely ordinary constant, referable anywhere later in the file (or, once the file is imported, anywhere else). Compare this with \texttt{example} from Chapter 3, which elaborates a term but does \emph{not} bind it to a name. \texttt{def} is for the case where the definition is meant to be reused.
+\item
+  \texttt{double} --- the name being bound. Lean enforces no special naming convention, but lowerCamelCase for \texttt{def}s and UpperCamelCase for types is the near-universal community style, which this book follows.
+\item
+  \texttt{(n : Nat)} --- an explicit argument named \texttt{n}, of type \texttt{Nat}. ``Explicit'' means a caller must supply it positionally: \texttt{double 5} provides \texttt{5} for \texttt{n} directly. This is what makes \texttt{double} a function rather than a plain value. Everything after \texttt{def double} up to the first bare \texttt{:=} (if there are argument binders) is the function's parameter list, and \texttt{double}'s \emph{actual} type ends up being \texttt{Nat → Nat}, exactly as if it had been written \texttt{def double : Nat → Nat := fun n => n * 2} instead. The two forms elaborate to the same term. The \texttt{(n : Nat)} binder form is simply the standard, more readable surface syntax for ``a function with named parameters.''
+\item
+  \texttt{: Nat} (the second one, right before \texttt{:=}) --- the declared return type. This is not optional filler. Lean uses it to \emph{check} the body against a known expected type while elaborating, rather than only inferring a type afterward. If the body's type did not match, an error would occur at this point, not somewhere downstream.
+\item
+  \texttt{:=} --- separates the declaration's signature (name, arguments, return type) from its definition (the actual term). Read it as ``is defined to be.''
+\item
+  \texttt{n * 2} --- the body. At this point in elaboration, \texttt{n} is in scope with type \texttt{Nat} (introduced by the \texttt{(n : Nat)} binder above), so \texttt{n * 2} is \texttt{Nat} multiplication applied to \texttt{n} and the numeral \texttt{2}. That numeral itself elaborates to a \texttt{Nat}, because that is what \texttt{Nat.mul}'s second argument's type forces it to be. Numeral elaboration is guided by the expected type --- another case of Lean checking against context instead of guessing.
+\end{itemize}
+
+\begin{mathreading}
+
+\texttt{def double (n : Nat) : Nat := n * 2} is nothing more than the ordinary mathematical definition
+
+\end{mathreading}
+
+\[
+\mathrm{double} : \mathbb{N} \to \mathbb{N}, \qquad \mathrm{double}(n) = 2n,
+\]
+
+with the signature \(\mathrm{double} : \mathbb{N} \to \mathbb{N}\) split across \texttt{def double (n : Nat) : Nat} (domain and codomain, spelled out argument-by-argument rather than as a single arrow), and the equation \(\mathrm{double}(n) = 2n\) becomes \texttt{:= n * 2}. There is no real difference between writing the domain as one arrow \texttt{Nat → Nat} or as a named binder \texttt{(n : Nat) : Nat}, exactly as \(f : A \to B,\ f(a) = \ldots\) and \(f = (a \mapsto \ldots) : A \to B\) describe the same function.
+
+\begin{lstlisting}
+def average (a b : Nat) : Nat :=
+  let sum := a + b
+  sum / 2
+\end{lstlisting}
+
+\textbf{\texttt{def average (a b : Nat) : Nat := let sum := a + b; sum /\allowbreak{} 2}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{(a b : Nat)} --- two explicit arguments, both of type \texttt{Nat}, written with a single shared type annotation. This is pure surface-syntax sugar for \texttt{(a : Nat) (b : Nat)}; Lean expands it identically either way. This shorthand is standard style whenever several consecutive parameters share a type, and costs nothing.
+\item
+  \texttt{let sum := a + b} --- introduces a \emph{local} definition, visible only in the rest of this particular body, as opposed to \texttt{def}'s \emph{global} one. \texttt{let} does not need (though it can take) a type annotation, since the type of \texttt{a + b} is already fully determined by \texttt{a} and \texttt{b}'s types, so Lean infers it. Operationally, \texttt{let sum := a + b; sum /\allowbreak{} 2} means exactly the same thing as substituting \texttt{a + b} for every occurrence of \texttt{sum} in \texttt{sum /\allowbreak{} 2}. A \texttt{let} is definitionally transparent, so \texttt{average a b} and \texttt{(a + b) /\allowbreak{} 2} elaborate to the same normal form. The reason to write it as a \texttt{let} anyway, rather than inlining \texttt{(a + b) /\allowbreak{} 2} directly, is purely for the human reader: naming an intermediate quantity documents what it means, and in a longer proof or definition, it prevents repeating a nontrivial subexpression (and therefore repeating a mistake in it) in several places.
+\item
+  The line break between \texttt{let sum := a + b} and \texttt{sum /\allowbreak{} 2} is whitespace, not two separate statements needing a semicolon. Lean's parser uses indentation-sensitive layout for \texttt{let}-chains, the same way it does for \texttt{by}-blocks in tactic mode. \texttt{sum /\allowbreak{} 2} is the \texttt{let}'s body: the whole two-line construct \texttt{let sum := a + b; sum /\allowbreak{} 2} is itself one term, which is then what \texttt{average}'s \texttt{:=} binds to.
+\item
+  \texttt{sum /\allowbreak{} 2} --- \texttt{Nat} division, which in Lean is \emph{truncating}. \texttt{average 4 10} computes \texttt{sum = 14}, then \texttt{14 /\allowbreak{} 2 = 7} exactly. But \texttt{average 1 2} would compute \texttt{sum = 3}, then \texttt{3 /\allowbreak{} 2 = 1} (rounded down, since \texttt{Nat} has no fractions). This should be noted before relying on this \texttt{average} for anything where the rounding matters.
+\end{itemize}
+
+\begin{mathreading}
+
+The \texttt{let} is exactly a ``let \(s := a + b\) in \(\ldots\)'' clause of the kind used constantly in written proofs to name an intermediate quantity:
+
+\end{mathreading}
+
+\[
+\mathrm{average}(a,b) = \big\lfloor \tfrac{s}{2} \big\rfloor
+\text{ where } s := a + b,
+\]
+
+One caveat: this \texttt{average} computes \(\lfloor s/2 \rfloor\) (floor division) rather than the true rational average \(s/2\), since \texttt{Nat}'s division is truncating. This gap is easy to overlook in ordinary mathematical prose, but Lean forces it to be confronted explicitly: there is no coercion to \(\mathbb{Q}\) happening for free.
+
+\begin{lstlisting}
+def identity {(*$\alpha$*) : Type} (x : (*$\alpha$*)) : (*$\alpha$*) := x
+\end{lstlisting}
+
+\textbf{\texttt{def identity \{α : Type\} (x : α) : α := x}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\{α : Type\}} --- an \textbf{implicit} argument, marked by curly braces instead of parentheses. The name \texttt{α} (conventionally a Greek letter for a type variable --- again pure convention, \texttt{T} or \texttt{A} would work just as well) has type \texttt{Type}, meaning this argument is itself a \emph{type}, not a value of some fixed type. \texttt{identity} is thus \textbf{polymorphic}: it works uniformly for every choice of \texttt{α}.
+\item
+  The crucial difference from \texttt{(n : Nat)} above: \texttt{\{α : Type\}} is not supplied positionally at call sites. Writing \texttt{identity 5} does \emph{not} mean ``pass \texttt{5} as \texttt{α}''. Lean instead \textbf{elaborates} (infers) \texttt{α} by unification, working backward from the type of the explicit argument actually supplied. In \texttt{identity 5}, Lean sees that \texttt{5 : Nat} is being passed where an \texttt{x : α} is expected, unifies \texttt{α := Nat}, and only then checks the rest. An implicit argument can still be supplied explicitly when overriding inference is necessary, with \texttt{@identity Nat 5}. The \texttt{@} prefix means ``no more auto-inference; every argument, implicit or not, is given by hand.'' This escape hatch matters mainly for debugging elaboration failures, not everyday use.
+\item
+  Why implicit rather than explicit here at all: \texttt{α} is determined by \texttt{x}'s type at every call site, so requiring the caller to type it out (as in \texttt{identity Nat 5}) would be pure noise. Lean already has enough information without being told. The general rule of thumb, used throughout Mathlib and this book: mark an argument implicit exactly when its value is always recoverable from the \emph{other} arguments or from the expected return type; keep it explicit when it genuinely varies independently, and a reader benefits from seeing it written at the call site.
+\item
+  \texttt{: α := x} --- the return type is \texttt{α} itself (the same type variable bound above, now in scope for the rest of the signature and body), and the body is simply \texttt{x}, the argument unchanged. This is the identity function at every type simultaneously: one \texttt{def}, rather than one per type, which is exactly what the \texttt{\{α : Type\}} parameter provides.
+\end{itemize}
+
+\begin{mathreading}
+
+\texttt{identity \{α : Type\} (x : α) : α := x} is the family \(\{\,\mathrm{id}_A : A \to A\,\}_{A \in \mathbf{Type}}\) indexed over \emph{every} type \(A\) at once. It is precisely the assignment sending each object \(A\) of the category to its identity morphism \(\mathrm{id}_A\), packaged as a single polymorphic definition rather than one definition per \(A\). The implicit argument \texttt{\{α : Type\}} is what makes this a \emph{statement about all \(A\) simultaneously} rather than a single fixed function. In category theory one would never write ``\(\mathrm{id}_{\mathbb{Z}}\), \(\mathrm{id}_{\mathbb{R}}\), \ldots{}'' one at a time either, but would instead say ``for every object \(A\), there is an identity morphism \(\mathrm{id}_A\),'' which is exactly what the universally-quantified, implicitly-inferred \texttt{\{α : Type\}} expresses.
+
+\end{mathreading}

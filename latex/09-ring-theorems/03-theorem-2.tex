@@ -1,0 +1,77 @@
+\section{\texorpdfstring{Theorem 2: \((-1) \cdot a = -a\)}{Theorem 2: (-1) \textbackslash cdot a = -a}}\label{sec:09-ring-theorems:03-theorem-2:1}
+
+\textbf{Claim.} \texttt{Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a}.
+
+\textbf{Finding the proof.} This employs the same reduction move as Theorem 3 of Chapter 7: ``show \(x = -a\)'' is exactly the shape of \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique}'s conclusion. Thus, instead of computing \((-1)\cdot a\) directly, we reduce the goal to verifying that \(x\) is a left additive-inverse of \(a\), i.e.~\(((-1)\cdot a) + a = 0\). That target is now purely about combining two products with a common right factor \(a\), which is what \texttt{right\_\allowbreak{}distrib} (read backwards) is for: \(((-1)\cdot a) + (1 \cdot a) = ((-1) + 1)\cdot a\). Since \((-1) + 1 = 0\) (an additive-group fact, \texttt{inv\_\allowbreak{}left}) and \(0 \cdot a = 0\) (the mirror of Theorem 1 --- see the exercises), the whole expression collapses.
+
+Stated generally, the pattern to notice is this: \textbf{a goal of the form \texttt{p * a + q * a = ...} is a \texttt{right\_\allowbreak{}distrib} target waiting to happen, read right-to-left}. Any additive expression of two products sharing a factor should be scanned for this pattern before anything else is attempted.
+
+The proof below requires \(0\cdot a = 0\), the mirror image of Theorem 1 (\(a\cdot 0 = 0\)), with \texttt{right\_\allowbreak{}distrib} in place of \texttt{left\_\allowbreak{}distrib}. We therefore prove that first, mechanically mirroring Theorem 1's proof line by line:
+
+\begin{lstlisting}
+theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id := by
+  have h0 : Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id = Rg.addGrp.id :=
+    Rg.addGrp.toGroup.id_left Rg.addGrp.id
+  have h1 : Rg.mul (Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id) a =
+      Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a) :=
+    Rg.right_distrib Rg.addGrp.id Rg.addGrp.id a
+  rw [h0] at h1
+  have h2 :
+      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a)) (Rg.mul Rg.addGrp.id a) =
+      Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))
+        (Rg.addGrp.op (Rg.mul Rg.addGrp.id a) (Rg.mul Rg.addGrp.id a)) :=
+    congrArg (Rg.addGrp.op (Rg.addGrp.toGroup.inv (Rg.mul Rg.addGrp.id a))) h1
+  rw [Rg.addGrp.toGroup.inv_left] at h2
+  rw [(*$\leftarrow$*) Rg.addGrp.toGroup.assoc] at h2
+  rw [Rg.addGrp.toGroup.inv_left] at h2
+  rw [Rg.addGrp.toGroup.id_left] at h2
+  exact h2.symm
+\end{lstlisting}
+
+Observe that this is Theorem 1's proof with every \texttt{left\_\allowbreak{}distrib}/\texttt{a} swapped for \texttt{right\_\allowbreak{}distrib}/(argument order reversed). This confirms that the ``mirror image'' claim is not merely a figure of speech, but a literal, symmetrical match between the two proofs. The main theorem follows:
+
+\begin{lstlisting}
+theorem neg_one_mul (a : R) :
+    Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a := by
+  apply left_inverse_unique Rg.addGrp.toGroup
+  -- Goal: op (mul (inv one) a) a = id
+  have step : Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a) a =
+      Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a) (Rg.mul Rg.one a) :=
+    congrArg (Rg.addGrp.op (Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a))
+      (show a = Rg.mul Rg.one a from (Rg.one_mul a).symm)
+  rw [step]
+  -- Goal: op (mul (inv one) a) (mul one a) = id
+  rw [(*$\leftarrow$*) Rg.right_distrib]
+  -- Goal: mul (op (inv one) one) a = id
+  rw [Rg.addGrp.toGroup.inv_left]
+  -- Goal: mul Rg.addGrp.id a = id, i.e. 0 * a = 0
+  exact mul_zero_left Rg a
+\end{lstlisting}
+
+Two features of the proof's shape are worth noting, both discovered by actually compiling it:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{No \texttt{apply Eq.symm} at the start.} The goal \texttt{Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a = Rg.addGrp.toGroup.inv a} already has the exact shape \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} concludes (\texttt{b = Grp.inv a}, with \texttt{b} unifying to \texttt{Rg.mul (Rg.addGrp.toGroup.inv Rg.one) a}). Flipping it with \texttt{Eq.symm} first produces the \emph{wrong} shape, and \texttt{apply left\_\allowbreak{}inverse\_\allowbreak{}unique} then fails to unify. When \texttt{apply}ing a lemma whose conclusion is an equality, one should check which side is which \emph{before} reaching for \texttt{Eq.symm}, rather than adding it automatically.
+\item
+  \textbf{\texttt{congrArg}, not \texttt{conv\_\allowbreak{}lhs => rw [...]}.} Plain \texttt{rw [h]} here would rewrite \emph{every} occurrence of \texttt{a} in the goal, including the one inside \texttt{mul (inv one) a} that must stay put. This is exactly the same kind of problem as Theorem 1's \texttt{h2} on the previous page. \texttt{congrArg f h} avoids it by directly constructing ``apply \texttt{f} to both sides of \texttt{h}'' as its own standalone fact (\texttt{step}, above), which is then used with a single, unambiguous \texttt{rw [step]}.
+\end{itemize}
+
+\begin{mathreading}
+
+This is the sign rule \((-1)\cdot a = -a\). By uniqueness of additive inverses it suffices to check \((-1)\cdot a\) is a left inverse of \(a\): \[
+(-1)\cdot a + a = (-1)\cdot a + 1\cdot a = \big((-1) + 1\big)\cdot a
+= 0\cdot a = 0,
+\] using \(1\cdot a = a\), \texttt{right\_\allowbreak{}distrib} (backwards), \(-1 + 1 = 0\), and the absorbing law \(0\cdot a = 0\). It expresses that left multiplication \(x \mapsto x\cdot a\) is a group homomorphism, hence it commutes with negation: \((-1)\cdot a = -(1\cdot a) = -a\). Thus multiplication by \(-1\) \emph{is} the negation map, which is the ring-theoretic source of ``\(-a = (-1)a\).''
+
+\end{mathreading}
+
+\textbf{Mathlib equivalent.} Both \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left} (the mirror lemma this proof depends on) and the sign rule itself are already in Mathlib, again under almost the same names:
+
+\begin{lstlisting}
+example {R : Type*} [Ring R] (a : R) : 0 * a = 0 := zero_mul a
+example {R : Type*} [Ring R] (a : R) : (-1 : R) * a = -a := neg_one_mul a
+\end{lstlisting}
+
+\href{https://loogle.lean-lang.org/?q=zero_mul}{\texttt{zero\_\allowbreak{}mul}} is \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left}'s Mathlib name, and \href{https://loogle.lean-lang.org/?q=neg_one_mul}{\texttt{neg\_\allowbreak{}one\_\allowbreak{}mul}} is exactly Theorem 2. A multi-step derivation in the book (needing \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left}, \texttt{right\_\allowbreak{}distrib}, and \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} all at once) reduces to citing one already-proved lemma.

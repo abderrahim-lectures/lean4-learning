@@ -1,0 +1,29 @@
+\chapter{Chapter 12: Working efficiently in Lean}\label{sec:12-working-efficiently:00-index:1}
+
+Chapters 7 and 9 were about \emph{finding} a proof by hand, deliberately slowly, so the underlying reasoning is never hidden. This chapter addresses the other half: once the reason a proof works is understood, how is it written (and found) faster in day-to-day use? Efficient Lean does not mean ``type less.'' It means knowing which automation to trust, knowing when it is still worth being explicit, and knowing how to structure lemmas so that the same fact is not derived twice. (For links to the official docs for every tactic and Mathlib name in this book, see the \hyperref[sec:root:tactic-and-library-reference:1]{tactic and library reference}.)
+
+\textbf{Learning objectives.} By the end of this chapter, use \texttt{exact?}/\texttt{apply?} to search for a known lemma or proof, recognize when a goal falls inside \texttt{decide}/\texttt{omega}/\texttt{norm\_\allowbreak{}num}'s decidable fragment versus needing a genuine hand proof, know what \texttt{simp} trades away for speed, choose between term mode and tactic mode for a given proof, and recognize when a sub-goal deserves its own named lemma.
+
+\section{Sections}\label{sec:12-working-efficiently:00-index:2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \hyperref[sec:12-working-efficiently:01-search-tactics:1]{Search tactics: letting Lean find the lemma or the proof}
+\item
+  \hyperref[sec:12-working-efficiently:02-decision-procedures:1]{Decision procedures: \texttt{decide}, \texttt{omega}, \texttt{norm\_\allowbreak{}num}}
+\item
+  \hyperref[sec:12-working-efficiently:03-simp:1]{\texttt{simp}, in light of what it replaces}
+\item
+  \hyperref[sec:12-working-efficiently:04-term-vs-tactic-mode:1]{Term mode vs tactic mode}
+\item
+  \hyperref[sec:12-working-efficiently:05-structuring-lemmas:1]{Structuring lemmas for reuse}
+\end{enumerate}
+
+% Auto-appended: input every other section in order.
+\input{12-working-efficiently/01-search-tactics.tex}
+\input{12-working-efficiently/02-decision-procedures.tex}
+\input{12-working-efficiently/03-simp.tex}
+\input{12-working-efficiently/04-term-vs-tactic-mode.tex}
+\input{12-working-efficiently/05-structuring-lemmas.tex}

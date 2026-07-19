@@ -1,0 +1,43 @@
+\section{\texorpdfstring{Universes: \texttt{Type}, \texttt{Type\ 1}, and why \texttt{Group} isn't a \texttt{Group}}{Universes: Type, Type 1, and why Group isn't a Group}}\label{sec:05-rigor-check:02-universes:1}
+
+Chapter 1 said \texttt{Type} is itself a term, of some type. A careful reader should immediately ask: \emph{of what type?} If the answer were ``\texttt{Type} is a term of type \texttt{Type},'' Lean's logic would be inconsistent. This is exactly Russell's paradox in type-theoretic form: the type of ``all types,'' if it contained itself, would permit rebuilding the set-of-all-sets-that-do-not- contain-themselves paradox inside the type theory. Lean avoids this with a \textbf{hierarchy of universes}.
+
+\subsection{The hierarchy}\label{sec:05-rigor-check:02-universes:2}
+
+\begin{lstlisting}
+#check (Nat : Type)        -- Nat itself lives in Type
+#check (Type : Type 1)      -- Type lives one level up, in Type 1
+#check (Type 1 : Type 2)    -- and so on, forever
+\end{lstlisting}
+
+\[
+\mathtt{Nat} : \mathtt{Type} : \mathtt{Type}\ 1 : \mathtt{Type}\ 2 : \cdots
+\]
+
+Each \texttt{Type u} is itself a term of \texttt{Type (u+1)}, never of itself. This gives just enough structure to block the paradox, while still permitting ``for every type'' (quantifying over some fixed \texttt{Type u}) to be said as often as needed. \texttt{Type} on its own (with no numeral) is notation for \texttt{Type 0}, the universe containing ``ordinary'' types like \texttt{Nat}, \texttt{Bool}, \texttt{Int}, and the \texttt{Point}/\texttt{Pair} structures from Chapter 2.
+
+\subsection{\texorpdfstring{Why this matters for \texttt{Group}}{Why this matters for Group}}\label{sec:05-rigor-check:02-universes:3}
+
+Recall \texttt{structure Group (G : Type) where ...} from Chapter 6. This signature commits to \texttt{G : Type}, meaning \texttt{G} lives in the universe \texttt{Type 0}. The natural question: does \texttt{Group} itself have a \texttt{Group}-structure? Is \texttt{Group Int} an element of some \texttt{Group (Group Int)}? Setting aside whether that would even be meaningful, a more basic obstruction is evident. \texttt{Group Int} is a \texttt{Type} (\texttt{\#check (Group Int : Type)} type-checks, since a \texttt{structure} applied to its parameters is itself a type), but \texttt{Group}, the type \emph{constructor} itself (before applying it to a carrier \texttt{G}), is not a \texttt{Type} at all. It is a function \texttt{Type → Type}, that is, a term of type \texttt{Type → Type}.
+
+\emph{Why} does \texttt{Type → Type} live in \texttt{Type 1} rather than back in \texttt{Type 0}? This is not merely a bookkeeping choice. It follows from the specific typing rule Lean uses for building function (Π-)types out of universes: forming \texttt{A → B} when \texttt{A : Type i} and \texttt{B : Type j} produces a term of type \texttt{Type (max i j)}, \emph{unless} \texttt{B}'s universe already needs to be at least one level higher to safely contain ``the collection of all functions out of \texttt{A}''. Concretely here, \texttt{A := Type} (living in \texttt{Type 1}, since \texttt{Type : Type 1}) and \texttt{B := Type} again, so \texttt{Type → Type} itself lands in \texttt{Type 1}. \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} states this rule precisely as one line of the calculus of constructions. The short version is that \texttt{Group} is not even a candidate carrier type for its own construction. It sits one universe level too high, exactly because it is a function \emph{out of} \texttt{Type} itself, not out of some ordinary \texttt{Type 0} type like \texttt{Nat}.
+
+\subsection{Universe polymorphism (a brief note)}\label{sec:05-rigor-check:02-universes:4}
+
+A definition is occasionally written with an explicit universe variable, e.g.~\texttt{structure Group.\{u\} (G : Type u) where ...}. This makes the definition \textbf{universe polymorphic}: usable the same way whether \texttt{G} lives in \texttt{Type 0}, \texttt{Type 1}, or any level, rather than pinned to \texttt{Type 0} specifically. This book fixes everything at \texttt{Type} (that is, \texttt{Type 0}) for simplicity, since none of the groups, rings, or modules built here need anything larger. Mathlib's actual definitions are universe polymorphic throughout, exactly because they must accommodate constructions (such as ``the group of automorphisms of a large category'') that genuinely do not fit in \texttt{Type 0}.
+
+\begin{quote}
+Read more: \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} states the universe-formation rules precisely, as part of the calculus of constructions. Externally, the ``Dependent Type Theory'' chapter of the \emph{Theorem Proving in Lean 4} manual (\cite{TPIL4}) covers universes at a similar level of detail with more Lean-specific examples.
+\end{quote}
+
+\subsection{References}\label{sec:05-rigor-check:02-universes:5}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §2.2 ``Types as objects'' --- Lean's own documentation on the universe hierarchy, verified verbatim (``Type 0 as a universe of `small' or `ordinary' types\ldots{} the list is infinite: there is a Type n for every natural number n''), matching the presentation here.
+\item
+  Girard --- \textbf{Correction:} \cite{Girard1971} (the 1971/1970 ``Une extension de l'interprétation de Gödel à l'analyse'' paper) is \emph{not} the source of the \texttt{Type : Type} inconsistency. The proof that a calculus with the rule \texttt{⊢ * : *} loses the normalization property is due to Girard's 1972 doctoral thesis, \emph{``Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure,''} Thèse d'État, Université Paris VII, 1972 --- not yet in this book's bibliography. (Thierry Coquand's 1986 paper ``An analysis of Girard's paradox,'' LICS 1986, is the standard modern exposition, also not yet cited here.)
+\end{itemize}

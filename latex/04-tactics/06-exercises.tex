@@ -1,0 +1,25 @@
+\section{Exercises}\label{sec:04-tactics:06-exercises:1}
+
+\textbf{Key points.} A goal is hypotheses above a line, a statement to prove below it; a tactic replaces it with zero or more simpler goals. The core loop is: try the cheapest tactic, read why it failed, find structure to split or induct on, locate the specific lemma that matches. \texttt{induction} generates one case (and hypothesis \texttt{ih}) per constructor, exactly mirroring a recursive function over the same type.
+
+\textbf{Socratic questions.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{\texttt{rw} rewrote \texttt{Nat.add\_\allowbreak{}succ} and closed the \texttt{succ} case of \texttt{my\_\allowbreak{}add\_\allowbreak{}comm}, but the same tactic failed on \texttt{a + b = b + a} before any induction. What changed between the two attempts?} Nothing about \texttt{rw} itself --- what changed is what is available to rewrite \emph{with}. Before induction there is no fact relating \texttt{a + b} and \texttt{b + a} at all; after \texttt{induction b}, the \texttt{succ} case comes with \texttt{ih : a + k = k + a} already in hand, giving \texttt{rw} something to substitute.
+\item
+  \emph{A tactic that produces no error but also does not close the goal --- is that a success or a failure?} Neither, and treating it as either is the mistake. It is progress to inspect: the goal state after the tactic is the actual source of truth, not the absence of a red error message. This is precisely why the goal state is checked after \emph{every} tactic, not just at the end.
+\item
+  \emph{\texttt{nat\_\allowbreak{}mul\_\allowbreak{}zero (n : Nat) : n * 0 = 0} closes by \texttt{rfl} alone. Would \texttt{0 * n = 0} also close by \texttt{rfl}?} No --- \texttt{Nat.mul} recurses on its \emph{second} argument, exactly like \texttt{Nat.add}, so \texttt{n * 0 = 0} is the base clause (immediate), while \texttt{0 * n = 0} needs an actual induction on \texttt{n}, for the same left/right-asymmetry reason \texttt{0 + n = n} did earlier in this chapter.
+\item
+  Prove \texttt{theorem and\_\allowbreak{}comm\_\allowbreak{}tac \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P := by ...} using \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}}, \texttt{h.left}, \texttt{h.right}.
+\item
+  Prove \texttt{theorem nat\_\allowbreak{}mul\_\allowbreak{}zero (n : Nat) : n * 0 = 0 := by rfl} --- check whether \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} alone works, and if not, use \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction}}.
+\item
+  Rewrite the \texttt{modus\_\allowbreak{}ponens} proof from Chapter 3 in tactic mode.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:03-chapter-4:1]{Appendix, Chapter 4}.
+
+With definitions, propositions, and tactics in hand, we pause for a brief rigor check before diving into groups.

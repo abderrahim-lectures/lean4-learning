@@ -1,0 +1,88 @@
+% `listings` style definitions for Lean and Python code, matching each
+% other in font/frame/color so the two read as one consistent system.
+% Lean's keyword/tactic lists and comment syntax match Lean 4's actual
+% grammar, adapted to `listings`' simpler (non-context-sensitive) model.
+\lstdefinelanguage{lean}{
+  morekeywords={theorem,lemma,def,abbrev,structure,inductive,class,instance,
+    namespace,end,section,import,open,variable,variables,universe,universes,
+    example,axiom,constant,by,where,with,match,fun,let,have,show,from,do,
+    deriving,mutual,partial,private,protected,noncomputable,unsafe,extends,
+    if,then,else,calc,set_option,attribute,macro,syntax,elab,notation,infix,
+    infixl,infixr,prefix,postfix,this,Type,Prop,Sort},
+  morekeywords=[2]{rw,rewrite,exact,apply,intro,intros,simp,simpa,simp_all,
+    dsimp,cases,rcases,obtain,induction,constructor,refine,decide,omega,
+    norm_num,ring,ring_nf,noncomm_ring,abel,field_simp,linarith,nlinarith,
+    positivity,tauto,aesop,use,left,right,funext,ext,congr,unfold,show,
+    sorry,rfl,trivial,assumption,contradiction,specialize,subst,change,
+    conv,conv_lhs,conv_rhs,by_contra,exact?,apply?,gcongr},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[s]{/-}{-/},
+  morestring=[b]{"},
+}
+
+\definecolor{codekeyword}{RGB}{20,60,150}
+\definecolor{codetactic}{RGB}{110,40,140}
+\definecolor{codecomment}{RGB}{60,110,60}
+\definecolor{codestring}{RGB}{150,40,40}
+\definecolor{codebg}{RGB}{247,247,247}
+
+\lstdefinestyle{lean}{
+  language=lean,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries\color{codekeyword},
+  keywordstyle=[2]\color{codetactic},
+  commentstyle=\itshape\color{codecomment},
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  showstringspaces=false,
+  breaklines=true,
+  breakautoindent=true,
+  % `columns=flexible` silently dropped the literal space immediately
+  % following any newunicodechar-substituted symbol (confirmed by
+  % isolating this in a minimal test file: "M -> M" rendered as "M ->M"
+  % regardless of how the substitution itself was written, but rendered
+  % correctly under `columns=fixed`) -- every arrow/logic/relation symbol
+  % in this book's Lean code was silently missing its trailing space.
+  columns=fixed,
+  % Even under columns=fixed, `listings` scrambles character order and
+  % swallows surrounding spaces around raw non-ASCII symbols (e.g. `{α`
+  % renders as `α{`, `α → Nat` renders as `α→  Nat`) -- a listings/XeTeX
+  % column-bookkeeping bug, not a newunicodechar artifact. build_latex.py's
+  % escape_lstlisting_unicode() routes every such symbol through this
+  % escape instead of leaving it as a raw character for listings to
+  % measure and position itself.
+  escapeinside={(*}{*)},
+  frame=single,
+  framerule=0.3pt,
+  rulecolor=\color{black!30},
+  numbers=none,
+  tabsize=2,
+}
+
+\lstdefinestyle{python}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries\color{codekeyword},
+  commentstyle=\itshape\color{codecomment},
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  showstringspaces=false,
+  breaklines=true,
+  breakautoindent=true,
+  columns=fixed,
+  escapeinside={(*}{*)},
+  frame=single,
+  framerule=0.3pt,
+  rulecolor=\color{black!30},
+  numbers=none,
+  tabsize=4,
+}
+
+% `style=lean` as the document-wide default (every fence in this book is
+% either `lean` or `python`; build_latex.py rewrites Pandoc's emitted
+% `[language=python]` to `[language=Python,style=python]` so Python fences
+% pick up listings' built-in Python rules and this file's matching style,
+% since `listings`' language names are case-sensitive and Pandoc emits the
+% Markdown fence's info string verbatim, lowercase).
+\lstset{style=lean}

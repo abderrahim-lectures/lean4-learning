@@ -1,0 +1,39 @@
+\section{Structures with type parameters}\label{sec:02-functions-and-structures:02-type-parameters:1}
+
+\begin{lstlisting}
+structure Pair ((*$\alpha$*) (*$\beta$*) : Type) where
+  fst : (*$\alpha$*)
+  snd : (*$\beta$*)
+
+def p : Pair Nat String := { fst := 1, snd := "one" }
+
+#eval p.fst    -- 1
+#eval p.snd     -- "one"
+\end{lstlisting}
+
+This generalizes directly to how we will write, e.g., \texttt{structure Group (α : Type)}.
+
+\begin{mathreading}
+
+\texttt{Pair α β} is the ordinary binary Cartesian product, but taken \emph{uniformly}, as a functor of two arguments at once. Rather than fixing \(\alpha\) and \(\beta\) once, \texttt{structure Pair (α β : Type) where ...} defines the \emph{whole family} of products \(\alpha \times \beta\) at once, one for every choice of the two type arguments. \texttt{Pair Nat String} is then just this construction evaluated at the pair \((\mathbb{N},
+\mathrm{String})\), giving \(\mathbb{N} \times \mathrm{String}\). This is the same ``definition parameterized by objects of the category'' idea that lets us later write \texttt{Group (G : Type)}: not one group, but the functor sending a carrier type \(G\) to the type of group-structures on \(G\).
+
+\end{mathreading}
+
+\begin{progcorner}
+
+Python code like \texttt{def identity(x): return x} or \texttt{class Pair: def \_\allowbreak{}\_\allowbreak{}init\_\allowbreak{}\_\allowbreak{}(self, fst, snd): ...} is also ``generic'' in the sense that it does not mention any particular type. Nothing checks that genericity until the code actually runs, however. Writing \texttt{identity(3) + "oops"} causes Python to happily run \texttt{identity}, hand back \texttt{3}, and only then break on \texttt{3 + "oops"} at runtime. Constructing a \texttt{Pair} and placing a \texttt{Group (Fin 3)} into its \texttt{fst} draws no complaint from Python. The closer analogue is \texttt{typing.TypeVar}: \texttt{def identity(x: T) -\allowbreak{}> T: return x} \emph{documents} the same universally quantified type \texttt{identity} has in Lean, but that annotation is optional, erased at runtime, and enforced only if a checker such as \texttt{mypy} is separately run --- and nothing stops a stray \texttt{\# type: ignore} from silencing it. Lean's \texttt{\{α : Type\} → α → α} is not documentation: it is \emph{proved}, once, that \texttt{identity} works for every type \texttt{α}, and that proof is checked before \texttt{identity} is ever called. It is not merely approximated by a linter that might go unrun.
+
+\end{progcorner}
+
+\subsection{References}\label{sec:02-functions-and-structures:02-type-parameters:2}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) --- for the Python-side comparison used in this section's box.
+\item
+  Milner (\cite{Milner1978}) --- the theoretical account of parametric polymorphism that \texttt{TypeVar}, and Lean's \texttt{\{α : Type\} → ...}, both implement to different degrees.
+\end{itemize}

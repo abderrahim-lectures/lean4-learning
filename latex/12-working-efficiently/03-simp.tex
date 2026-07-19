@@ -1,0 +1,21 @@
+\section{\texorpdfstring{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{simp}}, in light of what it replaces}{simp, in light of what it replaces}}\label{sec:12-working-efficiently:03-simp:1}
+
+Chapter 4 recommended avoiding \texttt{simp} while learning, so every step stayed traceable. Once it is understood \emph{why} a family of rewrites works (for example, ``additive identity/inverse cancellation,'' as in Chapter 9), \texttt{simp} is the efficient way to apply a whole \emph{set} of these known-safe rewrites at once, instead of spelling out each one:
+
+\begin{lstlisting}
+-- Chapter 9 style (explicit, for learning):
+theorem ex1 (n : Nat) : n + 0 = n := by
+  exact Nat.add_zero n
+
+-- Once the fact class is understood, in later proofs:
+theorem ex2 (n : Nat) : n + 0 = n := by
+  simp
+\end{lstlisting}
+
+A good habit: the \emph{first} time a new kind of cancellation or identity simplification is encountered, it should be done by hand with named lemmas, as this book does throughout. After that, \texttt{simp} (optionally \texttt{simp [specific\_\allowbreak{}lemma]} to narrow it, or \texttt{simp only [...]} to restrict exactly which lemmas fire) is the right everyday tool. Using \texttt{simp} from the start is how proofs end up compiling without anyone, including the author, being able to explain them a week later.
+
+\begin{mathreading}
+
+\texttt{simp} is \emph{normalization by rewriting}: it treats a chosen set of equations \(\{\ell_i = r_i\}\) (the simp set) as a left-to-right rewriting system and drives the goal to a normal form, closing it when both sides normalize to the same term. Both proofs of \(n + 0 = n\) use the same fact, \(n + 0 = n\) (the right-unit law for \(+\)). The explicit version cites it by name; \texttt{simp} finds it in the rewrite system. This is the algebraist's everyday move of ``simplify using the obvious identities.'' It works exactly when the rewrite rules are valid equalities, and confluent enough to reach a canonical form.
+
+\end{mathreading}

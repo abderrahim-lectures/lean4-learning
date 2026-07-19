@@ -1,0 +1,22 @@
+\section{Exercises}\label{sec:07-group-theorems:05-exercises:1}
+
+\textbf{Key points.} Three facts now hold for \emph{every} group: the identity is unique, a left inverse equals the (unique) two-sided inverse, and \((ab)^{-1}=b^{-1}a^{-1}\). The recurring proof pattern is relating both sides of a goal to a common third expression, or padding with the identity and cancelling; once a uniqueness fact is proved, later goals can be \emph{characterized} by it instead of computed directly.
+
+\textbf{Socratic questions.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{\texttt{id\_\allowbreak{}unique}'s proof related \texttt{e'} and \texttt{Grp.id} to a common third expression, \texttt{Grp.op e' Grp.id}. Could the same proof have gone through by relating them to \texttt{Grp.op Grp.id e'} instead?} Not directly --- \texttt{h} (the hypothesis that \texttt{e'} is a \emph{left} identity) only says something about \texttt{Grp.op e' a} for arbitrary \texttt{a}; it says nothing about \texttt{Grp.op a e'}. The proof has to route through the one expression both given facts actually describe, not just any expression that happens to involve both sides.
+\item
+  \emph{\texttt{inv\_\allowbreak{}op} proved \((ab)^{-1}=b^{-1}a^{-1}\) by showing \(b^{-1}a^{-1}\) is a left inverse of \(ab\), rather than computing \((ab)^{-1}\) directly. Was there ever a way to compute it directly?} Not from the axioms alone --- \texttt{Group} has no field that produces \texttt{inv} of a \emph{product} in closed form, only \texttt{inv} of a single element. Reducing ``compute this'' to ``verify this satisfies the defining property'' is not a shortcut taken for convenience; it is the only route the axioms actually offer.
+\item
+  \emph{Both \texttt{id\_\allowbreak{}unique} and \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} conclude an equation between two elements neither of which was ``computed.'' What do their proofs have in common that makes this possible?} Each relates both sides to one common expression via two \emph{separate} facts, then chains the two equalities --- never squeezing a value out of thin air, only noticing that two different routes describe the same thing.
+\item
+  Prove \texttt{theorem inv\_\allowbreak{}inv (a : G) : Grp.inv (Grp.inv a) = a}. Before writing any tactics, consider: does this match the shape of a lemma already in hand (Theorem 2 again)? What single fact about \texttt{a} and \texttt{Grp.inv a} would permit invoking it directly?
+\item
+  Prove \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}. Strategy hint: \texttt{b} and \texttt{c} cannot be rewritten directly in isolation. Instead, apply \texttt{Grp.op (Grp.inv a)} to \emph{both sides} of \texttt{h} first (as a \texttt{have}), then simplify each side using \texttt{assoc}/\texttt{inv\_\allowbreak{}left}/\texttt{id\_\allowbreak{}left}, the same ``regroup, then cancel'' pattern as Theorem 3.
+\end{enumerate}
+
+Solutions: \hyperref[sec:14-appendix-solutions:06-chapter-7:1]{Appendix, Chapter 7}.
+

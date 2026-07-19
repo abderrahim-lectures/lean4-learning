@@ -1,0 +1,64 @@
+\section{\texorpdfstring{\texttt{Prop}: the type of statements}{Prop: the type of statements}}\label{sec:03-propositions-and-proofs:01-prop:1}
+
+Alongside \texttt{Type}, Lean has \texttt{Prop}, the type of logical propositions. A term of type \texttt{P : Prop} is a \textbf{proof} of \texttt{P}. This is the \textbf{Curry--Howard correspondence} (Howard, \cite{Howard1980}): propositions are types, and proofs are programs.
+
+\subsection{The Curry--Howard correspondence, in full}\label{sec:03-propositions-and-proofs:01-prop:2}
+
+That one-line slogan is easy to state, but its importance is easy to miss on first read. What follows is the full dictionary it stands for: a two-way correspondence between logical connectives and type formers. This book uses each row repeatedly, starting in the next few sections.
+
+{\small\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+}
+\toprule
+Logic & Type theory & Lean notation \\
+\midrule
+proposition \(P\) & type \(P\) & \texttt{P : Prop} \\
+proof of \(P\) & term of type \(P\) & \texttt{p : P} \\
+\(P\) implies \(Q\) & function type & \texttt{P → Q} \\
+\(P\) and \(Q\) & product type & \texttt{P ∧ Q} \\
+\(P\) or \(Q\) & sum (coproduct) type & \texttt{P ∨ Q} \\
+false & empty type (no constructors) & \texttt{False} \\
+not \(P\) & function type to the empty type & \texttt{¬P} (:= \texttt{P → False}) \\
+for all \(x\), \(P(x)\) & dependent function (Π-) type & \texttt{∀ x, P x} \\
+there exists \(x\) with \(P(x)\) & dependent pair (Σ-)type & \texttt{∃ x, P x} \\
+proof by cases on a disjunction & pattern match / \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}} & \texttt{Or.elim}, \texttt{cases h with ...} \\
+a direct proof (construction) & a term built from constructors & \texttt{⟨\_\allowbreak{}, \_\allowbreak{}⟩}, \texttt{Or.inl \_\allowbreak{}}, \texttt{fun x => \_\allowbreak{}} \\
+\bottomrule
+\end{tabular}}
+
+
+Consider a few rows concretely. ``\(P\) and \(Q\)'' corresponds to a \emph{product} type because a proof of \(P \wedge Q\) is genuinely a \emph{pair}: a proof of \(P\) together with a proof of \(Q\). This is exactly the \texttt{⟨hp, hq⟩} seen in the next section. ``\(P\) or \(Q\)'' corresponds to a \emph{sum} type because a proof of \(P \vee Q\) is a \emph{choice}: either a proof of \(P\) (tagged \texttt{Or.inl}) or a proof of \(Q\) (tagged \texttt{Or.inr}), never both, and never neither. ``Not \(P\)'' being \texttt{P → False} says: a proof that \(P\) is false is a \emph{procedure} that would turn any (hypothetical) proof of \(P\) into a proof of the impossible proposition \texttt{False}. In other words, it is a witness that no such proof of \(P\) could exist.
+
+The correspondence goes deeper than just matching up connectives with type formers, though. It also extends to \emph{proofs themselves} behaving like \emph{programs}. Simplifying a proof (removing a detour, such as proving \(P \wedge Q\) and then immediately taking the left projection to recover a proof of \(P\)) corresponds exactly to a program taking a computation step (here, β-reduction eliminating a constructor immediately followed by the matching projection). This is why Chapter 4's tactics, which \emph{build} proof terms, and Chapter 5's discussion of reduction and definitional equality, are really talking about one and the same underlying process, just seen from two angles. Proof simplification and program evaluation are the same operation, described differently depending on whether the term is regarded as ``a proof'' or ``a computation.''
+
+\begin{quote}
+Read more: if ``propositional logic'' or ``natural deduction'' above are not already familiar, \hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{the next section} recaps standard logic from scratch, with no Lean involved, before this correspondence gets applied to it. \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter 1 §4} makes the correspondence fully precise, extending it down to the untyped λ-calculus underneath both proofs and ordinary functions. \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3}'s progress and preservation theorems are the formal statement of ``a proof never reduces to something of the wrong type,'' i.e.~``well-typed proofs do not go wrong.''
+\end{quote}
+
+\begin{lstlisting}
+#check (2 + 2 = 4)     -- 2 + 2 = 4 : Prop
+
+example : 2 + 2 = 4 := rfl
+\end{lstlisting}
+
+\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} is the proof ``both sides compute to the same thing'' (\textbf{refl}exivity). \texttt{example} states a proposition and immediately supplies a proof (an anonymous, unnamed \texttt{theorem}).
+
+\begin{mathreading}
+
+The Curry--Howard correspondence identifies a proposition \(P\) with the \emph{set of its proofs}: \(P\) is true exactly when that set is nonempty, i.e.~when there exists some term \(p : P\) (``\(P\) is inhabited''). This is why \texttt{Prop} behaves like a truth value rather than an ordinary type: every proposition's proof-set is either empty (false) or, up to proof irrelevance, has exactly one element (true), with no room for a ``third'' proof genuinely different from the rest. Proving \(P\) is exactly exhibiting an element \(p \in P\); nothing more is meant by ``provable.'' The proof \texttt{rfl : 2 + 2 = 4} is the reflexivity witness \(\mathrm{refl}_4\) of the equality relation, valid precisely because both sides reduce to the same normal form \(4\). This is equality of terms that are \emph{definitionally} equal, the strictest notion of ``\(=\)''.
+
+\end{mathreading}
+
+\subsection{References}\label{sec:03-propositions-and-proofs:01-prop:3}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  Howard (\cite{Howard1980}) --- the original source of the correspondence this section is named for. Per Sørensen \& Urzyczyn, \emph{Lectures on the Curry-Howard Isomorphism}, Studies in Logic and the Foundations of Mathematics vol.~149, Elsevier, 2006 (a secondary source corroborating this history, not Howard's paper itself): Howard's manuscript was ``privately circulated'' from 1969 and not formally published until 1980, in Curry's Festschrift; it develops the proofs-as-terms correspondence for implicational logic, extends it to the other propositional connectives, then to a term language for Heyting Arithmetic.
+\item
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), ``Propositions and Proofs'' --- Lean's own treatment of the correspondence, matching the dictionary above.
+\end{itemize}

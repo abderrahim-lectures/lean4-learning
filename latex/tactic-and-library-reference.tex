@@ -1,0 +1,85 @@
+\chapter*{Tactic and library reference}
+\addcontentsline{toc}{chapter}{Tactic and library reference}
+\setcounter{section}{0}\label{sec:root:tactic-and-library-reference:1}
+
+A quick index of every tactic used in this book, and every Mathlib name used in the ``Mathlib equivalent'' boxes (Chapters 6-11), each with a link to look it up yourself. This page is a lookup table, not something to read start to finish --- the tactics chapter (\hyperref[sec:04-tactics:00-index:1]{Chapter 4}) and the working-efficiently chapter (\hyperref[sec:12-working-efficiently:00-index:1]{Chapter 12}) are where each one is actually explained.
+
+Two general links used throughout this page:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Lean 4 Tactic Reference}} --- the official, current documentation for every built-in tactic.
+\item
+  \textbf{\href{https://loogle.lean-lang.org/}{Loogle}} --- the Mathlib declaration search engine; \texttt{https:/\allowbreak{}/\allowbreak{}loogle.lean-\allowbreak{}lang.org/\allowbreak{}?q=NAME} jumps straight to a name. Also see the browsable \textbf{\href{https://leanprover-community.github.io/mathlib4_docs/}{Mathlib4 docs}}.
+\end{itemize}
+
+\section*{Tactics}
+\addcontentsline{toc}{section}{Tactics}\label{sec:root:tactic-and-library-reference:2}
+
+{\small\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+}
+\toprule
+Tactic & First used & Reference \\
+\midrule
+\texttt{rfl} & Ch. 1 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{rw} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{exact} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{apply} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{intro} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{constructor} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{cases} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{induction} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{simp} & Ch. 4, Ch. 12 §3 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{unfold} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{decide} & Ch. 8, Ch. 12 §2 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{show} & Ch. 6 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{have} & Ch. 7 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{refine} & Ch. 10 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{ext} / \texttt{funext} & Ch. 6, Ch. 10 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{congr} & Ch. 10 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{left} / \texttt{right} & Ch. 3, Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{use} & Ch. 3, Ch. 10 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{exact?} / \texttt{apply?} & Ch. 12 §1 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{omega} & Ch. 12 §2 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{norm\_\allowbreak{}num} & Ch. 12 §2 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\texttt{noncomm\_\allowbreak{}ring} & Ch. 8 (Mathlib equivalent) & \href{https://loogle.lean-lang.org/?q=noncomm_ring}{Loogle} \\
+\texttt{sorry} & Ch. 4 §3 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
+\bottomrule
+\end{tabular}}
+
+
+\section*{Mathlib names (Chapters 6-11's ``Mathlib equivalent'' boxes)}
+\addcontentsline{toc}{section}{Mathlib names (Chapters 6-11's ``Mathlib equivalent'' boxes)}\label{sec:root:tactic-and-library-reference:3}
+
+{\small\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+}
+\toprule
+Name & What it is & Reference \\
+\midrule
+\texttt{Group}, \texttt{AddCommGroup}, \texttt{CommGroup} & The real group/abelian-group classes & \href{https://loogle.lean-lang.org/?q=Group}{Loogle: Group} \\
+\texttt{Ring}, \texttt{CommRing} & The real ring classes & \href{https://loogle.lean-lang.org/?q=Ring}{Loogle: Ring} \\
+\texttt{Module}, \texttt{Submodule} & The real module/submodule classes & \href{https://loogle.lean-lang.org/?q=Module}{Loogle: Module} \\
+\texttt{LinearMap} (\texttt{→ₗ[R]}) & Module homomorphisms & \href{https://loogle.lean-lang.org/?q=LinearMap}{Loogle: LinearMap} \\
+\texttt{Quiver}, \texttt{Quiver.Path} & Mathlib's own quiver/path classes & \href{https://loogle.lean-lang.org/?q=Quiver}{Loogle: Quiver} \\
+\texttt{ZMod} & \(\mathbb{Z}/n\mathbb{Z}\) & \href{https://loogle.lean-lang.org/?q=ZMod}{Loogle: ZMod} \\
+\texttt{Matrix} & Matrices over a ring & \href{https://loogle.lean-lang.org/?q=Matrix}{Loogle: Matrix} \\
+\texttt{Equiv.Perm}, \texttt{Equiv.swap}, \texttt{finRotate} & Permutation group of a type & \href{https://loogle.lean-lang.org/?q=Equiv.Perm}{Loogle: Equiv.Perm} \\
+\texttt{mul\_\allowbreak{}assoc}, \texttt{add\_\allowbreak{}assoc} & Associativity & \href{https://loogle.lean-lang.org/?q=mul_assoc}{Loogle: mul\_assoc} \\
+\texttt{one\_\allowbreak{}mul}, \texttt{mul\_\allowbreak{}one}, \texttt{zero\_\allowbreak{}add}, \texttt{add\_\allowbreak{}zero} & Identity laws & \href{https://loogle.lean-lang.org/?q=one_mul}{Loogle: one\_mul} \\
+\texttt{neg\_\allowbreak{}add\_\allowbreak{}cancel}, \texttt{add\_\allowbreak{}neg\_\allowbreak{}cancel}, \texttt{mul\_\allowbreak{}inv\_\allowbreak{}cancel} & Inverse laws & \href{https://loogle.lean-lang.org/?q=mul_inv_cancel}{Loogle: mul\_inv\_cancel} \\
+\texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} & \((ab)^{-1}=b^{-1}a^{-1}\) & \href{https://loogle.lean-lang.org/?q=mul_inv_rev}{Loogle: mul\_inv\_rev} \\
+\texttt{neg\_\allowbreak{}one\_\allowbreak{}mul}, \texttt{mul\_\allowbreak{}zero}, \texttt{zero\_\allowbreak{}mul} & Ring absorbing/sign laws & \href{https://loogle.lean-lang.org/?q=neg_one_mul}{Loogle: neg\_one\_mul} \\
+\texttt{mul\_\allowbreak{}add}, \texttt{add\_\allowbreak{}mul} & Distributivity & \href{https://loogle.lean-lang.org/?q=mul_add}{Loogle: mul\_add} \\
+\texttt{Submodule.span}, \texttt{Submodule.subset\_\allowbreak{}span} & Generated submodules & \href{https://loogle.lean-lang.org/?q=Submodule.span}{Loogle: Submodule.span} \\
+\texttt{LinearMap.fst} & Product-module projection & \href{https://loogle.lean-lang.org/?q=LinearMap.fst}{Loogle: LinearMap.fst} \\
+\texttt{inferInstance} & Typeclass-resolution term & \href{https://loogle.lean-lang.org/?q=inferInstance}{Loogle: inferInstance} \\
+\bottomrule
+\end{tabular}}
+

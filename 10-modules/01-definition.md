@@ -1,0 +1,30 @@
+## The mathematical definition
+
+[← Index](00-index.md) | [Next: Translating into Lean →](02-translating-into-lean.md)
+
+---
+
+Given a ring $R$ (Chapter 8), a (left) **$R$-module** is an abelian group
+$(M, +, 0, -(-))$ together with a scalar action $R \times M \to M$, written
+$r \cdot m$, satisfying:
+
+$$
+\begin{aligned}
+\text{(M1)}&\quad r \cdot (m + n) = r\cdot m + r \cdot n \\
+\text{(M2)}&\quad (r + s) \cdot m = r \cdot m + s \cdot m \\
+\text{(M3)}&\quad (r \cdot s) \cdot m = r \cdot (s \cdot m) \\
+\text{(M4)}&\quad 1 \cdot m = m
+\end{aligned}
+$$
+
+for all $r, s \in R$, $m, n \in M$. This is exactly the vector space
+definition, with "field" replaced by "ring". That extra generality is
+the whole point: $\mathbb{Z}$-modules are abelian groups, and $k[x]$-modules
+(for $k$ a field) are vector spaces equipped with a chosen linear endomorphism.
+Most importantly for this book, a representation of a quiver $Q$ is
+precisely a module over the path algebra $kQ$; this is why the present
+chapter is placed immediately before Chapter 11.
+
+---
+
+[← Index](00-index.md) | [Next: Translating into Lean →](02-translating-into-lean.md)
