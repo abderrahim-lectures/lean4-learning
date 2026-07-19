@@ -37,9 +37,13 @@ and are indexed separately in the
 
 <a id="hott2013"></a>**[HoTT2013]** The Univalent Foundations Program, *Homotopy Type Theory: Univalent Foundations of Mathematics*, 2013. [Free online](https://homotopytypetheory.org/book/).
 
+<a id="jacobs1999"></a>**[Jacobs1999]** Bart Jacobs, *Categorical Logic and Type Theory*, Studies in Logic and the Foundations of Mathematics vol. 141, Elsevier, 1999.
+
 <a id="leandocs"></a>**[LeanDocs]** Lean 4 documentation, ["Basic Types"](https://lean-lang.org/doc/reference/latest/) and the [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/).
 
 <a id="mathlib4docs"></a>**[Mathlib4Docs]** [Mathlib4 API documentation](https://leanprover-community.github.io/mathlib4_docs/).
+
+<a id="maclane1998"></a>**[MacLane1998]** Saunders Mac Lane, *Categories for the Working Mathematician*, 2nd ed., Graduate Texts in Mathematics 5, Springer, 1998.
 
 <a id="martinlof1984"></a>**[MartinLof1984]** Per Martin-Löf, *Intuitionistic Type Theory*, Bibliopolis, 1984.
 
@@ -47,15 +51,8 @@ and are indexed separately in the
 
 <a id="mypydocs"></a>**[MypyDocs]** [mypy documentation](https://mypy.readthedocs.io/).
 
-<a id="nlabforgetful"></a>**[NLabForgetful]** nLab, ["forgetful functor"](https://ncatlab.org/nlab/show/forgetful+functor).
 
-<a id="nlabinitial"></a>**[NLabInitial]** nLab, ["initial object"](https://ncatlab.org/nlab/show/initial+object).
-
-<a id="nlabinitialalgebra"></a>**[NLabInitialAlgebra]** nLab, ["initial algebra of an endofunctor"](https://ncatlab.org/nlab/show/initial+algebra+of+an+endofunctor).
-
-<a id="nlabnno"></a>**[NLabNNO]** nLab, ["natural numbers object"](https://ncatlab.org/nlab/show/natural+numbers+object).
-
-<a id="nlabproduct"></a>**[NLabProduct]** nLab, ["product"](https://ncatlab.org/nlab/show/product).
+<a id="pareigis1970"></a>**[Pareigis1970]** Bodo Pareigis, *Categories and Functors*, Pure and Applied Mathematics vol. 39, Academic Press, 1970.
 
 <a id="pierce2002"></a>**[Pierce2002]** Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002.
 
@@ -67,9 +64,9 @@ and are indexed separately in the
 
 <a id="schiffler2014"></a>**[Schiffler2014]** Ralf Schiffler, *[Quiver Representations](https://link.springer.com/book/10.1007/978-3-319-09204-1)*, CMS Books in Mathematics, Springer, 2014.
 
-<a id="thompson1991"></a>**[Thompson1991]** Simon Thompson, *[Type Theory and Functional Programming](https://kar.kent.ac.uk/20998/1/ttfp.pdf)*, Addison-Wesley, 1991. Freely available from the author's institutional repository.
+<a id="thompson1991"></a>**[Thompson1991]** Simon Thompson, *[Type Theory and Functional Programming](https://kar.kent.ac.uk/20998/1/ttfp.pdf)*, Addison-Wesley, 1991. Freely available from the author's institutional repository. (⚠ Link check 2026-07-19: `kar.kent.ac.uk` failed to complete a TLS handshake while the parent `kent.ac.uk` domain and unrelated control sites responded normally — possibly a dead/misconfigured host for the Kent Academic Repository subdomain specifically. Worth a manual check before relying on this link.)
 
-<a id="tpil4"></a>**[TPIL4]** *Theorem Proving in Lean 4*, ["Dependent Types"](https://leanprover.github.io/theorem_proving_in_lean4/dependent_type_theory.html) and ["Propositions and Proofs"](https://leanprover.github.io/theorem_proving_in_lean4/propositions_and_proofs.html).
+<a id="tpil4"></a>**[TPIL4]** *Theorem Proving in Lean 4*, ["Dependent Type Theory"](https://leanprover.github.io/theorem_proving_in_lean4/Dependent-Type-Theory/) (§2.1 "Simple Type Theory," §2.8 "What makes dependent type theory dependent?") and ["Propositions and Proofs"](https://leanprover.github.io/theorem_proving_in_lean4/Propositions-and-Proofs/) (§3.1 "Propositions as Types"). (URLs verified 2026-07-19; the book's original links used a stale pre-rewrite URL scheme — `dependent_type_theory.html` etc. — which now 404s.)
 
 <a id="vandalen2013"></a>**[VanDalen2013]** Dirk van Dalen, *[Logic and Structure](https://doi.org/10.1007/978-1-4471-4558-5)*, 5th ed., Springer, 2013.
 

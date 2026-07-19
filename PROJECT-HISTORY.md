@@ -12,7 +12,7 @@ For the reader-facing summary of what changed in each release, see
 
 ## Summary
 
-As of this writing: **87 issues** (all closed) and **43 pull requests**
+As of this writing: **96 issues** (all closed) and **58 pull requests**
 (all merged), covering:
 
 - **Building out the book's content** — widening the audience beyond a
@@ -49,6 +49,19 @@ As of this writing: **87 issues** (all closed) and **43 pull requests**
   new notion gets a link or citation at first use, book chapter/section
   numbers where possible, direct hyperlinks for web sources — across
   Chapters 1 through 11.
+- **Citation verification against primary sources** — checked every
+  external citation across the book against the actual cited text
+  (rather than trusting author/book names alone) and fixed six
+  mischaracterizations found this way: an overclaimed 1988 paper
+  (`CoquandHuet1988`), a wrong chapter/notation for a 1984 book
+  (`MartinLof1984`), a wrong chapter for a length-indexed-vector example
+  (`Chlipala2013`), a source described as covering material it
+  explicitly does not (`Pierce2002`, twice — once for dependently-typed
+  eliminators, once for a wrong Ch. 9–11 range), and a paradox
+  misattributed to the wrong paper by the same author (`Girard1971` vs.
+  the actual 1972 thesis). Also fixed stale, 404ing `TPIL4` bibliography
+  links, replaced the book's three remaining nLab wiki-page citations
+  with book citations, and ran a full external-link audit (68 URLs).
 
 ## Merged pull requests
 
@@ -97,6 +110,21 @@ As of this writing: **87 issues** (all closed) and **43 pull requests**
 | [#119](https://github.com/abderrahim-lectures/lean4-learning/pull/119) | Disambiguate overloaded + in the Chapter 1 Section 1 categorical box |
 | [#121](https://github.com/abderrahim-lectures/lean4-learning/pull/121) | Link Unit/Sum to Lean documentation at first use |
 | [#130](https://github.com/abderrahim-lectures/lean4-learning/pull/130) | Extend the "every notion gets a citation" rule to Chapters 6-11 |
+| [#132](https://github.com/abderrahim-lectures/lean4-learning/pull/132) | Add a "view PDF in browser" option to the root README |
+| [#134](https://github.com/abderrahim-lectures/lean4-learning/pull/134) | Fix broken "View PDF in browser" link (CORS + forced download) |
+| [#139](https://github.com/abderrahim-lectures/lean4-learning/pull/139) | Verify Ch.1 and Ch.11 citations against primary source texts |
+| [#140](https://github.com/abderrahim-lectures/lean4-learning/pull/140) | Verify Ch.2 citations; eliminate remaining nLab links |
+| [#141](https://github.com/abderrahim-lectures/lean4-learning/pull/141) | Ch.3: enrich Howard1980 citation with grounded detail |
+| [#144](https://github.com/abderrahim-lectures/lean4-learning/pull/144) | Verify Ch.5 citations; fix Girard/Pierce mischaracterizations |
+| [#145](https://github.com/abderrahim-lectures/lean4-learning/pull/145) | chore: untrack NOTEBOOK-SOURCE-GAPS.md |
+| [#147](https://github.com/abderrahim-lectures/lean4-learning/pull/147) | Ch.12: fix Decidable citation mischaracterization |
+| [#148](https://github.com/abderrahim-lectures/lean4-learning/pull/148) | Ch.3: verify Gentzen/VanDalen citations with newly added sources |
+| [#149](https://github.com/abderrahim-lectures/lean4-learning/pull/149) | Ch.13: verify Church1941 citation |
+| [#150](https://github.com/abderrahim-lectures/lean4-learning/pull/150) | Pre-release link audit: flag possibly-dead Thompson1991 URL |
+| [#151](https://github.com/abderrahim-lectures/lean4-learning/pull/151) | Bump to v1.4.12 |
+| [#152](https://github.com/abderrahim-lectures/lean4-learning/pull/152) | Restore PR #150 content lost in a history rewrite |
+| [#153](https://github.com/abderrahim-lectures/lean4-learning/pull/153) | Sync latex/references.bib with bibliography.md |
+| [#154](https://github.com/abderrahim-lectures/lean4-learning/pull/154) | Replace proprietary fonts with free, portable equivalents |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact

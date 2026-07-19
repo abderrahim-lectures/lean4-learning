@@ -146,15 +146,15 @@ Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
 \begin{itemize}
 \tightlist
 \item
-  Coquand and Huet (\cite{CoquandHuet1988}) --- the original paper defining CoC, the system this section formalizes, including the inductive-type extension (CIC) that gives rise to recursors/eliminators like \texttt{Nat.rec}.
+  Coquand and Huet (\cite{CoquandHuet1988}) --- the original paper defining CoC (variables/abstraction/application, §1 ``The Abstract Syntax of Terms''; typing rules, §2.1 ``The Inference System of Constructions''), the system this section formalizes. \textbf{Correction:} the 1988 paper does \emph{not} itself define the general inductive-type extension (CIC) or a \texttt{Nat.rec}-style recursor; §8 ``Possible Extensions'' only sketches one ad hoc worked example (a primitive \texttt{int} type with a \texttt{rec} constant, by direct analogy to what \texttt{Nat.rec} would later generalize). The general Calculus of Inductive Constructions is due to a later paper, Coquand and Paulin, ``Inductively Defined Types'' (1990), not yet in this book's bibliography.
 \item
-  Pierce (\cite{Pierce2002}) --- a general treatment of eliminators/case-analysis principles for inductive types in a dependently-typed setting.
+  Pierce (\cite{Pierce2002}) --- \textbf{Correction:} \emph{Types and Programming Languages} is explicitly \emph{not} a dependently-typed textbook (Pierce's own preface: dependent types are ``mentioned only in passing,'' developed no further than §30.5's one-paragraph sketch of ``families of types indexed by terms''). It does \emph{not} cover eliminators/recursors for inductive types in a dependent setting. What it actually covers, relevant here only by analogy: non-dependent \texttt{case} analysis on sum/variant types (§11.9--11.10) and on \texttt{µ}-recursive types like \texttt{NatList = μX.⟨nil:Unit, cons:\{Nat,X\}⟩} (Ch. 20), plus Church encodings of algebraic datatypes (Ch. 5 untyped, §23.4 typed/System F) --- a non-dependent cousin of the recursor/eliminator idea, not the same construction.
 \item
-  The Univalent Foundations Program (\cite{HoTT2013}) --- Ch. 1 gives a careful, from-scratch treatment of Π-types, Σ-types, and universes, in notation closely matching this section's.
+  The Univalent Foundations Program (\cite{HoTT2013}) --- §1.3 ``Universes and families,'' §1.4 ``Dependent function types (Π-types),'' §1.6 ``Dependent pair types (Σ-types)'' give a careful, from-scratch treatment of Π-types, Σ-types, and universes, verified verbatim, in notation closely matching this section's (identical \(\prod_{x:A}B(x)\) / \(\sum_{x:A}B(x)\) notation, and the same ``collapses to \(A \to B\) / \(A \times B\) when \(B\) is constant'' remark this chapter makes).
 \item
   Martin-Löf (\cite{MartinLof1984}) --- the foundational source for dependent Π/Σ types and universes predating CoC, for readers wanting the idea in its original, non-CoC-specific form.
 \item
-  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), ``Dependent Types'' and ``Propositions and Proofs'' --- Lean's own documentation on \texttt{Prop}, proof irrelevance, and universes, matching the presentation here.
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §3.1 ``Propositions as Types'' --- Lean's own documentation on \texttt{Prop}, proof irrelevance, and universes, verified verbatim: ``\texttt{Prop} is syntactic sugar for \texttt{Sort 0},'' ``Lean's kernel treats any two elements \texttt{t1 t2 : p} as being definitionally equal\ldots{} known as \emph{proof irrelevance},'' matching the presentation here.
 \item
   All Lean code in this section was checked directly against the toolchain pinned in this repository's \texttt{lean\_\allowbreak{}project/\allowbreak{}lean-\allowbreak{}toolchain} rather than only described; the \texttt{\#print Fin} output and both error messages shown are copied from real \texttt{lake env lean} runs.
 \end{itemize}

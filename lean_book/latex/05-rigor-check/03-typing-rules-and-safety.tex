@@ -141,7 +141,7 @@ Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
 \begin{itemize}
 \tightlist
 \item
-  Pierce (\cite{Pierce2002}), Ch. 9--11 --- the standard reference for STLC, including the (Var)/(Abs)/(App) rules and full proofs of progress and preservation, in the exact form used in this section.
+  Pierce (\cite{Pierce2002}), \textbf{Correction:} this section's material is in Ch. 8 ``Typed Arithmetic Expressions'' §8.3 ``Safety = Progress + Preservation'' (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 9 ``Simply Typed Lambda-Calculus'' §9.2 ``The Typing Relation'' (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 ``Properties of Typing'' (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC) --- not Ch. 9--11 as previously stated; Ch. 11 ``Simple Extensions'' covers pairs/tuples/records/sums, unrelated to this section's content. Verified verbatim.
 \item
   Milner (\cite{Milner1978}) --- the theoretical background for why STLC alone cannot type polymorphic functions like \texttt{identity}.
 \item
@@ -149,7 +149,7 @@ Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
 \item
   Coquand and Huet (\cite{CoquandHuet1988}) --- the original paper defining CoC, whose universe-formation rule is stated above.
 \item
-  Girard (\cite{Girard1971}) --- the source of ``Girard's paradox,'' the inconsistency \texttt{Type : Type} would introduce.
+  Girard --- \textbf{Correction:} see the note in \hyperref[sec:05-rigor-check:02-universes:1]{§2's References} --- ``Girard's paradox'' (the inconsistency of \texttt{Type : Type}) is due to Girard's 1972 thesis, not the 1971 paper cited as \cite{Girard1971} elsewhere in this book.
 \item
-  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), ``Dependent Types'' --- Lean's own documentation on universes, matching the presentation here.
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §2.2 ``Types as objects'' --- Lean's own documentation on universes, matching the presentation here.
 \end{itemize}

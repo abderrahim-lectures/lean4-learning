@@ -15,11 +15,15 @@
 % to match the git tag each time a release is cut, so the compiled PDF
 % itself states which version a reader has, not just the GitHub release
 % page it came from.
-\newcommand{\bookversion}{v1.4.11}
+\newcommand{\bookversion}{v1.4.13}
 
 \usepackage{fontspec}
-\setmonofont{Consolas}
-\setmainfont{Palatino Linotype}
+% Consolas/Palatino Linotype (proprietary Microsoft fonts) replaced with
+% free, metric-similar equivalents bundled with any standard TeX Live
+% install, so the manuscript builds on any machine without requiring
+% fonts licensed only via Windows/Office.
+\setmonofont{DejaVu Sans Mono}
+\setmainfont{TeX Gyre Pagella}
 % A bigger base size (12pt) plus extra leading and a paragraph gap below
 % are direct responses to feedback that the original 11pt/no-gap look
 % read too small and cramped.
