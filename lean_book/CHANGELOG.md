@@ -3,6 +3,13 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Cite the Nat-as-initial-object construction
+
+Added nLab's "natural numbers object" entry to the bibliography (both
+bibliography.md and the LaTeX-side references.bib, kept in sync this
+time) and cited it in Chapter 1 §1's categorical box and References
+list — the standard name for the construction described there.
+
 ## Unreleased — Rewrite the Ch. 1 §1 categorical "Mathematical reading" box
 
 A series of reader questions (functor vs. morphism, "zero" reused as a

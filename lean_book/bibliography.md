@@ -51,6 +51,8 @@ and are indexed separately in the
 
 <a id="nlabinitial"></a>**[NLabInitial]** nLab, ["initial object"](https://ncatlab.org/nlab/show/initial+object).
 
+<a id="nlabnno"></a>**[NLabNNO]** nLab, ["natural numbers object"](https://ncatlab.org/nlab/show/natural+numbers+object).
+
 <a id="nlabproduct"></a>**[NLabProduct]** nLab, ["product"](https://ncatlab.org/nlab/show/product).
 
 <a id="pierce2002"></a>**[Pierce2002]** Benjamin C. Pierce, *[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)*, MIT Press, 2002.
