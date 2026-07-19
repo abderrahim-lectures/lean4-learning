@@ -3,6 +3,12 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Disambiguate overloaded + in the Ch. 1 §1 categorical box
+
+The box used `+` for two different things in the same passage: disjoint
+sum in the endofunctor F(X) = 1 + X, then ordinary numeric addition in
+(Nat, +, 0) a few lines later. Added an explicit disambiguating clause.
+
 ## Unreleased — Name Nat as the initial algebra for 1 + (-), precisely
 
 Reader-caught: Chapter 1 §1's categorical box described Nat as the
