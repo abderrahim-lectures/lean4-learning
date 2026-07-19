@@ -12,7 +12,7 @@ For the reader-facing summary of what changed in each release, see
 
 ## Summary
 
-As of this writing: **71 issues** (all closed) and **35 pull requests**
+As of this writing: **87 issues** (all closed) and **43 pull requests**
 (all merged), covering:
 
 - **Building out the book's content** — widening the audience beyond a
@@ -40,6 +40,15 @@ As of this writing: **71 issues** (all closed) and **35 pull requests**
 - **Release/changelog hygiene** — fixing a project-wide drift where every
   `CHANGELOG.md` entry still said "Unreleased" despite nine shipped
   releases, and tightening the release workflow to prevent it recurring.
+- **Mathematical rigor and citation discipline** — a sustained audit
+  (prompted by reader questions on Chapter 1's categorical box) fixing
+  ambiguous pronouns, dense run-on sentences, wrong cross-references, and
+  imprecise categorical claims (e.g. correctly naming `Nat` as the
+  initial algebra for the endofunctor `1 + (-)`, not just an "initial
+  object" of an ad-hoc category), then extending a strict rule — every
+  new notion gets a link or citation at first use, book chapter/section
+  numbers where possible, direct hyperlinks for web sources — across
+  Chapters 1 through 11.
 
 ## Merged pull requests
 
@@ -80,6 +89,14 @@ As of this writing: **71 issues** (all closed) and **35 pull requests**
 | [#86](https://github.com/abderrahim-lectures/lean4-learning/pull/86) | Disambiguate "it" in Chapter 1 Section 1 |
 | [#92](https://github.com/abderrahim-lectures/lean4-learning/pull/92) | Full-book sweep for ambiguous "it" |
 | [#106](https://github.com/abderrahim-lectures/lean4-learning/pull/106) | Split 13 dense sentences into plain, simple ones |
+| [#108](https://github.com/abderrahim-lectures/lean4-learning/pull/108) | Add CONTRIBUTING.md and a project-history summary to the root README |
+| [#110](https://github.com/abderrahim-lectures/lean4-learning/pull/110) | Gloss alpha/beta at first use in Chapter 1 Section 1 |
+| [#112](https://github.com/abderrahim-lectures/lean4-learning/pull/112) | Make explicit that f : alpha -> beta is a morphism, not a functor |
+| [#114](https://github.com/abderrahim-lectures/lean4-learning/pull/114) | Rewrite the Chapter 1 Section 1 categorical Mathematical reading box |
+| [#117](https://github.com/abderrahim-lectures/lean4-learning/pull/117) | Name Nat as the initial algebra for 1 + (-), precisely |
+| [#119](https://github.com/abderrahim-lectures/lean4-learning/pull/119) | Disambiguate overloaded + in the Chapter 1 Section 1 categorical box |
+| [#121](https://github.com/abderrahim-lectures/lean4-learning/pull/121) | Link Unit/Sum to Lean documentation at first use |
+| [#130](https://github.com/abderrahim-lectures/lean4-learning/pull/130) | Extend the "every notion gets a citation" rule to Chapters 6-11 |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact

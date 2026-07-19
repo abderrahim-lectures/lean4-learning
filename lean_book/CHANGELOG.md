@@ -3,7 +3,7 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
-## Unreleased — Extend the "every notion gets a citation" rule to Ch. 6-11
+## v1.4.11 — Extend the "every notion gets a citation" rule to Ch. 6-11
 
 Broadened the citation audit beyond Chapter 1's categorical box. Found
 and fixed eight gaps: the group definition (Ch. 6) and the group-
@@ -17,7 +17,7 @@ in the same chapter. Added Dummit & Foote / Aluffi / Assem-Simson-
 Skowroński / Schiffler citations and a direct Fin doc link as
 appropriate, all sources already in the bibliography.
 
-## Unreleased — Link Unit/Sum to Lean documentation at first use
+## v1.4.11 — Link Unit/Sum to Lean documentation at first use
 
 Standing convention broadened: every new notion introduced anywhere in
 the book must link to its documentation, book, or paper reference, not
@@ -27,13 +27,13 @@ box, now link to their Mathlib4 docs pages (Init/Prelude.html#Unit,
 Init/Core.html#Sum) — anchor existence verified in the page HTML, not
 just that the URL returns 200.
 
-## Unreleased — Disambiguate overloaded + in the Ch. 1 §1 categorical box
+## v1.4.11 — Disambiguate overloaded + in the Ch. 1 §1 categorical box
 
 The box used `+` for two different things in the same passage: disjoint
 sum in the endofunctor F(X) = 1 + X, then ordinary numeric addition in
 (Nat, +, 0) a few lines later. Added an explicit disambiguating clause.
 
-## Unreleased — Name Nat as the initial algebra for 1 + (-), precisely
+## v1.4.11 — Name Nat as the initial algebra for 1 + (-), precisely
 
 Reader-caught: Chapter 1 §1's categorical box described Nat as the
 initial object of an ad-hoc category of (X, e, s) triples without
@@ -43,7 +43,7 @@ exactly nLab's own framing of a natural numbers object -- with a new
 nLab citation ("initial algebra of an endofunctor") added to both
 bibliography.md and references.bib.
 
-## Unreleased — Link nLab citations directly, add chapter specificity
+## v1.4.11 — Link nLab citations directly, add chapter specificity
 
 Standing convention going forward: web-hosted references (nLab) get the
 cited term hyperlinked directly to its exact page, not only referenced
@@ -52,14 +52,14 @@ object" in Chapter 1 §1. Also added chapter/section specificity to the
 Martin-Löf citation there ("Ch. 1, 'Judgements and their explanations'"),
 matching the specificity most other book citations already had.
 
-## Unreleased — Cite the Nat-as-initial-object construction
+## v1.4.11 — Cite the Nat-as-initial-object construction
 
 Added nLab's "natural numbers object" entry to the bibliography (both
 bibliography.md and the LaTeX-side references.bib, kept in sync this
 time) and cited it in Chapter 1 §1's categorical box and References
 list — the standard name for the construction described there.
 
-## Unreleased — Rewrite the Ch. 1 §1 categorical "Mathematical reading" box
+## v1.4.11 — Rewrite the Ch. 1 §1 categorical "Mathematical reading" box
 
 A series of reader questions (functor vs. morphism, "zero" reused as a
 generic distinguished element, "set" vs. "type" inconsistency) revealed
@@ -69,21 +69,21 @@ category, Nat-as-initial-object (a properly defined second category,
 consistently using "type" not "set"), and the distinct free-monoid
 universal property.
 
-## Unreleased — Make explicit that f : α → β is a morphism, not a functor
+## v1.4.11 — Make explicit that f : α → β is a morphism, not a functor
 
 Reader question prompted a clarity fix: Chapter 1 §1's categorical
 "Mathematical reading" box left room to misread `f : α → β` as a functor
 rather than a morphism, since `α`/`β` are types treated as objects.
 Made the objects/morphism/functor distinction explicit in the text.
 
-## Unreleased — Gloss α/β at first use in Chapter 1 §1
+## v1.4.11 — Gloss α/β at first use in Chapter 1 §1
 
 Reader-caught: the optional categorical "Mathematical reading" box in
 Chapter 1 §1 used `α`/`β` as type variables before that convention is
 explained (in §2, the next section). Added a brief gloss and forward
 link at first use.
 
-## Unreleased — Add CONTRIBUTING.md and PROJECT-HISTORY.md
+## v1.4.11 — Add CONTRIBUTING.md and PROJECT-HISTORY.md
 
 Added root-level CONTRIBUTING.md (how to report a problem or propose a
 change, and the book's prose conventions) and PROJECT-HISTORY.md (a
@@ -91,7 +91,7 @@ themed summary plus a full table of all 35 merged pull requests to
 date), and linked both from new "Contributing" and "Project history"
 sections in the root README.
 
-## Unreleased — Split 13 dense sentences into plain, simple ones
+## v1.4.11 — Split 13 dense sentences into plain, simple ones
 
 Follow-up to the ambiguity sweeps: audited the book for sentences that
 are grammatically correct and unambiguous but cram too much structure
@@ -101,7 +101,7 @@ read. Split 13 of these into 2-3 plain sentences each, across Chapters 1,
 3, 4, 6, 8, 9, 11, 12, and three appendix solutions. No content changed,
 only sentence structure.
 
-## Unreleased — Full-book sweep for ambiguous "it"
+## v1.4.11 — Full-book sweep for ambiguous "it"
 
 Follow-up to the Chapter 1 §1 "it" fix: reviewed the whole book for the
 same class of bug (a possessive noun phrase, or another plausible
@@ -112,19 +112,19 @@ referent) and fixed five more instances: a quiver/path-algebra mixup
 a this-system/Python's-tooling mixup (Ch. 5 §3). Left the thousands of
 unambiguous "it"s in the book untouched.
 
-## Unreleased — Disambiguate "it" in Chapter 1 §1
+## v1.4.11 — Disambiguate "it" in Chapter 1 §1
 
 Reader-caught: in the sentence simplified in the prior entry, "impossible
 for it" read ambiguously as referring to Lean rather than to the term
 that type-checked. Changed to "impossible for that term."
 
-## Unreleased — Simplify a wordy sentence in Chapter 1 §1
+## v1.4.11 — Simplify a wordy sentence in Chapter 1 §1
 
 Reader-requested simplification of the closing sentence of "Why this
 matters: types rule things out in advance" — tightened without changing
 the claim.
 
-## Unreleased — Fix "the calculus" used with no antecedent
+## v1.4.11 — Fix "the calculus" used with no antecedent
 
 Reader-caught: the judgment definition added to Chapter 1 §1 (PR #67/#69)
 referred to "the calculus" before any calculus had been named in the
@@ -132,7 +132,7 @@ text. Clarified that it means the underlying formal system generally,
 made concrete a few sentences later as the λ-calculus and named precisely
 as the calculus of constructions in Chapter 1 §5.
 
-## Unreleased — Fix three logic/reference errors found during review
+## v1.4.11 — Fix three logic/reference errors found during review
 
 A user-caught wording bug ("If Mathlib is Mathlib-free by design...", the
 subject should be the book, not Mathlib itself) prompted a wider pass for
