@@ -272,14 +272,13 @@ it is the identical idea, with a richer index.
 
 > **Mathematical reading (optional).** For readers who already think
 > categorically: an indexed family `B : A → Type` is exactly a functor out
-> of the discrete category on `A`, or (thinking of `A × A`-indexed
-> families as in the `Path` example above) an assignment of a
-> $\mathrm{Hom}$-set to every pair of objects in a category — a Π-type
-> over such a family is a **dependent product**, a term of $\sum_{x:A}
-> B(x)$ (Σ-type, next covered formally in
-> [§5](05-pi-sigma-and-coc.md)) is a
-> **dependent sum**, and both are literal categorical limits/colimits in
-> the appropriate indexed sense — not merely named after them by analogy.
+> of the discrete category on `A` — or, thinking of `A × A`-indexed
+> families as in the `Path` example above, an assignment of a
+> $\mathrm{Hom}$-set to every pair of objects in a category. A Π-type over
+> such a family is a **dependent product**; a term of $\sum_{x:A} B(x)$
+> (Σ-type, next covered formally in [§5](05-pi-sigma-and-coc.md)) is a
+> **dependent sum**. Both are literal categorical limits/colimits in the
+> appropriate indexed sense, not merely named after them by analogy.
 
 > Read more: [§5](05-pi-sigma-and-coc.md)
 > gives Π-types (and Σ-types) their formal typing rules, with more worked

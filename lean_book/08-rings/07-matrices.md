@@ -309,10 +309,11 @@ Two points are worth noting:
 
 **Mathematical reading.** `mat2Ring` is the ring $M_2(\mathbb{Z})$ assembled
 formally: `mat2Group`/`mat2CommGroup` verify that $(M_2(\mathbb{Z}), +)$ is
-an abelian group (all axioms hold *entrywise*, which is what `Mat2.ext`
-followed by the $\mathbb{Z}$-lemma expresses — $M_2(\mathbb{Z}) \cong
-\mathbb{Z}^4$ as additive groups), and `mat2Ring` supplies the monoid
-$(M_2(\mathbb{Z}), \times, I)$ with distributivity. Associativity of $\times$
+an abelian group, and `mat2Ring` supplies the monoid $(M_2(\mathbb{Z}),
+\times, I)$ with distributivity. All the additive-group axioms hold
+*entrywise*, which is what `Mat2.ext` followed by the $\mathbb{Z}$-lemma
+expresses: $M_2(\mathbb{Z}) \cong \mathbb{Z}^4$ as additive groups.
+Associativity of $\times$
 is the one substantial fact: $((XY)Z)_{i\ell} = \sum_{j,k} X_{ij}Y_{jk}Z_{k\ell}
 = (X(YZ))_{i\ell}$, whose per-entry form is a polynomial identity over the
 commutative ring $\mathbb{Z}$, so `ring` can close it. The construction

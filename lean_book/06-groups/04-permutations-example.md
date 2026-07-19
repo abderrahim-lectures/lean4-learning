@@ -184,9 +184,9 @@ already bundled into `Perm3` itself.
 symmetric group on three letters. It is the smallest non-abelian group
 (order $6$) and the standard first example in any course covering
 non-commutative groups. `swap01` and `cycle012` here are, respectively, a
-transposition and a 3-cycle, generating all of $S_3$ between them, exactly
+transposition and a 3-cycle. Together they generate all of $S_3$, exactly
 as in the usual presentation $S_3 = \langle r, s \mid r^3 = s^2 = e,\ srs
-= r^{-1} \rangle$ (with $r = $ `cycle012`, $s = $ `swap01`).
+= r^{-1} \rangle$, with $r = $ `cycle012` and $s = $ `swap01`.
 
 **Mathlib equivalent.** All of `Perm3`/`Perm3.comp`/`Perm3.ext`/
 `perm3Group` above exists to build one thing: "the group of bijections of a

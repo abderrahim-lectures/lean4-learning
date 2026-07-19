@@ -58,9 +58,9 @@ is regarded as "a proof" or "a computation."
 > Read more: if "propositional logic" or "natural deduction" above are not
 > already familiar, [the next section](02-logic-recap.md) recaps standard
 > logic from scratch, with no Lean involved, before this correspondence
-> gets applied to it. For the correspondence made fully precise — extending
-> it all the way down to the untyped λ-calculus underneath both proofs and
-> ordinary functions — see [Chapter 1 §4](../01-basics/05-pi-sigma-and-coc.md);
+> gets applied to it. [Chapter 1 §4](../01-basics/05-pi-sigma-and-coc.md)
+> makes the correspondence fully precise, extending it down to the untyped
+> λ-calculus underneath both proofs and ordinary functions.
 > [Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md)'s progress
 > and preservation theorems are the formal statement of "a proof never
 > reduces to something of the wrong type," i.e. "well-typed proofs do not

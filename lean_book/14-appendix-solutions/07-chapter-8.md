@@ -89,8 +89,8 @@ equality `h : Mat2.mul X Y = Mat2.mul Y X`. As the exercise's hint notes,
 `by decide` cannot attack `h` directly — `Mat2` has no `DecidableEq`
 instance — so `Mat2.mk.injEq` first turns `h` into a conjunction of four
 `Int` equalities, one per field. `h.1`, the first conjunct, states
-`2 = 1` (the two matrices' `a11` entries), which `Int` *does* have
-decidable equality for; `by decide` refutes it directly, and `absurd`
+`2 = 1` (the two matrices' `a11` entries). `Int` *does* have decidable
+equality for this, so `by decide` refutes it directly. `absurd` then
 combines the false hypothesis with its refutation to close the goal.
 
 ---
