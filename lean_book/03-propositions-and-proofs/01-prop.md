@@ -95,7 +95,7 @@ that are *definitionally* equal, the strictest notion of "$=$".
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Howard ([Howard1980]) — the original source of the correspondence this section is named for (circulated privately from 1969, published 1980).
+- Howard ([Howard1980]) — the original source of the correspondence this section is named for. Per Sørensen & Urzyczyn, *Lectures on the Curry-Howard Isomorphism*, Studies in Logic and the Foundations of Mathematics vol. 149, Elsevier, 2006 (a secondary source corroborating this history, not Howard's paper itself): Howard's manuscript was "privately circulated" from 1969 and not formally published until 1980, in Curry's Festschrift; it develops the proofs-as-terms correspondence for implicational logic, extends it to the other propositional connectives, then to a term language for Heyting Arithmetic.
 - *Theorem Proving in Lean 4* ([TPIL4]), "Propositions and Proofs" — Lean's own treatment of the correspondence, matching the dictionary above.
 
 [Howard1980]: ../bibliography.md#howard1980
