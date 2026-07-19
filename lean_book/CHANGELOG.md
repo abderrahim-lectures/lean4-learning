@@ -3,6 +3,69 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## v1.4.12 — Pre-release link audit
+
+Extracted and tested all 68 external URLs cited in the book. One flagged
+in `bibliography.md` (Thompson1991's free-PDF link, `kar.kent.ac.uk`,
+failed a TLS handshake while the parent domain and control sites
+responded normally) rather than asserted broken outright, since this
+could not be independently confirmed as more than a possible host issue.
+All other URLs check out; two apparent failures (AMS, Cambridge
+University Press) turned out to be bot-blocking, not dead links.
+
+## v1.4.12 — Fix a Decidable citation mischaracterization in Ch. 12
+
+`Pierce2002` was cited as "the standard reference for `Decidable` as a
+type-theoretic notion." Checked against the actual text: Pierce's *Types
+and Programming Languages* never discusses `Decidable` in this sense.
+The correct source is Chlipala's *Certified Programming with Dependent
+Types*, §6.2 "Decidable Proposition Types" — citation corrected.
+
+## v1.4.12 — Verify Ch.3 citations against primary texts
+
+Checked Gentzen1935, Van Dalen's *Logic and Structure*, and Church's
+*The Calculi of Lambda-Conversion* against their actual text once the
+primary sources became available for checking, adding precise section
+numbers (Gentzen §II; van Dalen §2.4/§2.5/§3.8/§4.1; Church §8) in place
+of author-only citations. Enriched the Howard1980 citation with
+historical detail (private circulation from 1969, publication in
+Curry's 1980 Festschrift) corroborated via a secondary source discussing
+that paper's history.
+
+## v1.4.12 — Verify Ch.5 citations; fix two mischaracterizations
+
+Checked every citation in `05-rigor-check/`. Found and fixed two
+mischaracterizations: `Girard1971` was credited with "Girard's paradox"
+(the inconsistency of `Type : Type`), but that result is actually from
+Girard's 1972 doctoral thesis, a different, later work; and `Pierce2002`
+was cited as "Ch. 9-11" for STLC/progress/preservation, but that content
+is actually in Ch. 8 §8.3 and Ch. 9 §9.2-9.3 — Ch. 11 covers unrelated
+material (pairs/records/sums). Added precise TPIL4 section numbers
+(§2.2 "Types as objects") for the universe-hierarchy citations.
+
+## v1.4.12 — Verify Ch.1/Ch.2/Ch.11 citations; fix four mischaracterizations
+
+A full citation audit of Chapters 1, 2, and 11, checking every external
+citation against the actual cited text rather than trusting author/book
+names alone. Found and fixed four mischaracterizations: `CoquandHuet1988`
+was credited with defining the full Calculus of Inductive Constructions,
+but the 1988 paper only sketches one ad hoc extension (CIC proper is a
+later 1990 paper); `MartinLof1984` was cited with a wrong chapter number
+and Lean's colon notation presented as if verbatim (the source uses
+unnumbered sections and set-membership notation, `a ∈ A`); `Chlipala2013`
+was cited for the wrong chapter (Ch. 2-3 instead of §8.1/§9.1, where the
+length-indexed-vector example actually appears); `Pierce2002` was
+mischaracterized as covering dependently-typed eliminators, which *Types
+and Programming Languages* explicitly does not. Also fixed the book's
+`[TPIL4]` bibliography links, which used a stale pre-site-rewrite URL
+scheme and 404'd, and replaced the book's three remaining nLab wiki
+links (initial object, initial algebra, forgetful functor, product) with
+citations to Mac Lane's *Categories for the Working Mathematician*,
+Jacobs' *Categorical Logic and Type Theory*, and Pareigis' *Categories
+and Functors*, verified against their actual text. Added precise
+Definition/Section numbers to the quiver/path/path-algebra citations in
+Chapter 11 that previously named only an author.
+
 ## v1.4.11 — Extend the "every notion gets a citation" rule to Ch. 6-11
 
 Broadened the citation audit beyond Chapter 1's categorical box. Found
