@@ -1,5 +1,7 @@
 # lean4-learning
 
+<img src="lean_book/images/cover.png" alt="Lean for Working Algebraists — book cover" width="280" align="right">
+
 ## [📖 Read the book (PDF)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest/download/lean-for-working-algebraists.pdf)
 
 [View in browser (no download)](https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fabderrahim-lectures%2Flean4-learning%2Freleases%2Flatest%2Fdownload%2Flean-for-working-algebraists.pdf&embedded=true) | [Notice](NOTICE.md) | [Reproducing this book](REPRODUCING.md)
