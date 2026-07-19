@@ -1,15 +1,16 @@
-# Rendered/compiled output -- the LaTeX source under latex/ is committed,
-# not any PDF compiled from it.
-*.pdf
-*.html
+# Jekyll's own build output -- everything under _layouts/ and _includes/
+# is real, hand-written site source and must stay tracked.
 _site/
+.jekyll-cache/
+.jekyll-metadata
+
+# LaTeX build artifacts (this branch also carries a copy of latex/ from
+# the book repo; only .tex/.bib source is meant to be committed).
+*.pdf
 *.aux
 *.log
 *.out
 *.toc
-
-# LaTeX build artifacts from compiling lean_book/latex/ (biblatex/biber and
-# the standalone tikz-cd diagram smoke-tests) -- only .tex source is committed.
 *.bbl
 *.bcf
 *.blg
