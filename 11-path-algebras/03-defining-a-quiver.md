@@ -7,9 +7,11 @@
 A quiver is encoded as a `structure`, parameterized by a type of vertices and
 a type of arrows:
 
-<p><a href="https://live.lean-lang.org/#code=structure%20Quiver%20%28V%20%3A%20Type%29%20%28A%20%3A%20Type%29%20where%0A%20%20source%20%3A%20A%20%E2%86%92%20V%0A%20%20target%20%3A%20A%20%E2%86%92%20V" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=structure%20Quiver%20%28V%20%3A%20Type%29%20%28A%20%3A%20Type%29%20where%0A%20%20source%20%3A%20A%20%E2%86%92%20V%0A%20%20target%20%3A%20A%20%E2%86%92%20V" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+structure Quiver (V : Type) (A : Type) where
+  source : A → V
+  target : A → V
+```
 
 This is a direct transcription: `V` is the type of vertices, `A` the type of
 arrows, and `source`/`target` are exactly $s$ and $t$ above.
@@ -26,9 +28,19 @@ is built.
 The three vertices are encoded as `Fin 3` (values `0, 1, 2`, standing for
 vertices `1, 2, 3`) and the two nontrivial arrows as an inductive type:
 
-<p><a href="https://live.lean-lang.org/#code=structure%20Quiver%20%28V%20%3A%20Type%29%20%28A%20%3A%20Type%29%20where%0A%20%20source%20%3A%20A%20%E2%86%92%20V%0A%20%20target%20%3A%20A%20%E2%86%92%20V%0A%0Ainductive%20ExampleArrow%20where%0A%20%20%7C%20alpha%20%3A%20ExampleArrow%20%20%20--%200%20%E2%86%92%201%0A%20%20%7C%20beta%20%3A%20ExampleArrow%20%20%20%20%20--%201%20%E2%86%92%202%0A%0Adef%20exampleQuiver%20%3A%20Quiver%20%28Fin%203%29%20ExampleArrow%20where%0A%20%20source%20%3A%3D%20fun%20a%20%3D%3E%20match%20a%20with%0A%20%20%20%20%7C%20ExampleArrow.alpha%20%3D%3E%200%0A%20%20%20%20%7C%20ExampleArrow.beta%20%3D%3E%201%0A%20%20target%20%3A%3D%20fun%20a%20%3D%3E%20match%20a%20with%0A%20%20%20%20%7C%20ExampleArrow.alpha%20%3D%3E%201%0A%20%20%20%20%7C%20ExampleArrow.beta%20%3D%3E%202" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=structure%20Quiver%20%28V%20%3A%20Type%29%20%28A%20%3A%20Type%29%20where%0A%20%20source%20%3A%20A%20%E2%86%92%20V%0A%20%20target%20%3A%20A%20%E2%86%92%20V%0A%0Ainductive%20ExampleArrow%20where%0A%20%20%7C%20alpha%20%3A%20ExampleArrow%20%20%20--%200%20%E2%86%92%201%0A%20%20%7C%20beta%20%3A%20ExampleArrow%20%20%20%20%20--%201%20%E2%86%92%202%0A%0Adef%20exampleQuiver%20%3A%20Quiver%20%28Fin%203%29%20ExampleArrow%20where%0A%20%20source%20%3A%3D%20fun%20a%20%3D%3E%20match%20a%20with%0A%20%20%20%20%7C%20ExampleArrow.alpha%20%3D%3E%200%0A%20%20%20%20%7C%20ExampleArrow.beta%20%3D%3E%201%0A%20%20target%20%3A%3D%20fun%20a%20%3D%3E%20match%20a%20with%0A%20%20%20%20%7C%20ExampleArrow.alpha%20%3D%3E%201%0A%20%20%20%20%7C%20ExampleArrow.beta%20%3D%3E%202" title="Lean playground" loading="lazy" style="width:100%;height:269px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+inductive ExampleArrow where
+  | alpha : ExampleArrow   -- 0 → 1
+  | beta : ExampleArrow     -- 1 → 2
+
+def exampleQuiver : Quiver (Fin 3) ExampleArrow where
+  source := fun a => match a with
+    | ExampleArrow.alpha => 0
+    | ExampleArrow.beta => 1
+  target := fun a => match a with
+    | ExampleArrow.alpha => 1
+    | ExampleArrow.beta => 2
+```
 
 `inductive ExampleArrow where | alpha : ExampleArrow | beta : ExampleArrow`
 defines a brand-new type with exactly two values, `alpha` and `beta`. This
@@ -64,9 +76,13 @@ plus separate `source`/`target : A → V` functions, it bakes the endpoints
 into the arrow's *type* directly, `Hom : V → V → Sort*` (with notation
 `a ⟶ b`). Thus an arrow from `i` to `j` simply *has type* `i ⟶ j`:
 
-<p><a href="https://live.lean-lang.org/#code=import%20Mathlib%0A%0Ainductive%20MyArrow%20%3A%20Fin%203%20%E2%86%92%20Fin%203%20%E2%86%92%20Type%0A%20%20%7C%20alpha%20%3A%20MyArrow%200%201%0A%20%20%7C%20beta%20%3A%20MyArrow%201%202%0A%0Ainstance%20%3A%20Quiver%20%28Fin%203%29%20%3A%3D%20%E2%9F%A8MyArrow%E2%9F%A9" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=import%20Mathlib%0A%0Ainductive%20MyArrow%20%3A%20Fin%203%20%E2%86%92%20Fin%203%20%E2%86%92%20Type%0A%20%20%7C%20alpha%20%3A%20MyArrow%200%201%0A%20%20%7C%20beta%20%3A%20MyArrow%201%202%0A%0Ainstance%20%3A%20Quiver%20%28Fin%203%29%20%3A%3D%20%E2%9F%A8MyArrow%E2%9F%A9" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+inductive MyArrow : Fin 3 → Fin 3 → Type
+  | alpha : MyArrow 0 1
+  | beta : MyArrow 1 2
+
+instance : Quiver (Fin 3) := ⟨MyArrow⟩
+```
 
 `MyArrow 0 1` has exactly the one constructor `alpha`. `MyArrow i j` for
 any other pair `(i, j)`, in particular the "backwards" or "no such arrow"

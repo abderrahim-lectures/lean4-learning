@@ -4,9 +4,14 @@
 
 ---
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch02Structures%0A%0Astructure%20Point%20where%0A%20%20x%20%3A%20Nat%0A%20%20y%20%3A%20Nat%0A%0Adef%20origin%20%3A%20Point%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%20%7D%0A%0A%23eval%20origin.x%20%20%20%20%20%20%20%20--%200%0A%0Adef%20shift%20%28p%20%3A%20Point%29%20%28dx%20dy%20%3A%20Nat%29%20%3A%20Point%20%3A%3D%0A%20%20%7B%20x%20%3A%3D%20p.x%20%2B%20dx%2C%20y%20%3A%3D%20p.y%20%2B%20dy%20%7D%0A%0A%23eval%20%28shift%20origin%203%204%29.y%20%20%20--%204%0A%0Astructure%20Pair%20%28%CE%B1%20%CE%B2%20%3A%20Type%29%20where%0A%20%20fst%20%3A%20%CE%B1%0A%20%20snd%20%3A%20%CE%B2%0A%0Adef%20p%20%3A%20Pair%20Nat%20String%20%3A%3D%20%7B%20fst%20%3A%3D%201%2C%20snd%20%3A%3D%20%22one%22%20%7D%0A%0A%23eval%20p.fst%20%20%20%20--%201%0A%23eval%20p.snd%20%20%20%20%20--%20%22one%22%0A%0Astructure%20Point3D%20extends%20Point%20where%0A%20%20z%20%3A%20Nat%0A%0Adef%20origin3D%20%3A%20Point3D%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%2C%20z%20%3A%3D%200%20%7D%0A%0A%23eval%20origin3D.x" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch02Structures%0A%0Astructure%20Point%20where%0A%20%20x%20%3A%20Nat%0A%20%20y%20%3A%20Nat%0A%0Adef%20origin%20%3A%20Point%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%20%7D%0A%0A%23eval%20origin.x%20%20%20%20%20%20%20%20--%200%0A%0Adef%20shift%20%28p%20%3A%20Point%29%20%28dx%20dy%20%3A%20Nat%29%20%3A%20Point%20%3A%3D%0A%20%20%7B%20x%20%3A%3D%20p.x%20%2B%20dx%2C%20y%20%3A%3D%20p.y%20%2B%20dy%20%7D%0A%0A%23eval%20%28shift%20origin%203%204%29.y%20%20%20--%204%0A%0Astructure%20Pair%20%28%CE%B1%20%CE%B2%20%3A%20Type%29%20where%0A%20%20fst%20%3A%20%CE%B1%0A%20%20snd%20%3A%20%CE%B2%0A%0Adef%20p%20%3A%20Pair%20Nat%20String%20%3A%3D%20%7B%20fst%20%3A%3D%201%2C%20snd%20%3A%3D%20%22one%22%20%7D%0A%0A%23eval%20p.fst%20%20%20%20--%201%0A%23eval%20p.snd%20%20%20%20%20--%20%22one%22%0A%0Astructure%20Point3D%20extends%20Point%20where%0A%20%20z%20%3A%20Nat%0A%0Adef%20origin3D%20%3A%20Point3D%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%2C%20z%20%3A%3D%200%20%7D%0A%0A%23eval%20origin3D.x" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+structure Point3D extends Point where
+  z : Nat
+
+def origin3D : Point3D := { x := 0, y := 0, z := 0 }
+
+#eval origin3D.x   -- inherited field, 0
+```
 
 `extends` is used later: a `CommGroup` (commutative group) will `extend`
 `Group` with one extra axiom (commutativity), instead of repeating all the

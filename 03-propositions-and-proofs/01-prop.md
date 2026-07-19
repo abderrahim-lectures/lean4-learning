@@ -66,9 +66,11 @@ is regarded as "a proof" or "a computation."
 > reduces to something of the wrong type," i.e. "well-typed proofs do not
 > go wrong."
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch03Propositions%0A%0A%23check%20%282%20%2B%202%20%3D%204%29%20%20%20%20%20--%202%20%2B%202%20%3D%204%20%3A%20Prop%0A%0Aexample%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch03Propositions%0A%0A%23check%20%282%20%2B%202%20%3D%204%29%20%20%20%20%20--%202%20%2B%202%20%3D%204%20%3A%20Prop%0A%0Aexample%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+#check (2 + 2 = 4)     -- 2 + 2 = 4 : Prop
+
+example : 2 + 2 = 4 := rfl
+```
 
 [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) is the proof "both sides compute to the same thing" (**refl**exivity).
 `example` states a proposition and immediately supplies a proof (an

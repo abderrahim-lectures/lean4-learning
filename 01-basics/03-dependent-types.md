@@ -53,9 +53,10 @@ Here is the smallest genuine example of a dependent type, and it is
 already sitting in Lean's core library. [`Fin n`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Fin)
 is the type of natural numbers *strictly less than* `n`:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23check%20Fin%203%20%20%20--%20Fin%203%20%3A%20Type%0A%23check%20Fin%205%20%20%20--%20Fin%205%20%3A%20Type" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23check%20Fin%203%20%20%20--%20Fin%203%20%3A%20Type%0A%23check%20Fin%205%20%20%20--%20Fin%205%20%3A%20Type" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+#check Fin 3   -- Fin 3 : Type
+#check Fin 5   -- Fin 5 : Type
+```
 
 `Fin` itself is not one type. It is a **recipe that produces a type once
 handed a number**: `Fin 3` and `Fin 5` are both genuine types, but they are
@@ -72,9 +73,13 @@ example of one.
 
 The construction of `Fin` can be inspected directly:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23print%20Fin%0A--%20structure%20Fin%20%28n%20%3A%20Nat%29%20%3A%20Type%0A--%20fields%3A%0A--%20%20%20Fin.val%20%20%3A%20Nat%0A--%20%20%20Fin.isLt%20%3A%20val%20%3C%20n" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23print%20Fin%0A--%20structure%20Fin%20%28n%20%3A%20Nat%29%20%3A%20Type%0A--%20fields%3A%0A--%20%20%20Fin.val%20%20%3A%20Nat%0A--%20%20%20Fin.isLt%20%3A%20val%20%3C%20n" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+#print Fin
+-- structure Fin (n : Nat) : Type
+-- fields:
+--   Fin.val  : Nat
+--   Fin.isLt : val < n
+```
 
 So a term of `Fin n` is literally a pair: a `Nat` value, plus a *proof*
 that the value is below `n`. The proof's very statement (`val < n`)
@@ -92,9 +97,11 @@ type depends on the specific *value* of its argument, not just the
 argument's type. Define fixed-length vectors from scratch, the standard
 first example in any dependent-type-theory course:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Ainductive%20Vec%20%28%CE%B1%20%3A%20Type%29%20%3A%20Nat%20%E2%86%92%20Type%20where%0A%20%20%7C%20nil%20%20%3A%20Vec%20%CE%B1%200%0A%20%20%7C%20cons%20%3A%20%CE%B1%20%E2%86%92%20Vec%20%CE%B1%20n%20%E2%86%92%20Vec%20%CE%B1%20%28n%20%2B%201%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Ainductive%20Vec%20%28%CE%B1%20%3A%20Type%29%20%3A%20Nat%20%E2%86%92%20Type%20where%0A%20%20%7C%20nil%20%20%3A%20Vec%20%CE%B1%200%0A%20%20%7C%20cons%20%3A%20%CE%B1%20%E2%86%92%20Vec%20%CE%B1%20n%20%E2%86%92%20Vec%20%CE%B1%20%28n%20%2B%201%29" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+inductive Vec (α : Type) : Nat → Type where
+  | nil  : Vec α 0
+  | cons : α → Vec α n → Vec α (n + 1)
+```
 
 Read this exactly like `Nat`'s two-constructor definition from the
 previous section, with one new ingredient: `Vec α` is not a single type,
@@ -109,9 +116,17 @@ than whatever it started with."
 Here is a function that *builds* one of these, and its type is the
 dependent-function payoff:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20Vec.replicate%20%28a%20%3A%20%CE%B1%29%20%3A%20%28n%20%3A%20Nat%29%20%E2%86%92%20Vec%20%CE%B1%20n%0A%20%20%7C%200%20%20%20%20%20%3D%3E%20Vec.nil%0A%20%20%7C%20n%20%2B%201%20%3D%3E%20Vec.cons%20a%20%28Vec.replicate%20a%20n%29%0A%0A%23check%20%40Vec.replicate%0A--%20%40Vec.replicate%20%3A%20%7B%CE%B1%20%3A%20Type%7D%20%E2%86%92%20%CE%B1%20%E2%86%92%20%28n%20%3A%20Nat%29%20%E2%86%92%20Vec%20%CE%B1%20n%0A%0A%23eval%20%28Vec.replicate%207%203%20%3A%20Vec%20Nat%203%29%0A--%20Vec.cons%207%20%28Vec.cons%207%20%28Vec.cons%207%20Vec.nil%29%29" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20Vec.replicate%20%28a%20%3A%20%CE%B1%29%20%3A%20%28n%20%3A%20Nat%29%20%E2%86%92%20Vec%20%CE%B1%20n%0A%20%20%7C%200%20%20%20%20%20%3D%3E%20Vec.nil%0A%20%20%7C%20n%20%2B%201%20%3D%3E%20Vec.cons%20a%20%28Vec.replicate%20a%20n%29%0A%0A%23check%20%40Vec.replicate%0A--%20%40Vec.replicate%20%3A%20%7B%CE%B1%20%3A%20Type%7D%20%E2%86%92%20%CE%B1%20%E2%86%92%20%28n%20%3A%20Nat%29%20%E2%86%92%20Vec%20%CE%B1%20n%0A%0A%23eval%20%28Vec.replicate%207%203%20%3A%20Vec%20Nat%203%29%0A--%20Vec.cons%207%20%28Vec.cons%207%20%28Vec.cons%207%20Vec.nil%29%29" title="Lean playground" loading="lazy" style="width:100%;height:231px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+def Vec.replicate (a : α) : (n : Nat) → Vec α n
+  | 0     => Vec.nil
+  | n + 1 => Vec.cons a (Vec.replicate a n)
+
+#check @Vec.replicate
+-- @Vec.replicate : {α : Type} → α → (n : Nat) → Vec α n
+
+#eval (Vec.replicate 7 3 : Vec Nat 3)
+-- Vec.cons 7 (Vec.cons 7 (Vec.cons 7 Vec.nil))
+```
 
 Look closely at the type `(n : Nat) → Vec α n`. The `n` that appears on
 the *left* of the arrow (the argument) reappears inside the type on the
@@ -131,18 +146,19 @@ Lean can rule out a whole class of mistakes *before running anything at
 all*. Define a function that reads a vector's first element, which only
 makes sense for a *non-empty* vector:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20Vec.head%20%3A%20Vec%20%CE%B1%20%28n%20%2B%201%29%20%E2%86%92%20%CE%B1%0A%20%20%7C%20Vec.cons%20a%20_%20%3D%3E%20a" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20Vec.head%20%3A%20Vec%20%CE%B1%20%28n%20%2B%201%29%20%E2%86%92%20%CE%B1%0A%20%20%7C%20Vec.cons%20a%20_%20%3D%3E%20a" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+def Vec.head : Vec α (n + 1) → α
+  | Vec.cons a _ => a
+```
 
 The argument type `Vec α (n + 1)` says, in the type itself, "this only
 accepts vectors of length *at least one*" — there is no separate runtime
 check for emptiness anywhere in this definition, because none is needed.
 Calling it on an empty vector is rejected before the expression ever runs:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23check%20Vec.head%20Vec.nil" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23check%20Vec.head%20Vec.nil" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+#check Vec.head Vec.nil
+```
 
 ```
 error: Application type mismatch: The argument
@@ -167,17 +183,22 @@ that, for free, using only the machinery already on the table.
 `dot`, rewritten for `Vec` instead of Python's `list`, with both
 arguments required to share the *same* length `n`:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20Vec.dot%20%3A%20Vec%20Nat%20n%20%E2%86%92%20Vec%20Nat%20n%20%E2%86%92%20Nat%0A%20%20%7C%20Vec.nil%2C%20Vec.nil%20%3D%3E%200%0A%20%20%7C%20Vec.cons%20x%20xs%2C%20Vec.cons%20y%20ys%20%3D%3E%20x%20%2A%20y%20%2B%20Vec.dot%20xs%20ys" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20Vec.dot%20%3A%20Vec%20Nat%20n%20%E2%86%92%20Vec%20Nat%20n%20%E2%86%92%20Nat%0A%20%20%7C%20Vec.nil%2C%20Vec.nil%20%3D%3E%200%0A%20%20%7C%20Vec.cons%20x%20xs%2C%20Vec.cons%20y%20ys%20%3D%3E%20x%20%2A%20y%20%2B%20Vec.dot%20xs%20ys" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+def Vec.dot : Vec Nat n → Vec Nat n → Nat
+  | Vec.nil, Vec.nil => 0
+  | Vec.cons x xs, Vec.cons y ys => x * y + Vec.dot xs ys
+```
 
 The signature `Vec Nat n → Vec Nat n → Nat` uses the *same* `n` for both
 arguments — that is not a naming coincidence, it is the whole point. Try
 to reproduce Python's silent bug:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20v3%20%3A%20Vec%20Nat%203%20%3A%3D%20Vec.cons%201%20%28Vec.cons%202%20%28Vec.cons%203%20Vec.nil%29%29%0Adef%20v2%20%3A%20Vec%20Nat%202%20%3A%3D%20Vec.cons%204%20%28Vec.cons%205%20Vec.nil%29%0A%0A%23check%20Vec.dot%20v3%20v2" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20v3%20%3A%20Vec%20Nat%203%20%3A%3D%20Vec.cons%201%20%28Vec.cons%202%20%28Vec.cons%203%20Vec.nil%29%29%0Adef%20v2%20%3A%20Vec%20Nat%202%20%3A%3D%20Vec.cons%204%20%28Vec.cons%205%20Vec.nil%29%0A%0A%23check%20Vec.dot%20v3%20v2" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+def v3 : Vec Nat 3 := Vec.cons 1 (Vec.cons 2 (Vec.cons 3 Vec.nil))
+def v2 : Vec Nat 2 := Vec.cons 4 (Vec.cons 5 Vec.nil)
+
+#check Vec.dot v3 v2
+```
 
 ```
 error: Application type mismatch: The argument

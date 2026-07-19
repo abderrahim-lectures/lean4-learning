@@ -58,9 +58,9 @@ one extra rule: **proof irrelevance**. Any two terms of the same type
 `P : Prop` are considered definitionally equal, since a proof carries no
 computational content beyond the bare fact that *a* proof exists:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Atheorem%20two_proofs%20%28h1%20h2%20%3A%202%20%2B%202%20%3D%204%29%20%3A%20h1%20%3D%20h2%20%3A%3D%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Atheorem%20two_proofs%20%28h1%20h2%20%3A%202%20%2B%202%20%3D%204%29%20%3A%20h1%20%3D%20h2%20%3A%3D%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+theorem two_proofs (h1 h2 : 2 + 2 = 4) : h1 = h2 := rfl
+```
 
 `rfl` succeeds no matter *how* `h1` and `h2` were each proved — by `rfl`
 directly, by a long tactic block, by an entirely different chain of
@@ -121,9 +121,13 @@ rather than to $A \times B$ — which is also why Π is never confused with
 This shape has already appeared, without the name: §3's `Fin n` is, under
 the hood, exactly this pair —
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23print%20Fin%0A--%20structure%20Fin%20%28n%20%3A%20Nat%29%20%3A%20Type%0A--%20fields%3A%0A--%20%20%20Fin.val%20%20%3A%20Nat%0A--%20%20%20Fin.isLt%20%3A%20val%20%3C%20n" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23print%20Fin%0A--%20structure%20Fin%20%28n%20%3A%20Nat%29%20%3A%20Type%0A--%20fields%3A%0A--%20%20%20Fin.val%20%20%3A%20Nat%0A--%20%20%20Fin.isLt%20%3A%20val%20%3C%20n" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+#print Fin
+-- structure Fin (n : Nat) : Type
+-- fields:
+--   Fin.val  : Nat
+--   Fin.isLt : val < n
+```
 
 a `Nat` value `val`, paired with a proof `isLt` whose *statement*
 (`val < n`) mentions `val` itself. That is $\Sigma$, concretely: the
@@ -131,9 +135,11 @@ second field's type depends on the value of the first. Here is the
 general construct, spelled out with Lean's actual `Sigma`, pairing a
 bound with an actual number below it:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20mySigma%20%3A%20%CE%A3%20n%20%3A%20Nat%2C%20Fin%20n%20%3A%3D%20%E2%9F%A83%2C%20%E2%9F%A82%2C%20by%20decide%E2%9F%A9%E2%9F%A9%0A%23eval%20mySigma.fst%20%20%20%20%20%20%20%20--%203%0A%23eval%20mySigma.snd.val%20%20%20%20--%202" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20mySigma%20%3A%20%CE%A3%20n%20%3A%20Nat%2C%20Fin%20n%20%3A%3D%20%E2%9F%A83%2C%20%E2%9F%A82%2C%20by%20decide%E2%9F%A9%E2%9F%A9%0A%23eval%20mySigma.fst%20%20%20%20%20%20%20%20--%203%0A%23eval%20mySigma.snd.val%20%20%20%20--%202" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+def mySigma : Σ n : Nat, Fin n := ⟨3, ⟨2, by decide⟩⟩
+#eval mySigma.fst        -- 3
+#eval mySigma.snd.val    -- 2
+```
 
 `mySigma.fst` extracts the first component with no fuss at all — it is
 ordinary data, just like extracting `.1` from an ordinary pair. This
@@ -156,9 +162,9 @@ the role of `B`. Lean's actual `Exists` is, however, *not literally* the
 proof irrelevance (above), that means the witness cannot be *extracted*
 from an `∃`-proof computationally:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20bad%20%28h%20%3A%20%E2%88%83%20n%20%3A%20Nat%2C%20n%20%3E%200%29%20%3A%20Nat%20%3A%3D%20h.1" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0Adef%20bad%20%28h%20%3A%20%E2%88%83%20n%20%3A%20Nat%2C%20n%20%3E%200%29%20%3A%20Nat%20%3A%3D%20h.1" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+def bad (h : ∃ n : Nat, n > 0) : Nat := h.1
+```
 
 ```
 error(lean.projNonPropFromProp): Invalid projection: Cannot project a
@@ -194,9 +200,13 @@ For an inductive type like `Nat`, with constructors `zero : Nat` and
 makes "define a function, or prove a statement, by giving one case per
 constructor" precise:
 
-<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23check%20%40Nat.rec%0A--%20%7Bmotive%20%3A%20Nat%20%E2%86%92%20Sort%20u%7D%0A--%20%20%20%E2%86%92%20motive%20Nat.zero%0A--%20%20%20%E2%86%92%20%28%28n%20%3A%20Nat%29%20%E2%86%92%20motive%20n%20%E2%86%92%20motive%20n.succ%29%0A--%20%20%20%E2%86%92%20%28t%20%3A%20Nat%29%20%E2%86%92%20motive%20t" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x%0A%0A%23eval%20double%207%20%20%20%20%20%20%20%20--%2014%0A%23eval%20average%204%2010%20%20%20%20%20--%207%0A%23eval%20identity%205%20%20%20%20%20%20%20%20--%205%0A%23eval%20identity%20%22hi%22%20%20%20%20%20%20--%20%22hi%22%0A%0Aend%20Ch01Basics%0A%0A%23check%20%40Nat.rec%0A--%20%7Bmotive%20%3A%20Nat%20%E2%86%92%20Sort%20u%7D%0A--%20%20%20%E2%86%92%20motive%20Nat.zero%0A--%20%20%20%E2%86%92%20%28%28n%20%3A%20Nat%29%20%E2%86%92%20motive%20n%20%E2%86%92%20motive%20n.succ%29%0A--%20%20%20%E2%86%92%20%28t%20%3A%20Nat%29%20%E2%86%92%20motive%20t" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
-</iframe>
+```lean
+#check @Nat.rec
+-- {motive : Nat → Sort u}
+--   → motive Nat.zero
+--   → ((n : Nat) → motive n → motive n.succ)
+--   → (t : Nat) → motive t
+```
 
 Read `Nat.rec`'s own type as a Π-type over a **motive**
 `motive : Nat → Sort u` (§4's "motive," spelled out in full): supply a
