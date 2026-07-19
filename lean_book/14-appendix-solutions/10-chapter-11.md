@@ -142,14 +142,14 @@ itself (§4–§5): `nil` contributes `0`, and each `cons` adds one to the
 length of the shorter path it extends. The proof of `append_length`
 mirrors `Path.append`'s own recursion case for case, exactly as the
 project asked, but with one genuine surprise if `rfl` is tried first in
-either case: it fails. `Path` is *indexed* by both endpoints, and Lean
-compiles a match on an indexed family like this so that its defining
+either case: it fails. `Path` is *indexed* by both endpoints. Because of
+this, Lean compiles a match on an indexed family so that its defining
 equations reduce only through their auto-generated equation lemmas, not
 through plain iota-reduction, once an abstract path (`p`, `q'`) is
-involved — concrete, fully closed paths like `pathAlpha` still reduce
-fine under `#eval`, which is why those three checks above work directly,
-but the *general*, universally-quantified theorem does not close by
-`rfl`. `simp only [Path.append, Path.length]` names exactly the two
+involved. Concrete, fully closed paths like `pathAlpha` still reduce fine
+under `#eval` — that is why the three checks above work directly. But the
+*general*, universally-quantified theorem does not close by `rfl`.
+`simp only [Path.append, Path.length]` names exactly the two
 definitions being unfolded and nothing else, so it plays the same explicit
 role a `rw` would if these equations were reachable that way — it is not
 standing in for an unknown pile of simp lemmas, only for the two named
