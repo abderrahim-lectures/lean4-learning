@@ -1,4 +1,5 @@
 title: "Lean for Working Algebraists"
+author: "Abderrahim Adrabi"
 description: >-
   A Lean 4 introduction for mathematicians: build groups, rings, modules,
   and quiver path algebras from scratch, no programming background assumed.
