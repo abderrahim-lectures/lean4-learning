@@ -12,7 +12,7 @@ For the reader-facing summary of what changed in each release, see
 
 ## Summary
 
-As of this writing: **96 issues** (all closed) and **54 pull requests**
+As of this writing: **96 issues** (all closed) and **58 pull requests**
 (all merged), covering:
 
 - **Building out the book's content** — widening the audience beyond a
@@ -121,6 +121,10 @@ As of this writing: **96 issues** (all closed) and **54 pull requests**
 | [#148](https://github.com/abderrahim-lectures/lean4-learning/pull/148) | Ch.3: verify Gentzen/VanDalen citations with newly added sources |
 | [#149](https://github.com/abderrahim-lectures/lean4-learning/pull/149) | Ch.13: verify Church1941 citation |
 | [#150](https://github.com/abderrahim-lectures/lean4-learning/pull/150) | Pre-release link audit: flag possibly-dead Thompson1991 URL |
+| [#151](https://github.com/abderrahim-lectures/lean4-learning/pull/151) | Bump to v1.4.12 |
+| [#152](https://github.com/abderrahim-lectures/lean4-learning/pull/152) | Restore PR #150 content lost in a history rewrite |
+| [#153](https://github.com/abderrahim-lectures/lean4-learning/pull/153) | Sync latex/references.bib with bibliography.md |
+| [#154](https://github.com/abderrahim-lectures/lean4-learning/pull/154) | Replace proprietary fonts with free, portable equivalents |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact

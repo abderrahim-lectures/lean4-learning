@@ -3,6 +3,22 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## v1.4.13 — Replace proprietary fonts with free, portable equivalents
+
+`preamble.tex` required Consolas (monospace) and Palatino Linotype
+(serif), both proprietary Microsoft fonts. On any machine without them
+installed, `fontspec` silently fell back to `nullfont` for text using
+those families — every code listing rendered as invisible/missing
+glyphs — and xelatex eventually crashed trying a legacy bitmap-font
+fallback for Consolas specifically. Replaced with DejaVu Sans Mono and
+TeX Gyre Pagella (a metric-compatible Palatino clone), both free and
+bundled with any standard TeX Live install. Verified with a from-
+scratch rebuild: zero missing-character warnings and zero errors
+across all three xelatex passes, versus 100+ errors and a crash
+before. Also synced `latex/references.bib` (a separate bibliography
+database from `bibliography.md`, kept manually in sync) with this
+session's earlier citation fixes — it had fallen out of sync.
+
 ## v1.4.12 — Pre-release link audit
 
 Extracted and tested all 68 external URLs cited in the book. One flagged
