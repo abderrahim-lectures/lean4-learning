@@ -3,6 +3,14 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Add CONTRIBUTING.md and PROJECT-HISTORY.md
+
+Added root-level CONTRIBUTING.md (how to report a problem or propose a
+change, and the book's prose conventions) and PROJECT-HISTORY.md (a
+themed summary plus a full table of all 35 merged pull requests to
+date), and linked both from new "Contributing" and "Project history"
+sections in the root README.
+
 ## Unreleased — Split 13 dense sentences into plain, simple ones
 
 Follow-up to the ambiguity sweeps: audited the book for sentences that

@@ -90,3 +90,18 @@ The book uses several recurring devices, applied consistently across all
   notebook that opens directly in
   [Google Colab](https://colab.research.google.com/github/abderrahim-lectures/lean4-learning/blob/master/lean_book/python-companion/python_companion.ipynb),
   no installation required.
+
+## Contributing
+
+Found a mistake in the book, or want to propose a change? See
+[CONTRIBUTING.md](CONTRIBUTING.md) for how to report it or open a pull
+request.
+
+## Project history
+
+Every change to this repository — bug fix, new feature, or content
+revision — is tracked as its own GitHub issue, closed by the pull request
+that addresses it. See [PROJECT-HISTORY.md](PROJECT-HISTORY.md) for a
+summary of all issues and pull requests to date, and
+[lean_book/CHANGELOG.md](lean_book/CHANGELOG.md) for the reader-facing
+summary of what changed in each release.
