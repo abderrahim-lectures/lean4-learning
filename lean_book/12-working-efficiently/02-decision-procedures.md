@@ -60,9 +60,9 @@ compute, and thus must be *proved* from the axioms instead of
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Pierce ([Pierce2002]) — the standard reference for `Decidable` as a type-theoretic notion (a type witnessing that a proposition's truth value is computable), the formal counterpart of the informal definition above.
+- Chlipala ([Chlipala2013]), §6.2 "Decidable Proposition Types" — **Correction:** previously cited as Pierce2002, but TAPL does not discuss `Decidable` as a type-theoretic notion at all; §6.2 of Chlipala's *Certified Programming with Dependent Types* is the actual source for this notion (a type witnessing that a proposition's truth value is computable), the formal counterpart of the informal definition above.
 
-[Pierce2002]: ../bibliography.md#pierce2002
+[Chlipala2013]: ../bibliography.md#chlipala2013
 
 ---
 
