@@ -142,7 +142,9 @@ ways a `Nat` can ever have been built.
 
 > **Mathematical reading (optional, for readers who already know some
 > category theory).** It is useful to regard `Type` as (the objects of) a
-> category: a term `x : α` is an element of `α`, a function `f : α → β` is
+> category: writing `α`, `β` for arbitrary types (the convention this book
+> uses throughout, spelled out fully in [§2](02-def-let-implicit.md)), a
+> term `x : α` is an element of `α`, a function `f : α → β` is
 > a morphism $\alpha \to \beta$, `fun x => x` is the identity, and `∘` is
 > genuine categorical composition, with associativity and the identity
 > laws holding *definitionally* (Lean checks them automatically, at no
