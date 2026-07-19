@@ -80,3 +80,13 @@ example : (2 : Int) (*$\in$*) evenSubmodule' := Submodule.subset_span rfl
 \end{lstlisting}
 
 \texttt{Submodule.span R s} is, by construction, the smallest submodule containing \texttt{s}. \href{https://loogle.lean-lang.org/?q=Submodule.subset_span}{\texttt{Submodule.subset\_\allowbreak{}span}} is the one fact that does all the work here: ``the generators are always members'', proved once, generically, instead of the book's custom \texttt{zero\_\allowbreak{}mem}/\texttt{add\_\allowbreak{}mem}/\texttt{smul\_\allowbreak{}mem} triple for this specific subset.
+
+\subsection{References}\label{sec:10-modules:04-submodules:3}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  Dummit and Foote (\cite{DummitFoote2003}) --- the standard classical (non-Lean) reference for submodules and their axioms.
+\end{itemize}

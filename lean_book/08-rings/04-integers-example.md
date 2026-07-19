@@ -51,7 +51,9 @@ already-known facts are assembled into the `Ring` bundle.
 an object of $\mathbf{Ring}$ — in fact the
 [*initial* object](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline),
 since there is a
-unique ring homomorphism $\mathbb{Z} \to R$ into any ring. First
+unique **ring homomorphism** $\mathbb{Z} \to R$ into any ring — a
+function preserving $+$, $\times$, $0$, and $1$ ([DummitFoote2003]).
+First
 `intCommGroup` upgrades the additive group $(\mathbb{Z},+)$ to an abelian
 group by supplying commutativity ($a + b = b + a$); then `intRing` adds the
 multiplicative monoid $(\mathbb{Z}, \times, 1)$ and checks the distributive
@@ -76,6 +78,16 @@ example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
 [`mul_add`](https://loogle.lean-lang.org/?q=mul_add)/[`add_mul`](https://loogle.lean-lang.org/?q=add_mul) are Mathlib's names for `left_distrib`/`right_distrib`.
 They are the same laws, but stated generically over `[Ring R]` (or the weaker
 `[Distrib R]`) instead of being cited per-type as `Int.mul_add`/`Int.add_mul`.
+
+---
+
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Dummit and Foote ([DummitFoote2003]) — the standard definition of a ring homomorphism, used above.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
 ---
 

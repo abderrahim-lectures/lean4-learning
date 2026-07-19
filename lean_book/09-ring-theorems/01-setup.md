@@ -30,4 +30,14 @@ the underlying additive group of $R$."
 
 ---
 
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for the two theorems this chapter formalizes ($a \cdot 0 = 0$ and the sign rule), both standard early consequences of the ring axioms.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
+
+---
+
 [← Index](00-index.md) | [Next: Theorem 1 →](02-theorem-1.md)

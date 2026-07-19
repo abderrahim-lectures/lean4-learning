@@ -183,4 +183,14 @@ def proj1' : (Int × Int) →ₗ[Int] Int := LinearMap.fst Int Int Int
 
 ---
 
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for direct sums of modules and their universal property.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
+
+---
+
 [← Linear maps](05-linear-maps.md) | [Index](00-index.md) | [Next: Exercises →](07-exercises.md)
