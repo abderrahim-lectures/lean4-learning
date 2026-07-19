@@ -157,8 +157,11 @@ ways a `Nat` can ever have been built.
 > In this language, `Nat` is the
 > [**initial algebra**](https://ncatlab.org/nlab/show/initial+algebra+of+an+endofunctor)
 > ([NLabInitialAlgebra]) for the **endofunctor** $F(X) = 1 + X$ on `Type`
-> (`1` a one-element type,
-> Lean's `Unit`; `+` disjoint sum). An $F$-algebra is a type $X$ together
+> (`1` a one-element type, Lean's
+> [`Unit`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Unit);
+> `+` disjoint sum, Lean's
+> [`Sum`](https://leanprover-community.github.io/mathlib4_docs/Init/Core.html#Sum)).
+> An $F$-algebra is a type $X$ together
 > with a map $F(X) \to X$, i.e. a map $(1 + X) \to X$ — equivalently, by
 > the universal property of `+`, a chosen element $e : X$ (the image of
 > the `1` summand; any element — nothing ties it to `Nat`'s own `zero`)
