@@ -22,9 +22,14 @@ the **calculus**, from the outside — not a proposition proved *inside* it.
 (For Lean, this calculus is made concrete a few sentences below as the
 $\lambda$-calculus, and named precisely as the **calculus of
 constructions** in [Chapter 1 §5](05-pi-sigma-and-coc.md). Nothing here
-depends on that name yet.) Following Martin-Löf ([MartinLof1984], Ch. 1,
-"Judgements and their explanations"), the judgment used here has
-the form $e : \tau$, read "$e$ is a term of type $\tau$." For example,
+depends on that name yet.) Following Martin-Löf ([MartinLof1984],
+"Explanations of the forms of judgement" — the source is organized into
+unnumbered sections, not a numbered "Ch. 1"), the judgment used here has
+the form $e : \tau$, read "$e$ is a term of type $\tau$" — adapted to
+Lean's colon notation; Martin-Löf's own text writes the same judgment as
+$a \in A$ ("$a$ is an element of the set $A$"), set-membership notation
+rather than a colon, though the judgment being made is the same one. For
+example,
 $3 : \mathtt{Nat}$ is one such judgment: it asserts, from outside the
 calculus, that the term $3$ has type $\mathtt{Nat}$ — not a fact proved
 *by* the calculus, but a fact established *about* it, the same way a
@@ -155,8 +160,7 @@ ways a `Nat` can ever have been built.
 > cost.
 >
 > In this language, `Nat` is the
-> [**initial algebra**](https://ncatlab.org/nlab/show/initial+algebra+of+an+endofunctor)
-> ([NLabInitialAlgebra]) for the **endofunctor** $F(X) = 1 + X$ on `Type`
+> **initial algebra** ([Jacobs1999], §2.6) for the **endofunctor** $F(X) = 1 + X$ on `Type`
 > (`1` a one-element type, Lean's
 > [`Unit`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Unit);
 > `+` disjoint sum, Lean's
@@ -170,8 +174,7 @@ ways a `Nat` can ever have been built.
 > $F$-algebras from $(X, e, s)$ to $(Y, e', s')$ is a function
 > $f : X \to Y$ satisfying $f(e) = e'$ and $f(s(x)) = s'(f(x))$ for every
 > $x$. `Nat`, with `zero` and `succ` playing the roles of $e$ and $s$, is
-> the [**initial object**](https://ncatlab.org/nlab/show/initial+object)
-> ([NLabInitial]) among $F$-algebras: for every other algebra
+> the **initial object** ([MacLane1998], Ch. I §5) among $F$-algebras: for every other algebra
 > $(X, e, s)$, exactly one algebra morphism out of `Nat` exists, forced by
 > sending `zero` to $e$ and `succ n` to $s$ applied to wherever `n` was
 > sent. That forced uniqueness is exactly the universal property that
@@ -179,8 +182,8 @@ ways a `Nat` can ever have been built.
 > statement, for every `Nat`, it suffices to say what happens at `zero`
 > and how it is preserved by `succ`. This construction has a standard
 > name: `Nat`, viewed this way, is a
-> [**natural numbers object**](https://ncatlab.org/nlab/show/natural+numbers+object)
-> ([NLabNNO]) of `Type` — equivalently, the initial algebra for the
+> **natural numbers object** ([Jacobs1999], §2.6; [MacLane1998], Appendix
+> "Foundations") of `Type` — equivalently, the initial algebra for the
 > endofunctor $1 + (-)$.
 >
 > None of this is required to use `Nat`. It is offered only because,
@@ -200,20 +203,19 @@ ways a `Nat` can ever have been built.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Lean 4 documentation, "Basic Types," and *Theorem Proving in Lean 4*, Ch. 2 ([LeanDocs], [TPIL4]) — the `#check`/`#eval` distinction and `Nat` as an inductive type, straight from the source.
+- Lean 4 documentation, "Basic Types," and *Theorem Proving in Lean 4*, §2.1 "Simple Type Theory" ([LeanDocs], [TPIL4]) — the `#check`/`#eval` distinction verified verbatim ("The `#check` command asks Lean to report their types... The `#eval` command asks Lean to evaluate the given expression") and `Nat` as an inductive type, straight from the source.
 - Martin-Löf ([MartinLof1984]), Ch. 1, "Judgements and their explanations" — the formal definition of "judgment" used above.
-- Pierce ([Pierce2002]), Ch. 1 — on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
-- nLab, "initial object" ([NLabInitial]) — the universal-property reading of `Nat` used in the optional box above.
-- nLab, "initial algebra of an endofunctor" ([NLabInitialAlgebra]) — the precise categorical framing used in the optional box's second paragraph: `Nat` as the initial algebra for $F(X) = 1 + X$.
-- nLab, "natural numbers object" ([NLabNNO]) — the standard name for the same construction, equivalent to the initial-algebra framing above.
+- Pierce ([Pierce2002]), §1.1 "Types in Computer Science," §1.2 "What Type Systems Are Good For" — on what a static type system buys (ruling out whole classes of runtime failure before execution), verified verbatim: "A type system is a tractable syntactic method for proving the absence of certain program behaviors..."; independent of any particular language.
+- Mac Lane ([MacLane1998]), Ch. I §5, p. 20 — the universal-property reading of `Nat` used in the optional box above, verified verbatim: "An object $s$ is initial in $C$ if to each object $a$ there is exactly one arrow $s \to a$."
+- Jacobs ([Jacobs1999]), §2.6, pp. 159–162 — the precise categorical framing used in the optional box's second paragraph: `Nat` as the initial algebra for $F(X) = 1 + X$, verified verbatim: "Notice that an initial algebra of the functor $X \mapsto 1 + X$ is a natural numbers object."
+- Jacobs ([Jacobs1999]), §2.6, p. 159, and Mac Lane ([MacLane1998]), Appendix "Foundations," p. 292 — the standard name (NNO) for the same construction, equivalent to the initial-algebra framing above.
 
 [LeanDocs]: ../bibliography.md#leandocs
 [TPIL4]: ../bibliography.md#tpil4
 [MartinLof1984]: ../bibliography.md#martinlof1984
 [Pierce2002]: ../bibliography.md#pierce2002
-[NLabInitial]: ../bibliography.md#nlabinitial
-[NLabInitialAlgebra]: ../bibliography.md#nlabinitialalgebra
-[NLabNNO]: ../bibliography.md#nlabnno
+[MacLane1998]: ../bibliography.md#maclane1998
+[Jacobs1999]: ../bibliography.md#jacobs1999
 
 ---
 
