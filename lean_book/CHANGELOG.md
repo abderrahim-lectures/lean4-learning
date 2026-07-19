@@ -3,6 +3,13 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Make explicit that f : α → β is a morphism, not a functor
+
+Reader question prompted a clarity fix: Chapter 1 §1's categorical
+"Mathematical reading" box left room to misread `f : α → β` as a functor
+rather than a morphism, since `α`/`β` are types treated as objects.
+Made the objects/morphism/functor distinction explicit in the text.
+
 ## Unreleased — Gloss α/β at first use in Chapter 1 §1
 
 Reader-caught: the optional categorical "Mathematical reading" box in
