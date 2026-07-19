@@ -220,12 +220,12 @@ at all, because nothing checks proofs against it.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Pierce ([Pierce2002]), Ch. 9–11 — the standard reference for STLC, including the (Var)/(Abs)/(App) rules and full proofs of progress and preservation, in the exact form used in this section.
+- Pierce ([Pierce2002]), **Correction:** this section's material is in Ch. 8 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 9 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC) — not Ch. 9–11 as previously stated; Ch. 11 "Simple Extensions" covers pairs/tuples/records/sums, unrelated to this section's content. Verified verbatim.
 - Milner ([Milner1978]) — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's boxes.
 - Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC, whose universe-formation rule is stated above.
-- Girard ([Girard1971]) — the source of "Girard's paradox," the inconsistency `Type : Type` would introduce.
-- *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" — Lean's own documentation on universes, matching the presentation here.
+- Girard — **Correction:** see the note in [§2's References](02-universes.md) — "Girard's paradox" (the inconsistency of `Type : Type`) is due to Girard's 1972 thesis, not the 1971 paper cited as [Girard1971] elsewhere in this book.
+- *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — Lean's own documentation on universes, matching the presentation here.
 
 [Pierce2002]: ../bibliography.md#pierce2002
 [Milner1978]: ../bibliography.md#milner1978
