@@ -141,15 +141,19 @@ show it is preserved by `succ` — because those are, provably, the only two
 ways a `Nat` can ever have been built.
 
 > **Mathematical reading (optional, for readers who already know some
-> category theory).** It is useful to regard `Type` as (the objects of) a
-> category: writing `α`, `β` for arbitrary types (the convention this book
-> uses throughout, spelled out fully in [§2](02-def-let-implicit.md)), a
-> term `x : α` is an element of `α`, a function `f : α → β` is
-> a morphism $\alpha \to \beta$, `fun x => x` is the identity, and `∘` is
-> genuine categorical composition, with associativity and the identity
-> laws holding *definitionally* (Lean checks them automatically, at no
-> extra cost). In this language, `Nat` is the **initial object** in the
-> category of "sets equipped with a distinguished element and an
+> category theory).** It is useful to regard `Type` as a category whose
+> **objects** are types: writing `α`, `β` for arbitrary types (the
+> convention this book uses throughout, spelled out fully in
+> [§2](02-def-let-implicit.md)), `α` and `β` are two such objects, and a
+> term `x : α` is an element of the object `α`. A function `f : α → β` is
+> a **morphism** between these two objects, $\alpha \to \beta$ — not a
+> functor: a functor maps *between* categories, and the only category in
+> play here is `Type` itself, with `α` and `β` as two of its objects, not
+> categories in their own right. `fun x => x` is the identity morphism,
+> and `∘` is genuine categorical composition, with associativity and the
+> identity laws holding *definitionally* (Lean checks them automatically,
+> at no extra cost). In this language, `Nat` is the **initial object** in
+> the category of "sets equipped with a distinguished element and an
 > endomorphism" ($\mathrm{zero} \in X$ and a map $s : X \to X$): a map out
 > of `Nat` is uniquely determined by where it sends `zero` and how it
 > commutes with `succ`, which is exactly the universal property that makes
