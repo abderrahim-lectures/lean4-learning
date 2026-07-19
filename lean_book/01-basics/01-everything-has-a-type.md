@@ -181,9 +181,11 @@ ways a `Nat` can ever have been built.
 > endofunctor $1 + (-)$.
 >
 > None of this is required to use `Nat`. It is offered only because,
-> once `+`/`0` are *defined* on `Nat` (Chapter 4), a second and different
-> fact becomes provable (not merely definitional): $(\mathbb{N}, +, 0)$
-> is the free commutative monoid on one generator. This is a genuinely
+> once ordinary numeric `+`/`0` are *defined* on `Nat` (Chapter 4) — this
+> `+` is addition, unrelated to the disjoint-sum `+` used for $F$ above —
+> a second and different fact becomes provable (not merely definitional):
+> $(\mathbb{N}, +, 0)$ is the free commutative monoid on one generator.
+> This is a genuinely
 > different universal property from the initial-object one above — worth
 > not conflating with it. [Chapter 1 §4](04-terminology.md) fixes the
 > vocabulary ("universal property," "initial object") used here, for any
