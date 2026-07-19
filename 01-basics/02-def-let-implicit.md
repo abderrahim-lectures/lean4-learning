@@ -7,8 +7,8 @@
 Consider three short definitions. Every token in them is doing something
 specific; each is examined in full below.
 
-<p><a href="https://live.lean-lang.org/#code=def%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=def%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
 </iframe>
 
 **`def double (n : Nat) : Nat := n * 2`**
@@ -66,8 +66,8 @@ between writing the domain as one arrow `Nat → Nat` or as a named binder
 $f = (a \mapsto \ldots) : A \to B$ describe the same function.
 
 
-<p><a href="https://live.lean-lang.org/#code=def%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=def%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
 </iframe>
 
 **`def average (a b : Nat) : Nat := let sum := a + b; sum / 2`**
@@ -117,8 +117,8 @@ truncating. This gap is easy to overlook in ordinary mathematical prose,
 but Lean forces it to be confronted explicitly: there is no coercion to
 $\mathbb{Q}$ happening for free.
 
-<p><a href="https://live.lean-lang.org/#code=def%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=def%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+<p><a href="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=namespace%20Ch01Basics%0A%0A%23check%20%283%20%3A%20Nat%29%0A%23check%20%28-3%20%3A%20Int%29%0A%23check%20%28Nat%20%3A%20Type%29%0A%23eval%202%20%5E%2010%20%20%20%20%20%20%20%20--%201024%0A%0Adef%20double%20%28n%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%20n%20%2A%202%0A%0Adef%20average%20%28a%20b%20%3A%20Nat%29%20%3A%20Nat%20%3A%3D%0A%20%20let%20sum%20%3A%3D%20a%20%2B%20b%0A%20%20sum%20%2F%202%0A%0Adef%20identity%20%7B%CE%B1%20%3A%20Type%7D%20%28x%20%3A%20%CE%B1%29%20%3A%20%CE%B1%20%3A%3D%20x" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
 </iframe>
 
 **`def identity {α : Type} (x : α) : α := x`**

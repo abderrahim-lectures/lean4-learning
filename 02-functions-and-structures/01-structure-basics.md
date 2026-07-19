@@ -7,8 +7,8 @@
 A `structure` groups several pieces of data under one name. We will use
 this Lean feature constantly once we define groups and rings.
 
-<p><a href="https://live.lean-lang.org/#code=structure%20Point%20where%0A%20%20x%20%3A%20Nat%0A%20%20y%20%3A%20Nat%0A%0Adef%20origin%20%3A%20Point%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%20%7D%0A%0A%23eval%20origin.x%20%20%20%20%20%20%20%20--%200" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=structure%20Point%20where%0A%20%20x%20%3A%20Nat%0A%20%20y%20%3A%20Nat%0A%0Adef%20origin%20%3A%20Point%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%20%7D%0A%0A%23eval%20origin.x%20%20%20%20%20%20%20%20--%200" title="Lean playground" loading="lazy" style="width:100%;height:193px;border:1px solid #ccc;border-radius:8px;">
+<p><a href="https://live.lean-lang.org/#code=namespace%20Ch02Structures%0A%0Astructure%20Point%20where%0A%20%20x%20%3A%20Nat%0A%20%20y%20%3A%20Nat%0A%0Adef%20origin%20%3A%20Point%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%20%7D%0A%0A%23eval%20origin.x" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=namespace%20Ch02Structures%0A%0Astructure%20Point%20where%0A%20%20x%20%3A%20Nat%0A%20%20y%20%3A%20Nat%0A%0Adef%20origin%20%3A%20Point%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%20%7D%0A%0A%23eval%20origin.x" title="Lean playground" loading="lazy" style="width:100%;height:193px;border:1px solid #ccc;border-radius:8px;">
 </iframe>
 
 Key points:
@@ -31,8 +31,8 @@ Key points:
 - `p.x` is **field projection** notation, shorthand for `Point.x p`.
   `origin.x` above is exactly this projection applied to `origin`.
 
-<p><a href="https://live.lean-lang.org/#code=def%20shift%20%28p%20%3A%20Point%29%20%28dx%20dy%20%3A%20Nat%29%20%3A%20Point%20%3A%3D%0A%20%20%7B%20x%20%3A%3D%20p.x%20%2B%20dx%2C%20y%20%3A%3D%20p.y%20%2B%20dy%20%7D%0A%0A%23eval%20%28shift%20origin%203%204%29.y%20%20%20--%204" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=def%20shift%20%28p%20%3A%20Point%29%20%28dx%20dy%20%3A%20Nat%29%20%3A%20Point%20%3A%3D%0A%20%20%7B%20x%20%3A%3D%20p.x%20%2B%20dx%2C%20y%20%3A%3D%20p.y%20%2B%20dy%20%7D%0A%0A%23eval%20%28shift%20origin%203%204%29.y%20%20%20--%204" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+<p><a href="https://live.lean-lang.org/#code=namespace%20Ch02Structures%0A%0Astructure%20Point%20where%0A%20%20x%20%3A%20Nat%0A%20%20y%20%3A%20Nat%0A%0Adef%20origin%20%3A%20Point%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%20%7D%0A%0A%23eval%20origin.x%20%20%20%20%20%20%20%20--%200%0A%0Adef%20shift%20%28p%20%3A%20Point%29%20%28dx%20dy%20%3A%20Nat%29%20%3A%20Point%20%3A%3D%0A%20%20%7B%20x%20%3A%3D%20p.x%20%2B%20dx%2C%20y%20%3A%3D%20p.y%20%2B%20dy%20%7D%0A%0A%23eval%20%28shift%20origin%203%204%29.y" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=namespace%20Ch02Structures%0A%0Astructure%20Point%20where%0A%20%20x%20%3A%20Nat%0A%20%20y%20%3A%20Nat%0A%0Adef%20origin%20%3A%20Point%20%3A%3D%20%7B%20x%20%3A%3D%200%2C%20y%20%3A%3D%200%20%7D%0A%0A%23eval%20origin.x%20%20%20%20%20%20%20%20--%200%0A%0Adef%20shift%20%28p%20%3A%20Point%29%20%28dx%20dy%20%3A%20Nat%29%20%3A%20Point%20%3A%3D%0A%20%20%7B%20x%20%3A%3D%20p.x%20%2B%20dx%2C%20y%20%3A%3D%20p.y%20%2B%20dy%20%7D%0A%0A%23eval%20%28shift%20origin%203%204%29.y" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
 </iframe>
 
 `shift` shows a structure used on *both* sides of a function: it takes a

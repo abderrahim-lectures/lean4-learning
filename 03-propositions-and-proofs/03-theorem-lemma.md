@@ -4,8 +4,8 @@
 
 ---
 
-<p><a href="https://live.lean-lang.org/#code=theorem%20two_plus_two%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%0A%0Atheorem%20add_comm_example%20%3A%202%20%2B%203%20%3D%203%20%2B%202%20%3A%3D%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
-<iframe src="https://live.lean-lang.org/#code=theorem%20two_plus_two%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%0A%0Atheorem%20add_comm_example%20%3A%202%20%2B%203%20%3D%203%20%2B%202%20%3A%3D%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
+<p><a href="https://live.lean-lang.org/#code=namespace%20Ch03Propositions%0A%0A%23check%20%282%20%2B%202%20%3D%204%29%20%20%20%20%20--%202%20%2B%202%20%3D%204%20%3A%20Prop%0A%0Aexample%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%0A%0Atheorem%20two_plus_two%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%0A%0Atheorem%20add_comm_example%20%3A%202%20%2B%203%20%3D%203%20%2B%202%20%3A%3D%20rfl" target="_blank" rel="noopener">&#8599; Open in Lean playground (new tab)</a></p>
+<iframe src="https://live.lean-lang.org/#code=namespace%20Ch03Propositions%0A%0A%23check%20%282%20%2B%202%20%3D%204%29%20%20%20%20%20--%202%20%2B%202%20%3D%204%20%3A%20Prop%0A%0Aexample%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%0A%0Atheorem%20two_plus_two%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%0A%0Atheorem%20add_comm_example%20%3A%202%20%2B%203%20%3D%203%20%2B%202%20%3A%3D%20rfl" title="Lean playground" loading="lazy" style="width:100%;height:180px;border:1px solid #ccc;border-radius:8px;">
 </iframe>
 
 `theorem` and `lemma` are the same thing syntactically. `lemma` is just a
