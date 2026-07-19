@@ -32,7 +32,7 @@ $$
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]) — the standard graduate reference for the quiver definition above.
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), **Definition 1.1** (Chapter II, §1, "Quivers and path algebras") — the standard graduate reference for the quiver definition above, stated there verbatim as $Q = (Q_0, Q_1, s, t)$.
 - Schiffler ([Schiffler2014]) — an elementary, textbook-level treatment of the same definition.
 
 [AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006

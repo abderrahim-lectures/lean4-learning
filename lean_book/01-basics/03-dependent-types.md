@@ -290,10 +290,10 @@ it is the identical idea, with a richer index.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" — the official Lean documentation's own introduction to dependent types, using this same length-indexed-vector example.
+- *Theorem Proving in Lean 4* ([TPIL4]), §2.8 "What makes dependent type theory dependent?" — the official Lean documentation's own introduction to dependent types, verified verbatim: same `List α`/`Vector α n` example, same `(a : α) → β a` dependent-arrow-type notation. Note: TPIL4 itself never uses the term "Π-type" (it says "dependent function type"/"dependent arrow type" throughout); the $\Pi$ notation used in this book is standard mathematical convention layered on top, not a TPIL4 term.
 - The Lean 4 source / [Mathlib4 API documentation][Mathlib4Docs] for `Fin` and `Vector` — confirmed directly in this section via `#print Fin` against the actual toolchain pinned in this repository's `lean_project/lean-toolchain`.
-- Thompson ([Thompson1991]) — a from-scratch treatment of dependent types and Π/Σ, independent of any one proof assistant.
-- Chlipala ([Chlipala2013]) — Ch. 2–3 build the same length-indexed-vector idea in Coq, a useful second angle on the identical concept.
+- Thompson ([Thompson1991]) — §4.6 "Quantifiers," §6.3 "Dependent types and quantifiers" develop the same dependent-product/dependent-sum content, verified verbatim against the source. **Terminology note:** Thompson's primary notation is $\forall$/$\exists$ (he calls the Σ-type-equivalent an "(infinitary) sum type" / "dependent sum type"), not Π/Σ — the literal term "Sigma-type" never appears in his main text (only once, in a bibliography entry citing a different author's paper). Explicit Π-notation does appear later, in his meta-theory chapters (§8.3, §9.1.5), applied to dependent function spaces in a typed λ-calculus meta-language.
+- Chlipala ([Chlipala2013]) — **Correction:** this book's length-indexed-vector idea (`ilist : nat → Set`) is built in §8.1 "Length-Indexed Lists" and revisited in §9.1 "More Length-Indexed Lists," not Ch. 2–3 as previously stated here; verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`) — a useful second angle on the identical concept, in Coq rather than Lean.
 
 [TPIL4]: ../bibliography.md#tpil4
 [Mathlib4Docs]: ../bibliography.md#mathlib4docs
