@@ -806,6 +806,26 @@ def write_main_driver():
         "% backmatter.tex (both hand-written, not generated from Markdown).\n",
         "\\input{preamble.tex}\n",
         "\\begin{document}\n",
+        # Front cover, full-bleed, unnumbered, before the roman-numeral
+        # front matter -- images/cover.png is maintained by hand
+        # (Canva-designed), not generated from Markdown. Placed via
+        # eso-pic's shipout hook rather than geometry's
+        # \\newgeometry/\\restoregeometry: newgeometry issues its own
+        # \\clearpage internally, and doing that as the very first command
+        # in the document -- before any page has been opened -- consumed
+        # page 1 as a blank leaf and pushed the image to page 2. eso-pic
+        # paints the background at shipout time instead, so it can't
+        # disturb pagination. width=\\paperwidth with keepaspectratio (no
+        # height given) is a deliberate "cover" fit for this specific
+        # image: its aspect ratio is narrower than the page's, so matching
+        # width alone already overshoots paperheight -- the excess is
+        # centered and clipped by the page box, filling the page edge to
+        # edge with no stretching and no visible margin.
+        "\\AddToShipoutPictureBG*{\\AtPageCenter{\\makebox(0,0){\\includegraphics[width=\\paperwidth,keepaspectratio]{../images/cover.png}}}}\n",
+        "\\thispagestyle{empty}\n",
+        "\\null\n",
+        "\\clearpage\n",
+        "\\ClearShipoutPictureBG\n",
         # Professional-book convention: front matter (title page through
         # Notation reference) is paginated with lowercase roman numerals,
         # switching to arabic starting at Chapter 0 -- matches every real
@@ -835,6 +855,14 @@ def write_main_driver():
         lines.append(f"\\input{{{stem}.tex}}\n")
     lines.append("\\input{bibliography.tex}\n")
     lines.append("\\input{backmatter.tex}\n")
+    # Back cover, full-bleed, unnumbered, as the final physical page. Same
+    # eso-pic approach as the front cover, for the same reason.
+    lines.append("\\clearpage\n")
+    lines.append(
+        "\\AddToShipoutPictureBG*{\\AtPageCenter{\\makebox(0,0){\\includegraphics[width=\\paperwidth,keepaspectratio]{../images/back-cover.png}}}}\n"
+    )
+    lines.append("\\thispagestyle{empty}\n")
+    lines.append("\\null\n")
     lines.append("\\end{document}\n")
     with open(out_path, "w", encoding="utf-8") as fh:
         fh.writelines(lines)

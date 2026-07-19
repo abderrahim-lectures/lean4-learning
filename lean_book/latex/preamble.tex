@@ -40,6 +40,10 @@
 \usepackage{tikz-cd}
 \usetikzlibrary{arrows.meta}
 \usepackage{graphicx}
+% For full-bleed front/back cover page backgrounds (see
+% lean-for-working-algebraists.tex): places images during shipout,
+% independent of \newgeometry/margins, so it can't disturb pagination.
+\usepackage{eso-pic}
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{array}

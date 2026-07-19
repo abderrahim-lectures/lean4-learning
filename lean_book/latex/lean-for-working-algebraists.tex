@@ -7,6 +7,11 @@
 % backmatter.tex (both hand-written, not generated from Markdown).
 \input{preamble.tex}
 \begin{document}
+\AddToShipoutPictureBG*{\AtPageCenter{\makebox(0,0){\includegraphics[width=\paperwidth,keepaspectratio]{../images/cover.png}}}}
+\thispagestyle{empty}
+\null
+\clearpage
+\ClearShipoutPictureBG
 \pagenumbering{roman}
 \input{frontmatter.tex}
 \input{learning-paths.tex}
@@ -33,4 +38,8 @@
 \input{lambda-calculus-dictionary.tex}
 \input{bibliography.tex}
 \input{backmatter.tex}
+\clearpage
+\AddToShipoutPictureBG*{\AtPageCenter{\makebox(0,0){\includegraphics[width=\paperwidth,keepaspectratio]{../images/back-cover.png}}}}
+\thispagestyle{empty}
+\null
 \end{document}
