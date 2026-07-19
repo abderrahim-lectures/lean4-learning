@@ -50,8 +50,8 @@ starting from the smallest possible example.
 ### First: a type family, one type per number
 
 Here is the smallest genuine example of a dependent type, and it is
-already sitting in Lean's core library. `Fin n` is the type of natural
-numbers *strictly less than* `n`:
+already sitting in Lean's core library. [`Fin n`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Fin)
+is the type of natural numbers *strictly less than* `n`:
 
 ```lean
 #check Fin 3   -- Fin 3 : Type
