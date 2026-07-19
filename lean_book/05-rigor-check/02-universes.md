@@ -84,8 +84,8 @@ in `Type 0`.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- *Theorem Proving in Lean 4* ([TPIL4]), "Dependent Types" — Lean's own documentation on the universe hierarchy, matching the presentation here.
-- Girard ([Girard1971]) — the original source of the paradox this stratified hierarchy is built to avoid (named "Girard's paradox" in [Chapter 5 §3](03-typing-rules-and-safety.md)).
+- *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — Lean's own documentation on the universe hierarchy, verified verbatim ("Type 0 as a universe of 'small' or 'ordinary' types... the list is infinite: there is a Type n for every natural number n"), matching the presentation here.
+- Girard — **Correction:** [Girard1971] (the 1971/1970 "Une extension de l'interprétation de Gödel à l'analyse" paper) is *not* the source of the `Type : Type` inconsistency. The proof that a calculus with the rule `⊢ * : *` loses the normalization property is due to Girard's 1972 doctoral thesis, *"Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure,"* Thèse d'État, Université Paris VII, 1972 — not yet in this book's bibliography. (Thierry Coquand's 1986 paper "An analysis of Girard's paradox," LICS 1986, is the standard modern exposition, also not yet cited here.)
 
 [TPIL4]: ../bibliography.md#tpil4
 [Girard1971]: ../bibliography.md#girard1971
