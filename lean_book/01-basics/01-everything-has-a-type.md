@@ -155,25 +155,30 @@ ways a `Nat` can ever have been built.
 > cost.
 >
 > In this language, `Nat` is the
-> [**initial object**](https://ncatlab.org/nlab/show/initial+object)
-> ([NLabInitial]) of a second,
-> different category — still built from `Type`, not a switch to
-> classical `Set` — whose objects are triples $(X, e, s)$: a type $X$,
-> some chosen element $e : X$ (any element — nothing ties it to `Nat`'s
-> own `zero`), and some chosen map $s : X \to X$ (any self-map — nothing
-> ties it to `succ`). A morphism from $(X, e, s)$ to $(Y, e', s')$ is a
-> function $f : X \to Y$ satisfying $f(e) = e'$ and $f(s(x)) = s'(f(x))$
-> for every $x$. `Nat` is the object $(\mathtt{Nat}, \mathtt{zero},
-> \mathtt{succ})$ in this category, and it is *initial*: for every other
-> object $(X, e, s)$, exactly one such structure-preserving map out of
-> `Nat` exists, forced by sending `zero` to $e$ and `succ n` to $s$
-> applied to wherever `n` was sent. That forced uniqueness is exactly the
-> universal property that makes structural induction valid: to define a
-> function, or prove a statement, for every `Nat`, it suffices to say
-> what happens at `zero` and how it is preserved by `succ`. This
-> construction has a standard name: `Nat`, viewed this way, is a
+> [**initial algebra**](https://ncatlab.org/nlab/show/initial+algebra+of+an+endofunctor)
+> ([NLabInitialAlgebra]) for the **endofunctor** $F(X) = 1 + X$ on `Type`
+> (`1` a one-element type,
+> Lean's `Unit`; `+` disjoint sum). An $F$-algebra is a type $X$ together
+> with a map $F(X) \to X$, i.e. a map $(1 + X) \to X$ — equivalently, by
+> the universal property of `+`, a chosen element $e : X$ (the image of
+> the `1` summand; any element — nothing ties it to `Nat`'s own `zero`)
+> together with a chosen self-map $s : X \to X$ (the image of the $X$
+> summand; any self-map — nothing ties it to `succ`). A morphism of
+> $F$-algebras from $(X, e, s)$ to $(Y, e', s')$ is a function
+> $f : X \to Y$ satisfying $f(e) = e'$ and $f(s(x)) = s'(f(x))$ for every
+> $x$. `Nat`, with `zero` and `succ` playing the roles of $e$ and $s$, is
+> the [**initial object**](https://ncatlab.org/nlab/show/initial+object)
+> ([NLabInitial]) among $F$-algebras: for every other algebra
+> $(X, e, s)$, exactly one algebra morphism out of `Nat` exists, forced by
+> sending `zero` to $e$ and `succ n` to $s$ applied to wherever `n` was
+> sent. That forced uniqueness is exactly the universal property that
+> makes structural induction valid: to define a function, or prove a
+> statement, for every `Nat`, it suffices to say what happens at `zero`
+> and how it is preserved by `succ`. This construction has a standard
+> name: `Nat`, viewed this way, is a
 > [**natural numbers object**](https://ncatlab.org/nlab/show/natural+numbers+object)
-> ([NLabNNO]) of `Type`.
+> ([NLabNNO]) of `Type` — equivalently, the initial algebra for the
+> endofunctor $1 + (-)$.
 >
 > None of this is required to use `Nat`. It is offered only because,
 > once `+`/`0` are *defined* on `Nat` (Chapter 4), a second and different
@@ -194,13 +199,15 @@ Full citations in the [Bibliography](../bibliography.md).
 - Martin-Löf ([MartinLof1984]), Ch. 1, "Judgements and their explanations" — the formal definition of "judgment" used above.
 - Pierce ([Pierce2002]), Ch. 1 — on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
 - nLab, "initial object" ([NLabInitial]) — the universal-property reading of `Nat` used in the optional box above.
-- nLab, "natural numbers object" ([NLabNNO]) — the standard name for exactly the construction in the optional box's second paragraph: `Nat` as the initial algebra for the "one chosen element plus one self-map" structure.
+- nLab, "initial algebra of an endofunctor" ([NLabInitialAlgebra]) — the precise categorical framing used in the optional box's second paragraph: `Nat` as the initial algebra for $F(X) = 1 + X$.
+- nLab, "natural numbers object" ([NLabNNO]) — the standard name for the same construction, equivalent to the initial-algebra framing above.
 
 [LeanDocs]: ../bibliography.md#leandocs
 [TPIL4]: ../bibliography.md#tpil4
 [MartinLof1984]: ../bibliography.md#martinlof1984
 [Pierce2002]: ../bibliography.md#pierce2002
 [NLabInitial]: ../bibliography.md#nlabinitial
+[NLabInitialAlgebra]: ../bibliography.md#nlabinitialalgebra
 [NLabNNO]: ../bibliography.md#nlabnno
 
 ---

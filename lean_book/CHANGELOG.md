@@ -3,6 +3,16 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Name Nat as the initial algebra for 1 + (-), precisely
+
+Reader-caught: Chapter 1 §1's categorical box described Nat as the
+initial object of an ad-hoc category of (X, e, s) triples without
+naming the endofunctor F(X) = 1 + X generating it. Rewrote to name the
+functor explicitly and use "initial algebra" terminology throughout --
+exactly nLab's own framing of a natural numbers object -- with a new
+nLab citation ("initial algebra of an endofunctor") added to both
+bibliography.md and references.bib.
+
 ## Unreleased — Link nLab citations directly, add chapter specificity
 
 Standing convention going forward: web-hosted references (nLab) get the
