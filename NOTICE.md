@@ -4,8 +4,8 @@
 assistant), working interactively with a human collaborator across
 multiple sessions. The human directed scope, structure, tone, audience,
 and many rounds of revision; Claude wrote the chapter text, Lean code,
-and LaTeX. See [lean_book/CHANGELOG.md](lean_book/CHANGELOG.md) for the
-full, itemized history of every pass.
+and LaTeX. See [lean_book/changelog/](lean_book/changelog/README.md) for
+the full, itemized history of every pass.
 
 **Lean version:** all code targets **Lean 4, toolchain `leanprover/lean4:v4.31.0`**,
 pinned in [`lean_project/lean-toolchain`](lean_project/lean-toolchain);
