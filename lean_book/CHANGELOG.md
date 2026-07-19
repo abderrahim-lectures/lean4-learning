@@ -3,6 +3,15 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Link nLab citations directly, add chapter specificity
+
+Standing convention going forward: web-hosted references (nLab) get the
+cited term hyperlinked directly to its exact page, not only referenced
+via the bracket citation. Applied to "initial object"/"natural numbers
+object" in Chapter 1 §1. Also added chapter/section specificity to the
+Martin-Löf citation there ("Ch. 1, 'Judgements and their explanations'"),
+matching the specificity most other book citations already had.
+
 ## Unreleased — Cite the Nat-as-initial-object construction
 
 Added nLab's "natural numbers object" entry to the bibliography (both

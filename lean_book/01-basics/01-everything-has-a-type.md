@@ -22,8 +22,8 @@ the **calculus**, from the outside — not a proposition proved *inside* it.
 (For Lean, this calculus is made concrete a few sentences below as the
 $\lambda$-calculus, and named precisely as the **calculus of
 constructions** in [Chapter 1 §5](05-pi-sigma-and-coc.md). Nothing here
-depends on that name yet.) Following Martin-Löf ([MartinLof1984]), the
-judgment used here has
+depends on that name yet.) Following Martin-Löf ([MartinLof1984], Ch. 1,
+"Judgements and their explanations"), the judgment used here has
 the form $e : \tau$, read "$e$ is a term of type $\tau$." For example,
 $3 : \mathtt{Nat}$ is one such judgment: it asserts, from outside the
 calculus, that the term $3$ has type $\mathtt{Nat}$ — not a fact proved
@@ -154,7 +154,9 @@ ways a `Nat` can ever have been built.
 > holding *definitionally* — Lean checks them automatically, at no extra
 > cost.
 >
-> In this language, `Nat` is the **initial object** of a second,
+> In this language, `Nat` is the
+> [**initial object**](https://ncatlab.org/nlab/show/initial+object)
+> ([NLabInitial]) of a second,
 > different category — still built from `Type`, not a switch to
 > classical `Set` — whose objects are triples $(X, e, s)$: a type $X$,
 > some chosen element $e : X$ (any element — nothing ties it to `Nat`'s
@@ -170,7 +172,8 @@ ways a `Nat` can ever have been built.
 > function, or prove a statement, for every `Nat`, it suffices to say
 > what happens at `zero` and how it is preserved by `succ`. This
 > construction has a standard name: `Nat`, viewed this way, is a
-> **natural numbers object** ([NLabNNO]) of `Type`.
+> [**natural numbers object**](https://ncatlab.org/nlab/show/natural+numbers+object)
+> ([NLabNNO]) of `Type`.
 >
 > None of this is required to use `Nat`. It is offered only because,
 > once `+`/`0` are *defined* on `Nat` (Chapter 4), a second and different
@@ -188,7 +191,7 @@ ways a `Nat` can ever have been built.
 Full citations in the [Bibliography](../bibliography.md).
 
 - Lean 4 documentation, "Basic Types," and *Theorem Proving in Lean 4*, Ch. 2 ([LeanDocs], [TPIL4]) — the `#check`/`#eval` distinction and `Nat` as an inductive type, straight from the source.
-- Martin-Löf ([MartinLof1984]) — the formal definition of "judgment" used above.
+- Martin-Löf ([MartinLof1984]), Ch. 1, "Judgements and their explanations" — the formal definition of "judgment" used above.
 - Pierce ([Pierce2002]), Ch. 1 — on what a static type system buys (ruling out whole classes of runtime failure before execution), independent of any particular language.
 - nLab, "initial object" ([NLabInitial]) — the universal-property reading of `Nat` used in the optional box above.
 - nLab, "natural numbers object" ([NLabNNO]) — the standard name for exactly the construction in the optional box's second paragraph: `Nat` as the initial algebra for the "one chosen element plus one self-map" structure.
