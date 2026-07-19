@@ -3,6 +3,16 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Link Unit/Sum to Lean documentation at first use
+
+Standing convention broadened: every new notion introduced anywhere in
+the book must link to its documentation, book, or paper reference, not
+only category-theory/type-theory terms. Applied here first: Lean's
+`Unit` and `Sum` (disjoint sum), named in Chapter 1 §1's categorical
+box, now link to their Mathlib4 docs pages (Init/Prelude.html#Unit,
+Init/Core.html#Sum) — anchor existence verified in the page HTML, not
+just that the URL returns 200.
+
 ## Unreleased — Disambiguate overloaded + in the Ch. 1 §1 categorical box
 
 The box used `+` for two different things in the same passage: disjoint
