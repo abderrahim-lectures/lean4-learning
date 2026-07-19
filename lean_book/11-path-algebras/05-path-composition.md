@@ -72,10 +72,10 @@ applications.
 category** $\mathrm{Free}(Q)$, written throughout this section in *path
 order*: "$p$ then $q$," matching the argument order of `Path.append p q`.
 This is not the function-composition order $q \circ p$ standard in
-category theory texts. (The two conventions denote the same
-composite; only the order in which the symbols are written differs, and
-mixing them mid-explanation is a common source of confusion, so this book
-fixes path order throughout.) In path order, `Path.append` is the map
+category theory texts. The two conventions denote the same composite;
+only the order in which the symbols are written differs. Mixing them
+mid-explanation is a common source of confusion, so this book fixes path
+order throughout. In path order, `Path.append` is the map
 
 $$
 \mathrm{Hom}(u,v) \times \mathrm{Hom}(v,w) \longrightarrow \mathrm{Hom}(u,w),

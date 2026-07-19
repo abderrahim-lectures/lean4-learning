@@ -3,6 +3,16 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Split 13 dense sentences into plain, simple ones
+
+Follow-up to the ambiguity sweeps: audited the book for sentences that
+are grammatically correct and unambiguous but cram too much structure
+into one sentence (nested parentheticals, "respectively" pairings,
+dash/semicolon-joined independent clauses) and are hard to parse in one
+read. Split 13 of these into 2-3 plain sentences each, across Chapters 1,
+3, 4, 6, 8, 9, 11, 12, and three appendix solutions. No content changed,
+only sentence structure.
+
 ## Unreleased — Full-book sweep for ambiguous "it"
 
 Follow-up to the Chapter 1 §1 "it" fix: reviewed the whole book for the
