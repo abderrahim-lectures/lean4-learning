@@ -3,6 +3,16 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Rewrite the Ch. 1 §1 categorical "Mathematical reading" box
+
+A series of reader questions (functor vs. morphism, "zero" reused as a
+generic distinguished element, "set" vs. "type" inconsistency) revealed
+this box had accumulated patch-on-patch edits into one dense, imprecise
+paragraph. Rewrote it as three clearly separated paragraphs: Type-as-
+category, Nat-as-initial-object (a properly defined second category,
+consistently using "type" not "set"), and the distinct free-monoid
+universal property.
+
 ## Unreleased — Make explicit that f : α → β is a morphism, not a functor
 
 Reader question prompted a clarity fix: Chapter 1 §1's categorical

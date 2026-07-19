@@ -141,30 +141,43 @@ show it is preserved by `succ` — because those are, provably, the only two
 ways a `Nat` can ever have been built.
 
 > **Mathematical reading (optional, for readers who already know some
-> category theory).** It is useful to regard `Type` as a category whose
-> **objects** are types: writing `α`, `β` for arbitrary types (the
-> convention this book uses throughout, spelled out fully in
-> [§2](02-def-let-implicit.md)), `α` and `β` are two such objects, and a
-> term `x : α` is an element of the object `α`. A function `f : α → β` is
-> a **morphism** between these two objects, $\alpha \to \beta$ — not a
-> functor: a functor maps *between* categories, and the only category in
-> play here is `Type` itself, with `α` and `β` as two of its objects, not
-> categories in their own right. `fun x => x` is the identity morphism,
-> and `∘` is genuine categorical composition, with associativity and the
-> identity laws holding *definitionally* (Lean checks them automatically,
-> at no extra cost). In this language, `Nat` is the **initial object** in
-> the category of "sets equipped with a distinguished element and an
-> endomorphism" ($\mathrm{zero} \in X$ and a map $s : X \to X$): a map out
-> of `Nat` is uniquely determined by where it sends `zero` and how it
-> commutes with `succ`, which is exactly the universal property that makes
-> structural induction valid. None of this is required to use `Nat` — it
-> is offered only because, once `+`/`0` are *defined* on `Nat` (Chapter 4),
-> it becomes provable (not just definitional) that $(\mathbb{N}, +, 0)$ is
-> the free commutative monoid on one generator, a genuinely different
-> universal property from the one above, worth not conflating with it.
-> [Chapter 1 §4](04-terminology.md) fixes the vocabulary ("universal
-> property," "initial object") used here, for any reader meeting it for
-> the first time.
+> category theory).** Regard `Type` as a category. Its **objects** are
+> types — writing `α`, `β` for arbitrary types (the convention this book
+> uses throughout, spelled out fully in [§2](02-def-let-implicit.md)),
+> `α` and `β` are two such objects. Its **morphisms** are functions: a
+> function `f : α → β` is a morphism from the object `α` to the object
+> `β`, not a functor (a functor maps *between* categories; the only
+> category here is `Type` itself, and `α`/`β` are two of its objects, not
+> categories in their own right). A term `x : α` is an element of the
+> object `α`. `fun x => x` is the identity morphism, and `∘` is genuine
+> categorical composition, with associativity and the identity laws
+> holding *definitionally* — Lean checks them automatically, at no extra
+> cost.
+>
+> In this language, `Nat` is the **initial object** of a second,
+> different category — still built from `Type`, not a switch to
+> classical `Set` — whose objects are triples $(X, e, s)$: a type $X$,
+> some chosen element $e : X$ (any element — nothing ties it to `Nat`'s
+> own `zero`), and some chosen map $s : X \to X$ (any self-map — nothing
+> ties it to `succ`). A morphism from $(X, e, s)$ to $(Y, e', s')$ is a
+> function $f : X \to Y$ satisfying $f(e) = e'$ and $f(s(x)) = s'(f(x))$
+> for every $x$. `Nat` is the object $(\mathtt{Nat}, \mathtt{zero},
+> \mathtt{succ})$ in this category, and it is *initial*: for every other
+> object $(X, e, s)$, exactly one such structure-preserving map out of
+> `Nat` exists, forced by sending `zero` to $e$ and `succ n` to $s$
+> applied to wherever `n` was sent. That forced uniqueness is exactly the
+> universal property that makes structural induction valid: to define a
+> function, or prove a statement, for every `Nat`, it suffices to say
+> what happens at `zero` and how it is preserved by `succ`.
+>
+> None of this is required to use `Nat`. It is offered only because,
+> once `+`/`0` are *defined* on `Nat` (Chapter 4), a second and different
+> fact becomes provable (not merely definitional): $(\mathbb{N}, +, 0)$
+> is the free commutative monoid on one generator. This is a genuinely
+> different universal property from the initial-object one above — worth
+> not conflating with it. [Chapter 1 §4](04-terminology.md) fixes the
+> vocabulary ("universal property," "initial object") used here, for any
+> reader meeting it for the first time.
 
 ---
 
