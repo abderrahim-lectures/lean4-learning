@@ -38,7 +38,7 @@ Every proof obligation is again a one-line \texttt{exact} naming a specific core
 
 \begin{mathreading}
 
-This shows \((\mathbb{Z}, +, \times, 0, 1)\) as an object of \(\mathbf{Ring}\) --- in fact the \hyperref[sec:01-basics:04-terminology:1]{\emph{initial} object}, since there is a unique ring homomorphism \(\mathbb{Z} \to R\) into any ring. First \texttt{intCommGroup} upgrades the additive group \((\mathbb{Z},+)\) to an abelian group by supplying commutativity (\(a + b = b + a\)); then \texttt{intRing} adds the multiplicative monoid \((\mathbb{Z}, \times, 1)\) and checks the distributive laws \(a(b+c) = ab + ac\) and \((a+b)c = ac + bc\). Each obligation is the named \(\mathbb{Z}\)-arithmetic fact, so the term is the formal counterpart of ``\(\mathbb{Z}\) is a commutative ring.''
+This shows \((\mathbb{Z}, +, \times, 0, 1)\) as an object of \(\mathbf{Ring}\) --- in fact the \hyperref[sec:01-basics:04-terminology:1]{\emph{initial} object}, since there is a unique \textbf{ring homomorphism} \(\mathbb{Z} \to R\) into any ring --- a function preserving \(+\), \(\times\), \(0\), and \(1\) (\cite{DummitFoote2003}). First \texttt{intCommGroup} upgrades the additive group \((\mathbb{Z},+)\) to an abelian group by supplying commutativity (\(a + b = b + a\)); then \texttt{intRing} adds the multiplicative monoid \((\mathbb{Z}, \times, 1)\) and checks the distributive laws \(a(b+c) = ab + ac\) and \((a+b)c = ac + bc\). Each obligation is the named \(\mathbb{Z}\)-arithmetic fact, so the term is the formal counterpart of ``\(\mathbb{Z}\) is a commutative ring.''
 
 \end{mathreading}
 
@@ -55,3 +55,13 @@ example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
 \end{lstlisting}
 
 \href{https://loogle.lean-lang.org/?q=mul_add}{\texttt{mul\_\allowbreak{}add}}/\href{https://loogle.lean-lang.org/?q=add_mul}{\texttt{add\_\allowbreak{}mul}} are Mathlib's names for \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib}. They are the same laws, but stated generically over \texttt{[Ring R]} (or the weaker \texttt{[Distrib R]}) instead of being cited per-type as \texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.add\_\allowbreak{}mul}.
+
+\subsection{References}\label{sec:08-rings:04-integers-example:2}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+
+\begin{itemize}
+\tightlist
+\item
+  Dummit and Foote (\cite{DummitFoote2003}) --- the standard definition of a ring homomorphism, used above.
+\end{itemize}

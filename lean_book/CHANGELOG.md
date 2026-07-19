@@ -3,6 +3,20 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Extend the "every notion gets a citation" rule to Ch. 6-11
+
+Broadened the citation audit beyond Chapter 1's categorical box. Found
+and fixed eight gaps: the group definition (Ch. 6) and the group-
+theorems chapter (Ch. 7) had zero citations anywhere; likewise the
+ring-theorems chapter (Ch. 9); "ring homomorphism" was used (Ch. 8 §4)
+with no definition or citation; `Fin` (Ch. 1 §3) was only cited via a
+generic Mathlib4Docs site link, not hyperlinked to its own page;
+submodules and direct sums of modules (Ch. 10) had no citation; and the
+quiver definition (Ch. 11 §1) cited no textbook, unlike a later section
+in the same chapter. Added Dummit & Foote / Aluffi / Assem-Simson-
+Skowroński / Schiffler citations and a direct Fin doc link as
+appropriate, all sources already in the bibliography.
+
 ## Unreleased — Link Unit/Sum to Lean documentation at first use
 
 Standing convention broadened: every new notion introduced anywhere in
