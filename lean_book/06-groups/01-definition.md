@@ -4,6 +4,18 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Group.** A set $G$ with a binary operation, identity, and
+  inverses satisfying associativity and the identity/inverse laws
+  (below); consequences of these axioms, e.g. "the identity of $G$ is
+  unique ... for each $a \in G$, $a^{-1}$ is uniquely determined"
+  ([DummitFoote2003], §1.1 "Basic Axioms and Examples," p. 17,
+  Proposition 1).
+
 A **group** is a set $G$ together with:
 
 - a binary operation $\cdot : G \times G \to G$,
@@ -28,9 +40,10 @@ $a \cdot b = b \cdot a$ always holds is called **abelian** or
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Dummit and Foote ([DummitFoote2003]), §1.1 "Basic Axioms and Examples," p. 17 — the standard classical (non-Lean) reference for the group axioms above and their consequences, verified verbatim: "the identity of G is unique... for each a ∈ G, a⁻¹ is uniquely determined" (Proposition 1).
+- Dummit and Foote ([DummitFoote2003]), §1.1 "Basic Axioms and Examples," p. 17 — group axioms, uniqueness of identity/inverses.
 - Aluffi ([Aluffi2009]) — **Gap:** not held in either notebook (see `NOTEBOOK-SOURCE-GAPS.md`); this recommendation is offered as further reading, not an independently verified factual claim — Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003

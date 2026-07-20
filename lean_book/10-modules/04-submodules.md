@@ -4,6 +4,16 @@
 
 ---
 
+### Recall
+
+Formal definition cited in this section, gathered here for quick
+reference (full citation in the [Bibliography](../bibliography.md)):
+
+- **Submodule.** "An $R$-submodule of $M$ is a subgroup $N$ of $M$
+  which is closed under the action of ring elements, i.e., $rn \in N$,
+  for all $r \in R, n \in N$" ([DummitFoote2003], §10.1 "Basic
+  Definitions and Examples," p. 337).
+
 A **submodule** of $M$ is a subset closed under $+$, containing $0$, and
 closed under the scalar action. In Lean, "a subset closed under some
 operations" is naturally a `structure` bundling a *predicate* on `M`
@@ -119,9 +129,10 @@ this specific subset.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Dummit and Foote ([DummitFoote2003]), §10.1 "Basic Definitions and Examples," p. 337 — the standard classical (non-Lean) reference for submodules and their axioms, verified verbatim: "An R-submodule of M is a subgroup N of M which is closed under the action of ring elements, i.e., rn ∈ N, for all r ∈ R, n ∈ N."
+- Dummit and Foote ([DummitFoote2003]), §10.1 "Basic Definitions and Examples," p. 337 — submodules and their axioms.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

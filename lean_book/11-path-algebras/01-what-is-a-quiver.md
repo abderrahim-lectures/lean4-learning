@@ -4,6 +4,17 @@
 
 ---
 
+### Recall
+
+Formal definition cited in this section, gathered here for quick
+reference (full citation in the [Bibliography](../bibliography.md)):
+
+- **Quiver.** Stated verbatim as $Q = (Q_0, Q_1, s, t)$
+  ([AssemSimsonSkowronski2006], Definition 1.1, Ch. II §1 "Quivers
+  and path algebras"): a set of vertices $Q_0$, a set of arrows
+  $Q_1$, and two functions $s, t : Q_1 \to Q_0$ giving each arrow's
+  source and target.
+
 A **quiver** is a *directed graph*: a set of vertices and a set of
 directed edges (called **arrows**) between them. This is the same notion
 Mathlib calls [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) (built here from scratch, following Chapter
@@ -30,9 +41,10 @@ $$
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), **Definition 1.1** (Chapter II, §1, "Quivers and path algebras") — the standard graduate reference for the quiver definition above, stated there verbatim as $Q = (Q_0, Q_1, s, t)$.
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.1, Ch. II §1 "Quivers and path algebras" — quiver.
 - Schiffler ([Schiffler2014]) — an elementary, textbook-level treatment of the same definition.
 
 [AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006

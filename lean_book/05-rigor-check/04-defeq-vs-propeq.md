@@ -4,6 +4,26 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Definitional equality.** "Two terms that reduce to the same value
+  are called definitionally equal. They are considered 'the same' by
+  Lean's type checker" ([TPIL4], "Dependent Types"). Brief: `rfl`
+  succeeds exactly when this holds.
+- **Propositional equality.** "In other situations ... reductions
+  hold only propositionally, which is to say, they are equational
+  theorems that must be applied explicitly" ([TPIL4], "Dependent
+  Types" / "Tactics"). Brief: an ordinary `Prop` that must be proved;
+  definitional equality implies propositional equality, but not
+  conversely.
+- **Proof irrelevance.** "If `p : Prop` is any proposition, Lean's
+  kernel treats any two elements `t1 t2 : p` as being definitionally
+  equal ... This is known as proof irrelevance" ([TPIL4],
+  "Propositions and Proofs").
+
 Chapter 4 introduced [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) as "the proof that both sides compute to the
 same thing," using it freely without asking exactly what "compute to
 the same thing" means, or whether it is the *only* notion of equality
@@ -127,7 +147,8 @@ fields.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
 - Pierce ([Pierce2002]), Ch. 3, 11–12 — operational semantics and reduction, and the general distinction between checking equality by computation versus by proof that this section specializes to Lean's `rfl`/`=`.
 - Martin-Löf ([MartinLof1984]) — the original source distinguishing definitional (judgmental) equality from propositional equality, the exact distinction this section works through.

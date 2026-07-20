@@ -1,5 +1,15 @@
 \section{Translating into Lean}\label{sec:10-modules:02-translating-into-lean:1}
 
+\subsection{Recall}\label{sec:10-modules:02-translating-into-lean:0b}
+
+Formal definition cited in this section, gathered here for quick reference (full citation in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Module.} ``A binary operation \(+\) on \(M\) under which \(M\) is an abelian group, and ... an action of \(R\) on \(M\) ... (a) \((r+s)m = rm+sm\) ... (b) \((rs)m = r(sm)\) ... (c) \(r(m+n) = rm+rn\) ... (d) \(1m = m\)'' (\cite{DummitFoote2003}, §10.1 ``Basic Definitions and Examples,'' p.~336).
+\end{itemize}
+
 The same ``data, then axioms'' build used for \texttt{Group} and \texttt{Ring} applies here:
 
 \begin{lstlisting}
@@ -41,12 +51,12 @@ Read more: Mathlib's \href{https://loogle.lean-lang.org/?q=Module}{\texttt{Modul
 
 \subsection{References}\label{sec:10-modules:02-translating-into-lean:2}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
-  Dummit and Foote (\cite{DummitFoote2003}), \S10.1 ``Basic Definitions and Examples,'' p.~336 --- the module axioms (M1)--(M4) from the classical, non-Lean point of view, verified verbatim: ``a binary operation $+$ on $M$ under which $M$ is an abelian group, and... an action of $R$ on $M$... (a) $(r+s)m = rm+sm$... (b) $(rs)m = r(sm)$... (c) $r(m+n) = rm+rn$... (d) $1m = m$.''
+  Dummit and Foote (\cite{DummitFoote2003}), \S10.1 ``Basic Definitions and Examples,'' p.~336 --- module axioms (M1)--(M4).
 \item
   Weibel (\cite{Weibel1994}) --- the deeper module/homological theory this section's ``Read more'' points toward.
 \end{itemize}

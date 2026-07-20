@@ -4,6 +4,26 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Dependent type.** "The short explanation is that types can depend
+  on parameters" ([TPIL4], §2.8 "What makes dependent type theory
+  dependent?"). Brief: this book's primary example is `Fin n`, a
+  genuinely different type per `n`.
+- **Dependent function type ($\Pi$-type).** "The type
+  `(a : α) → β a` denotes the type of functions `f` with the property
+  that, for each `a : α`, `f a` is an element of `β a`" ([TPIL4],
+  §2.8). Brief: written here as $\prod_{x:A} B(x)$ (standard
+  mathematical notation for the same construct — TPIL4 itself uses
+  "dependent function type"/"dependent arrow type," not the $\Pi$
+  symbol); strictly generalizes the ordinary function type
+  $A \to B$.
+
+---
+
 Every function seen so far has a *fixed* codomain: `double : Nat → Nat`
 returns a `Nat` regardless of the input `n`. Lean's type theory allows
 something more general: a type that itself depends on a *value*, and a
@@ -288,9 +308,10 @@ it is the identical idea, with a richer index.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions and verbatim quotes are gathered in Recall, above.
 
-- *Theorem Proving in Lean 4* ([TPIL4]), §2.8 "What makes dependent type theory dependent?" — the official Lean documentation's own introduction to dependent types, verified verbatim: same `List α`/`Vector α n` example, same `(a : α) → β a` dependent-arrow-type notation. Note: TPIL4 itself never uses the term "Π-type" (it says "dependent function type"/"dependent arrow type" throughout); the $\Pi$ notation used in this book is standard mathematical convention layered on top, not a TPIL4 term.
+- *Theorem Proving in Lean 4* ([TPIL4]), §2.8 "What makes dependent type theory dependent?" — dependent type, dependent function type.
 - The Lean 4 source / [Mathlib4 API documentation][Mathlib4Docs] for `Fin` and `Vector` — confirmed directly in this section via `#print Fin` against the actual toolchain pinned in this repository's `lean_project/lean-toolchain`.
 - Thompson ([Thompson1991]) — §4.6 "Quantifiers," §6.3 "Dependent types and quantifiers" develop the same dependent-product/dependent-sum content, verified verbatim against the source. **Terminology note:** Thompson's primary notation is $\forall$/$\exists$ (he calls the Σ-type-equivalent an "(infinitary) sum type" / "dependent sum type"), not Π/Σ — the literal term "Sigma-type" never appears in his main text (only once, in a bibliography entry citing a different author's paper). Explicit Π-notation does appear later, in his meta-theory chapters (§8.3, §9.1.5), applied to dependent function spaces in a typed λ-calculus meta-language.
 - Chlipala ([Chlipala2013]) — **Correction:** this book's length-indexed-vector idea (`ilist : nat → Set`) is built in §8.1 "Length-Indexed Lists" and revisited in §9.1 "More Length-Indexed Lists," not Ch. 2–3 as previously stated here; verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`) — a useful second angle on the identical concept, in Coq rather than Lean.

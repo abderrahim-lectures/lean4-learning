@@ -1,5 +1,17 @@
 \section{\texorpdfstring{\texttt{structure}: bundling data together}{structure: bundling data together}}\label{sec:02-functions-and-structures:01-structure-basics:1}
 
+\subsection{Recall}\label{sec:02-functions-and-structures:01-structure-basics:0b}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Record / tuple.} ``The simplest of these is pairs, or more generally tuples, of values ... the generalization from n-ary tuples to labeled records is equally straightforward'' (\cite{Pierce2002}, §11.6--§11.8). Brief: \texttt{structure} is this book's realization of a labeled record.
+\item
+  \textbf{Categorical product (universal property).} For a category with a product \(A \times B\) (with projections \(p_A, p_B\)) and any object \(C\) with morphisms \(f : C \to A\), \(g : C \to B\): ``there is exactly one morphism \(h : C \to A \times B\) such that \(f = p_A h\) and \(g = p_B h\)'' (\cite{Pareigis1970}, §1.11, p.~30).
+\end{itemize}
+
 A \texttt{structure} groups several pieces of data under one name. We will use this Lean feature constantly once we define groups and rings.
 
 \begin{lstlisting}
@@ -43,14 +55,14 @@ Note also that structures can bundle \emph{proofs} alongside data, not just data
 
 \subsection{References}\label{sec:02-functions-and-structures:01-structure-basics:2}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions and verbatim quotes are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
   Lean 4 documentation (\cite{LeanDocs}) --- the constructor/projection/anonymous-constructor mechanics described above.
 \item
-  Pierce (\cite{Pierce2002}), §11.6 ``Pairs,'' §11.7 ``Tuples,'' §11.8 ``Records'' --- records and products as the standard language-theoretic account of what \texttt{structure} implements, verified verbatim: ``The simplest of these is pairs, or more generally tuples, of values\ldots{} {[}§11.8{]} the generalization from n-ary tuples to labeled records is equally straightforward.''
+  Pierce (\cite{Pierce2002}), §11.6 ``Pairs,'' §11.7 ``Tuples,'' §11.8 ``Records'' --- records and tuples.
 \item
-  Bodo Pareigis, \emph{Categories and Functors} (\cite{Pareigis1970}), §1.11, p.~30 --- the universal-property definition of a categorical product used in the ``Mathematical reading'' box above, verified verbatim: ``there is exactly one morphism \(h : C \to A \times B\) such that \(f = p_A h\) and \(g = p_B h\).''
+  Bodo Pareigis, \emph{Categories and Functors} (\cite{Pareigis1970}), §1.11, p.~30 --- universal property of a categorical product.
 \end{itemize}

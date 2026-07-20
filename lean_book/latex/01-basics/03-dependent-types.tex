@@ -1,5 +1,17 @@
 \section{Dependent types, with examples}\label{sec:01-basics:03-dependent-types:1}
 
+\subsection{Recall}\label{sec:01-basics:03-dependent-types:0b}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Dependent type.} ``The short explanation is that types can depend on parameters'' (\cite{TPIL4}, §2.8 ``What makes dependent type theory dependent?''). Brief: this book's primary example is \texttt{Fin n}, a genuinely different type per \texttt{n}.
+\item
+  \textbf{Dependent function type (\(\Pi\)-type).} ``The type \texttt{(a : α) → β a} denotes the type of functions \texttt{f} with the property that, for each \texttt{a : α}, \texttt{f a} is an element of \texttt{β a}'' (\cite{TPIL4}, §2.8). Brief: written here as \(\prod_{x:A} B(x)\) (standard mathematical notation for the same construct --- TPIL4 itself uses ``dependent function type''/``dependent arrow type,'' not the \(\Pi\) symbol); strictly generalizes the ordinary function type \(A \to B\).
+\end{itemize}
+
 Every function seen so far has a \emph{fixed} codomain: \texttt{double : Nat → Nat} returns a \texttt{Nat} regardless of the input \texttt{n}. Lean's type theory allows something more general: a type that itself depends on a \emph{value}, and a function whose return type changes depending on which argument it was given. This is a \textbf{dependent type}. It is the single feature that separates Lean (and other proof assistants) from an ordinary typed programming language, so it is worth building up slowly, from the smallest possible example, before naming the general pattern.
 
 \subsection{The problem, in Python first}\label{sec:01-basics:03-dependent-types:2}
@@ -155,12 +167,12 @@ Read more: \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{§5} gives Π-types (a
 
 \subsection{References}\label{sec:01-basics:03-dependent-types:8}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions and verbatim quotes are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
-  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §2.8 ``What makes dependent type theory dependent?'' --- the official Lean documentation's own introduction to dependent types, verified verbatim: same \texttt{List α}/\texttt{Vector α n} example, same \texttt{(a : α) → β a} dependent-arrow-type notation. Note: TPIL4 itself never uses the term ``Π-type'' (it says ``dependent function type''/``dependent arrow type'' throughout); the \(\Pi\) notation used in this book is standard mathematical convention layered on top, not a TPIL4 term.
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §2.8 ``What makes dependent type theory dependent?'' --- dependent type, dependent function type.
 \item
   The Lean 4 source / {[}Mathlib4 API documentation{]}\cite{Mathlib4Docs} for \texttt{Fin} and \texttt{Vector} --- confirmed directly in this section via \texttt{\#print Fin} against the actual toolchain pinned in this repository's \texttt{lean\_\allowbreak{}project/\allowbreak{}lean-\allowbreak{}toolchain}.
 \item

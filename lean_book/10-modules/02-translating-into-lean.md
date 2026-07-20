@@ -4,6 +4,17 @@
 
 ---
 
+### Recall
+
+Formal definition cited in this section, gathered here for quick
+reference (full citation in the [Bibliography](../bibliography.md)):
+
+- **Module.** "A binary operation $+$ on $M$ under which $M$ is an
+  abelian group, and ... an action of $R$ on $M$ ... (a)
+  $(r+s)m = rm+sm$ ... (b) $(rs)m = r(sm)$ ... (c)
+  $r(m+n) = rm+rn$ ... (d) $1m = m$" ([DummitFoote2003], §10.1
+  "Basic Definitions and Examples," p. 336).
+
 The same "data, then axioms" build used for `Group` and `Ring` applies here:
 
 ```lean
@@ -60,9 +71,10 @@ some already-fixed ring.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Dummit and Foote ([DummitFoote2003]), §10.1 "Basic Definitions and Examples," p. 336 — the module axioms (M1)–(M4) from the classical, non-Lean point of view, verified verbatim: "a binary operation + on M under which M is an abelian group, and... an action of R on M... (a) (r+s)m = rm+sm... (b) (rs)m = r(sm)... (c) r(m+n) = rm+rn... (d) 1m = m."
+- Dummit and Foote ([DummitFoote2003]), §10.1 "Basic Definitions and Examples," p. 336 — module axioms (M1)–(M4).
 - Weibel ([Weibel1994]) — the deeper module/homological theory this section's "Read more" points toward.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003

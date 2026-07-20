@@ -4,6 +4,23 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Progress (Theorem 9.3.5).** "Suppose $t$ is a closed, well-typed
+  term (that is, $\vdash t : T$ for some $T$). Then either $t$ is a
+  value or else there is some $t'$ with $t \to t'$" ([Pierce2002],
+  §9.3 "Properties of Typing").
+- **Preservation (Theorem 9.3.9).** "If $\Gamma \vdash t : T$ and
+  $t \to t'$, then $\Gamma \vdash t' : T$" ([Pierce2002], §9.3).
+- **Universe-formation rule.** This book's working statement, after
+  the calculus of constructions ([CoquandHuet1988]):
+  $\mathtt{Type}\,i : \mathtt{Type}\,(i+1)$, and a Π-type built from
+  $A : \mathtt{Type}\,i$, $B : \mathtt{Type}\,j$ lands in
+  $\mathtt{Type}\,(\max(i,j))$.
+
 Chapters 1–4 have relied on Lean's type checking constantly without ever
 seeing its rules written down. This section makes two things precise:
 the actual rules Lean's kernel checks a term against (using a small,
@@ -218,7 +235,8 @@ at all, because nothing checks proofs against it.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
 - Pierce ([Pierce2002]), **Correction:** this section's material is in Ch. 8 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 9 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC) — not Ch. 9–11 as previously stated; Ch. 11 "Simple Extensions" covers pairs/tuples/records/sums, unrelated to this section's content. Verified verbatim.
 - Milner ([Milner1978]) — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.

@@ -1,5 +1,19 @@
 \section{Typing rules and safety}\label{sec:05-rigor-check:03-typing-rules-and-safety:1}
 
+\subsection{Recall}\label{sec:05-rigor-check:03-typing-rules-and-safety:0b}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Progress (Theorem 9.3.5).} ``Suppose \(t\) is a closed, well-typed term (that is, \(\vdash t : T\) for some \(T\)). Then either \(t\) is a value or else there is some \(t'\) with \(t \to t'\)'' (\cite{Pierce2002}, §9.3 ``Properties of Typing'').
+\item
+  \textbf{Preservation (Theorem 9.3.9).} ``If \(\Gamma \vdash t : T\) and \(t \to t'\), then \(\Gamma \vdash t' : T\)'' (\cite{Pierce2002}, §9.3).
+\item
+  \textbf{Universe-formation rule.} This book's working statement, after the calculus of constructions (\cite{CoquandHuet1988}): \(\mathtt{Type}\,i : \mathtt{Type}\,(i+1)\), and a Π-type built from \(A : \mathtt{Type}\,i\), \(B : \mathtt{Type}\,j\) lands in \(\mathtt{Type}\,(\max(i,j))\).
+\end{itemize}
+
 Chapters 1--4 have relied on Lean's type checking constantly without ever seeing its rules written down. This section makes two things precise: the actual rules Lean's kernel checks a term against (using a small, representative fragment, the \textbf{simply typed λ-calculus}, STLC), and the specific rule governing the universe hierarchy §2 just introduced informally.
 
 An untyped calculus has a serious defect: it permits terms that reduce forever (Chapter 1 §4 mentioned β-reduction; nothing there stopped a term from β-reducing to itself, endlessly), and nothing prevents applying one kind of value where a completely different kind was intended. STLC fixes this by attaching a \textbf{type} to every term and requiring application to respect types --- the direct ancestor of Chapter 1's ``every expression has a type.''
@@ -136,7 +150,7 @@ Python allows \texttt{type} to be its own type, with no stratification at all, b
 
 \subsection{References}\label{sec:05-rigor-check:03-typing-rules-and-safety:7}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
