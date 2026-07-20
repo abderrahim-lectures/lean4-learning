@@ -85,7 +85,7 @@ They are the same laws, but stated generically over `[Ring R]` (or the weaker
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Dummit and Foote ([DummitFoote2003]) — the standard definition of a ring homomorphism, used above.
+- Dummit and Foote ([DummitFoote2003]), §7.3 "Ring Homomorphisms and Quotient Rings," p. 239 — the standard definition of a ring homomorphism, used above, verified verbatim: "A ring homomorphism is a map φ : R → S satisfying (i) φ(a+b) = φ(a)+φ(b)... and (ii) φ(ab) = φ(a)φ(b)."
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

@@ -25,7 +25,7 @@ permutation groups, and to every group built later.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for the three theorems this chapter formalizes (uniqueness of the identity, uniqueness of inverses, and the inverse-of-a-product law), all standard early consequences of the group axioms.
+- Dummit and Foote ([DummitFoote2003]), §1.1 "Basic Axioms and Examples," pp. 17–18, Proposition 1 — the standard classical (non-Lean) reference for the three theorems this chapter formalizes (uniqueness of the identity, uniqueness of inverses, and the inverse-of-a-product law), verified verbatim: "the identity of G is unique... for each a ∈ G, a⁻¹ is uniquely determined... (a*b)⁻¹ = (b⁻¹)*(a⁻¹)."
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

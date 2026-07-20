@@ -65,8 +65,8 @@ $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for the ring axioms (R1)–(R4) and their consequences.
-- Aluffi ([Aluffi2009]) — a ring-theory treatment using the same categorical framing (forgetful functors, universal properties) this book uses.
+- Dummit and Foote ([DummitFoote2003]), §7.1 "Basic Definitions and Examples," pp. 222–225 — the standard classical (non-Lean) reference for the ring axioms (R1)–(R4) and their consequences, verified verbatim: "(i) (R, +) is an abelian group, (ii) × is associative... (iii) the distributive laws hold" and, for consequences, "0a = a0 = 0 for all a ∈ R" (Proposition 1).
+- Aluffi ([Aluffi2009]) — **Gap:** not held in either notebook (see `NOTEBOOK-SOURCE-GAPS.md`); this recommendation is offered as further reading, not an independently verified factual claim — Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

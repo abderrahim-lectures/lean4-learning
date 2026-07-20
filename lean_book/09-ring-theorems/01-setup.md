@@ -34,7 +34,7 @@ the underlying additive group of $R$."
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for the two theorems this chapter formalizes ($a \cdot 0 = 0$ and the sign rule), both standard early consequences of the ring axioms.
+- Dummit and Foote ([DummitFoote2003]), §7.1 "Basic Definitions and Examples," p. 225, Proposition 1 — the standard classical (non-Lean) reference for the two theorems this chapter formalizes ($a \cdot 0 = 0$ and the sign rule), verified verbatim: "0a = a0 = 0 for all a ∈ R... (-a)b = a(-b) = -(ab) for all a, b ∈ R."
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
