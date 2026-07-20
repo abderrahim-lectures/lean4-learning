@@ -62,8 +62,9 @@ with no more reductions available is in **normal form**. `#eval`
 (Chapter 1) computes a term's normal form and prints it. `rfl` (Chapter 3)
 succeeds exactly when both sides of an equation share a normal form. In
 practice, Lean's kernel usually only reduces as far as it needs to
-progress: down to **weak head normal form** (far enough to see the
-outermost constructor or function head), not necessarily all the way
+progress: down to **weak head normal form** ([Thompson1991], §2.3, p. 36,
+Definition 2.8) — far enough to see the
+outermost constructor or function head, not necessarily all the way
 down. This is why, for example, `Nat.add`'s recursion on its *second*
 argument (Chapter 4) determines which side of an equation reduces "for
 free" and which needs an explicit inductive argument. Lean only unfolds
@@ -78,11 +79,13 @@ variable `x`, an abstraction `fun x => t` (written $\lambda x.\, t$), or
 an application `t1 t2`, and nothing else — no built-in numbers, booleans,
 `if`, or recursion; every one of those is *encoded* as a term built from
 these three constructs alone. In $\lambda x.\, t$, occurrences of `x`
-inside `t` are **bound**; any other variable is **free** — exactly Lean's
+inside `t` are **bound**; any other variable is **free** ([Pierce2002],
+§5.1, p. 55) — exactly Lean's
 ordinary lexical scoping. Two abstractions differing only in a bound
 variable's name (`fun a => a` vs. `fun x => x`) are considered the *same*
-term (**α-conversion**); Lean's elaborator treats them as interchangeable
-without comment. The one computation rule, **β-reduction**, is applying an
+term (**α-conversion**, [Pierce2002], §5.3, p. 73); Lean's elaborator treats them as interchangeable
+without comment. The one computation rule, **β-reduction**
+([Pierce2002], §5.1, p. 56), is applying an
 abstraction to an argument by substitution:
 $$
 (\lambda x.\, t)\, s \;\longrightarrow_\beta\; t[x := s]
@@ -90,10 +93,12 @@ $$
 — precisely definitional equality's engine: `(fun x => x * 2) 5` reduces,
 by exactly this rule, to `5 * 2`. Every abstraction takes exactly *one*
 argument; a "two-argument function" `fun x y => t` is really `fun x => fun
-y => t`, a function returning a function — this is **currying**, why
+y => t`, a function returning a function — this is **currying**
+([Pierce2002], §5.2, pp. 58–59), why
 `Nat → Nat → Nat` is genuinely `Nat → (Nat → Nat)`, one argument at a
 time, with no separate multi-argument mechanism underneath. Finally, the
-**Church–Rosser theorem** guarantees that if a term has several possible
+**Church–Rosser theorem** ([Thompson1991], §2.3, p. 38, Theorem 2.10)
+guarantees that if a term has several possible
 next reduction steps, reducing them in any order that terminates reaches
 the *same* normal form — the theoretical bedrock under never having to
 worry that elaborating an expression "the wrong order" gives a different
@@ -166,7 +171,8 @@ later use can simply point back to this entry instead of re-explaining
 
 #### Universal property
 
-This is a characterization of a construction not by what it is *made of*,
+([MacLane1998], Ch. III §1, p. 55, via "universal arrows," the general
+categorical form of the concept.) This is a characterization of a construction not by what it is *made of*,
 but by what maps *uniquely factor through it*. "$X$ has property $U$"
 means "for every $Y$ with the relevant data, there is exactly one map
 $Y \to X$ compatible with that data." This is the category-theorist's way
@@ -207,7 +213,7 @@ combining them.
 
 #### Initial object
 
-This is an object $I$ of a category with a *unique* morphism
+([MacLane1998], Ch. I §5, p. 20.) This is an object $I$ of a category with a *unique* morphism
 $I \to X$ out to every other object $X$: the universal property above,
 specialized to "the best possible source":
 
@@ -232,7 +238,7 @@ is forced, with no choice involved.
 
 #### Forgetful functor
 
-This is a functor that takes a structure and *keeps only
+([MacLane1998], Ch. I §3, p. 14.) This is a functor that takes a structure and *keeps only
 part of it*, discarding the rest. Examples: the map sending a group $G$ to
 its underlying set (forgetting the multiplication), or a `Ring` to its
 underlying `Group` under addition (forgetting multiplication and its
@@ -261,6 +267,8 @@ data and drops the rest.
 
 #### Subobject / full subcategory
 
+Subobject: [MacLane1998], Ch. III §7, p. 126 (equivalently [Pareigis1970],
+§1.6, p. 20). Full subcategory: [MacLane1998], Ch. I §3, p. 15.
 A subobject of $X$ is (informally) "a
 subset of $X$ cut out by some condition, remembered together with its
 inclusion into $X$." For example, `CommGroup` is a subobject of `Group`'s
@@ -290,6 +298,29 @@ presheaf category, and the like), treat it as genuinely optional bonus
 content for readers who already know it. Nothing later in the book
 depends on it, and the surrounding plain-English explanation always stands
 on its own without it.
+
+---
+
+### References
+
+Full citations in the [Bibliography](../bibliography.md).
+
+- Pierce ([Pierce2002]), §5.1 "Basics," p. 55 — the definition of free variables used above, verified verbatim: "An occurrence of x is free if it appears in a position where it is not bound by an enclosing abstraction on x."
+- Pierce ([Pierce2002]), §5.1 "Basics," p. 56 — the definition of β-reduction used above, verified verbatim: "the operation of rewriting a redex according to the above rule is called beta-reduction."
+- Pierce ([Pierce2002]), §5.2 "Programming in the Lambda-Calculus," pp. 58–59 — the definition of currying used above, verified verbatim: "the transformation of multi-argument functions into higher-order functions is called currying in honor of Haskell Curry."
+- Pierce ([Pierce2002]), §5.3 "Formalities," p. 73 — the definition of α-conversion used above, verified verbatim: "Church used the term alpha-conversion for the operation of consistently renaming a bound variable in a term."
+- Thompson ([Thompson1991]), §2.3 "Evaluation," p. 36, Definition 2.8 — the definition of weak head normal form used above, verified verbatim: "Weak Head Normal Form: All expressions which are either λ-abstractions or of the form $\lambda x_1 \ldots \lambda x_n.\, y e_1 \ldots e_m$."
+- Thompson ([Thompson1991]), §2.3 "Evaluation," p. 38, Theorem 2.10 — the Church–Rosser theorem used above, verified verbatim: "For all e, f and g, if e → f and e → g then there exists h such that f → h and g → h."
+- Mac Lane ([MacLane1998]), Ch. III §1 "Universal Arrows," p. 55 — the general categorical form of "universal property" used above, verified verbatim: "a universal arrow from c to S is a pair (r, u) ... such that to every pair (d, f) ... there is a unique arrow f' : r → d ... with Sf' ∘ u = f."
+- Mac Lane ([MacLane1998]), Ch. I §5, p. 20 — the definition of initial object used above, verified verbatim: "An object s is initial in C if to each object a there is exactly one arrow s → a."
+- Mac Lane ([MacLane1998]), Ch. I §3 "Functors," p. 14 — the definition of forgetful functor used above, verified verbatim: "A functor which simply 'forgets' some or all of the structure of an algebraic object is commonly called a forgetful functor (or, an underlying functor)."
+- Mac Lane ([MacLane1998]), Ch. III §7 "Subobjects and Generators," p. 126 — the definition of subobject used above, verified verbatim: "the corresponding equivalence classes of these monics are called the subobjects of a." Equivalently, Pareigis ([Pareigis1970]), §1.6 "Subobjects and Quotient Objects," p. 20.
+- Mac Lane ([MacLane1998]), Ch. I §3 "Functors," p. 15 — the definition of full subcategory used above, verified verbatim: "We say that S is a full subcategory of C when the inclusion functor S → C is full."
+
+[Pierce2002]: ../bibliography.md#pierce2002
+[Thompson1991]: ../bibliography.md#thompson1991
+[MacLane1998]: ../bibliography.md#maclane1998
+[Pareigis1970]: ../bibliography.md#pareigis1970
 
 ---
 

@@ -174,7 +174,8 @@ ways a `Nat` can ever have been built.
 > and
 > [`Sum`](https://leanprover-community.github.io/mathlib4_docs/Init/Core.html#Sum),
 > and this $+$ is distinct from the numeric $+$ introduced later in this
-> box, notation notwithstanding). An **$F$-algebra** is a type $X$
+> box, notation notwithstanding). For an arbitrary endofunctor $F$, an
+> **$F$-algebra** ([Jacobs1999], §2.6, p. 161) is a type $X$
 > equipped with a map $F(X) \to X$. By the universal property of $+$, a
 > map $(1 + X) \to X$ is equivalent to a pair consisting of an element
 > $z : X$ and a self-map $s : X \to X$ — $z$ for "zero component," to
@@ -234,6 +235,7 @@ Full citations in the [Bibliography](../bibliography.md).
 - Martin-Löf ([MartinLof1984]), Ch. 1, "Judgements and their explanations" — the formal definition of "judgment" used above.
 - Pierce ([Pierce2002]), §1.1 "Types in Computer Science," §1.2 "What Type Systems Are Good For" — on what a static type system buys (ruling out whole classes of runtime failure before execution), verified verbatim: "A type system is a tractable syntactic method for proving the absence of certain program behaviors..."; independent of any particular language.
 - Mac Lane ([MacLane1998]), Ch. I §5, p. 20 — the universal-property reading of `Nat` used in the optional box above, verified verbatim: "An object $s$ is initial in $C$ if to each object $a$ there is exactly one arrow $s \to a$."
+- Jacobs ([Jacobs1999]), §2.6, p. 161 — the general definition of an algebra for an endofunctor used in the optional box's Step 1, verified verbatim: "For an arbitrary endofunctor $T : \mathbb{B} \to \mathbb{B}$ an algebra (or $T$-algebra) consists of a 'carrier' object $Y \in \mathbb{B}$ together with a morphism $\varphi : T(Y) \to Y$" (this book writes $F$ for Jacobs's $T$).
 - Jacobs ([Jacobs1999]), §2.6, pp. 159–162 — the precise categorical framing used in the optional box's second paragraph: `Nat` as the initial algebra for $F(X) = 1 + X$, verified verbatim: "Notice that an initial algebra of the functor $X \mapsto 1 + X$ is a natural numbers object."
 - Jacobs ([Jacobs1999]), §2.6, p. 159, and Mac Lane ([MacLane1998]), Appendix "Foundations," p. 292 — the standard name (NNO) for the same construction, equivalent to the initial-algebra framing above.
 
