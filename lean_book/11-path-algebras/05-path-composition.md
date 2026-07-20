@@ -4,6 +4,22 @@
 
 ---
 
+### Recall
+
+Formal definition cited in this section, gathered here for quick
+reference (full citation in the [Bibliography](../bibliography.md)):
+
+- **Path algebra $kQ$.** "Let $Q$ be a quiver. The path algebra $KQ$
+  of $Q$ is the $K$-algebra whose underlying $K$-vector space has as
+  its basis the set of all paths $(a \mid \alpha_1, \ldots, \alpha_l
+  \mid b)$ of length $l \geq 0$ in $Q$ and such that the product of
+  two basis vectors $(a \mid \alpha_1, \ldots, \alpha_l \mid b)$ and
+  $(c \mid \beta_1, \ldots, \beta_k \mid d)$ of $KQ$ is defined by
+  $(a \mid \alpha_1, \ldots, \alpha_l \mid b)(c \mid \beta_1, \ldots,
+  \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l,
+  \beta_1, \ldots, \beta_k \mid d)$" ([AssemSimsonSkowronski2006],
+  Ch. II §1, Definition 1.2).
+
 Given a path `p : Path Q u v` and a path `q : Path Q v w`, they can be concatenated
 into a path `Path Q u w`, defined by recursion on `q`:
 
@@ -136,8 +152,7 @@ q \cdot p = \begin{cases} q\circ p & \text{if } t(p) = s(q),\\ 0 &
 $$
 and unit $\sum_{v\in V} e_v$ (the sum of the trivial paths) — well-defined
 as a finite sum, hence a genuine identity element, precisely when $Q_0$ is
-finite; see [AssemSimsonSkowronski2006], Definition 1.2, remark following.
-So representations of $Q$ are exactly $kQ$-modules, the bridge to
+finite. So representations of $Q$ are exactly $kQ$-modules, the bridge to
 Chapter 10 promised there. The construction requires finitely-supported
 functions $\{\text{paths}\} \to k$, i.e. the free module, which is why
 only the composition (the category layer) is formalized here.
@@ -145,8 +160,8 @@ only the composition (the category layer) is formalized here.
 > **Not independently verified.** The description of $kQ$ as "the
 > $k$-linearization of the free category $\mathrm{Free}(Q)$, its category
 > algebra" is standard category-theory folklore, but it is *not* stated
-> verbatim in either of this chapter's two cited sources
-> ([AssemSimsonSkowronski2006], [Schiffler2014]) — both define $kQ$
+> verbatim in either of this chapter's two cited sources, Assem–Simson–Skowroński
+> or Schiffler — both define $kQ$
 > directly by basis-and-multiplication, as above, without naming it a
 > "category algebra." Treat that equivalence as a remark, not a cited
 > fact, until a source stating it explicitly is added to the
@@ -162,9 +177,10 @@ only the composition (the category layer) is formalized here.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), **Definition 1.2** (Chapter II, §1) — the path algebra $kQ$: basis = all paths (including stationary ones), product of two basis paths equal to their concatenation if endpoints match, else $0$, extended by distributivity. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*.
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.2, Ch. II §1 — path algebra $kQ$. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*.
 - Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2) — same construction; unit given explicitly as $1 = \sum_{i\in Q_0} e_i$ in the lemma immediately following (Lemma 4.3 in that source's numbering).
 
 [AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006

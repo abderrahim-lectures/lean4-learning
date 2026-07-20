@@ -1,6 +1,16 @@
 \section{\texorpdfstring{\texttt{Prop}: the type of statements}{Prop: the type of statements}}\label{sec:03-propositions-and-proofs:01-prop:1}
 
-Alongside \texttt{Type}, Lean has \texttt{Prop}, the type of logical propositions. A term of type \texttt{P : Prop} is a \textbf{proof} of \texttt{P}. This is the \textbf{Curry--Howard correspondence} (Howard, \cite{Howard1980}): propositions are types, and proofs are programs.
+\subsection{Recall}\label{sec:03-propositions-and-proofs:01-prop:0b}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Curry--Howard correspondence.} ``The fact that the rules for implication in a proof system for natural deduction correspond exactly to the rules governing abstraction and application for functions is an instance of the Curry-Howard isomorphism, sometimes known as the propositions-as-types paradigm'' (\cite{TPIL4}, ``Propositions and Proofs''; the correspondence traces to Howard's 1969 manuscript, circulated privately and formally published as \cite{Howard1980}). Brief: propositions are types, proofs are terms.
+\end{itemize}
+
+Alongside \texttt{Type}, Lean has \texttt{Prop}, the type of logical propositions. A term of type \texttt{P : Prop} is a \textbf{proof} of \texttt{P}. This is the \textbf{Curry--Howard correspondence}: propositions are types, and proofs are programs.
 
 \subsection{The Curry--Howard correspondence, in full}\label{sec:03-propositions-and-proofs:01-prop:2}
 
@@ -53,12 +63,12 @@ The Curry--Howard correspondence identifies a proposition \(P\) with the \emph{s
 
 \subsection{References}\label{sec:03-propositions-and-proofs:01-prop:3}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
   Howard (\cite{Howard1980}) --- the original source of the correspondence this section is named for. Per Sørensen \& Urzyczyn, \emph{Lectures on the Curry-Howard Isomorphism}, Studies in Logic and the Foundations of Mathematics vol.~149, Elsevier, 2006 (a secondary source corroborating this history, not Howard's paper itself): Howard's manuscript was ``privately circulated'' from 1969 and not formally published until 1980, in Curry's Festschrift; it develops the proofs-as-terms correspondence for implicational logic, extends it to the other propositional connectives, then to a term language for Heyting Arithmetic.
 \item
-  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), ``Propositions and Proofs'' --- Lean's own treatment of the correspondence, matching the dictionary above.
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), ``Propositions and Proofs'' --- Curry--Howard correspondence.
 \end{itemize}

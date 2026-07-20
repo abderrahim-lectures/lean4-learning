@@ -4,6 +4,17 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Ring.** "(i) $(R, +)$ is an abelian group, (ii) $\times$ is
+  associative ... (iii) the distributive laws hold" ([DummitFoote2003],
+  §7.1 "Basic Definitions and Examples," pp. 222–223). A basic
+  consequence: "$0a = a0 = 0$ for all $a \in R$" (p. 225, Proposition
+  1).
+
 ```lean
 structure Ring (R : Type) where
   addGrp : CommGroup R
@@ -63,9 +74,10 @@ $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Dummit and Foote ([DummitFoote2003]), §7.1 "Basic Definitions and Examples," pp. 222–225 — the standard classical (non-Lean) reference for the ring axioms (R1)–(R4) and their consequences, verified verbatim: "(i) (R, +) is an abelian group, (ii) × is associative... (iii) the distributive laws hold" and, for consequences, "0a = a0 = 0 for all a ∈ R" (Proposition 1).
+- Dummit and Foote ([DummitFoote2003]), §7.1 "Basic Definitions and Examples," pp. 222–225 — ring axioms (R1)–(R4) and their consequences.
 - Aluffi ([Aluffi2009]) — **Gap:** not held in either notebook (see `NOTEBOOK-SOURCE-GAPS.md`); this recommendation is offered as further reading, not an independently verified factual claim — Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003

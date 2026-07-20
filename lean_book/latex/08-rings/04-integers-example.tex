@@ -1,5 +1,15 @@
 \section{Example: the integers as a ring}\label{sec:08-rings:04-integers-example:1}
 
+\subsection{Recall}\label{sec:08-rings:04-integers-example:0b}
+
+Formal definition cited in this section, gathered here for quick reference (full citation in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Ring homomorphism.} ``A ring homomorphism is a map \(\varphi : R \to S\) satisfying (i) \(\varphi(a+b) = \varphi(a)+\varphi(b)\) ... and (ii) \(\varphi(ab) = \varphi(a)\varphi(b)\)'' (\cite{DummitFoote2003}, §7.3 ``Ring Homomorphisms and Quotient Rings,'' p.~239).
+\end{itemize}
+
 We reuse \texttt{intGroup} from Chapter 6 as the additive part.
 
 \begin{lstlisting}
@@ -38,7 +48,7 @@ Every proof obligation is again a one-line \texttt{exact} naming a specific core
 
 \begin{mathreading}
 
-This shows \((\mathbb{Z}, +, \times, 0, 1)\) as an object of \(\mathbf{Ring}\) --- in fact the \hyperref[sec:01-basics:04-terminology:1]{\emph{initial} object}, since there is a unique \textbf{ring homomorphism} \(\mathbb{Z} \to R\) into any ring --- a function preserving \(+\), \(\times\), \(0\), and \(1\) (\cite{DummitFoote2003}). First \texttt{intCommGroup} upgrades the additive group \((\mathbb{Z},+)\) to an abelian group by supplying commutativity (\(a + b = b + a\)); then \texttt{intRing} adds the multiplicative monoid \((\mathbb{Z}, \times, 1)\) and checks the distributive laws \(a(b+c) = ab + ac\) and \((a+b)c = ac + bc\). Each obligation is the named \(\mathbb{Z}\)-arithmetic fact, so the term is the formal counterpart of ``\(\mathbb{Z}\) is a commutative ring.''
+This shows \((\mathbb{Z}, +, \times, 0, 1)\) as an object of \(\mathbf{Ring}\) --- in fact the \hyperref[sec:01-basics:04-terminology:1]{\emph{initial} object}, since there is a unique \textbf{ring homomorphism} \(\mathbb{Z} \to R\) into any ring --- a function preserving \(+\), \(\times\), \(0\), and \(1\). First \texttt{intCommGroup} upgrades the additive group \((\mathbb{Z},+)\) to an abelian group by supplying commutativity (\(a + b = b + a\)); then \texttt{intRing} adds the multiplicative monoid \((\mathbb{Z}, \times, 1)\) and checks the distributive laws \(a(b+c) = ab + ac\) and \((a+b)c = ac + bc\). Each obligation is the named \(\mathbb{Z}\)-arithmetic fact, so the term is the formal counterpart of ``\(\mathbb{Z}\) is a commutative ring.''
 
 \end{mathreading}
 
@@ -58,10 +68,10 @@ example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
 
 \subsection{References}\label{sec:08-rings:04-integers-example:2}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
-  Dummit and Foote (\cite{DummitFoote2003}), \S7.3 ``Ring Homomorphisms and Quotient Rings,'' p.~239 --- the standard definition of a ring homomorphism, used above, verified verbatim: ``A ring homomorphism is a map $\varphi : R \to S$ satisfying (i) $\varphi(a+b) = \varphi(a)+\varphi(b)$... and (ii) $\varphi(ab) = \varphi(a)\varphi(b)$.''
+  Dummit and Foote (\cite{DummitFoote2003}), \S7.3 ``Ring Homomorphisms and Quotient Rings,'' p.~239 --- ring homomorphism.
 \end{itemize}

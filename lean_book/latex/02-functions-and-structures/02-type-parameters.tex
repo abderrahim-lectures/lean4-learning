@@ -1,5 +1,17 @@
 \section{Structures with type parameters}\label{sec:02-functions-and-structures:02-type-parameters:1}
 
+\subsection{Recall}\label{sec:02-functions-and-structures:02-type-parameters:0b}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Type-parameterized structure.} This book's working statement: \texttt{structure Pair (α β : Type)} defines a whole \emph{family} of products at once --- one instance per choice of type arguments --- categorically a functor of the type parameters, not a single fixed structure.
+\item
+  \textbf{Parametric polymorphism.} After Milner (\cite{Milner1978}), the theoretical account of type polymorphism that Python's \texttt{TypeVar} and Lean's \texttt{\{α : Type\} → ...} both implement to different degrees. Brief: genericity that is \emph{proved} once for every type, checked before the generic code is ever called, unlike an optional/erased type annotation.
+\end{itemize}
+
 \begin{lstlisting}
 structure Pair ((*$\alpha$*) (*$\beta$*) : Type) where
   fst : (*$\alpha$*)
@@ -28,12 +40,12 @@ Python code like \texttt{def identity(x): return x} or \texttt{class Pair: def \
 
 \subsection{References}\label{sec:02-functions-and-structures:02-type-parameters:2}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
   Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) --- for the Python-side comparison used in this section's box.
 \item
-  Milner (\cite{Milner1978}) --- the theoretical account of parametric polymorphism that \texttt{TypeVar}, and Lean's \texttt{\{α : Type\} → ...}, both implement to different degrees.
+  Milner (\cite{Milner1978}) --- parametric polymorphism.
 \end{itemize}

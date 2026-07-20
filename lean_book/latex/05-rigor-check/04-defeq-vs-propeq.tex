@@ -1,5 +1,19 @@
 \section{Definitional versus propositional equality}\label{sec:05-rigor-check:04-defeq-vs-propeq:1}
 
+\subsection{Recall}\label{sec:05-rigor-check:04-defeq-vs-propeq:0b}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Definitional equality.} ``Two terms that reduce to the same value are called definitionally equal. They are considered `the same' by Lean's type checker'' (\cite{TPIL4}, ``Dependent Types''). Brief: \texttt{rfl} succeeds exactly when this holds.
+\item
+  \textbf{Propositional equality.} ``In other situations ... reductions hold only propositionally, which is to say, they are equational theorems that must be applied explicitly'' (\cite{TPIL4}, ``Dependent Types'' / ``Tactics''). Brief: an ordinary \texttt{Prop} that must be proved; definitional equality implies propositional equality, but not conversely.
+\item
+  \textbf{Proof irrelevance.} ``If \texttt{p : Prop} is any proposition, Lean's kernel treats any two elements \texttt{t1 t2 : p} as being definitionally equal ... This is known as proof irrelevance'' (\cite{TPIL4}, ``Propositions and Proofs'').
+\end{itemize}
+
 Chapter 4 introduced \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} as ``the proof that both sides compute to the same thing,'' using it freely without asking exactly what ``compute to the same thing'' means, or whether it is the \emph{only} notion of equality Lean has. It is not. Lean has (at least) two, and confusing them is a common source of real confusion once proofs get more intricate. They are worth separating out clearly now.
 
 \subsection{Definitional equality}\label{sec:05-rigor-check:04-defeq-vs-propeq:2}
@@ -51,7 +65,7 @@ Read more: TPiL's chapter on structures discusses eta for structures directly; t
 
 \subsection{References}\label{sec:05-rigor-check:04-defeq-vs-propeq:7}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist

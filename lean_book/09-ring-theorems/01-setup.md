@@ -4,6 +4,15 @@
 
 ---
 
+### Recall
+
+Formal definition cited in this section, gathered here for quick
+reference (full citation in the [Bibliography](../bibliography.md)):
+
+- **Ring theorems proved here.** "$0a = a0 = 0$ for all $a \in R$ ...
+  $(-a)b = a(-b) = -(ab)$ for all $a, b \in R$" ([DummitFoote2003],
+  §7.1 "Basic Definitions and Examples," p. 225, Proposition 1).
+
 ```lean
 variable {R : Type} (Rg : Ring R)
 ```
@@ -32,9 +41,10 @@ the underlying additive group of $R$."
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Dummit and Foote ([DummitFoote2003]), §7.1 "Basic Definitions and Examples," p. 225, Proposition 1 — the standard classical (non-Lean) reference for the two theorems this chapter formalizes ($a \cdot 0 = 0$ and the sign rule), verified verbatim: "0a = a0 = 0 for all a ∈ R... (-a)b = a(-b) = -(ab) for all a, b ∈ R."
+- Dummit and Foote ([DummitFoote2003]), §7.1 "Basic Definitions and Examples," p. 225, Proposition 1 — $a \cdot 0 = 0$ and the sign rule.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

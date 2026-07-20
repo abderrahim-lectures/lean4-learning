@@ -4,6 +4,18 @@
 
 ---
 
+### Recall
+
+Formal definition cited in this section, gathered here for quick
+reference (full citation in the [Bibliography](../bibliography.md)):
+
+- **Decidable proposition (`sumbool`).** "`Inductive sumbool (A :
+  Prop) (B : Prop) : Set := left : A → {A} + {B} | right : B → {A} +
+  {B}`" ([Chlipala2013], §6.2 "Decidable Proposition Types," p. 110).
+  Brief: a type witnessing that a proposition's truth value is
+  computable — a constructive "$P \vee \neg P$, and we can tell
+  which."
+
 For goals that are *decidable* — where "true or false" can be settled by a
 terminating algorithm instead of a hand-built argument — Lean has tactics
 that just run that algorithm:
@@ -58,9 +70,10 @@ compute, and thus must be *proved* from the axioms instead of
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Chlipala ([Chlipala2013]), §6.2 "Decidable Proposition Types" — **Correction:** previously cited as Pierce2002, but TAPL does not discuss `Decidable` as a type-theoretic notion at all; §6.2 of Chlipala's *Certified Programming with Dependent Types* is the actual source for this notion (a type witnessing that a proposition's truth value is computable), the formal counterpart of the informal definition above.
+- Chlipala ([Chlipala2013]), §6.2 "Decidable Proposition Types" — **Correction:** previously cited as Pierce2002, but TAPL does not discuss `Decidable` as a type-theoretic notion at all; §6.2 of Chlipala's *Certified Programming with Dependent Types* is the actual source.
 
 [Chlipala2013]: ../bibliography.md#chlipala2013
 
