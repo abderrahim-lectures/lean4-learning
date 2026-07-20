@@ -301,6 +301,34 @@ on its own without it.
 
 ---
 
+### Recall
+
+Quick reminders of the definitions this section introduced, for anyone
+skimming back to check a term:
+
+- **Bound / free variable** — inside `λx.t`, occurrences of `x` in `t`
+  are bound; any other variable is free.
+- **α-conversion** — renaming a bound variable does not change a
+  term's identity.
+- **β-reduction** — applying an abstraction to an argument by
+  substitution: $(\lambda x.\, t)\, s \to t[x := s]$.
+- **Currying** — a multi-argument function is really a chain of
+  one-argument functions returning functions.
+- **Weak head normal form** — reduced far enough to see the outermost
+  constructor or function head, not necessarily any further.
+- **Church–Rosser theorem** — different terminating reduction orders
+  always reach the same normal form.
+- **Universal property** — a construction characterized by which maps
+  *uniquely factor through it*, not by what it is made of.
+- **Initial object** — an object with exactly one morphism out to
+  every other object of the category.
+- **Forgetful functor** — a functor that keeps only part of a
+  structure, discarding the rest.
+- **Subobject / full subcategory** — a piece of an object (or
+  category) cut out by a condition, remembered together with its
+  inclusion (or, for a full subcategory, with all original morphisms
+  between the retained objects).
+
 ### References
 
 Full citations in the [Bibliography](../bibliography.md).

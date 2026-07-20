@@ -227,6 +227,28 @@ ways a `Nat` can ever have been built.
 
 ---
 
+### Recall
+
+Quick reminders of the definitions this section introduced, for anyone
+skimming back to check a term:
+
+- **Judgment** — a statement made *about* a calculus from the outside
+  (e.g. `3 : Nat`), not a proposition proved *inside* it.
+- **Type system guarantee** — a static check that rules out a whole
+  class of runtime failure before any code runs, for every possible
+  input, not just the ones actually tested.
+- **$F$-algebra** — a type $X$ with a map $F(X) \to X$; for
+  $F(X) = 1 + X$, equivalently a pair $(z : X,\ s : X \to X)$.
+- **Initial object** — an object with exactly one morphism to every
+  other object of the same kind.
+- **Initial algebra / natural numbers object** — the initial object
+  among $F$-algebras for $F(X) = 1 + X$; `Nat` is the standard
+  example, and this uniqueness is exactly what licenses structural
+  induction.
+- **Free commutative monoid** — a separate universal property of
+  `(Nat, +, 0)`, not to be confused with the initial-algebra one
+  above.
+
 ### References
 
 Full citations in the [Bibliography](../bibliography.md).

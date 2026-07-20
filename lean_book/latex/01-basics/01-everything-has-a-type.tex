@@ -86,6 +86,26 @@ Lean prints numerals for readability, but underneath, every \texttt{Nat} really 
 \textbf{A second, different fact --- worth not conflating with the above.} None of this is required to use \texttt{Nat}. It is offered only because, once ordinary numeric \texttt{+} and \texttt{0} are \emph{defined} on \texttt{Nat} (Chapter 4) --- an entirely different operation from the disjoint-sum \(+\) used to build \(F\) above, despite sharing a symbol --- a second and different fact becomes provable (not merely definitional): \texttt{Nat}, with this numeric \texttt{+} and \texttt{0}, is the free commutative monoid on one generator. This is a genuinely different universal property from the initial-algebra one above --- the two are easy to conflate, since both attach the word ``universal'' to \texttt{Nat}, but one concerns \(F\)-algebras and the other concerns monoids. \hyperref[sec:01-basics:04-terminology:1]{Chapter 1 §4} fixes the vocabulary (``universal property,'' ``initial object'') used here, for any reader meeting it for the first time.
 \end{quote}
 
+\subsection{Recall}\label{sec:01-basics:01-everything-has-a-type:3b}
+
+Quick reminders of the definitions this section introduced, for anyone skimming back to check a term:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Judgment} --- a statement made \emph{about} a calculus from the outside (e.g. \texttt{3 : Nat}), not a proposition proved \emph{inside} it.
+\item
+  \textbf{Type system guarantee} --- a static check that rules out a whole class of runtime failure before any code runs, for every possible input, not just the ones actually tested.
+\item
+  \textbf{\(F\)-algebra} --- a type \(X\) with a map \(F(X) \to X\); for \(F(X) = 1 + X\), equivalently a pair \((z : X,\ s : X \to X)\).
+\item
+  \textbf{Initial object} --- an object with exactly one morphism to every other object of the same kind.
+\item
+  \textbf{Initial algebra / natural numbers object} --- the initial object among \(F\)-algebras for \(F(X) = 1 + X\); \texttt{Nat} is the standard example, and this uniqueness is exactly what licenses structural induction.
+\item
+  \textbf{Free commutative monoid} --- a separate universal property of \texttt{(Nat, +, 0)}, not to be confused with the initial-algebra one above.
+\end{itemize}
+
 \subsection{References}\label{sec:01-basics:01-everything-has-a-type:4}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.

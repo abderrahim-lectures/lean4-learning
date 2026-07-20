@@ -148,6 +148,34 @@ A full subcategory is the category formed by all objects satisfying such a condi
 
 These four are the ones worth fixing once. If a ``Mathematical reading'' box elsewhere uses a still-more-specialized term (adjunction, biproduct, a presheaf category, and the like), treat it as genuinely optional bonus content for readers who already know it. Nothing later in the book depends on it, and the surrounding plain-English explanation always stands on its own without it.
 
+\subsection{Recall}\label{sec:01-basics:04-terminology:10b}
+
+Quick reminders of the definitions this section introduced, for anyone skimming back to check a term:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Bound / free variable} --- inside \texttt{λx.t}, occurrences of \texttt{x} in \texttt{t} are bound; any other variable is free.
+\item
+  \textbf{α-conversion} --- renaming a bound variable does not change a term's identity.
+\item
+  \textbf{β-reduction} --- applying an abstraction to an argument by substitution: \((\lambda x.\, t)\, s \to t[x := s]\).
+\item
+  \textbf{Currying} --- a multi-argument function is really a chain of one-argument functions returning functions.
+\item
+  \textbf{Weak head normal form} --- reduced far enough to see the outermost constructor or function head, not necessarily any further.
+\item
+  \textbf{Church--Rosser theorem} --- different terminating reduction orders always reach the same normal form.
+\item
+  \textbf{Universal property} --- a construction characterized by which maps \emph{uniquely factor through it}, not by what it is made of.
+\item
+  \textbf{Initial object} --- an object with exactly one morphism out to every other object of the category.
+\item
+  \textbf{Forgetful functor} --- a functor that keeps only part of a structure, discarding the rest.
+\item
+  \textbf{Subobject / full subcategory} --- a piece of an object (or category) cut out by a condition, remembered together with its inclusion (or, for a full subcategory, with all original morphisms between the retained objects).
+\end{itemize}
+
 \subsection{References}\label{sec:01-basics:04-terminology:11}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
