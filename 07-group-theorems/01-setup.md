@@ -4,6 +4,16 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Group theorems proved here.** "The identity of $G$ is unique ...
+  for each $a \in G$, $a^{-1}$ is uniquely determined ...
+  $(a{*}b)^{-1} = (b^{-1}){*}(a^{-1})$" ([DummitFoote2003], §1.1
+  "Basic Axioms and Examples," pp. 17–18, Proposition 1).
+
 ```lean
 variable {G : Type} (Grp : Group G)
 ```
@@ -23,9 +33,10 @@ permutation groups, and to every group built later.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for the three theorems this chapter formalizes (uniqueness of the identity, uniqueness of inverses, and the inverse-of-a-product law), all standard early consequences of the group axioms.
+- Dummit and Foote ([DummitFoote2003]), §1.1 "Basic Axioms and Examples," pp. 17–18, Proposition 1 — uniqueness of identity/inverses, inverse-of-a-product law.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

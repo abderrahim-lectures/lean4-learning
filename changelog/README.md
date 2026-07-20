@@ -4,6 +4,10 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v1.4.18](v1.4.18.md) — Add Recall subsections across the whole book (23 entries)
+- [v1.4.17](v1.4.17.md) — Cite the terminology glossary; fix F-algebra citation; fix leaked blockquote markers
+- [v1.4.16](v1.4.16.md) — Clarify the Nat-as-initial-algebra optional math box; full-book link/citation audit
+- [v1.4.15](v1.4.15.md) — Dummit & Foote citation precision + direct-sums mischaracterization fix (9 entries)
 - [v1.4.14](v1.4.14.md) — Add a designed front/back cover, wired into the PDF
 - [v1.4.13](v1.4.13.md) — Replace proprietary fonts with free, portable equivalents
 - [v1.4.12](v1.4.12.md) — Pre-release link audit (5 entries)

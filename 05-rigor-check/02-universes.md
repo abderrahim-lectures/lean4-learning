@@ -4,6 +4,26 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Universe hierarchy.** "Think of `Type 0` as a universe of 'small'
+  or 'ordinary' types. `Type 1` is then a larger universe of types,
+  which contains `Type 0` as an element, and `Type 2` is an even
+  larger universe of types, which contains `Type 1` as an element.
+  The list is infinite: there is a `Type n` for every natural number
+  `n`. `Type` is an abbreviation for `Type 0`" ([TPIL4], §2.2 "Types
+  as objects").
+- **Universe polymorphism.** "Some operations ... need to be
+  polymorphic over type universes. For example, `List α` should make
+  sense for any type `α`, no matter which type universe `α` lives in
+  ... Lean allows you to declare universe variables explicitly using
+  the `universe` command" ([TPIL4], §2.2).
+
+---
+
 Chapter 1 said `Type` is itself a term, of some type. A careful reader
 should immediately ask: *of what type?* If the answer were "`Type` is a
 term of type `Type`," Lean's logic would be inconsistent. This is exactly
@@ -82,9 +102,10 @@ in `Type 0`.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — Lean's own documentation on the universe hierarchy, verified verbatim ("Type 0 as a universe of 'small' or 'ordinary' types... the list is infinite: there is a Type n for every natural number n"), matching the presentation here.
+- *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — universe hierarchy, universe polymorphism.
 - Girard — **Correction:** [Girard1971] (the 1971/1970 "Une extension de l'interprétation de Gödel à l'analyse" paper) is *not* the source of the `Type : Type` inconsistency. The proof that a calculus with the rule `⊢ * : *` loses the normalization property is due to Girard's 1972 doctoral thesis, *"Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure,"* Thèse d'État, Université Paris VII, 1972 — not yet in this book's bibliography. (Thierry Coquand's 1986 paper "An analysis of Girard's paradox," LICS 1986, is the standard modern exposition, also not yet cited here.)
 
 [TPIL4]: ../bibliography.md#tpil4

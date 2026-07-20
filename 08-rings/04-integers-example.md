@@ -4,6 +4,16 @@
 
 ---
 
+### Recall
+
+Formal definition cited in this section, gathered here for quick
+reference (full citation in the [Bibliography](../bibliography.md)):
+
+- **Ring homomorphism.** "A ring homomorphism is a map $\varphi : R
+  \to S$ satisfying (i) $\varphi(a+b) = \varphi(a)+\varphi(b)$ ... and
+  (ii) $\varphi(ab) = \varphi(a)\varphi(b)$" ([DummitFoote2003], §7.3
+  "Ring Homomorphisms and Quotient Rings," p. 239).
+
 We reuse `intGroup` from Chapter 6 as the additive part.
 
 ```lean
@@ -52,7 +62,7 @@ an object of $\mathbf{Ring}$ — in fact the
 [*initial* object](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline),
 since there is a
 unique **ring homomorphism** $\mathbb{Z} \to R$ into any ring — a
-function preserving $+$, $\times$, $0$, and $1$ ([DummitFoote2003]).
+function preserving $+$, $\times$, $0$, and $1$.
 First
 `intCommGroup` upgrades the additive group $(\mathbb{Z},+)$ to an abelian
 group by supplying commutativity ($a + b = b + a$); then `intRing` adds the
@@ -83,9 +93,10 @@ They are the same laws, but stated generically over `[Ring R]` (or the weaker
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
-- Dummit and Foote ([DummitFoote2003]) — the standard definition of a ring homomorphism, used above.
+- Dummit and Foote ([DummitFoote2003]), §7.3 "Ring Homomorphisms and Quotient Rings," p. 239 — ring homomorphism.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

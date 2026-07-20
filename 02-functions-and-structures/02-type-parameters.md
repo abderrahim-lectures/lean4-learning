@@ -4,6 +4,22 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Type-parameterized structure.** This book's working statement:
+  `structure Pair (α β : Type)` defines a whole *family* of products
+  at once — one instance per choice of type arguments — categorically
+  a functor of the type parameters, not a single fixed structure.
+- **Parametric polymorphism.** After Milner ([Milner1978]), the
+  theoretical account of type polymorphism that Python's `TypeVar`
+  and Lean's `{α : Type} → ...` both implement to different degrees.
+  Brief: genericity that is *proved* once for every type, checked
+  before the generic code is ever called, unlike an optional/erased
+  type annotation.
+
 ```lean
 structure Pair (α β : Type) where
   fst : α
@@ -46,10 +62,11 @@ is not merely approximated by a linter that might go unrun.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions are gathered in Recall, above.
 
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's box.
-- Milner ([Milner1978]) — the theoretical account of parametric polymorphism that `TypeVar`, and Lean's `{α : Type} → ...`, both implement to different degrees.
+- Milner ([Milner1978]) — parametric polymorphism.
 
 [PythonTyping]: ../bibliography.md#pythontyping
 [MypyDocs]: ../bibliography.md#mypydocs

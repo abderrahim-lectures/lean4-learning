@@ -4,6 +4,71 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Bound / free variable.** "An occurrence of x is free if it
+  appears in a position where it is not bound by an enclosing
+  abstraction on x" ([Pierce2002], §5.1, p. 55). Brief: inside
+  `λx.t`, occurrences of `x` in `t` are bound; any other variable is
+  free.
+- **α-conversion.** "Church used the term alpha-conversion for the
+  operation of consistently renaming a bound variable in a term"
+  ([Pierce2002], §5.3, p. 73). Brief: renaming a bound variable does
+  not change a term's identity.
+- **β-reduction.** "The operation of rewriting a redex according to
+  the above rule is called beta-reduction" ([Pierce2002], §5.1,
+  p. 56). Brief: applying an abstraction to an argument by
+  substitution, $(\lambda x.\, t)\, s \to t[x := s]$.
+- **Currying.** "The transformation of multi-argument functions into
+  higher-order functions is called currying in honor of Haskell
+  Curry" ([Pierce2002], §5.2, pp. 58–59). Brief: a multi-argument
+  function is really a chain of one-argument functions returning
+  functions.
+- **Weak head normal form.** "Weak Head Normal Form: all expressions
+  which are either λ-abstractions or of the form
+  $\lambda x_1 \ldots \lambda x_n.\, y\, e_1 \ldots e_m$"
+  ([Thompson1991], §2.3, p. 36, Definition 2.8). Brief: reduced far
+  enough to see the outermost constructor or function head, not
+  necessarily any further.
+- **Church–Rosser theorem.** "For all $e, f$ and $g$, if $e \to f$
+  and $e \to g$ then there exists $h$ such that $f \to h$ and
+  $g \to h$" ([Thompson1991], §2.3, p. 38, Theorem 2.10). Brief:
+  different terminating reduction orders always reach the same
+  normal form.
+- **Universal property (general form).** "If $S : D \to C$ is a
+  functor and $c$ an object of $C$, a universal arrow from $c$ to $S$
+  is a pair $(r, u)$ consisting of an object $r$ of $D$ and an arrow
+  $u : c \to Sr$ of $C$, such that to every pair $(d, f)$ with $d$ an
+  object of $D$ and $f : c \to Sd$ an arrow of $C$, there is a unique
+  arrow $f' : r \to d$ of $D$ with $Sf' \circ u = f$" ([MacLane1998],
+  Ch. III §1, p. 55). Brief: a construction characterized by which
+  maps *uniquely factor through it*, not by what it is made of.
+- **Initial object.** "An object $s$ is initial in a category $C$ if
+  to each object $a$ of $C$ there is exactly one arrow $s \to a$"
+  ([MacLane1998], Ch. I §5, p. 20). Brief: exactly one morphism out
+  to every other object of the category.
+- **Forgetful functor.** "A functor which simply 'forgets' some or
+  all of the structure of an algebraic object is commonly called a
+  forgetful functor (or, an underlying functor)" ([MacLane1998],
+  Ch. I §3, p. 14). Brief: a functor that keeps only part of a
+  structure, discarding the rest.
+- **Subobject.** "Let $A$ be any category. If $u : s \to a$ and
+  $v : t \to a$ are two monics [in $A$] with a common codomain $a$,
+  write $u \sim v$ when $u$ factors through $v$ ... the corresponding
+  equivalence classes of these monics are called the subobjects of
+  $a$" ([MacLane1998], Ch. III §7, p. 126; equivalently
+  [Pareigis1970], §1.6, p. 20). Brief: a piece of an object cut out
+  by a condition, remembered together with its inclusion.
+- **Full subcategory.** "We say that $S$ is a full subcategory of
+  $C$ when the inclusion functor $S \to C$ is full" ([MacLane1998],
+  Ch. I §3, p. 15). Brief: a subcategory retaining *all* original
+  morphisms of $C$ between its objects, not just some of them.
+
+---
+
 Four words are going to come up constantly from here on, well before this
 book gives any of them a full formal treatment. Rather than leave these
 words undefined until they are needed, here is a working definition of
@@ -62,8 +127,8 @@ with no more reductions available is in **normal form**. `#eval`
 (Chapter 1) computes a term's normal form and prints it. `rfl` (Chapter 3)
 succeeds exactly when both sides of an equation share a normal form. In
 practice, Lean's kernel usually only reduces as far as it needs to
-progress: down to **weak head normal form** (far enough to see the
-outermost constructor or function head), not necessarily all the way
+progress: down to **weak head normal form** — far enough to see the
+outermost constructor or function head, not necessarily all the way
 down. This is why, for example, `Nat.add`'s recursion on its *second*
 argument (Chapter 4) determines which side of an equation reduces "for
 free" and which needs an explicit inductive argument. Lean only unfolds
@@ -290,6 +355,30 @@ presheaf category, and the like), treat it as genuinely optional bonus
 content for readers who already know it. Nothing later in the book
 depends on it, and the surrounding plain-English explanation always stands
 on its own without it.
+
+---
+
+### References
+
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions and verbatim quotes are gathered in Recall, above.
+
+- Pierce ([Pierce2002]), §5.1 "Basics," p. 55 — free variables.
+- Pierce ([Pierce2002]), §5.1 "Basics," p. 56 — β-reduction.
+- Pierce ([Pierce2002]), §5.2 "Programming in the Lambda-Calculus," pp. 58–59 — currying.
+- Pierce ([Pierce2002]), §5.3 "Formalities," p. 73 — α-conversion.
+- Thompson ([Thompson1991]), §2.3 "Evaluation," p. 36, Definition 2.8 — weak head normal form.
+- Thompson ([Thompson1991]), §2.3 "Evaluation," p. 38, Theorem 2.10 — the Church–Rosser theorem.
+- Mac Lane ([MacLane1998]), Ch. III §1 "Universal Arrows," p. 55 — the general categorical form of "universal property."
+- Mac Lane ([MacLane1998]), Ch. I §5, p. 20 — initial object.
+- Mac Lane ([MacLane1998]), Ch. I §3 "Functors," p. 14 — forgetful functor.
+- Mac Lane ([MacLane1998]), Ch. III §7 "Subobjects and Generators," p. 126 — subobject. Equivalently, Pareigis ([Pareigis1970]), §1.6 "Subobjects and Quotient Objects," p. 20.
+- Mac Lane ([MacLane1998]), Ch. I §3 "Functors," p. 15 — full subcategory.
+
+[Pierce2002]: ../bibliography.md#pierce2002
+[Thompson1991]: ../bibliography.md#thompson1991
+[MacLane1998]: ../bibliography.md#maclane1998
+[Pareigis1970]: ../bibliography.md#pareigis1970
 
 ---
 

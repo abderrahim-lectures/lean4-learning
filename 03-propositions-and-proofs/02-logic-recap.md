@@ -4,6 +4,27 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Natural deduction.** After Gentzen ([Gentzen1935], "Recherches sur
+  la déduction logique," §II): each connective has an introduction
+  rule ("une introduction (E)") and an elimination rule ("une
+  élimination (B)") — how to prove a formula built with that
+  connective, and how to use one once it is available.
+- **Soundness.** "$\Gamma \vdash \varphi \Rightarrow \Gamma \models
+  \varphi$" ([VanDalen2013], §2.5, Lemma 2.5.1). Brief: everything
+  provable is true.
+- **Completeness.** "$\Gamma \vdash \varphi \Leftrightarrow \Gamma
+  \models \varphi$" ([VanDalen2013], §2.5 Theorem 2.5.13 for
+  propositional logic; §4.1 Theorem 4.1.3 for first-order logic;
+  first-order completeness is originally due to Gödel, 1929/1930 —
+  not independently verified against Gödel's own paper, see
+  [VanDalen2013] for the identical statement independently verified
+  here). Brief: everything true is provable.
+
 The previous section introduced the Curry–Howard correspondence by
 translating logic directly into Lean types. It assumed that "propositional
 logic," "$\vdash$," and "natural deduction" were at least half-familiar to
@@ -257,10 +278,11 @@ detail.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions and verbatim quotes are gathered in Recall, above.
 
-- Gentzen ([Gentzen1935]), Section II "Le calcul de la déduction naturelle" (French translation by R. Feys and J. Ladrière, *Recherches sur la déduction logique*, Presses Universitaires de France, 1955) — the original natural-deduction system, with introduction/elimination rules for each connective, verified verbatim against the translated text.
-- van Dalen ([VanDalen2013]), §2.4 "Natural Deduction" (Definition 2.4.1, propositional rules), §2.5 "Completeness" (Lemma 2.5.1 Soundness, Theorem 2.5.13 Completeness), §3.8 "Natural Deduction" (first-order ∀-rules, Lemma 3.8.2), §4.1 "The Completeness Theorem" (Theorem 4.1.3) — verified verbatim, exactly the soundness/completeness statements used above.
+- Gentzen ([Gentzen1935]), Section II "Le calcul de la déduction naturelle" — natural deduction.
+- van Dalen ([VanDalen2013]), §2.4 "Natural Deduction" (Definition 2.4.1, propositional rules), §2.5 "Completeness" (Lemma 2.5.1 Soundness, Theorem 2.5.13 Completeness), §3.8 "Natural Deduction" (first-order ∀-rules, Lemma 3.8.2), §4.1 "The Completeness Theorem" (Theorem 4.1.3) — soundness, completeness.
 - Gödel — **Gap:** the original 1930 completeness paper is not held in either notebook (see `NOTEBOOK-SOURCE-GAPS.md`); van Dalen's Theorem 4.1.3 above states the same result and is independently verified.
 - Pierce et al. ([PierceSF]) — **Note:** only the *Software Foundations* series homepage is available in the notebook, not chapter content, so the specific natural-deduction/classical-vs-intuitionistic treatment claimed here could not be verified verbatim.
 

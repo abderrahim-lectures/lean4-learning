@@ -4,6 +4,24 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Record / tuple.** "The simplest of these is pairs, or more
+  generally tuples, of values ... the generalization from n-ary
+  tuples to labeled records is equally straightforward" ([Pierce2002],
+  §11.6–§11.8). Brief: `structure` is this book's realization of a
+  labeled record.
+- **Categorical product (universal property).** For a category with a
+  product $A \times B$ (with projections $p_A, p_B$) and any object
+  $C$ with morphisms $f : C \to A$, $g : C \to B$: "there is exactly
+  one morphism $h : C \to A \times B$ such that $f = p_A h$ and
+  $g = p_B h$" ([Pareigis1970], §1.11, p. 30).
+
+---
+
 A `structure` groups several pieces of data under one name. We will use
 this Lean feature constantly once we define groups and rings.
 
@@ -70,11 +88,12 @@ $D$.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions and verbatim quotes are gathered in Recall, above.
 
 - Lean 4 documentation ([LeanDocs]) — the constructor/projection/anonymous-constructor mechanics described above.
-- Pierce ([Pierce2002]), §11.6 "Pairs," §11.7 "Tuples," §11.8 "Records" — records and products as the standard language-theoretic account of what `structure` implements, verified verbatim: "The simplest of these is pairs, or more generally tuples, of values... [§11.8] the generalization from n-ary tuples to labeled records is equally straightforward."
-- Bodo Pareigis, *Categories and Functors* ([Pareigis1970]), §1.11, p. 30 — the universal-property definition of a categorical product used in the "Mathematical reading" box above, verified verbatim: "there is exactly one morphism $h : C \to A \times B$ such that $f = p_A h$ and $g = p_B h$."
+- Pierce ([Pierce2002]), §11.6 "Pairs," §11.7 "Tuples," §11.8 "Records" — records and tuples.
+- Bodo Pareigis, *Categories and Functors* ([Pareigis1970]), §1.11, p. 30 — universal property of a categorical product.
 
 [LeanDocs]: ../bibliography.md#leandocs
 [Pierce2002]: ../bibliography.md#pierce2002
