@@ -121,7 +121,7 @@ this specific subset.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for submodules and their axioms.
+- Dummit and Foote ([DummitFoote2003]), §10.1 "Basic Definitions and Examples," p. 337 — the standard classical (non-Lean) reference for submodules and their axioms, verified verbatim: "An R-submodule of M is a subgroup N of M which is closed under the action of ring elements, i.e., rn ∈ N, for all r ∈ R, n ∈ N."
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

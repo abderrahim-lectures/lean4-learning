@@ -30,8 +30,8 @@ $a \cdot b = b \cdot a$ always holds is called **abelian** or
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for the group axioms above and their consequences.
-- Aluffi ([Aluffi2009]) — a group-theory treatment using the same categorical framing (forgetful functors, universal properties) this book uses from Chapter 6 §6 onward.
+- Dummit and Foote ([DummitFoote2003]), §1.1 "Basic Axioms and Examples," p. 17 — the standard classical (non-Lean) reference for the group axioms above and their consequences, verified verbatim: "the identity of G is unique... for each a ∈ G, a⁻¹ is uniquely determined" (Proposition 1).
+- Aluffi ([Aluffi2009]) — **Gap:** not held in either notebook (see `NOTEBOOK-SOURCE-GAPS.md`); this recommendation is offered as further reading, not an independently verified factual claim — Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

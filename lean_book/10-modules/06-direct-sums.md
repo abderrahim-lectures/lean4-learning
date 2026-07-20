@@ -187,7 +187,7 @@ def proj1' : (Int × Int) →ₗ[Int] Int := LinearMap.fst Int Int Int
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Dummit and Foote ([DummitFoote2003]) — the standard classical (non-Lean) reference for direct sums of modules and their universal property.
+- Dummit and Foote ([DummitFoote2003]), §10.3 "Generation of Modules, Direct Sums, and Free Modules," pp. 351–353, Proposition 5 — the standard classical (non-Lean) reference for direct sums of modules and the internal/external direct-sum equivalence. D&F's explicit universal-property discussion in this section covers free modules and tensor products, not direct sums specifically — the universal-property framing of direct sums used elsewhere in this book is its own extension of the pattern, not a claim quoted from Dummit & Foote.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

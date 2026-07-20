@@ -62,7 +62,7 @@ some already-fixed ring.
 
 Full citations in the [Bibliography](../bibliography.md).
 
-- Dummit and Foote ([DummitFoote2003]) — the module axioms (M1)–(M4) from the classical, non-Lean point of view.
+- Dummit and Foote ([DummitFoote2003]), §10.1 "Basic Definitions and Examples," p. 336 — the module axioms (M1)–(M4) from the classical, non-Lean point of view, verified verbatim: "a binary operation + on M under which M is an abelian group, and... an action of R on M... (a) (r+s)m = rm+sm... (b) (rs)m = r(sm)... (c) r(m+n) = rm+rn... (d) 1m = m."
 - Weibel ([Weibel1994]) — the deeper module/homological theory this section's "Read more" points toward.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
