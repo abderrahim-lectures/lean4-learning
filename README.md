@@ -4,17 +4,16 @@
 
 ## [📖 Read the book (in your browser)](https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fabderrahim-lectures%2Flean4-learning%2Freleases%2Flatest%2Fdownload%2Flean-for-working-algebraists.pdf&embedded=true)
 
-[![Download PDF](https://img.shields.io/badge/Download-PDF-blue?logo=adobeacrobatreader&logoColor=white)](https://github.com/abderrahim-lectures/lean4-learning/releases/download/v1.4.14/lean-for-working-algebraists-v1.4.14.pdf)
+[![Download PDF](https://img.shields.io/badge/Download-PDF-blue?logo=adobeacrobatreader&logoColor=white)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest/download/lean-for-working-algebraists.pdf)
 [![Browse online](https://img.shields.io/badge/Browse-online%20(HTML)-green?logo=github)](https://abderrahim-lectures.github.io/lean4-learning/)
 [![Try Lean now](https://img.shields.io/badge/%E2%96%B6%20Try%20Lean-in%20your%20browser-orange)](https://abderrahim-lectures.github.io/lean4-learning/try-lean.html)
 [Notice](NOTICE.md) | [Reproducing this book](REPRODUCING.md)
 
 The book is a single PDF — the link above opens it directly in your
 browser via Google's viewer, no account or software installation
-required; use the "Download PDF" badge instead to save a copy (its
-filename always includes the release version), or "Browse online" to
-read it as a normal linked website (one page per section) instead of a
-PDF. "Try Lean now" opens the official Lean 4 web playground, embedded
+required; use the "Download PDF" badge instead to save a copy, or
+"Browse online" to read it as a normal linked website (one page per
+section) instead of a PDF. "Try Lean now" opens the official Lean 4 web playground, embedded
 and ready to use — no toolchain install needed to experiment. The rest
 of this page describes the book and its companion material for readers
 who also want to run the Lean code or the Python examples on their own
