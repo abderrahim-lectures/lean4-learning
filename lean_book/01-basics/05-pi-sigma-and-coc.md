@@ -4,6 +4,43 @@
 
 ---
 
+### Recall
+
+Formal definitions cited in this section, gathered here for quick
+reference (full citations in the [Bibliography](../bibliography.md)):
+
+- **Σ-type.** "Given a type $A : U$ and a family $B : A \to U$, the
+  dependent pair type is written as $\sum_{(x:A)} B(x) : U$ ... If $B$
+  is constant, then the dependent pair type is the ordinary Cartesian
+  product type" ([HoTT2013], §1.6 "Dependent pair types (Σ-types)").
+  Brief: categorically an indexed disjoint union, collapsing to the
+  ordinary product $A \times B$ when $B$ is a constant family.
+- **`Prop`.** "The type `Prop` is syntactic sugar for `Sort 0`, the
+  very bottom of the type hierarchy" ([TPIL4], §3.1 "Propositions as
+  Types").
+- **Proof irrelevance.** "If `p : Prop` is any proposition, Lean's
+  kernel treats any two elements `t1 t2 : p` as being definitionally
+  equal ... This is known as proof irrelevance" ([TPIL4], §3.1). Brief:
+  any two proofs of the same `P : Prop` are considered definitionally
+  equal.
+- **Recursor / eliminator.** This book's working statement, built on
+  the calculus of constructions ([CoquandHuet1988]): the single
+  Π-typed term (`Nat.rec` and its analogues) that makes "one case per
+  constructor" precise; every `match`/`cases`/`induction` compiles
+  down to one.
+- **Calculus of constructions (CoC).** This book's working statement,
+  after Coquand and Huet ([CoquandHuet1988], §1 "The Abstract Syntax
+  of Terms," §2.1 "The Inference System of Constructions"): a small
+  formal system built from a variable, a function abstraction, and
+  function application, plus an infinite hierarchy of universes and
+  Π-types. Lean's specific extension with `inductive` type
+  declarations (giving Σ-types and general recursive data) is the
+  Calculus of Inductive Constructions (CIC), due to a later paper
+  (Coquand and Paulin, "Inductively Defined Types," 1990), not the
+  1988 paper itself.
+
+---
+
 §3 built Π-types concretely, from `Fin n` and `Vec.replicate`, up to the
 general pattern $\prod_{x:A} B(x)$. This section adds the second half of
 the picture — **Σ-types**, the dependent pair dual to Π — and then zooms
@@ -266,13 +303,14 @@ by name above.
 
 ### References
 
-Full citations in the [Bibliography](../bibliography.md).
+Full citations in the [Bibliography](../bibliography.md). Formal
+definitions and verbatim quotes are gathered in Recall, above.
 
-- Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC (variables/abstraction/application, §1 "The Abstract Syntax of Terms"; typing rules, §2.1 "The Inference System of Constructions"), the system this section formalizes. **Correction:** the 1988 paper does *not* itself define the general inductive-type extension (CIC) or a `Nat.rec`-style recursor; §8 "Possible Extensions" only sketches one ad hoc worked example (a primitive `int` type with a `rec` constant, by direct analogy to what `Nat.rec` would later generalize). The general Calculus of Inductive Constructions is due to a later paper, Coquand and Paulin, "Inductively Defined Types" (1990), not yet in this book's bibliography.
-- Pierce ([Pierce2002]) — **Correction:** *Types and Programming Languages* is explicitly *not* a dependently-typed textbook (Pierce's own preface: dependent types are "mentioned only in passing," developed no further than §30.5's one-paragraph sketch of "families of types indexed by terms"). It does *not* cover eliminators/recursors for inductive types in a dependent setting. What it actually covers, relevant here only by analogy: non-dependent `case` analysis on sum/variant types (§11.9–11.10) and on `µ`-recursive types like `NatList = μX.⟨nil:Unit, cons:{Nat,X}⟩` (Ch. 20), plus Church encodings of algebraic datatypes (Ch. 5 untyped, §23.4 typed/System F) — a non-dependent cousin of the recursor/eliminator idea, not the same construction.
-- The Univalent Foundations Program ([HoTT2013]) — §1.3 "Universes and families," §1.4 "Dependent function types (Π-types)," §1.6 "Dependent pair types (Σ-types)" give a careful, from-scratch treatment of Π-types, Σ-types, and universes, verified verbatim, in notation closely matching this section's (identical $\prod_{x:A}B(x)$ / $\sum_{x:A}B(x)$ notation, and the same "collapses to $A \to B$ / $A \times B$ when $B$ is constant" remark this chapter makes).
+- Coquand and Huet ([CoquandHuet1988]) — calculus of constructions, §1 "The Abstract Syntax of Terms," §2.1 "The Inference System of Constructions." **Correction:** the 1988 paper does *not* itself define the general inductive-type extension (CIC) or a `Nat.rec`-style recursor; §8 "Possible Extensions" only sketches one ad hoc worked example (a primitive `int` type with a `rec` constant). The general Calculus of Inductive Constructions is due to a later paper, Coquand and Paulin, "Inductively Defined Types" (1990), not yet in this book's bibliography.
+- Pierce ([Pierce2002]) — **Correction:** *Types and Programming Languages* is explicitly *not* a dependently-typed textbook (Pierce's own preface: dependent types are "mentioned only in passing," developed no further than §30.5's one-paragraph sketch of "families of types indexed by terms"). It does *not* cover eliminators/recursors for inductive types in a dependent setting. What it actually covers, relevant here only by analogy: non-dependent `case` analysis on sum/variant types (§11.9–11.10) and on `µ`-recursive types like `NatList = μX.⟨nil:Unit, cons:{Nat,X}⟩` (Ch. 20), plus Church encodings of algebraic datatypes (Ch. 5 untyped, §23.4 typed/System F).
+- The Univalent Foundations Program ([HoTT2013]), §1.6 — Σ-type.
 - Martin-Löf ([MartinLof1984]) — the foundational source for dependent Π/Σ types and universes predating CoC, for readers wanting the idea in its original, non-CoC-specific form.
-- *Theorem Proving in Lean 4* ([TPIL4]), §3.1 "Propositions as Types" — Lean's own documentation on `Prop`, proof irrelevance, and universes, verified verbatim: "`Prop` is syntactic sugar for `Sort 0`," "Lean's kernel treats any two elements `t1 t2 : p` as being definitionally equal... known as *proof irrelevance*," matching the presentation here.
+- *Theorem Proving in Lean 4* ([TPIL4]), §3.1 "Propositions as Types" — `Prop`, proof irrelevance.
 - All Lean code in this section was checked directly against the toolchain pinned in this repository's `lean_project/lean-toolchain` rather than only described; the `#print Fin` output and both error messages shown are copied from real `lake env lean` runs.
 
 [CoquandHuet1988]: ../bibliography.md#coquandhuet1988

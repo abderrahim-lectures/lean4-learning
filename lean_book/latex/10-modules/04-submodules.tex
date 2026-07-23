@@ -1,5 +1,15 @@
 \section{Submodules}\label{sec:10-modules:04-submodules:1}
 
+\subsection{Recall}\label{sec:10-modules:04-submodules:2}
+
+Formal definition cited in this section, gathered here for quick reference (full citation in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Submodule.} ``An \(R\)-submodule of \(M\) is a subgroup \(N\) of \(M\) which is closed under the action of ring elements, i.e., \(rn \in N\), for all \(r \in R, n \in N\)'' (\cite{DummitFoote2003}, §10.1 ``Basic Definitions and Examples,'' p.~337).
+\end{itemize}
+
 A \textbf{submodule} of \(M\) is a subset closed under \(+\), containing \(0\), and closed under the scalar action. In Lean, ``a subset closed under some operations'' is naturally a \texttt{structure} bundling a \emph{predicate} on \texttt{M} together with closure proofs. This is the same ``data + proofs'' idea as \texttt{Group}, just with the ``data'' being a property instead of an operation:
 
 \begin{lstlisting}
@@ -19,7 +29,7 @@ structure Submodule {R : Type} (Rg : Ring R) {M : Type} (Mod : Module R Rg M) wh
 
 \end{mathreading}
 
-\subsection{\texorpdfstring{Example: the submodule of even integers, as a \(\mathbb{Z}\)-submodule of \(\mathbb{Z}\)}{Example: the submodule of even integers, as a \textbackslash mathbb\{Z\}-submodule of \textbackslash mathbb\{Z\}}}\label{sec:10-modules:04-submodules:2}
+\subsection{\texorpdfstring{Example: the submodule of even integers, as a \(\mathbb{Z}\)-submodule of \(\mathbb{Z}\)}{Example: the submodule of even integers, as a \textbackslash mathbb\{Z\}-submodule of \textbackslash mathbb\{Z\}}}\label{sec:10-modules:04-submodules:3}
 
 The \(\mathbb{Z}\)-module structure on \(\mathbb{Z}\) itself, described only in passing so far, is required first:
 
@@ -81,12 +91,12 @@ example : (2 : Int) (*$\in$*) evenSubmodule' := Submodule.subset_span rfl
 
 \texttt{Submodule.span R s} is, by construction, the smallest submodule containing \texttt{s}. \href{https://loogle.lean-lang.org/?q=Submodule.subset_span}{\texttt{Submodule.subset\_\allowbreak{}span}} is the one fact that does all the work here: ``the generators are always members'', proved once, generically, instead of the book's custom \texttt{zero\_\allowbreak{}mem}/\texttt{add\_\allowbreak{}mem}/\texttt{smul\_\allowbreak{}mem} triple for this specific subset.
 
-\subsection{References}\label{sec:10-modules:04-submodules:3}
+\subsection{References}\label{sec:10-modules:04-submodules:4}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
-  Dummit and Foote (\cite{DummitFoote2003}) --- the standard classical (non-Lean) reference for submodules and their axioms.
+  Dummit and Foote (\cite{DummitFoote2003}), §10.1 ``Basic Definitions and Examples,'' p.~337 --- submodules and their axioms.
 \end{itemize}

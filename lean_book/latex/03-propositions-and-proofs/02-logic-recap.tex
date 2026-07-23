@@ -1,8 +1,24 @@
 \section{A recap of standard logic and logical calculus}\label{sec:03-propositions-and-proofs:02-logic-recap:1}
 
+\subsection{Recall}\label{sec:03-propositions-and-proofs:02-logic-recap:2}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Natural deduction.} After Gentzen (\cite{Gentzen1935}, ``Recherches sur la déduction logique,'' §II): each connective has an introduction rule (``une introduction (E)'') and an elimination rule (``une élimination (B)'') --- how to prove a formula built with that connective, and how to use one once it is available.
+\item
+  \textbf{Soundness.} ``\(\Gamma \vdash \varphi \Rightarrow \Gamma \models
+  \varphi\)'' (\cite{VanDalen2013}, §2.5, Lemma 2.5.1). Brief: everything provable is true.
+\item
+  \textbf{Completeness.} ``\(\Gamma \vdash \varphi \Leftrightarrow \Gamma
+  \models \varphi\)'' (\cite{VanDalen2013}, §2.5 Theorem 2.5.13 for propositional logic; §4.1 Theorem 4.1.3 for first-order logic; first-order completeness is originally due to Gödel, 1929/1930 --- not independently verified against Gödel's own paper, see \cite{VanDalen2013} for the identical statement independently verified here). Brief: everything true is provable.
+\end{itemize}
+
 The previous section introduced the Curry--Howard correspondence by translating logic directly into Lean types. It assumed that ``propositional logic,'' ``\(\vdash\),'' and ``natural deduction'' were at least half-familiar to the reader. If they were not, this section is the missing prerequisite --- skip ahead to \hyperref[sec:03-propositions-and-proofs:03-theorem-lemma:1]{§3} if propositional/first-order logic is already comfortable territory. It is a self-contained recap of standard mathematical logic --- the \emph{pre-Lean, pre-type-theory} version, exactly as it is presented in a first logic course --- so that §1's table has something concrete on its ``Logic'' side to refer back to. Nothing here mentions Lean, types, or programs; that translation was entirely §1's job, and \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter 1 §4} and \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} build the calculus those types compile down to. This section only fixes what the logic itself is.
 
-\subsection{Propositional logic: syntax}\label{sec:03-propositions-and-proofs:02-logic-recap:2}
+\subsection{Propositional logic: syntax}\label{sec:03-propositions-and-proofs:02-logic-recap:3}
 
 Fix a set of \textbf{propositional variables} (atomic statements) \(p, q, r,
 \dots\). These stand for sentences whose internal structure is not analyzed --- ``it is raining,'' ``\(n\) is prime,'' anything with a definite truth value. \textbf{Formulas} are built from these using the \textbf{connectives}:
@@ -15,7 +31,7 @@ Fix a set of \textbf{propositional variables} (atomic statements) \(p, q, r,
 
 read: a propositional variable, ``true,'' ``false,'' ``not \(\varphi\),'' ``\(\varphi\) and \(\varphi\),'' ``\(\varphi\) or \(\varphi\),'' ``\(\varphi\) implies \(\varphi\).'' This is pure syntax: a formula is just a string built by this grammar, nothing more. Whether a formula is \emph{true}, and whether it is \emph{provable}, are two separate questions, addressed next.
 
-\subsection{Semantics: truth tables and validity}\label{sec:03-propositions-and-proofs:02-logic-recap:3}
+\subsection{Semantics: truth tables and validity}\label{sec:03-propositions-and-proofs:02-logic-recap:4}
 
 A propositional variable's truth value is given by a \textbf{valuation} \(v : \{\text{variables}\} \to \{0, 1\}\) (an assignment of true or false to each atom). Every valuation extends uniquely to all formulas by the familiar truth tables:
 
@@ -40,7 +56,7 @@ A propositional variable's truth value is given by a \textbf{valuation} \(v : \{
 
 A formula is a \textbf{tautology} (valid, written \(\models \varphi\)) if it comes out true under \emph{every} valuation. For example, \(p \vee \neg p\) (the \textbf{law of excluded middle}) and \(\neg\neg p \Rightarrow p\) (\textbf{double negation elimination}) are both tautologies: check every row of their truth tables and the result is always 1. This is the ``meaning-based'' side of logic. Truth is defined by checking every possible case, with no notion of proof or derivation involved at all.
 
-\subsection{Proof theory: natural deduction}\label{sec:03-propositions-and-proofs:02-logic-recap:4}
+\subsection{Proof theory: natural deduction}\label{sec:03-propositions-and-proofs:02-logic-recap:5}
 
 \textbf{Provability}, by contrast, is a purely syntactic notion. A formula \(\varphi\) is \textbf{provable from hypotheses \(\Gamma\)} (a set of formulas), written \(\Gamma \vdash \varphi\), if there is a finite derivation of \(\varphi\) from \(\Gamma\) built out of a fixed, finite list of allowed \textbf{inference rules}. These are mechanical, symbol-pushing steps, checkable by an algorithm with no appeal to ``meaning'' at all. \textbf{Natural deduction} (Gentzen, 1934) is the standard system of such rules. Each connective gets an \textbf{introduction rule} (how to \emph{prove} a formula built with that connective) and an \textbf{elimination rule} (how to \emph{use} one once you have it). §1 already showed this pattern concretely (\texttt{⟨\_\allowbreak{}, \_\allowbreak{}⟩} introduces \texttt{∧}, \texttt{.left} eliminates it) without naming it. Writing \(\Gamma, \varphi\) for ``\(\Gamma\) together with the extra hypothesis \(\varphi\)'':
 
@@ -83,7 +99,7 @@ A formula is a \textbf{tautology} (valid, written \(\models \varphi\)) if it com
 
 \hyperref[sec:03-propositions-and-proofs:04-implication:1]{§3 (Implication)} names this exact formula ``implication is a function type'' and gives the corresponding Lean term directly: \texttt{fun hp => fun hq => hp}. The two are not just similar --- under Curry--Howard they are literally the same object, described twice.
 
-\subsection{Soundness and completeness: proof theory meets semantics}\label{sec:03-propositions-and-proofs:02-logic-recap:5}
+\subsection{Soundness and completeness: proof theory meets semantics}\label{sec:03-propositions-and-proofs:02-logic-recap:6}
 
 Two theorems connect the syntactic notion (\(\vdash\)) to the semantic one (\(\models\)). Together they justify treating ``provable'' and ``true in every case'' as interchangeable for propositional logic:
 
@@ -98,7 +114,7 @@ Two theorems connect the syntactic notion (\(\vdash\)) to the semantic one (\(\m
 
 Soundness is usually the easy direction to prove (check that each rule preserves truth); completeness is the harder theorem. Neither is used again in this book, but together they are the reason a working mathematician can trust that ``prove it'' and ``it is necessarily true'' describe the same territory for propositional (and first-order) logic. This guarantee stops holding once expressive enough systems are reached. (Gödel's \emph{incompleteness} theorems are a different and unrelated pair of results, despite the similar name --- they show arithmetic itself cannot be both complete and consistent.)
 
-\subsection{First-order logic: adding quantifiers}\label{sec:03-propositions-and-proofs:02-logic-recap:6}
+\subsection{First-order logic: adding quantifiers}\label{sec:03-propositions-and-proofs:02-logic-recap:7}
 
 Propositional logic treats ``\(n\) is prime'' as one indivisible atom. \textbf{First-order logic} (also called predicate logic) opens that up: fix a domain of individuals, \textbf{predicates} \(P(x), Q(x, y), \dots\) ranging over it, and add two quantifiers to the grammar:
 
@@ -132,22 +148,22 @@ Read the first row concretely: \(\forall x, P(x)\) becomes a \emph{dependent} fu
 
 With this table in hand, the whole of first-order natural deduction --- every rule stated in this section --- is visible as a special case of one simple idea: \emph{proofs are programs, and the specific shape of program a proof compiles to (pair, function, tagged choice, dependent function, dependent pair) is read off directly from the outermost connective or quantifier of the proposition being proved.} \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter 1 §4} makes this fully rigorous for the dependent case, by showing \(\Pi\) and \(\Sigma\) inside the calculus of constructions itself, rather than only stating the correspondence informally as this table does.
 
-\subsection{Classical vs.~intuitionistic: the fork that matters for this book}\label{sec:03-propositions-and-proofs:02-logic-recap:7}
+\subsection{Classical vs.~intuitionistic: the fork that matters for this book}\label{sec:03-propositions-and-proofs:02-logic-recap:8}
 
 Every rule listed above is accepted by \textbf{both} classical and \textbf{intuitionistic} logic. The two differ on exactly one further principle, the \textbf{law of excluded middle}, \(\varphi \vee \neg\varphi\) (equivalently, double negation elimination \(\neg\neg\varphi \Rightarrow \varphi\)). Classical logic takes it as an extra axiom, valid for every \(\varphi\) regardless of whether you can exhibit a witness or decide the matter constructively. Intuitionistic logic --- the system natural deduction \emph{as given above} actually is, with no extra axiom added --- rejects it as a general principle: \(\varphi \vee \neg\varphi\) is not derivable from the rules above for an arbitrary \(\varphi\), only for specific \(\varphi\) that can actually be settled one way or the other. (\hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{§4 (And, Or, Not)}'s \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} works because \texttt{1 = 2} happens to be \emph{decidable}, not because excluded middle is assumed.)
 
 This is not just a side note: it is the precise reason Curry--Howard works as cleanly as it does. A type-theoretic proof term is a genuine, \emph{constructive} witness. A Lean proof of \(\exists x, P\, x\) computes to an actual pair \texttt{⟨a, h⟩} that could be inspected via \texttt{\#eval}, and that only makes sense for a logic where ``true'' means ``constructible'' --- which is exactly intuitionistic logic. (Lean's core logic is intuitionistic for precisely this reason. Mathlib freely adds classical excluded middle as an axiom for propositions where a witness is not needed, but the base calculus this book's Curry--Howard table describes in §1 does not include it.) Keep this fork in mind when reading \hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{§4 (And, Or, Not)}'s remark that Lean has ``no built-in law of excluded middle.'' It is this exact distinction, not an incidental implementation detail.
 
-\subsection{References}\label{sec:03-propositions-and-proofs:02-logic-recap:8}
+\subsection{References}\label{sec:03-propositions-and-proofs:02-logic-recap:9}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions and verbatim quotes are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
-  Gentzen (\cite{Gentzen1935}), Section II ``Le calcul de la déduction naturelle'' (French translation by R. Feys and J. Ladrière, \emph{Recherches sur la déduction logique}, Presses Universitaires de France, 1955) --- the original natural-deduction system, with introduction/elimination rules for each connective, verified verbatim against the translated text.
+  Gentzen (\cite{Gentzen1935}), Section II ``Le calcul de la déduction naturelle'' --- natural deduction.
 \item
-  van Dalen (\cite{VanDalen2013}), §2.4 ``Natural Deduction'' (Definition 2.4.1, propositional rules), §2.5 ``Completeness'' (Lemma 2.5.1 Soundness, Theorem 2.5.13 Completeness), §3.8 ``Natural Deduction'' (first-order ∀-rules, Lemma 3.8.2), §4.1 ``The Completeness Theorem'' (Theorem 4.1.3) --- verified verbatim, exactly the soundness/completeness statements used above.
+  van Dalen (\cite{VanDalen2013}), §2.4 ``Natural Deduction'' (Definition 2.4.1, propositional rules), §2.5 ``Completeness'' (Lemma 2.5.1 Soundness, Theorem 2.5.13 Completeness), §3.8 ``Natural Deduction'' (first-order ∀-rules, Lemma 3.8.2), §4.1 ``The Completeness Theorem'' (Theorem 4.1.3) --- soundness, completeness.
 \item
   Gödel --- \textbf{Gap:} the original 1930 completeness paper is not held in either notebook (see \texttt{NOTEBOOK-\allowbreak{}SOURCE-\allowbreak{}GAPS.md}); van Dalen's Theorem 4.1.3 above states the same result and is independently verified.
 \item

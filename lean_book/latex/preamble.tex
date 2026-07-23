@@ -15,7 +15,7 @@
 % to match the git tag each time a release is cut, so the compiled PDF
 % itself states which version a reader has, not just the GitHub release
 % page it came from.
-\newcommand{\bookversion}{v1.4.13}
+\newcommand{\bookversion}{v1.4.18}
 
 \usepackage{fontspec}
 % Consolas/Palatino Linotype (proprietary Microsoft fonts) replaced with
@@ -40,6 +40,10 @@
 \usepackage{tikz-cd}
 \usetikzlibrary{arrows.meta}
 \usepackage{graphicx}
+% For full-bleed front/back cover page backgrounds (see
+% lean-for-working-algebraists.tex): places images during shipout,
+% independent of \newgeometry/margins, so it can't disturb pagination.
+\usepackage{eso-pic}
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{array}

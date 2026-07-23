@@ -1,6 +1,6 @@
 # Lean for Working Algebraists
 
-[Changelog](CHANGELOG.md) | [Latest release (PDF)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest)
+[Changelog](changelog/README.md) | [Latest release (PDF)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest)
 
 A guide to Lean 4 for readers who already think in groups, rings, functors,
 and diagrams, but have never written a line of Lean (or any proof
@@ -85,7 +85,7 @@ reading" ones; and a third, readability-focused pass that put every worked
 example in its own block immediately followed by its own explanation
 (rather than several examples dumped together, explained afterward all at
 once) and added plain-text category-theory diagrams at the natural spots.
-See [CHANGELOG.md](CHANGELOG.md) for the full, itemized history.
+See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Table of contents
 

@@ -12,7 +12,7 @@ For the reader-facing summary of what changed in each release, see
 
 ## Summary
 
-As of this writing: **96 issues** (all closed) and **58 pull requests**
+As of this writing: **97 issues** (all closed) and **63 pull requests**
 (all merged), covering:
 
 - **Building out the book's content** — widening the audience beyond a
@@ -62,6 +62,13 @@ As of this writing: **96 issues** (all closed) and **58 pull requests**
   the actual 1972 thesis). Also fixed stale, 404ing `TPIL4` bibliography
   links, replaced the book's three remaining nLab wiki-page citations
   with book citations, and ran a full external-link audit (68 URLs).
+- **Font portability and a designed cover** — replaced proprietary
+  fonts (Consolas, Palatino Linotype) that silently broke the PDF
+  build on any machine without them installed with free, metrically
+  similar equivalents (DejaVu Sans Mono, TeX Gyre Pagella); designed a
+  front/back cover and wired it into the PDF as full-bleed pages,
+  fixing two build bugs (a `\newgeometry`-caused blank leading page,
+  and image stretching) discovered along the way.
 
 ## Merged pull requests
 
@@ -125,6 +132,11 @@ As of this writing: **96 issues** (all closed) and **58 pull requests**
 | [#152](https://github.com/abderrahim-lectures/lean4-learning/pull/152) | Restore PR #150 content lost in a history rewrite |
 | [#153](https://github.com/abderrahim-lectures/lean4-learning/pull/153) | Sync latex/references.bib with bibliography.md |
 | [#154](https://github.com/abderrahim-lectures/lean4-learning/pull/154) | Replace proprietary fonts with free, portable equivalents |
+| [#155](https://github.com/abderrahim-lectures/lean4-learning/pull/155) | Bump to v1.4.13 |
+| [#156](https://github.com/abderrahim-lectures/lean4-learning/pull/156) | Add a book cover image to the README |
+| [#157](https://github.com/abderrahim-lectures/lean4-learning/pull/157) | Revert the book cover addition |
+| [#158](https://github.com/abderrahim-lectures/lean4-learning/pull/158) | Add front and back cover images |
+| [#159](https://github.com/abderrahim-lectures/lean4-learning/pull/159) | Wire covers into PDF as full-bleed page backgrounds |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact

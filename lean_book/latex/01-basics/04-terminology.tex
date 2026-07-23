@@ -1,12 +1,42 @@
 \section{Terminology encountered before it is fully explained}\label{sec:01-basics:04-terminology:1}
 
+\subsection{Recall}\label{sec:01-basics:04-terminology:2}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Bound / free variable.} ``An occurrence of x is free if it appears in a position where it is not bound by an enclosing abstraction on x'' (\cite{Pierce2002}, §5.1, p.~55). Brief: inside \texttt{λx.t}, occurrences of \texttt{x} in \texttt{t} are bound; any other variable is free.
+\item
+  \textbf{α-conversion.} ``Church used the term alpha-conversion for the operation of consistently renaming a bound variable in a term'' (\cite{Pierce2002}, §5.3, p.~73). Brief: renaming a bound variable does not change a term's identity.
+\item
+  \textbf{β-reduction.} ``The operation of rewriting a redex according to the above rule is called beta-reduction'' (\cite{Pierce2002}, §5.1, p.~56). Brief: applying an abstraction to an argument by substitution, \((\lambda x.\, t)\, s \to t[x := s]\).
+\item
+  \textbf{Currying.} ``The transformation of multi-argument functions into higher-order functions is called currying in honor of Haskell Curry'' (\cite{Pierce2002}, §5.2, pp.~58--59). Brief: a multi-argument function is really a chain of one-argument functions returning functions.
+\item
+  \textbf{Weak head normal form.} ``Weak Head Normal Form: all expressions which are either λ-abstractions or of the form \(\lambda x_1 \ldots \lambda x_n.\, y\, e_1 \ldots e_m\)'' (\cite{Thompson1991}, §2.3, p.~36, Definition 2.8). Brief: reduced far enough to see the outermost constructor or function head, not necessarily any further.
+\item
+  \textbf{Church--Rosser theorem.} ``For all \(e, f\) and \(g\), if \(e \to f\) and \(e \to g\) then there exists \(h\) such that \(f \to h\) and \(g \to h\)'' (\cite{Thompson1991}, §2.3, p.~38, Theorem 2.10). Brief: different terminating reduction orders always reach the same normal form.
+\item
+  \textbf{Universal property (general form).} ``If \(S : D \to C\) is a functor and \(c\) an object of \(C\), a universal arrow from \(c\) to \(S\) is a pair \((r, u)\) consisting of an object \(r\) of \(D\) and an arrow \(u : c \to Sr\) of \(C\), such that to every pair \((d, f)\) with \(d\) an object of \(D\) and \(f : c \to Sd\) an arrow of \(C\), there is a unique arrow \(f' : r \to d\) of \(D\) with \(Sf' \circ u = f\)'' (\cite{MacLane1998}, Ch. III §1, p.~55). Brief: a construction characterized by which maps \emph{uniquely factor through it}, not by what it is made of.
+\item
+  \textbf{Initial object.} ``An object \(s\) is initial in a category \(C\) if to each object \(a\) of \(C\) there is exactly one arrow \(s \to a\)'' (\cite{MacLane1998}, Ch. I §5, p.~20). Brief: exactly one morphism out to every other object of the category.
+\item
+  \textbf{Forgetful functor.} ``A functor which simply `forgets' some or all of the structure of an algebraic object is commonly called a forgetful functor (or, an underlying functor)'' (\cite{MacLane1998}, Ch. I §3, p.~14). Brief: a functor that keeps only part of a structure, discarding the rest.
+\item
+  \textbf{Subobject.} ``Let \(A\) be any category. If \(u : s \to a\) and \(v : t \to a\) are two monics {[}in \(A\){]} with a common codomain \(a\), write \(u \sim v\) when \(u\) factors through \(v\) \ldots{} the corresponding equivalence classes of these monics are called the subobjects of \(a\)'' (\cite{MacLane1998}, Ch. III §7, p.~126; equivalently \cite{Pareigis1970}, §1.6, p.~20). Brief: a piece of an object cut out by a condition, remembered together with its inclusion.
+\item
+  \textbf{Full subcategory.} ``We say that \(S\) is a full subcategory of \(C\) when the inclusion functor \(S \to C\) is full'' (\cite{MacLane1998}, Ch. I §3, p.~15). Brief: a subcategory retaining \emph{all} original morphisms of \(C\) between its objects, not just some of them.
+\end{itemize}
+
 Four words are going to come up constantly from here on, well before this book gives any of them a full formal treatment. Rather than leave these words undefined until they are needed, here is a working definition of each, good enough to use right away, with pointers to where a fuller formal treatment lives --- \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{§5 of this chapter} for Π/Σ-types and the calculus of constructions, \hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3 §2} for the logic underneath Curry--Howard, and \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} for typing rules and why Lean's guarantees can be trusted.
 
-\subsection{Elaborate / elaboration}\label{sec:01-basics:04-terminology:2}
+\subsection{Elaborate / elaboration}\label{sec:01-basics:04-terminology:3}
 
 This is the process by which Lean turns the surface syntax written by the user into a fully-explicit, fully-typed internal term: filling in implicit arguments, resolving notation, checking every subterm's type against what is expected. When this book says an expression ``elaborates to'' something, it means ``after Lean has finished this filling-in process, the result is\ldots{}'' For example, \texttt{identity 5} \emph{elaborates to} \texttt{@identity Nat 5} (Chapter 1), with \texttt{α := Nat} filled in silently. Elaboration is not guessing: it is \textbf{type inference for the calculus of constructions} (\hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{§5} makes this system precise), a deterministic algorithm driven by that calculus's own typing rules, not black-box compiler behavior. Every ``Lean figures it out from context'' moment since the very first \texttt{identity 5} is this same algorithm at work.
 
-\subsection{Unify / unification}\label{sec:01-basics:04-terminology:3}
+\subsection{Unify / unification}\label{sec:01-basics:04-terminology:4}
 
 This is the specific step inside elaboration that solves ``what must this placeholder be, given what I already know?'' When Lean sees \texttt{identity 5} and knows \texttt{identity : \{α : Type\} → α → α}, it \emph{unifies} the type of \texttt{5} (namely \texttt{Nat}) with the placeholder \texttt{α}, concluding \texttt{α := Nat}. Unification is what makes implicit-argument inference (Chapter 1), \texttt{apply}'s subgoal-matching (Chapter 4), and typeclass instance search (Chapter 5) all work. In each case, Lean is solving an equation between two (possibly partially unknown) terms --- a well-understood, terminating (for the fragment Lean actually uses) procedure, not an oracle. When it fails, the resulting error message (Chapter 4, ``reading a tactic failure'') states specifically which unification equation could not be solved.
 
@@ -14,9 +44,9 @@ This is the specific step inside elaboration that solves ``what must this placeh
 \textbf{Tactics do not add anything to the underlying calculus.} Every tactic from Chapter 4 onward (\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{intro}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{exact}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction}}, \ldots) is a \emph{user interface} for building terms of this same calculus step by step, with the goal state showing the type of the ``hole'' still to be filled. Every finished tactic proof elaborates to an ordinary term that could have been written by hand; running \texttt{\#print} on any tactic-proved theorem shows the literal term the tactic script built.
 \end{quote}
 
-\subsection{Reduce / reduction, normal form}\label{sec:01-basics:04-terminology:4}
+\subsection{Reduce / reduction, normal form}\label{sec:01-basics:04-terminology:5}
 
-A term \textbf{reduces} by repeatedly applying its computation rules: substituting an abstraction's argument into its body (β-reduction), unfolding a \texttt{def}, or simplifying a \texttt{match} on a known constructor. A term with no more reductions available is in \textbf{normal form}. \texttt{\#eval} (Chapter 1) computes a term's normal form and prints it. \texttt{rfl} (Chapter 3) succeeds exactly when both sides of an equation share a normal form. In practice, Lean's kernel usually only reduces as far as it needs to progress: down to \textbf{weak head normal form} (far enough to see the outermost constructor or function head), not necessarily all the way down. This is why, for example, \texttt{Nat.add}'s recursion on its \emph{second} argument (Chapter 4) determines which side of an equation reduces ``for free'' and which needs an explicit inductive argument. Lean only unfolds \texttt{a + b} far enough to expose \texttt{b}'s shape, so \texttt{a + 0} reduces immediately (the second argument is already the base case), while \texttt{0 + a}, with an unknown \texttt{a} in the position \texttt{Nat.add} recurses on, does not reduce at all until \texttt{a} itself is known.
+A term \textbf{reduces} by repeatedly applying its computation rules: substituting an abstraction's argument into its body (β-reduction), unfolding a \texttt{def}, or simplifying a \texttt{match} on a known constructor. A term with no more reductions available is in \textbf{normal form}. \texttt{\#eval} (Chapter 1) computes a term's normal form and prints it. \texttt{rfl} (Chapter 3) succeeds exactly when both sides of an equation share a normal form. In practice, Lean's kernel usually only reduces as far as it needs to progress: down to \textbf{weak head normal form} --- far enough to see the outermost constructor or function head, not necessarily all the way down. This is why, for example, \texttt{Nat.add}'s recursion on its \emph{second} argument (Chapter 4) determines which side of an equation reduces ``for free'' and which needs an explicit inductive argument. Lean only unfolds \texttt{a + b} far enough to expose \texttt{b}'s shape, so \texttt{a + 0} reduces immediately (the second argument is already the base case), while \texttt{0 + a}, with an unknown \texttt{a} in the position \texttt{Nat.add} recurses on, does not reduce at all until \texttt{a} itself is known.
 
 \textbf{Where β-reduction comes from, precisely.} Every \texttt{fun x => ...} in this book compiles down to one small formal system, the \textbf{λ-calculus}: a variable \texttt{x}, an abstraction \texttt{fun x => t} (written \(\lambda x.\, t\)), or an application \texttt{t1 t2}, and nothing else --- no built-in numbers, booleans, \texttt{if}, or recursion; every one of those is \emph{encoded} as a term built from these three constructs alone. In \(\lambda x.\, t\), occurrences of \texttt{x} inside \texttt{t} are \textbf{bound}; any other variable is \textbf{free} --- exactly Lean's ordinary lexical scoping. Two abstractions differing only in a bound variable's name (\texttt{fun a => a} vs.~\texttt{fun x => x}) are considered the \emph{same} term (\textbf{α-conversion}); Lean's elaborator treats them as interchangeable without comment. The one computation rule, \textbf{β-reduction}, is applying an abstraction to an argument by substitution: \[
 (\lambda x.\, t)\, s \;\longrightarrow_\beta\; t[x := s]
@@ -39,7 +69,7 @@ Python's own \texttt{lambda} really does \textgreater{} β-reduce exactly like t
 
 Chapter 1 §5 extends exactly this calculus with dependent types (Π/Σ, universes) to reach the system Lean's kernel actually runs --- the \textbf{calculus of constructions}.
 
-\subsection{Motive}\label{sec:01-basics:04-terminology:5}
+\subsection{Motive}\label{sec:01-basics:04-terminology:6}
 
 This is the (possibly type-dependent) predicate or type family that a tactic like \texttt{induction} or \texttt{rw} is secretly generalizing the goal over before it operates. When \texttt{rw [h]} fails with \textbf{``motive is not type correct,''} the meaning is as follows: to replace one side of \texttt{h} with the other throughout the goal, Lean first abstracts the goal into a function \texttt{C} (the motive) taking the rewritten term as a parameter. Here, that abstraction produces an ill-typed \texttt{C}, typically because the term being rewritten appears inside a dependent type's \emph{index} (as in Chapter 11's \texttt{Path}, whose very type depends on specific vertices) rather than in a position that can vary freely. The fix is almost always to restate the goal first with \texttt{show}, or to generalize the index explicitly, so the motive Lean builds is well-typed.
 
@@ -47,11 +77,11 @@ This is the (possibly type-dependent) predicate or type family that a tactic lik
 Read more: \hyperref[sec:05-rigor-check:04-defeq-vs-propeq:1]{Chapter 5 §4} revisits ``motive is not type correct'' alongside definitional equality; \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{§5 of this chapter} shows the recursor/eliminator (e.g.~\texttt{Nat.rec}) whose own type is literally parameterized by a motive, which is where the name comes from.
 \end{quote}
 
-\subsection{Category-theory terms used beyond the baseline}\label{sec:01-basics:04-terminology:6}
+\subsection{Category-theory terms used beyond the baseline}\label{sec:01-basics:04-terminology:7}
 
 The README states that the only category theory assumed going in is ``objects, morphisms, composition, functors,'' which holds true of the main text. The optional ``Mathematical reading'' boxes scattered through later chapters occasionally go one step further, for readers who already possess a bit more category theory and would appreciate the extra precision. Four such terms come up often enough to be worth fixing once here, so every later use can simply point back to this entry instead of re-explaining (or, worse, silently assuming) each time:
 
-\subsubsection{Universal property}\label{sec:01-basics:04-terminology:7}
+\subsubsection{Universal property}\label{sec:01-basics:04-terminology:8}
 
 This is a characterization of a construction not by what it is \emph{made of}, but by what maps \emph{uniquely factor through it}. ``\(X\) has property \(U\)'' means ``for every \(Y\) with the relevant data, there is exactly one map \(Y \to X\) compatible with that data.'' This is the category-theorist's way of saying ``\(X\) is the \emph{best possible} solution to a mapping problem,'' and it is the same idea as the familiar universal properties of products, quotients, and free constructions from an algebra course; nothing new is meant by the phrase here beyond that. Here is the classic picture, for a product \(X \times Y\): given any \(A\) with maps to both factors, there is exactly one map into the product making everything agree (the dashed arrow):
 
@@ -77,7 +107,7 @@ Symbol & Lean \\
 
 Read the diagram as follows: the two solid outer arrows (\(f\) and \(g\)) are \emph{given}. The universal property \emph{asserts} the dashed middle arrow \(h\) exists, is unique, and makes both triangles commute: \(\pi_X \circ h = f\) and \(\pi_Y \circ h = g\), i.e.~\texttt{h a |>.1 = f a} and \texttt{h a |>.2 = g a} for every \texttt{a}. ``Commute'' just means any two paths between the same two objects in the diagram compose to the same map. This is exactly what \texttt{⟨\_\allowbreak{}, \_\allowbreak{}⟩} does for \texttt{Pair}/\texttt{structure} types (Chapter 2 §1): give it an \texttt{f}-shaped piece and a \texttt{g}-shaped piece, and it hands back the unique \texttt{h} combining them.
 
-\subsubsection{Initial object}\label{sec:01-basics:04-terminology:8}
+\subsubsection{Initial object}\label{sec:01-basics:04-terminology:9}
 
 This is an object \(I\) of a category with a \emph{unique} morphism \(I \to X\) out to every other object \(X\): the universal property above, specialized to ``the best possible source'':
 
@@ -100,7 +130,7 @@ Symbol & Lean \\
 
 Exactly one arrow leaves \(I\) for every object in the category --- never zero (there is always a map), never more than one (no choice about which). \texttt{Nat} (\hyperref[sec:01-basics:01-everything-has-a-type:1]{Chapter 1 §1}) and \texttt{ℤ} in \texttt{Ring} (Chapter 8) are both flagged as initial objects of the relevant category in this sense: any structure-preserving map out of them is forced, with no choice involved.
 
-\subsubsection{Forgetful functor}\label{sec:01-basics:04-terminology:9}
+\subsubsection{Forgetful functor}\label{sec:01-basics:04-terminology:10}
 
 This is a functor that takes a structure and \emph{keeps only part of it}, discarding the rest. Examples: the map sending a group \(G\) to its underlying set (forgetting the multiplication), or a \texttt{Ring} to its underlying \texttt{Group} under addition (forgetting multiplication and its unit):
 
@@ -123,7 +153,7 @@ Symbol & Lean \\
 
 Each arrow keeps \emph{less} structure than the one before it. A \texttt{Ring} remembers both operations, the \texttt{Group} it maps to remembers only addition, and the \texttt{Set} it maps to remembers only the underlying elements. In this book, every \texttt{.toGroup}/\texttt{.toAddGroup}-style field generated by Lean's \texttt{extends} (\hyperref[sec:02-functions-and-structures:03-extending-structures:1]{Chapter 2 §3} onward) \emph{is} a forgetful functor, computationally: it is the projection that keeps some of a structure's data and drops the rest.
 
-\subsubsection{Subobject / full subcategory}\label{sec:01-basics:04-terminology:10}
+\subsubsection{Subobject / full subcategory}\label{sec:01-basics:04-terminology:11}
 
 A subobject of \(X\) is (informally) ``a subset of \(X\) cut out by some condition, remembered together with its inclusion into \(X\).'' For example, \texttt{CommGroup} is a subobject of \texttt{Group}'s data, cut out by the extra commutativity axiom:
 
@@ -147,3 +177,33 @@ Symbol & Lean \\
 A full subcategory is the category formed by all objects satisfying such a condition, together with \emph{all} morphisms between them inherited unchanged from the ambient category. (Nothing is removed at the morphism level, only at the object level.) For example, abelian groups form a full subcategory of all groups.
 
 These four are the ones worth fixing once. If a ``Mathematical reading'' box elsewhere uses a still-more-specialized term (adjunction, biproduct, a presheaf category, and the like), treat it as genuinely optional bonus content for readers who already know it. Nothing later in the book depends on it, and the surrounding plain-English explanation always stands on its own without it.
+
+\subsection{References}\label{sec:01-basics:04-terminology:12}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions and verbatim quotes are gathered in Recall, above.
+
+\begin{itemize}
+\tightlist
+\item
+  Pierce (\cite{Pierce2002}), §5.1 ``Basics,'' p.~55 --- free variables.
+\item
+  Pierce (\cite{Pierce2002}), §5.1 ``Basics,'' p.~56 --- β-reduction.
+\item
+  Pierce (\cite{Pierce2002}), §5.2 ``Programming in the Lambda-Calculus,'' pp.~58--59 --- currying.
+\item
+  Pierce (\cite{Pierce2002}), §5.3 ``Formalities,'' p.~73 --- α-conversion.
+\item
+  Thompson (\cite{Thompson1991}), §2.3 ``Evaluation,'' p.~36, Definition 2.8 --- weak head normal form.
+\item
+  Thompson (\cite{Thompson1991}), §2.3 ``Evaluation,'' p.~38, Theorem 2.10 --- the Church--Rosser theorem.
+\item
+  Mac Lane (\cite{MacLane1998}), Ch. III §1 ``Universal Arrows,'' p.~55 --- the general categorical form of ``universal property.''
+\item
+  Mac Lane (\cite{MacLane1998}), Ch. I §5, p.~20 --- initial object.
+\item
+  Mac Lane (\cite{MacLane1998}), Ch. I §3 ``Functors,'' p.~14 --- forgetful functor.
+\item
+  Mac Lane (\cite{MacLane1998}), Ch. III §7 ``Subobjects and Generators,'' p.~126 --- subobject. Equivalently, Pareigis (\cite{Pareigis1970}), §1.6 ``Subobjects and Quotient Objects,'' p.~20.
+\item
+  Mac Lane (\cite{MacLane1998}), Ch. I §3 ``Functors,'' p.~15 --- full subcategory.
+\end{itemize}
