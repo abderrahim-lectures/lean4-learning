@@ -1,13 +1,13 @@
 \section{\texorpdfstring{\texttt{Ring}: bundling an additive \texttt{CommGroup} with multiplication}{Ring: bundling an additive CommGroup with multiplication}}\label{sec:08-rings:03-ring:1}
 
-\subsection{Recall}\label{sec:08-rings:03-ring:0b}
+\subsection{Recall}\label{sec:08-rings:03-ring:2}
 
 Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Ring.} ``(i) \((R, +)\) is an abelian group, (ii) \(\times\) is associative ... (iii) the distributive laws hold'' (\cite{DummitFoote2003}, §7.1 ``Basic Definitions and Examples,'' pp.~222--223). A basic consequence: ``\(0a = a0 = 0\) for all \(a \in R\)'' (p.~225, Proposition 1).
+  \textbf{Ring.} ``(i) \((R, +)\) is an abelian group, (ii) \(\times\) is associative \ldots{} (iii) the distributive laws hold'' (\cite{DummitFoote2003}, §7.1 ``Basic Definitions and Examples,'' pp.~222--223). A basic consequence: ``\(0a = a0 = 0\) for all \(a \in R\)'' (p.~225, Proposition 1).
 \end{itemize}
 
 \begin{lstlisting}
@@ -51,14 +51,14 @@ Consider each field in turn:
 Read more: Mathlib's \texttt{Ring} (\texttt{Mathlib.Algebra.Ring.Defs}) sits inside a much larger hierarchy --- \texttt{Semiring}, \texttt{NonUnitalRing}, \texttt{CommRing}, \texttt{DivisionRing}, \texttt{Field} --- each adding or dropping exactly one axiom compared to its neighbors; see \hyperref[sec:13-next-steps:02-moving-to-mathlib:1]{Chapter 13}. For the classical (non-Lean) statement of these axioms and their standard consequences, Dummit \& Foote's \emph{Abstract Algebra} or Aluffi's \emph{Algebra: Chapter 0} (the latter using the same categorical framing this book uses) are standard references.
 \end{quote}
 
-\subsection{References}\label{sec:08-rings:03-ring:2}
+\subsection{References}\label{sec:08-rings:03-ring:3}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
-  Dummit and Foote (\cite{DummitFoote2003}), \S7.1 ``Basic Definitions and Examples,'' pp.~222--225 --- ring axioms (R1)--(R4) and their consequences.
+  Dummit and Foote (\cite{DummitFoote2003}), §7.1 ``Basic Definitions and Examples,'' pp.~222--225 --- ring axioms (R1)--(R4) and their consequences.
 \item
-  Aluffi (\cite{Aluffi2009}) --- \textbf{Gap:} not held in either notebook (see \texttt{NOTEBOOK-SOURCE-GAPS.md}); this recommendation is offered as further reading, not an independently verified factual claim --- Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
+  Aluffi (\cite{Aluffi2009}) --- \textbf{Gap:} not held in either notebook (see \texttt{NOTEBOOK-\allowbreak{}SOURCE-\allowbreak{}GAPS.md}); this recommendation is offered as further reading, not an independently verified factual claim --- Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
 \end{itemize}

@@ -1,17 +1,18 @@
 \section{Everything has a type}\label{sec:01-basics:01-everything-has-a-type:1}
 
-\subsection{Recall}\label{sec:01-basics:01-everything-has-a-type:0b}
+\subsection{Recall}\label{sec:01-basics:01-everything-has-a-type:2}
 
 Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Judgment.} ``A statement made about a calculus from the outside, not a proposition proved inside it'' (\cite{MartinLof1984}, Ch. 1, ``Judgements and their explanations,'' this book's working statement). Brief: written here in the form \(e : \tau\), e.g.~\texttt{3 : Nat}.
+  \textbf{Judgment.} ``A statement made about a calculus from the outside, not a proposition proved inside it'' (\cite{MartinLof1984}, Ch. 1, ``Judgements and their explanations,'' this book's working statement). Brief: written here in the form \(e : \tau\), e.g. \texttt{3 : Nat}.
 \item
-  \textbf{Type system guarantee.} ``A type system is a tractable syntactic method for proving the absence of certain program behaviors...'' (\cite{Pierce2002}, §1.1--§1.2). Brief: a static check that rules out a whole class of runtime failure before any code runs, for every possible input.
+  \textbf{Type system guarantee.} ``A type system is a tractable syntactic method for proving the absence of certain program behaviors\ldots{}'' (\cite{Pierce2002}, §1.1--§1.2). Brief: a static check that rules out a whole class of runtime failure before any code runs, for every possible input.
 \item
-  \textbf{\(F\)-algebra.} ``For an arbitrary endofunctor \(T : \mathbb{B} \to \mathbb{B}\) [on a category \(\mathbb{B}\)] an algebra (or \(T\)-algebra) consists of a `carrier' object \(Y \in \mathbb{B}\) together with a morphism \(\varphi : T(Y) \to Y\)'' (\cite{Jacobs1999}, §2.6, p.~161; this book writes \(F\) for Jacobs's \(T\)). Brief: for \(\mathbb{B} = \) \texttt{Type}, a type \(X\) equipped with a map \(F(X) \to X\).
+  \textbf{\(F\)-algebra.} ``For an arbitrary endofunctor \(T : \mathbb{B} \to
+  \mathbb{B}\) {[}on a category \(\mathbb{B}\){]} an algebra (or \(T\)-algebra) consists of a `carrier' object \(Y \in \mathbb{B}\) together with a morphism \(\varphi : T(Y) \to Y\)'' (\cite{Jacobs1999}, §2.6, p.~161; this book writes \(F\) for Jacobs's \(T\)). Brief: for \$\mathbb{B} = \$ \texttt{Type}, a type \(X\) equipped with a map \(F(X) \to X\).
 \item
   \textbf{Initial object.} ``An object \(s\) is initial in a category \(C\) if to each object \(a\) of \(C\) there is exactly one arrow \(s \to a\)'' (\cite{MacLane1998}, Ch. I §5, p.~20). Brief: exactly one morphism out to every other object of the category.
 \item
@@ -51,7 +52,7 @@ For readers who have written Python but not Lean: \texttt{\#check e} is \emph{no
 
 \end{progcorner}
 
-\subsection{Why this matters: types rule things out in advance}\label{sec:01-basics:01-everything-has-a-type:2}
+\subsection{Why this matters: types rule things out in advance}\label{sec:01-basics:01-everything-has-a-type:3}
 
 Here is the entire point of a type system, made concrete --- starting in Python, where the failure can actually be watched happening, before seeing how Lean rules it out instead.
 
@@ -74,7 +75,7 @@ Now the same shape of mistake in Lean:
 
 Lean refuses to even \emph{elaborate} this expression. It never runs it, never silently coerces \texttt{true} to \texttt{1}, never crashes five function calls later once the bad value finally reaches code that cannot handle it --- it simply never accepts the term in the first place, because \texttt{+}'s left argument is a \texttt{Nat} and its right argument is a \texttt{Bool}, and no rule connects the two. The check happens once, by reading the expression, without running it on any input. Lean's guarantee is stronger than Python's: once a term type-checks, this entire class of runtime error is impossible for that term, on \emph{every} input, not just the ones a test suite happened to run.
 
-\subsection{\texorpdfstring{\texttt{Nat}, concretely}{Nat, concretely}}\label{sec:01-basics:01-everything-has-a-type:3}
+\subsection{\texorpdfstring{\texttt{Nat}, concretely}{Nat, concretely}}\label{sec:01-basics:01-everything-has-a-type:4}
 
 \texttt{Nat} is not a built-in primitive the way \texttt{int} is in most languages. It is defined, in full, as an \textbf{inductive type}:
 
@@ -104,7 +105,7 @@ Lean prints numerals for readability, but underneath, every \texttt{Nat} really 
 \textbf{A second, different fact --- worth not conflating with the above.} None of this is required to use \texttt{Nat}. It is offered only because, once ordinary numeric \texttt{+} and \texttt{0} are \emph{defined} on \texttt{Nat} (Chapter 4) --- an entirely different operation from the disjoint-sum \(+\) used to build \(F\) above, despite sharing a symbol --- a second and different fact becomes provable (not merely definitional): \texttt{Nat}, with this numeric \texttt{+} and \texttt{0}, is the free commutative monoid on one generator. This is a genuinely different universal property from the initial-algebra one above --- the two are easy to conflate, since both attach the word ``universal'' to \texttt{Nat}, but one concerns \(F\)-algebras and the other concerns monoids. \hyperref[sec:01-basics:04-terminology:1]{Chapter 1 §4} fixes the vocabulary (``universal property,'' ``initial object'') used here, for any reader meeting it for the first time.
 \end{quote}
 
-\subsection{References}\label{sec:01-basics:01-everything-has-a-type:4}
+\subsection{References}\label{sec:01-basics:01-everything-has-a-type:5}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions and verbatim quotes are gathered in Recall, above.
 

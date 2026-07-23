@@ -1,13 +1,16 @@
 \section{Path composition}\label{sec:11-path-algebras:05-path-composition:1}
 
-\subsection{Recall}\label{sec:11-path-algebras:05-path-composition:0b}
+\subsection{Recall}\label{sec:11-path-algebras:05-path-composition:2}
 
 Formal definition cited in this section, gathered here for quick reference (full citation in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Path algebra \(kQ\).} ``Let \(Q\) be a quiver. The path algebra \(KQ\) of \(Q\) is the \(K\)-algebra whose underlying \(K\)-vector space has as its basis the set of all paths \((a \mid \alpha_1, \ldots, \alpha_l \mid b)\) of length \(l \geq 0\) in \(Q\) and such that the product of two basis vectors \((a \mid \alpha_1, \ldots, \alpha_l \mid b)\) and \((c \mid \beta_1, \ldots, \beta_k \mid d)\) of \(KQ\) is defined by \((a \mid \alpha_1, \ldots, \alpha_l \mid b)(c \mid \beta_1, \ldots, \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l, \beta_1, \ldots, \beta_k \mid d)\)'' (\cite{AssemSimsonSkowronski2006}, Ch. II §1, Definition 1.2).
+  \textbf{Path algebra \(kQ\).} ``Let \(Q\) be a quiver. The path algebra \(KQ\) of \(Q\) is the \(K\)-algebra whose underlying \(K\)-vector space has as its basis the set of all paths \((a \mid \alpha_1, \ldots, \alpha_l
+  \mid b)\) of length \(l \geq 0\) in \(Q\) and such that the product of two basis vectors \((a \mid \alpha_1, \ldots, \alpha_l \mid b)\) and \((c \mid \beta_1, \ldots, \beta_k \mid d)\) of \(KQ\) is defined by \((a \mid \alpha_1, \ldots, \alpha_l \mid b)(c \mid \beta_1, \ldots,
+  \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l,
+  \beta_1, \ldots, \beta_k \mid d)\)'' (\cite{AssemSimsonSkowronski2006}, Ch. II §1, Definition 1.2).
 \end{itemize}
 
 Given a path \texttt{p : Path Q u v} and a path \texttt{q : Path Q v w}, they can be concatenated into a path \texttt{Path Q u w}, defined by recursion on \texttt{q}:
@@ -32,7 +35,7 @@ Reading the recursion:
 
 This recursion terminates because each recursive call is on the strictly shorter path \texttt{q'}. This is the same structural recursion principle behind the \texttt{induction} tactic from Chapter 4.
 
-\subsection{\texorpdfstring{A worked instance: rebuilding \texttt{pathBetaAlpha} via \texttt{append}}{A worked instance: rebuilding pathBetaAlpha via append}}\label{sec:11-path-algebras:05-path-composition:2}
+\subsection{\texorpdfstring{A worked instance: rebuilding \texttt{pathBetaAlpha} via \texttt{append}}{A worked instance: rebuilding pathBetaAlpha via append}}\label{sec:11-path-algebras:05-path-composition:3}
 
 The previous section built \texttt{pathBetaAlpha : Path exampleQuiver 0 2} directly, one \texttt{Path.cons} at a time. Here it is again, built instead by \emph{composing} the shorter path \texttt{pathAlpha} with a fresh one-arrow path using \texttt{Path.append}. Both constructions produce the exact same path.
 
@@ -80,7 +83,7 @@ example : pathBetaAlphaViaComp' = pathBetaAlpha' := rfl
 
 This is the same closing \texttt{rfl} as the book's \texttt{pathBetaAlphaViaAppend = pathBetaAlpha} check: two paths built via different routes (direct \texttt{cons}-chaining versus composing two shorter paths) reduce to the identical term, because \texttt{Quiver.Path.comp} unfolds to exactly the same sequence of \texttt{cons} applications \texttt{Path.append} does.
 
-\subsection{The path algebra}\label{sec:11-path-algebras:05-path-composition:3}
+\subsection{The path algebra}\label{sec:11-path-algebras:05-path-composition:4}
 
 The \textbf{path algebra} \(kQ\) of a quiver \(Q\) over a field (or ring) \(k\) is the ring whose elements are \(k\)-linear combinations of paths in \(Q\), with multiplication given by path composition (composing two paths whose endpoints do not match gives \(0\)). Formalizing \(kQ\) fully (as a \texttt{Ring}, per Chapter 8) requires ``formal sums of paths with ring coefficients,'' which is a genuinely bigger construction: essentially a finitely-supported function from paths to \(k\). It is a natural next project once the material above is well understood. This chapter stops at ``paths and their composition'' because that data (the \emph{category} of paths, really) is the essential content of the construction; once it is in place, the ring structure on top is routine to add.
 
@@ -101,7 +104,7 @@ q \cdot p = \begin{cases} q\circ p & \text{if } t(p) = s(q),\\ 0 &
 Read more: \hyperref[sec:10-modules:00-index:1]{Chapter 10}'s \href{https://loogle.lean-lang.org/?q=Module}{\texttt{Module}}, \href{https://loogle.lean-lang.org/?q=LinearMap}{\texttt{LinearMap}}, and direct-sum material is exactly the vocabulary a full \(kQ\)-module (i.e.~quiver representation) formalization would need. Externally, Assem--Simson--Skowroński's \emph{Elements of the Representation Theory of Associative Algebras} (Vol. 1) and Schiffler's \emph{Quiver Representations} both develop path algebras and their representations from scratch, at a similar level of explicitness to this chapter.
 \end{quote}
 
-\subsection{References}\label{sec:11-path-algebras:05-path-composition:4}
+\subsection{References}\label{sec:11-path-algebras:05-path-composition:5}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 

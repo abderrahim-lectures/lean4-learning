@@ -1,13 +1,13 @@
 \section{Direct sums of modules}\label{sec:10-modules:06-direct-sums:1}
 
-\subsection{Recall}\label{sec:10-modules:06-direct-sums:0b}
+\subsection{Recall}\label{sec:10-modules:06-direct-sums:2}
 
 Formal definition cited in this section, gathered here for quick reference (full citation in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Direct sum of modules.} ``Let \(M_1, \ldots, M_k\) be a collection of \(R\)-modules. The collection of \(k\)-tuples \((m_1, \ldots, m_k)\) where \(m_i \in M_i\) with addition and action of \(R\) defined componentwise is called the direct product of \(M_1, \ldots, M_k\) ... also referred to as the (external) direct sum ... denoted \(M_1 \oplus \cdots \oplus M_k\)'' (\cite{DummitFoote2003}, §10.3 ``Generation of Modules, Direct Sums, and Free Modules,'' p.~351, Proposition 5). D\&F's explicit universal-property discussion in this section covers free modules and tensor products, not direct sums specifically --- the universal-property framing of direct sums used elsewhere in this book is its own extension of the pattern.
+  \textbf{Direct sum of modules.} ``Let \(M_1, \ldots, M_k\) be a collection of \(R\)-modules. The collection of \(k\)-tuples \((m_1, \ldots, m_k)\) where \(m_i \in M_i\) with addition and action of \(R\) defined componentwise is called the direct product of \(M_1, \ldots, M_k\) \ldots{} also referred to as the (external) direct sum \ldots{} denoted \(M_1 \oplus \cdots \oplus M_k\)'' (\cite{DummitFoote2003}, §10.3 ``Generation of Modules, Direct Sums, and Free Modules,'' p.~351, Proposition 5). D\&F's explicit universal-property discussion in this section covers free modules and tensor products, not direct sums specifically --- the universal-property framing of direct sums used elsewhere in this book is its own extension of the pattern.
 \end{itemize}
 
 Given two \(R\)-modules \(M\), \(N\), their direct sum \(M \oplus N\) has carrier \(M \times N\), componentwise addition, and componentwise scalar action:
@@ -100,7 +100,7 @@ This builds the \textbf{direct sum} \(M \oplus N\): its carrier is the product \
 
 \end{mathreading}
 
-\subsection{\texorpdfstring{A concrete instance: \(\mathbb{Z} \oplus \mathbb{Z}\)}{A concrete instance: \textbackslash mathbb\{Z\} \textbackslash oplus \textbackslash mathbb\{Z\}}}\label{sec:10-modules:06-direct-sums:2}
+\subsection{\texorpdfstring{A concrete instance: \(\mathbb{Z} \oplus \mathbb{Z}\)}{A concrete instance: \textbackslash mathbb\{Z\} \textbackslash oplus \textbackslash mathbb\{Z\}}}\label{sec:10-modules:06-direct-sums:3}
 
 Instantiating the generic construction requires nothing beyond supplying two modules --- here, \texttt{intZModule} twice.
 
@@ -149,12 +149,12 @@ def proj1' : (Int (*$\times$*) Int) (*$\rightarrow$*)(*${}_l$*)[Int] Int := Line
 #eval proj1' (7, 100)   -- 7
 \end{lstlisting}
 
-\subsection{References}\label{sec:10-modules:06-direct-sums:3}
+\subsection{References}\label{sec:10-modules:06-direct-sums:4}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
-  Dummit and Foote (\cite{DummitFoote2003}), \S10.3 ``Generation of Modules, Direct Sums, and Free Modules,'' pp.~351--353, Proposition 5 --- direct sums of modules, internal/external direct-sum equivalence.
+  Dummit and Foote (\cite{DummitFoote2003}), §10.3 ``Generation of Modules, Direct Sums, and Free Modules,'' pp.~351--353, Proposition 5 --- direct sums of modules, internal/external direct-sum equivalence.
 \end{itemize}

@@ -1,6 +1,6 @@
 \section{Dependent types, with examples}\label{sec:01-basics:03-dependent-types:1}
 
-\subsection{Recall}\label{sec:01-basics:03-dependent-types:0b}
+\subsection{Recall}\label{sec:01-basics:03-dependent-types:2}
 
 Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
@@ -14,7 +14,7 @@ Formal definitions cited in this section, gathered here for quick reference (ful
 
 Every function seen so far has a \emph{fixed} codomain: \texttt{double : Nat → Nat} returns a \texttt{Nat} regardless of the input \texttt{n}. Lean's type theory allows something more general: a type that itself depends on a \emph{value}, and a function whose return type changes depending on which argument it was given. This is a \textbf{dependent type}. It is the single feature that separates Lean (and other proof assistants) from an ordinary typed programming language, so it is worth building up slowly, from the smallest possible example, before naming the general pattern.
 
-\subsection{The problem, in Python first}\label{sec:01-basics:03-dependent-types:2}
+\subsection{The problem, in Python first}\label{sec:01-basics:03-dependent-types:3}
 
 Before any Lean syntax, here is the actual problem dependent types solve, in a language with no type checker enforcing anything at all. Suppose a dot-product function is written over two lists:
 
@@ -22,15 +22,15 @@ Before any Lean syntax, here is the actual problem dependent types solve, in a l
 def dot(xs, ys):
     return sum(x * y for x, y in zip(xs, ys))
 
-dot([1, 2, 3], [4, 5, 6])   # 32 (*\textemdash{}*) correct
-dot([1, 2, 3], [4, 5])      # 14 (*\textemdash{}*) silently wrong: zip() truncates to the shorter list
+dot([17, -3, 42], [99, 8, 6])   # 1911 (*\textemdash{}*) correct
+dot([17, -3, 42], [99, 8])      # 1659 (*\textemdash{}*) silently wrong: zip() truncates to the shorter list
 \end{lstlisting}
 
-This is worse than a crash. \texttt{dot([1, 2, 3], [4, 5])} does not raise anything --- \texttt{zip} just quietly drops the third element of \texttt{xs} and hands back a number that \emph{looks} like a perfectly good answer. The bug (calling \texttt{dot} on two lists of different lengths, which is mathematically nonsensical) is never caught, not by Python, not by a test that happens not to cover this call site, not by anything short of a human noticing the number looks off.
+This is worse than a crash. \texttt{dot([17, -\allowbreak{}3, 42], [99, 8])} does not raise anything --- \texttt{zip} just quietly drops the third element of \texttt{xs} and hands back a number that \emph{looks} like a perfectly good answer. The bug (calling \texttt{dot} on two lists of different lengths, which is mathematically nonsensical) is never caught, not by Python, not by a test that happens not to cover this call site, not by anything short of a human noticing the number looks off.
 
 The underlying mistake is that a Python \texttt{list} carries no information about its own length in any way Python's function signatures can see or enforce. \texttt{xs : list} and \texttt{ys : list} say nothing about whether the two lists agree in size --- that fact exists only as a comment at best, never checked by anything. What is actually wanted is a signature saying ``\texttt{dot} accepts two lists \emph{of the same length} \texttt{n}, for \emph{any} \texttt{n}'' --- a signature that mentions and constrains a value (\texttt{n}), not just a type (\texttt{list}). Ordinary type systems, Python's included even with type hints added, have no way to say that. This is exactly the gap dependent types close, and the rest of this section builds the machinery to say it, starting from the smallest possible example.
 
-\subsection{First: a type family, one type per number}\label{sec:01-basics:03-dependent-types:3}
+\subsection{First: a type family, one type per number}\label{sec:01-basics:03-dependent-types:4}
 
 Here is the smallest genuine example of a dependent type, and it is already sitting in Lean's core library. \href{https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html\#Fin}{\texttt{Fin n}} is the type of natural numbers \emph{strictly less than} \texttt{n}:
 
@@ -53,7 +53,7 @@ The construction of \texttt{Fin} can be inspected directly:
 
 So a term of \texttt{Fin n} is literally a pair: a \texttt{Nat} value, plus a \emph{proof} that the value is below \texttt{n}. The proof's very statement (\texttt{val < n}) mentions \texttt{n}, the value supplied. Change \texttt{n} and the result is a genuinely different type, with a genuinely different proof obligation attached. This bundling --- data, plus a proof whose statement depends on that data --- is the second half of the dependent-types story (formalized later in this section as a \textbf{Σ-type}); \texttt{Fin} is a real, live example of it, not a made-up one.
 
-\subsection{\texorpdfstring{Second: a function whose \emph{return type} changes with its argument}{Second: a function whose return type changes with its argument}}\label{sec:01-basics:03-dependent-types:4}
+\subsection{\texorpdfstring{Second: a function whose \emph{return type} changes with its argument}{Second: a function whose return type changes with its argument}}\label{sec:01-basics:03-dependent-types:5}
 
 Now for the companion idea: a \textbf{dependent function}, one whose return type depends on the specific \emph{value} of its argument, not just the argument's type. Define fixed-length vectors from scratch, the standard first example in any dependent-type-theory course:
 
@@ -75,13 +75,15 @@ def Vec.replicate (a : (*$\alpha$*)) : (n : Nat) (*$\rightarrow$*) Vec (*$\alpha
 #check @Vec.replicate
 -- @Vec.replicate : {(*$\alpha$*) : Type} (*$\rightarrow$*) (*$\alpha$*) (*$\rightarrow$*) (n : Nat) (*$\rightarrow$*) Vec (*$\alpha$*) n
 
-#eval (Vec.replicate 7 3 : Vec Nat 3)
--- Vec.cons 7 (Vec.cons 7 (Vec.cons 7 Vec.nil))
+#eval (Vec.replicate (-42 : Int) 3 : Vec Int 3)
+-- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) Vec.nil))
 \end{lstlisting}
+
+(Deliberately \texttt{Int}, not \texttt{Nat}, for the stored element here: with a \texttt{Vec Nat n} and a \texttt{Nat} value inside it, the length \texttt{n} and the stored numbers are both \texttt{Nat}, and it becomes easy to lose track of which \texttt{Nat} is playing which role. \texttt{Int} keeps the elements visibly numeric --- unlike, say, \texttt{Bool} --- while still being unmistakably a \emph{different} type from the length's \texttt{Nat}: \texttt{-\allowbreak{}42} is large and negative, nothing a length ever is, so no reader could mistake it for the \texttt{3}. Real or complex numbers would make the distinction just as clear, but are not an option this early: \texttt{ℝ}/\texttt{ℂ} are Mathlib types (this book stays Mathlib-free through Chapter 11), and Lean's reals in particular are \texttt{noncomputable} --- built from Cauchy sequences with no decidable equality --- so \texttt{\#eval} cannot evaluate one at all, not even in principle. \texttt{Int} is the closest numeric type that is both core Lean and actually computable. The next example, \texttt{Vec.dot}, uses \texttt{Vec Int n} for the same reason.)
 
 Look closely at the type \texttt{(n : Nat) → Vec α n}. The \texttt{n} that appears on the \emph{left} of the arrow (the argument) reappears inside the type on the \emph{right} of the arrow (the result). Feed \texttt{Vec.replicate a} the number \texttt{3}, and the result has type \texttt{Vec α 3}, specifically. Feed it \texttt{5}, and the very same function returns something of type \texttt{Vec α 5} instead. This is categorically different from \texttt{double : Nat → Nat}, where the output type (\texttt{Nat}) is fixed in advance and never reads the input value at all. Here, the \emph{type itself} changes based on which number was passed in. That is exactly what ``the codomain depends on the argument'' means, made as concrete as possible.
 
-\subsection{Why bother: invariants become part of the type, not a side promise}\label{sec:01-basics:03-dependent-types:5}
+\subsection{Why bother: invariants become part of the type, not a side promise}\label{sec:01-basics:03-dependent-types:6}
 
 The payoff is not just bookkeeping. Because the length lives in the type, Lean can rule out a whole class of mistakes \emph{before running anything at all}. Define a function that reads a vector's first element, which only makes sense for a \emph{non-empty} vector:
 
@@ -112,36 +114,36 @@ Nothing about ``index out of range'' happens at runtime, because the bad call is
 \textbf{Return to the Python example from the start of this section.} Here is \texttt{dot}, rewritten for \texttt{Vec} instead of Python's \texttt{list}, with both arguments required to share the \emph{same} length \texttt{n}:
 
 \begin{lstlisting}
-def Vec.dot : Vec Nat n (*$\rightarrow$*) Vec Nat n (*$\rightarrow$*) Nat
+def Vec.dot : Vec Int n (*$\rightarrow$*) Vec Int n (*$\rightarrow$*) Int
   | Vec.nil, Vec.nil => 0
   | Vec.cons x xs, Vec.cons y ys => x * y + Vec.dot xs ys
 \end{lstlisting}
 
-The signature \texttt{Vec Nat n → Vec Nat n → Nat} uses the \emph{same} \texttt{n} for both arguments --- that is not a naming coincidence, it is the whole point. Try to reproduce Python's silent bug:
+The signature \texttt{Vec Int n → Vec Int n → Int} uses the \emph{same} \texttt{n} --- a \texttt{Nat}, the length --- for both arguments; that is not a naming coincidence, it is the whole point. Elements are \texttt{Int}, not \texttt{Nat}, on purpose: this keeps the length (\texttt{n}, a \texttt{Nat}) and the stored numbers (\texttt{Int}) as visibly different types throughout, with no \texttt{Nat}/\texttt{Nat} overlap left to lose track of. The vectors below are also named \texttt{vecA}/\texttt{vecB}, not after their own lengths, to avoid yet another coincidence layered on top. Try to reproduce Python's silent bug:
 
 \begin{lstlisting}
-def v3 : Vec Nat 3 := Vec.cons 1 (Vec.cons 2 (Vec.cons 3 Vec.nil))
-def v2 : Vec Nat 2 := Vec.cons 4 (Vec.cons 5 Vec.nil)
+def vecA : Vec Int 3 := Vec.cons 17 (Vec.cons (-3) (Vec.cons 42 Vec.nil))
+def vecB : Vec Int 2 := Vec.cons 99 (Vec.cons 8 Vec.nil)
 
-#check Vec.dot v3 v2
+#check Vec.dot vecA vecB
 \end{lstlisting}
 
 \begin{lstlisting}
 error: Application type mismatch: The argument
-  v2
+  vecB
 has type
-  Vec Nat 2
+  Vec Int 2
 but is expected to have type
-  Vec Nat 3
+  Vec Int 3
 in the application
-  v3.dot v2
+  vecA.dot vecB
 \end{lstlisting}
 
-Where Python's \texttt{dot([1,2,3], [4,5])} silently returned \texttt{14} --- a wrong answer with no error at all --- Lean's version does not even compile. The length-mismatch bug is not caught by a clever runtime check \emph{added} to \texttt{Vec.dot}; there is no such check anywhere in its three-line definition. It is caught because ``both arguments have the same length'' was stated once, in the type, and Lean enforces every type it is given, automatically, for every call site, without exception.
+Where Python's \texttt{dot([17,-\allowbreak{}3,42], [99,8])} silently returned \texttt{1659} --- a wrong answer with no error at all --- Lean's version does not even compile. The length-mismatch bug is not caught by a clever runtime check \emph{added} to \texttt{Vec.dot}; there is no such check anywhere in its three-line definition. It is caught because ``both arguments have the same length'' was stated once, in the type, and Lean enforces every type it is given, automatically, for every call site, without exception.
 
 (Lean's actual, built-in \texttt{Vector α n} --- distinct from the toy \texttt{Vec} built here --- is defined differently under the hood, as an \texttt{Array α} paired with a proof that its size equals \texttt{n}, for performance reasons, the same way \texttt{Nat}'s \emph{presentation} above as Peano's \texttt{zero}/\texttt{succ} does not reflect how Lean actually stores numbers at runtime (as fast arbitrary-precision integers). The \texttt{Vec} built in this section is the traditional textbook definition --- simpler to reason about, and the one every type-theory reference uses first --- while Lean's real \texttt{Vector} is engineered for speed. Both are dependent types in exactly the sense described here.)
 
-\subsection{The general pattern: Π-types}\label{sec:01-basics:03-dependent-types:6}
+\subsection{The general pattern: Π-types}\label{sec:01-basics:03-dependent-types:7}
 
 Both examples above are instances of one idea. A \textbf{dependent function type}, written with \(\Pi\) (``Pi,'' for ``dependent product''), generalizes the ordinary function-space \(A \to B\):
 
@@ -153,7 +155,7 @@ read: ``a function that, given any \(x : A\), returns a term of type \(B(x)\)'' 
 
 This is also, not by coincidence, exactly what \texttt{∀} has meant since Chapter 3. \texttt{∀ n : Nat, n ≥ 0} is a Π-type where \(B(n)\) happens to be a \emph{proposition} (\texttt{n ≥ 0 : Prop}) rather than a data type like \texttt{Vec α n} --- ``for every \texttt{n}, produce a proof of the \texttt{n}-specific statement \texttt{n ≥ 0}.'' Every \texttt{∀} written since Chapter 3 was already a dependent function, whether or not the vocabulary was available for it yet; propositions are just the special case where the family \(B\) happens to land in \texttt{Prop} instead of \texttt{Type}.
 
-\subsection{Looking ahead}\label{sec:01-basics:03-dependent-types:7}
+\subsection{Looking ahead}\label{sec:01-basics:03-dependent-types:8}
 
 Chapter 11 builds a genuinely more elaborate dependent type, \texttt{Path Q : V → V → Type}, a family of types indexed by a \emph{pair} of vertices in a graph rather than by a single \texttt{Nat} --- ``the type of paths from \texttt{u} to \texttt{w},'' which differs for each choice of endpoints exactly as \texttt{Vec α n} differs for each length. Its \texttt{cons}-like constructor is a dependent function for the same reason \texttt{Vec.replicate} is one here: composing two paths is only accepted by the type-checker when their endpoints actually match, an invariant baked into the type rather than checked separately. Nothing new is needed to understand it once this section's \texttt{Fin}/\texttt{Vec} examples make sense --- it is the identical idea, with a richer index.
 
@@ -165,7 +167,7 @@ Chapter 11 builds a genuinely more elaborate dependent type, \texttt{Path Q : V 
 Read more: \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{§5} gives Π-types (and Σ-types) their formal typing rules, with more worked examples, rather than only the walkthrough given here.
 \end{quote}
 
-\subsection{References}\label{sec:01-basics:03-dependent-types:8}
+\subsection{References}\label{sec:01-basics:03-dependent-types:9}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions and verbatim quotes are gathered in Recall, above.
 

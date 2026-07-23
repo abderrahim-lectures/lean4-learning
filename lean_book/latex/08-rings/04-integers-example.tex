@@ -1,13 +1,22 @@
 \section{Example: the integers as a ring}\label{sec:08-rings:04-integers-example:1}
 
-\subsection{Recall}\label{sec:08-rings:04-integers-example:0b}
+\subsection{Recall}\label{sec:08-rings:04-integers-example:2}
 
 Formal definition cited in this section, gathered here for quick reference (full citation in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Ring homomorphism.} ``A ring homomorphism is a map \(\varphi : R \to S\) satisfying (i) \(\varphi(a+b) = \varphi(a)+\varphi(b)\) ... and (ii) \(\varphi(ab) = \varphi(a)\varphi(b)\)'' (\cite{DummitFoote2003}, §7.3 ``Ring Homomorphisms and Quotient Rings,'' p.~239).
+  \textbf{Ring homomorphism.} ``A ring homomorphism is a map \(\varphi : R
+  \to S\) satisfying (i) \(\varphi(a+b) = \varphi(a)+\varphi(b)\) \ldots{} and
+
+  \begin{enumerate}
+  \def\labelenumi{(\roman{enumi})}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    \(\varphi(ab) = \varphi(a)\varphi(b)\)'' (\cite{DummitFoote2003}, §7.3 ``Ring Homomorphisms and Quotient Rings,'' p.~239).
+  \end{enumerate}
 \end{itemize}
 
 We reuse \texttt{intGroup} from Chapter 6 as the additive part.
@@ -66,12 +75,12 @@ example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
 
 \href{https://loogle.lean-lang.org/?q=mul_add}{\texttt{mul\_\allowbreak{}add}}/\href{https://loogle.lean-lang.org/?q=add_mul}{\texttt{add\_\allowbreak{}mul}} are Mathlib's names for \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib}. They are the same laws, but stated generically over \texttt{[Ring R]} (or the weaker \texttt{[Distrib R]}) instead of being cited per-type as \texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.add\_\allowbreak{}mul}.
 
-\subsection{References}\label{sec:08-rings:04-integers-example:2}
+\subsection{References}\label{sec:08-rings:04-integers-example:3}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
-  Dummit and Foote (\cite{DummitFoote2003}), \S7.3 ``Ring Homomorphisms and Quotient Rings,'' p.~239 --- ring homomorphism.
+  Dummit and Foote (\cite{DummitFoote2003}), §7.3 ``Ring Homomorphisms and Quotient Rings,'' p.~239 --- ring homomorphism.
 \end{itemize}
