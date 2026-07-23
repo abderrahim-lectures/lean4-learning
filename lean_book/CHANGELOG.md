@@ -3,6 +3,25 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Fix confusing Nat-overload in two Ch. 1 §3 Vec examples
+
+Reader-caught: "#eval (Vec.replicate 7 3 : Vec Nat 3)" used Nat for both
+the vector's element type and its length, making it hard to tell which
+Nat played which role. Switched to `Vec Int 3`, storing `-42` — visibly
+numeric, but unmistakably not a length (negative, and no small Nat could
+be it). Real/complex numbers were considered but ruled out: both are
+Mathlib-only and `noncomputable` in Lean, so `#eval` cannot run them at
+all, let alone this early in a book that stays Mathlib-free through
+Chapter 11.
+
+The dot-product example had the same problem one step further: renaming
+`v3`/`v2` to `vecA`/`vecB` only removed the naming coincidence, not the
+underlying `Vec Nat`/`Nat` overlap. Switched `Vec.dot` itself to
+`Vec Int n → Vec Int n → Int`, and both `vecA`/`vecB`'s and the Python
+`dot()` example's values to non-sequential numbers (17, -3, 42, 99, 8)
+so no element value could be mistaken for a length either, keeping the
+Python/Lean examples' values in sync as before.
+
 ## v1.4.13 — Replace proprietary fonts with free, portable equivalents
 
 `preamble.tex` required Consolas (monospace) and Palatino Linotype
