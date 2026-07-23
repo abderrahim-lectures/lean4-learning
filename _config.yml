@@ -5,6 +5,14 @@ description: >-
   and quiver path algebras from scratch, no programming background assumed.
 url: "https://abderrahim-lectures.github.io"
 baseurl: "/lean4-learning"
+image:
+  path: "/images/cover.png"
+  width: 1410
+  height: 2250
+  alt: "Lean for Working Algebraists — book cover"
+lang: en_US
+twitter:
+  card: summary_large_image
 
 theme: jekyll-theme-cayman
 
