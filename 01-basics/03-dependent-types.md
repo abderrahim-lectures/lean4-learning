@@ -43,11 +43,11 @@ dot-product function is written over two lists:
 def dot(xs, ys):
     return sum(x * y for x, y in zip(xs, ys))
 
-dot([1, 2, 3], [4, 5, 6])   # 32 — correct
-dot([1, 2, 3], [4, 5])      # 14 — silently wrong: zip() truncates to the shorter list
+dot([17, -3, 42], [99, 8, 6])   # 1911 — correct
+dot([17, -3, 42], [99, 8])      # 1659 — silently wrong: zip() truncates to the shorter list
 ```
 
-This is worse than a crash. `dot([1, 2, 3], [4, 5])` does not raise
+This is worse than a crash. `dot([17, -3, 42], [99, 8])` does not raise
 anything — `zip` just quietly drops the third element of `xs` and hands
 back a number that *looks* like a perfectly good answer. The bug (calling
 `dot` on two lists of different lengths, which is mathematically
@@ -144,9 +144,22 @@ def Vec.replicate (a : α) : (n : Nat) → Vec α n
 #check @Vec.replicate
 -- @Vec.replicate : {α : Type} → α → (n : Nat) → Vec α n
 
-#eval (Vec.replicate 7 3 : Vec Nat 3)
--- Vec.cons 7 (Vec.cons 7 (Vec.cons 7 Vec.nil))
+#eval (Vec.replicate (-42 : Int) 3 : Vec Int 3)
+-- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) Vec.nil))
 ```
+
+(Deliberately `Int`, not `Nat`, for the stored element here: with a `Vec Nat n` and a `Nat`
+value inside it, the length `n` and the stored numbers are both `Nat`, and it becomes easy to
+lose track of which `Nat` is playing which role. `Int` keeps the elements visibly numeric —
+unlike, say, `Bool` — while still being unmistakably a *different* type from the length's
+`Nat`: `-42` is large and negative, nothing a length ever is, so no reader could mistake it for
+the `3`. Real or complex
+numbers would make the distinction just as clear, but are not an option this early: `ℝ`/`ℂ`
+are Mathlib types (this book stays Mathlib-free through Chapter 11), and Lean's reals in
+particular are `noncomputable` — built from Cauchy sequences with no decidable equality — so
+`#eval` cannot evaluate one at all, not even in principle. `Int` is the closest numeric type
+that is both core Lean and actually computable. The next example, `Vec.dot`, uses `Vec Int n`
+for the same reason.)
 
 Look closely at the type `(n : Nat) → Vec α n`. The `n` that appears on
 the *left* of the arrow (the argument) reappears inside the type on the
@@ -204,34 +217,39 @@ that, for free, using only the machinery already on the table.
 arguments required to share the *same* length `n`:
 
 ```lean
-def Vec.dot : Vec Nat n → Vec Nat n → Nat
+def Vec.dot : Vec Int n → Vec Int n → Int
   | Vec.nil, Vec.nil => 0
   | Vec.cons x xs, Vec.cons y ys => x * y + Vec.dot xs ys
 ```
 
-The signature `Vec Nat n → Vec Nat n → Nat` uses the *same* `n` for both
-arguments — that is not a naming coincidence, it is the whole point. Try
-to reproduce Python's silent bug:
+The signature `Vec Int n → Vec Int n → Int` uses the *same* `n` — a
+`Nat`, the length — for both arguments; that is not a naming
+coincidence, it is the whole point. Elements are `Int`, not `Nat`, on
+purpose: this keeps the length (`n`, a `Nat`) and the stored numbers
+(`Int`) as visibly different types throughout, with no `Nat`/`Nat`
+overlap left to lose track of. The vectors below are also named
+`vecA`/`vecB`, not after their own lengths, to avoid yet another
+coincidence layered on top. Try to reproduce Python's silent bug:
 
 ```lean
-def v3 : Vec Nat 3 := Vec.cons 1 (Vec.cons 2 (Vec.cons 3 Vec.nil))
-def v2 : Vec Nat 2 := Vec.cons 4 (Vec.cons 5 Vec.nil)
+def vecA : Vec Int 3 := Vec.cons 17 (Vec.cons (-3) (Vec.cons 42 Vec.nil))
+def vecB : Vec Int 2 := Vec.cons 99 (Vec.cons 8 Vec.nil)
 
-#check Vec.dot v3 v2
+#check Vec.dot vecA vecB
 ```
 
 ```
 error: Application type mismatch: The argument
-  v2
+  vecB
 has type
-  Vec Nat 2
+  Vec Int 2
 but is expected to have type
-  Vec Nat 3
+  Vec Int 3
 in the application
-  v3.dot v2
+  vecA.dot vecB
 ```
 
-Where Python's `dot([1,2,3], [4,5])` silently returned `14` — a wrong
+Where Python's `dot([17,-3,42], [99,8])` silently returned `1659` — a wrong
 answer with no error at all — Lean's version does not even compile. The
 length-mismatch bug is not caught by a clever runtime check *added* to
 `Vec.dot`; there is no such check anywhere in its three-line definition.
