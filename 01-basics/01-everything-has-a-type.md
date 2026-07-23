@@ -24,7 +24,7 @@ reference (full citations in the [Bibliography](../bibliography.md)):
   $T$-algebra) consists of a 'carrier' object $Y \in \mathbb{B}$
   together with a morphism $\varphi : T(Y) \to Y$" ([Jacobs1999],
   §2.6, p. 161; this book writes $F$ for Jacobs's $T$). Brief: for
-  $\mathbb{B} = $ `Type`, a type $X$ equipped with a map
+  $\mathbb{B}$ = `Type`, a type $X$ equipped with a map
   $F(X) \to X$.
 - **Initial object.** "An object $s$ is initial in a category $C$ if
   to each object $a$ of $C$ there is exactly one arrow $s \to a$"

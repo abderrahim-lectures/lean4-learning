@@ -277,23 +277,30 @@ $$
 \prod_{x : A} B(x)
 $$
 
-read: "a function that, given any $x : A$, returns a term of type
-$B(x)$" — a type allowed to mention $x$. When $B(x)$ does not actually
-depend on $x$, this collapses exactly to the ordinary function type
-$A \to B$. Π-types **strictly generalize** function types; they do not
-replace them. `Vec.replicate`'s type above literally *is*
+Here $B$ is not itself a type — $B$ is a **family of types indexed by
+$A$**, formally a function $B : A \to \mathrm{Type}$ (or into `Prop`,
+as below): for each $x : A$, $B(x)$ is the specific type that family
+produces at $x$, and different $x$'s may give genuinely different
+types. Read the whole expression as: "a function that, given any
+$x : A$, returns a term of type $B(x)$" — a type allowed to mention
+$x$, because $B$ itself is allowed to vary with $x$. When $B(x)$ does
+not actually depend on $x$ (i.e. $B$ is a *constant* family), this
+collapses exactly to the ordinary function type $A \to B$. Π-types
+**strictly generalize** function types; they do not replace them.
+`Vec.replicate`'s type above literally *is*
 $\prod_{n : \mathtt{Nat}} \mathrm{Vec}\,\alpha\,n$, with Lean's surface
 syntax `(n : Nat) → Vec α n` spelling out the same thing without needing
 the $\Pi$ symbol.
 
-This is also, not by coincidence, exactly what `∀` has meant since Chapter
-3. `∀ n : Nat, n ≥ 0` is a Π-type where $B(n)$ happens to be a
-*proposition* (`n ≥ 0 : Prop`) rather than a data type like `Vec α n` —
-"for every `n`, produce a proof of the `n`-specific statement `n ≥ 0`."
-Every `∀` written since Chapter 3 was already a dependent function,
-whether or not the vocabulary was available for it yet; propositions are
-just the special case where the family $B$ happens to land in `Prop`
-instead of `Type`.
+This is also, not by coincidence, exactly what `∀` means. `∀ n : Nat, n ≥
+0` is a Π-type where $B(n)$ happens to be a *proposition* (`n ≥ 0 :
+Prop`) rather than a data type like `Vec α n` — "for every `n`, produce a
+proof of the `n`-specific statement `n ≥ 0`." Chapter 3 introduces `∀`
+and propositional logic properly; once it does, every `∀` written from
+that point on is already a dependent function in exactly this sense,
+whether or not this vocabulary is available yet when it is first met.
+Propositions are just the special case where the family $B$ happens to
+land in `Prop` instead of `Type`.
 
 ### Looking ahead
 
