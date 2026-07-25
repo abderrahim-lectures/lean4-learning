@@ -111,8 +111,9 @@ produced — only that one was produced.
 
 ### Σ-types: the dependent pair, dual to Π
 
-Where Π generalizes $\to$, a **Σ-type** (dependent pair / dependent sum)
-generalizes $\times$ (the ordinary product):
+Where Π generalizes the ordinary function type $\to$, a **Σ-type**
+(dependent pair / dependent sum) generalizes $\times$ (the ordinary
+product):
 
 $$
 \sum_{x:A} B(x)
