@@ -58,12 +58,9 @@ A term \textbf{reduces} by repeatedly applying its computation rules: substituti
 \;\longrightarrow_\beta\; a
 \] The first step substitutes \(a\) for \(x\) in \(\lambda y.\, x\), giving \(\lambda y.\, a\) --- note \(a\) is now \emph{free} inside this abstraction, since the original body never mentioned \(y\) at all. The second step substitutes \(b\) for \(y\) in a body that does not mention \(y\), so it simply discards \(b\) and leaves \(a\). This particular term --- \(\lambda x.\, \lambda y.\, x\), ``take two arguments, return the first, discard the second'' --- is important enough to have its own name, \(K\), and it becomes \texttt{Bool.true}'s implementation once booleans are encoded this way (as in Chapter 13's Church-encoding aside).
 
-\begin{quote}
-\end{quote}
-
 \begin{progcorner}
 
-Python's own \texttt{lambda} really does \textgreater{} β-reduce exactly like the calculus above on simple examples --- \textgreater{} \texttt{(lambda x: x + 1)(5)} reduces to \texttt{5 + 1} to \texttt{6}, the same substitution \textgreater{} step as \((\lambda x.\, x + 1)\, 5 \to_\beta 5 + 1\) --- but Python's \textgreater{} \texttt{lambda} is a deliberately limited subset: its body must be a single \textgreater{} \emph{expression}, no \texttt{if}/\texttt{for}/multiple statements. The actual untyped \textgreater{} λ-calculus has no such restriction, because none is needed: conditionals \textgreater{} and recursion are just more terms built from abstraction and \textgreater{} application, not separate features bolted on top. Lean's \texttt{fun} matches \textgreater{} the unrestricted calculus, not Python's narrower \texttt{lambda}.
+Python's own \texttt{lambda} really does β-reduce exactly like the calculus above on simple examples --- \texttt{(lambda x: x + 1)(5)} reduces to \texttt{5 + 1} to \texttt{6}, the same substitution step as \((\lambda x.\, x + 1)\, 5 \to_\beta 5 + 1\) --- but Python's \texttt{lambda} is a deliberately limited subset: its body must be a single \emph{expression}, no \texttt{if}/\texttt{for}/multiple statements. The actual untyped λ-calculus has no such restriction, because none is needed: conditionals and recursion are just more terms built from abstraction and application, not separate features bolted on top. Lean's \texttt{fun} matches the unrestricted calculus, not Python's narrower \texttt{lambda}.
 
 \end{progcorner}
 
@@ -73,13 +70,35 @@ Chapter 1 §5 extends exactly this calculus with dependent types (Π/Σ, univers
 
 This is the (possibly type-dependent) predicate or type family that a tactic like \texttt{induction} or \texttt{rw} is secretly generalizing the goal over before it operates. When \texttt{rw [h]} fails with \textbf{``motive is not type correct,''} the meaning is as follows: to replace one side of \texttt{h} with the other throughout the goal, Lean first abstracts the goal into a function \texttt{C} (the motive) taking the rewritten term as a parameter. Here, that abstraction produces an ill-typed \texttt{C}, typically because the term being rewritten appears inside a dependent type's \emph{index} (as in Chapter 11's \texttt{Path}, whose very type depends on specific vertices) rather than in a position that can vary freely. The fix is almost always to restate the goal first with \texttt{show}, or to generalize the index explicitly, so the motive Lean builds is well-typed.
 
+\textbf{A worked example}, using \texttt{Vec} from §3 and the dependent pair \texttt{⟨\_\allowbreak{}, \_\allowbreak{}⟩} notation named formally as a Σ-type in \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{§5} (the next section --- nothing here depends on that name yet, only on reading \texttt{⟨n, v⟩} as ``a \texttt{Nat} paired with a \texttt{Vec} of that length''):
+
+\begin{lstlisting}
+example ((*$\alpha$*) : Type) (n : Nat) (h : n = 0) (v : Vec (*$\alpha$*) n) :
+    ((*$\langle$*)n, v(*$\rangle$*) : (*$\Sigma$*) k, Vec (*$\alpha$*) k) = (*$\langle$*)0, h ▸ v(*$\rangle$*) := by
+  rw [h]
+\end{lstlisting}
+
+\begin{lstlisting}
+error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => (*$\langle$*)_a, v(*$\rangle$*) = (*$\langle$*)0, h ▸ v(*$\rangle$*)
+\end{lstlisting}
+
+\texttt{n} appears twice in the goal: once as the pair's first component, and once hidden inside \texttt{v}'s own type, \texttt{Vec α n}. Abstracting the first occurrence to build the motive leaves \texttt{v} --- still fixed at \texttt{Vec α n} --- sitting in a slot that now expects \texttt{Vec α \_\allowbreak{}a} for an arbitrary \texttt{\_\allowbreak{}a}, which is exactly the ill-typed \texttt{C} described above. The fix here is \texttt{subst h} in place of \texttt{rw [h]}: \texttt{subst} replaces \texttt{n} with \texttt{0} \emph{everywhere at once}, including inside \texttt{v}'s type, so no intermediate ill-typed motive is ever built:
+
+\begin{lstlisting}
+example ((*$\alpha$*) : Type) (n : Nat) (h : n = 0) (v : Vec (*$\alpha$*) n) :
+    ((*$\langle$*)n, v(*$\rangle$*) : (*$\Sigma$*) k, Vec (*$\alpha$*) k) = (*$\langle$*)0, h ▸ v(*$\rangle$*) := by
+  subst h
+  rfl
+\end{lstlisting}
+
 \begin{quote}
 Read more: \hyperref[sec:05-rigor-check:04-defeq-vs-propeq:1]{Chapter 5 §4} revisits ``motive is not type correct'' alongside definitional equality; \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{§5 of this chapter} shows the recursor/eliminator (e.g.~\texttt{Nat.rec}) whose own type is literally parameterized by a motive, which is where the name comes from.
 \end{quote}
 
 \subsection{Category-theory terms used beyond the baseline}\label{sec:01-basics:04-terminology:7}
 
-The README states that the only category theory assumed going in is ``objects, morphisms, composition, functors,'' which holds true of the main text. The optional ``Mathematical reading'' boxes scattered through later chapters occasionally go one step further, for readers who already possess a bit more category theory and would appreciate the extra precision. Four such terms come up often enough to be worth fixing once here, so every later use can simply point back to this entry instead of re-explaining (or, worse, silently assuming) each time:
+This book assumes only ``objects, morphisms, composition, functors'' as prior category theory, and the main text holds to that limit throughout. The optional ``Mathematical reading'' boxes scattered through later chapters occasionally go one step further, for readers who already possess a bit more category theory and would appreciate the extra precision. Four such terms come up often enough to be worth fixing once here, so every later use can simply point back to this entry instead of re-explaining (or, worse, silently assuming) each time:
 
 \subsubsection{Universal property}\label{sec:01-basics:04-terminology:8}
 
@@ -106,6 +125,14 @@ Symbol & Lean \\
 
 
 Read the diagram as follows: the two solid outer arrows (\(f\) and \(g\)) are \emph{given}. The universal property \emph{asserts} the dashed middle arrow \(h\) exists, is unique, and makes both triangles commute: \(\pi_X \circ h = f\) and \(\pi_Y \circ h = g\), i.e.~\texttt{h a |>.1 = f a} and \texttt{h a |>.2 = g a} for every \texttt{a}. ``Commute'' just means any two paths between the same two objects in the diagram compose to the same map. This is exactly what \texttt{⟨\_\allowbreak{}, \_\allowbreak{}⟩} does for \texttt{Pair}/\texttt{structure} types (Chapter 2 §1): give it an \texttt{f}-shaped piece and a \texttt{g}-shaped piece, and it hands back the unique \texttt{h} combining them.
+
+\textbf{A second example, of a genuinely different shape: a free construction.} \hyperref[sec:01-basics:01-everything-has-a-type:1]{Chapter 1 §1} already used this idea without naming it: \((\mathbb{N}, +, 0)\) is the \emph{free commutative monoid on one generator}. Spelled out, that claim is itself a universal property, with the ``relevant data'' this time being ``a monoid \(M\) together with a chosen element \(m \in M\)'' (instead of ``a pair of maps,'' as for the product above):
+
+\begin{center}
+\input{diagrams/free-monoid-universal-property.tex}
+\end{center}
+
+``for every monoid \(M\) and every element \(m \in M\), there is exactly one monoid homomorphism \(h : \mathbb{N} \to M\) with \(h(1) = m\)'' --- namely \(h(n) = \underbrace{m + \cdots + m}_{n}\) (iterate \(m\)'s own operation \(n\) times), forced because a homomorphism must send \(0\) to \(M\)'s identity and send \(a+b\) to \(h(a)\) combined with \(h(b)\). Where the product's mediating map \(h\) was built by pairing (\(\langle f, g\rangle\)), this \(h\) is built by \emph{iteration}; the common thread is still ``exactly one map making the obvious diagram commute,'' just with a different shape of ``obvious diagram'' and a different notion of ``compatible with the given data.'' \(1 \in \mathbb{N}\) plays the role of the generator being mapped to \(m\), matching \(X\times Y\)'s two projections \(\pi_X,\pi_Y\) above.
 
 \subsubsection{Initial object}\label{sec:01-basics:04-terminology:9}
 
