@@ -216,9 +216,8 @@ ways a `Nat` can ever have been built.
 > equipped with a map $F(X) \to X$. By the universal property of $+$, a
 > map $(1 + X) \to X$ is equivalent to a pair consisting of an element
 > $z : X$ and a self-map $s : X \to X$ — $z$ for "zero component," to
-> avoid confusion with the identity element of a monoid, denoted $e$,
-> which appears later in this box for an unrelated structure; an
-> $F$-algebra is therefore equivalent to a triple $(X, z, s)$. A
+> avoid the symbol $e$ conventionally used for a monoid's identity
+> element; an $F$-algebra is therefore equivalent to a triple $(X, z, s)$. A
 > **morphism** of $F$-algebras from $(X, z, s)$ to $(Y, z', s')$ is a
 > function $f : X \to Y$ satisfying $f(z) = z'$ and $f(s(x)) = s'(f(x))$
 > for every $x$, i.e. a function compatible with both components of the
