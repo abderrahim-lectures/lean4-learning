@@ -228,6 +228,30 @@ literally Σ. The `structure`-based bundling this book uses throughout for
 `Group`/`Ring`/`Module` genuinely is `Sigma`-like (extractable), while an
 `∃`-statement genuinely is not.
 
+### Π and Σ, side by side
+
+Everything above in one table, gathering the two constructs' notation,
+readings, and special cases for direct comparison:
+
+| Aspect | Π-type $\prod_{x:A} B(x)$ | Σ-type $\sum_{x:A} B(x)$ |
+| --- | --- | --- |
+| Read as | "for every $x:A$, a term of $B(x)$" | "some $x:A$, together with a term of $B(x)$" |
+| Generalizes | $A \to B$ (function type) | $A \times B$ (product type) |
+| Constant-family collapse ($B$ ignores $x$) | ordinary function type $A \to B$ | ordinary product $A \times B$ |
+| Categorical reading | indexed **product** | indexed **coproduct** (disjoint union) |
+| Lean surface syntax | `(x : A) → B x` | `Σ x : A, B x`, built with `⟨_, _⟩` |
+| Logic special case ($B : A \to \mathrm{Prop}$) | `∀ x, P x` | `∃ x, P x` |
+| Witness/value extraction | always — applying a Π-typed function to an argument is ordinary evaluation | allowed for `Sigma` (`Type`-valued: `.fst`/`.snd`); **not** allowed for `Exists` (`Prop`-valued — proof irrelevance forbids it) |
+| First example this book gave | `Vec.replicate : (n : Nat) → Vec α n` (§3 above) | `Fin n`'s own fields, `val : Nat` paired with `isLt : val < n` (above) |
+
+The one asymmetry worth remembering from the row above: Π's logic
+special case (`∀`) and Σ's (`∃`) both extract cleanly as *propositions*,
+but only Σ's *data* special case (`Sigma`) supports extracting its
+witness back out. `∃` looks like a Σ-type and reads like one, but proof
+irrelevance makes it a strictly weaker, non-extractable cousin — the
+"caveat about `∃`" above is the one place this table's two columns are
+not simply mirror images of each other.
+
 ### Recursors and eliminators, named
 
 [§4](04-terminology.md) promised a formal treatment of the **recursor**

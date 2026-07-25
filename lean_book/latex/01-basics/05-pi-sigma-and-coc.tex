@@ -121,7 +121,33 @@ which has propositional type
 
 Compare this directly to \texttt{mySigma.fst} two paragraphs up, which worked with no error at all --- same pair-shape, different universe, and that difference is exactly why one extracts and the other does not. If \texttt{∃} \emph{did} allow extracting a witness, two different (but both equally valid) choices of witness could produce different results from a ``proof-irrelevant'' input, contradicting proof irrelevance itself. \texttt{Sigma} (the actual, \texttt{Type}-valued dependent pair, matching a \texttt{structure}'s bundled data) \emph{does} support projecting out its first component, precisely because it does not carry \texttt{Exists}'s irrelevance guarantee. So: \texttt{∃} has the same shape as Σ but lives in a universe where the witness is unobservable. That is what makes it a \emph{restricted} cousin of Σ rather than literally Σ. The \texttt{structure}-based bundling this book uses throughout for \texttt{Group}/\texttt{Ring}/\texttt{Module} genuinely is \texttt{Sigma}-like (extractable), while an \texttt{∃}-statement genuinely is not.
 
-\subsection{Recursors and eliminators, named}\label{sec:01-basics:05-pi-sigma-and-coc:6}
+\subsection{Π and Σ, side by side}\label{sec:01-basics:05-pi-sigma-and-coc:6}
+
+Everything above in one table, gathering the two constructs' notation, readings, and special cases for direct comparison:
+
+{\small\begin{tabular}{
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+}
+\toprule
+Aspect & Π-type \(\prod_{x:A} B(x)\) & Σ-type \(\sum_{x:A} B(x)\) \\
+\midrule
+Read as & ``for every \(x:A\), a term of \(B(x)\)'' & ``some \(x:A\), together with a term of \(B(x)\)'' \\
+Generalizes & \(A \to B\) (function type) & \(A \times B\) (product type) \\
+Constant-family collapse (\(B\) ignores \(x\)) & ordinary function type \(A \to B\) & ordinary product \(A \times B\) \\
+Categorical reading & indexed \textbf{product} & indexed \textbf{coproduct} (disjoint union) \\
+Lean surface syntax & \texttt{(x : A) → B x} & \texttt{Σ x : A, B x}, built with \texttt{⟨\_\allowbreak{}, \_\allowbreak{}⟩} \\
+Logic special case (\(B : A \to \mathrm{Prop}\)) & \texttt{∀ x, P x} & \texttt{∃ x, P x} \\
+Witness/value extraction & always --- applying a Π-typed function to an argument is ordinary evaluation & allowed for \texttt{Sigma} (\texttt{Type}-valued: \texttt{.fst}/\texttt{.snd}); \textbf{not} allowed for \texttt{Exists} (\texttt{Prop}-valued --- proof irrelevance forbids it) \\
+First example this book gave & \texttt{Vec.replicate : (n : Nat) → Vec α n} (§3 above) & \texttt{Fin n}'s own fields, \texttt{val : Nat} paired with \texttt{isLt : val < n} (above) \\
+\bottomrule
+\end{tabular}}
+
+
+The one asymmetry worth remembering from the row above: Π's logic special case (\texttt{∀}) and Σ's (\texttt{∃}) both extract cleanly as \emph{propositions}, but only Σ's \emph{data} special case (\texttt{Sigma}) supports extracting its witness back out. \texttt{∃} looks like a Σ-type and reads like one, but proof irrelevance makes it a strictly weaker, non-extractable cousin --- the ``caveat about \texttt{∃}'' above is the one place this table's two columns are not simply mirror images of each other.
+
+\subsection{Recursors and eliminators, named}\label{sec:01-basics:05-pi-sigma-and-coc:7}
 
 \hyperref[sec:01-basics:04-terminology:1]{§4} promised a formal treatment of the \textbf{recursor} (also called an \textbf{eliminator}) once Π/Σ-types were available; here it is. For an inductive type like \texttt{Nat}, with constructors \texttt{zero : Nat} and \texttt{succ : Nat → Nat}, the \textbf{recursor} \texttt{Nat.rec} is the single term that makes ``define a function, or prove a statement, by giving one case per constructor'' precise:
 
@@ -137,7 +163,7 @@ Read \texttt{Nat.rec}'s own type as a Π-type over a \textbf{motive} \texttt{mot
 
 An \textbf{eliminator} is the general name for this same pattern applied to \emph{any} inductive type: the single term that ``uses'' a value of that type by case-splitting on which constructor built it, with a motive tracking what is being proved or built in each case. \texttt{Nat.rec} above is \texttt{Nat}'s eliminator; \hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s \texttt{Or.elim \{P Q R : Prop\} (h : P ∨ Q) (hpr : P → R) (hqr : Q → R) : R} is \texttt{Or}'s --- a case for \texttt{Or.inl} and a case for \texttt{Or.inr}, with the (non-dependent, here) motive fixed to the constant type \texttt{R}. Every \texttt{match}/\texttt{cases}/\texttt{induction} used from here on compiles down to exactly this: an application of the relevant inductive type's eliminator, built automatically rather than written out by hand.
 
-\subsection{The calculus of constructions, named}\label{sec:01-basics:05-pi-sigma-and-coc:7}
+\subsection{The calculus of constructions, named}\label{sec:01-basics:05-pi-sigma-and-coc:8}
 
 Putting the pieces together, the \textbf{calculus of constructions} (CoC, Coquand--Huet) --- the core type theory underlying Lean, Coq, and similar systems --- is a small formal system built from a variable, a function abstraction, and function application, plus:
 
@@ -157,7 +183,7 @@ Putting the pieces together, the \textbf{calculus of constructions} (CoC, Coquan
 
 Every single Lean construct used in this book --- \texttt{def}, \texttt{structure}, \texttt{theorem}, \texttt{∀}, \texttt{∃}, tactics (which merely \emph{build} CIC terms, one piece at a time, without the terms being written by hand) --- compiles down to a term in exactly this system, checked by Lean's kernel using nothing more than typing rules like the ones sketched here and in Chapter 5, applied mechanically. \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5 §3} completes the picture with the simply typed λ-calculus's typing judgments and its progress/preservation theorems --- the formal reason ``well-typed proofs do not go wrong'' --- plus the universe-formation rule only sketched by name above.
 
-\subsection{References}\label{sec:01-basics:05-pi-sigma-and-coc:8}
+\subsection{References}\label{sec:01-basics:05-pi-sigma-and-coc:9}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions and verbatim quotes are gathered in Recall, above.
 

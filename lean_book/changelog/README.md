@@ -4,6 +4,7 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v1.4.21](v1.4.21.md) — Add a Π vs Σ comparison table
 - [v1.4.20](v1.4.20.md) — Fix a leaked blockquote marker, and add two worked examples
 - [v1.4.19](v1.4.19.md) — Fix confusing Nat-overload in two Ch. 1 §3 Vec examples
 - [v1.4.18](v1.4.18.md) — Add Recall subsections across the whole book (23 entries)
