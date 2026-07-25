@@ -60,7 +60,7 @@ running anything, and it never lets a term of the wrong type slip through.
 the **calculus**, from the outside — not a proposition proved *inside* it.
 (For Lean, this calculus is made concrete a few sentences below as the
 $\lambda$-calculus, and named precisely as the **calculus of
-constructions** in [Chapter 1 §5](05-pi-sigma-and-coc.md). Nothing here
+constructions** in [Chapter 1, Section 5](05-pi-sigma-and-coc.md). Nothing here
 depends on that name yet.) Following Martin-Löf, the judgment used here has
 the form $e : \tau$, read "$e$ is a term of type $\tau$" — adapted to
 Lean's colon notation; Martin-Löf's own text writes the same judgment as
@@ -81,7 +81,7 @@ computational content of $\beta$-reduction: Lean follows the definitional
 equalities until nothing more can fire, exactly as one would normalize a
 term in $\lambda$-calculus by hand. (Both "normal form" and
 "$\beta$-reduction" receive a full treatment in
-[Chapter 1 §4](04-terminology.md) for readers meeting them for the first
+[Chapter 1, Section 4](04-terminology.md) for readers meeting them for the first
 time; briefly, each denotes the value obtained after fully
 simplifying/running the expression, nothing more exotic.)
 
@@ -185,7 +185,7 @@ ways a `Nat` can ever have been built.
 > **Mathematical reading (optional, for readers who already know some
 > category theory).** Regard `Type` as a category: its **objects** are
 > types — `α`, `β`, ... (this book's convention throughout, spelled out
-> fully in [§2](02-def-let-implicit.md)) — and its **morphisms** are
+> fully in [Section 2](02-def-let-implicit.md)) — and its **morphisms** are
 > functions. A function `f : α → β` is a morphism from `α` to `β`, *not*
 > a functor (a functor maps *between* categories; `Type` is the only
 > category in sight here, and `α` and `β` are two of its objects, not
@@ -256,7 +256,7 @@ ways a `Nat` can ever have been built.
 > This is a genuinely different universal property from the
 > initial-algebra one above — the two are easy to conflate, since both
 > attach the word "universal" to `Nat`, but one concerns $F$-algebras and
-> the other concerns monoids. [Chapter 1 §4](04-terminology.md) fixes the
+> the other concerns monoids. [Chapter 1, Section 4](04-terminology.md) fixes the
 > vocabulary ("universal property," "initial object") used here, for any
 > reader meeting it for the first time.
 
