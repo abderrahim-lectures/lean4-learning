@@ -43,7 +43,7 @@ reference (full citations in the [Bibliography](../bibliography.md)):
 
 §3 built Π-types concretely, from `Fin n` and `Vec.replicate`, up to the
 general pattern $\prod_{x:A} B(x)$. This section adds the second half of
-the picture — **Σ-types**, the dependent pair dual to Π — and then zooms
+the picture — **Σ-types**, the dependent pair dual to the Π-type — and then zooms
 out to name the whole formal system these pieces belong to: the
 **calculus of constructions** (CoC), the core type theory underlying Lean.
 (Universes get their *own* formal typing rule in
@@ -105,13 +105,13 @@ lemmas — because Lean does not distinguish between different proofs of
 the same `Prop`. This is what makes Curry–Howard's slogan "propositions
 are types, proofs are terms" more than a slogan: `P : Prop` really is a
 type, `h : P` really is an ordinary term of that type built by ordinary
-$\lambda$/application/Π machinery, and the *only* difference from an
+$\lambda$/application/Π-type machinery, and the *only* difference from an
 ordinary `Type` is that Lean does not care *which* term of `P` was
 produced — only that one was produced.
 
-### Σ-types: the dependent pair, dual to Π
+### Σ-types: the dependent pair, dual to the Π-type
 
-Where Π generalizes the ordinary function type $\to$, a **Σ-type**
+Where the Π-type generalizes the ordinary function type $\to$, a **Σ-type**
 (dependent pair / dependent sum) generalizes $\times$ (the ordinary
 product):
 
@@ -123,7 +123,7 @@ a pair $\langle a, b\rangle$ with $a : A$ and $b : B(a)$ — the *second*
 component's type is allowed to depend on the *first* component's *value*.
 
 **Why "sum," if it generalizes ×?** The name is not a mismatch between
-Σ and the product — it names the more fundamental view underneath both.
+the Σ-type and the product — it names the more fundamental view underneath both.
 $\sum_{x:A} B(x)$ is, categorically, a disjoint union (coproduct) of the
 family $B$ *indexed by* $A$: one tagged copy of $B(x)$ for every $x \in A$,
 glued together as separate parts that never overlap. [Chapter 3
@@ -138,7 +138,7 @@ construction, cast along two different axes of "what is allowed to vary":
   coincides with the ordinary product $A \times B$ (a value of $A$,
   tagging *which* copy, paired with a value of $B$). This is the
   "dependent pair" reading used throughout this section, and it is
-  exactly Chapter 3's `∧` (`P ∧ Q` is `Σ`-like with the index type
+  exactly Chapter 3's `∧` (`P ∧ Q` is Σ-type-like with the index type
   restricted to two unlabeled slots, both of type `Prop`).
 - **Two-point index, varying family** — if $A$ is a two-element type
   (Lean's `Bool`, or "which side" of an `Or`) and $B(\mathrm{true}) = P$,
@@ -147,14 +147,15 @@ construction, cast along two different axes of "what is allowed to vary":
   $P \sqcup Q$ — the ordinary sum/coproduct type, exactly Chapter 3's
   `P ∨ Q`, built from `Or.inl`/`Or.inr`.
 
-Σ is called a *sum* because it always literally is one — an indexed
-disjoint union — and the product reading (`×`, and `∧` as its `Prop`
-special case) is the constant-family special case, not the general
-construction. `∀`/Π sits on the dual side of exactly the same coin:
-$\prod_{x:A} B(x)$ is an indexed *product*, which for a constant family
-collapses to the ordinary function type $A \to B$ (an exponential, $B^A$)
-rather than to $A \times B$ — which is also why Π is never confused with
-`×` the way Σ is with `∨`, and no equivalent puzzle arises on that side.
+The Σ-type is called a *sum* because it always literally is one — an
+indexed disjoint union — and the product reading (`×`, and `∧` as its
+`Prop` special case) is the constant-family special case, not the
+general construction. The `∀`/Π-type pairing sits on the dual side of
+exactly the same coin: $\prod_{x:A} B(x)$ is an indexed *product*, which
+for a constant family collapses to the ordinary function type $A \to B$
+(an exponential, $B^A$) rather than to $A \times B$ — which is also why
+the Π-type is never confused with `×` the way the Σ-type is with `∨`,
+and no equivalent puzzle arises on that side.
 
 This shape has already appeared, without the name: §3's `Fin n` is, under
 the hood, exactly this pair —
@@ -190,7 +191,7 @@ pattern that recurs throughout this book: `Group G`'s `⟨op, id, inv, assoc,
 witness `op`, paired with a witness `id`, paired with `assoc`, whose
 *type* depends on the values of `op` and `id` supplied earlier in the same
 structure. Chapter 2's "structures can bundle proofs alongside data" was
-already, silently, an appeal to Σ.
+already, silently, an appeal to the Σ-type.
 
 **A caveat about `∃`, worth being precise about.** Chapter 3 reads
 `∃ x : α, P x` as "a structure: a witness value plus a proof that the
@@ -223,13 +224,14 @@ choices of witness could produce different results from a
 (the actual, `Type`-valued dependent pair, matching a `structure`'s
 bundled data) *does* support projecting out its first component,
 precisely because it does not carry `Exists`'s irrelevance guarantee. So:
-`∃` has the same shape as Σ but lives in a universe where the witness is
-unobservable. That is what makes it a *restricted* cousin of Σ rather than
-literally Σ. The `structure`-based bundling this book uses throughout for
+`∃` has the same shape as the Σ-type but lives in a universe where the
+witness is unobservable. That is what makes it a *restricted* cousin of
+the Σ-type rather than literally the Σ-type. The `structure`-based
+bundling this book uses throughout for
 `Group`/`Ring`/`Module` genuinely is `Sigma`-like (extractable), while an
 `∃`-statement genuinely is not.
 
-### Π and Σ, side by side
+### Π-types and Σ-types, side by side
 
 Everything above in one table, gathering the two constructs' notation,
 readings, and special cases for direct comparison:
@@ -245,10 +247,11 @@ readings, and special cases for direct comparison:
 | Witness/value extraction | always — applying a Π-typed function to an argument is ordinary evaluation | allowed for `Sigma` (`Type`-valued: `.fst`/`.snd`); **not** allowed for `Exists` (`Prop`-valued — proof irrelevance forbids it) |
 | First example this book gave | `Vec.replicate : (n : Nat) → Vec α n` (§3 above) | `Fin n`'s own fields, `val : Nat` paired with `isLt : val < n` (above) |
 
-The one asymmetry worth remembering from the row above: Π's logic
-special case (`∀`) and Σ's (`∃`) both extract cleanly as *propositions*,
-but only Σ's *data* special case (`Sigma`) supports extracting its
-witness back out. `∃` looks like a Σ-type and reads like one, but proof
+The one asymmetry worth remembering from the row above: the Π-type's
+logic special case (`∀`) and the Σ-type's (`∃`) both extract cleanly as
+*propositions*, but only the Σ-type's *data* special case (`Sigma`)
+supports extracting its witness back out. `∃` looks like a Σ-type and
+reads like one, but proof
 irrelevance makes it a strictly weaker, non-extractable cousin — the
 "caveat about `∃`" above is the one place this table's two columns are
 not simply mirror images of each other.
