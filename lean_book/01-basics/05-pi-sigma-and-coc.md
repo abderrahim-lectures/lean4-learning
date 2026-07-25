@@ -61,8 +61,9 @@ $$
 allowed to mention $x$." §3's `Vec.replicate`, with type `(n : Nat) → Vec α
 n`, literally *is* $\prod_{n:\mathtt{Nat}} \mathrm{Vec}\,\alpha\,n$; Lean's
 surface syntax `(x : A) → B x` **is** $\prod_{x:A} B(x)$, and `∀` is the
-same construct specialized to `B : A → Prop`. Every `∀ n : Nat, P n` since
-Chapter 3 was already a Π-type.
+same construct specialized to `B : A → Prop`, as Chapter 3 makes precise.
+Every `∀ n : Nat, P n` written from that point on is already a Π-type in
+exactly this sense.
 
 **Programmer's corner (Python), on what is genuinely missing.** Even
 Python's `TypeVar` (its own fix for generic functions like `identity`)
@@ -127,8 +128,8 @@ the Σ-type and the product — it names the more fundamental view underneath bo
 $\sum_{x:A} B(x)$ is, categorically, a disjoint union (coproduct) of the
 family $B$ *indexed by* $A$: one tagged copy of $B(x)$ for every $x \in A$,
 glued together as separate parts that never overlap. [Chapter 3
-§1](../03-propositions-and-proofs/01-prop.md)'s Curry–Howard table already
-lists `∧` as a **product type** and `∨` as a **sum (coproduct) type**,
+§1](../03-propositions-and-proofs/01-prop.md)'s Curry–Howard table will
+list `∧` as a **product type** and `∨` as a **sum (coproduct) type**,
 side by side with `∃` as a **Σ-type** — as though all three were unrelated
 rows. They are not: `∧` and `∨` are both special cases of this same
 Σ-type construction. Which connective you get depends on which of the
@@ -140,14 +141,15 @@ and which is allowed to vary:
   coincides with the ordinary product $A \times B$ (a value of $A$,
   tagging *which* copy, paired with a value of $B$). This is the
   "dependent pair" reading used throughout this section, and it is
-  exactly Chapter 3's `∧` (`P ∧ Q` is Σ-type-like with the index type
-  restricted to two unlabeled slots, both of type `Prop`).
+  exactly what Chapter 3's `∧` will turn out to be (`P ∧ Q` is
+  Σ-type-like with the index type restricted to two unlabeled slots,
+  both of type `Prop`).
 - **Two-point index, varying family** — if $A$ is a two-element type
   (Lean's `Bool`, or "which side" of an `Or`) and $B(\mathrm{true}) = P$,
   $B(\mathrm{false}) = Q$ for two unrelated propositions, the *same*
   construction $\sum_{x:\mathrm{Bool}} B(x)$ collapses instead to
-  $P \sqcup Q$ — the ordinary sum/coproduct type, exactly Chapter 3's
-  `P ∨ Q`, built from `Or.inl`/`Or.inr`.
+  $P \sqcup Q$ — the ordinary sum/coproduct type that Chapter 3's
+  `P ∨ Q` will turn out to be, built from `Or.inl`/`Or.inr`.
 
 The Σ-type is called a *sum* because it always literally is an indexed
 disjoint union. The product reading (`×`, and `∧` as its `Prop` special
@@ -194,10 +196,11 @@ pattern that recurs throughout this book: `Group G`'s `⟨op, id, inv, assoc,
 ...⟩` is, underneath Lean's `structure` sugar, an iterated Σ-type — a
 witness `op`, paired with a witness `id`, paired with `assoc`, whose
 *type* depends on the values of `op` and `id` supplied earlier in the same
-structure. Chapter 2's "structures can bundle proofs alongside data" was
-already, silently, an appeal to the Σ-type.
+structure. This dependent-pair shape is exactly what lets Chapter 2 say
+that structures can bundle proofs alongside data: every such structure
+is, underneath, silently an appeal to the Σ-type.
 
-**A caveat about `∃`, worth being precise about.** Chapter 3 reads
+**A caveat about `∃`, worth being precise about.** Chapter 3 will read
 `∃ x : α, P x` as "a structure: a witness value plus a proof that the
 witness satisfies `P`" — in effect a Σ-type, with `P : α → Prop` playing
 the role of `B`. Lean's actual `Exists` is, however, *not literally* the
