@@ -130,8 +130,10 @@ glued together as separate parts that never overlap. [Chapter 3
 §1](../03-propositions-and-proofs/01-prop.md)'s Curry–Howard table already
 lists `∧` as a **product type** and `∨` as a **sum (coproduct) type**,
 side by side with `∃` as a **Σ-type** — as though all three were unrelated
-rows. They are not: `∧` and `∨` are both shadows of this one Σ-type
-construction, cast along two different axes of "what is allowed to vary":
+rows. They are not: `∧` and `∨` are both special cases of this same
+Σ-type construction. Which connective you get depends on which of the
+two ingredients — the index type $A$ or the family $B$ — is held fixed
+and which is allowed to vary:
 
 - **Constant family, varying index** — if $B(x)$ is the *same* type $B$
   for every $x$, the disjoint union of $|A|$ tagged copies of $B$
