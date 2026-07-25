@@ -79,7 +79,9 @@ a pair \(\langle a, b\rangle\) with \(a : A\) and \(b : B(a)\) --- the \emph{sec
   \textbf{Two-point index, varying family} --- if \(A\) is a two-element type (Lean's \texttt{Bool}, or ``which side'' of an \texttt{Or}) and \(B(\mathrm{true}) = P\), \(B(\mathrm{false}) = Q\) for two unrelated propositions, the \emph{same} construction \(\sum_{x:\mathrm{Bool}} B(x)\) collapses instead to \(P \sqcup Q\) --- the ordinary sum/coproduct type, exactly Chapter 3's \texttt{P ∨ Q}, built from \texttt{Or.inl}/\texttt{Or.inr}.
 \end{itemize}
 
-The Σ-type is called a \emph{sum} because it always literally is one --- an indexed disjoint union --- and the product reading (\texttt{×}, and \texttt{∧} as its \texttt{Prop} special case) is the constant-family special case, not the general construction. The \texttt{∀}/Π-type pairing sits on the dual side of exactly the same coin: \(\prod_{x:A} B(x)\) is an indexed \emph{product}, which for a constant family collapses to the ordinary function type \(A \to B\) (an exponential, \(B^A\)) rather than to \(A \times B\) --- which is also why the Π-type is never confused with \texttt{×} the way the Σ-type is with \texttt{∨}, and no equivalent puzzle arises on that side.
+The Σ-type is called a \emph{sum} because it always literally is an indexed disjoint union. The product reading (\texttt{×}, and \texttt{∧} as its \texttt{Prop} special case) is just the constant-family special case of that same construction, not a second, unrelated thing.
+
+The same split applies to the Π-type, the other way round. \(\prod_{x:A} B(x)\) is always literally an indexed \emph{product}. For a constant family, this collapses to the ordinary function type \(A \to B\) (an exponential, written \(B^A\)) --- not to \(A \times B\). This is why the Π-type is never confused with \texttt{×} the way the Σ-type is with \texttt{∨}, and no equivalent puzzle arises on that side.
 
 This shape has already appeared, without the name: §3's \texttt{Fin n} is, under the hood, exactly this pair ---
 

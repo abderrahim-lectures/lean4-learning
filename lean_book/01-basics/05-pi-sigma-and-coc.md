@@ -149,14 +149,16 @@ and which is allowed to vary:
   $P \sqcup Q$ — the ordinary sum/coproduct type, exactly Chapter 3's
   `P ∨ Q`, built from `Or.inl`/`Or.inr`.
 
-The Σ-type is called a *sum* because it always literally is one — an
-indexed disjoint union — and the product reading (`×`, and `∧` as its
-`Prop` special case) is the constant-family special case, not the
-general construction. The `∀`/Π-type pairing sits on the dual side of
-exactly the same coin: $\prod_{x:A} B(x)$ is an indexed *product*, which
-for a constant family collapses to the ordinary function type $A \to B$
-(an exponential, $B^A$) rather than to $A \times B$ — which is also why
-the Π-type is never confused with `×` the way the Σ-type is with `∨`,
+The Σ-type is called a *sum* because it always literally is an indexed
+disjoint union. The product reading (`×`, and `∧` as its `Prop` special
+case) is just the constant-family special case of that same
+construction, not a second, unrelated thing.
+
+The same split applies to the Π-type, the other way round.
+$\prod_{x:A} B(x)$ is always literally an indexed *product*. For a
+constant family, this collapses to the ordinary function type
+$A \to B$ (an exponential, written $B^A$) — not to $A \times B$. This is
+why the Π-type is never confused with `×` the way the Σ-type is with `∨`,
 and no equivalent puzzle arises on that side.
 
 This shape has already appeared, without the name: §3's `Fin n` is, under
