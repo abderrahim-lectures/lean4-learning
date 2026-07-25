@@ -182,16 +182,16 @@ enough to have its own name, $K$, and it becomes `Bool.true`'s
 implementation once booleans are encoded this way (as in Chapter 13's
 Church-encoding aside).
 
-> **Programmer's corner (Python).** Python's own `lambda` really does
-> β-reduce exactly like the calculus above on simple examples —
-> `(lambda x: x + 1)(5)` reduces to `5 + 1` to `6`, the same substitution
-> step as $(\lambda x.\, x + 1)\, 5 \to_\beta 5 + 1$ — but Python's
-> `lambda` is a deliberately limited subset: its body must be a single
-> *expression*, no `if`/`for`/multiple statements. The actual untyped
-> λ-calculus has no such restriction, because none is needed: conditionals
-> and recursion are just more terms built from abstraction and
-> application, not separate features bolted on top. Lean's `fun` matches
-> the unrestricted calculus, not Python's narrower `lambda`.
+**Programmer's corner (Python).** Python's own `lambda` really does
+β-reduce exactly like the calculus above on simple examples —
+`(lambda x: x + 1)(5)` reduces to `5 + 1` to `6`, the same substitution
+step as $(\lambda x.\, x + 1)\, 5 \to_\beta 5 + 1$ — but Python's
+`lambda` is a deliberately limited subset: its body must be a single
+*expression*, no `if`/`for`/multiple statements. The actual untyped
+λ-calculus has no such restriction, because none is needed: conditionals
+and recursion are just more terms built from abstraction and
+application, not separate features bolted on top. Lean's `fun` matches
+the unrestricted calculus, not Python's narrower `lambda`.
 
 Chapter 1 §5 extends exactly this calculus with dependent types (Π/Σ,
 universes) to reach the system Lean's kernel actually runs — the
@@ -212,6 +212,38 @@ position that can vary freely. The fix is almost always to restate the
 goal first with `show`, or to generalize the index explicitly, so the
 motive Lean builds is well-typed.
 
+**A worked example**, using `Vec` from §3 and the dependent pair
+`⟨_, _⟩` notation named formally as a Σ-type in [§5](05-pi-sigma-and-coc.md)
+(the next section — nothing here depends on that name yet, only on
+reading `⟨n, v⟩` as "a `Nat` paired with a `Vec` of that length"):
+
+```lean
+example (α : Type) (n : Nat) (h : n = 0) (v : Vec α n) :
+    (⟨n, v⟩ : Σ k, Vec α k) = ⟨0, h ▸ v⟩ := by
+  rw [h]
+```
+
+```
+error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => ⟨_a, v⟩ = ⟨0, h ▸ v⟩
+```
+
+`n` appears twice in the goal: once as the pair's first component, and
+once hidden inside `v`'s own type, `Vec α n`. Abstracting the first
+occurrence to build the motive leaves `v` — still fixed at `Vec α n` —
+sitting in a slot that now expects `Vec α _a` for an arbitrary `_a`,
+which is exactly the ill-typed `C` described above. The fix here is
+`subst h` in place of `rw [h]`: `subst` replaces `n` with `0`
+*everywhere at once*, including inside `v`'s type, so no intermediate
+ill-typed motive is ever built:
+
+```lean
+example (α : Type) (n : Nat) (h : n = 0) (v : Vec α n) :
+    (⟨n, v⟩ : Σ k, Vec α k) = ⟨0, h ▸ v⟩ := by
+  subst h
+  rfl
+```
+
 > Read more: [Chapter 5 §4](../05-rigor-check/04-defeq-vs-propeq.md)
 > revisits "motive is not type correct" alongside definitional equality;
 > [§5 of this chapter](05-pi-sigma-and-coc.md) shows the recursor/eliminator
@@ -220,9 +252,9 @@ motive Lean builds is well-typed.
 
 ### Category-theory terms used beyond the baseline
 
-The README states that the only category theory assumed going in is
-"objects, morphisms, composition, functors," which holds true of the main
-text. The optional "Mathematical reading" boxes scattered through later
+This book assumes only "objects, morphisms, composition, functors" as
+prior category theory, and the main text holds to that limit throughout.
+The optional "Mathematical reading" boxes scattered through later
 chapters occasionally go one step further, for readers who already possess
 a bit more category theory and would appreciate the extra precision. Four
 such terms come up often enough to be worth fixing once here, so every
@@ -269,6 +301,31 @@ objects in the diagram compose to the same map. This is exactly what
 `⟨_, _⟩` does for `Pair`/`structure` types (Chapter 2 §1): give it an
 `f`-shaped piece and a `g`-shaped piece, and it hands back the unique `h`
 combining them.
+
+**A second example, of a genuinely different shape: a free construction.**
+[Chapter 1 §1](01-everything-has-a-type.md) already used this idea without
+naming it: $(\mathbb{N}, +, 0)$ is the *free commutative monoid on one
+generator*. Spelled out, that claim is itself a universal property, with
+the "relevant data" this time being "a monoid $M$ together with a chosen
+element $m \in M$" (instead of "a pair of maps," as for the product
+above):
+
+```mermaid
+graph LR
+    N["&#8469; (with +, 0)"] -.->|"&exist;!h"| M["M (any monoid)"]
+```
+
+"for every monoid $M$ and every element $m \in M$, there is exactly one
+monoid homomorphism $h : \mathbb{N} \to M$ with $h(1) = m$" — namely
+$h(n) = \underbrace{m + \cdots + m}_{n}$ (iterate $m$'s own operation $n$
+times), forced because a homomorphism must send $0$ to $M$'s identity and
+send $a+b$ to $h(a)$ combined with $h(b)$. Where the product's mediating
+map $h$ was built by pairing ($\langle f, g\rangle$), this $h$ is built by
+*iteration*; the common thread is still "exactly one map making the
+obvious diagram commute," just with a different shape of "obvious
+diagram" and a different notion of "compatible with the given data."
+$1 \in \mathbb{N}$ plays the role of the generator being mapped to $m$,
+matching $X\times Y$'s two projections $\pi_X,\pi_Y$ above.
 
 #### Initial object
 
