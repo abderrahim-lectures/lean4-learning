@@ -279,6 +279,74 @@ principle bolted onto the language: proving something for `zero` and
 showing it is preserved by `succ` is *literally* supplying `Nat.rec`'s two
 remaining arguments.
 
+**A first worked example.** The simplest motive is a *constant* one — the
+result type does not actually depend on which `Nat` was supplied, only its
+value does. Doubling a number, written directly as an application of
+`Nat.rec` instead of via `+`:
+
+```lean
+def double (n : Nat) : Nat :=
+  Nat.rec 0 (fun _ ih => ih + 2) n
+
+#eval double 5   -- 10
+```
+
+Here `motive := fun _ => Nat` (inferred, since the zero case `0` and the
+succ case's result both have type `Nat`): the zero case supplies `0` for
+`double 0`, and the succ case says "given the doubled value `ih` for `n`,
+the doubled value for `n.succ` is `ih + 2`" — exactly the recursive
+definition of doubling, with no separate "recursion" mechanism beyond
+`Nat.rec` itself.
+
+**A second worked example, over a different inductive type.** The same
+pattern generalizes to any inductive type, not just `Nat`. Computing a
+list's length via `List.rec` directly, rather than via the built-in
+`List.length`:
+
+```lean
+noncomputable def myLength {α : Type} (l : List α) : Nat :=
+  List.rec (motive := fun _ => Nat) 0 (fun _ _ tailLen => tailLen + 1) l
+
+#reduce myLength [1, 2, 3]        -- 3
+#reduce myLength ([] : List Nat)  -- 0
+```
+
+(`noncomputable` and `#reduce` in place of `#eval` here are a Lean
+implementation detail — the code generator that backs `#eval` does not yet
+support compiling `List.rec` directly, so this definition is checked and
+reduced by the kernel via `#reduce` instead; the mathematical content is
+identical to `double` above, just for `List` in place of `Nat`.) The motive
+is again constant (`fun _ => Nat`), the "nil case" is `0`, and the "cons
+case" says "given the tail's length `tailLen`, the length with one more
+element prepended is `tailLen + 1`."
+
+**A counterexample: getting the case order wrong.** `Nat.rec`'s two case
+arguments are positional, not named — supplying them in the wrong order is
+a genuine, easy mistake, and Lean rejects it as a type error rather than
+silently doing the wrong thing:
+
+```lean
+def doubleBad (n : Nat) : Nat :=
+  Nat.rec (fun _ ih => ih + 2) 0 n
+```
+
+```
+error: Type mismatch
+  fun x ih => ih + 2
+has type
+  (x : ?m.4) → (ih : ?m.13 x) → ?m.15 x ih
+but is expected to have type
+  Nat
+```
+
+The succ-case function was placed where the zero case belongs; since
+`Nat.rec`'s first explicit argument must have type `motive Nat.zero`
+(here, plainly `Nat`), a function is rejected on the spot. This is the same
+class of error underlying "motive is not type correct" messages elsewhere
+in this book: `Nat.rec`'s argument positions encode real structure (which
+case is which), and getting that structure wrong is caught before anything
+runs, not discovered later at `#eval` time.
+
 An **eliminator** is the general name for this same pattern applied to
 *any* inductive type: the single term that "uses" a value of that type by
 case-splitting on which constructor built it, with a motive tracking what
