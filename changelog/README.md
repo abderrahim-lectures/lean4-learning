@@ -4,6 +4,7 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v1.4.23](v1.4.23.md) — Add dbg_trace tracing to Chapter 1 (PR E1, part 1)
 - [v1.4.22](v1.4.22.md) — Book-wide content-quality pass: clarity fixes, citations, and new diagrams
 - [v1.4.21](v1.4.21.md) — Add a Π vs Σ comparison table
 - [v1.4.20](v1.4.20.md) — Fix a leaked blockquote marker, and add two worked examples

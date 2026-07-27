@@ -137,6 +137,35 @@ example : (Path.append pathAlpha pathBetaOnly).length =
 #eval (Path.append pathAlpha pathBetaOnly).length          -- 2
 ```
 
+Neither `Path.append` nor `Path.length` can be watched with `dbg_trace`
+in isolation: a bare `Path` has no `Repr` instance, so only the composed
+`.length` call ever produces something `#eval` can print. Tracing both at
+once shows `Path.append` finish building the whole composed path first,
+then `Path.length` walk it afterward — the two recursions do not
+interleave:
+
+```lean
+def Path.append' {V A : Type} {Q : Quiver V A} {u v w : V}
+    (p : Path Q u v) (q : Path Q v w) : Path Q u w :=
+  match q with
+  | Path.nil _ => dbg_trace s!"append: q is nil, base case, returning p unchanged"; p
+  | Path.cons a h h' q' =>
+      dbg_trace s!"append: q ends with an arrow, recursing on the shorter path underneath, then re-attaching that arrow";
+      Path.cons a h h' (Path.append' p q')
+
+def Path.length' {V A : Type} {Q : Quiver V A} : {u v : V} → Path Q u v → Nat
+  | _, _, Path.nil _ => dbg_trace s!"length: nil, base case, returning 0"; 0
+  | _, _, Path.cons _ _ _ p => dbg_trace s!"length: cons, adding 1 to the rest's length"; p.length' + 1
+
+#eval (Path.append' pathAlpha pathBetaOnly).length'
+-- append: q ends with an arrow, recursing on the shorter path underneath, then re-attaching that arrow
+-- append: q is nil, base case, returning p unchanged
+-- length: cons, adding 1 to the rest's length
+-- length: cons, adding 1 to the rest's length
+-- length: nil, base case, returning 0
+-- 2
+```
+
 `Path.length` recurses on the same two constructors as `Path.append`
 itself (Sections 4–5): `nil` contributes `0`, and each `cons` adds one to the
 length of the shorter path it extends. The proof of `append_length`
