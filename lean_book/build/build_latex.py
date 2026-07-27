@@ -104,6 +104,12 @@ DIAGRAM_MAP = {
     "02-functions-and-structures/01-structure-basics.md": [
         "categorical-product",
     ],
+    "02-functions-and-structures/03-extending-structures.md": [
+        "multi-parent-forgetful",
+    ],
+    "10-modules/06-direct-sums.md": [
+        "biproduct",
+    ],
     "01-basics/04-terminology.md": [
         "universal-property",
         "free-monoid-universal-property",

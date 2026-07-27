@@ -1,0 +1,13 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\begin{document}
+% The biproduct M ⊕ N in R-Mod: simultaneously a product and a coproduct,
+% with projections pi_M, pi_N and inclusions iota_M, iota_N satisfying
+% pi_M iota_M = id, pi_N iota_N = id, pi_M iota_N = 0,
+% iota_M pi_M + iota_N pi_N = id.
+% Source: 10-modules/06-direct-sums.md, Mathematical reading box.
+\begin{tikzcd}
+  M \arrow[r, shift left, "\iota_M"] & M \oplus N \arrow[l, shift left, "\pi_M"] \arrow[r, shift right, "\pi_N"'] & N \arrow[l, shift right, "\iota_N"']
+\end{tikzcd}
+\end{document}
