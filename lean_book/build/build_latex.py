@@ -98,6 +98,9 @@ PBLPROJECT_FILES = {
 # diagram (see latex/diagrams/*.tex and latex/smoketest/*-smoke.tex for
 # each one's standalone compile smoke-test).
 DIAGRAM_MAP = {
+    "01-basics/01-everything-has-a-type.md": [
+        "f-algebra",
+    ],
     "01-basics/04-terminology.md": [
         "universal-property",
         "free-monoid-universal-property",
