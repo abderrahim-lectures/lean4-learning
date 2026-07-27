@@ -84,7 +84,10 @@ optional "Programmer's corner (Python)" boxes alongside the "Mathematical
 reading" ones; and a third, readability-focused pass that put every worked
 example in its own block immediately followed by its own explanation
 (rather than several examples dumped together, explained afterward all at
-once) and added plain-text category-theory diagrams at the natural spots.
+once) and added plain-text category-theory diagrams at the natural spots;
+and a fourth pass added `dbg_trace`-annotated tracing to every genuinely
+recursive Lean definition in the book, so the recursion can be watched
+unwinding one call at a time rather than only read about.
 See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Table of contents

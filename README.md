@@ -75,6 +75,13 @@ The book uses several recurring devices, applied consistently across all
   followed by a box showing the same statement phrased against Mathlib's
   real API, so the from-scratch construction and the library a reader
   will use afterward are both covered.
+- **Step-by-step tracing.** Every genuinely recursive Lean definition in
+  the book (`Vec.replicate`, `Path.append`, and the rest) has a
+  `dbg_trace`-annotated sibling showing the recursion unwind one call at
+  a time, verified against the real toolchain. Non-recursive code
+  (`structure`/`instance` declarations, single-step pattern matches,
+  tactic-mode proofs) has no such trace, since there is no multi-step
+  computation to show.
 - **Socratic questions.** Each chapter includes reflective "why X, not
   Y?" questions with their answers, distinct from the recap and the
   exercises.
