@@ -182,6 +182,47 @@ enough to have its own name, $K$, and it becomes `Bool.true`'s
 implementation once booleans are encoded this way (as in Chapter 13's
 Church-encoding aside).
 
+**A second worked example, applying the identity to itself.** Reduce
+$(\lambda x.\, x\, x)\, (\lambda y.\, y)$ — this needs *two* β-steps in a
+row, each firing on the *outermost* application, unlike the previous
+example where the second step fired inside what the first step had just
+produced:
+$$
+(\lambda x.\, x\, x)\, (\lambda y.\, y)
+\;\longrightarrow_\beta\; (\lambda y.\, y)\, (\lambda y.\, y)
+\;\longrightarrow_\beta\; \lambda y.\, y
+$$
+The first step substitutes $\lambda y.\, y$ for $x$ in $x\, x$, producing
+$(\lambda y.\, y)\, (\lambda y.\, y)$ — the identity function applied to
+itself. That is itself a new redex, so a second β-step fires: substituting
+$\lambda y.\, y$ for $y$ in the body $y$, leaving $\lambda y.\, y$
+unchanged, since applying the identity function to any term just returns
+that term. The result, $\lambda y.\, y$, is the identity function again —
+applying identity to itself gives back identity.
+
+**A worked example needing α-conversion, not just β-reduction.** Reduce
+$(\lambda x.\, \lambda y.\, x)\, y$ — note the *argument* being substituted
+in is itself named $y$, the same name as the inner bound variable. Naive,
+purely textual substitution would replace $x$ with $y$ inside
+$\lambda y.\, x$ and get $\lambda y.\, y$ — but that is *wrong*: it turns
+the free $y$ being substituted in into a variable *bound* by the inner
+$\lambda y$, silently changing which $y$ is meant (**variable capture**).
+Correct, capture-avoiding substitution first α-converts the bound variable
+to a fresh name, say $z$, since $\lambda y.\, x$ and $\lambda z.\, x$ are
+the same term (α-conversion, as above):
+$$
+(\lambda x.\, \lambda y.\, x)\, y
+\;=\; (\lambda x.\, \lambda z.\, x)\, y
+\;\longrightarrow_\beta\; \lambda z.\, y
+$$
+$\lambda z.\, y$ is the correct result: a function that ignores its
+argument and returns the *original free* $y$ — exactly what
+$\lambda x.\, \lambda y.\, x$ ("return the first argument, discard the
+second") should do when handed $y$ itself as that first argument.
+Lean's elaborator performs this renaming automatically and silently, the
+same way it treats α-equivalent terms as identical; a book working example
+is the only place this step needs to be shown explicitly.
+
 **Programmer's corner (Python).** Python's own `lambda` really does
 β-reduce exactly like the calculus above on simple examples —
 `(lambda x: x + 1)(5)` reduces to `5 + 1` to `6`, the same substitution

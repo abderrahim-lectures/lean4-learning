@@ -21,6 +21,40 @@ def origin3D : Point3D := { x := 0, y := 0, z := 0 }
 
 \texttt{extends} is used later: a \texttt{CommGroup} (commutative group) will \texttt{extend} \texttt{Group} with one extra axiom (commutativity), instead of repeating all the group fields.
 
+A second single-parent example, extending \texttt{Point} a different way:
+
+\begin{lstlisting}
+structure ColorPoint extends Point where
+  color : String
+
+def redOrigin : ColorPoint := { x := 0, y := 0, color := "red" }
+
+#eval redOrigin.x       -- inherited field, 0
+#eval redOrigin.color   -- own field, "red"
+\end{lstlisting}
+
+\subsection{Extending more than one structure at once}\label{sec:02-functions-and-structures:03-extending-structures:3}
+
+\texttt{extends} is not limited to a single parent. \texttt{structure C extends A, B} builds a structure with every field of \texttt{A}, every field of \texttt{B}, and any fields declared in \texttt{C} itself, generating both \texttt{.toA} and \texttt{.toB} forgetful projections:
+
+\begin{lstlisting}
+structure Named where
+  name : String
+
+structure NamedPoint extends Point, Named where
+  color : String
+
+def origin3 : NamedPoint :=
+  { x := 0, y := 0, name := "origin", color := "black" }
+
+#eval origin3.x            -- from Point, 0
+#eval origin3.name         -- from Named, "origin"
+#eval origin3.toPoint.x    -- forgetful projection to Point, 0
+#eval origin3.toNamed.name -- forgetful projection to Named, "origin"
+\end{lstlisting}
+
+\textbf{Field-name collisions.} If two parents both declare a field with the same name \emph{and} the same type, \texttt{extends} merges them into a single shared field rather than raising an error --- \texttt{NamedPoint} above has no collision, but if both \texttt{Point} and \texttt{Named} had declared an \texttt{x : Nat} field, the resulting structure would have exactly one \texttt{x}, filled once, and readable through either parent's forgetful projection. A collision on the same field name with \emph{different} types, by contrast, is a genuine error (\texttt{Field type mismatch: Field 'x' from parent 'B' has type String but is expected to have type Nat}) --- Lean does not silently pick one type over the other or rename either field.
+
 \begin{mathreading}
 
 \texttt{structure Point3D extends Point where z : Nat} is the product \(\mathrm{Point3D} = \mathrm{Point} \times \mathbb{N} \cong
@@ -28,7 +62,7 @@ def origin3D : Point3D := { x := 0, y := 0, z := 0 }
 
 \end{mathreading}
 
-\subsection{References}\label{sec:02-functions-and-structures:03-extending-structures:3}
+\subsection{References}\label{sec:02-functions-and-structures:03-extending-structures:4}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
