@@ -106,7 +106,7 @@ Full citations in the [Bibliography](../bibliography.md). Formal
 definitions are gathered in Recall, above.
 
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — universe hierarchy, universe polymorphism.
-- Girard — **Correction:** [Girard1971] (the 1971/1970 "Une extension de l'interprétation de Gödel à l'analyse" paper) is *not* the source of the `Type : Type` inconsistency. The proof that a calculus with the rule `⊢ * : *` loses the normalization property is due to Girard's 1972 doctoral thesis, *"Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure,"* Thèse d'État, Université Paris VII, 1972 — not yet in this book's bibliography. (Thierry Coquand's 1986 paper "An analysis of Girard's paradox," LICS 1986, is the standard modern exposition, also not yet cited here.)
+- Girard, *"Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure,"* Thèse d'État, Université Paris VII, 1972 (not yet in this book's bibliography) — the actual source of the `Type : Type` inconsistency: the proof that a calculus with the rule `⊢ * : *` loses the normalization property. [Girard1971] (the 1971/1970 "Une extension de l'interprétation de Gödel à l'analyse" paper, already in this book's bibliography) is a different, earlier paper and is not that source. Thierry Coquand's 1986 paper "An analysis of Girard's paradox," LICS 1986, is the standard modern exposition, also not yet cited here.
 
 [TPIL4]: ../bibliography.md#tpil4
 [Girard1971]: ../bibliography.md#girard1971

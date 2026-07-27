@@ -49,15 +49,19 @@ value. **Formulas** are built from these using the **connectives**:
 
 $$
 \varphi ::= p \;\mid\; \top \;\mid\; \bot \;\mid\; \neg\varphi \;\mid\;
-\varphi \wedge \varphi \;\mid\; \varphi \vee \varphi \;\mid\;
-\varphi \Rightarrow \varphi
+\varphi \wedge \psi \;\mid\; \varphi \vee \psi \;\mid\;
+\varphi \Rightarrow \psi
 $$
 
-read: a propositional variable, "true," "false," "not $\varphi$," "$\varphi$
-and $\varphi$," "$\varphi$ or $\varphi$," "$\varphi$ implies $\varphi$."
-This is pure syntax: a formula is just a string built by this grammar,
-nothing more. Whether a formula is *true*, and whether it is *provable*,
-are two separate questions, addressed next.
+Here $\varphi$ and $\psi$ are **metavariables**: each stands for "some
+already-built formula," not for one fixed formula repeated twice, so
+$\varphi \wedge \psi$ permits any two formulas as its two sides (including,
+as one case among many, the same formula on both sides). Read the grammar
+as: a propositional variable, "true," "false," "not $\varphi$," "$\varphi$
+and $\psi$," "$\varphi$ or $\psi$," "$\varphi$ implies $\psi$." This is pure
+syntax: a formula is just a string built by this grammar, nothing more.
+Whether a formula is *true*, and whether it is *provable*, are two separate
+questions, addressed next.
 
 ### Semantics: truth tables and validity
 
