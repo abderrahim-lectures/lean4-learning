@@ -101,6 +101,9 @@ DIAGRAM_MAP = {
     "01-basics/01-everything-has-a-type.md": [
         "f-algebra",
     ],
+    "02-functions-and-structures/01-structure-basics.md": [
+        "categorical-product",
+    ],
     "01-basics/04-terminology.md": [
         "universal-property",
         "free-monoid-universal-property",

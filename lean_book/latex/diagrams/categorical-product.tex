@@ -1,0 +1,9 @@
+% Universal property of the categorical product A x B, in this box's own
+% notation: C -> A (f), C -> B (g), and a unique mediating h : C -> A x B
+% making both triangles commute via the projections p_A, p_B.
+% Source: 02-functions-and-structures/01-structure-basics.md, "Categorical
+% product (universal property)" Recall entry / Mathematical reading box.
+\begin{tikzcd}
+  & C \arrow[dl, "f"'] \arrow[dr, "g"] \arrow[d, dashed, "\exists ! h"] & \\
+  A & A \times B \arrow[l, "p_A"] \arrow[r, "p_B"'] & B
+\end{tikzcd}

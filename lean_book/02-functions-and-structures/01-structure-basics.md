@@ -86,6 +86,19 @@ conditions**: a structure `{ data : D, proof : P data }` is the dependent
 pair (subset) $\{\, d \in D \mid P(d) \,\}$, categorically a subobject of
 $D$.
 
+Here is the universal property itself, in this box's own notation: the
+unique $h$ making both triangles commute is exactly what `{ x := ..., y :=
+... }` constructs when $f$ and $g$ are $p$'s two argument expressions.
+
+```mermaid
+graph TD
+    C -->|f| A
+    C -->|g| B
+    C -.->|"exists! h"| AB["A x B"]
+    AB -->|p_A| A
+    AB -->|p_B| B
+```
+
 ### References
 
 Full citations in the [Bibliography](../bibliography.md). Formal
