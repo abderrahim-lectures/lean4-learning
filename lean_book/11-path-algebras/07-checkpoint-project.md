@@ -74,6 +74,46 @@ example : (Path.append pathAlpha pathBetaOnly).length =
 #eval (Path.append pathAlpha pathBetaOnly).length   -- 2
 ```
 
+`Path.append` and `Path.length` both recurse, and neither's result can be
+printed on its own: a bare `Path` has no `Repr` instance (there is no
+generic way to display an arbitrary quiver's arrows as text), which is
+exactly why every example above prints a `.length` rather than the path
+itself. Composing the two together, with a `dbg_trace` in each, makes
+both recursions visible in the one place they can actually be observed:
+
+```lean
+def Path.append' {V A : Type} {Q : Quiver V A} {u v w : V}
+    (p : Path Q u v) (q : Path Q v w) : Path Q u w :=
+  match q with
+  | Path.nil _ => dbg_trace s!"append: q is nil, base case, returning p unchanged"; p
+  | Path.cons a h h' q' =>
+      dbg_trace s!"append: q ends with an arrow, recursing on the shorter path underneath, then re-attaching that arrow";
+      Path.cons a h h' (Path.append' p q')
+
+def Path.length' {V A : Type} {Q : Quiver V A} : {u v : V} → Path Q u v → Nat
+  | _, _, Path.nil _ => dbg_trace s!"length: nil, base case, returning 0"; 0
+  | _, _, Path.cons _ _ _ p => dbg_trace s!"length: cons, adding 1 to the rest's length"; p.length' + 1
+
+#eval (Path.append' pathAlpha pathBetaOnly).length'
+-- append: q ends with an arrow, recursing on the shorter path underneath, then re-attaching that arrow
+-- append: q is nil, base case, returning p unchanged
+-- length: cons, adding 1 to the rest's length
+-- length: cons, adding 1 to the rest's length
+-- length: nil, base case, returning 0
+-- 2
+```
+
+Read the five lines in order: the first two are `Path.append'` building
+the composed path (it recurses on `q = pathBetaOnly`, prints once for its
+one `cons`, then once for the trailing `nil` — matching `pathBetaOnly`'s
+own length of 1); only once that path exists do the next three lines run
+`Path.length'` over it, one `cons`/`cons`/`nil` line per constructor of
+the freshly-built two-arrow path, arriving at the same `2` the untraced
+version above already computed. `Path.append` finishes building the whole
+structure *before* `Path.length` ever starts walking it — the two
+recursions do not interleave step-by-step, even though both traces appear
+in one `#eval`.
+
 If this compiles and the `#eval`s match, the project is done. A full
 worked solution is in
 [Appendix, Chapter 11](../14-appendix-solutions/10-chapter-11.md).

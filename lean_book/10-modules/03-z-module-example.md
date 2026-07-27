@@ -24,7 +24,33 @@ def intSmul {M : Type} (CG : CommGroup M) (n : Int) (m : M) : M :=
 
 `natSmul Grp n m` is literally $m + m + \cdots + m$ ($n$ times). It is
 defined by recursion on `n`, in exactly the way `Nat.add` itself was
-defined (Chapter 4). `intSmul` extends it to negative integers using the
+defined (Chapter 4). A `dbg_trace` in the succ case shows this iterated
+addition happening one term at a time, using `intGroup` (Chapter 6) as a
+concrete `Group Int`:
+
+```lean
+def natSmul' {M : Type} (Grp : Group M) (n : Nat) (m : M) : M :=
+  match n with
+  | Nat.zero => dbg_trace s!"natSmul: n=0, base case, returning Grp.id"; Grp.id
+  | Nat.succ k =>
+      dbg_trace s!"natSmul: n={k+1}, adding one more copy of m, recursing with n={k}";
+      Grp.op m (natSmul' Grp k m)
+
+#eval natSmul' intGroup 4 (3 : Int)
+-- natSmul: n=4, adding one more copy of m, recursing with n=3
+-- natSmul: n=3, adding one more copy of m, recursing with n=2
+-- natSmul: n=2, adding one more copy of m, recursing with n=1
+-- natSmul: n=1, adding one more copy of m, recursing with n=0
+-- natSmul: n=0, base case, returning Grp.id
+-- 12
+```
+
+Five lines print, one per `succ` layer stripped off `4`, each announcing
+"one more copy of `m`" *before* the recursive call — the same five-step
+shape `double`'s `Nat.rec` trace had in Chapter 1, since both recurse
+structurally on the same `Nat` argument. The final `12` is exactly
+$3+3+3+3$, `intGroup`'s `op` (ordinary `Int` addition) applied four times.
+`intSmul` extends it to negative integers using the
 group inverse. Given any `CG : CommGroup M`, one can then check that
 `intSmul CG` satisfies (M1)–(M4) against `intRing` (Chapter 8). This is a
 genuine, if somewhat long, proof by induction on the integer scalar, in the

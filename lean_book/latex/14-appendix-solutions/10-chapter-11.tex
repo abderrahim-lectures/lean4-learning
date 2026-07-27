@@ -113,4 +113,28 @@ example : (Path.append pathAlpha pathBetaOnly).length =
 #eval (Path.append pathAlpha pathBetaOnly).length          -- 2
 \end{lstlisting}
 
+Neither \texttt{Path.append} nor \texttt{Path.length} can be watched with \texttt{dbg\_\allowbreak{}trace} in isolation: a bare \texttt{Path} has no \texttt{Repr} instance, so only the composed \texttt{.length} call ever produces something \texttt{\#eval} can print. Tracing both at once shows \texttt{Path.append} finish building the whole composed path first, then \texttt{Path.length} walk it afterward --- the two recursions do not interleave:
+
+\begin{lstlisting}
+def Path.append' {V A : Type} {Q : Quiver V A} {u v w : V}
+    (p : Path Q u v) (q : Path Q v w) : Path Q u w :=
+  match q with
+  | Path.nil _ => dbg_trace s!"append: q is nil, base case, returning p unchanged"; p
+  | Path.cons a h h' q' =>
+      dbg_trace s!"append: q ends with an arrow, recursing on the shorter path underneath, then re-attaching that arrow";
+      Path.cons a h h' (Path.append' p q')
+
+def Path.length' {V A : Type} {Q : Quiver V A} : {u v : V} (*$\rightarrow$*) Path Q u v (*$\rightarrow$*) Nat
+  | _, _, Path.nil _ => dbg_trace s!"length: nil, base case, returning 0"; 0
+  | _, _, Path.cons _ _ _ p => dbg_trace s!"length: cons, adding 1 to the rest's length"; p.length' + 1
+
+#eval (Path.append' pathAlpha pathBetaOnly).length'
+-- append: q ends with an arrow, recursing on the shorter path underneath, then re-attaching that arrow
+-- append: q is nil, base case, returning p unchanged
+-- length: cons, adding 1 to the rest's length
+-- length: cons, adding 1 to the rest's length
+-- length: nil, base case, returning 0
+-- 2
+\end{lstlisting}
+
 \texttt{Path.length} recurses on the same two constructors as \texttt{Path.append} itself (Sections 4--5): \texttt{nil} contributes \texttt{0}, and each \texttt{cons} adds one to the length of the shorter path it extends. The proof of \texttt{append\_\allowbreak{}length} mirrors \texttt{Path.append}'s own recursion case for case, exactly as the project asked, but with one genuine surprise if \texttt{rfl} is tried first in either case: it fails. \texttt{Path} is \emph{indexed} by both endpoints. Because of this, Lean compiles a match on an indexed family so that its defining equations reduce only through their auto-generated equation lemmas, not through plain iota-reduction, once an abstract path (\texttt{p}, \texttt{q'}) is involved. Concrete, fully closed paths like \texttt{pathAlpha} still reduce fine under \texttt{\#eval} --- that is why the three checks above work directly. But the \emph{general}, universally-quantified theorem does not close by \texttt{rfl}. \texttt{simp only [Path.append, Path.length]} names exactly the two definitions being unfolded and nothing else, so it plays the same explicit role a \texttt{rw} would if these equations were reachable that way --- it is not standing in for an unknown pile of simp lemmas, only for the two named here. This is the same kind of real, verified obstacle Chapter 6, Section 4's \texttt{Perm3.ext} ran into with core Lean's lack of a \texttt{structure} extensionality lemma, now met again with indexed recursion instead.
