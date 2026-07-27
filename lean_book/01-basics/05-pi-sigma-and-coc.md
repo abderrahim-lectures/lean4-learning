@@ -88,6 +88,44 @@ TypeScript's — has a construct for "the type mentions a specific runtime
 value," because none of them needed a proof assistant's level of
 precision. Π-types are precisely that missing construct, made rigorous.
 
+**A second worked example, where the codomain is a genuinely different
+type, not just a differently-sized version of the same type.**
+`Vec.replicate` always returns *some* `Vec`; the following function returns
+a `Nat` or a `Bool` depending on which was asked for — an even sharper case
+of "the type mentions the argument's value":
+
+```lean
+def pick (b : Bool) : (if b then Nat else Bool) :=
+  match b with
+  | true => (42 : Nat)
+  | false => (true : Bool)
+
+#check @pick   -- pick : (b : Bool) → if b = true then Nat else Bool
+#eval pick true   -- 42
+#eval pick false  -- true
+```
+
+**A counterexample.** Forcing `pick`'s result to a single fixed type
+(dropping the dependency) is rejected outright, because the two branches
+genuinely disagree on type — there is no ordinary, non-dependent function
+type that could describe `pick`:
+
+```lean
+def badPick (b : Bool) : Nat :=
+  match b with
+  | true => 42
+  | false => true
+```
+
+```
+error: Type mismatch
+  true
+has type
+  Bool
+but is expected to have type
+  Nat
+```
+
 ### `Prop` as a special, proof-irrelevant universe
 
 Lean's `Prop` (Chapter 3) sits alongside `Type` as its own universe, with
@@ -182,6 +220,44 @@ def mySigma : Σ n : Nat, Fin n := ⟨3, ⟨2, by decide⟩⟩
 ordinary data, just like extracting `.1` from an ordinary pair. This
 extractability matters, because it is exactly what `∃` (next) does *not*
 allow, and the reason why is the most subtle point in this section.
+
+**A second worked example, mirroring the Π-type one above.** Just as a
+Π-type's codomain can be a genuinely different type per argument, a
+Σ-type's second component can be a genuinely different type per first
+component — not just a differently-sized version of one fixed type:
+
+```lean
+def mySigma2 : Σ b : Bool, if b then Nat else String :=
+  ⟨true, (42 : Nat)⟩
+def mySigma3 : Σ b : Bool, if b then Nat else String :=
+  ⟨false, "hi"⟩
+
+#eval mySigma2.fst  -- true
+#eval mySigma2.snd  -- 42
+#eval mySigma3.fst  -- false
+#eval mySigma3.snd  -- "hi"
+```
+
+**A counterexample.** The second component's type is dictated by the
+*specific value* supplied as the first component, not freely choosable
+alongside it — supplying a `String` alongside `true` (whose dependent type
+here is `Nat`) is rejected:
+
+```lean
+def badSigma : Σ b : Bool, if b then Nat else String :=
+  ⟨true, "oops"⟩
+```
+
+```
+error: Application type mismatch: The argument
+  "oops"
+has type
+  String
+but is expected to have type
+  if true = true then Nat else String
+in the application
+  ⟨true, "oops"⟩
+```
 
 This dependent-pair shape is also the "structure bundling data + proofs"
 pattern that recurs throughout this book: `Group G`'s `⟨op, id, inv, assoc,
