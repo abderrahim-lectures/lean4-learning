@@ -383,7 +383,28 @@ succ case's result both have type `Nat`): the zero case supplies `0` for
 `double 0`, and the succ case says "given the doubled value `ih` for `n`,
 the doubled value for `n.succ` is `ih + 2`" — exactly the recursive
 definition of doubling, with no separate "recursion" mechanism beyond
-`Nat.rec` itself.
+`Nat.rec` itself. A `dbg_trace` inside the succ case makes each of the
+five hidden recursive steps visible:
+
+```lean
+def double' (n : Nat) : Nat :=
+  Nat.rec 0 (fun _ ih => dbg_trace s!"double: succ case, ih={ih}, adding 2"; ih + 2) n
+
+#eval double' 5
+-- double: succ case, ih=0, adding 2
+-- double: succ case, ih=2, adding 2
+-- double: succ case, ih=4, adding 2
+-- double: succ case, ih=6, adding 2
+-- double: succ case, ih=8, adding 2
+-- 10
+```
+
+Five lines print, one per `succ` layer `Nat.rec` peels off `5 =
+succ(succ(succ(succ(succ zero))))`, each showing the running total *before*
+the final `+ 2`: `0`, then `2`, then `4`, then `6`, then `8`, then the
+returned `10`. Nothing about `Nat.rec` was changed to make this possible —
+the trace prints from inside the ordinary succ-case function supplied as
+`Nat.rec`'s second argument, the same function already described above.
 
 **A second worked example, over a different inductive type.** The same
 pattern generalizes to any inductive type, not just `Nat`. Computing a
@@ -406,6 +427,16 @@ identical to `double` above, just for `List` in place of `Nat`.) The motive
 is again constant (`fun _ => Nat`), the "nil case" is `0`, and the "cons
 case" says "given the tail's length `tailLen`, the length with one more
 element prepended is `tailLen + 1`."
+
+Unlike `double` above, `myLength`'s recursion cannot be watched with
+`dbg_trace`: a `dbg_trace` call placed inside the cons case prints nothing
+at all under `#reduce`, verified directly — the kernel's definitional
+reduction (what `#reduce` invokes) is a pure, side-effect-free rewriting
+process, not a compiled/interpreted evaluation the way `#eval` is, so
+`dbg_trace`'s print action never fires. This is the same `noncomputable`
+boundary from one paragraph up, seen from a second angle: whatever cannot
+be compiled also cannot be traced by any mechanism that relies on running
+compiled code.
 
 **A counterexample: getting the case order wrong.** `Nat.rec`'s two case
 arguments are positional, not named — supplying them in the wrong order is

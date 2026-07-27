@@ -148,6 +148,39 @@ def Vec.replicate (a : α) : (n : Nat) → Vec α n
 -- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) Vec.nil))
 ```
 
+`Vec.replicate` recurses exactly once per unit of length, so it is worth
+watching the recursion unwind one call at a time. Adding a `dbg_trace`
+line to each branch (harmless — it only prints, and changes nothing about
+what the function returns) makes every step visible:
+
+```lean
+def Vec.replicate' (a : α) : (n : Nat) → Vec α n
+  | 0     => dbg_trace s!"replicate: n=0, base case, returning Vec.nil"; Vec.nil
+  | n + 1 => dbg_trace s!"replicate: n={n+1}, prepending one copy of a, recursing with n={n}";
+             Vec.cons a (Vec.replicate' a n)
+
+#eval (Vec.replicate' (-42 : Int) 3 : Vec Int 3)
+-- replicate: n=3, prepending one copy of a, recursing with n=2
+-- replicate: n=2, prepending one copy of a, recursing with n=1
+-- replicate: n=1, prepending one copy of a, recursing with n=0
+-- replicate: n=0, base case, returning Vec.nil
+-- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) Vec.nil))
+```
+
+Read the trace bottom-to-top against top-to-bottom: the four `dbg_trace`
+lines print in the order each recursive call is *entered* (`n=3`, then
+`n=2`, then `n=1`, then the base case `n=0`), and only once the base case
+returns does the final `#eval` line print the fully-built `Vec`. This is
+the general shape every structurally-recursive function over `Vec`/`Nat`
+in this book has: one line printed per recursive call, in call order, with
+the base case's line printed last before the result appears. `a`'s own value cannot be printed generically inside the trace: `α` is an
+arbitrary type here, and nothing says a `Repr α` instance (the typeclass
+that lets a value be turned into displayable text) exists for whichever
+type `α` turns out to be at a given call site. This is why the message
+names the *step* (which branch fired, what `n` is) rather than the data —
+the same reason `dbg_trace` traces later in this book stick to naming
+steps and concrete, already-known values, never a still-generic argument.
+
 This example deliberately stores `Int` values, not `Nat` values. With a
 `Vec Nat n` holding `Nat` elements, the length `n` and the stored numbers
 would both be `Nat`, and it becomes easy to lose track of which `Nat` is
@@ -240,6 +273,40 @@ def vecB : Vec Int 2 := Vec.cons 99 (Vec.cons 8 Vec.nil)
 
 #check Vec.dot vecA vecB
 ```
+
+`Vec.dot` recurses on *both* arguments at once, consuming one element from
+each per call, and accumulates a running total on the way back up. Before
+seeing why the mismatched-length call above fails, watch a same-length
+call succeed, with a `dbg_trace` line added to each branch. Unlike
+`Vec.replicate`'s trace, this one can also print the actual numbers, since
+`Int` (unlike a fully generic `α`) does have a `Repr` instance:
+
+```lean
+def Vec.dot' : Vec Int n → Vec Int n → Int
+  | Vec.nil, Vec.nil => dbg_trace s!"dot: both nil, base case, returning 0"; 0
+  | Vec.cons x xs, Vec.cons y ys =>
+      dbg_trace s!"dot: heads x={x}, y={y}, recursing on the rest";
+      x * y + Vec.dot' xs ys
+
+def vecC : Vec Int 3 := Vec.cons 2 (Vec.cons 5 (Vec.cons 1 Vec.nil))
+
+#eval Vec.dot' vecA vecC
+-- dot: heads x=17, y=2, recursing on the rest
+-- dot: heads x=-3, y=5, recursing on the rest
+-- dot: heads x=42, y=1, recursing on the rest
+-- dot: both nil, base case, returning 0
+-- 61
+```
+
+Each traced line names the pair of heads being multiplied *before* the
+recursive call is made, so the four lines above are exactly
+$17 \times 2$, $-3 \times 5$, $42 \times 1$, and the base case's $0$, in
+that order — the same four terms the definition's recursion adds
+together, made visible one at a time instead of only appearing as the
+final sum $34 + (-15) + 42 + 0 = 61$. `vecA` and `vecB` have different
+lengths on purpose, to set up the type-mismatch check next; `vecC` above
+is a third vector, the same length as `vecA`, used only to give
+`Vec.dot'` a legal pair to run on.
 
 ```
 error: Application type mismatch: The argument
