@@ -278,8 +278,10 @@ $$
 $$
 
 Here $B$ is not itself a type — $B$ is a **family of types indexed by
-$A$**, formally a function $B : A \to \mathrm{Type}$ (or into `Prop`,
-as below): for each $x : A$, $B(x)$ is the specific type that family
+$A$**, formally a function $B : A \to \mathrm{Type}$ (or into `Prop`, the
+type of propositions — a distinct universe of its own, formally named
+`Sort 0` in [Chapter 1, Section 5](05-pi-sigma-and-coc.md) — as below): for
+each $x : A$, $B(x)$ is the specific type that family
 produces at $x$, and different $x$'s may give genuinely different
 types. Read the whole expression as: "a function that, given any
 $x : A$, returns a term of type $B(x)$" — a type allowed to mention
