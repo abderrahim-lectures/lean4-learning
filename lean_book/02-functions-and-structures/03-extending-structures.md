@@ -89,6 +89,16 @@ full subcategory of `Group` cut out by an extra condition, with the
 forgetful functor $\mathrm{CommGroup} \to \mathrm{Group}$ being exactly
 `.toGroup`.
 
+The multi-parent case above generates two independent forgetful
+projections rather than a chain — `NamedPoint` forgets to `Point` and to
+`Named` separately, each simply discarding the other parent's fields:
+
+```mermaid
+graph LR
+    NamedPoint["NamedPoint"] -->|".toPoint"| Point["Point"]
+    NamedPoint -->|".toNamed"| Named["Named"]
+```
+
 ### References
 
 Full citations in the [Bibliography](../bibliography.md). Formal

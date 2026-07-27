@@ -62,6 +62,12 @@ def origin3 : NamedPoint :=
 
 \end{mathreading}
 
+The multi-parent case above generates two independent forgetful projections rather than a chain --- \texttt{NamedPoint} forgets to \texttt{Point} and to \texttt{Named} separately, each simply discarding the other parent's fields:
+
+\begin{center}
+\input{diagrams/multi-parent-forgetful.tex}
+\end{center}
+
 \subsection{References}\label{sec:02-functions-and-structures:03-extending-structures:4}
 
 Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
