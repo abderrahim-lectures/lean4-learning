@@ -283,27 +283,28 @@ def mat2Ring : Ring Mat2 where
 
 Two points are worth noting:
 
-1. **Every proof obligation here is spelled out explicitly, with no automation**
-   — matching the rest of the book, and unlike an earlier draft of this
-   section, which reached for Mathlib's `ring` tactic (a decision procedure
-   for commutative-ring identities). Since this book never imports
-   Mathlib, `ring` is not actually available. Each entry equation is instead
-   unfolded by hand through `Int.add_mul`/`Int.mul_add`/`Int.mul_assoc` down to
-   a sum of the same four cross terms in a different order, and
-   `add4_reorder` (proved once, above, and reused twelve times) supplies
-   exactly the regrouping needed to match them. The `Ring Mat2` bundle
-   itself is still noncommutative — nothing here decides *that*
-   automatically. `mul := Mat2.mul` is supplied directly, and the `mul_comm`-shaped fact is
-   simply absent from `Ring`'s fields, exactly as Chapter 8's exercise on
+1. **Every proof obligation here is spelled out explicitly, with no
+   automation**, matching the rest of the book. This book never imports
+   Mathlib, so its `ring` tactic — a decision procedure for
+   commutative-ring identities — is not actually available; an earlier
+   draft of this section reached for it by mistake. Each entry equation is
+   instead unfolded by hand through
+   `Int.add_mul`/`Int.mul_add`/`Int.mul_assoc` down to a sum of the same
+   four cross terms in a different order, and `add4_reorder` (proved once,
+   above, and reused twelve times) supplies exactly the regrouping needed
+   to match them. The `Ring Mat2` bundle itself is still noncommutative;
+   nothing here decides that automatically. `mul := Mat2.mul` is supplied
+   directly, and the `mul_comm`-shaped fact is simply absent from `Ring`'s
+   fields, exactly as Chapter 8's exercise on
    `left_distrib`/`right_distrib` anticipated.
 2. **This is the general pattern for "ring of $n\times n$ matrices over a
-   commutative ring $S$":** the entries live in $S$, every `Ring Mat2`
-   proof obligation reduces (through distributivity/associativity in $S$,
-   applied a bounded number of times depending on $n$) to a polynomial
-   identity purely in $S$, and $\text{Mat}_n(S)$ itself is noncommutative as
-   soon as $n \geq 2$, regardless of whether $S$ is commutative. Matrix
-   rings are the standard first example that any general ring theory
-   (Chapter 9's theorems, Mathlib's `Ring` hierarchy) has to handle
+   commutative ring $S$":** the entries live in $S$. Every `Ring Mat2`
+   proof obligation reduces to a polynomial identity purely in $S$, by
+   applying distributivity and associativity in $S$ a bounded number of
+   times depending on $n$. And $\text{Mat}_n(S)$ itself is noncommutative
+   as soon as $n \geq 2$, regardless of whether $S$ is commutative. Matrix
+   rings are the standard first example that any general ring theory —
+   Chapter 9's theorems, Mathlib's `Ring` hierarchy — has to handle
    *without* assuming commutativity, which is exactly why `Ring` does not
    bake in `mul_comm`.
 

@@ -10,15 +10,15 @@ Formal definitions cited in this section, gathered here for quick
 reference (full citations in the [Bibliography](../bibliography.md)):
 
 - **Type-parameterized structure.** This book's working statement:
-  `structure Pair (α β : Type)` defines a whole *family* of products
-  at once — one instance per choice of type arguments — categorically
-  a functor of the type parameters, not a single fixed structure.
-- **Parametric polymorphism.** After Milner ([Milner1978]), the
-  theoretical account of type polymorphism that Python's `TypeVar`
-  and Lean's `{α : Type} → ...` both implement to different degrees.
-  Brief: genericity that is *proved* once for every type, checked
-  before the generic code is ever called, unlike an optional/erased
-  type annotation.
+  `structure Pair (α β : Type)` does not define one structure. It defines
+  one structure *per choice* of `α` and `β`, all at once. Categorically,
+  this is a functor of the type parameters, not a single fixed structure.
+- **Parametric polymorphism.** Milner's theoretical account of type
+  polymorphism ([Milner1978]). Brief: genericity that is *proved* once for
+  every type, and checked before the generic code is ever called — unlike
+  an optional, erased type annotation. Python's `TypeVar` and Lean's
+  `{α : Type} → ...` both implement this idea, to different degrees, as
+  the Programmer's corner box below explains.
 
 ```lean
 structure Pair (α β : Type) where
@@ -45,20 +45,23 @@ us later write `Group (G : Type)`: not one group, but the functor sending
 a carrier type $G$ to the type of group-structures on $G$.
 
 **Programmer's corner (Python).** Python code like `def identity(x): return
-x` or `class Pair: def __init__(self, fst, snd): ...` is also "generic" in
-the sense that it does not mention any particular type. Nothing checks
-that genericity until the code actually runs, however. Writing
-`identity(3) + "oops"` causes Python to happily run `identity`, hand back
-`3`, and only then break on `3 + "oops"` at runtime. Constructing a `Pair`
-and placing a `Group (Fin 3)` into its `fst` draws no complaint from
-Python. The closer analogue is `typing.TypeVar`: `def identity(x: T) -> T:
-return x` *documents* the same universally quantified type `identity` has
-in Lean, but that annotation is optional, erased at runtime, and enforced
-only if a checker such as `mypy` is separately run — and nothing stops a
-stray `# type: ignore` from silencing it. Lean's `{α : Type} → α → α` is
-not documentation: it is *proved*, once, that `identity` works for every
-type `α`, and that proof is checked before `identity` is ever called. It
-is not merely approximated by a linter that might go unrun.
+x` or `class Pair: def __init__(self, fst, snd): ...` is also "generic," in
+the sense that it does not mention any particular type. But nothing checks
+that genericity until the code actually runs. Writing `identity(3) +
+"oops"` causes Python to happily run `identity`, hand back `3`, and only
+then break on `3 + "oops"` at runtime. Constructing a `Pair` and placing a
+`Group (Fin 3)` into its `fst` draws no complaint from Python either.
+
+The closer Python analogue is `typing.TypeVar`: `def identity(x: T) -> T:
+return x` documents the same universally quantified type that `identity`
+has in Lean. But that documentation is optional and erased at runtime. It
+is enforced only if a checker such as `mypy` is separately run, and a
+stray `# type: ignore` comment silences it entirely.
+
+Lean's `{α : Type} → α → α` is not documentation. It is *proved*, once,
+that `identity` works for every type `α`, and that proof is checked before
+`identity` is ever called — not merely approximated by a linter that might
+never run.
 
 ### References
 

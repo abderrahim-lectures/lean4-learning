@@ -16,22 +16,23 @@ structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
 ```
 
 This is precisely the categorical picture: $R$-modules and $R$-linear maps
-form a category (composition of linear maps is linear, and the identity
+form a category. Composition of linear maps is linear, and the identity
 function is linear — both easy `theorem`s to state and prove from the two
-fields above). Everything in this chapter, including submodules and the
+fields above. Everything in this chapter, including submodules and the
 direct sums below, is best understood as living inside that category,
 consistent with Chapter 1's opening dictionary for reading `Type`
 itself.
 
 **Mathematical reading.** `LinearMap Rg ModM ModN` is the set
 $\mathrm{Hom}_R(M, N)$ of $R$-module homomorphisms: functions $f : M \to N$
-that are additive ($f(m+n) = f(m)+f(n)$, so $f$ is a group homomorphism of
-the underlying abelian groups) and $R$-equivariant ($f(r\cdot m) = r\cdot
-f(m)$, so $f$ intertwines the two $R$-actions). Equivalently, $f$ commutes
-with the representation maps $\rho_M, \rho_N$ of the previous section:
-$f\circ\rho_M(r) = \rho_N(r)\circ f$ for all $r$. These are the morphisms of
-$R\text{-}\mathbf{Mod}$. $\mathrm{Hom}_R(M,N)$ is itself an abelian group
-(and an $R$-module when $R$ is commutative).
+satisfying two conditions. First, $f$ is additive: $f(m+n) = f(m)+f(n)$, so
+$f$ is a group homomorphism of the underlying abelian groups. Second, $f$
+is $R$-equivariant: $f(r\cdot m) = r\cdot f(m)$, so $f$ intertwines the two
+$R$-actions. Equivalently, $f$ commutes with the representation maps
+$\rho_M, \rho_N$ of the previous section: $f\circ\rho_M(r) =
+\rho_N(r)\circ f$ for all $r$. These are the morphisms of
+$R\text{-}\mathbf{Mod}$. $\mathrm{Hom}_R(M,N)$ is itself an abelian group,
+and an $R$-module when $R$ is commutative.
 
 ### A concrete linear map: multiplication by a fixed integer
 
