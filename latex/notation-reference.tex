@@ -21,7 +21,7 @@ Meaning & Math notation & Lean syntax & First appears \\
 Function type / implication & \(A \to B\) & \texttt{A → B} & Chapter 1 \\
 Universal quantifier (``for all'') & \(\forall x, P\, x\) & \texttt{∀ x, P x} & Chapter 3 \\
 Existential quantifier (``there exists'') & \(\exists x, P\, x\) & \texttt{∃ x, P x} & Chapter 3 \\
-Unique existence (``there exists a unique'') & \(\exists!\, x, P\, x\) & no single token --- witnessed by supplying the value and a proof it is the only one & Chapter 1 §4 \\
+Unique existence (``there exists a unique'') & \(\exists!\, x, P\, x\) & no single token --- witnessed by supplying the value and a proof it is the only one & Chapter 1, Section 4 \\
 Set/type membership & \(x \in A\) & \texttt{x ∈ A} & Chapter 1 \\
 Negation & \(\neg P\) & \texttt{¬P} & Chapter 3 \\
 Conjunction (``and'') & \(P \wedge Q\) & \texttt{P ∧ Q} (\texttt{And}) & Chapter 3 \\
@@ -44,9 +44,9 @@ Turnstile (``the goal to prove'') & \(\Gamma \vdash P\) & the goal-state display
 \toprule
 Meaning & Math notation & Lean syntax & First appears \\
 \midrule
-Definitional equality & \(t \equiv t'\) & \texttt{rfl} closes the goal & Chapter 5 §4 \\
+Definitional equality & \(t \equiv t'\) & \texttt{rfl} closes the goal & Chapter 5, Section 4 \\
 Isomorphism / equivalence & \(A \simeq B\) & \texttt{A ≃ B} (\texttt{Equiv}) & Chapter 10 \\
-Anonymous-constructor pairing & \(\langle a, b \rangle\) & \texttt{⟨a, b⟩} & Chapter 2 §1 \\
+Anonymous-constructor pairing & \(\langle a, b \rangle\) & \texttt{⟨a, b⟩} & Chapter 2, Section 1 \\
 Function composition & \(g \circ f\) & \texttt{g ∘ f} & Chapter 1 \\
 Scalar/group action, or a generic infix operation & \(a \cdot b\) & \texttt{a • b} (\texttt{SMul}) & Chapter 10 \\
 Inverse & \(a^{-1}\) & \texttt{a⁻¹} & Chapter 6 \\
@@ -54,8 +54,8 @@ Lambda abstraction (``sends to'') & \(x \mapsto e\) & \texttt{fun x => e} & Chap
 Divisibility & \(a \mid b\) & \texttt{a ∣ b} & Chapter 9 \\
 Subset & \(A \subseteq B\) & \texttt{A ⊆ B} & Chapter 10 \\
 Cartesian product & \(A \times B\) & \texttt{A × B} & Chapter 1 \\
-Long/derivation arrow (diagrams) & \(A \longrightarrow B\) & \texttt{⟶} (diagram labels only, not ordinary code) & Chapter 1 §4 \\
-Projections out of a product & \(\pi_X, \pi_Y\) & \texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd} & Chapter 1 §4 \\
+Long/derivation arrow (diagrams) & \(A \longrightarrow B\) & \texttt{⟶} (diagram labels only, not ordinary code) & Chapter 1, Section 4 \\
+Projections out of a product & \(\pi_X, \pi_Y\) & \texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd} & Chapter 1, Section 4 \\
 \bottomrule
 \end{tabular}}
 

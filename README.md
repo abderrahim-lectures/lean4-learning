@@ -28,7 +28,7 @@ math is written inline as `$...$` and in display blocks as `$$...$$`; render
 with any Markdown viewer that supports MathJax/KaTeX (e.g. VS Code with a
 Markdown+Math extension, or Pandoc). A handful of category-theory diagrams
 (the universal-property/initial-object/forgetful-functor entries in the
-Chapter 1 §4 glossary, the product/coproduct pictures in Chapter 3, the
+Chapter 1, Section 4 glossary, the product/coproduct pictures in Chapter 3, the
 running quiver example in Chapter 11, and the chapter-dependency graph in
 [Learning paths](learning-paths.md)) are written as
 [Mermaid](https://mermaid.js.org/) diagrams — these render natively on
@@ -77,8 +77,8 @@ for foundational terms used before they're explained, thin worked-example
 coverage, and outright factual errors; a second, accessibility-focused
 pass that caught "Mathematical reading" boxes drifting past the book's own
 promised background (a shared glossary now lives at
-[Chapter 1 §4](01-basics/04-terminology.md), and
-[Chapter 3 §2](03-propositions-and-proofs/02-logic-recap.md) recaps
+[Chapter 1, Section 4](01-basics/04-terminology.md), and
+[Chapter 3, Section 2](03-propositions-and-proofs/02-logic-recap.md) recaps
 standard logic from scratch for readers meeting it for the first time) and added
 optional "Programmer's corner (Python)" boxes alongside the "Mathematical
 reading" ones; and a third, readability-focused pass that put every worked

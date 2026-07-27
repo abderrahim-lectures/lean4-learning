@@ -12,12 +12,12 @@ for the reader to carry out, with no appendix entry.
 
 ### 1. Redo `Group`/`Ring` as type classes
 
-**Learning objectives.** Feel directly what Chapter 13 §2 only described:
+**Learning objectives.** Feel directly what Chapter 13, Section 2 only described:
 the ergonomic difference between this book's plain `structure`s and
 Mathlib's `class`-based hierarchy, and Lean's typeclass/instance search
 mechanism.
 
-**Prerequisites.** Chapter 5 §1 (`structure` vs `class`), Chapter 6
+**Prerequisites.** Chapter 5, Section 1 (`structure` vs `class`), Chapter 6
 (`Group`), Chapter 8 (`Ring`). The Chapter 5 appendix's `MyGroup` (exercise
 2) is a smaller version of the first milestone below and a good warm-up.
 
@@ -54,18 +54,18 @@ Chapter 11's Exercise 3 sketch of `PathAlgebraElem`.
 **Milestones.**
 
 1. Restrict first to a quiver with finitely many paths total — the
-   example quiver from Chapter 11 §3 has exactly six (`e_0, e_1, e_2,
+   example quiver from Chapter 11, Section 3 has exactly six (`e_0, e_1, e_2,
    alpha, beta, beta∘alpha`) — so "finitely supported" can start as a
    plain function on a finite index rather than needing Mathlib's
    `Finsupp`.
 2. Define pointwise addition on this finite carrier and prove it forms a
-   `CommGroup` (Chapter 8 §2).
+   `CommGroup` (Chapter 8, Section 2).
 3. Define multiplication by path composition, `0` on any pair whose
    endpoints do not match (as the chapter text describes), and prove the
    monoid laws (`mul_assoc`/`one_mul`/`mul_one`) using the sum of trivial
    paths as `one`.
 4. Assemble `Ring (PathAlgebraElem exampleQuiver k)` for a small, fully
-   concrete `k` (Chapter 8 §5's `fin3Ring`, `Fin 3`, is a good first
+   concrete `k` (Chapter 8, Section 5's `fin3Ring`, `Fin 3`, is a good first
    choice, since `decide` can then check the ring axioms outright).
 
 **Deliverable.** A `Ring` instance on a finite path algebra for a
@@ -74,7 +74,7 @@ concretely chosen `k`.
 **Self-verification.** `#eval` the product of two hand-chosen path-algebra
 elements and check it against a hand computation of the same product; if
 `k` is fully decidable (as `Fin 3` is), the ring axioms can additionally be
-discharged by `decide` rather than by hand, the same shortcut Chapter 8 §5
+discharged by `decide` rather than by hand, the same shortcut Chapter 8, Section 5
 took for `fin3Ring`.
 
 ### 3. Acyclic quivers have finite-dimensional path algebras
@@ -97,7 +97,7 @@ self-verification note gestures at).
    `Path.length` is bounded by the number of vertices — the idea being
    that a path visiting more vertices than exist must repeat one, forcing
    a nontrivial cycle.
-3. Instantiate the bound on `exampleQuiver` (acyclic, from Chapter 11 §3)
+3. Instantiate the bound on `exampleQuiver` (acyclic, from Chapter 11, Section 3)
    and on `cyclicQuiver` (Chapter 11 Exercise 1, which has a cycle) to see
    the argument apply in the first case and correctly fail to apply in the
    second.
@@ -127,7 +127,7 @@ above (comfort with the type-class style Mathlib uses throughout).
 **Milestones.**
 
 1. Read `Mathlib.Combinatorics.Quiver.Basic`'s `Quiver` class (already
-   introduced in Chapter 11 §1's "Mathlib equivalent" box) and
+   introduced in Chapter 11, Section 1's "Mathlib equivalent" box) and
    `Mathlib.CategoryTheory.Quiver`'s extension of it with identities and
    composition, comparing field-for-field against this book's plain
    `Quiver`/`Path`.
@@ -148,7 +148,7 @@ one-by-one in a comment, against `QuiverHom`'s own fields.
 
 ### 5. A concrete `kQ`-module
 
-**Learning objectives.** Turn Chapter 11 §5's closing remark —
+**Learning objectives.** Turn Chapter 11, Section 5's closing remark —
 "representations of $Q$ are exactly $kQ$-modules" — into an actual, if
 small, worked example.
 
@@ -159,12 +159,12 @@ a module *over*).
 **Milestones.**
 
 1. Using the example quiver and Project 2's finite path algebra, assign a
-   small carrier module to each vertex (e.g. `Fin 3` under Chapter 8 §5's
+   small carrier module to each vertex (e.g. `Fin 3` under Chapter 8, Section 5's
    `fin3Ring`-flavored addition) and a linear map to each arrow, exactly
-   the data of a quiver representation (Chapter 11 §5's remark, made
+   the data of a quiver representation (Chapter 11, Section 5's remark, made
    concrete).
 2. Package this data as a genuine `Module (PathAlgebraElem exampleQuiver
-   k) (SomeCarrier)` instance (Chapter 10 §2's `Module` structure), using
+   k) (SomeCarrier)` instance (Chapter 10, Section 2's `Module` structure), using
    Project 2's `Ring` as the scalar ring `Rg`.
 3. Confirm the module axioms hold by checking that the scalar action of a
    path-algebra element on a carrier element agrees with manually

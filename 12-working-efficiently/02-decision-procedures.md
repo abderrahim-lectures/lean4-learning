@@ -73,7 +73,7 @@ compute, and thus must be *proved* from the axioms instead of
 Full citations in the [Bibliography](../bibliography.md). Formal
 definitions are gathered in Recall, above.
 
-- Chlipala ([Chlipala2013]), §6.2 "Decidable Proposition Types" — **Correction:** previously cited as Pierce2002, but TAPL does not discuss `Decidable` as a type-theoretic notion at all; §6.2 of Chlipala's *Certified Programming with Dependent Types* is the actual source.
+- Chlipala ([Chlipala2013]), §6.2 "Decidable Proposition Types" — the actual source for `Decidable` as a type-theoretic notion (an earlier draft of this book cited Pierce2002 instead, but TAPL does not discuss `Decidable` at all).
 
 [Chlipala2013]: ../bibliography.md#chlipala2013
 

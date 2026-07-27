@@ -60,7 +60,7 @@ running anything, and it never lets a term of the wrong type slip through.
 the **calculus**, from the outside — not a proposition proved *inside* it.
 (For Lean, this calculus is made concrete a few sentences below as the
 $\lambda$-calculus, and named precisely as the **calculus of
-constructions** in [Chapter 1 §5](05-pi-sigma-and-coc.md). Nothing here
+constructions** in [Chapter 1, Section 5](05-pi-sigma-and-coc.md). Nothing here
 depends on that name yet.) Following Martin-Löf, the judgment used here has
 the form $e : \tau$, read "$e$ is a term of type $\tau$" — adapted to
 Lean's colon notation; Martin-Löf's own text writes the same judgment as
@@ -81,7 +81,7 @@ computational content of $\beta$-reduction: Lean follows the definitional
 equalities until nothing more can fire, exactly as one would normalize a
 term in $\lambda$-calculus by hand. (Both "normal form" and
 "$\beta$-reduction" receive a full treatment in
-[Chapter 1 §4](04-terminology.md) for readers meeting them for the first
+[Chapter 1, Section 4](04-terminology.md) for readers meeting them for the first
 time; briefly, each denotes the value obtained after fully
 simplifying/running the expression, nothing more exotic.)
 
@@ -185,7 +185,7 @@ ways a `Nat` can ever have been built.
 > **Mathematical reading (optional, for readers who already know some
 > category theory).** Regard `Type` as a category: its **objects** are
 > types — `α`, `β`, ... (this book's convention throughout, spelled out
-> fully in [§2](02-def-let-implicit.md)) — and its **morphisms** are
+> fully in [Chapter 1, Section 2](02-def-let-implicit.md)) — and its **morphisms** are
 > functions. A function `f : α → β` is a morphism from `α` to `β`, *not*
 > a functor (a functor maps *between* categories; `Type` is the only
 > category in sight here, and `α` and `β` are two of its objects, not
@@ -216,9 +216,8 @@ ways a `Nat` can ever have been built.
 > equipped with a map $F(X) \to X$. By the universal property of $+$, a
 > map $(1 + X) \to X$ is equivalent to a pair consisting of an element
 > $z : X$ and a self-map $s : X \to X$ — $z$ for "zero component," to
-> avoid confusion with the identity element of a monoid, denoted $e$,
-> which appears later in this box for an unrelated structure; an
-> $F$-algebra is therefore equivalent to a triple $(X, z, s)$. A
+> avoid the symbol $e$ conventionally used for a monoid's identity
+> element; an $F$-algebra is therefore equivalent to a triple $(X, z, s)$. A
 > **morphism** of $F$-algebras from $(X, z, s)$ to $(Y, z', s')$ is a
 > function $f : X \to Y$ satisfying $f(z) = z'$ and $f(s(x)) = s'(f(x))$
 > for every $x$, i.e. a function compatible with both components of the
@@ -226,7 +225,13 @@ ways a `Nat` can ever have been built.
 > **initial object**: an algebra
 > $(X_0, z_0, s_0)$ such that, for every algebra $(X, z, s)$, there
 > exists exactly one algebra morphism from $(X_0, z_0, s_0)$ to
-> $(X, z, s)$.
+> $(X, z, s)$. The algebra maps themselves are $\alpha_0 : F(X_0) \to X_0$
+> (the pair $(z_0, s_0)$, packaged as one map by the universal property of
+> $+$ above) and $\alpha : F(X) \to X$ (the pair $(z, s)$); the initiality
+> condition is exactly that $f$ makes the algebra-morphism square below
+> commute — applying the algebra map first and then $f$, or applying
+> $F(f)$ first and then the algebra map, must agree (the diagram itself
+> follows this box, once all the notation is in place).
 >
 > **2. Specializing to `Nat`.** Set $X_0 := \mathtt{Nat}$,
 > $z_0 := \mathtt{zero}$, $s_0 := \mathtt{succ}$. This triple is an
@@ -257,9 +262,22 @@ ways a `Nat` can ever have been built.
 > This is a genuinely different universal property from the
 > initial-algebra one above — the two are easy to conflate, since both
 > attach the word "universal" to `Nat`, but one concerns $F$-algebras and
-> the other concerns monoids. [Chapter 1 §4](04-terminology.md) fixes the
+> the other concerns monoids. [Chapter 1, Section 4](04-terminology.md) fixes the
 > vocabulary ("universal property," "initial object") used here, for any
 > reader meeting it for the first time.
+
+Here is the general algebra-morphism square the box above refers to: the
+initiality condition is exactly that the two paths around this square
+agree, for the unique $f$ from the initial algebra $(X_0, \alpha_0)$ to
+any other algebra $(X, \alpha)$.
+
+```mermaid
+graph LR
+    FX0["F(X0)"] -->|"F(f)"| FX["F(X)"]
+    FX0 -->|"alpha0"| X0
+    FX -->|"alpha"| X
+    X0 -->|f| X
+```
 
 ---
 

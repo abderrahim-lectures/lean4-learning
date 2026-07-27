@@ -75,9 +75,12 @@ $$
 \forall a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c);\quad
 \forall a,\ e\cdot a = a;\ \ldots;\quad \forall a,\ a\cdot a^{-1}=e.
 $$
-These fields are propositions (proof-irrelevant), so `Group G` is exactly
-the *subset* of `GroupData G` cut out by the group axioms: the
-$\Sigma$-type $\sum_{d : \mathrm{GroupData}(G)} \mathrm{Axioms}(d)$. This is
+These five fields are propositions, so any two proofs of the same one are
+considered definitionally equal — Lean does not distinguish between
+different ways of proving the same axiom, only whether a proof exists.
+This is why `Group G` is exactly the *subset* of `GroupData G` cut out by
+the group axioms: the $\Sigma$-type
+$\sum_{d : \mathrm{GroupData}(G)} \mathrm{Axioms}(d)$. This is
 the same $\Sigma$-type already encountered in Chapter 3 as "a witness together
 with a proof about it." Here the witness is a whole bundle of group data
 `d : GroupData G` rather than a single element, and the proof is the
@@ -94,7 +97,7 @@ of the space of raw data.
 > smaller classes (`Mul`, `One`, `Inv`, `Monoid`, ...) instead of listing
 > all axioms in one place. See [Chapter 13](../13-next-steps/02-moving-to-mathlib.md)
 > for the bridge between the two styles, and
-> [Chapter 5 §1](../05-rigor-check/01-structure-vs-class.md) for why this
+> [Chapter 5, Section 1](../05-rigor-check/01-structure-vs-class.md) for why this
 > book delays that mechanism.
 
 ---

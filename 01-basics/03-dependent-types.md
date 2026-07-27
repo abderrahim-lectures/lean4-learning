@@ -148,18 +148,21 @@ def Vec.replicate (a : α) : (n : Nat) → Vec α n
 -- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) Vec.nil))
 ```
 
-(Deliberately `Int`, not `Nat`, for the stored element here: with a `Vec Nat n` and a `Nat`
-value inside it, the length `n` and the stored numbers are both `Nat`, and it becomes easy to
-lose track of which `Nat` is playing which role. `Int` keeps the elements visibly numeric —
-unlike, say, `Bool` — while still being unmistakably a *different* type from the length's
-`Nat`: `-42` is large and negative, nothing a length ever is, so no reader could mistake it for
-the `3`. Real or complex
-numbers would make the distinction just as clear, but are not an option this early: `ℝ`/`ℂ`
-are Mathlib types (this book stays Mathlib-free through Chapter 11), and Lean's reals in
-particular are `noncomputable` — built from Cauchy sequences with no decidable equality — so
-`#eval` cannot evaluate one at all, not even in principle. `Int` is the closest numeric type
-that is both core Lean and actually computable. The next example, `Vec.dot`, uses `Vec Int n`
-for the same reason.)
+This example deliberately stores `Int` values, not `Nat` values. With a
+`Vec Nat n` holding `Nat` elements, the length `n` and the stored numbers
+would both be `Nat`, and it becomes easy to lose track of which `Nat` is
+playing which role. `Int` keeps the elements visibly numeric — unlike,
+say, `Bool` — while still being unmistakably a *different* type from the
+length's `Nat`: `-42` is large and negative, nothing a length ever is, so
+no reader could mistake it for the `3`.
+
+Real or complex numbers would make the distinction just as clear, but are
+not an option this early. `ℝ`/`ℂ` are Mathlib types, and this book stays
+Mathlib-free through Chapter 11. Lean's reals in particular are
+`noncomputable` (built from Cauchy sequences with no decidable equality),
+so `#eval` cannot evaluate one at all, not even in principle. `Int` is the
+closest numeric type that is both core Lean and actually computable. The
+next example, `Vec.dot`, uses `Vec Int n` for the same reason.
 
 Look closely at the type `(n : Nat) → Vec α n`. The `n` that appears on
 the *left* of the arrow (the argument) reappears inside the type on the
@@ -206,7 +209,7 @@ in the application
 
 Nothing about "index out of range" happens at runtime, because the bad
 call is not a well-typed term in the first place — the same "ruled out
-before running" guarantee from [§1](01-everything-has-a-type.md), now
+before running" guarantee from [Chapter 1, Section 1](01-everything-has-a-type.md), now
 enforced by an invariant (non-emptiness) that an ordinary, non-dependent
 type could not have expressed at all. `List α` has no way to say "and
 this one is non-empty" as part of its type; `Vec α (n+1)` says exactly
@@ -257,15 +260,15 @@ It is caught because "both arguments have the same length" was stated
 once, in the type, and Lean enforces every type it is given,
 automatically, for every call site, without exception.
 
-(Lean's actual, built-in `Vector α n` — distinct from the toy `Vec` built
-here — is defined differently under the hood, as an `Array α` paired with
-a proof that its size equals `n`, for performance reasons, the same way
-`Nat`'s *presentation* above as Peano's `zero`/`succ` does not reflect how
-Lean actually stores numbers at runtime (as fast arbitrary-precision
+Lean's actual, built-in `Vector α n` is distinct from the toy `Vec` built
+here. It is defined differently under the hood, as an `Array α` paired
+with a proof that its size equals `n`, for performance reasons — the same
+way `Nat`'s *presentation* above as Peano's `zero`/`succ` does not reflect
+how Lean actually stores numbers at runtime (as fast arbitrary-precision
 integers). The `Vec` built in this section is the traditional textbook
-definition — simpler to reason about, and the one every type-theory
-reference uses first — while Lean's real `Vector` is engineered for
-speed. Both are dependent types in exactly the sense described here.)
+definition, simpler to reason about and the one every type-theory
+reference uses first, while Lean's real `Vector` is engineered for speed.
+Both are dependent types in exactly the sense described here.
 
 ### The general pattern: Π-types
 
@@ -278,8 +281,10 @@ $$
 $$
 
 Here $B$ is not itself a type — $B$ is a **family of types indexed by
-$A$**, formally a function $B : A \to \mathrm{Type}$ (or into `Prop`,
-as below): for each $x : A$, $B(x)$ is the specific type that family
+$A$**, formally a function $B : A \to \mathrm{Type}$ (or into `Prop`, the
+type of propositions — a distinct universe of its own, formally named
+`Sort 0` in [Chapter 1, Section 5](05-pi-sigma-and-coc.md) — as below): for
+each $x : A$, $B(x)$ is the specific type that family
 produces at $x$, and different $x$'s may give genuinely different
 types. Read the whole expression as: "a function that, given any
 $x : A$, returns a term of type $B(x)$" — a type allowed to mention
@@ -321,11 +326,11 @@ it is the identical idea, with a richer index.
 > families as in the `Path` example above, an assignment of a
 > $\mathrm{Hom}$-set to every pair of objects in a category. A Π-type over
 > such a family is a **dependent product**; a term of $\sum_{x:A} B(x)$
-> (Σ-type, next covered formally in [§5](05-pi-sigma-and-coc.md)) is a
+> (Σ-type, next covered formally in [Chapter 1, Section 5](05-pi-sigma-and-coc.md)) is a
 > **dependent sum**. Both are literal categorical limits/colimits in the
 > appropriate indexed sense, not merely named after them by analogy.
 
-> Read more: [§5](05-pi-sigma-and-coc.md)
+> Read more: [Chapter 1, Section 5](05-pi-sigma-and-coc.md)
 > gives Π-types (and Σ-types) their formal typing rules, with more worked
 > examples, rather than only the walkthrough given here.
 
@@ -338,8 +343,8 @@ definitions and verbatim quotes are gathered in Recall, above.
 
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.8 "What makes dependent type theory dependent?" — dependent type, dependent function type.
 - The Lean 4 source / [Mathlib4 API documentation][Mathlib4Docs] for `Fin` and `Vector` — confirmed directly in this section via `#print Fin` against the actual toolchain pinned in this repository's `lean_project/lean-toolchain`.
-- Thompson ([Thompson1991]) — §4.6 "Quantifiers," §6.3 "Dependent types and quantifiers" develop the same dependent-product/dependent-sum content, verified verbatim against the source. **Terminology note:** Thompson's primary notation is $\forall$/$\exists$ (he calls the Σ-type-equivalent an "(infinitary) sum type" / "dependent sum type"), not Π/Σ — the literal term "Sigma-type" never appears in his main text (only once, in a bibliography entry citing a different author's paper). Explicit Π-notation does appear later, in his meta-theory chapters (§8.3, §9.1.5), applied to dependent function spaces in a typed λ-calculus meta-language.
-- Chlipala ([Chlipala2013]) — **Correction:** this book's length-indexed-vector idea (`ilist : nat → Set`) is built in §8.1 "Length-Indexed Lists" and revisited in §9.1 "More Length-Indexed Lists," not Ch. 2–3 as previously stated here; verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`) — a useful second angle on the identical concept, in Coq rather than Lean.
+- Thompson ([Thompson1991]) — §4.6 "Quantifiers," §6.3 "Dependent types and quantifiers" develop the same dependent-product/dependent-sum content, verified verbatim against the source. Thompson's primary notation is $\forall$/$\exists$, not Π/Σ: he calls the Σ-type-equivalent an "(infinitary) sum type" or "dependent sum type," and the literal term "Sigma-type" never appears in his main text, only once, in a bibliography entry citing a different author's paper. Explicit Π-notation does appear later, in his meta-theory chapters (§8.3, §9.1.5), applied to dependent function spaces in a typed λ-calculus meta-language.
+- Chlipala ([Chlipala2013]), §8.1 "Length-Indexed Lists" and §9.1 "More Length-Indexed Lists" — this book's length-indexed-vector idea (`ilist : nat → Set`) is built and revisited there, not in Ch. 2–3 as an earlier draft of this section stated; verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`) — a useful second angle on the identical concept, in Coq rather than Lean.
 
 [TPIL4]: ../bibliography.md#tpil4
 [Mathlib4Docs]: ../bibliography.md#mathlib4docs

@@ -35,13 +35,13 @@ underlying every Lean declaration seen so far.
    `Sigma`'s witness, landing in `Type`, has no such restriction.
 
 1. β-reduce $(\lambda x.\lambda y.\, y\, x)\, a\, b$ to normal form by
-   hand, writing out each step. §4's untyped-λ-calculus recap named
+   hand, writing out each step. Section 4's untyped-λ-calculus recap named
    $K = \lambda x.\lambda y.\, x$ ("take two arguments, return the
    first"). Which existing named term does $\lambda x.\lambda y.\, y\, x$
    resemble, and how does it differ?
 2. Write `Vec.toList : Vec α n → List α`, converting a length-indexed
    vector to an ordinary list by forgetting its length. Contrast its type
-   with `Vec.replicate`'s from §3: which one is a genuinely *dependent*
+   with `Vec.replicate`'s from Section 3: which one is a genuinely *dependent*
    function (its return type mentions the argument's value), and which
    one is an ordinary function that merely happens to take a value of a
    dependent type as input?

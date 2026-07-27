@@ -98,8 +98,21 @@ PBLPROJECT_FILES = {
 # diagram (see latex/diagrams/*.tex and latex/smoketest/*-smoke.tex for
 # each one's standalone compile smoke-test).
 DIAGRAM_MAP = {
+    "01-basics/01-everything-has-a-type.md": [
+        "f-algebra",
+    ],
+    "02-functions-and-structures/01-structure-basics.md": [
+        "categorical-product",
+    ],
+    "02-functions-and-structures/03-extending-structures.md": [
+        "multi-parent-forgetful",
+    ],
+    "10-modules/06-direct-sums.md": [
+        "biproduct",
+    ],
     "01-basics/04-terminology.md": [
         "universal-property",
+        "free-monoid-universal-property",
         "initial-object",
         "forgetful-functor-chain",
         "subobject-commgroup",
@@ -366,12 +379,26 @@ def wrap_reading_boxes(text):
     """Wrap the single paragraph starting '**Mathematical reading.**' or
     '**Programmer's corner (Python).**' in the matching custom environment.
     Scope: one paragraph only (up to the next blank line) -- a following
-    code block/list is not absorbed. See module docstring."""
+    code block/list is not absorbed. See module docstring.
+
+    The captured body is re-emitted as a fresh paragraph (not nested inside
+    a blockquote), so if the source ever writes one of these boxes as a
+    markdown blockquote (leading '> ' on every line -- inconsistent with
+    every other instance in this book, which use a plain paragraph), each
+    interior '> ' would no longer be recognized as blockquote continuation
+    syntax once extracted, and would leak through as a literal '>'
+    character (rendered as \\textgreater{}). Strip any such markers
+    defensively so a stray blockquote-formatted box can't reintroduce this."""
+    def _strip_quote_markers(s):
+        return re.sub(r'(?m)^>[ \t]?', '', s)
+
     def _mathreading(m):
-        return f"\n```{{=latex}}\n\\begin{{mathreading}}\n```\n{m.group(1)}\n```{{=latex}}\n\\end{{mathreading}}\n```\n"
+        body = _strip_quote_markers(m.group(1))
+        return f"\n```{{=latex}}\n\\begin{{mathreading}}\n```\n{body}\n```{{=latex}}\n\\end{{mathreading}}\n```\n"
 
     def _progcorner(m):
-        return f"\n```{{=latex}}\n\\begin{{progcorner}}\n```\n{m.group(1)}\n```{{=latex}}\n\\end{{progcorner}}\n```\n"
+        body = _strip_quote_markers(m.group(1))
+        return f"\n```{{=latex}}\n\\begin{{progcorner}}\n```\n{body}\n```{{=latex}}\n\\end{{progcorner}}\n```\n"
 
     text = re.sub(r'\*\*Mathematical reading\.\*\*(.*?)(?=\n\n)', _mathreading, text, flags=re.DOTALL)
     text = re.sub(r"\*\*Programmer's corner \(Python\)[^*]*\*\*(.*?)(?=\n\n)", _progcorner, text, flags=re.DOTALL)

@@ -1,5 +1,17 @@
 \section{Structures with type parameters}\label{sec:02-functions-and-structures:02-type-parameters:1}
 
+\subsection{Recall}\label{sec:02-functions-and-structures:02-type-parameters:2}
+
+Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Type-parameterized structure.} This book's working statement: \texttt{structure Pair (α β : Type)} does not define one structure. It defines one structure \emph{per choice} of \texttt{α} and \texttt{β}, all at once. Categorically, this is a functor of the type parameters, not a single fixed structure.
+\item
+  \textbf{Parametric polymorphism.} Milner's theoretical account of type polymorphism (\cite{Milner1978}). Brief: genericity that is \emph{proved} once for every type, and checked before the generic code is ever called --- unlike an optional, erased type annotation. Python's \texttt{TypeVar} and Lean's \texttt{\{α : Type\} → ...} both implement this idea, to different degrees, as the Programmer's corner box below explains.
+\end{itemize}
+
 \begin{lstlisting}
 structure Pair ((*$\alpha$*) (*$\beta$*) : Type) where
   fst : (*$\alpha$*)
@@ -22,18 +34,22 @@ This generalizes directly to how we will write, e.g., \texttt{structure Group (�
 
 \begin{progcorner}
 
-Python code like \texttt{def identity(x): return x} or \texttt{class Pair: def \_\allowbreak{}\_\allowbreak{}init\_\allowbreak{}\_\allowbreak{}(self, fst, snd): ...} is also ``generic'' in the sense that it does not mention any particular type. Nothing checks that genericity until the code actually runs, however. Writing \texttt{identity(3) + "oops"} causes Python to happily run \texttt{identity}, hand back \texttt{3}, and only then break on \texttt{3 + "oops"} at runtime. Constructing a \texttt{Pair} and placing a \texttt{Group (Fin 3)} into its \texttt{fst} draws no complaint from Python. The closer analogue is \texttt{typing.TypeVar}: \texttt{def identity(x: T) -\allowbreak{}> T: return x} \emph{documents} the same universally quantified type \texttt{identity} has in Lean, but that annotation is optional, erased at runtime, and enforced only if a checker such as \texttt{mypy} is separately run --- and nothing stops a stray \texttt{\# type: ignore} from silencing it. Lean's \texttt{\{α : Type\} → α → α} is not documentation: it is \emph{proved}, once, that \texttt{identity} works for every type \texttt{α}, and that proof is checked before \texttt{identity} is ever called. It is not merely approximated by a linter that might go unrun.
+Python code like \texttt{def identity(x): return x} or \texttt{class Pair: def \_\allowbreak{}\_\allowbreak{}init\_\allowbreak{}\_\allowbreak{}(self, fst, snd): ...} is also ``generic,'' in the sense that it does not mention any particular type. But nothing checks that genericity until the code actually runs. Writing \texttt{identity(3) + "oops"} causes Python to happily run \texttt{identity}, hand back \texttt{3}, and only then break on \texttt{3 + "oops"} at runtime. Constructing a \texttt{Pair} and placing a \texttt{Group (Fin 3)} into its \texttt{fst} draws no complaint from Python either.
 
 \end{progcorner}
 
-\subsection{References}\label{sec:02-functions-and-structures:02-type-parameters:2}
+The closer Python analogue is \texttt{typing.TypeVar}: \texttt{def identity(x: T) -\allowbreak{}> T: return x} documents the same universally quantified type that \texttt{identity} has in Lean. But that documentation is optional and erased at runtime. It is enforced only if a checker such as \texttt{mypy} is separately run, and a stray \texttt{\# type: ignore} comment silences it entirely.
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}.
+Lean's \texttt{\{α : Type\} → α → α} is not documentation. It is \emph{proved}, once, that \texttt{identity} works for every type \texttt{α}, and that proof is checked before \texttt{identity} is ever called --- not merely approximated by a linter that might never run.
+
+\subsection{References}\label{sec:02-functions-and-structures:02-type-parameters:3}
+
+Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
 
 \begin{itemize}
 \tightlist
 \item
   Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) --- for the Python-side comparison used in this section's box.
 \item
-  Milner (\cite{Milner1978}) --- the theoretical account of parametric polymorphism that \texttt{TypeVar}, and Lean's \texttt{\{α : Type\} → ...}, both implement to different degrees.
+  Milner (\cite{Milner1978}) --- parametric polymorphism.
 \end{itemize}

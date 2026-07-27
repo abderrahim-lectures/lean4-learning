@@ -31,6 +31,52 @@ def origin3D : Point3D := { x := 0, y := 0, z := 0 }
 `Group` with one extra axiom (commutativity), instead of repeating all the
 group fields.
 
+A second single-parent example, extending `Point` a different way:
+
+```lean
+structure ColorPoint extends Point where
+  color : String
+
+def redOrigin : ColorPoint := { x := 0, y := 0, color := "red" }
+
+#eval redOrigin.x       -- inherited field, 0
+#eval redOrigin.color   -- own field, "red"
+```
+
+### Extending more than one structure at once
+
+`extends` is not limited to a single parent. `structure C extends A, B`
+builds a structure with every field of `A`, every field of `B`, and any
+fields declared in `C` itself, generating both `.toA` and `.toB` forgetful
+projections:
+
+```lean
+structure Named where
+  name : String
+
+structure NamedPoint extends Point, Named where
+  color : String
+
+def origin3 : NamedPoint :=
+  { x := 0, y := 0, name := "origin", color := "black" }
+
+#eval origin3.x            -- from Point, 0
+#eval origin3.name         -- from Named, "origin"
+#eval origin3.toPoint.x    -- forgetful projection to Point, 0
+#eval origin3.toNamed.name -- forgetful projection to Named, "origin"
+```
+
+**Field-name collisions.** If two parents both declare a field with the
+same name *and* the same type, `extends` merges them into a single shared
+field rather than raising an error — `NamedPoint` above has no collision,
+but if both `Point` and `Named` had declared an `x : Nat` field, the
+resulting structure would have exactly one `x`, filled once, and readable
+through either parent's forgetful projection. A collision on the same
+field name with *different* types, by contrast, is a genuine error
+(`Field type mismatch: Field 'x' from parent 'B' has type String but is
+expected to have type Nat`) — Lean does not silently pick one type over
+the other or rename either field.
+
 **Mathematical reading.** `structure Point3D extends Point where z : Nat`
 is the product $\mathrm{Point3D} = \mathrm{Point} \times \mathbb{N} \cong
 \mathbb{N} \times \mathbb{N} \times \mathbb{N}$, together with the
@@ -42,6 +88,16 @@ later be "a `Group`-structure plus one more axiom ($ab = ba$)": a
 full subcategory of `Group` cut out by an extra condition, with the
 forgetful functor $\mathrm{CommGroup} \to \mathrm{Group}$ being exactly
 `.toGroup`.
+
+The multi-parent case above generates two independent forgetful
+projections rather than a chain — `NamedPoint` forgets to `Point` and to
+`Named` separately, each simply discarding the other parent's fields:
+
+```mermaid
+graph LR
+    NamedPoint["NamedPoint"] -->|".toPoint"| Point["Point"]
+    NamedPoint -->|".toNamed"| Named["Named"]
+```
 
 ### References
 

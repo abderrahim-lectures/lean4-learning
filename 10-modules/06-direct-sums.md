@@ -131,6 +131,14 @@ projections $\pi_M, \pi_N$ and inclusions $\iota_M, \iota_N$ satisfy
 $\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N =
 0$, and $\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$.
 
+```mermaid
+graph LR
+    M -->|iota_M| MN["M ⊕ N"]
+    MN -->|pi_M| M
+    N -->|iota_N| MN
+    MN -->|pi_N| N
+```
+
 ### A concrete instance: $\mathbb{Z} \oplus \mathbb{Z}$
 
 Instantiating the generic construction requires nothing beyond supplying two

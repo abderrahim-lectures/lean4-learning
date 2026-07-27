@@ -29,14 +29,14 @@ The previous section introduced the Curry–Howard correspondence by
 translating logic directly into Lean types. It assumed that "propositional
 logic," "$\vdash$," and "natural deduction" were at least half-familiar to
 the reader. If they were not, this section is the missing prerequisite —
-skip ahead to [§3](03-theorem-lemma.md) if propositional/first-order logic
+skip ahead to [Chapter 3, Section 3](03-theorem-lemma.md) if propositional/first-order logic
 is already comfortable territory. It is a self-contained recap of standard
 mathematical logic — the *pre-Lean, pre-type-theory* version, exactly as it
-is presented in a first logic course — so that §1's table has something
+is presented in a first logic course — so that Section 1's table has something
 concrete on its "Logic" side to refer back to. Nothing here mentions Lean,
-types, or programs; that translation was entirely §1's job, and
-[Chapter 1 §4](../01-basics/05-pi-sigma-and-coc.md) and
-[Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md) build the
+types, or programs; that translation was entirely Section 1's job, and
+[Chapter 1, Section 4](../01-basics/05-pi-sigma-and-coc.md) and
+[Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md) build the
 calculus those types compile down to. This section only fixes what the
 logic itself is.
 
@@ -49,15 +49,19 @@ value. **Formulas** are built from these using the **connectives**:
 
 $$
 \varphi ::= p \;\mid\; \top \;\mid\; \bot \;\mid\; \neg\varphi \;\mid\;
-\varphi \wedge \varphi \;\mid\; \varphi \vee \varphi \;\mid\;
-\varphi \Rightarrow \varphi
+\varphi \wedge \psi \;\mid\; \varphi \vee \psi \;\mid\;
+\varphi \Rightarrow \psi
 $$
 
-read: a propositional variable, "true," "false," "not $\varphi$," "$\varphi$
-and $\varphi$," "$\varphi$ or $\varphi$," "$\varphi$ implies $\varphi$."
-This is pure syntax: a formula is just a string built by this grammar,
-nothing more. Whether a formula is *true*, and whether it is *provable*,
-are two separate questions, addressed next.
+Here $\varphi$ and $\psi$ are **metavariables**: each stands for "some
+already-built formula," not for one fixed formula repeated twice, so
+$\varphi \wedge \psi$ permits any two formulas as its two sides (including,
+as one case among many, the same formula on both sides). Read the grammar
+as: a propositional variable, "true," "false," "not $\varphi$," "$\varphi$
+and $\psi$," "$\varphi$ or $\psi$," "$\varphi$ implies $\psi$." This is pure
+syntax: a formula is just a string built by this grammar, nothing more.
+Whether a formula is *true*, and whether it is *provable*, are two separate
+questions, addressed next.
 
 ### Semantics: truth tables and validity
 
@@ -92,7 +96,7 @@ by an algorithm with no appeal to "meaning" at all. **Natural deduction**
 (Gentzen, 1934) is the standard system of such rules. Each connective gets
 an **introduction rule** (how to *prove* a formula built with that
 connective) and an **elimination rule** (how to *use* one once you have
-it). §1 already showed this pattern concretely (`⟨_, _⟩` introduces `∧`,
+it). Section 1 already showed this pattern concretely (`⟨_, _⟩` introduces `∧`,
 `.left` eliminates it) without naming it. Writing $\Gamma, \varphi$ for
 "$\Gamma$ together with the extra hypothesis $\varphi$":
 
@@ -128,7 +132,7 @@ hypothesis, $\psi$ can be derived, then (discharging that hypothesis) one
 may conclude $\varphi \Rightarrow \psi$ outright." This is exactly the
 ordinary mathematical move "assume $\varphi$; ... ; therefore $\varphi
 \Rightarrow \psi$," turned into an explicit, checkable rule. It is
-*exactly* what §1 identified with writing a Lean function
+*exactly* what Section 1 identified with writing a Lean function
 `fun (hp : P) => ...`. Each rule above is stated once so it can be pointed
 to by name. The list need not be memorized — the point is to recognize a
 "natural deduction proof" as a *tree* built by chaining these rules, with
@@ -148,7 +152,7 @@ $$
 {\vdash p \Rightarrow (q \Rightarrow p)}\ (\Rightarrow\text{-intro})
 $$
 
-[§3 (Implication)](04-implication.md) names this exact formula
+[Chapter 3, Section 4 (Implication)](04-implication.md) names this exact formula
 "implication is a function type" and gives the corresponding Lean term
 directly: `fun hp => fun hq => hp`. The two are not just similar — under
 Curry–Howard they are literally the same object, described twice.
@@ -202,7 +206,7 @@ yet. The translation into Lean is deliberately left for the next
 paragraph, so that it is clear which half is "ordinary logic already
 familiar to the reader" and which half is "Curry–Howard's doing."
 
-**First-order logic and Curry–Howard.** §1's table translated the
+**First-order logic and Curry–Howard.** Section 1's table translated the
 *propositional* connectives ($\wedge, \vee, \Rightarrow, \neg$) into type
 formers. Quantifiers extend the same table, and this is the one place
 where the translation genuinely needs *dependent* types rather than
@@ -222,14 +226,14 @@ Read the first row concretely: $\forall x, P(x)$ becomes a *dependent*
 function type precisely because its return type, $P(x)$, depends on the
 very argument $x$ being fed in. An ordinary (non-dependent) function type
 `α → β` would not be expressive enough, since `β` there is one fixed type,
-not one proposition per `x`. This is exactly [Chapter 1
-§3](../01-basics/03-dependent-types.md)'s "dependent
+not one proposition per `x`. This is exactly [Chapter 1,
+Section 3](../01-basics/03-dependent-types.md)'s "dependent
 types" made concrete for the special case where the family being depended
 on happens to land in `Prop` instead of `Type`. $\forall$-elim is nothing
 more than ordinary function application: feed the function a specific
 `a`, get back a proof of `P a`. The natural-deduction rule and the
 programming-language operation are, again, not just similar but
-*identical* — the same fact [§3 (Implication)](04-implication.md) already
+*identical* — the same fact [Chapter 3, Section 4 (Implication)](04-implication.md) already
 showed for modus ponens and plain function application.
 
 With this table in hand, the whole of first-order natural deduction —
@@ -237,8 +241,8 @@ every rule stated in this section — is visible as a special case of one
 simple idea: *proofs are programs, and the specific shape of program a
 proof compiles to (pair, function, tagged choice, dependent function,
 dependent pair) is read off directly from the outermost connective or
-quantifier of the proposition being proved.* [Chapter 1
-§4](../01-basics/05-pi-sigma-and-coc.md) makes this fully rigorous for the
+quantifier of the proposition being proved.* [Chapter 1,
+Section 4](../01-basics/05-pi-sigma-and-coc.md) makes this fully rigorous for the
 dependent case, by showing $\Pi$ and $\Sigma$ inside the calculus of
 constructions itself, rather than only stating the correspondence
 informally as this table does.
@@ -255,7 +259,7 @@ constructively. Intuitionistic logic — the system natural deduction *as
 given above* actually is, with no extra axiom added — rejects it as a
 general principle: $\varphi \vee \neg\varphi$ is not derivable from the
 rules above for an arbitrary $\varphi$, only for specific $\varphi$ that
-can actually be settled one way or the other. ([§4 (And, Or,
+can actually be settled one way or the other. ([Section 4 (And, Or,
 Not)](05-and-or-not.md)'s [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)
 works because `1 = 2` happens to be *decidable*, not because excluded
 middle is assumed.)
@@ -268,8 +272,8 @@ makes sense for a logic where "true" means "constructible" — which is
 exactly intuitionistic logic. (Lean's core logic is intuitionistic for
 precisely this reason. Mathlib freely adds classical excluded middle as an
 axiom for propositions where a witness is not needed, but the base
-calculus this book's Curry–Howard table describes in §1 does not include
-it.) Keep this fork in mind when reading [§4 (And, Or,
+calculus this book's Curry–Howard table describes in Section 1 does not include
+it.) Keep this fork in mind when reading [Section 4 (And, Or,
 Not)](05-and-or-not.md)'s remark that Lean has "no built-in law of excluded
 middle." It is this exact distinction, not an incidental implementation
 detail.

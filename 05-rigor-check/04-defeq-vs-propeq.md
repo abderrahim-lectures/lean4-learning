@@ -140,7 +140,7 @@ fields.
 
 > Read more: TPiL's chapter on structures discusses eta for structures
 > directly; the "Why bundle proofs with data at all?" discussion in
-> [Chapter 6 §6](../06-groups/06-why-bundle.md) is the payoff this
+> [Chapter 6, Section 6](../06-groups/06-why-bundle.md) is the payoff this
 > definitional transparency is building toward.
 
 ---

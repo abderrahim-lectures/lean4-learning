@@ -58,7 +58,7 @@ works.) `Σ n : Nat, n > 0` fails to type-check because `n > 0 : Prop`
 *family* must land in some `Type v` (`Sort (v+1)` for `v ≥ 0`), which
 `Prop` (`Sort 0`) is not. `Fin n : Type` clears that bar; `n > 0 : Prop`
 does not. This is exactly why `∃` exists as `Sigma`'s `Prop`-restricted
-cousin (Chapter 1 §5) rather than everyone just writing `Σ` everywhere.
+cousin (Chapter 1, Section 5) rather than everyone just writing `Σ` everywhere.
 
 **4. `Path.append`'s signature as nested Π-types**
 
@@ -79,7 +79,7 @@ the signature. The last two levels are Π-types that happen to collapse to
 ordinary arrows: once $u, v, w$ are fixed, `Path Q u w`'s *type* no longer
 depends on the specific *proof term* `p` or `q` supplied, only on the
 vertices already bound — exactly the "$B(x)$ not depending on $x$"
-collapse case from Chapter 1 §3/§5.
+collapse case from Chapter 1, Sections 3/5.
 
 ---
 

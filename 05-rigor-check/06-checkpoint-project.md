@@ -25,7 +25,7 @@ done for the weaker `Monoid` first.
 
 1. Define `structure Monoid (M : Type) where` with fields `op`, `id`, and
    proof obligations `assoc`, `id_left`, `id_right` — exactly `Group`'s
-   fields (Chapter 6 §2), minus `inv`/`inv_left`/`inv_right`.
+   fields (Chapter 6, Section 2), minus `inv`/`inv_left`/`inv_right`.
 2. Build at least one concrete instance. Two natural choices, both reusing
    facts already available from core Lean: `List α` under `++`/`[]`, or
    `Nat` under `*`/`1`.
@@ -66,7 +66,7 @@ theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
 
 -- Applying the generic theorem to the concrete instance costs nothing
 -- beyond naming it — the same "prove once, use everywhere" payoff
--- Chapter 6 §6 promises for Group, delivered here one chapter early.
+-- Chapter 6, Section 6 promises for Group, delivered here one chapter early.
 #check monoid_id_unique (listMonoid Nat) [] (fun a => List.nil_append a)
 ```
 

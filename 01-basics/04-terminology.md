@@ -73,11 +73,11 @@ Four words are going to come up constantly from here on, well before this
 book gives any of them a full formal treatment. Rather than leave these
 words undefined until they are needed, here is a working definition of
 each, good enough to use right away, with pointers to where a fuller
-formal treatment lives — [§5 of this chapter](05-pi-sigma-and-coc.md) for
-Π/Σ-types and the calculus of constructions, [Chapter 3
-§2](../03-propositions-and-proofs/02-logic-recap.md) for the logic
-underneath Curry–Howard, and [Chapter 5
-§3](../05-rigor-check/03-typing-rules-and-safety.md) for typing rules and
+formal treatment lives — [Chapter 1, Section 5](05-pi-sigma-and-coc.md) for
+Π/Σ-types and the calculus of constructions, [Chapter 3,
+Section 2](../03-propositions-and-proofs/02-logic-recap.md) for the logic
+underneath Curry–Howard, and [Chapter 5,
+Section 3](../05-rigor-check/03-typing-rules-and-safety.md) for typing rules and
 why Lean's guarantees can be trusted.
 
 ### Elaborate / elaboration
@@ -90,7 +90,7 @@ something, it means "after Lean has finished this filling-in process, the
 result is..." For example, `identity 5` *elaborates to*
 `@identity Nat 5` (Chapter 1), with `α := Nat` filled in silently.
 Elaboration is not guessing: it is **type inference for the calculus of
-constructions** ([§5](05-pi-sigma-and-coc.md) makes this system precise),
+constructions** ([Chapter 1, Section 5](05-pi-sigma-and-coc.md) makes this system precise),
 a deterministic algorithm driven by that calculus's own typing rules, not
 black-box compiler behavior. Every "Lean figures it out from context"
 moment since the very first `identity 5` is this same algorithm at work.
@@ -182,6 +182,47 @@ enough to have its own name, $K$, and it becomes `Bool.true`'s
 implementation once booleans are encoded this way (as in Chapter 13's
 Church-encoding aside).
 
+**A second worked example, applying the identity to itself.** Reduce
+$(\lambda x.\, x\, x)\, (\lambda y.\, y)$ — this needs *two* β-steps in a
+row, each firing on the *outermost* application, unlike the previous
+example where the second step fired inside what the first step had just
+produced:
+$$
+(\lambda x.\, x\, x)\, (\lambda y.\, y)
+\;\longrightarrow_\beta\; (\lambda y.\, y)\, (\lambda y.\, y)
+\;\longrightarrow_\beta\; \lambda y.\, y
+$$
+The first step substitutes $\lambda y.\, y$ for $x$ in $x\, x$, producing
+$(\lambda y.\, y)\, (\lambda y.\, y)$ — the identity function applied to
+itself. That is itself a new redex, so a second β-step fires: substituting
+$\lambda y.\, y$ for $y$ in the body $y$, leaving $\lambda y.\, y$
+unchanged, since applying the identity function to any term just returns
+that term. The result, $\lambda y.\, y$, is the identity function again —
+applying identity to itself gives back identity.
+
+**A worked example needing α-conversion, not just β-reduction.** Reduce
+$(\lambda x.\, \lambda y.\, x)\, y$ — note the *argument* being substituted
+in is itself named $y$, the same name as the inner bound variable. Naive,
+purely textual substitution would replace $x$ with $y$ inside
+$\lambda y.\, x$ and get $\lambda y.\, y$ — but that is *wrong*: it turns
+the free $y$ being substituted in into a variable *bound* by the inner
+$\lambda y$, silently changing which $y$ is meant (**variable capture**).
+Correct, capture-avoiding substitution first α-converts the bound variable
+to a fresh name, say $z$, since $\lambda y.\, x$ and $\lambda z.\, x$ are
+the same term (α-conversion, as above):
+$$
+(\lambda x.\, \lambda y.\, x)\, y
+\;=\; (\lambda x.\, \lambda z.\, x)\, y
+\;\longrightarrow_\beta\; \lambda z.\, y
+$$
+$\lambda z.\, y$ is the correct result: a function that ignores its
+argument and returns the *original free* $y$ — exactly what
+$\lambda x.\, \lambda y.\, x$ ("return the first argument, discard the
+second") should do when handed $y$ itself as that first argument.
+Lean's elaborator performs this renaming automatically and silently, the
+same way it treats α-equivalent terms as identical; a book working example
+is the only place this step needs to be shown explicitly.
+
 **Programmer's corner (Python).** Python's own `lambda` really does
 β-reduce exactly like the calculus above on simple examples —
 `(lambda x: x + 1)(5)` reduces to `5 + 1` to `6`, the same substitution
@@ -193,7 +234,7 @@ and recursion are just more terms built from abstraction and
 application, not separate features bolted on top. Lean's `fun` matches
 the unrestricted calculus, not Python's narrower `lambda`.
 
-Chapter 1 §5 extends exactly this calculus with dependent types (Π/Σ,
+Chapter 1, Section 5 extends exactly this calculus with dependent types (Π/Σ,
 universes) to reach the system Lean's kernel actually runs — the
 **calculus of constructions**.
 
@@ -212,8 +253,8 @@ position that can vary freely. The fix is almost always to restate the
 goal first with `show`, or to generalize the index explicitly, so the
 motive Lean builds is well-typed.
 
-**A worked example**, using `Vec` from §3 and the dependent pair
-`⟨_, _⟩` notation named formally as a Σ-type in [§5](05-pi-sigma-and-coc.md)
+**A worked example**, using `Vec` from Section 3 and the dependent pair
+`⟨_, _⟩` notation named formally as a Σ-type in [Chapter 1, Section 5](05-pi-sigma-and-coc.md)
 (the next section — nothing here depends on that name yet, only on
 reading `⟨n, v⟩` as "a `Nat` paired with a `Vec` of that length"):
 
@@ -244,9 +285,9 @@ example (α : Type) (n : Nat) (h : n = 0) (v : Vec α n) :
   rfl
 ```
 
-> Read more: [Chapter 5 §4](../05-rigor-check/04-defeq-vs-propeq.md)
+> Read more: [Chapter 5, Section 4](../05-rigor-check/04-defeq-vs-propeq.md)
 > revisits "motive is not type correct" alongside definitional equality;
-> [§5 of this chapter](05-pi-sigma-and-coc.md) shows the recursor/eliminator
+> [Chapter 1, Section 5](05-pi-sigma-and-coc.md) shows the recursor/eliminator
 > (e.g. `Nat.rec`) whose own type is literally parameterized by a motive,
 > which is where the name comes from.
 
@@ -298,12 +339,12 @@ exists, is unique, and makes both triangles commute: $\pi_X \circ h = f$
 and $\pi_Y \circ h = g$, i.e. `h a |>.1 = f a` and `h a |>.2 = g a` for
 every `a`. "Commute" just means any two paths between the same two
 objects in the diagram compose to the same map. This is exactly what
-`⟨_, _⟩` does for `Pair`/`structure` types (Chapter 2 §1): give it an
+`⟨_, _⟩` does for `Pair`/`structure` types (Chapter 2, Section 1): give it an
 `f`-shaped piece and a `g`-shaped piece, and it hands back the unique `h`
 combining them.
 
 **A second example, of a genuinely different shape: a free construction.**
-[Chapter 1 §1](01-everything-has-a-type.md) already used this idea without
+[Chapter 1, Section 1](01-everything-has-a-type.md) already used this idea without
 naming it: $(\mathbb{N}, +, 0)$ is the *free commutative monoid on one
 generator*. Spelled out, that claim is itself a universal property, with
 the "relevant data" this time being "a monoid $M$ together with a chosen
@@ -347,7 +388,7 @@ graph LR
 
 Exactly one arrow leaves $I$ for every object in the category — never
 zero (there is always a map), never more than one (no choice about which).
-`Nat` ([Chapter 1 §1](01-everything-has-a-type.md)) and
+`Nat` ([Chapter 1, Section 1](01-everything-has-a-type.md)) and
 `ℤ` in `Ring` (Chapter 8) are both flagged as initial objects of the
 relevant category in this sense: any structure-preserving map out of them
 is forced, with no choice involved.
@@ -376,7 +417,7 @@ remembers both operations, the `Group` it maps to remembers only
 addition, and the `Set` it maps to remembers only the underlying elements.
 In this book, every `.toGroup`/`.toAddGroup`-style field generated by
 Lean's `extends`
-([Chapter 2 §3](../02-functions-and-structures/03-extending-structures.md)
+([Chapter 2, Section 3](../02-functions-and-structures/03-extending-structures.md)
 onward) *is* a forgetful functor,
 computationally: it is the projection that keeps some of a structure's
 data and drops the rest.
