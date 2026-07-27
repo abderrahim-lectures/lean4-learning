@@ -33,7 +33,7 @@ Reading the recursion:
   If \texttt{q} ends with an arrow \texttt{a} (i.e.~\texttt{q = Path.cons a h h' q'} for some shorter path \texttt{q'}), then appending \texttt{p} before all of \texttt{q} is the same as appending \texttt{p} before the shorter \texttt{q'}, and then re-attaching the same final arrow \texttt{a} on top.
 \end{itemize}
 
-This recursion terminates because each recursive call is on the strictly shorter path \texttt{q'}. This is the same structural recursion principle behind the \texttt{induction} tactic from Chapter 4.
+This recursion terminates because each recursive call is on the strictly shorter path \texttt{q'}. This is the same structural recursion principle behind the \texttt{induction} tactic from Chapter 4. A \texttt{Path} cannot be printed on its own (there is no generic way to display an arbitrary quiver's arrows as text), so watching this recursion step by step with \texttt{dbg\_\allowbreak{}trace} has to wait until the checkpoint project below, once \texttt{Path.length} gives the result something printable to reduce to.
 
 \subsection{\texorpdfstring{A worked instance: rebuilding \texttt{pathBetaAlpha} via \texttt{append}}{A worked instance: rebuilding pathBetaAlpha via append}}\label{sec:11-path-algebras:05-path-composition:3}
 

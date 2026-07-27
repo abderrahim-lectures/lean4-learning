@@ -43,7 +43,11 @@ Reading the recursion:
 
 This recursion terminates because each recursive call is on the strictly
 shorter path `q'`. This is the same structural recursion principle behind
-the `induction` tactic from Chapter 4.
+the `induction` tactic from Chapter 4. A `Path` cannot be printed on its
+own (there is no generic way to display an arbitrary quiver's arrows as
+text), so watching this recursion step by step with `dbg_trace` has to
+wait until the checkpoint project below, once `Path.length` gives the
+result something printable to reduce to.
 
 ### A worked instance: rebuilding `pathBetaAlpha` via `append`
 
