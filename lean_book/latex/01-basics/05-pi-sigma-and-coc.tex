@@ -235,7 +235,22 @@ def double (n : Nat) : Nat :=
 #eval double 5   -- 10
 \end{lstlisting}
 
-Here \texttt{motive := fun \_\allowbreak{} => Nat} (inferred, since the zero case \texttt{0} and the succ case's result both have type \texttt{Nat}): the zero case supplies \texttt{0} for \texttt{double 0}, and the succ case says ``given the doubled value \texttt{ih} for \texttt{n}, the doubled value for \texttt{n.succ} is \texttt{ih + 2}'' --- exactly the recursive definition of doubling, with no separate ``recursion'' mechanism beyond \texttt{Nat.rec} itself.
+Here \texttt{motive := fun \_\allowbreak{} => Nat} (inferred, since the zero case \texttt{0} and the succ case's result both have type \texttt{Nat}): the zero case supplies \texttt{0} for \texttt{double 0}, and the succ case says ``given the doubled value \texttt{ih} for \texttt{n}, the doubled value for \texttt{n.succ} is \texttt{ih + 2}'' --- exactly the recursive definition of doubling, with no separate ``recursion'' mechanism beyond \texttt{Nat.rec} itself. A \texttt{dbg\_\allowbreak{}trace} inside the succ case makes each of the five hidden recursive steps visible:
+
+\begin{lstlisting}
+def double' (n : Nat) : Nat :=
+  Nat.rec 0 (fun _ ih => dbg_trace s!"double: succ case, ih={ih}, adding 2"; ih + 2) n
+
+#eval double' 5
+-- double: succ case, ih=0, adding 2
+-- double: succ case, ih=2, adding 2
+-- double: succ case, ih=4, adding 2
+-- double: succ case, ih=6, adding 2
+-- double: succ case, ih=8, adding 2
+-- 10
+\end{lstlisting}
+
+Five lines print, one per \texttt{succ} layer \texttt{Nat.rec} peels off \texttt{5 = succ(succ(succ(succ(succ zero))))}, each showing the running total \emph{before} the final \texttt{+ 2}: \texttt{0}, then \texttt{2}, then \texttt{4}, then \texttt{6}, then \texttt{8}, then the returned \texttt{10}. Nothing about \texttt{Nat.rec} was changed to make this possible --- the trace prints from inside the ordinary succ-case function supplied as \texttt{Nat.rec}'s second argument, the same function already described above.
 
 \textbf{A second worked example, over a different inductive type.} The same pattern generalizes to any inductive type, not just \texttt{Nat}. Computing a list's length via \texttt{List.rec} directly, rather than via the built-in \texttt{List.length}:
 
@@ -248,6 +263,8 @@ noncomputable def myLength {(*$\alpha$*) : Type} (l : List (*$\alpha$*)) : Nat :
 \end{lstlisting}
 
 (\texttt{noncomputable} and \texttt{\#reduce} in place of \texttt{\#eval} here are a Lean implementation detail --- the code generator that backs \texttt{\#eval} does not yet support compiling \texttt{List.rec} directly, so this definition is checked and reduced by the kernel via \texttt{\#reduce} instead; the mathematical content is identical to \texttt{double} above, just for \texttt{List} in place of \texttt{Nat}.) The motive is again constant (\texttt{fun \_\allowbreak{} => Nat}), the ``nil case'' is \texttt{0}, and the ``cons case'' says ``given the tail's length \texttt{tailLen}, the length with one more element prepended is \texttt{tailLen + 1}.''
+
+Unlike \texttt{double} above, \texttt{myLength}'s recursion cannot be watched with \texttt{dbg\_\allowbreak{}trace}: a \texttt{dbg\_\allowbreak{}trace} call placed inside the cons case prints nothing at all under \texttt{\#reduce}, verified directly --- the kernel's definitional reduction (what \texttt{\#reduce} invokes) is a pure, side-effect-free rewriting process, not a compiled/interpreted evaluation the way \texttt{\#eval} is, so \texttt{dbg\_\allowbreak{}trace}'s print action never fires. This is the same \texttt{noncomputable} boundary from one paragraph up, seen from a second angle: whatever cannot be compiled also cannot be traced by any mechanism that relies on running compiled code.
 
 \textbf{A counterexample: getting the case order wrong.} \texttt{Nat.rec}'s two case arguments are positional, not named --- supplying them in the wrong order is a genuine, easy mistake, and Lean rejects it as a type error rather than silently doing the wrong thing:
 
