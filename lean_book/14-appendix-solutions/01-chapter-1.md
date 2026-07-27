@@ -45,6 +45,31 @@ input's *value*. `Vec.toList` throws the length away on the way out, the
 same way `Vec α n`'s own length information disappears once converted to
 a plain `List α`.
 
+Unlike `Vec`, `List` does have a `Repr` instance for any printable `α`,
+so `Vec.toList`'s recursion can be watched directly with `dbg_trace`,
+using `Vec.replicate` (Chapter 1, Section 3) to build a concrete input:
+
+```lean
+def Vec.toList' : Vec α n → List α
+  | Vec.nil => dbg_trace s!"toList: nil, base case, returning []"; []
+  | Vec.cons a rest =>
+      dbg_trace s!"toList: cons, prepending one element, recursing on the rest";
+      a :: Vec.toList' rest
+
+#eval Vec.toList' (Vec.replicate (7 : Int) 3)
+-- toList: cons, prepending one element, recursing on the rest
+-- toList: cons, prepending one element, recursing on the rest
+-- toList: cons, prepending one element, recursing on the rest
+-- toList: nil, base case, returning []
+-- [7, 7, 7]
+```
+
+Three `cons` lines print before the `nil` line, one per element of the
+length-3 vector, and only once the base case is reached does the fully
+assembled `[7, 7, 7]` print — the same "peel off constructors, print on
+the way down, assemble the result on the way back up" shape as every
+other traced recursion in this book.
+
 **3. A second `Σ n : Nat, Fin n`, and why `Σ n : Nat, n > 0` fails**
 
 ```lean
