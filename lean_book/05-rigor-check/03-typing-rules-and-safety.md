@@ -242,7 +242,7 @@ definitions are gathered in Recall, above.
 - Milner ([Milner1978]) — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's boxes.
 - Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC, whose universe-formation rule is stated above.
-- Girard — see [Section 2's References](02-universes.md) for the full citation: "Girard's paradox" (the inconsistency of `Type : Type`) is due to Girard's 1972 thesis, a different, later paper than [Girard1971] cited elsewhere in this book.
+- Girard — see [Chapter 5, Section 2's References](02-universes.md) for the full citation: "Girard's paradox" (the inconsistency of `Type : Type`) is due to Girard's 1972 thesis, a different, later paper than [Girard1971] cited elsewhere in this book.
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — Lean's own documentation on universes, matching the presentation here.
 
 [Pierce2002]: ../bibliography.md#pierce2002

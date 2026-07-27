@@ -341,7 +341,7 @@ not simply mirror images of each other.
 
 ### Recursors and eliminators, named
 
-[Section 4](04-terminology.md) promised a formal treatment of the **recursor**
+[Chapter 1, Section 4](04-terminology.md) promised a formal treatment of the **recursor**
 (also called an **eliminator**) once Π/Σ-types were available; here it is.
 For an inductive type like `Nat`, with constructors `zero : Nat` and
 `succ : Nat → Nat`, the **recursor** `Nat.rec` is the single term that

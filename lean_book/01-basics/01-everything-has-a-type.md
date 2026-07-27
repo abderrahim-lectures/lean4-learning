@@ -185,7 +185,7 @@ ways a `Nat` can ever have been built.
 > **Mathematical reading (optional, for readers who already know some
 > category theory).** Regard `Type` as a category: its **objects** are
 > types — `α`, `β`, ... (this book's convention throughout, spelled out
-> fully in [Section 2](02-def-let-implicit.md)) — and its **morphisms** are
+> fully in [Chapter 1, Section 2](02-def-let-implicit.md)) — and its **morphisms** are
 > functions. A function `f : α → β` is a morphism from `α` to `β`, *not*
 > a functor (a functor maps *between* categories; `Type` is the only
 > category in sight here, and `α` and `β` are two of its objects, not

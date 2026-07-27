@@ -29,7 +29,7 @@ The previous section introduced the Curry–Howard correspondence by
 translating logic directly into Lean types. It assumed that "propositional
 logic," "$\vdash$," and "natural deduction" were at least half-familiar to
 the reader. If they were not, this section is the missing prerequisite —
-skip ahead to [Section 3](03-theorem-lemma.md) if propositional/first-order logic
+skip ahead to [Chapter 3, Section 3](03-theorem-lemma.md) if propositional/first-order logic
 is already comfortable territory. It is a self-contained recap of standard
 mathematical logic — the *pre-Lean, pre-type-theory* version, exactly as it
 is presented in a first logic course — so that Section 1's table has something
@@ -152,7 +152,7 @@ $$
 {\vdash p \Rightarrow (q \Rightarrow p)}\ (\Rightarrow\text{-intro})
 $$
 
-[Section 3 (Implication)](04-implication.md) names this exact formula
+[Chapter 3, Section 4 (Implication)](04-implication.md) names this exact formula
 "implication is a function type" and gives the corresponding Lean term
 directly: `fun hp => fun hq => hp`. The two are not just similar — under
 Curry–Howard they are literally the same object, described twice.
@@ -233,7 +233,7 @@ on happens to land in `Prop` instead of `Type`. $\forall$-elim is nothing
 more than ordinary function application: feed the function a specific
 `a`, get back a proof of `P a`. The natural-deduction rule and the
 programming-language operation are, again, not just similar but
-*identical* — the same fact [Section 3 (Implication)](04-implication.md) already
+*identical* — the same fact [Chapter 3, Section 4 (Implication)](04-implication.md) already
 showed for modus ponens and plain function application.
 
 With this table in hand, the whole of first-order natural deduction —

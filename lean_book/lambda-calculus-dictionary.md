@@ -8,7 +8,7 @@ A direct dictionary connecting the formal λ-calculus/type-theory notation
 used in a few "Mathematical reading" boxes throughout this book back to
 the Lean syntax it corresponds to. This page is a lookup table, not
 something to read start to finish — [Chapter 1, Section 4](01-basics/04-terminology.md)
-and [Section 5](01-basics/05-pi-sigma-and-coc.md), [Chapter 3,
+and [Chapter 1, Section 5](01-basics/05-pi-sigma-and-coc.md), [Chapter 3,
 Section 2](03-propositions-and-proofs/02-logic-recap.md), and [Chapter 5,
 Section 3](05-rigor-check/03-typing-rules-and-safety.md) are where each row is
 actually built up and explained.

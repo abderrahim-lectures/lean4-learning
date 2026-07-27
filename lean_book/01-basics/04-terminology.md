@@ -73,7 +73,7 @@ Four words are going to come up constantly from here on, well before this
 book gives any of them a full formal treatment. Rather than leave these
 words undefined until they are needed, here is a working definition of
 each, good enough to use right away, with pointers to where a fuller
-formal treatment lives — [Section 5 of this chapter](05-pi-sigma-and-coc.md) for
+formal treatment lives — [Chapter 1, Section 5](05-pi-sigma-and-coc.md) for
 Π/Σ-types and the calculus of constructions, [Chapter 3,
 Section 2](../03-propositions-and-proofs/02-logic-recap.md) for the logic
 underneath Curry–Howard, and [Chapter 5,
@@ -90,7 +90,7 @@ something, it means "after Lean has finished this filling-in process, the
 result is..." For example, `identity 5` *elaborates to*
 `@identity Nat 5` (Chapter 1), with `α := Nat` filled in silently.
 Elaboration is not guessing: it is **type inference for the calculus of
-constructions** ([Section 5](05-pi-sigma-and-coc.md) makes this system precise),
+constructions** ([Chapter 1, Section 5](05-pi-sigma-and-coc.md) makes this system precise),
 a deterministic algorithm driven by that calculus's own typing rules, not
 black-box compiler behavior. Every "Lean figures it out from context"
 moment since the very first `identity 5` is this same algorithm at work.
@@ -254,7 +254,7 @@ goal first with `show`, or to generalize the index explicitly, so the
 motive Lean builds is well-typed.
 
 **A worked example**, using `Vec` from Section 3 and the dependent pair
-`⟨_, _⟩` notation named formally as a Σ-type in [Section 5](05-pi-sigma-and-coc.md)
+`⟨_, _⟩` notation named formally as a Σ-type in [Chapter 1, Section 5](05-pi-sigma-and-coc.md)
 (the next section — nothing here depends on that name yet, only on
 reading `⟨n, v⟩` as "a `Nat` paired with a `Vec` of that length"):
 
@@ -287,7 +287,7 @@ example (α : Type) (n : Nat) (h : n = 0) (v : Vec α n) :
 
 > Read more: [Chapter 5, Section 4](../05-rigor-check/04-defeq-vs-propeq.md)
 > revisits "motive is not type correct" alongside definitional equality;
-> [Section 5 of this chapter](05-pi-sigma-and-coc.md) shows the recursor/eliminator
+> [Chapter 1, Section 5](05-pi-sigma-and-coc.md) shows the recursor/eliminator
 > (e.g. `Nat.rec`) whose own type is literally parameterized by a motive,
 > which is where the name comes from.
 
