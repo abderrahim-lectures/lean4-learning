@@ -104,7 +104,7 @@ example {G : Type*} [Group G] (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := mul_
 ```
 
 And the same payoff Chapter 7 draws out concretely for `perm3Group` applies
-here too, against Mathlib's own $S_3$ from Chapter 6 §4. There is no new
+here too, against Mathlib's own $S_3$ from Chapter 6, Section 4. There is no new
 proof, only an application of `mul_inv_rev` at `Equiv.Perm (Fin 3)`:
 
 ```lean

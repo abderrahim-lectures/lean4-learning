@@ -38,7 +38,7 @@ def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
 #eval (mulByLinearMap 5).toFun 3   -- 15
 \end{lstlisting}
 
-\texttt{map\_\allowbreak{}add}'s goal, \texttt{d * (m+n) = d*m + d*n}, is exactly distributivity. \texttt{map\_\allowbreak{}smul}'s goal, \texttt{d * (r*m) = r * (d*m)}, holds because \(\mathbb{Z}\) is commutative, so \texttt{d} and \texttt{r} can swap past each other. Both fields, in other words, are pure \texttt{Int}-arithmetic facts once \texttt{toFun}, \texttt{ModM.smul}, and \texttt{ModM.addGrp.op} are unfolded to their meanings here. This is the same ``reduce a module-theoretic goal to a concrete arithmetic identity'' move that §4's \texttt{evenSubmodule} used, applied again.
+\texttt{map\_\allowbreak{}add}'s goal, \texttt{d * (m+n) = d*m + d*n}, is exactly distributivity. \texttt{map\_\allowbreak{}smul}'s goal, \texttt{d * (r*m) = r * (d*m)}, holds because \(\mathbb{Z}\) is commutative, so \texttt{d} and \texttt{r} can swap past each other. Both fields, in other words, are pure \texttt{Int}-arithmetic facts once \texttt{toFun}, \texttt{ModM.smul}, and \texttt{ModM.addGrp.op} are unfolded to their meanings here. This is the same ``reduce a module-theoretic goal to a concrete arithmetic identity'' move that Section 4's \texttt{evenSubmodule} used, applied again.
 
 \textbf{Mathlib equivalent.} Mathlib's own \href{https://loogle.lean-lang.org/?q=LinearMap}{\texttt{LinearMap}} (notation \texttt{M →ₗ[R] N}) is built the same way: supply \texttt{toFun} plus the two homomorphism proofs. But the result is directly interoperable with the rest of the library's linear-algebra API:
 

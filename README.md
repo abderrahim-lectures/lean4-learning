@@ -1,4 +1,4 @@
-# lean4-learning
+# Lean for Working Algebraists
 
 <img src="lean_book/images/cover.png" alt="Lean for Working Algebraists — book cover" width="280" align="right">
 

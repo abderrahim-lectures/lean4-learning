@@ -38,7 +38,7 @@ independently-statable sub-goal is a lemma waiting to be named.
 **Socratic questions.**
 
 1. *`exact?` sometimes returns a working but needlessly roundabout term
-   instead of the shortest one (Chapter 12 §1's own worked example).
+   instead of the shortest one (Chapter 12, Section 1's own worked example).
    Does that make it a poor tool to reach for?* No — it still guarantees
    a *correct* closing term, found automatically; simplifying what it
    returns by hand afterward is a small, separate step, cheaper than

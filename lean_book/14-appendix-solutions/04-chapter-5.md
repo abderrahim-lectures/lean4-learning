@@ -155,7 +155,7 @@ theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
 ```
 
 Both instances are one field-by-field build, exactly `intGroup`'s style
-(Chapter 6 §3) minus the two inverse fields: each proof obligation is a
+(Chapter 6, Section 3) minus the two inverse fields: each proof obligation is a
 single `intro` plus a one-line `exact` naming a core-library fact
 (`List.append_assoc`/`List.nil_append`/`List.append_nil` for the list
 instance, `Nat.mul_assoc`/`Nat.one_mul`/`Nat.mul_one` for the natural-number
@@ -164,7 +164,7 @@ verbatim, with every `Grp.` replaced by `Mn.` and `Group` weakened to
 `Monoid`. Every step used only `id_right` and the hypothesis `h`, never an
 inverse — which is exactly why the proof survives dropping `inv` entirely.
 The theorem applies unchanged to both instances built above, the same
-"prove once, get it for free" payoff Chapter 6 §6 promises for `Group`.
+"prove once, get it for free" payoff Chapter 6, Section 6 promises for `Group`.
 
 ---
 

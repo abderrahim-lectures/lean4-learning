@@ -46,7 +46,7 @@ Everything above is a promise that Mathlib is *more general*. Here are
 two concrete payoffs — things this book explicitly could not state,
 using exactly the examples already built.
 
-**`ZMod 3` is a field, not just a ring.** Chapter 8 §5 built `fin3Ring`
+**`ZMod 3` is a field, not just a ring.** Chapter 8, Section 5 built `fin3Ring`
 and said in so many words that a `Field` would need every nonzero
 element to be invertible, "true for $\mathbb{Z}/3$ precisely because $3$
 is prime, but not part of `Ring`'s axioms and not checked here." Mathlib
@@ -61,7 +61,7 @@ example : ∀ a : ZMod 3, a ≠ 0 → ∃ b, a * b = 1 := by decide
 ```
 
 **Lagrange's theorem, applied to the non-abelian example from Chapters
-6-7.** `Equiv.Perm (Fin 3)` (Chapter 6 §4's Mathlib analogue of
+6-7.** `Equiv.Perm (Fin 3)` (Chapter 6, Section 4's Mathlib analogue of
 `perm3Group`) never had subgroups defined for it — the book built one
 group, not the lattice of its subgroups. Mathlib's `Subgroup` type
 already comes with Lagrange's theorem attached, so applying it to a real

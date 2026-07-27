@@ -22,14 +22,14 @@ theorem exists_even : (*$\exists$*) n : Nat, n % 2 = 0 :=
   \texttt{∃ x : α, P x} is a structure: a \textbf{witness} value plus a proof that the witness satisfies \texttt{P}.
 \end{itemize}
 
-\textbf{Reading the shortcut \texttt{⟨2, rfl⟩}.} This is the same ``here are the pieces, in order'' anonymous-constructor shorthand from \hyperref[sec:02-functions-and-structures:01-structure-basics:1]{Chapter 2 §1}. It was already reused for \texttt{∧} (\hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s \texttt{⟨hp, hq⟩}), and here it builds an \texttt{∃}-proof in one line instead of two. The pattern to remember: \textbf{first the number, then why it works.}
+\textbf{Reading the shortcut \texttt{⟨2, rfl⟩}.} This is the same ``here are the pieces, in order'' anonymous-constructor shorthand from \hyperref[sec:02-functions-and-structures:01-structure-basics:1]{Chapter 2, Section 1}. It was already reused for \texttt{∧} (\hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3, Section 5}'s \texttt{⟨hp, hq⟩}), and here it builds an \texttt{∃}-proof in one line instead of two. The pattern to remember: \textbf{first the number, then why it works.}
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{2} is the \textbf{witness} --- the specific number being claimed even. It is the smallest one that actually makes the point (\texttt{0} technically works too, but reads as a trick --- ``of course \texttt{0} is even'').
 \item
-  \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} is the \textbf{proof}, filling in for \texttt{P 2}, i.e.~for \texttt{2 \% 2 = 0}. It works by \texttt{rfl} alone (no lemma needed) because \texttt{2 \% 2} simply \emph{computes} to \texttt{0} --- both sides of the equation are already the same term once evaluated, exactly like \texttt{2 + 2 = 4} back in \hyperref[sec:03-propositions-and-proofs:01-prop:1]{Chapter 3 §1}.
+  \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} is the \textbf{proof}, filling in for \texttt{P 2}, i.e.~for \texttt{2 \% 2 = 0}. It works by \texttt{rfl} alone (no lemma needed) because \texttt{2 \% 2} simply \emph{computes} to \texttt{0} --- both sides of the equation are already the same term once evaluated, exactly like \texttt{2 + 2 = 4} back in \hyperref[sec:03-propositions-and-proofs:01-prop:1]{Chapter 3, Section 1}.
 \end{itemize}
 
 So \texttt{⟨2, rfl⟩ : ∃ n : Nat, n \% 2 = 0} reads as ``2 works, and here is why: it just computes.'' Wherever \texttt{⟨w, p⟩} proves an \texttt{∃}-statement elsewhere in this book, it should be read the same way: \texttt{w} is \emph{what} is claimed to exist, and \texttt{p} is \emph{why} it satisfies the property. They are packed together because that is exactly the two pieces of data an existence proof needs.
@@ -53,7 +53,7 @@ theorem exists_prime_gt_three : (*$\exists$*) p : Nat, p > 3 (*$\wedge$*) isPrim
 \item
   The \emph{property} being witnessed, \texttt{p > 3 ∧ isPrime p}, is itself an \texttt{∧}. So the full picture is a witness (\texttt{5}) plus a \emph{pair} of facts about it (\texttt{5 > 3}, and \texttt{5} is prime), all packed into the outer \texttt{⟨\_\allowbreak{}, \_\allowbreak{}⟩}.
 \item
-  The proof is not \texttt{rfl}. \texttt{p > 3 ∧ isPrime p} does not reduce to a plain equality, so instead the second slot is by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} --- the same brute-force tactic from \hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s \texttt{not\_\allowbreak{}example}, which here checks \texttt{5 > 3} outright and tries every candidate divisor below \texttt{5} to confirm none of them divide it.
+  The proof is not \texttt{rfl}. \texttt{p > 3 ∧ isPrime p} does not reduce to a plain equality, so instead the second slot is by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} --- the same brute-force tactic from \hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3, Section 5}'s \texttt{not\_\allowbreak{}example}, which here checks \texttt{5 > 3} outright and tries every candidate divisor below \texttt{5} to confirm none of them divide it.
 \end{itemize}
 
 Read \texttt{⟨5, by decide⟩} exactly as before: \texttt{5} is still just the witness, \texttt{by decide} is still just the proof, filled in by a tactic block instead of \texttt{rfl} because \emph{this} proof happens to need one. The witness-then-proof shape never changes; only \emph{how} the proof half gets produced does.

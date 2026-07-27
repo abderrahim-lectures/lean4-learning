@@ -25,11 +25,11 @@ Chapters 1–4 have relied on Lean's type checking constantly without ever
 seeing its rules written down. This section makes two things precise:
 the actual rules Lean's kernel checks a term against (using a small,
 representative fragment, the **simply typed λ-calculus**, STLC), and the
-specific rule governing the universe hierarchy §2 just introduced
+specific rule governing the universe hierarchy Section 2 just introduced
 informally.
 
 An untyped calculus has a serious defect: it permits terms that reduce
-forever (Chapter 1 §4 mentioned β-reduction; nothing there stopped a term
+forever (Chapter 1, Section 4 mentioned β-reduction; nothing there stopped a term
 from β-reducing to itself, endlessly), and nothing prevents applying one
 kind of value where a completely different kind was intended. STLC fixes
 this by attaching a **type** to every term and requiring application to
@@ -47,7 +47,7 @@ where $\iota$ ranges over some fixed collection of **base types** (think
 $\tau_1$ to $\tau_2$ — exactly Lean's `→`. Every type is built from base
 types and arrows. There is not yet any way to quantify over *all* types
 the way Chapter 1's `identity {α : Type} (x : α) : α := x` did — that
-extra generality is exactly Chapter 1 §5's Π-types, already covered.
+extra generality is exactly Chapter 1, Section 5's Π-types, already covered.
 
 **Programmer's corner (Python), before the formal rules.** Python's own
 type hints plus `mypy` are a light version of exactly this system, worth
@@ -125,7 +125,7 @@ system at all:
 - **Preservation** (subject reduction): if $\Gamma \vdash t : \tau$ and
   $t \longrightarrow_\beta t'$, then $\Gamma \vdash t' : \tau$. Reduction
   never changes a term's type. This is *exactly* why this chapter's own
-  definitional equality (§4, next) is trustworthy: reducing a term to
+  definitional equality (Section 4, next) is trustworthy: reducing a term to
   normal form (what `#eval`/`rfl` do) can never accidentally produce
   something of a different type than the one it started with.
 
@@ -170,22 +170,22 @@ version of the same extra generality Lean's `identity {α : Type} (x : α) :
 α := x` uses, where `α` is filled in silently every call, the same way
 `mypy` silently solves `T := int` above.
 
-This is precisely the gap [Chapter 1 §5](../01-basics/05-pi-sigma-and-coc.md)
+This is precisely the gap [Chapter 1, Section 5](../01-basics/05-pi-sigma-and-coc.md)
 already closed: **dependent types** let a type itself depend on a term
 (here, the type argument `α`). That is exactly the extra generality
 `identity {α : Type} (x : α) : α := x` uses, and it is unavailable in STLC
 (or in Python's `TypeVar`, which is real but considerably less powerful —
 it cannot let a *return type* depend on an ordinary *value* argument the
-way Chapter 1 §3's `Vec.replicate` does).
+way Chapter 1, Section 3's `Vec.replicate` does).
 
 ### Universes, as a typing rule
 
-§2 introduced the hierarchy $\mathtt{Type} : \mathtt{Type}\,1 :
+Section 2 introduced the hierarchy $\mathtt{Type} : \mathtt{Type}\,1 :
 \mathtt{Type}\,2 : \cdots$ to avoid a Russell-style paradox (a "type of all
 types" that contains itself leads to the same contradiction as "the set of
 all sets that do not contain themselves"), and showed `Group : Type →
 Type` had to live in `Type 1`. In the calculus of constructions — the
-formal system CoC/CIC that Chapter 1 §5 named, extending STLC above with
+formal system CoC/CIC that Chapter 1, Section 5 named, extending STLC above with
 Π-types and universes — this is stated as a typing rule for the universes
 themselves:
 
@@ -201,7 +201,7 @@ $$
       {\Gamma \vdash \big(\textstyle\prod_{x:A} B\big) : \mathtt{Type}\,(\max(i,j))}
 $$
 
-This is exactly §2's `Group : Type → Type` computation spelled out as a
+This is exactly Section 2's `Group : Type → Type` computation spelled out as a
 general rule: with $A = \mathtt{Type}$ (itself living in `Type 1`) and
 $B = \mathtt{Type}$ again, the rule gives $\max(1, 1) = 1$, so `Type →
 Type` lands in `Type 1`, one level above `Type` itself.
@@ -242,7 +242,7 @@ definitions are gathered in Recall, above.
 - Milner ([Milner1978]) — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's boxes.
 - Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC, whose universe-formation rule is stated above.
-- Girard — **Correction:** see the note in [§2's References](02-universes.md) — "Girard's paradox" (the inconsistency of `Type : Type`) is due to Girard's 1972 thesis, not the 1971 paper cited as [Girard1971] elsewhere in this book.
+- Girard — **Correction:** see the note in [Section 2's References](02-universes.md) — "Girard's paradox" (the inconsistency of `Type : Type`) is due to Girard's 1972 thesis, not the 1971 paper cited as [Girard1971] elsewhere in this book.
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — Lean's own documentation on universes, matching the presentation here.
 
 [Pierce2002]: ../bibliography.md#pierce2002

@@ -206,7 +206,7 @@ in the application
 
 Nothing about "index out of range" happens at runtime, because the bad
 call is not a well-typed term in the first place — the same "ruled out
-before running" guarantee from [§1](01-everything-has-a-type.md), now
+before running" guarantee from [Section 1](01-everything-has-a-type.md), now
 enforced by an invariant (non-emptiness) that an ordinary, non-dependent
 type could not have expressed at all. `List α` has no way to say "and
 this one is non-empty" as part of its type; `Vec α (n+1)` says exactly
@@ -321,11 +321,11 @@ it is the identical idea, with a richer index.
 > families as in the `Path` example above, an assignment of a
 > $\mathrm{Hom}$-set to every pair of objects in a category. A Π-type over
 > such a family is a **dependent product**; a term of $\sum_{x:A} B(x)$
-> (Σ-type, next covered formally in [§5](05-pi-sigma-and-coc.md)) is a
+> (Σ-type, next covered formally in [Section 5](05-pi-sigma-and-coc.md)) is a
 > **dependent sum**. Both are literal categorical limits/colimits in the
 > appropriate indexed sense, not merely named after them by analogy.
 
-> Read more: [§5](05-pi-sigma-and-coc.md)
+> Read more: [Section 5](05-pi-sigma-and-coc.md)
 > gives Π-types (and Σ-types) their formal typing rules, with more worked
 > examples, rather than only the walkthrough given here.
 

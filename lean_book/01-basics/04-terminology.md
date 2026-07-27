@@ -73,11 +73,11 @@ Four words are going to come up constantly from here on, well before this
 book gives any of them a full formal treatment. Rather than leave these
 words undefined until they are needed, here is a working definition of
 each, good enough to use right away, with pointers to where a fuller
-formal treatment lives — [§5 of this chapter](05-pi-sigma-and-coc.md) for
-Π/Σ-types and the calculus of constructions, [Chapter 3
-§2](../03-propositions-and-proofs/02-logic-recap.md) for the logic
-underneath Curry–Howard, and [Chapter 5
-§3](../05-rigor-check/03-typing-rules-and-safety.md) for typing rules and
+formal treatment lives — [Section 5 of this chapter](05-pi-sigma-and-coc.md) for
+Π/Σ-types and the calculus of constructions, [Chapter 3,
+Section 2](../03-propositions-and-proofs/02-logic-recap.md) for the logic
+underneath Curry–Howard, and [Chapter 5,
+Section 3](../05-rigor-check/03-typing-rules-and-safety.md) for typing rules and
 why Lean's guarantees can be trusted.
 
 ### Elaborate / elaboration
@@ -90,7 +90,7 @@ something, it means "after Lean has finished this filling-in process, the
 result is..." For example, `identity 5` *elaborates to*
 `@identity Nat 5` (Chapter 1), with `α := Nat` filled in silently.
 Elaboration is not guessing: it is **type inference for the calculus of
-constructions** ([§5](05-pi-sigma-and-coc.md) makes this system precise),
+constructions** ([Section 5](05-pi-sigma-and-coc.md) makes this system precise),
 a deterministic algorithm driven by that calculus's own typing rules, not
 black-box compiler behavior. Every "Lean figures it out from context"
 moment since the very first `identity 5` is this same algorithm at work.
@@ -193,7 +193,7 @@ and recursion are just more terms built from abstraction and
 application, not separate features bolted on top. Lean's `fun` matches
 the unrestricted calculus, not Python's narrower `lambda`.
 
-Chapter 1 §5 extends exactly this calculus with dependent types (Π/Σ,
+Chapter 1, Section 5 extends exactly this calculus with dependent types (Π/Σ,
 universes) to reach the system Lean's kernel actually runs — the
 **calculus of constructions**.
 
@@ -212,8 +212,8 @@ position that can vary freely. The fix is almost always to restate the
 goal first with `show`, or to generalize the index explicitly, so the
 motive Lean builds is well-typed.
 
-**A worked example**, using `Vec` from §3 and the dependent pair
-`⟨_, _⟩` notation named formally as a Σ-type in [§5](05-pi-sigma-and-coc.md)
+**A worked example**, using `Vec` from Section 3 and the dependent pair
+`⟨_, _⟩` notation named formally as a Σ-type in [Section 5](05-pi-sigma-and-coc.md)
 (the next section — nothing here depends on that name yet, only on
 reading `⟨n, v⟩` as "a `Nat` paired with a `Vec` of that length"):
 
@@ -244,9 +244,9 @@ example (α : Type) (n : Nat) (h : n = 0) (v : Vec α n) :
   rfl
 ```
 
-> Read more: [Chapter 5 §4](../05-rigor-check/04-defeq-vs-propeq.md)
+> Read more: [Chapter 5, Section 4](../05-rigor-check/04-defeq-vs-propeq.md)
 > revisits "motive is not type correct" alongside definitional equality;
-> [§5 of this chapter](05-pi-sigma-and-coc.md) shows the recursor/eliminator
+> [Section 5 of this chapter](05-pi-sigma-and-coc.md) shows the recursor/eliminator
 > (e.g. `Nat.rec`) whose own type is literally parameterized by a motive,
 > which is where the name comes from.
 
@@ -298,12 +298,12 @@ exists, is unique, and makes both triangles commute: $\pi_X \circ h = f$
 and $\pi_Y \circ h = g$, i.e. `h a |>.1 = f a` and `h a |>.2 = g a` for
 every `a`. "Commute" just means any two paths between the same two
 objects in the diagram compose to the same map. This is exactly what
-`⟨_, _⟩` does for `Pair`/`structure` types (Chapter 2 §1): give it an
+`⟨_, _⟩` does for `Pair`/`structure` types (Chapter 2, Section 1): give it an
 `f`-shaped piece and a `g`-shaped piece, and it hands back the unique `h`
 combining them.
 
 **A second example, of a genuinely different shape: a free construction.**
-[Chapter 1 §1](01-everything-has-a-type.md) already used this idea without
+[Chapter 1, Section 1](01-everything-has-a-type.md) already used this idea without
 naming it: $(\mathbb{N}, +, 0)$ is the *free commutative monoid on one
 generator*. Spelled out, that claim is itself a universal property, with
 the "relevant data" this time being "a monoid $M$ together with a chosen
@@ -347,7 +347,7 @@ graph LR
 
 Exactly one arrow leaves $I$ for every object in the category — never
 zero (there is always a map), never more than one (no choice about which).
-`Nat` ([Chapter 1 §1](01-everything-has-a-type.md)) and
+`Nat` ([Chapter 1, Section 1](01-everything-has-a-type.md)) and
 `ℤ` in `Ring` (Chapter 8) are both flagged as initial objects of the
 relevant category in this sense: any structure-preserving map out of them
 is forced, with no choice involved.
@@ -376,7 +376,7 @@ remembers both operations, the `Group` it maps to remembers only
 addition, and the `Set` it maps to remembers only the underlying elements.
 In this book, every `.toGroup`/`.toAddGroup`-style field generated by
 Lean's `extends`
-([Chapter 2 §3](../02-functions-and-structures/03-extending-structures.md)
+([Chapter 2, Section 3](../02-functions-and-structures/03-extending-structures.md)
 onward) *is* a forgetful functor,
 computationally: it is the projection that keeps some of a structure's
 data and drops the rest.

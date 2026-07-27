@@ -138,7 +138,7 @@ example : (Path.append pathAlpha pathBetaOnly).length =
 ```
 
 `Path.length` recurses on the same two constructors as `Path.append`
-itself (§4–§5): `nil` contributes `0`, and each `cons` adds one to the
+itself (Sections 4–5): `nil` contributes `0`, and each `cons` adds one to the
 length of the shorter path it extends. The proof of `append_length`
 mirrors `Path.append`'s own recursion case for case, exactly as the
 project asked, but with one genuine surprise if `rfl` is tried first in
@@ -153,7 +153,7 @@ under `#eval` — that is why the three checks above work directly. But the
 definitions being unfolded and nothing else, so it plays the same explicit
 role a `rw` would if these equations were reachable that way — it is not
 standing in for an unknown pile of simp lemmas, only for the two named
-here. This is the same kind of real, verified obstacle Chapter 6 §4's
+here. This is the same kind of real, verified obstacle Chapter 6, Section 4's
 `Perm3.ext` ran into with core Lean's lack of a `structure`
 extensionality lemma, now met again with indexed recursion instead.
 

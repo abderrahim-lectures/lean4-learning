@@ -72,7 +72,7 @@ forming `A → B` when `A : Type i` and `B : Type j` produces a term of type
 level higher to safely contain "the collection of all functions out of `A`".
 Concretely here, `A := Type` (living in `Type 1`, since `Type : Type 1`)
 and `B := Type` again, so `Type → Type` itself lands in `Type 1`.
-[Chapter 5 §3](03-typing-rules-and-safety.md) states this rule precisely
+[Chapter 5, Section 3](03-typing-rules-and-safety.md) states this rule precisely
 as one line of the calculus of constructions. The short version
 is that `Group` is not even a candidate carrier type for its own
 construction. It sits one universe level too high, exactly because it is a
@@ -92,7 +92,7 @@ throughout, exactly because they must accommodate constructions (such as
 "the group of automorphisms of a large category") that genuinely do not fit
 in `Type 0`.
 
-> Read more: [Chapter 5 §3](03-typing-rules-and-safety.md) states the
+> Read more: [Chapter 5, Section 3](03-typing-rules-and-safety.md) states the
 > universe-formation rules precisely, as part of the calculus of
 > constructions. Externally, the "Dependent Type Theory" chapter of
 > the *Theorem Proving in Lean 4* manual ([TPIL4]) covers universes at a

@@ -63,7 +63,7 @@ Both sides agree on every input, exactly what \texttt{inv\_\allowbreak{}op}'s pr
 example {G : Type*} [Group G] (a b : G) : (a * b)(*${}^-$*)(*\textsuperscript{1}*) = b(*${}^-$*)(*\textsuperscript{1}*) * a(*${}^-$*)(*\textsuperscript{1}*) := mul_inv_rev a b
 \end{lstlisting}
 
-And the same payoff Chapter 7 draws out concretely for \texttt{perm3Group} applies here too, against Mathlib's own \(S_3\) from Chapter 6 §4. There is no new proof, only an application of \texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} at \texttt{Equiv.Perm (Fin 3)}:
+And the same payoff Chapter 7 draws out concretely for \texttt{perm3Group} applies here too, against Mathlib's own \(S_3\) from Chapter 6, Section 4. There is no new proof, only an application of \texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} at \texttt{Equiv.Perm (Fin 3)}:
 
 \begin{lstlisting}
 example : (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) = cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*) :=

@@ -14,9 +14,9 @@ Formal definitions cited in this section, gathered here for quick reference (ful
   \textbf{Universe-formation rule.} This book's working statement, after the calculus of constructions (\cite{CoquandHuet1988}): \(\mathtt{Type}\,i : \mathtt{Type}\,(i+1)\), and a Π-type built from \(A : \mathtt{Type}\,i\), \(B : \mathtt{Type}\,j\) lands in \(\mathtt{Type}\,(\max(i,j))\).
 \end{itemize}
 
-Chapters 1--4 have relied on Lean's type checking constantly without ever seeing its rules written down. This section makes two things precise: the actual rules Lean's kernel checks a term against (using a small, representative fragment, the \textbf{simply typed λ-calculus}, STLC), and the specific rule governing the universe hierarchy §2 just introduced informally.
+Chapters 1--4 have relied on Lean's type checking constantly without ever seeing its rules written down. This section makes two things precise: the actual rules Lean's kernel checks a term against (using a small, representative fragment, the \textbf{simply typed λ-calculus}, STLC), and the specific rule governing the universe hierarchy Section 2 just introduced informally.
 
-An untyped calculus has a serious defect: it permits terms that reduce forever (Chapter 1 §4 mentioned β-reduction; nothing there stopped a term from β-reducing to itself, endlessly), and nothing prevents applying one kind of value where a completely different kind was intended. STLC fixes this by attaching a \textbf{type} to every term and requiring application to respect types --- the direct ancestor of Chapter 1's ``every expression has a type.''
+An untyped calculus has a serious defect: it permits terms that reduce forever (Chapter 1, Section 4 mentioned β-reduction; nothing there stopped a term from β-reducing to itself, endlessly), and nothing prevents applying one kind of value where a completely different kind was intended. STLC fixes this by attaching a \textbf{type} to every term and requiring application to respect types --- the direct ancestor of Chapter 1's ``every expression has a type.''
 
 \subsection{Types}\label{sec:05-rigor-check:03-typing-rules-and-safety:3}
 
@@ -24,7 +24,7 @@ An untyped calculus has a serious defect: it permits terms that reduce forever (
 \tau ::= \iota \;\mid\; \tau \to \tau
 \]
 
-where \(\iota\) ranges over some fixed collection of \textbf{base types} (think \texttt{Nat}, \texttt{Bool}) and \(\tau_1 \to \tau_2\) is the type of functions from \(\tau_1\) to \(\tau_2\) --- exactly Lean's \texttt{→}. Every type is built from base types and arrows. There is not yet any way to quantify over \emph{all} types the way Chapter 1's \texttt{identity \{α : Type\} (x : α) : α := x} did --- that extra generality is exactly Chapter 1 §5's Π-types, already covered.
+where \(\iota\) ranges over some fixed collection of \textbf{base types} (think \texttt{Nat}, \texttt{Bool}) and \(\tau_1 \to \tau_2\) is the type of functions from \(\tau_1\) to \(\tau_2\) --- exactly Lean's \texttt{→}. Every type is built from base types and arrows. There is not yet any way to quantify over \emph{all} types the way Chapter 1's \texttt{identity \{α : Type\} (x : α) : α := x} did --- that extra generality is exactly Chapter 1, Section 5's Π-types, already covered.
 
 \begin{progcorner}
 
@@ -83,7 +83,7 @@ Two theorems about STLC are the entire reason to bother with a type system at al
 \item
   \textbf{Progress}: a well-typed closed term (no free variables) is either already a \textbf{value} --- an abstraction, or (if base types come with their own constants, as \texttt{Nat}/\texttt{Bool} effectively do) a constant of a base type --- or it can take a β-reduction step. It never ``gets stuck'' partway through evaluation. There is no well-typed analogue of ``apply \texttt{3} to \texttt{true},'' because (App)'s side condition would already have rejected such a term at elaboration time, before any reduction is attempted.
 \item
-  \textbf{Preservation} (subject reduction): if \(\Gamma \vdash t : \tau\) and \(t \longrightarrow_\beta t'\), then \(\Gamma \vdash t' : \tau\). Reduction never changes a term's type. This is \emph{exactly} why this chapter's own definitional equality (§4, next) is trustworthy: reducing a term to normal form (what \texttt{\#eval}/\texttt{rfl} do) can never accidentally produce something of a different type than the one it started with.
+  \textbf{Preservation} (subject reduction): if \(\Gamma \vdash t : \tau\) and \(t \longrightarrow_\beta t'\), then \(\Gamma \vdash t' : \tau\). Reduction never changes a term's type. This is \emph{exactly} why this chapter's own definitional equality (Section 4, next) is trustworthy: reducing a term to normal form (what \texttt{\#eval}/\texttt{rfl} do) can never accidentally produce something of a different type than the one it started with.
 \end{itemize}
 
 Together, progress and preservation are the formal content of ``well-typed programs do not go wrong,'' and, viewed through Curry--Howard (Chapter 3), ``well-typed proof terms do not prove something other than what they claim to prove.'' The entire reliability of Lean as a proof assistant rests on an extended version of exactly these two theorems, proved once for Lean's kernel and then trusted for every proof checked thereafter.
@@ -111,12 +111,12 @@ identity("hello")  # T := str
 
 Without \texttt{TypeVar}, the only option would be writing \texttt{identity\_\allowbreak{}int(x: int) -\allowbreak{}> int} and \texttt{identity\_\allowbreak{}str(x: str) -\allowbreak{}> str} separately --- exactly STLC's one-arrow-type-per-base-type wall. \texttt{TypeVar} is Python typing's escape hatch for this specific gap, and it is a useful anchor: a much lighter version of the same extra generality Lean's \texttt{identity \{α : Type\} (x : α) : α := x} uses, where \texttt{α} is filled in silently every call, the same way \texttt{mypy} silently solves \texttt{T := int} above.
 
-This is precisely the gap \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter 1 §5} already closed: \textbf{dependent types} let a type itself depend on a term (here, the type argument \texttt{α}). That is exactly the extra generality \texttt{identity \{α : Type\} (x : α) : α := x} uses, and it is unavailable in STLC (or in Python's \texttt{TypeVar}, which is real but considerably less powerful --- it cannot let a \emph{return type} depend on an ordinary \emph{value} argument the way Chapter 1 §3's \texttt{Vec.replicate} does).
+This is precisely the gap \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter 1, Section 5} already closed: \textbf{dependent types} let a type itself depend on a term (here, the type argument \texttt{α}). That is exactly the extra generality \texttt{identity \{α : Type\} (x : α) : α := x} uses, and it is unavailable in STLC (or in Python's \texttt{TypeVar}, which is real but considerably less powerful --- it cannot let a \emph{return type} depend on an ordinary \emph{value} argument the way Chapter 1, Section 3's \texttt{Vec.replicate} does).
 
 \subsection{Universes, as a typing rule}\label{sec:05-rigor-check:03-typing-rules-and-safety:7}
 
-§2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 :
-\mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions --- the formal system CoC/CIC that Chapter 1 §5 named, extending STLC above with Π-types and universes --- this is stated as a typing rule for the universes themselves:
+Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 :
+\mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions --- the formal system CoC/CIC that Chapter 1, Section 5 named, extending STLC above with Π-types and universes --- this is stated as a typing rule for the universes themselves:
 
 \[
 \dfrac{}{\mathtt{Type}\,i : \mathtt{Type}\,(i+1)}
@@ -129,7 +129,7 @@ together with a rule saying Π-types (function types, including ordinary \texttt
       {\Gamma \vdash \big(\textstyle\prod_{x:A} B\big) : \mathtt{Type}\,(\max(i,j))}
 \]
 
-This is exactly §2's \texttt{Group : Type → Type} computation spelled out as a general rule: with \(A = \mathtt{Type}\) (itself living in \texttt{Type 1}) and \(B = \mathtt{Type}\) again, the rule gives \(\max(1, 1) = 1\), so \texttt{Type → Type} lands in \texttt{Type 1}, one level above \texttt{Type} itself.
+This is exactly Section 2's \texttt{Group : Type → Type} computation spelled out as a general rule: with \(A = \mathtt{Type}\) (itself living in \texttt{Type 1}) and \(B = \mathtt{Type}\) again, the rule gives \(\max(1, 1) = 1\), so \texttt{Type → Type} lands in \texttt{Type 1}, one level above \texttt{Type} itself.
 
 \begin{progcorner}
 
@@ -163,7 +163,7 @@ Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal d
 \item
   Coquand and Huet (\cite{CoquandHuet1988}) --- the original paper defining CoC, whose universe-formation rule is stated above.
 \item
-  Girard --- \textbf{Correction:} see the note in \hyperref[sec:05-rigor-check:02-universes:1]{§2's References} --- ``Girard's paradox'' (the inconsistency of \texttt{Type : Type}) is due to Girard's 1972 thesis, not the 1971 paper cited as \cite{Girard1971} elsewhere in this book.
+  Girard --- \textbf{Correction:} see the note in \hyperref[sec:05-rigor-check:02-universes:1]{Section 2's References} --- ``Girard's paradox'' (the inconsistency of \texttt{Type : Type}) is due to Girard's 1972 thesis, not the 1971 paper cited as \cite{Girard1971} elsewhere in this book.
 \item
   \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §2.2 ``Types as objects'' --- Lean's own documentation on universes, matching the presentation here.
 \end{itemize}
