@@ -94,7 +94,7 @@ of the space of raw data.
 > smaller classes (`Mul`, `One`, `Inv`, `Monoid`, ...) instead of listing
 > all axioms in one place. See [Chapter 13](../13-next-steps/02-moving-to-mathlib.md)
 > for the bridge between the two styles, and
-> [Chapter 5 §1](../05-rigor-check/01-structure-vs-class.md) for why this
+> [Chapter 5, Section 1](../05-rigor-check/01-structure-vs-class.md) for why this
 > book delays that mechanism.
 
 ---

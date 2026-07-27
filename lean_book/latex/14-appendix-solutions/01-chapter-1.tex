@@ -27,7 +27,7 @@ def Vec.toList : Vec (*$\alpha$*) n (*$\rightarrow$*) List (*$\alpha$*)
 def anotherSigma : (*$\Sigma$*) n : Nat, Fin n := (*$\langle$*)5, (*$\langle$*)0, by decide(*$\rangle$*)(*$\rangle$*)
 \end{lstlisting}
 
-(\texttt{0 : Fin 5} is valid since \(0 < 5\); any pair \texttt{⟨k, ⟨i, h⟩⟩} with \texttt{i < k} works.) \texttt{Σ n : Nat, n > 0} fails to type-check because \texttt{n > 0 : Prop} (\texttt{Sort 0}), while Lean's \texttt{Sigma} is declared as \texttt{structure Sigma \{α : Type u\} (β : α → Type v)} --- the second component's \emph{family} must land in some \texttt{Type v} (\texttt{Sort (v+1)} for \texttt{v ≥ 0}), which \texttt{Prop} (\texttt{Sort 0}) is not. \texttt{Fin n : Type} clears that bar; \texttt{n > 0 : Prop} does not. This is exactly why \texttt{∃} exists as \texttt{Sigma}'s \texttt{Prop}-restricted cousin (Chapter 1 §5) rather than everyone just writing \texttt{Σ} everywhere.
+(\texttt{0 : Fin 5} is valid since \(0 < 5\); any pair \texttt{⟨k, ⟨i, h⟩⟩} with \texttt{i < k} works.) \texttt{Σ n : Nat, n > 0} fails to type-check because \texttt{n > 0 : Prop} (\texttt{Sort 0}), while Lean's \texttt{Sigma} is declared as \texttt{structure Sigma \{α : Type u\} (β : α → Type v)} --- the second component's \emph{family} must land in some \texttt{Type v} (\texttt{Sort (v+1)} for \texttt{v ≥ 0}), which \texttt{Prop} (\texttt{Sort 0}) is not. \texttt{Fin n : Type} clears that bar; \texttt{n > 0 : Prop} does not. This is exactly why \texttt{∃} exists as \texttt{Sigma}'s \texttt{Prop}-restricted cousin (Chapter 1, Section 5) rather than everyone just writing \texttt{Σ} everywhere.
 
 \textbf{4. \texttt{Path.append}'s signature as nested Π-types}
 
@@ -51,4 +51,4 @@ Level & \(A\) & \(B(\cdot)\) & Dependent? \\
 \end{tabular}}
 
 
-The first three levels are genuinely dependent Π-types: each \(B\) mentions the vertex just bound, since it appears as an index into \texttt{Path} later in the signature. The last two levels are Π-types that happen to collapse to ordinary arrows: once \(u, v, w\) are fixed, \texttt{Path Q u w}'s \emph{type} no longer depends on the specific \emph{proof term} \texttt{p} or \texttt{q} supplied, only on the vertices already bound --- exactly the ``\(B(x)\) not depending on \(x\)'' collapse case from Chapter 1 §3/§5.
+The first three levels are genuinely dependent Π-types: each \(B\) mentions the vertex just bound, since it appears as an index into \texttt{Path} later in the signature. The last two levels are Π-types that happen to collapse to ordinary arrows: once \(u, v, w\) are fixed, \texttt{Path Q u w}'s \emph{type} no longer depends on the specific \emph{proof term} \texttt{p} or \texttt{q} supplied, only on the vertices already bound --- exactly the ``\(B(x)\) not depending on \(x\)'' collapse case from Chapter 1, Sections 3/5.

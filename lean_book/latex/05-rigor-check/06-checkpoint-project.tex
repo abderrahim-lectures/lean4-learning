@@ -15,7 +15,7 @@ Part I is now complete: terms and types, structures, propositions and proofs, ta
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Define \texttt{structure Monoid (M : Type) where} with fields \texttt{op}, \texttt{id}, and proof obligations \texttt{assoc}, \texttt{id\_\allowbreak{}left}, \texttt{id\_\allowbreak{}right} --- exactly \texttt{Group}'s fields (Chapter 6 §2), minus \texttt{inv}/\texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right}.
+  Define \texttt{structure Monoid (M : Type) where} with fields \texttt{op}, \texttt{id}, and proof obligations \texttt{assoc}, \texttt{id\_\allowbreak{}left}, \texttt{id\_\allowbreak{}right} --- exactly \texttt{Group}'s fields (Chapter 6, Section 2), minus \texttt{inv}/\texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right}.
 \item
   Build at least one concrete instance. Two natural choices, both reusing facts already available from core Lean: \texttt{List α} under \texttt{++}/\texttt{[]}, or \texttt{Nat} under \texttt{*}/\texttt{1}.
 \item
@@ -50,7 +50,7 @@ theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
 
 -- Applying the generic theorem to the concrete instance costs nothing
 -- beyond naming it (*\textemdash{}*) the same "prove once, use everywhere" payoff
--- Chapter 6 (*\S*)6 promises for Group, delivered here one chapter early.
+-- Chapter 6, Section 6 promises for Group, delivered here one chapter early.
 #check monoid_id_unique (listMonoid Nat) [] (fun a => List.nil_append a)
 \end{lstlisting}
 

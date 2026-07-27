@@ -41,13 +41,13 @@ reference (full citations in the [Bibliography](../bibliography.md)):
 
 ---
 
-§3 built Π-types concretely, from `Fin n` and `Vec.replicate`, up to the
+Section 3 built Π-types concretely, from `Fin n` and `Vec.replicate`, up to the
 general pattern $\prod_{x:A} B(x)$. This section adds the second half of
 the picture — **Σ-types**, the dependent pair dual to Π — and then zooms
 out to name the whole formal system these pieces belong to: the
 **calculus of constructions** (CoC), the core type theory underlying Lean.
 (Universes get their *own* formal typing rule in
-[Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md), once
+[Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md), once
 Chapter 5 has built up the informal picture of `Type`/`Type 1` those rules
 formalize — nothing here depends on having read that yet.)
 
@@ -58,7 +58,7 @@ $$
 $$
 
 — "a function that, given $x : A$, returns a term of type $B(x)$, a type
-allowed to mention $x$." §3's `Vec.replicate`, with type `(n : Nat) → Vec α
+allowed to mention $x$." Section 3's `Vec.replicate`, with type `(n : Nat) → Vec α
 n`, literally *is* $\prod_{n:\mathtt{Nat}} \mathrm{Vec}\,\alpha\,n$; Lean's
 surface syntax `(x : A) → B x` **is** $\prod_{x:A} B(x)$, and `∀` is the
 same construct specialized to `B : A → Prop`. Every `∀ n : Nat, P n` since
@@ -125,8 +125,8 @@ component's type is allowed to depend on the *first* component's *value*.
 Σ and the product — it names the more fundamental view underneath both.
 $\sum_{x:A} B(x)$ is, categorically, a disjoint union (coproduct) of the
 family $B$ *indexed by* $A$: one tagged copy of $B(x)$ for every $x \in A$,
-glued together as separate parts that never overlap. [Chapter 3
-§1](../03-propositions-and-proofs/01-prop.md)'s Curry–Howard table already
+glued together as separate parts that never overlap. [Chapter 3,
+Section 1](../03-propositions-and-proofs/01-prop.md)'s Curry–Howard table already
 lists `∧` as a **product type** and `∨` as a **sum (coproduct) type**,
 side by side with `∃` as a **Σ-type** — as though all three were unrelated
 rows. They are not: `∧` and `∨` are both shadows of this one Σ-type
@@ -155,7 +155,7 @@ collapses to the ordinary function type $A \to B$ (an exponential, $B^A$)
 rather than to $A \times B$ — which is also why Π is never confused with
 `×` the way Σ is with `∨`, and no equivalent puzzle arises on that side.
 
-This shape has already appeared, without the name: §3's `Fin n` is, under
+This shape has already appeared, without the name: Section 3's `Fin n` is, under
 the hood, exactly this pair —
 
 ```lean
@@ -242,7 +242,7 @@ readings, and special cases for direct comparison:
 | Lean surface syntax | `(x : A) → B x` | `Σ x : A, B x`, built with `⟨_, _⟩` |
 | Logic special case ($B : A \to \mathrm{Prop}$) | `∀ x, P x` | `∃ x, P x` |
 | Witness/value extraction | always — applying a Π-typed function to an argument is ordinary evaluation | allowed for `Sigma` (`Type`-valued: `.fst`/`.snd`); **not** allowed for `Exists` (`Prop`-valued — proof irrelevance forbids it) |
-| First example this book gave | `Vec.replicate : (n : Nat) → Vec α n` (§3 above) | `Fin n`'s own fields, `val : Nat` paired with `isLt : val < n` (above) |
+| First example this book gave | `Vec.replicate : (n : Nat) → Vec α n` (Section 3 above) | `Fin n`'s own fields, `val : Nat` paired with `isLt : val < n` (above) |
 
 The one asymmetry worth remembering from the row above: Π's logic
 special case (`∀`) and Σ's (`∃`) both extract cleanly as *propositions*,
@@ -254,7 +254,7 @@ not simply mirror images of each other.
 
 ### Recursors and eliminators, named
 
-[§4](04-terminology.md) promised a formal treatment of the **recursor**
+[Section 4](04-terminology.md) promised a formal treatment of the **recursor**
 (also called an **eliminator**) once Π/Σ-types were available; here it is.
 For an inductive type like `Nat`, with constructors `zero : Nat` and
 `succ : Nat → Nat`, the **recursor** `Nat.rec` is the single term that
@@ -270,7 +270,7 @@ constructor" precise:
 ```
 
 Read `Nat.rec`'s own type as a Π-type over a **motive**
-`motive : Nat → Sort u` (§4's "motive," spelled out in full): supply a
+`motive : Nat → Sort u` (Section 4's "motive," spelled out in full): supply a
 "zero case" (a term of `motive Nat.zero`), a "succ case" (a function
 turning a value/proof for `n` into one for `n.succ`), and `Nat.rec`
 produces a term of `motive t` for *any* `t : Nat`. This is structural
@@ -283,7 +283,7 @@ An **eliminator** is the general name for this same pattern applied to
 *any* inductive type: the single term that "uses" a value of that type by
 case-splitting on which constructor built it, with a motive tracking what
 is being proved or built in each case. `Nat.rec` above is `Nat`'s
-eliminator; [Chapter 3 §5](../03-propositions-and-proofs/05-and-or-not.md)'s
+eliminator; [Chapter 3, Section 5](../03-propositions-and-proofs/05-and-or-not.md)'s
 `Or.elim {P Q R : Prop} (h : P ∨ Q) (hpr : P →
 R) (hqr : Q → R) : R` is `Or`'s — a case for `Or.inl` and a case for
 `Or.inr`, with the (non-dependent, here) motive fixed to the constant type
@@ -300,12 +300,12 @@ abstraction, and function application, plus:
 
 1. an infinite hierarchy of type universes $\mathtt{Type}\,0,
    \mathtt{Type}\,1, \ldots$, formalized in
-   [Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md),
+   [Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md),
 2. Π-types generalizing $\to$, allowing types to depend on terms (this
-   chapter's §3 and the top of this page),
+   chapter's Section 3 and the top of this page),
 3. (in Lean's specific extension, the **Calculus of Inductive
    Constructions**, CIC) `inductive` type declarations — `Nat`, `Bool`,
-   `Vec`/`Fin` (§3), `Path` (Chapter 11), and every `structure` written
+   `Vec`/`Fin` (Section 3), `Path` (Chapter 11), and every `structure` written
    throughout — giving Σ-types and much more (arbitrary recursive data)
    beyond what bare CoC provides,
 4. `Prop` as a distinguished, proof-irrelevant universe (Chapter 3, and
@@ -317,7 +317,7 @@ Every single Lean construct used in this book — `def`, `structure`,
 a time, without the terms being written by hand) — compiles down to a
 term in exactly this system, checked by Lean's kernel using nothing more
 than typing rules like the ones sketched here and in Chapter 5, applied
-mechanically. [Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md)
+mechanically. [Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md)
 completes the picture with the simply typed λ-calculus's typing judgments
 and its progress/preservation theorems — the formal reason "well-typed
 proofs do not go wrong" — plus the universe-formation rule only sketched

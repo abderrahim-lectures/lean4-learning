@@ -74,7 +74,7 @@ found automatically by [`inferInstance`](https://loogle.lean-lang.org/?q=inferIn
 are generic lemmas about *any* `AddCommGroup`, so they read somewhat
 differently from `Int.add_assoc`: they apply equally well to Chapter 6's
 `perm3Group`-style examples once those are phrased in Mathlib's
-`Group`/`AddCommGroup` classes (Chapter 6 §4 does exactly that next).
+`Group`/`AddCommGroup` classes (Chapter 6, Section 4 does exactly that next).
 
 ---
 

@@ -60,7 +60,7 @@ One more fact worth having, since it explains why this book never worries about 
 This is a companion fact, relied on silently whenever this book (or the reader) writes \texttt{⟨x.fst, x.snd⟩ = x} or splits a goal about a \texttt{structure}-typed equality into one goal per field. Lean's kernel treats a term \texttt{x : S} (for \texttt{S} a \texttt{structure}) as \textbf{definitionally equal} to \texttt{S.mk x.field1 x.field2 ...}. Rebuilding \texttt{x} field-by-field gives back \emph{the same term}, by η (eta) for structures, not just a term that is provably equal to it. This is exactly what makes Chapter 8's \texttt{Mat2.mk.injEq}-based extensionality reasoning work, and Chapter 10's \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{congr 1}}, which splits a \texttt{DirectSum.mk \_\allowbreak{} \_\allowbreak{} = DirectSum.mk \_\allowbreak{} \_\allowbreak{}} goal into two field-wise goals. Both depend on Lean already knowing, definitionally, that every term of a structure type \emph{is} (eta-equal to) its constructor applied to its own fields.
 
 \begin{quote}
-Read more: TPiL's chapter on structures discusses eta for structures directly; the ``Why bundle proofs with data at all?'' discussion in \hyperref[sec:06-groups:06-why-bundle:1]{Chapter 6 §6} is the payoff this definitional transparency is building toward.
+Read more: TPiL's chapter on structures discusses eta for structures directly; the ``Why bundle proofs with data at all?'' discussion in \hyperref[sec:06-groups:06-why-bundle:1]{Chapter 6, Section 6} is the payoff this definitional transparency is building toward.
 \end{quote}
 
 \subsection{References}\label{sec:05-rigor-check:04-defeq-vs-propeq:8}

@@ -8,13 +8,13 @@
 
 1. *Every group, ring, module, and path algebra in this book was built by
    hand, field by field. Having now seen Mathlib's `class`-based versions
-   in §2, was the from-scratch work wasted effort, now that a library
+   in Section 2, was the from-scratch work wasted effort, now that a library
    does it automatically?* No — Mathlib automates exactly the parts that
    are safe to automate *once the underlying data is already understood*.
-   Nothing in §2 replaces knowing what a `Group` axiom actually demands;
+   Nothing in Section 2 replaces knowing what a `Group` axiom actually demands;
    it only removes the bookkeeping of re-deriving that knowledge every
    time a new carrier type shows up.
-2. *Of the five projects sketched in §3, which one sounds least
+2. *Of the five projects sketched in Section 3, which one sounds least
    comfortable to attempt right now — and is that discomfort a reason to
    avoid it, or a reason to pick it?* This book has no answer to give
    here; noticing which gap feels least settled is itself the most

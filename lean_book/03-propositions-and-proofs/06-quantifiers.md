@@ -24,9 +24,9 @@ theorem exists_even : ∃ n : Nat, n % 2 = 0 :=
 
 **Reading the shortcut `⟨2, rfl⟩`.** This is the same "here are the pieces,
 in order" anonymous-constructor shorthand from
-[Chapter 2 §1](../02-functions-and-structures/01-structure-basics.md).
+[Chapter 2, Section 1](../02-functions-and-structures/01-structure-basics.md).
 It was already reused for `∧`
-([Chapter 3 §5](05-and-or-not.md)'s `⟨hp, hq⟩`), and here it builds an
+([Chapter 3, Section 5](05-and-or-not.md)'s `⟨hp, hq⟩`), and here it builds an
 `∃`-proof in one line instead of two. The pattern to remember: **first
 the number, then why it works.**
 
@@ -36,8 +36,8 @@ the number, then why it works.**
 - [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) is the **proof**, filling in for `P 2`, i.e. for `2 % 2 = 0`. It
   works by `rfl` alone (no lemma needed) because `2 % 2` simply *computes*
   to `0` — both sides of the equation are already the same term once
-  evaluated, exactly like `2 + 2 = 4` back in [Chapter 3
-  §1](01-prop.md).
+  evaluated, exactly like `2 + 2 = 4` back in [Chapter 3,
+  Section 1](01-prop.md).
 
 So `⟨2, rfl⟩ : ∃ n : Nat, n % 2 = 0` reads as "2 works, and here is why: it
 just computes." Wherever `⟨w, p⟩` proves an `∃`-statement
@@ -69,7 +69,7 @@ why" shape as before, but with two differences worth noting:
   (`5 > 3`, and `5` is prime), all packed into the outer `⟨_, _⟩`.
 - The proof is not `rfl`. `p > 3 ∧ isPrime p` does not reduce to a plain
   equality, so instead the second slot is by [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) — the same
-  brute-force tactic from [Chapter 3 §5](05-and-or-not.md)'s
+  brute-force tactic from [Chapter 3, Section 5](05-and-or-not.md)'s
   `not_example`, which here checks `5 > 3` outright and tries every
   candidate divisor below `5` to confirm none of them divide it.
 

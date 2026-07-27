@@ -37,7 +37,7 @@ directly:
 #check (add_assoc : ∀ a b c : Int, (a + b) + c = a + (b + c))
 ```
 
-This is the same contrast as §3: the book's `intGroup.op`/`.id`/`.inv` are
+This is the same contrast as Section 3: the book's `intGroup.op`/`.id`/`.inv` are
 projections out of a bundle built by hand, while Mathlib's `+`/`0`/
 `-` are notation that the typeclass system has already wired to the right
 instance. The underlying "which `AddCommGroup` instance is

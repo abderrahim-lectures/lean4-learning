@@ -25,7 +25,7 @@ throughout the main text and code.
 | Function type / implication | $A \to B$ | `A → B` | Chapter 1 |
 | Universal quantifier ("for all") | $\forall x, P\, x$ | `∀ x, P x` | Chapter 3 |
 | Existential quantifier ("there exists") | $\exists x, P\, x$ | `∃ x, P x` | Chapter 3 |
-| Unique existence ("there exists a unique") | $\exists!\, x, P\, x$ | no single token — witnessed by supplying the value and a proof it is the only one | Chapter 1 §4 |
+| Unique existence ("there exists a unique") | $\exists!\, x, P\, x$ | no single token — witnessed by supplying the value and a proof it is the only one | Chapter 1, Section 4 |
 | Set/type membership | $x \in A$ | `x ∈ A` | Chapter 1 |
 | Negation | $\neg P$ | `¬P` | Chapter 3 |
 | Conjunction ("and") | $P \wedge Q$ | `P ∧ Q` (`And`) | Chapter 3 |
@@ -37,9 +37,9 @@ throughout the main text and code.
 
 | Meaning | Math notation | Lean syntax | First appears |
 | --- | --- | --- | --- |
-| Definitional equality | $t \equiv t'$ | `rfl` closes the goal | Chapter 5 §4 |
+| Definitional equality | $t \equiv t'$ | `rfl` closes the goal | Chapter 5, Section 4 |
 | Isomorphism / equivalence | $A \simeq B$ | `A ≃ B` (`Equiv`) | Chapter 10 |
-| Anonymous-constructor pairing | $\langle a, b \rangle$ | `⟨a, b⟩` | Chapter 2 §1 |
+| Anonymous-constructor pairing | $\langle a, b \rangle$ | `⟨a, b⟩` | Chapter 2, Section 1 |
 | Function composition | $g \circ f$ | `g ∘ f` | Chapter 1 |
 | Scalar/group action, or a generic infix operation | $a \cdot b$ | `a • b` (`SMul`) | Chapter 10 |
 | Inverse | $a^{-1}$ | `a⁻¹` | Chapter 6 |
@@ -47,8 +47,8 @@ throughout the main text and code.
 | Divisibility | $a \mid b$ | `a ∣ b` | Chapter 9 |
 | Subset | $A \subseteq B$ | `A ⊆ B` | Chapter 10 |
 | Cartesian product | $A \times B$ | `A × B` | Chapter 1 |
-| Long/derivation arrow (diagrams) | $A \longrightarrow B$ | `⟶` (diagram labels only, not ordinary code) | Chapter 1 §4 |
-| Projections out of a product | $\pi_X, \pi_Y$ | `.1`/`.2`, or `.fst`/`.snd` | Chapter 1 §4 |
+| Long/derivation arrow (diagrams) | $A \longrightarrow B$ | `⟶` (diagram labels only, not ordinary code) | Chapter 1, Section 4 |
+| Projections out of a product | $\pi_X, \pi_Y$ | `.1`/`.2`, or `.fst`/`.snd` | Chapter 1, Section 4 |
 
 ---
 

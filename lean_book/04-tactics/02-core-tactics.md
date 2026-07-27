@@ -68,10 +68,10 @@ makes the old and new goals equivalent.
 > Read more: "deduction theorem" and "$\lambda$-abstraction rule" are two
 > names for the same rule. "Deduction theorem" names the $\Rightarrow$-intro
 > rule from natural deduction, stated in
-> [Chapter 3 §2](../03-propositions-and-proofs/02-logic-recap.md).
+> [Chapter 3, Section 2](../03-propositions-and-proofs/02-logic-recap.md).
 > "$\lambda$-abstraction rule" names that same rule's Curry–Howard reading
 > as a Lean `fun`, part of the typed $\lambda$-calculus formalized in
-> [Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md).
+> [Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md).
 
 ---
 

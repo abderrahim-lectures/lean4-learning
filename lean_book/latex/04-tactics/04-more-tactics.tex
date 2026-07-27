@@ -26,12 +26,12 @@ The \texttt{·} (focus dot) lets you address each remaining goal one at a time.
 
 \begin{mathreading}
 
-\texttt{constructor} invokes the introduction rule of the goal's type (\hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3 §2}'s \(\wedge\)-intro/\(\vee\)-intro, read more below). For a product/conjunction \(P \wedge Q\) it splits the task into proving each factor separately. This reflects the \hyperref[sec:01-basics:04-terminology:1]{universal property} of the product, ``a map into \(P \times Q\) is a pair of maps,'' so proving \(P\) and proving \(Q\) is enough. More generally, for any \texttt{structure} it reduces the goal to one subgoal per field. In a dual way, \texttt{cases} on \(h : P \vee Q\) below invokes the \emph{elimination} rule of a coproduct (\hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3 §5}'s reading of \(\vee\) as a coproduct): to prove anything from \(P \sqcup Q\) it suffices to prove it from each summand, the case analysis \(\iota_1\)/\(\iota_2\).
+\texttt{constructor} invokes the introduction rule of the goal's type (\hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3, Section 2}'s \(\wedge\)-intro/\(\vee\)-intro, read more below). For a product/conjunction \(P \wedge Q\) it splits the task into proving each factor separately. This reflects the \hyperref[sec:01-basics:04-terminology:1]{universal property} of the product, ``a map into \(P \times Q\) is a pair of maps,'' so proving \(P\) and proving \(Q\) is enough. More generally, for any \texttt{structure} it reduces the goal to one subgoal per field. In a dual way, \texttt{cases} on \(h : P \vee Q\) below invokes the \emph{elimination} rule of a coproduct (\hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3, Section 5}'s reading of \(\vee\) as a coproduct): to prove anything from \(P \sqcup Q\) it suffices to prove it from each summand, the case analysis \(\iota_1\)/\(\iota_2\).
 
 \end{mathreading}
 
 \begin{quote}
-Read more: \hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3 §2} states the introduction/elimination rules for every connective by name, if ``introduction rule''/``elimination rule'' as general terms are new.
+Read more: \hyperref[sec:03-propositions-and-proofs:02-logic-recap:1]{Chapter 3, Section 2} states the introduction/elimination rules for every connective by name, if ``introduction rule''/``elimination rule'' as general terms are new.
 \end{quote}
 
 \subsection{\texorpdfstring{\texttt{cases}: case-split on an inductive value or hypothesis}{cases: case-split on an inductive value or hypothesis}}\label{sec:04-tactics:04-more-tactics:4}

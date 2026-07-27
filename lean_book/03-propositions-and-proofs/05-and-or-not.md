@@ -20,7 +20,7 @@ theorem and_comm_term {P Q : Prop} (h : P ∧ Q) : Q ∧ P :=
 - `∧` (And) is a structure with two fields `left` and `right`. `⟨hp, hq⟩`
   is the same "here are the pieces, in order" anonymous-constructor
   shorthand from
-  [Chapter 2 §1](../02-functions-and-structures/01-structure-basics.md).
+  [Chapter 2, Section 1](../02-functions-and-structures/01-structure-basics.md).
   Since the goal is `P ∧ Q`, Lean infers that
   `⟨hp, hq⟩` must mean "build the `And` from a proof of `P` and a proof of
   `Q`," in that order, with no need to spell out `And.intro hp hq`.
@@ -40,7 +40,7 @@ theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
   is either "a proof of `P`" or "a proof of `Q`".
 - `Or.elim {P Q R : Prop} (h : P ∨ Q) (hpr : P → R) (hqr : Q → R) : R` is
   the *eliminator* for `Or` — see
-  [Chapter 1 §5](../01-basics/05-pi-sigma-and-coc.md) for what "eliminator"
+  [Chapter 1, Section 5](../01-basics/05-pi-sigma-and-coc.md) for what "eliminator"
   means formally (the general pattern `Nat.rec` illustrates for `Nat`).
   Given a proof of `P ∨ Q`, and a way to reach
   the same conclusion `R` from either disjunct separately, one obtains a proof

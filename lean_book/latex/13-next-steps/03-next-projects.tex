@@ -4,9 +4,9 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 \subsection{\texorpdfstring{1. Redo \texttt{Group}/\texttt{Ring} as type classes}{1. Redo Group/Ring as type classes}}\label{sec:13-next-steps:03-next-projects:2}
 
-\textbf{Learning objectives.} Feel directly what Chapter 13 §2 only described: the ergonomic difference between this book's plain \texttt{structure}s and Mathlib's \texttt{class}-based hierarchy, and Lean's typeclass/instance search mechanism.
+\textbf{Learning objectives.} Feel directly what Chapter 13, Section 2 only described: the ergonomic difference between this book's plain \texttt{structure}s and Mathlib's \texttt{class}-based hierarchy, and Lean's typeclass/instance search mechanism.
 
-\textbf{Prerequisites.} Chapter 5 §1 (\texttt{structure} vs \texttt{class}), Chapter 6 (\texttt{Group}), Chapter 8 (\texttt{Ring}). The Chapter 5 appendix's \texttt{MyGroup} (exercise 2) is a smaller version of the first milestone below and a good warm-up.
+\textbf{Prerequisites.} Chapter 5, Section 1 (\texttt{structure} vs \texttt{class}), Chapter 6 (\texttt{Group}), Chapter 8 (\texttt{Ring}). The Chapter 5 appendix's \texttt{MyGroup} (exercise 2) is a smaller version of the first milestone below and a good warm-up.
 
 \textbf{Milestones.}
 
@@ -37,18 +37,18 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Restrict first to a quiver with finitely many paths total --- the example quiver from Chapter 11 §3 has exactly six (\texttt{e\_\allowbreak{}0, e\_\allowbreak{}1, e\_\allowbreak{}2, alpha, beta, beta∘alpha}) --- so ``finitely supported'' can start as a plain function on a finite index rather than needing Mathlib's \texttt{Finsupp}.
+  Restrict first to a quiver with finitely many paths total --- the example quiver from Chapter 11, Section 3 has exactly six (\texttt{e\_\allowbreak{}0, e\_\allowbreak{}1, e\_\allowbreak{}2, alpha, beta, beta∘alpha}) --- so ``finitely supported'' can start as a plain function on a finite index rather than needing Mathlib's \texttt{Finsupp}.
 \item
-  Define pointwise addition on this finite carrier and prove it forms a \texttt{CommGroup} (Chapter 8 §2).
+  Define pointwise addition on this finite carrier and prove it forms a \texttt{CommGroup} (Chapter 8, Section 2).
 \item
   Define multiplication by path composition, \texttt{0} on any pair whose endpoints do not match (as the chapter text describes), and prove the monoid laws (\texttt{mul\_\allowbreak{}assoc}/\texttt{one\_\allowbreak{}mul}/\texttt{mul\_\allowbreak{}one}) using the sum of trivial paths as \texttt{one}.
 \item
-  Assemble \texttt{Ring (PathAlgebraElem exampleQuiver k)} for a small, fully concrete \texttt{k} (Chapter 8 §5's \texttt{fin3Ring}, \texttt{Fin 3}, is a good first choice, since \texttt{decide} can then check the ring axioms outright).
+  Assemble \texttt{Ring (PathAlgebraElem exampleQuiver k)} for a small, fully concrete \texttt{k} (Chapter 8, Section 5's \texttt{fin3Ring}, \texttt{Fin 3}, is a good first choice, since \texttt{decide} can then check the ring axioms outright).
 \end{enumerate}
 
 \textbf{Deliverable.} A \texttt{Ring} instance on a finite path algebra for a concretely chosen \texttt{k}.
 
-\textbf{Self-verification.} \texttt{\#eval} the product of two hand-chosen path-algebra elements and check it against a hand computation of the same product; if \texttt{k} is fully decidable (as \texttt{Fin 3} is), the ring axioms can additionally be discharged by \texttt{decide} rather than by hand, the same shortcut Chapter 8 §5 took for \texttt{fin3Ring}.
+\textbf{Self-verification.} \texttt{\#eval} the product of two hand-chosen path-algebra elements and check it against a hand computation of the same product; if \texttt{k} is fully decidable (as \texttt{Fin 3} is), the ring axioms can additionally be discharged by \texttt{decide} rather than by hand, the same shortcut Chapter 8, Section 5 took for \texttt{fin3Ring}.
 
 \subsection{3. Acyclic quivers have finite-dimensional path algebras}\label{sec:13-next-steps:03-next-projects:4}
 
@@ -66,7 +66,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \item
   Prove that in an acyclic quiver with a finite vertex type, every path's \texttt{Path.length} is bounded by the number of vertices --- the idea being that a path visiting more vertices than exist must repeat one, forcing a nontrivial cycle.
 \item
-  Instantiate the bound on \texttt{exampleQuiver} (acyclic, from Chapter 11 §3) and on \texttt{cyclicQuiver} (Chapter 11 Exercise 1, which has a cycle) to see the argument apply in the first case and correctly fail to apply in the second.
+  Instantiate the bound on \texttt{exampleQuiver} (acyclic, from Chapter 11, Section 3) and on \texttt{cyclicQuiver} (Chapter 11 Exercise 1, which has a cycle) to see the argument apply in the first case and correctly fail to apply in the second.
 \item
   Conclude finite-dimensionality: an acyclic quiver on finitely many vertices has only finitely many paths (bounded length, finitely many arrows to choose at each step), hence Project 2's path algebra is a finite-dimensional \texttt{Module} over \texttt{k} in Chapter 10's sense.
 \end{enumerate}
@@ -87,7 +87,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Read \texttt{Mathlib.Combinatorics.Quiver.Basic}'s \texttt{Quiver} class (already introduced in Chapter 11 §1's ``Mathlib equivalent'' box) and \texttt{Mathlib.CategoryTheory.Quiver}'s extension of it with identities and composition, comparing field-for-field against this book's plain \texttt{Quiver}/\texttt{Path}.
+  Read \texttt{Mathlib.Combinatorics.Quiver.Basic}'s \texttt{Quiver} class (already introduced in Chapter 11, Section 1's ``Mathlib equivalent'' box) and \texttt{Mathlib.CategoryTheory.Quiver}'s extension of it with identities and composition, comparing field-for-field against this book's plain \texttt{Quiver}/\texttt{Path}.
 \item
   Find Mathlib's \texttt{Prefunctor} (a quiver homomorphism) and, separately, define a \texttt{structure QuiverHom} by hand for two of this book's own quivers (\texttt{exampleQuiver}, \texttt{cyclicQuiver} from Chapter 11's exercises), mapping vertices to vertices and arrows to paths.
 \item
@@ -100,7 +100,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 \subsection{\texorpdfstring{5. A concrete \texttt{kQ}-module}{5. A concrete kQ-module}}\label{sec:13-next-steps:03-next-projects:6}
 
-\textbf{Learning objectives.} Turn Chapter 11 §5's closing remark --- ``representations of \(Q\) are exactly \(kQ\)-modules'' --- into an actual, if small, worked example.
+\textbf{Learning objectives.} Turn Chapter 11, Section 5's closing remark --- ``representations of \(Q\) are exactly \(kQ\)-modules'' --- into an actual, if small, worked example.
 
 \textbf{Prerequisites.} Chapter 10 (\texttt{Module}), Chapter 11, and Project 2 above (at least its first two milestones: a concrete, finite path algebra to be a module \emph{over}).
 
@@ -110,7 +110,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Using the example quiver and Project 2's finite path algebra, assign a small carrier module to each vertex (e.g.~\texttt{Fin 3} under Chapter 8 §5's \texttt{fin3Ring}-flavored addition) and a linear map to each arrow, exactly the data of a quiver representation (Chapter 11 §5's remark, made concrete).
+  Using the example quiver and Project 2's finite path algebra, assign a small carrier module to each vertex (e.g.~\texttt{Fin 3} under Chapter 8, Section 5's \texttt{fin3Ring}-flavored addition) and a linear map to each arrow, exactly the data of a quiver representation (Chapter 11, Section 5's remark, made concrete).
 \item
   Package this data as a genuine `Module (PathAlgebraElem exampleQuiver
 
@@ -119,7 +119,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
   \setcounter{enumii}{10}
   \tightlist
   \item
-    (SomeCarrier)\texttt{instance (Chapter 10 §2's}Module\texttt{structure), using Project 2's}Ring\texttt{as the scalar ring}Rg`.
+    (SomeCarrier)\texttt{instance (Chapter 10, Section 2's}Module\texttt{structure), using Project 2's}Ring\texttt{as the scalar ring}Rg`.
   \end{enumerate}
 \item
   Confirm the module axioms hold by checking that the scalar action of a path-algebra element on a carrier element agrees with manually composing the linear maps assigned to that path's arrows.

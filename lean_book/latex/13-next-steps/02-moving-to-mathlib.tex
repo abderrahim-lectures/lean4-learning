@@ -22,7 +22,7 @@ The jump from this book's \texttt{structure}-based definitions to Mathlib's \tex
 
 Everything above is a promise that Mathlib is \emph{more general}. Here are two concrete payoffs --- things this book explicitly could not state, using exactly the examples already built.
 
-\textbf{\texttt{ZMod 3} is a field, not just a ring.} Chapter 8 §5 built \texttt{fin3Ring} and said in so many words that a \texttt{Field} would need every nonzero element to be invertible, ``true for \(\mathbb{Z}/3\) precisely because \(3\) is prime, but not part of \texttt{Ring}'s axioms and not checked here.'' Mathlib already has this instance, for real:
+\textbf{\texttt{ZMod 3} is a field, not just a ring.} Chapter 8, Section 5 built \texttt{fin3Ring} and said in so many words that a \texttt{Field} would need every nonzero element to be invertible, ``true for \(\mathbb{Z}/3\) precisely because \(3\) is prime, but not part of \texttt{Ring}'s axioms and not checked here.'' Mathlib already has this instance, for real:
 
 \begin{lstlisting}
 example : Field (ZMod 3) := inferInstance
@@ -32,7 +32,7 @@ example : Field (ZMod 3) := inferInstance
 example : (*$\forall$*) a : ZMod 3, a (*$\neq$*) 0 (*$\rightarrow$*) (*$\exists$*) b, a * b = 1 := by decide
 \end{lstlisting}
 
-\textbf{Lagrange's theorem, applied to the non-abelian example from Chapters 6-7.} \texttt{Equiv.Perm (Fin 3)} (Chapter 6 §4's Mathlib analogue of \texttt{perm3Group}) never had subgroups defined for it --- the book built one group, not the lattice of its subgroups. Mathlib's \texttt{Subgroup} type already comes with Lagrange's theorem attached, so applying it to a real subgroup costs nothing beyond naming the subgroup:
+\textbf{Lagrange's theorem, applied to the non-abelian example from Chapters 6-7.} \texttt{Equiv.Perm (Fin 3)} (Chapter 6, Section 4's Mathlib analogue of \texttt{perm3Group}) never had subgroups defined for it --- the book built one group, not the lattice of its subgroups. Mathlib's \texttt{Subgroup} type already comes with Lagrange's theorem attached, so applying it to a real subgroup costs nothing beyond naming the subgroup:
 
 \begin{lstlisting}
 -- Lagrange's theorem, fully generic: a subgroup's size divides the
