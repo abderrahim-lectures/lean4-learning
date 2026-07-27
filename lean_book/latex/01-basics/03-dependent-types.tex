@@ -111,7 +111,7 @@ in the application
   Vec.head Vec.nil
 \end{lstlisting}
 
-Nothing about ``index out of range'' happens at runtime, because the bad call is not a well-typed term in the first place --- the same ``ruled out before running'' guarantee from \hyperref[sec:01-basics:01-everything-has-a-type:1]{Section 1}, now enforced by an invariant (non-emptiness) that an ordinary, non-dependent type could not have expressed at all. \texttt{List α} has no way to say ``and this one is non-empty'' as part of its type; \texttt{Vec α (n+1)} says exactly that, for free, using only the machinery already on the table.
+Nothing about ``index out of range'' happens at runtime, because the bad call is not a well-typed term in the first place --- the same ``ruled out before running'' guarantee from \hyperref[sec:01-basics:01-everything-has-a-type:1]{Chapter 1, Section 1}, now enforced by an invariant (non-emptiness) that an ordinary, non-dependent type could not have expressed at all. \texttt{List α} has no way to say ``and this one is non-empty'' as part of its type; \texttt{Vec α (n+1)} says exactly that, for free, using only the machinery already on the table.
 
 \textbf{Return to the Python example from the start of this section.} Here is \texttt{dot}, rewritten for \texttt{Vec} instead of Python's \texttt{list}, with both arguments required to share the \emph{same} length \texttt{n}:
 
@@ -162,11 +162,11 @@ This is also, not by coincidence, exactly what \texttt{∀} means. \texttt{∀ n
 Chapter 11 builds a genuinely more elaborate dependent type, \texttt{Path Q : V → V → Type}, a family of types indexed by a \emph{pair} of vertices in a graph rather than by a single \texttt{Nat} --- ``the type of paths from \texttt{u} to \texttt{w},'' which differs for each choice of endpoints exactly as \texttt{Vec α n} differs for each length. Its \texttt{cons}-like constructor is a dependent function for the same reason \texttt{Vec.replicate} is one here: composing two paths is only accepted by the type-checker when their endpoints actually match, an invariant baked into the type rather than checked separately. Nothing new is needed to understand it once this section's \texttt{Fin}/\texttt{Vec} examples make sense --- it is the identical idea, with a richer index.
 
 \begin{quote}
-\textbf{Mathematical reading (optional).} For readers who already think categorically: an indexed family \texttt{B : A → Type} is exactly a functor out of the discrete category on \texttt{A} --- or, thinking of \texttt{A × A}-indexed families as in the \texttt{Path} example above, an assignment of a \(\mathrm{Hom}\)-set to every pair of objects in a category. A Π-type over such a family is a \textbf{dependent product}; a term of \(\sum_{x:A} B(x)\) (Σ-type, next covered formally in \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Section 5}) is a \textbf{dependent sum}. Both are literal categorical limits/colimits in the appropriate indexed sense, not merely named after them by analogy.
+\textbf{Mathematical reading (optional).} For readers who already think categorically: an indexed family \texttt{B : A → Type} is exactly a functor out of the discrete category on \texttt{A} --- or, thinking of \texttt{A × A}-indexed families as in the \texttt{Path} example above, an assignment of a \(\mathrm{Hom}\)-set to every pair of objects in a category. A Π-type over such a family is a \textbf{dependent product}; a term of \(\sum_{x:A} B(x)\) (Σ-type, next covered formally in \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter 1, Section 5}) is a \textbf{dependent sum}. Both are literal categorical limits/colimits in the appropriate indexed sense, not merely named after them by analogy.
 \end{quote}
 
 \begin{quote}
-Read more: \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Section 5} gives Π-types (and Σ-types) their formal typing rules, with more worked examples, rather than only the walkthrough given here.
+Read more: \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter 1, Section 5} gives Π-types (and Σ-types) their formal typing rules, with more worked examples, rather than only the walkthrough given here.
 \end{quote}
 
 \subsection{References}\label{sec:01-basics:03-dependent-types:9}

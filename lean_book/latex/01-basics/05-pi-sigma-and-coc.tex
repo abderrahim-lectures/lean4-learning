@@ -214,7 +214,7 @@ The one asymmetry worth remembering from the row above: the Π-type's logic spec
 
 \subsection{Recursors and eliminators, named}\label{sec:01-basics:05-pi-sigma-and-coc:7}
 
-\hyperref[sec:01-basics:04-terminology:1]{Section 4} promised a formal treatment of the \textbf{recursor} (also called an \textbf{eliminator}) once Π/Σ-types were available; here it is. For an inductive type like \texttt{Nat}, with constructors \texttt{zero : Nat} and \texttt{succ : Nat → Nat}, the \textbf{recursor} \texttt{Nat.rec} is the single term that makes ``define a function, or prove a statement, by giving one case per constructor'' precise:
+\hyperref[sec:01-basics:04-terminology:1]{Chapter 1, Section 4} promised a formal treatment of the \textbf{recursor} (also called an \textbf{eliminator}) once Π/Σ-types were available; here it is. For an inductive type like \texttt{Nat}, with constructors \texttt{zero : Nat} and \texttt{succ : Nat → Nat}, the \textbf{recursor} \texttt{Nat.rec} is the single term that makes ``define a function, or prove a statement, by giving one case per constructor'' precise:
 
 \begin{lstlisting}
 #check @Nat.rec
