@@ -41,13 +41,13 @@ reference (full citations in the [Bibliography](../bibliography.md)):
 
 ---
 
-§3 built Π-types concretely, from `Fin n` and `Vec.replicate`, up to the
+Section 3 built Π-types concretely, from `Fin n` and `Vec.replicate`, up to the
 general pattern $\prod_{x:A} B(x)$. This section adds the second half of
-the picture — **Σ-types**, the dependent pair dual to Π — and then zooms
+the picture — **Σ-types**, the dependent pair dual to the Π-type — and then zooms
 out to name the whole formal system these pieces belong to: the
 **calculus of constructions** (CoC), the core type theory underlying Lean.
 (Universes get their *own* formal typing rule in
-[Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md), once
+[Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md), once
 Chapter 5 has built up the informal picture of `Type`/`Type 1` those rules
 formalize — nothing here depends on having read that yet.)
 
@@ -58,11 +58,12 @@ $$
 $$
 
 — "a function that, given $x : A$, returns a term of type $B(x)$, a type
-allowed to mention $x$." §3's `Vec.replicate`, with type `(n : Nat) → Vec α
+allowed to mention $x$." Section 3's `Vec.replicate`, with type `(n : Nat) → Vec α
 n`, literally *is* $\prod_{n:\mathtt{Nat}} \mathrm{Vec}\,\alpha\,n$; Lean's
 surface syntax `(x : A) → B x` **is** $\prod_{x:A} B(x)$, and `∀` is the
-same construct specialized to `B : A → Prop`. Every `∀ n : Nat, P n` since
-Chapter 3 was already a Π-type.
+same construct specialized to `B : A → Prop`, as Chapter 3 makes precise.
+Every `∀ n : Nat, P n` written from that point on is already a Π-type in
+exactly this sense.
 
 **Programmer's corner (Python), on what is genuinely missing.** Even
 Python's `TypeVar` (its own fix for generic functions like `identity`)
@@ -105,14 +106,15 @@ lemmas — because Lean does not distinguish between different proofs of
 the same `Prop`. This is what makes Curry–Howard's slogan "propositions
 are types, proofs are terms" more than a slogan: `P : Prop` really is a
 type, `h : P` really is an ordinary term of that type built by ordinary
-$\lambda$/application/Π machinery, and the *only* difference from an
+$\lambda$/application/Π-type machinery, and the *only* difference from an
 ordinary `Type` is that Lean does not care *which* term of `P` was
 produced — only that one was produced.
 
-### Σ-types: the dependent pair, dual to Π
+### Σ-types: the dependent pair, dual to the Π-type
 
-Where Π generalizes $\to$, a **Σ-type** (dependent pair / dependent sum)
-generalizes $\times$ (the ordinary product):
+Where the Π-type generalizes the ordinary function type $\to$, a **Σ-type**
+(dependent pair / dependent sum) generalizes $\times$ (the ordinary
+product):
 
 $$
 \sum_{x:A} B(x)
@@ -122,40 +124,46 @@ a pair $\langle a, b\rangle$ with $a : A$ and $b : B(a)$ — the *second*
 component's type is allowed to depend on the *first* component's *value*.
 
 **Why "sum," if it generalizes ×?** The name is not a mismatch between
-Σ and the product — it names the more fundamental view underneath both.
+the Σ-type and the product — it names the more fundamental view underneath both.
 $\sum_{x:A} B(x)$ is, categorically, a disjoint union (coproduct) of the
 family $B$ *indexed by* $A$: one tagged copy of $B(x)$ for every $x \in A$,
-glued together as separate parts that never overlap. [Chapter 3
-§1](../03-propositions-and-proofs/01-prop.md)'s Curry–Howard table already
-lists `∧` as a **product type** and `∨` as a **sum (coproduct) type**,
+glued together as separate parts that never overlap. [Chapter 3,
+Section 1](../03-propositions-and-proofs/01-prop.md)'s Curry–Howard table will
+list `∧` as a **product type** and `∨` as a **sum (coproduct) type**,
 side by side with `∃` as a **Σ-type** — as though all three were unrelated
-rows. They are not: `∧` and `∨` are both shadows of this one Σ-type
-construction, cast along two different axes of "what is allowed to vary":
+rows. They are not: `∧` and `∨` are both special cases of this same
+Σ-type construction. Which connective you get depends on which of the
+two ingredients — the index type $A$ or the family $B$ — is held fixed
+and which is allowed to vary:
 
 - **Constant family, varying index** — if $B(x)$ is the *same* type $B$
   for every $x$, the disjoint union of $|A|$ tagged copies of $B$
   coincides with the ordinary product $A \times B$ (a value of $A$,
   tagging *which* copy, paired with a value of $B$). This is the
   "dependent pair" reading used throughout this section, and it is
-  exactly Chapter 3's `∧` (`P ∧ Q` is `Σ`-like with the index type
-  restricted to two unlabeled slots, both of type `Prop`).
+  exactly what Chapter 3's `∧` will turn out to be (`P ∧ Q` is
+  Σ-type-like with the index type restricted to two unlabeled slots,
+  both of type `Prop`).
 - **Two-point index, varying family** — if $A$ is a two-element type
   (Lean's `Bool`, or "which side" of an `Or`) and $B(\mathrm{true}) = P$,
   $B(\mathrm{false}) = Q$ for two unrelated propositions, the *same*
   construction $\sum_{x:\mathrm{Bool}} B(x)$ collapses instead to
-  $P \sqcup Q$ — the ordinary sum/coproduct type, exactly Chapter 3's
-  `P ∨ Q`, built from `Or.inl`/`Or.inr`.
+  $P \sqcup Q$ — the ordinary sum/coproduct type that Chapter 3's
+  `P ∨ Q` will turn out to be, built from `Or.inl`/`Or.inr`.
 
-Σ is called a *sum* because it always literally is one — an indexed
-disjoint union — and the product reading (`×`, and `∧` as its `Prop`
-special case) is the constant-family special case, not the general
-construction. `∀`/Π sits on the dual side of exactly the same coin:
-$\prod_{x:A} B(x)$ is an indexed *product*, which for a constant family
-collapses to the ordinary function type $A \to B$ (an exponential, $B^A$)
-rather than to $A \times B$ — which is also why Π is never confused with
-`×` the way Σ is with `∨`, and no equivalent puzzle arises on that side.
+The Σ-type is called a *sum* because it always literally is an indexed
+disjoint union. The product reading (`×`, and `∧` as its `Prop` special
+case) is just the constant-family special case of that same
+construction, not a second, unrelated thing.
 
-This shape has already appeared, without the name: §3's `Fin n` is, under
+The same split applies to the Π-type, the other way round.
+$\prod_{x:A} B(x)$ is always literally an indexed *product*. For a
+constant family, this collapses to the ordinary function type
+$A \to B$ (an exponential, written $B^A$) — not to $A \times B$. This is
+why the Π-type is never confused with `×` the way the Σ-type is with `∨`,
+and no equivalent puzzle arises on that side.
+
+This shape has already appeared, without the name: Section 3's `Fin n` is, under
 the hood, exactly this pair —
 
 ```lean
@@ -188,10 +196,11 @@ pattern that recurs throughout this book: `Group G`'s `⟨op, id, inv, assoc,
 ...⟩` is, underneath Lean's `structure` sugar, an iterated Σ-type — a
 witness `op`, paired with a witness `id`, paired with `assoc`, whose
 *type* depends on the values of `op` and `id` supplied earlier in the same
-structure. Chapter 2's "structures can bundle proofs alongside data" was
-already, silently, an appeal to Σ.
+structure. This dependent-pair shape is exactly what lets Chapter 2 say
+that structures can bundle proofs alongside data: every such structure
+is, underneath, silently an appeal to the Σ-type.
 
-**A caveat about `∃`, worth being precise about.** Chapter 3 reads
+**A caveat about `∃`, worth being precise about.** Chapter 3 will read
 `∃ x : α, P x` as "a structure: a witness value plus a proof that the
 witness satisfies `P`" — in effect a Σ-type, with `P : α → Prop` playing
 the role of `B`. Lean's actual `Exists` is, however, *not literally* the
@@ -222,13 +231,14 @@ choices of witness could produce different results from a
 (the actual, `Type`-valued dependent pair, matching a `structure`'s
 bundled data) *does* support projecting out its first component,
 precisely because it does not carry `Exists`'s irrelevance guarantee. So:
-`∃` has the same shape as Σ but lives in a universe where the witness is
-unobservable. That is what makes it a *restricted* cousin of Σ rather than
-literally Σ. The `structure`-based bundling this book uses throughout for
+`∃` has the same shape as the Σ-type but lives in a universe where the
+witness is unobservable. That is what makes it a *restricted* cousin of
+the Σ-type rather than literally the Σ-type. The `structure`-based
+bundling this book uses throughout for
 `Group`/`Ring`/`Module` genuinely is `Sigma`-like (extractable), while an
 `∃`-statement genuinely is not.
 
-### Π and Σ, side by side
+### Π-types and Σ-types, side by side
 
 Everything above in one table, gathering the two constructs' notation,
 readings, and special cases for direct comparison:
@@ -242,19 +252,20 @@ readings, and special cases for direct comparison:
 | Lean surface syntax | `(x : A) → B x` | `Σ x : A, B x`, built with `⟨_, _⟩` |
 | Logic special case ($B : A \to \mathrm{Prop}$) | `∀ x, P x` | `∃ x, P x` |
 | Witness/value extraction | always — applying a Π-typed function to an argument is ordinary evaluation | allowed for `Sigma` (`Type`-valued: `.fst`/`.snd`); **not** allowed for `Exists` (`Prop`-valued — proof irrelevance forbids it) |
-| First example this book gave | `Vec.replicate : (n : Nat) → Vec α n` (§3 above) | `Fin n`'s own fields, `val : Nat` paired with `isLt : val < n` (above) |
+| First example this book gave | `Vec.replicate : (n : Nat) → Vec α n` (Section 3 above) | `Fin n`'s own fields, `val : Nat` paired with `isLt : val < n` (above) |
 
-The one asymmetry worth remembering from the row above: Π's logic
-special case (`∀`) and Σ's (`∃`) both extract cleanly as *propositions*,
-but only Σ's *data* special case (`Sigma`) supports extracting its
-witness back out. `∃` looks like a Σ-type and reads like one, but proof
+The one asymmetry worth remembering from the row above: the Π-type's
+logic special case (`∀`) and the Σ-type's (`∃`) both extract cleanly as
+*propositions*, but only the Σ-type's *data* special case (`Sigma`)
+supports extracting its witness back out. `∃` looks like a Σ-type and
+reads like one, but proof
 irrelevance makes it a strictly weaker, non-extractable cousin — the
 "caveat about `∃`" above is the one place this table's two columns are
 not simply mirror images of each other.
 
 ### Recursors and eliminators, named
 
-[§4](04-terminology.md) promised a formal treatment of the **recursor**
+[Section 4](04-terminology.md) promised a formal treatment of the **recursor**
 (also called an **eliminator**) once Π/Σ-types were available; here it is.
 For an inductive type like `Nat`, with constructors `zero : Nat` and
 `succ : Nat → Nat`, the **recursor** `Nat.rec` is the single term that
@@ -270,7 +281,7 @@ constructor" precise:
 ```
 
 Read `Nat.rec`'s own type as a Π-type over a **motive**
-`motive : Nat → Sort u` (§4's "motive," spelled out in full): supply a
+`motive : Nat → Sort u` (Section 4's "motive," spelled out in full): supply a
 "zero case" (a term of `motive Nat.zero`), a "succ case" (a function
 turning a value/proof for `n` into one for `n.succ`), and `Nat.rec`
 produces a term of `motive t` for *any* `t : Nat`. This is structural
@@ -283,7 +294,7 @@ An **eliminator** is the general name for this same pattern applied to
 *any* inductive type: the single term that "uses" a value of that type by
 case-splitting on which constructor built it, with a motive tracking what
 is being proved or built in each case. `Nat.rec` above is `Nat`'s
-eliminator; [Chapter 3 §5](../03-propositions-and-proofs/05-and-or-not.md)'s
+eliminator; [Chapter 3, Section 5](../03-propositions-and-proofs/05-and-or-not.md)'s
 `Or.elim {P Q R : Prop} (h : P ∨ Q) (hpr : P →
 R) (hqr : Q → R) : R` is `Or`'s — a case for `Or.inl` and a case for
 `Or.inr`, with the (non-dependent, here) motive fixed to the constant type
@@ -300,12 +311,12 @@ abstraction, and function application, plus:
 
 1. an infinite hierarchy of type universes $\mathtt{Type}\,0,
    \mathtt{Type}\,1, \ldots$, formalized in
-   [Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md),
+   [Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md),
 2. Π-types generalizing $\to$, allowing types to depend on terms (this
-   chapter's §3 and the top of this page),
+   chapter's Section 3 and the top of this page),
 3. (in Lean's specific extension, the **Calculus of Inductive
    Constructions**, CIC) `inductive` type declarations — `Nat`, `Bool`,
-   `Vec`/`Fin` (§3), `Path` (Chapter 11), and every `structure` written
+   `Vec`/`Fin` (Section 3), `Path` (Chapter 11), and every `structure` written
    throughout — giving Σ-types and much more (arbitrary recursive data)
    beyond what bare CoC provides,
 4. `Prop` as a distinguished, proof-irrelevant universe (Chapter 3, and
@@ -317,7 +328,7 @@ Every single Lean construct used in this book — `def`, `structure`,
 a time, without the terms being written by hand) — compiles down to a
 term in exactly this system, checked by Lean's kernel using nothing more
 than typing rules like the ones sketched here and in Chapter 5, applied
-mechanically. [Chapter 5 §3](../05-rigor-check/03-typing-rules-and-safety.md)
+mechanically. [Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md)
 completes the picture with the simply typed λ-calculus's typing judgments
 and its progress/preservation theorems — the formal reason "well-typed
 proofs do not go wrong" — plus the universe-formation rule only sketched
