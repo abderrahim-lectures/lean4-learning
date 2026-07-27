@@ -16,9 +16,9 @@ $$
 \end{aligned}
 $$
 
-(Some textbooks do not require a multiplicative identity. Such a structure is
-called a *rng* (missing the "i"). We include the identity, as it is the more
-common convention.)
+Some textbooks do not require a multiplicative identity. Such a structure
+is called a *rng* — the missing "i" stands for the missing identity. This
+book includes the identity, since that is the more common convention.
 
 Note that (R1) requires **commutative** addition, unlike the general `Group` of
 Chapter 6. Hence, before defining `Ring`, we first define what "commutative"
