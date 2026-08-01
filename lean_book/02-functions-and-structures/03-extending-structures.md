@@ -4,19 +4,14 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Forgetful functor.** "A functor which simply 'forgets' some or all
-  of the structure of an algebraic object is commonly called a
-  forgetful functor (or, an underlying functor). Thus the forgetful
-  functor $U : \mathbf{Grp} \to \mathbf{Set}$ assigns to each group
-  $G$ the set $UG$ of its elements..." ([MacLane1998], Ch. I §3,
-  p. 14). Brief: `extends` builds a new structure containing
-  everything an existing one has, plus more, generating a `.toX`
-  forgetful projection for free.
+The previous section parameterized a `structure` by a type, so `Pair α β`
+was really a whole family of structures, one per choice of `α` and `β`.
+Parameterizing by a type is not the only way to grow a structure, though:
+sometimes what is wanted is not a new type slotted in, but an *entirely
+new field* added on top of a structure that already exists — `Point3D`
+needs everything `Point` has, plus a `z` coordinate, without repeating
+`x` and `y`'s declarations by hand. `extends` is exactly this: building a
+new structure that contains an old one whole, plus more.
 
 ```lean
 structure Point3D extends Point where
@@ -99,13 +94,20 @@ graph LR
     NamedPoint -->|".toNamed"| Named["Named"]
 ```
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
+- **Forgetful functor.** "A functor which simply 'forgets' some or all
+  of the structure of an algebraic object is commonly called a
+  forgetful functor (or, an underlying functor). Thus the forgetful
+  functor $U : \mathbf{Grp} \to \mathbf{Set}$ assigns to each group
+  $G$ the set $UG$ of its elements..." ([MacLane1998], Ch. I §3,
+  p. 14). Brief: `extends` builds a new structure containing
+  everything an existing one has, plus more, generating a `.toX`
+  forgetful projection for free.
 - Lean 4 documentation ([LeanDocs]) — the auto-generated `.toX` projection produced by `extends`, used above as `origin3D.x` and `.toPoint`.
-- Mac Lane ([MacLane1998]), Ch. I §3 "Functors," p. 14 — forgetful functor.
 
 [LeanDocs]: ../bibliography.md#leandocs
 [MacLane1998]: ../bibliography.md#maclane1998

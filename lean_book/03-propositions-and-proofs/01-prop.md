@@ -4,20 +4,11 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Curry–Howard correspondence.** "The fact that the rules for
-  implication in a proof system for natural deduction correspond
-  exactly to the rules governing abstraction and application for
-  functions is an instance of the Curry-Howard isomorphism, sometimes
-  known as the propositions-as-types paradigm" ([TPIL4], "Propositions
-  and Proofs"; the correspondence traces to Howard's 1969 manuscript,
-  circulated privately and formally published as [Howard1980]). Brief:
-  propositions are types, proofs are terms.
-
+Chapter 2 closed with structures bundling data and proofs side by side,
+without yet saying what a "proof," as a piece of Lean data, actually is.
+That gap closes here: chapters 1 and 2 built terms and types for
+ordinary mathematical objects — numbers, points, groups-to-be — and this
+chapter turns the same machinery on *statements* and their proofs.
 Alongside `Type`, Lean has `Prop`, the type of logical propositions. A term
 of type `P : Prop` is a **proof** of `P`. This is the **Curry–Howard
 correspondence**: propositions are types, and
@@ -105,13 +96,20 @@ that are *definitionally* equal, the strictest notion of "$=$".
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
+- **Curry–Howard correspondence.** "The fact that the rules for
+  implication in a proof system for natural deduction correspond
+  exactly to the rules governing abstraction and application for
+  functions is an instance of the Curry-Howard isomorphism, sometimes
+  known as the propositions-as-types paradigm" ([TPIL4], "Propositions
+  and Proofs"; the correspondence traces to Howard's 1969 manuscript,
+  circulated privately and formally published as [Howard1980]). Brief:
+  propositions are types, proofs are terms.
 - Howard ([Howard1980]) — the original source of the correspondence this section is named for. Per Sørensen & Urzyczyn, *Lectures on the Curry-Howard Isomorphism*, Studies in Logic and the Foundations of Mathematics vol. 149, Elsevier, 2006 (a secondary source corroborating this history, not Howard's paper itself): Howard's manuscript was "privately circulated" from 1969 and not formally published until 1980, in Curry's Festschrift; it develops the proofs-as-terms correspondence for implicational logic, extends it to the other propositional connectives, then to a term language for Heyting Arithmetic.
-- *Theorem Proving in Lean 4* ([TPIL4]), "Propositions and Proofs" — Curry–Howard correspondence.
 
 [Howard1980]: ../bibliography.md#howard1980
 [TPIL4]: ../bibliography.md#tpil4

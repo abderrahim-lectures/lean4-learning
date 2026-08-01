@@ -4,44 +4,10 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Judgment.** "A statement made about a calculus from the outside,
-  not a proposition proved inside it" ([MartinLof1984], Ch. 1,
-  "Judgements and their explanations," this book's working
-  statement). Brief: written here in the form $e : \tau$, e.g.
-  `3 : Nat`.
-- **Type system guarantee.** "A type system is a tractable syntactic
-  method for proving the absence of certain program behaviors..."
-  ([Pierce2002], §1.1–§1.2). Brief: a static check that rules out a
-  whole class of runtime failure before any code runs, for every
-  possible input.
-- **$F$-algebra.** "For an arbitrary endofunctor $T : \mathbb{B} \to
-  \mathbb{B}$ [on a category $\mathbb{B}$] an algebra (or
-  $T$-algebra) consists of a 'carrier' object $Y \in \mathbb{B}$
-  together with a morphism $\varphi : T(Y) \to Y$" ([Jacobs1999],
-  §2.6, p. 161; this book writes $F$ for Jacobs's $T$). Brief: for
-  $\mathbb{B}$ = `Type`, a type $X$ equipped with a map
-  $F(X) \to X$.
-- **Initial object.** "An object $s$ is initial in a category $C$ if
-  to each object $a$ of $C$ there is exactly one arrow $s \to a$"
-  ([MacLane1998], Ch. I §5, p. 20). Brief: exactly one morphism out to
-  every other object of the category.
-- **Natural numbers object (NNO).** "In a category with finite
-  products a natural numbers object (NNO) consists of a zero and
-  successor diagram $1 \xrightarrow{0} N \xrightarrow{S} N$ which is
-  initial in the sense that for an arbitrary diagram of the form
-  $1 \xrightarrow{x} X \xrightarrow{g} X$ there is a unique
-  $h : N \to X$ making the diagram commute" ([Jacobs1999], §2.6,
-  p. 159; in functional notation, $h(0) = x$ and $h(Sn) = g(hn)$).
-  Brief: `Nat` is the standard example (`0 := zero`, `S := succ`),
-  equivalently the initial algebra for $F(X) = 1 + X$, and this
-  uniqueness is exactly what licenses structural induction.
-
----
+This is the first question the whole book will keep coming back to:
+before anything can be proved, or even run, Lean needs to know *what kind
+of thing* every piece of a program or proof is. "Everything has a type"
+is the slogan; the rest of this section makes it literal.
 
 In Lean 4, every expression (a **term**) has a **type**. A type answers the
 question "what *kind* of thing is this?" — a number, a boolean, a proof, a
@@ -143,7 +109,7 @@ and moves on, whether or not that was the intended meaning.
 Now the same shape of mistake in Lean:
 
 ```lean
-#check 3 + true   -- error: failed to synthesize Add Nat Bool
+#check 3 + true   -- error: failed to synthesize HAdd Nat Bool ?m
 ```
 
 Lean refuses to even *elaborate* this expression. It never runs it, never
@@ -281,17 +247,43 @@ graph LR
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions and verbatim quotes are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
+- **Judgment.** "A statement made about a calculus from the outside,
+  not a proposition proved inside it" ([MartinLof1984], Ch. 1,
+  "Judgements and their explanations," this book's working
+  statement). Brief: written here in the form $e : \tau$, e.g.
+  `3 : Nat`.
+- **Type system guarantee.** "A type system is a tractable syntactic
+  method for proving the absence of certain program behaviors..."
+  ([Pierce2002], §1.1–§1.2). Brief: a static check that rules out a
+  whole class of runtime failure before any code runs, for every
+  possible input.
+- **$F$-algebra.** "For an arbitrary endofunctor $T : \mathbb{B} \to
+  \mathbb{B}$ [on a category $\mathbb{B}$] an algebra (or
+  $T$-algebra) consists of a 'carrier' object $Y \in \mathbb{B}$
+  together with a morphism $\varphi : T(Y) \to Y$" ([Jacobs1999],
+  §2.6, p. 161; this book writes $F$ for Jacobs's $T$). Brief: for
+  $\mathbb{B}$ = `Type`, a type $X$ equipped with a map
+  $F(X) \to X$.
+- **Initial object.** "An object $s$ is initial in a category $C$ if
+  to each object $a$ of $C$ there is exactly one arrow $s \to a$"
+  ([MacLane1998], Ch. I §5, p. 20). Brief: exactly one morphism out to
+  every other object of the category.
+- **Natural numbers object (NNO).** "In a category with finite
+  products a natural numbers object (NNO) consists of a zero and
+  successor diagram $1 \xrightarrow{0} N \xrightarrow{S} N$ which is
+  initial in the sense that for an arbitrary diagram of the form
+  $1 \xrightarrow{x} X \xrightarrow{g} X$ there is a unique
+  $h : N \to X$ making the diagram commute" ([Jacobs1999], §2.6,
+  p. 159; in functional notation, $h(0) = x$ and $h(Sn) = g(hn)$).
+  Brief: `Nat` is the standard example (`0 := zero`, `S := succ`),
+  equivalently the initial algebra for $F(X) = 1 + X$, and this
+  uniqueness is exactly what licenses structural induction.
 - Lean 4 documentation, "Basic Types," and *Theorem Proving in Lean 4*, §2.1 "Simple Type Theory" ([LeanDocs], [TPIL4]) — the `#check`/`#eval` distinction and `Nat` as an inductive type.
-- Martin-Löf ([MartinLof1984]), Ch. 1, "Judgements and their explanations" — judgment.
-- Pierce ([Pierce2002]), §1.1 "Types in Computer Science," §1.2 "What Type Systems Are Good For" — type system guarantee.
-- Jacobs ([Jacobs1999]), §2.6, p. 161 — $F$-algebra.
-- Mac Lane ([MacLane1998]), Ch. I §5, p. 20 — initial object.
-- Jacobs ([Jacobs1999]), §2.6, p. 159, and Mac Lane ([MacLane1998]), Appendix "Foundations," p. 292 — natural numbers object.
 
 [LeanDocs]: ../bibliography.md#leandocs
 [TPIL4]: ../bibliography.md#tpil4

@@ -4,21 +4,14 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Type-parameterized structure.** This book's working statement:
-  `structure Pair (α β : Type)` does not define one structure. It defines
-  one structure *per choice* of `α` and `β`, all at once. Categorically,
-  this is a functor of the type parameters, not a single fixed structure.
-- **Parametric polymorphism.** Milner's theoretical account of type
-  polymorphism ([Milner1978]). Brief: genericity that is *proved* once for
-  every type, and checked before the generic code is ever called — unlike
-  an optional, erased type annotation. Python's `TypeVar` and Lean's
-  `{α : Type} → ...` both implement this idea, to different degrees, as
-  the Programmer's corner box below explains.
+The previous section built `Point`, a structure with two fixed `Nat`
+fields. That works only because `Point` never needed to hold anything
+but numbers. A structure that should bundle a value of *any* type — a
+pair of two arbitrary things, say — cannot be written once per type
+without repeating the same three lines endlessly. What is needed instead
+is a structure parameterized by the types themselves, the same
+implicit-argument idea from Chapter 1's `identity`, now applied to a
+`structure` rather than a `def`.
 
 ```lean
 structure Pair (α β : Type) where
@@ -31,7 +24,7 @@ def p : Pair Nat String := { fst := 1, snd := "one" }
 #eval p.snd     -- "one"
 ```
 
-This generalizes directly to how we will write, e.g., `structure Group (α : Type)`.
+This generalizes directly to how we will write, e.g., `structure Group (G : Type)`.
 
 **Mathematical reading.** `Pair α β` is the ordinary binary Cartesian
 product, but taken *uniformly*, as a functor of two arguments at once.
@@ -63,13 +56,22 @@ that `identity` works for every type `α`, and that proof is checked before
 `identity` is ever called — not merely approximated by a linter that might
 never run.
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
+- **Type-parameterized structure.** This book's working statement:
+  `structure Pair (α β : Type)` does not define one structure. It defines
+  one structure *per choice* of `α` and `β`, all at once. Categorically,
+  this is a functor of the type parameters, not a single fixed structure.
+- **Parametric polymorphism.** Milner's theoretical account of type
+  polymorphism ([Milner1978]). Brief: genericity that is *proved* once for
+  every type, and checked before the generic code is ever called — unlike
+  an optional, erased type annotation. Python's `TypeVar` and Lean's
+  `{α : Type} → ...` both implement this idea, to different degrees, as
+  the Programmer's corner box below explains.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's box.
-- Milner ([Milner1978]) — parametric polymorphism.
 
 [PythonTyping]: ../bibliography.md#pythontyping
 [MypyDocs]: ../bibliography.md#mypydocs

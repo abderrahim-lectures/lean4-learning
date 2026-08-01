@@ -4,15 +4,15 @@
 
 ---
 
-### Recall
-
-Formal definition cited in this section, gathered here for quick
-reference (full citation in the [Bibliography](../bibliography.md)):
-
-- **Ring homomorphism.** "A ring homomorphism is a map $\varphi : R
-  \to S$ satisfying (i) $\varphi(a+b) = \varphi(a)+\varphi(b)$ ... and
-  (ii) $\varphi(ab) = \varphi(a)\varphi(b)$" ([DummitFoote2003], §7.3
-  "Ring Homomorphisms and Quotient Rings," p. 239).
+`Ring` was just assembled field by field, entirely in the abstract: an
+`addGrp` slot, a `mul`/`one` pair, and four axioms tying them together.
+As with `Group` in Chapter 6, the definition alone gives no evidence that
+anything actually satisfies it. The most familiar candidate is the
+integers, and Chapter 6 already did most of the necessary work by
+packaging $(\mathbb{Z}, +, 0, -)$ as `intGroup`. What remains is to
+upgrade that group to a commutative one and then supply the multiplicative
+structure `Ring` additionally demands — turning the abstract definition
+into a first concrete witness that it is not vacuous.
 
 We reuse `intGroup` from Chapter 6 as the additive part.
 
@@ -91,12 +91,15 @@ They are the same laws, but stated generically over `[Ring R]` (or the weaker
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definition and citation for this section, gathered here for
+reference (full entry in the [Bibliography](../bibliography.md)):
 
-- Dummit and Foote ([DummitFoote2003]), §7.3 "Ring Homomorphisms and Quotient Rings," p. 239 — ring homomorphism.
+- **Ring homomorphism.** "A ring homomorphism is a map $\varphi : R
+  \to S$ satisfying (i) $\varphi(a+b) = \varphi(a)+\varphi(b)$ ... and
+  (ii) $\varphi(ab) = \varphi(a)\varphi(b)$" ([DummitFoote2003], §7.3
+  "Ring Homomorphisms and Quotient Rings," p. 239).
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

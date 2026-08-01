@@ -11,7 +11,8 @@ PATH; does not require a LaTeX distribution to run (only to later compile
 what this script emits).
 
 Design, in short:
-- Every chapter directory becomes `latex/<chapter>/`, containing one
+- Every chapter directory becomes `../lean_book_latex/<chapter>/`
+  (a sibling of `lean_book/`, not a subdirectory of it), containing one
   `.tex` per source `.md` (same stem) plus a `00-index.tex` driver that
   `\input`s them in order.
 - `lean-for-working-algebraists.tex` (the top-level driver) `\input`s
@@ -32,8 +33,8 @@ Design, in short:
   directly, since the key set matches `references.bib` by construction.
 - Every ```mermaid fence is replaced, before Pandoc ever sees it, with a
   raw-LaTeX block `\input`-ing the corresponding hand-translated tikz-cd
-  file in `latex/diagrams/` (see DIAGRAM_MAP below) -- Pandoc never
-  touches Mermaid source at all in this pipeline.
+  file in `lean_book_latex/diagrams/` (see DIAGRAM_MAP below) -- Pandoc
+  never touches Mermaid source at all in this pipeline.
 - Code fences convert via Pandoc's `--listings` flag to `\begin{lstlisting}`,
   styled by `lean-listings.tex` (Lean) and plain `language=Python`
   (Python), both `\input` from the top-level driver.
@@ -50,7 +51,8 @@ import sys
 
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
 BOOK_DIR = os.path.dirname(BUILD_DIR)
-LATEX_DIR = os.path.join(BOOK_DIR, "latex")
+REPO_ROOT = os.path.dirname(BOOK_DIR)
+LATEX_DIR = os.path.join(REPO_ROOT, "lean_book_latex")
 MAIN_TEX_NAME = "lean-for-working-algebraists.tex"
 
 CHAPTERS = [
@@ -95,8 +97,9 @@ PBLPROJECT_FILES = {
 }
 
 # Mermaid fences, in file order, mapped to their hand-translated tikz-cd
-# diagram (see latex/diagrams/*.tex and latex/smoketest/*-smoke.tex for
-# each one's standalone compile smoke-test).
+# diagram (see lean_book_latex/diagrams/*.tex and
+# lean_book_latex/smoketest/*-smoke.tex for each one's standalone compile
+# smoke-test).
 DIAGRAM_MAP = {
     "01-basics/01-everything-has-a-type.md": [
         "f-algebra",
@@ -569,9 +572,11 @@ def fix_image_paths(tex, chapter):
     """Pandoc emits \\includegraphics{...} with the path exactly as
     written in the source Markdown (chapter-relative, e.g.
     "images/foo.png"). \\input resolves paths relative to the top-level
-    driver's own directory (latex/), not the including sub-file's, so that path needs
-    "../<chapter>/" prepended to reach the original image in the
-    Markdown source tree (images are not duplicated into latex/)."""
+    driver's own directory (lean_book_latex/, a sibling of lean_book/),
+    not the including sub-file's, so that path needs
+    "../lean_book/<chapter>/" prepended to reach the original image in
+    the Markdown source tree (images are not duplicated into
+    lean_book_latex/)."""
     if not chapter:
         return tex
 
@@ -579,7 +584,7 @@ def fix_image_paths(tex, chapter):
         opts, path = m.group(1) or "", m.group(2)
         if path.startswith("http") or os.path.isabs(path):
             return m.group(0)
-        return f"\\includegraphics{opts}{{../{chapter}/{path}}}"
+        return f"\\includegraphics{opts}{{../lean_book/{chapter}/{path}}}"
 
     return re.sub(r'\\includegraphics(\[[^\]]*\])?\{([^}]+)\}', _sub, tex)
 
@@ -848,7 +853,7 @@ def write_main_driver():
         # width alone already overshoots paperheight -- the excess is
         # centered and clipped by the page box, filling the page edge to
         # edge with no stretching and no visible margin.
-        "\\AddToShipoutPictureBG*{\\AtPageCenter{\\makebox(0,0){\\includegraphics[width=\\paperwidth,keepaspectratio]{../images/cover.png}}}}\n",
+        "\\AddToShipoutPictureBG*{\\AtPageCenter{\\makebox(0,0){\\includegraphics[width=\\paperwidth,keepaspectratio]{../lean_book/images/cover.png}}}}\n",
         "\\thispagestyle{empty}\n",
         "\\null\n",
         "\\clearpage\n",
@@ -886,7 +891,7 @@ def write_main_driver():
     # eso-pic approach as the front cover, for the same reason.
     lines.append("\\clearpage\n")
     lines.append(
-        "\\AddToShipoutPictureBG*{\\AtPageCenter{\\makebox(0,0){\\includegraphics[width=\\paperwidth,keepaspectratio]{../images/back-cover.png}}}}\n"
+        "\\AddToShipoutPictureBG*{\\AtPageCenter{\\makebox(0,0){\\includegraphics[width=\\paperwidth,keepaspectratio]{../lean_book/images/back-cover.png}}}}\n"
     )
     lines.append("\\thispagestyle{empty}\n")
     lines.append("\\null\n")
@@ -916,15 +921,15 @@ def main():
             stem = convert_file(chapter, name)
             stems.append(stem)
             total += 1
-            print(f"  {chapter}/{name} -> latex/{chapter}/{stem}.tex")
+            print(f"  {chapter}/{name} -> lean_book_latex/{chapter}/{stem}.tex")
         write_chapter_driver(chapter, stems)
     for name in FRONT_MATTER_FILES + ROOT_FILES:
         convert_file("", name)
         total += 1
-        print(f"  {name} -> latex/{name[:-3]}.tex")
+        print(f"  {name} -> lean_book_latex/{name[:-3]}.tex")
     write_bibliography_chapter()
     write_main_driver()
-    print(f"Converted {total} section files. Wrote latex/{MAIN_TEX_NAME}.")
+    print(f"Converted {total} section files. Wrote lean_book_latex/{MAIN_TEX_NAME}.")
 
 
 if __name__ == "__main__":
