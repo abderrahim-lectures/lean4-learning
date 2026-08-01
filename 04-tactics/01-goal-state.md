@@ -58,9 +58,10 @@ polished result.
    as variables (not concrete numbers), the answer is no. `Nat.add` recurses
    on its *second* argument, so `a + b` and `b + a` do not reduce to a
    common form without knowing more about `a` and `b`. `rfl` fails with an
-   error such as "motive is not type correct" or "type mismatch." That
-   failure is *information*: it indicates the equality is not definitional,
-   hence an actual argument is required, not just unfolding.
+   error such as "the left-hand side ... is not definitionally equal to the
+   right-hand side ...". That failure is *information*: it indicates the
+   equality is not definitional, hence an actual argument is required, not
+   just unfolding.
 2. **Look for structure to induct or case-split on.** Both sides mention
    `a` and `b` as `Nat`s, and `Nat` is inductively defined (Chapter 1), so
    induction is the natural move. The question becomes *which* variable to

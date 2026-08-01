@@ -1,14 +1,6 @@
 \section{\texorpdfstring{Decision procedures: \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{omega}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{norm\_num}}}{Decision procedures: decide, omega, norm\_num}}\label{sec:12-working-efficiently:02-decision-procedures:1}
 
-\subsection{Recall}\label{sec:12-working-efficiently:02-decision-procedures:2}
-
-Formal definition cited in this section, gathered here for quick reference (full citation in the \hyperref[sec:root:bibliography:1]{Bibliography}):
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Decidable proposition (\texttt{sumbool}).} ``\texttt{Inductive sumbool (A : Prop) (B : Prop) : Set := left : A → \{A\} + \{B\} | right : B → \{A\} + \{B\}}'' (\cite{Chlipala2013}, §6.2 ``Decidable Proposition Types,'' p.~110). Brief: a type witnessing that a proposition's truth value is computable --- a constructive ``\(P \vee \neg P\), and we can tell which.''
-\end{itemize}
+Section 1's \texttt{exact?}/\texttt{apply?} search the library for a proof that already exists somewhere, then report it for inspection. Some goals need nothing of the kind: their truth value is not a fact to be looked up, it is a computation to be run. This section covers that second, disjoint case --- tactics that settle a goal by evaluating an algorithm rather than searching for or constructing a term by hand.
 
 For goals that are \emph{decidable} --- where ``true or false'' can be settled by a terminating algorithm instead of a hand-built argument --- Lean has tactics that just run that algorithm:
 
@@ -36,12 +28,12 @@ A proposition \(P\) is \texttt{Decidable} when there is an algorithm that comput
 Read more: the Lean/Mathlib documentation for \texttt{decide}, \texttt{omega}, and \texttt{norm\_\allowbreak{}num} (searchable in the Mathlib docs or via \texttt{\#help tactic omega} inside a Lean file) covers each tactic's exact decidable fragment and performance in more depth than this book needs.
 \end{quote}
 
-\subsection{References}\label{sec:12-working-efficiently:02-decision-procedures:3}
+\subsection{Sources, quoted}\label{sec:12-working-efficiently:02-decision-procedures:2}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
+Formal definition and citation for this section, gathered here for reference (full entry in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  Chlipala (\cite{Chlipala2013}), §6.2 ``Decidable Proposition Types'' --- the actual source for \texttt{Decidable} as a type-theoretic notion (an earlier draft of this book cited Pierce2002 instead, but TAPL does not discuss \texttt{Decidable} at all).
+  \textbf{Decidable proposition (\texttt{sumbool}).} ``\texttt{Inductive sumbool (A : Prop) (B : Prop) : Set := left : A → \{A\} + \{B\} | right : B → \{A\} + \{B\}}'' (\cite{Chlipala2013}, §6.2 ``Decidable Proposition Types,'' p.~110). Picture it like this: a litmus test strip rather than a question you have to reason through by hand --- dip it in and it changes color to tell you, definitively, acid or base. \texttt{sumbool} packages that same idea as data: run it and get back a definite ``yes, and here's why'' or ``no, and here's why,'' a constructive ``\(P \vee \neg P\), and we can tell which.'' Chlipala is the actual source for \texttt{Decidable} as a type-theoretic notion (an earlier draft of this book cited Pierce2002 instead, but TAPL does not discuss \texttt{Decidable} at all).
 \end{itemize}

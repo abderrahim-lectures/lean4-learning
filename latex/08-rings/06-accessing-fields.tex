@@ -9,7 +9,7 @@
 
 \begin{mathreading}
 
-The chained projections walk down the tower of \hyperref[sec:01-basics:04-terminology:1]{forgetful functors} \(\mathbf{Ring} \to \mathbf{Ab} \to \mathbf{Grp}\): \texttt{intRing.addGrp} applies \(\mathbf{Ring}\to\mathbf{Ab}\) (recovering \((\mathbb{Z},
+The chained projections walk down the tower of forgetful functors \(\mathbf{Ring} \to \mathbf{Ab} \to \mathbf{Grp}\): \texttt{intRing.addGrp} applies \(\mathbf{Ring}\to\mathbf{Ab}\) (recovering \((\mathbb{Z},
 +)\)), and \texttt{.toGroup} applies \(\mathbf{Ab}\to\mathbf{Grp}\). Thus, \texttt{intRing.addGrp.toGroup.inv 5} computes the additive inverse \(-5\) in the underlying group, while \texttt{intRing.mul}/\texttt{intRing.one} read off the multiplicative data \(\times\) and \(1\). Nested dot-access is just evaluating these structure-forgetting maps.
 
 \end{mathreading}

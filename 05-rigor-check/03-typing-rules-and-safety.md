@@ -4,25 +4,11 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Progress (Theorem 9.3.5).** "Suppose $t$ is a closed, well-typed
-  term (that is, $\vdash t : T$ for some $T$). Then either $t$ is a
-  value or else there is some $t'$ with $t \to t'$" ([Pierce2002],
-  §9.3 "Properties of Typing").
-- **Preservation (Theorem 9.3.9).** "If $\Gamma \vdash t : T$ and
-  $t \to t'$, then $\Gamma \vdash t' : T$" ([Pierce2002], §9.3).
-- **Universe-formation rule.** This book's working statement, after
-  the calculus of constructions ([CoquandHuet1988]):
-  $\mathtt{Type}\,i : \mathtt{Type}\,(i+1)$, and a Π-type built from
-  $A : \mathtt{Type}\,i$, $B : \mathtt{Type}\,j$ lands in
-  $\mathtt{Type}\,(\max(i,j))$.
-
-Chapters 1–4 have relied on Lean's type checking constantly without ever
-seeing its rules written down. This section makes two things precise:
+Section 2 showed *informally* why `Group : Type → Type` has to live one
+universe level up, by walking through that one specific case in prose.
+That argument leaned on a typing rule it never actually stated, and
+Chapters 1–4 have relied on Lean's type checking constantly the same
+way, without ever seeing its rules written down. This section makes two things precise:
 the actual rules Lean's kernel checks a term against (using a small,
 representative fragment, the **simply typed λ-calculus**, STLC), and the
 specific rule governing the universe hierarchy Section 2 just introduced
@@ -233,15 +219,25 @@ at all, because nothing checks proofs against it.
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
+- **Progress (Theorem 9.3.5).** "Suppose $t$ is a closed, well-typed
+  term (that is, $\vdash t : T$ for some $T$). Then either $t$ is a
+  value or else there is some $t'$ with $t \to t'$" ([Pierce2002],
+  §9.3 "Properties of Typing").
+- **Preservation (Theorem 9.3.9).** "If $\Gamma \vdash t : T$ and
+  $t \to t'$, then $\Gamma \vdash t' : T$" ([Pierce2002], §9.3).
+- **Universe-formation rule.** This book's working statement, after
+  the calculus of constructions ([CoquandHuet1988]):
+  $\mathtt{Type}\,i : \mathtt{Type}\,(i+1)$, and a Π-type built from
+  $A : \mathtt{Type}\,i$, $B : \mathtt{Type}\,j$ lands in
+  $\mathtt{Type}\,(\max(i,j))$.
 - Pierce ([Pierce2002]), Ch. 8 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 9 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC) — verified verbatim. An earlier draft of this section cited Ch. 9–11; Ch. 11 "Simple Extensions" actually covers pairs/tuples/records/sums, unrelated to this section's content.
 - Milner ([Milner1978]) — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's boxes.
-- Coquand and Huet ([CoquandHuet1988]) — the original paper defining CoC, whose universe-formation rule is stated above.
 - Girard — see [Chapter 5, Section 2's References](02-universes.md) for the full citation: "Girard's paradox" (the inconsistency of `Type : Type`) is due to Girard's 1972 thesis, a different, later paper than [Girard1971] cited elsewhere in this book.
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — Lean's own documentation on universes, matching the presentation here.
 

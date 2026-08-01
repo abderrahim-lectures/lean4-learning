@@ -4,14 +4,14 @@
 
 ---
 
-### Recall
-
-Formal definition cited in this section, gathered here for quick
-reference (full citation in the [Bibliography](../bibliography.md)):
-
-- **Ring theorems proved here.** "$0a = a0 = 0$ for all $a \in R$ ...
-  $(-a)b = a(-b) = -(ab)$ for all $a, b \in R$" ([DummitFoote2003],
-  §7.1 "Basic Definitions and Examples," p. 225, Proposition 1).
+Chapter 8's examples ran from the fully commutative (`Int`, `Fin 3`) to
+the deliberately noncommutative ($2\times 2$ integer matrices), each time
+verifying `Ring`'s axioms by hand for one specific carrier. That
+carrier-by-carrier approach does not scale — no one wants to re-derive
+$a\cdot 0=0$ separately for every ring encountered from now on. Chapter 7
+already established the fix for groups: fix an arbitrary structure once,
+via `variable`, and prove theorems against it that apply to every later
+instance automatically. This chapter repeats exactly that move for rings.
 
 ```lean
 variable {R : Type} (Rg : Ring R)
@@ -39,12 +39,14 @@ the underlying additive group of $R$."
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definition and citation for this section, gathered here for
+reference (full entry in the [Bibliography](../bibliography.md)):
 
-- Dummit and Foote ([DummitFoote2003]), §7.1 "Basic Definitions and Examples," p. 225, Proposition 1 — $a \cdot 0 = 0$ and the sign rule.
+- **Ring theorems proved here.** "$0a = a0 = 0$ for all $a \in R$ ...
+  $(-a)b = a(-b) = -(ab)$ for all $a, b \in R$" ([DummitFoote2003],
+  §7.1 "Basic Definitions and Examples," p. 225, Proposition 1).
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

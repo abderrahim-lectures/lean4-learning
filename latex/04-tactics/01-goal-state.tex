@@ -34,7 +34,7 @@ Suppose the task is to prove \texttt{(a b : Nat) → a + b = b + a}, with the pr
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{Try the cheapest thing first.} \texttt{rfl} asks ``do both sides already compute to the same normal form?'' For \texttt{a + b = b + a} with \texttt{a}, \texttt{b} as variables (not concrete numbers), the answer is no. \texttt{Nat.add} recurses on its \emph{second} argument, so \texttt{a + b} and \texttt{b + a} do not reduce to a common form without knowing more about \texttt{a} and \texttt{b}. \texttt{rfl} fails with an error such as ``motive is not type correct'' or ``type mismatch.'' That failure is \emph{information}: it indicates the equality is not definitional, hence an actual argument is required, not just unfolding.
+  \textbf{Try the cheapest thing first.} \texttt{rfl} asks ``do both sides already compute to the same normal form?'' For \texttt{a + b = b + a} with \texttt{a}, \texttt{b} as variables (not concrete numbers), the answer is no. \texttt{Nat.add} recurses on its \emph{second} argument, so \texttt{a + b} and \texttt{b + a} do not reduce to a common form without knowing more about \texttt{a} and \texttt{b}. \texttt{rfl} fails with an error such as ``the left-hand side \ldots{} is not definitionally equal to the right-hand side \ldots{}''. That failure is \emph{information}: it indicates the equality is not definitional, hence an actual argument is required, not just unfolding.
 \item
   \textbf{Look for structure to induct or case-split on.} Both sides mention \texttt{a} and \texttt{b} as \texttt{Nat}s, and \texttt{Nat} is inductively defined (Chapter 1), so induction is the natural move. The question becomes \emph{which} variable to induct on. Trying \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{induction b}} is suggested by the recursion on \texttt{+}'s second argument, since \texttt{b} is the one that unfolds cleanly.
 \item
@@ -44,8 +44,8 @@ Suppose the task is to prove \texttt{(a b : Nat) → a + b = b + a}, with the pr
 
   \begin{figure}
   \centering
-  \pandocbounded{\includegraphics[keepaspectratio,alt={The Lean Infoview panel in VS Code, showing the tactic state (hypotheses a k : Nat, ih : a + k = k + a, goal a + (k + 1) = k + 1 + a) for the succ case of my\_add\_comm's induction.}]{../04-tactics/images/goal-state-infoview.png}}
-  \caption{The Lean Infoview panel in VS Code, showing the tactic state (hypotheses \protect\texttt{a k : Nat}, \protect\texttt{ih : a + k = k + a}, goal \protect\texttt{a + (k + 1) = k + 1 + a}) for the \protect\texttt{succ} case of \protect\texttt{my\_\allowbreak{}add\_\allowbreak{}comm}'s induction.}
+  \pandocbounded{\includegraphics[keepaspectratio,alt={The Lean Infoview panel in VS Code, showing the tactic state (hypotheses a k : Nat, ih : a + k = k + a, goal a + (k + 1) = k + 1 + a) for the succ case of my\_add\_comm's induction.}]{../lean_book/04-tactics/images/goal-state-infoview.png}}
+  \caption{The Lean Infoview panel in VS Code, showing the tactic state (hypotheses \texttt{a k : Nat}, \texttt{ih : a + k = k + a}, goal \texttt{a + (k + 1) = k + 1 + a}) for the \texttt{succ} case of \texttt{my\_\allowbreak{}add\_\allowbreak{}comm}'s induction.}
   \end{figure}
 \item
   \textbf{Find the missing lemmas.} \texttt{Nat.add\_\allowbreak{}succ} and \texttt{Nat.zero\_\allowbreak{}add} need not be memorized. In an editor, typing \texttt{rw [Nat.add\_\allowbreak{}} and using autocomplete lists everything starting that way. Alternatively, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{exact?}} (Chapter 12), searches the whole environment for something that closes the current goal outright, and will often name exactly the lemma required even when its name cannot be guessed.

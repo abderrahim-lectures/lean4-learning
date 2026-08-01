@@ -17,14 +17,22 @@ Two general links used throughout this page:
 \section*{Tactics}
 \addcontentsline{toc}{section}{Tactics}\label{sec:root:tactic-and-library-reference:2}
 
-{\small\begin{tabular}{
+\begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-}
-\toprule
-Tactic & First used & Reference \\
-\midrule
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Tactic
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+First used
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reference
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
 \texttt{rfl} & Ch. 1 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
 \texttt{rw} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
 \texttt{exact} & Ch. 4 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
@@ -48,21 +56,27 @@ Tactic & First used & Reference \\
 \texttt{norm\_\allowbreak{}num} & Ch. 12, Section 2 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
 \texttt{noncomm\_\allowbreak{}ring} & Ch. 8 (Mathlib equivalent) & \href{https://loogle.lean-lang.org/?q=noncomm_ring}{Loogle} \\
 \texttt{sorry} & Ch. 4, Section 3 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
-\bottomrule
-\end{tabular}}
-
+\end{longtable}
 
 \section*{Mathlib names (Chapters 6-11's ``Mathlib equivalent'' boxes)}
 \addcontentsline{toc}{section}{Mathlib names (Chapters 6-11's ``Mathlib equivalent'' boxes)}\label{sec:root:tactic-and-library-reference:3}
 
-{\small\begin{tabular}{
+\begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-}
-\toprule
-Name & What it is & Reference \\
-\midrule
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What it is
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reference
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
 \texttt{Group}, \texttt{AddCommGroup}, \texttt{CommGroup} & The real group/abelian-group classes & \href{https://loogle.lean-lang.org/?q=Group}{Loogle: Group} \\
 \texttt{Ring}, \texttt{CommRing} & The real ring classes & \href{https://loogle.lean-lang.org/?q=Ring}{Loogle: Ring} \\
 \texttt{Module}, \texttt{Submodule} & The real module/submodule classes & \href{https://loogle.lean-lang.org/?q=Module}{Loogle: Module} \\
@@ -80,6 +94,4 @@ Name & What it is & Reference \\
 \texttt{Submodule.span}, \texttt{Submodule.subset\_\allowbreak{}span} & Generated submodules & \href{https://loogle.lean-lang.org/?q=Submodule.span}{Loogle: Submodule.span} \\
 \texttt{LinearMap.fst} & Product-module projection & \href{https://loogle.lean-lang.org/?q=LinearMap.fst}{Loogle: LinearMap.fst} \\
 \texttt{inferInstance} & Typeclass-resolution term & \href{https://loogle.lean-lang.org/?q=inferInstance}{Loogle: inferInstance} \\
-\bottomrule
-\end{tabular}}
-
+\end{longtable}

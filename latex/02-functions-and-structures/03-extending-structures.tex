@@ -1,14 +1,6 @@
 \section{Extending structures}\label{sec:02-functions-and-structures:03-extending-structures:1}
 
-\subsection{Recall}\label{sec:02-functions-and-structures:03-extending-structures:2}
-
-Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Forgetful functor.} ``A functor which simply `forgets' some or all of the structure of an algebraic object is commonly called a forgetful functor (or, an underlying functor). Thus the forgetful functor \(U : \mathbf{Grp} \to \mathbf{Set}\) assigns to each group \(G\) the set \(UG\) of its elements\ldots{}'' (\cite{MacLane1998}, Ch. I §3, p.~14). Brief: \texttt{extends} builds a new structure containing everything an existing one has, plus more, generating a \texttt{.toX} forgetful projection for free.
-\end{itemize}
+The previous section parameterized a \texttt{structure} by a type, so \texttt{Pair α β} was really a whole family of structures, one per choice of \texttt{α} and \texttt{β}. Parameterizing by a type is not the only way to grow a structure, though: sometimes what is wanted is not a new type slotted in, but an \emph{entirely new field} added on top of a structure that already exists --- \texttt{Point3D} needs everything \texttt{Point} has, plus a \texttt{z} coordinate, without repeating \texttt{x} and \texttt{y}'s declarations by hand. \texttt{extends} is exactly this: building a new structure that contains an old one whole, plus more.
 
 \begin{lstlisting}
 structure Point3D extends Point where
@@ -33,7 +25,7 @@ def redOrigin : ColorPoint := { x := 0, y := 0, color := "red" }
 #eval redOrigin.color   -- own field, "red"
 \end{lstlisting}
 
-\subsection{Extending more than one structure at once}\label{sec:02-functions-and-structures:03-extending-structures:3}
+\subsection{Extending more than one structure at once}\label{sec:02-functions-and-structures:03-extending-structures:2}
 
 \texttt{extends} is not limited to a single parent. \texttt{structure C extends A, B} builds a structure with every field of \texttt{A}, every field of \texttt{B}, and any fields declared in \texttt{C} itself, generating both \texttt{.toA} and \texttt{.toB} forgetful projections:
 
@@ -68,16 +60,16 @@ The multi-parent case above generates two independent forgetful projections rath
 \input{diagrams/multi-parent-forgetful.tex}
 \end{center}
 
-\subsection{References}\label{sec:02-functions-and-structures:03-extending-structures:4}
+\subsection{Sources, quoted}\label{sec:02-functions-and-structures:03-extending-structures:3}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  Lean 4 documentation (\cite{LeanDocs}) --- the auto-generated \texttt{.toX} projection produced by \texttt{extends}, used above as \texttt{origin3D.x} and \texttt{.toPoint}.
+  \textbf{Forgetful functor.} ``A functor which simply `forgets' some or all of the structure of an algebraic object is commonly called a forgetful functor (or, an underlying functor). Thus the forgetful functor \(U : \mathbf{Grp} \to \mathbf{Set}\) assigns to each group \(G\) the set \(UG\) of its elements\ldots{}'' (\cite{MacLane1998}, Ch. I §3, p.~14). Picture it like this: a company directory that lists only names and phone numbers, dropping job titles and departments --- the underlying people are still there, just stripped of the extra structure. \texttt{extends} builds a new structure containing everything an existing one has, plus more, generating exactly this kind of ``strip back down'' projection (\texttt{.toX}) for free.
 \item
-  Mac Lane (\cite{MacLane1998}), Ch. I §3 ``Functors,'' p.~14 --- forgetful functor.
+  Lean 4 documentation (\cite{LeanDocs}) --- the auto-generated \texttt{.toX} projection produced by \texttt{extends}, used above as \texttt{origin3D.x} and \texttt{.toPoint}.
 \end{itemize}
 
 \textbf{Key points.} A \texttt{structure} bundles data (and optionally proofs) under one name, built via the anonymous constructor \texttt{⟨...⟩} and read back out via field projection \texttt{.field}. \texttt{extends} builds a new structure containing everything an existing one has, plus more, generating a \texttt{.toX} forgetful projection for free --- the exact mechanism \texttt{CommGroup} uses to add commutativity to \texttt{Group} in Chapter 6.

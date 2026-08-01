@@ -1,16 +1,6 @@
 \section{Structures with type parameters}\label{sec:02-functions-and-structures:02-type-parameters:1}
 
-\subsection{Recall}\label{sec:02-functions-and-structures:02-type-parameters:2}
-
-Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Type-parameterized structure.} This book's working statement: \texttt{structure Pair (α β : Type)} does not define one structure. It defines one structure \emph{per choice} of \texttt{α} and \texttt{β}, all at once. Categorically, this is a functor of the type parameters, not a single fixed structure.
-\item
-  \textbf{Parametric polymorphism.} Milner's theoretical account of type polymorphism (\cite{Milner1978}). Brief: genericity that is \emph{proved} once for every type, and checked before the generic code is ever called --- unlike an optional, erased type annotation. Python's \texttt{TypeVar} and Lean's \texttt{\{α : Type\} → ...} both implement this idea, to different degrees, as the Programmer's corner box below explains.
-\end{itemize}
+The previous section built \texttt{Point}, a structure with two fixed \texttt{Nat} fields. That works only because \texttt{Point} never needed to hold anything but numbers. A structure that should bundle a value of \emph{any} type --- a pair of two arbitrary things, say --- cannot be written once per type without repeating the same three lines endlessly. What is needed instead is a structure parameterized by the types themselves, the same implicit-argument idea from Chapter 1's \texttt{identity}, now applied to a \texttt{structure} rather than a \texttt{def}.
 
 \begin{lstlisting}
 structure Pair ((*$\alpha$*) (*$\beta$*) : Type) where
@@ -23,7 +13,7 @@ def p : Pair Nat String := { fst := 1, snd := "one" }
 #eval p.snd     -- "one"
 \end{lstlisting}
 
-This generalizes directly to how we will write, e.g., \texttt{structure Group (α : Type)}.
+This generalizes directly to how we will write, e.g., \texttt{structure Group (G : Type)}.
 
 \begin{mathreading}
 
@@ -42,14 +32,16 @@ The closer Python analogue is \texttt{typing.TypeVar}: \texttt{def identity(x: T
 
 Lean's \texttt{\{α : Type\} → α → α} is not documentation. It is \emph{proved}, once, that \texttt{identity} works for every type \texttt{α}, and that proof is checked before \texttt{identity} is ever called --- not merely approximated by a linter that might never run.
 
-\subsection{References}\label{sec:02-functions-and-structures:02-type-parameters:3}
+\subsection{Sources, quoted}\label{sec:02-functions-and-structures:02-type-parameters:2}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) --- for the Python-side comparison used in this section's box.
+  \textbf{Type-parameterized structure.} This book's working statement: \texttt{structure Pair (α β : Type)} does not define one structure. It defines one structure \emph{per choice} of \texttt{α} and \texttt{β}, all at once. Categorically, this is a functor of the type parameters, not a single fixed structure.
 \item
-  Milner (\cite{Milner1978}) --- parametric polymorphism.
+  \textbf{Parametric polymorphism.} Milner's theoretical account of type polymorphism (\cite{Milner1978}). Picture it like this: a car platform that gets crash-tested and certified once, before a single unit rolls off the line --- every car built on it inherits that guarantee automatically, rather than each driver just hoping their particular car turns out safe. Genericity that is \emph{proved} once for every type, checked before the generic code is ever called, is that certification; an optional, erased type annotation is closer to the driver's hope. Python's \texttt{TypeVar} and Lean's \texttt{\{α : Type\} → ...} both implement this idea, to different degrees, as the Programmer's corner box below explains.
+\item
+  Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) --- for the Python-side comparison used in this section's box.
 \end{itemize}

@@ -9,12 +9,16 @@ message is almost always telling you exactly what to do next. Treat it as
 a diagnostic, not a dead end.
 
 - [`rw [h]`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) where `h : a = b` but the goal does not literally contain `a`
-  fails with **"motive is not type correct"** or "did not find instance of
-  the pattern." This means the exact syntactic term `a` being rewritten
-  does not occur in the goal as written. Fix: use `#check` (or hover in the
-  editor) on the goal's actual statement. It is common for a definition to be
-  unfolded differently than expected, so the term to be rewritten is
-  hiding behind a `def` that needs [`unfold`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) or [`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) first.
+  fails with **"did not find instance of the pattern"** (also phrased "did
+  not find an occurrence of the pattern"). This means the exact syntactic
+  term `a` being rewritten does not occur in the goal as written. Fix: use
+  `#check` (or hover in the editor) on the goal's actual statement. It is
+  common for a definition to be unfolded differently than expected, so the
+  term to be rewritten is hiding behind a `def` that needs [`unfold`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) or
+  [`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) first. (A different error, **"motive is not type correct,"** arises
+  instead when the term *is* found but rewriting it would produce an
+  ill-typed goal — typically when `a` occurs in a dependent position, such
+  as an index inside another hypothesis's type.)
 - [`exact e`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) where `e`'s type does not match the goal fails with a **type
   mismatch**, printing both the expected and the actual type side by side.
   The difference between them almost always points to one wrong

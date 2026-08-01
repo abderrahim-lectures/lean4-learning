@@ -1,26 +1,8 @@
 \section{Π/Σ-types and the calculus of constructions}\label{sec:01-basics:05-pi-sigma-and-coc:1}
 
-\subsection{Recall}\label{sec:01-basics:05-pi-sigma-and-coc:2}
-
-Formal definitions cited in this section, gathered here for quick reference (full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}):
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Σ-type.} ``Given a type \(A : U\) and a family \(B : A \to U\), the dependent pair type is written as \(\sum_{(x:A)} B(x) : U\) \ldots{} If \(B\) is constant, then the dependent pair type is the ordinary Cartesian product type'' (\cite{HoTT2013}, §1.6 ``Dependent pair types (Σ-types)''). Brief: categorically an indexed disjoint union, collapsing to the ordinary product \(A \times B\) when \(B\) is a constant family.
-\item
-  \textbf{\texttt{Prop}.} ``The type \texttt{Prop} is syntactic sugar for \texttt{Sort 0}, the very bottom of the type hierarchy'' (\cite{TPIL4}, §3.1 ``Propositions as Types'').
-\item
-  \textbf{Proof irrelevance.} ``If \texttt{p : Prop} is any proposition, Lean's kernel treats any two elements \texttt{t1 t2 : p} as being definitionally equal \ldots{} This is known as proof irrelevance'' (\cite{TPIL4}, §3.1). Brief: any two proofs of the same \texttt{P : Prop} are considered definitionally equal.
-\item
-  \textbf{Recursor / eliminator.} This book's working statement, built on the calculus of constructions (\cite{CoquandHuet1988}): the single Π-typed term (\texttt{Nat.rec} and its analogues) that makes ``one case per constructor'' precise; every \texttt{match}/\texttt{cases}/\texttt{induction} compiles down to one.
-\item
-  \textbf{Calculus of constructions (CoC).} This book's working statement, after Coquand and Huet (\cite{CoquandHuet1988}, §1 ``The Abstract Syntax of Terms,'' §2.1 ``The Inference System of Constructions''): a small formal system built from a variable, a function abstraction, and function application, plus an infinite hierarchy of universes and Π-types. Lean's specific extension with \texttt{inductive} type declarations (giving Σ-types and general recursive data) is the Calculus of Inductive Constructions (CIC), due to a later paper (Coquand and Paulin, ``Inductively Defined Types,'' 1990), not the 1988 paper itself.
-\end{itemize}
-
 Section 3 built Π-types concretely, from \texttt{Fin n} and \texttt{Vec.replicate}, up to the general pattern \(\prod_{x:A} B(x)\). This section adds the second half of the picture --- \textbf{Σ-types}, the dependent pair dual to the Π-type --- and then zooms out to name the whole formal system these pieces belong to: the \textbf{calculus of constructions} (CoC), the core type theory underlying Lean. (Universes get their \emph{own} formal typing rule in \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5, Section 3}, once Chapter 5 has built up the informal picture of \texttt{Type}/\texttt{Type 1} those rules formalize --- nothing here depends on having read that yet.)
 
-\subsection{Π-types, briefly recalled}\label{sec:01-basics:05-pi-sigma-and-coc:3}
+\subsection{Π-types, briefly recalled}\label{sec:01-basics:05-pi-sigma-and-coc:2}
 
 \[
 \prod_{x : A} B(x)
@@ -80,7 +62,7 @@ but is expected to have type
   Nat
 \end{lstlisting}
 
-\subsection{\texorpdfstring{\texttt{Prop} as a special, proof-irrelevant universe}{Prop as a special, proof-irrelevant universe}}\label{sec:01-basics:05-pi-sigma-and-coc:4}
+\subsection{\texorpdfstring{\texttt{Prop} as a special, proof-irrelevant universe}{Prop as a special, proof-irrelevant universe}}\label{sec:01-basics:05-pi-sigma-and-coc:3}
 
 Lean's \texttt{Prop} (Chapter 3) sits alongside \texttt{Type} as its own universe, with one extra rule: \textbf{proof irrelevance}. Any two terms of the same type \texttt{P : Prop} are considered definitionally equal, since a proof carries no computational content beyond the bare fact that \emph{a} proof exists:
 
@@ -90,7 +72,7 @@ theorem two_proofs (h1 h2 : 2 + 2 = 4) : h1 = h2 := rfl
 
 \texttt{rfl} succeeds no matter \emph{how} \texttt{h1} and \texttt{h2} were each proved --- by \texttt{rfl} directly, by a long tactic block, by an entirely different chain of lemmas --- because Lean does not distinguish between different proofs of the same \texttt{Prop}. This is what makes Curry--Howard's slogan ``propositions are types, proofs are terms'' more than a slogan: \texttt{P : Prop} really is a type, \texttt{h : P} really is an ordinary term of that type built by ordinary \(\lambda\)/application/Π-type machinery, and the \emph{only} difference from an ordinary \texttt{Type} is that Lean does not care \emph{which} term of \texttt{P} was produced --- only that one was produced.
 
-\subsection{Σ-types: the dependent pair, dual to the Π-type}\label{sec:01-basics:05-pi-sigma-and-coc:5}
+\subsection{Σ-types: the dependent pair, dual to the Π-type}\label{sec:01-basics:05-pi-sigma-and-coc:4}
 
 Where the Π-type generalizes the ordinary function type \(\to\), a \textbf{Σ-type} (dependent pair / dependent sum) generalizes \(\times\) (the ordinary product):
 
@@ -121,10 +103,10 @@ This shape has already appeared, without the name: Section 3's \texttt{Fin n} is
 -- structure Fin (n : Nat) : Type
 -- fields:
 --   Fin.val  : Nat
---   Fin.isLt : val < n
+--   Fin.isLt : ↑self < n
 \end{lstlisting}
 
-a \texttt{Nat} value \texttt{val}, paired with a proof \texttt{isLt} whose \emph{statement} (\texttt{val < n}) mentions \texttt{val} itself. That is \(\Sigma\), concretely: the second field's type depends on the value of the first. Here is the general construct, spelled out with Lean's actual \texttt{Sigma}, pairing a bound with an actual number below it:
+a \texttt{Nat} value \texttt{val}, paired with a proof \texttt{isLt} whose \emph{statement} (\texttt{↑self < n}) mentions the first field itself (\texttt{self.val}, printed with the \texttt{↑} coercion arrow). That is \(\Sigma\), concretely: the second field's type depends on the value of the first. Here is the general construct, spelled out with Lean's actual \texttt{Sigma}, pairing a bound with an actual number below it:
 
 \begin{lstlisting}
 def mySigma : (*$\Sigma$*) n : Nat, Fin n := (*$\langle$*)3, (*$\langle$*)2, by decide(*$\rangle$*)(*$\rangle$*)
@@ -186,18 +168,26 @@ which has propositional type
 
 Compare this directly to \texttt{mySigma.fst} two paragraphs up, which worked with no error at all --- same pair-shape, different universe, and that difference is exactly why one extracts and the other does not. If \texttt{∃} \emph{did} allow extracting a witness, two different (but both equally valid) choices of witness could produce different results from a ``proof-irrelevant'' input, contradicting proof irrelevance itself. \texttt{Sigma} (the actual, \texttt{Type}-valued dependent pair, matching a \texttt{structure}'s bundled data) \emph{does} support projecting out its first component, precisely because it does not carry \texttt{Exists}'s irrelevance guarantee. So: \texttt{∃} has the same shape as the Σ-type but lives in a universe where the witness is unobservable. That is what makes it a \emph{restricted} cousin of the Σ-type rather than literally the Σ-type. The \texttt{structure}-based bundling this book uses throughout for \texttt{Group}/\texttt{Ring}/\texttt{Module} genuinely is \texttt{Sigma}-like (extractable), while an \texttt{∃}-statement genuinely is not.
 
-\subsection{Π-types and Σ-types, side by side}\label{sec:01-basics:05-pi-sigma-and-coc:6}
+\subsection{Π-types and Σ-types, side by side}\label{sec:01-basics:05-pi-sigma-and-coc:5}
 
 Everything above in one table, gathering the two constructs' notation, readings, and special cases for direct comparison:
 
-{\small\begin{tabular}{
+\begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-}
-\toprule
-Aspect & Π-type \(\prod_{x:A} B(x)\) & Σ-type \(\sum_{x:A} B(x)\) \\
-\midrule
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Aspect
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Π-type \(\prod_{x:A} B(x)\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Σ-type \(\sum_{x:A} B(x)\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
 Read as & ``for every \(x:A\), a term of \(B(x)\)'' & ``some \(x:A\), together with a term of \(B(x)\)'' \\
 Generalizes & \(A \to B\) (function type) & \(A \times B\) (product type) \\
 Constant-family collapse (\(B\) ignores \(x\)) & ordinary function type \(A \to B\) & ordinary product \(A \times B\) \\
@@ -206,13 +196,11 @@ Lean surface syntax & \texttt{(x : A) → B x} & \texttt{Σ x : A, B x}, built w
 Logic special case (\(B : A \to \mathrm{Prop}\)) & \texttt{∀ x, P x} & \texttt{∃ x, P x} \\
 Witness/value extraction & always --- applying a Π-typed function to an argument is ordinary evaluation & allowed for \texttt{Sigma} (\texttt{Type}-valued: \texttt{.fst}/\texttt{.snd}); \textbf{not} allowed for \texttt{Exists} (\texttt{Prop}-valued --- proof irrelevance forbids it) \\
 First example this book gave & \texttt{Vec.replicate : (n : Nat) → Vec α n} (Section 3 above) & \texttt{Fin n}'s own fields, \texttt{val : Nat} paired with \texttt{isLt : val < n} (above) \\
-\bottomrule
-\end{tabular}}
-
+\end{longtable}
 
 The one asymmetry worth remembering from the row above: the Π-type's logic special case (\texttt{∀}) and the Σ-type's (\texttt{∃}) both extract cleanly as \emph{propositions}, but only the Σ-type's \emph{data} special case (\texttt{Sigma}) supports extracting its witness back out. \texttt{∃} looks like a Σ-type and reads like one, but proof irrelevance makes it a strictly weaker, non-extractable cousin --- the ``caveat about \texttt{∃}'' above is the one place this table's two columns are not simply mirror images of each other.
 
-\subsection{Recursors and eliminators, named}\label{sec:01-basics:05-pi-sigma-and-coc:7}
+\subsection{Recursors and eliminators, named}\label{sec:01-basics:05-pi-sigma-and-coc:6}
 
 \hyperref[sec:01-basics:04-terminology:1]{Chapter 1, Section 4} promised a formal treatment of the \textbf{recursor} (also called an \textbf{eliminator}) once Π/Σ-types were available; here it is. For an inductive type like \texttt{Nat}, with constructors \texttt{zero : Nat} and \texttt{succ : Nat → Nat}, the \textbf{recursor} \texttt{Nat.rec} is the single term that makes ``define a function, or prove a statement, by giving one case per constructor'' precise:
 
@@ -286,7 +274,7 @@ The succ-case function was placed where the zero case belongs; since \texttt{Nat
 
 An \textbf{eliminator} is the general name for this same pattern applied to \emph{any} inductive type: the single term that ``uses'' a value of that type by case-splitting on which constructor built it, with a motive tracking what is being proved or built in each case. \texttt{Nat.rec} above is \texttt{Nat}'s eliminator; \hyperref[sec:03-propositions-and-proofs:05-and-or-not:1]{Chapter 3, Section 5}'s \texttt{Or.elim \{P Q R : Prop\} (h : P ∨ Q) (hpr : P → R) (hqr : Q → R) : R} is \texttt{Or}'s --- a case for \texttt{Or.inl} and a case for \texttt{Or.inr}, with the (non-dependent, here) motive fixed to the constant type \texttt{R}. Every \texttt{match}/\texttt{cases}/\texttt{induction} used from here on compiles down to exactly this: an application of the relevant inductive type's eliminator, built automatically rather than written out by hand.
 
-\subsection{The calculus of constructions, named}\label{sec:01-basics:05-pi-sigma-and-coc:8}
+\subsection{The calculus of constructions, named}\label{sec:01-basics:05-pi-sigma-and-coc:7}
 
 Putting the pieces together, the \textbf{calculus of constructions} (CoC, Coquand--Huet) --- the core type theory underlying Lean, Coq, and similar systems --- is a small formal system built from a variable, a function abstraction, and function application, plus:
 
@@ -306,22 +294,26 @@ Putting the pieces together, the \textbf{calculus of constructions} (CoC, Coquan
 
 Every single Lean construct used in this book --- \texttt{def}, \texttt{structure}, \texttt{theorem}, \texttt{∀}, \texttt{∃}, tactics (which merely \emph{build} CIC terms, one piece at a time, without the terms being written by hand) --- compiles down to a term in exactly this system, checked by Lean's kernel using nothing more than typing rules like the ones sketched here and in Chapter 5, applied mechanically. \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5, Section 3} completes the picture with the simply typed λ-calculus's typing judgments and its progress/preservation theorems --- the formal reason ``well-typed proofs do not go wrong'' --- plus the universe-formation rule only sketched by name above.
 
-\subsection{References}\label{sec:01-basics:05-pi-sigma-and-coc:9}
+\subsection{Sources, quoted}\label{sec:01-basics:05-pi-sigma-and-coc:8}
 
-Full citations in the \hyperref[sec:root:bibliography:1]{Bibliography}. Formal definitions and verbatim quotes are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 
 \begin{itemize}
 \tightlist
 \item
-  Coquand and Huet (\cite{CoquandHuet1988}), §1 ``The Abstract Syntax of Terms,'' §2.1 ``The Inference System of Constructions'' --- calculus of constructions. The 1988 paper does \emph{not} itself define the general inductive-type extension (CIC) or a \texttt{Nat.rec}-style recursor; §8 ``Possible Extensions'' only sketches one ad hoc worked example (a primitive \texttt{int} type with a \texttt{rec} constant). The general Calculus of Inductive Constructions is due to a later paper, Coquand and Paulin, ``Inductively Defined Types'' (1990), not yet in this book's bibliography.
+  \textbf{Σ-type.} ``Given a type \(A : U\) and a family \(B : A \to U\), the dependent pair type is written as \(\sum_{(x:A)} B(x) : U\) \ldots{} If \(B\) is constant, then the dependent pair type is the ordinary Cartesian product type'' (\cite{HoTT2013}, §1.6 ``Dependent pair types (Σ-types)''). Picture it like this: a labeled suitcase where the label decides what kind of compartment to expect inside --- a ``shoes'' tag pairs with a shoe-shaped compartment, an ``electronics'' tag with a different one. When every tag happens to pair with the \emph{same} compartment shape regardless of the label, that's just an ordinary suitcase-and-item pair --- the constant-family special case, which is the ordinary product \(A \times B\).
+\item
+  \textbf{\texttt{Prop}.} ``The type \texttt{Prop} is syntactic sugar for \texttt{Sort 0}, the very bottom of the type hierarchy'' (\cite{TPIL4}, §3.1 ``Propositions as Types'').
+\item
+  \textbf{Proof irrelevance.} ``If \texttt{p : Prop} is any proposition, Lean's kernel treats any two elements \texttt{t1 t2 : p} as being definitionally equal \ldots{} This is known as proof irrelevance'' (\cite{TPIL4}, §3.1). Picture it like this: a ``verified'' stamp on a passport --- customs doesn't care which officer stamped it or how the check was carried out, only that a valid stamp exists. Any two proofs of the same \texttt{P : Prop} are just as interchangeable.
+\item
+  \textbf{Recursor / eliminator.} This book's working statement, built on the calculus of constructions (\cite{CoquandHuet1988}): the single Π-typed term (\texttt{Nat.rec} and its analogues) that makes ``one case per constructor'' precise; every \texttt{match}/\texttt{cases}/\texttt{induction} compiles down to one.
+\item
+  \textbf{Calculus of constructions (CoC).} This book's working statement, after Coquand and Huet (\cite{CoquandHuet1988}, §1 ``The Abstract Syntax of Terms,'' §2.1 ``The Inference System of Constructions''): a small formal system built from a variable, a function abstraction, and function application, plus an infinite hierarchy of universes and Π-types. Lean's specific extension with \texttt{inductive} type declarations (giving Σ-types and general recursive data) is the Calculus of Inductive Constructions (CIC), due to a later paper (Coquand and Paulin, ``Inductively Defined Types,'' 1990), not the 1988 paper itself.
 \item
   Pierce (\cite{Pierce2002}) --- cited here only by analogy: \emph{Types and Programming Languages} is explicitly \emph{not} a dependently-typed textbook (Pierce's own preface: dependent types are ``mentioned only in passing,'' developed no further than §30.5's one-paragraph sketch of ``families of types indexed by terms''), so it does not cover eliminators/recursors for inductive types in a dependent setting. What it does cover, relevant here only by analogy: non-dependent \texttt{case} analysis on sum/variant types (§11.9--11.10) and on \texttt{µ}-recursive types like \texttt{NatList = μX.⟨nil:Unit, cons:\{Nat,X\}⟩} (Ch. 20), plus Church encodings of algebraic datatypes (Ch. 5 untyped, §23.4 typed/System F).
 \item
-  The Univalent Foundations Program (\cite{HoTT2013}), §1.6 --- Σ-type.
-\item
   Martin-Löf (\cite{MartinLof1984}) --- the foundational source for dependent Π/Σ types and universes predating CoC, for readers wanting the idea in its original, non-CoC-specific form.
-\item
-  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §3.1 ``Propositions as Types'' --- \texttt{Prop}, proof irrelevance.
 \item
   All Lean code in this section was checked directly against the toolchain pinned in this repository's \texttt{lean\_\allowbreak{}project/\allowbreak{}lean-\allowbreak{}toolchain} rather than only described; the \texttt{\#print Fin} output and both error messages shown are copied from real \texttt{lake env lean} runs.
 \end{itemize}

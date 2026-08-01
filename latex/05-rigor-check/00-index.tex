@@ -4,7 +4,26 @@ Before committing to \texttt{Group}'s definition in the next chapter, this short
 
 \textbf{Learning objectives.} By the end of this chapter, explain why this book delays \texttt{class} in favor of \texttt{structure}, state the STLC typing rules and why \texttt{Type} itself needs a universe hierarchy, and distinguish definitional from propositional equality (and predict, correctly, when \texttt{rfl} alone will and will not close a goal).
 
-\section{Sections}\label{sec:05-rigor-check:00-index:2}
+\section{The story of this chapter}\label{sec:05-rigor-check:00-index:2}
+
+Unlike Chapters 1--3, this chapter is not building new machinery toward \texttt{Group} --- it is pausing to justify choices about to be made silently. Each section answers one of the three questions raised above, in the order a skeptical reader would actually ask them:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Mathlib defines every algebraic structure with \texttt{class}, not \texttt{structure}. If this book is heading toward the same kind of definitions, why not just use the tool the professionals use?} (\hyperref[sec:05-rigor-check:01-structure-vs-class:1]{Section 1}) Because \texttt{class} adds exactly one mechanism --- automatic instance search --- on top of plain \texttt{structure}, and that mechanism is worth understanding on purpose before leaning on it silently. This book delays it until Chapter 6's intuition for \texttt{Group} is already solid.
+\item
+  \textbf{A \texttt{structure} like \texttt{Group (G : Type)} is itself a term of some type. So does \texttt{Group} have a \texttt{Group}-structure of its own --- is \texttt{Group Group} a sensible thing to even ask for?} (\hyperref[sec:05-rigor-check:02-universes:1]{Section 2}) No, and the reason is load-bearing, not pedantic: \texttt{Type} cannot contain itself without reproducing Russell's paradox, so Lean stacks an infinite hierarchy of universes, and \texttt{Group : Type → Type} sits one level too high to ever be its own carrier.
+\item
+  \textbf{That answer leaned on a typing rule --- ``a Π-type built from level \(i\) and \(j\) lands in level \(\max(i,j)\)'' --- without ever stating where such rules come from. What \emph{are} Lean's typing rules, precisely, and why should they be trusted?} (\hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Section 3}) The simply typed λ-calculus's three rules (Var, Abs, App), plus the universe-formation rule from Section 2 restated formally, together with the progress and preservation theorems that are the actual reason ``well-typed proofs do not go wrong.''
+\item
+  \textbf{Preservation guarantees reduction never changes a term's type --- but it says nothing about when two terms \emph{are} the same term. \texttt{rfl} has been used constantly since Chapter 3 without ever asking what ``the same'' means.} (\hyperref[sec:05-rigor-check:04-defeq-vs-propeq:1]{Section 4}) Two notions, not one: definitional equality (\texttt{rfl}, checked by computation) and propositional equality (\texttt{=}, proved like any other theorem) coincide often enough to blur together, but knowing exactly where they part ways is what makes a failed \texttt{rfl} legible instead of mysterious.
+\end{enumerate}
+
+By the end of the chapter, three assumptions Chapter 6 is about to make silently --- \texttt{structure} over \texttt{class}, \texttt{Group : Type → Type}'s place in the universe hierarchy, and \texttt{rfl}'s exact reach --- have each been earned rather than merely used.
+
+\section{Sections}\label{sec:05-rigor-check:00-index:3}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

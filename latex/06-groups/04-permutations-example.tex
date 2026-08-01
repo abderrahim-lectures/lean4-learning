@@ -89,7 +89,7 @@ def cycle012 : Perm3 where
 #eval (Perm3.comp cycle012 swap01).toFun 0   -- 2
 \end{lstlisting}
 
-Both compositions send \texttt{0} somewhere, but to \emph{different} places: applying \texttt{cycle012} then \texttt{swap01} sends \(0 \to 1 \to 0\), while applying \texttt{swap01} then \texttt{cycle012} sends \(0 \to 0 \to 1\). Concretely, \texttt{\#eval} reports \texttt{0} for the first and \texttt{2} for the second. This is \textbf{directly computed evidence} that \texttt{Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01}; in other words, this group is genuinely non-abelian. This is exactly the kind of ``compute a counterexample'' move Chapter 8 uses again for matrices. It is cheaper than any hand-written non-commutativity proof, and it yields, for free, the specific pair of elements that fail to commute.
+Both compositions send \texttt{0} somewhere, but to \emph{different} places: applying \texttt{cycle012} then \texttt{swap01} sends \(0 \to 1 \to 0\), while applying \texttt{swap01} then \texttt{cycle012} sends \(0 \to 1 \to 2\). Concretely, \texttt{\#eval} reports \texttt{0} for the first and \texttt{2} for the second. This is \textbf{directly computed evidence} that \texttt{Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01}; in other words, this group is genuinely non-abelian. This is exactly the kind of ``compute a counterexample'' move Chapter 8 uses again for matrices. It is cheaper than any hand-written non-commutativity proof, and it yields, for free, the specific pair of elements that fail to commute.
 
 \subsection{\texorpdfstring{Assembling \texttt{Group\ Perm3}}{Assembling Group Perm3}}\label{sec:06-groups:04-permutations-example:5}
 

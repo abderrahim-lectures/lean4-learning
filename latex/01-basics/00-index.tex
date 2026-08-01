@@ -2,7 +2,28 @@
 
 \textbf{Learning objectives.} By the end of this chapter, read a Lean term's type with \texttt{\#check}, distinguish \texttt{\#check} from \texttt{\#eval}, write basic \texttt{def}s with implicit arguments, understand what makes a type \emph{dependent} (via \texttt{Fin}/\texttt{Vec}), and state precisely how Π-types, Σ-types, and \texttt{Prop} irrelevance fit into Lean's underlying calculus.
 
-\section{Sections}\label{sec:01-basics:00-index:2}
+\section{The story of this chapter}\label{sec:01-basics:00-index:2}
+
+Every section below answers one question, and each question is forced by the answer to the one before it. It helps to see the whole chain before working through it line by line:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{What is a type, and why does Lean check it before running anything?} (\hyperref[sec:01-basics:01-everything-has-a-type:1]{Section 1}) Ordinary languages catch type errors, if at all, at the moment the bad line runs --- possibly months after it shipped, on a rarely-hit branch. Lean checks the question ``what kind of thing is this?'' once, by reading the expression, for every possible input at once. That single idea --- \texttt{\#check} as a static guarantee, \texttt{\#eval} as a one-off fact --- is the foundation everything else in this book stands on.
+\item
+  \textbf{Given that types are checked this strictly, how are new ones built, and how does Lean avoid forcing tedious repetition at every call site?} (\hyperref[sec:01-basics:02-def-let-implicit:1]{Section 2}) \texttt{def} and \texttt{let} are the two ways to name a term; implicit arguments (\texttt{\{α : Type\}}) are how a single definition like \texttt{identity} serves \emph{every} type at once without being rewritten per type. Nothing here is new machinery yet --- just the vocabulary needed to read and write ordinary Lean definitions fluently.
+\item
+  \textbf{Is a type always fixed in advance, the way \texttt{Nat → Nat} never changes its output type?} (\hyperref[sec:01-basics:03-dependent-types:1]{Section 3}) No --- and this is the single feature that separates a proof assistant from an ordinary typed language. A type can depend on a \emph{value}, not just another type. \texttt{Fin n} is a different type for each \texttt{n}; a function's \emph{return type} can change depending on which argument it received. This is what finally lets a signature say ``these two lists must have the same length'' and have Lean enforce it, rather than merely hope for it.
+\item
+  \textbf{Several words just got used informally (\texttt{elaborate}, \texttt{reduce}, \texttt{bound variable}, \texttt{universal property}, \ldots) --- what do they actually mean?} (\hyperref[sec:01-basics:04-terminology:1]{Section 4}) This section is a deliberate pause, not a new topic: a glossary of the vocabulary already in use above and needed again below, defined precisely once instead of re-explained informally every time it recurs.
+\item
+  \textbf{\texttt{Fin}'s dependent function and \texttt{Vec}'s dependent pair-like structure both showed up in Section 3 --- are they two unrelated tricks, or one idea in two shapes?} (\hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Section 5}) One idea: the Π-type (dependent function) and Σ-type (dependent pair) are dual generalizations of \texttt{→} and \texttt{×}, and together with \texttt{Prop}'s proof irrelevance they \emph{are} the calculus of constructions --- the one formal system every example in this chapter has secretly been an instance of from the very first \texttt{\#check 3}.
+\end{enumerate}
+
+By the last section, the informal phrase ``everything has a type'' from Section 1 has turned into a precise, named formal system. Nothing along the way is optional scaffolding to be forgotten afterward --- Chapter 3's \texttt{∀}/\texttt{∃}, Chapter 6's \texttt{Group} structure, and Chapter 11's \texttt{Path} type are all direct, unglamorous applications of exactly what gets built here.
+
+\section{Sections}\label{sec:01-basics:00-index:3}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

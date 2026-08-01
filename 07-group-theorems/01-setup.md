@@ -4,15 +4,15 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Group theorems proved here.** "The identity of $G$ is unique ...
-  for each $a \in G$, $a^{-1}$ is uniquely determined ...
-  $(a{*}b)^{-1} = (b^{-1}){*}(a^{-1})$" ([DummitFoote2003], §1.1
-  "Basic Axioms and Examples," pp. 17–18, Proposition 1).
+Chapter 6 closed by pointing out the entire payoff of bundling data with
+proofs in the first place: a theorem proved once about a generic
+`Grp : Group G` is inherited for free by `intGroup`, by `perm3Group`, and
+by every group built afterward, with nothing about the specific carrier
+re-proved at each use site. This chapter cashes in that promise. Rather
+than fix `G` to `Int` or `Perm3` before proving anything, the setup below
+fixes an *arbitrary* group once, and every theorem that follows is proved
+against that one unnamed group — so that whatever gets proved here
+automatically applies everywhere a `Group` instance is later supplied.
 
 ```lean
 variable {G : Type} (Grp : Group G)
@@ -31,12 +31,15 @@ permutation groups, and to every group built later.
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
-- Dummit and Foote ([DummitFoote2003]), §1.1 "Basic Axioms and Examples," pp. 17–18, Proposition 1 — uniqueness of identity/inverses, inverse-of-a-product law.
+- **Group theorems proved here.** "The identity of $G$ is unique ...
+  for each $a \in G$, $a^{-1}$ is uniquely determined ...
+  $(a{*}b)^{-1} = (b^{-1}){*}(a^{-1})$" ([DummitFoote2003], §1.1
+  "Basic Axioms and Examples," pp. 17–18, Proposition 1).
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

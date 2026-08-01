@@ -84,7 +84,17 @@ optional "Programmer's corner (Python)" boxes alongside the "Mathematical
 reading" ones; and a third, readability-focused pass that put every worked
 example in its own block immediately followed by its own explanation
 (rather than several examples dumped together, explained afterward all at
-once) and added plain-text category-theory diagrams at the natural spots.
+once) and added plain-text category-theory diagrams at the natural spots;
+and a fourth pass added `dbg_trace`-annotated tracing to every genuinely
+recursive Lean definition in the book, so the recursion can be watched
+unwinding one call at a time rather than only read about; and a fifth,
+narrative-focused pass rewrote every chapter's opening as a genuine story
+(each section framed as the answer to a question the previous one forces,
+rather than a list of topics), moved every section's formal citations
+from a "Recall" box at the top — the reader's first impression, before
+any explanation — to a "Sources, quoted" recap at the bottom, and merged
+the former separate "References" list into that same box, so each
+section now closes with one citation block instead of two.
 See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Table of contents
@@ -130,8 +140,8 @@ See [changelog/](changelog/README.md) for the full, itemized history.
   symbols used throughout the main text (∀, ∃, ∈, ∘, •, ⟨_, _⟩, ...), each
   matched to its Lean syntax.
 - [Bibliography](bibliography.md) — every external source cited in any
-  chapter's "References" section, consolidated into one list with one
-  citation style; each chapter links back to the entries it uses.
+  section's "Sources, quoted" box, consolidated into one list with one
+  citation style; each section links back to the entries it uses.
 - [Python companion](python-companion/python_companion.ipynb) — every
   "Programmer's corner (Python)" snippet in the book, collected into one
   runnable notebook that opens directly in Google Colab, no Lean

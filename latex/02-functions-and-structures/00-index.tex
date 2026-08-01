@@ -4,7 +4,24 @@ Functions \textbf{curry}: \texttt{add : Nat → Nat → Nat} is really \texttt{N
 
 \textbf{Learning objectives.} By the end of this chapter, bundle data (and proofs) into a \texttt{structure}, use field projection and the anonymous constructor, parameterize a \texttt{structure} by a type, and extend one \texttt{structure} with another via \texttt{extends}.
 
-\section{Sections}\label{sec:02-functions-and-structures:00-index:2}
+\section{The story of this chapter}\label{sec:02-functions-and-structures:00-index:2}
+
+As in Chapter 1, each section below answers a question forced by the one before it:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{A function takes its arguments one at a time --- so how does several pieces of data that belong \emph{together}, like a point's \texttt{x} and \texttt{y}, get treated as a single value instead of two arguments a caller has to keep in sync by hand?} (\hyperref[sec:02-functions-and-structures:01-structure-basics:1]{Section 1}) \texttt{structure} bundles named fields under one type, built with the anonymous constructor \texttt{⟨...⟩} and read back out by field projection \texttt{.field}. This is the packaging mechanism every algebraic object from Chapter 6 onward --- a group, later a ring --- is built from.
+\item
+  \textbf{\texttt{Point} bundles two \texttt{Nat}s specifically. What if the same shape of bundling is needed for \emph{any} pair of types, not just \texttt{Nat} and \texttt{Nat}?} (\hyperref[sec:02-functions-and-structures:02-type-parameters:1]{Section 2}) A \texttt{structure} can be parameterized by a type, the same way \texttt{identity} in Chapter 1 was parameterized by \texttt{\{α : Type\}} --- \texttt{Pair α β} is not one structure but a whole family of them, one per choice of \texttt{α} and \texttt{β}, which is exactly the shape \texttt{Group (G : Type)} will need later.
+\item
+  \textbf{Some structures are not built from scratch --- they are an existing structure plus one more piece. How does Lean avoid re-declaring every inherited field by hand each time?} (\hyperref[sec:02-functions-and-structures:03-extending-structures:1]{Section 3}) \texttt{extends} builds a new structure containing an old one whole, plus more, generating a forgetful \texttt{.toX} projection for free --- the exact mechanism a \texttt{CommGroup} will use in Chapter 6 to add commutativity to \texttt{Group} without repeating the group axioms.
+\end{enumerate}
+
+By the end of the chapter, \texttt{structure} is no longer just a convenient keyword for grouping fields --- it is the bundling-and-forgetting machinery every algebraic structure in the rest of this book depends on.
+
+\section{Sections}\label{sec:02-functions-and-structures:00-index:3}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

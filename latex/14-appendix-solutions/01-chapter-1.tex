@@ -52,22 +52,30 @@ def anotherSigma : (*$\Sigma$*) n : Nat, Fin n := (*$\langle$*)5, (*$\langle$*)0
 
 \texttt{Path.append : \{u v w : V\} → Path Q u v → Path Q v w → Path Q u w}, treating the implicit binders as outer Π's, unfolds one binder at a time:
 
-{\small\begin{tabular}{
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1800}}
-}
-\toprule
-Level & \(A\) & \(B(\cdot)\) & Dependent? \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Level
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(A\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(B(\cdot)\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Dependent?
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
 1 (binds \(u\)) & \(V\) & \(\prod_{v:V}\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)\) & Yes --- mentions \(u\) \\
 2 (binds \(v\)) & \(V\) & \(\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)\) & Yes --- mentions \(v\) \\
 3 (binds \(w\)) & \(V\) & \(\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w\) & Yes --- mentions \(w\) \\
 4 (binds \(p\)) & \(\mathrm{Path}_Q\,u\,v\) & \(\mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w\) & No --- constant in \(p\) \\
 5 (binds \(q\)) & \(\mathrm{Path}_Q\,v\,w\) & \(\mathrm{Path}_Q\,u\,w\) & No --- constant in \(q\) \\
-\bottomrule
-\end{tabular}}
-
+\end{longtable}
 
 The first three levels are genuinely dependent Π-types: each \(B\) mentions the vertex just bound, since it appears as an index into \texttt{Path} later in the signature. The last two levels are Π-types that happen to collapse to ordinary arrows: once \(u, v, w\) are fixed, \texttt{Path Q u w}'s \emph{type} no longer depends on the specific \emph{proof term} \texttt{p} or \texttt{q} supplied, only on the vertices already bound --- exactly the ``\(B(x)\) not depending on \(x\)'' collapse case from Chapter 1, Sections 3/5.

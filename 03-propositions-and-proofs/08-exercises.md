@@ -28,9 +28,9 @@ by checking both sides reduce to the same normal form.
    reduction sequence turns `n + 0` into `n` without first knowing which
    `n` it is. That gap between "true" and "reduces to the same term" is
    exactly why proofs, not mere computation, exist.
-3. *`∃ n, n > 0` was proved with a witness and a decided fact about it.
-   What would go wrong trying to prove `∀ n, n > 0` the same way, by
-   picking one `n` and checking it?* A single witness proves only that
+3. *`∃ p, p > 3 ∧ isPrime p` was proved with a witness and a decided fact
+   about it. What would go wrong trying to prove `∀ n, n > 0` the same way,
+   by picking one `n` and checking it?* A single witness proves only that
    *some* `n` works — universal quantification demands the property hold
    for *every* `n` at once, which no finite number of individual checks
    can establish; it needs a genuine argument (an inductive proof,

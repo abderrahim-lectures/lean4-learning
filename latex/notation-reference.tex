@@ -9,15 +9,25 @@ Two related pages cover notation this one deliberately leaves out: the \hyperref
 \section*{Logic and quantifiers}
 \addcontentsline{toc}{section}{Logic and quantifiers}\label{sec:root:notation-reference:2}
 
-{\small\begin{tabular}{
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1800}}
-}
-\toprule
-Meaning & Math notation & Lean syntax & First appears \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Math notation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Lean syntax
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+First appears
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
 Function type / implication & \(A \to B\) & \texttt{A → B} & Chapter 1 \\
 Universal quantifier (``for all'') & \(\forall x, P\, x\) & \texttt{∀ x, P x} & Chapter 3 \\
 Existential quantifier (``there exists'') & \(\exists x, P\, x\) & \texttt{∃ x, P x} & Chapter 3 \\
@@ -28,22 +38,30 @@ Conjunction (``and'') & \(P \wedge Q\) & \texttt{P ∧ Q} (\texttt{And}) & Chapt
 Disjunction (``or'') & \(P \vee Q\) & \texttt{P ∨ Q} (\texttt{Or}) & Chapter 3 \\
 Not equal & \(a \neq b\) & \texttt{a ≠ b} & Chapter 3 \\
 Turnstile (``the goal to prove'') & \(\Gamma \vdash P\) & the goal-state display (not typed by the user) & Chapter 4 \\
-\bottomrule
-\end{tabular}}
-
+\end{longtable}
 
 \section*{Algebra, structure, and diagrams}
 \addcontentsline{toc}{section}{Algebra, structure, and diagrams}\label{sec:root:notation-reference:3}
 
-{\small\begin{tabular}{
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1800}}
-}
-\toprule
-Meaning & Math notation & Lean syntax & First appears \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Math notation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Lean syntax
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+First appears
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
 Definitional equality & \(t \equiv t'\) & \texttt{rfl} closes the goal & Chapter 5, Section 4 \\
 Isomorphism / equivalence & \(A \simeq B\) & \texttt{A ≃ B} (\texttt{Equiv}) & Chapter 10 \\
 Anonymous-constructor pairing & \(\langle a, b \rangle\) & \texttt{⟨a, b⟩} & Chapter 2, Section 1 \\
@@ -56,6 +74,4 @@ Subset & \(A \subseteq B\) & \texttt{A ⊆ B} & Chapter 10 \\
 Cartesian product & \(A \times B\) & \texttt{A × B} & Chapter 1 \\
 Long/derivation arrow (diagrams) & \(A \longrightarrow B\) & \texttt{⟶} (diagram labels only, not ordinary code) & Chapter 1, Section 4 \\
 Projections out of a product & \(\pi_X, \pi_Y\) & \texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd} & Chapter 1, Section 4 \\
-\bottomrule
-\end{tabular}}
-
+\end{longtable}

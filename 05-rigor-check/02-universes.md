@@ -4,27 +4,10 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Universe hierarchy.** "Think of `Type 0` as a universe of 'small'
-  or 'ordinary' types. `Type 1` is then a larger universe of types,
-  which contains `Type 0` as an element, and `Type 2` is an even
-  larger universe of types, which contains `Type 1` as an element.
-  The list is infinite: there is a `Type n` for every natural number
-  `n`. `Type` is an abbreviation for `Type 0`" ([TPIL4], §2.2 "Types
-  as objects").
-- **Universe polymorphism.** "Some operations ... need to be
-  polymorphic over type universes. For example, `List α` should make
-  sense for any type `α`, no matter which type universe `α` lives in
-  ... Lean allows you to declare universe variables explicitly using
-  the `universe` command" ([TPIL4], §2.2).
-
----
-
-Chapter 1 said `Type` is itself a term, of some type. A careful reader
+The previous section asked why this book delays Lean's `class` mechanism
+in favor of plain `structure`. This section asks the second of the three
+questions the chapter introduction raised. Chapter 1 said `Type` is
+itself a term, of some type. A careful reader
 should immediately ask: *of what type?* If the answer were "`Type` is a
 term of type `Type`," Lean's logic would be inconsistent. This is exactly
 Russell's paradox in type-theoretic form: the type of "all types," if it
@@ -68,10 +51,9 @@ applied to its parameters is itself a type), but `Group`, the type
 This is not merely a bookkeeping choice. It follows from the specific
 typing rule Lean uses for building function (Π-)types out of universes:
 forming `A → B` when `A : Type i` and `B : Type j` produces a term of type
-`Type (max i j)`, *unless* `B`'s universe already needs to be at least one
-level higher to safely contain "the collection of all functions out of `A`".
-Concretely here, `A := Type` (living in `Type 1`, since `Type : Type 1`)
-and `B := Type` again, so `Type → Type` itself lands in `Type 1`.
+`Type (max i j)`. Concretely here, `A := Type` (living in `Type 1`, since
+`Type : Type 1`) and `B := Type` again, so `Type → Type` itself lands in
+`Type (max 1 1) = Type 1`.
 [Chapter 5, Section 3](03-typing-rules-and-safety.md) states this rule precisely
 as one line of the calculus of constructions. The short version
 is that `Group` is not even a candidate carrier type for its own
@@ -100,12 +82,23 @@ in `Type 0`.
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
-- *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" — universe hierarchy, universe polymorphism.
+- **Universe hierarchy.** "Think of `Type 0` as a universe of 'small'
+  or 'ordinary' types. `Type 1` is then a larger universe of types,
+  which contains `Type 0` as an element, and `Type 2` is an even
+  larger universe of types, which contains `Type 1` as an element.
+  The list is infinite: there is a `Type n` for every natural number
+  `n`. `Type` is an abbreviation for `Type 0`" ([TPIL4], §2.2 "Types
+  as objects").
+- **Universe polymorphism.** "Some operations ... need to be
+  polymorphic over type universes. For example, `List α` should make
+  sense for any type `α`, no matter which type universe `α` lives in
+  ... Lean allows you to declare universe variables explicitly using
+  the `universe` command" ([TPIL4], §2.2).
 - Girard, *"Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure,"* Thèse d'État, Université Paris VII, 1972 (not yet in this book's bibliography) — the actual source of the `Type : Type` inconsistency: the proof that a calculus with the rule `⊢ * : *` loses the normalization property. [Girard1971] (the 1971/1970 "Une extension de l'interprétation de Gödel à l'analyse" paper, already in this book's bibliography) is a different, earlier paper and is not that source. Thierry Coquand's 1986 paper "An analysis of Girard's paradox," LICS 1986, is the standard modern exposition, also not yet cited here.
 
 [TPIL4]: ../bibliography.md#tpil4
