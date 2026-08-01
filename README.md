@@ -82,6 +82,11 @@ The book uses several recurring devices, applied consistently across all
   (`structure`/`instance` declarations, single-step pattern matches,
   tactic-mode proofs) has no such trace, since there is no multi-step
   computation to show.
+- **Sources, quoted.** Every formally cited term closes its section with
+  a verbatim quote, a precise citation, and a "Picture it like this:"
+  gloss explaining the idea through an everyday analogy — real-world,
+  not just mathematical — rather than a second compressed technical
+  restatement.
 - **Socratic questions.** Each chapter includes reflective "why X, not
   Y?" questions with their answers, distinct from the recap and the
   exercises.

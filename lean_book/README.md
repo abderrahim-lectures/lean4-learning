@@ -94,7 +94,12 @@ rather than a list of topics), moved every section's formal citations
 from a "Recall" box at the top — the reader's first impression, before
 any explanation — to a "Sources, quoted" recap at the bottom, and merged
 the former separate "References" list into that same box, so each
-section now closes with one citation block instead of two.
+section now closes with one citation block instead of two; and renamed
+the terse "Brief:" gloss following each verbatim quote to "Picture it
+like this:", rewriting all of them as plain-language explanations
+grounded in everyday analogies rather than a compressed technical
+restatement, while the quotes and citations themselves stay exactly as
+rigorous as before.
 See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Table of contents
