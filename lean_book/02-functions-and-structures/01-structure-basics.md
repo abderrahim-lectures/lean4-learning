@@ -4,23 +4,16 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Record / tuple.** "The simplest of these is pairs, or more
-  generally tuples, of values ... the generalization from n-ary
-  tuples to labeled records is equally straightforward" ([Pierce2002],
-  §11.6–§11.8). Brief: `structure` is this book's realization of a
-  labeled record.
-- **Categorical product (universal property).** For a category with a
-  product $A \times B$ (with projections $p_A, p_B$) and any object
-  $C$ with morphisms $f : C \to A$, $g : C \to B$: "there is exactly
-  one morphism $h : C \to A \times B$ such that $f = p_A h$ and
-  $g = p_B h$" ([Pareigis1970], §1.11, p. 30).
-
----
+Chapter 1 fixed what a single term and a single function look like, down
+to the calculus of constructions itself. But a function of several
+arguments, as the chapter introduction just noted, is really a chain of
+one-argument functions — `add : Nat → Nat → Nat` never actually receives
+two numbers at once. That is fine for arguments that stay independent,
+but plenty of the mathematics this book will build — a point in the
+plane, later a group's carrier and operation and axioms together — needs
+several pieces of data to travel *together*, as one value, not as
+separate arguments a caller has to remember to keep in sync. `structure`
+is Lean's answer to that need.
 
 A `structure` groups several pieces of data under one name. We will use
 this Lean feature constantly once we define groups and rings.
@@ -99,14 +92,25 @@ graph TD
     AB -->|p_B| B
 ```
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions and verbatim quotes are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
+- **Record / tuple.** "The simplest of these is pairs, or more
+  generally tuples, of values ... the generalization from n-ary
+  tuples to labeled records is equally straightforward" ([Pierce2002],
+  §11.6–§11.8). Picture it like this: an unlabeled tuple is a box
+  packed in a fixed order — you just have to remember "first slot is
+  the name, second is the age." A labeled record is the same box with
+  every slot tagged directly: "Name: ___, Age: ___." Lean's `structure`
+  is exactly this tagged version.
+- **Categorical product (universal property).** For a category with a
+  product $A \times B$ (with projections $p_A, p_B$) and any object
+  $C$ with morphisms $f : C \to A$, $g : C \to B$: "there is exactly
+  one morphism $h : C \to A \times B$ such that $f = p_A h$ and
+  $g = p_B h$" ([Pareigis1970], §1.11, p. 30).
 - Lean 4 documentation ([LeanDocs]) — the constructor/projection/anonymous-constructor mechanics described above.
-- Pierce ([Pierce2002]), §11.6 "Pairs," §11.7 "Tuples," §11.8 "Records" — records and tuples.
-- Bodo Pareigis, *Categories and Functors* ([Pareigis1970]), §1.11, p. 30 — universal property of a categorical product.
 
 [LeanDocs]: ../bibliography.md#leandocs
 [Pierce2002]: ../bibliography.md#pierce2002

@@ -8,7 +8,7 @@ links above are always the current, authoritative view (issues/PRs
 opened after this page was last updated will show there first).
 
 For the reader-facing summary of what changed in each release, see
-[`lean_book/CHANGELOG.md`](lean_book/CHANGELOG.md).
+[`lean_book/changelog/`](lean_book/changelog/README.md).
 
 ## Summary
 

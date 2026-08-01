@@ -4,21 +4,14 @@
 
 ---
 
-### Recall
-
-Formal definition cited in this section, gathered here for quick
-reference (full citation in the [Bibliography](../bibliography.md)):
-
-- **Path algebra $kQ$.** "Let $Q$ be a quiver. The path algebra $KQ$
-  of $Q$ is the $K$-algebra whose underlying $K$-vector space has as
-  its basis the set of all paths $(a \mid \alpha_1, \ldots, \alpha_l
-  \mid b)$ of length $l \geq 0$ in $Q$ and such that the product of
-  two basis vectors $(a \mid \alpha_1, \ldots, \alpha_l \mid b)$ and
-  $(c \mid \beta_1, \ldots, \beta_k \mid d)$ of $KQ$ is defined by
-  $(a \mid \alpha_1, \ldots, \alpha_l \mid b)(c \mid \beta_1, \ldots,
-  \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l,
-  \beta_1, \ldots, \beta_k \mid d)$" ([AssemSimsonSkowronski2006],
-  Ch. II §1, Definition 1.2).
+Section 4 built individual paths one arrow at a time, via `Path.cons`
+extending a shorter path with one new arrow. Two paths already built —
+separately, by whatever route — are often exactly what needs to be joined
+into a single longer path, rather than rebuilt from scratch arrow by
+arrow. That joining operation is **composition**, and, once every pair of
+composable paths is given a $k$-linear coefficient, it is also the
+multiplication that turns the set of all paths into the path algebra
+$kQ$ this chapter has been building toward from the start.
 
 Given a path `p : Path Q u v` and a path `q : Path Q v w`, they can be concatenated
 into a path `Path Q u w`, defined by recursion on `q`:
@@ -179,11 +172,21 @@ only the composition (the category layer) is formalized here.
 > Representations* both develop path algebras and their representations
 > from scratch, at a similar level of explicitness to this chapter.
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
+- **Path algebra $kQ$.** "Let $Q$ be a quiver. The path algebra $KQ$
+  of $Q$ is the $K$-algebra whose underlying $K$-vector space has as
+  its basis the set of all paths $(a \mid \alpha_1, \ldots, \alpha_l
+  \mid b)$ of length $l \geq 0$ in $Q$ and such that the product of
+  two basis vectors $(a \mid \alpha_1, \ldots, \alpha_l \mid b)$ and
+  $(c \mid \beta_1, \ldots, \beta_k \mid d)$ of $KQ$ is defined by
+  $(a \mid \alpha_1, \ldots, \alpha_l \mid b)(c \mid \beta_1, \ldots,
+  \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l,
+  \beta_1, \ldots, \beta_k \mid d)$" ([AssemSimsonSkowronski2006],
+  Ch. II §1, Definition 1.2).
 - Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.2, Ch. II §1 — path algebra $kQ$. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*.
 - Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2) — same construction; unit given explicitly as $1 = \sum_{i\in Q_0} e_i$ in the lemma immediately following (Lemma 4.3 in that source's numbering).
 

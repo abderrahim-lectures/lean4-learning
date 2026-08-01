@@ -4,15 +4,12 @@
 
 ---
 
-### Recall
-
-Formal definition cited in this section, gathered here for quick
-reference (full citation in the [Bibliography](../bibliography.md)):
-
-- **Submodule.** "An $R$-submodule of $M$ is a subgroup $N$ of $M$
-  which is closed under the action of ring elements, i.e., $rn \in N$,
-  for all $r \in R, n \in N$" ([DummitFoote2003], §10.1 "Basic
-  Definitions and Examples," p. 337).
+Section 3 exhibited a concrete module — the canonical $\mathbb{Z}$-action on
+an abelian group — built from nothing but the group structure itself. With
+at least one genuine module now in hand, the natural next question is
+which subsets of a module inherit its structure. This is the module
+analogue of a subgroup: a subset closed under the same operations the
+whole module is built from.
 
 A **submodule** of $M$ is a subset closed under $+$, containing $0$, and
 closed under the scalar action. In Lean, "a subset closed under some
@@ -127,12 +124,15 @@ this specific subset.
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
-- Dummit and Foote ([DummitFoote2003]), §10.1 "Basic Definitions and Examples," p. 337 — submodules and their axioms.
+- **Submodule.** "An $R$-submodule of $M$ is a subgroup $N$ of $M$
+  which is closed under the action of ring elements, i.e., $rn \in N$,
+  for all $r \in R, n \in N$" ([DummitFoote2003], §10.1 "Basic
+  Definitions and Examples," p. 337).
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

@@ -118,7 +118,7 @@ def cycle012 : Perm3 where
 
 Both compositions send `0` somewhere, but to *different* places: applying
 `cycle012` then `swap01` sends $0 \to 1 \to 0$, while applying `swap01`
-then `cycle012` sends $0 \to 0 \to 1$. Concretely, `#eval` reports `0` for
+then `cycle012` sends $0 \to 1 \to 2$. Concretely, `#eval` reports `0` for
 the first and `2` for the second. This is **directly computed evidence**
 that `Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01`; in other
 words, this group is genuinely non-abelian. This is exactly the kind

@@ -4,17 +4,15 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Group.** A set $G$ with a binary operation, identity, and
-  inverses satisfying associativity and the identity/inverse laws
-  (below); consequences of these axioms, e.g. "the identity of $G$ is
-  unique ... for each $a \in G$, $a^{-1}$ is uniquely determined"
-  ([DummitFoote2003], §1.1 "Basic Axioms and Examples," p. 17,
-  Proposition 1).
+Chapter 5's checkpoint project asked for a `Monoid`: a set with an
+associative operation and a two-sided identity, built entirely from the
+bundling techniques of Chapters 1–5, with no inverses required. A group is
+the natural next question a monoid forces: what happens once every
+element is also required to be *undoable*? Adding that one further axiom
+is the entire content of this chapter's opening definition, and it is
+what turns "a set with an associative operation" into the richer
+structure — with cancellation, and eventually genuine theorems reusable
+across every group at once — that the rest of Part II builds on.
 
 A **group** is a set $G$ together with:
 
@@ -38,13 +36,18 @@ $a \cdot b = b \cdot a$ always holds is called **abelian** or
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
-- Dummit and Foote ([DummitFoote2003]), §1.1 "Basic Axioms and Examples," p. 17 — group axioms, uniqueness of identity/inverses.
-- Aluffi ([Aluffi2009]) — **Gap:** not held in either notebook (see `NOTEBOOK-SOURCE-GAPS.md`); this recommendation is offered as further reading, not an independently verified factual claim — Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
+- **Group.** A set $G$ with a binary operation, identity, and
+  inverses satisfying associativity and the identity/inverse laws
+  (below); consequences of these axioms, e.g. "the identity of $G$ is
+  unique ... for each $a \in G$, $a^{-1}$ is uniquely determined"
+  ([DummitFoote2003], §1.1 "Basic Axioms and Examples," p. 17,
+  Proposition 1).
+- Aluffi ([Aluffi2009]) — offered as further reading, not an independently verified factual claim: Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

@@ -4,16 +4,12 @@
 
 ---
 
-### Recall
-
-Formal definition cited in this section, gathered here for quick
-reference (full citation in the [Bibliography](../bibliography.md)):
-
-- **Module.** "A binary operation $+$ on $M$ under which $M$ is an
-  abelian group, and ... an action of $R$ on $M$ ... (a)
-  $(r+s)m = rm+sm$ ... (b) $(rs)m = r(sm)$ ... (c)
-  $r(m+n) = rm+rn$ ... (d) $1m = m$" ([DummitFoote2003], §10.1
-  "Basic Definitions and Examples," p. 336).
+Section 1 stated the module axioms on paper, as the same "abelian group
+plus a compatible action" pattern already used for `Group` and `Ring`
+throughout Chapters 6–9. A definition stated on paper is not yet a
+definition Lean can check against; it still has to be written down as a
+`structure`, field by field, exactly as `Group` and `Ring` were before it.
+That translation is what this section carries out.
 
 The same "data, then axioms" build used for `Group` and `Ring` applies here:
 
@@ -69,12 +65,16 @@ some already-fixed ring.
 > to Homological Algebra* for the deeper theory) covers the same axioms
 > from the ground up.
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
-- Dummit and Foote ([DummitFoote2003]), §10.1 "Basic Definitions and Examples," p. 336 — module axioms (M1)–(M4).
+- **Module.** "A binary operation $+$ on $M$ under which $M$ is an
+  abelian group, and ... an action of $R$ on $M$ ... (a)
+  $(r+s)m = rm+sm$ ... (b) $(rs)m = r(sm)$ ... (c)
+  $r(m+n) = rm+rn$ ... (d) $1m = m$" ([DummitFoote2003], §10.1
+  "Basic Definitions and Examples," p. 336).
 - Weibel ([Weibel1994]) — the deeper module/homological theory this section's "Read more" points toward.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003

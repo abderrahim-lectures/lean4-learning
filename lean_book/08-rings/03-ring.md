@@ -4,16 +4,15 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Ring.** "(i) $(R, +)$ is an abelian group, (ii) $\times$ is
-  associative ... (iii) the distributive laws hold" ([DummitFoote2003],
-  §7.1 "Basic Definitions and Examples," pp. 222–223). A basic
-  consequence: "$0a = a0 = 0$ for all $a \in R$" (p. 225, Proposition
-  1).
+`CommGroup` closed off the additive side of a ring: `extends Group G`
+plus one extra axiom, `comm`, is already enough to say "$(R, +)$ is an
+abelian group." What a group — even a commutative one — still cannot
+express is a *second* operation living alongside the first, one that
+interacts with addition through distributivity rather than standing
+apart from it. `Ring` is exactly that: `CommGroup` supplies (R1) whole,
+as a single bundled field, and the definition below adds the remaining
+axioms (R2)–(R4) needed to make multiplication a genuine second citizen
+of the structure.
 
 ```lean
 structure Ring (R : Type) where
@@ -72,13 +71,17 @@ $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 > *Algebra: Chapter 0* (the latter using the same categorical
 > framing this book uses) are standard references.
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
-- Dummit and Foote ([DummitFoote2003]), §7.1 "Basic Definitions and Examples," pp. 222–225 — ring axioms (R1)–(R4) and their consequences.
-- Aluffi ([Aluffi2009]) — **Gap:** not held in either notebook (see `NOTEBOOK-SOURCE-GAPS.md`); this recommendation is offered as further reading, not an independently verified factual claim — Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
+- **Ring.** "(i) $(R, +)$ is an abelian group, (ii) $\times$ is
+  associative ... (iii) the distributive laws hold" ([DummitFoote2003],
+  §7.1 "Basic Definitions and Examples," pp. 222–223). A basic
+  consequence: "$0a = a0 = 0$ for all $a \in R$" (p. 225, Proposition
+  1).
+- Aluffi ([Aluffi2009]) — offered as further reading, not an independently verified factual claim: Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

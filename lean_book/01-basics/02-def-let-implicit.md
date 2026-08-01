@@ -4,8 +4,18 @@
 
 ---
 
-Consider three short definitions. Every token in them is doing something
-specific; each is examined in full below.
+Section 1 established that every term has a type, and that Lean checks
+this before running anything. That fact is useless without a way to
+*name* terms so they can be reused, and a way to write one definition
+that works for many types at once rather than one copy per type. Those
+are exactly the two gaps this section closes: `def`/`let` for naming
+(global and local, respectively), and implicit arguments for writing a
+single definition — like an identity function — that is correct for
+every type simultaneously, instead of retyped per type.
+
+Consider three short definitions, each introducing one of these pieces in
+turn. Every token in them is doing something specific; each is examined
+in full below.
 
 ```lean
 def double (n : Nat) : Nat := n * 2
@@ -169,6 +179,16 @@ $\mathrm{id}_{\mathbb{R}}$, ..." one at a time either, but would instead
 say "for every object $A$, there is an identity morphism $\mathrm{id}_A$," which is
 exactly what the universally-quantified, implicitly-inferred `{α : Type}`
 expresses.
+
+`identity`'s implicit `{α : Type}` is polymorphic *over which type is
+plugged in*, but its return type, `α`, never changes shape once `α` is
+fixed — an `identity` for `Nat` returns a `Nat`, full stop, no matter
+which `Nat` was given. The next section asks the sharper question this
+naturally raises: can the *type itself* depend not just on which type
+was chosen, but on the specific *value* of an argument, changing from one
+call to the next even at a single fixed type? That is a strictly new
+capability, not a variation on implicit arguments, and it is what makes
+Lean a genuine proof assistant rather than an ordinary typed language.
 
 ---
 

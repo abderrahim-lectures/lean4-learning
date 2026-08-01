@@ -4,26 +4,6 @@
 
 ---
 
-### Recall
-
-Formal definitions cited in this section, gathered here for quick
-reference (full citations in the [Bibliography](../bibliography.md)):
-
-- **Dependent type.** "The short explanation is that types can depend
-  on parameters" ([TPIL4], §2.8 "What makes dependent type theory
-  dependent?"). Brief: this book's primary example is `Fin n`, a
-  genuinely different type per `n`.
-- **Dependent function type ($\Pi$-type).** "The type
-  `(a : α) → β a` denotes the type of functions `f` with the property
-  that, for each `a : α`, `f a` is an element of `β a`" ([TPIL4],
-  §2.8). Brief: written here as $\prod_{x:A} B(x)$ (standard
-  mathematical notation for the same construct — TPIL4 itself uses
-  "dependent function type"/"dependent arrow type," not the $\Pi$
-  symbol); strictly generalizes the ordinary function type
-  $A \to B$.
-
----
-
 Every function seen so far has a *fixed* codomain: `double : Nat → Nat`
 returns a `Nat` regardless of the input `n`. Lean's type theory allows
 something more general: a type that itself depends on a *value*, and a
@@ -98,12 +78,13 @@ The construction of `Fin` can be inspected directly:
 -- structure Fin (n : Nat) : Type
 -- fields:
 --   Fin.val  : Nat
---   Fin.isLt : val < n
+--   Fin.isLt : ↑self < n
 ```
 
 So a term of `Fin n` is literally a pair: a `Nat` value, plus a *proof*
-that the value is below `n`. The proof's very statement (`val < n`)
-mentions `n`, the value supplied. Change `n` and the result is a
+that the value is below `n`. The proof's very statement (`↑self < n`,
+i.e. the wrapped `val` compared against `n`) mentions `n`, the value
+supplied. Change `n` and the result is a
 genuinely different type, with a genuinely different proof obligation
 attached. This bundling — data, plus a proof whose statement depends on
 that data — is the second half of the dependent-types story (formalized
@@ -145,7 +126,7 @@ def Vec.replicate (a : α) : (n : Nat) → Vec α n
 -- @Vec.replicate : {α : Type} → α → (n : Nat) → Vec α n
 
 #eval (Vec.replicate (-42 : Int) 3 : Vec Int 3)
--- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) Vec.nil))
+-- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) (Vec.nil)))
 ```
 
 `Vec.replicate` recurses exactly once per unit of length, so it is worth
@@ -164,7 +145,7 @@ def Vec.replicate' (a : α) : (n : Nat) → Vec α n
 -- replicate: n=2, prepending one copy of a, recursing with n=1
 -- replicate: n=1, prepending one copy of a, recursing with n=0
 -- replicate: n=0, base case, returning Vec.nil
--- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) Vec.nil))
+-- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) (Vec.nil)))
 ```
 
 Read the trace bottom-to-top against top-to-bottom: the four `dbg_trace`
@@ -237,8 +218,13 @@ has type
 but is expected to have type
   Vec ?m (?n + 1)
 in the application
-  Vec.head Vec.nil
+  Vec.nil.head
 ```
+
+(Lean's pretty-printer renders the failed application in field-notation
+form, `Vec.nil.head`, rather than echoing back `Vec.head Vec.nil` verbatim
+— cosmetic, but worth not being surprised by when reproducing this error
+directly.)
 
 Nothing about "index out of range" happens at runtime, because the bad
 call is not a well-typed term in the first place — the same "ruled out
@@ -403,12 +389,29 @@ it is the identical idea, with a richer index.
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions and verbatim quotes are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
-- *Theorem Proving in Lean 4* ([TPIL4]), §2.8 "What makes dependent type theory dependent?" — dependent type, dependent function type.
+- **Dependent type.** "The short explanation is that types can depend
+  on parameters" ([TPIL4], §2.8 "What makes dependent type theory
+  dependent?"). Picture it like this: a cake sized to the guest count — "the
+  cake for 12" and "the cake for 3" aren't the same cake made smaller,
+  they're genuinely different objects, one per number of guests. `Fin
+  n` is that idea turned into a type: `Fin 12` and `Fin 3` are
+  different types, one per `n`, the same way cake sizes differ per
+  guest count.
+- **Dependent function type ($\Pi$-type).** "The type
+  `(a : α) → β a` denotes the type of functions `f` with the property
+  that, for each `a : α`, `f a` is an element of `β a`" ([TPIL4],
+  §2.8). Picture it like this: a vending machine whose dispensing slot changes
+  shape depending which button is pressed — a soda comes out one
+  opening, a bag of chips another. Written here as $\prod_{x:A} B(x)$
+  (standard mathematical notation for the same construct — TPIL4
+  itself uses "dependent function type"/"dependent arrow type," not
+  the $\Pi$ symbol); an ordinary function type $A \to B$ is just the
+  boring special case where every slot happens to be the same shape.
 - The Lean 4 source / [Mathlib4 API documentation][Mathlib4Docs] for `Fin` and `Vector` — confirmed directly in this section via `#print Fin` against the actual toolchain pinned in this repository's `lean_project/lean-toolchain`.
 - Thompson ([Thompson1991]) — §4.6 "Quantifiers," §6.3 "Dependent types and quantifiers" develop the same dependent-product/dependent-sum content, verified verbatim against the source. Thompson's primary notation is $\forall$/$\exists$, not Π/Σ: he calls the Σ-type-equivalent an "(infinitary) sum type" or "dependent sum type," and the literal term "Sigma-type" never appears in his main text, only once, in a bibliography entry citing a different author's paper. Explicit Π-notation does appear later, in his meta-theory chapters (§8.3, §9.1.5), applied to dependent function spaces in a typed λ-calculus meta-language.
 - Chlipala ([Chlipala2013]), §8.1 "Length-Indexed Lists" and §9.1 "More Length-Indexed Lists" — this book's length-indexed-vector idea (`ilist : nat → Set`) is built and revisited there, not in Ch. 2–3 as an earlier draft of this section stated; verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`) — a useful second angle on the identical concept, in Coq rather than Lean.

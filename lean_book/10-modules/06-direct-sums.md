@@ -4,22 +4,12 @@
 
 ---
 
-### Recall
-
-Formal definition cited in this section, gathered here for quick
-reference (full citation in the [Bibliography](../bibliography.md)):
-
-- **Direct sum of modules.** "Let $M_1, \ldots, M_k$ be a collection
-  of $R$-modules. The collection of $k$-tuples $(m_1, \ldots, m_k)$
-  where $m_i \in M_i$ with addition and action of $R$ defined
-  componentwise is called the direct product of $M_1, \ldots, M_k$
-  ... also referred to as the (external) direct sum ... denoted
-  $M_1 \oplus \cdots \oplus M_k$" ([DummitFoote2003], §10.3
-  "Generation of Modules, Direct Sums, and Free Modules," p. 351,
-  Proposition 5). D&F's explicit universal-property discussion in
-  this section covers free modules and tensor products, not direct
-  sums specifically — the universal-property framing of direct sums
-  used elsewhere in this book is its own extension of the pattern.
+Section 5 supplied the morphisms of $R\text{-}\mathbf{Mod}$: linear maps
+between individual modules. With both objects (modules, Sections 2–4) and
+morphisms (linear maps) in hand, the next natural step is to build new
+objects out of old ones. The simplest such construction combines two
+modules into a third, with the morphisms tying them back to their pieces —
+exactly the direct sum below.
 
 Given two $R$-modules $M$, $N$, their direct sum $M \oplus N$ has carrier
 $M \times N$, componentwise addition, and componentwise scalar action:
@@ -208,12 +198,22 @@ def proj1' : (Int × Int) →ₗ[Int] Int := LinearMap.fst Int Int Int
 
 ---
 
-### References
+### Sources, quoted
 
-Full citations in the [Bibliography](../bibliography.md). Formal
-definitions are gathered in Recall, above.
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
 
-- Dummit and Foote ([DummitFoote2003]), §10.3 "Generation of Modules, Direct Sums, and Free Modules," pp. 351–353, Proposition 5 — direct sums of modules, internal/external direct-sum equivalence.
+- **Direct sum of modules.** "Let $M_1, \ldots, M_k$ be a collection
+  of $R$-modules. The collection of $k$-tuples $(m_1, \ldots, m_k)$
+  where $m_i \in M_i$ with addition and action of $R$ defined
+  componentwise is called the direct product of $M_1, \ldots, M_k$
+  ... also referred to as the (external) direct sum ... denoted
+  $M_1 \oplus \cdots \oplus M_k$" ([DummitFoote2003], §10.3
+  "Generation of Modules, Direct Sums, and Free Modules," p. 351,
+  Proposition 5). D&F's explicit universal-property discussion in
+  this section covers free modules and tensor products, not direct
+  sums specifically — the universal-property framing of direct sums
+  used elsewhere in this book is its own extension of the pattern.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 

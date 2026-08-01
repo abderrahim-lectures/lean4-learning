@@ -5,8 +5,8 @@
 ---
 
 Every external source cited anywhere in this book, consolidated into one
-list with one consistent citation style. Each chapter's own "References"
-section links back to the entries it uses, with a short note on *why*
+list with one consistent citation style. Each section's own "Sources,
+quoted" box links back to the entries it uses, with a short note on *why*
 that source is cited at that specific spot — this page holds the full
 citation, once, for every source in the book. (This does not include the
 Lean tactic-reference/Loogle links used inline throughout the main text,
@@ -27,7 +27,9 @@ and are indexed separately in the
 
 <a id="dummitfoote2003"></a>**[DummitFoote2003]** David S. Dummit and Richard M. Foote, *[Abstract Algebra](https://www.wiley.com/en-us/Abstract+Algebra,+3rd+Edition-p-9780471433347)*, 3rd ed., Wiley, 2003.
 
-<a id="gentzen1935"></a>**[Gentzen1935]** Gerhard Gentzen, "Untersuchungen über das logische Schließen," *Mathematische Zeitschrift*, 1935.
+<a id="gentzen1935"></a>**[Gentzen1935]** Gerhard Gentzen, "Untersuchungen über das logische Schließen," *Mathematische Zeitschrift* 39, 1935 (Part I, pp. 176–210; Part II, pp. 405–431).
+
+<a id="feysladriere1955"></a>**[FeysLadriere1955]** Gerhard Gentzen, *Recherches sur la déduction logique*, French translation by Robert Feys and Jean Ladrière, Presses Universitaires de France, 1955. A translation of [Gentzen1935]. §II p. 27's introduction/elimination-rule passage was verbatim-verified against this source.
 
 <a id="godel1930"></a>**[Godel1930]** Kurt Gödel, "Die Vollständigkeit der Axiome des logischen Funktionenkalküls," 1930.
 

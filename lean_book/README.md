@@ -87,7 +87,14 @@ example in its own block immediately followed by its own explanation
 once) and added plain-text category-theory diagrams at the natural spots;
 and a fourth pass added `dbg_trace`-annotated tracing to every genuinely
 recursive Lean definition in the book, so the recursion can be watched
-unwinding one call at a time rather than only read about.
+unwinding one call at a time rather than only read about; and a fifth,
+narrative-focused pass rewrote every chapter's opening as a genuine story
+(each section framed as the answer to a question the previous one forces,
+rather than a list of topics), moved every section's formal citations
+from a "Recall" box at the top — the reader's first impression, before
+any explanation — to a "Sources, quoted" recap at the bottom, and merged
+the former separate "References" list into that same box, so each
+section now closes with one citation block instead of two.
 See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Table of contents
@@ -133,8 +140,8 @@ See [changelog/](changelog/README.md) for the full, itemized history.
   symbols used throughout the main text (∀, ∃, ∈, ∘, •, ⟨_, _⟩, ...), each
   matched to its Lean syntax.
 - [Bibliography](bibliography.md) — every external source cited in any
-  chapter's "References" section, consolidated into one list with one
-  citation style; each chapter links back to the entries it uses.
+  section's "Sources, quoted" box, consolidated into one list with one
+  citation style; each section links back to the entries it uses.
 - [Python companion](python-companion/python_companion.ipynb) — every
   "Programmer's corner (Python)" snippet in the book, collected into one
   runnable notebook that opens directly in Google Colab, no Lean
@@ -143,25 +150,31 @@ See [changelog/](changelog/README.md) for the full, itemized history.
 ## Building the LaTeX manuscript
 
 `python build/build_latex.py` converts every chapter's Markdown into a
-full LaTeX manuscript under [`latex/`](latex/): one `.tex` file per
-Markdown section (mirroring the source layout exactly), a driver per
-chapter, and a top-level `latex/lean-for-working-algebraists.tex`. This
+full LaTeX manuscript under [`../lean_book_latex/`](../lean_book_latex/)
+(a sibling of this directory, not a subdirectory of it): one `.tex` file
+per Markdown section (mirroring the source layout exactly), a driver per
+chapter, and a top-level
+`lean_book_latex/lean-for-working-algebraists.tex`. This
 is real, professional LaTeX — proper `\chapter`/`\section` structure with
 styled headings and running headers, `amsthm`/`tcolorbox` environments
 for the book's recurring boxes ("Mathematical reading," "Programmer's
 corner," checkpoint projects), every former Mermaid diagram hand-translated
-to native `tikz-cd` (in [`latex/diagrams/`](latex/diagrams/), each with
+to native `tikz-cd` (in
+[`../lean_book_latex/diagrams/`](../lean_book_latex/diagrams/), each with
 its own standalone compile smoke-test in
-[`latex/smoketest/`](latex/smoketest/)), Lean and Python code via the
-`listings` package (styled in [`latex/lean-listings.tex`](latex/lean-listings.tex)),
-and a single `latex/references.bib` cited via `biblatex`. The script only
+[`../lean_book_latex/smoketest/`](../lean_book_latex/smoketest/)), Lean
+and Python code via the
+`listings` package (styled in
+[`../lean_book_latex/lean-listings.tex`](../lean_book_latex/lean-listings.tex)),
+and a single `lean_book_latex/references.bib` cited via `biblatex`. The
+script only
 emits `.tex` — no PDF is a build artifact of this repository; compile it
 yourself once a LaTeX distribution (e.g. MiKTeX or TeX Live) with
 `xelatex`, `biber`, and the `tikz-cd`/`tcolorbox`/`titlesec`/`fancyhdr`
 packages is available:
 
 ```sh
-cd latex
+cd ../lean_book_latex
 xelatex lean-for-working-algebraists.tex
 biber lean-for-working-algebraists
 xelatex lean-for-working-algebraists.tex

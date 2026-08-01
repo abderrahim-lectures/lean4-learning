@@ -19,6 +19,42 @@ identity, then cancel" patterns, and reuse a proved lemma
 (`left_inverse_unique`) to shortcut a later one (`inv_op`) instead of
 re-deriving it.
 
+## The story of this chapter
+
+Chapter 6 ended by naming a payoff it had not yet cashed in: a theorem
+proved once, generically, is inherited for free by every group built
+afterward. Each section here follows directly from making good on that
+promise:
+
+1. **How does one even state a theorem about "every group," rather than
+   about one specific group like `intGroup`?** ([Section 1](01-setup.md))
+   Fix an arbitrary `Grp : Group G` with `variable`, the same way a
+   written proof opens with "let $G$ be a group." Everything proved under
+   that fixed, unnamed group is a statement about all groups at once.
+2. **What is the first fact worth proving this way?**
+   ([Section 2](02-theorem-1.md)) That the identity is unique — chosen
+   first because its proof introduces the chapter's central technique:
+   when two opaque things must be shown equal, find a third expression
+   both sides equal on their own.
+3. **The same "relate to a common expression" idea just worked once — does
+   it stretch to a harder claim?** ([Section 3](03-theorem-2.md)) Yes, for
+   uniqueness of inverses, though this time no single axiom hands over the
+   needed third expression directly; it must be built by padding an
+   element with the identity and then swapping the identity for something
+   cancelable.
+4. **Having just proved *that* a left inverse is unique, can that fact
+   itself be reused rather than re-derived?** ([Section 4](04-theorem-3.md))
+   Yes: proving $(ab)^{-1} = b^{-1}a^{-1}$ reduces to checking that
+   $b^{-1}a^{-1}$ satisfies Theorem 2's characterizing equation — a
+   "compute this" goal turned into a cheaper "verify this" goal — and the
+   result is then applied, with no new proof, to Chapter 6's concrete
+   permutation group, delivering the "proved once, free everywhere"
+   promise for real.
+
+Chapter 8 needs exactly this pattern again, one level up: a second
+operation added to a group's structure, with its own theorems to prove
+generically before any concrete ring is built.
+
 ## Sections
 
 1. [Setup](01-setup.md)
