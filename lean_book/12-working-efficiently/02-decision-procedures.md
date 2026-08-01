@@ -71,8 +71,11 @@ reference (full entry in the [Bibliography](../bibliography.md)):
 - **Decidable proposition (`sumbool`).** "`Inductive sumbool (A :
   Prop) (B : Prop) : Set := left : A → {A} + {B} | right : B → {A} +
   {B}`" ([Chlipala2013], §6.2 "Decidable Proposition Types," p. 110).
-  Brief: a type witnessing that a proposition's truth value is
-  computable — a constructive "$P \vee \neg P$, and we can tell
+  Picture it like this: a litmus test strip rather than a question you
+  have to reason through by hand — dip it in and it changes color to
+  tell you, definitively, acid or base. `sumbool` packages that same
+  idea as data: run it and get back a definite "yes, and here's why" or
+  "no, and here's why," a constructive "$P \vee \neg P$, and we can tell
   which." Chlipala is the actual source for `Decidable` as a
   type-theoretic notion (an earlier draft of this book cited Pierce2002
   instead, but TAPL does not discuss `Decidable` at all).

@@ -301,11 +301,11 @@ Formal definitions and citations for this section, gathered here for reference (
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Σ-type.} ``Given a type \(A : U\) and a family \(B : A \to U\), the dependent pair type is written as \(\sum_{(x:A)} B(x) : U\) \ldots{} If \(B\) is constant, then the dependent pair type is the ordinary Cartesian product type'' (\cite{HoTT2013}, §1.6 ``Dependent pair types (Σ-types)''). Brief: categorically an indexed disjoint union, collapsing to the ordinary product \(A \times B\) when \(B\) is a constant family.
+  \textbf{Σ-type.} ``Given a type \(A : U\) and a family \(B : A \to U\), the dependent pair type is written as \(\sum_{(x:A)} B(x) : U\) \ldots{} If \(B\) is constant, then the dependent pair type is the ordinary Cartesian product type'' (\cite{HoTT2013}, §1.6 ``Dependent pair types (Σ-types)''). Picture it like this: a labeled suitcase where the label decides what kind of compartment to expect inside --- a ``shoes'' tag pairs with a shoe-shaped compartment, an ``electronics'' tag with a different one. When every tag happens to pair with the \emph{same} compartment shape regardless of the label, that's just an ordinary suitcase-and-item pair --- the constant-family special case, which is the ordinary product \(A \times B\).
 \item
   \textbf{\texttt{Prop}.} ``The type \texttt{Prop} is syntactic sugar for \texttt{Sort 0}, the very bottom of the type hierarchy'' (\cite{TPIL4}, §3.1 ``Propositions as Types'').
 \item
-  \textbf{Proof irrelevance.} ``If \texttt{p : Prop} is any proposition, Lean's kernel treats any two elements \texttt{t1 t2 : p} as being definitionally equal \ldots{} This is known as proof irrelevance'' (\cite{TPIL4}, §3.1). Brief: any two proofs of the same \texttt{P : Prop} are considered definitionally equal.
+  \textbf{Proof irrelevance.} ``If \texttt{p : Prop} is any proposition, Lean's kernel treats any two elements \texttt{t1 t2 : p} as being definitionally equal \ldots{} This is known as proof irrelevance'' (\cite{TPIL4}, §3.1). Picture it like this: a ``verified'' stamp on a passport --- customs doesn't care which officer stamped it or how the check was carried out, only that a valid stamp exists. Any two proofs of the same \texttt{P : Prop} are just as interchangeable.
 \item
   \textbf{Recursor / eliminator.} This book's working statement, built on the calculus of constructions (\cite{CoquandHuet1988}): the single Π-typed term (\texttt{Nat.rec} and its analogues) that makes ``one case per constructor'' precise; every \texttt{match}/\texttt{cases}/\texttt{induction} compiles down to one.
 \item

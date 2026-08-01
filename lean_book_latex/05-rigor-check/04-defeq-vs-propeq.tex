@@ -56,9 +56,9 @@ Formal definitions and citations for this section, gathered here for reference (
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Definitional equality.} ``Two terms that reduce to the same value are called definitionally equal. They are considered `the same' by Lean's type checker'' (\cite{TPIL4}, ``Dependent Types''). Brief: \texttt{rfl} succeeds exactly when this holds.
+  \textbf{Definitional equality.} ``Two terms that reduce to the same value are called definitionally equal. They are considered `the same' by Lean's type checker'' (\cite{TPIL4}, ``Dependent Types''). Picture it like this: recognizing that ``twelve inches'' and ``one foot'' are the exact same length just written differently --- settled purely by unit conversion, no argument required. \texttt{rfl} succeeds exactly when both sides are ``the same length'' in this sense.
 \item
-  \textbf{Propositional equality.} ``In other situations \ldots{} reductions hold only propositionally, which is to say, they are equational theorems that must be applied explicitly'' (\cite{TPIL4}, ``Dependent Types'' / ``Tactics''). Brief: an ordinary \texttt{Prop} that must be proved; definitional equality implies propositional equality, but not conversely.
+  \textbf{Propositional equality.} ``In other situations \ldots{} reductions hold only propositionally, which is to say, they are equational theorems that must be applied explicitly'' (\cite{TPIL4}, ``Dependent Types'' / ``Tactics''). Picture it like this: two chemical formulas that turn out to describe the same compound, but only an actual experiment (a proof) establishes that --- it's not obvious just from staring at the formulas. An ordinary \texttt{Prop} that must be proved; definitional equality implies propositional equality, but not conversely.
 \item
   \textbf{Proof irrelevance.} ``If \texttt{p : Prop} is any proposition, Lean's kernel treats any two elements \texttt{t1 t2 : p} as being definitionally equal \ldots{} This is known as proof irrelevance'' (\cite{TPIL4}, ``Propositions and Proofs'').
 \item

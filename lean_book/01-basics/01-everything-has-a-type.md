@@ -255,24 +255,36 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - **Judgment.** "A statement made about a calculus from the outside,
   not a proposition proved inside it" ([MartinLof1984], Ch. 1,
   "Judgements and their explanations," this book's working
-  statement). Brief: written here in the form $e : \tau$, e.g.
-  `3 : Nat`.
+  statement). Picture it like this: it's a label, not a proof — the same way a customs
+  officer stamping "fruit" on a crate is stating a fact about the crate
+  from outside it, not proving anything the fruit itself has to argue
+  for. $e : \tau$ is that stamp: `3 : Nat` says "3 belongs in the `Nat`
+  bin," decided once, from the outside, before anything runs.
 - **Type system guarantee.** "A type system is a tractable syntactic
   method for proving the absence of certain program behaviors..."
-  ([Pierce2002], §1.1–§1.2). Brief: a static check that rules out a
-  whole class of runtime failure before any code runs, for every
-  possible input.
+  ([Pierce2002], §1.1–§1.2). Picture it like this: an airport security scanner
+  that checks every bag before boarding, rather than waiting to see
+  which bags cause trouble mid-flight — a whole category of problem
+  (guns, in that analogy; passing a boolean where a number belongs, in
+  this one) is caught once, at the gate, for every passenger, instead of
+  discovered one incident at a time.
 - **$F$-algebra.** "For an arbitrary endofunctor $T : \mathbb{B} \to
   \mathbb{B}$ [on a category $\mathbb{B}$] an algebra (or
   $T$-algebra) consists of a 'carrier' object $Y \in \mathbb{B}$
   together with a morphism $\varphi : T(Y) \to Y$" ([Jacobs1999],
-  §2.6, p. 161; this book writes $F$ for Jacobs's $T$). Brief: for
-  $\mathbb{B}$ = `Type`, a type $X$ equipped with a map
-  $F(X) \to X$.
+  §2.6, p. 161; this book writes $F$ for Jacobs's $T$). Picture it like
+  this: a recipe that only ever uses ingredients already sitting in the
+  kitchen and produces a dish that goes back into that same kitchen —
+  never fetching anything from outside, never producing something that
+  needs a different kitchen. $F(X) \to X$ is exactly that closure
+  property, stated once for any "kitchen" $X$ and any "kind of recipe"
+  $F$.
 - **Initial object.** "An object $s$ is initial in a category $C$ if
   to each object $a$ of $C$ there is exactly one arrow $s \to a$"
-  ([MacLane1998], Ch. I §5, p. 20). Brief: exactly one morphism out to
-  every other object of the category.
+  ([MacLane1998], Ch. I §5, p. 20). Picture it like this: a single train station
+  that has exactly one direct route to every other station on the
+  entire map, and no other station has that property — "initial" means
+  uniquely, unambiguously first.
 - **Natural numbers object (NNO).** "In a category with finite
   products a natural numbers object (NNO) consists of a zero and
   successor diagram $1 \xrightarrow{0} N \xrightarrow{S} N$ which is
@@ -280,9 +292,14 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   $1 \xrightarrow{x} X \xrightarrow{g} X$ there is a unique
   $h : N \to X$ making the diagram commute" ([Jacobs1999], §2.6,
   p. 159; in functional notation, $h(0) = x$ and $h(Sn) = g(hn)$).
-  Brief: `Nat` is the standard example (`0 := zero`, `S := succ`),
-  equivalently the initial algebra for $F(X) = 1 + X$, and this
-  uniqueness is exactly what licenses structural induction.
+  Picture it like this: a staircase — one bottom step (`zero`) and a rule for
+  building the next step from the one before it (`succ`). `Nat` is the
+  staircase built from nothing but that rule, and it's the *only* such
+  staircase up to relabeling: any other structure with a "start" and a
+  "next step" rule can be reached from `Nat`'s staircase in exactly one
+  way, step for step. That uniqueness is exactly why "check the bottom
+  step, then check that each step implies the next" (ordinary induction)
+  is enough to cover every step there is.
 - Lean 4 documentation, "Basic Types," and *Theorem Proving in Lean 4*, §2.1 "Simple Type Theory" ([LeanDocs], [TPIL4]) — the `#check`/`#eval` distinction and `Nat` as an inductive type.
 
 [LeanDocs]: ../bibliography.md#leandocs

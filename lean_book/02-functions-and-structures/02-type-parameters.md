@@ -66,11 +66,15 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   one structure *per choice* of `α` and `β`, all at once. Categorically,
   this is a functor of the type parameters, not a single fixed structure.
 - **Parametric polymorphism.** Milner's theoretical account of type
-  polymorphism ([Milner1978]). Brief: genericity that is *proved* once for
-  every type, and checked before the generic code is ever called — unlike
-  an optional, erased type annotation. Python's `TypeVar` and Lean's
-  `{α : Type} → ...` both implement this idea, to different degrees, as
-  the Programmer's corner box below explains.
+  polymorphism ([Milner1978]). Picture it like this: a car platform that
+  gets crash-tested and certified once, before a single unit rolls off
+  the line — every car built on it inherits that guarantee automatically,
+  rather than each driver just hoping their particular car turns out
+  safe. Genericity that is *proved* once for every type, checked before
+  the generic code is ever called, is that certification; an optional,
+  erased type annotation is closer to the driver's hope. Python's
+  `TypeVar` and Lean's `{α : Type} → ...` both implement this idea, to
+  different degrees, as the Programmer's corner box below explains.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's box.
 
 [PythonTyping]: ../bibliography.md#pythontyping

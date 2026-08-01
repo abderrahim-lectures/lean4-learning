@@ -41,7 +41,7 @@ Formal definitions and citations for this section, gathered here for reference (
 \item
   \textbf{Type-parameterized structure.} This book's working statement: \texttt{structure Pair (α β : Type)} does not define one structure. It defines one structure \emph{per choice} of \texttt{α} and \texttt{β}, all at once. Categorically, this is a functor of the type parameters, not a single fixed structure.
 \item
-  \textbf{Parametric polymorphism.} Milner's theoretical account of type polymorphism (\cite{Milner1978}). Brief: genericity that is \emph{proved} once for every type, and checked before the generic code is ever called --- unlike an optional, erased type annotation. Python's \texttt{TypeVar} and Lean's \texttt{\{α : Type\} → ...} both implement this idea, to different degrees, as the Programmer's corner box below explains.
+  \textbf{Parametric polymorphism.} Milner's theoretical account of type polymorphism (\cite{Milner1978}). Picture it like this: a car platform that gets crash-tested and certified once, before a single unit rolls off the line --- every car built on it inherits that guarantee automatically, rather than each driver just hoping their particular car turns out safe. Genericity that is \emph{proved} once for every type, checked before the generic code is ever called, is that certification; an optional, erased type annotation is closer to the driver's hope. Python's \texttt{TypeVar} and Lean's \texttt{\{α : Type\} → ...} both implement this idea, to different degrees, as the Programmer's corner box below explains.
 \item
   Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) --- for the Python-side comparison used in this section's box.
 \end{itemize}

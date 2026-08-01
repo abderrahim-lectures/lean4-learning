@@ -484,16 +484,23 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   dependent pair type is written as $\sum_{(x:A)} B(x) : U$ ... If $B$
   is constant, then the dependent pair type is the ordinary Cartesian
   product type" ([HoTT2013], §1.6 "Dependent pair types (Σ-types)").
-  Brief: categorically an indexed disjoint union, collapsing to the
-  ordinary product $A \times B$ when $B$ is a constant family.
+  Picture it like this: a labeled suitcase where the label decides what
+  kind of compartment to expect inside — a "shoes" tag pairs with a
+  shoe-shaped compartment, an "electronics" tag with a different one.
+  When every tag happens to pair with the *same* compartment shape
+  regardless of the label, that's just an ordinary suitcase-and-item
+  pair — the constant-family special case, which is the ordinary
+  product $A \times B$.
 - **`Prop`.** "The type `Prop` is syntactic sugar for `Sort 0`, the
   very bottom of the type hierarchy" ([TPIL4], §3.1 "Propositions as
   Types").
 - **Proof irrelevance.** "If `p : Prop` is any proposition, Lean's
   kernel treats any two elements `t1 t2 : p` as being definitionally
-  equal ... This is known as proof irrelevance" ([TPIL4], §3.1). Brief:
-  any two proofs of the same `P : Prop` are considered definitionally
-  equal.
+  equal ... This is known as proof irrelevance" ([TPIL4], §3.1). Picture
+  it like this: a "verified" stamp on a passport — customs doesn't
+  care which officer stamped it or how the check was carried out, only
+  that a valid stamp exists. Any two proofs of the same `P : Prop` are
+  just as interchangeable.
 - **Recursor / eliminator.** This book's working statement, built on
   the calculus of constructions ([CoquandHuet1988]): the single
   Π-typed term (`Nat.rec` and its analogues) that makes "one case per

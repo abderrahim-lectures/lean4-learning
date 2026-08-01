@@ -100,8 +100,11 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - **Record / tuple.** "The simplest of these is pairs, or more
   generally tuples, of values ... the generalization from n-ary
   tuples to labeled records is equally straightforward" ([Pierce2002],
-  §11.6–§11.8). Brief: `structure` is this book's realization of a
-  labeled record.
+  §11.6–§11.8). Picture it like this: an unlabeled tuple is a box
+  packed in a fixed order — you just have to remember "first slot is
+  the name, second is the age." A labeled record is the same box with
+  every slot tagged directly: "Name: ___, Age: ___." Lean's `structure`
+  is exactly this tagged version.
 - **Categorical product (universal property).** For a category with a
   product $A \times B$ (with projections $p_A, p_B$) and any object
   $C$ with morphisms $f : C \to A$, $g : C \to B$: "there is exactly

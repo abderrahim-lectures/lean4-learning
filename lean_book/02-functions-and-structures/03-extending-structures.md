@@ -104,9 +104,12 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   forgetful functor (or, an underlying functor). Thus the forgetful
   functor $U : \mathbf{Grp} \to \mathbf{Set}$ assigns to each group
   $G$ the set $UG$ of its elements..." ([MacLane1998], Ch. I §3,
-  p. 14). Brief: `extends` builds a new structure containing
-  everything an existing one has, plus more, generating a `.toX`
-  forgetful projection for free.
+  p. 14). Picture it like this: a company directory that lists only
+  names and phone numbers, dropping job titles and departments — the
+  underlying people are still there, just stripped of the extra
+  structure. `extends` builds a new structure containing everything an
+  existing one has, plus more, generating exactly this kind of
+  "strip back down" projection (`.toX`) for free.
 - Lean 4 documentation ([LeanDocs]) — the auto-generated `.toX` projection produced by `extends`, used above as `origin3D.x` and `.toPoint`.
 
 [LeanDocs]: ../bibliography.md#leandocs

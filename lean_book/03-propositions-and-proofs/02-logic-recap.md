@@ -271,21 +271,27 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   « définitions » des signes qu'elles concernent, et les éli[minations
   ...]" (quote breaks at a page boundary in the source excerpt)
   ([FeysLadriere1955], §II "Le calcul de la déduction naturelle," p.
-  27; a French translation of Gentzen ([Gentzen1935])). Brief: each
-  connective has one deduction figure that
-  *introduces* it and one that *eliminates* it — introduction rules
-  act as the connective's "definition," elimination rules as its
-  consequence.
+  27; a French translation of Gentzen ([Gentzen1935])). Picture it
+  like this: a Lego instruction booklet where every piece type gets
+  exactly two entries — one showing how to snap it onto the model
+  (introduction), one showing what you're allowed to do once it's
+  there (elimination). Introduction rules act as the connective's
+  "definition," elimination rules as its consequence.
 - **Soundness.** "$\Gamma \vdash \varphi \Rightarrow \Gamma \models
-  \varphi$" ([VanDalen2013], §2.5, Lemma 2.5.1). Brief: everything
-  provable is true.
+  \varphi$" ([VanDalen2013], §2.5, Lemma 2.5.1). Picture it like this:
+  a factory whose quality-control process is airtight — if a product
+  passes inspection, it is guaranteed to actually work. Nothing merely
+  "provable" turns out to be false.
 - **Completeness.** "$\Gamma \vdash \varphi \Leftrightarrow \Gamma
   \models \varphi$" ([VanDalen2013], §2.5 Theorem 2.5.13 for
   propositional logic; §4.1 Theorem 4.1.3 for first-order logic;
   first-order completeness is originally due to Gödel, 1929/1930 —
   not independently verified against Gödel's own paper, see
   [VanDalen2013] for the identical statement independently verified
-  here). Brief: everything true is provable.
+  here). Picture it like this: the converse guarantee — the same
+  factory's inspection process is thorough enough that every product
+  which genuinely works *can* be certified by it. Nothing true slips
+  through as "uncertifiable."
 - van Dalen ([VanDalen2013]), §2.4 "Natural Deduction" (Definition 2.4.1, propositional rules), §3.8 "Natural Deduction" (first-order ∀-rules, Lemma 3.8.2) — the propositional and first-order natural-deduction rules underlying the quotes above.
 - Gödel — the original 1930 completeness paper was not independently verified against a held source; van Dalen's Theorem 4.1.3 above states the same result and is independently verified.
 - Pierce et al. ([PierceSF]) — **Note:** only the *Software Foundations* series homepage is available in the notebook, not chapter content, so the specific natural-deduction/classical-vs-intuitionistic treatment claimed here could not be verified verbatim.

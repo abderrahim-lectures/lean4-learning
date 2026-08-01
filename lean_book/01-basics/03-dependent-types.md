@@ -396,16 +396,22 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 
 - **Dependent type.** "The short explanation is that types can depend
   on parameters" ([TPIL4], §2.8 "What makes dependent type theory
-  dependent?"). Brief: this book's primary example is `Fin n`, a
-  genuinely different type per `n`.
+  dependent?"). Picture it like this: a cake sized to the guest count — "the
+  cake for 12" and "the cake for 3" aren't the same cake made smaller,
+  they're genuinely different objects, one per number of guests. `Fin
+  n` is that idea turned into a type: `Fin 12` and `Fin 3` are
+  different types, one per `n`, the same way cake sizes differ per
+  guest count.
 - **Dependent function type ($\Pi$-type).** "The type
   `(a : α) → β a` denotes the type of functions `f` with the property
   that, for each `a : α`, `f a` is an element of `β a`" ([TPIL4],
-  §2.8). Brief: written here as $\prod_{x:A} B(x)$ (standard
-  mathematical notation for the same construct — TPIL4 itself uses
-  "dependent function type"/"dependent arrow type," not the $\Pi$
-  symbol); strictly generalizes the ordinary function type
-  $A \to B$.
+  §2.8). Picture it like this: a vending machine whose dispensing slot changes
+  shape depending which button is pressed — a soda comes out one
+  opening, a bag of chips another. Written here as $\prod_{x:A} B(x)$
+  (standard mathematical notation for the same construct — TPIL4
+  itself uses "dependent function type"/"dependent arrow type," not
+  the $\Pi$ symbol); an ordinary function type $A \to B$ is just the
+  boring special case where every slot happens to be the same shape.
 - The Lean 4 source / [Mathlib4 API documentation][Mathlib4Docs] for `Fin` and `Vector` — confirmed directly in this section via `#print Fin` against the actual toolchain pinned in this repository's `lean_project/lean-toolchain`.
 - Thompson ([Thompson1991]) — §4.6 "Quantifiers," §6.3 "Dependent types and quantifiers" develop the same dependent-product/dependent-sum content, verified verbatim against the source. Thompson's primary notation is $\forall$/$\exists$, not Π/Σ: he calls the Σ-type-equivalent an "(infinitary) sum type" or "dependent sum type," and the literal term "Sigma-type" never appears in his main text, only once, in a bibliography entry citing a different author's paper. Explicit Π-notation does appear later, in his meta-theory chapters (§8.3, §9.1.5), applied to dependent function spaces in a typed λ-calculus meta-language.
 - Chlipala ([Chlipala2013]), §8.1 "Length-Indexed Lists" and §9.1 "More Length-Indexed Lists" — this book's length-indexed-vector idea (`ilist : nat → Set`) is built and revisited there, not in Ch. 2–3 as an earlier draft of this section stated; verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`) — a useful second angle on the identical concept, in Coq rather than Lean.

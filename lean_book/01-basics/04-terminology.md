@@ -404,61 +404,85 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 
 - **Bound / free variable.** "An occurrence of x is free if it
   appears in a position where it is not bound by an enclosing
-  abstraction on x" ([Pierce2002], §5.1, p. 55). Brief: inside
-  `λx.t`, occurrences of `x` in `t` are bound; any other variable is
-  free.
+  abstraction on x" ([Pierce2002], §5.1, p. 55). Picture it like this: the blank
+  in a form letter versus an actual name written on it. Inside
+  `λx.t`, `x` is a blank waiting to be filled in by whatever gets
+  passed in — it only means something relative to that surrounding
+  `λx`. A variable with no such blank to belong to is "free": a real,
+  specific reference, not a placeholder.
 - **α-conversion.** "Church used the term alpha-conversion for the
   operation of consistently renaming a bound variable in a term"
-  ([Pierce2002], §5.3, p. 73). Brief: renaming a bound variable does
-  not change a term's identity.
+  ([Pierce2002], §5.3, p. 73). Picture it like this: renaming the blank on a
+  form from "applicant" to "candidate" — as long as every occurrence
+  is renamed together, the form still means exactly the same thing.
+  Renaming a bound variable never changes what a term actually does.
 - **β-reduction.** "The operation of rewriting a redex according to
   the above rule is called beta-reduction" ([Pierce2002], §5.1,
-  p. 56). Brief: applying an abstraction to an argument by
-  substitution, $(\lambda x.\, t)\, s \to t[x := s]$.
+  p. 56). Picture it like this: mail-merge. "Dear ___, your order ___ has shipped"
+  with the blanks replaced by an actual name and order number is
+  exactly $(\lambda x.\, t)\, s \to t[x := s]$: substitute the real
+  value for the placeholder, everywhere it occurs.
 - **Currying.** "The transformation of multi-argument functions into
   higher-order functions is called currying in honor of Haskell
-  Curry" ([Pierce2002], §5.2, pp. 58–59). Brief: a multi-argument
-  function is really a chain of one-argument functions returning
-  functions.
+  Curry" ([Pierce2002], §5.2, pp. 58–59). Picture it like this: an ATM that asks
+  one question at a time — insert card, *then* enter PIN, *then*
+  choose an amount — rather than one screen demanding all three at
+  once. A function of several arguments is really a chain of
+  single-argument steps, each handing off to the next.
 - **Weak head normal form.** "Weak Head Normal Form: all expressions
   which are either λ-abstractions or of the form
   $\lambda x_1 \ldots \lambda x_n.\, y\, e_1 \ldots e_m$"
-  ([Thompson1991], §2.3, p. 36, Definition 2.8). Brief: reduced far
-  enough to see the outermost constructor or function head, not
-  necessarily any further.
+  ([Thompson1991], §2.3, p. 36, Definition 2.8). Picture it like this: telling a
+  wrapped gift is bicycle-shaped without unwrapping it — reduced just
+  far enough to see the outermost shape (a function, or a specific
+  constructor applied to arguments), without bothering to look inside
+  those arguments yet.
 - **Church–Rosser theorem.** "For all $e, f$ and $g$, if $e \to f$
   and $e \to g$ then there exists $h$ such that $f \to h$ and
-  $g \to h$" ([Thompson1991], §2.3, p. 38, Theorem 2.10). Brief:
-  different terminating reduction orders always reach the same
-  normal form.
+  $g \to h$" ([Thompson1991], §2.3, p. 38, Theorem 2.10). Picture it
+  like this: solving a Sudoku puzzle by filling in cells in a different order —
+  as long as the rules are followed to completion, everyone ends up
+  with the identical finished grid, regardless of which cell they
+  filled in first.
 - **Universal property (general form).** "If $S : D \to C$ is a
   functor and $c$ an object of $C$, a universal arrow from $c$ to $S$
   is a pair $(r, u)$ consisting of an object $r$ of $D$ and an arrow
   $u : c \to Sr$ of $C$, such that to every pair $(d, f)$ with $d$ an
   object of $D$ and $f : c \to Sd$ an arrow of $C$, there is a unique
   arrow $f' : r \to d$ of $D$ with $Sf' \circ u = f$" ([MacLane1998],
-  Ch. III §1, p. 55). Brief: a construction characterized by which
-  maps *uniquely factor through it*, not by what it is made of.
+  Ch. III §1, p. 55). Picture it like this: describing "the best hub airport for
+  a route network" not by naming its terminals or runways, but purely
+  by the fact that every other airport's connections can be rerouted
+  through it in exactly one sensible way. A universal property
+  describes something by the role it plays, not by what it's built
+  from.
 - **Initial object.** "An object $s$ is initial in a category $C$ if
   to each object $a$ of $C$ there is exactly one arrow $s \to a$"
-  ([MacLane1998], Ch. I §5, p. 20). Brief: exactly one morphism out
-  to every other object of the category.
+  ([MacLane1998], Ch. I §5, p. 20). Picture it like this: a single train station
+  with exactly one direct route to every other station on the map —
+  "initial" means uniquely, unambiguously first.
 - **Forgetful functor.** "A functor which simply 'forgets' some or
   all of the structure of an algebraic object is commonly called a
   forgetful functor (or, an underlying functor)" ([MacLane1998],
-  Ch. I §3, p. 14). Brief: a functor that keeps only part of a
-  structure, discarding the rest.
+  Ch. I §3, p. 14). Picture it like this: a company directory that lists only
+  names and phone numbers, dropping job titles and departments — the
+  underlying people are still there, just stripped of the extra
+  structure.
 - **Subobject.** "Let $A$ be any category. If $u : s \to a$ and
   $v : t \to a$ are two monics [in $A$] with a common codomain $a$,
   write $u \sim v$ when $u$ factors through $v$ ... the corresponding
   equivalence classes of these monics are called the subobjects of
   $a$" ([MacLane1998], Ch. III §7, p. 126; equivalently
-  [Pareigis1970], §1.6, p. 20). Brief: a piece of an object cut out
-  by a condition, remembered together with its inclusion.
+  [Pareigis1970], §1.6, p. 20). Picture it like this: a filtered view of a
+  spreadsheet — not a separate copy of some rows, but the specific
+  subset matching a condition, remembered together with exactly how
+  each row sits inside the original sheet.
 - **Full subcategory.** "We say that $S$ is a full subcategory of
   $C$ when the inclusion functor $S \to C$ is full" ([MacLane1998],
-  Ch. I §3, p. 15). Brief: a subcategory retaining *all* original
-  morphisms of $C$ between its objects, not just some of them.
+  Ch. I §3, p. 15). Picture it like this: a map of just one neighborhood that
+  still draws every street connecting the buildings it kept, rather
+  than a simplified map that only shows some of the roads between
+  them.
 
 [Pierce2002]: ../bibliography.md#pierce2002
 [Thompson1991]: ../bibliography.md#thompson1991

@@ -136,14 +136,19 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 
 - **Definitional equality.** "Two terms that reduce to the same value
   are called definitionally equal. They are considered 'the same' by
-  Lean's type checker" ([TPIL4], "Dependent Types"). Brief: `rfl`
-  succeeds exactly when this holds.
+  Lean's type checker" ([TPIL4], "Dependent Types"). Picture it like
+  this: recognizing that "twelve inches" and "one foot" are the exact
+  same length just written differently — settled purely by unit
+  conversion, no argument required. `rfl` succeeds exactly when both
+  sides are "the same length" in this sense.
 - **Propositional equality.** "In other situations ... reductions
   hold only propositionally, which is to say, they are equational
   theorems that must be applied explicitly" ([TPIL4], "Dependent
-  Types" / "Tactics"). Brief: an ordinary `Prop` that must be proved;
-  definitional equality implies propositional equality, but not
-  conversely.
+  Types" / "Tactics"). Picture it like this: two chemical formulas that
+  turn out to describe the same compound, but only an actual experiment
+  (a proof) establishes that — it's not obvious just from staring at the
+  formulas. An ordinary `Prop` that must be proved; definitional
+  equality implies propositional equality, but not conversely.
 - **Proof irrelevance.** "If `p : Prop` is any proposition, Lean's
   kernel treats any two elements `t1 t2 : p` as being definitionally
   equal ... This is known as proof irrelevance" ([TPIL4],

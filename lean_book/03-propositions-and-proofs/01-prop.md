@@ -107,8 +107,12 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   functions is an instance of the Curry-Howard isomorphism, sometimes
   known as the propositions-as-types paradigm" ([TPIL4], "Propositions
   and Proofs"; the correspondence traces to Howard's 1969 manuscript,
-  circulated privately and formally published as [Howard1980]). Brief:
-  propositions are types, proofs are terms.
+  circulated privately and formally published as [Howard1980]). Picture
+  it like this: a mathematical claim is a blueprint, and a valid proof
+  is an actual working machine built to that blueprint. There's no
+  separate "proof of correctness" apart from having successfully built
+  the machine — which is exactly why, in Lean, propositions are types
+  and proofs are the terms (the "machines") that inhabit them.
 - Howard ([Howard1980]) — the original source of the correspondence this section is named for. Per Sørensen & Urzyczyn, *Lectures on the Curry-Howard Isomorphism*, Studies in Logic and the Foundations of Mathematics vol. 149, Elsevier, 2006 (a secondary source corroborating this history, not Howard's paper itself): Howard's manuscript was "privately circulated" from 1969 and not formally published until 1980, in Curry's Festschrift; it develops the proofs-as-terms correspondence for implicational logic, extends it to the other propositional connectives, then to a term language for Heyting Arithmetic.
 
 [Howard1980]: ../bibliography.md#howard1980
