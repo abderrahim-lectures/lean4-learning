@@ -10,9 +10,12 @@
 #
 # Each invocation writes into a timestamped run folder (reviews/<DATE>/run-<HHMMSS>/)
 # so the "last ones" are always the newest run folder / newest timespan in the
-# report filenames. Phases are RESUMABLE: re-running p1/p2/p3 reuses the latest
-# run folder and skips any model whose report already exists on disk (saved and
-# reused — important on a slow connection). Use `--fresh` to force a new run.
+# report filenames. Each model runs inside a pseudo-TTY (via `script`), so you
+# SEE its live session — tool calls, file reads, streaming output — on the
+# terminal while the full transcript is logged for report extraction. Phases
+# are RESUMABLE: re-running p1/p2/p3 reuses the latest run folder and skips
+# any model whose report already exists on disk (saved and reused — important
+# on a slow connection). Use `--fresh` to force a new run.
 #
 # Usage:
 #   ./run_free_review.sh                  # p1, p2, p3 in sequence (resumable)
@@ -85,6 +88,17 @@ ensure_run() {
 # Extra context injected into every Phase-1 prompt: v1.4.25 regression alert
 REGRESSION_CTX="IMPORTANT: This book just underwent v1.4.25/v1.5.0 changes — toolchain pinned to v4.32.2 everywhere (project *and* docs, after a brief v1.5.0 doc-side bump to the unpublished v4.33.0 was reverted), 'Bloom verbs made implicit' (explicit 'Learning objectives' paragraphs were REMOVED from every chapter's 00-index.md and replaced with narrative 'story of this chapter' sections). v1.5.0: LaTeX removed 'Story' and 'Sections' sections. Your Regression Tracker persona MUST specifically check for issues introduced by these changes: broken cross-references to removed sections, version numbers inconsistent with v4.32.2 (the one true version), or gaps where removed scaffolding leaves exercises or theorems unmoored. All version references — lean_project/lean-toolchain, lakefile.toml, README.md, NOTICE.md, lean_book/README.md, lean_book/00-setup/02-installing-toolchain.md, lean_book/00-setup/04-mathlib-note.md, lean_book/learning-paths.md — should read v4.32.2."
 
+# Run opencode inside a pseudo-TTY (via `script`) so its live progress — tool
+# calls, file reads, streaming output — is visible on the terminal while the
+# full ANSI transcript is captured to a log for report extraction.
+# Usage: run_opencode <model> <prompt-file> <transcript-log>
+run_opencode() {
+  local model="$1" prompt_file="$2" log="$3"
+  # Prompt is piped via stdin (not argv) so it is NOT echoed into the
+  # transcript header, keeping report markers clean for extraction.
+  timeout 1800 script -q -c "opencode run --model opencode/$model < '$prompt_file'" "$log"
+}
+
 # --- Phase 1: per-model, per-topic review -----------------------------
 # Each model gets the files of its slice as its argument list. The skill
 # file path is passed first so the model loads the full reviewer instructions.
@@ -118,21 +132,21 @@ run_slice() {
     echo "$REGRESSION_CTX"
   } > "$prompt"
   echo "[p1] $model ($topic) — $(echo "$files" | wc -w) files"
-  timeout 1800 opencode run --model "opencode/$model" "$(cat "$prompt")" 2>"$RUN/logs/p1-$model-$start.log" \
-    | sed 's/\x1b\[[0-9;]*m//g' \
-    | awk '/<<<REPORT_START>>>/{f=1;next}/<<<REPORT_END>>>/{f=0}f' \
-    > "$dir/$model-$topic-$start.report"
+  run_opencode "$model" "$prompt" "$RUN/logs/p1-$model-$start.log"
   end="$(stamp)"
-  if [ -s "$dir/$model-$topic-$start.report" ]; then
-    final="$dir/$model-$topic-${start}_${end}.md"
-    mv "$dir/$model-$topic-$start.report" "$final"
+  final="$dir/$model-$topic-${start}_${end}.md"
+  # Extract the report from the ANSI transcript: strip colours, drop CR,
+  # then take the section between the report markers.
+  sed 's/\x1b\[[0-9;]*m//g' "$RUN/logs/p1-$model-$start.log" | tr -d '\r' \
+    | awk '/<<<REPORT_START>>>/{f=1;next}/<<<REPORT_END>>>/{f=0}f' \
+    > "$final"
+  if [ -s "$final" ]; then
+    echo "  -> $(wc -l < "$final") lines: $(basename "$final")"
   else
-    echo "  !! $model produced no report; saving raw output to log"
-    timeout 1800 opencode run --model "opencode/$model" "$(cat "$prompt")" 2>&1 \
-      | sed 's/\x1b\[[0-9;]*m//g' > "$dir/$model-$topic-${start}_${end}-raw.md"
+    echo "  !! $model produced no report; transcript saved as -raw.md"
+    cp "$RUN/logs/p1-$model-$start.log" "$dir/$model-$topic-${start}_${end}-raw.md"
     final="$dir/$model-$topic-${start}_${end}-raw.md"
   fi
-  echo "  -> $(wc -l < "$final") lines: $(basename "$final")"
   echo "$model" >> "$COUNTER"
 }
 
@@ -207,21 +221,19 @@ run_critique() {
     echo "<<<CRITIQUE_START>>> and <<<CRITIQUE_END>>>."
   } > "$prompt"
   echo "[p2] $model — critiquing $(echo "$peers" | wc -w) peer reports"
-  timeout 1800 opencode run --model "opencode/$model" "$(cat "$prompt")" 2>"$RUN/logs/critique-$model-$start.log" \
-    | sed 's/\x1b\[[0-9;]*m//g' \
-    | awk '/<<<CRITIQUE_START>>>/{f=1;next}/<<<CRITIQUE_END>>>/{f=0}f' \
-    > "$dir/critique-$model-$start.report"
+  run_opencode "$model" "$prompt" "$RUN/logs/critique-$model-$start.log"
   end="$(stamp)"
-  if [ -s "$dir/critique-$model-$start.report" ]; then
-    final="$dir/critique-$model-${start}_${end}.md"
-    mv "$dir/critique-$model-$start.report" "$final"
+  final="$dir/critique-$model-${start}_${end}.md"
+  sed 's/\x1b\[[0-9;]*m//g' "$RUN/logs/critique-$model-$start.log" | tr -d '\r' \
+    | awk '/<<<CRITIQUE_START>>>/{f=1;next}/<<<CRITIQUE_END>>>/{f=0}f' \
+    > "$final"
+  if [ -s "$final" ]; then
+    echo "  -> $(wc -l < "$final") lines: $(basename "$final")"
   else
-    echo "  !! $model produced no critique; saving raw output to log"
-    timeout 1800 opencode run --model "opencode/$model" "$(cat "$prompt")" 2>&1 \
-      | sed 's/\x1b\[[0-9;]*m//g' > "$dir/critique-$model-${start}_${end}-raw.md"
+    echo "  !! $model produced no critique; transcript saved as -raw.md"
+    cp "$RUN/logs/critique-$model-$start.log" "$dir/critique-$model-${start}_${end}-raw.md"
     final="$dir/critique-$model-${start}_${end}-raw.md"
   fi
-  echo "  -> $(wc -l < "$final") lines: $(basename "$final")"
   echo "$model" >> "$COUNTER"
 }
 
@@ -311,21 +323,19 @@ p3() {
     echo "<<<FINAL_START>>> and <<<FINAL_END>>>."
   } > "$prompt"
   echo "[p3] adjudication (reports=$(echo "$reports" | wc -w), critiques=$(echo "$critiques" | wc -w))"
-  timeout 1800 opencode run --model "opencode/nemotron-3-ultra-free" "$(cat "$prompt")" 2>"$RUN/logs/FINAL-$start.log" \
-    | sed 's/\x1b\[[0-9;]*m//g' \
-    | awk '/<<<FINAL_START>>>/{f=1;next}/<<<FINAL_END>>>/{f=0}f' \
-    > "$dir/FINAL-REVIEW-$start.report"
+  run_opencode nemotron-3-ultra-free "$prompt" "$RUN/logs/FINAL-$start.log"
   end="$(stamp)"
-  if [ -s "$dir/FINAL-REVIEW-$start.report" ]; then
-    final="$dir/FINAL-REVIEW-${start}_${end}.md"
-    mv "$dir/FINAL-REVIEW-$start.report" "$final"
+  final="$dir/FINAL-REVIEW-${start}_${end}.md"
+  sed 's/\x1b\[[0-9;]*m//g' "$RUN/logs/FINAL-$start.log" | tr -d '\r' \
+    | awk '/<<<FINAL_START>>>/{f=1;next}/<<<FINAL_END>>>/{f=0}f' \
+    > "$final"
+  if [ -s "$final" ]; then
+    echo "  -> $(wc -l < "$final") lines: $(basename "$final")"
   else
-    echo "  !! adjudication produced no report; saving raw output to log"
-    timeout 1800 opencode run --model "opencode/nemotron-3-ultra-free" "$(cat "$prompt")" 2>&1 \
-      | sed 's/\x1b\[[0-9;]*m//g' > "$dir/FINAL-REVIEW-${start}_${end}-raw.md"
+    echo "  !! adjudication produced no report; transcript saved as -raw.md"
+    cp "$RUN/logs/FINAL-$start.log" "$dir/FINAL-REVIEW-${start}_${end}-raw.md"
     final="$dir/FINAL-REVIEW-${start}_${end}-raw.md"
   fi
-  echo "  -> $(wc -l < "$final") lines: $(basename "$final")"
   echo "[p3] done -> $RUN/p3-adjudication/"
 }
 
