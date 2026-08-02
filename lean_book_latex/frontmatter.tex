@@ -30,7 +30,7 @@ not just described."\par}
 
 \vspace{1.5cm}
 {\normalfont\normalsize \today\ --- \bookversion\par}
-{\normalfont\small Lean toolchain \texttt{v4.33.0}\par}
+{\normalfont\small Lean toolchain \texttt{v4.32.2}\par}
 \vspace{0.3cm}
 {\normalfont\small Source code:
 \url{https://github.com/abderrahim-lectures/lean4-learning}\par}
@@ -104,9 +104,15 @@ Claude wrote the chapter text, Lean code, and LaTeX. No additional,
 independent mathematician or Lean expert has reviewed the content beyond
 the author's own review and the automated checks described in the
 project's README and CHANGELOG (every code block compiled against a real
-Lean~4 toolchain, plus several AI-driven review passes). Treat it as an
-author-reviewed draft produced through human-directed AI authorship, not
-a traditionally peer-reviewed text.
+Lean~4 toolchain, plus several AI-driven review passes). In the 2026
+review round, the manuscript was independently critiqued by six free-tier
+AI models --- DeepSeek V4 Flash, Laguna S2.1, Ling 3.0 Flash, Mimo V2.5,
+Nemotron 3 Ultra, and North Mini Code --- who then cross-critiqued one
+another's reports; Nemotron 3 Ultra adjudicated the combined corpus into a
+single final review (see \texttt{reviews/2026-08-02/} in the repository).
+The findings that survived adjudication drove the fixes in this release.
+Treat it as an author-reviewed draft produced through human-directed AI
+authorship, not a traditionally peer-reviewed text.
 
 % ===================================================================
 % How to read this book
@@ -121,7 +127,7 @@ start cover to cover.
 
 Each chapter is divided into short, numbered sections building on one
 another. Every code listing is valid Lean~4 (toolchain
-\texttt{v4.33.0}). Every code block in Chapters~1--11 has additionally
+\texttt{v4.32.2}). Every code block in Chapters~1--11 has additionally
 been ported into a companion Lean project and verified with
 \texttt{lake build} against the real compiler, not merely read over ---
 several bugs that only surfaced this way (a missing extensionality

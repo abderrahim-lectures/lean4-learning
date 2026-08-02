@@ -12,11 +12,12 @@ shell access to the working directory.
    > In this folder create two subfolders: `lean_book`, an absolute-beginners
    > guide to Lean 4 written in Markdown with LaTeX math, focused on groups,
    > rings, and path algebras as running examples; and `lean_project`, a Lean
-   > 4 project using the latest stable toolchain. Set up `lean_project` with
-   > a proper `lake` scaffold (`lakefile.toml`, `lean-toolchain` pinned to the
-   > latest release, a library module, and an executable), and start
-   > `lean_book` with a README table of contents and chapters covering Lean
-   > basics through groups and rings, ending with quiver path algebras.
+   > 4 project using the pinned toolchain `leanprover/lean4:v4.32.2`. Set up
+   > `lean_project` with a proper `lake` scaffold (`lakefile.toml` with
+   > Mathlib pinned to `rev = v4.32.2`, `lean-toolchain` pinned to
+   > `leanprover/lean4:v4.32.2`, a library module, and an executable), and
+   > start `lean_book` with a README table of contents and chapters covering
+   > Lean basics through groups and rings, ending with quiver path algebras.
 
 2. **Correct the audience and pedagogical stance** (issued as the draft
    developed — sequence these as separate follow-up instructions, not one
@@ -29,9 +30,11 @@ shell access to the working directory.
    > prior lemma justifies each rewrite.
    >
    > The audience is mathematicians with a category-theory background who
-   > already have programming experience — cut beginner-programmer
-   > explanations (what a function is, what a compiler does) and speak
-   > directly in the language of algebra and category theory instead.
+   > have no prior programming experience — keep the beginner-programmer
+   > explanations (what a function is, what a compiler does) and speak in
+   > the language of algebra and category theory throughout, meeting
+   > readers where their mathematical maturity is, not their programming
+   > background.
    >
    > The book must be complete, with a solutions appendix covering every
    > exercise.

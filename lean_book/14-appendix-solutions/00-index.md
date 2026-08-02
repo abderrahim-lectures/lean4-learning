@@ -22,6 +22,9 @@ to explain.
 9. [Chapter 10: Modules over a ring](09-chapter-10.md)
 10. [Chapter 11: Quivers and path algebras](10-chapter-11.md)
 
+(Chapter 2: Functions and structures has no exercises, so it has no
+solutions page here.)
+
 ---
 
 [← Ch. 13: Next Steps](../13-next-steps/00-index.md) | [Table of contents](../README.md)

@@ -21,7 +21,7 @@ Run these as Task tool subagents with focused prompts. Use the same pattern that
 - Key focus: Algebraic structures, 2x2 matrices, module constructions, quiver path algebra
 
 ### 2. Fix CRITICAL Issues from Completed Reviews
-- **Version reconciliation**: Update all v4.33.0 → v4.32.2 in docs, OR add disclaimer "docs target v4.33.0; companion project uses v4.32.2"
+- **Version reconciliation**: **DONE — v4.32.2 everywhere** (v1.5.0's doc-side v4.33.0 bump reverted; see FINAL-REVIEW.md C1)
 - **Solutions appendix**: Move Ch1 Ex4 (Path.append) to Ch11 file; expand `rfl` justifications; add Ch12 solutions
 - **Ch0/13 narratives**: Add explicit cognitive progression markers (Bloom verbs)
 

@@ -11,8 +11,8 @@
 
 ### ✅ COMPLETED
 
-1. **Lean toolchain documentation updated to v4.33.0** (in docs only; actual `lean_project/lean-toolchain` remains v4.32.2 because Mathlib v4.33.0 not yet released)
-   - Files: `README.md`, `lean_book/README.md`, `NOTICE.md`, `lean_book/00-setup/02-installing-toolchain.md`, `lean_book/00-setup/04-mathlib-note.md`, `lean_book/learning-paths.md`, `lean_book_latex/frontmatter.tex`, `lean_book_latex/preamble.tex` (`\bookversion{v1.5.0}`)
+1. **Lean toolchain documentation reverted to v4.32.2** (the v1.5.0 doc-side bump to the unpublished v4.33.0 was reverted; docs and project now both read `leanprover/lean4:v4.32.2`, the only version Mathlib publishes for this book — see the adjudication in `reviews/2026-08-02/FINAL-REVIEW.md`, finding C1)
+   - Files: `README.md`, `lean_book/README.md`, `NOTICE.md`, `lean_book/00-setup/02-installing-toolchain.md`, `lean_book/00-setup/04-mathlib-note.md`, `lean_book/learning-paths.md`, `lean_book_latex/frontmatter.tex`
 
 2. **LaTeX restructuring v1.5.0** — removed redundant section headings
    - Modified `lean_book/build/build_latex.py`: added `strip_story_and_sections_headings()`
@@ -84,7 +84,7 @@
    - Note: The opencen CLI `run --model` doesn't work in this environment (auth). Use `Task` tool subagents with focused prompts.
 
 2. **Fix CRITICAL issues from completed reviews** (can be done in parallel):
-   - Reconcile version: decide v4.32.2 (stable) vs v4.33.0 (docs) — update all or add disclaimer
+   - Reconcile version: **RESOLVED — v4.32.2 everywhere** (decision recorded in FINAL-REVIEW.md C1)
    - Move Ch 1 Ex 4 solution to Ch 11 file
    - Remove/expand `rfl` in solutions
    - Add missing Ch 12 solutions
@@ -137,7 +137,7 @@
 ## CONTACT / ESCALATION
 
 If blocked on:
-- **Version decision**: Ask maintainer (v4.32.2 stable vs v4.33.0 docs)
+- **Version decision**: RESOLVED — v4.32.2 everywhere
 - **Review pipeline**: Continue with Task tool subagents
 - **Lean code issues**: `lean_project` builds clean on v4.32.2
 

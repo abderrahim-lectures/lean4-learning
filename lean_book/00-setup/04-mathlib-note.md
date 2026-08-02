@@ -1,6 +1,6 @@
 ## A note on Mathlib
 
-[← Editor](03-editor.md) | [Index](00-index.md)
+[← Editor](03-editor.md) | [Index](00-index.md) | [Table of contents](../README.md) | [Ch. 1: Basics →](../01-basics/00-index.md)
 
 ---
 
@@ -42,7 +42,7 @@ Chapter 13.
    projects at once?* A later toolchain update to one project could
    silently change how another project's code elaborates or even fails
    to compile — the entire point of `lean_project/lean-toolchain` reading
-   `leanprover/lean4:v4.33.0` is that every code block in this book stays
+   `leanprover/lean4:v4.32.2` is that every code block in this book stays
    reproducible regardless of what else is installed system-wide.
 3. *If this book is Mathlib-free by design through Chapter 11, why does
    Chapter 6 onward show Mathlib code at all?* Because "built from

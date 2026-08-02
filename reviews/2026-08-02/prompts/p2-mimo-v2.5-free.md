@@ -10,7 +10,7 @@ file:line citations, or contradict the actual text.
 
 The peer review reports are:
 
- /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/nemotron-3-ultra-free-math-theorems.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/nemotron-3-ultra-free-math-theorems-raw.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/laguna-s-2.1-free-math-algebra.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/laguna-s-2.1-free-math-algebra-raw.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/north-mini-code-free-lean-code.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/north-mini-code-free-lean-code-raw.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/deepseek-v4-flash-free-solutions.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/deepseek-v4-flash-free-solutions-raw.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/ling-3.0-flash-free-root-notice.md /home/adrabi/dev/lean/lean4-learning/reviews/2026-08-02/ling-3.0-flash-free-root-notice-raw.md
+  reviews/2026-08-02/nemotron-3-ultra-free-math-theorems.md reviews/2026-08-02/laguna-s-2.1-free-math-algebra.md reviews/2026-08-02/north-mini-code-free-lean-code.md reviews/2026-08-02/deepseek-v4-flash-free-solutions.md reviews/2026-08-02/ling-3.0-flash-free-root-notice.md
 
 Produce your critique as your final message, wrapped between
 <<<CRITIQUE_START>>> and <<<CRITIQUE_END>>>.

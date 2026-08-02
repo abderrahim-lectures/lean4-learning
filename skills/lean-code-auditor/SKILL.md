@@ -30,7 +30,7 @@ proof.
 For every code block, snippet, or `dbg_trace` sibling:
 
 1. **Compiles.** Does the snippet typecheck against the pinned toolchain
-   (`v4.33.0`)? Does `lean_project/` build with `lake build`?
+   (`v4.32.2`)? Does `lean_project/` build with `lake build`?
 2. **Matches prose.** Does the formal statement agree with the prose
    claim — same hypotheses, same conclusion, same strength?
 3. **No shortcuts.** Are `sorry`, `admit`, `axiom`, `unsafe` absent? Is
@@ -46,7 +46,7 @@ For every code block, snippet, or `dbg_trace` sibling:
 ## Toolchain version discipline
 
 - The book's toolchain is pinned in `lean_project/lean-toolchain`.
-  After any toolchain bump (e.g. `v4.31.0` → `v4.33.0`), **re-run
+  After any toolchain bump (e.g. `v4.31.0` → `v4.32.2`), **re-run
   `lake build`** and confirm zero regressions.
 - Check that `lakefile.toml`'s Mathlib `rev` matches the toolchain tag.
 - Check that `lake-manifest.json` pins compatible dependency revisions.

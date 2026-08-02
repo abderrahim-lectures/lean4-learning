@@ -60,7 +60,7 @@ finding. A finding caught by 2+ personas gets promoted one severity level.
    present a polished artifact?
 5. **The Regression Tracker** — change-induced defects. When the book
    undergoes a rewrite (e.g. Bloom verbs made implicit, toolchain bumped
-   from v4.31.0 to v4.32.2 (v4.33.0 in docs)), does any Lean code block that previously
+   from v4.31.0 to v4.32.2), does any Lean code block that previously
    compiled now fail? Does any mathematical claim now lack the narrative
    scaffolding that was removed? Are cross-references still valid after
    structural edits? Checks specifically for issues introduced by the
@@ -92,7 +92,7 @@ each against every nontrivial statement, as an AMS referee would:
   degenerate case, the claim is false as stated or under-specified.
 - **Compile verification** — every Lean block compiles against the
   toolchain pinned in `lean_project/lean-toolchain` (currently
-  `v4.32.2` (project) / `v4.33.0` (docs). Run `lake build` in `lean_project/` and confirm zero
+  `v4.32.2`). Run `lake build` in `lean_project/` and confirm zero
   errors. A snippet that "looks correct" but does not compile is
   CRITICAL.
 

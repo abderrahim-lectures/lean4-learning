@@ -105,7 +105,7 @@ The book uses several recurring devices, applied consistently across all
   [lean_book/README.md](lean_book/README.md) for the full table of
   contents.
 - [lean_project/](lean_project/) — a companion Lean 4 project (toolchain
-  `v4.33.0`) containing every code block from the book, ported into one
+  `v4.32.2`) containing every code block from the book, ported into one
   module per chapter and verified to compile with `lake build` (see
   [lean_project/README.md](lean_project/README.md) for setup). This
   caught and fixed several real bugs in the book's original code — see
