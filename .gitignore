@@ -1,2 +1,6 @@
 NOTEBOOK-SOURCE-GAPS.md
 notebook-cache/
+*.log
+# Review artifacts
+reviews/*/*.log
+reviews/*/*-raw.md
