@@ -3,6 +3,16 @@
 Notable changes to this book, most recent first. Each entry links back to
 the commit(s) it corresponds to where one exists.
 
+## Unreleased — Update to Lean v4.32.2
+
+- Bumped the pinned toolchain in `lean_project/lean-toolchain` from
+  `leanprover/lean4:v4.31.0` to `leanprover/lean4:v4.32.2`, and Mathlib in
+  `lakefile.toml` from the `v4.31.0` tag to the matching `v4.32.2` tag.
+- Rebuilt every module with `lake build` against the new toolchain — the
+  existing code compiled cleanly with no changes required.
+- Updated the toolchain references in the READMEs and setup chapter to say
+  `v4.32.2`.
+
 ## Unreleased — Capstone: two theorems for free
 
 - Added "Two theorems for free" to [Chapter 13 §2](13-next-steps/02-moving-to-mathlib.md):

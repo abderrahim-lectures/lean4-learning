@@ -24,7 +24,7 @@ each project can pin the exact version it needs. (Readers familiar with
    configured with:
 
    ```text
-   lean-toolchain: leanprover/lean4:v4.31.0
+   lean-toolchain: leanprover/lean4:v4.32.2
    ```
 
    Running `lake build` inside `lean_project` causes elan to automatically
