@@ -1,6 +1,8 @@
 NOTEBOOK-SOURCE-GAPS.md
 notebook-cache/
 *.log
-# Review artifacts
-reviews/*/*.log
-reviews/*/*-raw.md
+# Review artifacts (nested under reviews/<DATE>/run-<HHMMSS>/)
+reviews/**/*.log
+reviews/**/*-raw.md
+reviews/**/.counter
+reviews/**/*.report
