@@ -4,6 +4,12 @@
 
 ---
 
+## Learning objectives
+
+- Translate the mathematical definition of a group into a Lean `structure` field by field.
+- Build both an abelian (`Int`) and a genuinely non-abelian (permutations of `Fin 3`) example from scratch.
+- Articulate why bundling data with proof obligations pays off once theorems are proved generically (Chapter 7).
+
 ## The story of this chapter
 
 Chapter 5's checkpoint project already built a `Monoid` — data plus proof

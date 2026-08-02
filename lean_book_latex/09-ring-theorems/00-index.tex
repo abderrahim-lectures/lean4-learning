@@ -1,5 +1,18 @@
 \chapter{Chapter 9: Ring examples and basic theorems}\label{sec:09-ring-theorems:00-index:1}
 
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Derive a ring fact that is \emph{not} an axiom (e.g.~\(a\cdot 0=0\)) from the axioms that are.
+\item
+  Spot when a ``mirror'' proof (\texttt{left\_\allowbreak{}distrib} vs.~\texttt{right\_\allowbreak{}distrib}) can be copied line-by-line rather than re-derived.
+\item
+  Reduce a ``compute this'' goal to a ``verify this satisfies the characterizing property'' goal via a previously-proved uniqueness lemma.
+\end{itemize}
+\end{learningobjectives}
+
+
 As in Chapter 7, the point here is the search process for each proof, not just the final term. Ring proofs are a good test of that process, because the goals become visually noisy fast (nested \texttt{addGrp.toGroup.op} everywhere). The skill under development is avoiding getting lost in that noise, and instead tracking which algebraic fact is one step away from use.
 
 Chapter 8 built rings one concrete carrier at a time --- \texttt{Int}, \texttt{Fin 3}, \(2\times 2\) matrices --- reverifying the same axioms by hand for each. Chapter 7 already showed the way out of that repetition for groups; this chapter repeats it for rings, and each section follows from the last:

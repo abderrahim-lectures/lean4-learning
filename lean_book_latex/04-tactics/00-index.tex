@@ -1,5 +1,22 @@
 \chapter{Chapter 4: Tactics --- the toolbox for proving things}\label{sec:04-tactics:00-index:1}
 
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Read a Lean goal state.
+\item
+  Use \texttt{intro}/\texttt{exact}/\texttt{apply}/\texttt{rw} to work a goal one step at a time.
+\item
+  Diagnose a failed tactic from its error message.
+\item
+  Use \texttt{induction}/\texttt{cases}/\texttt{constructor}/\texttt{unfold} on inductively-defined data.
+\item
+  Carry out a full inductive proof (\texttt{Nat.add}'s commutativity) from scratch.
+\end{itemize}
+\end{learningobjectives}
+
+
 Writing proof \emph{terms} directly (as in Chapter 3) quickly becomes hard to manage. Instead, Lean provides \textbf{tactic mode}, entered with \texttt{by}, in which a ``goal'' is worked step by step, much as one would write a proof on paper. This chapter's real subject is not the list of tactics below, but \textbf{how to work a goal whose proof is not yet known}, since that is the skill the rest of the book practices. The tactic reference is secondary: read it once, then return to it as needed. Each section below builds that skill one question at a time:
 
 \begin{enumerate}

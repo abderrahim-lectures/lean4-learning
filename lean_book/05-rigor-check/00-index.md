@@ -4,6 +4,12 @@
 
 ---
 
+## Learning objectives
+
+- Explain why this book delays `class` in favor of `structure`.
+- State the STLC typing rules and why `Type` itself needs a universe hierarchy.
+- Distinguish definitional from propositional equality, and predict when `rfl` alone will and will not close a goal.
+
 Before committing to `Group`'s definition in the next chapter, this short
 chapter answers three questions a careful mathematician should already be
 asking. Why does this book use plain `structure` instead of Lean's `class`

@@ -4,6 +4,12 @@
 
 ---
 
+## Learning objectives
+
+- Understand why this book chooses Lean over other proof assistants.
+- Install the Lean 4 toolchain and configure a working editor.
+- Understand why this book builds everything from scratch instead of importing Mathlib from the start.
+
 ## The story of this chapter
 
 Before any theorem is stated, three questions must be answered: *why* Lean,

@@ -1,5 +1,18 @@
 \chapter{\texorpdfstring{Chapter 6: Structures and classes --- defining a \texttt{Group}}{Chapter 6: Structures and classes --- defining a Group}}\label{sec:06-groups:00-index:1}
 
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Translate the mathematical definition of a group into a Lean \texttt{structure} field by field.
+\item
+  Build both an abelian (\texttt{Int}) and a genuinely non-abelian (permutations of \texttt{Fin 3}) example from scratch.
+\item
+  Articulate why bundling data with proof obligations pays off once theorems are proved generically (Chapter 7).
+\end{itemize}
+\end{learningobjectives}
+
+
 Chapter 5's checkpoint project already built a \texttt{Monoid} --- data plus proof obligations, bundled in a \texttt{structure}, using nothing but Chapters 1--5. Each section below asks the next question that answer forces:
 
 \begin{enumerate}

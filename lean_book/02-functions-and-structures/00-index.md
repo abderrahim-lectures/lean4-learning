@@ -4,6 +4,13 @@
 
 ---
 
+## Learning objectives
+
+- Bundle data (and proofs) into a `structure`.
+- Use field projection and the anonymous constructor.
+- Parameterize a `structure` by a type.
+- Extend one `structure` with another via `extends`.
+
 Functions **curry**: `add : Nat → Nat → Nat` is really
 `Nat → (Nat → Nat)`, a function that returns another function. So a
 "two-argument function" is just a one-argument function whose result is

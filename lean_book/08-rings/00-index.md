@@ -4,6 +4,12 @@
 
 ---
 
+## Learning objectives
+
+- Translate the ring axioms into a Lean `structure` built on top of `CommGroup`.
+- Build both a commutative (`Int`, `Fin 3`) and a genuinely noncommutative (2×2 matrices) example from scratch.
+- Recognize when a finite carrier lets `decide` replace a hand-written proof.
+
 ## The story of this chapter
 
 Chapter 7 finished everything Part II had to say about a single

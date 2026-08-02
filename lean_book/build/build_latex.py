@@ -758,6 +758,27 @@ def strip_story_and_sections_headings(tex):
     return tex
 
 
+LEARNING_OBJECTIVES_SECTION_RE = re.compile(
+    r'\\section\{Learning objectives\}\s*\\label\{[^}]*\}\s*'
+    r'(\\begin\{itemize\}.*?\\end\{itemize\})',
+    re.DOTALL,
+)
+
+
+def wrap_learning_objectives(tex):
+    """Convert the '## Learning objectives' section in a chapter 00-index file
+    into a titled learningobjectives tcolorbox (defined in preamble.tex):
+    drop the \section heading entirely and keep only the bulleted list as the
+    box contents. The section sits first in the file, immediately after the
+    \chapter{} heading, so the box renders right under the chapter title and
+    no section heading / TOC entry is produced. Chapters without a Learning
+    objectives section are left untouched."""
+    def _wrap(m):
+        return "\\begin{learningobjectives}\n" + m.group(1).strip() + "\n\\end{learningobjectives}\n"
+
+    return LEARNING_OBJECTIVES_SECTION_RE.sub(_wrap, tex)
+
+
 def get_title(md_path):
     with open(md_path, encoding="utf-8") as fh:
         for line in fh:
@@ -815,6 +836,10 @@ def convert_file(chapter, name):
 
     tex = strip_hypertargets(tex)
     if name == "00-index.md" and chapter:
+        # Wrap before strip_story_and_sections_headings: the box boundary is
+        # the next \section, which only still exists at this point (the strip
+        # below removes those headings).
+        tex = wrap_learning_objectives(tex)
         tex = strip_story_and_sections_headings(tex)
     tex = simplify_tables(tex)
     tex = fix_image_paths(tex, chapter)

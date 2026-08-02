@@ -4,6 +4,14 @@
 
 ---
 
+## Learning objectives
+
+- Use `exact?`/`apply?` to search for a known lemma or proof.
+- Recognize when a goal falls inside `decide`/`omega`/`norm_num`'s decidable fragment versus needing a genuine hand proof.
+- Know what `simp` trades away for speed.
+- Choose between term mode and tactic mode for a given proof.
+- Recognize when a sub-goal deserves its own named lemma.
+
 ## The story of this chapter
 
 Chapters 7 and 9 were about *finding* a proof by hand, deliberately slowly,

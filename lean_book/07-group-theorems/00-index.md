@@ -4,6 +4,12 @@
 
 ---
 
+## Learning objectives
+
+- Prove a fact about *every* group at once by reasoning only from `Group`'s fields.
+- Recognize the "relate both sides to a common third expression" and "pad with the identity, then cancel" patterns.
+- Reuse a proved lemma (`left_inverse_unique`) to shortcut a later one (`inv_op`) instead of re-deriving it.
+
 This chapter proves theorems about an *arbitrary* group. We are given some
 `Grp : Group G` for an unknown `G`, and we use only the fields from
 Chapter 6. The point of this chapter lies less in the three theorems

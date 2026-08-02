@@ -1,5 +1,18 @@
 \chapter{Chapter 7: Group examples and basic theorems}\label{sec:07-group-theorems:00-index:1}
 
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Prove a fact about \emph{every} group at once by reasoning only from \texttt{Group}'s fields.
+\item
+  Recognize the ``relate both sides to a common third expression'' and ``pad with the identity, then cancel'' patterns.
+\item
+  Reuse a proved lemma (\texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique}) to shortcut a later one (\texttt{inv\_\allowbreak{}op}) instead of re-deriving it.
+\end{itemize}
+\end{learningobjectives}
+
+
 This chapter proves theorems about an \emph{arbitrary} group. We are given some \texttt{Grp : Group G} for an unknown \texttt{G}, and we use only the fields from Chapter 6. The point of this chapter lies less in the three theorems themselves (they are standard) than in \textbf{the search process} for finding each proof: given a goal, what to examine, what to attempt, and how to recognize being stuck versus one step away. Each theorem below is presented as that search, not merely its answer.
 
 Chapter 6 ended by naming a payoff it had not yet cashed in: a theorem proved once, generically, is inherited for free by every group built afterward. Each section here follows directly from making good on that promise:

@@ -4,6 +4,12 @@
 
 ---
 
+## Learning objectives
+
+- Describe what this book built entirely from scratch.
+- Translate that construction into Mathlib's `class`-based idiom and see two genuinely new facts it delivers for free.
+- Pick a next project — from the five scaffolded here, or the Church-encodings aside — that extends material already in hand.
+
 ## The story of this chapter
 
 Thirteen chapters have built every group, ring, and path algebra from

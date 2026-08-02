@@ -1,5 +1,20 @@
 \chapter{Chapter 11: Quivers and path algebras}\label{sec:11-path-algebras:00-index:1}
 
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Encode a quiver as a \texttt{structure} of vertices/arrows/source/target.
+\item
+  Define \texttt{Path} as an inductive type indexed by its own endpoints.
+\item
+  Compose paths via \texttt{Path.append} and predict when composability side-conditions block a nonsensical composition.
+\item
+  Explain in what sense a path algebra \(kQ\) extends the \texttt{Ring}/\texttt{Module} machinery of Chapters 8 and 10.
+\end{itemize}
+\end{learningobjectives}
+
+
 This chapter combines everything covered so far: inductive types (Chapter 1), structures (Chapter 2), and rings (Chapters 7--8), used to build a genuinely interesting example: the \textbf{path algebra} of a quiver.
 
 Each section answers the question the previous one leaves open, working down toward a single target: the path algebra \(kQ\).

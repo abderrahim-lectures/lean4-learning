@@ -187,6 +187,14 @@
 }
 \newenvironment{progcorner}{\begin{progcornerbox}}{\end{progcornerbox}}
 
+% "Learning objectives" box at the start of every chapter (emitted by
+% build_latex.py from each 00-index.md's "## Learning objectives" section).
+\newtcolorbox{learningobjectives}{
+  colback=RoyalBlue!5, colframe=RoyalBlue!70!black, coltitle=white,
+  fonttitle=\bfseries, title=Learning objectives, breakable,
+  boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
 % Title is fixed to "Checkpoint Project N" (auto-numbered); the specific
 % project's own title is set as a bold first line inside the box body by
 % build_latex.py, rather than passed through tcolorbox's own optional

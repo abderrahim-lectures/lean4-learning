@@ -4,6 +4,13 @@
 
 ---
 
+## Learning objectives
+
+- Encode a quiver as a `structure` of vertices/arrows/source/target.
+- Define `Path` as an inductive type indexed by its own endpoints.
+- Compose paths via `Path.append` and predict when composability side-conditions block a nonsensical composition.
+- Explain in what sense a path algebra $kQ$ extends the `Ring`/`Module` machinery of Chapters 8 and 10.
+
 This chapter combines everything covered so far: inductive types
 (Chapter 1), structures (Chapter 2), and rings (Chapters 7–8), used
 to build a genuinely interesting example: the **path algebra** of a

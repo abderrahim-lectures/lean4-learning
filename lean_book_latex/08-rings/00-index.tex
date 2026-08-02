@@ -1,5 +1,18 @@
 \chapter{Chapter 8: Rings --- adding a second operation}\label{sec:08-rings:00-index:1}
 
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Translate the ring axioms into a Lean \texttt{structure} built on top of \texttt{CommGroup}.
+\item
+  Build both a commutative (\texttt{Int}, \texttt{Fin 3}) and a genuinely noncommutative (2×2 matrices) example from scratch.
+\item
+  Recognize when a finite carrier lets \texttt{decide} replace a hand-written proof.
+\end{itemize}
+\end{learningobjectives}
+
+
 Chapter 7 finished everything Part II had to say about a single operation. A ring is what happens once a second operation is added alongside it, and each section below follows from that one change:
 
 \begin{enumerate}

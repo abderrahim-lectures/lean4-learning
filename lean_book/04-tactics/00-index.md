@@ -4,6 +4,14 @@
 
 ---
 
+## Learning objectives
+
+- Read a Lean goal state.
+- Use `intro`/`exact`/`apply`/`rw` to work a goal one step at a time.
+- Diagnose a failed tactic from its error message.
+- Use `induction`/`cases`/`constructor`/`unfold` on inductively-defined data.
+- Carry out a full inductive proof (`Nat.add`'s commutativity) from scratch.
+
 ## The story of this chapter
 
 Writing proof *terms* directly (as in Chapter 3) quickly becomes hard to manage.
