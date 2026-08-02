@@ -1,6 +1,6 @@
 # lean_project
 
-A Lean 4 project scaffold (toolchain `v4.31.0`).
+A Lean 4 project scaffold (toolchain `v4.32.2`).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/abderrahim-lectures/lean4-learning)
 
@@ -23,7 +23,7 @@ The toolchain version is pinned in `lean-toolchain` and will be fetched automati
 
 ## Mathlib
 
-This project also depends on Mathlib (pinned to the `v4.31.0` tag, matching
+This project also depends on Mathlib (pinned to the `v4.32.2` tag, matching
 the toolchain). The from-scratch book code (`Ch06Groups.lean`, ...,
 `Ch11PathAlgebras.lean`) never uses it; the matching `*Mathlib.lean` files
 (`Ch06GroupsMathlib.lean`, ...) are Chapters 6-11's "Mathlib equivalent"

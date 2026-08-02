@@ -4,12 +4,6 @@
 
 ---
 
-**Learning objectives.** By the end of this chapter, translate the ring
-axioms into a Lean `structure` built on top of `CommGroup`, build both a
-commutative (`Int`, `Fin 3`) and a genuinely noncommutative ($2\times 2$
-matrices) example from scratch, and recognize when a finite carrier lets
-`decide` replace a hand-written proof.
-
 ## The story of this chapter
 
 Chapter 7 finished everything Part II had to say about a single

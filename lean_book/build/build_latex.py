@@ -728,6 +728,36 @@ def strip_hypertargets(tex):
     return re.sub(r'\\hypertarget\{[^}]*\}\{(\\(?:sub)*section\{.*?\}(?:\\label\{[^}]*\})?)\}', _sub, tex, flags=re.DOTALL)
 
 
+def strip_story_and_sections_headings(tex):
+    """Remove the \section{The story of this chapter} and \section{Sections}
+    headings from chapter 00-index files, but keep their body content.
+    The story text should flow directly under \chapter{}, and the Sections
+    enumerate is the chapter's TOC which should be REMOVED entirely (both
+    heading and body), since the story text already contains the section list."""
+    # Match \section{The story of this chapter}...body... up to next \section or \begin or \chapter or end
+    # Pattern: \section{The story of this chapter}\label{...} followed by body
+    # Remove the \section and \label, keep the body
+    story_pattern = re.compile(
+        r'(\\section\{The story of this chapter\}\s*\\label\{[^}]*\})\s*(.*?)(?=\\section\{|\n\\begin\{|\n\\chapter\{|\Z)',
+        re.DOTALL
+    )
+    def _strip_story(m):
+        return m.group(2).lstrip()
+    tex = story_pattern.sub(_strip_story, tex)
+
+    # Match \section{Sections}\label{...} followed by body (usually \begin{enumerate})
+    # Remove the ENTIRE section (heading + body)
+    sections_pattern = re.compile(
+        r'(\\section\{Sections\}\s*\\label\{[^}]*\})\s*.*?(?=\\section\{|\n\\begin\{|\n\\chapter\{|\Z)',
+        re.DOTALL
+    )
+    def _strip_sections(m):
+        return ""
+    tex = sections_pattern.sub(_strip_sections, tex)
+
+    return tex
+
+
 def get_title(md_path):
     with open(md_path, encoding="utf-8") as fh:
         for line in fh:
@@ -784,6 +814,8 @@ def convert_file(chapter, name):
     tex = result.stdout
 
     tex = strip_hypertargets(tex)
+    if name == "00-index.md" and chapter:
+        tex = strip_story_and_sections_headings(tex)
     tex = simplify_tables(tex)
     tex = fix_image_paths(tex, chapter)
     tex = fix_cross_links(tex, chapter)

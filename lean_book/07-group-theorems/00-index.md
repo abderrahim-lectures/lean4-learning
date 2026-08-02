@@ -12,13 +12,6 @@ each proof: given a goal, what to examine, what to attempt, and how to
 recognize being stuck versus one step away. Each theorem below is presented
 as that search, not merely its answer.
 
-**Learning objectives.** By the end of this chapter, prove a fact about
-*every* group at once by reasoning only from `Group`'s fields, recognize
-the "relate both sides to a common third expression" and "pad with the
-identity, then cancel" patterns, and reuse a proved lemma
-(`left_inverse_unique`) to shortcut a later one (`inv_op`) instead of
-re-deriving it.
-
 ## The story of this chapter
 
 Chapter 6 ended by naming a payoff it had not yet cashed in: a theorem

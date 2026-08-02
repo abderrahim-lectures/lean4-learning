@@ -4,11 +4,13 @@
 
 ---
 
-**Learning objectives.** By the end of this chapter, know why Lean (rather
-than another proof assistant) is this book's choice, have a working
-`lake`/Lean 4 toolchain and editor set up, and understand why this book
-builds everything from scratch instead of importing Mathlib from the
-start.
+## The story of this chapter
+
+Before any theorem is stated, three questions must be answered: *why* Lean,
+*can* you run it, and *why* this book builds everything by hand rather than
+trusting an existing library. Each section below addresses one of them in
+turn — not as abstract philosophy, but as a concrete choice with
+concrete consequences for the rest of the book.
 
 ## Sections
 

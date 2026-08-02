@@ -4,12 +4,6 @@
 
 ---
 
-**Learning objectives.** By the end of this chapter, read a Lean term's
-type with `#check`, distinguish `#check` from `#eval`, write basic `def`s
-with implicit arguments, understand what makes a type *dependent* (via
-`Fin`/`Vec`), and state precisely how Π-types, Σ-types, and `Prop`
-irrelevance fit into Lean's underlying calculus.
-
 ## The story of this chapter
 
 Every section below answers one question, and each question is forced by

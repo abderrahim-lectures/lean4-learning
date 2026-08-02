@@ -10,13 +10,6 @@ because the goals become visually noisy fast (nested `addGrp.toGroup.op`
 everywhere). The skill under development is avoiding getting lost in that
 noise, and instead tracking which algebraic fact is one step away from use.
 
-**Learning objectives.** By the end of this chapter, derive a ring fact
-that is *not* an axiom (e.g. $a\cdot 0=0$) from the axioms that are, spot
-when a "mirror" proof (`left_distrib` vs. `right_distrib`) can be copied
-line-by-line rather than re-derived, and reduce a "compute this" goal to
-a "verify this satisfies the characterizing property" goal via a
-previously-proved uniqueness lemma.
-
 ## The story of this chapter
 
 Chapter 8 built rings one concrete carrier at a time — `Int`, `Fin 3`,

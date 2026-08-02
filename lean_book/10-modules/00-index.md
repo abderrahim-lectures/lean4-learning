@@ -4,12 +4,6 @@
 
 ---
 
-**Learning objectives.** By the end of this chapter, translate the module
-axioms into a Lean `structure` parameterized by an explicit ring, build a
-`Submodule` as a membership predicate with closure proofs, define a
-`LinearMap` and check its two defining properties, and assemble a direct
-sum of modules field by field via `congr 1`.
-
 ## The story of this chapter
 
 Each section below answers the question the previous one forces:

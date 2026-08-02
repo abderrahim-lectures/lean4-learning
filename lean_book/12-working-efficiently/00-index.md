@@ -4,22 +4,28 @@
 
 ---
 
+## The story of this chapter
+
 Chapters 7 and 9 were about *finding* a proof by hand, deliberately slowly,
 so the underlying reasoning is never hidden. This chapter addresses the
 other half: once the reason a proof works is understood, how is it written
 (and found) faster in day-to-day use? Efficient Lean does not mean "type
 less." It means knowing which automation to trust, knowing when it is
-still worth being explicit, and knowing how to structure lemmas so that the
-same fact is not derived twice. (For links to the official docs for
-every tactic and Mathlib name in this book, see the
-[tactic and library reference](../tactic-and-library-reference.md).)
+still worth being explicit, and knowing how to structure lemmas so that
+the same fact is not derived twice. Each section below asks one question
+about that trade-off:
 
-**Learning objectives.** By the end of this chapter, use `exact?`/`apply?`
-to search for a known lemma or proof, recognize when a goal falls inside
-`decide`/`omega`/`norm_num`'s decidable fragment versus needing a genuine
-hand proof, know what `simp` trades away for speed, choose between term
-mode and tactic mode for a given proof, and recognize when a sub-goal
-deserves its own named lemma.
+1. What if Lean already knows the lemma or the proof you need — can it just
+   find it for you?
+2. When is a goal so mechanical that full automation (`decide`, `omega`,
+   `norm_num`) is the right call, and when does the search still need
+   human hands?
+3. `simp` rewrites thousands of steps at once — but what exactly does it
+   trade away for that speed, and when should you decline the trade?
+4. Should every proof be written as a tactic script, or are some of them
+   clearer as a single term?
+5. After a fact is proved once, how do you package it so the next proof
+   that needs it is a lookup, not a re-derivation?
 
 ## Sections
 
