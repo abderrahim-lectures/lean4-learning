@@ -14,7 +14,7 @@ mathematical logic — the *pre-Lean, pre-type-theory* version, exactly as it
 is presented in a first logic course — so that Section 1's table has something
 concrete on its "Logic" side to refer back to. Nothing here mentions Lean,
 types, or programs; that translation was entirely Section 1's job, and
-[Chapter 1, Section 4](../01-basics/05-pi-sigma-and-coc.md) and
+[Chapter 1, Section 5](../01-basics/05-pi-sigma-and-coc.md) and
 [Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md) build the
 calculus those types compile down to. This section only fixes what the
 logic itself is.
@@ -72,7 +72,8 @@ written $\Gamma \vdash \varphi$, if there is a finite derivation of
 $\varphi$ from $\Gamma$ built out of a fixed, finite list of allowed
 **inference rules**. These are mechanical, symbol-pushing steps, checkable
 by an algorithm with no appeal to "meaning" at all. **Natural deduction**
-(Gentzen, 1934) is the standard system of such rules. Each connective gets
+(Gentzen, 1935 — independently, and in a different notation, Jaśkowski 1934)
+is the standard system of such rules. Each connective gets
 an **introduction rule** (how to *prove* a formula built with that
 connective) and an **elimination rule** (how to *use* one once you have
 it). Section 1 already showed this pattern concretely (`⟨_, _⟩` introduces `∧`,
@@ -221,7 +222,7 @@ simple idea: *proofs are programs, and the specific shape of program a
 proof compiles to (pair, function, tagged choice, dependent function,
 dependent pair) is read off directly from the outermost connective or
 quantifier of the proposition being proved.* [Chapter 1,
-Section 4](../01-basics/05-pi-sigma-and-coc.md) makes this fully rigorous for the
+Section 5](../01-basics/05-pi-sigma-and-coc.md) makes this fully rigorous for the
 dependent case, by showing $\Pi$ and $\Sigma$ inside the calculus of
 constructions itself, rather than only stating the correspondence
 informally as this table does.

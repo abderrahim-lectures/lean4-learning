@@ -73,7 +73,9 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2)
   hypotheses in a signature — nothing prevents assuming something
   false; it only prevents *proving* it from nothing), one may
   conclude literally any proposition `P` whatsoever. This is the "ex falso
-  quodlibet" principle from classical logic, made concrete. Once a
+  quodlibet" principle made concrete — $\bot$-elimination from
+  [Section 2](02-logic-recap.md), which is valid in both classical and
+  intuitionistic logic, so nothing classical is being smuggled in here. Once a
   contradiction is present among the hypotheses, the goal being
   proved stops mattering.
 

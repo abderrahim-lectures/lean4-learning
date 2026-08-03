@@ -139,8 +139,7 @@ Everything in this book is built from Lean's \texttt{inductive} mechanism: \text
 \mathrm{false} := \lambda x.\, \lambda y.\, y
 \] A boolean, in this encoding, \emph{is} a choice function --- to use one, apply it to the two branches of an if-expression: \[
 \mathrm{if}\; b \;\mathrm{then}\; t \;\mathrm{else}\; e \;:=\; b\, t\, e
-\] Check: \(\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e
-\longrightarrow_\beta t\) (discarding \(e\)), and symmetrically \(\mathrm{false}\, t\, e \longrightarrow_\beta e\). ``If-then-else'' is not a primitive at all --- it is just \emph{application}, once booleans are represented this way. Lean's actual \texttt{Bool} (an \texttt{inductive} with two constructors) is a \emph{convenience}, not a necessity --- the calculus itself never needed a booleans primitive to express conditional behavior.
+\] Check: \(\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e \longrightarrow_\beta t\) (discarding \(e\)), and symmetrically \(\mathrm{false}\, t\, e \longrightarrow_\beta e\). ``If-then-else'' is not a primitive at all --- it is just \emph{application}, once booleans are represented this way. Lean's actual \texttt{Bool} (an \texttt{inductive} with two constructors) is a \emph{convenience}, not a necessity --- the calculus itself never needed a booleans primitive to express conditional behavior.
 
 \textbf{Church numerals.} Represent the natural number \(n\) as ``apply a function \(n\) times'': \[
 \underline{0} := \lambda f.\, \lambda x.\, x
@@ -155,18 +154,14 @@ Everything in this book is built from Lean's \texttt{inductive} mechanism: \text
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Successor:} \(\mathrm{succ} := \lambda n.\, \lambda f.\, \lambda x.\,
-  f\,(n\, f\, x)\) --- ``apply \(f\) one more time than \(n\) does.''
+  \textbf{Successor:} \(\mathrm{succ} := \lambda n.\, \lambda f.\, \lambda x.\, f\,(n\, f\, x)\) --- ``apply \(f\) one more time than \(n\) does.''
 \item
-  \textbf{Addition:} \(\mathrm{plus} := \lambda m.\lambda n.\lambda f.\lambda x.\,
-  m\, f\,(n\, f\, x)\) --- ``apply \(f\), \(m\) times, starting from where \(n\) already applied it \(n\) times,'' the same recursive shape that makes \texttt{Nat.add} recurse on its second argument (Chapter 4).
+  \textbf{Addition:} \(\mathrm{plus} := \lambda m.\lambda n.\lambda f.\lambda x.\, m\, f\,(n\, f\, x)\) --- ``apply \(f\), \(m\) times, starting from where \(n\) already applied it \(n\) times,'' the same recursive shape that makes \texttt{Nat.add} recurse on its second argument (Chapter 4).
 \item
-  \textbf{Multiplication} is even more striking: \(\mathrm{mult} := \lambda m.
-  \lambda n.\lambda f.\, m\,(n\, f)\) --- ``apply \emph{`apply \(f\), \(n\) times'}, \(m\) times.'' Multiplication is literally function composition, iterated.
+  \textbf{Multiplication} is even more striking: \(\mathrm{mult} := \lambda m. \lambda n.\lambda f.\, m\,(n\, f)\) --- ``apply \emph{`apply \(f\), \(n\) times'}, \(m\) times.'' Multiplication is literally function composition, iterated.
 \end{itemize}
 
-None of this is meant to suggest that one should ever program this way. It shows, concretely, that a system with only variables, abstraction, and application already has the expressive power to build booleans, naturals, and (by pairing constructions along the same lines) arbitrary tree-shaped data --- before any type system or \texttt{inductive} keyword enters the picture. Lean's actual \texttt{Bool} and \texttt{Nat} use \texttt{inductive} instead, for efficiency and because pattern-matching (\texttt{match}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}) is far more convenient to write and reason about than repeated application --- the \emph{expressiveness} was never in question. If this is interesting, a next step is to encode pairs the same way (\(\mathrm{pair} := \lambda a.\lambda b.\lambda f.\,
-f\, a\, b\)) and check by hand that projecting back out a component β-reduces correctly.
+None of this is meant to suggest that one should ever program this way. It shows, concretely, that a system with only variables, abstraction, and application already has the expressive power to build booleans, naturals, and (by pairing constructions along the same lines) arbitrary tree-shaped data --- before any type system or \texttt{inductive} keyword enters the picture. Lean's actual \texttt{Bool} and \texttt{Nat} use \texttt{inductive} instead, for efficiency and because pattern-matching (\texttt{match}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}) is far more convenient to write and reason about than repeated application --- the \emph{expressiveness} was never in question. If this is interesting, a next step is to encode pairs the same way (\(\mathrm{pair} := \lambda a.\lambda b.\lambda f.\, f\, a\, b\)) and check by hand that projecting back out a component β-reduces correctly.
 
 \subsubsection{References}\label{sec:13-next-steps:03-next-projects:8}
 

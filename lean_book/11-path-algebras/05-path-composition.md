@@ -142,12 +142,16 @@ top is routine to add.
 
 **Mathematical reading.** The **path algebra** $kQ$ is the free $k$-module
 on the set of all paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with
-multiplication extending path composition $k$-bilinearly:
+multiplication extending path composition $k$-bilinearly — written here in the
+same **path order** used throughout this section, so that it matches
+`Path.append` and the quoted source below:
 $$
-q \cdot p = \begin{cases} q\circ p & \text{if } t(p) = s(q),\\ 0 &
+p \cdot q = \begin{cases} p\,;q & \text{if } t(p) = s(q),\\ 0 &
 \text{otherwise,}\end{cases}
 $$
-and unit $\sum_{v\in V} e_v$ (the sum of the trivial paths) — well-defined
+where $p\,;q$ means "first $p$, then $q$". (Sources that fix
+function-composition order instead write this product as $q \cdot p = q \circ
+p$; the algebra is the same, read right-to-left.) The unit is $\sum_{v\in V} e_v$ (the sum of the trivial paths) — well-defined
 as a finite sum, hence a genuine identity element, precisely when $Q_0$ is
 finite. So representations of $Q$ are exactly $kQ$-modules, the bridge to
 Chapter 10 promised there. The construction requires finitely-supported
@@ -187,8 +191,15 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l,
   \beta_1, \ldots, \beta_k \mid d)$" ([AssemSimsonSkowronski2006],
   Ch. II §1, Definition 1.2).
-- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.2, Ch. II §1 — path algebra $kQ$. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*.
-- Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2) — same construction; unit given explicitly as $1 = \sum_{i\in Q_0} e_i$ in the lemma immediately following (Lemma 4.3 in that source's numbering).
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.2, Ch. II §1 — path algebra $kQ$. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*. Note that the quoted product writes the **left** factor's arrows first, i.e. in path order — the same order as `Path.append` and as the multiplication formula above.
+- Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2) — same construction; the unit is given explicitly as $1 = \sum_{i\in Q_0} e_i$ in a lemma nearby in that section.
+
+> **Numbering not independently verified.** An earlier draft of this box
+> reported the Schiffler unit as "Lemma 4.3 in that source's numbering,"
+> described as immediately following Definition 4.5 — which cannot both be
+> true. The definition number is the one this section relies on; the lemma
+> number has been dropped rather than guessed. Check both against the printed
+> source before quoting either.
 
 [AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006
 [Schiffler2014]: ../bibliography.md#schiffler2014

@@ -53,6 +53,16 @@ inductive Vec ((*$\alpha$*) : Type) : Nat (*$\rightarrow$*) Type where
 
 Read this exactly like \texttt{Nat}'s two-constructor definition from the previous section, with one new ingredient: \texttt{Vec α} is not a single type, it is a \textbf{family of types indexed by a \texttt{Nat}} --- \texttt{Vec α 0}, \texttt{Vec α 1}, \texttt{Vec α 2}, \ldots{} are all different types, one per length, and the length is tracked \emph{in the type itself}, not just at runtime. \texttt{nil} builds the unique length-\texttt{0} vector; \texttt{cons} takes an element and a length-\texttt{n} vector and produces a length-\texttt{(n+1)} vector --- the \texttt{n} used on both sides of \texttt{cons}'s arrow is the \emph{same} \texttt{n}, so the constructor itself enforces ``one longer than whatever it started with.''
 
+One detail that Section 2's careful treatment of \texttt{\{α : Type\}} does not account for: \texttt{n} is never bound anywhere in the \texttt{cons} line above, and yet the declaration elaborates. That is Lean's \textbf{\texttt{autoImplicit}} setting, on by default, which turns an unbound lowercase identifier in a declaration's type into an implicit argument automatically --- here inserting \texttt{\{n : Nat\}} for you. The same thing happens with \texttt{α} in the definitions below, which is why \texttt{\#check @Vec.replicate} prints a \texttt{\{α : Type\}} binder that nothing in the source wrote. Mathlib and most substantial projects set \texttt{autoImplicit := false}, precisely so that a typo cannot silently become a new implicit argument; in such a project write the binders out:
+
+\begin{lstlisting}
+inductive Vec ((*$\alpha$*) : Type) : Nat (*$\rightarrow$*) Type where
+  | nil  : Vec (*$\alpha$*) 0
+  | cons {n : Nat} : (*$\alpha$*) (*$\rightarrow$*) Vec (*$\alpha$*) n (*$\rightarrow$*) Vec (*$\alpha$*) (n + 1)
+\end{lstlisting}
+
+That version binds \texttt{n} explicitly rather than relying on the setting, which is what Chapter 13's Mathlib-style projects expect.
+
 Here is a function that \emph{builds} one of these, and its type is the dependent-function payoff:
 
 \begin{lstlisting}

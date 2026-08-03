@@ -30,7 +30,8 @@ down toward a single target: the path algebra $kQ$.
    several arrows, chained one after another?**
    ([Section 2](02-paths.md)) A **path**: a sequence of arrows composable
    head-to-tail, together with, for each vertex, a length-$0$ trivial path
-   that starts and ends there and composes with nothing but itself.
+   that starts and ends there and acts as the identity at that vertex,
+   composing with any path starting or ending there and leaving it unchanged.
 3. **Both of the last two sections were stated on paper. How does the
    quiver definition become something Lean can check against?**
    ([Section 3](03-defining-a-quiver.md)) A `structure` bundling the

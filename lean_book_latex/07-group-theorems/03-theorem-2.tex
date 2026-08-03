@@ -31,8 +31,7 @@ At each \texttt{rw}, the goal-state comment records what would appear in the edi
 
 \begin{mathreading}
 
-This is \emph{uniqueness of inverses}: if \(b\cdot a =
-e\) then \(b = a^{-1}\). The displayed chain \[
+This is \emph{uniqueness of inverses}: if \(b\cdot a = e\) then \(b = a^{-1}\). The displayed chain \[
 b = b\cdot e = b\cdot(a\cdot a^{-1}) = (b\cdot a)\cdot a^{-1} = e\cdot a^{-1}
 = a^{-1}
 \] is the textbook proof: insert \(e = a\cdot a^{-1}\), reassociate, apply the hypothesis \(b\cdot a = e\), then cancel the identity. Each \texttt{rw} performs exactly one equality in this chain, using the axioms \(\lambda_r\) (id\_right), \(\iota_r\) (inv\_right), \(\alpha\) (assoc), the hypothesis \(h\), and \(\lambda_\ell\) (id\_left). Together with Theorem 1 this establishes that inverses in a group are two-sided and unique, so the notation \(a^{-1}\) is unambiguous.

@@ -27,9 +27,7 @@ Why \texttt{rw [← step2]} and not \texttt{rw [step2]}? The goal is \texttt{e' 
 
 This is the classical \emph{uniqueness of the identity}: if \(e'\) is a left identity (\(e'\cdot a = a\) for all \(a\)) then \(e' = e\). The one-line proof is \[
 e' \overset{\text{id\_right}}{=} e' \cdot e \overset{h}{=} e,
-\] evaluating the hypothesis at \(a = e\) and comparing with the axiom \(e'\cdot e
-= e'\): both compute \(e' \cdot e\), so \(e' = e\). The two \texttt{have}s are these two equalities, and the \texttt{rw}/\texttt{exact} glue them at their common expression \(e'\cdot
-e\): the standard ``two things equal to a common third are equal.'' (The same argument in mirror shows a right identity is also unique, so a group's identity is unique, full stop.)
+\] evaluating the hypothesis at \(a = e\) and comparing with the axiom \(e'\cdot e = e'\): both compute \(e' \cdot e\), so \(e' = e\). The two \texttt{have}s are these two equalities, and the \texttt{rw}/\texttt{exact} glue them at their common expression \(e'\cdot e\): the standard ``two things equal to a common third are equal.'' (The same argument in mirror shows a right identity is also unique, so a group's identity is unique, full stop.)
 
 \end{mathreading}
 

@@ -1,4 +1,11 @@
 {
   "name": "lean4-learning",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu"
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12",
+      "installTools": false
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-science texlive-bibtex-extra texlive-pictures texlive-latex-recommended biber latexmk fonts-texgyre fonts-dejavu fontconfig && sudo rm -rf /var/lib/apt/lists/*"
 }

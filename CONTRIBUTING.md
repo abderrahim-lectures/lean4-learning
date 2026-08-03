@@ -29,7 +29,7 @@ examples of how past issues were scoped.
 1. Fork the repository and create a branch for your change.
 2. Make the edit. If you're changing book content, edit the Markdown
    source under `lean_book/<chapter>/` — the LaTeX/PDF pipeline
-   (`lean_book/build/build_latex.py`) regenerates `lean_book_latex/`
+   (`lean_book_latex/build/build_latex.py`) regenerates `lean_book_latex/`
    from Markdown automatically; don't hand-edit the `.tex` files.
 3. Add a `## Unreleased — <title>` entry to
    `lean_book/changelog/<current-unreleased-version>.md` describing what

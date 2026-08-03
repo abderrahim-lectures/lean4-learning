@@ -25,7 +25,7 @@ Each section answers the question the previous one leaves open, working down tow
 \item
   \textbf{What is the raw combinatorial object a path algebra is built from?} (\hyperref[sec:11-path-algebras:01-what-is-a-quiver:1]{Section 1}) A \textbf{quiver}: nothing more than a set of vertices, a set of arrows, and two functions recording each arrow's source and target --- a directed graph, stripped to the bare minimum.
 \item
-  \textbf{A single arrow is one directed step. What is a \emph{route} through several arrows, chained one after another?} (\hyperref[sec:11-path-algebras:02-paths:1]{Section 2}) A \textbf{path}: a sequence of arrows composable head-to-tail, together with, for each vertex, a length-\(0\) trivial path that starts and ends there and composes with nothing but itself.
+  \textbf{A single arrow is one directed step. What is a \emph{route} through several arrows, chained one after another?} (\hyperref[sec:11-path-algebras:02-paths:1]{Section 2}) A \textbf{path}: a sequence of arrows composable head-to-tail, together with, for each vertex, a length-\(0\) trivial path that starts and ends there and acts as the identity at that vertex, composing with any path starting or ending there and leaving it unchanged.
 \item
   \textbf{Both of the last two sections were stated on paper. How does the quiver definition become something Lean can check against?} (\hyperref[sec:11-path-algebras:03-defining-a-quiver:1]{Section 3}) A \texttt{structure} bundling the vertex type, the arrow type, and the two source/target functions --- a direct transcription, worked through on a small three-vertex example quiver used for the rest of the chapter.
 \item

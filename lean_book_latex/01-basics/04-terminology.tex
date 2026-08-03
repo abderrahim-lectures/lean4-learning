@@ -91,8 +91,8 @@ This is a characterization of a construction not by what it is \emph{made of}, b
 \end{center}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Symbol
@@ -120,6 +120,8 @@ Read the diagram as follows: the two solid outer arrows (\(f\) and \(g\)) are \e
 
 ``for every monoid \(M\) and every element \(m \in M\), there is exactly one monoid homomorphism \(h : \mathbb{N} \to M\) with \(h(1) = m\)'' --- namely \(h(n) = \underbrace{m + \cdots + m}_{n}\) (iterate \(m\)'s own operation \(n\) times), forced because a homomorphism must send \(0\) to \(M\)'s identity and send \(a+b\) to \(h(a)\) combined with \(h(b)\). Where the product's mediating map \(h\) was built by pairing (\(\langle f, g\rangle\)), this \(h\) is built by \emph{iteration}; the common thread is still ``exactly one map making the obvious diagram commute,'' just with a different shape of ``obvious diagram'' and a different notion of ``compatible with the given data.'' \(1 \in \mathbb{N}\) plays the role of the generator being mapped to \(m\), matching \(X\times Y\)'s two projections \(\pi_X,\pi_Y\) above.
 
+Note that what is stated here is the \emph{free monoid} on one generator: \(M\) ranges over all monoids, commutative or not. The phrase used in Section 1, ``free \emph{commutative} monoid on one generator,'' is the corresponding property with \(M\) ranging over commutative monoids only. Both hold of \(\mathbb{N}\), and for a reason worth seeing: the free monoid on one generator is already commutative (everything in it is a power of the single generator), so the weaker-looking commutative version comes for free from the stronger one.
+
 \subsubsection{Initial object}\label{sec:01-basics:04-terminology:8}
 
 This is an object \(I\) of a category with a \emph{unique} morphism \(I \to X\) out to every other object \(X\): the universal property above, specialized to ``the best possible source'':
@@ -129,8 +131,8 @@ This is an object \(I\) of a category with a \emph{unique} morphism \(I \to X\) 
 \end{center}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Symbol
@@ -156,8 +158,8 @@ This is a functor that takes a structure and \emph{keeps only part of it}, disca
 \end{center}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Symbol
@@ -183,8 +185,8 @@ A subobject of \(X\) is (informally) ``a subset of \(X\) cut out by some conditi
 \end{center}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Symbol
@@ -220,7 +222,7 @@ Formal definitions and citations for this section, gathered here for reference (
 \item
   \textbf{Weak head normal form.} ``Weak Head Normal Form: all expressions which are either λ-abstractions or of the form \(\lambda x_1 \ldots \lambda x_n.\, y\, e_1 \ldots e_m\)'' (\cite{Thompson1991}, §2.3, p.~36, Definition 2.8). Picture it like this: telling a wrapped gift is bicycle-shaped without unwrapping it --- reduced just far enough to see the outermost shape (a function, or a specific constructor applied to arguments), without bothering to look inside those arguments yet.
 \item
-  \textbf{Church--Rosser theorem.} ``For all \(e, f\) and \(g\), if \(e \to f\) and \(e \to g\) then there exists \(h\) such that \(f \to h\) and \(g \to h\)'' (\cite{Thompson1991}, §2.3, p.~38, Theorem 2.10). Picture it like this: solving a Sudoku puzzle by filling in cells in a different order --- as long as the rules are followed to completion, everyone ends up with the identical finished grid, regardless of which cell they filled in first.
+  \textbf{Church--Rosser theorem.} ``For all \(e, f\) and \(g\), if \(e \to f\) and \(e \to g\) then there exists \(h\) such that \(f \to h\) and \(g \to h\)'' (\cite{Thompson1991}, §2.3, p.~38, Theorem 2.10). Picture it like this: solving a Sudoku puzzle by filling in cells in a different order --- as long as the rules are followed to completion, everyone ends up with the identical finished grid, regardless of which cell they filled in first. The original source is Alonzo Church and J. Barkley Rosser, ``Some properties of conversion,'' \emph{Transactions of the American Mathematical Society} 39(3), 1936, pp.~472--482; it has not been consulted directly for this book, and the statement above is quoted from \cite{Thompson1991} instead, in keeping with this book's convention of citing what was actually read.
 \item
   \textbf{Universal property (general form).} ``If \(S : D \to C\) is a functor and \(c\) an object of \(C\), a universal arrow from \(c\) to \(S\) is a pair \((r, u)\) consisting of an object \(r\) of \(D\) and an arrow \(u : c \to Sr\) of \(C\), such that to every pair \((d, f)\) with \(d\) an object of \(D\) and \(f : c \to Sd\) an arrow of \(C\), there is a unique arrow \(f' : r \to d\) of \(D\) with \(Sf' \circ u = f\)'' (\cite{MacLane1998}, Ch. III §1, p.~55). Picture it like this: describing ``the best hub airport for a route network'' not by naming its terminals or runways, but purely by the fact that every other airport's connections can be rerouted through it in exactly one sensible way. A universal property describes something by the role it plays, not by what it's built from.
 \item

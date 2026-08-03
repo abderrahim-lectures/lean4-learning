@@ -63,7 +63,7 @@ is regarded as "a proof" or "a computation."
 > Read more: if "propositional logic" or "natural deduction" above are not
 > already familiar, [the next section](02-logic-recap.md) recaps standard
 > logic from scratch, with no Lean involved, before this correspondence
-> gets applied to it. [Chapter 1, Section 4](../01-basics/05-pi-sigma-and-coc.md)
+> gets applied to it. [Chapter 1, Section 5](../01-basics/05-pi-sigma-and-coc.md)
 > makes the correspondence fully precise, extending it down to the untyped
 > λ-calculus underneath both proofs and ordinary functions.
 > [Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md)'s progress
@@ -107,7 +107,12 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   functions is an instance of the Curry-Howard isomorphism, sometimes
   known as the propositions-as-types paradigm" ([TPIL4], "Propositions
   and Proofs"; the correspondence traces to Howard's 1969 manuscript,
-  circulated privately and formally published as [Howard1980]). Picture
+  circulated privately and formally published as [Howard1980]). The name
+  carries two people because the observation is older than Howard's paper:
+  Curry noticed the correspondence between implicational formulas and
+  combinator types in 1934, and Howard extended and sharpened it in 1969
+  (Wadler, "Propositions as Types," *CACM* 58(12), 2015: "a correspondence
+  observed by Curry in 1934 and refined by Howard in 1969"). Picture
   it like this: a mathematical claim is a blueprint, and a valid proof
   is an actual working machine built to that blueprint. There's no
   separate "proof of correctness" apart from having successfully built

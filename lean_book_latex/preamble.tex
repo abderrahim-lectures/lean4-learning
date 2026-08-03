@@ -144,6 +144,10 @@
 % Running headers/footers
 % ---------------------------------------------------------------------
 \usepackage{fancyhdr}
+% fancyhdr needs headheight >= the header's natural height, or it warns once
+% per page (238 identical warnings on a 280-page build). geometry's default
+% 12pt is short of the 13.6pt this header needs.
+\setlength{\headheight}{13.6pt}
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}

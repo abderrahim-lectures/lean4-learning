@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(claude mcp *)",
+      "Bash(grep -n '\"mcpServers\": {}' /home/vscode/.claude.json | head -3)",
+      "Read(//home/vscode/**)"
+    ]
+  }
+}

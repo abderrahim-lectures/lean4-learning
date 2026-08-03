@@ -41,7 +41,7 @@ clipping, and typography regressions.
 Before reviewing, confirm the build pipeline:
 
 ```sh
-python3 lean_book/build/build_latex.py
+python3 lean_book_latex/build/build_latex.py
 cd lean_book_latex
 latexmk -xelatex lean-for-working-algebraists.tex
 biber lean-for-working-algebraists

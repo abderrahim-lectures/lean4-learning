@@ -154,7 +154,7 @@ See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Building the LaTeX manuscript
 
-`python build/build_latex.py` converts every chapter's Markdown into a
+`python3 ../lean_book_latex/build/build_latex.py` converts every chapter's Markdown into a
 full LaTeX manuscript under [`../lean_book_latex/`](../lean_book_latex/)
 (a sibling of this directory, not a subdirectory of it): one `.tex` file
 per Markdown section (mirroring the source layout exactly), a driver per
