@@ -110,7 +110,29 @@ AI models --- DeepSeek V4 Flash, Laguna S2.1, Ling 3.0 Flash, Mimo V2.5,
 Nemotron 3 Ultra, and North Mini Code --- who then cross-critiqued one
 another's reports; Nemotron 3 Ultra adjudicated the combined corpus into a
 single final review (see \texttt{reviews/2026-08-02/} in the repository).
-The findings that survived adjudication drove the fixes in this release.
+The findings that survived adjudication drove the fixes in that release.
+
+A closing verification pass followed (see
+\texttt{reviews/2026-08-03/} in the repository), run as a single
+adversarial reviewer rather than a panel: it re-triaged every finding from
+the previous round, audited the bibliography against the literature via the
+Consensus research tool, swept the manuscript programmatically for broken
+links, mismatched cross-reference labels, and tactics used but absent from
+the reference tables, and --- following the project's
+adversarial-mathematics review protocol --- re-derived the worked examples
+and proofs by hand and tested the boundary and degenerate cases the earlier
+panel had not. That last step is what found the round's most serious defect:
+a false definition of the length-\(0\) path in Chapter~11, contradicted by
+the book's own later sections. Two further defects surfaced in the
+type-theory core --- a \texttt{rfl} example block in Chapter~5 that taught
+the inverse of the truth, and the Π-type universe rule stated with
+\(\max\) where Lean uses \(\mathrm{imax}\), which had made every
+\texttt{∀}-statement in Chapters~3--11 contradict the rule printed in
+Chapter~5. All are corrected in this release, along with several citation
+and cross-reference repairs. That reviewer also recorded two of its own
+predictions that testing against the real toolchain disproved; both are
+documented in the review file rather than quietly dropped.
+
 Treat it as an author-reviewed draft produced through human-directed AI
 authorship, not a traditionally peer-reviewed text.
 

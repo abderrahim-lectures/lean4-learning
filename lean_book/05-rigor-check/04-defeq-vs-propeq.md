@@ -29,10 +29,17 @@ check that two types or terms match) or it does not, and `rfl` is the tactic
 that asks Lean to check exactly this and fail loudly if it does not hold.
 
 ```lean
-example : 2 + 2 = 4 := rfl        -- 2 + 2 reduces to 4 definitionally
-example : 0 + 2 = 2 := rfl        -- Nat.add recurses on its 2nd arg; 2 + 0 = 2 is the base case
--- example : 2 + 0 = 2 := rfl     -- also rfl (0 + n needs induction, n + 0 doesn't)
+example : 2 + 2 = 4 := rfl              -- closed terms: both sides just compute
+example (n : Nat) : n + 0 = n := rfl    -- rfl: `n + 0` is Nat.add's base case
+-- example (n : Nat) : 0 + n = n := rfl -- FAILS: Nat.add recurses on its second
+--                                      -- argument, so `0 + n` is stuck at the
+--                                      -- unknown `n`. Needs induction — Chapter 4.
 ```
+
+The asymmetry in the last two lines is the whole point, and it only shows up
+with a *variable* `n`. On closed numerals everything computes, so `0 + 2 = 2`
+and `2 + 0 = 2` are both `rfl` and neither reveals anything. Replace `n` by a
+literal and the commented-out line starts succeeding.
 
 One precise point worth noting: "reduce to the same normal form" does not mean
 Lean necessarily unfolds a term *all the way down* before comparing.

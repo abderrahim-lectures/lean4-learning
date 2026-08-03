@@ -114,6 +114,26 @@ produces a length-`(n+1)` vector — the `n` used on both sides of `cons`'s
 arrow is the *same* `n`, so the constructor itself enforces "one longer
 than whatever it started with."
 
+One detail that Section 2's careful treatment of `{α : Type}` does not
+account for: `n` is never bound anywhere in the `cons` line above, and yet
+the declaration elaborates. That is Lean's **`autoImplicit`** setting, on by
+default, which turns an unbound lowercase identifier in a declaration's type
+into an implicit argument automatically — here inserting `{n : Nat}` for you.
+The same thing happens with `α` in the definitions below, which is why
+`#check @Vec.replicate` prints a `{α : Type}` binder that nothing in the
+source wrote. Mathlib and most substantial projects set
+`autoImplicit := false`, precisely so that a typo cannot silently become a
+new implicit argument; in such a project write the binders out:
+
+```lean
+inductive Vec (α : Type) : Nat → Type where
+  | nil  : Vec α 0
+  | cons {n : Nat} : α → Vec α n → Vec α (n + 1)
+```
+
+That version binds `n` explicitly rather than relying on the setting, which is
+what Chapter 13's Mathlib-style projects expect.
+
 Here is a function that *builds* one of these, and its type is the
 dependent-function payoff:
 

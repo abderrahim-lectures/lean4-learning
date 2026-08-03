@@ -25,9 +25,7 @@ Note that \texttt{cons} builds the path by appending the new arrow at the \emph{
 
 \begin{mathreading}
 
-\texttt{Path Q} is the family of Hom-sets of the \textbf{free category} \(\mathrm{Free}(Q)\) on the quiver \(Q\): \texttt{Path Q u w} \(=
-\mathrm{Hom}_{\mathrm{Free}(Q)}(u, w)\), the set of directed paths \(u
-\rightsquigarrow w\). As an \((V\times V)\)-indexed family it is the map \(V \times V \to \mathbf{Set}\), \((u,w) \mapsto \{\text{paths } u \to w\}\). The constructors are the category structure: \texttt{nil v} is the identity morphism \(e_v = \mathrm{id}_v \in \mathrm{Hom}(v,v)\) (the length-\(0\) path), and \texttt{cons} extends a path by one arrow, with the proof fields \(h : s(a) = v\), \(h' : t(a) = w\) enforcing head-to-tail composability. This is the type-level encoding of ``\(\circ\) is only defined on composable pairs.'' Because the composability constraint lives \emph{in the type}, an ill-formed composite simply fails to typecheck. This is exactly the dependent-type payoff from Chapter 1.
+\texttt{Path Q} is the family of Hom-sets of the \textbf{free category} \(\mathrm{Free}(Q)\) on the quiver \(Q\): \texttt{Path Q u w} \(= \mathrm{Hom}_{\mathrm{Free}(Q)}(u, w)\), the set of directed paths \(u \rightsquigarrow w\). As an \((V\times V)\)-indexed family it is the map \(V \times V \to \mathbf{Set}\), \((u,w) \mapsto \{\text{paths } u \to w\}\). The constructors are the category structure: \texttt{nil v} is the identity morphism \(e_v = \mathrm{id}_v \in \mathrm{Hom}(v,v)\) (the length-\(0\) path), and \texttt{cons} extends a path by one arrow, with the proof fields \(h : s(a) = v\), \(h' : t(a) = w\) enforcing head-to-tail composability. This is the type-level encoding of ``\(\circ\) is only defined on composable pairs.'' Because the composability constraint lives \emph{in the type}, an ill-formed composite simply fails to typecheck. This is exactly the dependent-type payoff from Chapter 1.
 
 \end{mathreading}
 

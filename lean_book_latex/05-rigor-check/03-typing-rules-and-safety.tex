@@ -101,8 +101,7 @@ This is precisely the gap \hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Chapter
 
 \subsection{Universes, as a typing rule}\label{sec:05-rigor-check:03-typing-rules-and-safety:6}
 
-Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 :
-\mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions --- the formal system CoC/CIC that Chapter 1, Section 5 named, extending STLC above with Π-types and universes --- this is stated as a typing rule for the universes themselves:
+Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 : \mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions --- the formal system CoC/CIC that Chapter 1, Section 5 named, extending STLC above with Π-types and universes --- this is stated as a typing rule for the universes themselves:
 
 \[
 \dfrac{}{\mathtt{Type}\,i : \mathtt{Type}\,(i+1)}
@@ -111,11 +110,22 @@ Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 :
 together with a rule saying Π-types (function types, including ordinary \texttt{→}) stay inside a suitable universe:
 
 \[
-\dfrac{\Gamma \vdash A : \mathtt{Type}\,i \quad \Gamma, x:A \vdash B : \mathtt{Type}\,j}
-      {\Gamma \vdash \big(\textstyle\prod_{x:A} B\big) : \mathtt{Type}\,(\max(i,j))}
+\dfrac{\Gamma \vdash A : \mathtt{Sort}\,i \quad \Gamma, x:A \vdash B : \mathtt{Sort}\,j}
+      {\Gamma \vdash \big(\textstyle\prod_{x:A} B\big) : \mathtt{Sort}\,(\mathrm{imax}(i,j))}
 \]
 
-This is exactly Section 2's \texttt{Group : Type → Type} computation spelled out as a general rule: with \(A = \mathtt{Type}\) (itself living in \texttt{Type 1}) and \(B = \mathtt{Type}\) again, the rule gives \(\max(1, 1) = 1\), so \texttt{Type → Type} lands in \texttt{Type 1}, one level above \texttt{Type} itself.
+where \(\mathrm{imax}(i, j) = j\) when \(j = 0\), and \(\max(i, j)\) otherwise, and where \texttt{Sort 0} is \texttt{Prop} and \texttt{Sort (k+1)} is \texttt{Type k} (Chapter 1, Section 5).
+
+For \(j > 0\) --- the case where \(B\) is genuinely a type rather than a proposition --- \(\mathrm{imax}\) \emph{is} \(\max\), and the rule is exactly Section 2's \texttt{Group : Type → Type} computation spelled out generally: with \(A = \mathtt{Type}\) (itself living in \texttt{Type 1}) and \(B = \mathtt{Type}\) again, the rule gives \(\max(1, 1) = 1\), so \texttt{Type → Type} lands in \texttt{Type 1}, one level above \texttt{Type} itself.
+
+The \(j = 0\) case is not a footnote --- it is what makes \texttt{∀} usable at all. When \(B\) lands in \texttt{Prop}, the whole Π-type is a \texttt{Prop} \emph{regardless of how large \(A\) is}. This is the \textbf{impredicativity of \texttt{Prop}}, and it is why \texttt{∀ n : Nat, n ≥ 0} is a proposition you can prove rather than an inhabitant of \texttt{Type 1}:
+
+\begin{lstlisting}
+#check ((*$\forall$*) n : Nat, n (*$\geq$*) 0)   -- (*$\forall$*) (n : Nat), n (*$\geq$*) 0 : Prop
+#check (Type (*$\rightarrow$*) Type)        -- Type (*$\rightarrow$*) Type : Type 1
+\end{lstlisting}
+
+Had the rule been \(\max\) throughout, the first of these would have landed in \texttt{Type 1} (since \(\mathtt{Nat} : \mathtt{Type}\,0 = \mathtt{Sort}\,1\) and \(n \ge 0 : \mathtt{Sort}\,0\) give \(\max(1,0) = 1\)), and every \texttt{∀}-statement in Chapters 3 through 11 would be a type rather than a theorem.
 
 \begin{progcorner}
 
@@ -145,7 +155,7 @@ Formal definitions and citations for this section, gathered here for reference (
 \item
   \textbf{Preservation (Theorem 9.3.9).} ``If \(\Gamma \vdash t : T\) and \(t \to t'\), then \(\Gamma \vdash t' : T\)'' (\cite{Pierce2002}, §9.3).
 \item
-  \textbf{Universe-formation rule.} This book's working statement, after the calculus of constructions (\cite{CoquandHuet1988}): \(\mathtt{Type}\,i : \mathtt{Type}\,(i+1)\), and a Π-type built from \(A : \mathtt{Type}\,i\), \(B : \mathtt{Type}\,j\) lands in \(\mathtt{Type}\,(\max(i,j))\).
+  \textbf{Universe-formation rule.} This book's working statement, after the calculus of constructions (\cite{CoquandHuet1988}): \(\mathtt{Type}\,i : \mathtt{Type}\,(i+1)\), and a Π-type built from \(A : \mathtt{Sort}\,i\), \(B : \mathtt{Sort}\,j\) lands in \(\mathtt{Sort}\,(\mathrm{imax}(i,j))\) --- the \(j = 0\) clause being the impredicativity of \texttt{Prop}, which the calculus of constructions is characterized by and which \cite{TPIL4} §2.2 documents for Lean specifically.
 \item
   Pierce (\cite{Pierce2002}), Ch. 8 ``Typed Arithmetic Expressions'' §8.3 ``Safety = Progress + Preservation'' (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 9 ``Simply Typed Lambda-Calculus'' §9.2 ``The Typing Relation'' (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 ``Properties of Typing'' (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC) --- verified verbatim. An earlier draft of this section cited Ch. 9--11; Ch. 11 ``Simple Extensions'' actually covers pairs/tuples/records/sums, unrelated to this section's content.
 \item

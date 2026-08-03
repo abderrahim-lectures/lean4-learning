@@ -55,7 +55,8 @@ forming `A → B` when `A : Type i` and `B : Type j` produces a term of type
 `Type : Type 1`) and `B := Type` again, so `Type → Type` itself lands in
 `Type (max 1 1) = Type 1`.
 [Chapter 5, Section 3](03-typing-rules-and-safety.md) states this rule precisely
-as one line of the calculus of constructions. The short version
+as one line of the calculus of constructions — including the one case not
+covered by `max`, namely when `B` is a proposition. The short version
 is that `Group` is not even a candidate carrier type for its own
 construction. It sits one universe level too high, exactly because it is a
 function *out of* `Type` itself, not out of some ordinary `Type 0` type

@@ -6,7 +6,8 @@ emitting `.tex`, per this project's Phase 5 plan (a Springer submission
 wants `.tex` source, not a pre-rendered PDF). This is the book's only
 build pipeline; the previous Pandoc-direct-to-PDF script has been retired.
 
-Run from anywhere: `python build/build_latex.py`. Requires `pandoc` on
+Run from anywhere: `python3 lean_book_latex/build/build_latex.py`, or via
+`lean_book_latex/build/build_pdf.sh` to go all the way to a PDF. Requires `pandoc` on
 PATH; does not require a LaTeX distribution to run (only to later compile
 what this script emits).
 
@@ -50,9 +51,9 @@ import subprocess
 import sys
 
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
-BOOK_DIR = os.path.dirname(BUILD_DIR)
-REPO_ROOT = os.path.dirname(BOOK_DIR)
-LATEX_DIR = os.path.join(REPO_ROOT, "lean_book_latex")
+LATEX_DIR = os.path.dirname(BUILD_DIR)
+REPO_ROOT = os.path.dirname(LATEX_DIR)
+BOOK_DIR = os.path.join(REPO_ROOT, "lean_book")
 MAIN_TEX_NAME = "lean-for-working-algebraists.tex"
 
 CHAPTERS = [
@@ -615,6 +616,13 @@ def fix_inline_code(tex):
     it looks when it doesn't need to."""
     def _sub(m):
         content = m.group(2)
+        # An inline code span that straddles a line break in the Markdown
+        # source (`` `Fin\n  n` ``) reaches here carrying the source's own
+        # indentation. Pandoc 2.x collapsed that run to one space; 3.x does
+        # not, and \texttt renders every one of them -- `Fin   n`. Collapse
+        # internal whitespace runs so the rendered span is independent of
+        # where the source happened to wrap.
+        content = re.sub(r'\s+', ' ', content)
         content = re.sub(r'(/|\\_|-)', r'\1\\allowbreak{}', content)
         return "\\texttt{" + content + "}"
 
@@ -719,13 +727,67 @@ def strip_next_section(tex):
     return NEXT_SECTION_RE.sub('', tex)
 
 
-def strip_hypertargets(tex):
-    # Pandoc wraps headings as \hypertarget{slug}{\subsection{...}\label{slug}} --
-    # drop the \hypertarget{...}{ ... } wrapper, keep the inner heading command.
-    def _sub(m):
-        return m.group(1)
+def _match_brace(tex, open_idx):
+    """Index of the `}` matching the `{` at open_idx, or -1 if unbalanced.
+    Skips brace characters escaped as `\\{` / `\\}`."""
+    depth = 0
+    i = open_idx
+    while i < len(tex):
+        ch = tex[i]
+        if ch == "\\":
+            i += 2
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return -1
 
-    return re.sub(r'\\hypertarget\{[^}]*\}\{(\\(?:sub)*section\{.*?\}(?:\\label\{[^}]*\})?)\}', _sub, tex, flags=re.DOTALL)
+
+def strip_hypertargets(tex):
+    r"""Drop Pandoc's `\hypertarget{slug}{...}` wrapper around headings, keeping
+    the inner heading command (and its `\label`) verbatim.
+
+    Brace matching is done by counting rather than by regex: heading titles
+    routinely contain `\texorpdfstring{...}{...}` and `\texttt{...}`, and a
+    non-greedy `.*?\}` silently stops at the *first* inner `}` -- which
+    swallows a brace and emits `\chapter{\texorpdfstring{A{B}}` instead of
+    `\chapter{\texorpdfstring{A}{B}}`.
+
+    Pandoc 2.x/3.x also differ on the opening delimiter (3.x emits `{%` and a
+    newline before the heading) and 3.x wraps `\chapter` the same way it wraps
+    `\section`, so both are handled here.
+    """
+    marker = "\\hypertarget{"
+    heading_re = re.compile(r'\\(?:chapter|(?:sub)*section)\*?\{')
+    out = []
+    pos = 0
+    while True:
+        start = tex.find(marker, pos)
+        if start == -1:
+            out.append(tex[pos:])
+            return "".join(out)
+        slug_open = start + len(marker) - 1
+        slug_close = _match_brace(tex, slug_open)
+        if slug_close == -1 or slug_close + 1 >= len(tex) or tex[slug_close + 1] != "{":
+            out.append(tex[pos:start + len(marker)])
+            pos = start + len(marker)
+            continue
+        body_open = slug_close + 1
+        body_close = _match_brace(tex, body_open)
+        body = tex[body_open + 1:body_close] if body_close != -1 else None
+        # Only unwrap when the body really is a heading: anything else that
+        # pandoc hypertargets (a link anchor, say) must be left alone.
+        if body is None or not heading_re.match(body.lstrip("%").lstrip()):
+            out.append(tex[pos:start + len(marker)])
+            pos = start + len(marker)
+            continue
+        out.append(tex[pos:start])
+        out.append(body.lstrip("%").lstrip("\n"))
+        pos = body_close + 1
 
 
 def strip_story_and_sections_headings(tex):

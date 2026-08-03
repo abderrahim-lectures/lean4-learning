@@ -309,6 +309,14 @@ diagram" and a different notion of "compatible with the given data."
 $1 \in \mathbb{N}$ plays the role of the generator being mapped to $m$,
 matching $X\times Y$'s two projections $\pi_X,\pi_Y$ above.
 
+Note that what is stated here is the *free monoid* on one generator: $M$
+ranges over all monoids, commutative or not. The phrase used in Section 1,
+"free *commutative* monoid on one generator," is the corresponding property
+with $M$ ranging over commutative monoids only. Both hold of $\mathbb{N}$,
+and for a reason worth seeing: the free monoid on one generator is already
+commutative (everything in it is a power of the single generator), so the
+weaker-looking commutative version comes for free from the stronger one.
+
 #### Initial object
 
 This is an object $I$ of a category with a *unique* morphism
@@ -443,7 +451,12 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   like this: solving a Sudoku puzzle by filling in cells in a different order —
   as long as the rules are followed to completion, everyone ends up
   with the identical finished grid, regardless of which cell they
-  filled in first.
+  filled in first. The original source is Alonzo Church and J. Barkley
+  Rosser, "Some properties of conversion," *Transactions of the American
+  Mathematical Society* 39(3), 1936, pp. 472–482; it has not been consulted
+  directly for this book, and the statement above is quoted from
+  [Thompson1991] instead, in keeping with this book's convention of citing
+  what was actually read.
 - **Universal property (general form).** "If $S : D \to C$ is a
   functor and $c$ an object of $C$, a universal arrow from $c$ to $S$
   is a pair $(r, u)$ consisting of an object $r$ of $D$ and an arrow

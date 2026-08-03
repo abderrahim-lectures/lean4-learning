@@ -183,14 +183,35 @@ together with a rule saying Π-types (function types, including ordinary
 `→`) stay inside a suitable universe:
 
 $$
-\dfrac{\Gamma \vdash A : \mathtt{Type}\,i \quad \Gamma, x:A \vdash B : \mathtt{Type}\,j}
-      {\Gamma \vdash \big(\textstyle\prod_{x:A} B\big) : \mathtt{Type}\,(\max(i,j))}
+\dfrac{\Gamma \vdash A : \mathtt{Sort}\,i \quad \Gamma, x:A \vdash B : \mathtt{Sort}\,j}
+      {\Gamma \vdash \big(\textstyle\prod_{x:A} B\big) : \mathtt{Sort}\,(\mathrm{imax}(i,j))}
 $$
 
-This is exactly Section 2's `Group : Type → Type` computation spelled out as a
-general rule: with $A = \mathtt{Type}$ (itself living in `Type 1`) and
-$B = \mathtt{Type}$ again, the rule gives $\max(1, 1) = 1$, so `Type →
-Type` lands in `Type 1`, one level above `Type` itself.
+where $\mathrm{imax}(i, j) = j$ when $j = 0$, and $\max(i, j)$ otherwise, and
+where `Sort 0` is `Prop` and `Sort (k+1)` is `Type k` (Chapter 1, Section 5).
+
+For $j > 0$ — the case where $B$ is genuinely a type rather than a
+proposition — $\mathrm{imax}$ *is* $\max$, and the rule is exactly Section 2's
+`Group : Type → Type` computation spelled out generally: with
+$A = \mathtt{Type}$ (itself living in `Type 1`) and $B = \mathtt{Type}$ again,
+the rule gives $\max(1, 1) = 1$, so `Type → Type` lands in `Type 1`, one level
+above `Type` itself.
+
+The $j = 0$ case is not a footnote — it is what makes `∀` usable at all. When
+$B$ lands in `Prop`, the whole Π-type is a `Prop` *regardless of how large $A$
+is*. This is the **impredicativity of `Prop`**, and it is why
+`∀ n : Nat, n ≥ 0` is a proposition you can prove rather than an inhabitant of
+`Type 1`:
+
+```lean
+#check (∀ n : Nat, n ≥ 0)   -- ∀ (n : Nat), n ≥ 0 : Prop
+#check (Type → Type)        -- Type → Type : Type 1
+```
+
+Had the rule been $\max$ throughout, the first of these would have landed in
+`Type 1` (since $\mathtt{Nat} : \mathtt{Type}\,0 = \mathtt{Sort}\,1$ and
+$n \ge 0 : \mathtt{Sort}\,0$ give $\max(1,0) = 1$), and every `∀`-statement in
+Chapters 3 through 11 would be a type rather than a theorem.
 
 **Programmer's corner (Python), on why this is genuinely a type-theory
 concern and not a Python one.** In Python, `type(3)` is `int`, and
@@ -233,8 +254,10 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - **Universe-formation rule.** This book's working statement, after
   the calculus of constructions ([CoquandHuet1988]):
   $\mathtt{Type}\,i : \mathtt{Type}\,(i+1)$, and a Π-type built from
-  $A : \mathtt{Type}\,i$, $B : \mathtt{Type}\,j$ lands in
-  $\mathtt{Type}\,(\max(i,j))$.
+  $A : \mathtt{Sort}\,i$, $B : \mathtt{Sort}\,j$ lands in
+  $\mathtt{Sort}\,(\mathrm{imax}(i,j))$ — the $j = 0$ clause being the
+  impredicativity of `Prop`, which the calculus of constructions is
+  characterized by and which [TPIL4] §2.2 documents for Lean specifically.
 - Pierce ([Pierce2002]), Ch. 8 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 9 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC) — verified verbatim. An earlier draft of this section cited Ch. 9–11; Ch. 11 "Simple Extensions" actually covers pairs/tuples/records/sums, unrelated to this section's content.
 - Milner ([Milner1978]) — the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's boxes.

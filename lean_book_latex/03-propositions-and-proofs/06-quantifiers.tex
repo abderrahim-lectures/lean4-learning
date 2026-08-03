@@ -66,10 +66,8 @@ This one example only shows \emph{a} prime past \texttt{3}. It does not yet show
 
 The two quantifiers are the ``indexed'' versions of the product and sum seen for \(\wedge\) and \(\vee\) in the previous section. Instead of combining two fixed propositions \(P\) and \(Q\), they combine a whole \emph{family} of propositions \(P(x)\), one for each \(x \in \alpha\). Universal quantification is the (\(\Pi\)-)type \[
 \forall x{:}\alpha,\ P(x) \;=\; \prod_{x : \alpha} P(x),
-\] literally an \(\alpha\)-indexed product: a proof is a function assigning to each \(x\) a proof of \(P(x)\), so \texttt{all\_\allowbreak{}nats\_\allowbreak{}ge\_\allowbreak{}zero} is the map \(n \mapsto (0
-\le n)\). This exactly generalizes how a proof of \(P \wedge Q\) was a pair \((p, q)\), one component per conjunct, except now there is one component per element of \(\alpha\) rather than just two. Existential quantification is the (\(\Sigma\)-)type \[
+\] literally an \(\alpha\)-indexed product: a proof is a function assigning to each \(x\) a proof of \(P(x)\), so \texttt{all\_\allowbreak{}nats\_\allowbreak{}ge\_\allowbreak{}zero} is the map \(n \mapsto (0 \le n)\). This exactly generalizes how a proof of \(P \wedge Q\) was a pair \((p, q)\), one component per conjunct, except now there is one component per element of \(\alpha\) rather than just two. Existential quantification is the (\(\Sigma\)-)type \[
 \exists x{:}\alpha,\ P(x) \;=\; \sum_{x : \alpha} P(x),
-\] an \(\alpha\)-indexed sum: a proof is a dependent pair \(\langle a, h\rangle\) with \(a \in \alpha\) the witness and \(h : P(a)\). Here \(\langle 2,
-\mathrm{refl}\rangle\) witnesses \(2 \bmod 2 = 0\). This is the \emph{constructive} reading of \(\exists\): asserting existence requires exhibiting an explicit witness \(a\) together with a proof \(h\) that it works. This exactly generalizes how a proof of \(P \vee Q\) was a tagged choice, except now the ``tag'' is which element of \(\alpha\) was chosen.
+\] an \(\alpha\)-indexed sum: a proof is a dependent pair \(\langle a, h\rangle\) with \(a \in \alpha\) the witness and \(h : P(a)\). Here \(\langle 2, \mathrm{refl}\rangle\) witnesses \(2 \bmod 2 = 0\). This is the \emph{constructive} reading of \(\exists\): asserting existence requires exhibiting an explicit witness \(a\) together with a proof \(h\) that it works. This exactly generalizes how a proof of \(P \vee Q\) was a tagged choice, except now the ``tag'' is which element of \(\alpha\) was chosen.
 
 \end{mathreading}
