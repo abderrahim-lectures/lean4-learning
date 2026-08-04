@@ -6,6 +6,12 @@
 
 **1. Adding a cycle**
 
+The book's `ExampleArrow` is left untouched; the same construction is
+done here on a fresh `CyclicArrow`/`cyclicQuiver` rather than extending
+`ExampleArrow` with a `gamma` arrow, since introducing a cycle into the
+book's own running example would make later chapters that assume
+acyclicity (see Chapter 11's finiteness discussion) inconsistent.
+
 ```lean
 inductive CyclicArrow where
   | alpha : CyclicArrow   -- 0 → 1
@@ -61,8 +67,9 @@ theorem append_nil_left {V A : Type} {Q : Quiver V A} {u v : V} (p : Path Q u v)
 
 This is exactly what the editor shows in the `cons` case: the Lean
 Infoview lists every hypothesis the pattern match introduces —
-`Q : Quiver V A`, `h : Q.source a = v`, `h' : Q.target a = wt`,
-`q' : Path Q u vt`, and the induction hypothesis
+`Q : Quiver V A`, `h : Q.source a = v✝`, `h' : Q.target a = w✝`,
+`q' : Path Q u v✝` (an intermediate vertex introduced by the pattern
+match, not the fixed endpoint `v`), and the induction hypothesis
 `ih : (Path.nil u).append q' = q'` — above the line, with the goal
 `(Path.nil u).append (Path.cons a h h' q') = Path.cons a h h' q'` below
 it:

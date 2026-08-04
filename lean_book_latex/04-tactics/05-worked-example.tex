@@ -54,7 +54,9 @@ This is the pattern --- base case, inductive step, explicit \texttt{ih} --- that
 
 \begin{mathreading}
 
-This is the elementary proof that \((\mathbb{N}, +)\) is commutative, carried out by induction on the second argument from the recursive definition \(a + 0 = a\), \(a + \mathrm{succ}(k) = \mathrm{succ}(a + k)\). Writing \(P(b) :\equiv (\forall a,\ a + b = b + a)\): the base case is \(P(0)\), which needs the auxiliary fact \(0 + a = a\) (proved separately since the recursion favors the right argument). The inductive step derives \(P(k+1)\) from \(P(k)\) via \[
+This is the elementary proof that \((\mathbb{N},
++)\) is commutative, carried out by induction on the second argument from the recursive definition \(a + 0 = a\), \(a + \mathrm{succ}(k) = \mathrm{succ}(a +
+k)\). Writing \(P(b) :\equiv (\forall a,\ a + b = b + a)\): the base case is \(P(0)\), which needs the auxiliary fact \(0 + a = a\) (proved separately since the recursion favors the right argument). The inductive step derives \(P(k+1)\) from \(P(k)\) via \[
 a + (k{+}1) = (a+k){+}1 \overset{\mathrm{ih}}{=} (k+a){+}1 = (k{+}1)+a.
 \] Each \texttt{rw} is one equational step in this chain. The whole proof is the standard textbook lemma, with the successor/zero cases spelled out in full, where written mathematics usually skips over them.
 

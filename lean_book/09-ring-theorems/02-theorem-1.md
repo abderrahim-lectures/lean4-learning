@@ -56,13 +56,15 @@ theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
   exact h2.symm
 ```
 
-`h2` is proved with `congrArg`, not `by rw [h1]`. Plain `rw [h1]` rewrites
-*every* syntactic occurrence of `h1`'s left-hand side in the goal,
-including copies produced by the substitution itself, and hence does not
-land on the exact stated goal here. `congrArg f h1` avoids this problem
-entirely: it directly builds "apply `f` to both sides of `h1`," which is
-precisely "add $-x$ to both sides of $x = x+x$" with no ambiguity about
-which occurrence is targeted.
+`h2` is proved with `congrArg`, not `by rw [h1]`. In an earlier draft,
+attempting to rewrite with `h1` at this intermediate `have` using plain
+`rw` caused occurrence-targeting problems: `rw [h1]` rewrites *every*
+syntactic occurrence of `h1`'s left-hand side in the goal, including
+copies produced by the substitution itself, and hence does not land on
+the exact stated goal here. `congrArg f h1` avoids this problem entirely:
+it directly builds "apply `f` to both sides of `h1`," which is precisely
+"add $-x$ to both sides of $x = x+x$" with no ambiguity about which
+occurrence is targeted.
 
 If progress is lost partway through, the recovery move is always the
 same: translate the *current* hypothesis (`h1`, then `h2`) into ordinary

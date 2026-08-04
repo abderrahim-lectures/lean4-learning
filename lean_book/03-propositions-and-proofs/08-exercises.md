@@ -21,13 +21,16 @@ by checking both sides reduce to the same normal form.
    record which side was chosen — hence two distinct constructors rather
    than one.
 2. *`rfl` closes `2 + 2 = 4` immediately. Why can it not, by the same
-   reasoning, close `∀ n, n + 0 = n`?* `rfl` checks that both sides
-   already reduce to the same closed term — `2 + 2` and `4` both compute
-   to the literal `4`. But `n` is a free variable, not a number to
-   compute with; `n + 0 = n` is true for every `n`, yet no single
-   reduction sequence turns `n + 0` into `n` without first knowing which
-   `n` it is. That gap between "true" and "reduces to the same term" is
-   exactly why proofs, not mere computation, exist.
+   reasoning, close `∀ n, 0 + n = n`?* `rfl` checks that both sides
+   already reduce to the same term via unfolding, even with a free
+   variable `n` in play — `Nat.add` recurses on its *second* argument, so
+   `n + 0 = n` actually **does** close by `rfl` (it's `n`'s own recursion's
+   base case). But `0 + n = n` does not: with `n` unknown, `0 + n` is stuck
+   on the second argument's shape and cannot unfold any further without
+   first knowing whether `n` is `0` or a successor. That gap between "true"
+   and "reduces to the same term" (see Chapter 5's definitional vs.
+   propositional equality discussion) is exactly why proofs, not mere
+   computation, exist — `0 + n = n` needs induction (Chapter 4), not `rfl`.
 3. *`∃ p, p > 3 ∧ isPrime p` was proved with a witness and a decided fact
    about it. What would go wrong trying to prove `∀ n, n > 0` the same way,
    by picking one `n` and checking it?* A single witness proves only that

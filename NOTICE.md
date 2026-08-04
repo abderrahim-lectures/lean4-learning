@@ -44,16 +44,6 @@ real: `lean_project` now depends on Mathlib (pinned to the `v4.32.2` tag),
 and each chapter's Mathlib snippets live in a matching `Ch0*Mathlib.lean`
 module, checked with `lake build`.
 
-**Adversarial review round (2026).** In the release-review round, the
-manuscript was independently critiqued by six free-tier AI models —
-DeepSeek V4 Flash, Laguna S2.1, Ling 3.0 Flash, Mimo V2.5, Nemotron 3
-Ultra, and North Mini Code — who then cross-critiqued one another's
-reports; Nemotron 3 Ultra adjudicated the combined corpus into a single
-final review. The surviving findings (three critical, one high, four
-low/medium — version pinning, audience promise, uncompiled appendix code,
-and minor consistency items) were all fixed and are recorded in
-`reviews/2026-08-02/`.
-
 **Plain-English pass (2026).** The whole book's prose (every chapter and
 the appendix) was rewritten toward roughly CEFR B2 English: shorter
 sentences, plainer words, fewer stacked em-dash asides, so a non-native

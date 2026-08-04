@@ -173,9 +173,9 @@ Compare this directly to \texttt{mySigma.fst} two paragraphs up, which worked wi
 Everything above in one table, gathering the two constructs' notation, readings, and special cases for direct comparison:
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Aspect
@@ -282,7 +282,8 @@ Putting the pieces together, the \textbf{calculus of constructions} (CoC, Coquan
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  an infinite hierarchy of type universes \(\mathtt{Type}\,0, \mathtt{Type}\,1, \ldots\), formalized in \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5, Section 3},
+  an infinite hierarchy of type universes \(\mathtt{Type}\,0,
+  \mathtt{Type}\,1, \ldots\), formalized in \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5, Section 3},
 \item
   Π-types generalizing \(\to\), allowing types to depend on terms (this chapter's Section 3 and the top of this page),
 \item

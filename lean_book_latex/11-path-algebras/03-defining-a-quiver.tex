@@ -38,7 +38,8 @@ def exampleQuiver : Quiver (Fin 3) ExampleArrow where
 
 \begin{mathreading}
 
-This is the concrete quiver \(Q\) with vertex set \(V = \{0,1,2\}\) (encoded as \(\mathrm{Fin}\,3\)) and arrow set \(A = \{\alpha, \beta\}\), where \(s(\alpha)=0,\ t(\alpha)=1\) and \(s(\beta)=1,\
+This is the concrete quiver \(Q\) with vertex set \(V = \{0,1,2\}\) (encoded as \(\mathrm{Fin}\,3\)) and arrow set \(A =
+\{\alpha, \beta\}\), where \(s(\alpha)=0,\ t(\alpha)=1\) and \(s(\beta)=1,\
 t(\beta)=2\): the linear \(A_3\) quiver, drawn exactly as on paper:
 
 \end{mathreading}
@@ -48,8 +49,8 @@ t(\beta)=2\): the linear \(A_3\) quiver, drawn exactly as on paper:
 \end{center}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Symbol
@@ -65,7 +66,8 @@ Lean
 \(s, t : A \to V\) (``source, target'') & \texttt{exampleQuiver.source}, \texttt{exampleQuiver.target} \\
 \end{longtable}
 
-The two-element inductive type is the finite set \(A = \{\alpha,\beta\}\), and the \texttt{match}-defined \texttt{source}/\texttt{target} are the functions \(s, t : A \to V\) given by their value tables: \texttt{source alpha = 0}, \texttt{target alpha = 1}, \texttt{source beta = 1}, \texttt{target beta = 2}. This is exactly the arrowheads and tails drawn above.
+The two-element inductive type is the finite set \(A = \{\alpha,\beta\}\), and the \texttt{match}-defined \texttt{source}/\texttt{target} are the functions \(s, t : A \to
+V\) given by their value tables: \texttt{source alpha = 0}, \texttt{target alpha = 1}, \texttt{source beta = 1}, \texttt{target beta = 2}. This is exactly the arrowheads and tails drawn above.
 
 \textbf{Mathlib equivalent.} Mathlib's own \href{https://loogle.lean-lang.org/?q=Quiver}{\texttt{Quiver}} class (the one this chapter's opening section mentioned building from scratch instead of reusing) encodes arrows differently. Instead of one flat arrow type \texttt{A} plus separate \texttt{source}/\texttt{target : A → V} functions, it bakes the endpoints into the arrow's \emph{type} directly, \texttt{Hom : V → V → Sort*} (with notation \texttt{a ⟶ b}). Thus an arrow from \texttt{i} to \texttt{j} simply \emph{has type} \texttt{i ⟶ j}:
 

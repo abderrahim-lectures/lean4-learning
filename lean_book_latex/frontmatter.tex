@@ -104,13 +104,7 @@ Claude wrote the chapter text, Lean code, and LaTeX. No additional,
 independent mathematician or Lean expert has reviewed the content beyond
 the author's own review and the automated checks described in the
 project's README and CHANGELOG (every code block compiled against a real
-Lean~4 toolchain, plus several AI-driven review passes). In the 2026
-review round, the manuscript was independently critiqued by six free-tier
-AI models --- DeepSeek V4 Flash, Laguna S2.1, Ling 3.0 Flash, Mimo V2.5,
-Nemotron 3 Ultra, and North Mini Code --- who then cross-critiqued one
-another's reports; Nemotron 3 Ultra adjudicated the combined corpus into a
-single final review (see \texttt{reviews/2026-08-02/} in the repository).
-The findings that survived adjudication drove the fixes in that release.
+Lean~4 toolchain, plus several AI-driven review passes).
 
 A closing verification pass followed (see
 \texttt{reviews/2026-08-03/} in the repository), run as a single
@@ -132,6 +126,19 @@ Chapter~5. All are corrected in this release, along with several citation
 and cross-reference repairs. That reviewer also recorded two of its own
 predictions that testing against the real toolchain disproved; both are
 documented in the review file rather than quietly dropped.
+
+A second closing pass (see \texttt{reviews/2026-08-03/run-173410/} in the
+repository) ran the same multi-model panel-then-adjudication pipeline
+again --- six Phase-1 reviewers, four Phase-2 cross-critiques, five
+specialized reviewers (category theory, notation, proof search, Lean
+audit, typesetting), adjudicated into one fix-ready report. It confirmed
+26 findings (8 critical) and correctly dismissed 20 fabricated or
+contradicted ones, including a false "v1.5.0 regression" claim that three
+of five Phase-1 reports had independently manufactured. All confirmed
+findings were re-verified against the working tree before being applied,
+and two errors in the adjudicated report itself were caught and corrected
+in the process --- documented alongside the fixes in that report's
+\texttt{POST-HOC CORRECTIONS} section rather than applied blindly.
 
 Treat it as an author-reviewed draft produced through human-directed AI
 authorship, not a traditionally peer-reviewed text.

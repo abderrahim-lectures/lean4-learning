@@ -49,10 +49,12 @@ down toward a single target: the path algebra $kQ$.
 5. **Two paths, each already built, often need to be joined into one
    longer path rather than reconstructed by hand — how?**
    ([Section 5](05-path-composition.md)) `Path.append`, composition in the
-   free category on $Q$, defined by recursion and verified, by a genuine
-   `rfl`, to agree with building the same composite path directly. This is
-   also, once paths are given $k$-linear coefficients, the multiplication
-   that makes the path algebra $kQ$ a ring.
+   free category on $Q$, defined by recursion; one concrete instance is
+   checked, by a genuine `rfl`, to agree with building the same composite
+   path directly (this checks that one example, not associativity or the
+   identity laws in general — see Section 5 for the general argument). This
+   is also, once paths are given $k$-linear coefficients, the
+   multiplication that makes the path algebra $kQ$ a ring.
 6. **Having built the definitions, what remains to actually practice
    with them?** ([Section 6](06-exercises.md), then the
    [checkpoint project](07-checkpoint-project.md)) Exercises on the
@@ -61,7 +63,7 @@ down toward a single target: the path algebra $kQ$.
    `Path.append`'s own recursion, that composition respects it.
 
 By the end, "quiver" has gone from an unadorned directed graph to a
-category of paths with verified composition — exactly the data a
+category of paths with a spot-checked composition — exactly the data a
 representation theorist needs before defining $kQ$ itself, and exactly
 the bridge back to Chapter 10's `Module`/`LinearMap` machinery, since a
 representation of $Q$ is precisely a module over $kQ$.

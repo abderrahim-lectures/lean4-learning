@@ -127,7 +127,7 @@ above (comfort with the type-class style Mathlib uses throughout).
 **Milestones.**
 
 1. Read `Mathlib.Combinatorics.Quiver.Basic`'s `Quiver` class (already
-   introduced in Chapter 11, Section 1's "Mathlib equivalent" box) and
+   introduced in Chapter 11, Section 3's "Mathlib equivalent" box) and
    `Mathlib.CategoryTheory.Quiver`'s extension of it with identities and
    composition, comparing field-for-field against this book's plain
    `Quiver`/`Path`.
@@ -226,8 +226,8 @@ as a higher-order function that knows how to iterate.
 - **Successor:** $\mathrm{succ} := \lambda n.\, \lambda f.\, \lambda x.\,
   f\,(n\, f\, x)$ — "apply $f$ one more time than $n$ does."
 - **Addition:** $\mathrm{plus} := \lambda m.\lambda n.\lambda f.\lambda x.\,
-  m\, f\,(n\, f\, x)$ — "apply $f$, $m$ times, starting from where $n$
-  already applied it $n$ times," the same recursive shape that makes
+  m\, f\,(n\, f\, x)$ — "apply $f$, $m$ more times, starting from where $n$
+  has already applied $f$, $n$ times," the same recursive shape that makes
   `Nat.add` recurse on its second argument (Chapter 4).
 - **Multiplication** is even more striking: $\mathrm{mult} := \lambda m.
   \lambda n.\lambda f.\, m\,(n\, f)$ — "apply *'apply $f$, $n$ times'*, $m$

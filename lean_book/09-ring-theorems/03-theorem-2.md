@@ -86,8 +86,12 @@ actually compiling it:
 - **`congrArg`, not `conv_lhs => rw [...]`.** Plain `rw [h]` here would
   rewrite *every* occurrence of `a` in the goal, including the one inside
   `mul (inv one) a` that must stay put. This is exactly the same kind of
-  problem as Theorem 1's `h2` on the previous page. `congrArg f h` avoids
-  it by directly constructing "apply `f` to both sides of `h`" as its own
+  problem as Theorem 1's `h2` on the previous page. An earlier draft tried
+  `conv_lhs => rw [...]` to target only the intended occurrence, but this
+  failed (Lean 4.32.2, current mathlib) — `conv_lhs` navigates into the
+  goal's literal left-hand side, which does not line up with the
+  occurrence that needs targeting here. `congrArg f h` avoids it by
+  directly constructing "apply `f` to both sides of `h`" as its own
   standalone fact (`step`, above), which is then used with a single,
   unambiguous `rw [step]`.
 

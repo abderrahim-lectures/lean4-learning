@@ -103,11 +103,40 @@ path *after* `p` changes nothing; this case is implemented directly by the
 separately, `Path.append (Path.nil u) p = p` (appending the trivial path
 *before* `p` also changes nothing; proved as Exercise 2 by induction on
 `p`, since the `nil` branch alone does not give this one for free). The
-`cons` case of the recursion is exactly associativity of concatenation.
-Together with `nil` as identities, this makes $\mathrm{Free}(Q)$ a genuine
-category: the smallest/most general category containing $Q$'s arrows, in
-the sense of a
-[universal property](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline).
+`cons` case of the recursion is a *definitional* recursion lemma
+(`Path.append p (Path.cons a h h' q') = Path.cons a h h' (Path.append p q')`)
+that lets induction unfold `Path.append` one arrow at a time — it is not
+itself associativity. True associativity of composition,
+
+$$
+\mathrm{append}(\mathrm{append}(p, q), r) = \mathrm{append}(p, \mathrm{append}(q, r)),
+$$
+
+is a separate statement, provable by induction on the *third* path
+argument, `r` — the same argument `Path.append` itself recurses on (as
+`append_nil_left`'s proof already relies on, inducting on its second
+argument). In the `nil` case both sides reduce to `append p q` directly.
+In the `cons` case, both sides reduce — via exactly the `cons`-recursion
+lemma above, applied on the outside of each `append` — to
+`Path.cons a h h' (·)` wrapped around a strictly shorter instance of the
+same equation, which the inductive hypothesis closes.
+This book does not carry out that induction in Lean, but the argument above
+is enough to see that it goes through. Associativity together with `nil` as
+identities is what makes $\mathrm{Free}(Q)$ a genuine category: the
+smallest/most general category containing $Q$'s arrows, in the sense of a
+**universal property**. Concretely: for any category $C$ and any quiver
+morphism $F : Q \to U(C)$ (a function on vertices and arrows into $C$'s
+objects and morphisms, where $U : \mathbf{Cat} \to \mathbf{Quiv}$ is the
+forgetful functor that remembers only a category's underlying quiver —
+objects and morphisms, forgetting identities and composition), there is a
+*unique* functor $\hat F : \mathrm{Free}(Q) \to C$ extending $F$, i.e.
+$U(\hat F) \circ \eta_Q = F$ where $\eta_Q : Q \to U(\mathrm{Free}(Q))$ is
+the inclusion of generators. Equivalently,
+$\mathrm{Hom}_{\mathbf{Cat}}(\mathrm{Free}(Q), C) \cong \mathrm{Hom}_{\mathbf{Quiv}}(Q, U(C))$,
+naturally in $C$: $\mathrm{Free}$ is left adjoint to $U$. This book does not
+formalize this functor or its uniqueness in Lean; it is stated here so the
+term "universal property" names something specific rather than a vague
+gesture at "the construction is canonical."
 
 **Mathlib equivalent.** `Path.append` is already in Mathlib, as
 `Quiver.Path.comp`. It is the same recursion (on the *second* path), with
@@ -124,7 +153,11 @@ This is the same closing `rfl` as the book's
 `pathBetaAlphaViaAppend = pathBetaAlpha` check: two paths built via
 different routes (direct `cons`-chaining versus composing two shorter
 paths) reduce to the identical term, because `Quiver.Path.comp` unfolds to
-exactly the same sequence of `cons` applications `Path.append` does.
+exactly the same sequence of `cons` applications `Path.append` does. Note
+that this `rfl` only checks *this one concrete instance* — it is not a
+proof of associativity or the identity laws in general (those are the
+separate statements discussed above); it is reassurance that the concrete
+`Free(Q)` machinery behaves as expected on a worked example.
 
 ### The path algebra
 

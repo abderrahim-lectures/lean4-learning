@@ -74,8 +74,8 @@ These are the constructive readings of the connectives as operations on the proo
 \end{center}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Symbol
@@ -109,4 +109,5 @@ Symbol & Lean \\
 \(\iota_2(q)\) (``right injection'') & \texttt{Or.inr hq} \\
 \end{longtable}
 
-To \emph{use} a proof of \(P \vee Q\), one case-splits by the universal property of the coproduct: given a proof \texttt{h : P ∨ Q} and a way to reach the same conclusion \texttt{R} from either side (\texttt{hpr : P → R}, \texttt{hqr : Q → R}), there is exactly one map \texttt{P∨Q → R} agreeing with both. This is precisely what \texttt{or\_\allowbreak{}comm\_\allowbreak{}term} above builds via \texttt{Or.elim}. Negation is \(\neg P := (P \to \bot)\), a map into the initial object \(\bot = \varnothing\). A proof of \(\neg(1=2)\) is a function turning the (impossible) hypothesis \(1 = 2\) into an element of \(\varnothing\), vacuously. Here it is discharged by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}}, which mechanically confirms \(1 \neq 2\) since equality of \texttt{Nat} literals is decidable. Underlying this is exactly the same fact used throughout this book: distinct constructors of an inductive type (\texttt{Nat.succ}, applied a different number of times) are disjoint, so \texttt{1 = 2} has no proof to begin with. Observe that this is \emph{intuitionistic} logic: there is no built-in law of excluded middle.
+To \emph{use} a proof of \(P \vee Q\), one case-splits by the universal property of the coproduct: given a proof \texttt{h : P ∨ Q} and a way to reach the same conclusion \texttt{R} from either side (\texttt{hpr : P → R}, \texttt{hqr : Q → R}), there is exactly one map \texttt{P∨Q → R} agreeing with both. This is precisely what \texttt{or\_\allowbreak{}comm\_\allowbreak{}term} above builds via \texttt{Or.elim}. Negation is \(\neg P := (P \to
+\bot)\), a map into the initial object \(\bot = \varnothing\). A proof of \(\neg(1=2)\) is a function turning the (impossible) hypothesis \(1 = 2\) into an element of \(\varnothing\), vacuously. Here it is discharged by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}}, which mechanically confirms \(1 \neq 2\) since equality of \texttt{Nat} literals is decidable. Underlying this is exactly the same fact used throughout this book: distinct constructors of an inductive type (\texttt{Nat.succ}, applied a different number of times) are disjoint, so \texttt{1 = 2} has no proof to begin with. Observe that this is \emph{intuitionistic} logic: there is no built-in law of excluded middle.

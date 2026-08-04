@@ -58,9 +58,9 @@ The book uses several recurring devices, applied consistently across all
 
 - **Chapter narratives.** Each chapter opens with a story framing the
   cognitive journey ahead (remember → understand → apply → analyze →
-  evaluate → create), and closes with a key-points recap before its
-  exercises — never listed as explicit objectives, always embedded in the
-  narrative flow.
+  evaluate → create) and a "Learning objectives" box naming that
+  chapter's concrete goals, and closes with a key-points recap before its
+  exercises.
 - **Mathematical reading.** Most Lean code blocks are followed by a
   "Mathematical reading" box translating the code into the standard
   notation a working algebraist would recognize from a textbook,

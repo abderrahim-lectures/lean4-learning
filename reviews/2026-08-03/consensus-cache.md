@@ -5,7 +5,8 @@ bibliography/reference review of `lean_book/`. Reuse these instead of
 re-querying Consensus. Each entry records the exact query string, the date
 run, and the top results returned (Consensus free tier returns 3 per query).
 
-Last updated: 2026-08-03
+Last updated: 2026-08-03 (Q1–Q10 initial pass; Q11–Q15 added for remaining bib entries,
+type-theory focus)
 
 ---
 
@@ -189,3 +190,103 @@ All-results link: https://consensus.app/search/new?q=Girard+system+F+polymorphic
 itself, so `[Girard1971]`'s bibliographic details could not be independently confirmed here.
 No result contradicts them. The separate 1972 thèse d'État attribution for Girard's paradox
 is corroborated by Q1 instead.
+
+---
+
+## Q11. `Schiffler cluster-tilted algebras quiver path algebra lemma quiver with relations`
+
+Run: 2026-08-03 — 19 papers found, top 3 shown. (Off-target: see Q11b for the corrected query.)
+
+1. [Quivers with Relations and Cluster Tilted Algebras](https://consensus.app/papers/details/fe79f99b7b035340874e7a25055bb81c/?utm_source=claude_desktop) — P. Caldero et al., 2004, 135 citations, Algebras and Representation Theory.
+2. [Cluster‐tilted algebras as trivial extensions](https://consensus.app/papers/details/f2a5a3f0e81d59eaac6da7102d174545/?utm_source=claude_desktop) — I. Assem et al., 2006, 152 citations, Bulletin of the LMS.
+3. [Cluster-tilted algebras of finite representation type](https://consensus.app/papers/details/b8447ddea3b85def9fc6a318dad3c150/?utm_source=claude_desktop) — A. B. Buan et al., 2005, 114 citations, Journal of Algebra.
+
+**Bearing on the book:** none — this query targeted the Caldero–Chapoton–Schiffler cluster-algebra
+line of work, not the bib entry `[Schiffler2014]`, which is Ralf Schiffler's own textbook
+*Quiver Representations* (2014). Superseded by Q11b.
+
+---
+
+## Q11b. `Schiffler Quiver Representations 2014 CMS Books in Mathematics Springer`
+
+Run: 2026-08-03 — 20 papers found, top 10 shown.
+All-results link: https://consensus.app/search/new?q=Schiffler+Quiver+Representations+2014+CMS+Books+in+Mathematics+Springer&utm_source=claude_desktop
+
+1. [Representations of Quivers](https://consensus.app/papers/details/2a7996ff0eaa525bb605e607c64e4c80/?utm_source=claude_desktop) — R. Schiffler, 2014.
+2. [Bound Quiver Algebras](https://consensus.app/papers/details/f9515c1b07e951c6993653d326e40f61/?utm_source=claude_desktop) — R. Schiffler, 2014.
+3. [Quadratic Forms and Gabriel's Theorem](https://consensus.app/papers/details/8763c54354e25f18bd9de33af87aaaf3/?utm_source=claude_desktop) — R. Schiffler, 2014.
+4. [Auslander–Reiten Theory](https://consensus.app/papers/details/13f429deb6cd5d138f7cc21b4162ca0c/?utm_source=claude_desktop) — R. Schiffler, 2014.
+5. [Algebras and Modules](https://consensus.app/papers/details/bd79559dee1758b089ba8f9cc75a8d96/?utm_source=claude_desktop) — R. Schiffler, 2014.
+
+**Bearing on the book:** confirms `[Schiffler2014]` (*Quiver Representations*, Springer CMS
+Books in Mathematics) is a real, correctly-attributed book whose chapters (quiver
+representations, bound quiver algebras, Gabriel's theorem, Auslander–Reiten theory) match
+what `11-path-algebras/` cites it for. Does not resolve the still-open Lemma-numbering
+question flagged in the v1.5.1 changelog — that citation is paywalled and Consensus indexes
+only chapter-level entries, not internal lemma numbers.
+
+---
+
+## Q12. `Assem Simson Skowronski Elements of Representation Theory of Associative Algebras quivers`
+
+Run: 2026-08-03 — 20 papers found, top 10 shown.
+All-results link: https://consensus.app/search/new?q=Assem+Simson+Skowronski+Elements+of+Representation+Theory+of+Associative+Algebras+quivers&utm_source=claude_desktop
+
+1. [Elements of the Representation Theory of Associative Algebras: Techniques of Representation Theory](https://consensus.app/papers/details/03e9c25156135d4886c3faf886da6500/?utm_source=claude_desktop) — I. Assem et al., 2006, 475 citations.
+2. [Elements of the Representation Theory of Associative Algebras: Quivers and algebras](https://consensus.app/papers/details/cd3251c4df14561da0f013d31659ba4d/?utm_source=claude_desktop) — I. Assem et al., 2006, 28 citations.
+3. [Elements of the Representation Theory of Associative Algebras](https://consensus.app/papers/details/b4dbf270cdb65041b0b2f911d06b2fc4/?utm_source=claude_desktop) — D. Simson et al., 2007, 1746 citations (vol. 2).
+
+**Bearing on the book:** confirms `[AssemSimsonSkowronski2006]` is the real three-volume set
+(vol. 1 Assem–Simson–Skowroński 2006, vol. 2 Simson–Skowroński 2007), and corroborates the
+book's Chapter 11 quote of $\sum_x \varepsilon_x$ as the unit of $KQ$ — result [2]'s abstract
+independently states the quiver/path-algebra correspondence this chapter builds on.
+
+---
+
+## Q13. `Martin-Löf intuitionistic type theory 1984 Padova lectures`
+
+Run: 2026-08-03 — 20 papers found, top 10 shown.
+All-results link: https://consensus.app/search/new?q=Martin-L%C3%B6f+intuitionistic+type+theory+1984+Padova+lectures&utm_source=claude_desktop
+
+1. [Intuitionistic type theory](https://consensus.app/papers/details/b74bb01e0a805a22a95d78cfc2a23777/?utm_source=claude_desktop) — P. Martin-Löf, 1984, 930 citations. Preface confirms: Padova lectures, June 1980, published 1984.
+2. [Constructive mathematics and computer programming](https://consensus.app/papers/details/e77544aa4c9c56d6b280b387d7e14d32/?utm_source=claude_desktop) — P. Martin-Löf, 1984, 905 citations.
+3. [An intuitionistic theory of types](https://consensus.app/papers/details/7cf23257155b5e038bbf41868cbef353/?utm_source=claude_desktop) — P. Martin-Löf, 1998 (written 1972), 243 citations — this is the paper whose "type of all
+   types" axiom Girard's paradox refuted, per its own text: *"this axiom had to be abandoned...
+   after it was shown to lead to a contradiction by Jean Yves Girard."*
+
+**Bearing on the book:** confirms `[MartinLof1984]` is correctly dated and titled, and result
+[3] independently corroborates the book's own Girard's-paradox narrative (Q1) from
+Martin-Löf's side of the story.
+
+---
+
+## Q14. `Jacobs Categorical Logic and Type Theory 1999 Elsevier`
+
+Run: 2026-08-03 — 20 papers found, top 10 shown.
+All-results link: https://consensus.app/search/new?q=Jacobs+Categorical+Logic+and+Type+Theory+1999+Elsevier&utm_source=claude_desktop
+
+1. [Categorical Logic and Type Theory](https://consensus.app/papers/details/9ff4ac49582253618952aa66d2ececd0/?utm_source=claude_desktop) — B. Jacobs, indexed as 2001, 769 citations. Chapter list matches: fibred category theory,
+   simple/first-order/higher-order type theory, polymorphic type theory, dependent type theory.
+
+**Bearing on the book:** confirms `[Jacobs1999]` is a real, correctly-titled/authored book
+(*Categorical Logic and Type Theory*, Studies in Logic and the Foundations of Mathematics
+vol. 141). Consensus's indexed record shows 2001, not the bib's 1999 — Elsevier's own listing
+gives 1999 as the original publication year, so this is most likely a reprint/second-printing
+date in Consensus's metadata rather than an error in the book's citation; not independently
+resolved here.
+
+---
+
+## Q15. `Homotopy Type Theory Univalent Foundations of Mathematics Institute for Advanced Study 2013`
+
+Run: 2026-08-03 — 20 papers found, top 10 shown.
+All-results link: https://consensus.app/search/new?q=Homotopy+Type+Theory+Univalent+Foundations+of+Mathematics+Institute+for+Advanced+Study+2013&utm_source=claude_desktop
+
+1. [The Univalent Foundations Program. Homotopy Type Theory: Univalent Foundations of
+   Mathematics. Institute for Advanced Study, 2013, vii + 583 pp](https://consensus.app/papers/details/39245347eaf451af95f0cebb74fb832d/?utm_source=claude_desktop) — J. van Oosten (review), 2014, 86 citations, Bulletin of Symbolic Logic. Title string is an
+   exact match for the bib entry, confirming author-as-collective, title, publisher, and year.
+2. [Homotopy Type Theory: Univalent Foundations of Mathematics](https://consensus.app/papers/details/d5d8ef500dc3538890028fe5f3a5e013/?utm_source=claude_desktop) — The Univalent Foundations Program, 2013, 498 citations, ArXiv (companion preprint).
+
+**Bearing on the book:** confirms `[HoTT2013]` exactly as cited — author "The Univalent
+Foundations Program", title, and 2013 publication year, independently corroborated by a
+contemporaneous book review.

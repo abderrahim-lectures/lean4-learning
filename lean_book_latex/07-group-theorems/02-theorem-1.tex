@@ -6,7 +6,10 @@
 
 \begin{lstlisting}
 theorem id_unique (e' : G) (h : (*$\forall$*) a : G, Grp.op e' a = a) : e' = Grp.id := by
-  sorry
+  have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
+  have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
+  rw [(*$\leftarrow$*) step2]
+  exact step1
 \end{lstlisting}
 
 The goal is \texttt{e' = Grp.id}, an equality between two elements of \texttt{G} about which we individually know very little: \texttt{e'} only through \texttt{h}, and \texttt{Grp.id} only through \texttt{Grp}'s own axioms. \textbf{When a goal is ``show two opaque things are equal,'' the standard move is to find a \emph{third} expression that both sides equal on their own, then chain the two equalities.} We ask: is there anything both \texttt{e'} and \texttt{Grp.id} can be related to?
@@ -21,13 +24,15 @@ theorem id_unique (e' : G) (h : (*$\forall$*) a : G, Grp.op e' a = a) : e' = Grp
   exact step1
 \end{lstlisting}
 
-Why \texttt{rw [← step2]} and not \texttt{rw [step2]}? The goal is \texttt{e' = Grp.id}, and \texttt{step2 : Grp.op e' Grp.id = e'} has \texttt{e'} on its \emph{right}. \texttt{rw [step2]} would rewrite the goal's \texttt{Grp.op e' Grp.id}, but the goal does not yet contain that term --- it contains \texttt{e'}. \texttt{rw [← step2]} rewrites right-to-left, replacing \texttt{e'} (which the goal \emph{does} contain) with \texttt{Grp.op e' Grp.id}. This right-to-left choice, ``which side of the \texttt{have} actually appears in the goal at present,'' is something to check every time \texttt{rw} is invoked, not something to guess.
+Why \texttt{rw [← step2]} and not \texttt{rw [step2]}? The goal is \texttt{e' = Grp.id}, and \texttt{step2 : Grp.op e' Grp.id = e'} has \texttt{e'} on its \emph{right}. \texttt{rw [step2]} would rewrite the goal's \texttt{Grp.op e' Grp.id}, but the goal does not yet contain that term --- it contains \texttt{e'}. \texttt{rw [← step2]} rewrites right-to-left, replacing \texttt{e'} (which the goal \emph{does} contain) with \texttt{Grp.op e' Grp.id}. This right-to-left choice, ``which side of the \texttt{have} actually appears in the goal at present,'' is something to check every time \texttt{rw} is invoked, not something to guess. Put more sharply: \textbf{rewrite the side that actually appears in the current goal}, not whichever side happens to look more ``finished'' --- the direction of \texttt{rw} is dictated by what is already there, not by where the proof is headed.
 
 \begin{mathreading}
 
 This is the classical \emph{uniqueness of the identity}: if \(e'\) is a left identity (\(e'\cdot a = a\) for all \(a\)) then \(e' = e\). The one-line proof is \[
 e' \overset{\text{id\_right}}{=} e' \cdot e \overset{h}{=} e,
-\] evaluating the hypothesis at \(a = e\) and comparing with the axiom \(e'\cdot e = e'\): both compute \(e' \cdot e\), so \(e' = e\). The two \texttt{have}s are these two equalities, and the \texttt{rw}/\texttt{exact} glue them at their common expression \(e'\cdot e\): the standard ``two things equal to a common third are equal.'' (The same argument in mirror shows a right identity is also unique, so a group's identity is unique, full stop.)
+\] evaluating the hypothesis at \(a = e\) and comparing with the axiom \(e'\cdot e
+= e'\): both compute \(e' \cdot e\), so \(e' = e\). The two \texttt{have}s are these two equalities, and the \texttt{rw}/\texttt{exact} glue them at their common expression \(e'\cdot
+e\): the standard ``two things equal to a common third are equal.'' (The same argument in mirror shows a right identity is also unique, so a group's identity is unique, full stop.)
 
 \end{mathreading}
 

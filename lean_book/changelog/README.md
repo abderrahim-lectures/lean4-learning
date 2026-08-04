@@ -4,6 +4,8 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v1.5.2](v1.5.2.md) — Corrections from the 2026-08-03/run-173410 closing review
+- [v1.5.1](v1.5.1.md) — Corrections from the 2026-08-03 closing review
 - [v1.5.0](v1.5.0.md) — Major LaTeX restructuring: removed "The story of this chapter" section heading; removed "Sections" section entirely
 - [v1.4.25](v1.4.25.md) — Toolchain bump to Lean v4.32.2; Bloom verbs made implicit
 - [v1.4.24](v1.4.24.md) — Full-book rigor audit, plus a narrative rewrite of Chapter 1
