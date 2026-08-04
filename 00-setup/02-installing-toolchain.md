@@ -11,7 +11,10 @@ each project can pin the exact version it needs. (Readers familiar with
 elan as playing the same role for Lean.)
 
 1. Install elan: follow the instructions at the official Lean installation
-   guide (search "leanprover elan install" or use a package manager).
+   guide, [quickstart.html](https://lean-lang.org/lean4/doc/quickstart.html)
+   (the "Project setup" page at
+   [lean-lang.org](https://lean-lang.org/) links the elan installer
+   directly), or use a package manager.
    On Windows, Linux, and macOS alike, the recommended path is via VS
    Code's *Lean 4* extension, which offers to install elan automatically
    through a platform-specific setup script for whichever OS it detects.
@@ -26,7 +29,7 @@ elan as playing the same role for Lean.)
    configured with:
 
    ```text
-   lean-toolchain: leanprover/lean4:v4.31.0
+   lean-toolchain: leanprover/lean4:v4.32.2
    ```
 
    Running `lake build` inside `lean_project` causes elan to automatically

@@ -142,9 +142,9 @@ and which is allowed to vary:
   coincides with the ordinary product $A \times B$ (a value of $A$,
   tagging *which* copy, paired with a value of $B$). This is the
   "dependent pair" reading used throughout this section, and it is
-  exactly what Chapter 3's `∧` will turn out to be (`P ∧ Q` is
-  Σ-type-like with the index type restricted to two unlabeled slots,
-  both of type `Prop`).
+  exactly what Chapter 3's `∧` will turn out to be: $P \wedge Q$ is
+  $\sum_{\_ : P} Q$ — index type $P$, family constantly $Q$, so the
+  "which copy" tag is itself a *proof* rather than a value.
 - **Two-point index, varying family** — if $A$ is a two-element type
   (Lean's `Bool`, or "which side" of an `Or`) and $B(\mathrm{true}) = P$,
   $B(\mathrm{false}) = Q$ for two unrelated propositions, the *same*
@@ -513,9 +513,13 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   function application, plus an infinite hierarchy of universes and
   Π-types. Lean's specific extension with `inductive` type
   declarations (giving Σ-types and general recursive data) is the
-  Calculus of Inductive Constructions (CIC), due to a later paper
-  (Coquand and Paulin, "Inductively Defined Types," 1990), not the
-  1988 paper itself.
+  Calculus of Inductive Constructions (CIC), due to a later paper —
+  Thierry Coquand and Christine **Paulin-Mohring**, "Inductively Defined
+  Types," in *COLOG-88*, Lecture Notes in Computer Science 417,
+  Springer, 1990 — not the 1988 paper itself. Note that this is a
+  *different* paper from Pfenning & Paulin-Mohring's "Inductively Defined
+  Types in the Calculus of Constructions" (1989), with which it is easily
+  conflated; the surname is hyphenated in both.
 - Pierce ([Pierce2002]) — cited here only by analogy: *Types and Programming Languages* is explicitly *not* a dependently-typed textbook (Pierce's own preface: dependent types are "mentioned only in passing," developed no further than §30.5's one-paragraph sketch of "families of types indexed by terms"), so it does not cover eliminators/recursors for inductive types in a dependent setting. What it does cover, relevant here only by analogy: non-dependent `case` analysis on sum/variant types (§11.9–11.10) and on `µ`-recursive types like `NatList = μX.⟨nil:Unit, cons:{Nat,X}⟩` (Ch. 20), plus Church encodings of algebraic datatypes (Ch. 5 untyped, §23.4 typed/System F).
 - Martin-Löf ([MartinLof1984]) — the foundational source for dependent Π/Σ types and universes predating CoC, for readers wanting the idea in its original, non-CoC-specific form.
 - All Lean code in this section was checked directly against the toolchain pinned in this repository's `lean_project/lean-toolchain` rather than only described; the `#print Fin` output and both error messages shown are copied from real `lake env lean` runs.

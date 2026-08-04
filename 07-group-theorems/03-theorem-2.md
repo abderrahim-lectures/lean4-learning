@@ -10,9 +10,11 @@
 **Finding the proof.** This has the same shape as Theorem 1: an equality
 between two elements known only through separate facts (`h` about `b`, the
 `Group` axioms about `Grp.inv a`). Hence the same strategy applies: relate
-both sides to something in common. Here, however, no single lemma hands us
-`Grp.op b Grp.id` the way `Grp.id_right` did in Theorem 1's simpler setting.
-We must *build* the chain by rewriting `b` itself, step by step.
+both sides to something in common. Here, however, no single lemma hands us `Grp.op b Grp.id`
+**pointing the way we need** — `Grp.id_right` gives
+`Grp.op b Grp.id = b`, so we must use it backwards (`.symm`) to pad `b`
+with the identity, unlike Theorem 1's simpler setting. We must *build*
+the chain by rewriting `b` itself, step by step.
 
 The trick worth internalizing: **pad `b` with the identity, then swap the
 identity for something you can cancel.** Concretely:

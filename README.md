@@ -8,10 +8,10 @@ assistant). We assume no programming background — only the mathematical
 maturity of someone comfortable with abstract algebra and the basic language
 of category theory (objects, morphisms, composition, functors). The book
 builds up Lean 4 syntax and tactics only as far as needed to formalize
-groups, rings, and quiver path algebras — the categorical viewpoint (a
-quiver's path category, a ring as a one-object preadditive category, etc.)
-is called out explicitly wherever it clarifies what the Lean code is really
-encoding.
+groups, rings, and quiver path algebras — the categorical viewpoint (most
+substantially, a quiver's path category as the free category on a quiver
+in Chapter 11) is called out explicitly wherever it clarifies what the
+Lean code is really encoding.
 
 ## How to read this book
 

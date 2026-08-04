@@ -4,12 +4,11 @@
 
 ---
 
-**Learning objectives.** By the end of this chapter, translate the
-mathematical definition of a group into a Lean `structure` field by
-field, build both an abelian (`Int`) and a genuinely non-abelian
-(permutations of `Fin 3`) example from scratch, and articulate why
-bundling data with proof obligations pays off once theorems are proved
-generically (Chapter 7).
+## Learning objectives
+
+- Translate the mathematical definition of a group into a Lean `structure` field by field.
+- Build both an abelian (`Int`) and a genuinely non-abelian (permutations of `Fin 3`) example from scratch.
+- Articulate why bundling data with proof obligations pays off once theorems are proved generically (Chapter 7).
 
 ## The story of this chapter
 

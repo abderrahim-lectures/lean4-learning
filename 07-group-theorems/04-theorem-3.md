@@ -19,8 +19,10 @@ easier to attack directly with `assoc`/`inv_left`/`inv_right` than
 this thing" goals into "verify this thing satisfies the characterizing
 property" goals** — almost always a simpler target.
 
-Applying that here (with the goal read backwards, `apply Eq.symm` first, so
-`left_inverse_unique` unifies against the "b" slot), the remaining goal is
+Applying that here: flipping the goal with `Eq.symm` makes the LHS match
+the `b` in `left_inverse_unique`'s conclusion `b = Grp.inv a`, so
+`apply Eq.symm` first, then `left_inverse_unique` unifies against the "b"
+slot. The remaining goal is
 `Grp.op (Grp.op (Grp.inv b) (Grp.inv a)) (Grp.op a b) = Grp.id`. This is
 pure cancellation: regroup with `assoc` until `Grp.inv a` sits next to `a`,
 cancel via `inv_left`, then regroup until `Grp.inv b` sits next to `b`, and

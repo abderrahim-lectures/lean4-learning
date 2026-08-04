@@ -103,11 +103,40 @@ path *after* `p` changes nothing; this case is implemented directly by the
 separately, `Path.append (Path.nil u) p = p` (appending the trivial path
 *before* `p` also changes nothing; proved as Exercise 2 by induction on
 `p`, since the `nil` branch alone does not give this one for free). The
-`cons` case of the recursion is exactly associativity of concatenation.
-Together with `nil` as identities, this makes $\mathrm{Free}(Q)$ a genuine
-category: the smallest/most general category containing $Q$'s arrows, in
-the sense of a
-[universal property](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline).
+`cons` case of the recursion is a *definitional* recursion lemma
+(`Path.append p (Path.cons a h h' q') = Path.cons a h h' (Path.append p q')`)
+that lets induction unfold `Path.append` one arrow at a time — it is not
+itself associativity. True associativity of composition,
+
+$$
+\mathrm{append}(\mathrm{append}(p, q), r) = \mathrm{append}(p, \mathrm{append}(q, r)),
+$$
+
+is a separate statement, provable by induction on the *third* path
+argument, `r` — the same argument `Path.append` itself recurses on (as
+`append_nil_left`'s proof already relies on, inducting on its second
+argument). In the `nil` case both sides reduce to `append p q` directly.
+In the `cons` case, both sides reduce — via exactly the `cons`-recursion
+lemma above, applied on the outside of each `append` — to
+`Path.cons a h h' (·)` wrapped around a strictly shorter instance of the
+same equation, which the inductive hypothesis closes.
+This book does not carry out that induction in Lean, but the argument above
+is enough to see that it goes through. Associativity together with `nil` as
+identities is what makes $\mathrm{Free}(Q)$ a genuine category: the
+smallest/most general category containing $Q$'s arrows, in the sense of a
+**universal property**. Concretely: for any category $C$ and any quiver
+morphism $F : Q \to U(C)$ (a function on vertices and arrows into $C$'s
+objects and morphisms, where $U : \mathbf{Cat} \to \mathbf{Quiv}$ is the
+forgetful functor that remembers only a category's underlying quiver —
+objects and morphisms, forgetting identities and composition), there is a
+*unique* functor $\hat F : \mathrm{Free}(Q) \to C$ extending $F$, i.e.
+$U(\hat F) \circ \eta_Q = F$ where $\eta_Q : Q \to U(\mathrm{Free}(Q))$ is
+the inclusion of generators. Equivalently,
+$\mathrm{Hom}_{\mathbf{Cat}}(\mathrm{Free}(Q), C) \cong \mathrm{Hom}_{\mathbf{Quiv}}(Q, U(C))$,
+naturally in $C$: $\mathrm{Free}$ is left adjoint to $U$. This book does not
+formalize this functor or its uniqueness in Lean; it is stated here so the
+term "universal property" names something specific rather than a vague
+gesture at "the construction is canonical."
 
 **Mathlib equivalent.** `Path.append` is already in Mathlib, as
 `Quiver.Path.comp`. It is the same recursion (on the *second* path), with
@@ -124,7 +153,11 @@ This is the same closing `rfl` as the book's
 `pathBetaAlphaViaAppend = pathBetaAlpha` check: two paths built via
 different routes (direct `cons`-chaining versus composing two shorter
 paths) reduce to the identical term, because `Quiver.Path.comp` unfolds to
-exactly the same sequence of `cons` applications `Path.append` does.
+exactly the same sequence of `cons` applications `Path.append` does. Note
+that this `rfl` only checks *this one concrete instance* — it is not a
+proof of associativity or the identity laws in general (those are the
+separate statements discussed above); it is reassurance that the concrete
+`Free(Q)` machinery behaves as expected on a worked example.
 
 ### The path algebra
 
@@ -142,12 +175,16 @@ top is routine to add.
 
 **Mathematical reading.** The **path algebra** $kQ$ is the free $k$-module
 on the set of all paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with
-multiplication extending path composition $k$-bilinearly:
+multiplication extending path composition $k$-bilinearly — written here in the
+same **path order** used throughout this section, so that it matches
+`Path.append` and the quoted source below:
 $$
-q \cdot p = \begin{cases} q\circ p & \text{if } t(p) = s(q),\\ 0 &
+p \cdot q = \begin{cases} p\,;q & \text{if } t(p) = s(q),\\ 0 &
 \text{otherwise,}\end{cases}
 $$
-and unit $\sum_{v\in V} e_v$ (the sum of the trivial paths) — well-defined
+where $p\,;q$ means "first $p$, then $q$". (Sources that fix
+function-composition order instead write this product as $q \cdot p = q \circ
+p$; the algebra is the same, read right-to-left.) The unit is $\sum_{v\in V} e_v$ (the sum of the trivial paths) — well-defined
 as a finite sum, hence a genuine identity element, precisely when $Q_0$ is
 finite. So representations of $Q$ are exactly $kQ$-modules, the bridge to
 Chapter 10 promised there. The construction requires finitely-supported
@@ -187,8 +224,15 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l,
   \beta_1, \ldots, \beta_k \mid d)$" ([AssemSimsonSkowronski2006],
   Ch. II §1, Definition 1.2).
-- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.2, Ch. II §1 — path algebra $kQ$. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*.
-- Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2) — same construction; unit given explicitly as $1 = \sum_{i\in Q_0} e_i$ in the lemma immediately following (Lemma 4.3 in that source's numbering).
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.2, Ch. II §1 — path algebra $kQ$. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*. Note that the quoted product writes the **left** factor's arrows first, i.e. in path order — the same order as `Path.append` and as the multiplication formula above.
+- Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2) — same construction; the unit is given explicitly as $1 = \sum_{i\in Q_0} e_i$ in a lemma nearby in that section.
+
+> **Numbering not independently verified.** An earlier draft of this box
+> reported the Schiffler unit as "Lemma 4.3 in that source's numbering,"
+> described as immediately following Definition 4.5 — which cannot both be
+> true. The definition number is the one this section relies on; the lemma
+> number has been dropped rather than guessed. Check both against the printed
+> source before quoting either.
 
 [AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006
 [Schiffler2014]: ../bibliography.md#schiffler2014

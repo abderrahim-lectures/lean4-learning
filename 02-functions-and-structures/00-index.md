@@ -4,6 +4,13 @@
 
 ---
 
+## Learning objectives
+
+- Bundle data (and proofs) into a `structure`.
+- Use field projection and the anonymous constructor.
+- Parameterize a `structure` by a type.
+- Extend one `structure` with another via `extends`.
+
 Functions **curry**: `add : Nat → Nat → Nat` is really
 `Nat → (Nat → Nat)`, a function that returns another function. So a
 "two-argument function" is just a one-argument function whose result is
@@ -15,11 +22,6 @@ two-argument map is the same data as a one-argument map into a space of
 maps. This is not needed to follow along — the plain statement above is
 enough.) The interesting part of this chapter is `structure`, which is
 how algebraic data will be packaged.
-
-**Learning objectives.** By the end of this chapter, bundle data (and
-proofs) into a `structure`, use field projection and the anonymous
-constructor, parameterize a `structure` by a type, and extend one
-`structure` with another via `extends`.
 
 ## The story of this chapter
 

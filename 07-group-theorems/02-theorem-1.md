@@ -12,7 +12,10 @@ available:
 
 ```lean
 theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
-  sorry
+  have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
+  have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
+  rw [← step2]
+  exact step1
 ```
 
 The goal is `e' = Grp.id`, an equality between two elements of `G` about
@@ -44,7 +47,10 @@ that term — it contains `e'`. `rw [← step2]` rewrites right-to-left,
 replacing `e'` (which the goal *does* contain) with `Grp.op e' Grp.id`.
 This right-to-left choice, "which side of the `have` actually appears in
 the goal at present," is something to check every time `rw` is invoked, not
-something to guess.
+something to guess. Put more sharply: **rewrite the side that actually
+appears in the current goal**, not whichever side happens to look more
+"finished" — the direction of `rw` is dictated by what is already there, not
+by where the proof is headed.
 
 **Mathematical reading.** This is the classical *uniqueness of the identity*:
 if $e'$ is a left identity ($e'\cdot a = a$ for all $a$) then $e' = e$. The

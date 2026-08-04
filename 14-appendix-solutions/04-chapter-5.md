@@ -19,7 +19,8 @@ Both sides compute to the same normal form, so no subtlety arises.
 example (n : Nat) : n * 2 = n + n := rfl
 ```
 
-This also succeeds, though the reason requires elaboration. `2` is
+One might first guess this also succeeds, but the reason requires
+elaboration. `2` is
 `Nat.succ (Nat.succ Nat.zero)`, so `n * 2` unfolds via the step clause
 twice: `n * 2 = n * 1 + n = (n * 0 + n) + n = (0 + n) + n`. Since `Nat.add`
 recurses on its *second* argument, `0 + n` is not immediately `n` by
@@ -68,7 +69,7 @@ data it contains.
 ```lean
 def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x
 
-#eval opTwiceTC (3 : Int)   -- 6, with the Group Int instance found automatically
+#eval opTwiceTC (3 : Int)   -- 6, with the MyGroup Int instance found automatically
 ```
 
 That difference in how it is found is exactly what makes `opTwiceTC`

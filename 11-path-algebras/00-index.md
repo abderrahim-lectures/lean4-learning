@@ -4,17 +4,17 @@
 
 ---
 
+## Learning objectives
+
+- Encode a quiver as a `structure` of vertices/arrows/source/target.
+- Define `Path` as an inductive type indexed by its own endpoints.
+- Compose paths via `Path.append` and predict when composability side-conditions block a nonsensical composition.
+- Explain in what sense a path algebra $kQ$ extends the `Ring`/`Module` machinery of Chapters 8 and 10.
+
 This chapter combines everything covered so far: inductive types
 (Chapter 1), structures (Chapter 2), and rings (Chapters 7–8), used
 to build a genuinely interesting example: the **path algebra** of a
 quiver.
-
-**Learning objectives.** By the end of this chapter, encode a quiver as a
-`structure` of vertices/arrows/source/target, define `Path` as an
-inductive type indexed by its own endpoints, compose paths via
-`Path.append` and predict when the composability side-conditions block a
-nonsensical composition, and explain in what sense a path algebra $kQ$
-extends the `Ring`/`Module` machinery of Chapters 8 and 10.
 
 ## The story of this chapter
 
@@ -30,7 +30,8 @@ down toward a single target: the path algebra $kQ$.
    several arrows, chained one after another?**
    ([Section 2](02-paths.md)) A **path**: a sequence of arrows composable
    head-to-tail, together with, for each vertex, a length-$0$ trivial path
-   that starts and ends there and composes with nothing but itself.
+   that starts and ends there and acts as the identity at that vertex,
+   composing with any path starting or ending there and leaving it unchanged.
 3. **Both of the last two sections were stated on paper. How does the
    quiver definition become something Lean can check against?**
    ([Section 3](03-defining-a-quiver.md)) A `structure` bundling the
@@ -48,10 +49,12 @@ down toward a single target: the path algebra $kQ$.
 5. **Two paths, each already built, often need to be joined into one
    longer path rather than reconstructed by hand — how?**
    ([Section 5](05-path-composition.md)) `Path.append`, composition in the
-   free category on $Q$, defined by recursion and verified, by a genuine
-   `rfl`, to agree with building the same composite path directly. This is
-   also, once paths are given $k$-linear coefficients, the multiplication
-   that makes the path algebra $kQ$ a ring.
+   free category on $Q$, defined by recursion; one concrete instance is
+   checked, by a genuine `rfl`, to agree with building the same composite
+   path directly (this checks that one example, not associativity or the
+   identity laws in general — see Section 5 for the general argument). This
+   is also, once paths are given $k$-linear coefficients, the
+   multiplication that makes the path algebra $kQ$ a ring.
 6. **Having built the definitions, what remains to actually practice
    with them?** ([Section 6](06-exercises.md), then the
    [checkpoint project](07-checkpoint-project.md)) Exercises on the
@@ -60,7 +63,7 @@ down toward a single target: the path algebra $kQ$.
    `Path.append`'s own recursion, that composition respects it.
 
 By the end, "quiver" has gone from an unadorned directed graph to a
-category of paths with verified composition — exactly the data a
+category of paths with a spot-checked composition — exactly the data a
 representation theorist needs before defining $kQ$ itself, and exactly
 the bridge back to Chapter 10's `Module`/`LinearMap` machinery, since a
 representation of $Q$ is precisely a module over $kQ$.

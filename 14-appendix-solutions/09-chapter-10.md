@@ -111,6 +111,13 @@ shape. Full verification of `add_smul` and `smul_smul` follows the same
 induction-on-the-scalar pattern, and makes a good longer exercise for
 further practice.
 
+**Partial coverage note:** this solution only proves `natSmul_add` for
+natural-number scalars (with an extra `comm` hypothesis added for
+convenience). The exercise as stated asks for the full `intSmul`/`smul_add`
+property, including negative scalars. Extending to `Int` requires case
+splitting on `Int.ofNat`/`Int.negSucc` and handling sign flips in the
+inductive step — left here as an exercise rather than fully verified.
+
 **4. Submodule of multiples of `d`**
 
 ```lean

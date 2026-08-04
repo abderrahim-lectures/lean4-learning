@@ -4,6 +4,11 @@
 
 ---
 
+## Learning objectives
+
+- Follow complete, step-by-step solutions to exercises from the main chapters.
+- See every `rw`/`have`/`intro` spelled out one step at a time, in the book's own style.
+
 Solutions are written in the same explicit style as the main text: every
 `rw`/`have`/`intro` is one step. We avoid shortcuts (`simp`, unexplained
 `rfl`) except when a step is truly definitional and there is nothing left
@@ -21,6 +26,9 @@ to explain.
 8. [Chapter 9: Ring examples and basic theorems](08-chapter-9.md)
 9. [Chapter 10: Modules over a ring](09-chapter-10.md)
 10. [Chapter 11: Quivers and path algebras](10-chapter-11.md)
+
+(Chapter 2: Functions and structures has no exercises, so it has no
+solutions page here.)
 
 ---
 

@@ -24,10 +24,12 @@ actually built up and explained.
 | simple function type $\tau_1 \to \tau_2$ | `τ1 → τ2` | Chapter 1, Chapter 5, Section 3 |
 | universe hierarchy $\mathtt{Type}\,i$ | `Type`, `Type 1`, ... | Chapter 5, Sections 2–3 |
 | Π-type $\prod_{x:A} B(x)$ | `(x : A) → B x`, `∀ x : A, B x` | Chapter 1, Sections 3, 5, Chapter 3 |
-| Σ-type $\sum_{x:A} B(x)$ | `structure` (extractable); `∃ x, P x` is a *restricted* cousin (no witness-extraction) rather than literally Σ | Chapter 2, Chapter 1, Section 5 |
+| Σ-type $\sum_{x:A} B(x)$ | `structure` (a general dependent-pair type, extractable), of which `Sigma`/the anonymous-constructor `⟨_, _⟩` pairing is a direct instance | Chapter 2, Chapter 1, Section 5 |
+| $\exists x, P\, x$ (existential, `Prop`-valued) | `∃ x, P x` — *not* Σ: a proposition witnessed by a pair, but with no witness-extraction since it lives in `Prop` | Chapter 3 |
 | proof-irrelevant universe | `Prop` | Chapter 3, Chapter 1, Section 5 |
 | inductive data (beyond bare CoC) | `inductive`, `structure` | Chapters 1, 2, 11 |
 | Curry–Howard: propositions-as-types | `Prop`/proof terms | Chapter 3 |
+| negation $\neg P$ | `¬P` (defined as `P → False`) | Chapter 3 |
 | progress + preservation | Lean's kernel type-checker | Chapter 5, Section 3 |
 | Church numerals (encoded data) | `Nat` (but built via `inductive`, not encoded) | Chapter 1, Section 4, Chapter 13 (aside) |
 | Church booleans / if-then-else via application | `Bool`, `if`/`match` (but native, not encoded) | Chapter 13 (aside) |

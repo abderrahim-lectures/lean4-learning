@@ -4,6 +4,12 @@
 
 ---
 
+## Learning objectives
+
+- Explain why this book delays `class` in favor of `structure`.
+- State the STLC typing rules and why `Type` itself needs a universe hierarchy.
+- Distinguish definitional from propositional equality, and predict when `rfl` alone will and will not close a goal.
+
 Before committing to `Group`'s definition in the next chapter, this short
 chapter answers three questions a careful mathematician should already be
 asking. Why does this book use plain `structure` instead of Lean's `class`
@@ -13,12 +19,6 @@ and does `Group (α : Type)` really quantify over *all* types, including
 are they "the same"? Skipping these would leave exactly the kind of
 unstated assumption a demanding reader is trained to notice and question,
 so they are addressed here, before Chapter 6 proceeds.
-
-**Learning objectives.** By the end of this chapter, explain why this book
-delays `class` in favor of `structure`, state the STLC typing rules and
-why `Type` itself needs a universe hierarchy, and distinguish definitional
-from propositional equality (and predict, correctly, when `rfl` alone
-will and will not close a goal).
 
 ## The story of this chapter
 

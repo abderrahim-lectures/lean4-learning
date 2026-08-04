@@ -4,11 +4,26 @@
 
 ---
 
-**Learning objectives.** By the end of this chapter, describe what this
-book built entirely from scratch, translate that construction into
-Mathlib's `class`-based idiom and see two genuinely new facts it delivers
-for free, and pick a next project — from the five scaffolded here, or the
-Church-encodings aside — that extends material already in hand.
+## Learning objectives
+
+- Describe what this book built entirely from scratch.
+- Translate that construction into Mathlib's `class`-based idiom and see two genuinely new facts it delivers for free.
+- Pick a next project — from the five scaffolded here, or the Church-encodings aside — that extends material already in hand.
+
+## The story of this chapter
+
+Thirteen chapters have built every group, ring, and path algebra from
+scratch — no Mathlib, no `class`, no pre-packaged API. That journey was
+the point: every definition and proof obligation was seen explicitly so
+that nothing is ever trusted blindly. This closing chapter asks four
+questions in turn. First, what has actually been constructed, end to end?
+Second, how does that from-scratch construction translate into Mathlib's
+real `class`-based idiom — and what genuinely new conveniences does that
+translation unlock as a reward for the trip? Third, rather than stopping
+at the chapter's end, what next project — drawn from the five scaffolded
+here, or sketched in the margins — extends the material already in hand?
+Fourth, the solutions to the chapter's exercises, closing out the
+chapter.
 
 ## Sections
 

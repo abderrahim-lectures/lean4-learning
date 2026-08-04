@@ -45,7 +45,7 @@ built afterward at no extra cost.
 2. Verify on paper that `inv_left` and `inv_right` are genuinely
    different obligations. They coincide automatically only once the group has
    been *proved* commutative — this is exactly the content of
-   Chapter 7's first theorem.
+   Chapter 7's second theorem (left inverses equal right inverses).
 
 Solutions: [Appendix, Chapter 6](../14-appendix-solutions/05-chapter-6.md).
 

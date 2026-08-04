@@ -25,6 +25,7 @@ Two general links used throughout this page:
 | --- | --- | --- |
 | `rfl` | Ch. 1 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 | `rw` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `subst` | Ch. 1, Section 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 | `exact` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 | `apply` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 | `intro` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |

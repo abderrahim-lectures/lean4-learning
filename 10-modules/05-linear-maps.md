@@ -17,11 +17,14 @@ structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
 
 This is precisely the categorical picture: $R$-modules and $R$-linear maps
 form a category. Composition of linear maps is linear, and the identity
-function is linear — both easy `theorem`s to state and prove from the two
-fields above. Everything in this chapter, including submodules and the
-direct sums below, is best understood as living inside that category,
-consistent with Chapter 1's opening dictionary for reading `Type`
-itself.
+function is linear — both easy to state and prove from the two fields
+above. This chapter's exercises ask you to prove exactly these two facts
+(`idLinearMap`, `composeLinearMap` in the appendix solutions), rather than
+proving them here in the main narrative. Everything in this chapter,
+including submodules and the direct sums below, is best understood as
+living inside that category, consistent with Chapter 1's opening
+dictionary for reading
+`Type` itself.
 
 **Mathematical reading.** `LinearMap Rg ModM ModN` is the set
 $\mathrm{Hom}_R(M, N)$ of $R$-module homomorphisms: functions $f : M \to N$
