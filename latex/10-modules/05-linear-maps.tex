@@ -10,7 +10,7 @@ structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
   map_smul : (*$\forall$*) (r : R) (m : M), toFun (ModM.smul r m) = ModN.smul r (toFun m)
 \end{lstlisting}
 
-This is precisely the categorical picture: \(R\)-modules and \(R\)-linear maps form a category. Composition of linear maps is linear, and the identity function is linear --- both easy \texttt{theorem}s to state and prove from the two fields above. Everything in this chapter, including submodules and the direct sums below, is best understood as living inside that category, consistent with Chapter 1's opening dictionary for reading \texttt{Type} itself.
+This is precisely the categorical picture: \(R\)-modules and \(R\)-linear maps form a category. Composition of linear maps is linear, and the identity function is linear --- both easy to state and prove from the two fields above. This chapter's exercises ask you to prove exactly these two facts (\texttt{idLinearMap}, \texttt{composeLinearMap} in the appendix solutions), rather than proving them here in the main narrative. Everything in this chapter, including submodules and the direct sums below, is best understood as living inside that category, consistent with Chapter 1's opening dictionary for reading \texttt{Type} itself.
 
 \begin{mathreading}
 

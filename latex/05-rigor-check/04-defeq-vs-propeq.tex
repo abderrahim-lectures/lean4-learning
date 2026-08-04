@@ -7,10 +7,14 @@ Section 3's progress and preservation theorems guaranteed that reduction never c
 Two terms are \textbf{definitionally equal} (\(a \equiv b\), sometimes written \(a \equiv_\beta b\) to stress that it is driven by reduction) if they reduce to the same normal form by unfolding definitions, beta-reduction (substituting a lambda's argument into its body), and the built-in computation rules of inductive types (a \texttt{match} on a constructor reduces immediately). This is a \emph{judgment the type-checker computes}, not a proposition you prove. There is no term of type \texttt{a ≡ b}. Either Lean's kernel confirms it during elaboration (silently, whenever it needs to check that two types or terms match) or it does not, and \texttt{rfl} is the tactic that asks Lean to check exactly this and fail loudly if it does not hold.
 
 \begin{lstlisting}
-example : 2 + 2 = 4 := rfl        -- 2 + 2 reduces to 4 definitionally
-example : 0 + 2 = 2 := rfl        -- Nat.add recurses on its 2nd arg; 2 + 0 = 2 is the base case
--- example : 2 + 0 = 2 := rfl     -- also rfl (0 + n needs induction, n + 0 doesn't)
+example : 2 + 2 = 4 := rfl              -- closed terms: both sides just compute
+example (n : Nat) : n + 0 = n := rfl    -- rfl: `n + 0` is Nat.add's base case
+-- example (n : Nat) : 0 + n = n := rfl -- FAILS: Nat.add recurses on its second
+--                                      -- argument, so `0 + n` is stuck at the
+--                                      -- unknown `n`. Needs induction (*\textemdash{}*) Chapter 4.
 \end{lstlisting}
+
+The asymmetry in the last two lines is the whole point, and it only shows up with a \emph{variable} \texttt{n}. On closed numerals everything computes, so \texttt{0 + 2 = 2} and \texttt{2 + 0 = 2} are both \texttt{rfl} and neither reveals anything. Replace \texttt{n} by a literal and the commented-out line starts succeeding.
 
 One precise point worth noting: ``reduce to the same normal form'' does not mean Lean necessarily unfolds a term \emph{all the way down} before comparing. Checking \texttt{a ≡ b} typically only reduces each side as far as its \textbf{weak head normal form} (WHNF): far enough to see the outermost constructor or function head, no further than needed. It then compares heads, recursing into subterms only as required. This is exactly why ``\texttt{Nat.add} recurses on its second argument'' is a fact about \emph{evaluation order}. To determine whether \texttt{0 + n} reduces at all, Lean examines \texttt{n}'s outermost shape (its WHNF). If \texttt{n} is an unknown variable rather than a known \texttt{zero}/\texttt{succ} constructor, there is nothing to see, so no reduction fires and the goal is stuck at \texttt{0 + n}, exactly as Chapter 4 found.
 

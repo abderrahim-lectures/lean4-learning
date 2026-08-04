@@ -87,7 +87,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Read \texttt{Mathlib.Combinatorics.Quiver.Basic}'s \texttt{Quiver} class (already introduced in Chapter 11, Section 1's ``Mathlib equivalent'' box) and \texttt{Mathlib.CategoryTheory.Quiver}'s extension of it with identities and composition, comparing field-for-field against this book's plain \texttt{Quiver}/\texttt{Path}.
+  Read \texttt{Mathlib.Combinatorics.Quiver.Basic}'s \texttt{Quiver} class (already introduced in Chapter 11, Section 3's ``Mathlib equivalent'' box) and \texttt{Mathlib.CategoryTheory.Quiver}'s extension of it with identities and composition, comparing field-for-field against this book's plain \texttt{Quiver}/\texttt{Path}.
 \item
   Find Mathlib's \texttt{Prefunctor} (a quiver homomorphism) and, separately, define a \texttt{structure QuiverHom} by hand for two of this book's own quivers (\texttt{exampleQuiver}, \texttt{cyclicQuiver} from Chapter 11's exercises), mapping vertices to vertices and arrows to paths.
 \item
@@ -159,7 +159,7 @@ Everything in this book is built from Lean's \texttt{inductive} mechanism: \text
   f\,(n\, f\, x)\) --- ``apply \(f\) one more time than \(n\) does.''
 \item
   \textbf{Addition:} \(\mathrm{plus} := \lambda m.\lambda n.\lambda f.\lambda x.\,
-  m\, f\,(n\, f\, x)\) --- ``apply \(f\), \(m\) times, starting from where \(n\) already applied it \(n\) times,'' the same recursive shape that makes \texttt{Nat.add} recurse on its second argument (Chapter 4).
+  m\, f\,(n\, f\, x)\) --- ``apply \(f\), \(m\) more times, starting from where \(n\) has already applied \(f\), \(n\) times,'' the same recursive shape that makes \texttt{Nat.add} recurse on its second argument (Chapter 4).
 \item
   \textbf{Multiplication} is even more striking: \(\mathrm{mult} := \lambda m.
   \lambda n.\lambda f.\, m\,(n\, f)\) --- ``apply \emph{`apply \(f\), \(n\) times'}, \(m\) times.'' Multiplication is literally function composition, iterated.

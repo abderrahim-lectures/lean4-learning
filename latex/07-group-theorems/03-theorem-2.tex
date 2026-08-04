@@ -2,7 +2,7 @@
 
 \textbf{Claim.} If \texttt{Grp.op b a = Grp.id} for some \texttt{a b : G}, then \texttt{b = Grp.inv a}.
 
-\textbf{Finding the proof.} This has the same shape as Theorem 1: an equality between two elements known only through separate facts (\texttt{h} about \texttt{b}, the \texttt{Group} axioms about \texttt{Grp.inv a}). Hence the same strategy applies: relate both sides to something in common. Here, however, no single lemma hands us \texttt{Grp.op b Grp.id} the way \texttt{Grp.id\_\allowbreak{}right} did in Theorem 1's simpler setting. We must \emph{build} the chain by rewriting \texttt{b} itself, step by step.
+\textbf{Finding the proof.} This has the same shape as Theorem 1: an equality between two elements known only through separate facts (\texttt{h} about \texttt{b}, the \texttt{Group} axioms about \texttt{Grp.inv a}). Hence the same strategy applies: relate both sides to something in common. Here, however, no single lemma hands us \texttt{Grp.op b Grp.id} \textbf{pointing the way we need} --- \texttt{Grp.id\_\allowbreak{}right} gives \texttt{Grp.op b Grp.id = b}, so we must use it backwards (\texttt{.symm}) to pad \texttt{b} with the identity, unlike Theorem 1's simpler setting. We must \emph{build} the chain by rewriting \texttt{b} itself, step by step.
 
 The trick worth internalizing: \textbf{pad \texttt{b} with the identity, then swap the identity for something you can cancel.} Concretely:
 
