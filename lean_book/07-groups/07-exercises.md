@@ -17,7 +17,7 @@ built afterward at no extra cost.
    or `inv_left`/`inv_right`, since `Int` addition is commutative. Does
    that mean the split is only there for the sake of generality, with no
    concrete example that actually needs it?* No. `perm3Group` needs it
-   for real: composing permutations is genuinely non-commutative, so
+   for real, composing permutations is genuinely non-commutative, so
    `id_left` and `id_right` are two separate proof obligations there,
    not a single fact proved twice.
 2. *`GroupData` (op, id, inv, no axioms) type-checks for any choice of
@@ -47,7 +47,7 @@ built afterward at no extra cost.
    been *proved* commutative. This is exactly the content of
    the second theorem in Chapter 8 (left inverses equal right inverses).
 
-Solutions: [Appendix, Chapter 7](../15-appendix-solutions/06-chapter-7.md).
+Solutions, [Appendix, Chapter 7](../15-appendix-solutions/07-chapter-7.md).
 
 ## Next
 

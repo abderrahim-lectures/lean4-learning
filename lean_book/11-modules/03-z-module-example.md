@@ -65,7 +65,7 @@ induction, leaving no freedom.
 on any abelian group. `natSmul` is the
 $\mathbb{N}$-action $n\cdot m = \underbrace{m + \cdots + m}_{n}$ (the
 $n$-fold sum, with $0\cdot m = 0$), and `intSmul` extends it to $\mathbb{Z}$
-by $(-n)\cdot m = -(n\cdot m)$. This is forced: since $\mathbb{Z}$ is the
+by $(-n)\cdot m = -(n\cdot m)$. This is forced, since $\mathbb{Z}$ is the
 [initial](../02-terminology-and-coc/01-terminology.md#category-theory-terms-used-beyond-the-baseline)
 ring, there is a unique ring map $\mathbb{Z} \to
 \mathrm{End}(M)$ for any abelian group $M$ (it must send $1 \mapsto

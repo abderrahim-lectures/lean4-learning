@@ -54,7 +54,7 @@ def pathBetaOnly : Path exampleQuiver 1 2 :=
   Path.cons ExampleArrow.beta rfl rfl (Path.nil 1)
 ```
 
-`pathBetaOnly` is that fresh one-arrow path: a path from `1` to `2`
+`pathBetaOnly` is that fresh one-arrow path, a path from `1` to `2`
 consisting of just the single arrow `beta`, built on its own rather than
 by extending `pathAlpha`.
 
@@ -76,7 +76,7 @@ That final `rfl` is not a weak or approximate check. It says the two
 constructions are *definitionally* the same term, reducing to an
 identical normal form (Chapter 6), not merely "provably equal after some
 argument." This is the concrete payoff of the recursive definition of
-`Path.append`: composing paths built independently, via arbitrarily different
+`Path.append`, composing paths built independently, via arbitrarily different
 routes, agrees exactly with building the composite path directly by hand,
 because both ultimately unfold to the same sequence of `Path.cons`
 applications.
@@ -122,7 +122,7 @@ lemma above, applied on the outside of each `append`, to
 same equation, which the inductive hypothesis closes.
 This book does not carry out that induction in Lean, but the argument above
 is enough to see that it goes through. Associativity together with `nil` as
-identities is what makes $\mathrm{Free}(Q)$ a genuine category: the
+identities is what makes $\mathrm{Free}(Q)$ a genuine category, the
 smallest/most general category containing the arrows of $Q$, in the sense of a
 **universal property**. Concretely, for any category $C$ and any quiver
 morphism $F : Q \to U(C)$ (a function on vertices and arrows into the
@@ -150,7 +150,7 @@ example : pathBetaAlphaViaComp' = pathBetaAlpha' := rfl
 ```
 
 This is the same closing `rfl` as the
-`pathBetaAlphaViaAppend = pathBetaAlpha` check in the book: two paths built via
+`pathBetaAlphaViaAppend = pathBetaAlpha` check in the book, two paths built via
 different routes (direct `cons`-chaining versus composing two shorter
 paths) reduce to the identical term, because `Quiver.Path.comp` unfolds to
 exactly the same sequence of `cons` applications `Path.append` does. Note
@@ -166,7 +166,7 @@ ring whose elements are $k$-linear combinations of paths in $Q$, with
 multiplication given by path composition (composing two paths whose
 endpoints do not match gives $0$). Formalizing $kQ$ fully (as a `Ring`, per
 Chapter 9) requires "formal sums of paths with ring coefficients," which is
-a genuinely bigger construction: essentially a finitely-supported function
+a genuinely bigger construction, essentially a finitely-supported function
 from paths to $k$. It is a natural next project once the material above is
 well understood. This chapter stops at "paths and their composition"
 because that data (the *category* of paths, really) is the essential

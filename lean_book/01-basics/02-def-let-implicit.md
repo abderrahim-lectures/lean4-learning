@@ -65,8 +65,8 @@ A word of warning about the `→` that appeared two bullets up
 later in this book, meaning something that looks different each time. Once
 `Prop` exists ([Chapter 4](../04-propositions-and-proofs/04-implication.md)),
 `P → Q` for propositions `P`, `Q` reads as logical implication, not "takes a
-`P`-value, returns a `Q`-value." And later this section
-([Section 5](../02-terminology-and-coc/02-pi-sigma-and-coc.md)) names the fully general pattern `→` is
+`P`-value, returns a `Q`-value." And later,
+[Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md) names the fully general pattern `→` is
 secretly always an instance of, the Π-type, where the *codomain* is allowed
 to depend on which argument was given, `Nat → Nat` being only the special
 case where it happens not to. Nothing about `double` above needs any of
@@ -210,12 +210,12 @@ Briefly, so meeting these elsewhere later is not a surprise:
   occasionally in Mathlib source), behaves like `{}` except that Lean
   defers solving it until an *explicit* argument after it is actually
   supplied. It is a Mathlib idiom for keeping partially applied functions
-  well behaved, and does not appear anywhere in this book's own code. It
+  well behaved, and does not appear anywhere in the own code of this book. It
   is named here only so it is recognizable, not mysterious, if
   encountered while reading Mathlib source directly.
 - `def` is not the only way to introduce a definition either. `abbrev` and
   `opaque` exist alongside it, and differ not in what they let you write,
-  but in how transparent the result is to Lean's own equality checker,
+  but in how transparent the result is to the own equality checker of Lean,
   whether `unfold`ing it is ever needed, or ever even possible.
   [Chapter 5](../05-tactics/04-more-tactics.md), once `unfold` itself is on
   the table, is where this is worth actually seeing rather than taking on

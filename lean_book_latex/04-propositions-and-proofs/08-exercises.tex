@@ -1,6 +1,6 @@
 \section{Exercises}\label{sec:04-propositions-and-proofs:08-exercises:1}
 
-\textbf{Key points.} \texttt{Prop} is the type of statements, and a proof is just an ordinary term of that type (Curry--Howard). \texttt{∧}/\texttt{∨}/\texttt{→}/\texttt{∀}/\texttt{∃} each have their own introduction and elimination rule, mirrored directly by Lean syntax: the anonymous constructor, \texttt{Or.inl}/\texttt{Or.inr}/\texttt{match}, \texttt{fun}/ application, and \texttt{fun}/anonymous-constructor again. \texttt{rfl} proves equality by checking both sides reduce to the same normal form.
+\textbf{Key points.} \texttt{Prop} is the type of statements, and a proof is just an ordinary term of that type (Curry--Howard). \texttt{∧}/\texttt{∨}/\texttt{→}/\texttt{∀}/\texttt{∃} each have their own introduction and elimination rule, mirrored directly by Lean syntax, the anonymous constructor, \texttt{Or.inl}/\texttt{Or.inr}/\texttt{match}, \texttt{fun}/ application, and \texttt{fun}/anonymous-constructor again. \texttt{rfl} proves equality by checking both sides reduce to the same normal form.
 
 \textbf{Socratic questions.}
 
@@ -15,10 +15,10 @@
 \item
   Prove \texttt{theorem and\_\allowbreak{}comm\_\allowbreak{}ex \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}.
 \item
-  Prove \texttt{theorem or\_\allowbreak{}comm\_\allowbreak{}ex \{P Q : Prop\} (h : P ∨ Q) : Q ∨ P} (hint: use \texttt{Or.elim} or pattern matching with \texttt{match}).
+  Prove \texttt{theorem or\_\allowbreak{}comm\_\allowbreak{}ex \{P Q : Prop\} (h : P ∨ Q) : Q ∨ P} (hint, use \texttt{Or.elim} or pattern matching with \texttt{match}).
 \item
   Prove \texttt{theorem exists\_\allowbreak{}gt\_\allowbreak{}zero : ∃ n : Nat, n > 0}.
 \end{enumerate}
 
-Solutions: \hyperref[sec:15-appendix-solutions:03-chapter-4:1]{Appendix, Chapter 4}.
+Solutions, \hyperref[sec:15-appendix-solutions:04-chapter-4:1]{Appendix, Chapter 4}.
 

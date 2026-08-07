@@ -37,10 +37,10 @@ into one independent fact per summand.
    equality of a product is checked componentwise) that makes all five/four
    proofs uniform instead of five/four bespoke arguments.
 
-1. Prove that the identity function is a linear map: for any
+1. Prove that the identity function is a linear map, for any
    `Mod : Module R Rg M`, construct
    `idLinearMap : LinearMap Rg Mod Mod` with `toFun := id`.
-2. Prove that linear maps compose: given
+2. Prove that linear maps compose, given
    `f : LinearMap Rg ModM ModN` and `g : LinearMap Rg ModN ModP`, construct
    `LinearMap Rg ModM ModP` with `toFun := g.toFun ∘ f.toFun`. (This,
    together with Exercise 1 and associativity of function composition, is
@@ -53,7 +53,7 @@ into one independent fact per summand.
    (generalizing `evenSubmodule`, which is the case `d = 2`), and check
    that the three closure proofs generalize verbatim with `2` replaced by `d`.
 
-Solutions: [Appendix, Chapter 11](../15-appendix-solutions/10-chapter-11.md).
+Solutions, [Appendix, Chapter 11](../15-appendix-solutions/11-chapter-11.md).
 
 ## Next
 

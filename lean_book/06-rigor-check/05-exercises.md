@@ -7,7 +7,7 @@
 **Key points.** This book delays `class` for `structure` so every proof
 obligation stays explicit. `class` only changes *how* Lean finds an
 instance, not what data it holds. The type of `Type` itself must live one universe
-up (`Type 1`), or `Type : Type` reintroduces Russell's paradox. `rfl`
+up (`Type 1`), or `Type : Type` reintroduces the Russell paradox. `rfl`
 proves only *definitional* equality, reduction to the same normal form,
 which is not every true propositional equality (an asymmetric recursion
 like that of `Nat.add` is exactly where the two can diverge).
@@ -40,25 +40,25 @@ like that of `Nat.add` is exactly where the two can diverge).
 
 1. Predict, before running it, whether [`example : (2 : Nat) * 3 = 3 + 3 := rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)
    type-checks. Then predict whether
-   `example (n : Nat) : n * 2 = n + n := rfl` type-checks (hint: which
+   `example (n : Nat) : n * 2 = n + n := rfl` type-checks (hint, which
    argument does `Nat.mul` recurse on? Compare with the `Nat.add` recursion
    pattern from Chapter 5).
 2. Rewrite `opTwice` (from the `structure` vs `class` section) as a
-   type class version yourself: declare `class MyGroup (G : Type) where ...`
+   type class version yourself, declare `class MyGroup (G : Type) where ...`
    with the same fields as `Group` in this book, register
    `instance : MyGroup Int where ...`, and write
    `def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x`. Confirm
    `#eval opTwiceTC (3 : Int)` works with no explicit instance argument.
 3. In one or two sentences, explain why `Type → Type` (the type of `Group`
    itself, before applying it to a carrier) must live in `Type 1` rather
-   than `Type 0`. Tie the answer back to the Russell's-paradox
+   than `Type 0`. Tie the answer back to the Russell-paradox
    obstruction this chapter described.
 4. Give an example (distinct from `my_add_comm`) of a true propositional
    equality between two `Nat` expressions that is *not* provable by `rfl`
    alone, and identify which side has the recursive structure that is the
    obstruction.
 
-Solutions: [Appendix, Chapter 6](../15-appendix-solutions/05-chapter-6.md).
+Solutions, [Appendix, Chapter 6](../15-appendix-solutions/06-chapter-6.md).
 
 ## Next
 

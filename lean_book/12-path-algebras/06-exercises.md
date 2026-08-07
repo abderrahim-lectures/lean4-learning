@@ -49,7 +49,7 @@ multiplication by composition.
    what a `structure PathAlgebra (V A : Type) (Q : Quiver V A) (k : Type) (Rg : Ring k)`
    would need to contain to satisfy the fields of `Ring` from Chapter 9.
 
-Solutions: [Appendix, Chapter 12](../15-appendix-solutions/11-chapter-12.md).
+Solutions, [Appendix, Chapter 12](../15-appendix-solutions/12-chapter-12.md).
 
 ## Next
 

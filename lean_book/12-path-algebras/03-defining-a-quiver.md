@@ -16,11 +16,11 @@ structure Quiver (V : Type) (A : Type) where
 This is a direct transcription: `V` is the type of vertices, `A` the type of
 arrows, and `source`/`target` are exactly $s$ and $t$ above.
 
-**Mathematical reading.** `Quiver V A` is a quiver $Q = (V, A, s, t)$: the
+**Mathematical reading.** `Quiver V A` is a quiver $Q = (V, A, s, t)$, the
 data of two functions $s, t : A \to V$, i.e. a parallel pair of arrows
 $A \rightrightarrows V$ in $\mathbf{Set}$. A quiver is precisely
 the underlying data of a small category *before* composition and
-identities are imposed: the raw generators from which the free category (paths)
+identities are imposed, the raw generators from which the free category (paths)
 is built.
 
 ### The example quiver, formalized
@@ -64,7 +64,7 @@ graph LR
 | $s, t : A \to V$ ("source, target") | `exampleQuiver.source`, `exampleQuiver.target` |
 
 The two-element inductive type is the finite set $A = \{\alpha,\beta\}$,
-and the `match`-defined `source`/`target` are the functions $s, t : A \to
+and the `match`-defined `source`/`target` are the functions $s, t . A \to
 V$ given by their value tables: `source alpha = 0`, `target alpha = 1`,
 `source beta = 1`, `target beta = 2`. This is exactly the arrowheads and
 tails drawn above.

@@ -14,7 +14,7 @@ composition, tying together the inductive-type work of this chapter with the
 **Learning objectives.** Define a recursive function over the same indexed
 inductive type `Path` (Section 4), then prove a genuine theorem about it by
 induction, mirroring the recursion of `Path.append` itself case for case (Section 5).
-Along the way, this project surfaces a real, verifiable fact about Lean:
+Along the way, this project surfaces a real, verifiable fact about Lean,
 because `Path` is *indexed* by both its endpoints, functions matching on
 it (both `Path.append` and the `Path.length` built here) do not reduce by
 bare `rfl` once an abstract path variable is involved. Only their
@@ -27,7 +27,7 @@ understood by predicting what each `rw` will do before running it.
 
 **Milestones.**
 
-1. Define `Path.length : {u v : V} → Path Q u v → Nat` by recursion: the
+1. Define `Path.length : {u v : V} → Path Q u v → Nat` by recursion, the
    trivial path `nil` has length `0`; `cons a h h' p` has length
    `p.length + 1` (one more than the path it extends).
 2. Compute a couple of lengths by hand and check them with `#eval` against
@@ -116,7 +116,7 @@ in one `#eval`.
 
 If this compiles and the `#eval`s match, the project is done. A full
 worked solution is in
-[Appendix, Chapter 12](../15-appendix-solutions/11-chapter-12.md).
+[Appendix, Chapter 12](../15-appendix-solutions/12-chapter-12.md).
 
 ---
 

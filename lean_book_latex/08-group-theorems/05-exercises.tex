@@ -1,6 +1,6 @@
 \section{Exercises}\label{sec:08-group-theorems:05-exercises:1}
 
-\textbf{Key points.} Three facts now hold for \emph{every} group: the identity is unique, a left inverse equals the (unique) two-sided inverse, and \((ab)^{-1}=b^{-1}a^{-1}\). The recurring proof pattern is relating both sides of a goal to a common third expression, or padding with the identity and cancelling. Once a uniqueness fact is proved, later goals can be \emph{characterized} by it instead of computed directly.
+\textbf{Key points.} Three facts now hold for \emph{every} group, the identity is unique, a left inverse equals the (unique) two-sided inverse, and \((ab)^{-1}=b^{-1}a^{-1}\). The recurring proof pattern is relating both sides of a goal to a common third expression, or padding with the identity and cancelling. Once a uniqueness fact is proved, later goals can be \emph{characterized} by it instead of computed directly.
 
 \textbf{Socratic questions.}
 
@@ -15,8 +15,8 @@
 \item
   Prove \texttt{theorem inv\_\allowbreak{}inv (a : G) : Grp.inv (Grp.inv a) = a}. Before writing any tactics, consider whether this matches the shape of a lemma already in hand (Theorem 2 again). What single fact about \texttt{a} and \texttt{Grp.inv a} would permit invoking it directly?
 \item
-  Prove \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}. Strategy hint: \texttt{b} and \texttt{c} cannot be rewritten directly in isolation. Instead, apply \texttt{Grp.op (Grp.inv a)} to \emph{both sides} of \texttt{h} first (as a \texttt{have}), then simplify each side using \texttt{assoc}/\texttt{inv\_\allowbreak{}left}/\texttt{id\_\allowbreak{}left}, the same ``regroup, then cancel'' pattern as Theorem 3.
+  Prove \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}. Strategy hint, \texttt{b} and \texttt{c} cannot be rewritten directly in isolation. Instead, apply \texttt{Grp.op (Grp.inv a)} to \emph{both sides} of \texttt{h} first (as a \texttt{have}), then simplify each side using \texttt{assoc}/\texttt{inv\_\allowbreak{}left}/\texttt{id\_\allowbreak{}left}, the same ``regroup, then cancel'' pattern as Theorem 3.
 \end{enumerate}
 
-Solutions: \hyperref[sec:15-appendix-solutions:07-chapter-8:1]{Appendix, Chapter 8}.
+Solutions, \hyperref[sec:15-appendix-solutions:08-chapter-8:1]{Appendix, Chapter 8}.
 

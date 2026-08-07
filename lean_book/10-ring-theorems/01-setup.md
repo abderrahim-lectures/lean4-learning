@@ -9,7 +9,7 @@ the deliberately noncommutative ($2\times 2$ integer matrices), each time
 verifying the axioms of `Ring` by hand for one specific carrier. That
 carrier-by-carrier approach does not scale. No one wants to re-derive
 $a\cdot 0=0$ separately for every ring encountered from now on. Chapter 8
-already established the fix for groups: fix an arbitrary structure once,
+already established the fix for groups, fix an arbitrary structure once,
 via `variable`, and prove theorems against it that apply to every later
 instance automatically. This chapter repeats exactly that move for rings.
 

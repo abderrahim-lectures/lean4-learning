@@ -9,7 +9,7 @@ Given a term `Grp : Group G`, *any* theorem proved about a
 automatically applies to `intGroup`, to `perm3Group` (the permutation group of
 the previous section), and to every other group constructed later (the
 underlying additive group of path algebras, and beyond). This is the payoff of
-the whole exercise: prove it once, generically, and obtain it for free
+the whole exercise, prove it once, generically, and obtain it for free
 everywhere. Chapter 8 demonstrates exactly this, applying a generic
 theorem to a concrete group once it is proved.
 

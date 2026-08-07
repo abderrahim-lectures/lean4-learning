@@ -116,7 +116,7 @@ seen through automatically.
   earlier in this file, nothing unfolds silently, and every step names
   what justified it.
 - **`abbrev` (reducible, automatically `@[reducible, inline]`).** Declares
-  the definition *notational*, not merely equal, so Lean's elaborator and
+  the definition *notational*, not merely equal, so the elaborator of Lean and
   automated machinery treat every occurrence as if the body had been
   written out directly, with no `unfold` step to ask for. The clean
   demonstration of this has to wait for tools that actually *search*
@@ -141,7 +141,7 @@ explicit, visible step. An `abbrev` is pure notation, the kind silently
 unfolded without comment, writing $2n$ in place of ever having introduced
 a name $f(n) := 2n$ at all. An `opaque` value is an axiomatized or
 black-boxed object, reasoned about only through its stated properties,
-never its construction. Lean's three transparency levels are exactly
+never its construction. The three transparency levels of Lean are exactly
 these three mathematical habits, made explicit and machine-checked instead
 of left to convention.
 

@@ -14,13 +14,13 @@ This chapter proves theorems about an *arbitrary* group. We are given some
 `Grp : Group G` for an unknown `G`, and we use only the fields from
 Chapter 7. The point of this chapter lies less in the three theorems
 themselves (they are standard) than in **the search process** for finding
-each proof: given a goal, what to examine, what to attempt, and how to
+each proof, given a goal, what to examine, what to attempt, and how to
 recognize being stuck versus one step away. Each theorem below is presented
 as that search, not merely its answer.
 
 ## The story of this chapter
 
-Chapter 7 ended by naming a payoff it had not yet cashed in: a theorem
+Chapter 7 ended by naming a payoff it had not yet cashed in, a theorem
 proved once, generically, is inherited for free by every group built
 afterward. Each section here follows directly from making good on that
 promise.
@@ -50,7 +50,7 @@ promise.
    permutation group of Chapter 7, delivering the "proved once, free everywhere"
    promise for real.
 
-Chapter 9 needs exactly this pattern again, one level up: a second
+Chapter 9 needs exactly this pattern again, one level up, a second
 operation added to the structure of a group, with its own theorems to prove
 generically before any concrete ring is built.
 

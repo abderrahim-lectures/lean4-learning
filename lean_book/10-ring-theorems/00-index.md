@@ -39,14 +39,14 @@ chapter repeats it for rings, and each section follows from the last.
    equal to its own double is zero."
 3. **Does the same reasoning extend to a genuinely new claim, the sign
    rule $(-1)\cdot a = -a$?** ([Section 3](03-theorem-2.md)) Yes, by
-   reusing `left_inverse_unique` from Chapter 8 directly: showing $(-1)\cdot
+   reusing `left_inverse_unique` from Chapter 8 directly, showing $(-1)\cdot
    a$ satisfies the *characterizing* equation for $-a$ is easier than
    computing $-a$ from scratch, and the proof needs a mirror image of
    Theorem 1 (`right_distrib` in place of `left_distrib`) obtained by
    copying the earlier proof line for line rather than reinventing it.
 
 Two theorems, each reducing a ring-shaped goal to a group-shaped one
-already solved in Chapter 8, complete the abstract-algebra core of Part II:
+already solved in Chapter 8, complete the abstract-algebra core of Part II,
 groups, then rings built on top of them, each with a small library of
 theorems proved once and inherited by every carrier built so far.
 

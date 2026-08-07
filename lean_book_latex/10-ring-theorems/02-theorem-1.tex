@@ -2,7 +2,7 @@
 
 \textbf{Claim.} \texttt{Rg.mul a Rg.addGrp.id = Rg.addGrp.id}, i.e.~\(a \cdot 0 = 0\).
 
-\textbf{Finding the proof.} In ordinary notation, the standard trick is as follows. It is worth memorizing as a pattern applicable to any additive-identity argument: start from \(0 = 0 + 0\), multiply through, and cancel.
+\textbf{Finding the proof.} In ordinary notation, the standard trick is as follows. It is worth memorizing as a pattern applicable to any additive-identity argument, start from \(0 = 0 + 0\), multiply through, and cancel.
 
 \[
 a \cdot 0 \overset{?}{=} 0
@@ -39,7 +39,7 @@ theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
 
 \texttt{h2} is proved with \texttt{congrArg}, not \texttt{by rw [h1]}. In an earlier draft, attempting to rewrite with \texttt{h1} at this intermediate \texttt{have} using plain \texttt{rw} caused occurrence-targeting problems. \texttt{rw [h1]} rewrites \emph{every} syntactic occurrence of the left-hand side of \texttt{h1} in the goal, including copies produced by the substitution itself, and hence does not land on the exact stated goal here. \texttt{congrArg f h1} avoids this problem entirely. It directly builds ``apply \texttt{f} to both sides of \texttt{h1},'' which is precisely ``add \(-x\) to both sides of \(x = x+x\)'' with no ambiguity about which occurrence is targeted.
 
-If progress is lost partway through, the recovery move is always the same: translate the \emph{current} hypothesis (\texttt{h1}, then \texttt{h2}) into ordinary \texttt{+}/\texttt{0} notation, check it against the paper derivation above, and identify exactly which line of the paper proof this corresponds to. The Lean proof is long only because each paper-proof line (``add \(-x\) to both sides'', ``regroup'', ``cancel'') corresponds to one \texttt{rw}. Nothing here is conceptually harder than the five-line sketch preceding it.
+If progress is lost partway through, the recovery move is always the same, translate the \emph{current} hypothesis (\texttt{h1}, then \texttt{h2}) into ordinary \texttt{+}/\texttt{0} notation, check it against the paper derivation above, and identify exactly which line of the paper proof this corresponds to. The Lean proof is long only because each paper-proof line (``add \(-x\) to both sides'', ``regroup'', ``cancel'') corresponds to one \texttt{rw}. Nothing here is conceptually harder than the five-line sketch preceding it.
 
 \begin{mathreading}
 

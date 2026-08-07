@@ -56,11 +56,11 @@ point back to the relevant section).
 checkpoint projects included. This is the path the book is written to
 support directly, and every forward reference assumes it.
 
-**"I already know Lean, teach me the algebra."** Skim Chapter 1 (just
-confirm your toolchain matches `v4.32.2`, and skim the `Fin`/`Vec`
-examples), skip Chapter 2 (terminology and the calculus of constructions)
-and Chapter 6 (rigor check) entirely unless something later sends you
-back (the [Chapter 2, Section 1
+**"I already know Lean, teach me the algebra."** Skim Chapter 0 (just
+confirm your toolchain matches `v4.32.2`), read Chapter 1 for the
+specific `Fin`/`Vec` examples of this book, skip Chapter 2 (terminology
+and the calculus of constructions) and Chapter 6 (rigor check) entirely
+unless something later sends you back (the [Chapter 2, Section 1
 glossary](02-terminology-and-coc/01-terminology.md) and [tactic and library
 reference](tactic-and-library-reference.md) work as pure lookup tables
 if a term is unfamiliar), then read Chapters 3–5 quickly for the own
@@ -82,7 +82,7 @@ onward take for granted, at the cost of deferring concrete payoff the
 longest.
 
 **"I want to see Lean do real mathematics as fast as possible."** Read
-Chapter 1, Section 1 ("Why Lean?"), then jump straight to Chapters 7–8 (`Group`),
+Chapter 0, Section 1 ("Why Lean?"), then jump straight to Chapters 7–8 (`Group`),
 referring back to Chapters 1–6 only when a specific term or tactic is
 unfamiliar (the [Chapter 2, Section 1 glossary](02-terminology-and-coc/01-terminology.md) and
 [tactic and library reference](tactic-and-library-reference.md) are

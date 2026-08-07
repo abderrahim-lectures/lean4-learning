@@ -180,8 +180,8 @@ def vecLen' {α : Type} {n : Nat} : Vec α n → Nat
   `Vec α n → Nat`, a bare arrow, precisely as if it were the *statement* of
   a theorem rather than the header of a function. The argument is instead
   supplied by the single equation `| _ => n` below, matching against
-  whatever term of `Vec α n` is eventually passed in. Lean's **equation
-  compiler** is what turns this `| pattern => term` block into an ordinary
+  whatever term of `Vec α n` is eventually passed in. The **equation
+  compiler** of Lean is what turns this `| pattern => term` block into an ordinary
   function, internally no different from writing `fun v => match v with
   | _ => n` inside a `:=` body. `vecLen` and `vecLen'` are, after
   elaboration, the same function under two different pieces of surface
@@ -355,7 +355,7 @@ generic would mean constraining `α` with instance-implicit arguments,
 something like `[Mul α] [Add α] [Zero α]` (the third binder style flagged
 back in [Section 2](02-def-let-implicit.md)), so that the required
 operations are supplied by whichever concrete type is chosen, the same
-way Mathlib's real dot-product functions work. That mechanism, and the
+way the real dot-product functions of Mathlib work. That mechanism, and the
 `class`/`instance` machinery behind it, is exactly what
 [Chapter 6](../06-rigor-check/01-structure-vs-class.md) builds up before
 Chapter 7 needs it for real algebraic structures. Until then, `Vec.dot`

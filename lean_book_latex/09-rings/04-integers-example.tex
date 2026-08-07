@@ -1,6 +1,6 @@
 \section{Example: the integers as a ring}\label{sec:09-rings:04-integers-example:1}
 
-\texttt{Ring} was just assembled field by field, entirely in the abstract: an \texttt{addGrp} slot, a \texttt{mul}/\texttt{one} pair, and four axioms tying them together. As with \texttt{Group} in Chapter 7, the definition alone gives no evidence that anything actually satisfies it. The most familiar candidate is the integers, and Chapter 7 already did most of the necessary work by packaging \((\mathbb{Z}, +, 0, -)\) as \texttt{intGroup}. What remains is to upgrade that group to a commutative one and then supply the multiplicative structure \texttt{Ring} additionally demands, turning the abstract definition into a first concrete witness that it is not vacuous.
+\texttt{Ring} was just assembled field by field, entirely in the abstract, an \texttt{addGrp} slot, a \texttt{mul}/\texttt{one} pair, and four axioms tying them together. As with \texttt{Group} in Chapter 7, the definition alone gives no evidence that anything actually satisfies it. The most familiar candidate is the integers, and Chapter 7 already did most of the necessary work by packaging \((\mathbb{Z}, +, 0, -)\) as \texttt{intGroup}. What remains is to upgrade that group to a commutative one and then supply the multiplicative structure \texttt{Ring} additionally demands, turning the abstract definition into a first concrete witness that it is not vacuous.
 
 We reuse \texttt{intGroup} from Chapter 7 as the additive part.
 
@@ -65,7 +65,8 @@ Formal definition and citation for this section, gathered here for reference (fu
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Ring homomorphism.} ``A ring homomorphism is a map \(\varphi : R \to S\) satisfying (i) \(\varphi(a+b) = \varphi(a)+\varphi(b)\) \ldots{} and
+  \textbf{Ring homomorphism.} ``A ring homomorphism is a map \(\varphi . R
+  \to S\) satisfying (i) \(\varphi(a+b) = \varphi(a)+\varphi(b)\) \ldots{} and
 
   \begin{enumerate}
   \def\labelenumi{(\roman{enumi})}

@@ -74,7 +74,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   the generic code is ever called, is that certification. An optional,
   erased type annotation is closer to the hope of the driver. `TypeVar` in Python
   and `{α : Type} → ...` in Lean both implement this idea, to
-  different degrees, as the Programmer's corner box below explains.
+  different degrees, as the Programmer's corner box above explains.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the box in this section.
 
 [PythonTyping]: ../bibliography.md#pythontyping

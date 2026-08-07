@@ -31,7 +31,7 @@ plain `rfl`, once an abstract path is involved. Both name only the exact
 definitions being unfolded, standing in for a specific, known step rather
 than an unknown pile of lemmas. Every other proof avoids `simp` entirely,
 precisely to keep the discipline required for reading (or writing) a real
-Lean library: when something goes wrong, the exact lemma responsible
+Lean library, when something goes wrong, the exact lemma responsible
 should be identifiable.
 
 ---

@@ -4,7 +4,7 @@
 
 ---
 
-Section 5 supplied the morphisms of $R\text{-}\mathbf{Mod}$: linear maps
+Section 5 supplied the morphisms of $R\text{-}\mathbf{Mod}$, linear maps
 between individual modules. With both objects (modules, Sections 2–4) and
 morphisms (linear maps) in hand, the next natural step is to build new
 objects out of old ones. The simplest such construction combines two
@@ -109,14 +109,14 @@ application. `congr 1` cannot reliably split a goal it does not recognize
 as "one constructor applied to arguments on both sides," a real gap that
 the compiler catches immediately if the `show` line is left out.
 
-**Mathematical reading.** This builds the **direct sum** $M \oplus N$: its
+**Mathematical reading.** This builds the **direct sum** $M \oplus N$, its
 carrier is the product $M \times N$, with all structure defined
 componentwise, $(m,n) + (m',n') = (m+m',\, n+n')$, $0 = (0,0)$, $-(m,n) =
 (-m,-n)$, and $r\cdot(m,n) = (r\cdot m,\, r\cdot n)$. Every axiom holds
 because it holds in each coordinate independently, which is exactly what
-`congr 1` exposes: an equation of pairs splits into one equation in $M$ and
+`congr 1` exposes, an equation of pairs splits into one equation in $M$ and
 one in $N$. For finitely many summands the direct sum $M \oplus N$ is both
-a product and a coproduct at once in $R\text{-}\mathbf{Mod}$: the
+a product and a coproduct at once in $R\text{-}\mathbf{Mod}$, the
 projections $\pi_M, \pi_N$ and inclusions $\iota_M, \iota_N$ satisfy
 $\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N =
 0$, and $\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$.

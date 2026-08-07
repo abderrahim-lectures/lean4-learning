@@ -13,9 +13,9 @@
 \item
   β-reduce \((\lambda x.\lambda y.\, y\, x)\, a\, b\) to normal form by hand, writing out each step. The untyped-λ-calculus recap in Section 1 named \(K = \lambda x.\lambda y.\, x\) (``take two arguments, return the first''). Which existing named term does \(\lambda x.\lambda y.\, y\, x\) resemble, and how does it differ?
 \item
-  Construct a term of type \texttt{Σ n : Nat, Fin n} other than the \texttt{⟨3, ⟨2, by decide⟩⟩} example given in the text. Then, in a sentence or two, explain why \texttt{Σ n : Nat, n > 0} fails to type-check in Lean at all (hint: check what \emph{sort} \texttt{n > 0} lives in, and compare to the signature of \texttt{Sigma} itself).
+  Construct a term of type \texttt{Σ n : Nat, Fin n} other than the \texttt{⟨3, ⟨2, by decide⟩⟩} example given in the text. Then, in a sentence or two, explain why \texttt{Σ n : Nat, n > 0} fails to type-check in Lean at all (hint, check what \emph{sort} \texttt{n > 0} lives in, and compare to the signature of \texttt{Sigma} itself).
 \item
   The \texttt{Path Q : V → V → Type} of Chapter 12 was described as ``a family of types indexed by a pair of vertices.'' Write down the Π-type expression \(\prod_{x:A} B(x)\) instantiated so that it matches the signature of \texttt{Path.append}, \texttt{\{u v w : V\} → Path Q u v → Path Q v w → Path Q u w} (treat the implicit \texttt{\{u v w : V\}} as outer Π-binders). Identify \(A\) and \(B\) explicitly at each nesting level.
 \end{enumerate}
 
-Solutions: \hyperref[sec:15-appendix-solutions:02-chapter-2:1]{Appendix, Chapter 2}.
+Solutions, \hyperref[sec:15-appendix-solutions:02-chapter-2:1]{Appendix, Chapter 2}.

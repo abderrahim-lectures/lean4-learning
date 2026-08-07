@@ -55,7 +55,7 @@ inverse composes the two inverses in the *opposite* order
 (`g.invFun ∘ f.invFun`), which is exactly $(fg)^{-1} = g^{-1}f^{-1}$, the
 same "reverse the order" fact Theorem 3 of Chapter 8
 (`inv_op`) proves abstractly for every group. This construction shows concretely
-why the fact holds: to undo "first $g$, then $f$," one must first undo $f$,
+why the fact holds, to undo "first $g$, then $f$," one must first undo $f$,
 then undo $g$.
 
 ```lean
@@ -66,7 +66,7 @@ def Perm3.identity : Perm3 where
   right_inv := fun _ => rfl
 ```
 
-`Perm3.identity` is the identity permutation: it fixes every point, hence
+`Perm3.identity` is the identity permutation, it fixes every point, hence
 both of its proof fields are immediate by `rfl`.
 
 ```lean
@@ -116,7 +116,7 @@ def cycle012 : Perm3 where
 #eval (Perm3.comp cycle012 swap01).toFun 0   -- 2
 ```
 
-Both compositions send `0` somewhere, but to *different* places: applying
+Both compositions send `0` somewhere, but to *different* places, applying
 `cycle012` then `swap01` sends $0 \to 1 \to 0$, while applying `swap01`
 then `cycle012` sends $0 \to 1 \to 2$. Concretely, `#eval` reports `0` for
 the first and `2` for the second. This is **directly computed evidence**

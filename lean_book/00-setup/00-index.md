@@ -1,4 +1,4 @@
-# Chapter 1: Setting up Lean 4
+# Chapter 0: Setting up Lean 4
 
 [Table of contents](../README.md) | [Ch. 1: Basics →](../01-basics/00-index.md)
 

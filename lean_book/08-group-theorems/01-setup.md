@@ -5,7 +5,7 @@
 ---
 
 Chapter 7 closed by pointing out the entire payoff of bundling data with
-proofs in the first place: a theorem proved once about a generic
+proofs in the first place, a theorem proved once about a generic
 `Grp : Group G` is inherited for free by `intGroup`, by `perm3Group`, and
 by every group built afterward, with nothing about the specific carrier
 re-proved at each use site. This chapter cashes in that promise. Rather
@@ -22,7 +22,7 @@ variable {G : Type} (Grp : Group G)
 declaration that mentions `G` or `Grp`.
 
 **Mathematical reading.** This is the phrase "Let $G$ be a group" opening a
-section: we fix an arbitrary object $(G, \cdot, e, (-)^{-1})$ of
+section, we fix an arbitrary object $(G, \cdot, e, (-)^{-1})$ of
 $\mathbf{Grp}$ and reason generically about it. Everything proved under this
 `variable` is a statement quantified over *all* groups. A theorem about the
 group $\mathrm{Grp}$ is really $\forall (G : \mathrm{Type})\,(\mathrm{Grp} :

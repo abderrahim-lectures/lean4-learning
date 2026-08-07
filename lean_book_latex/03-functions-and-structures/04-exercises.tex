@@ -1,0 +1,23 @@
+\section{Exercises}\label{sec:03-functions-and-structures:04-exercises:1}
+
+\textbf{Key points.} A \texttt{structure} bundles data (and optionally proofs) under one name, built via the anonymous constructor \texttt{⟨...⟩} and read back out via field projection \texttt{.field}. \texttt{extends} builds a new structure containing everything an existing one has, plus more, generating a \texttt{.toX} forgetful projection for free, the exact mechanism \texttt{CommGroup} uses to add commutativity to \texttt{Group} in Chapter 7.
+
+\textbf{Socratic questions.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{\texttt{⟨0, 0⟩} and \texttt{\{ x := 0, y := 0 \}} build the identical \texttt{Point}. Since the named form says more, why does the anonymous form ever get used?} Because the \emph{expected type} already says which fields are which. \texttt{def origin : Point := ⟨0, 0⟩} cannot be ambiguous, since Lean already knows a \texttt{Point} is being built and in what field order. The named form earns its keep only when that context is not enough to make the assignment obvious to a reader.
+\item
+  \emph{\texttt{Point3D extends Point} generates \texttt{.toPoint} automatically. What would have to be written by hand instead, if \texttt{extends} did not exist?} A separate function \texttt{Point3D.toPoint : Point3D → Point} projecting out the shared fields one at a time, exactly what a forgetful functor does explicitly, which is the whole reason \texttt{extends} is read categorically rather than as a mere convenience keyword.
+\item
+  \emph{A \texttt{structure} can bundle proofs as fields, not only data. What changes about }checking* that a term has the right type, once one of its fields is a proof rather than a number?* Nothing about the mechanism. Lean still checks the field has the stated type, but the stated type is now a proposition, so supplying that field means supplying a proof, checked once at construction time. This is exactly what makes \texttt{Group} (Chapter 7) impossible to build carelessly. The axiom fields cannot be filled in with nonsense that happens to type-check as data can.
+\item
+  Define \texttt{structure Rectangle} with two \texttt{Nat} fields, \texttt{width} and \texttt{height}. Then define \texttt{def area (r : Rectangle) : Nat}, computing the area, and confirm \texttt{\#eval area ⟨3, 4⟩} reports \texttt{12}.
+\item
+  \texttt{Pair α β} (Section 2) holds two values of two possibly different types. Define \texttt{structure Box (α : Type)} holding a single value of \emph{one} type parameter, plus \texttt{def unwrap \{α : Type\} (b : Box α) : α} reading it back out. Build one \texttt{Box Nat} and one \texttt{Box String}, and confirm \texttt{unwrap} recovers the original value in each case.
+\item
+  Define \texttt{structure ColoredRectangle extends Rectangle where color : String}, then a value \texttt{redSquare : ColoredRectangle} with \texttt{width := 5}, \texttt{height := 5}, \texttt{color := "red"}. Confirm \texttt{redSquare.toRectangle} has type \texttt{Rectangle}, and that \texttt{area redSquare.toRectangle} computes \texttt{25} using the \texttt{area} function from Exercise 1 unchanged, with no \texttt{ColoredRectangle}-specific code written. In a sentence or two, explain why this is exactly the ``forgetful functor'' pattern from the Mathematical reading box of this section, not a coincidence of naming.
+\end{enumerate}
+
+Solutions, \hyperref[sec:15-appendix-solutions:03-chapter-3:1]{Appendix, Chapter 3}.

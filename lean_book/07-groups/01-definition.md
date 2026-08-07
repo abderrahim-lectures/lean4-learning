@@ -7,7 +7,7 @@
 The checkpoint project of Chapter 6 asked for a `Monoid`, a set with an
 associative operation and a two-sided identity, built entirely from the
 bundling techniques of Chapters 1–6, with no inverses required. A group is
-the natural next question a monoid forces: what happens once every
+the natural next question a monoid forces, what happens once every
 element is also required to be *undoable*? Adding that one further axiom
 is the entire content of the opening definition of this chapter, and it is
 what turns "a set with an associative operation" into the richer

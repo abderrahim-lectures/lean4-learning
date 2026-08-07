@@ -14,7 +14,7 @@
 
 Thirteen chapters have built every group, ring, and path algebra from
 scratch, no Mathlib, no `class`, no pre-packaged API. That journey was
-the point: every definition and proof obligation was seen explicitly so
+the point, every definition and proof obligation was seen explicitly so
 that nothing is ever trusted blindly. This closing chapter asks four
 questions in turn. First, what has actually been constructed, end to end?
 Second, how does that from-scratch construction translate into the

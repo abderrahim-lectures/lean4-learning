@@ -4,7 +4,7 @@
 
 ---
 
-Inside `by`, Lean displays a **goal**: hypotheses above a horizontal line
+Inside `by`, Lean displays a **goal**, hypotheses above a horizontal line
 (named, typed facts available for use), and the statement to prove below
 it. Each tactic changes the goal. Sometimes it closes the goal, sometimes it
 splits it into several smaller goals, and sometimes it merely rewrites it into an

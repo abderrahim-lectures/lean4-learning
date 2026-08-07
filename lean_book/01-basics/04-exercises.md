@@ -26,7 +26,7 @@ runs. A type is *dependent* when a later type mentions an earlier
    one is an ordinary function that merely happens to take a value of a
    dependent type as input?
 
-Solutions: [Appendix, Chapter 1](../15-appendix-solutions/01-chapter-1.md).
+Solutions, [Appendix, Chapter 1](../15-appendix-solutions/01-chapter-1.md).
 
 ---
 

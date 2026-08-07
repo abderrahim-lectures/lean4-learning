@@ -33,7 +33,7 @@ alongside it, and each section below follows from that one change.
    the associativity of multiplication, its identity, and the two distributive
    laws.
 4. **Is the definition non-vacuous?** ([Section 4](04-integers-example.md))
-   Yes: $(\mathbb{Z}, +, \times, 0, 1)$, reusing `intGroup` from Chapter 7
+   Yes, $(\mathbb{Z}, +, \times, 0, 1)$, reusing `intGroup` from Chapter 7
    for the additive part and citing one core-library lemma per remaining
    axiom, exactly the pattern Chapter 7 used for `Group`.
 5. **`intRing` is commutative and infinite. Does every ring axiom have to
@@ -49,7 +49,7 @@ alongside it, and each section below follows from that one change.
 7. **`intRing` is commutative. Does anything in the definition of `Ring`
    actually forbid that, the way permutations in Chapter 7 tested `Group`
    for hidden commutativity assumptions?** ([Section 7](07-matrices.md))
-   No, and $2\times 2$ integer matrices prove it directly: a concrete,
+   No, and $2\times 2$ integer matrices prove it directly, a concrete,
    genuinely noncommutative ring, built and verified field by field with
    no shortcuts available.
 

@@ -4,7 +4,7 @@
 
 ---
 
-**Key points.** Three facts now hold for *every* group: the identity is
+**Key points.** Three facts now hold for *every* group, the identity is
 unique, a left inverse equals the (unique) two-sided inverse, and
 $(ab)^{-1}=b^{-1}a^{-1}$. The recurring proof pattern is relating both
 sides of a goal to a common third expression, or padding with the
@@ -40,12 +40,12 @@ can be *characterized* by it instead of computed directly.
    hand (Theorem 2 again). What single fact about `a` and `Grp.inv a` would
    permit invoking it directly?
 2. Prove `theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c`.
-   Strategy hint: `b` and `c` cannot be rewritten directly in isolation.
+   Strategy hint, `b` and `c` cannot be rewritten directly in isolation.
    Instead, apply `Grp.op (Grp.inv a)` to *both sides* of `h` first (as a
    `have`), then simplify each side using `assoc`/`inv_left`/`id_left`, the
    same "regroup, then cancel" pattern as Theorem 3.
 
-Solutions: [Appendix, Chapter 8](../15-appendix-solutions/07-chapter-8.md).
+Solutions, [Appendix, Chapter 8](../15-appendix-solutions/08-chapter-8.md).
 
 ## Next
 

@@ -1,6 +1,6 @@
 \section{Submodules}\label{sec:11-modules:04-submodules:1}
 
-Section 3 exhibited a concrete module, the canonical \(\mathbb{Z}\)-action on an abelian group, built from nothing but the group structure itself. With at least one genuine module now in hand, the natural next question is which subsets of a module inherit its structure. This is the module analogue of a subgroup: a subset closed under the same operations the whole module is built from.
+Section 3 exhibited a concrete module, the canonical \(\mathbb{Z}\)-action on an abelian group, built from nothing but the group structure itself. With at least one genuine module now in hand, the natural next question is which subsets of a module inherit its structure. This is the module analogue of a subgroup, a subset closed under the same operations the whole module is built from.
 
 A \textbf{submodule} of \(M\) is a subset closed under \(+\), containing \(0\), and closed under the scalar action. In Lean, ``a subset closed under some operations'' is naturally a \texttt{structure} bundling a \emph{predicate} on \texttt{M} together with closure proofs. This is the same ``data + proofs'' idea as \texttt{Group}, just with the ``data'' being a property instead of an operation.
 
@@ -12,11 +12,12 @@ structure Submodule {R : Type} (Rg : Ring R) {M : Type} (Mod : Module R Rg M) wh
   smul_mem : (*$\forall$*) (r : R) {m : M}, carrier m (*$\rightarrow$*) carrier (Mod.smul r m)
 \end{lstlisting}
 
-\texttt{carrier : M → Prop} is the subset, viewed as its membership predicate (\texttt{carrier m} reads ``\texttt{m} is in the submodule''). This is the standard Lean idiom for ``subobject of \texttt{X}'': not a \texttt{Set X} wrapped separately, but a predicate directly, since \texttt{carrier m} \emph{is} a proposition usable directly as a hypothesis.
+\texttt{carrier : M → Prop} is the subset, viewed as its membership predicate (\texttt{carrier m} reads ``\texttt{m} is in the submodule''). This is the standard Lean idiom for ``subobject of \texttt{X}'', not a \texttt{Set X} wrapped separately, but a predicate directly, since \texttt{carrier m} \emph{is} a proposition usable directly as a hypothesis.
 
 \begin{mathreading}
 
-\texttt{Submodule Rg Mod} is a submodule \(N \le M\), presented by its membership predicate \(\chi_N : M \to \mathrm{Prop}\) (a subset \(N = \{\,m \in M \mid \chi_N(m)\,\}\)) together with closure proofs: \(0 \in N\), \(m,n \in N \Rightarrow m+n \in N\), and \(r\in R,\, m\in N \Rightarrow r\cdot m \in N\). These are exactly the conditions for \(N\) to be an \(R\)-submodule: closed under the abelian-group operations and stable under scalars. So \(N\) inherits an \(R\)-module structure and the inclusion \(N \hookrightarrow M\) is \(R\)-linear. Categorically this is a subobject of \(M\) in \(R\text{-}\mathbf{Mod}\).
+\texttt{Submodule Rg Mod} is a submodule \(N \le M\), presented by its membership predicate \(\chi_N : M \to \mathrm{Prop}\) (a subset \(N = \{\,m \in M \mid \chi_N(m)\,\}\)) together with closure proofs: \(0 \in N\), \(m,n \in N \Rightarrow m+n \in N\), and \(r\in R,\, m\in N
+\Rightarrow r\cdot m \in N\). These are exactly the conditions for \(N\) to be an \(R\)-submodule, closed under the abelian-group operations and stable under scalars. So \(N\) inherits an \(R\)-module structure and the inclusion \(N \hookrightarrow M\) is \(R\)-linear. Categorically this is a subobject of \(M\) in \(R\text{-}\mathbf{Mod}\).
 
 \end{mathreading}
 
@@ -64,7 +65,7 @@ def evenSubmodule : Submodule intRing intZModule where
     rw [hk, (*$\leftarrow$*) Int.mul_assoc, Int.mul_comm r 2, Int.mul_assoc]
 \end{lstlisting}
 
-Each closure proof follows the same shape: destructure the hypothesis to expose its witness (\texttt{⟨k, hk⟩} denotes ``\texttt{m} is even, with witness \texttt{k} and proof \texttt{hk : m = 2 * k}''), then supply a new witness and discharge the resulting \texttt{Int} equation. The witness \texttt{0} of \texttt{zero\_\allowbreak{}mem} makes the goal \texttt{id = 2 * 0}, true by \texttt{rfl} directly (both sides compute to \texttt{0}). \texttt{add\_\allowbreak{}mem} and \texttt{smul\_\allowbreak{}mem} require \texttt{show} first to reveal the \texttt{+}/\texttt{*}-form of the goal before \texttt{rw} can find anything to rewrite, since \texttt{Mod.addGrp.op}/\texttt{Mod.smul} do not display as plain \texttt{+}/\texttt{*}, even though they compute to exactly that here.
+Each closure proof follows the same shape, destructure the hypothesis to expose its witness (\texttt{⟨k, hk⟩} denotes ``\texttt{m} is even, with witness \texttt{k} and proof \texttt{hk : m = 2 * k}''), then supply a new witness and discharge the resulting \texttt{Int} equation. The witness \texttt{0} of \texttt{zero\_\allowbreak{}mem} makes the goal \texttt{id = 2 * 0}, true by \texttt{rfl} directly (both sides compute to \texttt{0}). \texttt{add\_\allowbreak{}mem} and \texttt{smul\_\allowbreak{}mem} require \texttt{show} first to reveal the \texttt{+}/\texttt{*}-form of the goal before \texttt{rw} can find anything to rewrite, since \texttt{Mod.addGrp.op}/\texttt{Mod.smul} do not display as plain \texttt{+}/\texttt{*}, even though they compute to exactly that here.
 
 \begin{mathreading}
 

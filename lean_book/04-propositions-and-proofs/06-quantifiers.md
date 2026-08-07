@@ -60,7 +60,7 @@ theorem exists_prime_gt_three : ∃ p : Nat, p > 3 ∧ isPrime p :=
   ⟨5, by decide⟩
 ```
 
-**A second example: there is always a bigger prime.** `exists_prime_gt_three`
+**A second example, there is always a bigger prime.** `exists_prime_gt_three`
 is one concrete instance of a classical fact. No matter which number is
 chosen, there is a prime bigger than it (here the chosen number is `3`, and
 `5` is a prime that beats it). It follows the exact same "number, then
@@ -123,7 +123,7 @@ $$
 an $\alpha$-indexed sum. A proof is a dependent pair $\langle a, h\rangle$
 with $a \in \alpha$ the witness and $h : P(a)$. Here $\langle 2,
 \mathrm{refl}\rangle$ witnesses $2 \bmod 2 = 0$. This is the
-*constructive* reading of $\exists$: asserting existence requires exhibiting
+*constructive* reading of $\exists$, asserting existence requires exhibiting
 an explicit witness $a$ together with a proof $h$ that it works. This
 exactly generalizes how a proof of $P \vee Q$ was a tagged choice, except
 now the "tag" is which element of $\alpha$ was chosen.

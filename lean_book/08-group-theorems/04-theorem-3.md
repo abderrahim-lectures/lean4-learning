@@ -19,12 +19,12 @@ easier to attack directly with `assoc`/`inv_left`/`inv_right` than
 this thing" goals into "verify this thing satisfies the characterizing
 property" goals**, almost always a simpler target.
 
-Applying that here: flipping the goal with `Eq.symm` makes the LHS match
+Applying that here, flipping the goal with `Eq.symm` makes the LHS match
 the `b` in the conclusion of `left_inverse_unique`, `b = Grp.inv a`, so
 `apply Eq.symm` first, then `left_inverse_unique` unifies against the "b"
 slot. The remaining goal is
 `Grp.op (Grp.op (Grp.inv b) (Grp.inv a)) (Grp.op a b) = Grp.id`. This is
-pure cancellation: regroup with `assoc` until `Grp.inv a` sits next to `a`,
+pure cancellation, regroup with `assoc` until `Grp.inv a` sits next to `a`,
 cancel via `inv_left`, then regroup until `Grp.inv b` sits next to `b`, and
 cancel again.
 
@@ -51,7 +51,7 @@ pattern, *regroup, then cancel*, comes up constantly in algebra and is
 worth recognizing on sight rather than re-deriving from scratch each time.
 
 **Mathematical reading.** This is the *shoes-and-socks* law $(a\cdot
-b)^{-1} = b^{-1}\cdot a^{-1}$: the inverse operation reverses the order of
+b)^{-1} = b^{-1}\cdot a^{-1}$, the inverse operation reverses the order of
 composition. By the uniqueness of inverses
 (Theorem 2) it suffices to check that $b^{-1}a^{-1}$ is a genuine inverse of
 $ab$, i.e.
@@ -78,7 +78,7 @@ example : perm3Group.inv (perm3Group.op swap01 cycle012) =
   inv_op perm3Group swap01 cycle012
 ```
 
-This is the entire proof: a single application of the already-proved
+This is the entire proof, a single application of the already-proved
 `inv_op`, instantiated at `Grp := perm3Group`, `a := swap01`,
 `b := cycle012`. It can also be checked computationally, pointwise, on
 every element of `Fin 3`.
@@ -121,7 +121,7 @@ example : (swap01' * cycle012')⁻¹ = cycle012'⁻¹ * swap01'⁻¹ :=
 #eval (cycle012'⁻¹ * swap01'⁻¹) 2   -- 1
 ```
 
-Both sides agree on every input: the same six values, in the same order,
+Both sides agree on every input, the same six values, in the same order,
 as the `perm3Group` check of the book above. Where `inv_op` in the book
 required a five-line `rw` chain (regroup via `assoc`, cancel via
 `inv_left`, regroup again, cancel again), the Mathlib version requires no

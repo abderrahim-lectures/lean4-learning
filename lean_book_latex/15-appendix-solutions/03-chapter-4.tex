@@ -1,4 +1,4 @@
-\section{Chapter 5: Propositions and proofs}\label{sec:15-appendix-solutions:03-chapter-4:1}
+\section{Chapter 4: Propositions and proofs}\label{sec:15-appendix-solutions:03-chapter-4:1}
 
 \textbf{1. \texttt{theorem and\_\allowbreak{}comm\_\allowbreak{}ex \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}}
 
@@ -27,4 +27,4 @@ theorem exists_gt_zero : (*$\exists$*) n : Nat, n > 0 :=
   (*$\langle$*)1, by decide(*$\rangle$*)
 \end{lstlisting}
 
-An \texttt{∃}-proof is a witness (\texttt{1}) paired with a proof that it satisfies the predicate (\texttt{1 > 0}). Here \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} handles that proof, since \texttt{1 > 0} on \texttt{Nat} is a decidable, closed proposition. We could also write \texttt{⟨1, Nat.one\_\allowbreak{}pos⟩}. Note that \texttt{⟨1, rfl⟩} does \emph{not} work here: \texttt{1 > 0} unfolds to \texttt{0 < 1}, i.e.~the successor form of \texttt{Nat.le 1 1}, which is a \emph{propositional} fact proved by a constructor (\texttt{Nat.le.refl}), not something \texttt{rfl} can close by definitional unfolding alone. This is the same definitional-vs-propositional-equality distinction taught in Chapter 7.
+An \texttt{∃}-proof is a witness (\texttt{1}) paired with a proof that it satisfies the predicate (\texttt{1 > 0}). Here \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} handles that proof, since \texttt{1 > 0} on \texttt{Nat} is a decidable, closed proposition. We could also write \texttt{⟨1, Nat.one\_\allowbreak{}pos⟩}. Note that \texttt{⟨1, rfl⟩} does \emph{not} work here: \texttt{1 > 0} unfolds to \texttt{0 < 1}, i.e.~the successor form of \texttt{Nat.le 1 1}, which is a \emph{propositional} fact proved by a constructor (\texttt{Nat.le.refl}), not something \texttt{rfl} can close by definitional unfolding alone. This is the same definitional-vs-propositional-equality distinction taught in Chapter 6.

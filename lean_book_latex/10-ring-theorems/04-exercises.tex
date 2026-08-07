@@ -13,10 +13,10 @@
 \item
   \emph{\texttt{neg\_\allowbreak{}seven} closes by \texttt{rfl}; the general \texttt{neg\_\allowbreak{}one\_\allowbreak{}mul (a : R)} needed a five-line proof for the }same* underlying fact. What exactly is different about the general statement?* \texttt{neg\_\allowbreak{}seven} names one concrete, already-computed integer. Both sides reduce to \texttt{-\allowbreak{}7} directly. \texttt{neg\_\allowbreak{}one\_\allowbreak{}mul} quantifies over \emph{every} ring \texttt{R} and element \texttt{a}. There is no concrete value to reduce, so the equality must be established from the axioms rather than read off by computation.
 \item
-  Prove \texttt{theorem neg\_\allowbreak{}mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)}. Strategy: this is ``show \(x = -(ab)\),'' hence reduce through \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} to ``show \(x + ab = 0\),'' then look for a \texttt{right\_\allowbreak{}distrib}-shaped simplification of \((-a)\cdot b + a \cdot b\), exactly as in Theorem 2. \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left} (proved in the section for Theorem 2) is required at the end, the same way Theorem 2 itself used it.
+  Prove \texttt{theorem neg\_\allowbreak{}mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)}. Strategy, this is ``show \(x = -(ab)\),'' hence reduce through \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} to ``show \(x + ab = 0\),'' then look for a \texttt{right\_\allowbreak{}distrib}-shaped simplification of \((-a)\cdot b + a \cdot b\), exactly as in Theorem 2. \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left} (proved in the section for Theorem 2) is required at the end, the same way Theorem 2 itself used it.
 \item
   Instantiate \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 8) directly on the additive group of \texttt{intRing} to compute a concrete additive inverse, e.g.~prove \texttt{theorem neg\_\allowbreak{}seven : intRing.addGrp.toGroup.inv 7 = -\allowbreak{}7 := rfl} and, in a comment, state why \texttt{rfl} alone suffices here (compare to the proof of Theorem 2, which required real work precisely because \texttt{a} was an unknown variable rather than a concrete numeral).
 \end{enumerate}
 
-Solutions: \hyperref[sec:15-appendix-solutions:09-chapter-10:1]{Appendix, Chapter 10}.
+Solutions, \hyperref[sec:15-appendix-solutions:10-chapter-10:1]{Appendix, Chapter 10}.
 

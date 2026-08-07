@@ -5,7 +5,7 @@
 
 Part II closes here, having built groups, rings, modules, and now quivers and paths from scratch. This project extends the \texttt{Path}/\texttt{Path.append} construction from Sections 4--5 with one more piece of structure, the \textbf{length} of a path, and proves it behaves the way it obviously should under composition, tying together the inductive-type work of this chapter with the ``prove it once, generically'' habit Chapters 8 and 10 established.
 
-\textbf{Learning objectives.} Define a recursive function over the same indexed inductive type \texttt{Path} (Section 4), then prove a genuine theorem about it by induction, mirroring the recursion of \texttt{Path.append} itself case for case (Section 5). Along the way, this project surfaces a real, verifiable fact about Lean: because \texttt{Path} is \emph{indexed} by both its endpoints, functions matching on it (both \texttt{Path.append} and the \texttt{Path.length} built here) do not reduce by bare \texttt{rfl} once an abstract path variable is involved. Only their auto-generated equation lemmas do. This is worth discovering directly rather than being told, the same way the worked proofs of Section 5 are best understood by predicting what each \texttt{rw} will do before running it.
+\textbf{Learning objectives.} Define a recursive function over the same indexed inductive type \texttt{Path} (Section 4), then prove a genuine theorem about it by induction, mirroring the recursion of \texttt{Path.append} itself case for case (Section 5). Along the way, this project surfaces a real, verifiable fact about Lean, because \texttt{Path} is \emph{indexed} by both its endpoints, functions matching on it (both \texttt{Path.append} and the \texttt{Path.length} built here) do not reduce by bare \texttt{rfl} once an abstract path variable is involved. Only their auto-generated equation lemmas do. This is worth discovering directly rather than being told, the same way the worked proofs of Section 5 are best understood by predicting what each \texttt{rw} will do before running it.
 
 \textbf{Prerequisites.} Chapters 1--12, specifically Section 4 (\texttt{Path}) and Section 5 (\texttt{Path.append}).
 
@@ -15,7 +15,7 @@ Part II closes here, having built groups, rings, modules, and now quivers and pa
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Define \texttt{Path.length : \{u v : V\} → Path Q u v → Nat} by recursion: the trivial path \texttt{nil} has length \texttt{0}; \texttt{cons a h h' p} has length \texttt{p.length + 1} (one more than the path it extends).
+  Define \texttt{Path.length : \{u v : V\} → Path Q u v → Nat} by recursion, the trivial path \texttt{nil} has length \texttt{0}; \texttt{cons a h h' p} has length \texttt{p.length + 1} (one more than the path it extends).
 \item
   Compute a couple of lengths by hand and check them with \texttt{\#eval} against the example paths of Section 4 (\texttt{pathAlpha}, \texttt{pathBetaAlpha}).
 \item
@@ -80,6 +80,6 @@ def Path.length' {V A : Type} {Q : Quiver V A} : {u v : V} (*$\rightarrow$*) Pat
 
 Read the five lines in order. The first two are \texttt{Path.append'} building the composed path (it recurses on \texttt{q = pathBetaOnly}, prints once for its one \texttt{cons}, then once for the trailing \texttt{nil}, matching the length of \texttt{pathBetaOnly} itself, which is 1). Only once that path exists do the next three lines run \texttt{Path.length'} over it, one \texttt{cons}/\texttt{cons}/\texttt{nil} line per constructor of the freshly-built two-arrow path, arriving at the same \texttt{2} the untraced version above already computed. \texttt{Path.append} finishes building the whole structure \emph{before} \texttt{Path.length} ever starts walking it. The two recursions do not interleave step-by-step, even though both traces appear in one \texttt{\#eval}.
 
-If this compiles and the \texttt{\#eval}s match, the project is done. A full worked solution is in \hyperref[sec:15-appendix-solutions:11-chapter-12:1]{Appendix, Chapter 12}.
+If this compiles and the \texttt{\#eval}s match, the project is done. A full worked solution is in \hyperref[sec:15-appendix-solutions:12-chapter-12:1]{Appendix, Chapter 12}.
 
 \end{pblproject}

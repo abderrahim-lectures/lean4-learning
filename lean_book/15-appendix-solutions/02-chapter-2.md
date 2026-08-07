@@ -1,6 +1,6 @@
 ## Chapter 2: Terminology and the calculus of constructions
 
-[← Chapter 1](01-chapter-1.md) | [Index](00-index.md) | [Next: Chapter 4 →](03-chapter-4.md)
+[← Chapter 1](01-chapter-1.md) | [Index](00-index.md) | [Next: Chapter 3 →](03-chapter-3.md)
 
 ---
 
@@ -22,7 +22,7 @@ always is. $K\,a\,b \to_\beta a$. $K$ *discards* its second argument and
 returns the first, verbatim. Here, $(\lambda x.\lambda y.\, y\, x)\, a\, b
 \to_\beta b\, a$. Both arguments survive, but with the *second* one
 applied to the *first*. This term is sometimes called the "Thrush"
-combinator ($T$, satisfying $T\, x\, y = y\, x$): it flips the order of
+combinator ($T$, satisfying $T\, x\, y = y\, x$), it flips the order of
 application rather than discarding anything, which is genuinely different
 behavior from $K$, not just a relabeling of it.
 
@@ -53,14 +53,14 @@ treating the implicit binders as outer Π's, unfolds one binder at a time.
 | 4 (binds $p$) | $\mathrm{Path}_Q\,u\,v$ | $\mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w$ | No, constant in $p$ |
 | 5 (binds $q$) | $\mathrm{Path}_Q\,v\,w$ | $\mathrm{Path}_Q\,u\,w$ | No, constant in $q$ |
 
-The first three levels are genuinely dependent Π-types: each $B$ mentions
+The first three levels are genuinely dependent Π-types, each $B$ mentions
 the vertex just bound, since it appears as an index into `Path` later in
 the signature. The last two levels are Π-types that happen to collapse to
-ordinary arrows: once $u, v, w$ are fixed, the *type* of `Path Q u w` no longer
+ordinary arrows, once $u, v, w$ are fixed, the *type* of `Path Q u w` no longer
 depends on the specific *proof term* `p` or `q` supplied, only on the
 vertices already bound, exactly the "$B(x)$ not depending on $x$"
 collapse case from Chapter 2, Sections 1/2.
 
 ---
 
-[← Chapter 1](01-chapter-1.md) | [Index](00-index.md) | [Next: Chapter 4 →](03-chapter-4.md)
+[← Chapter 1](01-chapter-1.md) | [Index](00-index.md) | [Next: Chapter 3 →](03-chapter-3.md)

@@ -23,7 +23,7 @@ factored out are as follows.
   reads as a short chain of named facts instead of one long
   undifferentiated block.
 
-This is the same judgment call made writing ordinary code:
+This is the same judgment call made writing ordinary code,
 extract a helper when, and only when, real duplication or a
 genuinely separate sub-claim is present, not ahead of time "just in case."
 
@@ -48,7 +48,7 @@ independently-statable sub-goal is a lemma waiting to be named.
    used `decide` this way. If it was already in use back then, what does
    this chapter actually add?* Chapter 9 used `decide` on one specific
    example, without stopping to say *why* it applied there. This chapter
-   turns that one-off use into a general principle: recognizing which
+   turns that one-off use into a general principle, recognizing which
    regime a goal is in, a finite, concretely enumerable carrier where
    `decide` applies, versus a general, unspecified structure (an arbitrary
    `Group G` or `Ring R`, as in Chapters 8 and 10) where no decision
@@ -59,7 +59,7 @@ independently-statable sub-goal is a lemma waiting to be named.
    the reverse also true, should every proof be split into the smallest
    possible named lemmas, just in case one gets reused later?* No.
    Speculative extraction with no present duplication is the same
-   mistake in the opposite direction: three similar lines are better
+   mistake in the opposite direction, three similar lines are better
    than a premature abstraction. The signal to extract is an actual
    repeated shape or an actual independently-statable sub-claim, not the
    mere possibility of future reuse.

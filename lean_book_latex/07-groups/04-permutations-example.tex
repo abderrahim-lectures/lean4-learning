@@ -34,7 +34,7 @@ def Perm3.comp (f g : Perm3) : Perm3 where
     exact f.right_inv x
 \end{lstlisting}
 
-\texttt{Perm3.comp f g} composes \texttt{f} \emph{after} \texttt{g} (apply \texttt{g.toFun} first, then \texttt{f.toFun}). This is the standard function-composition convention. Its inverse composes the two inverses in the \emph{opposite} order (\texttt{g.invFun ∘ f.invFun}), which is exactly \((fg)^{-1} = g^{-1}f^{-1}\), the same ``reverse the order'' fact Theorem 3 of Chapter 8 (\texttt{inv\_\allowbreak{}op}) proves abstractly for every group. This construction shows concretely why the fact holds: to undo ``first \(g\), then \(f\),'' one must first undo \(f\), then undo \(g\).
+\texttt{Perm3.comp f g} composes \texttt{f} \emph{after} \texttt{g} (apply \texttt{g.toFun} first, then \texttt{f.toFun}). This is the standard function-composition convention. Its inverse composes the two inverses in the \emph{opposite} order (\texttt{g.invFun ∘ f.invFun}), which is exactly \((fg)^{-1} = g^{-1}f^{-1}\), the same ``reverse the order'' fact Theorem 3 of Chapter 8 (\texttt{inv\_\allowbreak{}op}) proves abstractly for every group. This construction shows concretely why the fact holds, to undo ``first \(g\), then \(f\),'' one must first undo \(f\), then undo \(g\).
 
 \begin{lstlisting}
 def Perm3.identity : Perm3 where
@@ -44,7 +44,7 @@ def Perm3.identity : Perm3 where
   right_inv := fun _ => rfl
 \end{lstlisting}
 
-\texttt{Perm3.identity} is the identity permutation: it fixes every point, hence both of its proof fields are immediate by \texttt{rfl}.
+\texttt{Perm3.identity} is the identity permutation, it fixes every point, hence both of its proof fields are immediate by \texttt{rfl}.
 
 \begin{lstlisting}
 def Perm3.inv (f : Perm3) : Perm3 where
@@ -89,7 +89,7 @@ def cycle012 : Perm3 where
 #eval (Perm3.comp cycle012 swap01).toFun 0   -- 2
 \end{lstlisting}
 
-Both compositions send \texttt{0} somewhere, but to \emph{different} places: applying \texttt{cycle012} then \texttt{swap01} sends \(0 \to 1 \to 0\), while applying \texttt{swap01} then \texttt{cycle012} sends \(0 \to 1 \to 2\). Concretely, \texttt{\#eval} reports \texttt{0} for the first and \texttt{2} for the second. This is \textbf{directly computed evidence} that \texttt{Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01}. In other words, this group is genuinely non-abelian. This is exactly the kind of ``compute a counterexample'' move Chapter 9 uses again for matrices. It is cheaper than any hand-written non-commutativity proof, and it yields, for free, the specific pair of elements that fail to commute.
+Both compositions send \texttt{0} somewhere, but to \emph{different} places, applying \texttt{cycle012} then \texttt{swap01} sends \(0 \to 1 \to 0\), while applying \texttt{swap01} then \texttt{cycle012} sends \(0 \to 1 \to 2\). Concretely, \texttt{\#eval} reports \texttt{0} for the first and \texttt{2} for the second. This is \textbf{directly computed evidence} that \texttt{Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01}. In other words, this group is genuinely non-abelian. This is exactly the kind of ``compute a counterexample'' move Chapter 9 uses again for matrices. It is cheaper than any hand-written non-commutativity proof, and it yields, for free, the specific pair of elements that fail to commute.
 
 \subsection{\texorpdfstring{Assembling \texttt{Group\ Perm3}}{Assembling Group Perm3}}\label{sec:07-groups:04-permutations-example:5}
 
@@ -138,7 +138,8 @@ def perm3Group : Group Perm3 where
 
 \begin{mathreading}
 
-\texttt{Perm3} (with composition) is \(S_3\), the symmetric group on three letters. It is the smallest non-abelian group (order \(6\)) and the standard first example in any course covering non-commutative groups. \texttt{swap01} and \texttt{cycle012} here are, respectively, a transposition and a 3-cycle. Together they generate all of \(S_3\), exactly as in the usual presentation \(S_3 = \langle r, s \mid r^3 = s^2 = e,\ srs = r^{-1} \rangle\), with \(r\) = \texttt{cycle012} and \(s\) = \texttt{swap01}.
+\texttt{Perm3} (with composition) is \(S_3\), the symmetric group on three letters. It is the smallest non-abelian group (order \(6\)) and the standard first example in any course covering non-commutative groups. \texttt{swap01} and \texttt{cycle012} here are, respectively, a transposition and a 3-cycle. Together they generate all of \(S_3\), exactly as in the usual presentation \(S_3 = \langle r, s \mid r^3 = s^2 = e,\ srs
+= r^{-1} \rangle\), with \(r\) = \texttt{cycle012} and \(s\) = \texttt{swap01}.
 
 \end{mathreading}
 

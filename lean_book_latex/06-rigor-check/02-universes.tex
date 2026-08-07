@@ -1,6 +1,6 @@
 \section{\texorpdfstring{Universes: \texttt{Type}, \texttt{Type\ 1}, and why \texttt{Group} isn't a \texttt{Group}}{Universes: Type, Type 1, and why Group isn't a Group}}\label{sec:06-rigor-check:02-universes:1}
 
-The previous section asked why this book delays the \texttt{class} mechanism in Lean in favor of plain \texttt{structure}. This section asks the second of the three questions the chapter introduction raised. Chapter 1 said \texttt{Type} is itself a term, of some type. A careful reader should immediately ask \emph{of what type?} If the answer were ``\texttt{Type} is a term of type \texttt{Type},'' the logic of Lean would be inconsistent. This is exactly Russell's paradox in type-theoretic form. The type of ``all types,'' if it contained itself, would permit rebuilding the set-of-all-sets-that-do-not- contain-themselves paradox inside the type theory. Lean avoids this with a \textbf{hierarchy of universes}.
+The previous section asked why this book delays the \texttt{class} mechanism in Lean in favor of plain \texttt{structure}. This section asks the second of the three questions the chapter introduction raised. Chapter 1 said \texttt{Type} is itself a term, of some type. A careful reader should immediately ask \emph{of what type?} If the answer were ``\texttt{Type} is a term of type \texttt{Type},'' the logic of Lean would be inconsistent. This is exactly the Russell paradox in type-theoretic form. The type of ``all types,'' if it contained itself, would permit rebuilding the set-of-all-sets-that-do-not- contain-themselves paradox inside the type theory. Lean avoids this with a \textbf{hierarchy of universes}.
 
 \subsection{The hierarchy}\label{sec:06-rigor-check:02-universes:2}
 
@@ -37,7 +37,7 @@ Formal definitions and citations for this section, gathered here for reference (
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Universe hierarchy.} ``Think of \texttt{Type 0} as a universe of `small' or `ordinary' types. \texttt{Type 1} is then a larger universe of types, which contains \texttt{Type 0} as an element, and \texttt{Type 2} is an even larger universe of types, which contains \texttt{Type 1} as an element. The list is infinite: there is a \texttt{Type n} for every natural number \texttt{n}. \texttt{Type} is an abbreviation for \texttt{Type 0}'' (\cite{TPIL4}, §2.2 ``Types as objects'').
+  \textbf{Universe hierarchy.} ``Think of \texttt{Type 0} as a universe of `small' or `ordinary' types. \texttt{Type 1} is then a larger universe of types, which contains \texttt{Type 0} as an element, and \texttt{Type 2} is an even larger universe of types, which contains \texttt{Type 1} as an element. The list is infinite, there is a \texttt{Type n} for every natural number \texttt{n}. \texttt{Type} is an abbreviation for \texttt{Type 0}'' (\cite{TPIL4}, §2.2 ``Types as objects'').
 \item
   \textbf{Universe polymorphism.} ``Some operations \ldots{} need to be polymorphic over type universes. For example, \texttt{List α} should make sense for any type \texttt{α}, no matter which type universe \texttt{α} lives in \ldots{} Lean allows you to declare universe variables explicitly using the \texttt{universe} command'' (\cite{TPIL4}, §2.2).
 \item

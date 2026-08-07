@@ -19,7 +19,7 @@ Instead, Lean provides **tactic mode**, entered with `by`, in which a "goal"
 is worked step by step, much as one would write a proof on paper. The
 real subject of this chapter is not the list of tactics below, but **how to work a goal
 whose proof is not yet known**, since that is the skill the rest of
-the book practices. The tactic reference is secondary: read it once, then
+the book practices. The tactic reference is secondary, read it once, then
 return to it as needed. Each section below builds that skill one question at a
 time.
 

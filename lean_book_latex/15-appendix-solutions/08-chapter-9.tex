@@ -1,4 +1,4 @@
-\section{Chapter 10: Rings}\label{sec:15-appendix-solutions:08-chapter-9:1}
+\section{Chapter 9: Rings}\label{sec:15-appendix-solutions:08-chapter-9:1}
 
 \textbf{1. \texttt{boolAndOrRing} (the ring \(\mathbb{Z}/2\mathbb{Z}\) on \texttt{Bool})}
 
@@ -50,11 +50,11 @@ def bool2Ring : Ring Bool where
       | true => cases c with | false => rfl | true => rfl
 \end{lstlisting}
 
-We reuse \texttt{boolXorGroup} from the exercise of Chapter 8 as the additive group (\texttt{+} = XOR, \texttt{0} = \texttt{false}), and add \texttt{∧} (Boolean and) as multiplication with \texttt{1 = true}. As with \texttt{assoc} in Chapter 8, every axiom is a finite check over \(2\) or \(2^3\) cases, each closed by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} since \texttt{Bool.and}/\texttt{Bool.xor} compute on concrete constructors. This is exactly \(\mathbb{Z}/2\mathbb{Z}\): XOR is addition mod 2, and AND is multiplication mod 2.
+We reuse \texttt{boolXorGroup} from the exercise of Chapter 7 as the additive group (\texttt{+} = XOR, \texttt{0} = \texttt{false}), and add \texttt{∧} (Boolean and) as multiplication with \texttt{1 = true}. As with \texttt{assoc} in Chapter 7, every axiom is a finite check over \(2\) or \(2^3\) cases, each closed by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} since \texttt{Bool.and}/\texttt{Bool.xor} compute on concrete constructors. This is exactly \(\mathbb{Z}/2\mathbb{Z}\): XOR is addition mod 2, and AND is multiplication mod 2.
 
 \textbf{2. Why both \texttt{left\_\allowbreak{}distrib} and \texttt{right\_\allowbreak{}distrib} are needed}
 
-Distributivity as usually stated, \(a(b+c) = ab+ac\), only lets you expand a product with the \emph{sum on the right}. Its mirror, \((a+b)c = ac+bc\), expands a product with the \emph{sum on the left}. If \texttt{mul} were known to be commutative, these two would be interchangeable, just apply \texttt{comm} and use the other one. But a general \texttt{Ring} (unlike a \texttt{CommRing}) makes no such assumption. In fact, the proof of \texttt{mul\_\allowbreak{}zero} in Chapter 11 uses \texttt{left\_\allowbreak{}distrib}, while \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left} (its mirror, an exercise) needs \texttt{right\_\allowbreak{}distrib} instead, precisely because there is no \texttt{mul\_\allowbreak{}comm} field to convert one into the other.
+Distributivity as usually stated, \(a(b+c) = ab+ac\), only lets you expand a product with the \emph{sum on the right}. Its mirror, \((a+b)c = ac+bc\), expands a product with the \emph{sum on the left}. If \texttt{mul} were known to be commutative, these two would be interchangeable, just apply \texttt{comm} and use the other one. But a general \texttt{Ring} (unlike a \texttt{CommRing}) makes no such assumption. In fact, the proof of \texttt{mul\_\allowbreak{}zero} in Chapter 10 uses \texttt{left\_\allowbreak{}distrib}, while \texttt{mul\_\allowbreak{}zero\_\allowbreak{}left} (its mirror, an exercise) needs \texttt{right\_\allowbreak{}distrib} instead, precisely because there is no \texttt{mul\_\allowbreak{}comm} field to convert one into the other.
 
 \textbf{3. \texttt{theorem mat2\_\allowbreak{}not\_\allowbreak{}comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X}}
 

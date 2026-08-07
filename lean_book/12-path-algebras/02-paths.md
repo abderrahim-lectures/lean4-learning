@@ -4,12 +4,12 @@
 
 ---
 
-Section 1 fixed the raw data of a quiver: a set of vertices and a set of
+Section 1 fixed the raw data of a quiver, a set of vertices and a set of
 arrows, each arrow going from one vertex to another. A single arrow is
 already a directed connection, but the interesting routes through a graph
 usually chain several arrows together, one after another. Not every such
 chain makes sense, though. An arrow can only be appended if it starts
-where the previous one ended. This section names that notion precisely:
+where the previous one ended. This section names that notion precisely,
 a **path**.
 
 A **path** in $Q$ is a sequence of arrows that can be composed head-to-tail:
@@ -20,7 +20,7 @@ any path that starts or ends at $i$, leaving it unchanged. $e_i$ is the
 *identity* at $i$, which is exactly what makes the length-$0$ paths the units
 of the path algebra in [Section 5](05-path-composition.md).
 
-In the running example, the paths are: $e_1, e_2, e_3$ (trivial), $\alpha$, $\beta$,
+In the running example, the paths are $e_1, e_2, e_3$ (trivial), $\alpha$, $\beta$,
 and $\beta\alpha$ (first $\alpha$, then $\beta$), and nothing else, since
 there is no arrow out of $3$ or into $1$.
 

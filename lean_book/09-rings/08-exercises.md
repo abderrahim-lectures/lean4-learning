@@ -35,8 +35,8 @@ computed counterexample (`#eval`) to refute commutativity outright.
    when there are finitely many to try. `Int` has none of that; a real
    argument is the only way in.
 
-1. Build `boolAndOrRing`. This is surprisingly difficult: is
-   there a natural ring structure on `Bool`? (Hint: think of `Bool` as
+1. Build `boolAndOrRing`. This is surprisingly difficult, is
+   there a natural ring structure on `Bool`? (Hint, think of `Bool` as
    $\mathbb{Z}/2\mathbb{Z}$. Addition is XOR, multiplication is AND. Build
    `intAddGroupMod2 : CommGroup Bool` with `op := Bool.xor`, then a
    `Ring Bool` using `mul := Bool.and`, `one := true`.)
@@ -54,7 +54,7 @@ computed counterexample (`#eval`) to refute commutativity outright.
    first (false) one with `by decide` at the `Int`-equality level, where a
    `DecidableEq` instance really does exist.
 
-Solutions: [Appendix, Chapter 9](../15-appendix-solutions/08-chapter-9.md).
+Solutions, [Appendix, Chapter 9](../15-appendix-solutions/09-chapter-9.md).
 
 ## Next
 

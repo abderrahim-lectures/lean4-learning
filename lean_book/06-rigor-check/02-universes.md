@@ -10,7 +10,7 @@ questions the chapter introduction raised. Chapter 1 said `Type` is
 itself a term, of some type. A careful reader
 should immediately ask *of what type?* If the answer were "`Type` is a
 term of type `Type`," the logic of Lean would be inconsistent. This is exactly
-Russell's paradox in type-theoretic form. The type of "all types," if it
+the Russell paradox in type-theoretic form. The type of "all types," if it
 contained itself, would permit rebuilding the set-of-all-sets-that-do-not-
 contain-themselves paradox inside the type theory. Lean avoids this with
 a **hierarchy of universes**.
@@ -92,7 +92,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   or 'ordinary' types. `Type 1` is then a larger universe of types,
   which contains `Type 0` as an element, and `Type 2` is an even
   larger universe of types, which contains `Type 1` as an element.
-  The list is infinite: there is a `Type n` for every natural number
+  The list is infinite, there is a `Type n` for every natural number
   `n`. `Type` is an abbreviation for `Type 0`" ([TPIL4], §2.2 "Types
   as objects").
 - **Universe polymorphism.** "Some operations ... need to be

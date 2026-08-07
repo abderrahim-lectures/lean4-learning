@@ -36,7 +36,7 @@ an unknown `a` genuinely cannot, mirroring the defeq-vs-propeq distinction of Ch
 
 1. Prove
    `theorem neg_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)`.
-   Strategy: this is "show $x = -(ab)$," hence reduce through
+   Strategy, this is "show $x = -(ab)$," hence reduce through
    `left_inverse_unique` to "show $x + ab = 0$," then look for a
    `right_distrib`-shaped simplification of $(-a)\cdot b + a \cdot b$,
    exactly as in Theorem 2. `mul_zero_left` (proved in the section for Theorem 2)
@@ -48,7 +48,7 @@ an unknown `a` genuinely cannot, mirroring the defeq-vs-propeq distinction of Ch
    which required real work precisely because `a` was an unknown
    variable rather than a concrete numeral).
 
-Solutions: [Appendix, Chapter 10](../15-appendix-solutions/09-chapter-10.md).
+Solutions, [Appendix, Chapter 10](../15-appendix-solutions/10-chapter-10.md).
 
 ## Next
 

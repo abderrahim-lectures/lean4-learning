@@ -85,12 +85,12 @@ notion of a finite spanning set from Chapter 11.
 
 **Prerequisites.** Chapter 11 (`Module`), Chapter 12, the `Path.length`
 checkpoint project (a prerequisite in substance, not just in reading
-order: this project is exactly the "harder" continuation its own
+order, this project is exactly the "harder" continuation its own
 self-verification note gestures at).
 
 **Milestones.**
 
-1. Define what "acyclic" means for a `Quiver`: no nontrivial path from any
+1. Define what "acyclic" means for a `Quiver`, no nontrivial path from any
    vertex back to itself (`∀ v, ∀ p : Path Q v v, <p is the trivial path>`
    is one natural phrasing).
 2. Prove that in an acyclic quiver with a finite vertex type, the
@@ -101,7 +101,7 @@ self-verification note gestures at).
    and on `cyclicQuiver` (Chapter 12 Exercise 1, which has a cycle) to see
    the argument apply in the first case and correctly fail to apply in the
    second.
-4. Conclude finite-dimensionality: an acyclic quiver on finitely many
+4. Conclude finite-dimensionality, an acyclic quiver on finitely many
    vertices has only finitely many paths (bounded length, finitely many
    arrows to choose at each step), hence the path algebra of Project 2 is a
    finite-dimensional `Module` over `k` in the sense of Chapter 11.
@@ -153,7 +153,7 @@ one-by-one in a comment, against the fields of `QuiverHom` itself.
 small, worked example.
 
 **Prerequisites.** Chapter 11 (`Module`), Chapter 12, and Project 2 above
-(at least its first two milestones: a concrete, finite path algebra to be
+(at least its first two milestones, a concrete, finite path algebra to be
 a module *over*).
 
 **Milestones.**

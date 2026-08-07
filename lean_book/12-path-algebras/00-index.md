@@ -11,24 +11,24 @@
 - Compose paths via `Path.append` and predict when composability side-conditions block a nonsensical composition.
 - Explain in what sense a path algebra $kQ$ extends the `Ring`/`Module` machinery of Chapters 9 and 11.
 
-This chapter combines everything covered so far: inductive types
+This chapter combines everything covered so far, inductive types
 (Chapter 1), structures (Chapter 3), and rings (Chapters 8–9), used
-to build a genuinely interesting example: the **path algebra** of a
+to build a genuinely interesting example, the **path algebra** of a
 quiver.
 
 ## The story of this chapter
 
 Each section answers the question the previous one leaves open, working
-down toward a single target: the path algebra $kQ$.
+down toward a single target, the path algebra $kQ$.
 
 1. **What is the raw combinatorial object a path algebra is built
-   from?** ([Section 1](01-what-is-a-quiver.md)) A **quiver**: nothing
+   from?** ([Section 1](01-what-is-a-quiver.md)) A **quiver**, nothing
    more than a set of vertices, a set of arrows, and two functions
    recording the source and target of each arrow, a directed graph, stripped
    to the bare minimum.
 2. **A single arrow is one directed step. What is a *route* through
    several arrows, chained one after another?**
-   ([Section 2](02-paths.md)) A **path**: a sequence of arrows composable
+   ([Section 2](02-paths.md)) A **path**, a sequence of arrows composable
    head-to-tail, together with, for each vertex, a length-$0$ trivial path
    that starts and ends there and acts as the identity at that vertex,
    composing with any path starting or ending there and leaving it unchanged.
@@ -42,7 +42,7 @@ down toward a single target: the path algebra $kQ$.
    genuinely composable arrow-sequences can be built at all?**
    ([Section 4](04-paths-as-inductive-type.md)) `Path` as an inductive
    type *indexed* by its own source and target vertex, the dependent-type
-   idea from Chapter 1, now put to real use: an arrow can only be
+   idea from Chapter 1, now put to real use, an arrow can only be
    `cons`ed onto a path when a proof shows its source matches where the
    path already ends, so a nonsensical composition is rejected before it
    is ever built, not caught afterward.

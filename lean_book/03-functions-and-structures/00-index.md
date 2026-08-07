@@ -1,6 +1,6 @@
 # Chapter 3: Functions, definitions, and structures
 
-[← Ch. 1: Basics](../01-basics/00-index.md) | [Table of contents](../README.md) | [Ch. 4: Propositions & Proofs →](../04-propositions-and-proofs/00-index.md)
+[← Ch. 2: Terminology & CoC](../02-terminology-and-coc/00-index.md) | [Table of contents](../README.md) | [Ch. 4: Propositions & Proofs →](../04-propositions-and-proofs/00-index.md)
 
 ---
 
@@ -60,7 +60,8 @@ machinery every algebraic structure in the rest of this book depends on.
 1. [`structure`: bundling data together](01-structure-basics.md)
 2. [Structures with type parameters](02-type-parameters.md)
 3. [Extending structures](03-extending-structures.md)
+4. [Exercises](04-exercises.md)
 
 ---
 
-[← Ch. 1: Basics](../01-basics/00-index.md) | [Table of contents](../README.md) | [Ch. 4: Propositions & Proofs →](../04-propositions-and-proofs/00-index.md)
+[← Ch. 2: Terminology & CoC](../02-terminology-and-coc/00-index.md) | [Table of contents](../README.md) | [Ch. 4: Propositions & Proofs →](../04-propositions-and-proofs/00-index.md)

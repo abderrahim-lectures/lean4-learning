@@ -54,7 +54,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 \textbf{Learning objectives.} Combinatorial reasoning about \texttt{Path.length} (the checkpoint project of Chapter 12), and connecting it to the \texttt{Module} notion of a finite spanning set from Chapter 11.
 
-\textbf{Prerequisites.} Chapter 11 (\texttt{Module}), Chapter 12, the \texttt{Path.length} checkpoint project (a prerequisite in substance, not just in reading order: this project is exactly the ``harder'' continuation its own self-verification note gestures at).
+\textbf{Prerequisites.} Chapter 11 (\texttt{Module}), Chapter 12, the \texttt{Path.length} checkpoint project (a prerequisite in substance, not just in reading order, this project is exactly the ``harder'' continuation its own self-verification note gestures at).
 
 \textbf{Milestones.}
 
@@ -62,13 +62,13 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Define what ``acyclic'' means for a \texttt{Quiver}: no nontrivial path from any vertex back to itself (\texttt{∀ v, ∀ p : Path Q v v, <p is the trivial path>} is one natural phrasing).
+  Define what ``acyclic'' means for a \texttt{Quiver}, no nontrivial path from any vertex back to itself (\texttt{∀ v, ∀ p : Path Q v v, <p is the trivial path>} is one natural phrasing).
 \item
   Prove that in an acyclic quiver with a finite vertex type, the \texttt{Path.length} of every path is bounded by the number of vertices, the idea being that a path visiting more vertices than exist must repeat one, forcing a nontrivial cycle.
 \item
   Instantiate the bound on \texttt{exampleQuiver} (acyclic, from Chapter 12, Section 3) and on \texttt{cyclicQuiver} (Chapter 12 Exercise 1, which has a cycle) to see the argument apply in the first case and correctly fail to apply in the second.
 \item
-  Conclude finite-dimensionality: an acyclic quiver on finitely many vertices has only finitely many paths (bounded length, finitely many arrows to choose at each step), hence the path algebra of Project 2 is a finite-dimensional \texttt{Module} over \texttt{k} in the sense of Chapter 11.
+  Conclude finite-dimensionality, an acyclic quiver on finitely many vertices has only finitely many paths (bounded length, finitely many arrows to choose at each step), hence the path algebra of Project 2 is a finite-dimensional \texttt{Module} over \texttt{k} in the sense of Chapter 11.
 \end{enumerate}
 
 \textbf{Deliverable.} A stated and proved length bound for acyclic quivers, checked against both example quivers.
@@ -102,7 +102,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 \textbf{Learning objectives.} Turn the closing remark of Chapter 12, Section 5, ``representations of \(Q\) are exactly \(kQ\)-modules,'' into an actual, if small, worked example.
 
-\textbf{Prerequisites.} Chapter 11 (\texttt{Module}), Chapter 12, and Project 2 above (at least its first two milestones: a concrete, finite path algebra to be a module \emph{over}).
+\textbf{Prerequisites.} Chapter 11 (\texttt{Module}), Chapter 12, and Project 2 above (at least its first two milestones, a concrete, finite path algebra to be a module \emph{over}).
 
 \textbf{Milestones.}
 
@@ -139,7 +139,8 @@ Everything in this book is built from the \texttt{inductive} mechanism of Lean: 
 \mathrm{false} := \lambda x.\, \lambda y.\, y
 \] A boolean, in this encoding, \emph{is} a choice function. To use one, apply it to the two branches of an if-expression. \[
 \mathrm{if}\; b \;\mathrm{then}\; t \;\mathrm{else}\; e \;:=\; b\, t\, e
-\] Check: \(\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e \longrightarrow_\beta t\) (discarding \(e\)), and symmetrically \(\mathrm{false}\, t\, e \longrightarrow_\beta e\). ``If-then-else'' is not a primitive at all. It is just \emph{application}, once booleans are represented this way. The actual \texttt{Bool} of Lean (an \texttt{inductive} with two constructors) is a \emph{convenience}, not a necessity. The calculus itself never needed a booleans primitive to express conditional behavior.
+\] Check: \(\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e
+\longrightarrow_\beta t\) (discarding \(e\)), and symmetrically \(\mathrm{false}\, t\, e \longrightarrow_\beta e\). ``If-then-else'' is not a primitive at all. It is just \emph{application}, once booleans are represented this way. The actual \texttt{Bool} of Lean (an \texttt{inductive} with two constructors) is a \emph{convenience}, not a necessity. The calculus itself never needed a booleans primitive to express conditional behavior.
 
 \textbf{Church numerals.} Represent the natural number \(n\) as ``apply a function \(n\) times.'' \[
 \underline{0} := \lambda f.\, \lambda x.\, x
@@ -154,14 +155,18 @@ Everything in this book is built from the \texttt{inductive} mechanism of Lean: 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Successor:} \(\mathrm{succ} := \lambda n.\, \lambda f.\, \lambda x.\, f\,(n\, f\, x)\), meaning ``apply \(f\) one more time than \(n\) does.''
+  \textbf{Successor:} \(\mathrm{succ} := \lambda n.\, \lambda f.\, \lambda x.\,
+  f\,(n\, f\, x)\), meaning ``apply \(f\) one more time than \(n\) does.''
 \item
-  \textbf{Addition:} \(\mathrm{plus} := \lambda m.\lambda n.\lambda f.\lambda x.\, m\, f\,(n\, f\, x)\), meaning ``apply \(f\), \(m\) more times, starting from where \(n\) has already applied \(f\), \(n\) times.'' This is the same recursive shape that makes \texttt{Nat.add} recurse on its second argument (Chapter 5).
+  \textbf{Addition:} \(\mathrm{plus} := \lambda m.\lambda n.\lambda f.\lambda x.\,
+  m\, f\,(n\, f\, x)\), meaning ``apply \(f\), \(m\) more times, starting from where \(n\) has already applied \(f\), \(n\) times.'' This is the same recursive shape that makes \texttt{Nat.add} recurse on its second argument (Chapter 5).
 \item
-  \textbf{Multiplication} is even more striking: \(\mathrm{mult} := \lambda m. \lambda n.\lambda f.\, m\,(n\, f)\), meaning ``apply \emph{`apply \(f\), \(n\) times'}, \(m\) times.'' Multiplication is literally function composition, iterated.
+  \textbf{Multiplication} is even more striking: \(\mathrm{mult} := \lambda m.
+  \lambda n.\lambda f.\, m\,(n\, f)\), meaning ``apply \emph{`apply \(f\), \(n\) times'}, \(m\) times.'' Multiplication is literally function composition, iterated.
 \end{itemize}
 
-None of this is meant to suggest that one should ever program this way. It shows, concretely, that a system with only variables, abstraction, and application already has the expressive power to build booleans, naturals, and (by pairing constructions along the same lines) arbitrary tree-shaped data, before any type system or \texttt{inductive} keyword enters the picture. The actual \texttt{Bool} and \texttt{Nat} of Lean use \texttt{inductive} instead, for efficiency and because pattern-matching (\texttt{match}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}) is far more convenient to write and reason about than repeated application. The \emph{expressiveness} was never in question. If this is interesting, a next step is to encode pairs the same way (\(\mathrm{pair} := \lambda a.\lambda b.\lambda f.\, f\, a\, b\)) and check by hand that projecting back out a component β-reduces correctly.
+None of this is meant to suggest that one should ever program this way. It shows, concretely, that a system with only variables, abstraction, and application already has the expressive power to build booleans, naturals, and (by pairing constructions along the same lines) arbitrary tree-shaped data, before any type system or \texttt{inductive} keyword enters the picture. The actual \texttt{Bool} and \texttt{Nat} of Lean use \texttt{inductive} instead, for efficiency and because pattern-matching (\texttt{match}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}) is far more convenient to write and reason about than repeated application. The \emph{expressiveness} was never in question. If this is interesting, a next step is to encode pairs the same way (\(\mathrm{pair} := \lambda a.\lambda b.\lambda f.\,
+f\, a\, b\)) and check by hand that projecting back out a component β-reduces correctly.
 
 \subsubsection{References}\label{sec:14-next-steps:03-next-projects:8}
 

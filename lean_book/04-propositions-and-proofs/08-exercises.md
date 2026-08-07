@@ -7,7 +7,7 @@
 **Key points.** `Prop` is the type of statements, and a proof is just an
 ordinary term of that type (Curry–Howard). `∧`/`∨`/`→`/`∀`/`∃` each have
 their own introduction and elimination rule, mirrored directly by Lean
-syntax: the anonymous constructor, `Or.inl`/`Or.inr`/`match`, `fun`/
+syntax, the anonymous constructor, `Or.inl`/`Or.inr`/`match`, `fun`/
 application, and `fun`/anonymous-constructor again. `rfl` proves equality
 by checking both sides reduce to the same normal form.
 
@@ -40,11 +40,11 @@ by checking both sides reduce to the same normal form.
    starting in Chapter 5) that works uniformly.
 
 1. Prove `theorem and_comm_ex {P Q : Prop} (h : P ∧ Q) : Q ∧ P`.
-2. Prove `theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P` (hint: use
+2. Prove `theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P` (hint, use
    `Or.elim` or pattern matching with `match`).
 3. Prove `theorem exists_gt_zero : ∃ n : Nat, n > 0`.
 
-Solutions: [Appendix, Chapter 4](../15-appendix-solutions/03-chapter-4.md).
+Solutions, [Appendix, Chapter 4](../15-appendix-solutions/04-chapter-4.md).
 
 ## Next
 

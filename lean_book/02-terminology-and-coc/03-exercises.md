@@ -34,7 +34,7 @@ substitution step at a time.
    resemble, and how does it differ?
 2. Construct a term of type `Σ n : Nat, Fin n` other than the
    `⟨3, ⟨2, by decide⟩⟩` example given in the text. Then, in a sentence or two, explain why
-   `Σ n : Nat, n > 0` fails to type-check in Lean at all (hint: check what
+   `Σ n : Nat, n > 0` fails to type-check in Lean at all (hint, check what
    *sort* `n > 0` lives in, and compare to the signature of `Sigma` itself).
 3. The `Path Q : V → V → Type` of Chapter 12 was described as "a family of
    types indexed by a pair of vertices." Write down the Π-type expression
@@ -44,7 +44,7 @@ substitution step at a time.
    (treat the implicit `{u v w : V}` as outer Π-binders). Identify $A$ and
    $B$ explicitly at each nesting level.
 
-Solutions: [Appendix, Chapter 2](../15-appendix-solutions/02-chapter-2.md).
+Solutions, [Appendix, Chapter 2](../15-appendix-solutions/02-chapter-2.md).
 
 ---
 

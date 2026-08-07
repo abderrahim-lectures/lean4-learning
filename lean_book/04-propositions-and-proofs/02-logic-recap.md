@@ -118,7 +118,7 @@ to by name. The list need not be memorized. The point is to recognize a
 "natural deduction proof" as a *tree* built by chaining these rules, with
 leaves at hypotheses in $\Gamma$ and its root at the conclusion $\varphi$.
 
-**Worked example: proving $p \Rightarrow (q \Rightarrow p)$.** Assume $p$
+**Worked example, proving $p \Rightarrow (q \Rightarrow p)$.** Assume $p$
 as a hypothesis, aiming to apply $\Rightarrow$-intro at the end. Within
 that, assume $q$ too. The conclusion $p$ is now already among the
 hypotheses, so it is derived for free. Discharge the $q$-hypothesis via
@@ -143,11 +143,11 @@ Two theorems connect the syntactic notion ($\vdash$) to the semantic one
 ($\models$). Together they justify treating "provable" and "true in
 every case" as interchangeable for propositional logic.
 
-- **Soundness**: if $\Gamma \vdash \varphi$ then $\Gamma \models \varphi$.
+- **Soundness**, if $\Gamma \vdash \varphi$ then $\Gamma \models \varphi$.
   Everything the rules can derive really is true whenever the hypotheses
   are. The rules never let you "prove" something false.
 - **Completeness** (Gödel, 1929/1930, for first-order logic; the propositional
-  case is elementary): if $\Gamma \models \varphi$ then $\Gamma \vdash
+  case is elementary), if $\Gamma \models \varphi$ then $\Gamma \vdash
   \varphi$. Every semantically valid consequence *does* have a natural
   deduction proof, so the rule list above, small as it is, is not missing
   anything.
@@ -210,7 +210,7 @@ not one proposition per `x`. This is exactly the "dependent
 types" of [Chapter 1,
 Section 3](../01-basics/03-dependent-types.md), made concrete for the special case where the family being depended
 on happens to land in `Prop` instead of `Type`. $\forall$-elim is nothing
-more than ordinary function application: feed the function a specific
+more than ordinary function application, feed the function a specific
 `a`, get back a proof of `P a`. The natural-deduction rule and the
 programming-language operation are, again, not just similar but
 *identical*, the same fact already shown for modus ponens and plain function application by
@@ -294,7 +294,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   which genuinely works *can* be certified by it. Nothing true slips
   through as "uncertifiable."
 - van Dalen ([VanDalen2013]), §2.4 "Natural Deduction" (Definition 2.4.1, propositional rules), §3.8 "Natural Deduction" (first-order ∀-rules, Lemma 3.8.2) covers the propositional and first-order natural-deduction rules underlying the quotes above.
-- Gödel: the original 1930 completeness paper was not independently verified against a held source. Theorem 4.1.3 of van Dalen above states the same result and is independently verified.
+- Gödel, the original 1930 completeness paper was not independently verified against a held source. Theorem 4.1.3 of van Dalen above states the same result and is independently verified.
 - Pierce et al. ([PierceSF]). **Note:** only the *Software Foundations* series homepage is available in the notebook, not chapter content, so the specific natural-deduction/classical-vs-intuitionistic treatment claimed here could not be verified verbatim.
 
 [Gentzen1935]: ../bibliography.md#gentzen1935

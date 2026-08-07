@@ -27,7 +27,7 @@ for reading
 `Type` itself.
 
 **Mathematical reading.** `LinearMap Rg ModM ModN` is the set
-$\mathrm{Hom}_R(M, N)$ of $R$-module homomorphisms: functions $f : M \to N$
+$\mathrm{Hom}_R(M, N)$ of $R$-module homomorphisms, functions $f : M \to N$
 satisfying two conditions. First, $f$ is additive: $f(m+n) = f(m)+f(n)$, so
 $f$ is a group homomorphism of the underlying abelian groups. Second, $f$
 is $R$-equivariant: $f(r\cdot m) = r\cdot f(m)$, so $f$ intertwines the two
@@ -67,7 +67,7 @@ module-theoretic goal to a concrete arithmetic identity" move used by
 `evenSubmodule` in Section 4, applied again.
 
 **Mathlib equivalent.** The [`LinearMap`](https://loogle.lean-lang.org/?q=LinearMap) of Mathlib (notation `M →ₗ[R] N`)
-is built the same way: supply `toFun` plus the two homomorphism proofs.
+is built the same way, supply `toFun` plus the two homomorphism proofs.
 But the result is directly interoperable with the rest of the linear-algebra
 API of the library.
 
@@ -80,7 +80,7 @@ def mulByLinearMap' (d : Int) : Int →ₗ[Int] Int where
 #eval mulByLinearMap' 5 3   -- 15
 ```
 
-This has the same shape as `mulByLinearMap`: a `toFun` and two proof
+This has the same shape as `mulByLinearMap`, a `toFun` and two proof
 obligations, with `map_add`/`map_smul` becoming the Mathlib names
 `map_add'`/`map_smul'`. The real difference is that `Int →ₗ[Int] Int` is a
 type the rest of Mathlib already knows how to compose, transport along

@@ -13,12 +13,12 @@
 \item
   \emph{\texttt{decide} closed every axiom for \texttt{fin3Ring} but cannot touch a single axiom of \texttt{intRing}. What property of the carrier decides which side of that line a ring falls on?} Finiteness (and decidable equality) of the carrier, not the ring axioms themselves. \texttt{by decide} brute-forces every combination of finitely many elements, which is only possible when there are finitely many to try. \texttt{Int} has none of that; a real argument is the only way in.
 \item
-  Build \texttt{boolAndOrRing}. This is surprisingly difficult: is there a natural ring structure on \texttt{Bool}? (Hint: think of \texttt{Bool} as \(\mathbb{Z}/2\mathbb{Z}\). Addition is XOR, multiplication is AND. Build \texttt{intAddGroupMod2 : CommGroup Bool} with \texttt{op := Bool.xor}, then a \texttt{Ring Bool} using \texttt{mul := Bool.and}, \texttt{one := true}.)
+  Build \texttt{boolAndOrRing}. This is surprisingly difficult, is there a natural ring structure on \texttt{Bool}? (Hint, think of \texttt{Bool} as \(\mathbb{Z}/2\mathbb{Z}\). Addition is XOR, multiplication is AND. Build \texttt{intAddGroupMod2 : CommGroup Bool} with \texttt{op := Bool.xor}, then a \texttt{Ring Bool} using \texttt{mul := Bool.and}, \texttt{one := true}.)
 \item
   State (in words, no Lean needed yet) why we needed \emph{both} \texttt{left\_\allowbreak{}distrib} and \texttt{right\_\allowbreak{}distrib} as separate axioms, tying it back to not assuming \texttt{mul} is commutative.
 \item
   Using the witness pair \texttt{(X, Y)} computed above, state and prove \texttt{theorem mat2\_\allowbreak{}not\_\allowbreak{}comm : ∃ X Y : Mat2, Mat2.mul X Y ≠ Mat2.mul Y X}. Note that \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{by decide}} does \emph{not} work directly here. \texttt{Mat2} has no \texttt{DecidableEq} instance, so equality of two \texttt{Mat2} terms is not something \texttt{decide} can evaluate out of the box (check the error message it gives; this is exactly the ``read the failure'' habit from Chapter 5). Instead, assume \texttt{h : Mat2.mul X Y = Mat2.mul Y X}, use \texttt{Mat2.mk.injEq} to turn \texttt{h} into a conjunction of \texttt{Int} equalities, and derive \texttt{False} from the first (false) one with \texttt{by decide} at the \texttt{Int}-equality level, where a \texttt{DecidableEq} instance really does exist.
 \end{enumerate}
 
-Solutions: \hyperref[sec:15-appendix-solutions:08-chapter-9:1]{Appendix, Chapter 9}.
+Solutions, \hyperref[sec:15-appendix-solutions:09-chapter-9:1]{Appendix, Chapter 9}.
 

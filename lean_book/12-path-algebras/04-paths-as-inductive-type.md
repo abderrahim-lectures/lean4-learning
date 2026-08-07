@@ -32,7 +32,7 @@ Reading this carefully.
   is (provably, via `h`) `v` and whose target is (provably, via `h'`) `w`,
   `p` can be extended by appending `a`, producing a path from `u` to `w`.
   The two proof fields `h` and `h'` are exactly what *prevents* the
-  construction of nonsense paths: an arrow cannot be `cons`ed onto a path unless
+  construction of nonsense paths, an arrow cannot be `cons`ed onto a path unless
   its source matches where the path left off.
 
 Note that `cons` builds the path by appending the new arrow at the *end*,

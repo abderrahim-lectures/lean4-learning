@@ -1,6 +1,6 @@
 \section{\texorpdfstring{Example: \(2\times 2\) matrices --- a genuinely noncommutative ring}{Example: 2\textbackslash times 2 matrices --- a genuinely noncommutative ring}}\label{sec:09-rings:07-matrices:1}
 
-\texttt{intRing} above is commutative (\texttt{Int.mul\_\allowbreak{}comm} exists, even though it was not wired into the fields of \texttt{Ring}), so it does not test the fact that \texttt{Ring} deliberately does \emph{not} assume \texttt{mul\_\allowbreak{}comm}. Matrices do: \(M_2(\mathbb{Z})\), the ring of \(2\times 2\) integer matrices under matrix addition and multiplication, has \(AB \neq BA\) in general. It is also a good test of \href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\_\allowbreak{}assoc}}, since the associativity of matrix multiplication is not a one-line library lemma call. It genuinely takes some work, which is the point of working through it.
+\texttt{intRing} above is commutative (\texttt{Int.mul\_\allowbreak{}comm} exists, even though it was not wired into the fields of \texttt{Ring}), so it does not test the fact that \texttt{Ring} deliberately does \emph{not} assume \texttt{mul\_\allowbreak{}comm}. Matrices do, \(M_2(\mathbb{Z})\), the ring of \(2\times 2\) integer matrices under matrix addition and multiplication, has \(AB \neq BA\) in general. It is also a good test of \href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\_\allowbreak{}assoc}}, since the associativity of matrix multiplication is not a one-line library lemma call. It genuinely takes some work, which is the point of working through it.
 
 A \(2 \times 2\) matrix is represented as a \texttt{structure} with four entries. (More scalable representations exist, \texttt{Fin 2 → Fin 2 → Int}, or the general \href{https://loogle.lean-lang.org/?q=Matrix}{\texttt{Matrix}} of Mathlib, but four named fields keep every computation fully explicit, which is the goal here.)
 
@@ -86,11 +86,13 @@ def Y : Mat2 := (*$\langle$*)1, 0, 1, 1(*$\rangle$*)
 #eval Mat2.mul Y X    -- (*$\langle$*)1, 1, 1, 2(*$\rangle$*)
 \end{lstlisting}
 
-\texttt{\#eval} here is doing real work: it is a two-line proof by computation that \texttt{mul} is not commutative. This is cheaper than any hand-written counterexample proof, and it is exactly the kind of thing to try before committing to a \texttt{theorem}. Should \texttt{¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X} be needed as a theorem, this computed pair \texttt{(X, Y)} serves as the witness.
+\texttt{\#eval} here is doing real work, it is a two-line proof by computation that \texttt{mul} is not commutative. This is cheaper than any hand-written counterexample proof, and it is exactly the kind of thing to try before committing to a \texttt{theorem}. Should \texttt{¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X} be needed as a theorem, this computed pair \texttt{(X, Y)} serves as the witness.
 
 \begin{mathreading}
 
-This is the standard counterexample to commutativity of matrix multiplication: with \(X = \begin{psmallmatrix}1&1\\0&1\end{psmallmatrix}\) and \(Y = \begin{psmallmatrix}1&0\\1&1\end{psmallmatrix}\) (elementary shear matrices), \[
+This is the standard counterexample to commutativity of matrix multiplication, with \(X =
+\begin{psmallmatrix}1&1\\0&1\end{psmallmatrix}\) and \(Y =
+\begin{psmallmatrix}1&0\\1&1\end{psmallmatrix}\) (elementary shear matrices), \[
 XY = \begin{psmallmatrix}2&1\\1&1\end{psmallmatrix} \neq
 \begin{psmallmatrix}1&1\\1&2\end{psmallmatrix} = YX,
 \] so \(M_2(\mathbb{Z})\) is a \emph{non}commutative ring. The pair \((X, Y)\) is a concrete witness for the existential \(\exists X, Y,\ XY \neq YX\).
@@ -138,7 +140,7 @@ def mat2Group : Group Mat2 where
     apply Mat2.ext <;> exact Int.add_right_neg _
 \end{lstlisting}
 
-\texttt{mat2Group} verifies that \((M_2(\mathbb{Z}), +)\) is a group: every axiom (\texttt{assoc}, \texttt{id\_\allowbreak{}left}, \texttt{id\_\allowbreak{}right}, \texttt{inv\_\allowbreak{}left}, \texttt{inv\_\allowbreak{}right}) is checked entrywise, using \texttt{Mat2.ext} to split the single \texttt{Mat2} equality into four \texttt{Int} equalities, each of which is then a direct citation of the matching \texttt{Int} addition lemma.
+\texttt{mat2Group} verifies that \((M_2(\mathbb{Z}), +)\) is a group, every axiom (\texttt{assoc}, \texttt{id\_\allowbreak{}left}, \texttt{id\_\allowbreak{}right}, \texttt{inv\_\allowbreak{}left}, \texttt{inv\_\allowbreak{}right}) is checked entrywise, using \texttt{Mat2.ext} to split the single \texttt{Mat2} equality into four \texttt{Int} equalities, each of which is then a direct citation of the matching \texttt{Int} addition lemma.
 
 \begin{lstlisting}
 def mat2CommGroup : CommGroup Mat2 where
@@ -262,7 +264,9 @@ Two points are worth noting.
 
 \begin{mathreading}
 
-\texttt{mat2Ring} is the ring \(M_2(\mathbb{Z})\) assembled formally: \texttt{mat2Group}/\texttt{mat2CommGroup} verify that \((M_2(\mathbb{Z}), +)\) is an abelian group, and \texttt{mat2Ring} supplies the monoid \((M_2(\mathbb{Z}), \times, I)\) with distributivity. All the additive-group axioms hold \emph{entrywise}, which is what \texttt{Mat2.ext} followed by the \(\mathbb{Z}\)-lemma expresses: \(M_2(\mathbb{Z}) \cong \mathbb{Z}^4\) as additive groups. Associativity of \(\times\) is the one substantial fact: \(((XY)Z)_{i\ell} = \sum_{j,k} X_{ij}Y_{jk}Z_{k\ell} = (X(YZ))_{i\ell}\), whose per-entry form is a polynomial identity over the commutative ring \(\mathbb{Z}\), so \texttt{ring} can close it. The construction generalizes exactly the same way to \(M_n(S)\) for any commutative ring \(S\): entrywise reduction turns each ring axiom into an \(S\)-polynomial identity, and \(M_n(S)\) is noncommutative for \(n \ge 2\).
+\texttt{mat2Ring} is the ring \(M_2(\mathbb{Z})\) assembled formally: \texttt{mat2Group}/\texttt{mat2CommGroup} verify that \((M_2(\mathbb{Z}), +)\) is an abelian group, and \texttt{mat2Ring} supplies the monoid \((M_2(\mathbb{Z}),
+\times, I)\) with distributivity. All the additive-group axioms hold \emph{entrywise}, which is what \texttt{Mat2.ext} followed by the \(\mathbb{Z}\)-lemma expresses: \(M_2(\mathbb{Z}) \cong \mathbb{Z}^4\) as additive groups. Associativity of \(\times\) is the one substantial fact: \(((XY)Z)_{i\ell} = \sum_{j,k} X_{ij}Y_{jk}Z_{k\ell}
+= (X(YZ))_{i\ell}\), whose per-entry form is a polynomial identity over the commutative ring \(\mathbb{Z}\), so \texttt{ring} can close it. The construction generalizes exactly the same way to \(M_n(S)\) for any commutative ring \(S\), entrywise reduction turns each ring axiom into an \(S\)-polynomial identity, and \(M_n(S)\) is noncommutative for \(n \ge 2\).
 
 \end{mathreading}
 

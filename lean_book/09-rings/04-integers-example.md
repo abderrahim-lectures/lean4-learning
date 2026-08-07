@@ -4,7 +4,7 @@
 
 ---
 
-`Ring` was just assembled field by field, entirely in the abstract: an
+`Ring` was just assembled field by field, entirely in the abstract, an
 `addGrp` slot, a `mul`/`one` pair, and four axioms tying them together.
 As with `Group` in Chapter 7, the definition alone gives no evidence that
 anything actually satisfies it. The most familiar candidate is the
@@ -96,7 +96,7 @@ They are the same laws, but stated generically over `[Ring R]` (or the weaker
 Formal definition and citation for this section, gathered here for
 reference (full entry in the [Bibliography](../bibliography.md)):
 
-- **Ring homomorphism.** "A ring homomorphism is a map $\varphi : R
+- **Ring homomorphism.** "A ring homomorphism is a map $\varphi . R
   \to S$ satisfying (i) $\varphi(a+b) = \varphi(a)+\varphi(b)$ ... and
   (ii) $\varphi(ab) = \varphi(a)\varphi(b)$" ([DummitFoote2003], §7.3
   "Ring Homomorphisms and Quotient Rings," p. 239).

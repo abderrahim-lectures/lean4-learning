@@ -18,7 +18,7 @@ Each section below asks the next question that answer forces.
 
 1. **A monoid has an associative operation and an identity. What is
    missing to reach the structures Part II is actually about?**
-   ([Section 1](01-definition.md)) One axiom: every element must be
+   ([Section 1](01-definition.md)) One axiom, every element must be
    invertible. Adding it to the data of the monoid turns "a set with an
    associative operation" into a **group**, stated first in ordinary
    mathematical notation before any Lean is written.
@@ -29,7 +29,7 @@ Each section below asks the next question that answer forces.
    throughout the book, applied here for the first time to something with
    this many moving parts.
 3. **Is the definition non-vacuous? Does anything actually satisfy it?**
-   ([Section 3](03-integers-example.md)) Yes: $(\mathbb{Z}, +, 0, -)$,
+   ([Section 3](03-integers-example.md)) Yes, $(\mathbb{Z}, +, 0, -)$,
    assembled as `intGroup` by citing one core-library lemma per axiom. But
    `intGroup` is abelian, so it never distinguishes a left inverse from a
    right one.
@@ -37,11 +37,11 @@ Each section below asks the next question that answer forces.
    the definition of `Group` does not require it to?** ([Section 4](04-permutations-example.md))
    Building a genuinely non-abelian group, the permutations of three
    elements, forces every axiom to be checked honestly, left and right
-   separately, and answers the question directly: no, nothing in `Group`
+   separately, and answers the question directly, no, nothing in `Group`
    assumes commutativity.
 5. **Now that two concrete groups exist, how is their data actually used?**
    ([Section 5](05-accessing-fields.md)) The same way the fields of any structure
-   are used, from Chapter 3 onward: ordinary projection, whether
+   are used, from Chapter 3 onward, ordinary projection, whether
    the field holds data or a proof.
 6. **Two groups have now been built by hand, field by field. Is that
    effort about to be paid back?** ([Section 6](06-why-bundle.md)) Yes.

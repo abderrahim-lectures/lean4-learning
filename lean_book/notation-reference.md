@@ -15,7 +15,7 @@ depending on context. See the two "Group multiplication" and "Module
 scalar action" rows below. They share the same math notation but
 translate to different Lean operations, `Group.op` versus `SMul.smul`.
 
-Two related pages cover notation this one deliberately leaves out: the
+Two related pages cover notation this one deliberately leaves out, the
 [tactic and library reference](tactic-and-library-reference.md) (tactics
 and Mathlib declaration names) and the
 [λ-calculus / type theory to Lean dictionary](lambda-calculus-dictionary.md)

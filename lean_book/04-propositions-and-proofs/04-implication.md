@@ -4,7 +4,7 @@
 
 ---
 
-$P \to Q$ (read "$P$ implies $Q$") is literally a function type: a proof of
+$P \to Q$ (read "$P$ implies $Q$") is literally a function type, a proof of
 $P \to Q$ is a function that turns any proof of $P$ into a proof of $Q$.
 This is the same `→` flagged back in
 [Chapter 1, Section 2](../01-basics/02-def-let-implicit.md), the one that
@@ -24,7 +24,7 @@ by proofs of $P$). So modus ponens
 $$
 \frac{P \Rightarrow Q \qquad P}{Q}
 $$
-is nothing but function application: given $f \in \mathrm{Hom}(P, Q)$ and
+is nothing but function application, given $f \in \mathrm{Hom}(P, Q)$ and
 $p \in P$, evaluate to get $f(p) \in Q$. The term `hpq hp` is precisely this
 evaluation $f(p)$.
 

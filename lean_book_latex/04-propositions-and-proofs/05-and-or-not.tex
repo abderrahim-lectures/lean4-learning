@@ -60,12 +60,12 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) (*$\ne
 \begin{itemize}
 \tightlist
 \item
-  \texttt{absurd \{P Q : Prop\} (h1 : P) (h2 : ¬P) : Q} derives \emph{anything at all} from a genuine contradiction: a direct proof of \texttt{P} together with a proof that \texttt{P} is impossible. \texttt{anything\_\allowbreak{}from\_\allowbreak{}contradiction} shows this concretely. From \texttt{1 = 2} and \texttt{1 ≠ 2} (contradictory hypotheses that could never both hold, but which Lean happily accepts as \emph{given} hypotheses in a signature. Nothing prevents assuming something false; it only prevents \emph{proving} it from nothing), one may conclude literally any proposition \texttt{P} whatsoever. This is the ``ex falso quodlibet'' principle made concrete. This is \(\bot\)-elimination from \hyperref[sec:04-propositions-and-proofs:02-logic-recap:1]{Section 2}, which is valid in both classical and intuitionistic logic, so nothing classical is being smuggled in here. Once a contradiction is present among the hypotheses, the goal being proved stops mattering.
+  \texttt{absurd \{P Q : Prop\} (h1 : P) (h2 : ¬P) : Q} derives \emph{anything at all} from a genuine contradiction, a direct proof of \texttt{P} together with a proof that \texttt{P} is impossible. \texttt{anything\_\allowbreak{}from\_\allowbreak{}contradiction} shows this concretely. From \texttt{1 = 2} and \texttt{1 ≠ 2} (contradictory hypotheses that could never both hold, but which Lean happily accepts as \emph{given} hypotheses in a signature. Nothing prevents assuming something false; it only prevents \emph{proving} it from nothing), one may conclude literally any proposition \texttt{P} whatsoever. This is the ``ex falso quodlibet'' principle made concrete. This is \(\bot\)-elimination from \hyperref[sec:04-propositions-and-proofs:02-logic-recap:1]{Section 2}, which is valid in both classical and intuitionistic logic, so nothing classical is being smuggled in here. Once a contradiction is present among the hypotheses, the goal being proved stops mattering.
 \end{itemize}
 
 \begin{mathreading}
 
-These are the constructive readings of the connectives as operations on the proof-sets. Conjunction \(P \wedge Q\) is the \textbf{product} \(P \times Q\): a proof is a pair \(\langle p, q\rangle\), so \texttt{and\_\allowbreak{}example} builds \((p,q)\) and \texttt{and\_\allowbreak{}left} applies \(\pi_1\):
+These are the constructive readings of the connectives as operations on the proof-sets. Conjunction \(P \wedge Q\) is the \textbf{product} \(P \times Q\), a proof is a pair \(\langle p, q\rangle\), so \texttt{and\_\allowbreak{}example} builds \((p,q)\) and \texttt{and\_\allowbreak{}left} applies \(\pi_1\):
 
 \end{mathreading}
 
@@ -74,8 +74,8 @@ These are the constructive readings of the connectives as operations on the proo
 \end{center}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Symbol
@@ -91,7 +91,7 @@ Lean
 \(\pi_1, \pi_2\) (``the projections'') & \texttt{h.left}, \texttt{h.right} (\texttt{and\_\allowbreak{}left} applies \texttt{.left}) \\
 \end{longtable}
 
-Disjunction \(P \vee Q\) is the \textbf{coproduct} \(P \sqcup Q\), the mirror image: arrows point \emph{in} rather than \emph{out}, and a proof is a tagged injection.
+Disjunction \(P \vee Q\) is the \textbf{coproduct} \(P \sqcup Q\), the mirror image, arrows point \emph{in} rather than \emph{out}, and a proof is a tagged injection.
 
 \begin{center}
 \input{diagrams/or-coproduct.tex}
@@ -109,4 +109,5 @@ Symbol & Lean \\
 \(\iota_2(q)\) (``right injection'') & \texttt{Or.inr hq} \\
 \end{longtable}
 
-To \emph{use} a proof of \(P \vee Q\), one case-splits by the universal property of the coproduct: given a proof \texttt{h : P ∨ Q} and a way to reach the same conclusion \texttt{R} from either side (\texttt{hpr : P → R}, \texttt{hqr : Q → R}), there is exactly one map \texttt{P∨Q → R} agreeing with both. This is precisely what \texttt{or\_\allowbreak{}comm\_\allowbreak{}term} above builds via \texttt{Or.elim}. Negation is \(\neg P := (P \to \bot)\), a map into the initial object \(\bot = \varnothing\). A proof of \(\neg(1=2)\) is a function turning the (impossible) hypothesis \(1 = 2\) into an element of \(\varnothing\), vacuously. Here it is discharged by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}}, which mechanically confirms \(1 \neq 2\) since equality of \texttt{Nat} literals is decidable. Underlying this is exactly the same fact used throughout this book: distinct constructors of an inductive type (\texttt{Nat.succ}, applied a different number of times) are disjoint, so \texttt{1 = 2} has no proof to begin with. Observe that this is \emph{intuitionistic} logic: there is no built-in law of excluded middle.
+To \emph{use} a proof of \(P \vee Q\), one case-splits by the universal property of the coproduct, given a proof \texttt{h : P ∨ Q} and a way to reach the same conclusion \texttt{R} from either side (\texttt{hpr : P → R}, \texttt{hqr : Q → R}), there is exactly one map \texttt{P∨Q → R} agreeing with both. This is precisely what \texttt{or\_\allowbreak{}comm\_\allowbreak{}term} above builds via \texttt{Or.elim}. Negation is \(\neg P := (P \to
+\bot)\), a map into the initial object \(\bot = \varnothing\). A proof of \(\neg(1=2)\) is a function turning the (impossible) hypothesis \(1 = 2\) into an element of \(\varnothing\), vacuously. Here it is discharged by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}}, which mechanically confirms \(1 \neq 2\) since equality of \texttt{Nat} literals is decidable. Underlying this is exactly the same fact used throughout this book, distinct constructors of an inductive type (\texttt{Nat.succ}, applied a different number of times) are disjoint, so \texttt{1 = 2} has no proof to begin with. Observe that this is \emph{intuitionistic} logic, there is no built-in law of excluded middle.

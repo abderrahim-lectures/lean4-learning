@@ -19,7 +19,7 @@ this.
   hierarchy in between (`Semiring`, `NonUnitalRing`, ...).
 - `Mathlib.Algebra.Module.Defs` has [`Module`](https://loogle.lean-lang.org/?q=Module), much more general than
   the hand-built version of Chapter 11, with the entire linear-algebra library
-  (`Mathlib.LinearAlgebra.*`: bases, dimension, tensor products, exact
+  (`Mathlib.LinearAlgebra.*`, bases, dimension, tensor products, exact
   sequences) built on top.
 - `Mathlib.Combinatorics.Quiver.Basic` and `Mathlib.Algebra.Category.*` have
   quivers as the underlying data of a category (a category is "a quiver
@@ -32,7 +32,7 @@ this.
   good starting point once the type-class style is familiar.
 
 The jump from the `structure`-based definitions of this book to the
-`class`-based ones of Mathlib is mostly about **ergonomics**: automatic instance
+`class`-based ones of Mathlib is mostly about **ergonomics**, automatic instance
 resolution, shared notation, and inheritance diamonds (the ambiguity that
 arises when a structure extends two parents with a common ancestor)
 already resolved. It is not really about mathematical content.
@@ -90,11 +90,11 @@ example : Nat.card (Subgroup.zpowers (finRotate 3)) = 3 := by
 
 Thus $3 \mid 6$, not asserted, but *derived*, by instantiating a theorem
 Mathlib already proved once, generically, for every group. Neither of
-these two facts required a single new definition: both reuse objects
+these two facts required a single new definition, both reuse objects
 this book already built, and both are facts the from-scratch
 `Ring`/`Group` of this book genuinely could not have stated, since it never built
 the surrounding machinery (invertibility, subgroups) that Mathlib
-already has. This is the concrete shape of "moving to Mathlib": not
+already has. This is the concrete shape of "moving to Mathlib", not
 different mathematics, merely a much larger stock of already-proved
 consequences to draw on.
 

@@ -8,7 +8,7 @@
 initial ring (Theorem 1/2 of Chapter 8 hold for it as easily as
 possible, since it has essentially the "obvious" ring structure).
 [The matrix example of this chapter](07-matrices.md) shows a genuinely *noncommutative* ring. This
-section shows the other direction the axioms can specialize to: a
+section shows the other direction the axioms can specialize to, a
 **commutative, finite** ring, small enough to check every axiom by direct
 computation rather than by citing library lemmas.
 

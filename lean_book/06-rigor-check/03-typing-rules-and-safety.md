@@ -82,15 +82,15 @@ $$
 
 Each rule, read as a Lean fact already familiar from earlier chapters.
 
-- **(Var)**: if the type of `x` is recorded in the local context, `#check x`
+- **(Var)**, if the type of `x` is recorded in the local context, `#check x`
   reports that type; there is nothing to derive.
-- **(Abs)**: to type-check `fun x => t`, extend the context with
+- **(Abs)**, to type-check `fun x => t`, extend the context with
   `x : τ1` (a fresh assumption, exactly like a hypothesis introduced by
   [`intro`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) in Chapter 5), check that the type of `t` is `τ2` under that extended
   context, and conclude the whole abstraction has type `τ1 → τ2`. This
   *is* how Lean checks every `def f (x : τ1) : τ2 := t` written
   since Chapter 1.
-- **(App)**: to type-check `t1 t2`, `t1` must have a function type whose
+- **(App)**, to type-check `t1 t2`, `t1` must have a function type whose
   domain matches the type of `t2` exactly; the result has the codomain type.
   This is exactly the error discussed in Chapter 5 under "reading a tactic
   failure." [`exact`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) `e` fails with a **type mismatch** precisely when the
@@ -101,14 +101,14 @@ Each rule, read as a Lean fact already familiar from earlier chapters.
 Two theorems about STLC are the entire reason to bother with a type
 system at all.
 
-- **Progress**: a well-typed closed term (no free variables) is either
+- **Progress**, a well-typed closed term (no free variables) is either
   already a **value**, an abstraction, or (if base types come with their
   own constants, as `Nat`/`Bool` effectively do) a constant of a base type,
   or it can take a β-reduction step. It never "gets stuck" partway
   through evaluation. There is no well-typed analogue of "apply `3` to
   `true`," because the side condition of (App) would already have rejected
   such a term at elaboration time, before any reduction is attempted.
-- **Preservation** (subject reduction): if $\Gamma \vdash t : \tau$ and
+- **Preservation** (subject reduction), if $\Gamma \vdash t : \tau$ and
   $t \longrightarrow_\beta t'$, then $\Gamma \vdash t' : \tau$. Reduction
   never changes the type of a term. This is *exactly* why the definitional
   equality of this chapter (Section 4, next) is trustworthy. Reducing a term to
@@ -192,7 +192,7 @@ Here $\mathrm{imax}(i, j) = j$ when $j = 0$, and $\max(i, j)$ otherwise, and
 
 For $j > 0$, the case where $B$ is genuinely a type rather than a
 proposition, $\mathrm{imax}$ *is* $\max$, and the rule is exactly the
-`Group : Type → Type` computation of Section 2 spelled out generally: with
+`Group : Type → Type` computation of Section 2 spelled out generally, with
 $A = \mathtt{Type}$ (itself living in `Type 1`) and $B = \mathtt{Type}$ again,
 the rule gives $\max(1, 1) = 1$, so `Type → Type` lands in `Type 1`, one level
 above `Type` itself.
@@ -231,7 +231,7 @@ Python allows `type` to be its own type, with no stratification at all,
 because the type system of Python is not being used as a proof system. There
 is no soundness property at stake that a Russell-style paradox could
 break. `Type` in Lean cannot self-apply this way (`Type : Type` is
-*inconsistent*. It allows encoding Girard's paradox and proving `False`),
+*inconsistent*. It allows encoding the Girard paradox and proving `False`),
 which is exactly why the infinite, strictly increasing hierarchy above is
 load-bearing rather than pedantry. This is one of the few places where the
 Python comparison genuinely runs out. It is not that Python does the same
@@ -261,7 +261,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - Pierce ([Pierce2002]), Ch. 9 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10–11; Ch. 12 "Simple Extensions" actually covers pairs/tuples/records/sums, unrelated to the content of this section.
 - Milner ([Milner1978]) covers the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the boxes of this section.
-- Girard: see [the references of Chapter 6, Section 2](02-universes.md) for the full citation. "Girard's paradox" (the inconsistency of `Type : Type`) is due to the 1972 thesis of Girard, a different, later paper than [Girard1971] cited elsewhere in this book.
+- Girard, see [the references of Chapter 6, Section 2](02-universes.md) for the full citation. The Girard paradox (the inconsistency of `Type : Type`) is due to the 1972 thesis of Girard, a different, later paper than [Girard1971] cited elsewhere in this book.
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" is the Lean documentation on universes, matching the presentation here.
 
 [Pierce2002]: ../bibliography.md#pierce2002

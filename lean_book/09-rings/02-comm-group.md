@@ -9,8 +9,8 @@ structure CommGroup (G : Type) extends Group G where
   comm : ∀ a b : G, op a b = op b a
 ```
 
-Recall `extends` from Chapter 3: a `CommGroup G` *is* a `Group G` (it has
-every field `Group G` has — `op`, `id`, `inv`, `assoc`, etc.) plus one more
+Recall `extends` from Chapter 3. A `CommGroup G` *is* a `Group G` (it has
+every field `Group G` has, namely `op`, `id`, `inv`, `assoc`, etc.) plus one more
 field, `comm`. Anywhere Lean expects a `Group G`, a `CommGroup G` may be
 passed instead (via `.toGroup`).
 

@@ -16,7 +16,7 @@
 
 Chapters 8 and 10 were about *finding* a proof by hand, deliberately slowly,
 so the underlying reasoning is never hidden. This chapter addresses the
-other half: once the reason a proof works is understood, how is it written
+other half, once the reason a proof works is understood, how is it written
 (and found) faster in day-to-day use? Efficient Lean does not mean "type
 less." It means knowing which automation to trust, knowing when it is
 still worth being explicit, and knowing how to structure lemmas so that

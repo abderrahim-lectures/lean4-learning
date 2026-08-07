@@ -8,7 +8,7 @@
 
 **Finding the proof.** In ordinary notation, the standard trick is as
 follows. It is worth memorizing as a pattern applicable to any
-additive-identity argument: start from $0 = 0 + 0$, multiply through, and
+additive-identity argument, start from $0 = 0 + 0$, multiply through, and
 cancel.
 
 $$
@@ -68,7 +68,7 @@ It directly builds "apply `f` to both sides of `h1`," which is precisely
 occurrence is targeted.
 
 If progress is lost partway through, the recovery move is always the
-same: translate the *current* hypothesis (`h1`, then `h2`) into ordinary
+same, translate the *current* hypothesis (`h1`, then `h2`) into ordinary
 `+`/`0` notation, check it against the paper derivation above, and
 identify exactly which line of the paper proof this corresponds to. The
 Lean proof is long only because each paper-proof line ("add $-x$ to both

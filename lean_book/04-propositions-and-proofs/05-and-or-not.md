@@ -66,7 +66,7 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2)
 ```
 
 - `absurd {P Q : Prop} (h1 : P) (h2 : ¬P) : Q` derives *anything at all*
-  from a genuine contradiction: a direct proof of `P` together with a
+  from a genuine contradiction, a direct proof of `P` together with a
   proof that `P` is impossible. `anything_from_contradiction` shows this
   concretely. From `1 = 2` and `1 ≠ 2` (contradictory hypotheses that could
   never both hold, but which Lean happily accepts as *given*
@@ -81,7 +81,7 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2)
 
 **Mathematical reading.** These are the constructive readings of the
 connectives as operations on the proof-sets. Conjunction $P \wedge Q$ is
-the **product** $P \times Q$: a proof is a pair $\langle p, q\rangle$, so
+the **product** $P \times Q$, a proof is a pair $\langle p, q\rangle$, so
 `and_example` builds $(p,q)$ and `and_left` applies $\pi_1$:
 
 ```mermaid
@@ -96,7 +96,7 @@ graph LR
 | $\langle p, q \rangle$ ("pairing") | `⟨hp, hq⟩` (`and_example`) |
 | $\pi_1, \pi_2$ ("the projections") | `h.left`, `h.right` (`and_left` applies `.left`) |
 
-Disjunction $P \vee Q$ is the **coproduct** $P \sqcup Q$, the mirror image:
+Disjunction $P \vee Q$ is the **coproduct** $P \sqcup Q$, the mirror image,
 arrows point *in* rather than *out*, and a proof is a tagged injection.
 
 ```mermaid
@@ -112,7 +112,7 @@ graph LR
 | $\iota_2(q)$ ("right injection") | `Or.inr hq` |
 
 To *use* a proof of $P \vee Q$, one case-splits by the universal property of
-the coproduct: given a proof `h : P ∨ Q` and a way to reach the same
+the coproduct, given a proof `h : P ∨ Q` and a way to reach the same
 conclusion `R` from either side (`hpr : P → R`, `hqr : Q → R`), there is
 exactly one map `P∨Q → R` agreeing with both. This is precisely what
 `or_comm_term` above builds via `Or.elim`. Negation is $\neg P := (P \to
@@ -121,9 +121,9 @@ $\neg(1=2)$ is a function turning the (impossible) hypothesis $1 = 2$ into
 an element of $\varnothing$, vacuously. Here it is discharged by [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/),
 which mechanically confirms $1 \neq 2$ since equality of `Nat` literals is
 decidable. Underlying this is exactly the same fact used throughout this
-book: distinct constructors of an inductive type (`Nat.succ`, applied a
+book, distinct constructors of an inductive type (`Nat.succ`, applied a
 different number of times) are disjoint, so `1 = 2` has no proof to begin
-with. Observe that this is *intuitionistic* logic: there is no built-in law of
+with. Observe that this is *intuitionistic* logic, there is no built-in law of
 excluded middle.
 
 ---

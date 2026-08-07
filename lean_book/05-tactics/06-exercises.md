@@ -39,7 +39,7 @@ mirroring a recursive function over the same type.
    whether [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) alone works, and if not, use [`induction`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/).
 3. Rewrite the `modus_ponens` proof from Chapter 4 in tactic mode.
 
-Solutions: [Appendix, Chapter 5](../15-appendix-solutions/04-chapter-5.md).
+Solutions, [Appendix, Chapter 5](../15-appendix-solutions/05-chapter-5.md).
 
 With definitions, propositions, and tactics in hand, we pause for a brief
 rigor check before diving into groups.

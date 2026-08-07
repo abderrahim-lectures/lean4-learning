@@ -39,7 +39,7 @@ order a skeptical reader would actually ask them.
    type. So does `Group` have a `Group`-structure of its own? Is
    `Group Group` a sensible thing to even ask for?** ([Section 2](02-universes.md))
    No, and the reason is load-bearing, not pedantic. `Type` cannot
-   contain itself without reproducing Russell's paradox, so Lean stacks
+   contain itself without reproducing the Russell paradox, so Lean stacks
    an infinite hierarchy of universes, and `Group : Type → Type` sits
    one level too high to ever be its own carrier.
 3. **That answer leaned on a typing rule, "a Π-type built from level
@@ -54,7 +54,7 @@ order a skeptical reader would actually ask them.
    but it says nothing about when two terms *are* the same term. `rfl`
    has been used constantly since Chapter 4 without ever asking what
    "the same" means.** ([Section 4](04-defeq-vs-propeq.md)) Two notions,
-   not one: definitional equality (`rfl`, checked by computation) and
+   not one, definitional equality (`rfl`, checked by computation) and
    propositional equality (`=`, proved like any other theorem) coincide
    often enough to blur together, but knowing exactly where they part
    ways is what makes a failed `rfl` legible instead of mysterious.

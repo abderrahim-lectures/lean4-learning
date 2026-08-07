@@ -4,7 +4,7 @@
 
 ---
 
-Part I is now complete: terms and types, structures, propositions and
+Part I is now complete, terms and types, structures, propositions and
 proofs, tactics, and the rigor questions just answered. Before Chapter 7
 builds `Group`, this project asks for a smaller, self-contained version of
 exactly that construction, a **monoid**, a set with an associative
@@ -27,7 +27,7 @@ done for the weaker `Monoid` first.
    proof obligations `assoc`, `id_left`, `id_right`, exactly the fields of `Group`
    (Chapter 7, Section 2), minus `inv`/`inv_left`/`inv_right`.
 2. Build at least one concrete instance. Two natural choices, both reusing
-   facts already available from core Lean: `List α` under `++`/`[]`, or
+   facts already available from core Lean, `List α` under `++`/`[]`, or
    `Nat` under `*`/`1`.
 3. Prove a generic theorem for an arbitrary `Mn : Monoid M`: *the identity
    is unique*, if `e' : M` satisfies `∀ a, Mn.op e' a = a`, then
@@ -72,7 +72,7 @@ theorem monoid_id_unique {M : Type} (Mn : Monoid M) (e' : M)
 
 If this compiles (`lake env lean` on a file containing it, or pasted into
 `lean_project`), the project is done. A full worked solution, including a
-second instance, is in [Appendix, Chapter 6](../15-appendix-solutions/05-chapter-6.md).
+second instance, is in [Appendix, Chapter 6](../15-appendix-solutions/06-chapter-6.md).
 
 ---
 

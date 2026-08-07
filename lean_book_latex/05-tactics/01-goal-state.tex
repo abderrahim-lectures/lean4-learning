@@ -1,6 +1,6 @@
 \section{The goal state, and how to read it}\label{sec:05-tactics:01-goal-state:1}
 
-Inside \texttt{by}, Lean displays a \textbf{goal}: hypotheses above a horizontal line (named, typed facts available for use), and the statement to prove below it. Each tactic changes the goal. Sometimes it closes the goal, sometimes it splits it into several smaller goals, and sometimes it merely rewrites it into an equivalent but easier-to-handle shape. Proving something in Lean is mostly the skill of examining the current goal and asking what tactic changes this into something closer to solved.
+Inside \texttt{by}, Lean displays a \textbf{goal}, hypotheses above a horizontal line (named, typed facts available for use), and the statement to prove below it. Each tactic changes the goal. Sometimes it closes the goal, sometimes it splits it into several smaller goals, and sometimes it merely rewrites it into an equivalent but easier-to-handle shape. Proving something in Lean is mostly the skill of examining the current goal and asking what tactic changes this into something closer to solved.
 
 \begin{lstlisting}
 theorem two_plus_two : 2 + 2 = 4 := by
@@ -44,7 +44,7 @@ Suppose the task is to prove \texttt{(a b : Nat) → a + b = b + a}, with the pr
 
   \begin{figure}
   \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{../lean_book/05-tactics/images/goal-state-infoview.png}
+  \pandocbounded{\includegraphics[keepaspectratio,alt={The Lean Infoview panel in VS Code, showing the tactic state (hypotheses a k : Nat, ih : a + k = k + a, goal a + (k + 1) = k + 1 + a) for the succ case of the induction in my\_add\_comm.}]{../lean_book/05-tactics/images/goal-state-infoview.png}}
   \caption{The Lean Infoview panel in VS Code, showing the tactic state (hypotheses \texttt{a k : Nat}, \texttt{ih : a + k = k + a}, goal \texttt{a + (k + 1) = k + 1 + a}) for the succ case of the induction in my\_add\_comm.}
   \end{figure}
 \item

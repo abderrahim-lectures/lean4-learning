@@ -54,7 +54,7 @@ and substitution rule are identical to ordinary `rw`. Only the *target*
 (a named hypothesis, not the goal) is different.
 
 **Mathematical reading.** Each tactic corresponds to a standard proof move.
-`intro` discharges an implication/universal by the deduction theorem: to
+`intro` discharges an implication/universal by the deduction theorem, to
 prove $A \to B$, *assume* $A$ as a new hypothesis and prove $B$. This is the
 $\lambda$-abstraction rule. `exact e` supplies a finished term, "this is
 precisely our claim." `apply f` is backward chaining. To prove the

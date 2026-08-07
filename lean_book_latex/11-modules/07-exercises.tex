@@ -13,14 +13,14 @@
 \item
   \emph{\texttt{congr 1} split the group axioms of a direct sum into one fact per summand. What would go wrong trying to prove the axioms of \texttt{directSumModule} without it, working with the pair as a single opaque value?} Nothing would be \emph{wrong}, exactly, but every axiom would need its own ad-hoc unfolding of what equality of pairs means. \texttt{congr 1} names the one fact (a equality of a product is checked componentwise) that makes all five/four proofs uniform instead of five/four bespoke arguments.
 \item
-  Prove that the identity function is a linear map: for any \texttt{Mod : Module R Rg M}, construct \texttt{idLinearMap : LinearMap Rg Mod Mod} with \texttt{toFun := id}.
+  Prove that the identity function is a linear map, for any \texttt{Mod : Module R Rg M}, construct \texttt{idLinearMap : LinearMap Rg Mod Mod} with \texttt{toFun := id}.
 \item
-  Prove that linear maps compose: given \texttt{f : LinearMap Rg ModM ModN} and \texttt{g : LinearMap Rg ModN ModP}, construct \texttt{LinearMap Rg ModM ModP} with \texttt{toFun := g.toFun ∘ f.toFun}. (This, together with Exercise 1 and associativity of function composition, is what makes \(R\)-modules and \(R\)-linear maps a category. This is the payoff that Chapter 1 promised.)
+  Prove that linear maps compose, given \texttt{f : LinearMap Rg ModM ModN} and \texttt{g : LinearMap Rg ModN ModP}, construct \texttt{LinearMap Rg ModM ModP} with \texttt{toFun := g.toFun ∘ f.toFun}. (This, together with Exercise 1 and associativity of function composition, is what makes \(R\)-modules and \(R\)-linear maps a category. This is the payoff that Chapter 1 promised.)
 \item
   Verify that \texttt{intSmul} (defined above) satisfies the four axioms of \texttt{Module} against \texttt{intRing}, at least for \texttt{one\_\allowbreak{}smul} and \texttt{smul\_\allowbreak{}add}, by induction on the integer scalar, in the style of Chapter 5.
 \item
   Define the submodule of multiples of a fixed integer \texttt{d : Int} (generalizing \texttt{evenSubmodule}, which is the case \texttt{d = 2}), and check that the three closure proofs generalize verbatim with \texttt{2} replaced by \texttt{d}.
 \end{enumerate}
 
-Solutions: \hyperref[sec:15-appendix-solutions:10-chapter-11:1]{Appendix, Chapter 11}.
+Solutions, \hyperref[sec:15-appendix-solutions:11-chapter-11:1]{Appendix, Chapter 11}.
 

@@ -1,4 +1,4 @@
-\section{Chapter 12: Modules over a ring}\label{sec:15-appendix-solutions:10-chapter-11:1}
+\section{Chapter 11: Modules over a ring}\label{sec:15-appendix-solutions:10-chapter-11:1}
 
 \textbf{1. The identity function is a linear map}
 
@@ -75,12 +75,12 @@ theorem natSmul_add {M : Type} (Grp : Group M) (n : Nat) (m1 m2 : M)
     -- Both sides are the same four elements combined via `op`, just grouped
     -- and ordered differently; regroup with `assoc` and swap the middle two
     -- terms using `comm`, exactly the "regroup, then rearrange" pattern
-    -- from Chapter 9.
+    -- from Chapter 8.
     rw [(*$\leftarrow$*) Grp.assoc, Grp.assoc m1 m2, comm m2 (natSmul Grp k m1), (*$\leftarrow$*) Grp.assoc m1,
         Grp.assoc]
 \end{lstlisting}
 
-The base case is \texttt{id = id + id} (an identity is its own double). This mirrors the ``element equal to its own double is zero'' fact used in \texttt{mul\_\allowbreak{}zero} from Chapter 11. The inductive step requires commutativity (\texttt{comm}, available since the group is a \texttt{CommGroup}) to slide \texttt{m2} and \texttt{natSmul Grp k m1} past each other. This is exactly why \texttt{intSmul} distributing over \texttt{+} requires an abelian group, rather than a general one: without \texttt{comm}, there is no way to reorder the four terms into a matching shape. Full verification of \texttt{add\_\allowbreak{}smul} and \texttt{smul\_\allowbreak{}smul} follows the same induction-on-the-scalar pattern, and makes a good longer exercise for further practice.
+The base case is \texttt{id = id + id} (an identity is its own double). This mirrors the ``element equal to its own double is zero'' fact used in \texttt{mul\_\allowbreak{}zero} from Chapter 10. The inductive step requires commutativity (\texttt{comm}, available since the group is a \texttt{CommGroup}) to slide \texttt{m2} and \texttt{natSmul Grp k m1} past each other. This is exactly why \texttt{intSmul} distributing over \texttt{+} requires an abelian group, rather than a general one: without \texttt{comm}, there is no way to reorder the four terms into a matching shape. Full verification of \texttt{add\_\allowbreak{}smul} and \texttt{smul\_\allowbreak{}smul} follows the same induction-on-the-scalar pattern, and makes a good longer exercise for further practice.
 
 \textbf{Partial coverage note:} this solution only proves \texttt{natSmul\_\allowbreak{}add} for natural-number scalars (with an extra \texttt{comm} hypothesis added for convenience). The exercise as stated asks for the full \texttt{intSmul}/\texttt{smul\_\allowbreak{}add} property, including negative scalars. Extending to \texttt{Int} requires case splitting on \texttt{Int.ofNat}/\texttt{Int.negSucc} and handling sign flips in the inductive step, left here as an exercise rather than fully verified.
 

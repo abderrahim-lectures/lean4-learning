@@ -8,7 +8,7 @@ Section 3 exhibited a concrete module, the canonical $\mathbb{Z}$-action on
 an abelian group, built from nothing but the group structure itself. With
 at least one genuine module now in hand, the natural next question is
 which subsets of a module inherit its structure. This is the module
-analogue of a subgroup: a subset closed under the same operations the
+analogue of a subgroup, a subset closed under the same operations the
 whole module is built from.
 
 A **submodule** of $M$ is a subset closed under $+$, containing $0$, and
@@ -27,7 +27,7 @@ structure Submodule {R : Type} (Rg : Ring R) {M : Type} (Mod : Module R Rg M) wh
 
 `carrier : M → Prop` is the subset, viewed as its membership predicate
 (`carrier m` reads "`m` is in the submodule"). This is the standard Lean
-idiom for "subobject of `X`": not a `Set X` wrapped separately, but a
+idiom for "subobject of `X`", not a `Set X` wrapped separately, but a
 predicate directly, since `carrier m` *is* a proposition usable directly as a
 hypothesis.
 
@@ -36,7 +36,7 @@ presented by its membership predicate $\chi_N : M \to \mathrm{Prop}$ (a
 subset $N = \{\,m \in M \mid \chi_N(m)\,\}$) together with closure proofs:
 $0 \in N$, $m,n \in N \Rightarrow m+n \in N$, and $r\in R,\, m\in N
 \Rightarrow r\cdot m \in N$. These are exactly the conditions for $N$ to be
-an $R$-submodule: closed under the abelian-group operations and stable
+an $R$-submodule, closed under the abelian-group operations and stable
 under scalars. So $N$ inherits an $R$-module structure and the
 inclusion $N \hookrightarrow M$ is $R$-linear. Categorically this is a
 [subobject](../02-terminology-and-coc/01-terminology.md#category-theory-terms-used-beyond-the-baseline)
@@ -87,7 +87,7 @@ def evenSubmodule : Submodule intRing intZModule where
     rw [hk, ← Int.mul_assoc, Int.mul_comm r 2, Int.mul_assoc]
 ```
 
-Each closure proof follows the same shape: destructure the hypothesis to
+Each closure proof follows the same shape, destructure the hypothesis to
 expose its witness (`⟨k, hk⟩` denotes "`m` is even, with witness `k` and proof
 `hk : m = 2 * k`"), then supply a new witness and discharge the resulting
 `Int` equation. The witness `0` of `zero_mem` makes the goal `id = 2 * 0`, true

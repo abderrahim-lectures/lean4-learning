@@ -26,7 +26,7 @@ Each section below answers the question the previous one forces.
    proofs against. How is it written down as a `structure`?**
    ([Section 2](02-translating-into-lean.md)) Exactly the same "data,
    then axioms" translation already used for `Group` and `Ring`,
-   with one difference: the ring $R$ a module is defined *over* enters as
+   with one difference, the ring $R$ a module is defined *over* enters as
    an explicit argument to `Module`, not as bundled data, because a module
    is always a module over some already-fixed ring.
 3. **Is this definition merely formally sound, or does something already
@@ -44,13 +44,13 @@ Each section below answers the question the previous one forces.
    membership predicate bundled with closure proofs, rather than a
    `Set X` wrapped separately.
 5. **Given a module, what are the structure-preserving maps *between* two
-   of them?** ([Section 5](05-linear-maps.md)) A **linear map**: additive,
+   of them?** ([Section 5](05-linear-maps.md)) A **linear map**, additive,
    and compatible with the scalar action on both sides. This supplies the
    morphisms of the category $R\text{-}\mathbf{Mod}$, completing the
    objects-and-morphisms picture Chapter 1 first set up for `Type` itself.
 6. **With objects and morphisms both available, how are new modules built
    out of old ones?** ([Section 6](06-direct-sums.md)) The **direct
-   sum** $M \oplus N$: componentwise structure on the product $M \times N$,
+   sum** $M \oplus N$, componentwise structure on the product $M \times N$,
    verified field by field with `congr 1`, and equipped with projection
    maps that are themselves instances of the `LinearMap` of Section 5,
    nothing new is needed to state them, only what is already on the table.
@@ -58,7 +58,7 @@ Each section below answers the question the previous one forces.
 By the last section, "module" has gone from a paper generalization of
 "vector space" to a working Lean `structure`, complete with a canonical
 example, its subobjects, its morphisms, and one way to build new modules
-from old. Chapter 12 puts this machinery to its intended use: a
+from old. Chapter 12 puts this machinery to its intended use, a
 representation of a quiver is exactly a module over its path algebra,
 which is why this chapter comes immediately before it.
 

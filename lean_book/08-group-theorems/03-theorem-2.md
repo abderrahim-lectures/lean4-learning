@@ -9,7 +9,7 @@
 
 **Finding the proof.** This has the same shape as Theorem 1: an equality
 between two elements known only through separate facts (`h` about `b`, the
-`Group` axioms about `Grp.inv a`). Hence the same strategy applies: relate
+`Group` axioms about `Grp.inv a`). Hence the same strategy applies, relate
 both sides to something in common. Here, however, no single lemma hands us `Grp.op b Grp.id`
 **pointing the way we need**. `Grp.id_right` gives
 `Grp.op b Grp.id = b`, so we must use it backwards (`.symm`) to pad `b`
@@ -48,17 +48,17 @@ theorem left_inverse_unique (a b : G) (h : Grp.op b a = Grp.id) :
 At each `rw`, the goal-state comment records what would appear in the
 editor. It is worth training oneself to predict that comment *before*
 running the tactic, then checking it. When the prediction is wrong, that is
-the moment worth stopping to understand why (usually: the `rw` fired on a
+the moment worth stopping to understand why (usually, the `rw` fired on a
 different occurrence of the pattern than expected, or in the wrong
 direction).
 
-**Mathematical reading.** This is *uniqueness of inverses*: if $b\cdot a =
+**Mathematical reading.** This is *uniqueness of inverses*, if $b\cdot a =
 e$ then $b = a^{-1}$. The displayed chain
 $$
 b = b\cdot e = b\cdot(a\cdot a^{-1}) = (b\cdot a)\cdot a^{-1} = e\cdot a^{-1}
 = a^{-1}
 $$
-is the textbook proof: insert $e = a\cdot a^{-1}$, reassociate, apply the
+is the textbook proof, insert $e = a\cdot a^{-1}$, reassociate, apply the
 hypothesis $b\cdot a = e$, then cancel the identity. Each `rw` performs
 exactly one equality in this chain, using the axioms $\lambda_r$ (id_right),
 $\iota_r$ (inv_right), $\alpha$ (assoc), the hypothesis $h$, and $\lambda_\ell$

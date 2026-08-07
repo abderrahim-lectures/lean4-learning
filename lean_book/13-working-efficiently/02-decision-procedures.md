@@ -6,7 +6,7 @@
 
 The `exact?`/`apply?` tactics of Section 1 search the library for a proof that already
 exists somewhere, then report it for inspection. Some goals need nothing
-of the kind: their truth value is not a fact to be looked up, it is a
+of the kind, their truth value is not a fact to be looked up, it is a
 computation to be run. This section covers that second, disjoint case,
 tactics that settle a goal by evaluating an algorithm rather than
 searching for or constructing a term by hand.
@@ -18,7 +18,7 @@ that just run that algorithm.
 - **`decide`** evaluates a `Decidable` proposition to `true`/`false`
   directly. It works well for small, closed (no free variables)
   propositions, for example `(7 : Nat) ∣ 21` or `¬ (3 = 5)`. `decide` should
-  not be used on propositions with free variables or unbounded search: it can
+  not be used on propositions with free variables or unbounded search, it can
   time out, or worse, produce a correct but useless proof term that
   reveals nothing.
 - **`omega`** is a decision procedure for *linear* arithmetic over `Nat`/`Int`
@@ -74,7 +74,7 @@ reference (full entry in the [Bibliography](../bibliography.md)):
   Picture it like this. A litmus test strip rather than a question you
   have to reason through by hand. Dip it in and it changes color to
   tell you, definitively, acid or base. `sumbool` packages that same
-  idea as data: run it and get back a definite "yes, and here's why" or
+  idea as data, run it and get back a definite "yes, and here's why" or
   "no, and here's why," a constructive "$P \vee \neg P$, and we can tell
   which." Chlipala is the actual source for `Decidable` as a
   type-theoretic notion (an earlier draft of this book cited Pierce2002

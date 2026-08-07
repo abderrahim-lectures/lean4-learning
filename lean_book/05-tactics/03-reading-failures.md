@@ -11,7 +11,7 @@ a diagnostic, not a dead end.
 - [`rw [h]`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) where `h : a = b` but the goal does not literally contain `a`
   fails with **"did not find instance of the pattern"** (also phrased "did
   not find an occurrence of the pattern"). This means the exact syntactic
-  term `a` being rewritten does not occur in the goal as written. Fix: use
+  term `a` being rewritten does not occur in the goal as written. Fix, use
   `#check` (or hover in the editor) on the actual statement of the goal. It is
   common for a definition to be unfolded differently than expected, so the
   term to be rewritten is hiding behind a `def` that needs [`unfold`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) or
@@ -32,7 +32,7 @@ a diagnostic, not a dead end.
   [`sorry`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) in place of the rest of the proof, which type-checks with a
   warning and permits inspection of exactly what remains).
 
-`sorry` deserves a special mention: it is a placeholder that closes any
+`sorry` deserves a special mention, it is a placeholder that closes any
 goal instantly but marks the theorem as unproved. (Lean prints a warning,
 and any downstream proof depending on it inherits this unproved status.) It should be used
 constantly while exploring. Writing the skeleton of a multi-step proof with

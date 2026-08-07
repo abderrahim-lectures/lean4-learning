@@ -58,7 +58,7 @@ where each is actually explained end to end (not just first mentioned).
 | `(x : α)` | Explicit argument, supplied positionally | Ch. 1, Section 2 |
 | `{x : α}` | Implicit argument, solved by unification | Ch. 1, Section 2 |
 | `[x : C]` | Instance-implicit argument, solved by typeclass search | Ch. 1, Section 2 (named) / Ch. 6, Section 1 (in use) |
-| `{{x : α}}` | Strict-implicit argument, deferred until an explicit argument follows; not used in this book's own code | Ch. 1, Section 2 |
+| `{{x : α}}` | Strict-implicit argument, deferred until an explicit argument follows; not used in the own code of this book | Ch. 1, Section 2 |
 | `def` | Semi-reducible definition; unfolds only when told to (`unfold`) | Ch. 1, Section 2 (named) / Ch. 5 (transparency) |
 | `let` | Local, definitionally transparent definition | Ch. 1, Section 2 |
 | `abbrev` | Reducible definition, auto `@[reducible, inline]`, seen through automatically | Ch. 1, Section 2 (named) / Ch. 5 (in depth) |

@@ -446,7 +446,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   choose an amount, rather than one screen demanding all three at
   once. A function of several arguments is really a chain of
   single-argument steps, each handing off to the next.
-- **Weak head normal form.** "Weak Head Normal Form: all expressions
+- **Weak head normal form.** "Weak Head Normal Form, all expressions
   which are either λ-abstractions or of the form
   $\lambda x_1 \ldots \lambda x_n.\, y\, e_1 \ldots e_m$"
   ([Thompson1991], §2.3, p. 36, Definition 2.8). Picture it like this. Telling a

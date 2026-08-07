@@ -53,11 +53,11 @@ Each rule, read as a Lean fact already familiar from earlier chapters.
 \begin{itemize}
 \tightlist
 \item
-  \textbf{(Var)}: if the type of \texttt{x} is recorded in the local context, \texttt{\#check x} reports that type; there is nothing to derive.
+  \textbf{(Var)}, if the type of \texttt{x} is recorded in the local context, \texttt{\#check x} reports that type; there is nothing to derive.
 \item
-  \textbf{(Abs)}: to type-check \texttt{fun x => t}, extend the context with \texttt{x : τ1} (a fresh assumption, exactly like a hypothesis introduced by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{intro}} in Chapter 5), check that the type of \texttt{t} is \texttt{τ2} under that extended context, and conclude the whole abstraction has type \texttt{τ1 → τ2}. This \emph{is} how Lean checks every \texttt{def f (x : τ1) : τ2 := t} written since Chapter 1.
+  \textbf{(Abs)}, to type-check \texttt{fun x => t}, extend the context with \texttt{x : τ1} (a fresh assumption, exactly like a hypothesis introduced by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{intro}} in Chapter 5), check that the type of \texttt{t} is \texttt{τ2} under that extended context, and conclude the whole abstraction has type \texttt{τ1 → τ2}. This \emph{is} how Lean checks every \texttt{def f (x : τ1) : τ2 := t} written since Chapter 1.
 \item
-  \textbf{(App)}: to type-check \texttt{t1 t2}, \texttt{t1} must have a function type whose domain matches the type of \texttt{t2} exactly; the result has the codomain type. This is exactly the error discussed in Chapter 5 under ``reading a tactic failure.'' \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{exact}} \texttt{e} fails with a \textbf{type mismatch} precisely when the side condition of this rule (that \(\tau_1\) must match on both sides) is not met.
+  \textbf{(App)}, to type-check \texttt{t1 t2}, \texttt{t1} must have a function type whose domain matches the type of \texttt{t2} exactly; the result has the codomain type. This is exactly the error discussed in Chapter 5 under ``reading a tactic failure.'' \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{exact}} \texttt{e} fails with a \textbf{type mismatch} precisely when the side condition of this rule (that \(\tau_1\) must match on both sides) is not met.
 \end{itemize}
 
 \subsection{Type preservation and progress: the payoff}\label{sec:06-rigor-check:03-typing-rules-and-safety:4}
@@ -67,9 +67,9 @@ Two theorems about STLC are the entire reason to bother with a type system at al
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Progress}: a well-typed closed term (no free variables) is either already a \textbf{value}, an abstraction, or (if base types come with their own constants, as \texttt{Nat}/\texttt{Bool} effectively do) a constant of a base type, or it can take a β-reduction step. It never ``gets stuck'' partway through evaluation. There is no well-typed analogue of ``apply \texttt{3} to \texttt{true},'' because the side condition of (App) would already have rejected such a term at elaboration time, before any reduction is attempted.
+  \textbf{Progress}, a well-typed closed term (no free variables) is either already a \textbf{value}, an abstraction, or (if base types come with their own constants, as \texttt{Nat}/\texttt{Bool} effectively do) a constant of a base type, or it can take a β-reduction step. It never ``gets stuck'' partway through evaluation. There is no well-typed analogue of ``apply \texttt{3} to \texttt{true},'' because the side condition of (App) would already have rejected such a term at elaboration time, before any reduction is attempted.
 \item
-  \textbf{Preservation} (subject reduction): if \(\Gamma \vdash t : \tau\) and \(t \longrightarrow_\beta t'\), then \(\Gamma \vdash t' : \tau\). Reduction never changes the type of a term. This is \emph{exactly} why the definitional equality of this chapter (Section 4, next) is trustworthy. Reducing a term to normal form (what \texttt{\#eval}/\texttt{rfl} do) can never accidentally produce something of a different type than the one it started with.
+  \textbf{Preservation} (subject reduction), if \(\Gamma \vdash t : \tau\) and \(t \longrightarrow_\beta t'\), then \(\Gamma \vdash t' : \tau\). Reduction never changes the type of a term. This is \emph{exactly} why the definitional equality of this chapter (Section 4, next) is trustworthy. Reducing a term to normal form (what \texttt{\#eval}/\texttt{rfl} do) can never accidentally produce something of a different type than the one it started with.
 \end{itemize}
 
 Together, progress and preservation are the formal content of ``well-typed programs do not go wrong,'' and, viewed through Curry--Howard (Chapter 4), ``well-typed proof terms do not prove something other than what they claim to prove.'' The entire reliability of Lean as a proof assistant rests on an extended version of exactly these two theorems, proved once for the kernel of Lean and then trusted for every proof checked thereafter.
@@ -101,7 +101,8 @@ This is precisely the gap already closed by \hyperref[sec:02-terminology-and-coc
 
 \subsection{Universes, as a typing rule}\label{sec:06-rigor-check:03-typing-rules-and-safety:6}
 
-Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 : \mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions, the formal system CoC/CIC named by Chapter 2, Section 2, extending STLC above with Π-types and universes, this is stated as a typing rule for the universes themselves.
+Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 :
+\mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions, the formal system CoC/CIC named by Chapter 2, Section 2, extending STLC above with Π-types and universes, this is stated as a typing rule for the universes themselves.
 
 \[
 \dfrac{}{\mathtt{Type}\,i : \mathtt{Type}\,(i+1)}
@@ -116,7 +117,7 @@ together with a rule saying Π-types (function types, including ordinary \texttt
 
 Here \(\mathrm{imax}(i, j) = j\) when \(j = 0\), and \(\max(i, j)\) otherwise, and \texttt{Sort 0} is \texttt{Prop} and \texttt{Sort (k+1)} is \texttt{Type k} (Chapter 2, Section 2).
 
-For \(j > 0\), the case where \(B\) is genuinely a type rather than a proposition, \(\mathrm{imax}\) \emph{is} \(\max\), and the rule is exactly the \texttt{Group : Type → Type} computation of Section 2 spelled out generally: with \(A = \mathtt{Type}\) (itself living in \texttt{Type 1}) and \(B = \mathtt{Type}\) again, the rule gives \(\max(1, 1) = 1\), so \texttt{Type → Type} lands in \texttt{Type 1}, one level above \texttt{Type} itself.
+For \(j > 0\), the case where \(B\) is genuinely a type rather than a proposition, \(\mathrm{imax}\) \emph{is} \(\max\), and the rule is exactly the \texttt{Group : Type → Type} computation of Section 2 spelled out generally, with \(A = \mathtt{Type}\) (itself living in \texttt{Type 1}) and \(B = \mathtt{Type}\) again, the rule gives \(\max(1, 1) = 1\), so \texttt{Type → Type} lands in \texttt{Type 1}, one level above \texttt{Type} itself.
 
 The \(j = 0\) case is not a footnote. It is what makes \texttt{∀} usable at all. When \(B\) lands in \texttt{Prop}, the whole Π-type is a \texttt{Prop} \emph{regardless of how large \(A\) is}. This is the \textbf{impredicativity of \texttt{Prop}}, and it is why \texttt{∀ n : Nat, n ≥ 0} is a proposition you can prove rather than an inhabitant of \texttt{Type 1}.
 
@@ -142,7 +143,7 @@ In Python, \texttt{type(3)} is \texttt{int}, and \texttt{type(int)} is \texttt{t
 <class 'type'>
 \end{lstlisting}
 
-Python allows \texttt{type} to be its own type, with no stratification at all, because the type system of Python is not being used as a proof system. There is no soundness property at stake that a Russell-style paradox could break. \texttt{Type} in Lean cannot self-apply this way (\texttt{Type : Type} is \emph{inconsistent}. It allows encoding Girard's paradox and proving \texttt{False}), which is exactly why the infinite, strictly increasing hierarchy above is load-bearing rather than pedantry. This is one of the few places where the Python comparison genuinely runs out. It is not that Python does the same thing more simply, it is that Python does not need to solve this problem at all, because nothing checks proofs against it.
+Python allows \texttt{type} to be its own type, with no stratification at all, because the type system of Python is not being used as a proof system. There is no soundness property at stake that a Russell-style paradox could break. \texttt{Type} in Lean cannot self-apply this way (\texttt{Type : Type} is \emph{inconsistent}. It allows encoding the Girard paradox and proving \texttt{False}), which is exactly why the infinite, strictly increasing hierarchy above is load-bearing rather than pedantry. This is one of the few places where the Python comparison genuinely runs out. It is not that Python does the same thing more simply, it is that Python does not need to solve this problem at all, because nothing checks proofs against it.
 
 \subsection{Sources, quoted}\label{sec:06-rigor-check:03-typing-rules-and-safety:7}
 
@@ -163,7 +164,7 @@ Formal definitions and citations for this section, gathered here for reference (
 \item
   Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) cover the Python-side comparison used in the boxes of this section.
 \item
-  Girard: see \hyperref[sec:06-rigor-check:02-universes:1]{the references of Chapter 6, Section 2} for the full citation. ``Girard's paradox'' (the inconsistency of \texttt{Type : Type}) is due to the 1972 thesis of Girard, a different, later paper than \cite{Girard1971} cited elsewhere in this book.
+  Girard, see \hyperref[sec:06-rigor-check:02-universes:1]{the references of Chapter 6, Section 2} for the full citation. The Girard paradox (the inconsistency of \texttt{Type : Type}) is due to the 1972 thesis of Girard, a different, later paper than \cite{Girard1971} cited elsewhere in this book.
 \item
   \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §2.2 ``Types as objects'' is the Lean documentation on universes, matching the presentation here.
 \end{itemize}

@@ -18,14 +18,16 @@ Reading this carefully.
 \item
   \texttt{nil (v : V) : Path Q v v} is the trivial path at \texttt{v}, going from \texttt{v} to \texttt{v} in zero steps. This is \(e_v\) from the math above.
 \item
-  \texttt{cons \{u v w : V\} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w}. given an existing path \texttt{p} from \texttt{u} to \texttt{v}, and an arrow \texttt{a} whose source is (provably, via \texttt{h}) \texttt{v} and whose target is (provably, via \texttt{h'}) \texttt{w}, \texttt{p} can be extended by appending \texttt{a}, producing a path from \texttt{u} to \texttt{w}. The two proof fields \texttt{h} and \texttt{h'} are exactly what \emph{prevents} the construction of nonsense paths: an arrow cannot be \texttt{cons}ed onto a path unless its source matches where the path left off.
+  \texttt{cons \{u v w : V\} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w}. given an existing path \texttt{p} from \texttt{u} to \texttt{v}, and an arrow \texttt{a} whose source is (provably, via \texttt{h}) \texttt{v} and whose target is (provably, via \texttt{h'}) \texttt{w}, \texttt{p} can be extended by appending \texttt{a}, producing a path from \texttt{u} to \texttt{w}. The two proof fields \texttt{h} and \texttt{h'} are exactly what \emph{prevents} the construction of nonsense paths, an arrow cannot be \texttt{cons}ed onto a path unless its source matches where the path left off.
 \end{itemize}
 
 Note that \texttt{cons} builds the path by appending the new arrow at the \emph{end}, matching the natural description ``take path \texttt{p}, then follow arrow \texttt{a}.''
 
 \begin{mathreading}
 
-\texttt{Path Q} is the family of Hom-sets of the \textbf{free category} \(\mathrm{Free}(Q)\) on the quiver \(Q\): \texttt{Path Q u w} \(= \mathrm{Hom}_{\mathrm{Free}(Q)}(u, w)\), the set of directed paths \(u \rightsquigarrow w\). As an \((V\times V)\)-indexed family it is the map \(V \times V \to \mathbf{Set}\), \((u,w) \mapsto \{\text{paths } u \to w\}\). The constructors are the category structure: \texttt{nil v} is the identity morphism \(e_v = \mathrm{id}_v \in \mathrm{Hom}(v,v)\) (the length-\(0\) path), and \texttt{cons} extends a path by one arrow, with the proof fields \(h : s(a) = v\), \(h' : t(a) = w\) enforcing head-to-tail composability. This is the type-level encoding of ``\(\circ\) is only defined on composable pairs.'' Because the composability constraint lives \emph{in the type}, an ill-formed composite simply fails to typecheck. This is exactly the dependent-type payoff from Chapter 1.
+\texttt{Path Q} is the family of Hom-sets of the \textbf{free category} \(\mathrm{Free}(Q)\) on the quiver \(Q\): \texttt{Path Q u w} \(=
+\mathrm{Hom}_{\mathrm{Free}(Q)}(u, w)\), the set of directed paths \(u
+\rightsquigarrow w\). As an \((V\times V)\)-indexed family it is the map \(V \times V \to \mathbf{Set}\), \((u,w) \mapsto \{\text{paths } u \to w\}\). The constructors are the category structure: \texttt{nil v} is the identity morphism \(e_v = \mathrm{id}_v \in \mathrm{Hom}(v,v)\) (the length-\(0\) path), and \texttt{cons} extends a path by one arrow, with the proof fields \(h : s(a) = v\), \(h' : t(a) = w\) enforcing head-to-tail composability. This is the type-level encoding of ``\(\circ\) is only defined on composable pairs.'' Because the composability constraint lives \emph{in the type}, an ill-formed composite simply fails to typecheck. This is exactly the dependent-type payoff from Chapter 1.
 
 \end{mathreading}
 

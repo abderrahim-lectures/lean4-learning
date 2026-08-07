@@ -6,7 +6,7 @@
 
 `intRing` above is commutative (`Int.mul_comm` exists, even though it was not
 wired into the fields of `Ring`), so it does not test the fact that `Ring`
-deliberately does *not* assume `mul_comm`. Matrices do: $M_2(\mathbb{Z})$,
+deliberately does *not* assume `mul_comm`. Matrices do, $M_2(\mathbb{Z})$,
 the ring of $2\times 2$ integer matrices under matrix addition and
 multiplication, has $AB \neq BA$ in general. It is also a good test
 of [`mul_assoc`](https://loogle.lean-lang.org/?q=mul_assoc), since the associativity of matrix multiplication is not a
@@ -104,14 +104,14 @@ def Y : Mat2 := ⟨1, 0, 1, 1⟩
 #eval Mat2.mul Y X    -- ⟨1, 1, 1, 2⟩
 ```
 
-`#eval` here is doing real work: it is a two-line proof by computation that
+`#eval` here is doing real work, it is a two-line proof by computation that
 `mul` is not commutative. This is cheaper than any hand-written counterexample
 proof, and it is exactly the kind of thing to try before committing to a
 `theorem`. Should `¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X` be needed as
 a theorem, this computed pair `(X, Y)` serves as the witness.
 
 **Mathematical reading.** This is the standard counterexample to
-commutativity of matrix multiplication: with $X =
+commutativity of matrix multiplication, with $X =
 \begin{psmallmatrix}1&1\\0&1\end{psmallmatrix}$ and $Y =
 \begin{psmallmatrix}1&0\\1&1\end{psmallmatrix}$ (elementary shear matrices),
 $$
@@ -165,7 +165,7 @@ def mat2Group : Group Mat2 where
     apply Mat2.ext <;> exact Int.add_right_neg _
 ```
 
-`mat2Group` verifies that $(M_2(\mathbb{Z}), +)$ is a group: every axiom
+`mat2Group` verifies that $(M_2(\mathbb{Z}), +)$ is a group, every axiom
 (`assoc`, `id_left`, `id_right`, `inv_left`, `inv_right`) is checked
 entrywise, using `Mat2.ext` to split the single `Mat2` equality into four
 `Int` equalities, each of which is then a direct citation of the matching
@@ -318,7 +318,7 @@ Associativity of $\times$
 is the one substantial fact: $((XY)Z)_{i\ell} = \sum_{j,k} X_{ij}Y_{jk}Z_{k\ell}
 = (X(YZ))_{i\ell}$, whose per-entry form is a polynomial identity over the
 commutative ring $\mathbb{Z}$, so `ring` can close it. The construction
-generalizes exactly the same way to $M_n(S)$ for any commutative ring $S$: entrywise
+generalizes exactly the same way to $M_n(S)$ for any commutative ring $S$, entrywise
 reduction turns each ring axiom into an $S$-polynomial identity, and
 $M_n(S)$ is noncommutative for $n \ge 2$.
 

@@ -60,7 +60,7 @@ careful mathematician will already be asking by that point, namely `structure`
 versus `class`, universes, and definitional versus propositional equality,
 before committing to the definition of `Group` in Chapter 7.
 
-This book is, and remains, Mathlib-free by design: every group, ring, and
+This book is, and remains, Mathlib-free by design, every group, ring, and
 path algebra is built from scratch so you see every definition and proof
 obligation explicitly (see [the Mathlib note](00-setup/04-mathlib-note.md)).
 Starting in Chapter 7, though, each worked example is followed by a clearly
@@ -68,11 +68,11 @@ labeled "Mathlib equivalent" box showing the same statement phrased against
 the real `Group`/`Ring`/`Module` API of Mathlib. This isn't a contradiction of
 the from-scratch approach; it's a second, parallel track. Seeing the same
 idea twice, once built by hand and once as Mathlib already has it, is how
-you learn both halves of working in Lean at once: the underlying
+you learn both halves of working in Lean at once, the underlying
 mathematics *and* the shape of the library you'll actually use once you
 leave this book. Chapter 14 then completes the handoff to Mathlib in full.
 
-The book has been through several editorial passes: a first pass checking
+The book has been through several editorial passes, a first pass checking
 for foundational terms used before they're explained, thin worked-example
 coverage, and outright factual errors; a second, accessibility-focused
 pass that caught "Mathematical reading" boxes drifting past the own
@@ -157,7 +157,7 @@ See [changelog/](changelog/README.md) for the full, itemized history.
 
 `python3 ../lean_book_latex/build/build_latex.py` converts the Markdown of every chapter into a
 full LaTeX manuscript under [`../lean_book_latex/`](../lean_book_latex/)
-(a sibling of this directory, not a subdirectory of it): one `.tex` file
+(a sibling of this directory, not a subdirectory of it), one `.tex` file
 per Markdown section (mirroring the source layout exactly), a driver per
 chapter, and a top-level
 `lean_book_latex/lean-for-working-algebraists.tex`. This

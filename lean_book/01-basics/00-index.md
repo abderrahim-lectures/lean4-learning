@@ -36,7 +36,7 @@ working through it line by line.
    is the single feature that separates a proof assistant from an
    ordinary typed language. A type can depend on a *value*, not just
    another type. `Fin n` is a different type for each `n`. The
-   *return type* of a function can change depending on which argument it received. This
+   *return type* of a function can change depending on which argument it receives. This
    is what finally lets a signature say "these two lists must have the
    same length" and have Lean enforce it, rather than merely hope for it.
 
@@ -53,8 +53,8 @@ formal system they are instances of, is the job of
 3. [Dependent types, with examples](03-dependent-types.md)
 4. [Exercises](04-exercises.md)
 
-Section 2 names several binder and definition styles beyond the two of
-each actually needed this early. The
+Section 2 names several binder and definition styles beyond the couple
+actually needed this early. The
 "Binder & definition styles" table in the
 [tactic and library reference](../tactic-and-library-reference.md)
 is a standing lookup for all of them, with a pointer to wherever
