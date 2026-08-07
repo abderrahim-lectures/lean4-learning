@@ -17,8 +17,7 @@ This generalizes directly to how we will write, e.g., \texttt{structure Group (G
 
 \begin{mathreading}
 
-\texttt{Pair α β} is the ordinary binary Cartesian product, but taken \emph{uniformly}, as a functor of two arguments at once. Rather than fixing \(\alpha\) and \(\beta\) once, \texttt{structure Pair (α β : Type) where ...} defines the \emph{whole family} of products \(\alpha \times \beta\) at once, one for every choice of the two type arguments. \texttt{Pair Nat String} is then just this construction evaluated at the pair \((\mathbb{N},
-\mathrm{String})\), giving \(\mathbb{N} \times \mathrm{String}\). This is the same ``definition parameterized by objects of the category'' idea that lets us later write \texttt{Group (G : Type)}, not one group, but the functor sending a carrier type \(G\) to the type of group-structures on \(G\).
+\texttt{Pair α β} is the ordinary binary Cartesian product, but taken \emph{uniformly}, as a functor of two arguments at once. Rather than fixing \(\alpha\) and \(\beta\) once, \texttt{structure Pair (α β : Type) where ...} defines the \emph{whole family} of products \(\alpha \times \beta\) at once, one for every choice of the two type arguments. \texttt{Pair Nat String} is then just this construction evaluated at the pair \((\mathbb{N}, \mathrm{String})\), giving \(\mathbb{N} \times \mathrm{String}\). This is the same ``definition parameterized by objects of the category'' idea that lets us later write \texttt{Group (G : Type)}, not one group, but the functor sending a carrier type \(G\) to the type of group-structures on \(G\).
 
 \end{mathreading}
 

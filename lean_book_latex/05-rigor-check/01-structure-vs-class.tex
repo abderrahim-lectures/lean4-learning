@@ -36,7 +36,7 @@ instance : Group Int where
   -- ...
 \end{lstlisting}
 
-Lean records the group structure of \texttt{Int} in a global table. From then on, any function that takes an \emph{implicit} \texttt{[Group G]} argument (square brackets, not curly braces; this is a third kind of argument, an \textbf{instance argument}) has it filled in automatically whenever \texttt{G} is unified with \texttt{Int}, with no explicit term needed at the call site.
+Lean records the group structure of \texttt{Int} in a global table. From then on, any function that takes an \emph{implicit} \texttt{[Group G]} argument (square brackets, not curly braces; this is the third of the four kinds of argument Lean has, flagged back in \hyperref[sec:01-basics:02-def-let-implicit:1]{Chapter 1, Section 2} under the name \textbf{instance-implicit}) has it filled in automatically whenever \texttt{G} is unified with \texttt{Int}, with no explicit term needed at the call site. The difference from an ordinary implicit \texttt{\{G : Type\}} is \emph{how} the value gets found. \texttt{\{\}} is solved by unification, working backward from the types of the other arguments, while \texttt{[]} is solved by the typeclass search just described, a lookup through registered \texttt{instance}s, and would fail (or find an unexpected instance) if none had been registered for the type in question.
 
 \begin{lstlisting}
 def opTwice [Group G] (x : G) : G :=

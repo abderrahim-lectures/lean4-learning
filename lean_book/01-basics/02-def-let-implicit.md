@@ -205,12 +205,14 @@ Briefly, so meeting these elsewhere later is not a surprise:
   `Group`/`class`/`instance` machinery that makes it useful is built up
   from `structure` first, so the automation is understood rather than
   taken on faith.
-- A **fourth**, rarer kind, **strict implicit**, written `⦃x : α⦄`, behaves
-  like `{}` except that Lean defers solving it until an *explicit* argument
-  after it is actually supplied. It is a Mathlib idiom for keeping partially
-  applied functions well behaved, and does not appear anywhere in this
-  book's own code. It is named here only so it is recognizable, not
-  mysterious, if encountered while reading Mathlib source directly.
+- A **fourth**, rarer kind, **strict implicit**, written `{{x : α}}` (Lean
+  also accepts a Unicode spelling of the same double-brace pair, seen
+  occasionally in Mathlib source), behaves like `{}` except that Lean
+  defers solving it until an *explicit* argument after it is actually
+  supplied. It is a Mathlib idiom for keeping partially applied functions
+  well behaved, and does not appear anywhere in this book's own code. It
+  is named here only so it is recognizable, not mysterious, if
+  encountered while reading Mathlib source directly.
 - `def` is not the only way to introduce a definition either. `abbrev` and
   `opaque` exist alongside it, and differ not in what they let you write,
   but in how transparent the result is to Lean's own equality checker,

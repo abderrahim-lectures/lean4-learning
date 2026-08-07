@@ -4,8 +4,7 @@ The previous section introduced the Curry--Howard correspondence by translating 
 
 \subsection{Propositional logic: syntax}\label{sec:03-propositions-and-proofs:02-logic-recap:2}
 
-Fix a set of \textbf{propositional variables} (atomic statements) \(p, q, r,
-\dots\). These stand for sentences whose internal structure is not analyzed, ``it is raining,'' ``\(n\) is prime,'' anything with a definite truth value. \textbf{Formulas} are built from these using the \textbf{connectives}.
+Fix a set of \textbf{propositional variables} (atomic statements) \(p, q, r, \dots\). These stand for sentences whose internal structure is not analyzed, ``it is raining,'' ``\(n\) is prime,'' anything with a definite truth value. \textbf{Formulas} are built from these using the \textbf{connectives}.
 
 \[
 \varphi ::= p \;\mid\; \top \;\mid\; \bot \;\mid\; \neg\varphi \;\mid\;
@@ -20,12 +19,12 @@ Here \(\varphi\) and \(\psi\) are \textbf{metavariables}. Each stands for ``some
 The truth value of a propositional variable is given by a \textbf{valuation} \(v : \{\text{variables}\} \to \{0, 1\}\) (an assignment of true or false to each atom). Every valuation extends uniquely to all formulas by the familiar truth tables.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \(\varphi\)
@@ -83,8 +82,7 @@ A formula is a \textbf{tautology} (valid, written \(\models \varphi\)) if it com
 \text{($\bot$-elim, ex falso)}\ \ \frac{\Gamma \vdash \bot}{\Gamma \vdash \varphi}
 \]
 
-\(\Rightarrow\)-intro reads as follows. If, granting \(\varphi\) as an extra hypothesis, \(\psi\) can be derived, then (discharging that hypothesis) one may conclude \(\varphi \Rightarrow \psi\) outright. This is exactly the ordinary mathematical move ``assume \(\varphi\); \ldots{} ; therefore \(\varphi
-\Rightarrow \psi\),'' turned into an explicit, checkable rule. It is \emph{exactly} what Section 1 identified with writing a Lean function \texttt{fun (hp : P) => ...}. Each rule above is stated once so it can be pointed to by name. The list need not be memorized. The point is to recognize a ``natural deduction proof'' as a \emph{tree} built by chaining these rules, with leaves at hypotheses in \(\Gamma\) and its root at the conclusion \(\varphi\).
+\(\Rightarrow\)-intro reads as follows. If, granting \(\varphi\) as an extra hypothesis, \(\psi\) can be derived, then (discharging that hypothesis) one may conclude \(\varphi \Rightarrow \psi\) outright. This is exactly the ordinary mathematical move ``assume \(\varphi\); \ldots{} ; therefore \(\varphi \Rightarrow \psi\),'' turned into an explicit, checkable rule. It is \emph{exactly} what Section 1 identified with writing a Lean function \texttt{fun (hp : P) => ...}. Each rule above is stated once so it can be pointed to by name. The list need not be memorized. The point is to recognize a ``natural deduction proof'' as a \emph{tree} built by chaining these rules, with leaves at hypotheses in \(\Gamma\) and its root at the conclusion \(\varphi\).
 
 \textbf{Worked example: proving \(p \Rightarrow (q \Rightarrow p)\).} Assume \(p\) as a hypothesis, aiming to apply \(\Rightarrow\)-intro at the end. Within that, assume \(q\) too. The conclusion \(p\) is now already among the hypotheses, so it is derived for free. Discharge the \(q\)-hypothesis via \(\Rightarrow\)-intro to get \(q \Rightarrow p\), then discharge the \(p\)-hypothesis via \(\Rightarrow\)-intro again to get \(p \Rightarrow (q \Rightarrow p)\). As a derivation tree, with hypotheses listed to the left of \(\vdash\):
 
@@ -104,8 +102,7 @@ Two theorems connect the syntactic notion (\(\vdash\)) to the semantic one (\(\m
 \item
   \textbf{Soundness}: if \(\Gamma \vdash \varphi\) then \(\Gamma \models \varphi\). Everything the rules can derive really is true whenever the hypotheses are. The rules never let you ``prove'' something false.
 \item
-  \textbf{Completeness} (Gödel, 1929/1930, for first-order logic; the propositional case is elementary): if \(\Gamma \models \varphi\) then \(\Gamma \vdash
-  \varphi\). Every semantically valid consequence \emph{does} have a natural deduction proof, so the rule list above, small as it is, is not missing anything.
+  \textbf{Completeness} (Gödel, 1929/1930, for first-order logic; the propositional case is elementary): if \(\Gamma \models \varphi\) then \(\Gamma \vdash \varphi\). Every semantically valid consequence \emph{does} have a natural deduction proof, so the rule list above, small as it is, is not missing anything.
 \end{itemize}
 
 Soundness is usually the easy direction to prove (check that each rule preserves truth). Completeness is the harder theorem. Neither is used again in this book, but together they are the reason a working mathematician can trust that ``prove it'' and ``it is necessarily true'' describe the same territory for propositional (and first-order) logic. This guarantee stops holding once expressive enough systems are reached. (The \emph{incompleteness} theorems of Gödel are a different and unrelated pair of results, despite the similar name. They show arithmetic itself cannot be both complete and consistent.)
@@ -123,9 +120,9 @@ The natural deduction rules generalize the rules for \(\wedge\)/\(\vee\) in the 
 \textbf{First-order logic and Curry--Howard.} The table in Section 1 translated the \emph{propositional} connectives (\(\wedge, \vee, \Rightarrow, \neg\)) into type formers. Quantifiers extend the same table, and this is the one place where the translation genuinely needs \emph{dependent} types rather than ordinary ones, because \(P(x)\), the very thing being quantified over, is a different proposition for each \(x\).
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Logic
@@ -165,11 +162,9 @@ Formal definitions and citations for this section, gathered here for reference (
 \item
   \textbf{Natural deduction.} ``À chacun des signes logiques \&, ∨, ∀, ∃, ⊃, ¬, appartient exactement une figure de déduction qui « introduit » ce signe --- comme signe terminal d'une formule --- et une figure qui l'« élimine »\ldots{} Les introductions représentent pour ainsi dire les « définitions » des signes qu'elles concernent, et les éli{[}minations \ldots{]}'' (quote breaks at a page boundary in the source excerpt) (\cite{FeysLadriere1955}, §II ``Le calcul de la déduction naturelle,'' p. 27; a French translation of Gentzen (\cite{Gentzen1935})). Picture it like this. A Lego instruction booklet where every piece type gets exactly two entries, one showing how to snap it onto the model (introduction), one showing what you're allowed to do once it's there (elimination). Introduction rules act as the ``definition'' of the connective, elimination rules as its consequence.
 \item
-  \textbf{Soundness.} ``\(\Gamma \vdash \varphi \Rightarrow \Gamma \models
-  \varphi\)'' (\cite{VanDalen2013}, §2.5, Lemma 2.5.1). Picture it like this. A factory whose quality-control process is airtight. If a product passes inspection, it is guaranteed to actually work. Nothing merely ``provable'' turns out to be false.
+  \textbf{Soundness.} ``\(\Gamma \vdash \varphi \Rightarrow \Gamma \models \varphi\)'' (\cite{VanDalen2013}, §2.5, Lemma 2.5.1). Picture it like this. A factory whose quality-control process is airtight. If a product passes inspection, it is guaranteed to actually work. Nothing merely ``provable'' turns out to be false.
 \item
-  \textbf{Completeness.} ``\(\Gamma \vdash \varphi \Leftrightarrow \Gamma
-  \models \varphi\)'' (\cite{VanDalen2013}, §2.5 Theorem 2.5.13 for propositional logic; §4.1 Theorem 4.1.3 for first-order logic; first-order completeness is originally due to Gödel, 1929/1930, not independently verified against the original paper by Gödel, see \cite{VanDalen2013} for the identical statement independently verified here). Picture it like this. The converse guarantee. The same factory inspection process is thorough enough that every product which genuinely works \emph{can} be certified by it. Nothing true slips through as ``uncertifiable.''
+  \textbf{Completeness.} ``\(\Gamma \vdash \varphi \Leftrightarrow \Gamma \models \varphi\)'' (\cite{VanDalen2013}, §2.5 Theorem 2.5.13 for propositional logic; §4.1 Theorem 4.1.3 for first-order logic; first-order completeness is originally due to Gödel, 1929/1930, not independently verified against the original paper by Gödel, see \cite{VanDalen2013} for the identical statement independently verified here). Picture it like this. The converse guarantee. The same factory inspection process is thorough enough that every product which genuinely works \emph{can} be certified by it. Nothing true slips through as ``uncertifiable.''
 \item
   van Dalen (\cite{VanDalen2013}), §2.4 ``Natural Deduction'' (Definition 2.4.1, propositional rules), §3.8 ``Natural Deduction'' (first-order ∀-rules, Lemma 3.8.2) covers the propositional and first-order natural-deduction rules underlying the quotes above.
 \item

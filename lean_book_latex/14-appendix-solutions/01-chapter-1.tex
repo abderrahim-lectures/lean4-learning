@@ -8,8 +8,7 @@ Application associates to the left, so this is \(((\lambda x.\lambda y.\, y\, x)
 \;\longrightarrow_\beta\; b\, a
 \] Step 1 substitutes \(a\) for \(x\) in \(\lambda y.\, y\, x\), giving \(\lambda y.\, y\, a\). Step 2 substitutes \(b\) for \(y\) in \(y\, a\), giving \(b\, a\).
 
-The result is \textbf{not} simply one of the two inputs, the way the result of \(K\) always is. \(K\,a\,b \to_\beta a\). \(K\) \emph{discards} its second argument and returns the first, verbatim. Here, \((\lambda x.\lambda y.\, y\, x)\, a\, b
-\to_\beta b\, a\). Both arguments survive, but with the \emph{second} one applied to the \emph{first}. This term is sometimes called the ``Thrush'' combinator (\(T\), satisfying \(T\, x\, y = y\, x\)): it flips the order of application rather than discarding anything, which is genuinely different behavior from \(K\), not just a relabeling of it.
+The result is \textbf{not} simply one of the two inputs, the way the result of \(K\) always is. \(K\,a\,b \to_\beta a\). \(K\) \emph{discards} its second argument and returns the first, verbatim. Here, \((\lambda x.\lambda y.\, y\, x)\, a\, b \to_\beta b\, a\). Both arguments survive, but with the \emph{second} one applied to the \emph{first}. This term is sometimes called the ``Thrush'' combinator (\(T\), satisfying \(T\, x\, y = y\, x\)): it flips the order of application rather than discarding anything, which is genuinely different behavior from \(K\), not just a relabeling of it.
 
 \textbf{2. \texttt{Vec.toList : Vec α n → List α}}
 
@@ -53,10 +52,10 @@ def anotherSigma : (*$\Sigma$*) n : Nat, Fin n := (*$\langle$*)5, (*$\langle$*)0
 \texttt{Path.append : \{u v w : V\} → Path Q u v → Path Q v w → Path Q u w}, treating the implicit binders as outer Π's, unfolds one binder at a time.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Level

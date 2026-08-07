@@ -8,8 +8,7 @@ Section 3 built Π-types concretely, from \texttt{Fin n} and \texttt{Vec.replica
 \prod_{x : A} B(x)
 \]
 
-This reads as ``a function that, given \(x : A\), returns a term of type \(B(x)\), a type allowed to mention \(x\).'' The \texttt{Vec.replicate} from Section 3, with type \texttt{(n : Nat) → Vec α n}, literally \emph{is} \(\prod_{n:\mathtt{Nat}}
-\mathrm{Vec}\,\alpha\,n\). The surface syntax \texttt{(x : A) → B x} in Lean \textbf{is} \(\prod_{x:A} B(x)\), and \texttt{∀} is the same construct specialized to \texttt{B : A → Prop}, as Chapter 3 makes precise. Every \texttt{∀ n : Nat, P n} written from that point on is already a Π-type in exactly this sense.
+This reads as ``a function that, given \(x : A\), returns a term of type \(B(x)\), a type allowed to mention \(x\).'' The \texttt{Vec.replicate} from Section 3, with type \texttt{(n : Nat) → Vec α n}, literally \emph{is} \(\prod_{n:\mathtt{Nat}} \mathrm{Vec}\,\alpha\,n\). The surface syntax \texttt{(x : A) → B x} in Lean \textbf{is} \(\prod_{x:A} B(x)\), and \texttt{∀} is the same construct specialized to \texttt{B : A → Prop}, as Chapter 3 makes precise. Every \texttt{∀ n : Nat, P n} written from that point on is already a Π-type in exactly this sense.
 
 \begin{progcorner}
 
@@ -174,9 +173,9 @@ Compare this directly to \texttt{mySigma.fst} two paragraphs up, which worked wi
 Everything above in one table, gathering the two constructs' notation, readings, and special cases for direct comparison.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Aspect
@@ -283,8 +282,7 @@ Putting the pieces together, the \textbf{calculus of constructions} (CoC, Coquan
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  An infinite hierarchy of type universes \(\mathtt{Type}\,0,
-  \mathtt{Type}\,1, \ldots\), formalized in \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5, Section 3}.
+  An infinite hierarchy of type universes \(\mathtt{Type}\,0, \mathtt{Type}\,1, \ldots\), formalized in \hyperref[sec:05-rigor-check:03-typing-rules-and-safety:1]{Chapter 5, Section 3}.
 \item
   Π-types generalizing \(\to\), allowing types to depend on terms (Section 3 of this chapter and the top of this page).
 \item

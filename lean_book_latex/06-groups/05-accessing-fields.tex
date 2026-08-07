@@ -12,8 +12,7 @@ Because \texttt{intGroup} is a term of type \texttt{Group Int}, its fields can b
 
 \begin{mathreading}
 
-The projections recover the individual components of the structure. \texttt{intGroup.op} is the multiplication \(\cdot\) (so \texttt{intGroup.op 3 4} is \(3 + 4 = 7\) in \(\mathbb{Z}\)), \texttt{intGroup.id} is \(e = 0\), and \texttt{intGroup.inv} is \((-)^{-1} = -(-)\). The key point is that \texttt{intGroup.assoc} projects out a \emph{proof}. It is the element of \(\forall
-a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)\) that was supplied when building the group. Data-fields and proof-fields are accessed the same way because, in the dependent-pair view (a \texttt{structure} is, underneath, exactly this kind of dependent pair), both are just coordinates of the same tuple.
+The projections recover the individual components of the structure. \texttt{intGroup.op} is the multiplication \(\cdot\) (so \texttt{intGroup.op 3 4} is \(3 + 4 = 7\) in \(\mathbb{Z}\)), \texttt{intGroup.id} is \(e = 0\), and \texttt{intGroup.inv} is \((-)^{-1} = -(-)\). The key point is that \texttt{intGroup.assoc} projects out a \emph{proof}. It is the element of \(\forall a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)\) that was supplied when building the group. Data-fields and proof-fields are accessed the same way because, in the dependent-pair view (a \texttt{structure} is, underneath, exactly this kind of dependent pair), both are just coordinates of the same tuple.
 
 \end{mathreading}
 

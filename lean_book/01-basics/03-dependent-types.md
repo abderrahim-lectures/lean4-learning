@@ -155,6 +155,10 @@ named every argument inside `(...)` and gave one term after `:=`.
 argument: `(n : Nat)` never appears to the left of `:=`, the signature
 itself ends in a plain `→` the way the statement of a `theorem` does, and the
 body is a list of `| pattern => term` equations instead of one term. This
+style of writing a function body, naming the *shape* an argument must
+have rather than a name for the argument itself, is called **pattern
+matching**, a term used again from here on wherever a definition or proof
+picks apart a value by its constructor rather than by a bound name. This
 is not a new arrow meaning on top of the two flagged in
 [Section 2](02-def-let-implicit.md), and it is not a different kind of
 function. It is a third *writing style* for the exact same thing, worth
@@ -280,6 +284,21 @@ def Vec.head : Vec α (n + 1) → α
 The argument type `Vec α (n + 1)` says, in the type itself, "this only
 accepts vectors of length *at least one*." There is no separate runtime
 check for emptiness anywhere in this definition, because none is needed.
+
+Notice also that the equation-style body above has only one case,
+`Vec.cons a _ => a`, with no `Vec.nil` arm. In other words, `Vec.nil` is
+not a case this match forgot or silently skips. It is a case Lean will
+not even let be *written* here. `Vec.nil` has type `Vec α 0`, but the
+argument being matched has type `Vec α (n + 1)`, so a `Vec.nil` arm would
+require `0` to unify with `n + 1` for some `n`, and no such `n` exists,
+since `Nat.zero` and `Nat.succ n` are different constructors of the same
+type and Lean already knows two different constructors can never produce
+the same value. The equation compiler checks exactly this while
+elaborating the match, sees the `Vec.nil` case is impossible at this
+type, and closes it off automatically. What looks like an *incomplete*
+match, only one pattern for a type with two constructors, is actually a
+*complete* one, once the index `n + 1` is taken into account.
+
 Calling it on an empty vector is rejected before the expression ever runs:
 
 ```lean

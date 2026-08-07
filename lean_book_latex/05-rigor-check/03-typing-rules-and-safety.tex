@@ -101,8 +101,7 @@ This is precisely the gap already closed by \hyperref[sec:01-basics:05-pi-sigma-
 
 \subsection{Universes, as a typing rule}\label{sec:05-rigor-check:03-typing-rules-and-safety:6}
 
-Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 :
-\mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions, the formal system CoC/CIC named by Chapter 1, Section 5, extending STLC above with Π-types and universes, this is stated as a typing rule for the universes themselves.
+Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 : \mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions, the formal system CoC/CIC named by Chapter 1, Section 5, extending STLC above with Π-types and universes, this is stated as a typing rule for the universes themselves.
 
 \[
 \dfrac{}{\mathtt{Type}\,i : \mathtt{Type}\,(i+1)}

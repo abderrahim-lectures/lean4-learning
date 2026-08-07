@@ -77,6 +77,33 @@ def Vec.replicate (a : (*$\alpha$*)) : (n : Nat) (*$\rightarrow$*) Vec (*$\alpha
 -- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) (Vec.nil)))
 \end{lstlisting}
 
+\textbf{A third style of writing a \texttt{def} body, and why the signature ends in a bare \texttt{→}.} Every \texttt{def} up to this point (\texttt{double}, \texttt{average}, \texttt{identity}) named every argument inside \texttt{(...)} and gave one term after \texttt{:=}. \texttt{Vec.replicate} above does something visibly different for its last argument: \texttt{(n : Nat)} never appears to the left of \texttt{:=}, the signature itself ends in a plain \texttt{→} the way the statement of a \texttt{theorem} does, and the body is a list of \texttt{| pattern => term} equations instead of one term. This style of writing a function body, naming the \emph{shape} an argument must have rather than a name for the argument itself, is called \textbf{pattern matching}, a term used again from here on wherever a definition or proof picks apart a value by its constructor rather than by a bound name. This is not a new arrow meaning on top of the two flagged in \hyperref[sec:01-basics:02-def-let-implicit:1]{Section 2}, and it is not a different kind of function. It is a third \emph{writing style} for the exact same thing, worth seeing side by side on a smaller example before trusting it in \texttt{Vec.replicate}:
+
+\begin{lstlisting}
+def vecLen {(*$\alpha$*) : Type} {n : Nat} (_ : Vec (*$\alpha$*) n) : Nat := n
+
+def vecLen' {(*$\alpha$*) : Type} {n : Nat} : Vec (*$\alpha$*) n (*$\rightarrow$*) Nat
+  | _ => n
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{vecLen} is the familiar style. The \texttt{Vec α n} argument is bound by name (as \texttt{\_\allowbreak{}}, since the body never actually uses it, only its index \texttt{n}) inside \texttt{(...)}, and the body is one term, \texttt{n}, exactly like the body of \texttt{double} was one term, \texttt{n * 2}.
+\item
+  \texttt{vecLen'} binds nothing after the colon. Its signature is \texttt{Vec α n → Nat}, a bare arrow, precisely as if it were the \emph{statement} of a theorem rather than the header of a function. The argument is instead supplied by the single equation \texttt{| \_\allowbreak{} => n} below, matching against whatever term of \texttt{Vec α n} is eventually passed in. Lean's \textbf{equation compiler} is what turns this \texttt{| pattern => term} block into an ordinary function, internally no different from writing \texttt{fun v => match v with | \_\allowbreak{} => n} inside a \texttt{:=} body. \texttt{vecLen} and \texttt{vecLen'} are, after elaboration, the same function under two different pieces of surface syntax, not two functions that happen to agree on every input.
+\item
+  The two styles are not interchangeable in every situation, only equally valid where they overlap. Equation-style earns its keep exactly when the whole purpose of a definition is to case on the \emph{shape} of an inductive argument, one equation per constructor, which is why \texttt{Vec.replicate} above (and \texttt{Vec.head}, \texttt{Vec.dot} shortly) are written that way. Each genuinely has one case for \texttt{0}/\texttt{nil} and one for \texttt{n + 1}/\texttt{cons}. The named-binder \texttt{:=} style stays the natural choice once the argument is used as an ordinary value rather than taken apart, exactly as \texttt{vecLen} above never inspects \emph{which} vector it received, only its already-known length \texttt{n}.
+\end{itemize}
+
+\begin{mathreading}
+
+Equation-style \texttt{def} is the Lean transcription of ordinary definition by cases, \[
+f(n) = \begin{cases} c_0 & n = 0 \\ c(k, f(k)) & n = k + 1, \end{cases}
+\] the exact shape a mathematician already writes for a recursively defined sequence or function. Nothing new is being learned here beyond the Lean spelling of a pattern already familiar from ordinary practice, which is also exactly why it shows up unannounced the moment this book starts defining functions over an inductive type like \texttt{Vec}.
+
+\end{mathreading}
+
 \texttt{Vec.replicate} recurses exactly once per unit of length, so it is worth watching the recursion unwind one call at a time. Adding a \texttt{dbg\_\allowbreak{}trace} line to each branch (harmless, since it only prints, and changes nothing about what the function returns) makes every step visible:
 
 \begin{lstlisting}
@@ -110,7 +137,11 @@ def Vec.head : Vec (*$\alpha$*) (n + 1) (*$\rightarrow$*) (*$\alpha$*)
   | Vec.cons a _ => a
 \end{lstlisting}
 
-The argument type \texttt{Vec α (n + 1)} says, in the type itself, ``this only accepts vectors of length \emph{at least one}.'' There is no separate runtime check for emptiness anywhere in this definition, because none is needed. Calling it on an empty vector is rejected before the expression ever runs:
+The argument type \texttt{Vec α (n + 1)} says, in the type itself, ``this only accepts vectors of length \emph{at least one}.'' There is no separate runtime check for emptiness anywhere in this definition, because none is needed.
+
+Notice also that the equation-style body above has only one case, \texttt{Vec.cons a \_\allowbreak{} => a}, with no \texttt{Vec.nil} arm. In other words, \texttt{Vec.nil} is not a case this match forgot or silently skips. It is a case Lean will not even let be \emph{written} here. \texttt{Vec.nil} has type \texttt{Vec α 0}, but the argument being matched has type \texttt{Vec α (n + 1)}, so a \texttt{Vec.nil} arm would require \texttt{0} to unify with \texttt{n + 1} for some \texttt{n}, and no such \texttt{n} exists, since \texttt{Nat.zero} and \texttt{Nat.succ n} are different constructors of the same type and Lean already knows two different constructors can never produce the same value. The equation compiler checks exactly this while elaborating the match, sees the \texttt{Vec.nil} case is impossible at this type, and closes it off automatically. What looks like an \emph{incomplete} match, only one pattern for a type with two constructors, is actually a \emph{complete} one, once the index \texttt{n + 1} is taken into account.
+
+Calling it on an empty vector is rejected before the expression ever runs:
 
 \begin{lstlisting}
 #check Vec.head Vec.nil

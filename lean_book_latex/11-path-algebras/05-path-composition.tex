@@ -87,8 +87,7 @@ The \textbf{path algebra} \(kQ\) of a quiver \(Q\) over a field (or ring) \(k\) 
 The \textbf{path algebra} \(kQ\) is the free \(k\)-module on the set of all paths, \(kQ = \bigoplus_{p\ \text{path}} k\cdot p\), with multiplication extending path composition \(k\)-bilinearly, written here in the same \textbf{path order} used throughout this section, so that it matches \texttt{Path.append} and the quoted source below. \[
 p \cdot q = \begin{cases} p\,;q & \text{if } t(p) = s(q),\\ 0 &
 \text{otherwise,}\end{cases}
-\] where \(p\,;q\) means ``first \(p\), then \(q\)''. (Sources that fix function-composition order instead write this product as \(q \cdot p = q \circ
-p\); the algebra is the same, read right-to-left.) The unit is \(\sum_{v\in V} e_v\) (the sum of the trivial paths), well-defined as a finite sum, hence a genuine identity element, precisely when \(Q_0\) is finite. So representations of \(Q\) are exactly \(kQ\)-modules, the bridge to Chapter 10 promised there. The construction requires finitely-supported functions \(\{\text{paths}\} \to k\), i.e.~the free module, which is why only the composition (the category layer) is formalized here.
+\] where \(p\,;q\) means ``first \(p\), then \(q\)''. (Sources that fix function-composition order instead write this product as \(q \cdot p = q \circ p\); the algebra is the same, read right-to-left.) The unit is \(\sum_{v\in V} e_v\) (the sum of the trivial paths), well-defined as a finite sum, hence a genuine identity element, precisely when \(Q_0\) is finite. So representations of \(Q\) are exactly \(kQ\)-modules, the bridge to Chapter 10 promised there. The construction requires finitely-supported functions \(\{\text{paths}\} \to k\), i.e.~the free module, which is why only the composition (the category layer) is formalized here.
 
 \end{mathreading}
 
@@ -107,10 +106,7 @@ Formal definitions and citations for this section, gathered here for reference (
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Path algebra \(kQ\).} ``Let \(Q\) be a quiver. The path algebra \(KQ\) of \(Q\) is the \(K\)-algebra whose underlying \(K\)-vector space has as its basis the set of all paths \((a \mid \alpha_1, \ldots, \alpha_l
-  \mid b)\) of length \(l \geq 0\) in \(Q\) and such that the product of two basis vectors \((a \mid \alpha_1, \ldots, \alpha_l \mid b)\) and \((c \mid \beta_1, \ldots, \beta_k \mid d)\) of \(KQ\) is defined by \((a \mid \alpha_1, \ldots, \alpha_l \mid b)(c \mid \beta_1, \ldots,
-  \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l,
-  \beta_1, \ldots, \beta_k \mid d)\)'' (\cite{AssemSimsonSkowronski2006}, Ch. II §1, Definition 1.2).
+  \textbf{Path algebra \(kQ\).} ``Let \(Q\) be a quiver. The path algebra \(KQ\) of \(Q\) is the \(K\)-algebra whose underlying \(K\)-vector space has as its basis the set of all paths \((a \mid \alpha_1, \ldots, \alpha_l \mid b)\) of length \(l \geq 0\) in \(Q\) and such that the product of two basis vectors \((a \mid \alpha_1, \ldots, \alpha_l \mid b)\) and \((c \mid \beta_1, \ldots, \beta_k \mid d)\) of \(KQ\) is defined by \((a \mid \alpha_1, \ldots, \alpha_l \mid b)(c \mid \beta_1, \ldots, \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l, \beta_1, \ldots, \beta_k \mid d)\)'' (\cite{AssemSimsonSkowronski2006}, Ch. II §1, Definition 1.2).
 \item
   Assem, Simson, and Skowroński (\cite{AssemSimsonSkowronski2006}), Definition 1.2, Ch. II §1, covers the path algebra \(kQ\). Also notes each stationary path \(\varepsilon_x\) is idempotent, and \(\sum_{x\in Q_0}\varepsilon_x\) is the identity \emph{when \(Q_0\) is finite}. Note that the quoted product writes the arrows of the \textbf{left} factor first, i.e.~in path order, the same order as \texttt{Path.append} and as the multiplication formula above.
 \item

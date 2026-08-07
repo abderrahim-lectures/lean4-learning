@@ -18,9 +18,9 @@ Two general links used throughout this page:
 \addcontentsline{toc}{section}{Tactics}\label{sec:root:tactic-and-library-reference:2}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Tactic
@@ -59,13 +59,46 @@ Reference
 \texttt{sorry} & Ch. 4, Section 3 & \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{Tactic Reference} \\
 \end{longtable}
 
-\section*{Mathlib names (the ``Mathlib equivalent'' boxes of Chapters 6-11)}
-\addcontentsline{toc}{section}{Mathlib names (the ``Mathlib equivalent'' boxes of Chapters 6-11)}\label{sec:root:tactic-and-library-reference:3}
+\section*{Binder \& definition styles}
+\addcontentsline{toc}{section}{Binder \& definition styles}\label{sec:root:tactic-and-library-reference:3}
+
+Every way Lean has of binding an argument or introducing a definition, and where each is actually explained end to end (not just first mentioned).
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Syntax
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What it is
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+First explained
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{(x : α)} & Explicit argument, supplied positionally & Ch. 1, Section 2 \\
+\texttt{\{x : α\}} & Implicit argument, solved by unification & Ch. 1, Section 2 \\
+\texttt{[x : C]} & Instance-implicit argument, solved by typeclass search & Ch. 1, Section 2 (named) / Ch. 5, Section 1 (in use) \\
+\texttt{\{\{x : α\}\}} & Strict-implicit argument, deferred until an explicit argument follows; not used in this book's own code & Ch. 1, Section 2 \\
+\texttt{def} & Semi-reducible definition; unfolds only when told to (\texttt{unfold}) & Ch. 1, Section 2 (named) / Ch. 4 (transparency) \\
+\texttt{let} & Local, definitionally transparent definition & Ch. 1, Section 2 \\
+\texttt{abbrev} & Reducible definition, auto \texttt{@[reducible, inline]}, seen through automatically & Ch. 1, Section 2 (named) / Ch. 4 (in depth) \\
+\texttt{opaque} & Never unfolds, even explicitly; hides an implementation entirely & Ch. 1, Section 2 (named) / Ch. 4 (in depth) \\
+\texttt{@[reducible]} & Attribute form of the transparency \texttt{abbrev} gets automatically, applied to an existing \texttt{def} & Ch. 3, Section 6 (in use) / Ch. 4 (explained) \\
+\texttt{def f : A → B} (equation-style body) & Pattern-matches the last argument(s) directly, one equation per case, instead of naming them in \texttt{(...)} & Ch. 1, Section 3 \\
+\end{longtable}
+
+\section*{Mathlib names (the ``Mathlib equivalent'' boxes of Chapters 6-11)}
+\addcontentsline{toc}{section}{Mathlib names (the ``Mathlib equivalent'' boxes of Chapters 6-11)}\label{sec:root:tactic-and-library-reference:4}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Name
