@@ -6,16 +6,16 @@
 
 Throughout this book, a lemma name has typically been hunted for by hand.
 In practice, searching by memory or by grep is rarely necessary. Two tactics
-perform this search automatically:
+perform this search automatically.
 
-- **[`exact?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)** — searches the whole environment (core Lean, plus anything
+- **[`exact?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)** searches the whole environment (core Lean, plus anything
   else imported) for a term that closes the *current goal
   exactly*. It either fails or suggests a working
   `exact ...` line that can be pasted in directly. It is best used as soon as
-  a fact is suspected to already exist somewhere — for instance,
+  a fact is suspected to already exist somewhere, for instance,
   after simplifying a ring goal down to something that *looks* like a
   named lemma whose name cannot be recalled.
-- **[`apply?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)** — like `exact?`, but for cases where the goal would be
+- **[`apply?`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)** is like `exact?`, but for cases where the goal would be
   closed by `apply`ing something that leaves further subgoals, not a
   single exact match.
 
@@ -35,7 +35,7 @@ example (a b : Nat) (h : a = b) : b = a := by
   -- not the shorter `h.symm` a human would write — see below)
 ```
 
-**Mathematical reading.** This is the formal version of "this is standard —
+**Mathematical reading.** This is the formal version of "this is standard,
 cite the relevant lemma." The goal $b = a$ under hypothesis $h : a = b$ is
 closed by symmetry of equality, $h^{\mathrm{sym}}$, and that is what a
 human proof would cite. `exact?` performs a library search: it scans the

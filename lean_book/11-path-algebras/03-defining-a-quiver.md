@@ -5,7 +5,7 @@
 ---
 
 A quiver is encoded as a `structure`, parameterized by a type of vertices and
-a type of arrows:
+a type of arrows.
 
 ```lean
 structure Quiver (V : Type) (A : Type) where
@@ -26,7 +26,7 @@ is built.
 ### The example quiver, formalized
 
 The three vertices are encoded as `Fin 3` (values `0, 1, 2`, standing for
-vertices `1, 2, 3`) and the two nontrivial arrows as an inductive type:
+vertices `1, 2, 3`) and the two nontrivial arrows as an inductive type.
 
 ```lean
 inductive ExampleArrow where
@@ -50,7 +50,7 @@ just with two constructors that carry no extra data.
 **Mathematical reading.** This is the concrete quiver $Q$ with vertex set
 $V = \{0,1,2\}$ (encoded as $\mathrm{Fin}\,3$) and arrow set $A =
 \{\alpha, \beta\}$, where $s(\alpha)=0,\ t(\alpha)=1$ and $s(\beta)=1,\
-t(\beta)=2$: the linear $A_3$ quiver, drawn exactly as on paper:
+t(\beta)=2$, the linear $A_3$ quiver, drawn exactly as on paper.
 
 ```mermaid
 graph LR
@@ -69,12 +69,12 @@ V$ given by their value tables: `source alpha = 0`, `target alpha = 1`,
 `source beta = 1`, `target beta = 2`. This is exactly the arrowheads and
 tails drawn above.
 
-**Mathlib equivalent.** Mathlib's own [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) class (the one this
-chapter's opening section mentioned building from scratch instead of
+**Mathlib equivalent.** The [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) class in Mathlib (the one the
+opening section of this chapter mentioned building from scratch instead of
 reusing) encodes arrows differently. Instead of one flat arrow type `A`
 plus separate `source`/`target : A → V` functions, it bakes the endpoints
-into the arrow's *type* directly, `Hom : V → V → Sort*` (with notation
-`a ⟶ b`). Thus an arrow from `i` to `j` simply *has type* `i ⟶ j`:
+into the *type* of the arrow directly, `Hom : V → V → Sort*` (with notation
+`a ⟶ b`). Thus an arrow from `i` to `j` simply *has type* `i ⟶ j`.
 
 ```lean
 inductive MyArrow : Fin 3 → Fin 3 → Type
@@ -90,7 +90,7 @@ cases, has no constructors at all, and is thus simply an empty type. There is
 no `source`/`target` to state or prove separately, and no `h : Q.source a = v`
 side-condition to discharge with `rfl` later (Chapter 11, Section 4). An
 ill-typed composition is rejected by the type checker before a proof
-obligation is even reached, one step earlier than the book's own encoding
+obligation is even reached, one step earlier than the encoding of the book
 catches the same mistake.
 
 ---

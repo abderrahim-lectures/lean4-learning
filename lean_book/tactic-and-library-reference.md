@@ -7,15 +7,15 @@
 A quick index of every tactic used in this book, and every Mathlib name
 used in the "Mathlib equivalent" boxes (Chapters 6-11), each with a link
 to look it up yourself. This page is a lookup table, not something to
-read start to finish — the tactics chapter ([Chapter 4](04-tactics/00-index.md))
+read start to finish. The tactics chapter ([Chapter 4](04-tactics/00-index.md))
 and the working-efficiently chapter ([Chapter 12](12-working-efficiently/00-index.md))
 are where each one is actually explained.
 
 Two general links used throughout this page:
 
-- **[Lean 4 Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)**
-  — the official, current documentation for every built-in tactic.
-- **[Loogle](https://loogle.lean-lang.org/)** — the Mathlib declaration
+- **[Lean 4 Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)**,
+  the official, current documentation for every built-in tactic.
+- **[Loogle](https://loogle.lean-lang.org/)**, the Mathlib declaration
   search engine; `https://loogle.lean-lang.org/?q=NAME` jumps straight to
   a name. Also see the browsable **[Mathlib4 docs](https://leanprover-community.github.io/mathlib4_docs/)**.
 
@@ -48,7 +48,7 @@ Two general links used throughout this page:
 | `noncomm_ring` | Ch. 8 (Mathlib equivalent) | [Loogle](https://loogle.lean-lang.org/?q=noncomm_ring) |
 | `sorry` | Ch. 4, Section 3 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 
-## Mathlib names (Chapters 6-11's "Mathlib equivalent" boxes)
+## Mathlib names (the "Mathlib equivalent" boxes of Chapters 6-11)
 
 | Name | What it is | Reference |
 | --- | --- | --- |
@@ -56,7 +56,7 @@ Two general links used throughout this page:
 | `Ring`, `CommRing` | The real ring classes | [Loogle: Ring](https://loogle.lean-lang.org/?q=Ring) |
 | `Module`, `Submodule` | The real module/submodule classes | [Loogle: Module](https://loogle.lean-lang.org/?q=Module) |
 | `LinearMap` (`→ₗ[R]`) | Module homomorphisms | [Loogle: LinearMap](https://loogle.lean-lang.org/?q=LinearMap) |
-| `Quiver`, `Quiver.Path` | Mathlib's own quiver/path classes | [Loogle: Quiver](https://loogle.lean-lang.org/?q=Quiver) |
+| `Quiver`, `Quiver.Path` | The real quiver/path classes of Mathlib | [Loogle: Quiver](https://loogle.lean-lang.org/?q=Quiver) |
 | `ZMod` | $\mathbb{Z}/n\mathbb{Z}$ | [Loogle: ZMod](https://loogle.lean-lang.org/?q=ZMod) |
 | `Matrix` | Matrices over a ring | [Loogle: Matrix](https://loogle.lean-lang.org/?q=Matrix) |
 | `Equiv.Perm`, `Equiv.swap`, `finRotate` | Permutation group of a type | [Loogle: Equiv.Perm](https://loogle.lean-lang.org/?q=Equiv.Perm) |

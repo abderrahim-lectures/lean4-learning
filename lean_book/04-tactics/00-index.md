@@ -10,36 +10,36 @@
 - Use `intro`/`exact`/`apply`/`rw` to work a goal one step at a time.
 - Diagnose a failed tactic from its error message.
 - Use `induction`/`cases`/`constructor`/`unfold` on inductively-defined data.
-- Carry out a full inductive proof (`Nat.add`'s commutativity) from scratch.
+- Carry out a full inductive proof (commutativity of `Nat.add`) from scratch.
 
 ## The story of this chapter
 
 Writing proof *terms* directly (as in Chapter 3) quickly becomes hard to manage.
 Instead, Lean provides **tactic mode**, entered with `by`, in which a "goal"
-is worked step by step, much as one would write a proof on paper. This chapter's
-real subject is not the list of tactics below, but **how to work a goal
+is worked step by step, much as one would write a proof on paper. The
+real subject of this chapter is not the list of tactics below, but **how to work a goal
 whose proof is not yet known**, since that is the skill the rest of
 the book practices. The tactic reference is secondary: read it once, then
 return to it as needed. Each section below builds that skill one question at a
-time:
+time.
 
 1. **What does a Lean goal state look like, and what is the first strategy
-   when no proof is in hand?** ([Section 1](01-goal-state.md)) — the anatomy
+   when no proof is in hand?** ([Section 1](01-goal-state.md)) The anatomy
    of a goal, and the habit of reading every hypothesis before trying anything.
 2. **Which four tactics does every proof reduce to, and what does each one
-   actually do to a goal?** ([Section 2](02-core-tactics.md)) — `intro`,
+   actually do to a goal?** ([Section 2](02-core-tactics.md)) `intro`,
    `exact`, `apply`, `rw`, each mapped to the ordinary inference rule it
    realizes.
-3. **When a tactic fails, Lean does not whisper — it points.** ([Section 3](03-reading-failures.md))
-   how to read an error message as a debugging trace, and when `sorry` is a
+3. **When a tactic fails, Lean does not whisper. It points.** ([Section 3](03-reading-failures.md))
+   How to read an error message as a debugging trace, and when `sorry` is a
    placeholder to be filled versus a flag that something deeper must change.
 4. **How does one reason by cases or by induction on data that is defined
-   recursively?** ([Section 4](04-more-tactics.md)) — `cases`, `induction`,
+   recursively?** ([Section 4](04-more-tactics.md)) `cases`, `induction`,
    `constructor`, `unfold`, the tactics that open up inductively-defined
    data.
 5. **Can all of the above be assembled into a real inductive proof from
-   scratch — one with no automation to hide behind?** ([Section 5](05-worked-example.md))
-   — `Nat.add`'s commutativity, built one tactic at a time.
+   scratch, one with no automation to hide behind?** ([Section 5](05-worked-example.md))
+   Commutativity of `Nat.add`, built one tactic at a time.
 
 ## Sections
 

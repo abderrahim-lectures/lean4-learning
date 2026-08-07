@@ -5,12 +5,12 @@
 ---
 
 Every external source cited anywhere in this book, consolidated into one
-list with one consistent citation style. Each section's own "Sources,
-quoted" box links back to the entries it uses, with a short note on *why*
-that source is cited at that specific spot — this page holds the full
+list with one consistent citation style. Each section has its own "Sources,
+quoted" box that links back to the entries it uses, with a short note on *why*
+that source is cited at that specific spot. This page holds the full
 citation, once, for every source in the book. (This does not include the
 Lean tactic-reference/Loogle links used inline throughout the main text,
-or Mathlib module paths named in "Mathlib equivalent" boxes — those serve
+or Mathlib module paths named in "Mathlib equivalent" boxes; those serve
 as functional, per-occurrence documentation links rather than citations,
 and are indexed separately in the
 [tactic and library reference](tactic-and-library-reference.md).)
@@ -29,7 +29,7 @@ and are indexed separately in the
 
 <a id="gentzen1935"></a>**[Gentzen1935]** Gerhard Gentzen, "Untersuchungen über das logische Schließen," *Mathematische Zeitschrift* 39, 1935 (Part I, pp. 176–210; Part II, pp. 405–431).
 
-<a id="feysladriere1955"></a>**[FeysLadriere1955]** Gerhard Gentzen, *Recherches sur la déduction logique*, French translation by Robert Feys and Jean Ladrière, Presses Universitaires de France, 1955. A translation of [Gentzen1935]. §II p. 27's introduction/elimination-rule passage was verbatim-verified against this source.
+<a id="feysladriere1955"></a>**[FeysLadriere1955]** Gerhard Gentzen, *Recherches sur la déduction logique*, French translation by Robert Feys and Jean Ladrière, Presses Universitaires de France, 1955. A translation of [Gentzen1935]. The introduction/elimination-rule passage on §II p. 27 was verbatim-verified against this source.
 
 <a id="godel1930"></a>**[Godel1930]** Kurt Gödel, "Die Vollständigkeit der Axiome des logischen Funktionenkalküls," 1930.
 
@@ -66,9 +66,9 @@ and are indexed separately in the
 
 <a id="schiffler2014"></a>**[Schiffler2014]** Ralf Schiffler, *[Quiver Representations](https://link.springer.com/book/10.1007/978-3-319-09204-1)*, CMS Books in Mathematics, Springer, 2014.
 
-<a id="thompson1991"></a>**[Thompson1991]** Simon Thompson, *[Type Theory and Functional Programming](https://kar.kent.ac.uk/20998/1/ttfp.pdf)*, Addison-Wesley, 1991. Freely available from the author's institutional repository. (⚠ Link check 2026-07-19: `kar.kent.ac.uk` failed to complete a TLS handshake while the parent `kent.ac.uk` domain and unrelated control sites responded normally — possibly a dead/misconfigured host for the Kent Academic Repository subdomain specifically. Worth a manual check before relying on this link.)
+<a id="thompson1991"></a>**[Thompson1991]** Simon Thompson, *[Type Theory and Functional Programming](https://kar.kent.ac.uk/20998/1/ttfp.pdf)*, Addison-Wesley, 1991. Freely available from the institutional repository of the author. (⚠ Link check 2026-07-19, `kar.kent.ac.uk` failed to complete a TLS handshake while the parent `kent.ac.uk` domain and unrelated control sites responded normally, possibly a dead/misconfigured host for the Kent Academic Repository subdomain specifically. Worth a manual check before relying on this link.)
 
-<a id="tpil4"></a>**[TPIL4]** *Theorem Proving in Lean 4*, ["Dependent Type Theory"](https://leanprover.github.io/theorem_proving_in_lean4/Dependent-Type-Theory/) (§2.1 "Simple Type Theory," §2.8 "What makes dependent type theory dependent?") and ["Propositions and Proofs"](https://leanprover.github.io/theorem_proving_in_lean4/Propositions-and-Proofs/) (§3.1 "Propositions as Types"). (URLs verified 2026-07-19; the book's original links used a stale pre-rewrite URL scheme — `dependent_type_theory.html` etc. — which now 404s.)
+<a id="tpil4"></a>**[TPIL4]** *Theorem Proving in Lean 4*, ["Dependent Type Theory"](https://leanprover.github.io/theorem_proving_in_lean4/Dependent-Type-Theory/) (§2.1 "Simple Type Theory," §2.8 "What makes dependent type theory dependent?") and ["Propositions and Proofs"](https://leanprover.github.io/theorem_proving_in_lean4/Propositions-and-Proofs/) (§3.1 "Propositions as Types"). (URLs verified 2026-07-19; the original links of the book used a stale pre-rewrite URL scheme, such as `dependent_type_theory.html`, which now 404s.)
 
 <a id="vandalen2013"></a>**[VanDalen2013]** Dirk van Dalen, *[Logic and Structure](https://doi.org/10.1007/978-1-4471-4558-5)*, 5th ed., Springer, 2013.
 

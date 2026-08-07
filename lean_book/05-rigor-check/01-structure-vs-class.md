@@ -4,9 +4,9 @@
 
 ---
 
-Every algebraic definition in this book — `Group`, `Ring`, `Module` — is
+Every algebraic definition in this book, `Group`, `Ring`, `Module`, is
 written as a plain `structure`. Mathlib, the real Lean library, defines
-all of these using `class` instead:
+all of these using `class` instead.
 
 ```lean
 -- this book's style
@@ -49,11 +49,11 @@ instance : Group Int where
   -- ...
 ```
 
-Lean records `Int`'s group structure in a global table. From then on,
+Lean records the group structure of `Int` in a global table. From then on,
 any function that takes an *implicit* `[Group G]` argument (square
-brackets, not curly braces — this is a third kind of argument, an **instance
+brackets, not curly braces; this is a third kind of argument, an **instance
 argument**) has it filled in automatically whenever `G` is unified with
-`Int`, with no explicit term needed at the call site:
+`Int`, with no explicit term needed at the call site.
 
 ```lean
 def opTwice [Group G] (x : G) : G :=
@@ -64,7 +64,7 @@ def opTwice [Group G] (x : G) : G :=
 
 Compare this to the style used throughout this book, where every theorem
 about groups takes an *explicit* term `Grp : Group G` as a genuine
-function argument:
+function argument.
 
 ```lean
 def opTwice (Grp : Group G) (x : G) : G :=
@@ -73,26 +73,26 @@ def opTwice (Grp : Group G) (x : G) : G :=
 #eval opTwice intGroup 3   -- the specific Group term must be named
 ```
 
-Mathematically, the difference is this: `class` + `instance` implements the
+Mathematically, the difference is this. `class` + `instance` implements the
 same convention as ordinary mathematical prose, in which one writes "let $G$
 be a group" once and then simply writes $a \cdot b$, $e$, $a^{-1}$
 thereafter. The *specific* group structure is left implicit, tracked by
-context, and never re-named at each use. Lean's typeclass mechanism
-automates exactly that convention. A `structure`-only approach (this
-book's style) requires the structure to always be carried around
+context, and never re-named at each use. The typeclass mechanism in Lean
+automates exactly that convention. A `structure`-only approach (the
+style used in this book) requires the structure to always be carried around
 explicitly, so the group operation is never left unstated.
 
 ### Why this book deliberately avoids `class`, for now
 
-`class`'s automation is exactly what would make it harder to see, the
+The automation in `class` is exactly what would make it harder to see, the
 first time through, what is actually happening. Every `Grp.op`, every
-`Grp.assoc` in this book's proofs is a visible, traceable term. One can
+`Grp.assoc` in the proofs of this book is a visible, traceable term. One can
 always ask "where did this fact come from?" and point at the specific
 argument it is a field of. With `class`, that same information is present
-but resolved silently by the elaborator — convenient once trusted, but
+but resolved silently by the elaborator, convenient once trusted, but
 difficult to debug the first time instance resolution picks the
 "wrong" (or an unexpected) instance, or fails to find one at all. Reading
-the *explicit* version first, this book's approach, builds the
+the *explicit* version first, the approach taken by this book, builds the
 mental model that makes debugging *silent* instance-resolution failures
 manageable later, since the data being
 threaded through remains known even once no longer visible in the source text.
@@ -100,18 +100,18 @@ threaded through remains known even once no longer visible in the source text.
 ### The bridge to Mathlib
 
 Nothing about the *mathematical content* changes between the two styles.
-`Group`'s axioms are the axioms, in either encoding. The type-class version
-also usually bundles in the group's `*`, `⁻¹`, `1` as genuine
-*notation* (through further, separate mechanisms — `Mul`, `Inv`, `One` type
+The axioms of `Group` are the axioms, in either encoding. The type-class version
+also usually bundles in the `*`, `⁻¹`, `1` of the group as genuine
+*notation* (through further, separate mechanisms, the `Mul`, `Inv`, `One` type
 classes that `Group` extends), so that Mathlib code reads as `a * b`
-instead of `Grp.op a b`. Chapter 13's suggested projects include redoing
-this book's `Group`/`Ring` as type classes once the reader is comfortable
+instead of `Grp.op a b`. The suggested projects of Chapter 13 include redoing
+`Group`/`Ring` from this book as type classes once the reader is comfortable
 doing so. At that point, everything in this section is the vocabulary needed.
 
 ### A note on `.toGroup`, `.toPoint`, and coercion
 
-Whenever a `structure` extends another (Chapter 2's `Point3D extends Point`,
-this book's `CommGroup extends Group`), Lean generates a field named
+Whenever a `structure` extends another (`Point3D extends Point` in Chapter 2,
+`CommGroup extends Group` in this book), Lean generates a field named
 `.toX` that projects back to the parent structure. `cg.toGroup` recovers the
 underlying `Group` from a `CommGroup cg`. Lean also permits *dropping* the
 `.toGroup` and writing `cg.op` directly, silently inserting the projection.
@@ -123,7 +123,7 @@ though a much simpler case, as coercing `Nat` values into `Int`. The
 literal projection differs, but "insert a conversion function
 automatically so notation reads naturally" is the shared mechanism.
 
-> Read more: TPiL's chapters on "Structures and Records" and "Type
+> Read more. The TPiL chapters "Structures and Records" and "Type
 > Classes" cover both topics in this section directly, including
 > coercions, in more depth and with additional worked examples than this
 > book provides.

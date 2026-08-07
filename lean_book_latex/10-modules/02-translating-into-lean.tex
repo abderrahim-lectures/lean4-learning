@@ -2,7 +2,7 @@
 
 Section 1 stated the module axioms on paper, as the same ``abelian group plus a compatible action'' pattern already used for \texttt{Group} and \texttt{Ring} throughout Chapters 6--9. A definition stated on paper is not yet a definition Lean can check against; it still has to be written down as a \texttt{structure}, field by field, exactly as \texttt{Group} and \texttt{Ring} were before it. That translation is what this section carries out.
 
-The same ``data, then axioms'' build used for \texttt{Group} and \texttt{Ring} applies here:
+The same ``data, then axioms'' build used for \texttt{Group} and \texttt{Ring} applies here.
 
 \begin{lstlisting}
 structure Module (R : Type) (Rg : Ring R) (M : Type) where
@@ -14,20 +14,20 @@ structure Module (R : Type) (Rg : Ring R) (M : Type) where
   one_smul : (*$\forall$*) m : M, smul Rg.one m = m
 \end{lstlisting}
 
-Field by field:
+Field by field.
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{addGrp : CommGroup M} --- the underlying abelian group of the module, exactly as \texttt{addGrp} played this role inside \texttt{Ring} (Chapter 8). Note that \texttt{Module} takes \texttt{Rg : Ring R} as an \emph{explicit argument}, not a field: a module is always a module \emph{over} a specific, already-given ring, so \texttt{Rg} is a parameter of the whole structure rather than data bundled inside it.
+  \texttt{addGrp : CommGroup M} is the underlying abelian group of the module, exactly as \texttt{addGrp} played this role inside \texttt{Ring} (Chapter 8). Note that \texttt{Module} takes \texttt{Rg : Ring R} as an \emph{explicit argument}, not a field. A module is always a module \emph{over} a specific, already-given ring, so \texttt{Rg} is a parameter of the whole structure rather than data bundled inside it.
 \item
-  \texttt{smul : R → M → M} --- the scalar action, \texttt{r • m} in ordinary notation.
+  \texttt{smul : R → M → M} is the scalar action, \texttt{r • m} in ordinary notation.
 \item
-  \texttt{smul\_\allowbreak{}add}, \texttt{add\_\allowbreak{}smul} --- the two distributivity laws (M1), (M2). Read them as ``scalar over module-sum'' and ``ring-sum over scalar''. This is the same left/right split used for \texttt{Ring}'s \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib}, but here the split is based on \emph{which} addition (\texttt{Rg.addGrp.op} vs. \texttt{addGrp.op}) is involved, not on which side \texttt{mul} is applied.
+  \texttt{smul\_\allowbreak{}add}, \texttt{add\_\allowbreak{}smul} are the two distributivity laws (M1), (M2). Read them as ``scalar over module-sum'' and ``ring-sum over scalar.'' This is the same left/right split used for \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib} of \texttt{Ring}, but here the split is based on \emph{which} addition (\texttt{Rg.addGrp.op} vs. \texttt{addGrp.op}) is involved, not on which side \texttt{mul} is applied.
 \item
-  \texttt{smul\_\allowbreak{}smul} --- (M3), compatibility of the ring's multiplication with iterated scalar action.
+  \texttt{smul\_\allowbreak{}smul} is (M3), compatibility of the multiplication of the ring with iterated scalar action.
 \item
-  \texttt{one\_\allowbreak{}smul} --- (M4), the ring's multiplicative identity acts as the identity scalar.
+  \texttt{one\_\allowbreak{}smul} is (M4), the multiplicative identity of the ring acts as the identity scalar.
 \end{itemize}
 
 \begin{mathreading}
@@ -38,7 +38,7 @@ M\), \((r,m)\mapsto r\cdot m\). The four axioms say precisely that the curried m
 \end{mathreading}
 
 \begin{quote}
-Read more: Mathlib's \href{https://loogle.lean-lang.org/?q=Module}{\texttt{Module}} (\texttt{Mathlib.Algebra.Module.Defs}) is much more general. It is universe-polymorphic, stated for \texttt{Semiring} rather than just \texttt{Ring}, and integrated with the whole \texttt{Mathlib.LinearAlgebra.*} hierarchy (bases, dimension, tensor products); see \hyperref[sec:13-next-steps:02-moving-to-mathlib:1]{Chapter 13}. For the classical theory, any standard module-theory or homological-algebra text (e.g.~Dummit \& Foote's chapters on modules, or Weibel's \emph{An Introduction to Homological Algebra} for the deeper theory) covers the same axioms from the ground up.
+Read more. \texttt{Module} in Mathlib (\href{https://loogle.lean-lang.org/?q=Module}{\texttt{Module}}, \texttt{Mathlib.Algebra.Module.Defs}) is much more general. It is universe-polymorphic, stated for \texttt{Semiring} rather than just \texttt{Ring}, and integrated with the whole \texttt{Mathlib.LinearAlgebra.*} hierarchy (bases, dimension, tensor products); see \hyperref[sec:13-next-steps:02-moving-to-mathlib:1]{Chapter 13}. For the classical theory, any standard module-theory or homological-algebra text (e.g.~the chapters on modules in Dummit \& Foote, or \emph{An Introduction to Homological Algebra} by Weibel for the deeper theory) covers the same axioms from the ground up.
 \end{quote}
 
 \subsection{Sources, quoted}\label{sec:10-modules:02-translating-into-lean:2}
@@ -50,5 +50,5 @@ Formal definitions and citations for this section, gathered here for reference (
 \item
   \textbf{Module.} ``A binary operation \(+\) on \(M\) under which \(M\) is an abelian group, and \ldots{} an action of \(R\) on \(M\) \ldots{} (a) \((r+s)m = rm+sm\) \ldots{} (b) \((rs)m = r(sm)\) \ldots{} (c) \(r(m+n) = rm+rn\) \ldots{} (d) \(1m = m\)'' (\cite{DummitFoote2003}, §10.1 ``Basic Definitions and Examples,'' p.~336).
 \item
-  Weibel (\cite{Weibel1994}) --- the deeper module/homological theory this section's ``Read more'' points toward.
+  Weibel (\cite{Weibel1994}) covers the deeper module/homological theory the ``Read more'' note of this section points toward.
 \end{itemize}

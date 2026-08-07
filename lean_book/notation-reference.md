@@ -4,16 +4,16 @@
 
 ---
 
-A lookup table connecting the mathematical notation used in this book's
-prose to the corresponding Lean syntax used in its code. This page is a
-quick reference, not something to read start to finish — every row is
+A lookup table connecting the mathematical notation used in the prose of
+this book to the corresponding Lean syntax used in its code. This page is a
+quick reference, not something to read start to finish. Every row is
 built up and explained properly the first time it is needed, at the
 chapter cited in the last column.
 
 **Note:** `·` in mathematical prose maps to different Lean constructs
-depending on context — see the two "Group multiplication" and "Scalar
-action" rows below, which share the same math notation but translate to
-different Lean operations (`Group.op` vs `SMul.smul`).
+depending on context. See the two "Group multiplication" and "Module
+scalar action" rows below. They share the same math notation but
+translate to different Lean operations, `Group.op` versus `SMul.smul`.
 
 Two related pages cover notation this one deliberately leaves out: the
 [tactic and library reference](tactic-and-library-reference.md) (tactics
@@ -30,7 +30,7 @@ throughout the main text and code.
 | Function type / implication | $A \to B$ | `A → B` | Chapter 1 |
 | Universal quantifier ("for all") | $\forall x, P\, x$ | `∀ x, P x` | Chapter 3 |
 | Existential quantifier ("there exists") | $\exists x, P\, x$ | `∃ x, P x` | Chapter 3 |
-| Unique existence ("there exists a unique") | $\exists!\, x, P\, x$ | no single token — witnessed by supplying the value and a proof it is the only one | Chapter 1, Section 4 |
+| Unique existence ("there exists a unique") | $\exists!\, x, P\, x$ | no single token, witnessed by supplying the value and a proof it is the only one | Chapter 1, Section 4 |
 | Set/type membership | $x \in A$ | `x ∈ A` | Chapter 1 |
 | Negation | $\neg P$ | `¬P` | Concept introduced Chapter 1 (terminology); formal use from Chapter 3 |
 | Conjunction ("and") | $P \wedge Q$ | `P ∧ Q` (`And`) | Chapter 3 |
@@ -49,8 +49,8 @@ throughout the main text and code.
 | Anonymous-constructor pairing | $\langle a, b \rangle$ | `⟨a, b⟩` | Chapter 1, Section 4 |
 | Coercion (embedding) | — | `↑` (auto-coercion) | Chapter 1, Section 3 |
 | Function composition | $g \circ f$ | `g ∘ f` | Chapter 1 |
-| Group multiplication (a `Group`'s binary operation) | $a \cdot b$ | `op a b` (the `op` field of `Group G`) | Chapter 6 |
-| Scalar/group action | $a \cdot b$ (or $r \cdot m$) | `a • b` (`SMul`) | Chapter 10 |
+| Group multiplication (the binary operation of a `Group`) | $a \cdot b$ | `op a b` (the `op` field of `Group G`) | Chapter 6 |
+| Module scalar action (a ring element acting on a module element) | $r \cdot m$ | `r • m` (`SMul`) | Chapter 10 |
 | Inverse | $a^{-1}$ | `a⁻¹` | Chapter 6 |
 | Lambda abstraction ("sends to") | $x \mapsto e$ | `fun x => e` | Chapter 1 |
 | Divisibility | $a \mid b$ | `a ∣ b` | Chapter 9 |

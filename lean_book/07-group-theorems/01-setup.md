@@ -11,7 +11,7 @@ by every group built afterward, with nothing about the specific carrier
 re-proved at each use site. This chapter cashes in that promise. Rather
 than fix `G` to `Int` or `Perm3` before proving anything, the setup below
 fixes an *arbitrary* group once, and every theorem that follows is proved
-against that one unnamed group — so that whatever gets proved here
+against that one unnamed group, so that whatever gets proved here
 automatically applies everywhere a `Group` instance is later supplied.
 
 ```lean

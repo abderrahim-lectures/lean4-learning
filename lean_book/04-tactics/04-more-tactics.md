@@ -20,7 +20,7 @@ justifies each step, and `induction` with a fully spelled-out base case and
 inductive step. `simp` should be treated as a tool for later, independent
 proofs, once what it would have done by hand is already understood.
 
-> Read more: [Chapter 12, "`simp`, now that you understand what it
+> Read more. [Chapter 12, "`simp`, now that you understand what it
 > replaces"](../12-working-efficiently/03-simp.md) covers when it is the
 > *right* efficient choice, once every step no longer needs to be spelled out.
 
@@ -36,8 +36,8 @@ theorem and_example (P Q : Prop) (hp : P) (hq : Q) : P ∧ Q := by
 The `·` (focus dot) lets you address each remaining goal one at a time.
 
 **Mathematical reading.** `constructor` invokes the introduction rule of the
-goal's type ([Chapter 3, Section 2](../03-propositions-and-proofs/02-logic-recap.md)'s
-$\wedge$-intro/$\vee$-intro, read more below). For a product/conjunction
+type of the goal (the $\wedge$-intro/$\vee$-intro of [Chapter 3, Section 2](../03-propositions-and-proofs/02-logic-recap.md),
+read more below). For a product/conjunction
 $P \wedge Q$ it splits the task into proving each factor separately. This
 reflects the [universal
 property](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
@@ -45,11 +45,11 @@ of the product, "a map into $P \times Q$ is a pair of maps," so proving $P$
 and proving $Q$ is enough. More generally, for any `structure` it reduces the
 goal to one subgoal per field. In a dual way, `cases` on $h : P \vee Q$ below
 invokes the *elimination* rule of a coproduct
-([Chapter 3, Section 5](../03-propositions-and-proofs/05-and-or-not.md)'s reading
-of $\vee$ as a coproduct): to prove anything from $P \sqcup Q$ it suffices to
+(the reading of $\vee$ as a coproduct in [Chapter 3, Section 5](../03-propositions-and-proofs/05-and-or-not.md)).
+To prove anything from $P \sqcup Q$ it suffices to
 prove it from each summand, the case analysis $\iota_1$/$\iota_2$.
 
-> Read more: [Chapter 3, Section 2](../03-propositions-and-proofs/02-logic-recap.md)
+> Read more. [Chapter 3, Section 2](../03-propositions-and-proofs/02-logic-recap.md)
 > states the introduction/elimination rules for every connective by name,
 > if "introduction rule"/"elimination rule" as general terms are new.
 
@@ -73,7 +73,7 @@ theorem add_zero_left (n : Nat) : 0 + n = n := by
     rw [Nat.add_succ, ih]
 ```
 
-This mirrors the mathematical principle of induction:
+This mirrors the mathematical principle of induction.
 
 $$
 P(0) \;\land\; \big(\forall k,\ P(k) \to P(k+1)\big) \;\implies\; \forall n,\ P(n)

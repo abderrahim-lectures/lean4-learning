@@ -6,11 +6,11 @@
 
 **1. Adding a cycle**
 
-The book's `ExampleArrow` is left untouched; the same construction is
+The `ExampleArrow` of the book is left untouched; the same construction is
 done here on a fresh `CyclicArrow`/`cyclicQuiver` rather than extending
 `ExampleArrow` with a `gamma` arrow, since introducing a cycle into the
-book's own running example would make later chapters that assume
-acyclicity (see Chapter 11's finiteness discussion) inconsistent.
+running example of the book itself would make later chapters that assume
+acyclicity (see the finiteness discussion of Chapter 11) inconsistent.
 
 ```lean
 inductive CyclicArrow where
@@ -53,8 +53,8 @@ theorem append_nil_left {V A : Type} {Q : Quiver V A} {u v : V} (p : Path Q u v)
   induction p with
   | nil =>
     -- Goal: Path.append (Path.nil u) (Path.nil u) = Path.nil u
-    -- (`nil`'s case binds no fresh variable here — the vertex is already
-    -- fixed by p's own type — so there is nothing to name.)
+    -- (the `nil` case binds no fresh variable here — the vertex is already
+    -- fixed by the type of p itself — so there is nothing to name.)
     -- Path.append unfolds on its second argument being `nil`, giving
     -- `Path.nil u` on the nose.
     rfl
@@ -65,23 +65,23 @@ theorem append_nil_left {V A : Type} {Q : Quiver V A} {u v : V} (p : Path Q u v)
     rw [ih]
 ```
 
-This is exactly what the editor shows in the `cons` case: the Lean
-Infoview lists every hypothesis the pattern match introduces —
+This is exactly what the editor shows in the `cons` case. The Lean
+Infoview lists every hypothesis the pattern match introduces, namely
 `Q : Quiver V A`, `h : Q.source a = v✝`, `h' : Q.target a = w✝`,
 `q' : Path Q u v✝` (an intermediate vertex introduced by the pattern
 match, not the fixed endpoint `v`), and the induction hypothesis
-`ih : (Path.nil u).append q' = q'` — above the line, with the goal
+`ih : (Path.nil u).append q' = q'`, above the line, with the goal
 `(Path.nil u).append (Path.cons a h h' q') = Path.cons a h h' q'` below
-it:
+it.
 
-![The Lean Infoview panel in VS Code, showing the tactic state for the `cons` case of `append_nil_left`'s induction: hypotheses `V A : Type`, `Q : Quiver V A`, `u v vt wt : V`, `a : A`, `h : Q.source a = v`, `h' : Q.target a = wt`, `q' : Path Q u vt`, `ih : (Path.nil u).append q' = q'`, and the goal `(Path.nil u).append (Path.cons a h h' q') = Path.cons a h h' q'`.](../11-path-algebras/images/append-nil-left-infoview.png)
+![The Lean Infoview panel in VS Code, showing the tactic state for the `cons` case of the induction for `append_nil_left`: hypotheses `V A : Type`, `Q : Quiver V A`, `u v vt wt : V`, `a : A`, `h : Q.source a = v`, `h' : Q.target a = wt`, `q' : Path Q u vt`, `ih : (Path.nil u).append q' = q'`, and the goal `(Path.nil u).append (Path.cons a h h' q') = Path.cons a h h' q'`.](../11-path-algebras/images/append-nil-left-infoview.png)
 
-This mirrors `Path.append`'s own recursion, case for case. `Path.append`
+This mirrors the own recursion of `Path.append`, case for case. `Path.append`
 was defined by matching on its second argument, so `induction p` (which
 splits into cases on exactly that argument, generating the matching
 induction hypothesis `ih` in the `cons` case) unfolds the definition
 directly. In the `nil` case, both sides are `Path.nil u` by definition. In
-the `cons` case, unfolding `Path.append`'s defining equation turns the goal
+the `cons` case, unfolding the defining equation of `Path.append` turns the goal
 into `Path.cons a h h' (Path.append (Path.nil u) q') = Path.cons a h h' q'`
 (the [`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) line makes this explicit rather than leaving it to
 elaboration), and `rw [ih]` completes the proof using the induction
@@ -97,7 +97,7 @@ structure PathAlgebraElem (V A : Type) (Q : Quiver V A) (k : Type) where
   -- coeff p = the coefficient of path p, for finitely many nonzero p
   coeff : {u v : V} → Path Q u v → k
   -- (a finiteness/support condition would be required here in a full
-  -- development, e.g. via Mathlib's `Finsupp`)
+  -- development, e.g. via the `Finsupp` type of Mathlib)
 
 -- To satisfy `Ring` (Chapter 8), `PathAlgebraElem` would need:
 --   addGrp : CommGroup (PathAlgebraElem V A Q k)   -- pointwise addition of coefficients
@@ -106,9 +106,9 @@ structure PathAlgebraElem (V A : Type) (Q : Quiver V A) (k : Type) where
 --   one    : the sum, over all vertices v, of 1 · (trivial path at v)
 --            (an idempotent identity, since Q may have infinitely many
 --            vertices this "one" is only literally an element when Q0 is
---            finite — for infinite Q the path algebra is typically only
---            a "ring with local units," a subtlety Mathlib's category-
---            theoretic treatment handles more gracefully than a bare Ring)
+--            finite; for infinite Q the path algebra is typically only
+--            a "ring with local units," a subtlety the category-
+--            theoretic treatment of Mathlib handles more gracefully than a bare Ring)
 ```
 
 The real finiteness/support bookkeeping (tracking which paths have nonzero
@@ -145,11 +145,11 @@ example : (Path.append pathAlpha pathBetaOnly).length =
 ```
 
 Neither `Path.append` nor `Path.length` can be watched with `dbg_trace`
-in isolation: a bare `Path` has no `Repr` instance, so only the composed
+in isolation. A bare `Path` has no `Repr` instance, so only the composed
 `.length` call ever produces something `#eval` can print. Tracing both at
 once shows `Path.append` finish building the whole composed path first,
-then `Path.length` walk it afterward — the two recursions do not
-interleave:
+then `Path.length` walk it afterward, and the two recursions do not
+interleave, as shown below.
 
 ```lean
 def Path.append' {V A : Type} {Q : Quiver V A} {u v w : V}
@@ -174,23 +174,23 @@ def Path.length' {V A : Type} {Q : Quiver V A} : {u v : V} → Path Q u v → Na
 ```
 
 `Path.length` recurses on the same two constructors as `Path.append`
-itself (Sections 4–5): `nil` contributes `0`, and each `cons` adds one to the
+itself (Sections 4-5). `nil` contributes `0`, and each `cons` adds one to the
 length of the shorter path it extends. The proof of `append_length`
-mirrors `Path.append`'s own recursion case for case, exactly as the
+mirrors the own recursion of `Path.append` case for case, exactly as the
 project asked, but with one genuine surprise if `rfl` is tried first in
-either case: it fails. `Path` is *indexed* by both endpoints. Because of
+either case. It fails. `Path` is *indexed* by both endpoints. Because of
 this, Lean compiles a match on an indexed family so that its defining
 equations reduce only through their auto-generated equation lemmas, not
 through plain iota-reduction, once an abstract path (`p`, `q'`) is
 involved. Concrete, fully closed paths like `pathAlpha` still reduce fine
-under `#eval` — that is why the three checks above work directly. But the
+under `#eval`, which is why the three checks above work directly. But the
 *general*, universally-quantified theorem does not close by `rfl`.
 `simp only [Path.append, Path.length]` names exactly the two
 definitions being unfolded and nothing else, so it plays the same explicit
-role a `rw` would if these equations were reachable that way — it is not
+role a `rw` would if these equations were reachable that way. It is not
 standing in for an unknown pile of simp lemmas, only for the two named
-here. This is the same kind of real, verified obstacle Chapter 6, Section 4's
-`Perm3.ext` ran into with core Lean's lack of a `structure`
+here. This is the same kind of real, verified obstacle that `Perm3.ext` ran into
+in Chapter 6, Section 4, with core Lean lacking a `structure`
 extensionality lemma, now met again with indexed recursion instead.
 
 ---

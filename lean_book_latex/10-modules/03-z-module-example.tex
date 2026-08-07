@@ -1,6 +1,6 @@
 \section{\texorpdfstring{Example: every abelian group is a \(\mathbb{Z}\)-module}{Example: every abelian group is a \textbackslash mathbb\{Z\}-module}}\label{sec:10-modules:03-z-module-example:1}
 
-This is the standard first example, and a good one to build by hand, since the scalar action is not given as data: it must be \emph{defined}, by repeated addition, from the group structure alone.
+This is the standard first example, and a good one to build by hand, since the scalar action is not given as data. It must be \emph{defined}, by repeated addition, from the group structure alone.
 
 \begin{lstlisting}
 -- n (*$\bullet$*) m for n : Nat, by iterating `op`.
@@ -16,7 +16,7 @@ def intSmul {M : Type} (CG : CommGroup M) (n : Int) (m : M) : M :=
   | Int.negSucc k => CG.toGroup.inv (natSmul CG.toGroup (k + 1) m)
 \end{lstlisting}
 
-\texttt{natSmul Grp n m} is literally \(m + m + \cdots + m\) (\(n\) times). It is defined by recursion on \texttt{n}, in exactly the way \texttt{Nat.add} itself was defined (Chapter 4). A \texttt{dbg\_\allowbreak{}trace} in the succ case shows this iterated addition happening one term at a time, using \texttt{intGroup} (Chapter 6) as a concrete \texttt{Group Int}:
+\texttt{natSmul Grp n m} is literally \(m + m + \cdots + m\) (\(n\) times). It is defined by recursion on \texttt{n}, in exactly the way \texttt{Nat.add} itself was defined (Chapter 4). A \texttt{dbg\_\allowbreak{}trace} in the succ case shows this iterated addition happening one term at a time, using \texttt{intGroup} (Chapter 6) as a concrete \texttt{Group Int}.
 
 \begin{lstlisting}
 def natSmul' {M : Type} (Grp : Group M) (n : Nat) (m : M) : M :=
@@ -35,7 +35,7 @@ def natSmul' {M : Type} (Grp : Group M) (n : Nat) (m : M) : M :=
 -- 12
 \end{lstlisting}
 
-Five lines print, one per \texttt{succ} layer stripped off \texttt{4}, each announcing ``one more copy of \texttt{m}'' \emph{before} the recursive call --- the same five-step shape \texttt{double}'s \texttt{Nat.rec} trace had in Chapter 1, since both recurse structurally on the same \texttt{Nat} argument. The final \texttt{12} is exactly \(3+3+3+3\), \texttt{intGroup}'s \texttt{op} (ordinary \texttt{Int} addition) applied four times. \texttt{intSmul} extends it to negative integers using the group inverse. Given any \texttt{CG : CommGroup M}, one can then check that \texttt{intSmul CG} satisfies (M1)--(M4) against \texttt{intRing} (Chapter 8). This is a genuine, if somewhat long, proof by induction on the integer scalar, in the same spirit as Chapter 4's \texttt{my\_\allowbreak{}add\_\allowbreak{}comm}. The full verification is left as an extended exercise, since carrying it out directly is the best way to see \emph{why} modules over \(\mathbb{Z}\) are forced, not chosen: \texttt{intSmul} is the \emph{unique} action that turns any abelian group into a \(\mathbb{Z}\)-module, because (M4) plus (M1)/(M2) pin down \(n \cdot m\) for every integer \(n\) by induction, leaving no freedom.
+Five lines print, one per \texttt{succ} layer stripped off \texttt{4}, each announcing ``one more copy of \texttt{m}'' \emph{before} the recursive call, the same five-step shape the \texttt{Nat.rec} trace of \texttt{double} had in Chapter 1, since both recurse structurally on the same \texttt{Nat} argument. The final \texttt{12} is exactly \(3+3+3+3\), the \texttt{op} of \texttt{intGroup} (ordinary \texttt{Int} addition) applied four times. \texttt{intSmul} extends it to negative integers using the group inverse. Given any \texttt{CG : CommGroup M}, one can then check that \texttt{intSmul CG} satisfies (M1)--(M4) against \texttt{intRing} (Chapter 8). This is a genuine, if somewhat long, proof by induction on the integer scalar, in the same spirit as \texttt{my\_\allowbreak{}add\_\allowbreak{}comm} in Chapter 4. The full verification is left as an extended exercise, since carrying it out directly is the best way to see \emph{why} modules over \(\mathbb{Z}\) are forced, not chosen: \texttt{intSmul} is the \emph{unique} action that turns any abelian group into a \(\mathbb{Z}\)-module, because (M4) plus (M1)/(M2) pin down \(n \cdot m\) for every integer \(n\) by induction, leaving no freedom.
 
 \begin{mathreading}
 
@@ -45,10 +45,10 @@ This constructs the canonical \(\mathbb{Z}\)-action on any abelian group. \textt
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} Mathlib does not leave ``every abelian group is (uniquely) a \(\mathbb{Z}\)-module'' as an exercise. It is registered as an instance, available for \emph{any} \texttt{AddCommGroup} at all, with no \texttt{natSmul}/\texttt{intSmul} to define or verify by hand:
+\textbf{Mathlib equivalent.} Mathlib does not leave ``every abelian group is (uniquely) a \(\mathbb{Z}\)-module'' as an exercise. It is registered as an instance, available for \emph{any} \texttt{AddCommGroup} at all, with no \texttt{natSmul}/\texttt{intSmul} to define or verify by hand.
 
 \begin{lstlisting}
 example {M : Type*} [AddCommGroup M] : Module Int M := inferInstance
 \end{lstlisting}
 
-The book builds the action from nothing (\texttt{natSmul} by recursion, then \texttt{intSmul} by extending to negative integers via \texttt{inv}) and leaves the four-axiom verification as an extended exercise. Mathlib's instance already carries that proof, following exactly the uniqueness argument in the mathematical reading above, established once in the library instead of once per abelian group encountered.
+The book builds the action from nothing (\texttt{natSmul} by recursion, then \texttt{intSmul} by extending to negative integers via \texttt{inv}) and leaves the four-axiom verification as an extended exercise. The Mathlib instance already carries that proof, following exactly the uniqueness argument in the mathematical reading above, established once in the library instead of once per abelian group encountered.

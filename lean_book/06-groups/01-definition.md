@@ -4,15 +4,15 @@
 
 ---
 
-Chapter 5's checkpoint project asked for a `Monoid`: a set with an
+The checkpoint project of Chapter 5 asked for a `Monoid`, a set with an
 associative operation and a two-sided identity, built entirely from the
 bundling techniques of Chapters 1–5, with no inverses required. A group is
 the natural next question a monoid forces: what happens once every
 element is also required to be *undoable*? Adding that one further axiom
-is the entire content of this chapter's opening definition, and it is
+is the entire content of the opening definition of this chapter, and it is
 what turns "a set with an associative operation" into the richer
-structure — with cancellation, and eventually genuine theorems reusable
-across every group at once — that the rest of Part II builds on.
+structure, with cancellation, and eventually genuine theorems reusable
+across every group at once, that the rest of Part II builds on.
 
 A **group** is a set $G$ together with:
 
@@ -47,7 +47,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   unique ... for each $a \in G$, $a^{-1}$ is uniquely determined"
   ([DummitFoote2003], §1.1 "Basic Axioms and Examples," p. 17,
   Proposition 1).
-- Aluffi ([Aluffi2009]) — offered as further reading, not an independently verified factual claim: Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
+- Aluffi ([Aluffi2009]) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of the book itself, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

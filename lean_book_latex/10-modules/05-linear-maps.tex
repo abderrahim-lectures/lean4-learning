@@ -1,6 +1,6 @@
 \section{Linear maps}\label{sec:10-modules:05-linear-maps:1}
 
-A \textbf{linear map} (module homomorphism) \(f : M \to N\) between \(R\)-modules satisfies \(f(m+n) = f(m) + f(n)\) and \(f(r \cdot m) = r \cdot f(m)\):
+A \textbf{linear map} (module homomorphism) \(f : M \to N\) between \(R\)-modules satisfies \(f(m+n) = f(m) + f(n)\) and \(f(r \cdot m) = r \cdot f(m)\).
 
 \begin{lstlisting}
 structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
@@ -10,7 +10,7 @@ structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
   map_smul : (*$\forall$*) (r : R) (m : M), toFun (ModM.smul r m) = ModN.smul r (toFun m)
 \end{lstlisting}
 
-This is precisely the categorical picture: \(R\)-modules and \(R\)-linear maps form a category. Composition of linear maps is linear, and the identity function is linear --- both easy to state and prove from the two fields above. This chapter's exercises ask you to prove exactly these two facts (\texttt{idLinearMap}, \texttt{composeLinearMap} in the appendix solutions), rather than proving them here in the main narrative. Everything in this chapter, including submodules and the direct sums below, is best understood as living inside that category, consistent with Chapter 1's opening dictionary for reading \texttt{Type} itself.
+This is precisely the categorical picture: \(R\)-modules and \(R\)-linear maps form a category. Composition of linear maps is linear, and the identity function is linear, both easy to state and prove from the two fields above. The exercises of this chapter ask you to prove exactly these two facts (\texttt{idLinearMap}, \texttt{composeLinearMap} in the appendix solutions), rather than proving them here in the main narrative. Everything in this chapter, including submodules and the direct sums below, is best understood as living inside that category, consistent with the opening dictionary of Chapter 1 for reading \texttt{Type} itself.
 
 \begin{mathreading}
 
@@ -21,7 +21,7 @@ This is precisely the categorical picture: \(R\)-modules and \(R\)-linear maps f
 
 \subsection{A concrete linear map: multiplication by a fixed integer}\label{sec:10-modules:05-linear-maps:2}
 
-The abstract definition is easier to trust once a single instance has been built by hand. Fix \(d \in \mathbb{Z}\); multiplication by \(d\) is \(\mathbb{Z}\)-linear as a map \(\mathbb{Z} \to \mathbb{Z}\):
+The abstract definition is easier to trust once a single instance has been built by hand. Fix \(d \in \mathbb{Z}\); multiplication by \(d\) is \(\mathbb{Z}\)-linear as a map \(\mathbb{Z} \to \mathbb{Z}\).
 
 \begin{lstlisting}
 def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
@@ -38,9 +38,9 @@ def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
 #eval (mulByLinearMap 5).toFun 3   -- 15
 \end{lstlisting}
 
-\texttt{map\_\allowbreak{}add}'s goal, \texttt{d * (m+n) = d*m + d*n}, is exactly distributivity. \texttt{map\_\allowbreak{}smul}'s goal, \texttt{d * (r*m) = r * (d*m)}, holds because \(\mathbb{Z}\) is commutative, so \texttt{d} and \texttt{r} can swap past each other. Both fields, in other words, are pure \texttt{Int}-arithmetic facts once \texttt{toFun}, \texttt{ModM.smul}, and \texttt{ModM.addGrp.op} are unfolded to their meanings here. This is the same ``reduce a module-theoretic goal to a concrete arithmetic identity'' move that Section 4's \texttt{evenSubmodule} used, applied again.
+The goal for \texttt{map\_\allowbreak{}add}, \texttt{d * (m+n) = d*m + d*n}, is exactly distributivity. The goal for \texttt{map\_\allowbreak{}smul}, \texttt{d * (r*m) = r * (d*m)}, holds because \(\mathbb{Z}\) is commutative, so \texttt{d} and \texttt{r} can swap past each other. Both fields, in other words, are pure \texttt{Int}-arithmetic facts once \texttt{toFun}, \texttt{ModM.smul}, and \texttt{ModM.addGrp.op} are unfolded to their meanings here. This is the same ``reduce a module-theoretic goal to a concrete arithmetic identity'' move used by \texttt{evenSubmodule} in Section 4, applied again.
 
-\textbf{Mathlib equivalent.} Mathlib's own \href{https://loogle.lean-lang.org/?q=LinearMap}{\texttt{LinearMap}} (notation \texttt{M →ₗ[R] N}) is built the same way: supply \texttt{toFun} plus the two homomorphism proofs. But the result is directly interoperable with the rest of the library's linear-algebra API:
+\textbf{Mathlib equivalent.} The \href{https://loogle.lean-lang.org/?q=LinearMap}{\texttt{LinearMap}} of Mathlib (notation \texttt{M →ₗ[R] N}) is built the same way: supply \texttt{toFun} plus the two homomorphism proofs. But the result is directly interoperable with the rest of the linear-algebra API of the library.
 
 \begin{lstlisting}
 def mulByLinearMap' (d : Int) : Int (*$\rightarrow$*)(*${}_l$*)[Int] Int where
@@ -51,4 +51,4 @@ def mulByLinearMap' (d : Int) : Int (*$\rightarrow$*)(*${}_l$*)[Int] Int where
 #eval mulByLinearMap' 5 3   -- 15
 \end{lstlisting}
 
-This has the same shape as \texttt{mulByLinearMap}: a \texttt{toFun} and two proof obligations, with \texttt{map\_\allowbreak{}add}/\texttt{map\_\allowbreak{}smul} becoming Mathlib's \texttt{map\_\allowbreak{}add'}/\texttt{map\_\allowbreak{}smul'}. The real difference is that \texttt{Int →ₗ[Int] Int} is a type the rest of Mathlib already knows how to compose, transport along isomorphisms, and package into matrices. \texttt{LinearMap intRing intZModule intZModule} gets none of that for free.
+This has the same shape as \texttt{mulByLinearMap}: a \texttt{toFun} and two proof obligations, with \texttt{map\_\allowbreak{}add}/\texttt{map\_\allowbreak{}smul} becoming the Mathlib names \texttt{map\_\allowbreak{}add'}/\texttt{map\_\allowbreak{}smul'}. The real difference is that \texttt{Int →ₗ[Int] Int} is a type the rest of Mathlib already knows how to compose, transport along isomorphisms, and package into matrices. \texttt{LinearMap intRing intZModule intZModule} gets none of that for free.

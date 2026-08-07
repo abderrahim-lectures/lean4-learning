@@ -9,16 +9,16 @@ inductive Path {V A : Type} (Q : Quiver V A) : V (*$\rightarrow$*) V (*$\rightar
       (p : Path Q u v) : Path Q u w
 \end{lstlisting}
 
-Reading this carefully:
+Reading this carefully.
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{Path Q : V → V → Type} --- for each pair of vertices \texttt{(start, finish)}, \texttt{Path Q start finish} is the \emph{type} of paths from \texttt{start} to \texttt{finish}. A term of this type is one specific path.
+  \texttt{Path Q : V → V → Type}. For each pair of vertices \texttt{(start, finish)}, \texttt{Path Q start finish} is the \emph{type} of paths from \texttt{start} to \texttt{finish}. A term of this type is one specific path.
 \item
-  \texttt{nil (v : V) : Path Q v v} --- the trivial path at \texttt{v}, going from \texttt{v} to \texttt{v} in zero steps. This is \(e_v\) from the math above.
+  \texttt{nil (v : V) : Path Q v v} is the trivial path at \texttt{v}, going from \texttt{v} to \texttt{v} in zero steps. This is \(e_v\) from the math above.
 \item
-  \texttt{cons \{u v w : V\} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w} --- given an existing path \texttt{p} from \texttt{u} to \texttt{v}, and an arrow \texttt{a} whose source is (provably, via \texttt{h}) \texttt{v} and whose target is (provably, via \texttt{h'}) \texttt{w}, \texttt{p} can be extended by appending \texttt{a}, producing a path from \texttt{u} to \texttt{w}. The two proof fields \texttt{h} and \texttt{h'} are exactly what \emph{prevents} the construction of nonsense paths: an arrow cannot be \texttt{cons}ed onto a path unless its source matches where the path left off.
+  \texttt{cons \{u v w : V\} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w}. given an existing path \texttt{p} from \texttt{u} to \texttt{v}, and an arrow \texttt{a} whose source is (provably, via \texttt{h}) \texttt{v} and whose target is (provably, via \texttt{h'}) \texttt{w}, \texttt{p} can be extended by appending \texttt{a}, producing a path from \texttt{u} to \texttt{w}. The two proof fields \texttt{h} and \texttt{h'} are exactly what \emph{prevents} the construction of nonsense paths: an arrow cannot be \texttt{cons}ed onto a path unless its source matches where the path left off.
 \end{itemize}
 
 Note that \texttt{cons} builds the path by appending the new arrow at the \emph{end}, matching the natural description ``take path \texttt{p}, then follow arrow \texttt{a}.''
@@ -41,7 +41,7 @@ def pathAlpha : Path exampleQuiver 0 1 :=
 \begin{itemize}
 \tightlist
 \item
-  \texttt{pathAlpha} starts from \texttt{Path.nil 0} (the trivial path at vertex \texttt{0}) and appends \texttt{alpha} (source \texttt{0}, target \texttt{1}, both proved by \texttt{rfl} since they compute directly from the \texttt{match} in \texttt{exampleQuiver}'s definition).
+  \texttt{pathAlpha} starts from \texttt{Path.nil 0} (the trivial path at vertex \texttt{0}) and appends \texttt{alpha} (source \texttt{0}, target \texttt{1}, both proved by \texttt{rfl} since they compute directly from the \texttt{match} in the definition of \texttt{exampleQuiver}).
 \end{itemize}
 
 \begin{lstlisting}
@@ -55,7 +55,7 @@ def pathBetaAlpha : Path exampleQuiver 0 2 :=
   \texttt{pathBetaAlpha} appends \texttt{beta} (source \texttt{1}, target \texttt{2}) onto \texttt{pathAlpha}, giving a path from \texttt{0} to \texttt{2}, exactly \(\beta\alpha\).
 \end{itemize}
 
-Attempting \texttt{Path.cons ExampleArrow.beta rfl rfl (Path.nil 0)} instead (appending \texttt{beta}, whose source is \texttt{1}, directly onto the trivial path at \texttt{0}) is rejected by Lean: the proof obligation \texttt{Q.source ExampleArrow.beta = 0} is \texttt{1 = 0}, which is false, so no \texttt{rfl} (or any other proof) exists. This is the type system enforcing ``arrows that do not match up cannot compose'', for free, at compile time.
+Attempting \texttt{Path.cons ExampleArrow.beta rfl rfl (Path.nil 0)} instead (appending \texttt{beta}, whose source is \texttt{1}, directly onto the trivial path at \texttt{0}) is rejected by Lean. The proof obligation \texttt{Q.source ExampleArrow.beta = 0} is \texttt{1 = 0}, which is false, so no \texttt{rfl} (or any other proof) exists. This is the type system enforcing ``arrows that do not match up cannot compose,'' for free, at compile time.
 
 \begin{mathreading}
 
@@ -63,7 +63,7 @@ Attempting \texttt{Path.cons ExampleArrow.beta rfl rfl (Path.nil 0)} instead (ap
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} Mathlib's \href{https://loogle.lean-lang.org/?q=Quiver.Path}{\texttt{Quiver.Path}} (building on the \texttt{MyArrow}/\texttt{Quiver (Fin 3)} instance from the previous section) is the same inductive family, \texttt{nil}/\texttt{cons}, just with \texttt{cons} taking the shorter path \emph{first} and the new arrow second. This is the mirror image of the book's argument order, which takes the arrow first and the path last:
+\textbf{Mathlib equivalent.} \href{https://loogle.lean-lang.org/?q=Quiver.Path}{\texttt{Quiver.Path}} in Mathlib (building on the \texttt{MyArrow}/\texttt{Quiver (Fin 3)} instance from the previous section) is the same inductive family, \texttt{nil}/\texttt{cons}, just with \texttt{cons} taking the shorter path \emph{first} and the new arrow second. This is the mirror image of the argument order in the book, which takes the arrow first and the path last.
 
 \begin{lstlisting}
 -- NOTE: deliberately *not* `open Quiver` (*\textemdash{}*) Mathlib also has a root-level

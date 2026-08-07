@@ -39,9 +39,9 @@ def composeLinearMap {R : Type} (Rg : Ring R) {M N P : Type}
     exact g.map_smul r (f.toFun m)
 \end{lstlisting}
 
-\texttt{g.toFun ∘ f.toFun} is ordinary function composition. Each field's proof first uses \texttt{f}'s own compatibility fact (\texttt{f.map\_\allowbreak{}add}/\texttt{f.map\_\allowbreak{}smul}) to push the additive-group operation or scalar action \emph{through} \texttt{f}. This leaves a goal that is now exactly \texttt{g}'s compatibility fact, applied to the already-transformed points \texttt{f.toFun m}, \texttt{f.toFun n}. This, plus Exercise 1 and the associativity of \texttt{∘} (both free from ordinary function composition), is exactly the data that makes \(R\)-modules and \(R\)-linear maps a category, as promised in the chapter text.
+\texttt{g.toFun ∘ f.toFun} is ordinary function composition. The proof of each field first uses the own compatibility fact of \texttt{f} (\texttt{f.map\_\allowbreak{}add}/\texttt{f.map\_\allowbreak{}smul}) to push the additive-group operation or scalar action \emph{through} \texttt{f}. This leaves a goal that is now exactly the compatibility fact of \texttt{g}, applied to the already-transformed points \texttt{f.toFun m}, \texttt{f.toFun n}. This, plus Exercise 1 and the associativity of \texttt{∘} (both free from ordinary function composition), is exactly the data that makes \(R\)-modules and \(R\)-linear maps a category, as promised in the chapter text.
 
-\textbf{3. Verifying \texttt{intSmul} satisfies \texttt{Module}'s axioms (partial: \texttt{one\_\allowbreak{}smul}, \texttt{smul\_\allowbreak{}add})}
+\textbf{3. Verifying \texttt{intSmul} satisfies the axioms of \texttt{Module} (partial: \texttt{one\_\allowbreak{}smul}, \texttt{smul\_\allowbreak{}add})}
 
 \begin{lstlisting}
 -- one_smul: intSmul CG 1 m = m
@@ -80,9 +80,9 @@ theorem natSmul_add {M : Type} (Grp : Group M) (n : Nat) (m1 m2 : M)
         Grp.assoc]
 \end{lstlisting}
 
-The base case is \texttt{id = id + id} (an identity is its own double). This mirrors the ``element equal to its own double is zero'' fact used in Chapter 9's \texttt{mul\_\allowbreak{}zero}. The inductive step requires commutativity (\texttt{comm}, available since the group is a \texttt{CommGroup}) to slide \texttt{m2} and \texttt{natSmul Grp k m1} past each other. This is exactly why \texttt{intSmul} distributing over \texttt{+} requires an abelian group, rather than a general one: without \texttt{comm}, there is no way to reorder the four terms into a matching shape. Full verification of \texttt{add\_\allowbreak{}smul} and \texttt{smul\_\allowbreak{}smul} follows the same induction-on-the-scalar pattern, and makes a good longer exercise for further practice.
+The base case is \texttt{id = id + id} (an identity is its own double). This mirrors the ``element equal to its own double is zero'' fact used in \texttt{mul\_\allowbreak{}zero} from Chapter 9. The inductive step requires commutativity (\texttt{comm}, available since the group is a \texttt{CommGroup}) to slide \texttt{m2} and \texttt{natSmul Grp k m1} past each other. This is exactly why \texttt{intSmul} distributing over \texttt{+} requires an abelian group, rather than a general one: without \texttt{comm}, there is no way to reorder the four terms into a matching shape. Full verification of \texttt{add\_\allowbreak{}smul} and \texttt{smul\_\allowbreak{}smul} follows the same induction-on-the-scalar pattern, and makes a good longer exercise for further practice.
 
-\textbf{Partial coverage note:} this solution only proves \texttt{natSmul\_\allowbreak{}add} for natural-number scalars (with an extra \texttt{comm} hypothesis added for convenience). The exercise as stated asks for the full \texttt{intSmul}/\texttt{smul\_\allowbreak{}add} property, including negative scalars. Extending to \texttt{Int} requires case splitting on \texttt{Int.ofNat}/\texttt{Int.negSucc} and handling sign flips in the inductive step --- left here as an exercise rather than fully verified.
+\textbf{Partial coverage note:} this solution only proves \texttt{natSmul\_\allowbreak{}add} for natural-number scalars (with an extra \texttt{comm} hypothesis added for convenience). The exercise as stated asks for the full \texttt{intSmul}/\texttt{smul\_\allowbreak{}add} property, including negative scalars. Extending to \texttt{Int} requires case splitting on \texttt{Int.ofNat}/\texttt{Int.negSucc} and handling sign flips in the inductive step, left here as an exercise rather than fully verified.
 
 \textbf{4. Submodule of multiples of \texttt{d}}
 
@@ -102,4 +102,4 @@ def multiplesSubmodule (d : Int) : Submodule intRing intZModule where
     rw [hk, (*$\leftarrow$*) Int.mul_assoc, Int.mul_comm r d, Int.mul_assoc]
 \end{lstlisting}
 
-This has the same shape as \texttt{evenSubmodule} (the case \texttt{d = 2}). Every \texttt{2} in that proof is simply replaced by the parameter \texttt{d}, and each closure proof still reduces to an \texttt{Int} equation, handled the same way (\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{show}} to reveal the goal's \texttt{+}/\texttt{*}-form, then \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}}), rather than with \texttt{ring} (which this book does not import from Mathlib).
+This has the same shape as \texttt{evenSubmodule} (the case \texttt{d = 2}). Every \texttt{2} in that proof is simply replaced by the parameter \texttt{d}, and each closure proof still reduces to an \texttt{Int} equation, handled the same way (\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{show}} to reveal the \texttt{+}/\texttt{*}-form of the goal, then \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}}), rather than with \texttt{ring} (which this book does not import from Mathlib).

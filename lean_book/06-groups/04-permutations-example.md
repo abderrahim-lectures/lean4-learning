@@ -7,8 +7,8 @@
 `intGroup` is abelian ($a + b = b + a$), so it never tests the
 distinction between `id_left`/`id_right` or `inv_left`/`inv_right`. In a
 commutative group these coincide, which might suggest that
-the left/right split in `Group`'s definition is merely overly
-careful. It is not: the following is a small, fully concrete, genuinely
+the left/right split in the definition of `Group` is merely overly
+careful. It is not. The following is a small, fully concrete, genuinely
 **non-abelian** group, built the same way `intGroup` was, field by field.
 
 ### The carrier: bijections of a 3-element set
@@ -16,7 +16,7 @@ careful. It is not: the following is a small, fully concrete, genuinely
 The symmetric group $S_3$ consists of all bijections (permutations) of a
 3-element set, under composition. We represent a permutation of
 `Fin 3 := {0, 1, 2}` as a bijective function bundled with its own inverse
-and the proofs that they cancel:
+and the proofs that they cancel.
 
 ```lean
 structure Perm3 where
@@ -53,7 +53,7 @@ def Perm3.comp (f g : Perm3) : Perm3 where
 `f.toFun`). This is the standard function-composition convention. Its
 inverse composes the two inverses in the *opposite* order
 (`g.invFun ∘ f.invFun`), which is exactly $(fg)^{-1} = g^{-1}f^{-1}$, the
-same "reverse the order" fact Chapter 7's Theorem 3
+same "reverse the order" fact Theorem 3 of Chapter 7
 (`inv_op`) proves abstractly for every group. This construction shows concretely
 why the fact holds: to undo "first $g$, then $f$," one must first undo $f$,
 then undo $g$.
@@ -120,7 +120,7 @@ Both compositions send `0` somewhere, but to *different* places: applying
 `cycle012` then `swap01` sends $0 \to 1 \to 0$, while applying `swap01`
 then `cycle012` sends $0 \to 1 \to 2$. Concretely, `#eval` reports `0` for
 the first and `2` for the second. This is **directly computed evidence**
-that `Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01`; in other
+that `Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01`. In other
 words, this group is genuinely non-abelian. This is exactly the kind
 of "compute a counterexample" move Chapter 8 uses again for matrices. It
 is cheaper than any hand-written non-commutativity proof, and it yields,
@@ -170,9 +170,9 @@ def perm3Group : Group Perm3 where
 ```
 
 `Perm3.ext` is a small helper (an *extensionality* lemma, in the same
-spirit as Chapter 8's `Mat2.mk.injEq`-based reasoning): two `Perm3`s are
+spirit as the `Mat2.mk.injEq`-based reasoning of Chapter 8). Two `Perm3`s are
 equal exactly when their `toFun`s agree everywhere *and* their `invFun`s
-agree everywhere, since those are `Perm3`'s only two fields (the proof
+agree everywhere, since those are the only two fields of `Perm3` (the proof
 fields do not matter, by proof irrelevance, Chapter 5). Each `Group` field
 is then proved by reducing to this extensionality check and confirming
 both functions involved agree pointwise. Most cases are `rfl` directly
@@ -190,8 +190,8 @@ as in the usual presentation $S_3 = \langle r, s \mid r^3 = s^2 = e,\ srs
 
 **Mathlib equivalent.** All of `Perm3`/`Perm3.comp`/`Perm3.ext`/
 `perm3Group` above exists to build one thing: "the group of bijections of a
-3-element set." Mathlib's ready-made model of exactly that is [`Equiv.Perm`](https://loogle.lean-lang.org/?q=Equiv.Perm),
-already a [`Group`](https://loogle.lean-lang.org/?q=Group) instance for *any* type:
+3-element set." The ready-made model of exactly that in Mathlib is [`Equiv.Perm`](https://loogle.lean-lang.org/?q=Equiv.Perm),
+already a [`Group`](https://loogle.lean-lang.org/?q=Group) instance for *any* type.
 
 ```lean
 example : Group (Equiv.Perm (Fin 3)) := inferInstance
@@ -207,13 +207,13 @@ def cycle012' : Equiv.Perm (Fin 3) := finRotate 3
 ```
 
 No `Perm3` bundle, no hand-written extensionality lemma, and no field-by-field
-`Group` construction are needed: `Equiv.Perm (Fin 3)` (the type of bijections
+`Group` construction are needed. `Equiv.Perm (Fin 3)` (the type of bijections
 `Fin 3 ≃ Fin 3`) is already known to be a group, [`Equiv.swap`](https://loogle.lean-lang.org/?q=Equiv.swap) and
-[`finRotate`](https://loogle.lean-lang.org/?q=finRotate) are Mathlib's own constructors for a transposition and a
+[`finRotate`](https://loogle.lean-lang.org/?q=finRotate) are the constructors Mathlib provides for a transposition and a
 rotation, and `*` is the already-registered group operation (composition,
-matching `Perm3.comp`'s convention). The two `#eval`s are the same
+matching the convention of `Perm3.comp`). The two `#eval`s are the same
 "compute a witness of non-commutativity" move as `swap01`/`cycle012`
-above, now applied to the library's own $S_3$.
+above, now applied to the $S_3$ of the library itself.
 
 ## Next
 

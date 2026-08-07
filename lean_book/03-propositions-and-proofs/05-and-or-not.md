@@ -39,7 +39,7 @@ theorem or_comm_term {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
 - `∨` (Or) has two constructors, `Or.inl` and `Or.inr`. A proof of `P ∨ Q`
   is either "a proof of `P`" or "a proof of `Q`".
 - `Or.elim {P Q R : Prop} (h : P ∨ Q) (hpr : P → R) (hqr : Q → R) : R` is
-  the *eliminator* for `Or` — see
+  the *eliminator* for `Or`. See
   [Chapter 1, Section 5](../01-basics/05-pi-sigma-and-coc.md) for what "eliminator"
   means formally (the general pattern `Nat.rec` illustrates for `Nat`).
   Given a proof of `P ∨ Q`, and a way to reach
@@ -70,10 +70,10 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2)
   proof that `P` is impossible. `anything_from_contradiction` shows this
   concretely. From `1 = 2` and `1 ≠ 2` (contradictory hypotheses that could
   never both hold, but which Lean happily accepts as *given*
-  hypotheses in a signature — nothing prevents assuming something
+  hypotheses in a signature. Nothing prevents assuming something
   false; it only prevents *proving* it from nothing), one may
   conclude literally any proposition `P` whatsoever. This is the "ex falso
-  quodlibet" principle made concrete — $\bot$-elimination from
+  quodlibet" principle made concrete. This is $\bot$-elimination from
   [Section 2](02-logic-recap.md), which is valid in both classical and
   intuitionistic logic, so nothing classical is being smuggled in here. Once a
   contradiction is present among the hypotheses, the goal being

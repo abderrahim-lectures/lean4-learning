@@ -5,7 +5,7 @@
 ---
 
 Because `intGroup` is a term of type `Group Int`, its
-fields can be projected out exactly as in Chapter 2:
+fields can be projected out exactly as in Chapter 2.
 
 ```lean
 #eval intGroup.op 3 4        -- 7
@@ -16,10 +16,10 @@ fields can be projected out exactly as in Chapter 2:
 ```
 
 **Mathematical reading.** The projections recover the individual components
-of the structure: `intGroup.op` is the multiplication $\cdot$ (so
+of the structure. `intGroup.op` is the multiplication $\cdot$ (so
 `intGroup.op 3 4` is $3 + 4 = 7$ in $\mathbb{Z}$), `intGroup.id` is $e = 0$,
 and `intGroup.inv` is $(-)^{-1} = -(-)$. The key point is that
-`intGroup.assoc` projects out a *proof*: it is the element of $\forall
+`intGroup.assoc` projects out a *proof*. It is the element of $\forall
 a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)$ that was supplied when building
 the group. Data-fields and proof-fields are accessed the same way because,
 in the dependent-pair view (a `structure` is, underneath, exactly this kind
@@ -27,8 +27,8 @@ of dependent pair), both are just coordinates of the same tuple.
 
 **Mathlib equivalent.** There is no `intGroup.op 3 4`-style field access to
 write at all. Once `Int` is known to be an [`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup), the ordinary
-`+`/`0`/`-` notations already resolve to that instance's operations
-directly:
+`+`/`0`/`-` notations already resolve to the operations of that instance
+directly.
 
 ```lean
 #eval (3 : Int) + 4
@@ -37,9 +37,9 @@ directly:
 #check (add_assoc : ∀ a b c : Int, (a + b) + c = a + (b + c))
 ```
 
-This is the same contrast as Section 3: the book's `intGroup.op`/`.id`/`.inv` are
-projections out of a bundle built by hand, while Mathlib's `+`/`0`/
-`-` are notation that the typeclass system has already wired to the right
+This is the same contrast as Section 3. The `intGroup.op`/`.id`/`.inv` of the
+book are projections out of a bundle built by hand, while the `+`/`0`/
+`-` of Mathlib are notation that the typeclass system has already wired to the right
 instance. The underlying "which `AddCommGroup` instance is
 this?" bookkeeping remains invisible unless sought out (for example, with `#print`).
 
