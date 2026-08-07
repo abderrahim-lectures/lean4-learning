@@ -70,3 +70,19 @@ This is the general recipe used throughout the book: \textbf{a mathematical stru
 \begin{quote}
 Read more. The actual \texttt{Group} in Mathlib (\texttt{Mathlib.Algebra.Group.Defs}) is a \texttt{class}, not the plain \texttt{structure} used in this book. It inherits from a chain of smaller classes (\texttt{Mul}, \texttt{One}, \texttt{Inv}, \texttt{Monoid}, \ldots) instead of listing all axioms in one place. See \hyperref[sec:14-next-steps:02-moving-to-mathlib:1]{Chapter 14} for the bridge between the two styles, and \hyperref[sec:06-rigor-check:01-structure-vs-class:1]{Chapter 6, Section 1} for why this book delays that mechanism.
 \end{quote}
+
+\begin{progcorner}
+
+A Python programmer modeling a group usually writes an ordinary class.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+class Group:
+    def __init__(self, op, id, inv):
+        self.op = op
+        self.id = id
+        self.inv = inv
+\end{lstlisting}
+
+Nothing here checks associativity, the identity laws, or the inverse laws. \texttt{Group(op=lambda a, b: a -\allowbreak{} b, id=0, inv=lambda a: a)} type-checks fine, runs fine, and is not a group at all, since subtraction is not associative. The bug shows up later, silently, as a wrong answer somewhere downstream, whenever some theorem that assumed associativity gets applied to this particular \texttt{op} without ever re-checking the assumption. \texttt{GroupData} above has exactly the same problem this bare Python class has, values are just bundled and nothing about those values is checked. That gap is exactly why \texttt{Group} adds the five axiom fields. A term of type \texttt{Group G} cannot exist unless proofs of \texttt{assoc}, \texttt{id\_\allowbreak{}left}, \texttt{id\_\allowbreak{}right}, \texttt{inv\_\allowbreak{}left}, and \texttt{inv\_\allowbreak{}right} were actually supplied, so every theorem in the rest of this book that takes a \texttt{Group G} as an argument gets those five facts for free, checked once at construction time, rather than having to hope every caller happened to build the underlying data correctly.

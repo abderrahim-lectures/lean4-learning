@@ -100,6 +100,32 @@ of the space of raw data.
 > [Chapter 6, Section 1](../06-rigor-check/01-structure-vs-class.md) for why this
 > book delays that mechanism.
 
+**Programmer's corner (Python).** A Python programmer modeling a group
+usually writes an ordinary class.
+
+```python
+class Group:
+    def __init__(self, op, id, inv):
+        self.op = op
+        self.id = id
+        self.inv = inv
+```
+
+Nothing here checks associativity, the identity laws, or the inverse
+laws. `Group(op=lambda a, b: a - b, id=0, inv=lambda a: a)` type-checks
+fine, runs fine, and is not a group at all, since subtraction is not
+associative. The bug shows up later, silently, as a wrong answer
+somewhere downstream, whenever some theorem that assumed associativity
+gets applied to this particular `op` without ever re-checking the
+assumption. `GroupData` above has exactly the same problem this bare Python class
+has, values are just bundled and nothing about those values is
+checked. That gap is exactly why `Group` adds the five axiom fields. A term of type `Group G` cannot exist unless proofs of
+`assoc`, `id_left`, `id_right`, `inv_left`, and `inv_right` were
+actually supplied, so every theorem in the rest of this book that takes
+a `Group G` as an argument gets those five facts for free, checked once
+at construction time, rather than having to hope every caller happened
+to build the underlying data correctly.
+
 ---
 
 [← Definition](01-definition.md) | [Index](00-index.md) | [Next: Integers example →](03-integers-example.md)

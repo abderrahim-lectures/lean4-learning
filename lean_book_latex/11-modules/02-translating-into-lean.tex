@@ -41,6 +41,27 @@ M\), \((r,m)\mapsto r\cdot m\). The four axioms say precisely that the curried m
 Read more. \texttt{Module} in Mathlib (\href{https://loogle.lean-lang.org/?q=Module}{\texttt{Module}}, \texttt{Mathlib.Algebra.Module.Defs}) is much more general. It is universe-polymorphic, stated for \texttt{Semiring} rather than just \texttt{Ring}, and integrated with the whole \texttt{Mathlib.LinearAlgebra.*} hierarchy (bases, dimension, tensor products); see \hyperref[sec:14-next-steps:02-moving-to-mathlib:1]{Chapter 14}. For the classical theory, any standard module-theory or homological-algebra text (e.g.~the chapters on modules in Dummit \& Foote, or \emph{An Introduction to Homological Algebra} by Weibel for the deeper theory) covers the same axioms from the ground up.
 \end{quote}
 
+\begin{progcorner}
+
+\texttt{smul : R → M → M} fixes, once and for all, which type plays the role of scalars and which type plays the role of module elements. A Python library implementing the same ``scalar acts on a vector'' idea usually overloads \texttt{\_\allowbreak{}\_\allowbreak{}mul\_\allowbreak{}\_\allowbreak{}} or \texttt{\_\allowbreak{}\_\allowbreak{}rmul\_\allowbreak{}\_\allowbreak{}} instead.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+class Vector:
+    def __init__(self, xs):
+        self.xs = xs
+
+    def __rmul__(self, scalar):
+        return Vector([scalar * x for x in self.xs])
+
+v = Vector([1, 2, 3])
+w = 2 * v            # fine, Vector([2, 4, 6])
+broken = v * v       # TypeError, but only once this exact line runs
+\end{lstlisting}
+
+Whether \texttt{v * v} is even meaningful depends entirely on which dunder methods someone remembered to define, and the answer is only found out by running the offending line, possibly deep inside a call stack far from where \texttt{v} was first constructed. \texttt{smul} has no such ambiguity. Its type \texttt{R → M → M} states, before any theorem in this chapter is proved, that a scalar comes from \texttt{R} and a module element comes from \texttt{M}, and Lean rejects \texttt{smul v m} at the point it is written if \texttt{v : M} was passed where an \texttt{R} was expected, rather than accepting it and producing a wrong answer, or an exception, once the program actually runs.
+
 \subsection{Sources, quoted}\label{sec:11-modules:02-translating-into-lean:2}
 
 Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):

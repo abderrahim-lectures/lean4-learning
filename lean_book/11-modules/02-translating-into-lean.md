@@ -65,6 +65,35 @@ some already-fixed ring.
 > to Homological Algebra* by Weibel for the deeper theory) covers the same axioms
 > from the ground up.
 
+**Programmer's corner (Python).** `smul : R → M → M` fixes, once and for
+all, which type plays the role of scalars and which type plays the role
+of module elements. A Python library implementing the same "scalar acts
+on a vector" idea usually overloads `__mul__` or `__rmul__` instead.
+
+```python
+class Vector:
+    def __init__(self, xs):
+        self.xs = xs
+
+    def __rmul__(self, scalar):
+        return Vector([scalar * x for x in self.xs])
+
+v = Vector([1, 2, 3])
+w = 2 * v            # fine, Vector([2, 4, 6])
+broken = v * v       # TypeError, but only once this exact line runs
+```
+
+Whether `v * v` is even meaningful depends entirely on which dunder
+methods someone remembered to define, and the answer is only found out
+by running the offending line, possibly deep inside a call stack far
+from where `v` was first constructed. `smul` has no such ambiguity.
+Its type `R → M → M` states, before any theorem in this chapter is
+proved, that a scalar comes from `R` and a module element comes from
+`M`, and Lean rejects `smul v m` at the point it is written if `v : M`
+was passed where an `R` was expected, rather than accepting it and
+producing a wrong answer, or an exception, once the program actually
+runs.
+
 ### Sources, quoted
 
 Formal definitions and citations for this section, gathered here for
