@@ -1,5 +1,5 @@
 ---
-description: Adversarial maths reviewer of Chapters 8-11 (rings, ring theorems, modules, path algebras) — dense algebraic content, best on the laguna reasoning model. Dispatched by review-lean-book during Phase 1.
+description: Adversarial maths reviewer of Chapters 9-12 (rings, ring theorems, modules, path algebras) — dense algebraic content, best on the laguna reasoning model. Dispatched by review-lean-book during Phase 1.
 mode: subagent
 model: opencode/laguna-s-2.1-free
 color: secondary

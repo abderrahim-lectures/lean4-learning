@@ -1,5 +1,5 @@
 ---
-description: Adversarial maths reviewer of Chapters 1-4, 12 and the tactic/library reference (Lean fundamentals, tactics, code blocks, efficiency) — code-specialized, best on the north-mini-code model. Dispatched by review-lean-book during Phase 1.
+description: Adversarial maths reviewer of Chapters 1-5, 13 and the tactic/library reference (Lean fundamentals, tactics, code blocks, efficiency) — code-specialized, best on the north-mini-code model. Dispatched by review-lean-book during Phase 1.
 mode: subagent
 model: opencode/north-mini-code-free
 color: success

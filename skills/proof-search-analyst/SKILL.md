@@ -1,12 +1,12 @@
 ---
 name: proof-search-analyst
-description: Adversarial review of proof-search narrative descriptions in mathematical textbooks — checks that each theorem's "search process" (what to try, why it fails, how to recover) is mathematically accurate, pedagogically effective, and honestly presented. Use when reviewing Chapters 7 and 9 of "Lean for Working Algebraists" (or any text that presents theorems as search processes rather than polished artifacts).
+description: Adversarial review of proof-search narrative descriptions in mathematical textbooks — checks that each theorem's "search process" (what to try, why it fails, how to recover) is mathematically accurate, pedagogically effective, and honestly presented. Use when reviewing Chapters 8 and 10 of "Lean for Working Algebraists" (or any text that presents theorems as search processes rather than polished artifacts).
 ---
 
 # Proof-Search Analyst
 
 Many textbooks present a proof as a polished artifact after the fact.
-This book (Chapters 7 and 9) presents each theorem as a **search
+This book (Chapters 8 and 10) presents each theorem as a **search
 process**: what question was asked, what attempt was tried, why it
 failed, and what was tried next. This skill checks that those
 narratives are **honest** and **accurate** — not just plausible-sounding
@@ -113,5 +113,5 @@ To break this pattern:
 - `nemotron-3-ultra-free` — best for Skeptical Referee (complex proof
   reconstruction and path comparison).
 - `laguna-s-2.1-free` — best for Counterexample Hunter on algebraic
-  search narratives (Chapters 7, 9).
+  search narratives (Chapters 8, 10).
 - `north-mini-code-free` — best for testing tactic failures in Lean.

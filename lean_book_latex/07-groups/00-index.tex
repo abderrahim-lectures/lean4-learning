@@ -1,0 +1,45 @@
+\chapter{\texorpdfstring{Chapter 7: Structures and classes --- defining a \texttt{Group}}{Chapter 7: Structures and classes --- defining a Group}}\label{sec:07-groups:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Translate the mathematical definition of a group into a Lean \texttt{structure} field by field.
+\item
+  Build both an abelian (\texttt{Int}) and a genuinely non-abelian (permutations of \texttt{Fin 3}) example from scratch.
+\item
+  Articulate why bundling data with proof obligations pays off once theorems are proved generically (Chapter 8).
+\end{itemize}
+\end{learningobjectives}
+
+
+The checkpoint project of Chapter 6 already built a \texttt{Monoid}, data plus proof obligations, bundled in a \texttt{structure}, using nothing but Chapters 1--6. Each section below asks the next question that answer forces.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{A monoid has an associative operation and an identity. What is missing to reach the structures Part II is actually about?} (\hyperref[sec:07-groups:01-definition:1]{Section 1}) One axiom: every element must be invertible. Adding it to the data of the monoid turns ``a set with an associative operation'' into a \textbf{group}, stated first in ordinary mathematical notation before any Lean is written.
+\item
+  \textbf{How does that mathematical definition become an actual Lean type?} (\hyperref[sec:07-groups:02-translating:1]{Section 2}) Field by field. First the raw data (\texttt{GroupData}, no axioms), then the same data with one proof-obligation field added per axiom (\texttt{Group}). This is the general recipe used throughout the book, applied here for the first time to something with this many moving parts.
+\item
+  \textbf{Is the definition non-vacuous? Does anything actually satisfy it?} (\hyperref[sec:07-groups:03-integers-example:1]{Section 3}) Yes: \((\mathbb{Z}, +, 0, -)\), assembled as \texttt{intGroup} by citing one core-library lemma per axiom. But \texttt{intGroup} is abelian, so it never distinguishes a left inverse from a right one.
+\item
+  \textbf{Does that abelian example secretly rely on commutativity somewhere the definition of \texttt{Group} does not require it to?} (\hyperref[sec:07-groups:04-permutations-example:1]{Section 4}) Building a genuinely non-abelian group, the permutations of three elements, forces every axiom to be checked honestly, left and right separately, and answers the question directly: no, nothing in \texttt{Group} assumes commutativity.
+\item
+  \textbf{Now that two concrete groups exist, how is their data actually used?} (\hyperref[sec:07-groups:05-accessing-fields:1]{Section 5}) The same way the fields of any structure are used, from Chapter 3 onward: ordinary projection, whether the field holds data or a proof.
+\item
+  \textbf{Two groups have now been built by hand, field by field. Is that effort about to be paid back?} (\hyperref[sec:07-groups:06-why-bundle:1]{Section 6}) Yes. Any theorem proved once about an arbitrary \texttt{Group G} applies automatically to \texttt{intGroup}, to the permutation group, and to every group built afterward. Chapter 8 is that payoff, carried out in full.
+\end{enumerate}
+
+By the end of the chapter, \texttt{Group} is no longer just a definition sitting on the page. It is a structure with two concrete inhabitants, one commutative and one not, and a stated reason to keep building on it.
+
+
+% Auto-appended: input every other section in order.
+\input{07-groups/01-definition.tex}
+\input{07-groups/02-translating.tex}
+\input{07-groups/03-integers-example.tex}
+\input{07-groups/04-permutations-example.tex}
+\input{07-groups/05-accessing-fields.tex}
+\input{07-groups/06-why-bundle.tex}
+\input{07-groups/07-exercises.tex}

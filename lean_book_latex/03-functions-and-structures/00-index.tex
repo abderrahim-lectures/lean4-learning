@@ -1,0 +1,39 @@
+\chapter{Chapter 3: Functions, definitions, and structures}\label{sec:03-functions-and-structures:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Bundle data (and proofs) into a \texttt{structure}.
+\item
+  Use field projection and the anonymous constructor.
+\item
+  Parameterize a \texttt{structure} by a type.
+\item
+  Extend one \texttt{structure} with another via \texttt{extends}.
+\end{itemize}
+\end{learningobjectives}
+
+
+Functions \textbf{curry}. \texttt{add : Nat → Nat → Nat} is really \texttt{Nat → (Nat → Nat)}, a function that returns another function. So a ``two-argument function'' is just a one-argument function whose result is itself another function. It takes one argument at a time. (For readers already thinking categorically, this is the type-theoretic form of the Hom-set isomorphism \(\mathrm{Hom}(A\times B, C)\cong\mathrm{Hom}(A,\mathrm{Hom}(B,C))\). A two-argument map is the same data as a one-argument map into a space of maps. This is not needed to follow along; the plain statement above is enough.) The interesting part of this chapter is \texttt{structure}, which is how algebraic data will be packaged.
+
+As in Chapter 1, each section below answers a question forced by the one before it.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{A function takes its arguments one at a time. So how does several pieces of data that belong \emph{together}, like the \texttt{x} and \texttt{y} of a point, get treated as a single value instead of two arguments a caller has to keep in sync by hand?} (\hyperref[sec:03-functions-and-structures:01-structure-basics:1]{Section 1}) \texttt{structure} bundles named fields under one type, built with the anonymous constructor \texttt{⟨...⟩} and read back out by field projection \texttt{.field}. This is the packaging mechanism every algebraic object from Chapter 7 onward, a group, later a ring, is built from.
+\item
+  \textbf{\texttt{Point} bundles two \texttt{Nat}s specifically. What if the same shape of bundling is needed for \emph{any} pair of types, not just \texttt{Nat} and \texttt{Nat}?} (\hyperref[sec:03-functions-and-structures:02-type-parameters:1]{Section 2}) A \texttt{structure} can be parameterized by a type, the same way \texttt{identity} in Chapter 1 was parameterized by \texttt{\{α : Type\}}. \texttt{Pair α β} is not one structure but a whole family of them, one per choice of \texttt{α} and \texttt{β}, which is exactly the shape \texttt{Group (G : Type)} will need later.
+\item
+  \textbf{Some structures are not built from scratch. They are an existing structure plus one more piece. How does Lean avoid re-declaring every inherited field by hand each time?} (\hyperref[sec:03-functions-and-structures:03-extending-structures:1]{Section 3}) \texttt{extends} builds a new structure containing an old one whole, plus more, generating a forgetful \texttt{.toX} projection for free, the exact mechanism a \texttt{CommGroup} will use in Chapter 7 to add commutativity to \texttt{Group} without repeating the group axioms.
+\end{enumerate}
+
+By the end of the chapter, \texttt{structure} is no longer just a convenient keyword for grouping fields. It is the bundling-and-forgetting machinery every algebraic structure in the rest of this book depends on.
+
+
+% Auto-appended: input every other section in order.
+\input{03-functions-and-structures/01-structure-basics.tex}
+\input{03-functions-and-structures/02-type-parameters.tex}
+\input{03-functions-and-structures/03-extending-structures.tex}

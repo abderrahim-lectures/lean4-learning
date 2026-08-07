@@ -7,10 +7,10 @@
 This book builds groups, rings, and path algebras **from scratch**,
 deliberately, without importing Mathlib (Lean's community math library).
 This is slower, but better for learning: every definition and every proof
-obligation is made explicit. Chapter 13 points toward Mathlib for readers
+obligation is made explicit. Chapter 14 points toward Mathlib for readers
 ready to use the "real" library instead of reinventing it.
 
-Starting in Chapter 6, most worked examples are followed by a small,
+Starting in Chapter 7, most worked examples are followed by a small,
 clearly labeled "Mathlib equivalent" box, showing the same statement
 written against Mathlib's actual `Group`/`Ring`/`Module` API. This does not
 replace the from-scratch approach; the hand-built version remains the main
@@ -22,14 +22,14 @@ than either alone would.
 **Key points.** Lean 4 plus `lake`, an editor with the Lean extension, and
 a pinned toolchain (matching `lean_project/lean-toolchain`) are all that
 is needed to follow along. This book is Mathlib-free by design through
-Chapter 11's from-scratch constructions; Mathlib appears only in the
-"Mathlib equivalent" boxes from Chapter 6 onward, and in full starting
-Chapter 13.
+Chapter 12's from-scratch constructions; Mathlib appears only in the
+"Mathlib equivalent" boxes from Chapter 7 onward, and in full starting
+Chapter 14.
 
 **Socratic questions.**
 
 1. *`lean_project` already has Mathlib installed as a dependency (it is
-   what powers the "Mathlib equivalent" boxes from Chapter 6 onward) —
+   what powers the "Mathlib equivalent" boxes from Chapter 7 onward) —
    so why not just import it everywhere from page one, instead of
    building `Group`/`Ring` from scratch first?* Because the point of this
    book is not merely to *use* a group in Lean, but to see exactly what a
@@ -44,13 +44,13 @@ Chapter 13.
    to compile — the entire point of `lean_project/lean-toolchain` reading
    `leanprover/lean4:v4.32.2` is that every code block in this book stays
    reproducible regardless of what else is installed system-wide.
-3. *If this book is Mathlib-free by design through Chapter 11, why does
-   Chapter 6 onward show Mathlib code at all?* Because "built from
+3. *If this book is Mathlib-free by design through Chapter 12, why does
+   Chapter 7 onward show Mathlib code at all?* Because "built from
    scratch" and "never shown the real library" are different design
    choices, and this book only commits to the first. Every hand-built
-   definition from Chapter 6 onward is paired with a labeled preview of
+   definition from Chapter 7 onward is paired with a labeled preview of
    its Mathlib counterpart, so that the transition to Mathlib in
-   Chapter 13 is a recognition of material already seen, not a cold
+   Chapter 14 is a recognition of material already seen, not a cold
    start.
 
 ## Next

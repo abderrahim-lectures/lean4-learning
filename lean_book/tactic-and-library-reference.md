@@ -5,10 +5,10 @@
 ---
 
 A quick index of every tactic used in this book, and every Mathlib name
-used in the "Mathlib equivalent" boxes (Chapters 6-11), each with a link
+used in the "Mathlib equivalent" boxes (Chapters 7-12), each with a link
 to look it up yourself. This page is a lookup table, not something to
-read start to finish. The tactics chapter ([Chapter 4](04-tactics/00-index.md))
-and the working-efficiently chapter ([Chapter 12](12-working-efficiently/00-index.md))
+read start to finish. The tactics chapter ([Chapter 5](05-tactics/00-index.md))
+and the working-efficiently chapter ([Chapter 13](13-working-efficiently/00-index.md))
 are where each one is actually explained.
 
 Two general links used throughout this page:
@@ -24,29 +24,29 @@ Two general links used throughout this page:
 | Tactic | First used | Reference |
 | --- | --- | --- |
 | `rfl` | Ch. 1 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `rw` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `subst` | Ch. 1, Section 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `exact` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `apply` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `intro` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `constructor` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `cases` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `induction` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `simp` | Ch. 4, Ch. 12, Section 3 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `unfold` | Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `decide` | Ch. 8, Ch. 12, Section 2 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `show` | Ch. 6 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `have` | Ch. 7 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `refine` | Ch. 10 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `ext` / `funext` | Ch. 6, Ch. 10 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `congr` | Ch. 10 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `left` / `right` | Ch. 3, Ch. 4 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `use` | Ch. 3, Ch. 10 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `exact?` / `apply?` | Ch. 12, Section 1 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `omega` | Ch. 12, Section 2 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `norm_num` | Ch. 12, Section 2 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
-| `noncomm_ring` | Ch. 8 (Mathlib equivalent) | [Loogle](https://loogle.lean-lang.org/?q=noncomm_ring) |
-| `sorry` | Ch. 4, Section 3 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `rw` | Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `subst` | Ch. 2, Section 1 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `exact` | Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `apply` | Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `intro` | Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `constructor` | Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `cases` | Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `induction` | Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `simp` | Ch. 5, Ch. 13, Section 3 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `unfold` | Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `decide` | Ch. 9, Ch. 13, Section 2 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `show` | Ch. 7 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `have` | Ch. 8 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `refine` | Ch. 11 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `ext` / `funext` | Ch. 7, Ch. 11 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `congr` | Ch. 11 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `left` / `right` | Ch. 4, Ch. 5 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `use` | Ch. 4, Ch. 11 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `exact?` / `apply?` | Ch. 13, Section 1 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `omega` | Ch. 13, Section 2 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `norm_num` | Ch. 13, Section 2 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
+| `noncomm_ring` | Ch. 9 (Mathlib equivalent) | [Loogle](https://loogle.lean-lang.org/?q=noncomm_ring) |
+| `sorry` | Ch. 5, Section 3 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 
 ## Binder & definition styles
 
@@ -57,16 +57,16 @@ where each is actually explained end to end (not just first mentioned).
 | --- | --- | --- |
 | `(x : α)` | Explicit argument, supplied positionally | Ch. 1, Section 2 |
 | `{x : α}` | Implicit argument, solved by unification | Ch. 1, Section 2 |
-| `[x : C]` | Instance-implicit argument, solved by typeclass search | Ch. 1, Section 2 (named) / Ch. 5, Section 1 (in use) |
+| `[x : C]` | Instance-implicit argument, solved by typeclass search | Ch. 1, Section 2 (named) / Ch. 6, Section 1 (in use) |
 | `{{x : α}}` | Strict-implicit argument, deferred until an explicit argument follows; not used in this book's own code | Ch. 1, Section 2 |
-| `def` | Semi-reducible definition; unfolds only when told to (`unfold`) | Ch. 1, Section 2 (named) / Ch. 4 (transparency) |
+| `def` | Semi-reducible definition; unfolds only when told to (`unfold`) | Ch. 1, Section 2 (named) / Ch. 5 (transparency) |
 | `let` | Local, definitionally transparent definition | Ch. 1, Section 2 |
-| `abbrev` | Reducible definition, auto `@[reducible, inline]`, seen through automatically | Ch. 1, Section 2 (named) / Ch. 4 (in depth) |
-| `opaque` | Never unfolds, even explicitly; hides an implementation entirely | Ch. 1, Section 2 (named) / Ch. 4 (in depth) |
-| `@[reducible]` | Attribute form of the transparency `abbrev` gets automatically, applied to an existing `def` | Ch. 3, Section 6 (in use) / Ch. 4 (explained) |
+| `abbrev` | Reducible definition, auto `@[reducible, inline]`, seen through automatically | Ch. 1, Section 2 (named) / Ch. 5 (in depth) |
+| `opaque` | Never unfolds, even explicitly; hides an implementation entirely | Ch. 1, Section 2 (named) / Ch. 5 (in depth) |
+| `@[reducible]` | Attribute form of the transparency `abbrev` gets automatically, applied to an existing `def` | Ch. 4, Section 6 (in use) / Ch. 5 (explained) |
 | `def f : A → B` (equation-style body) | Pattern-matches the last argument(s) directly, one equation per case, instead of naming them in `(...)` | Ch. 1, Section 3 |
 
-## Mathlib names (the "Mathlib equivalent" boxes of Chapters 6-11)
+## Mathlib names (the "Mathlib equivalent" boxes of Chapters 7-12)
 
 | Name | What it is | Reference |
 | --- | --- | --- |

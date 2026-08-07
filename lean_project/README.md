@@ -24,9 +24,9 @@ The toolchain version is pinned in `lean-toolchain` and will be fetched automati
 ## Mathlib
 
 This project also depends on Mathlib (pinned to the `v4.32.2` tag, matching
-the toolchain). The from-scratch book code (`Ch06Groups.lean`, ...,
-`Ch11PathAlgebras.lean`) never uses it; the matching `*Mathlib.lean` files
-(`Ch06GroupsMathlib.lean`, ...) are Chapters 6-11's "Mathlib equivalent"
+the toolchain). The from-scratch book code (`Ch07Groups.lean`, ...,
+`Ch12PathAlgebras.lean`) never uses it; the matching `*Mathlib.lean` files
+(`Ch07GroupsMathlib.lean`, ...) are Chapters 7-12's "Mathlib equivalent"
 boxes ported and compiled for real. The first `lake build` after adding
 Mathlib downloads its build cache and can take several minutes — later
 builds are fast.
@@ -35,10 +35,10 @@ There are two separate library targets, built by `lake build` together
 but never imported from one file:
 
 - **`LeanProject`** (root `LeanProject.lean`) — the from-scratch book code,
-  Chapters 1–11. `Main.lean`/`lake exe lean_project` only use this one.
+  Chapters 1–12. `Main.lean`/`lake exe lean_project` only use this one.
 - **`LeanProjectMathlib`** (root `LeanProjectMathlib.lean`) — the six
-  `Ch0*Mathlib.lean` files, plus `Ch13CapstoneMathlib.lean` (Chapter 13's
-  "Two theorems for free" capstone: `Field (ZMod 3)` and Lagrange's
+  `*Mathlib.lean` chapter files, plus `Ch14CapstoneMathlib.lean` (Chapter
+  14's "Two theorems for free" capstone: `Field (ZMod 3)` and Lagrange's
   theorem applied to a real subgroup of `Equiv.Perm (Fin 3)`).
 
 They're kept apart on purpose: the from-scratch chapters define their own

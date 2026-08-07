@@ -185,6 +185,24 @@ shell access to the working directory.
     > stable link anchor, and update all three READMEs to reflect the
     > current state of the project.
 
+14. **Split the oversized opening chapter, and rebalance the book.** (a
+    later session still, once one chapter had grown far past the others)
+    > Chapter 1 is now more than twice the length of any other chapter,
+    > carrying dependent types, a full terminology glossary, and the
+    > formal calculus-of-constructions material all under one roof. Split
+    > it into two, without cutting any content, at whichever section
+    > boundary actually balances the two halves best, not necessarily
+    > where I first guessed. Renumber every chapter after it, every
+    > cross-reference and relative link book-wide (the README table of
+    > contents, the learning-paths dependency graph, the appendix
+    > solutions folder, the `tactic-and-library-reference.md` lookup
+    > tables, and the parallel `lean_project` module-per-chapter naming),
+    > while leaving the changelog, prior review reports, and this file's
+    > own past entries as the historical record they are, not something
+    > to silently rewrite. Verify with a full PDF rebuild and an
+    > independent link-resolution pass, and with `lake build`, not just a
+    > read-through.
+
 A note on process, for anyone replaying this: several steps above
 triggered large mechanical passes (renumbering a dozen chapters and every
 cross-reference, splitting long files into folders, adding an annotation

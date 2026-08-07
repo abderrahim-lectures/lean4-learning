@@ -1,5 +1,5 @@
 ---
-description: Adversarial book reviewer of Chapter 0 (setup), Chapter 13 (next steps) and the reference pages — broad prose/pattern scanning, best on the fast mimo model. Dispatched by review-lean-book during Phase 1.
+description: Adversarial book reviewer of Chapter 0 (setup), Chapter 14 (next steps) and the reference pages — broad prose/pattern scanning, best on the fast mimo model. Dispatched by review-lean-book during Phase 1.
 mode: subagent
 model: opencode/mimo-v2.5-free
 color: info

@@ -28,7 +28,7 @@ def double (n : Nat) : Nat := n * 2
   fixed term. This is different from a hypothesis or a local variable.
   Once elaborated, `double` is a completely ordinary constant, referable
   anywhere later in the file (or, once the file is imported, anywhere
-  else). Compare this with `example` from Chapter 3, which elaborates a
+  else). Compare this with `example` from Chapter 4, which elaborates a
   term but does *not* bind it to a name. `def` is for the case where the
   definition is meant to be reused.
 - `double` is the name being bound. Lean enforces no special naming
@@ -63,10 +63,10 @@ def double (n : Nat) : Nat := n * 2
 A word of warning about the `→` that appeared two bullets up
 (`Nat → Nat`, the type of `double`). This same arrow reappears twice more
 later in this book, meaning something that looks different each time. Once
-`Prop` exists ([Chapter 3](../03-propositions-and-proofs/04-implication.md)),
+`Prop` exists ([Chapter 4](../04-propositions-and-proofs/04-implication.md)),
 `P → Q` for propositions `P`, `Q` reads as logical implication, not "takes a
 `P`-value, returns a `Q`-value." And later this section
-([Section 5](05-pi-sigma-and-coc.md)) names the fully general pattern `→` is
+([Section 5](../02-terminology-and-coc/02-pi-sigma-and-coc.md)) names the fully general pattern `→` is
 secretly always an instance of, the Π-type, where the *codomain* is allowed
 to depend on which argument was given, `Nat → Nat` being only the special
 case where it happens not to. Nothing about `double` above needs any of
@@ -201,7 +201,7 @@ Briefly, so meeting these elsewhere later is not a surprise:
   is solved neither positionally like `()` nor by unification like `{}`,
   but by a search through registered instances of `C`, called
   **typeclass resolution**. This book delays it deliberately, until
-  [Chapter 5](../05-rigor-check/01-structure-vs-class.md), where the
+  [Chapter 6](../06-rigor-check/01-structure-vs-class.md), where the
   `Group`/`class`/`instance` machinery that makes it useful is built up
   from `structure` first, so the automation is understood rather than
   taken on faith.
@@ -217,7 +217,7 @@ Briefly, so meeting these elsewhere later is not a surprise:
   `opaque` exist alongside it, and differ not in what they let you write,
   but in how transparent the result is to Lean's own equality checker,
   whether `unfold`ing it is ever needed, or ever even possible.
-  [Chapter 4](../04-tactics/04-more-tactics.md), once `unfold` itself is on
+  [Chapter 5](../05-tactics/04-more-tactics.md), once `unfold` itself is on
   the table, is where this is worth actually seeing rather than taking on
   faith.
 

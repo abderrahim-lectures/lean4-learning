@@ -10,7 +10,7 @@ of category theory (objects, morphisms, composition, functors). The book
 builds up Lean 4 syntax and tactics only as far as needed to formalize
 groups, rings, and quiver path algebras. The categorical viewpoint (most
 substantially, the path category of a quiver as the free category on a quiver
-in Chapter 11) is called out explicitly wherever it clarifies what the
+in Chapter 12) is called out explicitly wherever it clarifies what the
 Lean code is really encoding.
 
 ## How to read this book
@@ -21,15 +21,15 @@ handful of named paths through the book (already know Lean? already know
 algebra? want the formal foundations first?) before committing to reading
 start to finish.
 
-Each chapter is its own folder (e.g. [06-groups/](06-groups/)) containing a
+Each chapter is its own folder (e.g. [07-groups/](07-groups/)) containing a
 `00-index.md` overview plus one small Markdown file per section. Open the
 `00-index.md` of the chapter first, which links to every section in order. LaTeX
 math is written inline as `$...$` and in display blocks as `$$...$$`; render
 with any Markdown viewer that supports MathJax/KaTeX (e.g. VS Code with a
 Markdown+Math extension, or Pandoc). A handful of category-theory diagrams
 (the universal-property/initial-object/forgetful-functor entries in the
-Chapter 1, Section 4 glossary, the product/coproduct pictures in Chapter 3, the
-running quiver example in Chapter 11, and the chapter-dependency graph in
+Chapter 2, Section 1 glossary, the product/coproduct pictures in Chapter 4, the
+running quiver example in Chapter 12, and the chapter-dependency graph in
 [Learning paths](learning-paths.md)) are written as
 [Mermaid](https://mermaid.js.org/) diagrams; these render natively on
 GitHub and in VS Code with the "Markdown Preview Mermaid Support"
@@ -38,7 +38,7 @@ readable fenced code block showing the source of the diagram instead of a
 rendering error.
 
 Code blocks are valid Lean 4 (toolchain `v4.32.2`, matching
-`../lean_project`). Every code block in Chapters 1–11 has been ported into
+`../lean_project`). Every code block in Chapters 1–12 has been ported into
 `../lean_project/LeanProject/` (one module per chapter) and verified with
 `lake build` against the real compiler, not just read over. Several bugs
 that only surfaced this way (a missing extensionality lemma, a couple of
@@ -51,34 +51,34 @@ to see it compile.
 This book is about more than the constructs it covers. The running goal is
 to build the *skill* of using Lean, namely reading a goal state, deciding what to
 try next, recovering when a tactic fails, and knowing which proofs to
-derive by hand versus hand off to automation. Chapters 7 and 9 in
+derive by hand versus hand off to automation. Chapters 8 and 10 in
 particular present each theorem as a search process (what to look at, what
 to try, why an attempt fails) rather than only the polished final proof;
-Chapter 12 is dedicated entirely to working efficiently once the underlying
-ideas are understood. Chapter 5 pauses to address the rigor questions a
+Chapter 13 is dedicated entirely to working efficiently once the underlying
+ideas are understood. Chapter 6 pauses to address the rigor questions a
 careful mathematician will already be asking by that point, namely `structure`
 versus `class`, universes, and definitional versus propositional equality,
-before committing to the definition of `Group` in Chapter 6.
+before committing to the definition of `Group` in Chapter 7.
 
 This book is, and remains, Mathlib-free by design: every group, ring, and
 path algebra is built from scratch so you see every definition and proof
 obligation explicitly (see [the Mathlib note](00-setup/04-mathlib-note.md)).
-Starting in Chapter 6, though, each worked example is followed by a clearly
+Starting in Chapter 7, though, each worked example is followed by a clearly
 labeled "Mathlib equivalent" box showing the same statement phrased against
 the real `Group`/`Ring`/`Module` API of Mathlib. This isn't a contradiction of
 the from-scratch approach; it's a second, parallel track. Seeing the same
 idea twice, once built by hand and once as Mathlib already has it, is how
 you learn both halves of working in Lean at once: the underlying
 mathematics *and* the shape of the library you'll actually use once you
-leave this book. Chapter 13 then completes the handoff to Mathlib in full.
+leave this book. Chapter 14 then completes the handoff to Mathlib in full.
 
 The book has been through several editorial passes: a first pass checking
 for foundational terms used before they're explained, thin worked-example
 coverage, and outright factual errors; a second, accessibility-focused
 pass that caught "Mathematical reading" boxes drifting past the own
 promised background of the book (a shared glossary now lives at
-[Chapter 1, Section 4](01-basics/04-terminology.md), and
-[Chapter 3, Section 2](03-propositions-and-proofs/02-logic-recap.md) recaps
+[Chapter 2, Section 1](02-terminology-and-coc/01-terminology.md), and
+[Chapter 4, Section 2](04-propositions-and-proofs/02-logic-recap.md) recaps
 standard logic from scratch for readers meeting it for the first time) and added
 optional "Programmer's corner (Python)" boxes alongside the "Mathematical
 reading" ones; and a third, readability-focused pass that put every worked
@@ -108,28 +108,29 @@ See [changelog/](changelog/README.md) for the full, itemized history.
 
 0. [Setting up Lean 4](00-setup/00-index.md)
 1. [First steps: terms, types, `#eval`](01-basics/00-index.md)
-2. [Functions, definitions, and structures](02-functions-and-structures/00-index.md)
-3. [Propositions as types, and basic proofs](03-propositions-and-proofs/00-index.md)
-4. [Tactics, the toolbox for proving things](04-tactics/00-index.md)
-5. [Rigor check: structures, universes, and equality](05-rigor-check/00-index.md)
+2. [Terminology and the calculus of constructions](02-terminology-and-coc/00-index.md)
+3. [Functions, definitions, and structures](03-functions-and-structures/00-index.md)
+4. [Propositions as types, and basic proofs](04-propositions-and-proofs/00-index.md)
+5. [Tactics, the toolbox for proving things](05-tactics/00-index.md)
+6. [Rigor check: structures, universes, and equality](06-rigor-check/00-index.md)
 
 **Part II, Algebra, formalized**
 
-6. [Structures and classes: defining a `Group`](06-groups/00-index.md)
-7. [Group examples and basic theorems](07-group-theorems/00-index.md)
-8. [Rings: adding a second operation](08-rings/00-index.md)
-9. [Ring examples and basic theorems](09-ring-theorems/00-index.md)
-10. [Modules over a ring](10-modules/00-index.md)
-11. [Quivers and path algebras](11-path-algebras/00-index.md)
+7. [Structures and classes: defining a `Group`](07-groups/00-index.md)
+8. [Group examples and basic theorems](08-group-theorems/00-index.md)
+9. [Rings: adding a second operation](09-rings/00-index.md)
+10. [Ring examples and basic theorems](10-ring-theorems/00-index.md)
+11. [Modules over a ring](11-modules/00-index.md)
+12. [Quivers and path algebras](12-path-algebras/00-index.md)
 
 **Part III, Working with Lean, and beyond**
 
-12. [Working efficiently in Lean](12-working-efficiently/00-index.md)
-13. [Where to go next](13-next-steps/00-index.md)
+13. [Working efficiently in Lean](13-working-efficiently/00-index.md)
+14. [Where to go next](14-next-steps/00-index.md)
 
 **Appendix**
 
-14. [Solutions to exercises](14-appendix-solutions/00-index.md)
+15. [Solutions to exercises](15-appendix-solutions/00-index.md)
 
 **Reference**
 
@@ -137,7 +138,7 @@ See [changelog/](changelog/README.md) for the full, itemized history.
   named reading paths for different starting points.
 - [Tactic and library reference](tactic-and-library-reference.md), every
   tactic used in the book, and every Mathlib name from the
-  "Mathlib equivalent" boxes of Chapters 6-11, each linked to its official documentation.
+  "Mathlib equivalent" boxes of Chapters 7-12, each linked to its official documentation.
 - [λ-calculus / type theory to Lean dictionary](lambda-calculus-dictionary.md),
   a lookup table connecting the formal notation in the
   "Mathematical reading" boxes of this book back to Lean syntax, term by term.
