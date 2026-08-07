@@ -98,8 +98,8 @@ The book uses several recurring devices, applied consistently across all
 - **Socratic questions.** Each chapter includes reflective "why X, not
   Y?" questions with their answers, distinct from the recap and the
   exercises.
-- **Checkpoint projects.** Two projects, placed after Chapter 5 and
-  after Chapter 11, apply material from all preceding chapters to a
+- **Checkpoint projects.** Two projects, placed after Chapter 6 and
+  after Chapter 12, apply material from all preceding chapters to a
   single self-contained construction, each with a self-verification step
   and a full solution in the appendix.
 - **Exercises with full solutions.** The exercises of every chapter have a
