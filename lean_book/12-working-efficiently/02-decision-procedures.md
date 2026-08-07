@@ -4,33 +4,33 @@
 
 ---
 
-Section 1's `exact?`/`apply?` search the library for a proof that already
+The `exact?`/`apply?` tactics of Section 1 search the library for a proof that already
 exists somewhere, then report it for inspection. Some goals need nothing
 of the kind: their truth value is not a fact to be looked up, it is a
-computation to be run. This section covers that second, disjoint case —
+computation to be run. This section covers that second, disjoint case,
 tactics that settle a goal by evaluating an algorithm rather than
 searching for or constructing a term by hand.
 
-For goals that are *decidable* — where "true or false" can be settled by a
-terminating algorithm instead of a hand-built argument — Lean has tactics
-that just run that algorithm:
+For goals that are *decidable*, where "true or false" can be settled by a
+terminating algorithm instead of a hand-built argument, Lean has tactics
+that just run that algorithm.
 
-- **`decide`** — evaluates a `Decidable` proposition to `true`/`false`
+- **`decide`** evaluates a `Decidable` proposition to `true`/`false`
   directly. It works well for small, closed (no free variables)
   propositions, for example `(7 : Nat) ∣ 21` or `¬ (3 = 5)`. `decide` should
   not be used on propositions with free variables or unbounded search: it can
   time out, or worse, produce a correct but useless proof term that
   reveals nothing.
-- **`omega`** — a decision procedure for *linear* arithmetic over `Nat`/`Int`
+- **`omega`** is a decision procedure for *linear* arithmetic over `Nat`/`Int`
   (goals built from `+`, subtraction, `≤`, `<`, `=`, and multiplication by
-  *literal constants* only — `omega` handles `3 * n` fine, but not `n * m`
+  *literal constants* only. `omega` handles `3 * n` fine, but not `n * m`
   for two unknown variables `n`, `m`; multiplying two unknown variables
   together falls outside what it can decide). For a goal that is "some
   linear inequality or equality about integers," `omega` should be
   reached for before deriving the fact by hand. This is exactly the kind of fact a decision
   procedure handles better than a custom [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain, and a hand-derived
-  proof teaches nothing that `omega`'s existence does not already establish.
-- **`norm_num`** — normalizes and evaluates numerical expressions
+  proof teaches nothing that the existence of `omega` does not already establish.
+- **`norm_num`** normalizes and evaluates numerical expressions
   (arithmetic on concrete numerals, including some with `+`, `*`, `^`,
   `≤` on literals).
 
@@ -39,7 +39,7 @@ falls entirely inside its decidable fragment; use explicit `rw`/`have`
 reasoning whenever the goal is about a *general*, unspecified structure**
 (like an arbitrary `Group G` or `Ring R`). No decision procedure applies
 there, because there is no concrete computation to run, only axioms to
-combine. Chapters 7 and 9's group/ring theorems are all of this second
+combine. The group/ring theorems of Chapters 7 and 9 are all of this second
 kind, which is exactly why they needed hand-built proofs instead of
 `omega`.
 
@@ -56,9 +56,9 @@ fill in. A theorem about an arbitrary group has no finite truth table to
 compute, and thus must be *proved* from the axioms instead of
 *decided*.
 
-> Read more: the Lean/Mathlib documentation for `decide`, `omega`, and
+> Read more. The Lean/Mathlib documentation for `decide`, `omega`, and
 > `norm_num` (searchable in the Mathlib docs or via `#help tactic omega`
-> inside a Lean file) covers each tactic's exact decidable fragment and
+> inside a Lean file) covers the exact decidable fragment of each tactic and
 > performance in more depth than this book needs.
 
 ---
@@ -71,8 +71,8 @@ reference (full entry in the [Bibliography](../bibliography.md)):
 - **Decidable proposition (`sumbool`).** "`Inductive sumbool (A :
   Prop) (B : Prop) : Set := left : A → {A} + {B} | right : B → {A} +
   {B}`" ([Chlipala2013], §6.2 "Decidable Proposition Types," p. 110).
-  Picture it like this: a litmus test strip rather than a question you
-  have to reason through by hand — dip it in and it changes color to
+  Picture it like this. A litmus test strip rather than a question you
+  have to reason through by hand. Dip it in and it changes color to
   tell you, definitively, acid or base. `sumbool` packages that same
   idea as data: run it and get back a definite "yes, and here's why" or
   "no, and here's why," a constructive "$P \vee \neg P$, and we can tell

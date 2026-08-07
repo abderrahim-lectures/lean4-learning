@@ -7,16 +7,16 @@
 Part I is now complete: terms and types, structures, propositions and
 proofs, tactics, and the rigor questions just answered. Before Chapter 6
 builds `Group`, this project asks for a smaller, self-contained version of
-exactly that construction — a **monoid**: a set with an associative
+exactly that construction, a **monoid**, a set with an associative
 operation and a two-sided identity, but *no* inverses. Everything needed
 is already in hand from Chapters 1–5 alone; nothing here depends on
-`Group`, so it previews the next chapter's construction rather than
+`Group`, so it previews the construction of the next chapter rather than
 spoiling it.
 
 **Learning objectives.** Practice bundling data with proof obligations in
 a `structure` (Chapter 2), writing tactic-mode proofs for a genuine
 algebraic axiom set (Chapter 4), and building a small "prove it once,
-generically" theorem in the style Chapter 7 will use for `Group` — here
+generically" theorem in the style Chapter 7 will use for `Group`, here
 done for the weaker `Monoid` first.
 
 **Prerequisites.** Chapters 1–5 only.
@@ -24,15 +24,15 @@ done for the weaker `Monoid` first.
 **Milestones.**
 
 1. Define `structure Monoid (M : Type) where` with fields `op`, `id`, and
-   proof obligations `assoc`, `id_left`, `id_right` — exactly `Group`'s
-   fields (Chapter 6, Section 2), minus `inv`/`inv_left`/`inv_right`.
+   proof obligations `assoc`, `id_left`, `id_right`, exactly the fields of `Group`
+   (Chapter 6, Section 2), minus `inv`/`inv_left`/`inv_right`.
 2. Build at least one concrete instance. Two natural choices, both reusing
    facts already available from core Lean: `List α` under `++`/`[]`, or
    `Nat` under `*`/`1`.
 3. Prove a generic theorem for an arbitrary `Mn : Monoid M`: *the identity
-   is unique* — if `e' : M` satisfies `∀ a, Mn.op e' a = a`, then
-   `e' = Mn.id`. This is exactly Chapter 7's Theorem 1 (`id_unique`)
-   carried out one chapter early, and — worth checking directly — its
+   is unique*, if `e' : M` satisfies `∀ a, Mn.op e' a = a`, then
+   `e' = Mn.id`. This is exactly Theorem 1 of Chapter 7 (`id_unique`)
+   carried out one chapter early, and, worth checking directly, its
    proof never needs an inverse, so nothing about lacking one gets in the
    way.
 

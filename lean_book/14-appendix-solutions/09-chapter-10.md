@@ -48,16 +48,16 @@ def composeLinearMap {R : Type} (Rg : Ring R) {M N P : Type}
     exact g.map_smul r (f.toFun m)
 ```
 
-`g.toFun ∘ f.toFun` is ordinary function composition. Each field's proof
-first uses `f`'s own compatibility fact (`f.map_add`/`f.map_smul`) to push
+`g.toFun ∘ f.toFun` is ordinary function composition. The proof of each field
+first uses the own compatibility fact of `f` (`f.map_add`/`f.map_smul`) to push
 the additive-group operation or scalar action *through* `f`. This leaves a
-goal that is now exactly `g`'s compatibility fact, applied to the
+goal that is now exactly the compatibility fact of `g`, applied to the
 already-transformed points `f.toFun m`, `f.toFun n`. This, plus Exercise 1
 and the associativity of `∘` (both free from ordinary function
 composition), is exactly the data that makes $R$-modules and $R$-linear
 maps a category, as promised in the chapter text.
 
-**3. Verifying `intSmul` satisfies `Module`'s axioms (partial: `one_smul`, `smul_add`)**
+**3. Verifying `intSmul` satisfies the axioms of `Module` (partial: `one_smul`, `smul_add`)**
 
 ```lean
 -- one_smul: intSmul CG 1 m = m
@@ -102,7 +102,7 @@ theorem natSmul_add {M : Type} (Grp : Group M) (n : Nat) (m1 m2 : M)
 
 The base case is `id = id + id` (an identity is its own double). This
 mirrors the "element equal to its own double is zero" fact used in
-Chapter 9's `mul_zero`. The inductive step requires commutativity (`comm`,
+`mul_zero` from Chapter 9. The inductive step requires commutativity (`comm`,
 available since the group is a `CommGroup`) to slide `m2` and
 `natSmul Grp k m1` past each other. This is exactly why `intSmul`
 distributing over `+` requires an abelian group, rather than a general one:
@@ -116,7 +116,7 @@ natural-number scalars (with an extra `comm` hypothesis added for
 convenience). The exercise as stated asks for the full `intSmul`/`smul_add`
 property, including negative scalars. Extending to `Int` requires case
 splitting on `Int.ofNat`/`Int.negSucc` and handling sign flips in the
-inductive step — left here as an exercise rather than fully verified.
+inductive step, left here as an exercise rather than fully verified.
 
 **4. Submodule of multiples of `d`**
 
@@ -139,7 +139,7 @@ def multiplesSubmodule (d : Int) : Submodule intRing intZModule where
 This has the same shape as `evenSubmodule` (the case `d = 2`). Every `2` in
 that proof is simply replaced by the parameter `d`, and each closure proof
 still reduces to an `Int` equation, handled the same way ([`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) to
-reveal the goal's `+`/`*`-form, then [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)), rather than with `ring` (which
+reveal the `+`/`*`-form of the goal, then [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/)), rather than with `ring` (which
 this book does not import from Mathlib).
 
 ---

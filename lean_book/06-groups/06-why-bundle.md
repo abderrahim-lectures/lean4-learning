@@ -6,17 +6,17 @@
 
 Given a term `Grp : Group G`, *any* theorem proved about a
 "generic" `Group G` (using only `Grp.assoc`, `Grp.id_left`, and so on)
-automatically applies to `intGroup`, to `perm3Group` (the previous section's
-permutation group), and to every other group constructed later (path
-algebras' underlying additive group, and beyond). This is the payoff of
+automatically applies to `intGroup`, to `perm3Group` (the permutation group of
+the previous section), and to every other group constructed later (the
+underlying additive group of path algebras, and beyond). This is the payoff of
 the whole exercise: prove it once, generically, and obtain it for free
 everywhere. Chapter 7 demonstrates exactly this, applying a generic
 theorem to a concrete group once it is proved.
 
 **Mathlib equivalent.** This "prove it once, get it for free everywhere"
-promise is not something Mathlib puts off to a later chapter; it is the
-reason Mathlib's algebra hierarchy is organized around typeclasses at all.
-The *same* lemma name applies unchanged to two completely different groups:
+promise is not something Mathlib puts off to a later chapter. It is the
+reason the algebra hierarchy in Mathlib is organized around typeclasses at all.
+The *same* lemma name applies unchanged to two completely different groups.
 
 ```lean
 example (a b c : Int) : (a + b) + c = a + (b + c) := add_assoc a b c

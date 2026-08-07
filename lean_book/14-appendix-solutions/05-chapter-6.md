@@ -63,7 +63,7 @@ element that is merely a left inverse of `a` must already equal
 two-sided inverses are known to exist. This is what lets one-sided
 inverse-uniqueness arguments substitute for commutativity in that specific
 proof. It does not mean `inv_left` and `inv_right` were redundant as
-axioms — only that, once both hold, "a" left inverse coincides with
+axioms, only that, once both hold, "a" left inverse coincides with
 "the" two-sided one.
 
 ---

@@ -46,30 +46,30 @@ theorem rw_at_example (a b c : Nat) (h1 : a = b) (h2 : a + c = 10) : b + c = 10 
 Every `rw` seen so far rewrites the *goal*. Adding `at h` instead
 rewrites a *hypothesis* `h`, in place, using the same left-to-right
 substitution rule. This is just as common as rewriting the goal itself.
-Chapter 9's ring proofs, for instance, use `rw [...] at h1`/`at h2`
+The ring proofs of Chapter 9, for instance, use `rw [...] at h1`/`at h2`
 repeatedly to reshape a hypothesis into the exact form needed before
-citing it with `exact`. Read `rw [h1] at h2` as "wherever `h1`'s left side
-appears inside `h2`, replace it with `h1`'s right side." The direction
+citing it with `exact`. Read `rw [h1] at h2` as "wherever the left side of `h1`
+appears inside `h2`, replace it with the right side of `h1`." The direction
 and substitution rule are identical to ordinary `rw`. Only the *target*
 (a named hypothesis, not the goal) is different.
 
 **Mathematical reading.** Each tactic corresponds to a standard proof move.
 `intro` discharges an implication/universal by the deduction theorem: to
 prove $A \to B$, *assume* $A$ as a new hypothesis and prove $B$. This is the
-$\lambda$-abstraction rule. `exact e` supplies a finished term: "this is
-precisely our claim." `apply f` is backward chaining: to prove the
+$\lambda$-abstraction rule. `exact e` supplies a finished term, "this is
+precisely our claim." `apply f` is backward chaining. To prove the
 conclusion of $f : A_1 \to \cdots \to A_n \to G$, it suffices to prove the
-premises $A_1, \ldots, A_n$, which become the new goals. This is the working
-mathematician's "by $f$, it remains to check the hypotheses of $f$." `rw [h]`
-with $h : a = b$ is substitution of equals for equals (Leibniz): every
+premises $A_1, \ldots, A_n$, which become the new goals. This is the
+working-mathematician move "by $f$, it remains to check the hypotheses of $f$." `rw [h]`
+with $h : a = b$ is substitution of equals for equals (Leibniz). Every
 occurrence of $a$ in the goal is replaced by $b$. This is justified because $a = b$
 makes the old and new goals equivalent.
 
-> Read more: "deduction theorem" and "$\lambda$-abstraction rule" are two
+> Read more. "Deduction theorem" and "$\lambda$-abstraction rule" are two
 > names for the same rule. "Deduction theorem" names the $\Rightarrow$-intro
 > rule from natural deduction, stated in
 > [Chapter 3, Section 2](../03-propositions-and-proofs/02-logic-recap.md).
-> "$\lambda$-abstraction rule" names that same rule's Curry–Howard reading
+> "$\lambda$-abstraction rule" names the Curry–Howard reading of that same rule
 > as a Lean `fun`, part of the typed $\lambda$-calculus formalized in
 > [Chapter 5, Section 3](../05-rigor-check/03-typing-rules-and-safety.md).
 

@@ -1,28 +1,28 @@
 \section{Moving to Mathlib}\label{sec:13-next-steps:02-moving-to-mathlib:1}
 
-Everything here was reinvented on purpose instead of imported, so that every moving part would be visible. Mathlib, Lean's community mathematics library, already has much more general and well-tested versions of all of this:
+Everything here was reinvented on purpose instead of imported, so that every moving part would be visible. Mathlib, the community mathematics library of Lean, already has much more general and well-tested versions of all of this.
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{Mathlib.Algebra.Group.Defs} --- \href{https://loogle.lean-lang.org/?q=Group}{\texttt{Group}}, \texttt{CommGroup}, built with Lean's \textbf{type class} mechanism (\texttt{class ... extends ...}) instead of a plain \texttt{structure}. This lets notation like \texttt{a * b}, \texttt{a⁻¹}, \texttt{1} work the same way across every group, without threading a \texttt{Grp :} argument through every definition by hand, and lets Lean find instances automatically through typeclass search.
+  \texttt{Mathlib.Algebra.Group.Defs} has \href{https://loogle.lean-lang.org/?q=Group}{\texttt{Group}} and \texttt{CommGroup}, built with the \textbf{type class} mechanism of Lean (\texttt{class ... extends ...}) instead of a plain \texttt{structure}. This lets notation like \texttt{a * b}, \texttt{a⁻¹}, \texttt{1} work the same way across every group, without threading a \texttt{Grp :} argument through every definition by hand, and lets Lean find instances automatically through typeclass search.
 \item
-  \texttt{Mathlib.Algebra.Ring.Defs} --- \href{https://loogle.lean-lang.org/?q=Ring}{\texttt{Ring}}, \texttt{CommRing}, \texttt{Field}, and the whole hierarchy in between (\texttt{Semiring}, \texttt{NonUnitalRing}, \ldots).
+  \texttt{Mathlib.Algebra.Ring.Defs} has \href{https://loogle.lean-lang.org/?q=Ring}{\texttt{Ring}}, \texttt{CommRing}, \texttt{Field}, and the whole hierarchy in between (\texttt{Semiring}, \texttt{NonUnitalRing}, \ldots).
 \item
-  \texttt{Mathlib.Algebra.Module.Defs} --- \href{https://loogle.lean-lang.org/?q=Module}{\texttt{Module}}, much more general than Chapter 10's hand-built version, with the entire linear-algebra library (\texttt{Mathlib.LinearAlgebra.*}: bases, dimension, tensor products, exact sequences) built on top.
+  \texttt{Mathlib.Algebra.Module.Defs} has \href{https://loogle.lean-lang.org/?q=Module}{\texttt{Module}}, much more general than the hand-built version of Chapter 10, with the entire linear-algebra library (\texttt{Mathlib.LinearAlgebra.*}: bases, dimension, tensor products, exact sequences) built on top.
 \item
-  \texttt{Mathlib.Combinatorics.Quiver.Basic} and \texttt{Mathlib.Algebra.Category.*} --- quivers as the underlying data of a category (a category is ``a quiver plus identities and composition satisfying associativity,'' the same free-category construction from Chapter 11), and \texttt{Mathlib.CategoryTheory} more broadly.
+  \texttt{Mathlib.Combinatorics.Quiver.Basic} and \texttt{Mathlib.Algebra.Category.*} have quivers as the underlying data of a category (a category is ``a quiver plus identities and composition satisfying associativity,'' the same free-category construction from Chapter 11), and \texttt{Mathlib.CategoryTheory} more broadly.
 \item
-  Path algebras specifically show up in representation-theory-oriented corners of Mathlib and in dedicated Lean projects on quiver representations. Searching Mathlib's docs for ``quiver'' and ``path'' is a good starting point once the type-class style is familiar.
+  Path algebras specifically show up in representation-theory-oriented corners of Mathlib and in dedicated Lean projects on quiver representations. Searching the Mathlib docs for ``quiver'' and ``path'' is a good starting point once the type-class style is familiar.
 \end{itemize}
 
-The jump from this book's \texttt{structure}-based definitions to Mathlib's \texttt{class}-based ones is mostly about \textbf{ergonomics}: automatic instance resolution, shared notation, and inheritance diamonds (the ambiguity that arises when a structure extends two parents with a common ancestor) already resolved. It is not really about mathematical content --- the axioms already learned are the same axioms, merely packaged so Lean's elaborator can find them without a \texttt{Grp} argument named in every theorem.
+The jump from the \texttt{structure}-based definitions of this book to the \texttt{class}-based ones of Mathlib is mostly about \textbf{ergonomics}: automatic instance resolution, shared notation, and inheritance diamonds (the ambiguity that arises when a structure extends two parents with a common ancestor) already resolved. It is not really about mathematical content. The axioms already learned are the same axioms, merely packaged so the elaborator of Lean can find them without a \texttt{Grp} argument named in every theorem.
 
 \subsection{Two theorems for free}\label{sec:13-next-steps:02-moving-to-mathlib:2}
 
-Everything above is a promise that Mathlib is \emph{more general}. Here are two concrete payoffs --- things this book explicitly could not state, using exactly the examples already built.
+Everything above is a promise that Mathlib is \emph{more general}. Here are two concrete payoffs, things this book explicitly could not state, using exactly the examples already built.
 
-\textbf{\texttt{ZMod 3} is a field, not just a ring.} Chapter 8, Section 5 built \texttt{fin3Ring} and said in so many words that a \texttt{Field} would need every nonzero element to be invertible, ``true for \(\mathbb{Z}/3\) precisely because \(3\) is prime, but not part of \texttt{Ring}'s axioms and not checked here.'' Mathlib already has this instance, for real:
+\textbf{\texttt{ZMod 3} is a field, not just a ring.} \texttt{fin3Ring} in Chapter 8, Section 5 was built and said in so many words that a \texttt{Field} would need every nonzero element to be invertible, ``true for \(\mathbb{Z}/3\) precisely because \(3\) is prime, but not part of the axioms of \texttt{Ring} and not checked here.'' Mathlib already has this instance, for real.
 
 \begin{lstlisting}
 example : Field (ZMod 3) := inferInstance
@@ -32,7 +32,7 @@ example : Field (ZMod 3) := inferInstance
 example : (*$\forall$*) a : ZMod 3, a (*$\neq$*) 0 (*$\rightarrow$*) (*$\exists$*) b, a * b = 1 := by decide
 \end{lstlisting}
 
-\textbf{Lagrange's theorem, applied to the non-abelian example from Chapters 6-7.} \texttt{Equiv.Perm (Fin 3)} (Chapter 6, Section 4's Mathlib analogue of \texttt{perm3Group}) never had subgroups defined for it --- the book built one group, not the lattice of its subgroups. Mathlib's \texttt{Subgroup} type already comes with Lagrange's theorem attached, so applying it to a real subgroup costs nothing beyond naming the subgroup:
+\textbf{The theorem of Lagrange, applied to the non-abelian example from Chapters 6-7.} \texttt{Equiv.Perm (Fin 3)} (the Mathlib analogue of \texttt{perm3Group} in Chapter 6, Section 4) never had subgroups defined for it. The book built one group, not the lattice of its subgroups. The \texttt{Subgroup} type in Mathlib already comes with the theorem of Lagrange attached, so applying it to a real subgroup costs nothing beyond naming the subgroup.
 
 \begin{lstlisting}
 -- Lagrange's theorem, fully generic: a subgroup's size divides the
@@ -55,4 +55,4 @@ example : Nat.card (Subgroup.zpowers (finRotate 3)) = 3 := by
   (*$\cdot$*) decide
 \end{lstlisting}
 
-Thus \(3 \mid 6\) --- not asserted, but \emph{derived}, by instantiating a theorem Mathlib already proved once, generically, for every group. Neither of these two facts required a single new definition: both reuse objects this book already built, and both are facts this book's own from-scratch \texttt{Ring}/\texttt{Group} genuinely could not have stated, since it never built the surrounding machinery (invertibility, subgroups) that Mathlib already has. This is the concrete shape of ``moving to Mathlib'': not different mathematics, merely a much larger stock of already-proved consequences to draw on.
+Thus \(3 \mid 6\), not asserted, but \emph{derived}, by instantiating a theorem Mathlib already proved once, generically, for every group. Neither of these two facts required a single new definition: both reuse objects this book already built, and both are facts the from-scratch \texttt{Ring}/\texttt{Group} of this book genuinely could not have stated, since it never built the surrounding machinery (invertibility, subgroups) that Mathlib already has. This is the concrete shape of ``moving to Mathlib'': not different mathematics, merely a much larger stock of already-proved consequences to draw on.

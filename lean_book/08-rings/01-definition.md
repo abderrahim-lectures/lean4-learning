@@ -17,7 +17,7 @@ $$
 $$
 
 Some textbooks do not require a multiplicative identity. Such a structure
-is called a *rng* — the missing "i" stands for the missing identity. This
+is called a *rng*. The missing "i" stands for the missing identity. This
 book includes the identity, since that is the more common convention.
 
 Note that (R1) requires **commutative** addition, unlike the general `Group` of

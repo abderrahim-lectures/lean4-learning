@@ -12,18 +12,18 @@ a diagnostic, not a dead end.
   fails with **"did not find instance of the pattern"** (also phrased "did
   not find an occurrence of the pattern"). This means the exact syntactic
   term `a` being rewritten does not occur in the goal as written. Fix: use
-  `#check` (or hover in the editor) on the goal's actual statement. It is
+  `#check` (or hover in the editor) on the actual statement of the goal. It is
   common for a definition to be unfolded differently than expected, so the
   term to be rewritten is hiding behind a `def` that needs [`unfold`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) or
   [`show`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) first. (A different error, **"motive is not type correct,"** arises
   instead when the term *is* found but rewriting it would produce an
-  ill-typed goal — typically when `a` occurs in a dependent position, such
-  as an index inside another hypothesis's type.)
-- [`exact e`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) where `e`'s type does not match the goal fails with a **type
+  ill-typed goal, typically when `a` occurs in a dependent position, such
+  as an index inside the type of another hypothesis.)
+- [`exact e`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) where the type of `e` does not match the goal fails with a **type
   mismatch**, printing both the expected and the actual type side by side.
   The difference between them almost always points to one wrong
   argument or a missing `.symm`.
-- [`apply f`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) where `f`'s conclusion does not unify with the goal fails in a
+- [`apply f`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) where the conclusion of `f` does not unify with the goal fails in a
   similar way, but *before* spending effort on `apply`, `#check f` shows
   its full type. This reveals exactly what subgoals `apply` would leave,
   before committing to the tactic.

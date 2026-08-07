@@ -6,7 +6,7 @@
 \item
   Use \texttt{exact?}/\texttt{apply?} to search for a known lemma or proof.
 \item
-  Recognize when a goal falls inside \texttt{decide}/\texttt{omega}/\texttt{norm\_\allowbreak{}num}'s decidable fragment versus needing a genuine hand proof.
+  Recognize when a goal falls inside the decidable fragment of \texttt{decide}/\texttt{omega}/\texttt{norm\_\allowbreak{}num} versus needing a genuine hand proof.
 \item
   Know what \texttt{simp} trades away for speed.
 \item
@@ -17,17 +17,17 @@
 \end{learningobjectives}
 
 
-Chapters 7 and 9 were about \emph{finding} a proof by hand, deliberately slowly, so the underlying reasoning is never hidden. This chapter addresses the other half: once the reason a proof works is understood, how is it written (and found) faster in day-to-day use? Efficient Lean does not mean ``type less.'' It means knowing which automation to trust, knowing when it is still worth being explicit, and knowing how to structure lemmas so that the same fact is not derived twice. Each section below asks one question about that trade-off:
+Chapters 7 and 9 were about \emph{finding} a proof by hand, deliberately slowly, so the underlying reasoning is never hidden. This chapter addresses the other half: once the reason a proof works is understood, how is it written (and found) faster in day-to-day use? Efficient Lean does not mean ``type less.'' It means knowing which automation to trust, knowing when it is still worth being explicit, and knowing how to structure lemmas so that the same fact is not derived twice. Each section below asks one question about that trade-off.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  What if Lean already knows the lemma or the proof you need --- can it just find it for you?
+  What if Lean already knows the lemma or the proof you need? Can it just find it for you?
 \item
   When is a goal so mechanical that full automation (\texttt{decide}, \texttt{omega}, \texttt{norm\_\allowbreak{}num}) is the right call, and when does the search still need human hands?
 \item
-  \texttt{simp} rewrites thousands of steps at once --- but what exactly does it trade away for that speed, and when should you decline the trade?
+  \texttt{simp} rewrites thousands of steps at once. But what exactly does it trade away for that speed, and when should you decline the trade?
 \item
   Should every proof be written as a tactic script, or are some of them clearer as a single term?
 \item

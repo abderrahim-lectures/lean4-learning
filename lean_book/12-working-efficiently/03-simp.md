@@ -8,7 +8,7 @@ Chapter 4 recommended avoiding `simp` while learning, so every step stayed
 traceable. Once it is understood *why* a family of rewrites works (for
 example, "additive identity/inverse cancellation," as in Chapter 9),
 `simp` is the efficient way to apply a whole *set* of these known-safe
-rewrites at once, instead of spelling out each one:
+rewrites at once, instead of spelling out each one.
 
 ```lean
 -- Chapter 9 style (explicit, for learning):
@@ -20,7 +20,7 @@ theorem ex2 (n : Nat) : n + 0 = n := by
   simp
 ```
 
-A good habit: the *first* time a new kind of cancellation or
+A good habit is that the *first* time a new kind of cancellation or
 identity simplification is encountered, it should be done by hand with named lemmas, as this book
 does throughout. After that, `simp` (optionally `simp [specific_lemma]` to
 narrow it, or `simp only [...]` to restrict exactly which lemmas fire) is
@@ -34,7 +34,7 @@ left-to-right rewriting system and drives the goal to a normal form,
 closing it when both sides normalize to the same term. Both proofs of
 $n + 0 = n$ use the same fact, $n + 0 = n$ (the right-unit law for $+$).
 The explicit version cites it by name; `simp` finds it in the rewrite
-system. This is the algebraist's everyday move of "simplify using the
+system. This is the everyday move of an algebraist to "simplify using the
 obvious identities." It works exactly when the rewrite rules are valid
 equalities, and confluent enough to reach a canonical form.
 

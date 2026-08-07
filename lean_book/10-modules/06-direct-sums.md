@@ -8,11 +8,11 @@ Section 5 supplied the morphisms of $R\text{-}\mathbf{Mod}$: linear maps
 between individual modules. With both objects (modules, Sections 2–4) and
 morphisms (linear maps) in hand, the next natural step is to build new
 objects out of old ones. The simplest such construction combines two
-modules into a third, with the morphisms tying them back to their pieces —
+modules into a third, with the morphisms tying them back to their pieces,
 exactly the direct sum below.
 
 Given two $R$-modules $M$, $N$, their direct sum $M \oplus N$ has carrier
-$M \times N$, componentwise addition, and componentwise scalar action:
+$M \times N$, componentwise addition, and componentwise scalar action.
 
 ```lean
 structure DirectSum (M N : Type) where
@@ -95,23 +95,23 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
 `congr 1` is a tactic worth noting, as this is its first
 appearance. Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
 `congr 1` reduces it to the componentwise goals `a1 = b1` and `a2 = b2`.
-This is the categorical fact that a product's equality is checked
+This is the categorical fact that the equality of a product is checked
 pairwise, turned into a one-line tactic instead of a hand-unfolded
 `Prod.ext`-style lemma. Every proof obligation above genuinely *is* two
 independent facts, one from `M` and one from `N`, glued together by the
-direct-sum's product structure. `congr 1` is the right tool exactly
+product structure of the direct sum. `congr 1` is the right tool exactly
 because it exposes that independence directly, instead of hiding it
 inside a single opaque equality on pairs. Note the
-`show DirectSum.mk _ _ = DirectSum.mk _ _` line before each `congr 1`:
-without it, the goal is stated in terms of the anonymous-constructor
+`show DirectSum.mk _ _ = DirectSum.mk _ _` line before each `congr 1`.
+Without it, the goal is stated in terms of the anonymous-constructor
 lambda (`op := fun x y => ⟨...⟩`) rather than the visible `DirectSum.mk`
 application. `congr 1` cannot reliably split a goal it does not recognize
-as "one constructor applied to arguments on both sides" — a real gap that
+as "one constructor applied to arguments on both sides," a real gap that
 the compiler catches immediately if the `show` line is left out.
 
 **Mathematical reading.** This builds the **direct sum** $M \oplus N$: its
 carrier is the product $M \times N$, with all structure defined
-componentwise — $(m,n) + (m',n') = (m+m',\, n+n')$, $0 = (0,0)$, $-(m,n) =
+componentwise, $(m,n) + (m',n') = (m+m',\, n+n')$, $0 = (0,0)$, $-(m,n) =
 (-m,-n)$, and $r\cdot(m,n) = (r\cdot m,\, r\cdot n)$. Every axiom holds
 because it holds in each coordinate independently, which is exactly what
 `congr 1` exposes: an equation of pairs splits into one equation in $M$ and
@@ -132,7 +132,7 @@ graph LR
 ### A concrete instance: $\mathbb{Z} \oplus \mathbb{Z}$
 
 Instantiating the generic construction requires nothing beyond supplying two
-modules — here, `intZModule` twice.
+modules, here, `intZModule` twice.
 
 ```lean
 def zSquaredModule := directSumModule intRing intZModule intZModule
@@ -151,7 +151,7 @@ reading above, computed rather than merely asserted.
 field by field (five group axioms, four module axioms, each split
 componentwise via `congr 1`). Mathlib already gives the ordinary product
 type `M × N` a `Module R` instance directly. There is no `DirectSum`
-wrapper to define at all:
+wrapper to define at all.
 
 ```lean
 example {M N : Type*} [AddCommGroup M] [AddCommGroup N]
@@ -161,16 +161,16 @@ example {M N : Type*} [AddCommGroup M] [AddCommGroup N]
 #eval ((5 : Int) • ((2, 3) : Int × Int))   -- (10, 15)
 ```
 
-These are the same componentwise formulas as `zSquaredModule`'s `#eval`s
-above. But `Prod`'s `AddCommGroup`/[`Module`](https://loogle.lean-lang.org/?q=Module) instances (and the
+These are the same componentwise formulas as the `#eval`s of `zSquaredModule`
+above. But the `AddCommGroup`/[`Module`](https://loogle.lean-lang.org/?q=Module) instances of `Prod` (and the
 componentwise `+`/`•` they provide) are already in the library, built once
 for *any* two additive groups or modules, instead of assembled here for
 `Int` and `Int` specifically.
 
 The first projection $\pi_1 : \mathbb{Z}\oplus\mathbb{Z} \to \mathbb{Z}$,
 one of the defining maps from the product/coproduct structure above, is
-itself a `LinearMap` (previous section), built directly from
-`DirectSum`'s own field accessor:
+itself a `LinearMap` (previous section), built directly from the field
+accessor of `DirectSum` itself.
 
 ```lean
 def proj1 : LinearMap intRing zSquaredModule intZModule where
@@ -181,14 +181,14 @@ def proj1 : LinearMap intRing zSquaredModule intZModule where
 #eval proj1.toFun ⟨7, 100⟩   -- 7
 ```
 
-Both proof obligations are `rfl` directly: `zSquaredModule.addGrp.op`
+Both proof obligations are `rfl` directly. `zSquaredModule.addGrp.op`
 unfolds to componentwise addition (by the construction two sections
 back), so taking `.fst` of a sum is definitionally the same as summing the
 `.fst`s. No arithmetic argument is needed, only unfolding.
 
 **Mathlib equivalent, continued.** The projection `proj1` is, again, not
-something that needs to be built. Mathlib's [`LinearMap.fst`](https://loogle.lean-lang.org/?q=LinearMap.fst) already is $\pi_1$,
-generic over any two modules over any ring:
+something that needs to be built. [`LinearMap.fst`](https://loogle.lean-lang.org/?q=LinearMap.fst) in Mathlib already is $\pi_1$,
+generic over any two modules over any ring.
 
 ```lean
 def proj1' : (Int × Int) →ₗ[Int] Int := LinearMap.fst Int Int Int
@@ -210,9 +210,9 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   ... also referred to as the (external) direct sum ... denoted
   $M_1 \oplus \cdots \oplus M_k$" ([DummitFoote2003], §10.3
   "Generation of Modules, Direct Sums, and Free Modules," p. 351,
-  Proposition 5). D&F's explicit universal-property discussion in
+  Proposition 5). The explicit universal-property discussion by D&F in
   this section covers free modules and tensor products, not direct
-  sums specifically — the universal-property framing of direct sums
+  sums specifically. The universal-property framing of direct sums
   used elsewhere in this book is its own extension of the pattern.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003

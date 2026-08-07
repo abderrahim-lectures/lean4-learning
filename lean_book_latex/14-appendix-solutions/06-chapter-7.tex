@@ -10,7 +10,7 @@ theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
   exact Grp.inv_right a
 \end{lstlisting}
 
-By \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 7, Theorem 2), to show \texttt{a = Grp.inv (Grp.inv a)} it suffices to show \texttt{a} is a left inverse of \texttt{Grp.inv a}, i.e.~\texttt{Grp.op a (Grp.inv a) = Grp.id} --- exactly \texttt{Grp.inv\_\allowbreak{}right a}.
+By \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 7, Theorem 2), to show \texttt{a = Grp.inv (Grp.inv a)} it suffices to show \texttt{a} is a left inverse of \texttt{Grp.inv a}, i.e.~\texttt{Grp.op a (Grp.inv a) = Grp.id}, exactly \texttt{Grp.inv\_\allowbreak{}right a}.
 
 \textbf{2. \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}}
 

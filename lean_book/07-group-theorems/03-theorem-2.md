@@ -11,12 +11,12 @@
 between two elements known only through separate facts (`h` about `b`, the
 `Group` axioms about `Grp.inv a`). Hence the same strategy applies: relate
 both sides to something in common. Here, however, no single lemma hands us `Grp.op b Grp.id`
-**pointing the way we need** — `Grp.id_right` gives
+**pointing the way we need**. `Grp.id_right` gives
 `Grp.op b Grp.id = b`, so we must use it backwards (`.symm`) to pad `b`
-with the identity, unlike Theorem 1's simpler setting. We must *build*
+with the identity, unlike the simpler setting of Theorem 1. We must *build*
 the chain by rewriting `b` itself, step by step.
 
-The trick worth internalizing: **pad `b` with the identity, then swap the
+The trick worth internalizing is to **pad `b` with the identity, then swap the
 identity for something you can cancel.** Concretely:
 
 $$
@@ -67,7 +67,7 @@ are two-sided and unique, so the notation $a^{-1}$ is unambiguous.
 
 **Mathlib equivalent.** The exact same "pad with the identity, swap it for
 something cancelable" chain, written with `*`/`1`/`⁻¹` instead of
-`Grp.op`/`Grp.id`/`Grp.inv`:
+`Grp.op`/`Grp.id`/`Grp.inv`.
 
 ```lean
 example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
@@ -75,11 +75,11 @@ example {G : Type*} [Group G] (a b : G) (h : b * a = 1) : b = a⁻¹ := by
 ```
 
 Reading right to left through the `rw` list gives line-for-line the
-displayed chain above: `←` [`mul_one`](https://loogle.lean-lang.org/?q=mul_one) `b` turns `b` into `b * 1`; `←` [`mul_inv_cancel`](https://loogle.lean-lang.org/?q=mul_inv_cancel) `a`
+displayed chain above. `←` [`mul_one`](https://loogle.lean-lang.org/?q=mul_one) `b` turns `b` into `b * 1`; `←` [`mul_inv_cancel`](https://loogle.lean-lang.org/?q=mul_inv_cancel) `a`
 turns that `1` into `a * a⁻¹`; `←` [`mul_assoc`](https://loogle.lean-lang.org/?q=mul_assoc) reassociates; `h` substitutes
 `b * a` for `1`; [`one_mul`](https://loogle.lean-lang.org/?q=one_mul) clears the resulting `1 * a⁻¹`. These are the same
-five steps, in the same order — only the names `Grp.assoc`/`Grp.inv_right`
-and so on are replaced by Mathlib's generic `mul_assoc`/`mul_inv_cancel`
+five steps, in the same order. Only the names `Grp.assoc`/`Grp.inv_right`
+and so on are replaced by the generic `mul_assoc`/`mul_inv_cancel` in Mathlib
 and so on.
 
 ---

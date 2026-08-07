@@ -4,12 +4,12 @@
 
 ---
 
-`CommGroup` closed off the additive side of a ring: `extends Group G`
+`CommGroup` closed off the additive side of a ring. `extends Group G`
 plus one extra axiom, `comm`, is already enough to say "$(R, +)$ is an
-abelian group." What a group — even a commutative one — still cannot
+abelian group." What a group, even a commutative one, still cannot
 express is a *second* operation living alongside the first, one that
 interacts with addition through distributivity rather than standing
-apart from it. `Ring` is exactly that: `CommGroup` supplies (R1) whole,
+apart from it. `Ring` is exactly that. `CommGroup` supplies (R1) whole,
 as a single bundled field, and the definition below adds the remaining
 axioms (R2)–(R4) needed to make multiplication a genuine second citizen
 of the structure.
@@ -26,18 +26,18 @@ structure Ring (R : Type) where
   right_distrib : ∀ a b c : R, mul (addGrp.op a b) c = addGrp.op (mul a c) (mul b c)
 ```
 
-Consider each field in turn:
+Consider each field in turn.
 
-- `addGrp : CommGroup R` — the whole additive structure ($+$, $0$, unary
+- `addGrp : CommGroup R`. The whole additive structure ($+$, $0$, unary
   minus, and commutativity) is a single field, itself a bundled structure.
   This is the "structures containing structures" pattern.
-- `mul`, `one` — the multiplicative operation and its identity, `1`.
-- `mul_assoc`, `one_mul`, `mul_one` — multiplication is associative and has
+- `mul`, `one`. The multiplicative operation and its identity, `1`.
+- `mul_assoc`, `one_mul`, `mul_one`. Multiplication is associative and has
   a two-sided identity. Note, however, that `mul` is **not** required to be
   commutative or to have inverses. General rings need neither. (A
   commutative ring would add a `mul_comm` field, the same way `CommGroup`
   added `comm` to `Group`.)
-- `left_distrib`, `right_distrib` — multiplication distributes over
+- `left_distrib`, `right_distrib`. Multiplication distributes over
   addition on both sides. Both are needed precisely because `mul` is not
   assumed to be commutative.
 
@@ -53,22 +53,22 @@ $$
 $$
 The field `addGrp` is the *underlying additive abelian group*, so a ring is
 "an abelian group $(R,+)$ carrying a compatible monoid structure
-$(R,\cdot,1)$" — a monoid (a set with an associative operation and identity
+$(R,\cdot,1)$", a monoid (a set with an associative operation and identity
 element, i.e. a group without inverses). The remaining fields say
 $(R,\cdot,1)$ is a monoid (`mul_assoc`, `one_mul`, `mul_one`) and that the
-two operations interact through the two-sided distributive laws — that is,
+two operations interact through the two-sided distributive laws, that is,
 multiplication is compatible with addition on both sides. Nesting `addGrp`
 as a whole substructure mirrors the
 [forgetful functor](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
 $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 
-> Read more: Mathlib's `Ring` (`Mathlib.Algebra.Ring.Defs`) sits inside a
-> much larger hierarchy — `Semiring`, `NonUnitalRing`, `CommRing`,
-> `DivisionRing`, `Field` — each adding or dropping exactly one axiom
+> Read more. `Ring` in Mathlib (`Mathlib.Algebra.Ring.Defs`) sits inside a
+> much larger hierarchy, `Semiring`, `NonUnitalRing`, `CommRing`,
+> `DivisionRing`, `Field`, each adding or dropping exactly one axiom
 > compared to its neighbors; see [Chapter 13](../13-next-steps/02-moving-to-mathlib.md).
 > For the classical (non-Lean) statement of these axioms and their
-> standard consequences, Dummit & Foote's *Abstract Algebra* or Aluffi's
-> *Algebra: Chapter 0* (the latter using the same categorical
+> standard consequences, *Abstract Algebra* by Dummit & Foote or
+> *Algebra: Chapter 0* by Aluffi (the latter using the same categorical
 > framing this book uses) are standard references.
 
 ### Sources, quoted
@@ -81,7 +81,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   §7.1 "Basic Definitions and Examples," pp. 222–223). A basic
   consequence: "$0a = a0 = 0$ for all $a \in R$" (p. 225, Proposition
   1).
-- Aluffi ([Aluffi2009]) — offered as further reading, not an independently verified factual claim: Aluffi's use of forgetful functors and universal properties is publicly documented in the book's own table of contents, not quoted from a verified excerpt.
+- Aluffi ([Aluffi2009]) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of that book, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

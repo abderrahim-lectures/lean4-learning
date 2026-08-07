@@ -5,52 +5,52 @@
 ---
 
 Everything here was reinvented on purpose instead of imported, so that
-every moving part would be visible. Mathlib, Lean's community mathematics
-library, already has much more general and well-tested versions of all of
-this:
+every moving part would be visible. Mathlib, the community mathematics
+library of Lean, already has much more general and well-tested versions of all of
+this.
 
-- `Mathlib.Algebra.Group.Defs` — [`Group`](https://loogle.lean-lang.org/?q=Group), `CommGroup`, built with Lean's
-  **type class** mechanism (`class ... extends ...`) instead of a plain
+- `Mathlib.Algebra.Group.Defs` has [`Group`](https://loogle.lean-lang.org/?q=Group) and `CommGroup`, built with the
+  **type class** mechanism of Lean (`class ... extends ...`) instead of a plain
   `structure`. This lets notation like `a * b`, `a⁻¹`, `1` work the same
   way across every group, without threading a `Grp :` argument through
   every definition by hand, and lets Lean find instances automatically
   through typeclass search.
-- `Mathlib.Algebra.Ring.Defs` — [`Ring`](https://loogle.lean-lang.org/?q=Ring), `CommRing`, `Field`, and the whole
+- `Mathlib.Algebra.Ring.Defs` has [`Ring`](https://loogle.lean-lang.org/?q=Ring), `CommRing`, `Field`, and the whole
   hierarchy in between (`Semiring`, `NonUnitalRing`, ...).
-- `Mathlib.Algebra.Module.Defs` — [`Module`](https://loogle.lean-lang.org/?q=Module), much more general than
-  Chapter 10's hand-built version, with the entire linear-algebra library
+- `Mathlib.Algebra.Module.Defs` has [`Module`](https://loogle.lean-lang.org/?q=Module), much more general than
+  the hand-built version of Chapter 10, with the entire linear-algebra library
   (`Mathlib.LinearAlgebra.*`: bases, dimension, tensor products, exact
   sequences) built on top.
-- `Mathlib.Combinatorics.Quiver.Basic` and `Mathlib.Algebra.Category.*` —
+- `Mathlib.Combinatorics.Quiver.Basic` and `Mathlib.Algebra.Category.*` have
   quivers as the underlying data of a category (a category is "a quiver
   plus identities and composition satisfying associativity," the same
   free-category construction from Chapter 11), and `Mathlib.CategoryTheory`
   more broadly.
 - Path algebras specifically show up in representation-theory-oriented
   corners of Mathlib and in dedicated Lean projects on quiver
-  representations. Searching Mathlib's docs for "quiver" and "path" is a
+  representations. Searching the Mathlib docs for "quiver" and "path" is a
   good starting point once the type-class style is familiar.
 
-The jump from this book's `structure`-based definitions to Mathlib's
-`class`-based ones is mostly about **ergonomics**: automatic instance
+The jump from the `structure`-based definitions of this book to the
+`class`-based ones of Mathlib is mostly about **ergonomics**: automatic instance
 resolution, shared notation, and inheritance diamonds (the ambiguity that
 arises when a structure extends two parents with a common ancestor)
-already resolved. It is not really about mathematical content —
-the axioms already learned are the same axioms, merely packaged so
-Lean's elaborator can find them without a `Grp` argument named in
+already resolved. It is not really about mathematical content.
+The axioms already learned are the same axioms, merely packaged so
+the elaborator of Lean can find them without a `Grp` argument named in
 every theorem.
 
 ### Two theorems for free
 
 Everything above is a promise that Mathlib is *more general*. Here are
-two concrete payoffs — things this book explicitly could not state,
+two concrete payoffs, things this book explicitly could not state,
 using exactly the examples already built.
 
-**`ZMod 3` is a field, not just a ring.** Chapter 8, Section 5 built `fin3Ring`
+**`ZMod 3` is a field, not just a ring.** `fin3Ring` in Chapter 8, Section 5 was built
 and said in so many words that a `Field` would need every nonzero
 element to be invertible, "true for $\mathbb{Z}/3$ precisely because $3$
-is prime, but not part of `Ring`'s axioms and not checked here." Mathlib
-already has this instance, for real:
+is prime, but not part of the axioms of `Ring` and not checked here." Mathlib
+already has this instance, for real.
 
 ```lean
 example : Field (ZMod 3) := inferInstance
@@ -60,12 +60,12 @@ example : Field (ZMod 3) := inferInstance
 example : ∀ a : ZMod 3, a ≠ 0 → ∃ b, a * b = 1 := by decide
 ```
 
-**Lagrange's theorem, applied to the non-abelian example from Chapters
-6-7.** `Equiv.Perm (Fin 3)` (Chapter 6, Section 4's Mathlib analogue of
-`perm3Group`) never had subgroups defined for it — the book built one
-group, not the lattice of its subgroups. Mathlib's `Subgroup` type
-already comes with Lagrange's theorem attached, so applying it to a real
-subgroup costs nothing beyond naming the subgroup:
+**The theorem of Lagrange, applied to the non-abelian example from Chapters
+6-7.** `Equiv.Perm (Fin 3)` (the Mathlib analogue of `perm3Group` in Chapter 6, Section 4)
+never had subgroups defined for it. The book built one
+group, not the lattice of its subgroups. The `Subgroup` type in Mathlib
+already comes with the theorem of Lagrange attached, so applying it to a real
+subgroup costs nothing beyond naming the subgroup.
 
 ```lean
 -- Lagrange's theorem, fully generic: a subgroup's size divides the
@@ -88,11 +88,11 @@ example : Nat.card (Subgroup.zpowers (finRotate 3)) = 3 := by
   · decide
 ```
 
-Thus $3 \mid 6$ — not asserted, but *derived*, by instantiating a theorem
+Thus $3 \mid 6$, not asserted, but *derived*, by instantiating a theorem
 Mathlib already proved once, generically, for every group. Neither of
 these two facts required a single new definition: both reuse objects
-this book already built, and both are facts this book's own from-scratch
-`Ring`/`Group` genuinely could not have stated, since it never built
+this book already built, and both are facts the from-scratch
+`Ring`/`Group` of this book genuinely could not have stated, since it never built
 the surrounding machinery (invertibility, subgroups) that Mathlib
 already has. This is the concrete shape of "moving to Mathlib": not
 different mathematics, merely a much larger stock of already-proved

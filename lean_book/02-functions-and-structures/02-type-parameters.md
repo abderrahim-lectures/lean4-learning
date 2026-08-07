@@ -6,11 +6,11 @@
 
 The previous section built `Point`, a structure with two fixed `Nat`
 fields. That works only because `Point` never needed to hold anything
-but numbers. A structure that should bundle a value of *any* type — a
-pair of two arbitrary things, say — cannot be written once per type
+but numbers. A structure that should bundle a value of *any* type, a
+pair of two arbitrary things, say, cannot be written once per type
 without repeating the same three lines endlessly. What is needed instead
 is a structure parameterized by the types themselves, the same
-implicit-argument idea from Chapter 1's `identity`, now applied to a
+implicit-argument idea from `identity` in Chapter 1, now applied to a
 `structure` rather than a `def`.
 
 ```lean
@@ -34,7 +34,7 @@ once, one for every choice of the two type arguments. `Pair Nat String`
 is then just this construction evaluated at the pair $(\mathbb{N},
 \mathrm{String})$, giving $\mathbb{N} \times \mathrm{String}$. This is the
 same "definition parameterized by objects of the category" idea that lets
-us later write `Group (G : Type)`: not one group, but the functor sending
+us later write `Group (G : Type)`, not one group, but the functor sending
 a carrier type $G$ to the type of group-structures on $G$.
 
 **Programmer's corner (Python).** Python code like `def identity(x): return
@@ -45,15 +45,15 @@ that genericity until the code actually runs. Writing `identity(3) +
 then break on `3 + "oops"` at runtime. Constructing a `Pair` and placing a
 `Group (Fin 3)` into its `fst` draws no complaint from Python either.
 
-The closer Python analogue is `typing.TypeVar`: `def identity(x: T) -> T:
+The closer Python analogue is `typing.TypeVar`. `def identity(x: T) -> T:
 return x` documents the same universally quantified type that `identity`
 has in Lean. But that documentation is optional and erased at runtime. It
 is enforced only if a checker such as `mypy` is separately run, and a
 stray `# type: ignore` comment silences it entirely.
 
-Lean's `{α : Type} → α → α` is not documentation. It is *proved*, once,
+The type `{α : Type} → α → α` given by Lean is not documentation. It is *proved*, once,
 that `identity` works for every type `α`, and that proof is checked before
-`identity` is ever called — not merely approximated by a linter that might
+`identity` is ever called, not merely approximated by a linter that might
 never run.
 
 ### Sources, quoted
@@ -61,21 +61,21 @@ never run.
 Formal definitions and citations for this section, gathered here for
 reference (full entries in the [Bibliography](../bibliography.md)):
 
-- **Type-parameterized structure.** This book's working statement:
+- **Type-parameterized structure.** The working statement used by this book:
   `structure Pair (α β : Type)` does not define one structure. It defines
   one structure *per choice* of `α` and `β`, all at once. Categorically,
   this is a functor of the type parameters, not a single fixed structure.
-- **Parametric polymorphism.** Milner's theoretical account of type
-  polymorphism ([Milner1978]). Picture it like this: a car platform that
+- **Parametric polymorphism.** The theoretical account of type
+  polymorphism given by Milner ([Milner1978]). Picture it like this. A car platform that
   gets crash-tested and certified once, before a single unit rolls off
-  the line — every car built on it inherits that guarantee automatically,
+  the line. Every car built on it inherits that guarantee automatically,
   rather than each driver just hoping their particular car turns out
   safe. Genericity that is *proved* once for every type, checked before
-  the generic code is ever called, is that certification; an optional,
-  erased type annotation is closer to the driver's hope. Python's
-  `TypeVar` and Lean's `{α : Type} → ...` both implement this idea, to
+  the generic code is ever called, is that certification. An optional,
+  erased type annotation is closer to the hope of the driver. `TypeVar` in Python
+  and `{α : Type} → ...` in Lean both implement this idea, to
   different degrees, as the Programmer's corner box below explains.
-- Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) — for the Python-side comparison used in this section's box.
+- Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the box in this section.
 
 [PythonTyping]: ../bibliography.md#pythontyping
 [MypyDocs]: ../bibliography.md#mypydocs

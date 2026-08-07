@@ -4,10 +4,10 @@
 
 ---
 
-Chapter 8's examples ran from the fully commutative (`Int`, `Fin 3`) to
+The examples of Chapter 8 ran from the fully commutative (`Int`, `Fin 3`) to
 the deliberately noncommutative ($2\times 2$ integer matrices), each time
-verifying `Ring`'s axioms by hand for one specific carrier. That
-carrier-by-carrier approach does not scale — no one wants to re-derive
+verifying the axioms of `Ring` by hand for one specific carrier. That
+carrier-by-carrier approach does not scale. No one wants to re-derive
 $a\cdot 0=0$ separately for every ring encountered from now on. Chapter 7
 already established the fix for groups: fix an arbitrary structure once,
 via `variable`, and prove theorems against it that apply to every later

@@ -1,8 +1,8 @@
 \section{\texorpdfstring{Example: \(2\times 2\) matrices --- a genuinely noncommutative ring}{Example: 2\textbackslash times 2 matrices --- a genuinely noncommutative ring}}\label{sec:08-rings:07-matrices:1}
 
-\texttt{intRing} above is commutative (\texttt{Int.mul\_\allowbreak{}comm} exists, even though it was not wired into \texttt{Ring}'s fields), so it does not test the fact that \texttt{Ring} deliberately does \emph{not} assume \texttt{mul\_\allowbreak{}comm}. Matrices do: \(M_2(\mathbb{Z})\), the ring of \(2\times 2\) integer matrices under matrix addition and multiplication, has \(AB \neq BA\) in general. It is also a good test of \href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\_\allowbreak{}assoc}}, since matrix multiplication's associativity is not a one-line library lemma call. It genuinely takes some work, which is the point of working through it.
+\texttt{intRing} above is commutative (\texttt{Int.mul\_\allowbreak{}comm} exists, even though it was not wired into the fields of \texttt{Ring}), so it does not test the fact that \texttt{Ring} deliberately does \emph{not} assume \texttt{mul\_\allowbreak{}comm}. Matrices do: \(M_2(\mathbb{Z})\), the ring of \(2\times 2\) integer matrices under matrix addition and multiplication, has \(AB \neq BA\) in general. It is also a good test of \href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\_\allowbreak{}assoc}}, since the associativity of matrix multiplication is not a one-line library lemma call. It genuinely takes some work, which is the point of working through it.
 
-A \(2 \times 2\) matrix is represented as a \texttt{structure} with four entries. (More scalable representations exist --- \texttt{Fin 2 → Fin 2 → Int}, or Mathlib's general \href{https://loogle.lean-lang.org/?q=Matrix}{\texttt{Matrix}} --- but four named fields keep every computation fully explicit, which is the goal here.)
+A \(2 \times 2\) matrix is represented as a \texttt{structure} with four entries. (More scalable representations exist, \texttt{Fin 2 → Fin 2 → Int}, or the general \href{https://loogle.lean-lang.org/?q=Matrix}{\texttt{Matrix}} of Mathlib, but four named fields keep every computation fully explicit, which is the goal here.)
 
 \begin{lstlisting}
 structure Mat2 where
@@ -26,7 +26,7 @@ theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
 
 \begin{mathreading}
 
-\texttt{Mat2} is the free \(\mathbb{Z}\)-module \(M_2(\mathbb{Z}) \cong \mathbb{Z}^4\) on the four matrix entries. The extensionality lemma \texttt{Mat2.ext} --- supplied by hand right alongside the structure, since almost every proof below needs it --- says two \texttt{Mat2} values are equal exactly when all four entries match.
+\texttt{Mat2} is the free \(\mathbb{Z}\)-module \(M_2(\mathbb{Z}) \cong \mathbb{Z}^4\) on the four matrix entries. The extensionality lemma \texttt{Mat2.ext}, supplied by hand right alongside the structure, since almost every proof below needs it, says two \texttt{Mat2} values are equal exactly when all four entries match.
 
 \end{mathreading}
 
@@ -74,9 +74,9 @@ def Mat2.one : Mat2 := (*$\langle$*)1, 0, 0, 1(*$\rangle$*)
 
 \texttt{Mat2.one} is the identity \(I = \begin{psmallmatrix}1&0\\0&1\end{psmallmatrix}\). Together these five definitions are the operations of the matrix ring \(M_2(\mathbb{Z})\).
 
-\subsection{Why matrix multiplication is noncommutative --- check it computationally first}\label{sec:08-rings:07-matrices:2}
+\subsection{Why matrix multiplication is noncommutative: check it computationally first}\label{sec:08-rings:07-matrices:2}
 
-Before building the \texttt{Ring Mat2} instance, consider the very fact that motivates this example:
+Before building the \texttt{Ring Mat2} instance, consider the very fact that motivates this example.
 
 \begin{lstlisting}
 def X : Mat2 := (*$\langle$*)1, 1, 0, 1(*$\rangle$*)
@@ -99,7 +99,7 @@ XY = \begin{psmallmatrix}2&1\\1&1\end{psmallmatrix} \neq
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} Mathlib's \texttt{Matrix (Fin 2) (Fin 2) Int} is exactly \(M_2(\mathbb{Z})\), already a (noncommutative) \texttt{Ring} instance. There is no \texttt{Mat2}/ \texttt{Mat2.ext}/\texttt{add4\_\allowbreak{}reorder} needed, and \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} works directly here (unlike \texttt{Mat2}) because \texttt{Matrix} over \texttt{Int} already has \texttt{DecidableEq}:
+\textbf{Mathlib equivalent.} \texttt{Matrix (Fin 2) (Fin 2) Int} in Mathlib is exactly \(M_2(\mathbb{Z})\), already a (noncommutative) \texttt{Ring} instance. There is no \texttt{Mat2}/ \texttt{Mat2.ext}/\texttt{add4\_\allowbreak{}reorder} needed, and \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} works directly here (unlike \texttt{Mat2}) because \texttt{Matrix} over \texttt{Int} already has \texttt{DecidableEq}.
 
 \begin{lstlisting}
 example : Ring (Matrix (Fin 2) (Fin 2) Int) := inferInstance
@@ -251,15 +251,15 @@ def mat2Ring : Ring Mat2 where
       rw [Int.add_mul, Int.add_mul, add4_reorder]
 \end{lstlisting}
 
-Two points are worth noting:
+Two points are worth noting.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Every proof obligation here is spelled out explicitly, with no automation}, matching the rest of the book. This book never imports Mathlib, so its \texttt{ring} tactic --- a decision procedure for commutative-ring identities --- is not actually available; an earlier draft of this section reached for it by mistake. Each entry equation is instead unfolded by hand through \texttt{Int.add\_\allowbreak{}mul}/\texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.mul\_\allowbreak{}assoc} down to a sum of the same four cross terms in a different order, and \texttt{add4\_\allowbreak{}reorder} (proved once, above, and reused twelve times) supplies exactly the regrouping needed to match them. The \texttt{Ring Mat2} bundle itself is still noncommutative; nothing here decides that automatically. \texttt{mul := Mat2.mul} is supplied directly, and the \texttt{mul\_\allowbreak{}comm}-shaped fact is simply absent from \texttt{Ring}'s fields, exactly as Chapter 8's exercise on \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib} anticipated.
+  \textbf{Every proof obligation here is spelled out explicitly, with no automation}, matching the rest of the book. This book never imports Mathlib, so its \texttt{ring} tactic, a decision procedure for commutative-ring identities, is not actually available. An earlier draft of this section reached for it by mistake. Each entry equation is instead unfolded by hand through \texttt{Int.add\_\allowbreak{}mul}/\texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.mul\_\allowbreak{}assoc} down to a sum of the same four cross terms in a different order, and \texttt{add4\_\allowbreak{}reorder} (proved once, above, and reused twelve times) supplies exactly the regrouping needed to match them. The \texttt{Ring Mat2} bundle itself is still noncommutative; nothing here decides that automatically. \texttt{mul := Mat2.mul} is supplied directly, and the \texttt{mul\_\allowbreak{}comm}-shaped fact is simply absent from the fields of \texttt{Ring}, exactly as the exercise on \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib} in Chapter 8 anticipated.
 \item
-  \textbf{This is the general pattern for ``ring of \(n\times n\) matrices over a commutative ring \(S\)'':} the entries live in \(S\). Every \texttt{Ring Mat2} proof obligation reduces to a polynomial identity purely in \(S\), by applying distributivity and associativity in \(S\) a bounded number of times depending on \(n\). And \(\text{Mat}_n(S)\) itself is noncommutative as soon as \(n \geq 2\), regardless of whether \(S\) is commutative. Matrix rings are the standard first example that any general ring theory --- Chapter 9's theorems, Mathlib's \texttt{Ring} hierarchy --- has to handle \emph{without} assuming commutativity, which is exactly why \texttt{Ring} does not bake in \texttt{mul\_\allowbreak{}comm}.
+  \textbf{This is the general pattern for ``ring of \(n\times n\) matrices over a commutative ring \(S\)'':} the entries live in \(S\). Every \texttt{Ring Mat2} proof obligation reduces to a polynomial identity purely in \(S\), by applying distributivity and associativity in \(S\) a bounded number of times depending on \(n\). And \(\text{Mat}_n(S)\) itself is noncommutative as soon as \(n \geq 2\), regardless of whether \(S\) is commutative. Matrix rings are the standard first example that any general ring theory, the theorems of Chapter 9, the \texttt{Ring} hierarchy of Mathlib, has to handle \emph{without} assuming commutativity, which is exactly why \texttt{Ring} does not bake in \texttt{mul\_\allowbreak{}comm}.
 \end{enumerate}
 
 \begin{mathreading}
@@ -270,14 +270,14 @@ Two points are worth noting:
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent, continued.} Where the book spends most of this section deriving \texttt{mul\_\allowbreak{}assoc} for \texttt{Mat2} by hand (the \texttt{add4\_\allowbreak{}reorder} helper, reused twelve times across all five axioms), Mathlib already proves associativity of matrix multiplication generically. It is simply \texttt{mul\_\allowbreak{}assoc} again, the same lemma name as every other ring in this chapter's Mathlib boxes:
+\textbf{Mathlib equivalent, continued.} Where the book spends most of this section deriving \texttt{mul\_\allowbreak{}assoc} for \texttt{Mat2} by hand (the \texttt{add4\_\allowbreak{}reorder} helper, reused twelve times across all five axioms), Mathlib already proves associativity of matrix multiplication generically. It is simply \texttt{mul\_\allowbreak{}assoc} again, the same lemma name as every other ring in the Mathlib boxes of this chapter.
 
 \begin{lstlisting}
 example (A B C : Matrix (Fin 2) (Fin 2) Int) : (A * B) * C = A * (B * C) :=
   mul_assoc A B C
 \end{lstlisting}
 
-And where the book's \texttt{mat2Ring} needs a custom \texttt{Int}-arithmetic rewrite chain for each of \texttt{mul\_\allowbreak{}assoc}/\texttt{one\_\allowbreak{}mul}/\texttt{mul\_\allowbreak{}one}/\texttt{left\_\allowbreak{}distrib}/ \texttt{right\_\allowbreak{}distrib}, Mathlib has an automated decision procedure for exactly this class of goal, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{noncomm\_\allowbreak{}ring}} --- the noncommutative-ring counterpart of the \texttt{ring} tactic that the book's own note above states is not available without Mathlib:
+And where \texttt{mat2Ring} in the book needs a custom \texttt{Int}-arithmetic rewrite chain for each of \texttt{mul\_\allowbreak{}assoc}/\texttt{one\_\allowbreak{}mul}/\texttt{mul\_\allowbreak{}one}/\texttt{left\_\allowbreak{}distrib}/ \texttt{right\_\allowbreak{}distrib}, Mathlib has an automated decision procedure for exactly this class of goal, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{noncomm\_\allowbreak{}ring}}, the noncommutative-ring counterpart of the \texttt{ring} tactic that the note above states is not available in this book without Mathlib.
 
 \begin{lstlisting}
 example (A B C : Matrix (Fin 2) (Fin 2) Int) :

@@ -7,7 +7,7 @@
 **Claim.** `Rg.mul a Rg.addGrp.id = Rg.addGrp.id`, i.e. $a \cdot 0 = 0$.
 
 **Finding the proof.** In ordinary notation, the standard trick is as
-follows; it is worth memorizing as a pattern applicable to any
+follows. It is worth memorizing as a pattern applicable to any
 additive-identity argument: start from $0 = 0 + 0$, multiply through, and
 cancel.
 
@@ -17,10 +17,11 @@ $$
 
 No `Ring` axiom directly states this. [`mul_zero`](https://loogle.lean-lang.org/?q=mul_zero) is not a
 field of `Ring` (Chapter 8); it must instead be *derived* from `left_distrib`
-plus group cancellation. The general recipe: whenever a goal involves `0`
+plus group cancellation. The general recipe is that whenever a goal involves `0`
 (or any identity element) in a non-trivial way, attempt rewriting it as
-`0 + 0`. This is exactly [Chapter 7's Theorem 2](../07-group-theorems/03-theorem-2.md)'s
-"pad with the identity" trick, but here it is applied to the input of the
+`0 + 0`. This is exactly the "pad with the identity" trick of
+[Theorem 2 of Chapter 7](../07-group-theorems/03-theorem-2.md),
+but here it is applied to the input of the
 equation to be proved, rather than to the output.
 
 $$
@@ -29,7 +30,7 @@ $$
 
 using `left_distrib` on the last step. Writing $x := a \cdot 0$, this shows
 $x = x + x$. The goal has thereby become "an additive-group element that
-equals its own double is zero" — a pure group fact, provable by adding
+equals its own double is zero," a pure group fact, provable by adding
 $-x$ to both sides and using associativity/cancellation exactly as in
 Chapter 7. **Recognizing that the ring-shaped goal reduces to a
 group-shaped goal already known to be solvable** is the real insight;
@@ -58,11 +59,11 @@ theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
 
 `h2` is proved with `congrArg`, not `by rw [h1]`. In an earlier draft,
 attempting to rewrite with `h1` at this intermediate `have` using plain
-`rw` caused occurrence-targeting problems: `rw [h1]` rewrites *every*
-syntactic occurrence of `h1`'s left-hand side in the goal, including
+`rw` caused occurrence-targeting problems. `rw [h1]` rewrites *every*
+syntactic occurrence of the left-hand side of `h1` in the goal, including
 copies produced by the substitution itself, and hence does not land on
-the exact stated goal here. `congrArg f h1` avoids this problem entirely:
-it directly builds "apply `f` to both sides of `h1`," which is precisely
+the exact stated goal here. `congrArg f h1` avoids this problem entirely.
+It directly builds "apply `f` to both sides of `h1`," which is precisely
 "add $-x$ to both sides of $x = x+x$" with no ambiguity about which
 occurrence is targeted.
 
@@ -88,13 +89,13 @@ because multiplication is additive in each argument.
 **Mathlib equivalent.** Where the book spends a full `have`/`congrArg`/`rw`
 derivation getting from `left_distrib` and group cancellation to
 $a\cdot 0=0$, Mathlib already proves this and gives it exactly the same
-name:
+name.
 
 ```lean
 example {R : Type*} [Ring R] (a : R) : a * 0 = 0 := mul_zero a
 ```
 
-There is nothing to derive — `mul_zero` is proved once, generically, for
+There is nothing to derive. `mul_zero` is proved once, generically, for
 every `Ring` (indeed every `MulZeroClass`), by essentially the argument
 above, and is then simply *available* rather than re-derived at each use
 site.

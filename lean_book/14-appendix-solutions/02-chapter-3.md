@@ -39,9 +39,9 @@ An `∃`-proof is a witness (`1`) paired with a proof that it satisfies the
 predicate (`1 > 0`). Here [`decide`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) handles that proof, since `1 > 0` on
 `Nat` is a decidable, closed proposition. We could also write
 `⟨1, Nat.one_pos⟩`. Note that `⟨1, rfl⟩` does *not* work here: `1 > 0`
-unfolds to `0 < 1`, i.e. `Nat.le 1 1`'s successor form, which is a
+unfolds to `0 < 1`, i.e. the successor form of `Nat.le 1 1`, which is a
 *propositional* fact proved by a constructor (`Nat.le.refl`), not something
-`rfl` can close by definitional unfolding alone — this is the same
+`rfl` can close by definitional unfolding alone. This is the same
 definitional-vs-propositional-equality distinction taught in Chapter 5.
 
 ---
