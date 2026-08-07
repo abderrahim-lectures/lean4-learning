@@ -51,6 +51,8 @@ existence proof needs.
 -- `n` is prime if it's at least 2 and no number strictly between 2 and n
 -- divides it. `@[reducible]` lets `decide` below see straight through
 -- this definition, instead of needing a separate `unfold` step first.
+-- (The full story on `def` vs. `abbrev`/`opaque` transparency is in
+-- Chapter 4, "More tactics," alongside `unfold`.)
 @[reducible] def isPrime (n : Nat) : Prop :=
   n ≥ 2 ∧ ∀ m : Nat, m < n → m ≥ 2 → ¬ (m ∣ n)
 

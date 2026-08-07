@@ -99,4 +99,50 @@ two are interchangeable by definition (like unwinding "$n$ is even" to
 "$\exists k,\ n = 2k$" in a proof). So the goal becomes the tautology
 $0 = 0$, closed by reflexivity.
 
+### An aside on transparency: `def` vs. `abbrev` vs. `opaque`
+
+`unfold isZero` above had to name `isZero` explicitly, the same way
+`rw` names an equation explicitly, because that is exactly what `unfold`
+is for. This is a good moment to name the promise from
+[Chapter 1, Section 2](../01-basics/02-def-let-implicit.md). `def` is not
+the only way to introduce a definition, and the alternatives differ
+precisely in how much they need to be *told about* like this, versus being
+seen through automatically.
+
+- **`def` (semi-reducible, the default).** Requires an explicit instruction
+  to unfold, `unfold` by name in a tactic proof, exactly as above. This
+  matches the traceability this book has been deliberately practicing
+  since [`simp` was first introduced](#simp-simplify-using-known-simplification-lemmas)
+  earlier in this file, nothing unfolds silently, and every step names
+  what justified it.
+- **`abbrev` (reducible, automatically `@[reducible, inline]`).** Declares
+  the definition *notational*, not merely equal, so Lean's elaborator and
+  automated machinery treat every occurrence as if the body had been
+  written out directly, with no `unfold` step to ask for. The clean
+  demonstration of this has to wait for tools that actually *search*
+  through definitions automatically. Typeclass resolution
+  ([Chapter 5](../05-rigor-check/01-structure-vs-class.md)) searches at
+  reducible transparency by default, so an `abbrev` (or a `def` tagged
+  `@[reducible]`, as `isPrime` was in
+  [Chapter 3](../03-propositions-and-proofs/06-quantifiers.md)) is visible
+  to that search without being unfolded by hand first, while a
+  plain `def` generally is not.
+- **`opaque`.** The opposite extreme, not unfoldable at all, by `unfold`
+  or anything else, even though it still has a definition somewhere. Useful
+  for genuinely hiding an implementation and exposing only the properties
+  proved about it, the Lean equivalent of citing a chosen but unspecified
+  witness ("let $c$ be *some* element of the nonempty set $S$") and
+  reasoning only from what is known about it, never from how it was built.
+
+**Mathematical reading.** This maps onto a distinction already made
+informally, if rarely by name, in ordinary mathematical writing. A `def`
+is a definition cited by name in a proof, "by definition of $f$, ...", an
+explicit, visible step. An `abbrev` is pure notation, the kind silently
+unfolded without comment, writing $2n$ in place of ever having introduced
+a name $f(n) := 2n$ at all. An `opaque` value is an axiomatized or
+black-boxed object, reasoned about only through its stated properties,
+never its construction. Lean's three transparency levels are exactly
+these three mathematical habits, made explicit and machine-checked instead
+of left to convention.
+
 [← Reading failures](03-reading-failures.md) | [Index](00-index.md) | [Next: Worked example →](05-worked-example.md)

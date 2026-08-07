@@ -60,6 +60,19 @@ def double (n : Nat) : Nat := n * 2
   expected type, another case of Lean checking against context instead of
   guessing.
 
+A word of warning about the `→` that appeared two bullets up
+(`Nat → Nat`, the type of `double`). This same arrow reappears twice more
+later in this book, meaning something that looks different each time. Once
+`Prop` exists ([Chapter 3](../03-propositions-and-proofs/04-implication.md)),
+`P → Q` for propositions `P`, `Q` reads as logical implication, not "takes a
+`P`-value, returns a `Q`-value." And later this section
+([Section 5](05-pi-sigma-and-coc.md)) names the fully general pattern `→` is
+secretly always an instance of, the Π-type, where the *codomain* is allowed
+to depend on which argument was given, `Nat → Nat` being only the special
+case where it happens not to. Nothing about `double` above needs any of
+this yet. It is flagged only so the same symbol showing up wearing two more
+meanings later does not read as three unrelated coincidences.
+
 **Mathematical reading.** `def double (n : Nat) : Nat := n * 2` is nothing
 more than the ordinary mathematical definition
 
@@ -179,6 +192,35 @@ $\mathrm{id}_{\mathbb{R}}$, ..." one at a time either, but would instead
 say "for every object $A$, there is an identity morphism $\mathrm{id}_A$," which is
 exactly what the universally-quantified, implicitly-inferred `{α : Type}`
 expresses.
+
+**Two more binder styles, and one more kind of `def`, not needed yet.**
+`()` and `{}` are not the whole story, only the two pieces needed so far.
+Briefly, so meeting these elsewhere later is not a surprise:
+
+- A **third** kind of argument, written with square brackets, `[x : C]`,
+  is solved neither positionally like `()` nor by unification like `{}`,
+  but by a search through registered instances of `C`, called
+  **typeclass resolution**. This book delays it deliberately, until
+  [Chapter 5](../05-rigor-check/01-structure-vs-class.md), where the
+  `Group`/`class`/`instance` machinery that makes it useful is built up
+  from `structure` first, so the automation is understood rather than
+  taken on faith.
+- A **fourth**, rarer kind, **strict implicit**, written `⦃x : α⦄`, behaves
+  like `{}` except that Lean defers solving it until an *explicit* argument
+  after it is actually supplied. It is a Mathlib idiom for keeping partially
+  applied functions well behaved, and does not appear anywhere in this
+  book's own code. It is named here only so it is recognizable, not
+  mysterious, if encountered while reading Mathlib source directly.
+- `def` is not the only way to introduce a definition either. `abbrev` and
+  `opaque` exist alongside it, and differ not in what they let you write,
+  but in how transparent the result is to Lean's own equality checker,
+  whether `unfold`ing it is ever needed, or ever even possible.
+  [Chapter 4](../04-tactics/04-more-tactics.md), once `unfold` itself is on
+  the table, is where this is worth actually seeing rather than taking on
+  faith.
+
+None of this needs remembering yet. Only `()` and `{}` are needed for
+everything through the end of this chapter.
 
 The implicit `{α : Type}` argument of `identity` is polymorphic *over which type is
 plugged in*, but its return type, `α`, never changes shape once `α` is

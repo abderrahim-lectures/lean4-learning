@@ -6,6 +6,12 @@
 
 $P \to Q$ (read "$P$ implies $Q$") is literally a function type: a proof of
 $P \to Q$ is a function that turns any proof of $P$ into a proof of $Q$.
+This is the same `→` flagged back in
+[Chapter 1, Section 2](../01-basics/02-def-let-implicit.md), the one that
+built `double : Nat → Nat`. Nothing about the symbol changes here, only
+what stands on either side of it. `Nat → Nat` is functions between two
+data types; `P → Q`, for `P Q : Prop`, is functions between two
+*proofs*, which is exactly what "implication" turns out to mean.
 
 ```lean
 theorem modus_ponens {P Q : Prop} (hpq : P → Q) (hp : P) : Q :=

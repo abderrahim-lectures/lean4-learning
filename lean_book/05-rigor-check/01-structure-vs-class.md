@@ -51,9 +51,17 @@ instance : Group Int where
 
 Lean records the group structure of `Int` in a global table. From then on,
 any function that takes an *implicit* `[Group G]` argument (square
-brackets, not curly braces; this is a third kind of argument, an **instance
-argument**) has it filled in automatically whenever `G` is unified with
-`Int`, with no explicit term needed at the call site.
+brackets, not curly braces; this is the third of the four kinds of
+argument Lean has, flagged back in
+[Chapter 1, Section 2](../01-basics/02-def-let-implicit.md) under the name
+**instance-implicit**) has it filled in automatically whenever `G` is
+unified with `Int`, with no explicit term needed at the call site. The
+difference from an ordinary implicit `{G : Type}` is *how* the value gets
+found. `{}` is solved by unification, working backward from the types of
+the other arguments, while `[]` is solved by the typeclass search just
+described, a lookup through registered `instance`s, and would fail (or
+find an unexpected instance) if none had been registered for the type in
+question.
 
 ```lean
 def opTwice [Group G] (x : G) : G :=

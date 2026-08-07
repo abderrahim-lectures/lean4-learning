@@ -148,6 +148,62 @@ def Vec.replicate (a : α) : (n : Nat) → Vec α n
 -- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) (Vec.nil)))
 ```
 
+**A third style of writing a `def` body, and why the signature ends in a
+bare `→`.** Every `def` up to this point (`double`, `average`, `identity`)
+named every argument inside `(...)` and gave one term after `:=`.
+`Vec.replicate` above does something visibly different for its last
+argument: `(n : Nat)` never appears to the left of `:=`, the signature
+itself ends in a plain `→` the way the statement of a `theorem` does, and the
+body is a list of `| pattern => term` equations instead of one term. This
+is not a new arrow meaning on top of the two flagged in
+[Section 2](02-def-let-implicit.md), and it is not a different kind of
+function. It is a third *writing style* for the exact same thing, worth
+seeing side by side on a smaller example before trusting it in
+`Vec.replicate`:
+
+```lean
+def vecLen {α : Type} {n : Nat} (_ : Vec α n) : Nat := n
+
+def vecLen' {α : Type} {n : Nat} : Vec α n → Nat
+  | _ => n
+```
+
+- `vecLen` is the familiar style. The `Vec α n` argument is bound by name
+  (as `_`, since the body never actually uses it, only its index `n`)
+  inside `(...)`, and the body is one term, `n`, exactly like the body of
+  `double` was one term, `n * 2`.
+- `vecLen'` binds nothing after the colon. Its signature is
+  `Vec α n → Nat`, a bare arrow, precisely as if it were the *statement* of
+  a theorem rather than the header of a function. The argument is instead
+  supplied by the single equation `| _ => n` below, matching against
+  whatever term of `Vec α n` is eventually passed in. Lean's **equation
+  compiler** is what turns this `| pattern => term` block into an ordinary
+  function, internally no different from writing `fun v => match v with
+  | _ => n` inside a `:=` body. `vecLen` and `vecLen'` are, after
+  elaboration, the same function under two different pieces of surface
+  syntax, not two functions that happen to agree on every input.
+- The two styles are not interchangeable in every situation, only
+  equally valid where they overlap. Equation-style earns its keep exactly
+  when the whole purpose of a definition is to case on the *shape* of an
+  inductive argument, one equation per constructor, which is why
+  `Vec.replicate` above (and `Vec.head`, `Vec.dot` shortly) are written
+  that way. Each genuinely has one case for `0`/`nil` and one for
+  `n + 1`/`cons`. The named-binder `:=` style stays the natural choice
+  once the argument is used as an ordinary value rather than taken apart,
+  exactly as `vecLen` above never inspects *which* vector it received,
+  only its already-known length `n`.
+
+**Mathematical reading.** Equation-style `def` is the Lean transcription
+of ordinary definition by cases,
+$$
+f(n) = \begin{cases} c_0 & n = 0 \\ c(k, f(k)) & n = k + 1, \end{cases}
+$$
+the exact shape a mathematician already writes for a recursively defined
+sequence or function. Nothing new is being learned here beyond the Lean
+spelling of a pattern already familiar from ordinary practice, which is
+also exactly why it shows up unannounced the moment this book starts
+defining functions over an inductive type like `Vec`.
+
 `Vec.replicate` recurses exactly once per unit of length, so it is worth
 watching the recursion unwind one call at a time. Adding a `dbg_trace`
 line to each branch (harmless, since it only prints, and changes nothing about

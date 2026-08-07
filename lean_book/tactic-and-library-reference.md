@@ -48,6 +48,24 @@ Two general links used throughout this page:
 | `noncomm_ring` | Ch. 8 (Mathlib equivalent) | [Loogle](https://loogle.lean-lang.org/?q=noncomm_ring) |
 | `sorry` | Ch. 4, Section 3 | [Tactic Reference](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) |
 
+## Binder & definition styles
+
+Every way Lean has of binding an argument or introducing a definition, and
+where each is actually explained end to end (not just first mentioned).
+
+| Syntax | What it is | Reference |
+| --- | --- | --- |
+| `(x : α)` | Explicit argument, supplied positionally | [Ch. 1, Section 2](01-basics/02-def-let-implicit.md) |
+| `{x : α}` | Implicit argument, solved by unification | [Ch. 1, Section 2](01-basics/02-def-let-implicit.md) |
+| `[x : C]` | Instance-implicit argument, solved by typeclass search | [Ch. 1, Section 2](01-basics/02-def-let-implicit.md) (named) / [Ch. 5, Section 1](05-rigor-check/01-structure-vs-class.md) (in use) |
+| `⦃x : α⦄` | Strict-implicit argument, deferred until an explicit argument follows; not used in this book's own code | [Ch. 1, Section 2](01-basics/02-def-let-implicit.md) |
+| `def` | Semi-reducible definition; unfolds only when told to (`unfold`) | [Ch. 1, Section 2](01-basics/02-def-let-implicit.md) (named) / [Ch. 4](04-tactics/04-more-tactics.md) (transparency) |
+| `let` | Local, definitionally transparent definition | [Ch. 1, Section 2](01-basics/02-def-let-implicit.md) |
+| `abbrev` | Reducible definition, auto `@[reducible, inline]`, seen through automatically | [Ch. 1, Section 2](01-basics/02-def-let-implicit.md) (named) / [Ch. 4](04-tactics/04-more-tactics.md) (in depth) |
+| `opaque` | Never unfolds, even explicitly; hides an implementation entirely | [Ch. 1, Section 2](01-basics/02-def-let-implicit.md) (named) / [Ch. 4](04-tactics/04-more-tactics.md) (in depth) |
+| `@[reducible]` | Attribute form of the transparency `abbrev` gets automatically, applied to an existing `def` | [Ch. 3, Section 6](03-propositions-and-proofs/06-quantifiers.md) (in use) / [Ch. 4](04-tactics/04-more-tactics.md) (explained) |
+| `def f : A → B \| pat => ...` | Equation-style `def` body, pattern-matching the last argument(s) directly instead of naming them in `(...)` | [Ch. 1, Section 3](01-basics/03-dependent-types.md) |
+
 ## Mathlib names (the "Mathlib equivalent" boxes of Chapters 6-11)
 
 | Name | What it is | Reference |

@@ -70,6 +70,14 @@ all direct, unglamorous applications of exactly what gets built here.
 5. [Π/Σ-types and the calculus of constructions](05-pi-sigma-and-coc.md)
 6. [Exercises](06-exercises.md)
 
+Section 2 names several binder and definition styles beyond the two of
+each actually needed this early. The
+"Binder & definition styles" table in the
+[tactic and library reference](../tactic-and-library-reference.md)
+is a standing lookup for all of them, with a pointer to wherever
+each is explained in full, worth bookmarking rather than memorizing on the
+first pass.
+
 ---
 
 [← Setup](../00-setup/00-index.md) | [Table of contents](../README.md) | [Ch. 2: Functions & Structures →](../02-functions-and-structures/00-index.md)
