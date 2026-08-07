@@ -61,7 +61,7 @@ equivalent.
 ## Pedagogical approach
 
 The book uses several recurring devices, applied consistently across all
-14 chapters:
+15 chapters (Chapters 0–14):
 
 - **Chapter narratives.** Each chapter opens with a story framing the
   cognitive journey ahead (remember → understand → apply → analyze →
@@ -73,10 +73,12 @@ The book uses several recurring devices, applied consistently across all
   notation a working algebraist would recognize from a textbook,
   including the categorical reading (functors, universal properties,
   Hom-sets) where it clarifies what the code encodes.
-- **Programmer's corner (Python).** At several points, an optional box
-  compares a Lean construct to its nearest Python analogue, for readers
-  with programming background but no prior exposure to formal logic or
-  type theory.
+- **Programmer's corner (Python).** Nearly every chapter includes an
+  optional box grounding the value of Lean and functional programming
+  in a concrete Python failure mode (an untyped `dict` `KeyError`, a
+  runtime `assert`, a `float` silently breaking associativity, and the
+  like), for readers with programming background but no prior exposure
+  to formal logic or type theory.
 - **Mathlib equivalent.** Starting in Chapter 6, each worked example is
   followed by a box showing the same statement phrased against the
   real API of Mathlib, so the from-scratch construction and the library a reader
@@ -101,7 +103,7 @@ The book uses several recurring devices, applied consistently across all
   single self-contained construction, each with a self-verification step
   and a full solution in the appendix.
 - **Exercises with full solutions.** The exercises of every chapter have a
-  complete worked solution in the [appendix](lean_book/14-appendix-solutions/00-index.md),
+  complete worked solution in the [appendix](lean_book/15-appendix-solutions/00-index.md),
   and every Lean snippet in the book (main text and solutions) is
   verified against the pinned toolchain, not merely written and assumed
   correct.
