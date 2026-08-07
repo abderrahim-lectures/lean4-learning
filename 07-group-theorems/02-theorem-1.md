@@ -8,7 +8,7 @@
 `e' = Grp.id`.
 
 **Finding the proof.** We begin by stating the goal and examining what is
-available:
+available.
 
 ```lean
 theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
@@ -20,17 +20,17 @@ theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
 
 The goal is `e' = Grp.id`, an equality between two elements of `G` about
 which we individually know very little: `e'` only through `h`, and `Grp.id`
-only through `Grp`'s own axioms. **When a goal is "show two opaque things
+only through the axioms of `Grp` itself. **When a goal is "show two opaque things
 are equal," the standard move is to find a *third* expression that both
-sides equal on their own, then chain the two equalities.** We ask: is there
-anything both `e'` and `Grp.id` can be related to?
+sides equal on their own, then chain the two equalities.** We ask whether
+there is anything both `e'` and `Grp.id` can be related to.
 
-`h` lets us compute `Grp.op e' a` for *any* `a` — in particular for
+`h` lets us compute `Grp.op e' a` for *any* `a`, in particular for
 `a := Grp.id`, giving `Grp.op e' Grp.id = Grp.id`. Separately, `Grp.id_right`
 (a field of `Group`, so available for free) says `Grp.op e' Grp.id = e'`
 (instantiating its universal quantifier at `e'`). Both describe
-`Grp.op e' Grp.id` — that is the third expression. Once this is noticed, the
-proof is a matter of bookkeeping:
+`Grp.op e' Grp.id`. That is the third expression. Once this is noticed, the
+proof is a matter of bookkeeping.
 
 ```lean
 theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
@@ -42,32 +42,32 @@ theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
 
 Why `rw [← step2]` and not `rw [step2]`? The goal is `e' = Grp.id`, and
 `step2 : Grp.op e' Grp.id = e'` has `e'` on its *right*. `rw [step2]` would
-rewrite the goal's `Grp.op e' Grp.id`, but the goal does not yet contain
-that term — it contains `e'`. `rw [← step2]` rewrites right-to-left,
+rewrite the `Grp.op e' Grp.id` in the goal, but the goal does not yet contain
+that term. It contains `e'`. `rw [← step2]` rewrites right-to-left,
 replacing `e'` (which the goal *does* contain) with `Grp.op e' Grp.id`.
 This right-to-left choice, "which side of the `have` actually appears in
 the goal at present," is something to check every time `rw` is invoked, not
-something to guess. Put more sharply: **rewrite the side that actually
+something to guess. Put more sharply, **rewrite the side that actually
 appears in the current goal**, not whichever side happens to look more
-"finished" — the direction of `rw` is dictated by what is already there, not
+"finished." The direction of `rw` is dictated by what is already there, not
 by where the proof is headed.
 
-**Mathematical reading.** This is the classical *uniqueness of the identity*:
-if $e'$ is a left identity ($e'\cdot a = a$ for all $a$) then $e' = e$. The
+**Mathematical reading.** This is the classical *uniqueness of the identity*.
+If $e'$ is a left identity ($e'\cdot a = a$ for all $a$) then $e' = e$. The
 one-line proof is
 $$
 e' \overset{\text{id\_right}}{=} e' \cdot e \overset{h}{=} e,
 $$
 evaluating the hypothesis at $a = e$ and comparing with the axiom $e'\cdot e
-= e'$: both compute $e' \cdot e$, so $e' = e$. The two `have`s are these two
+= e'$. Both compute $e' \cdot e$, so $e' = e$. The two `have`s are these two
 equalities, and the `rw`/`exact` glue them at their common expression $e'\cdot
-e$: the standard "two things equal to a common third are equal." (The
-same argument in mirror shows a right identity is also unique, so a group's
-identity is unique, full stop.)
+e$, the standard "two things equal to a common third are equal." (The
+same argument in mirror shows a right identity is also unique, so the
+identity of a group is unique, full stop.)
 
-**Mathlib equivalent.** Phrased against Mathlib's [`Group`](https://loogle.lean-lang.org/?q=Group) class, `Grp.op`/
+**Mathlib equivalent.** Phrased against the [`Group`](https://loogle.lean-lang.org/?q=Group) class in Mathlib, `Grp.op`/
 `Grp.id`/`Grp.id_right` become the ordinary `*`/`1`/[`mul_one`](https://loogle.lean-lang.org/?q=mul_one), and the
-whole "third expression" chain collapses into a single `.symm.trans`:
+whole "third expression" chain collapses into a single `.symm.trans`.
 
 ```lean
 example {G : Type*} [Group G] (e' : G) (h : ∀ a : G, e' * a = a) : e' = 1 :=
@@ -75,10 +75,10 @@ example {G : Type*} [Group G] (e' : G) (h : ∀ a : G, e' * a = a) : e' = 1 :=
 ```
 
 This is the same proof, the same two facts glued at their common value
-$e'\cdot 1$: `h 1` is the book's `step1` and `mul_one e'` is `step2`. The
+$e'\cdot 1$: `h 1` is `step1` in the book and `mul_one e'` is `step2`. The
 only difference is that `1` is written for `Grp.id`, and there is no
-field-projection to spell out, since `*`/`1` already mean "whatever this
-type's `Group` instance says they mean."
+field-projection to spell out, since `*`/`1` already mean "whatever the
+`Group` instance for this type says they mean."
 
 ---
 

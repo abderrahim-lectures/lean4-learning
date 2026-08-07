@@ -13,17 +13,17 @@
 
 ## The story of this chapter
 
-Each section below answers the question the previous one forces:
+Each section below answers the question the previous one forces.
 
 1. **A `Ring`, from Chapter 8, already generalizes a field by dropping
    division. What happens to a *vector space* under the same move?**
    ([Section 1](01-definition.md)) The vector-space axioms make sense
-   verbatim over an arbitrary ring, not just a field — an abelian group
+   verbatim over an arbitrary ring, not just a field. An abelian group
    $M$ equipped with a scalar action $R \times M \to M$ satisfying the
    same four distributivity/associativity/unit laws. This is the
-   **module**, and it is the whole chapter's subject.
+   **module**, and it is the subject of the whole chapter.
 2. **Stated on paper, this definition is not yet something Lean can check
-   proofs against — how is it written down as a `structure`?**
+   proofs against. How is it written down as a `structure`?**
    ([Section 2](02-translating-into-lean.md)) Exactly the same "data,
    then axioms" translation already used for `Group` and `Ring`,
    with one difference: the ring $R$ a module is defined *over* enters as
@@ -32,13 +32,13 @@ Each section below answers the question the previous one forces:
 3. **Is this definition merely formally sound, or does something already
    familiar satisfy it?** ([Section 3](03-z-module-example.md)) Every
    abelian group is a $\mathbb{Z}$-module, and moreover the scalar action is
-   *forced*, not chosen: $\mathbb{Z}$'s own initiality as a ring pins down
+   *forced*, not chosen. The initiality of $\mathbb{Z}$ itself as a ring pins down
    $n \cdot m$ uniquely by induction. "Abelian group" and
    "$\mathbb{Z}$-module" turn out to be the same notion, seen from two
    directions.
 4. **Given one module, which of its subsets inherit the same
-   structure?** ([Section 4](04-submodules.md)) A **submodule** — the
-   module analogue of a subgroup — a subset closed under addition,
+   structure?** ([Section 4](04-submodules.md)) A **submodule**, the
+   module analogue of a subgroup, a subset closed under addition,
    containing $0$, and closed under the scalar action, encoded in Lean the
    same way every "subobject of $X$" has been encoded since Chapter 2: a
    membership predicate bundled with closure proofs, rather than a
@@ -52,7 +52,7 @@ Each section below answers the question the previous one forces:
    out of old ones?** ([Section 6](06-direct-sums.md)) The **direct
    sum** $M \oplus N$: componentwise structure on the product $M \times N$,
    verified field by field with `congr 1`, and equipped with projection
-   maps that are themselves instances of Section 5's `LinearMap` —
+   maps that are themselves instances of the `LinearMap` of Section 5,
    nothing new is needed to state them, only what is already on the table.
 
 By the last section, "module" has gone from a paper generalization of

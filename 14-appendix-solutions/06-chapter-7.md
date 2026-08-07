@@ -16,7 +16,7 @@ theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
 
 By `left_inverse_unique` (Chapter 7, Theorem 2), to show
 `a = Grp.inv (Grp.inv a)` it suffices to show `a` is a left inverse of
-`Grp.inv a`, i.e. `Grp.op a (Grp.inv a) = Grp.id` — exactly `Grp.inv_right a`.
+`Grp.inv a`, i.e. `Grp.op a (Grp.inv a) = Grp.id`, exactly `Grp.inv_right a`.
 
 **2. `theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c`**
 

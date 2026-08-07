@@ -11,7 +11,7 @@ anything actually satisfies it. The most familiar candidate is the
 integers, and Chapter 6 already did most of the necessary work by
 packaging $(\mathbb{Z}, +, 0, -)$ as `intGroup`. What remains is to
 upgrade that group to a commutative one and then supply the multiplicative
-structure `Ring` additionally demands — turning the abstract definition
+structure `Ring` additionally demands, turning the abstract definition
 into a first concrete witness that it is not vacuous.
 
 We reuse `intGroup` from Chapter 6 as the additive part.
@@ -25,9 +25,9 @@ def intCommGroup : CommGroup Int where
 ```
 
 `toGroup := intGroup` fills the field inherited from `Group Int` inside
-`CommGroup Int`'s definition. This is how `extends` works mechanically:
-under the hood, `CommGroup G` really has fields `toGroup : Group G` and
-`comm : ...`, and Lean's dot-notation makes `cg.op` mean `cg.toGroup.op`
+the definition of `CommGroup Int`. This is how `extends` works mechanically.
+Under the hood, `CommGroup G` really has fields `toGroup : Group G` and
+`comm : ...`, and the dot-notation of Lean makes `cg.op` mean `cg.toGroup.op`
 automatically.
 
 ```lean
@@ -58,10 +58,10 @@ as in Chapter 6. Integer arithmetic is not being proved from nothing; rather,
 already-known facts are assembled into the `Ring` bundle.
 
 **Mathematical reading.** This shows $(\mathbb{Z}, +, \times, 0, 1)$ as
-an object of $\mathbf{Ring}$ — in fact the
+an object of $\mathbf{Ring}$, in fact the
 [*initial* object](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline),
 since there is a
-unique **ring homomorphism** $\mathbb{Z} \to R$ into any ring — a
+unique **ring homomorphism** $\mathbb{Z} \to R$ into any ring, a
 function preserving $+$, $\times$, $0$, and $1$.
 First
 `intCommGroup` upgrades the additive group $(\mathbb{Z},+)$ to an abelian
@@ -73,7 +73,7 @@ $\mathbb{Z}$-arithmetic fact, so the term is the formal counterpart of
 
 **Mathlib equivalent.** `Int` is already a [`CommRing`](https://loogle.lean-lang.org/?q=CommRing) instance, so there is no
 `intRing`-style bundle to build. The obligations `intRing` checks by hand
-are, again, generic lemmas that hold for every commutative ring:
+are, again, generic lemmas that hold for every commutative ring.
 
 ```lean
 example : CommRing Int := inferInstance
@@ -85,7 +85,7 @@ example (a b c : Int) : a * (b + c) = a * b + a * c := mul_add a b c
 example (a b c : Int) : (a + b) * c = a * c + b * c := add_mul a b c
 ```
 
-[`mul_add`](https://loogle.lean-lang.org/?q=mul_add)/[`add_mul`](https://loogle.lean-lang.org/?q=add_mul) are Mathlib's names for `left_distrib`/`right_distrib`.
+[`mul_add`](https://loogle.lean-lang.org/?q=mul_add)/[`add_mul`](https://loogle.lean-lang.org/?q=add_mul) are the names Mathlib uses for `left_distrib`/`right_distrib`.
 They are the same laws, but stated generically over `[Ring R]` (or the weaker
 `[Distrib R]`) instead of being cited per-type as `Int.mul_add`/`Int.add_mul`.
 

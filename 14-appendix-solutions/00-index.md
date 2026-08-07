@@ -7,7 +7,7 @@
 ## Learning objectives
 
 - Follow complete, step-by-step solutions to exercises from the main chapters.
-- See every `rw`/`have`/`intro` spelled out one step at a time, in the book's own style.
+- See every `rw`/`have`/`intro` spelled out one step at a time, in the same style as the book itself.
 
 Solutions are written in the same explicit style as the main text: every
 `rw`/`have`/`intro` is one step. We avoid shortcuts (`simp`, unexplained

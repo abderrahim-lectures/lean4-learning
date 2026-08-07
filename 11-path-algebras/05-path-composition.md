@@ -5,8 +5,8 @@
 ---
 
 Section 4 built individual paths one arrow at a time, via `Path.cons`
-extending a shorter path with one new arrow. Two paths already built —
-separately, by whatever route — are often exactly what needs to be joined
+extending a shorter path with one new arrow. Two paths already built,
+separately, by whatever route, are often exactly what needs to be joined
 into a single longer path, rather than rebuilt from scratch arrow by
 arrow. That joining operation is **composition**, and, once every pair of
 composable paths is given a $k$-linear coefficient, it is also the
@@ -14,7 +14,7 @@ multiplication that turns the set of all paths into the path algebra
 $kQ$ this chapter has been building toward from the start.
 
 Given a path `p : Path Q u v` and a path `q : Path Q v w`, they can be concatenated
-into a path `Path Q u w`, defined by recursion on `q`:
+into a path `Path Q u w`, defined by recursion on `q`.
 
 ```lean
 def Path.append {V A : Type} {Q : Quiver V A} {u v w : V}
@@ -24,7 +24,7 @@ def Path.append {V A : Type} {Q : Quiver V A} {u v w : V}
   | Path.cons a h h' q' => Path.cons a h h' (Path.append p q')
 ```
 
-Reading the recursion:
+Reading the recursion.
 
 - If `q` is trivial (`Path.nil _`, a path of length zero from `v` to `v`),
   then appending `p` before it just gives back `p` itself (there is nothing
@@ -37,7 +37,7 @@ Reading the recursion:
 This recursion terminates because each recursive call is on the strictly
 shorter path `q'`. This is the same structural recursion principle behind
 the `induction` tactic from Chapter 4. A `Path` cannot be printed on its
-own (there is no generic way to display an arbitrary quiver's arrows as
+own (there is no generic way to display the arrows of an arbitrary quiver as
 text), so watching this recursion step by step with `dbg_trace` has to
 wait until the checkpoint project below, once `Path.length` gives the
 result something printable to reduce to.
@@ -75,8 +75,8 @@ example : pathBetaAlphaViaAppend = pathBetaAlpha := rfl
 That final `rfl` is not a weak or approximate check. It says the two
 constructions are *definitionally* the same term, reducing to an
 identical normal form (Chapter 5), not merely "provably equal after some
-argument." This is the concrete payoff of `Path.append`'s recursive
-definition: composing paths built independently, via arbitrarily different
+argument." This is the concrete payoff of the recursive definition of
+`Path.append`: composing paths built independently, via arbitrarily different
 routes, agrees exactly with building the composite path directly by hand,
 because both ultimately unfold to the same sequence of `Path.cons`
 applications.
@@ -97,7 +97,7 @@ $$
 
 (the semicolon "$;$" is a common notation for path-order composition,
 distinguishing it from function-order $\circ$). The identity laws, stated
-in path order: `Path.append p (Path.nil v) = p` (appending the trivial
+in path order, are `Path.append p (Path.nil v) = p` (appending the trivial
 path *after* `p` changes nothing; this case is implemented directly by the
 `nil` branch of the `match` above, since recursion is on `q`), and,
 separately, `Path.append (Path.nil u) p = p` (appending the trivial path
@@ -105,7 +105,7 @@ separately, `Path.append (Path.nil u) p = p` (appending the trivial path
 `p`, since the `nil` branch alone does not give this one for free). The
 `cons` case of the recursion is a *definitional* recursion lemma
 (`Path.append p (Path.cons a h h' q') = Path.cons a h h' (Path.append p q')`)
-that lets induction unfold `Path.append` one arrow at a time — it is not
+that lets induction unfold `Path.append` one arrow at a time. It is not
 itself associativity. True associativity of composition,
 
 $$
@@ -113,34 +113,34 @@ $$
 $$
 
 is a separate statement, provable by induction on the *third* path
-argument, `r` — the same argument `Path.append` itself recurses on (as
-`append_nil_left`'s proof already relies on, inducting on its second
+argument, `r`, the same argument `Path.append` itself recurses on (as
+the proof of `append_nil_left` already relies on, inducting on its second
 argument). In the `nil` case both sides reduce to `append p q` directly.
-In the `cons` case, both sides reduce — via exactly the `cons`-recursion
-lemma above, applied on the outside of each `append` — to
+In the `cons` case, both sides reduce, via exactly the `cons`-recursion
+lemma above, applied on the outside of each `append`, to
 `Path.cons a h h' (·)` wrapped around a strictly shorter instance of the
 same equation, which the inductive hypothesis closes.
 This book does not carry out that induction in Lean, but the argument above
 is enough to see that it goes through. Associativity together with `nil` as
 identities is what makes $\mathrm{Free}(Q)$ a genuine category: the
-smallest/most general category containing $Q$'s arrows, in the sense of a
-**universal property**. Concretely: for any category $C$ and any quiver
-morphism $F : Q \to U(C)$ (a function on vertices and arrows into $C$'s
-objects and morphisms, where $U : \mathbf{Cat} \to \mathbf{Quiv}$ is the
-forgetful functor that remembers only a category's underlying quiver —
+smallest/most general category containing the arrows of $Q$, in the sense of a
+**universal property**. Concretely, for any category $C$ and any quiver
+morphism $F : Q \to U(C)$ (a function on vertices and arrows into the
+objects and morphisms of $C$, where $U : \mathbf{Cat} \to \mathbf{Quiv}$ is the
+forgetful functor that remembers only the underlying quiver of a category,
 objects and morphisms, forgetting identities and composition), there is a
 *unique* functor $\hat F : \mathrm{Free}(Q) \to C$ extending $F$, i.e.
 $U(\hat F) \circ \eta_Q = F$ where $\eta_Q : Q \to U(\mathrm{Free}(Q))$ is
 the inclusion of generators. Equivalently,
 $\mathrm{Hom}_{\mathbf{Cat}}(\mathrm{Free}(Q), C) \cong \mathrm{Hom}_{\mathbf{Quiv}}(Q, U(C))$,
-naturally in $C$: $\mathrm{Free}$ is left adjoint to $U$. This book does not
+naturally in $C$. $\mathrm{Free}$ is left adjoint to $U$. This book does not
 formalize this functor or its uniqueness in Lean; it is stated here so the
 term "universal property" names something specific rather than a vague
 gesture at "the construction is canonical."
 
 **Mathlib equivalent.** `Path.append` is already in Mathlib, as
 `Quiver.Path.comp`. It is the same recursion (on the *second* path), with
-the same "`nil` does nothing, `cons` re-attaches its trailing arrow" shape:
+the same "`nil` does nothing, `cons` re-attaches its trailing arrow" shape.
 
 ```lean
 def pathBetaOnly' : Quiver.Path (1 : Fin 3) 2 := Quiver.Path.cons Quiver.Path.nil MyArrow.beta
@@ -149,14 +149,14 @@ def pathBetaAlphaViaComp' : Quiver.Path (0 : Fin 3) 2 := Quiver.Path.comp pathAl
 example : pathBetaAlphaViaComp' = pathBetaAlpha' := rfl
 ```
 
-This is the same closing `rfl` as the book's
-`pathBetaAlphaViaAppend = pathBetaAlpha` check: two paths built via
+This is the same closing `rfl` as the
+`pathBetaAlphaViaAppend = pathBetaAlpha` check in the book: two paths built via
 different routes (direct `cons`-chaining versus composing two shorter
 paths) reduce to the identical term, because `Quiver.Path.comp` unfolds to
 exactly the same sequence of `cons` applications `Path.append` does. Note
-that this `rfl` only checks *this one concrete instance* — it is not a
+that this `rfl` only checks *this one concrete instance*. It is not a
 proof of associativity or the identity laws in general (those are the
-separate statements discussed above); it is reassurance that the concrete
+separate statements discussed above). It is reassurance that the concrete
 `Free(Q)` machinery behaves as expected on a worked example.
 
 ### The path algebra
@@ -170,21 +170,21 @@ a genuinely bigger construction: essentially a finitely-supported function
 from paths to $k$. It is a natural next project once the material above is
 well understood. This chapter stops at "paths and their composition"
 because that data (the *category* of paths, really) is the essential
-content of the construction; once it is in place, the ring structure on
+content of the construction. Once it is in place, the ring structure on
 top is routine to add.
 
 **Mathematical reading.** The **path algebra** $kQ$ is the free $k$-module
 on the set of all paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with
-multiplication extending path composition $k$-bilinearly — written here in the
+multiplication extending path composition $k$-bilinearly, written here in the
 same **path order** used throughout this section, so that it matches
-`Path.append` and the quoted source below:
+`Path.append` and the quoted source below.
 $$
 p \cdot q = \begin{cases} p\,;q & \text{if } t(p) = s(q),\\ 0 &
 \text{otherwise,}\end{cases}
 $$
 where $p\,;q$ means "first $p$, then $q$". (Sources that fix
 function-composition order instead write this product as $q \cdot p = q \circ
-p$; the algebra is the same, read right-to-left.) The unit is $\sum_{v\in V} e_v$ (the sum of the trivial paths) — well-defined
+p$; the algebra is the same, read right-to-left.) The unit is $\sum_{v\in V} e_v$ (the sum of the trivial paths), well-defined
 as a finite sum, hence a genuine identity element, precisely when $Q_0$ is
 finite. So representations of $Q$ are exactly $kQ$-modules, the bridge to
 Chapter 10 promised there. The construction requires finitely-supported
@@ -194,19 +194,19 @@ only the composition (the category layer) is formalized here.
 > **Not independently verified.** The description of $kQ$ as "the
 > $k$-linearization of the free category $\mathrm{Free}(Q)$, its category
 > algebra" is standard category-theory folklore, but it is *not* stated
-> verbatim in either of this chapter's two cited sources, Assem–Simson–Skowroński
-> or Schiffler — both define $kQ$
+> verbatim in either of the two sources cited by this chapter, Assem–Simson–Skowroński
+> or Schiffler. Both define $kQ$
 > directly by basis-and-multiplication, as above, without naming it a
 > "category algebra." Treat that equivalence as a remark, not a cited
 > fact, until a source stating it explicitly is added to the
 > bibliography.
 
-> Read more: [Chapter 10](../10-modules/00-index.md)'s [`Module`](https://loogle.lean-lang.org/?q=Module),
-> [`LinearMap`](https://loogle.lean-lang.org/?q=LinearMap), and direct-sum material is exactly the vocabulary a full
+> Read more. The [`Module`](https://loogle.lean-lang.org/?q=Module),
+> [`LinearMap`](https://loogle.lean-lang.org/?q=LinearMap), and direct-sum material of [Chapter 10](../10-modules/00-index.md) is exactly the vocabulary a full
 > $kQ$-module (i.e. quiver representation) formalization would need.
-> Externally, Assem–Simson–Skowroński's *Elements of the Representation
-> Theory of Associative Algebras* (Vol. 1) and Schiffler's *Quiver
-> Representations* both develop path algebras and their representations
+> Externally, *Elements of the Representation
+> Theory of Associative Algebras* (Vol. 1) by Assem–Simson–Skowroński and *Quiver
+> Representations* by Schiffler both develop path algebras and their representations
 > from scratch, at a similar level of explicitness to this chapter.
 
 ### Sources, quoted
@@ -224,12 +224,12 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   \beta_k \mid d) = \delta_{bc}(a \mid \alpha_1, \ldots, \alpha_l,
   \beta_1, \ldots, \beta_k \mid d)$" ([AssemSimsonSkowronski2006],
   Ch. II §1, Definition 1.2).
-- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.2, Ch. II §1 — path algebra $kQ$. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*. Note that the quoted product writes the **left** factor's arrows first, i.e. in path order — the same order as `Path.append` and as the multiplication formula above.
-- Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2) — same construction; the unit is given explicitly as $1 = \sum_{i\in Q_0} e_i$ in a lemma nearby in that section.
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Definition 1.2, Ch. II §1, covers the path algebra $kQ$. Also notes each stationary path $\varepsilon_x$ is idempotent, and $\sum_{x\in Q_0}\varepsilon_x$ is the identity *when $Q_0$ is finite*. Note that the quoted product writes the arrows of the **left** factor first, i.e. in path order, the same order as `Path.append` and as the multiplication formula above.
+- Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 4, §4.2), covers the same construction. The unit is given explicitly as $1 = \sum_{i\in Q_0} e_i$ in a lemma nearby in that section.
 
 > **Numbering not independently verified.** An earlier draft of this box
 > reported the Schiffler unit as "Lemma 4.3 in that source's numbering,"
-> described as immediately following Definition 4.5 — which cannot both be
+> described as immediately following Definition 4.5, which cannot both be
 > true. The definition number is the one this section relies on; the lemma
 > number has been dropped rather than guessed. Check both against the printed
 > source before quoting either.

@@ -6,11 +6,11 @@
 
 The single biggest efficiency gain, greater than any tactic choice, is to
 **prove the general fact once, as its own named lemma, as soon as an
-argument would otherwise be repeated.** Chapter 7's
-`left_inverse_unique` is the running example. Theorem 3 (`inv_op`) and
-Chapter 9's `neg_one_mul` and `neg_mul` all reduce to it, instead of
+argument would otherwise be repeated.** `left_inverse_unique` from Chapter 7
+is the running example. Theorem 3 (`inv_op`) and
+`neg_one_mul` and `neg_mul` from Chapter 9 all reduce to it, instead of
 re-deriving "uniqueness of inverses" inline. Signs that a lemma should be
-factored out:
+factored out are as follows.
 
 - A [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain already written for a different
   but structurally identical goal is about to be repeated. In that case, the shared
@@ -18,47 +18,47 @@ factored out:
   places.
 - A sub-goal deep in a proof would itself be a reasonable, independently
   statable mathematical fact (for example, "an element that equals its
-  own double is zero," buried inside Chapter 9's `mul_zero`). Naming it
+  own double is zero," buried inside `mul_zero` of Chapter 9). Naming it
   is both more efficient *and* more readable, since the outer proof then
   reads as a short chain of named facts instead of one long
   undifferentiated block.
 
 This is the same judgment call made writing ordinary code:
-extract a helper when — and only when — real duplication or a
+extract a helper when, and only when, real duplication or a
 genuinely separate sub-claim is present, not ahead of time "just in case."
 
 **Key points.** `exact?`/`apply?` search for a closing term but do not
-always find the shortest one; `decide`/`omega`/`norm_num` replace a hand
+always find the shortest one. `decide`/`omega`/`norm_num` replace a hand
 proof exactly on their decidable fragment, never on a goal about a
-generic, unspecified structure; `simp` trades traceability for speed, so
+generic, unspecified structure. `simp` trades traceability for speed, so
 this book reaches for it only when a genuine technical obstacle makes the
-explicit alternative not worth the detour; and a repeated `rw` chain or an
+explicit alternative not worth the detour. And a repeated `rw` chain or an
 independently-statable sub-goal is a lemma waiting to be named.
 
 **Socratic questions.**
 
 1. *`exact?` sometimes returns a working but needlessly roundabout term
-   instead of the shortest one (Chapter 12, Section 1's own worked example).
-   Does that make it a poor tool to reach for?* No — it still guarantees
-   a *correct* closing term, found automatically; simplifying what it
+   instead of the shortest one (the worked example of Chapter 12, Section 1 itself).
+   Does that make it a poor tool to reach for?* No. It still guarantees
+   a *correct* closing term, found automatically. Simplifying what it
    returns by hand afterward is a small, separate step, cheaper than
    deriving the whole thing from nothing.
 2. *`decide` and a hand-written proof can close the exact same goal on a
-   finite carrier like `Fin 3` — Chapter 8's `fin3Group`/`fin3Ring` already
+   finite carrier like `Fin 3`. `fin3Group`/`fin3Ring` from Chapter 8 already
    used `decide` this way. If it was already in use back then, what does
    this chapter actually add?* Chapter 8 used `decide` on one specific
    example, without stopping to say *why* it applied there. This chapter
    turns that one-off use into a general principle: recognizing which
-   regime a goal is in — a finite, concretely enumerable carrier where
+   regime a goal is in, a finite, concretely enumerable carrier where
    `decide` applies, versus a general, unspecified structure (an arbitrary
    `Group G` or `Ring R`, as in Chapters 7 and 9) where no decision
    procedure applies and a hand-built proof is the only option. Knowing
    *when* to reach for `decide` is the skill; using it once, correctly, is
    not yet that skill.
 3. *A repeated `rw` chain is a sign a lemma should be factored out. Is
-   the reverse also true — should every proof be split into the smallest
-   possible named lemmas, just in case one gets reused later?* No —
-   speculative extraction with no present duplication is the same
+   the reverse also true, should every proof be split into the smallest
+   possible named lemmas, just in case one gets reused later?* No.
+   Speculative extraction with no present duplication is the same
    mistake in the opposite direction: three similar lines are better
    than a premature abstraction. The signal to extract is an actual
    repeated shape or an actual independently-statable sub-claim, not the

@@ -20,14 +20,14 @@ inductive Path {V A : Type} (Q : Quiver V A) : V → V → Type where
       (p : Path Q u v) : Path Q u w
 ```
 
-Reading this carefully:
+Reading this carefully.
 
-- `Path Q : V → V → Type` — for each pair of vertices `(start, finish)`,
+- `Path Q : V → V → Type`. For each pair of vertices `(start, finish)`,
   `Path Q start finish` is the *type* of paths from `start` to `finish`.
   A term of this type is one specific path.
-- `nil (v : V) : Path Q v v` — the trivial path at `v`, going from `v` to
+- `nil (v : V) : Path Q v v` is the trivial path at `v`, going from `v` to
   `v` in zero steps. This is $e_v$ from the math above.
-- `cons {u v w : V} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w` —
+- `cons {u v w : V} (a : A) (h : Q.source a = v) (h' : Q.target a = w) (p : Path Q u v) : Path Q u w`.
   given an existing path `p` from `u` to `v`, and an arrow `a` whose source
   is (provably, via `h`) `v` and whose target is (provably, via `h'`) `w`,
   `p` can be extended by appending `a`, producing a path from `u` to `w`.
@@ -62,7 +62,7 @@ def pathAlpha : Path exampleQuiver 0 1 :=
 
 - `pathAlpha` starts from `Path.nil 0` (the trivial path at vertex `0`) and
   appends `alpha` (source `0`, target `1`, both proved by `rfl` since they
-  compute directly from the `match` in `exampleQuiver`'s definition).
+  compute directly from the `match` in the definition of `exampleQuiver`).
 
 ```lean
 def pathBetaAlpha : Path exampleQuiver 0 2 :=
@@ -74,9 +74,9 @@ def pathBetaAlpha : Path exampleQuiver 0 2 :=
 
 Attempting `Path.cons ExampleArrow.beta rfl rfl (Path.nil 0)` instead
 (appending `beta`, whose source is `1`, directly onto the trivial path at
-`0`) is rejected by Lean: the proof obligation `Q.source ExampleArrow.beta = 0`
+`0`) is rejected by Lean. The proof obligation `Q.source ExampleArrow.beta = 0`
 is `1 = 0`, which is false, so no `rfl` (or any other proof) exists. This is
-the type system enforcing "arrows that do not match up cannot compose",
+the type system enforcing "arrows that do not match up cannot compose,"
 for free, at compile time.
 
 **Mathematical reading.** `pathBetaAlpha` is the composite morphism
@@ -90,11 +90,11 @@ type system refusing to compose non-composable arrows, which in a category
 is the statement that $\circ$ is a *partial* operation, defined only when
 endpoints agree.
 
-**Mathlib equivalent.** Mathlib's [`Quiver.Path`](https://loogle.lean-lang.org/?q=Quiver.Path) (building on the
+**Mathlib equivalent.** [`Quiver.Path`](https://loogle.lean-lang.org/?q=Quiver.Path) in Mathlib (building on the
 `MyArrow`/`Quiver (Fin 3)` instance from the previous section) is the same
 inductive family, `nil`/`cons`, just with `cons` taking the shorter path
-*first* and the new arrow second. This is the mirror image of the book's
-argument order, which takes the arrow first and the path last:
+*first* and the new arrow second. This is the mirror image of the argument
+order in the book, which takes the arrow first and the path last.
 
 ```lean
 -- NOTE: deliberately *not* `open Quiver` — Mathlib also has a root-level

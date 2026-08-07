@@ -37,7 +37,7 @@ becomes `b + 1 = b + 1`, which `rw` then closes automatically by trying
 The congruence `congr_example` is the Leibniz principle: $a = b \Rightarrow
 f(a) = f(b)$ for any function $f$ (here $f(x) = x + 1$). This is
 "substitute equals for equals," mechanized. `rw` is the workhorse for this
-from here on: nearly every proof from Chapter 4 onward reaches for it
+from here on. Nearly every proof from Chapter 4 onward reaches for it
 whenever an equality hypothesis needs to be used inside a larger goal.
 
 ---

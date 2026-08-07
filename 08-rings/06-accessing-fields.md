@@ -13,7 +13,7 @@
 
 **Mathematical reading.** The chained projections walk down the tower of
 [forgetful functors](../01-basics/04-terminology.md#category-theory-terms-used-beyond-the-baseline)
-$\mathbf{Ring} \to \mathbf{Ab} \to \mathbf{Grp}$:
+$\mathbf{Ring} \to \mathbf{Ab} \to \mathbf{Grp}$.
 `intRing.addGrp` applies $\mathbf{Ring}\to\mathbf{Ab}$ (recovering $(\mathbb{Z},
 +)$), and `.toGroup` applies $\mathbf{Ab}\to\mathbf{Grp}$. Thus,
 `intRing.addGrp.toGroup.inv 5` computes the additive inverse $-5$ in the
@@ -22,8 +22,8 @@ multiplicative data $\times$ and $1$. Nested dot-access is just evaluating
 these structure-forgetting maps.
 
 **Mathlib equivalent.** There is no chain of `.addGrp.toGroup.inv`-style projections
-to write — `+`/`*`/`0`/`1`/`-` already resolve to `Int`'s `CommRing`
-instance directly:
+to write. `+`/`*`/`0`/`1`/`-` already resolve to the `CommRing`
+instance of `Int` directly.
 
 ```lean
 #eval (3 : Int) + 4     -- 7
@@ -32,8 +32,8 @@ instance directly:
 #eval -(5 : Int)          -- -5
 ```
 
-The book's nested projections walk down a tower of structures built
-by hand (`Ring → CommGroup → Group`). Mathlib's typeclass resolution walks
+The nested projections of the book walk down a tower of structures built
+by hand (`Ring → CommGroup → Group`). The typeclass resolution of Mathlib walks
 down a similar tower of instances (`CommRing → Ring → ... → AddCommGroup`)
 automatically, so the notation never needs to name which layer it is coming
 from.

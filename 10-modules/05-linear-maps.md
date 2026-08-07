@@ -5,7 +5,7 @@
 ---
 
 A **linear map** (module homomorphism) $f : M \to N$ between $R$-modules
-satisfies $f(m+n) = f(m) + f(n)$ and $f(r \cdot m) = r \cdot f(m)$:
+satisfies $f(m+n) = f(m) + f(n)$ and $f(r \cdot m) = r \cdot f(m)$.
 
 ```lean
 structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
@@ -17,13 +17,13 @@ structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
 
 This is precisely the categorical picture: $R$-modules and $R$-linear maps
 form a category. Composition of linear maps is linear, and the identity
-function is linear — both easy to state and prove from the two fields
-above. This chapter's exercises ask you to prove exactly these two facts
+function is linear, both easy to state and prove from the two fields
+above. The exercises of this chapter ask you to prove exactly these two facts
 (`idLinearMap`, `composeLinearMap` in the appendix solutions), rather than
 proving them here in the main narrative. Everything in this chapter,
 including submodules and the direct sums below, is best understood as
-living inside that category, consistent with Chapter 1's opening
-dictionary for reading
+living inside that category, consistent with the opening dictionary of Chapter 1
+for reading
 `Type` itself.
 
 **Mathematical reading.** `LinearMap Rg ModM ModN` is the set
@@ -41,7 +41,7 @@ and an $R$-module when $R$ is commutative.
 
 The abstract definition is easier to trust once a single instance has been
 built by hand. Fix $d \in \mathbb{Z}$; multiplication by $d$ is $\mathbb{Z}$-linear
-as a map $\mathbb{Z} \to \mathbb{Z}$:
+as a map $\mathbb{Z} \to \mathbb{Z}$.
 
 ```lean
 def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
@@ -58,18 +58,18 @@ def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
 #eval (mulByLinearMap 5).toFun 3   -- 15
 ```
 
-`map_add`'s goal, `d * (m+n) = d*m + d*n`, is exactly distributivity.
-`map_smul`'s goal, `d * (r*m) = r * (d*m)`, holds because $\mathbb{Z}$ is
+The goal for `map_add`, `d * (m+n) = d*m + d*n`, is exactly distributivity.
+The goal for `map_smul`, `d * (r*m) = r * (d*m)`, holds because $\mathbb{Z}$ is
 commutative, so `d` and `r` can swap past each other. Both fields, in
 other words, are pure `Int`-arithmetic facts once `toFun`,
 `ModM.smul`, and `ModM.addGrp.op` are unfolded to their meanings here. This is the same "reduce a
-module-theoretic goal to a concrete arithmetic identity" move that
-Section 4's `evenSubmodule` used, applied again.
+module-theoretic goal to a concrete arithmetic identity" move used by
+`evenSubmodule` in Section 4, applied again.
 
-**Mathlib equivalent.** Mathlib's own [`LinearMap`](https://loogle.lean-lang.org/?q=LinearMap) (notation `M →ₗ[R] N`)
+**Mathlib equivalent.** The [`LinearMap`](https://loogle.lean-lang.org/?q=LinearMap) of Mathlib (notation `M →ₗ[R] N`)
 is built the same way: supply `toFun` plus the two homomorphism proofs.
-But the result is directly interoperable with the rest of the library's
-linear-algebra API:
+But the result is directly interoperable with the rest of the linear-algebra
+API of the library.
 
 ```lean
 def mulByLinearMap' (d : Int) : Int →ₗ[Int] Int where
@@ -81,7 +81,7 @@ def mulByLinearMap' (d : Int) : Int →ₗ[Int] Int where
 ```
 
 This has the same shape as `mulByLinearMap`: a `toFun` and two proof
-obligations, with `map_add`/`map_smul` becoming Mathlib's
+obligations, with `map_add`/`map_smul` becoming the Mathlib names
 `map_add'`/`map_smul'`. The real difference is that `Int →ₗ[Int] Int` is a
 type the rest of Mathlib already knows how to compose, transport along
 isomorphisms, and package into matrices. `LinearMap intRing intZModule

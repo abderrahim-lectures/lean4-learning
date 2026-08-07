@@ -7,7 +7,7 @@
 **1. β-reduce $(\lambda x.\lambda y.\, y\, x)\, a\, b$ and compare to $K$.**
 
 Application associates to the left, so this is
-$((\lambda x.\lambda y.\, y\, x)\, a)\, b$:
+$((\lambda x.\lambda y.\, y\, x)\, a)\, b$.
 $$
 (\lambda x.\lambda y.\, y\, x)\, a\, b
 \;\longrightarrow_\beta\; (\lambda y.\, y\, a)\, b
@@ -17,10 +17,10 @@ Step 1 substitutes $a$ for $x$ in $\lambda y.\, y\, x$, giving
 $\lambda y.\, y\, a$. Step 2 substitutes $b$ for $y$ in $y\, a$, giving
 $b\, a$.
 
-The result is **not** simply one of the two inputs, the way $K$'s result
-always is. $K\,a\,b \to_\beta a$ — $K$ *discards* its second argument and
+The result is **not** simply one of the two inputs, the way the result of $K$
+always is. $K\,a\,b \to_\beta a$. $K$ *discards* its second argument and
 returns the first, verbatim. Here, $(\lambda x.\lambda y.\, y\, x)\, a\, b
-\to_\beta b\, a$ — both arguments survive, but with the *second* one
+\to_\beta b\, a$. Both arguments survive, but with the *second* one
 applied to the *first*. This term is sometimes called the "Thrush"
 combinator ($T$, satisfying $T\, x\, y = y\, x$): it flips the order of
 application rather than discarding anything, which is genuinely different
@@ -34,20 +34,20 @@ def Vec.toList : Vec α n → List α
   | Vec.cons a rest => a :: Vec.toList rest
 ```
 
-`Vec.replicate`'s type, `(n : Nat) → Vec α n`, is genuinely dependent: the
+The type of `Vec.replicate`, `(n : Nat) → Vec α n`, is genuinely dependent. The
 *return* type `Vec α n` mentions `n`, the value just supplied as the
-argument. `Vec.toList`'s type, `Vec α n → List α`, is not — its return
+argument. The type of `Vec.toList`, `Vec α n → List α`, is not. Its return
 type `List α` never mentions `n` at all, even though its *argument* type
 happens to be dependent (`Vec α n`, one specific type per length). Taking
 a dependently-typed *input* does not automatically make a function
 dependent; what matters is whether the *output* type varies with the
-input's *value*. `Vec.toList` throws the length away on the way out, the
-same way `Vec α n`'s own length information disappears once converted to
+*value* of the input. `Vec.toList` throws the length away on the way out, the
+same way the own length information of `Vec α n` disappears once converted to
 a plain `List α`.
 
 Unlike `Vec`, `List` does have a `Repr` instance for any printable `α`,
-so `Vec.toList`'s recursion can be watched directly with `dbg_trace`,
-using `Vec.replicate` (Chapter 1, Section 3) to build a concrete input:
+so the recursion of `Vec.toList` can be watched directly with `dbg_trace`,
+using `Vec.replicate` (Chapter 1, Section 3) to build a concrete input.
 
 ```lean
 def Vec.toList' : Vec α n → List α
@@ -66,7 +66,7 @@ def Vec.toList' : Vec α n → List α
 
 Three `cons` lines print before the `nil` line, one per element of the
 length-3 vector, and only once the base case is reached does the fully
-assembled `[7, 7, 7]` print — the same "peel off constructors, print on
+assembled `[7, 7, 7]` print, the same "peel off constructors, print on
 the way down, assemble the result on the way back up" shape as every
 other traced recursion in this book.
 
@@ -78,32 +78,31 @@ def anotherSigma : Σ n : Nat, Fin n := ⟨5, ⟨0, by decide⟩⟩
 
 (`0 : Fin 5` is valid since $0 < 5$; any pair `⟨k, ⟨i, h⟩⟩` with `i < k`
 works.) `Σ n : Nat, n > 0` fails to type-check because `n > 0 : Prop`
-(`Sort 0`), while Lean's `Sigma` is declared as
-`structure Sigma {α : Type u} (β : α → Type v)` — the second component's
-*family* must land in some `Type v` (`Sort (v+1)` for `v ≥ 0`), which
+(`Sort 0`), while `Sigma` in Lean is declared as
+`structure Sigma {α : Type u} (β : α → Type v)`. The *family* of the second component must land in some `Type v` (`Sort (v+1)` for `v ≥ 0`), which
 `Prop` (`Sort 0`) is not. `Fin n : Type` clears that bar; `n > 0 : Prop`
-does not. This is exactly why `∃` exists as `Sigma`'s `Prop`-restricted
-cousin (Chapter 1, Section 5) rather than everyone just writing `Σ` everywhere.
+does not. This is exactly why `∃` exists as the `Prop`-restricted
+cousin of `Sigma` (Chapter 1, Section 5) rather than everyone just writing `Σ` everywhere.
 
-**4. `Path.append`'s signature as nested Π-types**
+**4. The signature of `Path.append` as nested Π-types**
 
 `Path.append : {u v w : V} → Path Q u v → Path Q v w → Path Q u w`,
-treating the implicit binders as outer Π's, unfolds one binder at a time:
+treating the implicit binders as outer Π's, unfolds one binder at a time.
 
 | Level | $A$ | $B(\cdot)$ | Dependent? |
 | --- | --- | --- | --- |
-| 1 (binds $u$) | $V$ | $\prod_{v:V}\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)$ | Yes — mentions $u$ |
-| 2 (binds $v$) | $V$ | $\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)$ | Yes — mentions $v$ |
-| 3 (binds $w$) | $V$ | $\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w$ | Yes — mentions $w$ |
-| 4 (binds $p$) | $\mathrm{Path}_Q\,u\,v$ | $\mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w$ | No — constant in $p$ |
-| 5 (binds $q$) | $\mathrm{Path}_Q\,v\,w$ | $\mathrm{Path}_Q\,u\,w$ | No — constant in $q$ |
+| 1 (binds $u$) | $V$ | $\prod_{v:V}\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)$ | Yes, mentions $u$ |
+| 2 (binds $v$) | $V$ | $\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)$ | Yes, mentions $v$ |
+| 3 (binds $w$) | $V$ | $\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w$ | Yes, mentions $w$ |
+| 4 (binds $p$) | $\mathrm{Path}_Q\,u\,v$ | $\mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w$ | No, constant in $p$ |
+| 5 (binds $q$) | $\mathrm{Path}_Q\,v\,w$ | $\mathrm{Path}_Q\,u\,w$ | No, constant in $q$ |
 
 The first three levels are genuinely dependent Π-types: each $B$ mentions
 the vertex just bound, since it appears as an index into `Path` later in
 the signature. The last two levels are Π-types that happen to collapse to
-ordinary arrows: once $u, v, w$ are fixed, `Path Q u w`'s *type* no longer
+ordinary arrows: once $u, v, w$ are fixed, the *type* of `Path Q u w` no longer
 depends on the specific *proof term* `p` or `q` supplied, only on the
-vertices already bound — exactly the "$B(x)$ not depending on $x$"
+vertices already bound, exactly the "$B(x)$ not depending on $x$"
 collapse case from Chapter 1, Sections 3/5.
 
 ---

@@ -27,7 +27,7 @@ group `Rg.addGrp.toGroup`), it suffices to show that
 `Rg.mul a b`. `right_distrib` (used backwards) merges the two products into
 `Rg.mul (Rg.addGrp.op (Rg.addGrp.toGroup.inv a) a) b`. Then `inv_left`
 collapses the inner sum to `Rg.addGrp.id`, and `mul_zero_left` (proved in
-Theorem 2's own section, since `neg_one_mul` there needed it too) finishes
+the same section as Theorem 2, since `neg_one_mul` there needed it too) finishes
 the proof.
 
 **2. `theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl`**
@@ -36,8 +36,8 @@ the proof.
 theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl
 ```
 
-[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) suffices here, but it would not have sufficed for Theorem 2's
-`neg_one_mul (a : R)`, which required real work. The difference is that `7` is
+[`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) suffices here, but it would not have sufficed for
+`neg_one_mul (a : R)` from Theorem 2, which required real work. The difference is that `7` is
 a concrete numeral, not an unknown variable `a`.
 `intRing.addGrp.toGroup.inv` unfolds (by the `def intGroup` from Chapter 6)
 to `fun a => -a`, so `intRing.addGrp.toGroup.inv 7` reduces directly, by
