@@ -585,6 +585,15 @@ def fix_image_paths(tex, chapter):
         opts, path = m.group(1) or "", m.group(2)
         if path.startswith("http") or os.path.isabs(path):
             return m.group(0)
+        if not opts:
+            # Pandoc emits a bare \includegraphics{...} for a plain
+            # Markdown image with no {width=...} attribute in the source,
+            # so the image renders at its native pixel size converted to
+            # points. Screenshots sized for a screen are far wider than
+            # the page (confirmed: a couple hundred to 650pt overfull),
+            # so give every unconstrained image a safe default instead of
+            # requiring each Markdown source to opt in individually.
+            opts = "[width=\\linewidth,keepaspectratio]"
         return f"\\includegraphics{opts}{{../lean_book/{chapter}/{path}}}"
 
     return re.sub(r'\\includegraphics(\[[^\]]*\])?\{([^}]+)\}', _sub, tex)

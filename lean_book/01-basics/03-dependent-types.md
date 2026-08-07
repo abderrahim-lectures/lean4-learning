@@ -339,6 +339,29 @@ def Vec.dot : Vec Int n → Vec Int n → Int
   | Vec.cons x xs, Vec.cons y ys => x * y + Vec.dot xs ys
 ```
 
+`Vec.dot` also drops the polymorphic `α` that `Vec.replicate` and
+`Vec.head` both kept, in favor of the concrete `Int` seen above, and this
+is not only the visual-distinction reason already given for choosing
+`Int` over `Nat`. `Vec.replicate` only ever copies a value of type `α`
+around, and `Vec.head` only ever hands one back unchanged, so neither
+needs to know anything about `α` beyond the bare fact that it exists.
+`Vec.dot` is different. Its body computes `x * y + Vec.dot xs ys`, which
+needs multiplication and addition to already exist for whatever type the
+elements have. A fully generic `α` carries no such guarantee. `Nat` and
+`Int` do, but an arbitrary type variable does not, so a version of
+`Vec.dot` written over `Vec α n` would not even elaborate. Lean has no
+`*` or `+` to offer for an unconstrained `α`. Making this genuinely
+generic would mean constraining `α` with instance-implicit arguments,
+something like `[Mul α] [Add α] [Zero α]` (the third binder style flagged
+back in [Section 2](02-def-let-implicit.md)), so that the required
+operations are supplied by whichever concrete type is chosen, the same
+way Mathlib's real dot-product functions work. That mechanism, and the
+`class`/`instance` machinery behind it, is exactly what
+[Chapter 5](../05-rigor-check/01-structure-vs-class.md) builds up before
+Chapter 6 needs it for real algebraic structures. Until then, `Vec.dot`
+takes the simpler way out and fixes `α := Int` outright, sidestepping the
+question rather than answering it generically.
+
 The signature `Vec Int n → Vec Int n → Int` uses the *same* `n`, a
 `Nat`, the length, for both arguments. That is not a naming
 coincidence, it is the whole point. Elements are `Int`, not `Nat`, on
