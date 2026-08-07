@@ -34,6 +34,30 @@ precisely to keep the discipline required for reading (or writing) a real
 Lean library, when something goes wrong, the exact lemma responsible
 should be identifiable.
 
+**Programmer's corner (Python).** Every Programmer's corner in this book
+made the same comparison, once per chapter, against one concrete
+Python failure mode, a `KeyError` from an untyped `dict`, an `assert`
+that only ever ran the inputs it happened to see, a `float` silently
+breaking associativity, a hand-checked graph invariant nobody remembered
+to enforce everywhere. None of those bugs are exotic. Each is a bug a
+working Python programmer has hit, or will hit. The pattern behind all
+of them is the same one, some invariant is true "by convention," known
+to the author, documented in a comment or a docstring at best, and
+checked, if at all, only at the specific call sites someone thought to
+guard. `Group`, `Ring`, `Module`, and `Path` in this book took the
+opposite approach at every step, each invariant, associativity, the
+identity laws, connectivity of a path, was written as a *type*, so that
+building a value of that type is the same act as proving the invariant
+holds. The habitual question a Python programmer has to ask, "did I
+remember to check this everywhere it matters," simply does not arise
+for anything proved this way. It was checked once, by the type checker, at the one
+place the value was constructed, and every later use of it inherits
+that guarantee for free. This is the actual case for functional,
+statically typed languages like Lean, not that they make correct
+programs easier to write in the small, but that they make entire
+categories of bug, the ones coming from an invariant nobody remembered
+to check, structurally unable to compile in the first place.
+
 ---
 
 [← Index](00-index.md) | [Next: Moving to Mathlib →](02-moving-to-mathlib.md)

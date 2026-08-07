@@ -86,6 +86,30 @@ Conceptually this says the map $x \mapsto a\cdot x$ is a group homomorphism
 of $(R,+)$, and homomorphisms send the identity to the identity. $0$ absorbs
 because multiplication is additive in each argument.
 
+**Programmer's corner (Python).** `mul_zero` looks obvious enough that a
+Python codebase would never think to test it, `x * 0` is `0`, of
+course. It genuinely is, for `int`. It is not, for every numeric type
+Python ships.
+
+```python
+float('nan') * 0.0   # nan, not 0.0
+float('inf') * 0.0   # nan, not 0.0
+```
+
+`nan` and `inf` are ordinary `float` values, reachable from perfectly
+normal-looking arithmetic (`1.0 / 0.0` under the right settings, or the
+result of an earlier overflow), and once one of them appears, "multiply
+anything by zero and get zero" quietly stops holding, with no exception
+raised anywhere to flag it. The theorem `mul_zero` proved above carries
+no such asterisk, because it is proved from the `Ring` axioms of
+Chapter 9 alone, and any `R` that can be given a genuine `Ring R` value
+must, by that same proof, actually satisfy it, no matter what `R` turns
+out to be later. There is no possibility of an `R` that type-checks as
+a `Ring` and still has some element behaving like `nan`, since a `nan`-
+like element would falsify `left_distrib` or one of the additive-group
+axioms `mul_zero` is built from, and a `Ring R` value could never have
+been constructed for it in the first place.
+
 **Mathlib equivalent.** Where the book spends a full `have`/`congrArg`/`rw`
 derivation getting from `left_distrib` and group cancellation to
 $a\cdot 0=0$, Mathlib already proves this and gives it exactly the same

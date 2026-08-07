@@ -49,6 +49,19 @@ x = a\cdot 0 = a\cdot(0+0) = a\cdot 0 + a\cdot 0 = x + x,
 
 \end{mathreading}
 
+\begin{progcorner}
+
+\texttt{mul\_\allowbreak{}zero} looks obvious enough that a Python codebase would never think to test it, \texttt{x * 0} is \texttt{0}, of course. It genuinely is, for \texttt{int}. It is not, for every numeric type Python ships.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+float('nan') * 0.0   # nan, not 0.0
+float('inf') * 0.0   # nan, not 0.0
+\end{lstlisting}
+
+\texttt{nan} and \texttt{inf} are ordinary \texttt{float} values, reachable from perfectly normal-looking arithmetic (\texttt{1.0 /\allowbreak{} 0.0} under the right settings, or the result of an earlier overflow), and once one of them appears, ``multiply anything by zero and get zero'' quietly stops holding, with no exception raised anywhere to flag it. The theorem \texttt{mul\_\allowbreak{}zero} proved above carries no such asterisk, because it is proved from the \texttt{Ring} axioms of Chapter 9 alone, and any \texttt{R} that can be given a genuine \texttt{Ring R} value must, by that same proof, actually satisfy it, no matter what \texttt{R} turns out to be later. There is no possibility of an \texttt{R} that type-checks as a \texttt{Ring} and still has some element behaving like \texttt{nan}, since a \texttt{nan}- like element would falsify \texttt{left\_\allowbreak{}distrib} or one of the additive-group axioms \texttt{mul\_\allowbreak{}zero} is built from, and a \texttt{Ring R} value could never have been constructed for it in the first place.
+
 \textbf{Mathlib equivalent.} Where the book spends a full \texttt{have}/\texttt{congrArg}/\texttt{rw} derivation getting from \texttt{left\_\allowbreak{}distrib} and group cancellation to \(a\cdot 0=0\), Mathlib already proves this and gives it exactly the same name.
 
 \begin{lstlisting}

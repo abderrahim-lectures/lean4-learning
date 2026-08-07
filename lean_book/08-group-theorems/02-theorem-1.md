@@ -65,6 +65,29 @@ e$, the standard "two things equal to a common third are equal." (The
 same argument in mirror shows a right identity is also unique, so the
 identity of a group is unique, full stop.)
 
+**Programmer's corner (Python).** A Python codebase that wants
+confidence in "the identity element is unique" reaches for a test.
+
+```python
+def test_identity_unique():
+    assert my_group.op(other_identity, "a") == "a"
+    assert other_identity == my_group.id
+```
+
+This test passes, once, for whichever `my_group` and whichever `"a"`
+were chosen when writing it. It says nothing about the next group
+someone defines, or the next element they pick, since the test only
+ever ran the specific inputs written into it. `id_unique` above is not
+a test run against one `Group`. `e'` and `Grp.id` are arbitrary, bound
+by `∀`, so the proof, once it type-checks, holds for every group and
+every candidate identity that will ever exist, including ones not yet
+written. This is the difference the phrase "proof, not test" is
+pointing at throughout this chapter. A test samples finitely many
+cases and hopes they generalize. A proof, since it is a term whose type
+quantifies over all of `G`, covers every case at once, the same way
+`id_unique e'` can be applied to any group later in this book, or in
+any project built on top of it, without re-checking anything.
+
 **Mathlib equivalent.** Phrased against the [`Group`](https://loogle.lean-lang.org/?q=Group) class in Mathlib, `Grp.op`/
 `Grp.id`/`Grp.id_right` become the ordinary `*`/`1`/[`mul_one`](https://loogle.lean-lang.org/?q=mul_one), and the
 whole "third expression" chain collapses into a single `.symm.trans`.
