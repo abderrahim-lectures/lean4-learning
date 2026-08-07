@@ -90,6 +90,36 @@ type system refusing to compose non-composable arrows, which in a category
 is the statement that $\circ$ is a *partial* operation, defined only when
 endpoints agree.
 
+**Programmer's corner (Python).** A Python graph library represents a
+path the obvious way, a plain list of edges.
+
+```python
+def append_edge(path, edge):
+    if path and path[-1].target != edge.source:
+        raise ValueError("edges do not connect")
+    return path + [edge]
+```
+
+This `if` is a runtime check, written by hand, and its correctness
+depends entirely on whoever wrote `append_edge` remembering to include
+it, and every other function anywhere in the codebase that builds a
+path some other way remembering the same thing. Forget one `if`, or
+build a path by slicing and concatenating two lists directly instead of
+calling `append_edge`, and a broken path, `target != source` somewhere
+in the middle, exists as an ordinary Python list, passed around and
+processed by everything downstream as if it were valid, until whatever
+eventually reads `.target`/`.source` off adjacent edges either crashes
+or, worse, silently produces a wrong result. `Path Q u w` above makes
+that entire category of bug unrepresentable rather than merely
+detected. `Path.cons` cannot be called at all unless `h : Q.source a =
+v` is supplied, and `v` is fixed by the type of the path already being
+extended, so there is no separate "check the path is valid" step to
+forget anywhere in the codebase. Every function that ever receives a
+`Path Q u w` receives that connectivity guarantee for free, checked once,
+at the point of construction, not re-verified defensively at every call
+site out of justified paranoia about what some other function might
+have built.
+
 **Mathlib equivalent.** [`Quiver.Path`](https://loogle.lean-lang.org/?q=Quiver.Path) in Mathlib (building on the
 `MyArrow`/`Quiver (Fin 3)` instance from the previous section) is the same
 inductive family, `nil`/`cons`, just with `cons` taking the shorter path

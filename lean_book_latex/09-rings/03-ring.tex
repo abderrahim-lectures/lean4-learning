@@ -43,6 +43,19 @@ Consider each field in turn.
 Read more. \texttt{Ring} in Mathlib (\texttt{Mathlib.Algebra.Ring.Defs}) sits inside a much larger hierarchy, \texttt{Semiring}, \texttt{NonUnitalRing}, \texttt{CommRing}, \texttt{DivisionRing}, \texttt{Field}, each adding or dropping exactly one axiom compared to its neighbors; see \hyperref[sec:14-next-steps:02-moving-to-mathlib:1]{Chapter 14}. For the classical (non-Lean) statement of these axioms and their standard consequences, \emph{Abstract Algebra} by Dummit \& Foote or \emph{Algebra: Chapter 1} by Aluffi (the latter using the same categorical framing this book uses) are standard references.
 \end{quote}
 
+\begin{progcorner}
+
+\texttt{mul\_\allowbreak{}assoc} and \texttt{left\_\allowbreak{}distrib}/ \texttt{right\_\allowbreak{}distrib} are not free assumptions here. Whoever builds a \texttt{Ring R} must supply an actual proof of each, for the specific \texttt{mul} and \texttt{addGrp.op} chosen. Python's built-in \texttt{float} looks like it forms a ring, \texttt{+}, \texttt{*}, \texttt{0.0}, \texttt{1.0} are all present, but the axioms above simply do not hold for it.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+a, b, c = 0.1, 0.2, 0.3
+print((a + b) + c == a + (b + c))   # False
+\end{lstlisting}
+
+\texttt{(a + b) + c} and \texttt{a + (b + c)} are two different \texttt{float} values, differing in the last bit, because floating-point rounding depends on the order additions happen in. Associativity, the very first axiom listed above, silently fails, and nothing in Python raises an error about it, since \texttt{float} was never required to prove any such thing before being handed the \texttt{+} operator. Code that assumes \texttt{(a + b) + c == a + (b + c)}, to reorder a sum for performance or parallelize it across workers, is trusting a law that Python's own numeric types do not actually satisfy. \texttt{mul\_\allowbreak{}assoc} above rules this out completely for anything built as a \texttt{Ring}. If \texttt{R} were instantiated with a type where associativity genuinely failed, \texttt{mul\_\allowbreak{}assoc} could not be proved, and no \texttt{Ring R} value could be constructed at all.
+
 \subsection{Sources, quoted}\label{sec:09-rings:03-ring:2}
 
 Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
