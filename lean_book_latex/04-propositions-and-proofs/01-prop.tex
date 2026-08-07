@@ -51,6 +51,26 @@ example : 2 + 2 = 4 := rfl
 
 \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} is the proof ``both sides compute to the same thing'' (\textbf{refl}exivity). \texttt{example} states a proposition and immediately supplies a proof (an anonymous, unnamed \texttt{theorem}).
 
+\begin{progcorner}
+
+A Python function that needs a precondition to hold usually states it with \texttt{assert}.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+def divide(a: int, b: int) -> int:
+    assert b != 0, "b must not be zero"
+    return a // b
+\end{lstlisting}
+
+That \texttt{assert} is a promise, not a proof. It says ``this had better be true,'' and finds out whether it actually was only at the moment \texttt{divide} runs, on whichever inputs happen to reach it in production. A caller three modules away that forgot to check for zero first gets a crash discovered by a user, not by a type checker. In Lean, the corresponding function does not assert \texttt{b ≠ 0}. It \emph{requires} a proof of \texttt{b ≠ 0} as an ordinary argument, and Curry-Howard is exactly what makes that possible, since \texttt{b ≠ 0} is a type and a proof of it is a term of that type, checkable the same way any other argument is checked.
+
+\begin{lstlisting}
+def safeDivide (a b : Nat) (h : b (*$\neq$*) 0) : Nat := a / b
+\end{lstlisting}
+
+Calling \texttt{safeDivide 10 0 proof} for some \texttt{proof : (0 : Nat) ≠ 0} cannot type-check, because no such proof exists to supply, \texttt{0 ≠ 0} being false. The precondition is not documentation and not a runtime check racing against whatever inputs show up first. It is part of the type of \texttt{safeDivide} itself, verified once, for every call site, before the program runs at all.
+
 \begin{mathreading}
 
 The Curry--Howard correspondence identifies a proposition \(P\) with the \emph{set of its proofs}. \(P\) is true exactly when that set is nonempty, i.e.~when there exists some term \(p : P\) (``\(P\) is inhabited''). This is why \texttt{Prop} behaves like a truth value rather than an ordinary type. Every proof-set of a proposition is either empty (false) or, up to proof irrelevance, has exactly one element (true), with no room for a ``third'' proof genuinely different from the rest. Proving \(P\) is exactly exhibiting an element \(p \in P\); nothing more is meant by ``provable.'' The proof \texttt{rfl : 2 + 2 = 4} is the reflexivity witness \(\mathrm{refl}_4\) of the equality relation, valid precisely because both sides reduce to the same normal form \(4\). This is equality of terms that are \emph{definitionally} equal, the strictest notion of ``\(=\)''.

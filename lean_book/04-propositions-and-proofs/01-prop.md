@@ -81,6 +81,37 @@ example : 2 + 2 = 4 := rfl
 `example` states a proposition and immediately supplies a proof (an
 anonymous, unnamed `theorem`).
 
+**Programmer's corner (Python).** A Python function that needs a
+precondition to hold usually states it with `assert`.
+
+```python
+def divide(a: int, b: int) -> int:
+    assert b != 0, "b must not be zero"
+    return a // b
+```
+
+That `assert` is a promise, not a proof. It says "this had better be
+true," and finds out whether it actually was only at the moment
+`divide` runs, on whichever inputs happen to reach it in production. A
+caller three modules away that forgot to check for zero first gets a
+crash discovered by a user, not by a type checker. In Lean, the
+corresponding function does not assert `b ≠ 0`. It *requires* a proof
+of `b ≠ 0` as an ordinary argument, and Curry-Howard is exactly what
+makes that possible, since `b ≠ 0` is a type and a proof of it is a
+term of that type, checkable the same way any other argument is
+checked.
+
+```lean
+def safeDivide (a b : Nat) (h : b ≠ 0) : Nat := a / b
+```
+
+Calling `safeDivide 10 0 proof` for some `proof : (0 : Nat) ≠ 0` cannot
+type-check, because no such proof exists to supply, `0 ≠ 0` being
+false. The precondition is not documentation and not a runtime check
+racing against whatever inputs show up first. It is part of the type of
+`safeDivide` itself, verified once, for every call site, before the
+program runs at all.
+
 **Mathematical reading.** The Curry–Howard correspondence identifies a
 proposition $P$ with the *set of its proofs*. $P$ is true exactly when
 that set is nonempty, i.e. when there exists some term $p : P$ ("$P$ is

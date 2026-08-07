@@ -65,6 +65,32 @@ data. This is exactly how a group will be defined later, a carrier type,
 an operation, and proofs that the operation satisfies the group axioms,
 all in one `structure`.
 
+**Programmer's corner (Python).** A Python programmer reaching for the
+same "bundle a couple of values together" idea usually writes a `dict`
+first.
+
+```python
+origin = {"x": 0, "y": 0}
+print(origin["z"])   # KeyError: 'z', but only once this line actually runs
+```
+
+Nothing about `origin` says which keys it is supposed to have. A typo
+in a key name, `origin["ix"]`, is caught the same way a missing key is,
+by crashing at run time, on whichever run happens to reach that line
+first. `Point.x` has no such failure mode. `origin.z` is rejected while
+reading the file, before `#eval` or any test ever runs, because `z` is
+not a field `structure Point` declared. A `@dataclass` closes part of
+this gap, since `dataclass` at least fixes the field names in advance,
+but a plain Python `dataclass` is mutable by default. `origin.x = 99`
+silently overwrites the field in place, and any other code still
+holding a reference to `origin` sees the change too, whether it wanted
+to or not. `shift` above does not do this. It builds a brand new
+`Point` and returns it, leaving the `Point` passed in exactly as it
+was. Reasoning about `shift p 3 4` never requires asking who else might
+be holding onto `p` and whether they will be surprised by it changing
+underneath them, a question that has to be asked constantly about
+shared mutable Python objects.
+
 **Mathematical reading.** `structure Point where x : Nat; y : Nat` is the
 Cartesian product $\mathrm{Point} = \mathbb{N} \times \mathbb{N}$, with `x`
 and `y` playing the role of the two projections
