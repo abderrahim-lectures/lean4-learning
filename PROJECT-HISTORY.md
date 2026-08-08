@@ -12,8 +12,8 @@ For the reader-facing summary of what changed in each release, see
 
 ## Summary
 
-As of this writing: **97 issues** (all closed) and **63 pull requests**
-(all merged), covering:
+As of this writing: **148 issues** (147 closed, 1 open) and
+**97 pull requests** (all merged), covering:
 
 - **Building out the book's content** — widening the audience beyond a
   category-theory background, adding Mathlib-equivalent boxes, Socratic
@@ -69,6 +69,20 @@ As of this writing: **97 issues** (all closed) and **63 pull requests**
   front/back cover and wired it into the PDF as full-bleed pages,
   fixing two build bugs (a `\newgeometry`-caused blank leading page,
   and image stretching) discovered along the way.
+- **v1.6.0: splitting Chapter 1, and a book-wide consistency pass** —
+  Chapter 1 had grown to more than twice the length of any other
+  chapter, so it was split into two (Chapter 1, "Basics," and a new
+  Chapter 2, "Terminology and the calculus of constructions"),
+  renumbering every later chapter, cross-reference, and the appendix
+  accordingly; cleared a book-wide backlog of roughly 145 prose colons,
+  em-dashes, and possessives; fixed several regressions the split
+  introduced (a mistitled Chapter 0, an appendix off-by-one across 9
+  files, stale `learning-paths.md` citations, a stale checkpoint-project
+  reference in the README); balanced Chapter 3 with a new exercises
+  section and matching appendix solutions; and added a "Programmer's
+  corner (Python)" worked example to every main chapter that lacked one,
+  each grounding the value of Lean and functional programming in a
+  concrete Python bug rather than an abstract claim.
 
 ## Merged pull requests
 
@@ -137,6 +151,40 @@ As of this writing: **97 issues** (all closed) and **63 pull requests**
 | [#157](https://github.com/abderrahim-lectures/lean4-learning/pull/157) | Revert the book cover addition |
 | [#158](https://github.com/abderrahim-lectures/lean4-learning/pull/158) | Add front and back cover images |
 | [#159](https://github.com/abderrahim-lectures/lean4-learning/pull/159) | Wire covers into PDF as full-bleed page backgrounds |
+| [#161](https://github.com/abderrahim-lectures/lean4-learning/pull/161) | Bump to v1.4.14 |
+| [#162](https://github.com/abderrahim-lectures/lean4-learning/pull/162) | Split CHANGELOG into per-version files; badge/link updates |
+| [#163](https://github.com/abderrahim-lectures/lean4-learning/pull/163) | Link the new GitHub Pages site and Try Lean page |
+| [#165](https://github.com/abderrahim-lectures/lean4-learning/pull/165) | Dummit & Foote citation precision + direct-sums mischaracterization fix |
+| [#166](https://github.com/abderrahim-lectures/lean4-learning/pull/166) | Release v1.4.15 |
+| [#167](https://github.com/abderrahim-lectures/lean4-learning/pull/167) | Clarify the Nat-as-initial-algebra optional math box |
+| [#168](https://github.com/abderrahim-lectures/lean4-learning/pull/168) | Release v1.4.16 |
+| [#169](https://github.com/abderrahim-lectures/lean4-learning/pull/169) | Cite the terminology glossary; fix F-algebra citation; fix leaked blockquote markers |
+| [#170](https://github.com/abderrahim-lectures/lean4-learning/pull/170) | Release v1.4.17 |
+| [#171](https://github.com/abderrahim-lectures/lean4-learning/pull/171) | Add Recall subsections across the whole book |
+| [#172](https://github.com/abderrahim-lectures/lean4-learning/pull/172) | Release v1.4.18 |
+| [#175](https://github.com/abderrahim-lectures/lean4-learning/pull/175) | Fix confusing Nat-overload in two Chapter 1 Section 3 Vec examples |
+| [#177](https://github.com/abderrahim-lectures/lean4-learning/pull/177) | Fix a stale "Download PDF" badge in the root README |
+| [#179](https://github.com/abderrahim-lectures/lean4-learning/pull/179) | Release v1.4.19 |
+| [#184](https://github.com/abderrahim-lectures/lean4-learning/pull/184) | Fix a Pi-type family/type conflation, a forward reference, and a LaTeX build crash |
+| [#189](https://github.com/abderrahim-lectures/lean4-learning/pull/189) | Fix a leaked blockquote marker, and add two worked examples |
+| [#190](https://github.com/abderrahim-lectures/lean4-learning/pull/190) | Release v1.4.20 |
+| [#193](https://github.com/abderrahim-lectures/lean4-learning/pull/193) | Add a Pi vs Sigma comparison table |
+| [#194](https://github.com/abderrahim-lectures/lean4-learning/pull/194) | Release v1.4.21 |
+| [#197](https://github.com/abderrahim-lectures/lean4-learning/pull/197) | Name the arrow symbol, matching how x is glossed right next to it |
+| [#203](https://github.com/abderrahim-lectures/lean4-learning/pull/203) | Fix a false claim that "e" reappears later in the categorical box |
+| [#205](https://github.com/abderrahim-lectures/lean4-learning/pull/205) | Use full section numbers instead of § shorthand book-wide; retitle root README |
+| [#213](https://github.com/abderrahim-lectures/lean4-learning/pull/213) | PR A: quick surgical fixes (grammar, Sort 0, citations, examples) |
+| [#221](https://github.com/abderrahim-lectures/lean4-learning/pull/221) | PR B (part 1): plain academic English, cut confusing parentheticals |
+| [#223](https://github.com/abderrahim-lectures/lean4-learning/pull/223) | PR C1 (part 1): F-algebra diagram for Chapter 1 |
+| [#225](https://github.com/abderrahim-lectures/lean4-learning/pull/225) | Give same-chapter cross-references full Chapter+Section citations |
+| [#227](https://github.com/abderrahim-lectures/lean4-learning/pull/227) | Add categorical-product diagram to Chapter 2's universal-property box |
+| [#230](https://github.com/abderrahim-lectures/lean4-learning/pull/230) | Add multi-parent forgetful and biproduct diagrams (Ch. 2, Ch. 10) |
+| [#233](https://github.com/abderrahim-lectures/lean4-learning/pull/233) | PR E1: add dbg_trace tracing to Chapter 1's recursive code |
+| [#237](https://github.com/abderrahim-lectures/lean4-learning/pull/237) | PR E10/E11/E14: dbg_trace for all remaining recursive Lean blocks |
+| [#238](https://github.com/abderrahim-lectures/lean4-learning/pull/238) | Full-book AMS-style rigor and narrative pass (v1.4.24) |
+| [#240](https://github.com/abderrahim-lectures/lean4-learning/pull/240) | Rewrite book prose to avoid colons, em-dashes, and possessives |
+| [#241](https://github.com/abderrahim-lectures/lean4-learning/pull/241) | Add binder styles, def transparency, and arrow-notation coverage |
+| [#247](https://github.com/abderrahim-lectures/lean4-learning/pull/247) | v1.6.0: split Chapter 1, book-wide style pass, Python-comparison examples |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact
