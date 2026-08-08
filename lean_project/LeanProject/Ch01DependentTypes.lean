@@ -44,6 +44,12 @@ def Vec.replicate' (a : α) : (n : Nat) → Vec α n
 -- replicate: n=0, base case, returning Vec.nil
 -- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) (Vec.nil)))
 
+-- Two writing styles for the same function, named-binder vs. equation-style.
+def vecLen {α : Type} {n : Nat} (_ : Vec α n) : Nat := n
+
+def vecLen' {α : Type} {n : Nat} : Vec α n → Nat
+  | _ => n
+
 -- A function that only accepts a non-empty vector, and a dot product that
 -- forces both arguments to share the same length.
 def Vec.head : Vec α (n + 1) → α
