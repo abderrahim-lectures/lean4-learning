@@ -13,7 +13,7 @@ def double (n : Nat) : Nat := n * 2
 \begin{itemize}
 \tightlist
 \item
-  \texttt{def} is the keyword that introduces a new global definition into the environment, a name, permanently available afterward, standing for a fixed term. This is different from a hypothesis or a local variable. Once elaborated, \texttt{double} is a completely ordinary constant, referable anywhere later in the file (or, once the file is imported, anywhere else). Compare this with \texttt{example} from Chapter 3, which elaborates a term but does \emph{not} bind it to a name. \texttt{def} is for the case where the definition is meant to be reused.
+  \texttt{def} is the keyword that introduces a new global definition into the environment, a name, permanently available afterward, standing for a fixed term. This is different from a hypothesis or a local variable. Once elaborated, \texttt{double} is a completely ordinary constant, referable anywhere later in the file (or, once the file is imported, anywhere else). Compare this with \texttt{example} from Chapter 4, which elaborates a term but does \emph{not} bind it to a name. \texttt{def} is for the case where the definition is meant to be reused.
 \item
   \texttt{double} is the name being bound. Lean enforces no special naming convention, but lowerCamelCase for \texttt{def}s and UpperCamelCase for types is the near-universal community style, which this book follows.
 \item
@@ -25,6 +25,8 @@ def double (n : Nat) : Nat := n * 2
 \item
   \texttt{n * 2} is the body. At this point in elaboration, \texttt{n} is in scope with type \texttt{Nat} (introduced by the \texttt{(n : Nat)} binder above), so \texttt{n * 2} is \texttt{Nat} multiplication applied to \texttt{n} and the numeral \texttt{2}. That numeral itself elaborates to a \texttt{Nat}, because that is what the type of the second argument of \texttt{Nat.mul} forces it to be. Numeral elaboration is guided by the expected type, another case of Lean checking against context instead of guessing.
 \end{itemize}
+
+A word of warning about the \texttt{→} that appeared two bullets up (\texttt{Nat → Nat}, the type of \texttt{double}). This same arrow reappears twice more later in this book, meaning something that looks different each time. Once \texttt{Prop} exists (\hyperref[sec:04-propositions-and-proofs:04-implication:1]{Chapter 4}), \texttt{P → Q} for propositions \texttt{P}, \texttt{Q} reads as logical implication, not ``takes a \texttt{P}-value, returns a \texttt{Q}-value.'' And later, \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2} names the fully general pattern \texttt{→} is secretly always an instance of, the Π-type, where the \emph{codomain} is allowed to depend on which argument was given, \texttt{Nat → Nat} being only the special case where it happens not to. Nothing about \texttt{double} above needs any of this yet. It is flagged only so the same symbol showing up wearing two more meanings later does not read as three unrelated coincidences.
 
 \begin{mathreading}
 
@@ -94,5 +96,19 @@ def identity {(*$\alpha$*) : Type} (x : (*$\alpha$*)) : (*$\alpha$*) := x
 \texttt{identity \{α : Type\} (x : α) : α := x} is the family \(\{\,\mathrm{id}_A : A \to A\,\}_{A \in \mathbf{Type}}\) indexed over \emph{every} type \(A\) at once. It is precisely the assignment sending each object \(A\) of the category to its identity morphism \(\mathrm{id}_A\), packaged as a single polymorphic definition rather than one definition per \(A\). The implicit argument \texttt{\{α : Type\}} is what makes this a \emph{statement about all \(A\) simultaneously} rather than a single fixed function. In category theory one would never write ``\(\mathrm{id}_{\mathbb{Z}}\), \(\mathrm{id}_{\mathbb{R}}\), \ldots{}'' one at a time either, but would instead say ``for every object \(A\), there is an identity morphism \(\mathrm{id}_A\),'' which is exactly what the universally-quantified, implicitly-inferred \texttt{\{α : Type\}} expresses.
 
 \end{mathreading}
+
+\textbf{Two more binder styles, and one more kind of \texttt{def}, not needed yet.} \texttt{()} and \texttt{\{\}} are not the whole story, only the two pieces needed so far. Briefly, so meeting these elsewhere later is not a surprise:
+
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{third} kind of argument, written with square brackets, \texttt{[x : C]}, is solved neither positionally like \texttt{()} nor by unification like \texttt{\{\}}, but by a search through registered instances of \texttt{C}, called \textbf{typeclass resolution}. This book delays it deliberately, until \hyperref[sec:06-rigor-check:01-structure-vs-class:1]{Chapter 6}, where the \texttt{Group}/\texttt{class}/\texttt{instance} machinery that makes it useful is built up from \texttt{structure} first, so the automation is understood rather than taken on faith.
+\item
+  A \textbf{fourth}, rarer kind, \textbf{strict implicit}, written \texttt{\{\{x : α\}\}} (Lean also accepts a Unicode spelling of the same double-brace pair, seen occasionally in Mathlib source), behaves like \texttt{\{\}} except that Lean defers solving it until an \emph{explicit} argument after it is actually supplied. It is a Mathlib idiom for keeping partially applied functions well behaved, and does not appear anywhere in the own code of this book. It is named here only so it is recognizable, not mysterious, if encountered while reading Mathlib source directly.
+\item
+  \texttt{def} is not the only way to introduce a definition either. \texttt{abbrev} and \texttt{opaque} exist alongside it, and differ not in what they let you write, but in how transparent the result is to the own equality checker of Lean, whether \texttt{unfold}ing it is ever needed, or ever even possible. \hyperref[sec:05-tactics:04-more-tactics:1]{Chapter 5}, once \texttt{unfold} itself is on the table, is where this is worth actually seeing rather than taking on faith.
+\end{itemize}
+
+None of this needs remembering yet. Only \texttt{()} and \texttt{\{\}} are needed for everything through the end of this chapter.
 
 The implicit \texttt{\{α : Type\}} argument of \texttt{identity} is polymorphic \emph{over which type is plugged in}, but its return type, \texttt{α}, never changes shape once \texttt{α} is fixed. An \texttt{identity} for \texttt{Nat} returns a \texttt{Nat}, full stop, no matter which \texttt{Nat} was given. The next section asks the sharper question this naturally raises. Can the \emph{type itself} depend not just on which type was chosen, but on the specific \emph{value} of an argument, changing from one call to the next even at a single fixed type? That is a strictly new capability, not a variation on implicit arguments, and it is what makes Lean a genuine proof assistant rather than an ordinary typed language.

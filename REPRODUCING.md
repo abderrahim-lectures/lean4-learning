@@ -185,6 +185,54 @@ shell access to the working directory.
     > stable link anchor, and update all three READMEs to reflect the
     > current state of the project.
 
+14. **Split the oversized opening chapter, and rebalance the book.** (a
+    later session still, once one chapter had grown far past the others)
+    > Chapter 1 is now more than twice the length of any other chapter,
+    > carrying dependent types, a full terminology glossary, and the
+    > formal calculus-of-constructions material all under one roof. Split
+    > it into two, without cutting any content, at whichever section
+    > boundary actually balances the two halves best, not necessarily
+    > where I first guessed. Renumber every chapter after it, every
+    > cross-reference and relative link book-wide (the README table of
+    > contents, the learning-paths dependency graph, the appendix
+    > solutions folder, the `tactic-and-library-reference.md` lookup
+    > tables, and the parallel `lean_project` module-per-chapter naming),
+    > while leaving the changelog, prior review reports, and this file's
+    > own past entries as the historical record they are, not something
+    > to silently rewrite. Verify with a full PDF rebuild and an
+    > independent link-resolution pass, and with `lake build`, not just a
+    > read-through.
+
+15. **Fix a style/consistency backlog, balance a thin chapter, and add
+    cross-language worked examples.** (a later session, treating the
+    book as something to be audited and rebalanced, not just extended)
+    > Enforce a book-wide prose rule with no exceptions inside narrative
+    > text: no colons, no em-dashes, and no English possessive ('s) —
+    > rewrite every sentence that violates it, across every chapter,
+    > without touching code blocks, LaTeX math, headers, or verbatim
+    > quotes. Then audit the book for soundness and consistency: check
+    > every chapter title, every appendix cross-reference, and the
+    > learning-paths dependency graph against what the current chapter
+    > structure actually is, and fix every regression found (a
+    > mistitled chapter, an off-by-one numbering bug introduced by an
+    > earlier restructuring pass, a stale citation). Compare chapters by
+    > length and section count; whichever chapter is thin relative to
+    > its neighbors (missing an exercises section other chapters all
+    > have, for instance) gets the same treatment as every other
+    > chapter, new exercises plus a matching appendix-solutions file,
+    > renumbering the appendix folder if needed. Finally, add a
+    > "Programmer's corner (Python)" worked example to every chapter
+    > that still lacks one, each one grounded in a real, specific
+    > Python bug (an untyped `dict` `KeyError`, a runtime `assert` that
+    > only ever samples the inputs it happened to see, `float` silently
+    > breaking associativity, an unchecked invariant nobody remembered
+    > to re-verify at every call site) contrasted with the guarantee the
+    > surrounding Lean section just proved, so the value of Lean and
+    > functional programming is argued from a concrete pain point
+    > familiar to a working programmer, not asserted in the abstract.
+    > Verify every change with a full PDF rebuild after each batch, not
+    > just a read-through.
+
 A note on process, for anyone replaying this: several steps above
 triggered large mechanical passes (renumbering a dozen chapters and every
 cross-reference, splitting long files into folders, adding an annotation

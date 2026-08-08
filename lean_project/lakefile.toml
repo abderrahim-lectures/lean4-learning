@@ -9,7 +9,7 @@ rev = "v4.32.2"
 [[lean_lib]]
 name = "LeanProject"
 
-# The Mathlib-equivalent modules (Chapters 6-11's "Mathlib equivalent"
+# The Mathlib-equivalent modules (Chapters 7-12's "Mathlib equivalent"
 # boxes), as a separate library target from `LeanProject` above — see the
 # comment atop `LeanProjectMathlib.lean` for why they can't share one
 # importing root.

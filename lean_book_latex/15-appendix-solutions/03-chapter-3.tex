@@ -1,0 +1,47 @@
+\section{Chapter 3: Functions, definitions, and structures}\label{sec:15-appendix-solutions:03-chapter-3:1}
+
+\textbf{1. \texttt{Rectangle} and \texttt{area}}
+
+\begin{lstlisting}
+structure Rectangle where
+  width : Nat
+  height : Nat
+
+def area (r : Rectangle) : Nat := r.width * r.height
+
+#eval area (*$\langle$*)3, 4(*$\rangle$*)   -- 12
+\end{lstlisting}
+
+\texttt{⟨3, 4⟩} is the anonymous constructor, filling \texttt{width} and \texttt{height} in field-declaration order. \texttt{area} reads both fields back out via \texttt{.width} and \texttt{.height} projection and multiplies them. Nothing here differs from \texttt{Point}/\texttt{shift} in Section 1, only the field names and the arithmetic change.
+
+\textbf{2. \texttt{Box α} and \texttt{unwrap}}
+
+\begin{lstlisting}
+structure Box ((*$\alpha$*) : Type) where
+  value : (*$\alpha$*)
+
+def unwrap {(*$\alpha$*) : Type} (b : Box (*$\alpha$*)) : (*$\alpha$*) := b.value
+
+def natBox : Box Nat := (*$\langle$*)7(*$\rangle$*)
+def strBox : Box String := (*$\langle$*)"seven"(*$\rangle$*)
+
+#eval unwrap natBox   -- 7
+#eval unwrap strBox   -- "seven"
+\end{lstlisting}
+
+\texttt{Box} is \texttt{Pair} with one slot instead of two, the same ``parameterize by the type itself'' idea from Section 2, at its simplest possible size. \texttt{Box Nat} and \texttt{Box String} are two different types, generated from the one \texttt{structure Box (α : Type)} declaration, the way \texttt{Pair Nat String} and \texttt{Pair String Nat} are two different instantiations of \texttt{Pair}. \texttt{unwrap} is implicit in \texttt{α}, exactly like \texttt{identity} in Chapter 1, since the type of \texttt{b.value} already determines it.
+
+\textbf{3. \texttt{ColoredRectangle} and the forgetful projection}
+
+\begin{lstlisting}
+structure ColoredRectangle extends Rectangle where
+  color : String
+
+def redSquare : ColoredRectangle :=
+  { width := 5, height := 5, color := "red" }
+
+#check redSquare.toRectangle      -- redSquare.toRectangle : Rectangle
+#eval area redSquare.toRectangle  -- 25
+\end{lstlisting}
+
+\texttt{redSquare.toRectangle} has type \texttt{Rectangle}, generated automatically by \texttt{extends}, discarding only the \texttt{color} field and keeping \texttt{width}/\texttt{height} untouched. \texttt{area} was written once, against \texttt{Rectangle}, with no knowledge that \texttt{ColoredRectangle} would ever exist. Calling it on \texttt{redSquare.toRectangle} reuses that same function unchanged, computing \texttt{25} from the inherited \texttt{width}/\texttt{height} fields alone. This is exactly the forgetful-functor pattern from the Mathematical reading box of Section 3, not a coincidence of naming. \texttt{.toRectangle} is the map \(U : \mathrm{ColoredRectangle} \to \mathrm{Rectangle}\) that strips away the extra structure (the \texttt{color} field) and keeps everything else, and \texttt{area} factoring through it is exactly what it means for \texttt{area} to be a function defined on the \emph{underlying} \texttt{Rectangle}, indifferent to whatever extra data the specific extension of a caller happens to add on top.

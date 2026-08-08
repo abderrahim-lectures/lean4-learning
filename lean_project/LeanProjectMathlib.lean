@@ -4,10 +4,10 @@
 -- own root-level `Group`/`CommGroup`/`Ring`/`Module`/`Submodule`/
 -- `LinearMap`/`Quiver` — names Mathlib also declares at the root namespace
 -- — so one file cannot import both chains without a name clash.
-import LeanProject.Ch06GroupsMathlib
-import LeanProject.Ch07GroupTheoremsMathlib
-import LeanProject.Ch08RingsMathlib
-import LeanProject.Ch09RingTheoremsMathlib
-import LeanProject.Ch10ModulesMathlib
-import LeanProject.Ch11PathAlgebrasMathlib
-import LeanProject.Ch13CapstoneMathlib
+import LeanProject.Ch07GroupsMathlib
+import LeanProject.Ch08GroupTheoremsMathlib
+import LeanProject.Ch09RingsMathlib
+import LeanProject.Ch10RingTheoremsMathlib
+import LeanProject.Ch11ModulesMathlib
+import LeanProject.Ch12PathAlgebrasMathlib
+import LeanProject.Ch14CapstoneMathlib

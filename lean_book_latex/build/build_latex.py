@@ -59,19 +59,20 @@ MAIN_TEX_NAME = "lean-for-working-algebraists.tex"
 CHAPTERS = [
     "00-setup",
     "01-basics",
-    "02-functions-and-structures",
-    "03-propositions-and-proofs",
-    "04-tactics",
-    "05-rigor-check",
-    "06-groups",
-    "07-group-theorems",
-    "08-rings",
-    "09-ring-theorems",
-    "10-modules",
-    "11-path-algebras",
-    "12-working-efficiently",
-    "13-next-steps",
-    "14-appendix-solutions",
+    "02-terminology-and-coc",
+    "03-functions-and-structures",
+    "04-propositions-and-proofs",
+    "05-tactics",
+    "06-rigor-check",
+    "07-groups",
+    "08-group-theorems",
+    "09-rings",
+    "10-ring-theorems",
+    "11-modules",
+    "12-path-algebras",
+    "13-working-efficiently",
+    "14-next-steps",
+    "15-appendix-solutions",
 ]
 
 # Root-level pages, converted the same way but with no sub-sections/chapter
@@ -93,8 +94,8 @@ ROOT_FILES = [
 # project per file, unlike Chapter 13 Sec.3's five-projects-in-one-file,
 # which is left as plain sections -- see module docstring).
 PBLPROJECT_FILES = {
-    "05-rigor-check/06-checkpoint-project.md",
-    "11-path-algebras/07-checkpoint-project.md",
+    "06-rigor-check/06-checkpoint-project.md",
+    "12-path-algebras/07-checkpoint-project.md",
 }
 
 # Mermaid fences, in file order, mapped to their hand-translated tikz-cd
@@ -105,27 +106,27 @@ DIAGRAM_MAP = {
     "01-basics/01-everything-has-a-type.md": [
         "f-algebra",
     ],
-    "02-functions-and-structures/01-structure-basics.md": [
+    "03-functions-and-structures/01-structure-basics.md": [
         "categorical-product",
     ],
-    "02-functions-and-structures/03-extending-structures.md": [
+    "03-functions-and-structures/03-extending-structures.md": [
         "multi-parent-forgetful",
     ],
-    "10-modules/06-direct-sums.md": [
+    "11-modules/06-direct-sums.md": [
         "biproduct",
     ],
-    "01-basics/04-terminology.md": [
+    "02-terminology-and-coc/01-terminology.md": [
         "universal-property",
         "free-monoid-universal-property",
         "initial-object",
         "forgetful-functor-chain",
         "subobject-commgroup",
     ],
-    "03-propositions-and-proofs/05-and-or-not.md": [
+    "04-propositions-and-proofs/05-and-or-not.md": [
         "and-product",
         "or-coproduct",
     ],
-    "11-path-algebras/03-defining-a-quiver.md": [
+    "12-path-algebras/03-defining-a-quiver.md": [
         "quiver-example",
     ],
     "learning-paths.md": [
@@ -585,6 +586,15 @@ def fix_image_paths(tex, chapter):
         opts, path = m.group(1) or "", m.group(2)
         if path.startswith("http") or os.path.isabs(path):
             return m.group(0)
+        if not opts:
+            # Pandoc emits a bare \includegraphics{...} for a plain
+            # Markdown image with no {width=...} attribute in the source,
+            # so the image renders at its native pixel size converted to
+            # points. Screenshots sized for a screen are far wider than
+            # the page (confirmed: a couple hundred to 650pt overfull),
+            # so give every unconstrained image a safe default instead of
+            # requiring each Markdown source to opt in individually.
+            opts = "[width=\\linewidth,keepaspectratio]"
         return f"\\includegraphics{opts}{{../lean_book/{chapter}/{path}}}"
 
     return re.sub(r'\\includegraphics(\[[^\]]*\])?\{([^}]+)\}', _sub, tex)
@@ -910,7 +920,7 @@ def convert_file(chapter, name):
     tex = escape_lstlisting_unicode(tex)
     tex = renumber_labels(tex, chapter, stem)
     tex = strip_next_section(tex)
-    if not chapter or (chapter == "14-appendix-solutions" and name == "00-index.md"):
+    if not chapter or (chapter == "15-appendix-solutions" and name == "00-index.md"):
         tex = unnumber_chapter(tex)
         tex = unnumber_sections(tex)
     # listings' language names are case-sensitive; its built-in Python

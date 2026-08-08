@@ -1,0 +1,33 @@
+\chapter{Chapter 2: Terminology and the calculus of constructions}\label{sec:02-terminology-and-coc:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Read \texttt{elaborate}, \texttt{reduce}, \texttt{bound variable}, \texttt{universal property}, and the other vocabulary used informally in Chapter 1, defined precisely.
+\item
+  Recognize β-reduction, the computational engine underneath \texttt{rfl} and \texttt{\#eval}.
+\item
+  State precisely how Π-types, Σ-types, and \texttt{Prop} irrelevance fit into the underlying calculus of Lean.
+\end{itemize}
+\end{learningobjectives}
+
+
+Chapter 1 built \texttt{Fin}/\texttt{Vec}, concrete dependent types, by example, and used several words along the way (\texttt{elaborate}, \texttt{reduce}, \texttt{universal property}, \ldots) informally, trusting they were clear enough from context to keep moving. That trust gets repaid here, and the two questions this chapter answers are forced directly by what Chapter 1 left open.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Several words just got used informally. What do they actually mean?} (\hyperref[sec:02-terminology-and-coc:01-terminology:1]{Section 1}) This section is a deliberate pause, not a new topic. It is a glossary of the vocabulary already in use in Chapter 1 and needed again below, defined precisely once instead of re-explained informally every time it recurs.
+\item
+  \textbf{The dependent function of \texttt{Fin} and the dependent pair-like structure of \texttt{Vec} both showed up in Chapter 1. Are they two unrelated tricks, or one idea in two shapes?} (\hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Section 2}) One idea. The Π-type (dependent function) and Σ-type (dependent pair) are dual generalizations of \texttt{→} and \texttt{×}, and together with the proof irrelevance of \texttt{Prop} they \emph{are} the calculus of constructions, the one formal system every example since the very first \texttt{\#check 3} of Chapter 1 has secretly been an instance of.
+\end{enumerate}
+
+By the end of this chapter, the informal phrase ``everything has a type'' from Chapter 1, Section 1 has turned into a precise, named formal system. Nothing along the way is optional scaffolding to be forgotten afterward. The \texttt{∀}/\texttt{∃} of Chapter 4, the \texttt{Group} structure of Chapter 7, and the \texttt{Path} type of Chapter 12 are all direct, unglamorous applications of exactly what gets built here.
+
+
+% Auto-appended: input every other section in order.
+\input{02-terminology-and-coc/01-terminology.tex}
+\input{02-terminology-and-coc/02-pi-sigma-and-coc.tex}
+\input{02-terminology-and-coc/03-exercises.tex}

@@ -231,7 +231,7 @@ model — before it becomes a fix.
 - `nemotron-3-ultra-free` — best for Skeptical Referee (complex proof
   analysis) and final moderation of multiple reviewers' reports.
 - `laguna-s-2.1-free` — best for Counterexample Hunter and Formalizer
-  on dense algebraic material (Chapters 8–11).
+  on dense algebraic material (Chapters 9–12).
 - `deepseek-v4-flash-free` — best for exercising and solution correctness
   in the appendix (straightforward but error-prone).
 - `north-mini-code-free` — best for code compilation verification and
