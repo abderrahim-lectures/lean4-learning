@@ -4,6 +4,7 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v1.6.1](v1.6.1.md) — Companion-project verification and history backfill
 - [v1.6.0](v1.6.0.md) — Split Chapter 1, book-wide style/consistency pass, and Python-comparison examples
 - [v1.5.4](v1.5.4.md) — Binder styles, `def` transparency, and arrow-notation coverage
 - [v1.5.3](v1.5.3.md) — Book-wide prose style pass: no colons, em-dashes, or possessives

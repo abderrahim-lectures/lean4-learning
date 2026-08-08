@@ -4,7 +4,7 @@
 
 ## [📖 Read the book (in your browser)](https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fabderrahim-lectures%2Flean4-learning%2Freleases%2Flatest%2Fdownload%2Flean-for-working-algebraists.pdf&embedded=true)
 
-[![Download PDF](https://img.shields.io/badge/Download-PDF-blue?logo=adobeacrobatreader&logoColor=white)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest/download/lean-for-working-algebraists-v1.6.0.pdf)
+[![Download PDF](https://img.shields.io/badge/Download-PDF-blue?logo=adobeacrobatreader&logoColor=white)](https://github.com/abderrahim-lectures/lean4-learning/releases/latest/download/lean-for-working-algebraists-v1.6.1.pdf)
 [![Browse online](https://img.shields.io/badge/Browse-online%20(HTML)-green?logo=github)](https://abderrahim-lectures.github.io/lean4-learning/)
 [![Try Lean now](https://img.shields.io/badge/%E2%96%B6%20Try%20Lean-in%20your%20browser-orange)](https://abderrahim-lectures.github.io/lean4-learning/try-lean.html)
 [Notice](NOTICE.md) | [Reproducing this book](REPRODUCING.md)
@@ -20,7 +20,7 @@ material for readers who also want to run the Lean code or the Python
 examples on their own machine or in a browser.
 
 Every release also attaches a version-named copy of the PDF (for example
-`lean-for-working-algebraists-v1.6.0.pdf`) alongside the plain
+`lean-for-working-algebraists-v1.6.1.pdf`) alongside the plain
 `lean-for-working-algebraists.pdf`, so a saved download can be traced
 back to the exact release it came from. See the
 [releases page](https://github.com/abderrahim-lectures/lean4-learning/releases)
@@ -45,7 +45,7 @@ functors), and no prior exposure to Lean, formal logic, or programming.
 The book develops Lean 4 syntax and tactics from first principles, then
 uses them to formalize groups, rings, modules, and quiver path algebras,
 building every definition from scratch rather than relying on Mathlib.
-Starting in Chapter 6, each worked example is followed by a "Mathlib
+Starting in Chapter 7, each worked example is followed by a "Mathlib
 equivalent" showing the same construction phrased against the real
 API of Mathlib, so the from-scratch material and the library a reader will use
 afterward are both covered. By the end, you can read and write basic Lean
@@ -79,7 +79,7 @@ The book uses several recurring devices, applied consistently across all
   runtime `assert`, a `float` silently breaking associativity, and the
   like), for readers with programming background but no prior exposure
   to formal logic or type theory.
-- **Mathlib equivalent.** Starting in Chapter 6, each worked example is
+- **Mathlib equivalent.** Starting in Chapter 7, each worked example is
   followed by a box showing the same statement phrased against the
   real API of Mathlib, so the from-scratch construction and the library a reader
   will use afterward are both covered.
