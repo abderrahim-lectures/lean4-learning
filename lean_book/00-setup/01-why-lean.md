@@ -6,9 +6,9 @@
 
 Lean 4 is a programming language with a built-in interactive theorem
 prover. Mathematical definitions and statements are expressed as code,
-and proofs are verified by Lean's type checker: a proof is correct if
-and only if it type-checks, assuming one trusts Lean's small trusted
-kernel.
+and proofs are verified by the type checker of Lean, so a proof is correct if
+and only if it type-checks, assuming one trusts the small trusted
+kernel of Lean.
 
 This book uses abstract algebra (groups, rings) and a bit of category-flavored
 material (path algebras of quivers) as running examples. These topics are

@@ -131,7 +131,7 @@ inductive Vec (α : Type) : Nat → Type where
 ```
 
 That version binds `n` explicitly rather than relying on the setting, which is
-what the Mathlib-style projects in Chapter 13 expect.
+what the Mathlib-style projects in Chapter 14 expect.
 
 Here is a function that *builds* one of these, and its type is the
 dependent-function payoff:
@@ -180,8 +180,8 @@ def vecLen' {α : Type} {n : Nat} : Vec α n → Nat
   `Vec α n → Nat`, a bare arrow, precisely as if it were the *statement* of
   a theorem rather than the header of a function. The argument is instead
   supplied by the single equation `| _ => n` below, matching against
-  whatever term of `Vec α n` is eventually passed in. Lean's **equation
-  compiler** is what turns this `| pattern => term` block into an ordinary
+  whatever term of `Vec α n` is eventually passed in. The **equation
+  compiler** of Lean is what turns this `| pattern => term` block into an ordinary
   function, internally no different from writing `fun v => match v with
   | _ => n` inside a `:=` body. `vecLen` and `vecLen'` are, after
   elaboration, the same function under two different pieces of surface
@@ -252,7 +252,7 @@ which a length can never be, so no reader could mistake it for the length
 
 Real or complex numbers would make the distinction just as clear, but are
 not an option this early. `ℝ`/`ℂ` are Mathlib types, and this book stays
-Mathlib-free through Chapter 11. The reals in Lean in particular are
+Mathlib-free through Chapter 12. The reals in Lean in particular are
 `noncomputable` (built from Cauchy sequences with no decidable equality),
 so `#eval` cannot evaluate one at all, not even in principle. `Int` is the
 closest numeric type that is both core Lean and actually computable. The
@@ -355,10 +355,10 @@ generic would mean constraining `α` with instance-implicit arguments,
 something like `[Mul α] [Add α] [Zero α]` (the third binder style flagged
 back in [Section 2](02-def-let-implicit.md)), so that the required
 operations are supplied by whichever concrete type is chosen, the same
-way Mathlib's real dot-product functions work. That mechanism, and the
+way the real dot-product functions of Mathlib work. That mechanism, and the
 `class`/`instance` machinery behind it, is exactly what
-[Chapter 5](../05-rigor-check/01-structure-vs-class.md) builds up before
-Chapter 6 needs it for real algebraic structures. Until then, `Vec.dot`
+[Chapter 6](../06-rigor-check/01-structure-vs-class.md) builds up before
+Chapter 7 needs it for real algebraic structures. Until then, `Vec.dot`
 takes the simpler way out and fixes `α := Int` outright, sidestepping the
 question rather than answering it generically.
 
@@ -454,7 +454,7 @@ $$
 Here $B$ is not itself a type. $B$ is a **family of types indexed by
 $A$**, formally a function $B : A \to \mathrm{Type}$ (or into `Prop`, the
 type of propositions, a distinct universe of its own, formally named
-`Sort 0` in [Chapter 1, Section 5](05-pi-sigma-and-coc.md), as below). For
+`Sort 0` in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md), as below). For
 each $x : A$, $B(x)$ is the specific type that family
 produces at $x$, and different values of $x$ may give genuinely different
 types. Read the whole expression as "a function that, given any
@@ -471,7 +471,7 @@ the $\Pi$ symbol.
 This is also, not by coincidence, exactly what `∀` means. `∀ n : Nat, n ≥
 0` is a Π-type where $B(n)$ happens to be a *proposition* (`n ≥ 0 :
 Prop`) rather than a data type like `Vec α n`. It reads as "for every `n`, produce a
-proof of the `n`-specific statement `n ≥ 0`." Chapter 3 introduces `∀`
+proof of the `n`-specific statement `n ≥ 0`." Chapter 4 introduces `∀`
 and propositional logic properly. Once it does, every `∀` written from
 that point on is already a dependent function in exactly this sense,
 whether or not this vocabulary is available yet when it is first met.
@@ -480,7 +480,7 @@ land in `Prop` instead of `Type`.
 
 ### Looking ahead
 
-Chapter 11 builds a genuinely more elaborate dependent type, `Path Q : V →
+Chapter 12 builds a genuinely more elaborate dependent type, `Path Q : V →
 V → Type`, a family of types indexed by a *pair* of vertices in a graph
 rather than by a single `Nat`. It is "the type of paths from `u` to `w`," which
 differs for each choice of endpoints exactly as `Vec α n` differs for each
@@ -497,11 +497,11 @@ It is the identical idea, with a richer index.
 > families as in the `Path` example above, an assignment of a
 > $\mathrm{Hom}$-set to every pair of objects in a category. A Π-type over
 > such a family is a **dependent product**. A term of $\sum_{x:A} B(x)$
-> (Σ-type, next covered formally in [Chapter 1, Section 5](05-pi-sigma-and-coc.md)) is a
+> (Σ-type, next covered formally in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md)) is a
 > **dependent sum**. Both are literal categorical limits/colimits in the
 > appropriate indexed sense, not merely named after them by analogy.
 
-> Read more. [Chapter 1, Section 5](05-pi-sigma-and-coc.md)
+> Read more. [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md)
 > gives Π-types (and Σ-types) their formal typing rules, with more worked
 > examples, rather than only the walkthrough given here.
 
@@ -532,7 +532,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   boring special case where every slot happens to be the same shape.
 - The Lean 4 source / [Mathlib4 API documentation][Mathlib4Docs] for `Fin` and `Vector`, confirmed directly in this section via `#print Fin` against the actual toolchain pinned in `lean_project/lean-toolchain` in this repository.
 - Thompson ([Thompson1991]), §4.6 "Quantifiers," §6.3 "Dependent types and quantifiers" develop the same dependent-product/dependent-sum content, verified verbatim against the source. The primary notation used by Thompson is $\forall$/$\exists$, not Π/Σ. He calls the Σ-type-equivalent an "(infinitary) sum type" or "dependent sum type," and the literal term "Sigma-type" never appears in his main text, only once, in a bibliography entry citing a paper by a different author. Explicit Π-notation does appear later, in the meta-theory chapters of that book (§8.3, §9.1.5), applied to dependent function spaces in a typed λ-calculus meta-language.
-- Chlipala ([Chlipala2013]), §8.1 "Length-Indexed Lists" and §9.1 "More Length-Indexed Lists". The length-indexed-vector idea in this book (`ilist : nat → Set`) is built and revisited there, not in Ch. 2–3 as an earlier draft of this section stated, verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`). This is a useful second angle on the identical concept, in Coq rather than Lean.
+- Chlipala ([Chlipala2013]), §8.1 "Length-Indexed Lists" and §9.1 "More Length-Indexed Lists". The length-indexed-vector idea in this book (`ilist : nat → Set`) is built and revisited there, not in Ch. 3–3 as an earlier draft of this section stated, verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`). This is a useful second angle on the identical concept, in Coq rather than Lean.
 
 [TPIL4]: ../bibliography.md#tpil4
 [Mathlib4Docs]: ../bibliography.md#mathlib4docs
@@ -541,4 +541,4 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 
 ---
 
-[← `def`, `let`, implicit arguments](02-def-let-implicit.md) | [Index](00-index.md) | [Next: Terminology →](04-terminology.md)
+[← `def`, `let`, implicit arguments](02-def-let-implicit.md) | [Index](00-index.md) | [Next: Exercises →](04-exercises.md)

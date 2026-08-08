@@ -1,0 +1,170 @@
+\section{Typing rules and safety}\label{sec:06-rigor-check:03-typing-rules-and-safety:1}
+
+Section 2 showed \emph{informally} why \texttt{Group : Type → Type} has to live one universe level up, by walking through that one specific case in prose. That argument leaned on a typing rule it never actually stated, and Chapters 1--5 have relied on the type checking of Lean constantly the same way, without ever seeing its rules written down. This section makes two things precise. the actual rules the kernel of Lean checks a term against (using a small, representative fragment, the \textbf{simply typed λ-calculus}, STLC), and the specific rule governing the universe hierarchy Section 2 just introduced informally.
+
+An untyped calculus has a serious defect. It permits terms that reduce forever (Chapter 2, Section 1 mentioned β-reduction; nothing there stopped a term from β-reducing to itself, endlessly), and nothing prevents applying one kind of value where a completely different kind was intended. STLC fixes this by attaching a \textbf{type} to every term and requiring application to respect types. This is the direct ancestor of ``every expression has a type'' from Chapter 1.
+
+\subsection{Types}\label{sec:06-rigor-check:03-typing-rules-and-safety:2}
+
+\[
+\tau ::= \iota \;\mid\; \tau \to \tau
+\]
+
+Here \(\iota\) ranges over some fixed collection of \textbf{base types} (think \texttt{Nat}, \texttt{Bool}) and \(\tau_1 \to \tau_2\) is the type of functions from \(\tau_1\) to \(\tau_2\), exactly the \texttt{→} of Lean. Every type is built from base types and arrows. There is not yet any way to quantify over \emph{all} types the way \texttt{identity \{α : Type\} (x : α) : α := x} did in Chapter 1. That extra generality is exactly the Π-types of Chapter 2, Section 2, already covered.
+
+\begin{progcorner}
+
+The type hints of Python plus \texttt{mypy} are a light version of exactly this system, worth seeing first since this Python tooling runs today, without any Lean installation at all.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+def apply_twice(f: int, x: int) -> int:  # pretend f is Callable[[int], int]
+    ...
+
+def to_str(n: int) -> str:
+    return str(n)
+
+# mypy accepts this: to_str's declared input type (int) matches what
+# it is given (an int literal).
+to_str(5)
+
+# mypy rejects this with an error, WITHOUT running anything:
+# error: Argument 1 to "to_str" has incompatible type "str"; expected "int"
+to_str("already a string")
+\end{lstlisting}
+
+The check \texttt{mypy} runs on \texttt{to\_\allowbreak{}str("already a string")} is exactly the (App) rule below, refusing to combine a function with an argument of the wrong type, caught by reading the code rather than running it. The difference is that the hints in Python are optional and only checked when \texttt{mypy} is run at all. The type system in Lean is not optional, is checked on every single elaboration, and is a real part of the meaning of the language rather than an add-on linter. STLC below is what is actually going on, underneath both.
+
+\subsection{Typing judgments and rules}\label{sec:06-rigor-check:03-typing-rules-and-safety:3}
+
+A \textbf{typing judgment} \(\Gamma \vdash t : \tau\) reads ``in context \(\Gamma\) (a list of variable-type assignments \(x_1:\tau_1, \ldots, x_n:\tau_n\)), the term \(t\) has type \(\tau\).'' This is precisely what \texttt{\#check} reports in Lean, and precisely the ``context'' that appears above the line in every tactic goal state since Chapter 5. The rules that generate valid judgments are as follows.
+
+\[
+\dfrac{x : \tau \in \Gamma}{\Gamma \vdash x : \tau} \;\text{(Var)}
+\qquad
+\dfrac{\Gamma, x:\tau_1 \vdash t : \tau_2}{\Gamma \vdash \lambda x.\, t : \tau_1 \to \tau_2} \;\text{(Abs)}
+\qquad
+\dfrac{\Gamma \vdash t_1 : \tau_1 \to \tau_2 \quad \Gamma \vdash t_2 : \tau_1}{\Gamma \vdash t_1\, t_2 : \tau_2} \;\text{(App)}
+\]
+
+Each rule, read as a Lean fact already familiar from earlier chapters.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{(Var)}, if the type of \texttt{x} is recorded in the local context, \texttt{\#check x} reports that type; there is nothing to derive.
+\item
+  \textbf{(Abs)}, to type-check \texttt{fun x => t}, extend the context with \texttt{x : τ1} (a fresh assumption, exactly like a hypothesis introduced by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{intro}} in Chapter 5), check that the type of \texttt{t} is \texttt{τ2} under that extended context, and conclude the whole abstraction has type \texttt{τ1 → τ2}. This \emph{is} how Lean checks every \texttt{def f (x : τ1) : τ2 := t} written since Chapter 1.
+\item
+  \textbf{(App)}, to type-check \texttt{t1 t2}, \texttt{t1} must have a function type whose domain matches the type of \texttt{t2} exactly; the result has the codomain type. This is exactly the error discussed in Chapter 5 under ``reading a tactic failure.'' \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{exact}} \texttt{e} fails with a \textbf{type mismatch} precisely when the side condition of this rule (that \(\tau_1\) must match on both sides) is not met.
+\end{itemize}
+
+\subsection{Type preservation and progress: the payoff}\label{sec:06-rigor-check:03-typing-rules-and-safety:4}
+
+Two theorems about STLC are the entire reason to bother with a type system at all.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Progress}, a well-typed closed term (no free variables) is either already a \textbf{value}, an abstraction, or (if base types come with their own constants, as \texttt{Nat}/\texttt{Bool} effectively do) a constant of a base type, or it can take a β-reduction step. It never ``gets stuck'' partway through evaluation. There is no well-typed analogue of ``apply \texttt{3} to \texttt{true},'' because the side condition of (App) would already have rejected such a term at elaboration time, before any reduction is attempted.
+\item
+  \textbf{Preservation} (subject reduction), if \(\Gamma \vdash t : \tau\) and \(t \longrightarrow_\beta t'\), then \(\Gamma \vdash t' : \tau\). Reduction never changes the type of a term. This is \emph{exactly} why the definitional equality of this chapter (Section 4, next) is trustworthy. Reducing a term to normal form (what \texttt{\#eval}/\texttt{rfl} do) can never accidentally produce something of a different type than the one it started with.
+\end{itemize}
+
+Together, progress and preservation are the formal content of ``well-typed programs do not go wrong,'' and, viewed through Curry--Howard (Chapter 4), ``well-typed proof terms do not prove something other than what they claim to prove.'' The entire reliability of Lean as a proof assistant rests on an extended version of exactly these two theorems, proved once for the kernel of Lean and then trusted for every proof checked thereafter.
+
+\subsection{What STLC still cannot do}\label{sec:06-rigor-check:03-typing-rules-and-safety:5}
+
+STLC cannot type \texttt{identity} from Chapter 1 \emph{polymorphically}. One could write \texttt{identity\_\allowbreak{}Nat : Nat → Nat} and separately \texttt{identity\_\allowbreak{}Bool : Bool → Bool}, one arrow-type definition per base type. But there is no single term of a single STLC type that captures ``the identity function, at every type.''
+
+\begin{progcorner}
+
+Plain Python never runs into this, because it has no static types to begin with. \texttt{def identity(x): return x} already works on anything, at runtime, with zero declarations. But the instant type hints are added, wanting \texttt{mypy} to check the \emph{general} claim ``this returns whatever type it was given'' requires a dedicated feature, \texttt{TypeVar}, precisely because bare hints have the same limitation as STLC.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+from typing import TypeVar
+T = TypeVar("T")
+
+def identity(x: T) -> T:   # one signature, valid at every type
+    return x
+
+identity(5)        # T := int
+identity("hello")  # T := str
+\end{lstlisting}
+
+Without \texttt{TypeVar}, the only option would be writing \texttt{identity\_\allowbreak{}int(x: int) -\allowbreak{}> int} and \texttt{identity\_\allowbreak{}str(x: str) -\allowbreak{}> str} separately, exactly the one-arrow-type-per-base-type wall of STLC. \texttt{TypeVar} is the escape hatch in Python typing for this specific gap, and it is a useful anchor. It is a much lighter version of the same extra generality that \texttt{identity \{α : Type\} (x : α) : α := x} uses in Lean, where \texttt{α} is filled in silently every call, the same way \texttt{mypy} silently solves \texttt{T := int} above.
+
+This is precisely the gap already closed by \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2}. \textbf{Dependent types} let a type itself depend on a term (here, the type argument \texttt{α}). That is exactly the extra generality \texttt{identity \{α : Type\} (x : α) : α := x} uses, and it is unavailable in STLC (or in the \texttt{TypeVar} of Python, which is real but considerably less powerful. It cannot let a \emph{return type} depend on an ordinary \emph{value} argument the way \texttt{Vec.replicate} does in Chapter 1, Section 3).
+
+\subsection{Universes, as a typing rule}\label{sec:06-rigor-check:03-typing-rules-and-safety:6}
+
+Section 2 introduced the hierarchy \(\mathtt{Type} : \mathtt{Type}\,1 :
+\mathtt{Type}\,2 : \cdots\) to avoid a Russell-style paradox (a ``type of all types'' that contains itself leads to the same contradiction as ``the set of all sets that do not contain themselves''), and showed \texttt{Group : Type → Type} had to live in \texttt{Type 1}. In the calculus of constructions, the formal system CoC/CIC named by Chapter 2, Section 2, extending STLC above with Π-types and universes, this is stated as a typing rule for the universes themselves.
+
+\[
+\dfrac{}{\mathtt{Type}\,i : \mathtt{Type}\,(i+1)}
+\]
+
+together with a rule saying Π-types (function types, including ordinary \texttt{→}) stay inside a suitable universe.
+
+\[
+\dfrac{\Gamma \vdash A : \mathtt{Sort}\,i \quad \Gamma, x:A \vdash B : \mathtt{Sort}\,j}
+      {\Gamma \vdash \big(\textstyle\prod_{x:A} B\big) : \mathtt{Sort}\,(\mathrm{imax}(i,j))}
+\]
+
+Here \(\mathrm{imax}(i, j) = j\) when \(j = 0\), and \(\max(i, j)\) otherwise, and \texttt{Sort 0} is \texttt{Prop} and \texttt{Sort (k+1)} is \texttt{Type k} (Chapter 2, Section 2).
+
+For \(j > 0\), the case where \(B\) is genuinely a type rather than a proposition, \(\mathrm{imax}\) \emph{is} \(\max\), and the rule is exactly the \texttt{Group : Type → Type} computation of Section 2 spelled out generally, with \(A = \mathtt{Type}\) (itself living in \texttt{Type 1}) and \(B = \mathtt{Type}\) again, the rule gives \(\max(1, 1) = 1\), so \texttt{Type → Type} lands in \texttt{Type 1}, one level above \texttt{Type} itself.
+
+The \(j = 0\) case is not a footnote. It is what makes \texttt{∀} usable at all. When \(B\) lands in \texttt{Prop}, the whole Π-type is a \texttt{Prop} \emph{regardless of how large \(A\) is}. This is the \textbf{impredicativity of \texttt{Prop}}, and it is why \texttt{∀ n : Nat, n ≥ 0} is a proposition you can prove rather than an inhabitant of \texttt{Type 1}.
+
+\begin{lstlisting}
+#check ((*$\forall$*) n : Nat, n (*$\geq$*) 0)   -- (*$\forall$*) (n : Nat), n (*$\geq$*) 0 : Prop
+#check (Type (*$\rightarrow$*) Type)        -- Type (*$\rightarrow$*) Type : Type 1
+\end{lstlisting}
+
+Had the rule been \(\max\) throughout, the first of these would have landed in \texttt{Type 1} (since \(\mathtt{Nat} : \mathtt{Type}\,0 = \mathtt{Sort}\,1\) and \(n \ge 0 : \mathtt{Sort}\,0\) give \(\max(1,0) = 1\)), and every \texttt{∀}-statement in Chapters 3 through 11 would be a type rather than a theorem.
+
+\begin{progcorner}
+
+In Python, \texttt{type(3)} is \texttt{int}, and \texttt{type(int)} is \texttt{type}, and, unlike the stratified hierarchy in Lean, \texttt{type(type)} is \emph{also} \texttt{type}.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+>>> type(3)
+<class 'int'>
+>>> type(int)
+<class 'type'>
+>>> type(type)
+<class 'type'>
+\end{lstlisting}
+
+Python allows \texttt{type} to be its own type, with no stratification at all, because the type system of Python is not being used as a proof system. There is no soundness property at stake that a Russell-style paradox could break. \texttt{Type} in Lean cannot self-apply this way (\texttt{Type : Type} is \emph{inconsistent}. It allows encoding the Girard paradox and proving \texttt{False}), which is exactly why the infinite, strictly increasing hierarchy above is load-bearing rather than pedantry. This is one of the few places where the Python comparison genuinely runs out. It is not that Python does the same thing more simply, it is that Python does not need to solve this problem at all, because nothing checks proofs against it.
+
+\subsection{Sources, quoted}\label{sec:06-rigor-check:03-typing-rules-and-safety:7}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Progress (Theorem 9.3.5).} ``Suppose \(t\) is a closed, well-typed term (that is, \(\vdash t : T\) for some \(T\)). Then either \(t\) is a value or else there is some \(t'\) with \(t \to t'\)'' (\cite{Pierce2002}, §9.3 ``Properties of Typing'').
+\item
+  \textbf{Preservation (Theorem 9.3.9).} ``If \(\Gamma \vdash t : T\) and \(t \to t'\), then \(\Gamma \vdash t' : T\)'' (\cite{Pierce2002}, §9.3).
+\item
+  \textbf{Universe-formation rule.} The working statement used by this book, after the calculus of constructions (\cite{CoquandHuet1988}): \(\mathtt{Type}\,i : \mathtt{Type}\,(i+1)\), and a Π-type built from \(A : \mathtt{Sort}\,i\), \(B : \mathtt{Sort}\,j\) lands in \(\mathtt{Sort}\,(\mathrm{imax}(i,j))\). The \(j = 0\) clause is the impredicativity of \texttt{Prop}, which the calculus of constructions is characterized by and which \cite{TPIL4} §2.2 documents for Lean specifically.
+\item
+  Pierce (\cite{Pierce2002}), Ch. 9 ``Typed Arithmetic Expressions'' §8.3 ``Safety = Progress + Preservation'' (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 ``Simply Typed Lambda-Calculus'' §9.2 ``The Typing Relation'' (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 ``Properties of Typing'' (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10--11; Ch. 12 ``Simple Extensions'' actually covers pairs/tuples/records/sums, unrelated to the content of this section.
+\item
+  Milner (\cite{Milner1978}) covers the theoretical background for why STLC alone cannot type polymorphic functions like \texttt{identity}.
+\item
+  Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) cover the Python-side comparison used in the boxes of this section.
+\item
+  Girard, see \hyperref[sec:06-rigor-check:02-universes:1]{the references of Chapter 6, Section 2} for the full citation. The Girard paradox (the inconsistency of \texttt{Type : Type}) is due to the 1972 thesis of Girard, a different, later paper than \cite{Girard1971} cited elsewhere in this book.
+\item
+  \emph{Theorem Proving in Lean 4} (\cite{TPIL4}), §2.2 ``Types as objects'' is the Lean documentation on universes, matching the presentation here.
+\end{itemize}

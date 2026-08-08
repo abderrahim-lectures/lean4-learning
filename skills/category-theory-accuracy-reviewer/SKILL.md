@@ -5,8 +5,8 @@ description: AMS-level adversarial review of category-theory claims and explanat
 
 # Category-Theory Accuracy Reviewer
 
-This book calls out categorical viewpoints throughout (Chapters 1, 3, 6,
-8, 11): a quiver's path category, a ring as a one-object preadditive
+This book calls out categorical viewpoints throughout (Chapters 2, 4, 7,
+9, 12): a quiver's path category, a ring as a one-object preadditive
 category, Hom-set isomorphisms, universal properties. This skill checks
 that every such claim is **mathematically correct** at AMS referee
 standard — not just "morally right" or "directionally true."
@@ -96,7 +96,7 @@ definition or the Lean code is not a finding.
 ## Recommended free models
 
 - `laguna-s-2.1-free` — best for complex categorical reasoning on
-  Chapters 1, 8, 11.
+  Chapters 2, 9, 12.
 - `nemotron-3-ultra-free` — best for adjunction and universal property
   checks across all chapters.
 - `mimo-v2.5-free` — best for accessibility/pedagogy checks of

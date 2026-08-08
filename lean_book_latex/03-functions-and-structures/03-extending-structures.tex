@@ -1,0 +1,73 @@
+\section{Extending structures}\label{sec:03-functions-and-structures:03-extending-structures:1}
+
+The previous section parameterized a \texttt{structure} by a type, so \texttt{Pair α β} was really a whole family of structures, one per choice of \texttt{α} and \texttt{β}. Parameterizing by a type is not the only way to grow a structure, though. Sometimes what is wanted is not a new type slotted in, but an \emph{entirely new field} added on top of a structure that already exists. \texttt{Point3D} needs everything \texttt{Point} has, plus a \texttt{z} coordinate, without repeating the declarations of \texttt{x} and \texttt{y} by hand. \texttt{extends} is exactly this, building a new structure that contains an old one whole, plus more.
+
+\begin{lstlisting}
+structure Point3D extends Point where
+  z : Nat
+
+def origin3D : Point3D := { x := 0, y := 0, z := 0 }
+
+#eval origin3D.x   -- inherited field, 0
+\end{lstlisting}
+
+\texttt{extends} is used later. A \texttt{CommGroup} (commutative group) will \texttt{extend} \texttt{Group} with one extra axiom (commutativity), instead of repeating all the group fields.
+
+A second single-parent example, extending \texttt{Point} a different way:
+
+\begin{lstlisting}
+structure ColorPoint extends Point where
+  color : String
+
+def redOrigin : ColorPoint := { x := 0, y := 0, color := "red" }
+
+#eval redOrigin.x       -- inherited field, 0
+#eval redOrigin.color   -- own field, "red"
+\end{lstlisting}
+
+\subsection{Extending more than one structure at once}\label{sec:03-functions-and-structures:03-extending-structures:2}
+
+\texttt{extends} is not limited to a single parent. \texttt{structure C extends A, B} builds a structure with every field of \texttt{A}, every field of \texttt{B}, and any fields declared in \texttt{C} itself, generating both \texttt{.toA} and \texttt{.toB} forgetful projections:
+
+\begin{lstlisting}
+structure Named where
+  name : String
+
+structure NamedPoint extends Point, Named where
+  color : String
+
+def origin3 : NamedPoint :=
+  { x := 0, y := 0, name := "origin", color := "black" }
+
+#eval origin3.x            -- from Point, 0
+#eval origin3.name         -- from Named, "origin"
+#eval origin3.toPoint.x    -- forgetful projection to Point, 0
+#eval origin3.toNamed.name -- forgetful projection to Named, "origin"
+\end{lstlisting}
+
+\textbf{Field-name collisions.} If two parents both declare a field with the same name \emph{and} the same type, \texttt{extends} merges them into a single shared field rather than raising an error. \texttt{NamedPoint} above has no collision, but if both \texttt{Point} and \texttt{Named} had declared an \texttt{x : Nat} field, the resulting structure would have exactly one \texttt{x}, filled once, and readable through either parent forgetful projection. A collision on the same field name with \emph{different} types, by contrast, is a genuine error (\texttt{Field type mismatch: Field 'x' from parent 'B' has type String but is expected to have type Nat}). Lean does not silently pick one type over the other or rename either field.
+
+\begin{mathreading}
+
+\texttt{structure Point3D extends Point where z : Nat} is the product \(\mathrm{Point3D} = \mathrm{Point} \times \mathbb{N} \cong
+\mathbb{N} \times \mathbb{N} \times \mathbb{N}\), together with the \emph{forgetful map} \(\mathrm{Point3D} \to \mathrm{Point}\) (projecting away \(z\)), generated automatically as \texttt{.toPoint}. In algebraic language, this is exactly the pattern ``a \(\mathrm{Point3D}\)-structure is a \(\mathrm{Point}\)-structure plus one more piece of data.'' This is precisely how a \texttt{CommGroup} will later be ``a \texttt{Group}-structure plus one more axiom (\(ab = ba\)),'' a full subcategory of \texttt{Group} cut out by an extra condition, with the forgetful functor \(\mathrm{CommGroup} \to \mathrm{Group}\) being exactly \texttt{.toGroup}.
+
+\end{mathreading}
+
+The multi-parent case above generates two independent forgetful projections rather than a chain. \texttt{NamedPoint} forgets to \texttt{Point} and to \texttt{Named} separately, each simply discarding the fields of the other parent:
+
+\begin{center}
+\input{diagrams/multi-parent-forgetful.tex}
+\end{center}
+
+\subsection{Sources, quoted}\label{sec:03-functions-and-structures:03-extending-structures:3}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Forgetful functor.} ``A functor which simply `forgets' some or all of the structure of an algebraic object is commonly called a forgetful functor (or, an underlying functor). Thus the forgetful functor \(U : \mathbf{Grp} \to \mathbf{Set}\) assigns to each group \(G\) the set \(UG\) of its elements\ldots{}'' (\cite{MacLane1998}, Ch. I §3, p.~14). Picture it like this. A company directory that lists only names and phone numbers, dropping job titles and departments. The underlying people are still there, just stripped of the extra structure. \texttt{extends} builds a new structure containing everything an existing one has, plus more, generating exactly this kind of ``strip back down'' projection (\texttt{.toX}) for free.
+\item
+  The Lean 4 documentation (\cite{LeanDocs}) covers the auto-generated \texttt{.toX} projection produced by \texttt{extends}, used above as \texttt{origin3D.x} and \texttt{.toPoint}.
+\end{itemize}

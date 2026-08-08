@@ -1,5 +1,5 @@
 ---
-description: Adversarial maths reviewer of Chapters 3-7 (propositions and proofs, rigor check, groups, group theorems) on the strongest free reasoning model. Dispatched by review-lean-book during Phase 1.
+description: Adversarial maths reviewer of Chapters 4-8 (propositions and proofs, rigor check, groups, group theorems) on the strongest free reasoning model. Dispatched by review-lean-book during Phase 1.
 mode: subagent
 model: opencode/nemotron-3-ultra-free
 color: primary

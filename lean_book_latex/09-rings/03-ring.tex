@@ -1,0 +1,69 @@
+\section{\texorpdfstring{\texttt{Ring}: bundling an additive \texttt{CommGroup} with multiplication}{Ring: bundling an additive CommGroup with multiplication}}\label{sec:09-rings:03-ring:1}
+
+\texttt{CommGroup} closed off the additive side of a ring. \texttt{extends Group G} plus one extra axiom, \texttt{comm}, is already enough to say ``\((R, +)\) is an abelian group.'' What a group, even a commutative one, still cannot express is a \emph{second} operation living alongside the first, one that interacts with addition through distributivity rather than standing apart from it. \texttt{Ring} is exactly that. \texttt{CommGroup} supplies (R1) whole, as a single bundled field, and the definition below adds the remaining axioms (R2)--(R4) needed to make multiplication a genuine second citizen of the structure.
+
+\begin{lstlisting}
+structure Ring (R : Type) where
+  addGrp : CommGroup R
+  mul : R (*$\rightarrow$*) R (*$\rightarrow$*) R
+  one : R
+  mul_assoc : (*$\forall$*) a b c : R, mul (mul a b) c = mul a (mul b c)
+  one_mul : (*$\forall$*) a : R, mul one a = a
+  mul_one : (*$\forall$*) a : R, mul a one = a
+  left_distrib : (*$\forall$*) a b c : R, mul a (addGrp.op b c) = addGrp.op (mul a b) (mul a c)
+  right_distrib : (*$\forall$*) a b c : R, mul (addGrp.op a b) c = addGrp.op (mul a c) (mul b c)
+\end{lstlisting}
+
+Consider each field in turn.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{addGrp : CommGroup R}. The whole additive structure (\(+\), \(0\), unary minus, and commutativity) is a single field, itself a bundled structure. This is the ``structures containing structures'' pattern.
+\item
+  \texttt{mul}, \texttt{one}. The multiplicative operation and its identity, \texttt{1}.
+\item
+  \texttt{mul\_\allowbreak{}assoc}, \texttt{one\_\allowbreak{}mul}, \texttt{mul\_\allowbreak{}one}. Multiplication is associative and has a two-sided identity. Note, however, that \texttt{mul} is \textbf{not} required to be commutative or to have inverses. General rings need neither. (A commutative ring would add a \texttt{mul\_\allowbreak{}comm} field, the same way \texttt{CommGroup} added \texttt{comm} to \texttt{Group}.)
+\item
+  \texttt{left\_\allowbreak{}distrib}, \texttt{right\_\allowbreak{}distrib}. Multiplication distributes over addition on both sides. Both are needed precisely because \texttt{mul} is not assumed to be commutative.
+\end{itemize}
+
+\texttt{addGrp.op} will be written constantly below; notation-free helper abbreviations could be defined later. For now everything is spelled out so each usage is traceable to the definition above.
+
+\begin{mathreading}
+
+\texttt{Ring R} is exactly the textbook definition of a (unital, not-necessarily-commutative) ring, presented as a tuple \[
+\Big(\,(R,+,0,-)\in\mathbf{Ab},\ \cdot : R\times R\to R,\ 1\in R,\
+\text{proofs of }(\mathrm{R2}),(\mathrm{R3}),(\mathrm{R4})\,\Big).
+\] The field \texttt{addGrp} is the \emph{underlying additive abelian group}, so a ring is ``an abelian group \((R,+)\) carrying a compatible monoid structure \((R,\cdot,1)\)'', a monoid (a set with an associative operation and identity element, i.e.~a group without inverses). The remaining fields say \((R,\cdot,1)\) is a monoid (\texttt{mul\_\allowbreak{}assoc}, \texttt{one\_\allowbreak{}mul}, \texttt{mul\_\allowbreak{}one}) and that the two operations interact through the two-sided distributive laws, that is, multiplication is compatible with addition on both sides. Nesting \texttt{addGrp} as a whole substructure mirrors the forgetful functor \(\mathbf{Ring}\to\mathbf{Ab}\) sending a ring to its additive group.
+
+\end{mathreading}
+
+\begin{quote}
+Read more. \texttt{Ring} in Mathlib (\texttt{Mathlib.Algebra.Ring.Defs}) sits inside a much larger hierarchy, \texttt{Semiring}, \texttt{NonUnitalRing}, \texttt{CommRing}, \texttt{DivisionRing}, \texttt{Field}, each adding or dropping exactly one axiom compared to its neighbors; see \hyperref[sec:14-next-steps:02-moving-to-mathlib:1]{Chapter 14}. For the classical (non-Lean) statement of these axioms and their standard consequences, \emph{Abstract Algebra} by Dummit \& Foote or \emph{Algebra: Chapter 1} by Aluffi (the latter using the same categorical framing this book uses) are standard references.
+\end{quote}
+
+\begin{progcorner}
+
+\texttt{mul\_\allowbreak{}assoc} and \texttt{left\_\allowbreak{}distrib}/ \texttt{right\_\allowbreak{}distrib} are not free assumptions here. Whoever builds a \texttt{Ring R} must supply an actual proof of each, for the specific \texttt{mul} and \texttt{addGrp.op} chosen. Python's built-in \texttt{float} looks like it forms a ring, \texttt{+}, \texttt{*}, \texttt{0.0}, \texttt{1.0} are all present, but the axioms above simply do not hold for it.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+a, b, c = 0.1, 0.2, 0.3
+print((a + b) + c == a + (b + c))   # False
+\end{lstlisting}
+
+\texttt{(a + b) + c} and \texttt{a + (b + c)} are two different \texttt{float} values, differing in the last bit, because floating-point rounding depends on the order additions happen in. Associativity, the very first axiom listed above, silently fails, and nothing in Python raises an error about it, since \texttt{float} was never required to prove any such thing before being handed the \texttt{+} operator. Code that assumes \texttt{(a + b) + c == a + (b + c)}, to reorder a sum for performance or parallelize it across workers, is trusting a law that Python's own numeric types do not actually satisfy. \texttt{mul\_\allowbreak{}assoc} above rules this out completely for anything built as a \texttt{Ring}. If \texttt{R} were instantiated with a type where associativity genuinely failed, \texttt{mul\_\allowbreak{}assoc} could not be proved, and no \texttt{Ring R} value could be constructed at all.
+
+\subsection{Sources, quoted}\label{sec:09-rings:03-ring:2}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Ring.} ``(i) \((R, +)\) is an abelian group, (ii) \(\times\) is associative \ldots{} (iii) the distributive laws hold'' (\cite{DummitFoote2003}, §7.1 ``Basic Definitions and Examples,'' pp.~222--223). A basic consequence: ``\(0a = a0 = 0\) for all \(a \in R\)'' (p.~225, Proposition 1).
+\item
+  Aluffi (\cite{Aluffi2009}) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of that book, not quoted from a verified excerpt.
+\end{itemize}

@@ -29,12 +29,12 @@ For each of the six reviewers below, dispatch the matching subagent ONE at a tim
 - the regression context block below.
 
 Order and mappings (subagent name → slice files):
-1. `maths-theorems` → `lean_book/03-propositions-and-proofs/*.md lean_book/05-rigor-check/*.md lean_book/06-groups/*.md lean_book/07-group-theorems/*.md`
-2. `maths-algebra` → `lean_book/08-rings/*.md lean_book/09-ring-theorems/*.md lean_book/10-modules/*.md lean_book/11-path-algebras/*.md`
-3. `lean-code` → `lean_book/01-basics/*.md lean_book/02-functions-and-structures/*.md lean_book/04-tactics/*.md lean_book/12-working-efficiently/*.md lean_book/tactic-and-library-reference.md`
-4. `solutions` → `lean_book/14-appendix-solutions/*.md`
+1. `maths-theorems` → `lean_book/04-propositions-and-proofs/*.md lean_book/06-rigor-check/*.md lean_book/07-groups/*.md lean_book/08-group-theorems/*.md`
+2. `maths-algebra` → `lean_book/09-rings/*.md lean_book/10-ring-theorems/*.md lean_book/11-modules/*.md lean_book/12-path-algebras/*.md`
+3. `lean-code` → `lean_book/01-basics/*.md lean_book/02-terminology-and-coc/*.md lean_book/03-functions-and-structures/*.md lean_book/05-tactics/*.md lean_book/13-working-efficiently/*.md lean_book/tactic-and-library-reference.md`
+4. `solutions` → `lean_book/15-appendix-solutions/*.md`
 5. `root-notice` → `README.md NOTICE.md CONTRIBUTING.md REPRODUCING.md`
-6. `prose-setup` → `lean_book/00-setup/*.md lean_book/13-next-steps/*.md lean_book/README.md lean_book/lambda-calculus-dictionary.md lean_book/notation-reference.md lean_book/learning-paths.md lean_book/bibliography.md`
+6. `prose-setup` → `lean_book/00-setup/*.md lean_book/14-next-steps/*.md lean_book/README.md lean_book/lambda-calculus-dictionary.md lean_book/notation-reference.md lean_book/learning-paths.md lean_book/bibliography.md`
 
 Output filenames: `p1-reviews/maths-theorems.md`, `p1-reviews/maths-algebra.md`, `p1-reviews/lean-code.md`, `p1-reviews/solutions.md`, `p1-reviews/root-notice.md`, `p1-reviews/prose-setup.md`.
 
@@ -46,9 +46,9 @@ Include this regression context verbatim in every Phase-1 dispatch:
 Dispatch each ONE at a time, output to `$RUN/specialized/<agent>.md`:
 1. `lean-audit` → scope: all Lean code blocks in the book + `lean_project/`. It runs `lake build` itself.
 2. `typesetting` → scope: `lean_book_latex/lean-for-working-algebraists.pdf` (and the `latexmk` log).
-3. `proof-search` → scope: Chapters 7 and 9 search narratives (`lean_book/07-group-theorems/*.md lean_book/09-ring-theorems/*.md`).
+3. `proof-search` → scope: Chapters 8 and 10 search narratives (`lean_book/08-group-theorems/*.md lean_book/10-ring-theorems/*.md`).
 4. `notation` → scope: all chapters (`lean_book/*/00-index.md` and `lean_book/*/0*.md`).
-5. `category-theory` → scope: Chapters 1, 3, 6, 8, 11 categorical claims.
+5. `category-theory` → scope: Chapters 2, 4, 7, 9, 12 categorical claims.
 
 ## Phase 2 — cross-critiques (sequential)
 

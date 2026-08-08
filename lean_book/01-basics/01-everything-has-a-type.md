@@ -26,7 +26,7 @@ running anything, and it never lets a term of the wrong type slip through.
 the **calculus**, from the outside, not a proposition proved *inside* it.
 For Lean, this calculus is made concrete a few sentences below as the
 $\lambda$-calculus, and named precisely as the **calculus of
-constructions** in [Chapter 1, Section 5](05-pi-sigma-and-coc.md). Nothing here
+constructions** in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md). Nothing here
 depends on that name yet. Following Martin-Löf, the judgment used here has
 the form $e : \tau$, read "$e$ is a term of type $\tau$," adapted to
 the colon notation used by Lean. The original text by Martin-Löf writes the same judgment as
@@ -47,7 +47,7 @@ computational content of $\beta$-reduction. Lean follows the definitional
 equalities until nothing more can fire, exactly as one would normalize a
 term in $\lambda$-calculus by hand. Both "normal form" and
 "$\beta$-reduction" receive a full treatment in
-[Chapter 1, Section 4](04-terminology.md) for readers meeting them for the first
+[Chapter 2, Section 1](../02-terminology-and-coc/01-terminology.md) for readers meeting them for the first
 time. Briefly, each denotes the value obtained after fully
 simplifying/running the expression, nothing more exotic.
 
@@ -143,7 +143,7 @@ shorthand for `succ (succ (succ zero))`. Confirm it directly:
 Lean prints numerals for readability, but underneath, every `Nat` really is
 built from nothing but `zero` and `succ`, the same way every natural number
 in a first course in logic is built from the axioms of Peano. This inductive
-shape is exactly what licenses proof by induction later (Chapter 4). To
+shape is exactly what licenses proof by induction later (Chapter 5). To
 prove something about *every* `Nat`, it suffices to prove it for `zero` and
 show it is preserved by `succ`, because those are, provably, the only two
 ways a `Nat` can ever have been built.
@@ -220,7 +220,7 @@ ways a `Nat` can ever have been built.
 >
 > **A second, different fact, worth not conflating with the above.**
 > None of this is required to use `Nat`. It is offered only because,
-> once ordinary numeric `+` and `0` are *defined* on `Nat` (Chapter 4),
+> once ordinary numeric `+` and `0` are *defined* on `Nat` (Chapter 5),
 > an entirely different operation from the disjoint-sum $+$ used to
 > build $F$ above, despite sharing a symbol, a second and different
 > fact becomes provable (not merely definitional). `Nat`, with this
@@ -228,7 +228,7 @@ ways a `Nat` can ever have been built.
 > This is a genuinely different universal property from the
 > initial-algebra one above. The two are easy to conflate, since both
 > attach the word "universal" to `Nat`, but one concerns $F$-algebras and
-> the other concerns monoids. [Chapter 1, Section 4](04-terminology.md) fixes the
+> the other concerns monoids. [Chapter 2, Section 1](../02-terminology-and-coc/01-terminology.md) fixes the
 > vocabulary ("universal property," "initial object") used here, for any
 > reader meeting it for the first time.
 

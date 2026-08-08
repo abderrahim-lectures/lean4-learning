@@ -103,4 +103,4 @@ indicates a structural problem, not an iteration problem.
 - `nemotron-3-ultra-free` — best for cross-checking Formalizer findings
   across multiple chapters.
 - `laguna-s-2.1-free` — best for complex tactic-failure analysis in
-  Chapters 4 and 9.
+  Chapters 5 and 10.

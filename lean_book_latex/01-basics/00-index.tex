@@ -9,8 +9,6 @@
   Write basic \texttt{def}s with implicit arguments.
 \item
   Understand what makes a type \emph{dependent} (via \texttt{Fin}/\texttt{Vec}).
-\item
-  State precisely how Π-types, Σ-types, and \texttt{Prop} irrelevance fit into the underlying calculus of Lean.
 \end{itemize}
 \end{learningobjectives}
 
@@ -25,20 +23,14 @@ Every section below answers one question, and each question is forced by the ans
 \item
   \textbf{Given that types are checked this strictly, how are new ones built, and how does Lean avoid forcing tedious repetition at every call site?} (\hyperref[sec:01-basics:02-def-let-implicit:1]{Section 2}) \texttt{def} and \texttt{let} are the two ways to name a term. Implicit arguments (\texttt{\{α : Type\}}) are how a single definition like \texttt{identity} serves \emph{every} type at once without being rewritten per type. Nothing here is new machinery yet, just the vocabulary needed to read and write ordinary Lean definitions fluently.
 \item
-  \textbf{Is a type always fixed in advance, the way \texttt{Nat → Nat} never changes its output type?} (\hyperref[sec:01-basics:03-dependent-types:1]{Section 3}) No, and this is the single feature that separates a proof assistant from an ordinary typed language. A type can depend on a \emph{value}, not just another type. \texttt{Fin n} is a different type for each \texttt{n}. The \emph{return type} of a function can change depending on which argument it received. This is what finally lets a signature say ``these two lists must have the same length'' and have Lean enforce it, rather than merely hope for it.
-\item
-  \textbf{Several words just got used informally (\texttt{elaborate}, \texttt{reduce}, \texttt{bound variable}, \texttt{universal property}, \ldots). What do they actually mean?} (\hyperref[sec:01-basics:04-terminology:1]{Section 4}) This section is a deliberate pause, not a new topic. It is a glossary of the vocabulary already in use above and needed again below, defined precisely once instead of re-explained informally every time it recurs.
-\item
-  \textbf{The dependent function of \texttt{Fin} and the dependent pair-like structure of \texttt{Vec} both showed up in Section 3. Are they two unrelated tricks, or one idea in two shapes?} (\hyperref[sec:01-basics:05-pi-sigma-and-coc:1]{Section 5}) One idea. The Π-type (dependent function) and Σ-type (dependent pair) are dual generalizations of \texttt{→} and \texttt{×}, and together with the proof irrelevance of \texttt{Prop} they \emph{are} the calculus of constructions, the one formal system every example in this chapter has secretly been an instance of from the very first \texttt{\#check 3}.
+  \textbf{Is a type always fixed in advance, the way \texttt{Nat → Nat} never changes its output type?} (\hyperref[sec:01-basics:03-dependent-types:1]{Section 3}) No, and this is the single feature that separates a proof assistant from an ordinary typed language. A type can depend on a \emph{value}, not just another type. \texttt{Fin n} is a different type for each \texttt{n}. The \emph{return type} of a function can change depending on which argument it receives. This is what finally lets a signature say ``these two lists must have the same length'' and have Lean enforce it, rather than merely hope for it.
 \end{enumerate}
 
-By the last section, the informal phrase ``everything has a type'' from Section 1 has turned into a precise, named formal system. Nothing along the way is optional scaffolding to be forgotten afterward. The \texttt{∀}/\texttt{∃} of Chapter 3, the \texttt{Group} structure of Chapter 6, and the \texttt{Path} type of Chapter 11 are all direct, unglamorous applications of exactly what gets built here.
+That single feature, a type depending on a value, is the hook the next chapter picks up directly. \texttt{Fin}/\texttt{Vec} are dependent types encountered concretely here; naming the vocabulary behind them precisely, and the formal system they are instances of, is the job of \hyperref[sec:02-terminology-and-coc:00-index:1]{Chapter 2}, not of this chapter.
 
 
 % Auto-appended: input every other section in order.
 \input{01-basics/01-everything-has-a-type.tex}
 \input{01-basics/02-def-let-implicit.tex}
 \input{01-basics/03-dependent-types.tex}
-\input{01-basics/04-terminology.tex}
-\input{01-basics/05-pi-sigma-and-coc.tex}
-\input{01-basics/06-exercises.tex}
+\input{01-basics/04-exercises.tex}

@@ -1,0 +1,44 @@
+\chapter{Chapter 5: Tactics --- the toolbox for proving things}\label{sec:05-tactics:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Read a Lean goal state.
+\item
+  Use \texttt{intro}/\texttt{exact}/\texttt{apply}/\texttt{rw} to work a goal one step at a time.
+\item
+  Diagnose a failed tactic from its error message.
+\item
+  Use \texttt{induction}/\texttt{cases}/\texttt{constructor}/\texttt{unfold} on inductively-defined data.
+\item
+  Carry out a full inductive proof (commutativity of \texttt{Nat.add}) from scratch.
+\end{itemize}
+\end{learningobjectives}
+
+
+Writing proof \emph{terms} directly (as in Chapter 4) quickly becomes hard to manage. Instead, Lean provides \textbf{tactic mode}, entered with \texttt{by}, in which a ``goal'' is worked step by step, much as one would write a proof on paper. The real subject of this chapter is not the list of tactics below, but \textbf{how to work a goal whose proof is not yet known}, since that is the skill the rest of the book practices. The tactic reference is secondary, read it once, then return to it as needed. Each section below builds that skill one question at a time.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{What does a Lean goal state look like, and what is the first strategy when no proof is in hand?} (\hyperref[sec:05-tactics:01-goal-state:1]{Section 1}) The anatomy of a goal, and the habit of reading every hypothesis before trying anything.
+\item
+  \textbf{Which four tactics does every proof reduce to, and what does each one actually do to a goal?} (\hyperref[sec:05-tactics:02-core-tactics:1]{Section 2}) \texttt{intro}, \texttt{exact}, \texttt{apply}, \texttt{rw}, each mapped to the ordinary inference rule it realizes.
+\item
+  \textbf{When a tactic fails, Lean does not whisper. It points.} (\hyperref[sec:05-tactics:03-reading-failures:1]{Section 3}) How to read an error message as a debugging trace, and when \texttt{sorry} is a placeholder to be filled versus a flag that something deeper must change.
+\item
+  \textbf{How does one reason by cases or by induction on data that is defined recursively?} (\hyperref[sec:05-tactics:04-more-tactics:1]{Section 4}) \texttt{cases}, \texttt{induction}, \texttt{constructor}, \texttt{unfold}, the tactics that open up inductively-defined data.
+\item
+  \textbf{Can all of the above be assembled into a real inductive proof from scratch, one with no automation to hide behind?} (\hyperref[sec:05-tactics:05-worked-example:1]{Section 5}) Commutativity of \texttt{Nat.add}, built one tactic at a time.
+\end{enumerate}
+
+
+% Auto-appended: input every other section in order.
+\input{05-tactics/01-goal-state.tex}
+\input{05-tactics/02-core-tactics.tex}
+\input{05-tactics/03-reading-failures.tex}
+\input{05-tactics/04-more-tactics.tex}
+\input{05-tactics/05-worked-example.tex}
+\input{05-tactics/06-exercises.tex}
