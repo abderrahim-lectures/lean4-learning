@@ -14,6 +14,8 @@ lang: en_US
 twitter:
   card: summary_large_image
 
+theme: jekyll-theme-cayman
+
 plugins:
   - jekyll-relative-links
   - jekyll-optional-front-matter
