@@ -1,0 +1,72 @@
+chapters:
+  - dir: 00-setup
+    title: "Setup"
+    url: "/00-setup/00-index.html"
+  - dir: 01-basics
+    title: "1. First Steps"
+    url: "/01-basics/00-index.html"
+  - dir: 02-terminology-and-coc
+    title: "2. Terminology & CoC"
+    url: "/02-terminology-and-coc/00-index.html"
+  - dir: 03-functions-and-structures
+    title: "3. Functions & Structures"
+    url: "/03-functions-and-structures/00-index.html"
+  - dir: 04-propositions-and-proofs
+    title: "4. Propositions & Proofs"
+    url: "/04-propositions-and-proofs/00-index.html"
+  - dir: 05-tactics
+    title: "5. Tactics"
+    url: "/05-tactics/00-index.html"
+  - dir: 06-rigor-check
+    title: "6. Rigor Check"
+    url: "/06-rigor-check/00-index.html"
+  - dir: 07-groups
+    title: "7. Groups"
+    url: "/07-groups/00-index.html"
+  - dir: 08-group-theorems
+    title: "8. Group Theorems"
+    url: "/08-group-theorems/00-index.html"
+  - dir: 09-rings
+    title: "9. Rings"
+    url: "/09-rings/00-index.html"
+  - dir: 10-ring-theorems
+    title: "10. Ring Theorems"
+    url: "/10-ring-theorems/00-index.html"
+  - dir: 11-modules
+    title: "11. Modules"
+    url: "/11-modules/00-index.html"
+  - dir: 12-path-algebras
+    title: "12. Path Algebras"
+    url: "/12-path-algebras/00-index.html"
+  - dir: 13-working-efficiently
+    title: "13. Working Efficiently"
+    url: "/13-working-efficiently/00-index.html"
+  - dir: 14-next-steps
+    title: "14. Next Steps"
+    url: "/14-next-steps/00-index.html"
+  - dir: 15-appendix-solutions
+    title: "Appendix. Solutions"
+    url: "/15-appendix-solutions/00-index.html"
+
+references:
+  - dir: learning-paths
+    title: "Learning Paths"
+    url: "/learning-paths.html"
+  - dir: notation-reference
+    title: "Notation Reference"
+    url: "/notation-reference.html"
+  - dir: tactic-and-library-reference
+    title: "Tactic & Library Reference"
+    url: "/tactic-and-library-reference.html"
+  - dir: lambda-calculus-dictionary
+    title: "Lambda Calculus Dictionary"
+    url: "/lambda-calculus-dictionary.html"
+  - dir: bibliography
+    title: "Bibliography"
+    url: "/bibliography.html"
+  - dir: changelog
+    title: "Changelog"
+    url: "/changelog/"
+  - dir: try-lean
+    title: "Try Lean"
+    url: "/try-lean.html"

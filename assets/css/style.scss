@@ -1,0 +1,482 @@
+---
+---
+// Lean for Working Algebraists — docs-site stylesheet.
+// Self-contained replacement for the jekyll-theme-cayman remote theme:
+// persistent sidebar, readable article typography, light/dark mode via
+// CSS custom properties, and proper monospace code blocks for rouge.
+
+// ---------------------------------------------------------------------
+// Color tokens. Light palette lives on bare :root. Dark palette is
+// applied both when the system prefers dark (and no explicit choice was
+// made) and when the toggle sets data-theme="dark" on <html>. An
+// explicit data-theme="light" always wins.
+// ---------------------------------------------------------------------
+:root {
+  --bg: #ffffff;
+  --bg-elevated: #f6f7f9;
+  --bg-sidebar: #f6f7f9;
+  --bg-code: #f2f3f5;
+  --bg-hover: #ebedf0;
+  --text: #1c1f24;
+  --text-muted: #5b6472;
+  --text-faint: #8a94a3;
+  --border: #e2e5ea;
+  --link: #0b6e6e;
+  --link-hover: #084f4f;
+  --accent: #157878;
+  --accent-soft: rgba(21, 120, 120, 0.12);
+  --code-text: #24292e;
+  --shadow: rgba(20, 25, 35, 0.08);
+  --btn-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171c;
+    --bg-elevated: #1a1e24;
+    --bg-sidebar: #181b21;
+    --bg-code: #1e2229;
+    --bg-hover: #262b33;
+    --text: #e6e9ee;
+    --text-muted: #a3adba;
+    --text-faint: #737e8c;
+    --border: #2a2f38;
+    --link: #4fd1c5;
+    --link-hover: #7ee4da;
+    --accent: #3fb8b0;
+    --accent-soft: rgba(63, 184, 176, 0.16);
+    --code-text: #e6e9ee;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --btn-text: #0d1013;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #14171c;
+  --bg-elevated: #1a1e24;
+  --bg-sidebar: #181b21;
+  --bg-code: #1e2229;
+  --bg-hover: #262b33;
+  --text: #e6e9ee;
+  --text-muted: #a3adba;
+  --text-faint: #737e8c;
+  --border: #2a2f38;
+  --link: #4fd1c5;
+  --link-hover: #7ee4da;
+  --accent: #3fb8b0;
+  --accent-soft: rgba(63, 184, 176, 0.16);
+  --code-text: #e6e9ee;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --btn-text: #0d1013;
+}
+
+// ---------------------------------------------------------------------
+// Base
+// ---------------------------------------------------------------------
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Source Sans 3", "Iowan Old Style", "Palatino Linotype", Georgia, "Noto Serif", serif;
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+#skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--btn-text);
+  padding: 8px 16px;
+  z-index: 2000;
+}
+
+#skip-to-content:focus {
+  left: 8px;
+  top: 8px;
+}
+
+// ---------------------------------------------------------------------
+// Shell layout: fixed sidebar + scrolling main column
+// ---------------------------------------------------------------------
+.site-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  flex: 0 0 272px;
+  width: 272px;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  padding: 20px 0 40px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 4px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.sidebar-title {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--text);
+  display: block;
+}
+
+.sidebar-tagline {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.sidebar-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sidebar nav {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.86rem;
+}
+
+.sidebar-group-label {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  padding: 14px 20px 6px;
+  font-weight: 600;
+}
+
+.sidebar a.toc-link {
+  display: block;
+  padding: 6px 20px;
+  color: var(--text-muted);
+  border-left: 3px solid transparent;
+  line-height: 1.4;
+}
+
+.sidebar a.toc-link:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.sidebar a.toc-link.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+
+.theme-toggle {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-hover);
+}
+
+.sidebar-github {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.sidebar-github:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+  text-decoration: none;
+}
+
+// Mobile: sidebar collapses behind a toggle button
+.sidebar-open-btn {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .site-shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1500;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    box-shadow: 2px 0 24px var(--shadow);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-open-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: sticky;
+    top: 0;
+    z-index: 1200;
+    background: var(--bg-elevated);
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 16px;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1400;
+  }
+
+  .sidebar-backdrop.open {
+    display: block;
+  }
+}
+
+// ---------------------------------------------------------------------
+// Main column
+// ---------------------------------------------------------------------
+.main-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 24px 80px;
+}
+
+.page-header {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 0 16px;
+}
+
+.project-name {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 2rem;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+.project-tagline {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 16px;
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  background: var(--bg-hover);
+  text-decoration: none;
+}
+
+.article {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5 {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  line-height: 1.3;
+  scroll-margin-top: 16px;
+}
+
+.article h1 {
+  font-size: 1.9rem;
+  margin-top: 0.4em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3em;
+}
+
+.article h2 {
+  font-size: 1.4rem;
+  margin-top: 2em;
+}
+
+.article h3 {
+  font-size: 1.15rem;
+  margin-top: 1.6em;
+}
+
+.article p,
+.article li {
+  color: var(--text);
+}
+
+.article blockquote {
+  margin: 1.2em 0;
+  padding: 0.2em 1em;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+}
+
+.article table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.4em 0;
+  font-size: 0.94rem;
+  display: block;
+  overflow-x: auto;
+}
+
+.article table th,
+.article table td {
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  text-align: left;
+}
+
+.article table th {
+  background: var(--bg-elevated);
+}
+
+.article img {
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.article hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5em 0;
+}
+
+// ---------------------------------------------------------------------
+// Code — proper monospace, subtle background, horizontal scroll instead
+// of wrap (the book is full of Lean listings).
+// ---------------------------------------------------------------------
+code,
+pre,
+kbd,
+samp {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.86em;
+}
+
+.article code {
+  background: var(--bg-code);
+  color: var(--code-text);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+.article pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.55;
+}
+
+.article pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  white-space: pre;
+  word-break: normal;
+}
+
+// Mermaid diagrams get a light card so they read consistently in both themes
+.article .mermaid {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+}
+
+// ---------------------------------------------------------------------
+// Footer
+// ---------------------------------------------------------------------
+.site-footer {
+  max-width: 760px;
+  margin: 3em auto 0;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--border);
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
+.site-footer a {
+  color: var(--text-muted);
+}
