@@ -15,7 +15,7 @@ depending on context. See the two "Group multiplication" and "Module
 scalar action" rows below. They share the same math notation but
 translate to different Lean operations, `Group.op` versus `SMul.smul`.
 
-Two related pages cover notation this one deliberately leaves out: the
+Two related pages cover notation this one deliberately leaves out, the
 [tactic and library reference](tactic-and-library-reference.md) (tactics
 and Mathlib declaration names) and the
 [λ-calculus / type theory to Lean dictionary](lambda-calculus-dictionary.md)
@@ -28,36 +28,36 @@ throughout the main text and code.
 | Meaning | Math notation | Lean syntax | First appears |
 | --- | --- | --- | --- |
 | Function type / implication | $A \to B$ | `A → B` | Chapter 1 |
-| Universal quantifier ("for all") | $\forall x, P\, x$ | `∀ x, P x` | Chapter 3 |
-| Existential quantifier ("there exists") | $\exists x, P\, x$ | `∃ x, P x` | Chapter 3 |
-| Unique existence ("there exists a unique") | $\exists!\, x, P\, x$ | no single token, witnessed by supplying the value and a proof it is the only one | Chapter 1, Section 4 |
+| Universal quantifier ("for all") | $\forall x, P\, x$ | `∀ x, P x` | Chapter 4 |
+| Existential quantifier ("there exists") | $\exists x, P\, x$ | `∃ x, P x` | Chapter 4 |
+| Unique existence ("there exists a unique") | $\exists!\, x, P\, x$ | no single token, witnessed by supplying the value and a proof it is the only one | Chapter 2, Section 1 |
 | Set/type membership | $x \in A$ | `x ∈ A` | Chapter 1 |
-| Negation | $\neg P$ | `¬P` | Concept introduced Chapter 1 (terminology); formal use from Chapter 3 |
-| Conjunction ("and") | $P \wedge Q$ | `P ∧ Q` (`And`) | Chapter 3 |
-| Disjunction ("or") | $P \vee Q$ | `P ∨ Q` (`Or`) | Chapter 3 |
-| Not equal | $a \neq b$ | `a ≠ b` | Chapter 3 |
-| Turnstile ("the goal to prove") | $\Gamma \vdash P$ | the goal-state display (not typed by the user) | Chapter 4 |
+| Negation | $\neg P$ | `¬P` | Concept introduced Chapter 1 (terminology); formal use from Chapter 4 |
+| Conjunction ("and") | $P \wedge Q$ | `P ∧ Q` (`And`) | Chapter 4 |
+| Disjunction ("or") | $P \vee Q$ | `P ∨ Q` (`Or`) | Chapter 4 |
+| Not equal | $a \neq b$ | `a ≠ b` | Chapter 4 |
+| Turnstile ("the goal to prove") | $\Gamma \vdash P$ | the goal-state display (not typed by the user) | Chapter 5 |
 
 ## Algebra, structure, and diagrams
 
 | Meaning | Math notation | Lean syntax | First appears |
 | --- | --- | --- | --- |
-| Definitional equality | $t \equiv t'$ | `rfl` closes the goal | Chapter 5, Section 4 |
-| Reflexivity / the `rfl` tactic and term | — | `rfl` | Chapter 1 (tactic use, `#eval`/`#check`); Chapter 3 (as a proof term, e.g. `2+2=4 := rfl`) |
-| Direct sum (modules) | $M \oplus N$ | `DirectSum M N` (custom structure, no `⊕` operator in code) | Chapter 10 |
-| Isomorphism / equivalence | $A \simeq B$ | `A ≃ B` (`Equiv`) | Chapter 10 |
-| Anonymous-constructor pairing | $\langle a, b \rangle$ | `⟨a, b⟩` | Chapter 1, Section 4 |
+| Definitional equality | $t \equiv t'$ | `rfl` closes the goal | Chapter 6, Section 4 |
+| Reflexivity / the `rfl` tactic and term | — | `rfl` | Chapter 1 (tactic use, `#eval`/`#check`); Chapter 4 (as a proof term, e.g. `2+2=4 := rfl`) |
+| Direct sum (modules) | $M \oplus N$ | `DirectSum M N` (custom structure, no `⊕` operator in code) | Chapter 11 |
+| Isomorphism / equivalence | $A \simeq B$ | `A ≃ B` (`Equiv`) | Chapter 11 |
+| Anonymous-constructor pairing | $\langle a, b \rangle$ | `⟨a, b⟩` | Chapter 2, Section 1 |
 | Coercion (embedding) | — | `↑` (auto-coercion) | Chapter 1, Section 3 |
 | Function composition | $g \circ f$ | `g ∘ f` | Chapter 1 |
-| Group multiplication (the binary operation of a `Group`) | $a \cdot b$ | `op a b` (the `op` field of `Group G`) | Chapter 6 |
-| Module scalar action (a ring element acting on a module element) | $r \cdot m$ | `r • m` (`SMul`) | Chapter 10 |
-| Inverse | $a^{-1}$ | `a⁻¹` | Chapter 6 |
+| Group multiplication (the binary operation of a `Group`) | $a \cdot b$ | `op a b` (the `op` field of `Group G`) | Chapter 7 |
+| Module scalar action (a ring element acting on a module element) | $r \cdot m$ | `r • m` (`SMul`) | Chapter 11 |
+| Inverse | $a^{-1}$ | `a⁻¹` | Chapter 7 |
 | Lambda abstraction ("sends to") | $x \mapsto e$ | `fun x => e` | Chapter 1 |
-| Divisibility | $a \mid b$ | `a ∣ b` | Chapter 9 |
-| Subset | $A \subseteq B$ | `A ⊆ B` | Chapter 10 |
+| Divisibility | $a \mid b$ | `a ∣ b` | Chapter 10 |
+| Subset | $A \subseteq B$ | `A ⊆ B` | Chapter 11 |
 | Cartesian product | $A \times B$ | `A × B` | Chapter 1 |
-| Long/derivation arrow (diagrams) | $A \longrightarrow B$ | `⟶` (diagram labels only, not ordinary code) | Chapter 11, Sections 2–3 |
-| Projections out of a product | $\pi_X, \pi_Y$ | `.1`/`.2`, or `.fst`/`.snd` | Chapter 1, Section 4 |
+| Long/derivation arrow (diagrams) | $A \longrightarrow B$ | `⟶` (diagram labels only, not ordinary code) | Chapter 12, Sections 2–3 |
+| Projections out of a product | $\pi_X, \pi_Y$ | `.1`/`.2`, or `.fst`/`.snd` | Chapter 2, Section 1 |
 
 ---
 

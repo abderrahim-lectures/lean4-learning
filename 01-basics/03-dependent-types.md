@@ -131,7 +131,7 @@ inductive Vec (α : Type) : Nat → Type where
 ```
 
 That version binds `n` explicitly rather than relying on the setting, which is
-what the Mathlib-style projects in Chapter 13 expect.
+what the Mathlib-style projects in Chapter 14 expect.
 
 Here is a function that *builds* one of these, and its type is the
 dependent-function payoff:
@@ -147,6 +147,66 @@ def Vec.replicate (a : α) : (n : Nat) → Vec α n
 #eval (Vec.replicate (-42 : Int) 3 : Vec Int 3)
 -- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) (Vec.nil)))
 ```
+
+**A third style of writing a `def` body, and why the signature ends in a
+bare `→`.** Every `def` up to this point (`double`, `average`, `identity`)
+named every argument inside `(...)` and gave one term after `:=`.
+`Vec.replicate` above does something visibly different for its last
+argument: `(n : Nat)` never appears to the left of `:=`, the signature
+itself ends in a plain `→` the way the statement of a `theorem` does, and the
+body is a list of `| pattern => term` equations instead of one term. This
+style of writing a function body, naming the *shape* an argument must
+have rather than a name for the argument itself, is called **pattern
+matching**, a term used again from here on wherever a definition or proof
+picks apart a value by its constructor rather than by a bound name. This
+is not a new arrow meaning on top of the two flagged in
+[Section 2](02-def-let-implicit.md), and it is not a different kind of
+function. It is a third *writing style* for the exact same thing, worth
+seeing side by side on a smaller example before trusting it in
+`Vec.replicate`:
+
+```lean
+def vecLen {α : Type} {n : Nat} (_ : Vec α n) : Nat := n
+
+def vecLen' {α : Type} {n : Nat} : Vec α n → Nat
+  | _ => n
+```
+
+- `vecLen` is the familiar style. The `Vec α n` argument is bound by name
+  (as `_`, since the body never actually uses it, only its index `n`)
+  inside `(...)`, and the body is one term, `n`, exactly like the body of
+  `double` was one term, `n * 2`.
+- `vecLen'` binds nothing after the colon. Its signature is
+  `Vec α n → Nat`, a bare arrow, precisely as if it were the *statement* of
+  a theorem rather than the header of a function. The argument is instead
+  supplied by the single equation `| _ => n` below, matching against
+  whatever term of `Vec α n` is eventually passed in. The **equation
+  compiler** of Lean is what turns this `| pattern => term` block into an ordinary
+  function, internally no different from writing `fun v => match v with
+  | _ => n` inside a `:=` body. `vecLen` and `vecLen'` are, after
+  elaboration, the same function under two different pieces of surface
+  syntax, not two functions that happen to agree on every input.
+- The two styles are not interchangeable in every situation, only
+  equally valid where they overlap. Equation-style earns its keep exactly
+  when the whole purpose of a definition is to case on the *shape* of an
+  inductive argument, one equation per constructor, which is why
+  `Vec.replicate` above (and `Vec.head`, `Vec.dot` shortly) are written
+  that way. Each genuinely has one case for `0`/`nil` and one for
+  `n + 1`/`cons`. The named-binder `:=` style stays the natural choice
+  once the argument is used as an ordinary value rather than taken apart,
+  exactly as `vecLen` above never inspects *which* vector it received,
+  only its already-known length `n`.
+
+**Mathematical reading.** Equation-style `def` is the Lean transcription
+of ordinary definition by cases,
+$$
+f(n) = \begin{cases} c_0 & n = 0 \\ c(k, f(k)) & n = k + 1, \end{cases}
+$$
+the exact shape a mathematician already writes for a recursively defined
+sequence or function. Nothing new is being learned here beyond the Lean
+spelling of a pattern already familiar from ordinary practice, which is
+also exactly why it shows up unannounced the moment this book starts
+defining functions over an inductive type like `Vec`.
 
 `Vec.replicate` recurses exactly once per unit of length, so it is worth
 watching the recursion unwind one call at a time. Adding a `dbg_trace`
@@ -192,7 +252,7 @@ which a length can never be, so no reader could mistake it for the length
 
 Real or complex numbers would make the distinction just as clear, but are
 not an option this early. `ℝ`/`ℂ` are Mathlib types, and this book stays
-Mathlib-free through Chapter 11. The reals in Lean in particular are
+Mathlib-free through Chapter 12. The reals in Lean in particular are
 `noncomputable` (built from Cauchy sequences with no decidable equality),
 so `#eval` cannot evaluate one at all, not even in principle. `Int` is the
 closest numeric type that is both core Lean and actually computable. The
@@ -224,6 +284,21 @@ def Vec.head : Vec α (n + 1) → α
 The argument type `Vec α (n + 1)` says, in the type itself, "this only
 accepts vectors of length *at least one*." There is no separate runtime
 check for emptiness anywhere in this definition, because none is needed.
+
+Notice also that the equation-style body above has only one case,
+`Vec.cons a _ => a`, with no `Vec.nil` arm. In other words, `Vec.nil` is
+not a case this match forgot or silently skips. It is a case Lean will
+not even let be *written* here. `Vec.nil` has type `Vec α 0`, but the
+argument being matched has type `Vec α (n + 1)`, so a `Vec.nil` arm would
+require `0` to unify with `n + 1` for some `n`, and no such `n` exists,
+since `Nat.zero` and `Nat.succ n` are different constructors of the same
+type and Lean already knows two different constructors can never produce
+the same value. The equation compiler checks exactly this while
+elaborating the match, sees the `Vec.nil` case is impossible at this
+type, and closes it off automatically. What looks like an *incomplete*
+match, only one pattern for a type with two constructors, is actually a
+*complete* one, once the index `n + 1` is taken into account.
+
 Calling it on an empty vector is rejected before the expression ever runs:
 
 ```lean
@@ -263,6 +338,29 @@ def Vec.dot : Vec Int n → Vec Int n → Int
   | Vec.nil, Vec.nil => 0
   | Vec.cons x xs, Vec.cons y ys => x * y + Vec.dot xs ys
 ```
+
+`Vec.dot` also drops the polymorphic `α` that `Vec.replicate` and
+`Vec.head` both kept, in favor of the concrete `Int` seen above, and this
+is not only the visual-distinction reason already given for choosing
+`Int` over `Nat`. `Vec.replicate` only ever copies a value of type `α`
+around, and `Vec.head` only ever hands one back unchanged, so neither
+needs to know anything about `α` beyond the bare fact that it exists.
+`Vec.dot` is different. Its body computes `x * y + Vec.dot xs ys`, which
+needs multiplication and addition to already exist for whatever type the
+elements have. A fully generic `α` carries no such guarantee. `Nat` and
+`Int` do, but an arbitrary type variable does not, so a version of
+`Vec.dot` written over `Vec α n` would not even elaborate. Lean has no
+`*` or `+` to offer for an unconstrained `α`. Making this genuinely
+generic would mean constraining `α` with instance-implicit arguments,
+something like `[Mul α] [Add α] [Zero α]` (the third binder style flagged
+back in [Section 2](02-def-let-implicit.md)), so that the required
+operations are supplied by whichever concrete type is chosen, the same
+way the real dot-product functions of Mathlib work. That mechanism, and the
+`class`/`instance` machinery behind it, is exactly what
+[Chapter 6](../06-rigor-check/01-structure-vs-class.md) builds up before
+Chapter 7 needs it for real algebraic structures. Until then, `Vec.dot`
+takes the simpler way out and fixes `α := Int` outright, sidestepping the
+question rather than answering it generically.
 
 The signature `Vec Int n → Vec Int n → Int` uses the *same* `n`, a
 `Nat`, the length, for both arguments. That is not a naming
@@ -356,7 +454,7 @@ $$
 Here $B$ is not itself a type. $B$ is a **family of types indexed by
 $A$**, formally a function $B : A \to \mathrm{Type}$ (or into `Prop`, the
 type of propositions, a distinct universe of its own, formally named
-`Sort 0` in [Chapter 1, Section 5](05-pi-sigma-and-coc.md), as below). For
+`Sort 0` in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md), as below). For
 each $x : A$, $B(x)$ is the specific type that family
 produces at $x$, and different values of $x$ may give genuinely different
 types. Read the whole expression as "a function that, given any
@@ -373,7 +471,7 @@ the $\Pi$ symbol.
 This is also, not by coincidence, exactly what `∀` means. `∀ n : Nat, n ≥
 0` is a Π-type where $B(n)$ happens to be a *proposition* (`n ≥ 0 :
 Prop`) rather than a data type like `Vec α n`. It reads as "for every `n`, produce a
-proof of the `n`-specific statement `n ≥ 0`." Chapter 3 introduces `∀`
+proof of the `n`-specific statement `n ≥ 0`." Chapter 4 introduces `∀`
 and propositional logic properly. Once it does, every `∀` written from
 that point on is already a dependent function in exactly this sense,
 whether or not this vocabulary is available yet when it is first met.
@@ -382,7 +480,7 @@ land in `Prop` instead of `Type`.
 
 ### Looking ahead
 
-Chapter 11 builds a genuinely more elaborate dependent type, `Path Q : V →
+Chapter 12 builds a genuinely more elaborate dependent type, `Path Q : V →
 V → Type`, a family of types indexed by a *pair* of vertices in a graph
 rather than by a single `Nat`. It is "the type of paths from `u` to `w`," which
 differs for each choice of endpoints exactly as `Vec α n` differs for each
@@ -399,11 +497,11 @@ It is the identical idea, with a richer index.
 > families as in the `Path` example above, an assignment of a
 > $\mathrm{Hom}$-set to every pair of objects in a category. A Π-type over
 > such a family is a **dependent product**. A term of $\sum_{x:A} B(x)$
-> (Σ-type, next covered formally in [Chapter 1, Section 5](05-pi-sigma-and-coc.md)) is a
+> (Σ-type, next covered formally in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md)) is a
 > **dependent sum**. Both are literal categorical limits/colimits in the
 > appropriate indexed sense, not merely named after them by analogy.
 
-> Read more. [Chapter 1, Section 5](05-pi-sigma-and-coc.md)
+> Read more. [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md)
 > gives Π-types (and Σ-types) their formal typing rules, with more worked
 > examples, rather than only the walkthrough given here.
 
@@ -434,7 +532,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   boring special case where every slot happens to be the same shape.
 - The Lean 4 source / [Mathlib4 API documentation][Mathlib4Docs] for `Fin` and `Vector`, confirmed directly in this section via `#print Fin` against the actual toolchain pinned in `lean_project/lean-toolchain` in this repository.
 - Thompson ([Thompson1991]), §4.6 "Quantifiers," §6.3 "Dependent types and quantifiers" develop the same dependent-product/dependent-sum content, verified verbatim against the source. The primary notation used by Thompson is $\forall$/$\exists$, not Π/Σ. He calls the Σ-type-equivalent an "(infinitary) sum type" or "dependent sum type," and the literal term "Sigma-type" never appears in his main text, only once, in a bibliography entry citing a paper by a different author. Explicit Π-notation does appear later, in the meta-theory chapters of that book (§8.3, §9.1.5), applied to dependent function spaces in a typed λ-calculus meta-language.
-- Chlipala ([Chlipala2013]), §8.1 "Length-Indexed Lists" and §9.1 "More Length-Indexed Lists". The length-indexed-vector idea in this book (`ilist : nat → Set`) is built and revisited there, not in Ch. 2–3 as an earlier draft of this section stated, verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`). This is a useful second angle on the identical concept, in Coq rather than Lean.
+- Chlipala ([Chlipala2013]), §8.1 "Length-Indexed Lists" and §9.1 "More Length-Indexed Lists". The length-indexed-vector idea in this book (`ilist : nat → Set`) is built and revisited there, not in Ch. 3–3 as an earlier draft of this section stated, verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`). This is a useful second angle on the identical concept, in Coq rather than Lean.
 
 [TPIL4]: ../bibliography.md#tpil4
 [Mathlib4Docs]: ../bibliography.md#mathlib4docs
@@ -443,4 +541,4 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 
 ---
 
-[← `def`, `let`, implicit arguments](02-def-let-implicit.md) | [Index](00-index.md) | [Next: Terminology →](04-terminology.md)
+[← `def`, `let`, implicit arguments](02-def-let-implicit.md) | [Index](00-index.md) | [Next: Exercises →](04-exercises.md)

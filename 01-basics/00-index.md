@@ -1,6 +1,6 @@
 # Chapter 1: First steps — terms, types, `#eval`
 
-[← Setup](../00-setup/00-index.md) | [Table of contents](../README.md) | [Ch. 2: Functions & Structures →](../02-functions-and-structures/00-index.md)
+[← Setup](../00-setup/00-index.md) | [Table of contents](../README.md) | [Ch. 2: Terminology & CoC →](../02-terminology-and-coc/00-index.md)
 
 ---
 
@@ -9,7 +9,6 @@
 - Read the type of a Lean term with `#check` and distinguish `#check` from `#eval`.
 - Write basic `def`s with implicit arguments.
 - Understand what makes a type *dependent* (via `Fin`/`Vec`).
-- State precisely how Π-types, Σ-types, and `Prop` irrelevance fit into the underlying calculus of Lean.
 
 ## The story of this chapter
 
@@ -37,39 +36,31 @@ working through it line by line.
    is the single feature that separates a proof assistant from an
    ordinary typed language. A type can depend on a *value*, not just
    another type. `Fin n` is a different type for each `n`. The
-   *return type* of a function can change depending on which argument it received. This
+   *return type* of a function can change depending on which argument it receives. This
    is what finally lets a signature say "these two lists must have the
    same length" and have Lean enforce it, rather than merely hope for it.
-4. **Several words just got used informally (`elaborate`, `reduce`,
-   `bound variable`, `universal property`, ...). What do they actually
-   mean?** ([Section 4](04-terminology.md)) This section is a deliberate
-   pause, not a new topic. It is a glossary of the vocabulary already in use
-   above and needed again below, defined precisely once instead of
-   re-explained informally every time it recurs.
-5. **The dependent function of `Fin` and the dependent pair-like structure of `Vec`
-   both showed up in Section 3. Are they two unrelated tricks, or one
-   idea in two shapes?** ([Section 5](05-pi-sigma-and-coc.md)) One idea.
-   The Π-type (dependent function) and Σ-type (dependent pair) are dual
-   generalizations of `→` and `×`, and together with the proof
-   irrelevance of `Prop` they *are* the calculus of constructions, the one formal
-   system every example in this chapter has secretly been an instance of
-   from the very first `#check 3`.
 
-By the last section, the informal phrase "everything has a type" from
-Section 1 has turned into a precise, named formal system. Nothing along
-the way is optional scaffolding to be forgotten afterward. The
-`∀`/`∃` of Chapter 3, the `Group` structure of Chapter 6, and the `Path` type of Chapter 11 are
-all direct, unglamorous applications of exactly what gets built here.
+That single feature, a type depending on a value, is the hook the next
+chapter picks up directly. `Fin`/`Vec` are dependent types encountered
+concretely here; naming the vocabulary behind them precisely, and the
+formal system they are instances of, is the job of
+[Chapter 2](../02-terminology-and-coc/00-index.md), not of this chapter.
 
 ## Sections
 
 1. [Everything has a type](01-everything-has-a-type.md)
 2. [`def`, `let`, implicit arguments](02-def-let-implicit.md)
 3. [Dependent types, with examples](03-dependent-types.md)
-4. [Terminology encountered before it is fully explained](04-terminology.md)
-5. [Π/Σ-types and the calculus of constructions](05-pi-sigma-and-coc.md)
-6. [Exercises](06-exercises.md)
+4. [Exercises](04-exercises.md)
+
+Section 2 names several binder and definition styles beyond the couple
+actually needed this early. The
+"Binder & definition styles" table in the
+[tactic and library reference](../tactic-and-library-reference.md)
+is a standing lookup for all of them, with a pointer to wherever
+each is explained in full, worth bookmarking rather than memorizing on the
+first pass.
 
 ---
 
-[← Setup](../00-setup/00-index.md) | [Table of contents](../README.md) | [Ch. 2: Functions & Structures →](../02-functions-and-structures/00-index.md)
+[← Setup](../00-setup/00-index.md) | [Table of contents](../README.md) | [Ch. 2: Terminology & CoC →](../02-terminology-and-coc/00-index.md)

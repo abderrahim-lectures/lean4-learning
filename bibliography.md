@@ -15,7 +15,7 @@ as functional, per-occurrence documentation links rather than citations,
 and are indexed separately in the
 [tactic and library reference](tactic-and-library-reference.md).)
 
-<a id="aluffi2009"></a>**[Aluffi2009]** Paolo Aluffi, *[Algebra: Chapter 0](https://bookstore.ams.org/gsm-104)*, Graduate Studies in Mathematics vol. 104, American Mathematical Society, 2009.
+<a id="aluffi2009"></a>**[Aluffi2009]** Paolo Aluffi, *[Algebra: Chapter 1](https://bookstore.ams.org/gsm-104)*, Graduate Studies in Mathematics vol. 104, American Mathematical Society, 2009.
 
 <a id="assemsimsonskowronski2006"></a>**[AssemSimsonSkowronski2006]** Ibrahim Assem, Daniel Simson, and Andrzej Skowroński, *[Elements of the Representation Theory of Associative Algebras, Vol. 1: Techniques of Representation Theory](https://www.cambridge.org/us/academic/subjects/mathematics/algebra/elements-representation-theory-associative-algebras-techniques-representation-theory-volume-1)*, London Mathematical Society Student Texts 65, Cambridge University Press, 2006.
 
