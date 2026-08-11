@@ -465,7 +465,9 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   Mathematical Society* 39(3), 1936, pp. 472–482. It has not been consulted
   directly for this book, and the statement above is quoted from
   [Thompson1991] instead, in keeping with the convention this book follows of citing
-  what was actually read.
+  what was actually read. The general confluence machinery this specific
+  instance rests on, abstracted away from the λ-calculus, is due to Huet
+  ([Huet1980]).
 - **Universal property (general form).** "If $S : D \to C$ is a
   functor and $c$ an object of $C$, a universal arrow from $c$ to $S$
   is a pair $(r, u)$ consisting of an object $r$ of $D$ and an arrow
@@ -510,6 +512,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 [Thompson1991]: ../bibliography.md#thompson1991
 [MacLane1998]: ../bibliography.md#maclane1998
 [Pareigis1970]: ../bibliography.md#pareigis1970
+[Huet1980]: ../bibliography.md#huet1980
 
 ---
 

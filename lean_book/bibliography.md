@@ -15,11 +15,15 @@ as functional, per-occurrence documentation links rather than citations,
 and are indexed separately in the
 [tactic and library reference](tactic-and-library-reference.md).)
 
+<a id="agore2023"></a>**[Agore2023]** Ana L. Agore, *[A First Course in Category Theory](https://doi.org/10.1007/978-3-031-42899-9)*, Universitext, Springer, 2023.
+
 <a id="aluffi2009"></a>**[Aluffi2009]** Paolo Aluffi, *[Algebra: Chapter 1](https://bookstore.ams.org/gsm-104)*, Graduate Studies in Mathematics vol. 104, American Mathematical Society, 2009.
 
 <a id="assemsimsonskowronski2006"></a>**[AssemSimsonSkowronski2006]** Ibrahim Assem, Daniel Simson, and Andrzej Skowroński, *[Elements of the Representation Theory of Associative Algebras, Vol. 1: Techniques of Representation Theory](https://www.cambridge.org/us/academic/subjects/mathematics/algebra/elements-representation-theory-associative-algebras-techniques-representation-theory-volume-1)*, London Mathematical Society Student Texts 65, Cambridge University Press, 2006.
 
 <a id="chlipala2013"></a>**[Chlipala2013]** Adam Chlipala, *Certified Programming with Dependent Types*, MIT Press, 2013. [Free online edition](http://adam.chlipala.net/cpdt/).
+
+<a id="coquand2021"></a>**[Coquand2021]** Thierry Coquand, "[Reduction Free Normalisation for a Proof Irrelevant Type of Propositions](https://doi.org/10.46298/lmcs-17(4:15)2021)," *Logical Methods in Computer Science*, 17(4), 2021. Proves normalisation and decidability of convertibility for a universe hierarchy with a proof-irrelevant type of propositions "close to the type system used in the proof assistant Lean" (abstract), corroborating this book's working description of `Prop`.
 
 <a id="church1941"></a>**[Church1941]** Alonzo Church, *[The Calculi of Lambda-Conversion](https://archive.org/details/AnnalsOfMathematicalStudies6ChurchAlonzoTheCalculiOfLambdaConversionPrincetonUniversityPress1941)*, Princeton University Press, 1941.
 
@@ -34,6 +38,8 @@ and are indexed separately in the
 <a id="godel1930"></a>**[Godel1930]** Kurt Gödel, "Die Vollständigkeit der Axiome des logischen Funktionenkalküls," 1930.
 
 <a id="girard1971"></a>**[Girard1971]** Jean-Yves Girard, "Une extension de l'interprétation de Gödel à l'analyse, et son application à l'élimination des coupures dans l'analyse et la théorie des types," in *Proceedings of the Second Scandinavian Logic Symposium*, Studies in Logic and the Foundations of Mathematics vol. 63, North-Holland, 1971, 63–92.
+
+<a id="huet1980"></a>**[Huet1980]** Gérard Huet, "[Confluent Reductions: Abstract Properties and Applications to Term Rewriting Systems](https://doi.org/10.1145/322217.322230)," *Journal of the ACM*, 27(4), 1980, 797–821. The general confluence result (Newman's lemma and its extensions) underlying the Church–Rosser property invoked in the terminology chapter, independent of the specific λ-calculus setting.
 
 <a id="howard1980"></a>**[Howard1980]** William A. Howard, "The Formulae-as-Types Notion of Construction," in *To H.B. Curry: Essays on Combinatory Logic, Lambda Calculus and Formalism*, Academic Press, 1980, 479–490. (Circulated privately since 1969.)
 
