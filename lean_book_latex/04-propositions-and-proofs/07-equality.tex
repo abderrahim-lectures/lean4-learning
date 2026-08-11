@@ -25,3 +25,15 @@ theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
 
 The congruence \texttt{congr\_\allowbreak{}example} is the Leibniz principle: \(a = b \Rightarrow
 f(a) = f(b)\) for any function \(f\) (here \(f(x) = x + 1\)). This is ``substitute equals for equals,'' mechanized. \texttt{rw} is the workhorse for this from here on. Nearly every proof from Chapter 5 onward reaches for it whenever an equality hypothesis needs to be used inside a larger goal.
+
+\subsection{Sources, quoted}\label{sec:04-propositions-and-proofs:07-equality:2}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Equality as an equivalence relation.} ``A fundamental property of equality is that it is an equivalence relation, holding reflexivity, symmetry, {[}and{]} transitivity'' (\cite{TPIL4}, §4.2 ``Equality''). Picture it like this. \texttt{symm\_\allowbreak{}example} and \texttt{trans\_\allowbreak{}example} above are exactly the symmetry and transitivity halves of that triple; reflexivity is \texttt{rfl}, used freely everywhere else in this book.
+\item
+  \textbf{Substitution and congruence.} ``Equality is much more than an equivalence relation, however. It has the important property that every assertion respects the equivalence, in the sense that we can substitute equal expressions without changing the truth value. {[}\ldots{]} Given \texttt{h1 : a = b} and \texttt{h2 : p a}, we can construct a proof for \texttt{p b} using substitution: \texttt{Eq.subst h1 h2}'' (\cite{TPIL4}, §4.2 ``Equality''). Picture it like this. \texttt{congr\_\allowbreak{}example} is a \texttt{rw}-mechanized instance of exactly this substitution property, \texttt{rw [h]} finds \texttt{a} and replaces it with \texttt{b} wherever the goal mentions it, which is substitution applied to the specific assertion \texttt{\_\allowbreak{} + 1 = b + 1}.
+\end{itemize}

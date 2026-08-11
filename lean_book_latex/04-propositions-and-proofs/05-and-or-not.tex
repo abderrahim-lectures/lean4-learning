@@ -111,3 +111,17 @@ Symbol & Lean \\
 
 To \emph{use} a proof of \(P \vee Q\), one case-splits by the universal property of the coproduct, given a proof \texttt{h : P ∨ Q} and a way to reach the same conclusion \texttt{R} from either side (\texttt{hpr : P → R}, \texttt{hqr : Q → R}), there is exactly one map \texttt{P∨Q → R} agreeing with both. This is precisely what \texttt{or\_\allowbreak{}comm\_\allowbreak{}term} above builds via \texttt{Or.elim}. Negation is \(\neg P := (P \to
 \bot)\), a map into the initial object \(\bot = \varnothing\). A proof of \(\neg(1=2)\) is a function turning the (impossible) hypothesis \(1 = 2\) into an element of \(\varnothing\), vacuously. Here it is discharged by \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}}, which mechanically confirms \(1 \neq 2\) since equality of \texttt{Nat} literals is decidable. Underlying this is exactly the same fact used throughout this book, distinct constructors of an inductive type (\texttt{Nat.succ}, applied a different number of times) are disjoint, so \texttt{1 = 2} has no proof to begin with. Observe that this is \emph{intuitionistic} logic, there is no built-in law of excluded middle.
+
+\subsection{Sources, quoted}\label{sec:04-propositions-and-proofs:05-and-or-not:2}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Product.} ``A product of the family \((P_i)_{i \in I}\) is a pair \(\left(\prod_{i \in I} P_i, (p_i)_{i \in I}\right)\)'' together with projection morphisms \(p_j\) to each \(P_j\), such that any other candidate pair factors uniquely through it (\cite{Agore2023}, Definition 2.1.1). Picture it like this. \texttt{and\_\allowbreak{}left}'s \texttt{h.left} is exactly one of those projections \(p_j\), applied to the two-object family \(\{P, Q\}\).
+\item
+  \textbf{Coproduct.} Defined dually to the product, by reversing every arrow (\cite{Agore2023}, Definition 2.1.2, via the duality principle of Propositions 2.1.3--2.1.4). Picture it like this. \texttt{Or.inl}/\texttt{Or.inr} are the two injections into the coproduct, and \texttt{or\_\allowbreak{}comm\_\allowbreak{}term}'s use of \texttt{Or.elim} is the universal factoring property, reversed.
+\item
+  \textbf{Initial object.} An object \(0\) such that for every object \(C\) there is a unique morphism \(0 \to C\) (\cite{Agore2023}, Proposition 1.4.3). Picture it like this. \texttt{False} has no constructors, so vacuously there is exactly one function out of it into anything, which is why \texttt{¬P := (P → False)} and \texttt{absurd} can conclude \emph{any} \texttt{P} once a proof of \texttt{False} is in hand.
+\end{itemize}
