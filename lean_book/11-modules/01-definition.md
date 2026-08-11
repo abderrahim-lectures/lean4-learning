@@ -25,6 +25,25 @@ Most importantly for this book, a representation of a quiver $Q$ is
 precisely a module over the path algebra $kQ$; this is why the present
 chapter is placed immediately before Chapter 12.
 
+### Sources, quoted
+
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
+
+- **Module.** Given a ring $R$, a left $R$-module is an abelian group
+  under addition together with a scalar action of $R$ satisfying the
+  left-distributive, right-distributive, and associative-action axioms,
+  plus unitality when $R$ has an identity
+  ([DummitFoote2003], Ch. 10 "Introduction to Module Theory," §10.1
+  "Basic Definitions and Examples"). This is a structural citation to
+  the section and its numbered axioms, not a verified word-for-word
+  excerpt.
+- Weibel ([Weibel1994]) is offered as further reading on modules in the
+  broader context of homological algebra, not an independently verified
+  factual claim.
+
+[Weibel1994]: ../bibliography.md#weibel1994
+
 ---
 
 [← Index](00-index.md) | [Next: Translating into Lean →](02-translating-into-lean.md)

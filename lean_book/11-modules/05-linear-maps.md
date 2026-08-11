@@ -37,6 +37,20 @@ $\rho_M, \rho_N$ of the previous section: $f\circ\rho_M(r) =
 $R\text{-}\mathbf{Mod}$. $\mathrm{Hom}_R(M,N)$ is itself an abelian group,
 and an $R$-module when $R$ is commutative.
 
+### Sources, quoted
+
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
+
+- **Module homomorphism.** An $R$-module homomorphism (or $R$-linear map)
+  between $R$-modules $M$ and $N$ is a function $\varphi : M \to N$ that
+  is a homomorphism of the underlying abelian groups and additionally
+  commutes with the scalar action, $\varphi(rm) = r\varphi(m)$ for all
+  $r \in R$, $m \in M$ ([DummitFoote2003], Ch. 10 "Introduction to
+  Module Theory," §10.2 "Homomorphisms and Quotient Modules"). This is a
+  structural citation to the section and its definition, not a verified
+  word-for-word excerpt.
+
 ### A concrete linear map: multiplication by a fixed integer
 
 The abstract definition is easier to trust once a single instance has been
