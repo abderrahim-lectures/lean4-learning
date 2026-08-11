@@ -13,7 +13,7 @@ For the reader-facing summary of what changed in each release, see
 ## Summary
 
 As of this writing: **148 issues** (147 closed, 1 open) and
-**97 pull requests** (all merged), covering:
+**98 pull requests** (all merged), covering:
 
 - **Building out the book's content** — widening the audience beyond a
   category-theory background, adding Mathlib-equivalent boxes, Socratic
@@ -185,6 +185,7 @@ As of this writing: **148 issues** (147 closed, 1 open) and
 | [#240](https://github.com/abderrahim-lectures/lean4-learning/pull/240) | Rewrite book prose to avoid colons, em-dashes, and possessives |
 | [#241](https://github.com/abderrahim-lectures/lean4-learning/pull/241) | Add binder styles, def transparency, and arrow-notation coverage |
 | [#247](https://github.com/abderrahim-lectures/lean4-learning/pull/247) | v1.6.0: split Chapter 1, book-wide style pass, Python-comparison examples |
+| [#248](https://github.com/abderrahim-lectures/lean4-learning/pull/248) | v1.6.2: bibliography citations for Chapter 4, Ring, Module, and LinearMap |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact

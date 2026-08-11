@@ -75,3 +75,15 @@ The two quantifiers are the ``indexed'' versions of the product and sum seen for
 \mathrm{refl}\rangle\) witnesses \(2 \bmod 2 = 0\). This is the \emph{constructive} reading of \(\exists\), asserting existence requires exhibiting an explicit witness \(a\) together with a proof \(h\) that it works. This exactly generalizes how a proof of \(P \vee Q\) was a tagged choice, except now the ``tag'' is which element of \(\alpha\) was chosen.
 
 \end{mathreading}
+
+\subsection{Sources, quoted}\label{sec:04-propositions-and-proofs:06-quantifiers:2}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Universal quantifier as Π-type.} ``The Calculus of Constructions therefore identifies dependent arrow types with forall-expressions in this way. If \texttt{p} is any expression, \texttt{∀ x : α, p} is nothing more than alternative notation for \texttt{(x : α) → p}'' (\cite{TPIL4}, §4.1 ``The Universal Quantifier''). Picture it like this. \texttt{all\_\allowbreak{}nats\_\allowbreak{}ge\_\allowbreak{}zero} is a function \texttt{(n : Nat) → n ≥ 0} under a different notation for the same arrow type, the reading this book already gave \texttt{Π-\allowbreak{}type (dependent function type)} in \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2}.
+\item
+  \textbf{Existential quantifier as Σ-type, witness plus proof.} ``To prove \texttt{∃ x : α, p x}, it suffices to provide a suitable term \texttt{t} and a proof of \texttt{p t}'' (\cite{TPIL4}, §4.1 ``The Universal Quantifier'', existential quantifier subsection). See also \cite{HoTT2013}, §1.6 ``Dependent pair types (Σ-types)'', quoted in \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2} for the general Σ-type this specializes. Picture it like this. \texttt{⟨2, rfl⟩} is \texttt{t = 2}, \texttt{p t} proved by \texttt{rfl}, exactly that pair.
+\end{itemize}
