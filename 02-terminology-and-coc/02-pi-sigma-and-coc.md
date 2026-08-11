@@ -501,7 +501,11 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   it like this. A "verified" stamp on a passport. Customs doesn't
   care which officer stamped it or how the check was carried out, only
   that a valid stamp exists. Any two proofs of the same `P : Prop` are
-  just as interchangeable.
+  just as interchangeable. For the metatheory underneath this working
+  description, normalisation and decidable conversion for a universe
+  hierarchy with a proof-irrelevant type of propositions "close to the
+  type system used in the proof assistant Lean" is established directly
+  in [Coquand2021].
 - **Recursor / eliminator.** The working statement used by this book, built on
   the calculus of constructions ([CoquandHuet1988]), is the single
   Π-typed term (`Nat.rec` and its analogues) that makes "one case per
@@ -541,6 +545,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 [HoTT2013]: ../bibliography.md#hott2013
 [MartinLof1984]: ../bibliography.md#martinlof1984
 [TPIL4]: ../bibliography.md#tpil4
+[Coquand2021]: ../bibliography.md#coquand2021
 
 ---
 

@@ -126,6 +126,29 @@ different number of times) are disjoint, so `1 = 2` has no proof to begin
 with. Observe that this is *intuitionistic* logic, there is no built-in law of
 excluded middle.
 
+### Sources, quoted
+
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
+
+- **Product.** "A product of the family $(P_i)_{i \in I}$ is a pair
+  $\left(\prod_{i \in I} P_i, (p_i)_{i \in I}\right)$" together with
+  projection morphisms $p_j$ to each $P_j$, such that any other candidate
+  pair factors uniquely through it ([Agore2023], Definition 2.1.1).
+  Picture it like this. `and_left`'s `h.left` is exactly one of those
+  projections $p_j$, applied to the two-object family $\{P, Q\}$.
+- **Coproduct.** Defined dually to the product, by reversing every arrow
+  ([Agore2023], Definition 2.1.2, via the duality principle of
+  Propositions 2.1.3–2.1.4). Picture it like this. `Or.inl`/`Or.inr` are
+  the two injections into the coproduct, and `or_comm_term`'s use of
+  `Or.elim` is the universal factoring property, reversed.
+- **Initial object.** An object $0$ such that for every object $C$ there
+  is a unique morphism $0 \to C$ ([Agore2023], Proposition 1.4.3).
+  Picture it like this. `False` has no constructors, so vacuously there
+  is exactly one function out of it into anything, which is why
+  `¬P := (P → False)` and `absurd` can conclude *any* `P` once a proof of
+  `False` is in hand.
+
 ---
 
 [← Implication](04-implication.md) | [Index](00-index.md) | [Next: Quantifiers →](06-quantifiers.md)

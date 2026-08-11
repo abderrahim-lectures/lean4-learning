@@ -128,6 +128,28 @@ an explicit witness $a$ together with a proof $h$ that it works. This
 exactly generalizes how a proof of $P \vee Q$ was a tagged choice, except
 now the "tag" is which element of $\alpha$ was chosen.
 
+### Sources, quoted
+
+Formal definitions and citations for this section, gathered here for
+reference (full entries in the [Bibliography](../bibliography.md)):
+
+- **Universal quantifier as Π-type.** "The Calculus of Constructions
+  therefore identifies dependent arrow types with forall-expressions in
+  this way. If `p` is any expression, `∀ x : α, p` is nothing more than
+  alternative notation for `(x : α) → p`" ([TPIL4], §4.1 "The Universal
+  Quantifier"). Picture it like this. `all_nats_ge_zero` is a function
+  `(n : Nat) → n ≥ 0` under a different notation for the same arrow type,
+  the reading this book already gave `Π-type (dependent function type)`
+  in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md).
+- **Existential quantifier as Σ-type, witness plus proof.** "To prove
+  `∃ x : α, p x`, it suffices to provide a suitable term `t` and a proof
+  of `p t`" ([TPIL4], §4.1 "The Universal Quantifier", existential
+  quantifier subsection). See also [HoTT2013], §1.6 "Dependent pair
+  types (Σ-types)", quoted in
+  [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md)
+  for the general Σ-type this specializes. Picture it like this.
+  `⟨2, rfl⟩` is `t = 2`, `p t` proved by `rfl`, exactly that pair.
+
 ---
 
 [← And, Or, Not](05-and-or-not.md) | [Index](00-index.md) | [Next: Equality reasoning →](07-equality.md)
