@@ -51,7 +51,13 @@ single, book-wide system, not chapter by chapter.
    reading order. Is there a definition preceding it? If not, it is a
    CRITICAL fault.
 6. Check the notation-reference (`notation-reference.md`) lists every
-   symbol. Missing symbols are a HIGH fault.
+   symbol. Missing symbols are a HIGH fault. **Verify every "First
+   appears: Chapter N" claim in `notation-reference.md` by grepping the
+   symbol/identifier across the entire book, not by trusting the row as
+   written** — a symbol used only in a "Mathlib equivalent" or other
+   reference box in an earlier chapter still counts as a first
+   appearance, and `notation-reference.md` is exactly as likely to be
+   stale as any other cross-reference after a book-wide rewrite.
 7. Check that overloaded terms are disambiguated: "ring" in the sense of
    the algebraic structure vs. "ring" as in "ring homomorphism" — are
    both uses consistent with the same definition?
@@ -78,6 +84,19 @@ single, book-wide system, not chapter by chapter.
     switch to `Fin n` and another to `FinSet n`?
 11. Check that `⟨` / `⟩` (anonymous constructor) is consistently
     described in the dictionary and the notation reference.
+
+### Provenance of cited lemmas/theorems
+
+12. Whenever prose cites a named lemma/theorem as established "in
+    Chapter N" or "in the main text," verify where that lemma is
+    actually **proved**, not just where its name is mentioned: `grep`
+    for `theorem <name>` (or the equivalent declaration) across the
+    book. A name that is stated as an unsolved exercise in the main
+    chapter and only proved in `15-appendix-solutions/` is not a
+    main-text theorem, and citing it as one misleads a reader trying to
+    look up the proof. This is the same class of fault as a broken
+    cross-reference, but is missed by link-checking since no link is
+    broken — only the description of what the target contains is wrong.
 
 ## The three personas
 
