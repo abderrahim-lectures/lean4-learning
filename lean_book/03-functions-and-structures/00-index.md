@@ -11,11 +11,16 @@
 - Parameterize a `structure` by a type.
 - Extend one `structure` with another via `extends`.
 
-Functions **curry**. `add : Nat → Nat → Nat` is really
-`Nat → (Nat → Nat)`, a function that returns another function. So a
-"two-argument function" is just a one-argument function whose result is
-itself another function. It takes one argument at a time. This is the
-type-theoretic form of the Hom-set isomorphism
+Every function type built so far, `Nat → Nat`, `Bool → Nat`, takes exactly
+one argument. What type, then, does `add : Nat → Nat → Nat` actually have?
+Reading the arrow as right-associative, it parses as `Nat → (Nat → Nat)`:
+a function taking one `Nat` and returning *another function*, `Nat → Nat`.
+So `add 3 : Nat → Nat` is a genuine value, the "add 3 to something"
+function, before it is ever applied to a second argument. A "two-argument
+function" is nothing but a one-argument function whose result happens to
+be itself another function, applied one argument at a time. This pattern
+is called **currying**, and it is the type-theoretic form of the Hom-set
+isomorphism
 $\mathrm{Hom}(A\times B, C)\cong\mathrm{Hom}(A,\mathrm{Hom}(B,C))$: a
 two-argument map is the same data as a one-argument map into a space of
 maps. The interesting part of this chapter is `structure`, which is
