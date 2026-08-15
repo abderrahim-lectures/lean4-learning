@@ -10,35 +10,33 @@
 - Write basic `def`s with implicit arguments.
 - Understand what makes a type *dependent* (via `Fin`/`Vec`).
 
-## The story of this chapter
+## What forces the chapter
 
-Every section below answers one question, and each question is forced by
-the answer to the one before it. It helps to see the whole chain before
-working through it line by line.
+Ordinary languages catch a type error, if at all, at the moment the bad
+line runs, possibly months after it shipped, on a rarely-hit branch. What
+would it take to catch it earlier, for every possible input at once,
+rather than one run at a time? Reading the expression once and deciding
+"what kind of thing is this?" before ever running it, exactly what
+`#check` does and `#eval` does not. [Section 1](01-everything-has-a-type.md)
+draws that line, `#check` a static guarantee, `#eval` a one-off fact, the
+foundation everything else in this book stands on.
 
-1. **What is a type, and why does Lean check it before running anything?**
-   ([Section 1](01-everything-has-a-type.md)) Ordinary languages catch
-   type errors, if at all, at the moment the bad line runs, possibly
-   months after it shipped, on a rarely-hit branch. Lean checks the
-   question "what kind of thing is this?" once, by reading the
-   expression, for every possible input at once. That single idea, that
-   `#check` gives a static guarantee while `#eval` gives a one-off fact, is the
-   foundation everything else in this book stands on.
-2. **Given that types are checked this strictly, how are new ones built,
-   and how does Lean avoid forcing tedious repetition at every call
-   site?** ([Section 2](02-def-let-implicit.md)) `def` and `let` are the
-   two ways to name a term. Implicit arguments (`{α : Type}`) are how a
-   single definition like `identity` serves *every* type at once without
-   being rewritten per type. Nothing here is new machinery yet, just the
-   vocabulary needed to read and write ordinary Lean definitions fluently.
-3. **Is a type always fixed in advance, the way `Nat → Nat` never changes
-   its output type?** ([Section 3](03-dependent-types.md)) No, and this
-   is the single feature that separates a proof assistant from an
-   ordinary typed language. A type can depend on a *value*, not just
-   another type. `Fin n` is a different type for each `n`. The
-   *return type* of a function can change depending on which argument it receives. This
-   is what finally lets a signature say "these two lists must have the
-   same length" and have Lean enforce it, rather than merely hope for it.
+Types checked this strictly still need to be built, and reused, without
+rewriting a definition once per type. `def` and `let` are the two ways to
+name a term; implicit arguments (`{α : Type}`) are how a single
+definition like `identity` serves *every* type at once, without being
+rewritten per type. [Section 2](02-def-let-implicit.md) covers this
+vocabulary, no new machinery yet, just what is needed to read and write
+ordinary Lean definitions fluently.
+
+Is a type always fixed in advance, the way `Nat → Nat` never changes its
+output type? No, and this is the one feature separating a proof
+assistant from an ordinary typed language: a type can depend on a
+*value*, not just another type. `Fin n` is a different type for each
+`n`, and a function's *return type* can change depending on which
+argument it receives, letting a signature say "these two lists must have
+the same length" and have Lean enforce it, rather than merely hope for
+it. [Section 3](03-dependent-types.md) works this out concretely.
 
 That single feature, a type depending on a value, is the hook the next
 chapter picks up directly. `Fin`/`Vec` are dependent types encountered

@@ -1,6 +1,10 @@
 \section{Chapter 1: First steps}\label{sec:15-appendix-solutions:01-chapter-1:1}
 
-\textbf{1. \texttt{Vec.toList : Vec α n → List α}}
+\textbf{1. Is \texttt{Nat.succ : Nat → Nat} a Π-type?}
+
+Yes. \texttt{∀ n : Nat, Nat} is a Π-type whose body happens not to mention the bound variable. Every ordinary function type is a Π-type in the degenerate case where the codomain is constant. ``Dependent'' describes the \emph{interesting} instances, where the codomain does mention the bound variable, not a separate kind of arrow from the Π-type.
+
+\textbf{2. \texttt{Vec.toList : Vec α n → List α}}
 
 \begin{lstlisting}
 def Vec.toList : Vec (*$\alpha$*) n (*$\rightarrow$*) List (*$\alpha$*)

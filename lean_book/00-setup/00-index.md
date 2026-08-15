@@ -10,13 +10,22 @@
 - Install the Lean 4 toolchain and configure a working editor.
 - Understand why this book builds everything from scratch instead of importing Mathlib from the start.
 
-## The story of this chapter
+## What forces the setup
 
-Before any theorem is stated, three questions must be answered: *why* Lean,
-*can* you run it, and *why* this book builds everything by hand rather than
-trusting an existing library. Each section below addresses one of them in
-turn — not as abstract philosophy, but as a concrete choice with
-concrete consequences for the rest of the book.
+Before any theorem is stated, three questions need settling, each forcing
+the next. Why trust a proof to Lean specifically, rather than to pen and
+paper or to a different proof assistant? Given the answer, how does a
+reader actually get Lean running? And once it runs, why does this book
+build every structure by hand rather than importing an existing library
+that already has them? [Section 1](01-why-lean.md) answers the first
+question by fixing what "verified" means for the rest of the book: a
+proof is correct exactly when it type-checks against the kernel of Lean.
+[Section 2](02-installing-toolchain.md) and [Section 3](03-editor.md)
+answer the second, mechanically: install elan, pin a toolchain, add an
+editor that shows the goal state. [Section 4](04-mathlib-note.md)
+answers the third: building `Group`/`Ring` from scratch exposes every
+field and proof obligation Mathlib would otherwise hide behind its
+typeclass hierarchy, which is the entire point of a first encounter.
 
 ## Sections
 

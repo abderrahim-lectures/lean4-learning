@@ -13,18 +13,13 @@
 \end{learningobjectives}
 
 
-Chapter 1 built \texttt{Fin}/\texttt{Vec}, concrete dependent types, by example, and used several words along the way (\texttt{elaborate}, \texttt{reduce}, \texttt{universal property}, \ldots) informally, trusting they were clear enough from context to keep moving. That trust gets repaid here, and the two questions this chapter answers are forced directly by what Chapter 1 left open.
+\section{What forces the terminology}\label{sec:02-terminology-and-coc:00-index:2}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{Several words just got used informally. What do they actually mean?} (\hyperref[sec:02-terminology-and-coc:01-terminology:1]{Section 1}) This section is a deliberate pause, not a new topic. It is a glossary of the vocabulary already in use in Chapter 1 and needed again below, defined precisely once instead of re-explained informally every time it recurs.
-\item
-  \textbf{The dependent function of \texttt{Fin} and the dependent pair-like structure of \texttt{Vec} both showed up in Chapter 1. Are they two unrelated tricks, or one idea in two shapes?} (\hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Section 2}) One idea. The Π-type (dependent function) and Σ-type (dependent pair) are dual generalizations of \texttt{→} and \texttt{×}, and together with the proof irrelevance of \texttt{Prop} they \emph{are} the calculus of constructions, the one formal system every example since the very first \texttt{\#check 3} of Chapter 1 has secretly been an instance of.
-\end{enumerate}
+Chapter 1 built \texttt{Fin}/\texttt{Vec}, concrete dependent types, by example, and used words like \texttt{elaborate}, \texttt{reduce}, and \texttt{universal property} informally along the way, trusting context to carry the meaning. That trust runs out once the logic chapters begin, where loose use of these words would start hiding genuine distinctions instead of merely being informal shorthand. Fixing precise, working definitions for them, with pointers to where the full formal treatment lives, is the entire content of \hyperref[sec:02-terminology-and-coc:01-terminology:1]{Section 1}, a deliberate pause rather than a new topic.
 
-By the end of this chapter, the informal phrase ``everything has a type'' from Chapter 1, Section 1 has turned into a precise, named formal system. Nothing along the way is optional scaffolding to be forgotten afterward. The \texttt{∀}/\texttt{∃} of Chapter 4, the \texttt{Group} structure of Chapter 7, and the \texttt{Path} type of Chapter 12 are all direct, unglamorous applications of exactly what gets built here.
+The dependent function of \texttt{Fin} and the dependent pair-like structure of \texttt{Vec} both appeared in Chapter 1 as two separate tricks. Are they related? \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Section 2} shows they are the same idea in two shapes: the Π-type (dependent function) and Σ-type (dependent pair) are dual generalizations of \texttt{→} and \texttt{×}, and together with the proof irrelevance of \texttt{Prop} they \emph{are} the calculus of constructions, the one formal system every example since the very first \texttt{\#check 3} of Chapter 1 has secretly been an instance of.
+
+By the end of the chapter, the informal phrase ``everything has a type'' from Chapter 1, Section 1 has turned into a precise, named formal system. Nothing along the way is optional scaffolding to be forgotten afterward. The \texttt{∀}/\texttt{∃} of Chapter 4, the \texttt{Group} structure of Chapter 7, and the \texttt{Path} type of Chapter 12 are all direct, unglamorous applications of exactly what gets built here.
 
 
 % Auto-appended: input every other section in order.

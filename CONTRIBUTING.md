@@ -43,11 +43,28 @@ examples of how past issues were scoped.
 
 The book aims for plain, direct academic language throughout: no
 metaphors, rhetorical questions used as a stylistic device, or casual
-asides. Every type-theory or category-theory term introduced gets a
-formal definition (ideally with a citation — see
-[`lean_book/bibliography.md`](lean_book/bibliography.md)) followed by a
-worked example. If a sentence needs two readings to parse, it's a
-candidate for splitting into two plain sentences.
+asides. If a sentence needs two readings to parse, it's a candidate for
+splitting into two plain sentences.
+
+New or rewritten sections follow a derivation-first exposition, in the
+tradition of Arnold's and Gelfand's teaching rather than Bourbaki's: a
+definition or theorem is not stated and then explained, it is *earned*.
+Pose the question or concrete problem that forces it, walk the chain of
+reasoning that discovers it, and only then name and formalize the result
+— proof and motivation are one continuous argument, not two separated
+blocks. There is no fixed Definition→Theorem→Proof→Remark skeleton to
+fill in; structure follows the logic of the argument. Do not open a
+section or chapter with a narrative "story" framing or a "Picture it like
+this" analogy box in place of doing the derivation. Every type-theory or
+category-theory term still gets a formal definition (ideally with a
+citation — see [`lean_book/bibliography.md`](lean_book/bibliography.md))
+and a worked example; abstract or structural motivation is preferred over
+a contrived real-world scenario. Exercises favor fewer, escalating,
+proof-heavy problems ("Prove that...", "Show that...") over repetitive
+drills, and should not give away their own answer inline — solutions
+belong in `lean_book/15-appendix-solutions/`.
+This is now the style of the whole book; [Chapter 7](lean_book/07-groups/00-index.md)
+is a good reference example if you want to see it applied in full.
 
 ## Lean code
 

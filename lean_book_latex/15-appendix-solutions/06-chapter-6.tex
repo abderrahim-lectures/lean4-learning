@@ -1,6 +1,18 @@
 \section{Chapter 6: Rigor check --- structures, universes, and equality}\label{sec:15-appendix-solutions:06-chapter-6:1}
 
-\textbf{1. \texttt{rfl} predictions}
+\textbf{1. Why Mathlib uses \texttt{class}}
+
+\texttt{class} changes only \emph{how} Lean finds an instance, automatic search through registered \texttt{instance}s rather than an explicit argument, not what data the structure holds. That difference in \emph{how it is found} is exactly the ergonomic payoff a large shared library needs. Automatic instance resolution lets \texttt{+}/\texttt{*}/\texttt{1} resolve at every registered type with no \texttt{Grp : Group G} argument threaded through every theorem by hand; a huge library like Mathlib, applying the same lemma to hundreds of unrelated types, could not tolerate carrying that argument explicitly everywhere. This book delays that payoff on purpose, so the underlying data is seen plainly first, before the convenience of automatic resolution hides it.
+
+\textbf{2. Why the universe hierarchy does not repeat the paradox one level up}
+
+The Russell paradox needs a type containing \emph{itself}. \texttt{Type i : Type (i+1)} is always one level higher than what it classifies, so no universe ever contains its own code; \texttt{Type 1} classifies \texttt{Type 0}, not itself, and \texttt{Type 2} classifies \texttt{Type 1}, not itself, and so on. The hierarchy is infinite specifically so this containment can never close the loop back onto a universe classifying itself.
+
+\textbf{3. \texttt{rfl} versus \texttt{decide}}
+
+\texttt{rfl} checks that two terms reduce to an identical normal form by computation, unfolding definitions and beta-reducing. \texttt{decide} instead runs the algorithm supplied by a \texttt{Decidable} instance for the proposition and checks that it computes to \texttt{true}. They overlap on simple closed arithmetic (both close \texttt{2 + 2 = 4}), but only \texttt{decide} can settle a proposition like \texttt{¬ (3 ∣ 10)}, which is not stated as an equality of two terms at all, so there is no normal form for \texttt{rfl} to compare.
+
+\textbf{4. \texttt{rfl} predictions}
 
 \begin{lstlisting}
 example : (2 : Nat) * 3 = 3 + 3 := rfl
@@ -14,7 +26,7 @@ example (n : Nat) : n * 2 = n + n := rfl
 
 One might first guess this also succeeds, but the reason requires elaboration. \texttt{2} is \texttt{Nat.succ (Nat.succ Nat.zero)}, so \texttt{n * 2} unfolds via the step clause twice: \texttt{n * 2 = n * 1 + n = (n * 0 + n) + n = (0 + n) + n}. Since \texttt{Nat.add} recurses on its \emph{second} argument, \texttt{0 + n} is not immediately \texttt{n} by definition (this is the same asymmetry Chapter 5 relied on for \texttt{my\_\allowbreak{}add\_\allowbreak{}comm}). Hence this reduces to \texttt{(0 + n) + n}, which is not syntactically \texttt{n + n} unless \texttt{0 + n} also reduces to \texttt{n}. It does not, by definition. Thus, contrary to a first guess, \textbf{this does not type-check as \texttt{rfl}} in general. Confirming this directly, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} fails, while \texttt{by rw [Nat.mul\_\allowbreak{}two]} (or an explicit induction) succeeds instead. Note this is \texttt{Nat.mul\_\allowbreak{}two : n * 2 = n + n}, not \texttt{Nat.two\_\allowbreak{}mul : 2 * n = n + n}, since the goal has \texttt{n} on the left of \texttt{*}. The lesson is that multiplying by a literal does not collapse to \texttt{rfl} for free once a general variable \texttt{n} sits on the ``wrong'' side of an asymmetric recursion. This is the same reason \texttt{0 + n = n} required real induction in Chapter 5.
 
-\textbf{2. \texttt{MyGroup} as a type class}
+\textbf{5. \texttt{MyGroup} as a type class}
 
 \begin{lstlisting}
 class MyGroup (G : Type) where
@@ -48,11 +60,11 @@ def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x
 
 That difference in how it is found is exactly what makes \texttt{opTwiceTC} possible. It is written once, in a generic way, against the \texttt{[MyGroup G]} assumption, with no mention of \texttt{Int} anywhere. At the \texttt{\#eval} call site, Lean needs a \texttt{MyGroup Int} to run \texttt{MyGroup.op}. It searches the instances it has registered, finds the one declared above, and plugs it in automatically. A plain \texttt{def} would not take part in this kind of lookup.
 
-\textbf{3. Why \texttt{Type → Type} needs \texttt{Type 1}}
+\textbf{6. Why \texttt{Type → Type} needs \texttt{Type 1}}
 
 Suppose \texttt{Type → Type} (the type of \texttt{Group} itself, before we supply a carrier) lived in \texttt{Type 0} alongside \texttt{Nat}, \texttt{Bool}, and every other ordinary type. Then \texttt{Type} itself, being an argument type appearing inside \texttt{Type → Type}, would need to be an element of \texttt{Type 0}. In other words, this would require \texttt{Type : Type}. But \texttt{Type} is meant to be (roughly) the type of \emph{all} \texttt{Type 0}-level types. If it were itself one such type, one could rebuild the Russell paradox inside Lean (a self-referential type such as ``the type of all types not containing themselves''). The kernel of Lean avoids this, anything built from \texttt{Type 0} (such as a function \emph{into or out of} \texttt{Type 0}) that is not itself a small type must bump up a universe level. That is why \texttt{Type → Type} lands in \texttt{Type 1} rather than \texttt{Type 0}.
 
-\textbf{4. A true propositional equality not provable by \texttt{rfl}}
+\textbf{7. A true propositional equality not provable by \texttt{rfl}}
 
 \begin{lstlisting}
 theorem add_one_eq_succ (n : Nat) : n + 1 = Nat.succ n := rfl

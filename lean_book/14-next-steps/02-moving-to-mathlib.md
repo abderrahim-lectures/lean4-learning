@@ -64,8 +64,12 @@ example : ∀ a : ZMod 3, a ≠ 0 → ∃ b, a * b = 1 := by decide
 6-7.** `Equiv.Perm (Fin 3)` (the Mathlib analogue of `perm3Group` in Chapter 7, Section 4)
 never had subgroups defined for it. The book built one
 group, not the lattice of its subgroups. The `Subgroup` type in Mathlib
-already comes with the theorem of Lagrange attached, so applying it to a real
-subgroup costs nothing beyond naming the subgroup.
+already comes with the theorem of Lagrange, "the order of a subgroup
+divides the order of the group" ([DummitFoote2003], §3.2, Theorem 8),
+attached, so applying it to a real subgroup costs nothing beyond naming
+the subgroup.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
 ```lean
 -- Lagrange's theorem, fully generic: a subgroup's size divides the

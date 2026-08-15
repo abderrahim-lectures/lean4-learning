@@ -4,7 +4,25 @@
 
 ---
 
-**1. `theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a`**
+**1. Could `id_unique` route through `Grp.op Grp.id e'` instead?**
+
+Not directly. `h` is the hypothesis that `e'` is a *left* identity, so it
+only describes `Grp.op e' a` for arbitrary `a`; it says nothing about
+`Grp.op a e'`. The proof of `id_unique` has to route through the one
+expression, `Grp.op e' Grp.id`, that both given facts (`h` and
+`Grp.id_right`) actually describe, not any expression that happens to
+mention both sides.
+
+**2. Can `inv (a op b)` be computed directly from the axioms?**
+
+Not from the axioms alone. `Group` has no field that produces `inv` of a
+*product* in closed form, only `inv` of a single element. Reducing
+"compute this" to "verify this satisfies the defining property" of
+Theorem 2 is not a shortcut taken for convenience; it is the only route
+the axioms actually offer, which is exactly why `inv_op` is proved by
+characterization rather than direct computation.
+
+**3. `theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a`**
 
 ```lean
 theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
@@ -18,7 +36,7 @@ By `left_inverse_unique` (Chapter 8, Theorem 2), to show
 `a = Grp.inv (Grp.inv a)` it suffices to show `a` is a left inverse of
 `Grp.inv a`, i.e. `Grp.op a (Grp.inv a) = Grp.id`, exactly `Grp.inv_right a`.
 
-**2. `theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c`**
+**4. `theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c`**
 
 ```lean
 theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c := by

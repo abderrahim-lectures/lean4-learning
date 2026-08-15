@@ -12,28 +12,32 @@
 - Choose between term mode and tactic mode for a given proof.
 - Recognize when a sub-goal deserves its own named lemma.
 
-## The story of this chapter
+## What efficiency means once the reasoning is understood
 
-Chapters 8 and 10 were about *finding* a proof by hand, deliberately slowly,
-so the underlying reasoning is never hidden. This chapter addresses the
-other half, once the reason a proof works is understood, how is it written
-(and found) faster in day-to-day use? Efficient Lean does not mean "type
-less." It means knowing which automation to trust, knowing when it is
-still worth being explicit, and knowing how to structure lemmas so that
-the same fact is not derived twice. Each section below asks one question
-about that trade-off.
-
-1. What if Lean already knows the lemma or the proof you need? Can it just
-   find it for you?
-2. When is a goal so mechanical that full automation (`decide`, `omega`,
-   `norm_num`) is the right call, and when does the search still need
-   human hands?
-3. `simp` rewrites thousands of steps at once. But what exactly does it
-   trade away for that speed, and when should you decline the trade?
-4. Should every proof be written as a tactic script, or are some of them
-   clearer as a single term?
-5. After a fact is proved once, how do you package it so the next proof
-   that needs it is a lookup, not a re-derivation?
+Chapters 8 and 10 found proofs by hand, deliberately slowly, so the
+underlying reasoning was never hidden. Once the reason a proof works is
+understood, the same fact should not have to be re-derived, by hand, every
+time it recurs; the question left is how to write and find proofs faster
+without losing that understanding. "Faster" does not mean "type less." A
+lemma that already exists in the environment should be looked up, not
+re-proved, hence the search tactics `exact?`/`apply?`
+([Section 1](01-search-tactics.md)). A goal that reduces to a terminating
+computation, decidable equality or inequality on `Nat`/`Int`, a concrete
+numeral, should be settled by running that computation, `decide`, `omega`,
+`norm_num`, rather than by a hand-built `rw` chain, exactly because a
+decision procedure exists precisely where hand-derivation adds nothing a
+human proof of the general case still needs
+([Section 2](02-decision-procedures.md)). Once a family of rewrites is
+understood well enough to be trusted as a set, applying that whole set at
+once with `simp` is the efficient move, at the cost of not seeing which
+member of the set actually fired ([Section 3](03-simp.md)). A short proof
+reads better as a single term; a proof with several sequential steps or
+case splits reads (and is written) better as a tactic script, so the
+choice between term mode and tactic mode is about readability, not power
+([Section 4](04-term-vs-tactic-mode.md)). And a sub-goal that already
+recurs, or that states an independent mathematical fact in its own right,
+should be pulled out and named once, so that every later proof of it is a
+lookup rather than a re-derivation ([Section 5](05-structuring-lemmas.md)).
 
 ## Sections
 

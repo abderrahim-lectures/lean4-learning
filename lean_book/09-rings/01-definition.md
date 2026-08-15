@@ -4,6 +4,21 @@
 
 ---
 
+A `Group` (Chapter 7) has one operation. Arithmetic on $\mathbb{Z}$ has
+more structure than that: multiplication sits alongside addition, and
+$a(b+c) = ab+ac$ ties the two together. What is the minimal set of
+axioms capturing "two operations, one of them a group, the second
+compatible with the first via distributivity"? Every familiar instance,
+integers, polynomials, matrices under entrywise addition, has
+commutative addition; Chapter 7's `Group` alone does not require it, so
+the additive part is strengthened to a *commutative* group. The second
+operation, multiplication, is required to be associative with a
+two-sided identity, an ordinary monoid structure, but not to commute or
+have inverses: neither holds for $2 \times 2$ matrices, which must still
+count as a ring. Distributivity, stated on both sides since
+multiplication is not assumed commutative, ties the two operations
+together. These three ingredients give the definition.
+
 A **ring** is a set $R$ with *two* binary operations, addition and
 multiplication, such that:
 
@@ -20,9 +35,9 @@ Some textbooks do not require a multiplicative identity. Such a structure
 is called a *rng*. The missing "i" stands for the missing identity. This
 book includes the identity, since that is the more common convention.
 
-Note that (R1) requires **commutative** addition, unlike the general `Group` of
-Chapter 7. Hence, before defining `Ring`, we first define what "commutative"
-means as an extension of `Group`.
+(R1) is exactly the strengthening argued for above: `Group` in Chapter 7
+did not require commutativity, so before `Ring` can be translated into
+Lean, "commutative" must first be defined as an extension of `Group`.
 
 ### Sources, quoted
 

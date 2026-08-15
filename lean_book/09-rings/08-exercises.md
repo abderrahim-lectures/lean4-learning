@@ -11,30 +11,6 @@ finite carrier (`Fin 3`) lets every axiom be checked by `decide`; an
 infinite one (`Int`, matrices over `Int`) needs a real proof, or a
 computed counterexample (`#eval`) to refute commutativity outright.
 
-**Socratic questions.**
-
-1. *`Ring` has no `mul_comm` field, yet `intRing` and `fin3Ring` are both
-   commutative in practice. Is the missing field a gap in the
-   definition?* No. `Ring` deliberately states only what every ring
-   must satisfy. `Int` and `Fin 3` *happen* to commute, as a fact provable
-   from their specific `mul`, not as something `Ring` assumes on their
-   behalf. `mat2Ring` is the proof that a genuine `Ring` need not commute
-   at all.
-2. *The `mul_assoc` of `mat2Ring` needed a twelve-line proof; that of `intRing`
-   needed one. Both are proving associativity. Why such different
-   effort?* `Int.mul_assoc` is a single already-proved core-library fact
-   to cite. The associativity of matrix multiplication is not a citation away.
-   Each entry of $(XY)Z$ expands to four cross-terms that must be
-   regrouped to match the four cross-terms of $X(YZ)$, entry by entry. The
-   *content* being proved is bigger, not just the notation.
-3. *`decide` closed every axiom for `fin3Ring` but cannot touch a single
-   axiom of `intRing`. What property of the carrier decides which side of
-   that line a ring falls on?* Finiteness (and decidable equality) of the
-   carrier, not the ring axioms themselves. `by decide` brute-forces
-   every combination of finitely many elements, which is only possible
-   when there are finitely many to try. `Int` has none of that; a real
-   argument is the only way in.
-
 1. Build `boolAndOrRing`. This is surprisingly difficult, is
    there a natural ring structure on `Bool`? (Hint, think of `Bool` as
    $\mathbb{Z}/2\mathbb{Z}$. Addition is XOR, multiplication is AND. Build

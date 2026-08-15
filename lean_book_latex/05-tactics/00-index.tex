@@ -17,22 +17,11 @@
 \end{learningobjectives}
 
 
-Writing proof \emph{terms} directly (as in Chapter 4) quickly becomes hard to manage. Instead, Lean provides \textbf{tactic mode}, entered with \texttt{by}, in which a ``goal'' is worked step by step, much as one would write a proof on paper. The real subject of this chapter is not the list of tactics below, but \textbf{how to work a goal whose proof is not yet known}, since that is the skill the rest of the book practices. The tactic reference is secondary, read it once, then return to it as needed. Each section below builds that skill one question at a time.
+\section{What forces tactic mode}\label{sec:05-tactics:00-index:2}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{What does a Lean goal state look like, and what is the first strategy when no proof is in hand?} (\hyperref[sec:05-tactics:01-goal-state:1]{Section 1}) The anatomy of a goal, and the habit of reading every hypothesis before trying anything.
-\item
-  \textbf{Which four tactics does every proof reduce to, and what does each one actually do to a goal?} (\hyperref[sec:05-tactics:02-core-tactics:1]{Section 2}) \texttt{intro}, \texttt{exact}, \texttt{apply}, \texttt{rw}, each mapped to the ordinary inference rule it realizes.
-\item
-  \textbf{When a tactic fails, Lean does not whisper. It points.} (\hyperref[sec:05-tactics:03-reading-failures:1]{Section 3}) How to read an error message as a debugging trace, and when \texttt{sorry} is a placeholder to be filled versus a flag that something deeper must change.
-\item
-  \textbf{How does one reason by cases or by induction on data that is defined recursively?} (\hyperref[sec:05-tactics:04-more-tactics:1]{Section 4}) \texttt{cases}, \texttt{induction}, \texttt{constructor}, \texttt{unfold}, the tactics that open up inductively-defined data.
-\item
-  \textbf{Can all of the above be assembled into a real inductive proof from scratch, one with no automation to hide behind?} (\hyperref[sec:05-tactics:05-worked-example:1]{Section 5}) Commutativity of \texttt{Nat.add}, built one tactic at a time.
-\end{enumerate}
+Writing proof \emph{terms} directly (as in Chapter 4) quickly becomes hard to manage as a proof grows. Lean's alternative is \textbf{tactic mode}, entered with \texttt{by}, in which a ``goal'' is worked step by step, much as one would write a proof on paper. The real subject of this chapter is not the list of tactics below, but \textbf{how to work a goal whose proof is not yet known}, since that is the skill the rest of the book practices. The tactic reference is secondary, read it once, then return to it as needed.
+
+The anatomy of a goal, and the habit of reading every hypothesis before trying anything, comes first (\hyperref[sec:05-tactics:01-goal-state:1]{Section 1}). Four tactics carry the bulk of any proof, \texttt{intro}, \texttt{exact}, \texttt{apply}, \texttt{rw}, each mapped to the ordinary inference rule it realizes (\hyperref[sec:05-tactics:02-core-tactics:1]{Section 2}). When a tactic fails, Lean does not whisper, it points; reading an error message as a debugging trace, and telling apart a \texttt{sorry} that is a placeholder to be filled from one flagging that something deeper must change, comes next (\hyperref[sec:05-tactics:03-reading-failures:1]{Section 3}). Reasoning by cases or by induction on data that is defined recursively needs its own tactics, \texttt{cases}, \texttt{induction}, \texttt{constructor}, \texttt{unfold}, the tools that open up inductively-defined data (\hyperref[sec:05-tactics:04-more-tactics:1]{Section 4}). Assembling all of the above into a real inductive proof from scratch, with no automation to hide behind, commutativity of \texttt{Nat.add}, built one tactic at a time, closes the loop (\hyperref[sec:05-tactics:05-worked-example:1]{Section 5}).
 
 
 % Auto-appended: input every other section in order.

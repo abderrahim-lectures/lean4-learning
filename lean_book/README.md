@@ -13,6 +13,27 @@ substantially, the path category of a quiver as the free category on a quiver
 in Chapter 12) is called out explicitly wherever it clarifies what the
 Lean code is really encoding.
 
+## Pedagogical approach
+
+This book teaches by derivation, not by dispensation, in the tradition
+of Arnold's and Gelfand's teaching rather than Bourbaki's. "It is
+impossible to understand an unmotivated definition" (Arnold, *On
+Teaching Mathematics*, 1997): every definition and theorem in this book
+is *earned*. A section poses the question or concrete problem that forces
+a concept, walks the reasoning that discovers it, and only then names
+and formalizes the result, mirroring Gelfand's Moscow seminar method of
+finding the simplest example that captures a phenomenon before finding
+the language to state it generally. There is no fixed
+Definition→Theorem→Proof→Remark skeleton imposed on that reasoning;
+structure follows the logic of the argument, not a template. Formulas
+and theorems are proved before they are used, never handed down as rules
+to memorize. Exercises favor fewer, harder, escalating, proof-heavy
+problems over repetitive drills, and do not give away their own answer;
+solutions live in [15-appendix-solutions/](15-appendix-solutions/00-index.md).
+See [CONTRIBUTING.md](../CONTRIBUTING.md#book-prose-conventions) for
+the convention as a checklist, and
+[Chapter 7](07-groups/00-index.md) for it applied in full.
+
 ## How to read this book
 
 Not every reader needs every chapter in order. See
@@ -100,6 +121,22 @@ like this:", rewriting all of them as plain-language explanations
 grounded in everyday analogies rather than a compressed technical
 restatement, while the quotes and citations themselves stay exactly as
 rigorous as before.
+
+A sixth pass reverses part of the fifth, book-wide: narrative chapter
+openers and bare "Picture it like this" analogy boxes are replaced with a
+derivation-first exposition in the tradition of Arnold's and Gelfand's
+teaching, "it is impossible to understand an unmotivated definition." A
+definition or theorem is no longer stated and then explained; each
+section poses the question that forces it and walks the reasoning that
+discovers it, naming the result once it has been earned, with no fixed
+Definition-Theorem-Proof template imposed on that reasoning. Exercises
+that gave away their own answer inline ("Socratic questions") were
+converted to stated problems, with solutions moved to
+[15-appendix-solutions/](15-appendix-solutions/00-index.md). Worked
+examples, citations, and the "Picture it like this" glosses inside
+"Sources, quoted" citation boxes (direct quotes) are unaffected.
+[Chapter 7](07-groups/00-index.md) was the pilot; the same treatment now
+covers every chapter.
 See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Table of contents
