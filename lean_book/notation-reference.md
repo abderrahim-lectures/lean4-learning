@@ -7,8 +7,10 @@
 A lookup table connecting the mathematical notation used in the prose of
 this book to the corresponding Lean syntax used in its code. This page is a
 quick reference, not something to read start to finish. Every row is
-built up and explained properly the first time it is needed, at the
-chapter cited in the last column.
+*earned*, not just introduced, at the chapter cited in the last column
+(see [Pedagogical approach](README.md#pedagogical-approach)): the symbol
+appears here only as a shorthand for reasoning already carried out in
+full there.
 
 **Note:** `·` in mathematical prose maps to different Lean constructs
 depending on context. See the two "Group multiplication" and "Module
