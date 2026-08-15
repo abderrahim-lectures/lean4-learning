@@ -44,7 +44,7 @@ at a time, closes the loop ([Section 5](05-worked-example.md)).
 1. [The goal state, and a worked strategy session](01-goal-state.md)
 2. [Core tactics](02-core-tactics.md)
 3. [Reading a tactic failure, and `sorry`](03-reading-failures.md)
-4. [More tactics: `simp`, `constructor`, `cases`, `induction`, `unfold`](04-more-tactics.md)
+4. [More tactics: `constructor`, `cases`, `induction`, `unfold`, `simp`](04-more-tactics.md)
 5. [Worked example: proving `Nat.add` is commutative from scratch](05-worked-example.md)
 6. [Exercises](06-exercises.md)
 
