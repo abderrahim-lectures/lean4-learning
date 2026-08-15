@@ -32,7 +32,7 @@ example : Field (ZMod 3) := inferInstance
 example : (*$\forall$*) a : ZMod 3, a (*$\neq$*) 0 (*$\rightarrow$*) (*$\exists$*) b, a * b = 1 := by decide
 \end{lstlisting}
 
-\textbf{The theorem of Lagrange, applied to the non-abelian example from Chapters 6-7.} \texttt{Equiv.Perm (Fin 3)} (the Mathlib analogue of \texttt{perm3Group} in Chapter 7, Section 4) never had subgroups defined for it. The book built one group, not the lattice of its subgroups. The \texttt{Subgroup} type in Mathlib already comes with the theorem of Lagrange attached, so applying it to a real subgroup costs nothing beyond naming the subgroup.
+\textbf{The theorem of Lagrange, applied to the non-abelian example from Chapters 6-7.} \texttt{Equiv.Perm (Fin 3)} (the Mathlib analogue of \texttt{perm3Group} in Chapter 7, Section 4) never had subgroups defined for it. The book built one group, not the lattice of its subgroups. The \texttt{Subgroup} type in Mathlib already comes with the theorem of Lagrange, ``the order of a subgroup divides the order of the group'' (\cite{DummitFoote2003}, §3.2, Theorem 8), attached, so applying it to a real subgroup costs nothing beyond naming the subgroup.
 
 \begin{lstlisting}
 -- Lagrange's theorem, fully generic: a subgroup's size divides the

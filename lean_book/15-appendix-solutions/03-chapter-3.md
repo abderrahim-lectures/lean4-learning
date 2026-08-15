@@ -4,7 +4,60 @@
 
 ---
 
-**1. `Rectangle` and `area`**
+**1. Why `⟨0, 0⟩` is unambiguous**
+
+`def origin : Point := ⟨0, 0⟩` type-checks unambiguously because the
+*expected type* `Point` is already fixed by the `def`'s signature before
+the right-hand side is elaborated. Lean reads off `Point`'s constructor
+and field order from that expected type alone, so `⟨0, 0⟩` needs no
+further information to know it means `Point.mk 0 0` rather than, say,
+`Pair.mk 0 0`.
+
+This property fails whenever no expected type is available, or several
+structures with the same field arity are simultaneously in scope with
+nothing to disambiguate them: `#check (⟨0, 0⟩ : _)` with the placeholder
+left fully open. Lean cannot choose a constructor from field values
+alone, and reports an "expected type" error rather than a fabricated
+guess. The named form `{ x := ..., y := ... }` sidesteps this, since the
+field names themselves pin down the constructor regardless of context.
+
+**2. Writing out `.toPoint` by hand**
+
+Without `extends`, the projection `extends Point` generates would have to
+be written explicitly, as
+`def Point3D.toPoint (p : Point3D) : Point := { x := p.x, y := p.y }`.
+
+This is precisely a **forgetful functor**
+([Chapter 2, Section 1](../02-terminology-and-coc/01-terminology.md), and
+the Mathematical reading box of
+[Section 3](../03-functions-and-structures/03-extending-structures.md)):
+a map that keeps some of the data of a structure (here, `x` and `y`) and
+discards the rest (`z`). `extends` generates exactly this projection
+automatically, under the name `.toPoint`, rather than requiring it to be
+written by hand for every extension.
+
+**3. Proof fields change nothing about type-checking**
+
+Claim: a `structure` field whose declared type is a proposition `P` is
+checked by exactly the same mechanism as a field whose declared type is
+`Nat` or any other `Type`.
+
+*Proof.* Field checking in a `structure` constructor is uniform across
+all fields: given `{ f₁ := e₁, ..., fₙ := eₙ }`, Lean elaborates each `eᵢ`
+against the declared type of `fᵢ` and accepts the term exactly when that
+type-check succeeds, regardless of which universe (`Type` or `Prop`) the
+declared type inhabits. Supplying a proof field is the ordinary case of
+this rule with `fᵢ : P` for some `P : Prop`; the term `eᵢ` supplied must
+be a proof of `P`, checked once, at construction time, the same way `eᵢ`
+supplied for a `Nat`-typed field must genuinely have type `Nat`. $\blacksquare$
+
+This is exactly what makes `Group` (Chapter 7) impossible to build
+carelessly. Its axiom fields (`assoc`, `id_left`, ...) are `Prop`-valued
+fields like any other, so a `Group` value cannot be assembled without
+supplying an actual proof of each axiom, checked by the same constructor
+mechanism that checks `op`, `id`, and `inv`.
+
+**4. `Rectangle` and `area`**
 
 ```lean
 structure Rectangle where
@@ -22,7 +75,7 @@ and `.height` projection and multiplies them. Nothing here differs from
 `Point`/`shift` in Section 1, only the field names and the arithmetic
 change.
 
-**2. `Box α` and `unwrap`**
+**5. `Box α` and `unwrap`**
 
 ```lean
 structure Box (α : Type) where
@@ -45,7 +98,7 @@ generated from the one `structure Box (α : Type)` declaration, the way
 of `Pair`. `unwrap` is implicit in `α`, exactly like `identity` in
 Chapter 1, since the type of `b.value` already determines it.
 
-**3. `ColoredRectangle` and the forgetful projection**
+**6. `ColoredRectangle` and the forgetful projection**
 
 ```lean
 structure ColoredRectangle extends Rectangle where

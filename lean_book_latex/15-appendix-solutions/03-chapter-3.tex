@@ -1,6 +1,26 @@
 \section{Chapter 3: Functions, definitions, and structures}\label{sec:15-appendix-solutions:03-chapter-3:1}
 
-\textbf{1. \texttt{Rectangle} and \texttt{area}}
+\textbf{1. Why \texttt{⟨0, 0⟩} is unambiguous}
+
+\texttt{def origin : Point := ⟨0, 0⟩} type-checks unambiguously because the \emph{expected type} \texttt{Point} is already fixed by the \texttt{def}'s signature before the right-hand side is elaborated. Lean reads off \texttt{Point}'s constructor and field order from that expected type alone, so \texttt{⟨0, 0⟩} needs no further information to know it means \texttt{Point.mk 0 0} rather than, say, \texttt{Pair.mk 0 0}.
+
+This property fails whenever no expected type is available, or several structures with the same field arity are simultaneously in scope with nothing to disambiguate them: \texttt{\#check (⟨0, 0⟩ : \_\allowbreak{})} with the placeholder left fully open. Lean cannot choose a constructor from field values alone, and reports an ``expected type'' error rather than a fabricated guess. The named form \texttt{\{ x := ..., y := ... \}} sidesteps this, since the field names themselves pin down the constructor regardless of context.
+
+\textbf{2. Writing out \texttt{.toPoint} by hand}
+
+Without \texttt{extends}, the projection \texttt{extends Point} generates would have to be written explicitly, as \texttt{def Point3D.toPoint (p : Point3D) : Point := \{ x := p.x, y := p.y \}}.
+
+This is precisely a \textbf{forgetful functor} (\hyperref[sec:02-terminology-and-coc:01-terminology:1]{Chapter 2, Section 1}, and the Mathematical reading box of \hyperref[sec:03-functions-and-structures:03-extending-structures:1]{Section 3}): a map that keeps some of the data of a structure (here, \texttt{x} and \texttt{y}) and discards the rest (\texttt{z}). \texttt{extends} generates exactly this projection automatically, under the name \texttt{.toPoint}, rather than requiring it to be written by hand for every extension.
+
+\textbf{3. Proof fields change nothing about type-checking}
+
+Claim: a \texttt{structure} field whose declared type is a proposition \texttt{P} is checked by exactly the same mechanism as a field whose declared type is \texttt{Nat} or any other \texttt{Type}.
+
+\emph{Proof.} Field checking in a \texttt{structure} constructor is uniform across all fields: given \texttt{\{ f₁ := e₁, ..., fₙ := eₙ \}}, Lean elaborates each \texttt{eᵢ} against the declared type of \texttt{fᵢ} and accepts the term exactly when that type-check succeeds, regardless of which universe (\texttt{Type} or \texttt{Prop}) the declared type inhabits. Supplying a proof field is the ordinary case of this rule with \texttt{fᵢ : P} for some \texttt{P : Prop}; the term \texttt{eᵢ} supplied must be a proof of \texttt{P}, checked once, at construction time, the same way \texttt{eᵢ} supplied for a \texttt{Nat}-typed field must genuinely have type \texttt{Nat}. \(\blacksquare\)
+
+This is exactly what makes \texttt{Group} (Chapter 7) impossible to build carelessly. Its axiom fields (\texttt{assoc}, \texttt{id\_\allowbreak{}left}, \ldots) are \texttt{Prop}-valued fields like any other, so a \texttt{Group} value cannot be assembled without supplying an actual proof of each axiom, checked by the same constructor mechanism that checks \texttt{op}, \texttt{id}, and \texttt{inv}.
+
+\textbf{4. \texttt{Rectangle} and \texttt{area}}
 
 \begin{lstlisting}
 structure Rectangle where
@@ -14,7 +34,7 @@ def area (r : Rectangle) : Nat := r.width * r.height
 
 \texttt{⟨3, 4⟩} is the anonymous constructor, filling \texttt{width} and \texttt{height} in field-declaration order. \texttt{area} reads both fields back out via \texttt{.width} and \texttt{.height} projection and multiplies them. Nothing here differs from \texttt{Point}/\texttt{shift} in Section 1, only the field names and the arithmetic change.
 
-\textbf{2. \texttt{Box α} and \texttt{unwrap}}
+\textbf{5. \texttt{Box α} and \texttt{unwrap}}
 
 \begin{lstlisting}
 structure Box ((*$\alpha$*) : Type) where
@@ -31,7 +51,7 @@ def strBox : Box String := (*$\langle$*)"seven"(*$\rangle$*)
 
 \texttt{Box} is \texttt{Pair} with one slot instead of two, the same ``parameterize by the type itself'' idea from Section 2, at its simplest possible size. \texttt{Box Nat} and \texttt{Box String} are two different types, generated from the one \texttt{structure Box (α : Type)} declaration, the way \texttt{Pair Nat String} and \texttt{Pair String Nat} are two different instantiations of \texttt{Pair}. \texttt{unwrap} is implicit in \texttt{α}, exactly like \texttt{identity} in Chapter 1, since the type of \texttt{b.value} already determines it.
 
-\textbf{3. \texttt{ColoredRectangle} and the forgetful projection}
+\textbf{6. \texttt{ColoredRectangle} and the forgetful projection}
 
 \begin{lstlisting}
 structure ColoredRectangle extends Rectangle where

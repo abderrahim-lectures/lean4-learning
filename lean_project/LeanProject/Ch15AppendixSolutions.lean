@@ -74,6 +74,9 @@ theorem or_comm_ex {P Q : Prop} (h : P ∨ Q) : Q ∨ P :=
 theorem exists_gt_zero : ∃ n : Nat, n > 0 :=
   ⟨1, by decide⟩
 
+-- Exercise 5:
+theorem nat_add_zero (n : Nat) : n + 0 = n := rfl
+
 -- ── Chapter 5: tactics ────────────────────────────────────────────────
 
 -- Exercise 1:
@@ -90,6 +93,13 @@ theorem nat_mul_zero (n : Nat) : n * 0 = 0 := by
 theorem modus_ponens_tac {P Q : Prop} (hpq : P → Q) (hp : P) : Q := by
   apply hpq
   exact hp
+
+-- Exercise 5:
+theorem nat_zero_mul (n : Nat) : 0 * n = 0 := by
+  induction n with
+  | zero => rfl
+  | succ k ih =>
+    rw [Nat.mul_succ, ih]
 
 -- ── Chapter 6: rigor check ────────────────────────────────────────────
 

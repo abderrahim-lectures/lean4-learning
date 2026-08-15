@@ -1,6 +1,6 @@
 \section{A first example: the integers under addition}\label{sec:07-groups:03-integers-example:1}
 
-Consider packaging \((\mathbb{Z}, +, 0, -(-))\) as a \texttt{Group Int}. The construction proceeds field by field, proving each obligation with a short, explicit tactic proof.
+A definition with no inhabitant is empty. Does anything satisfy \texttt{Group}? \((\mathbb{Z}, +, 0, -(-))\) does, and the construction proceeds field by field, each obligation closed by a short, explicit tactic proof rather than assumed.
 
 \begin{lstlisting}
 def intGroup : Group Int where
@@ -29,16 +29,15 @@ def intGroup : Group Int where
     exact Int.add_right_neg a
 \end{lstlisting}
 
-Each field is proved separately. Each proof is a single \texttt{intro} (to name the universally quantified variables) followed by \texttt{exact} naming the exact core-library lemma that already states this fact about \texttt{Int}. No step is hidden. \texttt{Int.add\_\allowbreak{}assoc}, \texttt{Int.zero\_\allowbreak{}add}, and the rest are themselves proved (elsewhere, in the core library of Lean) by induction on the same \texttt{Nat}/\texttt{Int} representation introduced in Chapter 5. These lemmas are reused here rather than re-deriving integer arithmetic from scratch.
+Each field is a single \texttt{intro} followed by \texttt{exact}, naming the core-library lemma that already states the fact about \texttt{Int}. Nothing is hidden: \texttt{Int.add\_\allowbreak{}assoc}, \texttt{Int.zero\_\allowbreak{}add}, and the rest are themselves proved, elsewhere, by induction on the same representation of \texttt{Nat}/\texttt{Int} from Chapter 5, and reused here rather than re-derived.
 
 \begin{mathreading}
 
-This shows \((\mathbb{Z}, +, 0, -)\) as an object of the category \(\mathbf{Grp}\). The term \texttt{intGroup} is a \emph{proof that \(\mathbb{Z}\) is a group}, built by giving the data \((+, 0, -)\) and verifying each axiom. The verification is not re-proved here but \emph{cited}. Associativity is \(\mathrm{Int.add\_assoc}\), the identity laws are \(0 + a = a
-= a + 0\), and the inverse laws are \((-a) + a = 0 = a + (-a)\). In textbook terms this is the one-line remark ``\(\mathbb{Z}\) under addition is an abelian group,'' with the underlying lemmas about \(\mathbb{Z}\) (themselves ultimately inductions on the integers) written out in full instead of just assumed.
+This exhibits \((\mathbb{Z}, +, 0, -)\) as an object of \(\mathbf{Grp}\). \texttt{intGroup} is a proof that \(\mathbb{Z}\) is a group, built by supplying \((+, 0, -)\) and citing, not re-proving, each axiom: associativity is \(\mathrm{Int.add\_assoc}\), the identity laws are \(0 + a = a = a + 0\), the inverse laws are \((-a) + a = 0 = a + (-a)\). This is the one-line textbook remark ``\(\mathbb{Z}\) under addition is an abelian group,'' with the underlying inductions on \(\mathbb{Z}\) written out rather than assumed.
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} Mathlib requires no \texttt{intGroup}-style bundle at all. \texttt{Int} is \emph{already} registered as an \href{https://loogle.lean-lang.org/?q=AddCommGroup}{\texttt{AddCommGroup}} instance, and the five axioms above are available as free-standing lemmas that apply to every additive group, not just \texttt{Int}.
+\textbf{Mathlib equivalent.} Mathlib needs no \texttt{intGroup}-style bundle at all. \texttt{Int} is already an \href{https://loogle.lean-lang.org/?q=AddCommGroup}{\texttt{AddCommGroup}} instance, and the five axioms above are free-standing lemmas applying to every additive group, not only \texttt{Int}.
 
 \begin{lstlisting}
 example : AddCommGroup Int := inferInstance
@@ -50,4 +49,4 @@ example (a : Int) : -a + a = 0 := neg_add_cancel a
 example (a : Int) : a + -a = 0 := add_neg_cancel a
 \end{lstlisting}
 
-This is the same content as \texttt{intGroup}, the same five facts about \(\mathbb{Z}\). But where the book \emph{assembles} a \texttt{Group Int} term by hand, the Mathlib version has nothing to assemble. The instance already exists, found automatically by \href{https://loogle.lean-lang.org/?q=inferInstance}{\texttt{inferInstance}}. And \href{https://loogle.lean-lang.org/?q=add_assoc}{\texttt{add\_\allowbreak{}assoc}}/\href{https://loogle.lean-lang.org/?q=zero_add}{\texttt{zero\_\allowbreak{}add}}/etc. are generic lemmas about \emph{any} \texttt{AddCommGroup}, so they read somewhat differently from \texttt{Int.add\_\allowbreak{}assoc}. They apply equally well to the \texttt{perm3Group}-style examples of Chapter 7 once those are phrased in the \texttt{Group}/\texttt{AddCommGroup} classes of Mathlib (Chapter 7, Section 4 does exactly that next).
+Same five facts about \(\mathbb{Z}\); where the book \emph{assembles} a \texttt{Group Int} term by hand, the instance already exists, found automatically by \href{https://loogle.lean-lang.org/?q=inferInstance}{\texttt{inferInstance}}. \href{https://loogle.lean-lang.org/?q=add_assoc}{\texttt{add\_\allowbreak{}assoc}}/\href{https://loogle.lean-lang.org/?q=zero_add}{\texttt{zero\_\allowbreak{}add}}/etc. are generic over \emph{any} \texttt{AddCommGroup}, so they apply equally to the \texttt{perm3Group}-style example of Section 4 once phrased in Mathlib's \texttt{Group}/\texttt{AddCommGroup} classes, as that section does next.

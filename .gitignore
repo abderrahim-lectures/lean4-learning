@@ -8,3 +8,6 @@ reviews/**/*.log
 reviews/**/*-raw.md
 reviews/**/.counter
 reviews/**/*.report
+
+# graphify tool artifacts (any depth)
+**/graphify-out/

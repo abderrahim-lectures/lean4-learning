@@ -13,28 +13,13 @@
 \end{learningobjectives}
 
 
-Chapter 8 finished everything Part II had to say about a single operation. A ring is what happens once a second operation is added alongside it, and each section below follows from that one change.
+\section{What a second operation forces}\label{sec:09-rings:00-index:2}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{What, precisely, changes when a second operation is layered onto a group?} (\hyperref[sec:09-rings:01-definition:1]{Section 1}) The additive side must now be commutative, and a compatible multiplication is added, tied to addition by the distributive laws, stated first as ordinary axioms (R1)--(R4), the way Chapter 7 opened with the group axioms before any Lean.
-\item
-  \textbf{Axiom (R1) demands \emph{commutative} addition, but \texttt{Group} in Chapter 7 said nothing about commutativity. Where does that requirement come from in Lean?} (\hyperref[sec:09-rings:02-comm-group:1]{Section 2}) \texttt{CommGroup}, a small \texttt{extends Group G} with one extra field, \texttt{comm}. This is the piece \texttt{Ring} will bundle as its additive part.
-\item
-  \textbf{With that piece in hand, what does the full \texttt{Ring} structure look like?} (\hyperref[sec:09-rings:03-ring:1]{Section 3}) \texttt{CommGroup} supplies (R1) as a single nested field, and the remaining axioms (R2)--(R4) are added directly: the associativity of multiplication, its identity, and the two distributive laws.
-\item
-  \textbf{Is the definition non-vacuous?} (\hyperref[sec:09-rings:04-integers-example:1]{Section 4}) Yes, \((\mathbb{Z}, +, \times, 0, 1)\), reusing \texttt{intGroup} from Chapter 7 for the additive part and citing one core-library lemma per remaining axiom, exactly the pattern Chapter 7 used for \texttt{Group}.
-\item
-  \textbf{\texttt{intRing} is commutative and infinite. Does every ring axiom have to be proved this way, one library citation at a time?} (\hyperref[sec:09-rings:05-finite-ring-example:1]{Section 5}) Not when the carrier is finite. The axioms of \(\mathbb{Z}/3\mathbb{Z}\) are decidable statements about only finitely many elements, so \texttt{decide} can check them by brute enumeration instead.
-\item
-  \textbf{How is the data of this structure actually used, now that it nests a whole \texttt{CommGroup} inside it?} (\hyperref[sec:09-rings:06-accessing-fields:1]{Section 6}) By ordinary field projection, chained one level deeper than Chapter 7, \texttt{Rg.addGrp.op} rather than a single \texttt{Grp.op}.
-\item
-  \textbf{\texttt{intRing} is commutative. Does anything in the definition of \texttt{Ring} actually forbid that, the way permutations in Chapter 7 tested \texttt{Group} for hidden commutativity assumptions?} (\hyperref[sec:09-rings:07-matrices:1]{Section 7}) No, and \(2\times 2\) integer matrices prove it directly, a concrete, genuinely noncommutative ring, built and verified field by field with no shortcuts available.
-\end{enumerate}
+Chapter 8 finished everything Part II had to say about a single operation. What changes, precisely, once a second operation is layered onto a group? The additive side must now be commutative --- otherwise the distributive laws below cannot be stated symmetrically --- and a compatible multiplication is added, tied to addition by distributivity. These are stated first as ordinary axioms (R1)--(R4) (\hyperref[sec:09-rings:01-definition:1]{Section 1}), the way Chapter 7 opened with the group axioms before any Lean. Axiom (R1) demands \emph{commutative} addition, but \texttt{Group} from Chapter 7 said nothing about commutativity, so that requirement has to be built in Lean before \texttt{Ring} itself can be: \texttt{CommGroup}, a small \texttt{extends Group G} with one extra field, \texttt{comm} (\hyperref[sec:09-rings:02-comm-group:1]{Section 2}), is the piece \texttt{Ring} bundles as its additive part. With that piece in hand, \texttt{CommGroup} supplies (R1) as a single nested field, and the remaining axioms (R2)--(R4), associativity of multiplication, its identity, and the two distributive laws, are added directly (\hyperref[sec:09-rings:03-ring:1]{Section 3}).
 
-By the end of the chapter, \texttt{Ring} has the same shape \texttt{Group} did at the end of Chapter 7: a precise definition, both a commutative and a noncommutative witness that it is satisfiable, and, as Chapter 10 takes up next, theorems still waiting to be proved generically rather than per carrier.
+A definition earns its keep only once it is shown non-vacuous. The most familiar witness is \((\mathbb{Z}, +, \times, 0, 1)\), reusing \texttt{intGroup} from Chapter 7 for the additive part and citing one core-library lemma per remaining axiom, exactly the pattern Chapter 7 used for \texttt{Group} (\hyperref[sec:09-rings:04-integers-example:1]{Section 4}). \texttt{intRing} is commutative and infinite; not every ring axiom needs to be proved that way, one library citation at a time. When the carrier is finite, the axioms of \(\mathbb{Z}/3\mathbb{Z}\) become decidable statements about only finitely many elements, and \texttt{decide} checks them by brute enumeration instead (\hyperref[sec:09-rings:05-finite-ring-example:1]{Section 5}). Once a \texttt{Ring} value nests a whole \texttt{CommGroup} inside it, its data is used exactly as before, by ordinary field projection, chained one level deeper than Chapter 7, \texttt{Rg.addGrp.op} rather than a single \texttt{Grp.op} (\hyperref[sec:09-rings:06-accessing-fields:1]{Section 6}).
+
+\texttt{intRing} is commutative, but nothing in the definition of \texttt{Ring} forces that, the same question permutations settled for \texttt{Group} in Chapter 7. \(2\times 2\) integer matrices settle it directly for rings, a concrete, genuinely noncommutative ring, built and verified field by field with no shortcuts available (\hyperref[sec:09-rings:07-matrices:1]{Section 7}). By the end of the chapter, \texttt{Ring} has the same shape \texttt{Group} did at the end of Chapter 7: a precise definition, both a commutative and a noncommutative witness that it is satisfiable, and, as Chapter 10 takes up next, theorems still waiting to be proved generically rather than per carrier.
 
 
 % Auto-appended: input every other section in order.

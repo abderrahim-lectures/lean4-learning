@@ -4,7 +4,52 @@
 
 ---
 
-**1. β-reduce $(\lambda x.\lambda y.\, y\, x)\, a\, b$ and compare to $K$.**
+**1. Why `Σ n : Nat, Fin n` type-checks but `Σ n : Nat, n > 0` does not**
+
+`Sigma` is declared as `structure Sigma {α : Type u} (β : α → Type v)`.
+The family `β` must land in some `Type v` (equivalently, `Sort (v+1)` for
+`v ≥ 0`). This is the rule: the second component of `Sigma` is always
+`Type`-valued, never `Prop`-valued, because `Prop` (`Sort 0`) is a
+strictly lower, separate universe from every `Type v`.
+
+*Proof this rules out `Σ n : Nat, n > 0`.* `Fin n : Type` for every `n`,
+so `fun n => Fin n` has type `Nat → Type`, matching the required shape of
+`β` exactly, and `Σ n : Nat, Fin n` elaborates. `n > 0 : Prop`, so `fun n
+=> n > 0` has type `Nat → Prop`, not `Nat → Type v` for any `v`; no
+instantiation of `β`'s codomain universe unifies `Prop` with a `Type v`,
+since they are different, non-overlapping sorts. Elaboration therefore
+rejects `Σ n : Nat, n > 0` outright, for the same reason it would reject
+supplying a `Prop`-valued family anywhere Lean expects a `Type`-valued
+one. $\blacksquare$
+
+**2. Witnesses of `∃` cannot be extracted computationally**
+
+Claim: given `h : ∃ x, P x`, there is no way to compute a term `w : α`
+with `P w` from `h` alone, whereas the same is possible from `h' : Σ x,
+P x`.
+
+*Proof.* `Exists` is declared to land in `Prop`. By proof irrelevance,
+Lean's kernel treats any two proofs of the same proposition as
+definitionally equal, so `h` carries no information beyond the bare fact
+that *some* witness exists; every possible choice of witness gives a
+`Prop`-equal, indistinguishable proof term `h`. If a function could
+extract a witness from `h`, two `∃`-proofs built from different witnesses
+but proof-irrelevantly equal would have to be sent to the same output by
+that function, which is impossible in general, since the witnesses
+genuinely differ as data. Lean's projection mechanism therefore refuses
+projections out of `Prop`-valued fields into `Type`-valued results,
+exactly the `lean.projNonPropFromProp` error. `Sigma`, landing in `Type`,
+carries no such irrelevance guarantee; `.fst` on `h' : Σ x, P x` is
+ordinary data extraction, no different from `.1` on any other pair.
+$\blacksquare$
+
+The fact this argument turns on is precisely proof irrelevance
+([Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md)): `∃` has
+the shape of a Σ-type but lives in the one universe where two
+inhabitants of the same type are indistinguishable, which is exactly what
+blocks extraction.
+
+**3. β-reduce $(\lambda x.\lambda y.\, y\, x)\, a\, b$ and compare to $K$.**
 
 Application associates to the left, so this is
 $((\lambda x.\lambda y.\, y\, x)\, a)\, b$.
@@ -26,7 +71,7 @@ combinator ($T$, satisfying $T\, x\, y = y\, x$), it flips the order of
 application rather than discarding anything, which is genuinely different
 behavior from $K$, not just a relabeling of it.
 
-**2. A second `Σ n : Nat, Fin n`, and why `Σ n : Nat, n > 0` fails**
+**4. A second `Σ n : Nat, Fin n`, and why `Σ n : Nat, n > 0` fails**
 
 ```lean
 def anotherSigma : Σ n : Nat, Fin n := ⟨5, ⟨0, by decide⟩⟩
@@ -40,7 +85,7 @@ works.) `Σ n : Nat, n > 0` fails to type-check because `n > 0 : Prop`
 does not. This is exactly why `∃` exists as the `Prop`-restricted
 cousin of `Sigma` (Chapter 2, Section 2) rather than everyone just writing `Σ` everywhere.
 
-**3. The signature of `Path.append` as nested Π-types**
+**5. The signature of `Path.append` as nested Π-types**
 
 `Path.append : {u v w : V} → Path Q u v → Path Q v w → Path Q u w`,
 treating the implicit binders as outer Π's, unfolds one binder at a time.

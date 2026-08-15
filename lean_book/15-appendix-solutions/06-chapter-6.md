@@ -4,7 +4,39 @@
 
 ---
 
-**1. `rfl` predictions**
+**1. Why Mathlib uses `class`**
+
+`class` changes only *how* Lean finds an instance, automatic search
+through registered `instance`s rather than an explicit argument, not what
+data the structure holds. That difference in *how it is found* is exactly
+the ergonomic payoff a large shared library needs. Automatic instance
+resolution lets `+`/`*`/`1` resolve at every registered type with no
+`Grp : Group G` argument threaded through every theorem by hand; a huge
+library like Mathlib, applying the same lemma to hundreds of unrelated
+types, could not tolerate carrying that argument explicitly everywhere.
+This book delays that payoff on purpose, so the underlying data is seen
+plainly first, before the convenience of automatic resolution hides it.
+
+**2. Why the universe hierarchy does not repeat the paradox one level up**
+
+The Russell paradox needs a type containing *itself*. `Type i : Type
+(i+1)` is always one level higher than what it classifies, so no universe
+ever contains its own code; `Type 1` classifies `Type 0`, not itself, and
+`Type 2` classifies `Type 1`, not itself, and so on. The hierarchy is
+infinite specifically so this containment can never close the loop back
+onto a universe classifying itself.
+
+**3. `rfl` versus `decide`**
+
+`rfl` checks that two terms reduce to an identical normal form by
+computation, unfolding definitions and beta-reducing. `decide` instead
+runs the algorithm supplied by a `Decidable` instance for the proposition
+and checks that it computes to `true`. They overlap on simple closed
+arithmetic (both close `2 + 2 = 4`), but only `decide` can settle a
+proposition like `¬ (3 ∣ 10)`, which is not stated as an equality of two
+terms at all, so there is no normal form for `rfl` to compare.
+
+**4. `rfl` predictions**
 
 ```lean
 example : (2 : Nat) * 3 = 3 + 3 := rfl
@@ -36,7 +68,7 @@ lesson is that multiplying by a literal does not collapse to `rfl` for free once
 general variable `n` sits on the "wrong" side of an asymmetric recursion.
 This is the same reason `0 + n = n` required real induction in Chapter 5.
 
-**2. `MyGroup` as a type class**
+**5. `MyGroup` as a type class**
 
 ```lean
 class MyGroup (G : Type) where
@@ -79,7 +111,7 @@ Lean needs a `MyGroup Int` to run `MyGroup.op`. It searches the instances
 it has registered, finds the one declared above, and plugs it in
 automatically. A plain `def` would not take part in this kind of lookup.
 
-**3. Why `Type → Type` needs `Type 1`**
+**6. Why `Type → Type` needs `Type 1`**
 
 Suppose `Type → Type` (the type of `Group` itself, before we supply a
 carrier) lived in `Type 0` alongside `Nat`, `Bool`, and every other
@@ -93,7 +125,7 @@ this, anything built from `Type 0` (such as a function *into or out of*
 `Type 0`) that is not itself a small type must bump up a universe level.
 That is why `Type → Type` lands in `Type 1` rather than `Type 0`.
 
-**4. A true propositional equality not provable by `rfl`**
+**7. A true propositional equality not provable by `rfl`**
 
 ```lean
 theorem add_one_eq_succ (n : Nat) : n + 1 = Nat.succ n := rfl

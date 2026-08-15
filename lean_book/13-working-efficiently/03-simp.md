@@ -36,7 +36,13 @@ $n + 0 = n$ use the same fact, $n + 0 = n$ (the right-unit law for $+$).
 The explicit version cites it by name; `simp` finds it in the rewrite
 system. This is the everyday move of an algebraist to "simplify using the
 obvious identities." It works exactly when the rewrite rules are valid
-equalities, and confluent enough to reach a canonical form.
+equalities, and confluent enough to reach a canonical form, the same
+general confluence property (Newman's lemma and its extensions) already
+invoked for term rewriting in
+[Chapter 2, Section 1](../02-terminology-and-coc/01-terminology.md#sources-quoted)
+([Huet1980]).
+
+[Huet1980]: ../bibliography.md#huet1980
 
 ---
 
