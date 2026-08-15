@@ -34,7 +34,7 @@ Function type / implication & \(A \to B\) & \texttt{A → B} & Chapter 1 \\
 Universal quantifier (``for all'') & \(\forall x, P\, x\) & \texttt{∀ x, P x} & Chapter 4 \\
 Existential quantifier (``there exists'') & \(\exists x, P\, x\) & \texttt{∃ x, P x} & Chapter 4 \\
 Unique existence (``there exists a unique'') & \(\exists!\, x, P\, x\) & no single token, witnessed by supplying the value and a proof it is the only one & Chapter 2, Section 1 \\
-Set/type membership & \(x \in A\) & \texttt{x ∈ A} & Chapter 1 \\
+Set/type membership & \(x \in A\) & \texttt{x ∈ A} & Chapter 11, Section 4 (Chapter 1 only contrasts \(\in\) against Lean's \texttt{:} for term-has-type, never uses the \texttt{∈} operator itself) \\
 Negation & \(\neg P\) & \texttt{¬P} & Concept introduced Chapter 1 (terminology); formal use from Chapter 4 \\
 Conjunction (``and'') & \(P \wedge Q\) & \texttt{P ∧ Q} (\texttt{And}) & Chapter 4 \\
 Disjunction (``or'') & \(P \vee Q\) & \texttt{P ∨ Q} (\texttt{Or}) & Chapter 4 \\
@@ -76,7 +76,7 @@ Module scalar action (a ring element acting on a module element) & \(r \cdot m\)
 Inverse & \(a^{-1}\) & \texttt{a⁻¹} & Chapter 7 \\
 Lambda abstraction (``sends to'') & \(x \mapsto e\) & \texttt{fun x => e} & Chapter 1 \\
 Divisibility & \(a \mid b\) & \texttt{a ∣ b} & Chapter 10 \\
-Subset & \(A \subseteq B\) & \texttt{A ⊆ B} & Chapter 11 \\
+Subset (subobject inclusion) & \(A \subseteq B\) & no infix operator; expressed via \texttt{extends} (\texttt{CommGroup} includes \texttt{Group}) or a \texttt{carrier : M → Prop} membership predicate (submodules) --- the book never uses a literal \texttt{⊆}/\texttt{≤} Lean token & Chapter 2, Section 1 (categorical use); Chapter 11, Section 4 (submodule use) \\
 Cartesian product & \(A \times B\) & \texttt{A × B} & Chapter 1 \\
 Long/derivation arrow (diagrams) & \(A \longrightarrow B\) & \texttt{⟶} (diagram labels only, not ordinary code) & Chapter 12, Sections 2--3 \\
 Projections out of a product & \(\pi_X, \pi_Y\) & \texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd} & Chapter 2, Section 1 \\

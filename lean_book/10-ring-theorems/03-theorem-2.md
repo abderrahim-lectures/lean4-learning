@@ -86,14 +86,15 @@ actually compiling it.
 - **`congrArg`, not `conv_lhs => rw [...]`.** Plain `rw [h]` here would
   rewrite *every* occurrence of `a` in the goal, including the one inside
   `mul (inv one) a` that must stay put. This is exactly the same kind of
-  problem as `h2` of Theorem 1 on the previous page. An earlier draft tried
-  `conv_lhs => rw [...]` to target only the intended occurrence, but this
-  failed (Lean 4.32.2, current mathlib). `conv_lhs` navigates into the
-  literal left-hand side of the goal, which does not line up with the
-  occurrence that needs targeting here. `congrArg f h` avoids it by
-  directly constructing "apply `f` to both sides of `h`" as its own
-  standalone fact (`step`, above), which is then used with a single,
-  unambiguous `rw [step]`.
+  problem as `h2` of Theorem 1 on the previous page. An earlier draft
+  tried `conv_lhs => rw [...]` to target only the intended occurrence,
+  but this failed with `unknown tactic`: `conv_lhs` is a Mathlib tactic
+  notation, and this book's `Ring` development never imports Mathlib
+  (see the [Mathlib note](../00-setup/04-mathlib-note.md)), so the
+  tactic is simply not in scope here, not merely mis-targeted.
+  `congrArg f h` needs no such tactic at all: it directly constructs
+  "apply `f` to both sides of `h`" as its own standalone fact (`step`,
+  above), which is then used with a single, unambiguous `rw [step]`.
 
 **Mathematical reading.** This is the sign rule $(-1)\cdot a = -a$. By
 uniqueness of additive inverses it suffices to check $(-1)\cdot a$ is a left

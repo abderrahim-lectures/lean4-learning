@@ -4,7 +4,7 @@
 
 ---
 
-**1. `boolAndOrRing` (the ring $\mathbb{Z}/2\mathbb{Z}$ on `Bool`)**
+**1. `bool2Ring` (the ring $\mathbb{Z}/2\mathbb{Z}$ on `Bool`)**
 
 ```lean
 def bool2CommGroup : CommGroup Bool where

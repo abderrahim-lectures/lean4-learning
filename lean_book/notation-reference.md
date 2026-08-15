@@ -33,7 +33,7 @@ throughout the main text and code.
 | Universal quantifier ("for all") | $\forall x, P\, x$ | `∀ x, P x` | Chapter 4 |
 | Existential quantifier ("there exists") | $\exists x, P\, x$ | `∃ x, P x` | Chapter 4 |
 | Unique existence ("there exists a unique") | $\exists!\, x, P\, x$ | no single token, witnessed by supplying the value and a proof it is the only one | Chapter 2, Section 1 |
-| Set/type membership | $x \in A$ | `x ∈ A` | Chapter 1 |
+| Set/type membership | $x \in A$ | `x ∈ A` | Chapter 11, Section 4 (Chapter 1 only contrasts $\in$ against Lean's `:` for term-has-type, never uses the `∈` operator itself) |
 | Negation | $\neg P$ | `¬P` | Concept introduced Chapter 1 (terminology); formal use from Chapter 4 |
 | Conjunction ("and") | $P \wedge Q$ | `P ∧ Q` (`And`) | Chapter 4 |
 | Disjunction ("or") | $P \vee Q$ | `P ∨ Q` (`Or`) | Chapter 4 |
@@ -56,7 +56,7 @@ throughout the main text and code.
 | Inverse | $a^{-1}$ | `a⁻¹` | Chapter 7 |
 | Lambda abstraction ("sends to") | $x \mapsto e$ | `fun x => e` | Chapter 1 |
 | Divisibility | $a \mid b$ | `a ∣ b` | Chapter 10 |
-| Subset | $A \subseteq B$ | `A ⊆ B` | Chapter 11 |
+| Subset (subobject inclusion) | $A \subseteq B$ | no infix operator; expressed via `extends` (`CommGroup` includes `Group`) or a `carrier : M → Prop` membership predicate (submodules) — the book never uses a literal `⊆`/`≤` Lean token | Chapter 2, Section 1 (categorical use); Chapter 11, Section 4 (submodule use) |
 | Cartesian product | $A \times B$ | `A × B` | Chapter 1 |
 | Long/derivation arrow (diagrams) | $A \longrightarrow B$ | `⟶` (diagram labels only, not ordinary code) | Chapter 12, Sections 2–3 |
 | Projections out of a product | $\pi_X, \pi_Y$ | `.1`/`.2`, or `.fst`/`.snd` | Chapter 2, Section 1 |
