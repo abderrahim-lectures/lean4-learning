@@ -100,10 +100,12 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   sense for any type `α`, no matter which type universe `α` lives in
   ... Lean allows you to declare universe variables explicitly using
   the `universe` command" ([TPIL4], §2.2).
-- Girard, *"Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure,"* Thèse d'État, Université Paris VII, 1972 (not yet in the bibliography of this book), is the actual source of the `Type : Type` inconsistency, the proof that a calculus with the rule `⊢ * : *` loses the normalization property. [Girard1971] (the 1971/1970 "Une extension de l'interprétation de Gödel à l'analyse" paper, already in the bibliography of this book) is a different, earlier paper and is not that source. The 1986 paper by Thierry Coquand, "An analysis of Girard's paradox," LICS 1986, is the standard modern exposition, also not yet cited here.
+- [Girard1972] is the actual source of the `Type : Type` inconsistency, the proof that a calculus with the rule `⊢ * : *` loses the normalization property. [Girard1971] (the 1971/1970 "Une extension de l'interprétation de Gödel à l'analyse" paper) is a different, earlier paper and is not that source. [Coquand1986] is the standard modern exposition.
 
 [TPIL4]: ../bibliography.md#tpil4
 [Girard1971]: ../bibliography.md#girard1971
+[Girard1972]: ../bibliography.md#girard1972
+[Coquand1986]: ../bibliography.md#coquand1986
 
 ---
 

@@ -11,11 +11,11 @@ finite carrier (`Fin 3`) lets every axiom be checked by `decide`; an
 infinite one (`Int`, matrices over `Int`) needs a real proof, or a
 computed counterexample (`#eval`) to refute commutativity outright.
 
-1. Build `boolAndOrRing`. This is surprisingly difficult, is
-   there a natural ring structure on `Bool`? (Hint, think of `Bool` as
-   $\mathbb{Z}/2\mathbb{Z}$. Addition is XOR, multiplication is AND. Build
-   `intAddGroupMod2 : CommGroup Bool` with `op := Bool.xor`, then a
-   `Ring Bool` using `mul := Bool.and`, `one := true`.)
+1. Is there a natural ring structure on `Bool`? Build it as `bool2Ring`.
+   (Hint, think of `Bool` as $\mathbb{Z}/2\mathbb{Z}$: addition is XOR,
+   multiplication is AND. Build `bool2CommGroup : CommGroup Bool`
+   reusing `boolXorGroup` from Chapter 7's exercises for `+`, then
+   `bool2Ring : Ring Bool` with `mul := Bool.and`, `one := true`.)
 2. State (in words, no Lean needed yet) why we needed *both*
    `left_distrib` and `right_distrib` as separate axioms, tying it back to
    not assuming `mul` is commutative.

@@ -6,7 +6,7 @@
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Build \texttt{boolAndOrRing}. This is surprisingly difficult, is there a natural ring structure on \texttt{Bool}? (Hint, think of \texttt{Bool} as \(\mathbb{Z}/2\mathbb{Z}\). Addition is XOR, multiplication is AND. Build \texttt{intAddGroupMod2 : CommGroup Bool} with \texttt{op := Bool.xor}, then a \texttt{Ring Bool} using \texttt{mul := Bool.and}, \texttt{one := true}.)
+  Is there a natural ring structure on \texttt{Bool}? Build it as \texttt{bool2Ring}. (Hint, think of \texttt{Bool} as \(\mathbb{Z}/2\mathbb{Z}\): addition is XOR, multiplication is AND. Build \texttt{bool2CommGroup : CommGroup Bool} reusing \texttt{boolXorGroup} from Chapter 7's exercises for \texttt{+}, then \texttt{bool2Ring : Ring Bool} with \texttt{mul := Bool.and}, \texttt{one := true}.)
 \item
   State (in words, no Lean needed yet) why we needed \emph{both} \texttt{left\_\allowbreak{}distrib} and \texttt{right\_\allowbreak{}distrib} as separate axioms, tying it back to not assuming \texttt{mul} is commutative.
 \item

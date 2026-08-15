@@ -261,7 +261,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - Pierce ([Pierce2002]), Ch. 9 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10–11; Ch. 12 "Simple Extensions" actually covers pairs/tuples/records/sums, unrelated to the content of this section.
 - Milner ([Milner1978]) covers the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the boxes of this section.
-- Girard, see [the references of Chapter 6, Section 2](02-universes.md) for the full citation. The Girard paradox (the inconsistency of `Type : Type`) is due to the 1972 thesis of Girard, a different, later paper than [Girard1971] cited elsewhere in this book.
+- [Girard1972] is the Girard paradox (the inconsistency of `Type : Type`), a different, later thesis than [Girard1971] cited elsewhere in this book; see [Chapter 6, Section 2](02-universes.md) for the full citation and [Coquand1986] for the modern exposition.
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" is the Lean documentation on universes, matching the presentation here.
 
 [Pierce2002]: ../bibliography.md#pierce2002
@@ -270,6 +270,8 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 [MypyDocs]: ../bibliography.md#mypydocs
 [CoquandHuet1988]: ../bibliography.md#coquandhuet1988
 [Girard1971]: ../bibliography.md#girard1971
+[Girard1972]: ../bibliography.md#girard1972
+[Coquand1986]: ../bibliography.md#coquand1986
 [TPIL4]: ../bibliography.md#tpil4
 
 ---
