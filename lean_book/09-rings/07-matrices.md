@@ -317,7 +317,9 @@ expresses: $M_2(\mathbb{Z}) \cong \mathbb{Z}^4$ as additive groups.
 Associativity of $\times$
 is the one substantial fact: $((XY)Z)_{i\ell} = \sum_{j,k} X_{ij}Y_{jk}Z_{k\ell}
 = (X(YZ))_{i\ell}$, whose per-entry form is a polynomial identity over the
-commutative ring $\mathbb{Z}$, so `ring` can close it. The construction
+commutative ring $\mathbb{Z}$, closed above by hand through
+`Int.add_mul`/`Int.mul_add`/`Int.mul_assoc` and `add4_reorder`, since this
+book's Mathlib-free development has no `ring` tactic available. The construction
 generalizes exactly the same way to $M_n(S)$ for any commutative ring $S$, entrywise
 reduction turns each ring axiom into an $S$-polynomial identity, and
 $M_n(S)$ is noncommutative for $n \ge 2$.

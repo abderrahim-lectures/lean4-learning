@@ -47,7 +47,7 @@ throughout the main text and code.
 | Definitional equality | $t \equiv t'$ | `rfl` closes the goal | Chapter 6, Section 4 |
 | Reflexivity / the `rfl` tactic and term | — | `rfl` | Chapter 1 (tactic use, `#eval`/`#check`); Chapter 4 (as a proof term, e.g. `2+2=4 := rfl`) |
 | Direct sum (modules) | $M \oplus N$ | `DirectSum M N` (custom structure, no `⊕` operator in code) | Chapter 11 |
-| Isomorphism / equivalence | $A \simeq B$ | `A ≃ B` (`Equiv`) | Chapter 11 |
+| Isomorphism / equivalence | $A \simeq B$ | `A ≃ B` (`Equiv`) | Chapter 7 (`Equiv.Perm`, Mathlib equivalent box) |
 | Anonymous-constructor pairing | $\langle a, b \rangle$ | `⟨a, b⟩` | Chapter 2, Section 1 |
 | Coercion (embedding) | — | `↑` (auto-coercion) | Chapter 1, Section 3 |
 | Function composition | $g \circ f$ | `g ∘ f` | Chapter 1 |

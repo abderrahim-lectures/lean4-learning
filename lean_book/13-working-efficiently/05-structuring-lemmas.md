@@ -7,8 +7,8 @@
 The single biggest efficiency gain, greater than any tactic choice, is to
 **prove the general fact once, as its own named lemma, as soon as an
 argument would otherwise be repeated.** `left_inverse_unique` from Chapter 8
-is the running example. Theorem 3 (`inv_op`) and
-`neg_one_mul` and `neg_mul` from Chapter 10 all reduce to it, instead of
+is the running example. Theorem 3 (`inv_op`), `neg_one_mul`, and the
+exercise `neg_mul` from Chapter 10 all reduce to it, instead of
 re-deriving "uniqueness of inverses" inline. Signs that a lemma should be
 factored out are as follows.
 
