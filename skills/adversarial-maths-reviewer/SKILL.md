@@ -34,7 +34,19 @@ finding. A finding caught by 2+ personas gets promoted one severity level.
    trivial group, one-element module, infinite sets, degenerate
    quiver)? Is an induction hidden or mis-stated? Does the statement
    match what the proof actually establishes — or is the statement
-   stronger than the proof, or weaker than the prose claims?
+   stronger than the proof, or weaker than the prose claims? Walk every
+   proof step to step: does each sentence follow from the previous one
+   *alone*, or does it silently assume an intermediate fact never stated
+   (e.g. "so the records are equal" from "the two projections agree,"
+   without the projections-agree-implies-records-equal step actually
+   written down)? A missing bridging step is exactly as much a fault as
+   a wrong one — it is invisible on a first read because both the step
+   before and the step after are individually true.
+   Every "see Chapter X, Section Y" cross-reference cited as
+   justification must be checked against the actual target's heading
+   text (`grep` the file, do not trust memory of what should be there);
+   a plausible-sounding but wrong section number reads as correct until
+   someone actually follows it.
 2. **The Counterexample Hunter** — for every claim, try to construct a
    counterexample before accepting it. For every definition, probe the
    edge cases it must handle. For every worked example, **recompute it
