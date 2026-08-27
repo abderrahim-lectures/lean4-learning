@@ -10,8 +10,12 @@ theorem two_plus_two : 2 + 2 = 4 := rfl
 theorem add_comm_example : 2 + 3 = 3 + 2 := rfl
 ```
 
-`theorem` and `lemma` are the same thing syntactically. `lemma` is just a
-naming convention for "small helper facts."
+Chapter 3's `def` named an ordinary computation. Nothing about `def` lets
+that name assert `2 + 2 = 4` is *true* rather than merely *defined*, so
+the two blocks above use a different keyword, `theorem`, for exactly that
+purpose. `lemma` writes the identical keyword under a different name:
+`theorem` and `lemma` are the same thing syntactically, and `lemma` is
+just a naming convention for "small helper facts."
 
 **Mathematical reading.** A `theorem name : P := proof` is exactly the act
 of naming a proof. It asserts that $P$ is provable, and records a specific

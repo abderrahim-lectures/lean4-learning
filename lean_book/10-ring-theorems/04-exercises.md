@@ -12,11 +12,7 @@ an unknown `a` genuinely cannot, mirroring the defeq-vs-propeq distinction of Ch
 
 1. Prove
    `theorem neg_mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)`.
-   Strategy, this is "show $x = -(ab)$," hence reduce through
-   `left_inverse_unique` to "show $x + ab = 0$," then look for a
-   `right_distrib`-shaped simplification of $(-a)\cdot b + a \cdot b$,
-   exactly as in Theorem 2. `mul_zero_left` (proved in the section for Theorem 2)
-   is required at the end, the same way Theorem 2 itself used it.
+   Uses the same idea as Theorem 2.
 2. Instantiate `left_inverse_unique` (Chapter 8) directly on the additive group of `intRing`
    to compute a concrete additive inverse, e.g. prove
    `theorem neg_seven : intRing.addGrp.toGroup.inv 7 = -7 := rfl` and, in

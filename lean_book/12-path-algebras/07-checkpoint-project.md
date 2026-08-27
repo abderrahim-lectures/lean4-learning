@@ -7,8 +7,8 @@
 Part II closes here, having built groups, rings, modules, and now quivers
 and paths from scratch. This project extends the `Path`/`Path.append`
 construction from Sections 4–5 with one more piece of structure, the
-**length** of a path, and proves it behaves the way it obviously should under
-composition, tying together the inductive-type work of this chapter with the
+**length** of a path, and proves `(Path.append p q).length = p.length +
+q.length`, tying together the inductive-type work of this chapter with the
 "prove it once, generically" habit Chapters 8 and 10 established.
 
 **Learning objectives.** Define a recursive function over the same indexed
