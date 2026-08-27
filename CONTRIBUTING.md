@@ -53,7 +53,13 @@ Pose the question or concrete problem that forces it, walk the chain of
 reasoning that discovers it, and only then name and formalize the result
 — proof and motivation are one continuous argument, not two separated
 blocks. There is no fixed Definition→Theorem→Proof→Remark skeleton to
-fill in; structure follows the logic of the argument. Do not open a
+fill in; structure follows the logic of the argument. (Chapters 8 and 10
+are a deliberate exception: their theorem sections stand as a
+reference-style catalog, so each entry does follow a fixed six-box
+sequence, Claim → Finding the proof → Lean code → Mathematical reading →
+Programmer's corner → Mathlib equivalent, chosen because a reader
+consulting them wants a predictable layout, not fresh structure per
+theorem.) Do not open a
 section or chapter with a narrative "story" framing or a "Picture it like
 this" analogy box in place of doing the derivation. Every type-theory or
 category-theory term still gets a formal definition (ideally with a
