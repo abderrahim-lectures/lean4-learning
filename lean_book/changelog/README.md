@@ -4,6 +4,7 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v2.0.1](v2.0.1.md) — Regenerate stale LaTeX, close the review backlog
 - [v2.0.0](v2.0.0.md) — Derivation-first style pass, whole book
 - [v1.6.2](v1.6.2.md) — Bibliography citations for Chapter 4, Ring, Module, and LinearMap
 - [v1.6.1](v1.6.1.md) — Companion-project verification and history backfill
