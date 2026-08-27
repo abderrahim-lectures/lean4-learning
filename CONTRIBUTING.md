@@ -64,13 +64,24 @@ section or chapter with a narrative "story" framing or a "Picture it like
 this" analogy box in place of doing the derivation. Every type-theory or
 category-theory term still gets a formal definition (ideally with a
 citation — see [`lean_book/bibliography.md`](lean_book/bibliography.md))
-and a worked example; abstract or structural motivation is preferred over
-a contrived real-world scenario. Exercises favor fewer, escalating,
+and a worked example. Per Arnold's own account of this tradition ("On
+Teaching Mathematics," 1997) and the practice of the Gelfand seminar, the
+forcing question or problem that opens a section should itself be
+**concrete first**: a specific number, a specific small case, a specific
+broken computation, not the general phenomenon stated abstractly. Derive
+the general definition or theorem *from* that concrete case, rather than
+motivating it by structural analogy alone — "abstract or structural
+motivation is preferred over a contrived real-world scenario" no longer
+describes this book's convention; concrete motivation, worked in full
+before any generalization, does. A contrived scenario is still to be
+avoided, but a genuine concrete instance of the actual mathematical
+object under discussion (a specific ring, a specific group element, a
+specific failing proof attempt) is not contrived, it is the example the
+definition is trying to capture. Exercises favor fewer, escalating,
 proof-heavy problems ("Prove that...", "Show that...") over repetitive
 drills, and should not give away their own answer inline — solutions
 belong in `lean_book/15-appendix-solutions/`.
-This is now the style of the whole book; [Chapter 7](lean_book/07-groups/00-index.md)
-is a good reference example if you want to see it applied in full.
+This convention now applies to the whole book, from Chapter 0 onward.
 
 ## Lean code
 
