@@ -1,6 +1,9 @@
 \section{The mathematical definition}\label{sec:11-modules:01-definition:1}
 
-Given a ring \(R\) (Chapter 9), a (left) \textbf{\(R\)-module} is an abelian group \((M, +, 0, -(-))\) together with a scalar action \(R \times M \to M\), written \(r \cdot m\), satisfying:
+Take any abelian group \((M, +, 0, -(-))\), say \(\mathbb{Z}\) itself, or the group of \(2\times 2\) integer matrices under addition from Chapter 9. Multiplying one of its elements \(m\) by a positive integer \(n\) needs no new structure at all, \(3 \cdot m\) already means \(m + m + m\), computed with nothing but the group operation already in hand, and \(n \cdot m\) for \(n \le 0\) extends this the same way \texttt{intSmul}/\texttt{natSmul} will in Section 3. This ``multiply by an integer'' action satisfies four facts for free, inherited directly from the group axioms: \(n \cdot (m_1 + m_2) = n\cdot m_1 + n \cdot m_2\), \((n_1+n_2)\cdot m = n_1\cdot m + n_2 \cdot m\), \((n_1 n_2)\cdot m =
+n_1\cdot(n_2\cdot m)\), and \(1 \cdot m = m\). None of this required \(\mathbb{Z}\) to be a field, only a ring, unlike a vector space, which needs division to make sense of ``scaling.'' What is the general structure these four facts describe, once \(\mathbb{Z}\) is replaced by an arbitrary ring \(R\) and ``integer scaling'' by an arbitrary action \(R \times M \to M\)?
+
+Given a ring \(R\) (Chapter 9), a (left) \textbf{\(R\)-module} is an abelian group \((M, +, 0, -(-))\) together with a scalar action \(R \times M \to M\), written \(r \cdot m\), satisfying exactly the four facts just observed for \(\mathbb{Z}\)-scaling, now required as axioms for an arbitrary \(R\):
 
 \[
 \begin{aligned}

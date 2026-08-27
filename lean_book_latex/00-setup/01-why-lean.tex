@@ -1,5 +1,17 @@
 \section{Why Lean?}\label{sec:00-setup:01-why-lean:1}
 
-Lean 4 is a programming language with a built-in interactive theorem prover. Mathematical definitions and statements are expressed as code, and proofs are verified by the type checker of Lean, so a proof is correct if and only if it type-checks, assuming one trusts the small trusted kernel of Lean.
+In 1879, Alfred Kempe published a proof of the four-color theorem, the claim that any map can be colored with four colors so that no two adjacent regions share a color. The proof was accepted, cited, and taught for eleven years. In 1890, Percy Heawood found a specific configuration of eleven regions for which Kempe's central technique, alternating chains of two colors, silently broke down: two chains that were supposed to stay disjoint could, in this one configuration, interfere with each other, and Kempe's argument gave no way to detect that this had happened. No reader who checked Kempe's proof over those eleven years was careless. A single unhandled case, invisible unless a reader constructed exactly the right counterexample by hand, survived peer review, publication, and a decade of citation (\cite{Heawood1890}).
+
+A proof checker exists to make this specific failure mode structurally impossible. Lean 4 is a programming language with a built-in interactive theorem prover. Mathematical definitions and statements are expressed as code, and every proof is a term whose type must match the statement exactly, checked by a small, fixed kernel. There is no step at which a silently-unhandled case can pass review, because there is no step at which a human reader's attention is the only thing standing between a gap and an accepted proof. A proof is correct if and only if it type-checks, and it either type-checks or it does not, regardless of how many regions the missing case would have involved.
 
 This book uses abstract algebra (groups, rings) and a bit of category-flavored material (path algebras of quivers) as running examples. These topics are rich enough to be interesting, but simple enough to build from scratch.
+
+\subsection{Sources, quoted}\label{sec:00-setup:01-why-lean:2}
+
+Formal definitions and citations for this section, gathered here for reference (full entry in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{The Kempe/Heawood gap.} \cite{Heawood1890} identifies the specific eleven-region configuration for which Kempe's 1879 argument fails, eleven years after publication.
+\end{itemize}
