@@ -43,6 +43,8 @@ and are indexed separately in the
 
 <a id="girard1972"></a>**[Girard1972]** Jean-Yves Girard, "Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure," Thèse d'État, Université Paris VII, 1972. The source of the `Type : Type` inconsistency (the paradox that a calculus with the rule `⊢ * : *` loses normalization), distinct from the earlier, unrelated [Girard1971].
 
+<a id="heawood1890"></a>**[Heawood1890]** P.J. Heawood, "Map-colour theorem," *Quarterly Journal of Pure and Applied Mathematics*, 24, 1890, 332–338. Identifies the gap in Alfred Kempe's 1879 published proof of the four-color theorem: a configuration of eleven regions for which Kempe's alternating-chain argument does not go through, undetected through eleven years of citation.
+
 <a id="huet1980"></a>**[Huet1980]** Gérard Huet, "[Confluent Reductions: Abstract Properties and Applications to Term Rewriting Systems](https://doi.org/10.1145/322217.322230)," *Journal of the ACM*, 27(4), 1980, 797–821. The general confluence result (Newman's lemma and its extensions) underlying the Church–Rosser property invoked in the terminology chapter, independent of the specific λ-calculus setting.
 
 <a id="howard1980"></a>**[Howard1980]** William A. Howard, "The Formulae-as-Types Notion of Construction," in *To H.B. Curry: Essays on Combinatory Logic, Lambda Calculus and Formalism*, Academic Press, 1980, 479–490. (Circulated privately since 1969.)
