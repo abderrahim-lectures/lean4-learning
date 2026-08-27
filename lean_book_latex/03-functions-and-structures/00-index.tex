@@ -15,7 +15,7 @@
 \end{learningobjectives}
 
 
-Functions \textbf{curry}. \texttt{add : Nat → Nat → Nat} is really \texttt{Nat → (Nat → Nat)}, a function that returns another function. So a ``two-argument function'' is just a one-argument function whose result is itself another function. It takes one argument at a time. This is the type-theoretic form of the Hom-set isomorphism \(\mathrm{Hom}(A\times B, C)\cong\mathrm{Hom}(A,\mathrm{Hom}(B,C))\): a two-argument map is the same data as a one-argument map into a space of maps. The interesting part of this chapter is \texttt{structure}, which is how algebraic data will be packaged.
+Every function type built so far, \texttt{Nat → Nat}, \texttt{Bool → Nat}, takes exactly one argument. What type, then, does \texttt{add : Nat → Nat → Nat} actually have? Reading the arrow as right-associative, it parses as \texttt{Nat → (Nat → Nat)}: a function taking one \texttt{Nat} and returning \emph{another function}, \texttt{Nat → Nat}. So \texttt{add 3 : Nat → Nat} is a genuine value, the ``add 3 to something'' function, before it is ever applied to a second argument. A ``two-argument function'' is nothing but a one-argument function whose result happens to be itself another function, applied one argument at a time. This pattern is called \textbf{currying}, and it is the type-theoretic form of the Hom-set isomorphism \(\mathrm{Hom}(A\times B, C)\cong\mathrm{Hom}(A,\mathrm{Hom}(B,C))\): a two-argument map is the same data as a one-argument map into a space of maps. The interesting part of this chapter is \texttt{structure}, which is how algebraic data will be packaged.
 
 \section{\texorpdfstring{What forces \texttt{structure}}{What forces structure}}\label{sec:03-functions-and-structures:00-index:2}
 

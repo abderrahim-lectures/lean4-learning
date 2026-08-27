@@ -266,7 +266,7 @@ Two points are worth noting.
 
 \texttt{mat2Ring} is the ring \(M_2(\mathbb{Z})\) assembled formally: \texttt{mat2Group}/\texttt{mat2CommGroup} verify that \((M_2(\mathbb{Z}), +)\) is an abelian group, and \texttt{mat2Ring} supplies the monoid \((M_2(\mathbb{Z}),
 \times, I)\) with distributivity. All the additive-group axioms hold \emph{entrywise}, which is what \texttt{Mat2.ext} followed by the \(\mathbb{Z}\)-lemma expresses: \(M_2(\mathbb{Z}) \cong \mathbb{Z}^4\) as additive groups. Associativity of \(\times\) is the one substantial fact: \(((XY)Z)_{i\ell} = \sum_{j,k} X_{ij}Y_{jk}Z_{k\ell}
-= (X(YZ))_{i\ell}\), whose per-entry form is a polynomial identity over the commutative ring \(\mathbb{Z}\), so \texttt{ring} can close it. The construction generalizes exactly the same way to \(M_n(S)\) for any commutative ring \(S\), entrywise reduction turns each ring axiom into an \(S\)-polynomial identity, and \(M_n(S)\) is noncommutative for \(n \ge 2\).
+= (X(YZ))_{i\ell}\), whose per-entry form is a polynomial identity over the commutative ring \(\mathbb{Z}\), closed above by hand through \texttt{Int.add\_\allowbreak{}mul}/\texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.mul\_\allowbreak{}assoc} and \texttt{add4\_\allowbreak{}reorder}, since this book's Mathlib-free development has no \texttt{ring} tactic available. The construction generalizes exactly the same way to \(M_n(S)\) for any commutative ring \(S\), entrywise reduction turns each ring axiom into an \(S\)-polynomial identity, and \(M_n(S)\) is noncommutative for \(n \ge 2\).
 
 \end{mathreading}
 
