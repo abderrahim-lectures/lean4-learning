@@ -12,7 +12,7 @@
 \item
   Prove \texttt{theorem inv\_\allowbreak{}inv (a : G) : Grp.inv (Grp.inv a) = a}. Before writing any tactics, consider whether this matches the shape of a lemma already in hand (Theorem 2 again). What single fact about \texttt{a} and \texttt{Grp.inv a} would permit invoking it directly?
 \item
-  Prove \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}. Strategy hint, \texttt{b} and \texttt{c} cannot be rewritten directly in isolation. Instead, apply \texttt{Grp.op (Grp.inv a)} to \emph{both sides} of \texttt{h} first (as a \texttt{have}), then simplify each side using \texttt{assoc}/\texttt{inv\_\allowbreak{}left}/\texttt{id\_\allowbreak{}left}, the same ``regroup, then cancel'' pattern as Theorem 3.
+  Prove \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}. \texttt{b} and \texttt{c} cannot be rewritten directly in isolation, they only appear inside \texttt{h}. This uses the same ``regroup, then cancel'' pattern as Theorem 3.
 \end{enumerate}
 
 Solutions, \hyperref[sec:15-appendix-solutions:08-chapter-8:1]{Appendix, Chapter 8}.
