@@ -23,8 +23,13 @@ You will be handed paths (pass them into your Read calls):
 3. **The Phase-3 FINAL-REVIEW.md** produced by the nemotron adjudicator.
 
 Also read the reviewer skills so your stance matches theirs:
-- `skills/adversarial-maths-reviewer/SKILL.md`
-- `skills/adversarial-book-reviewer/SKILL.md`
+- `.claude/skills/adversarial-maths-reviewer/SKILL.md`
+- `.claude/skills/adversarial-book-reviewer/SKILL.md`
+- `.claude/skills/prose-style-reviewer/SKILL.md` (sentence-level style;
+  not covered by either skill above)
+
+See `.claude/skills/second-brain/SKILL.md` for the full catalog of this
+repo's review skills and when each one applies.
 
 ## Operating stance
 

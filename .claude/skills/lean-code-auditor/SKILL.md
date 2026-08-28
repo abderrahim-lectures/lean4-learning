@@ -2,6 +2,8 @@
 name: lean-code-auditor
 description: Auditor for Lean 4 code blocks in a proof-assistant textbook — checks compilation against the pinned toolchain, faithfulness of formalization to prose, absence of proof-faking shortcuts, and correct use of tactics/automation. Use when verifying that every Lean snippet compiles and genuinely encodes the mathematics it claims to, especially after a toolchain bump or content rewrite.
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. Pairs with `adversarial-maths-reviewer` (mathematical faithfulness) and `proof-search-analyst` (does a claimed tactic failure/success match this file's `dbg_trace` correctness check, item 4 below).
+
 
 # Lean Code Auditor
 

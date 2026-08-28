@@ -2,6 +2,8 @@
 name: proof-search-analyst
 description: Adversarial review of proof-search narrative descriptions in mathematical textbooks — checks that each theorem's "search process" (what to try, why it fails, how to recover) is mathematically accurate, pedagogically effective, and honestly presented. Use when reviewing Chapters 8 and 10 of "Lean for Working Algebraists" (or any text that presents theorems as search processes rather than polished artifacts).
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. Pairs with `adversarial-maths-reviewer`'s Formalizer persona and `lean-code-auditor`'s compile-verification for the Lean side of every claimed tactic failure.
+
 
 # Proof-Search Analyst
 

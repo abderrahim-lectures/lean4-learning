@@ -2,6 +2,8 @@
 name: latex-typesetting-reviewer
 description: Adversarial review of LaTeX/PDF typesetting output — checks formatting consistency, equation rendering, diagram quality (tikz-cd), cross-reference integrity, code-block styling, and overall visual correctness against the source Markdown. Use after running the LaTeX build pipeline (build_latex.py -> xelatex -> biber) to verify the PDF is production-ready.
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. Run after `lean_book_latex/build/build_pdf.sh`, not on the Markdown source directly.
+
 
 # LaTeX Typesetting Reviewer
 
