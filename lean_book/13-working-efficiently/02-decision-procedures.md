@@ -56,7 +56,7 @@ fill in. A theorem about an arbitrary group has no finite truth table to
 compute, and thus must be *proved* from the axioms instead of
 *decided*.
 
-**Programmer's corner (Python).** `omega` deciding "some linear
+**Programmer note (Python).** `omega` deciding "some linear
 inequality about integers" sounds, at first glance, like exactly what a
 Python `assert` already does.
 
@@ -72,8 +72,8 @@ being "checked" is only ever a sample, however large, of the actual
 claim. `omega` is not sampling. It decides the *general* statement, the
 `∀`-quantified goal about every `n` and `m`, and the term it hands back
 is a genuine proof of that universal statement, not a record of which
-inputs were tried. This is the same distinction as the Programmer's
-corner of Chapter 8, a test versus a proof, specialized here to the
+inputs were tried. This is the same distinction as the Programmer note
+in Chapter 8, a test versus a proof, specialized here to the
 case where the proof happens to be found automatically, by an algorithm,
 rather than written out `have` by `have`. The correctness of `assert`
 depends on which inputs eventually call `check_bound`. The correctness

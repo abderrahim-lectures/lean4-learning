@@ -90,7 +90,7 @@ type system refusing to compose non-composable arrows, which in a category
 is the statement that $\circ$ is a *partial* operation, defined only when
 endpoints agree.
 
-**Programmer's corner (Python).** A Python graph library represents a
+**Programmer note (Python).** A Python graph library represents a
 path the obvious way, a plain list of edges.
 
 ```python

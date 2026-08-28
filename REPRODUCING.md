@@ -136,7 +136,7 @@ shell access to the working directory.
     > flourishes that add nothing for this audience, and write a
     > from-scratch recap of standard logic (propositional/first-order,
     > natural deduction) for readers meeting it for the first time. Also
-    > add an optional "Programmer's corner" box alongside the existing
+    > add an optional "Programmer note" box alongside the existing
     > "Mathematical reading" box at a handful of good spots, giving readers
     > with programming background but no formal-logic background a second
     > concrete anchor.
@@ -221,7 +221,7 @@ shell access to the working directory.
     > have, for instance) gets the same treatment as every other
     > chapter, new exercises plus a matching appendix-solutions file,
     > renumbering the appendix folder if needed. Finally, add a
-    > "Programmer's corner (Python)" worked example to every chapter
+    > "Programmer note (Python)" worked example to every chapter
     > that still lacks one, each one grounded in a real, specific
     > Python bug (an untyped `dict` `KeyError`, a runtime `assert` that
     > only ever samples the inputs it happened to see, `float` silently

@@ -82,7 +82,7 @@ of the space of raw data.
 > [Chapter 6, Section 1](../06-rigor-check/01-structure-vs-class.md) for why this
 > book delays that mechanism.
 
-**Programmer's corner (Python).** An ordinary Python class checks none of
+**Programmer note (Python).** An ordinary Python class checks none of
 this:
 
 ```python

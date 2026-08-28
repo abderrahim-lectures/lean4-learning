@@ -57,7 +57,7 @@ fill in; structure follows the logic of the argument. (Chapters 8 and 10
 are a deliberate exception: their theorem sections stand as a
 reference-style catalog, so each entry does follow a fixed six-box
 sequence, Claim → Finding the proof → Lean code → Mathematical reading →
-Programmer's corner → Mathlib equivalent, chosen because a reader
+Programmer note → Mathlib equivalent, chosen because a reader
 consulting them wants a predictable layout, not fresh structure per
 theorem.) Do not open a
 section or chapter with a narrative "story" framing or a "Picture it like
