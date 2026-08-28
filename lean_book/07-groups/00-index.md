@@ -27,8 +27,8 @@ inhabitant: $(\mathbb{Z}, +, 0, -)$ satisfies all five axioms, citing one
 core-library lemma per axiom ([Section 3](03-integers-example.md)).
 
 `intGroup` is commutative, so it cannot tell `id_left` apart from
-`id_right`, or `inv_left` from `inv_right` — in an abelian group these
-coincide. Whether the left/right split in the definition is doing real
+`id_right`, or `inv_left` from `inv_right`, since in an abelian group
+these coincide. Whether the left/right split in the definition is doing real
 work, rather than overcaution, can only be settled by a genuinely
 non-abelian example: the permutations of a 3-element set, built the same
 way, field by field, with both directions checked honestly

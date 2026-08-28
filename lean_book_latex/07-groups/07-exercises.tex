@@ -5,7 +5,7 @@
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \texttt{GroupData} (\texttt{op}, \texttt{id}, \texttt{inv}, no axioms) type-checks for any choice of the three fields, including nonsense ones. State which fields \texttt{Group} adds to cut out the genuine groups. Then exhibit a \texttt{GroupData Bool} whose operation is associative and has a left identity, but no right identity, and prove it --- showing that \texttt{id\_\allowbreak{}right} cannot be derived from the other four axioms and must remain a field of its own.
+  \texttt{GroupData} (\texttt{op}, \texttt{id}, \texttt{inv}, no axioms) type-checks for any choice of the three fields, including nonsense ones. State which fields \texttt{Group} adds to cut out the genuine groups. Then exhibit a \texttt{GroupData Bool} whose operation is associative and has a left identity, but no right identity, and prove it, showing that \texttt{id\_\allowbreak{}right} cannot be derived from the other four axioms and must remain a field of its own.
 \item
   Build \texttt{boolXorGroup : Group Bool} where \texttt{op} is boolean XOR (\texttt{Bool.xor}), \texttt{id := false}, and \texttt{inv := fun a => a} (every element is its own inverse). \texttt{by intro a; cases a <;> rfl} proves each field in one line; instead use \texttt{cases a with | false => rfl | true => rfl} for the fields that need a case split, to see which case does what.
 \item

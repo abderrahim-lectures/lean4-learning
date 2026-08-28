@@ -7,7 +7,7 @@
 A `Monoid` (Chapter 6) has an associative operation and a two-sided
 identity, nothing more; an element need not be undoable. What is the
 weakest extra requirement that makes every element undoable? Not "some
-element cancels it" — that already holds vacuously for the identity
+element cancels it", since that already holds vacuously for the identity
 itself paired with $e \cdot e = e$. The requirement has to hold for
 *every* element, and it has to be witnessed, not merely asserted: for
 each $a$ there must exist $a^{-1}$ with $a \cdot a^{-1} = a^{-1} \cdot a =
@@ -34,7 +34,7 @@ $$
 No further axiom is required; commutativity is not assumed (a group where
 $a \cdot b = b \cdot a$ always holds is **abelian**, a strictly stronger
 condition defined separately). Nothing above forces the identity or
-right/left laws to coincide — Section 4 exhibits a group where they
+right/left laws to coincide. Section 4 exhibits a group where they
 genuinely do not.
 
 ---

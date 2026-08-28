@@ -19,7 +19,7 @@ structure GroupData (G : Type) where
 ```
 
 A `GroupData G` is an operation, an identity element, and an inverse
-function — no axiom is checked. It can still be nonsense: `op` could
+function, with no axiom checked. It can still be nonsense: `op` could
 ignore both arguments.
 
 **Mathematical reading.** `GroupData G` is the *signature* of a group on
@@ -50,8 +50,8 @@ structure Group (G : Type) where
 `assoc` is a *proof obligation*: whoever constructs a `Group G` must
 supply a term proving it for every `a b c`. The remaining four fields are
 the identity and inverse axioms, split left/right because commutativity
-has not been assumed — collapsing them into one field each would silently
-assume it.
+has not been assumed. Collapsing them into one field each would
+silently assume it.
 
 **Mathematical reading.** `Group G` is the type of *group structures on
 the fixed carrier $G$*, a dependent tuple
@@ -67,7 +67,7 @@ $$
 $$
 `Group G` is exactly the subset of `GroupData G` cut out by these five
 propositions, the $\Sigma$-type $\sum_{d : \mathrm{GroupData}(G)}
-\mathrm{Axioms}(d)$ — the same shape as Chapter 4's "witness together with
+\mathrm{Axioms}(d)$, the same shape as Chapter 4's "witness together with
 a proof about it," here with a whole bundle of data as the witness. This
 matches "a set with operations *such that* the axioms hold"; the "such
 that" is a genuine
@@ -97,8 +97,8 @@ class Group:
 runs, and is not a group, since subtraction is not associative. The bug
 surfaces later, silently, wherever a theorem assuming associativity is
 applied to this `op` without re-checking the assumption. `GroupData`
-above has the identical defect — values bundled, nothing checked — which
-is exactly why `Group` adds the five axiom fields: a term of type `Group
+above has the identical defect. Values are bundled but nothing is
+checked, which is exactly why `Group` adds the five axiom fields: a term of type `Group
 G` cannot exist unless proofs of `assoc`, `id_left`, `id_right`,
 `inv_left`, and `inv_right` were actually supplied, so every theorem in
 the rest of the book taking a `Group G` gets those five facts for free,
