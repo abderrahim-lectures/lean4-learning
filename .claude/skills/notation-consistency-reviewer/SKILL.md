@@ -2,6 +2,8 @@
 name: notation-consistency-reviewer
 description: AMS-level adversarial review of mathematical notation consistency across an entire textbook — checks that every symbol, term, and convention is defined before use, used consistently, and correctly translated between Lean syntax and standard mathematical notation. Use when reviewing notation across all chapters of a proof-assistant textbook, especially after a rewrite that may have removed defining context.
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. Pairs with `adversarial-maths-reviewer` for the mathematical content the notation expresses.
+
 
 # Notation Consistency Reviewer
 

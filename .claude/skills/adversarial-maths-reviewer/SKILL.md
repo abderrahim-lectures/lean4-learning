@@ -2,6 +2,8 @@
 name: adversarial-maths-reviewer
 description: Adversarial, brutally honest review of mathematical content — definitions, theorems, proofs, worked examples, exercises and their solutions — including formal Lean 4 code. Use when checking the mathematics of a textbook or manuscript before publishing, when the author suspects self-review blindness, or after an ordinary correctness pass. Hunts for wrong theorems, circular reasoning, unstated hypotheses, weakened statements, silent proof steps, incorrect examples, and Lean code that fakes correctness.
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. For category-theory-specific claims also run `category-theory-accuracy-reviewer`; for cross-chapter notation also run `notation-consistency-reviewer`; for Chapters 8/10's proof-search narration also run `proof-search-analyst`.
+
 
 # Adversarial Maths Reviewer
 
@@ -85,7 +87,17 @@ each against every nontrivial statement, as an AMS referee would:
 
 - **Faithfulness** — the formal/Lean statement and the prose statement
   agree at full strength. No hypothesis weakened, no conclusion
-  truncated, no content hidden in a typeclass field.
+  truncated, no content hidden in a typeclass field. Operationally: for
+  every named construction a section's prose references (`Group`,
+  `intGroup`, `natSmul`, `Path`, ...), `grep` the companion
+  `lean_project/LeanProject/*.lean` file for that exact name. A
+  construction the prose references but the Lean source never defines,
+  or a helper the Lean source silently supplies (a workaround, a
+  "not actually given in the book" comment) that the prose never
+  mentions, is a faithfulness gap. This is the check that caught a
+  missing `intZModule` definition and a silently hand-supplied
+  `Mat2.ext` lemma (see `reviews/2026-08-15/math-algebra-review.md` for
+  worked examples), both fixed before this repo's `v2.0.0` release.
 - **No smuggling** — no hidden `axiom`, `sorry`, `admit`, or `unsafe`;
   no `by`-block that sidesteps the goal; no `noncomputable` hiding a
   missing construction.

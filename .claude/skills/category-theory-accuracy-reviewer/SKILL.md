@@ -2,6 +2,8 @@
 name: category-theory-accuracy-reviewer
 description: AMS-level adversarial review of category-theory claims and explanations in a mathematics textbook — checks that categorical readings (quivers as categories, rings as one-object preadditive categories, universal properties, functors, forgetful functors) are stated correctly, precisely, and at the right level for the target audience.
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. Pairs with `adversarial-maths-reviewer` for general mathematical correctness beyond category theory.
+
 
 # Category-Theory Accuracy Reviewer
 

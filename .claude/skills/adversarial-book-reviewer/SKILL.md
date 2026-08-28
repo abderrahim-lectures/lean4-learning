@@ -2,6 +2,8 @@
 name: adversarial-book-reviewer
 description: Adversarial, brutally honest review of a book or long-form technical manuscript's prose, structure, pedagogy, and factual claims. Use when reviewing textbook or technical writing before publishing, when the author wants genuine criticism instead of praise, or when an ordinary "does this look right" pass already ran and residual risk remains. Hunts for what a hostile reader, a first-time reader, an editor, and a fact-checker would each attack.
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. Run `prose-style-reviewer` as a separate pass for sentence-level style, this skill does not check possessives, em-dashes, or comma pileups.
+
 
 # Adversarial Book Reviewer
 

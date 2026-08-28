@@ -31,7 +31,7 @@ set -uo pipefail
 # Don't use -e: we want to continue even if one model fails
 
 BOOK="$(pwd)/lean_book"
-SKILLS="$(pwd)/skills"
+SKILLS="$(pwd)/.claude/skills"
 DATE="$(date +%F)"
 BASE="$(pwd)/reviews/$DATE"
 MODELS=(nemotron-3-ultra-free laguna-s-2.1-free north-mini-code-free deepseek-v4-flash-free ling-3.0-flash-free mimo-v2.5-free)
