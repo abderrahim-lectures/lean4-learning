@@ -185,8 +185,8 @@ No `Perm3` bundle, no hand-written extensionality lemma. `Equiv.Perm
 (Fin 3)`, the type of bijections `Fin 3 ≃ Fin 3`, is already a group;
 [`Equiv.swap`](https://loogle.lean-lang.org/?q=Equiv.swap) and [`finRotate`](https://loogle.lean-lang.org/?q=finRotate) construct a transposition and a rotation, `*` is
 the registered operation matching `Perm3.comp`'s convention. The two
-`#eval`s are the same non-commutativity witness, now on the library's
-$S_3$.
+`#eval`s are the same non-commutativity witness, now on the $S_3$ of
+the library.
 
 ## Next
 
