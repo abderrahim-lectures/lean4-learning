@@ -44,6 +44,30 @@ For every code block, snippet, or `dbg_trace` sibling:
 5. **Exercise solutions.** Do the appendix solutions actually compile
    and produce the stated result? No missing imports, no changed
    identifiers, no `sorry`-dropped lemmas.
+6. **Axiom check.** For each top-level `theorem`/`def` a snippet
+   introduces, run `#print axioms <name>` (a scratch file via `lake env
+   lean`) and confirm the axiom list is limited to the three standard
+   ones Lean's kernel uses (`propext`, `Classical.choice`, `Quot.sound`)
+   or none at all. Anything else, a stray `sorryAx`, an ad hoc `axiom`
+   declaration, is a CRITICAL finding even if `lake build` reported
+   success: this catches a proof that compiles but is silently unsound
+   or incomplete in a way build output alone does not always surface.
+
+## Skill provenance
+
+Item 6 was added from `.claude/skills/skill-scout-daily-cron`'s
+2026-08-28 report (`reviews/skill-scouting/2026-08-28.md`), sourced from
+`cameronfreer/lean4-skills`'s "per-file build, axiom check, commit"
+workflow. That same report also proposed requiring a Mathlib search
+(LeanSearch/Loogle) before accepting any hand-written proof of a
+standard algebraic fact, flagging duplication as a style finding. That
+proposal is **rejected**, not adopted: this book is deliberately
+Mathlib-free through Chapter 12 (`00-setup/04-mathlib-note.md`), so
+every hand-written proof of a standard fact is duplicating Mathlib *on
+purpose*, that is the pedagogical point, not an oversight. Applying that
+check here would manufacture a false finding on nearly every proof in
+Chapters 7-13. Recorded here so a future scouting pass does not
+resurface it without this context.
 
 ## Toolchain version discipline
 
