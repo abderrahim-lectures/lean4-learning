@@ -45,7 +45,7 @@ from page one, rather than building `Group`/`Ring` from scratch first,
 would be strictly less work. It would also defeat the point. The goal is
 not merely to *use* a group in Lean, but to see exactly what a group *is*
 to Lean: every field, every proof obligation, in one `structure`, with
-nothing hidden behind someone else's typeclass hierarchy. A library saves
+nothing hidden behind the typeclass hierarchy of someone else. A library saves
 effort by hiding that machinery, and the purpose of this book is for the
 reader to see it on a first encounter, not have it hidden.
 

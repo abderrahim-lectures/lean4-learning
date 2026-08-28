@@ -14,9 +14,9 @@
 
 Chapter 8 finished everything Part II had to say about a single
 operation. What changes, precisely, once a second operation is layered
-onto a group? The additive side must now be commutative — otherwise the
-distributive laws below cannot be stated symmetrically — and a compatible
-multiplication is added, tied to addition by distributivity. These are
+onto a group? The additive side must now be commutative, otherwise the
+distributive laws below cannot be stated symmetrically. A compatible
+multiplication is then added, tied to addition by distributivity. These are
 stated first as ordinary axioms (R1)–(R4)
 ([Section 1](01-definition.md)), the way Chapter 7 opened with the group
 axioms before any Lean. Axiom (R1) demands *commutative* addition, but

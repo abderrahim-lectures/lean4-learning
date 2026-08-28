@@ -20,8 +20,8 @@ which it ends at. Nothing else is required to make sense of chaining two
 arrows together, so nothing else goes into the definition.
 
 A **quiver** is exactly this: a set of vertices $Q_0$, a set of arrows
-$Q_1$, and two functions $s, t : Q_1 \to Q_0$ recording each arrow's
-**source** and **target**. It is a *directed graph* under another name.
+$Q_1$, and two functions $s, t : Q_1 \to Q_0$ recording the
+**source** and **target** of each arrow. It is a *directed graph* under another name.
 This is the same notion as [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) in Mathlib (built here from scratch, following the
 "no Mathlib" policy of Chapter 1, rather than reusing the Mathlib version).
 

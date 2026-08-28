@@ -24,8 +24,8 @@ built. Data-fields and proof-fields are accessed the same way, since a
 the same tuple.
 
 **Mathlib equivalent.** No field access to write at all. Once `Int` is an
-[`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup), the ordinary `+`/`0`/`-` notations already resolve to that
-instance's operations.
+[`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup), the ordinary `+`/`0`/`-` notations already resolve to the operations of
+that instance.
 
 ```lean
 #eval (3 : Int) + 4
