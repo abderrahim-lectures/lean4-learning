@@ -81,7 +81,7 @@ example : 2 + 2 = 4 := rfl
 `example` states a proposition and immediately supplies a proof (an
 anonymous, unnamed `theorem`).
 
-**Programmer's corner (Python).** A Python function that needs a
+**Programmer note (Python).** A Python function that needs a
 precondition to hold usually states it with `assert`.
 
 ```python

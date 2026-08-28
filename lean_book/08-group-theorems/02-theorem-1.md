@@ -65,7 +65,7 @@ e$, the standard "two things equal to a common third are equal." (The
 same argument in mirror shows a right identity is also unique, so the
 identity of a group is unique, full stop.)
 
-**Programmer's corner (Python).** A Python codebase that wants
+**Programmer note (Python).** A Python codebase that wants
 confidence in "the identity element is unique" reaches for a test.
 
 ```python

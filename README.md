@@ -91,7 +91,7 @@ The book uses several recurring devices, applied consistently across all
   notation a working algebraist would recognize from a textbook,
   including the categorical reading (functors, universal properties,
   Hom-sets) where it clarifies what the code encodes.
-- **Programmer's corner (Python).** Nearly every chapter includes an
+- **Programmer note (Python).** Nearly every chapter includes an
   optional box grounding the value of Lean and functional programming
   in a concrete Python failure mode (an untyped `dict` `KeyError`, a
   runtime `assert`, a `float` silently breaking associativity, and the
@@ -135,7 +135,7 @@ The book uses several recurring devices, applied consistently across all
   [GitHub Codespace](https://codespaces.new/abderrahim-lectures/lean4-learning),
   toolchain and dependencies installed automatically.
 - [lean_book/python-companion/](lean_book/python-companion/), every
-  "Programmer's corner (Python)" snippet in the book, collected into one
+  "Programmer note (Python)" snippet in the book, collected into one
   notebook that opens directly in
   [Google Colab](https://colab.research.google.com/github/abderrahim-lectures/lean4-learning/blob/master/lean_book/python-companion/python_companion.ipynb)
   or [Binder](https://mybinder.org/v2/gh/abderrahim-lectures/lean4-learning/master?filepath=lean_book%2Fpython-companion%2Fpython_companion.ipynb),

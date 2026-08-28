@@ -35,7 +35,7 @@ types and arrows. There is not yet any way to quantify over *all* types
 the way `identity {α : Type} (x : α) : α := x` did in Chapter 1. That
 extra generality is exactly the Π-types of Chapter 2, Section 2, already covered.
 
-**Programmer's corner (Python), before the formal rules.** The
+**Programmer note (Python), before the formal rules.** The
 type hints of Python plus `mypy` are a light version of exactly this system, worth
 seeing first since this Python tooling runs today, without any Lean
 installation at all.
@@ -129,7 +129,7 @@ write `identity_Nat : Nat → Nat` and separately `identity_Bool : Bool → Bool
 one arrow-type definition per base type. But there is no single term of a
 single STLC type that captures "the identity function, at every type."
 
-**Programmer's corner (Python), on the same limitation.** Plain Python
+**Programmer note (Python), on the same limitation.** Plain Python
 never runs into this, because it has no static types to begin with. `def
 identity(x): return x` already works on anything, at runtime, with zero
 declarations. But the instant type hints are added, wanting `mypy` to
@@ -213,7 +213,7 @@ Had the rule been $\max$ throughout, the first of these would have landed in
 $n \ge 0 : \mathtt{Sort}\,0$ give $\max(1,0) = 1$), and every `∀`-statement in
 Chapters 3 through 11 would be a type rather than a theorem.
 
-**Programmer's corner (Python), on why this is genuinely a type-theory
+**Programmer note (Python), on why this is genuinely a type-theory
 concern and not a Python one.** In Python, `type(3)` is `int`, and
 `type(int)` is `type`, and, unlike the stratified hierarchy in Lean,
 `type(type)` is *also* `type`.

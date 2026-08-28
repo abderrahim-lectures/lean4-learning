@@ -56,7 +56,7 @@ def fin3Ring : Ring (Fin 3) where
   right_distrib := by decide
 ```
 
-**Programmer's corner (Python).** `by decide` on a goal like `assoc` for
+**Programmer note (Python).** `by decide` on a goal like `assoc` for
 `Fin 3` is not magic. It is exactly what one would get from
 
 ```python

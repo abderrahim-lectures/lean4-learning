@@ -71,7 +71,7 @@ $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 > *Algebra: Chapter 1* by Aluffi (the latter using the same categorical
 > framing this book uses) are standard references.
 
-**Programmer's corner (Python).** `mul_assoc` and `left_distrib`/
+**Programmer note (Python).** `mul_assoc` and `left_distrib`/
 `right_distrib` are not free assumptions here. Whoever builds a
 `Ring R` must supply an actual proof of each, for the specific `mul`
 and `addGrp.op` chosen. Python's built-in `float` looks like it forms

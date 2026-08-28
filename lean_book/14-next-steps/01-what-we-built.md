@@ -34,7 +34,7 @@ precisely to keep the discipline required for reading (or writing) a real
 Lean library, when something goes wrong, the exact lemma responsible
 should be identifiable.
 
-**Programmer's corner (Python).** Every Programmer's corner in this book
+**Programmer note (Python).** Every Programmer note in this book
 made the same comparison, once per chapter, against one concrete
 Python failure mode, a `KeyError` from an untyped `dict`, an `assert`
 that only ever ran the inputs it happened to see, a `float` silently

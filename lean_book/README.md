@@ -101,7 +101,7 @@ promised background of the book (a shared glossary now lives at
 [Chapter 2, Section 1](02-terminology-and-coc/01-terminology.md), and
 [Chapter 4, Section 2](04-propositions-and-proofs/02-logic-recap.md) recaps
 standard logic from scratch for readers meeting it for the first time) and added
-optional "Programmer's corner (Python)" boxes alongside the "Mathematical
+optional "Programmer note (Python)" boxes alongside the "Mathematical
 reading" ones; and a third, readability-focused pass that put every worked
 example in its own block immediately followed by its own explanation
 (rather than several examples dumped together, explained afterward all at
@@ -186,7 +186,7 @@ See [changelog/](changelog/README.md) for the full, itemized history.
   "Sources, quoted" box of a section, consolidated into one list with one
   citation style; each section links back to the entries it uses.
 - [Python companion](python-companion/python_companion.ipynb), every
-  "Programmer's corner (Python)" snippet in the book, collected into one
+  "Programmer note (Python)" snippet in the book, collected into one
   runnable notebook that opens directly in Google Colab, no Lean
   installation required.
 
@@ -200,8 +200,8 @@ chapter, and a top-level
 `lean_book_latex/lean-for-working-algebraists.tex`. This
 is real, professional LaTeX, with proper `\chapter`/`\section` structure with
 styled headings and running headers, `amsthm`/`tcolorbox` environments
-for the recurring boxes of the book ("Mathematical reading," "Programmer's
-corner," checkpoint projects), every former Mermaid diagram hand-translated
+for the recurring boxes of the book ("Mathematical reading," "Programmer
+note," checkpoint projects), every former Mermaid diagram hand-translated
 to native `tikz-cd` (in
 [`../lean_book_latex/diagrams/`](../lean_book_latex/diagrams/), each with
 its own standalone compile smoke-test in
