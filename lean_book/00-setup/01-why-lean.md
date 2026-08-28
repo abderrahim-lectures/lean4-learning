@@ -8,12 +8,13 @@ In 1879, Alfred Kempe published a proof of the four-color theorem, the
 claim that any map can be colored with four colors so that no two
 adjacent regions share a color. The proof was accepted, cited, and
 taught for eleven years. In 1890, Percy Heawood found a specific
-configuration of eleven regions for which Kempe's central technique,
-alternating chains of two colors, silently broke down: two chains that
-were supposed to stay disjoint could, in this one configuration,
-interfere with each other, and Kempe's argument gave no way to detect
-that this had happened. No reader who checked Kempe's proof over those
-eleven years was careless. A single unhandled case, invisible unless a
+configuration of eleven regions for which Kempe's central technique
+silently broke down. That technique built two chains of alternating
+colors and relied on them staying disjoint. In Heawood's
+eleven-region configuration the two chains could interfere with each
+other instead, and Kempe's argument gave no way to detect that this had
+happened. No reader who checked Kempe's proof over those eleven years
+was careless. A single unhandled case, invisible unless a
 reader constructed exactly the right counterexample by hand, survived
 peer review, publication, and a decade of citation ([Heawood1890]).
 

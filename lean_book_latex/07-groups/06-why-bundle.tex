@@ -2,11 +2,11 @@
 
 Two groups now exist, \texttt{intGroup} and \texttt{perm3Group}, built independently, field by field. Was that duplication of effort, or does it pay for itself? Given \texttt{Grp : Group G}, any theorem proved about a \emph{generic} \texttt{Group G}, using only \texttt{Grp.assoc}, \texttt{Grp.id\_\allowbreak{}left}, and the other four fields, applies automatically to \texttt{intGroup}, to \texttt{perm3Group}, and to every group built later (the additive group underlying path algebras, and beyond). Prove it once, generically, obtain it for free everywhere. Chapter 8 does exactly this.
 
-\textbf{Mathlib equivalent.} This ``once, free everywhere'' promise is not deferred to a later chapter in Mathlib --- it is why the algebra hierarchy is organized around typeclasses at all. The same lemma name applies unchanged to two unrelated groups.
+\textbf{Mathlib equivalent.} This ``once, free everywhere'' promise is not deferred to a later chapter in Mathlib, which is why the algebra hierarchy is organized around typeclasses at all. The same lemma name applies unchanged to two unrelated groups.
 
 \begin{lstlisting}
 example (a b c : Int) : (a + b) + c = a + (b + c) := add_assoc a b c
 example (f g h : Equiv.Perm (Fin 3)) : (f * g) * h = f * (g * h) := mul_assoc f g h
 \end{lstlisting}
 
-\href{https://loogle.lean-lang.org/?q=add_assoc}{\texttt{add\_\allowbreak{}assoc}}/\href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\_\allowbreak{}assoc}} were each proved exactly once, generically over \texttt{[AddCommGroup G]}/\texttt{[Group G]}; \texttt{Int} and \texttt{Equiv.Perm (Fin 3)} obtain the fact automatically simply by having the instance. Nothing about either type is re-proved at the call site --- the library-scale version of the payoff Chapter 8 carries out by hand for \texttt{perm3Group}.
+\href{https://loogle.lean-lang.org/?q=add_assoc}{\texttt{add\_\allowbreak{}assoc}}/\href{https://loogle.lean-lang.org/?q=mul_assoc}{\texttt{mul\_\allowbreak{}assoc}} were each proved exactly once, generically over \texttt{[AddCommGroup G]}/\texttt{[Group G]}; \texttt{Int} and \texttt{Equiv.Perm (Fin 3)} obtain the fact automatically simply by having the instance. Nothing about either type is re-proved at the call site. This is the library-scale version of the payoff Chapter 8 carries out by hand for \texttt{perm3Group}.

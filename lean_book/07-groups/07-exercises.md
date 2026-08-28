@@ -15,7 +15,7 @@ at no extra cost.
    of the three fields, including nonsense ones. State which fields
    `Group` adds to cut out the genuine groups. Then exhibit a
    `GroupData Bool` whose operation is associative and has a left
-   identity, but no right identity, and prove it — showing that
+   identity, but no right identity, and prove it, showing that
    `id_right` cannot be derived from the other four axioms and must
    remain a field of its own.
 

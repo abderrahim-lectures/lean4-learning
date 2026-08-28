@@ -5,7 +5,7 @@
 ---
 
 `intGroup` is abelian, so `id_left` never differs from `id_right`, nor
-`inv_left` from `inv_right` — in a commutative group these coincide. Does
+`inv_left` from `inv_right`, since in a commutative group these coincide. Does
 that mean the left/right split in the definition of `Group` is mere
 caution, with nothing forcing it? Settling this needs a group where `op`
 genuinely fails to commute, built the same way `intGroup` was, field by
@@ -16,7 +16,7 @@ field, with both directions checked honestly.
 The symmetric group $S_3$ is all bijections of a 3-element set, under
 composition. Represent a permutation of `Fin 3 := {0, 1, 2}` as a
 bijective function bundled with its inverse and the proofs that they
-cancel — an arbitrary `Fin 3 → Fin 3` need not be a bijection at all.
+cancel, since an arbitrary `Fin 3 → Fin 3` need not be a bijection at all.
 
 ```lean
 structure Perm3 where
@@ -101,7 +101,7 @@ def cycle012 : Perm3 where
 ```
 
 Applying `cycle012` then `swap01` sends $0 \to 1 \to 0$; applying
-`swap01` then `cycle012` sends $0 \to 1 \to 2$ — `#eval` computes `0` and
+`swap01` then `cycle012` sends $0 \to 1 \to 2$. `#eval` computes `0` and
 `2`. This is a computed proof, not suggestive evidence, that
 `Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01`: the group is
 non-abelian. Chapter 9, Section 7 uses the same compute-a-counterexample

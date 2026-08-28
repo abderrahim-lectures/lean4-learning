@@ -1,6 +1,6 @@
 \section{The mathematical definition}\label{sec:07-groups:01-definition:1}
 
-A \texttt{Monoid} (Chapter 6) has an associative operation and a two-sided identity, nothing more; an element need not be undoable. What is the weakest extra requirement that makes every element undoable? Not ``some element cancels it'' --- that already holds vacuously for the identity itself paired with \(e \cdot e = e\). The requirement has to hold for \emph{every} element, and it has to be witnessed, not merely asserted: for each \(a\) there must exist \(a^{-1}\) with \(a \cdot a^{-1} = a^{-1} \cdot a =
+A \texttt{Monoid} (Chapter 6) has an associative operation and a two-sided identity, nothing more; an element need not be undoable. What is the weakest extra requirement that makes every element undoable? Not ``some element cancels it'', since that already holds vacuously for the identity itself paired with \(e \cdot e = e\). The requirement has to hold for \emph{every} element, and it has to be witnessed, not merely asserted: for each \(a\) there must exist \(a^{-1}\) with \(a \cdot a^{-1} = a^{-1} \cdot a =
 e\). Adding exactly this to the data of a monoid is the entire content of this section, and it is what turns ``a set with an associative operation'' into a structure with cancellation.
 
 A \textbf{group} is a set \(G\) together with:
@@ -25,7 +25,7 @@ satisfying three axioms, for all \(a, b, c \in G\):
 \end{aligned}
 \]
 
-No further axiom is required; commutativity is not assumed (a group where \(a \cdot b = b \cdot a\) always holds is \textbf{abelian}, a strictly stronger condition defined separately). Nothing above forces the identity or right/left laws to coincide --- Section 4 exhibits a group where they genuinely do not.
+No further axiom is required; commutativity is not assumed (a group where \(a \cdot b = b \cdot a\) always holds is \textbf{abelian}, a strictly stronger condition defined separately). Nothing above forces the identity or right/left laws to coincide. Section 4 exhibits a group where they genuinely do not.
 
 \subsection{Sources, quoted}\label{sec:07-groups:01-definition:2}
 
