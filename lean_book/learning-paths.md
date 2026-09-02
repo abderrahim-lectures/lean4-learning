@@ -66,7 +66,7 @@ checkpoint projects included. This is the path the book is written to
 support directly, and every forward reference assumes it.
 
 **"I already know Lean, teach me the algebra."** Skim Chapter 0 (just
-confirm your toolchain matches `v4.32.2`), read Chapter 1 for the
+confirm your toolchain matches `v4.33.1`), read Chapter 1 for the
 specific `Fin`/`Vec` examples of this book, skip Chapter 2 (terminology
 and the calculus of constructions) and Chapter 6 (rigor check) entirely
 unless something later sends you back (the [Chapter 2, Section 1

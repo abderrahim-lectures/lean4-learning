@@ -12,10 +12,10 @@ shell access to the working directory.
    > In this folder create two subfolders: `lean_book`, an absolute-beginners
    > guide to Lean 4 written in Markdown with LaTeX math, focused on groups,
    > rings, and path algebras as running examples; and `lean_project`, a Lean
-   > 4 project using the pinned toolchain `leanprover/lean4:v4.32.2`. Set up
+   > 4 project using the pinned toolchain `leanprover/lean4:v4.33.1`. Set up
    > `lean_project` with a proper `lake` scaffold (`lakefile.toml` with
-   > Mathlib pinned to `rev = "v4.32.2"`, `lean-toolchain` pinned to
-   > `leanprover/lean4:v4.32.2`, a library module, and an executable), and
+   > Mathlib pinned to `rev = "v4.33.1"`, `lean-toolchain` pinned to
+   > `leanprover/lean4:v4.33.1`, a library module, and an executable), and
    > start `lean_book` with a README table of contents and chapters covering
    > Lean basics through groups and rings, ending with quiver path algebras.
 

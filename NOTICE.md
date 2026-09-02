@@ -7,7 +7,7 @@ and many rounds of revision; Claude wrote the chapter text, Lean code,
 and LaTeX. See [lean_book/changelog/](lean_book/changelog/README.md) for
 the full, itemized history of every pass.
 
-**Lean version:** all code targets **Lean 4, toolchain `leanprover/lean4:v4.32.2`**,
+**Lean version:** all code targets **Lean 4, toolchain `leanprover/lean4:v4.33.1`**,
 pinned in [`lean_project/lean-toolchain`](lean_project/lean-toolchain);
 `lake` fetches this exact version automatically on first build (see
 [lean_project/README.md](lean_project/README.md)). The code in Chapters
@@ -40,7 +40,7 @@ construction phrased against Mathlib's real `Group`/`Ring`/`Module`/
 `Quiver` API. The from-scratch build stays the main teaching path; the
 Mathlib box is a deliberate look ahead, so Chapter 13's move to Mathlib
 isn't the reader's first sight of it. Every added snippet is compiled for
-real: `lean_project` now depends on Mathlib (pinned to the `v4.32.2` tag),
+real: `lean_project` now depends on Mathlib (pinned to the `v4.33.1` tag),
 and each chapter's Mathlib snippets live in a matching `Ch0*Mathlib.lean`
 module, checked with `lake build`.
 

@@ -9,7 +9,7 @@ theorem and_example (P Q : Prop) (hp : P) (hq : Q) : P (*$\wedge$*) Q := by
   (*$\cdot$*) exact hq
 \end{lstlisting}
 
-\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}} is exactly the tactic for this: it invokes the introduction rule of the goal's type, splitting \(P \wedge Q\) into the two goals \(P\) and \(Q\) (the \texttt{·} focus dot addresses each one in turn), and more generally, for any \texttt{structure}, into one goal per field. This reflects the universal property of the product, ``a map into \(P \times Q\) is a pair of maps,'' so proving \(P\) and proving \(Q\) is enough.
+\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}} is exactly the tactic for this: it invokes the introduction rule for the type of the goal, splitting \(P \wedge Q\) into the two goals \(P\) and \(Q\) (the \texttt{·} focus dot addresses each one in turn), and more generally, for any \texttt{structure}, into one goal per field. This reflects the universal property of the product, ``a map into \(P \times Q\) is a pair of maps,'' so proving \(P\) and proving \(Q\) is enough.
 
 \begin{quote}
 Read more. \hyperref[sec:04-propositions-and-proofs:02-logic-recap:1]{Chapter 4, Section 2} states the introduction/elimination rules for every connective by name, if ``introduction rule''/``elimination rule'' as general terms are new.

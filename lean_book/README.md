@@ -58,7 +58,7 @@ extension. In a viewer without Mermaid support they fall back to a
 readable fenced code block showing the source of the diagram instead of a
 rendering error.
 
-Code blocks are valid Lean 4 (toolchain `v4.32.2`, matching
+Code blocks are valid Lean 4 (toolchain `v4.33.1`, matching
 `../lean_project`). Every code block in Chapters 1–12 has been ported into
 `../lean_project/LeanProject/` (one module per chapter) and verified with
 `lake build` against the real compiler, not just read over. Several bugs

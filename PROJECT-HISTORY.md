@@ -83,6 +83,14 @@ As of this writing: **148 issues** (147 closed, 1 open) and
   corner (Python)" worked example to every main chapter that lacked one,
   each grounding the value of Lean and functional programming in a
   concrete Python bug rather than an abstract claim.
+- **v2.0.x: rewriting the book in derivation-first prose (v2.0.5 release)** —
+  rewrote the whole book so each topic is presented as a live derivation
+  (what to look at, what to try, why an attempt fails) instead of a
+  polished final artifact; added the proof-strategy guide and closed its
+  adversarial review; bumped the Lean toolchain and mathlib from v4.32.2
+  to v4.33.1 and rebuilt the companion project; rewrote the stale LaTeX
+  chapter-dependency graph to match the learning-paths graph; and
+  released v2.0.5 as the first v2.x release.
 
 ## Merged pull requests
 
@@ -186,6 +194,7 @@ As of this writing: **148 issues** (147 closed, 1 open) and
 | [#241](https://github.com/abderrahim-lectures/lean4-learning/pull/241) | Add binder styles, def transparency, and arrow-notation coverage |
 | [#247](https://github.com/abderrahim-lectures/lean4-learning/pull/247) | v1.6.0: split Chapter 1, book-wide style pass, Python-comparison examples |
 | [#248](https://github.com/abderrahim-lectures/lean4-learning/pull/248) | v1.6.2: bibliography citations for Chapter 4, Ring, Module, and LinearMap |
+| [#261](https://github.com/abderrahim-lectures/lean4-learning/pull/261) | v2.0.x: rewrite the book in derivation-first prose, add the proof strategy guide (v2.0.5 release) |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact
