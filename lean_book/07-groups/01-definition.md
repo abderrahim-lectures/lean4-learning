@@ -33,9 +33,12 @@ $$
 
 No further axiom is required; commutativity is not assumed (a group where
 $a \cdot b = b \cdot a$ always holds is **abelian**, a strictly stronger
-condition defined separately). Nothing above forces the identity or
-right/left laws to coincide. Section 4 exhibits a group where they
-genuinely do not.
+condition defined separately). The identity and inverse laws are each
+stated in both a left and a right direction, and the two directions are
+kept as separate axioms rather than collapsed into one. In an abelian
+group the directions are logically equivalent, but with commutativity not
+assumed each must be supplied on its own. [Section 4](04-permutations-example.md)
+builds a non-abelian group, $S_3$, where this split is put to work.
 
 ---
 

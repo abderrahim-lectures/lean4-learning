@@ -33,7 +33,7 @@ Is a type always fixed in advance, the way `Nat → Nat` never changes its
 output type? No, and this is the one feature separating a proof
 assistant from an ordinary typed language: a type can depend on a
 *value*, not just another type. `Fin n` is a different type for each
-`n`, and a function's *return type* can change depending on which
+`n`, and the *return type* of a function can change depending on which
 argument it receives, letting a signature say "these two lists must have
 the same length" and have Lean enforce it, rather than merely hope for
 it. [Section 3](03-dependent-types.md) works this out concretely.

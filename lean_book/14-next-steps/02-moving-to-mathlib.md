@@ -40,6 +40,26 @@ The axioms already learned are the same axioms, merely packaged so
 the elaborator of Lean can find them without a `Grp` argument named in
 every theorem.
 
+Beyond Mathlib itself, the ecosystem now includes libraries built on
+top of it. One notable example is
+[TauCeti](https://github.com/TauCetiProject/TauCeti), a Lean library of
+formalized mathematics that depends on Mathlib's `master` branch and
+defers to its design decisions. TauCeti is directed by human-written
+roadmaps, while AI contributors implement and maintain the mathematics
+under adversarial review against open rubrics; the Lean FRO and the
+Mathlib Initiative incubate the project jointly. It does not replace
+Mathlib, which remains the gold standard for human-curated mathematics.
+TauCeti instead adopts Mathlib's design conventions and pursues a
+library of reusable results at AI scale. Two points connect it to this
+book. The `structure` versus `class` distinction of Chapter 6, Section 1
+is the exact mechanic such a library runs on. The roadmaps of TauCeti
+cover areas well past this book, such as the Jacobian challenge and
+reductive algebraic groups, so it shows where the subject is headed.
+Checking how far Mathlib (and TauCeti) have grown past the hand-built
+`Group` of Chapter 7 and `Ring` of Chapter 9 is a useful way to measure
+both the growth of the surrounding machinery and the stability of the
+core axioms.
+
 ### Two theorems for free
 
 Everything above is a promise that Mathlib is *more general*. Here are

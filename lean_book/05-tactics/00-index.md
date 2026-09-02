@@ -15,7 +15,7 @@
 ## What forces tactic mode
 
 Writing proof *terms* directly (as in Chapter 4) quickly becomes hard to
-manage as a proof grows. Lean's alternative is **tactic mode**, entered
+manage as a proof grows. The alternative is **tactic mode**, entered
 with `by`, in which a "goal" is worked step by step, much as one would
 write a proof on paper. The real subject of this chapter is not the list
 of tactics below, but **how to work a goal whose proof is not yet
