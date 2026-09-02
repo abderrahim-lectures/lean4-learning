@@ -10,48 +10,38 @@
 - Build both an abelian (`Int`) and a genuinely non-abelian (permutations of `Fin 3`) example from scratch.
 - Articulate why bundling data with proof obligations pays off once theorems are proved generically (Chapter 8).
 
-## The story of this chapter
+## What forces the definition
 
-The checkpoint project of Chapter 6 already built a `Monoid`, data plus proof
-obligations, bundled in a `structure`, using nothing but Chapters 1–6.
-Each section below asks the next question that answer forces.
+The checkpoint project of Chapter 6 built a `Monoid`: an associative
+operation with a two-sided identity, no inverses. One question drives this
+chapter: what is the weakest extra condition that makes every element
+undoable? Requiring an inverse function $(-)^{-1}$ with $a \cdot a^{-1} =
+a^{-1} \cdot a = e$ is the smallest addition that does this, and it is
+exactly what a **group** is ([Section 1](01-definition.md)).
 
-1. **A monoid has an associative operation and an identity. What is
-   missing to reach the structures Part II is actually about?**
-   ([Section 1](01-definition.md)) One axiom, every element must be
-   invertible. Adding it to the data of the monoid turns "a set with an
-   associative operation" into a **group**, stated first in ordinary
-   mathematical notation before any Lean is written.
-2. **How does that mathematical definition become an actual Lean type?**
-   ([Section 2](02-translating.md)) Field by field. First the raw data
-   (`GroupData`, no axioms), then the same data with one proof-obligation
-   field added per axiom (`Group`). This is the general recipe used
-   throughout the book, applied here for the first time to something with
-   this many moving parts.
-3. **Is the definition non-vacuous? Does anything actually satisfy it?**
-   ([Section 3](03-integers-example.md)) Yes, $(\mathbb{Z}, +, 0, -)$,
-   assembled as `intGroup` by citing one core-library lemma per axiom. But
-   `intGroup` is abelian, so it never distinguishes a left inverse from a
-   right one.
-4. **Does that abelian example secretly rely on commutativity somewhere
-   the definition of `Group` does not require it to?** ([Section 4](04-permutations-example.md))
-   Building a genuinely non-abelian group, the permutations of three
-   elements, forces every axiom to be checked honestly, left and right
-   separately, and answers the question directly, no, nothing in `Group`
-   assumes commutativity.
-5. **Now that two concrete groups exist, how is their data actually used?**
-   ([Section 5](05-accessing-fields.md)) The same way the fields of any structure
-   are used, from Chapter 3 onward, ordinary projection, whether
-   the field holds data or a proof.
-6. **Two groups have now been built by hand, field by field. Is that
-   effort about to be paid back?** ([Section 6](06-why-bundle.md)) Yes.
-   Any theorem proved once about an arbitrary `Group G` applies
-   automatically to `intGroup`, to the permutation group, and to every
-   group built afterward. Chapter 8 is that payoff, carried out in full.
+A definition earns its keep only if it is realizable in Lean and
+non-vacuous. Realizing it means specifying the recipe: bundle the raw
+signature `GroupData` first, then add one proof field per axiom to get
+`Group` ([Section 2](02-translating.md)). Non-vacuous means exhibiting an
+inhabitant: $(\mathbb{Z}, +, 0, -)$ satisfies all five axioms, citing one
+core-library lemma per axiom ([Section 3](03-integers-example.md)).
 
-By the end of the chapter, `Group` is no longer just a definition sitting
-on the page. It is a structure with two concrete inhabitants, one
-commutative and one not, and a stated reason to keep building on it.
+`intGroup` is commutative, so it cannot tell `id_left` apart from
+`id_right`, or `inv_left` from `inv_right`, since in an abelian group
+these coincide. Whether the left/right split in the definition is doing real
+work, rather than overcaution, can only be settled by a genuinely
+non-abelian example: the permutations of a 3-element set, built the same
+way, field by field, with both directions checked honestly
+([Section 4](04-permutations-example.md)). They are not interchangeable
+there.
+
+With two concrete groups built, their data is used exactly as any
+`structure`'s fields are used since Chapter 3, by projection, whether the
+field holds data or a proof ([Section 5](05-accessing-fields.md)). The
+return on building `Group G` generically, rather than writing `intGroup`
+and `perm3Group` as unrelated one-off definitions, is that a theorem
+proved once about an arbitrary `Group G` applies to both without further
+work ([Section 6](06-why-bundle.md)); Chapter 8 carries this out.
 
 ## Sections
 

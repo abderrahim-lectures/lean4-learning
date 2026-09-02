@@ -1,0 +1,37 @@
+\chapter{Chapter 4: Propositions as types, and basic proofs}\label{sec:04-propositions-and-proofs:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Read \texttt{Prop} as the type of statements and a proof as an ordinary term.
+\item
+  State the introduction/elimination rules of natural deduction for \texttt{∧}/\texttt{∨}/\texttt{¬}/\texttt{→}.
+\item
+  Write and prove \texttt{theorem}/\texttt{lemma}s directly as terms.
+\item
+  Reason about \texttt{∀}/\texttt{∃} and equality via the anonymous constructor and \texttt{rfl}.
+\end{itemize}
+\end{learningobjectives}
+
+
+\section{What forces the definitions}\label{sec:04-propositions-and-proofs:00-index:2}
+
+Chapters 1 and 3 built terms and types for numbers, points, and soon-to-be groups, but never said what a \emph{proof} is, as a piece of Lean data. \texttt{Prop}, the type of statements, and the reading of a proof as an ordinary term of that type, is the Curry--Howard correspondence (\hyperref[sec:04-propositions-and-proofs:01-prop:1]{Section 1}), the same terms-and-types machinery already in place, turned on statements instead of on numbers. That correspondence presupposes ``propositional logic'' and ``natural deduction'' are already familiar; \hyperref[sec:04-propositions-and-proofs:02-logic-recap:1]{Section 2} is a self-contained, Lean-free recap of standard logic, fixing exactly what the ``Logic'' column of the table in Section 1 refers to, so the translation into types has something precise to translate.
+
+Once a proposition is a type, stating and naming a proof needs no new syntax. \texttt{theorem} and \texttt{lemma} are identical to \texttt{def} (\hyperref[sec:04-propositions-and-proofs:03-theorem-lemma:1]{Section 3}), since a proof is a term like any other. The most basic rule of natural deduction, \(\Rightarrow\)-intro, was already recognizable as \texttt{fun (hp : P) => ...}; the resemblance is exact, not merely suggestive. Implication \emph{is} the function type, and modus ponens \emph{is} function application, with nothing lost in the translation (\hyperref[sec:04-propositions-and-proofs:04-implication:1]{Section 4}). Implication is one connective; \texttt{∧}, \texttt{∨}, \texttt{¬} each get their own type former (product, sum, function-to-\texttt{False}), completing the dictionary that Section 1 only started (\hyperref[sec:04-propositions-and-proofs:05-and-or-not:1]{Section 5}).
+
+Every connective so far concerns \emph{fixed} propositions \texttt{P}, \texttt{Q}. A statement varying over every \texttt{n}, or asserting that \emph{some} witness exists, needs quantifiers. \texttt{∀} and \texttt{∃} are exactly the Π- and Σ-types of Chapter 1, specialized to a family landing in \texttt{Prop} instead of \texttt{Type} (\hyperref[sec:04-propositions-and-proofs:06-quantifiers:1]{Section 6}); dependent types were never optional scaffolding, and here is where they pay off for logic itself. One relation has been used silently in every section so far, \texttt{rfl}, \texttt{=}, without being examined on its own terms; equality reasoning covers reflexivity, symmetry, transitivity, and substitution, the tools every later proof in this book leans on without comment (\hyperref[sec:04-propositions-and-proofs:07-equality:1]{Section 7}).
+
+By the last section, ``propositions are types, proofs are terms'' has gone from a one-line slogan to a working toolkit. Every connective and quantifier in ordinary mathematical writing now has a precise Lean counterpart, ready for the tactics of Chapter 5 to build automatically instead of by hand.
+
+
+% Auto-appended: input every other section in order.
+\input{04-propositions-and-proofs/01-prop.tex}
+\input{04-propositions-and-proofs/02-logic-recap.tex}
+\input{04-propositions-and-proofs/03-theorem-lemma.tex}
+\input{04-propositions-and-proofs/04-implication.tex}
+\input{04-propositions-and-proofs/05-and-or-not.tex}
+\input{04-propositions-and-proofs/06-quantifiers.tex}
+\input{04-propositions-and-proofs/07-equality.tex}
+\input{04-propositions-and-proofs/08-exercises.tex}

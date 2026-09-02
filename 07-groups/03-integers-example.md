@@ -4,8 +4,10 @@
 
 ---
 
-Consider packaging $(\mathbb{Z}, +, 0, -(-))$ as a `Group Int`. The construction
-proceeds field by field, proving each obligation with a short, explicit tactic proof.
+A definition with no inhabitant is empty. Does anything satisfy `Group`?
+$(\mathbb{Z}, +, 0, -(-))$ does, and the construction proceeds field by
+field, each obligation closed by a short, explicit tactic proof rather
+than assumed.
 
 ```lean
 def intGroup : Group Int where
@@ -34,28 +36,24 @@ def intGroup : Group Int where
     exact Int.add_right_neg a
 ```
 
-Each field is proved separately. Each proof is a single `intro` (to name
-the universally quantified variables) followed by `exact` naming the exact
-core-library lemma that already states this fact about `Int`. No step is
-hidden. `Int.add_assoc`, `Int.zero_add`, and the rest are
-themselves proved (elsewhere, in the core library of Lean) by induction on the
-same `Nat`/`Int` representation introduced in Chapter 5. These lemmas are
-reused here rather than re-deriving integer arithmetic from scratch.
+Each field is a single `intro` followed by `exact`, naming the
+core-library lemma that already states the fact about `Int`. Nothing is
+hidden: `Int.add_assoc`, `Int.zero_add`, and the rest are themselves
+proved, elsewhere, by induction on the same representation of `Nat`/`Int`
+from Chapter 5, and reused here rather than re-derived.
 
-**Mathematical reading.** This shows $(\mathbb{Z}, +, 0, -)$ as an object
-of the category $\mathbf{Grp}$. The term `intGroup` is a *proof that
-$\mathbb{Z}$ is a group*, built by giving the data $(+, 0, -)$ and
-verifying each axiom. The verification is not re-proved here but *cited*.
-Associativity is $\mathrm{Int.add\_assoc}$, the identity laws are $0 + a = a
-= a + 0$, and the inverse laws are $(-a) + a = 0 = a + (-a)$. In textbook
-terms this is the one-line remark "$\mathbb{Z}$ under addition is an abelian
-group," with the underlying lemmas about $\mathbb{Z}$ (themselves ultimately
-inductions on the integers) written out in full instead of just assumed.
+**Mathematical reading.** This exhibits $(\mathbb{Z}, +, 0, -)$ as an
+object of $\mathbf{Grp}$. `intGroup` is a proof that $\mathbb{Z}$ is a
+group, built by supplying $(+, 0, -)$ and citing, not re-proving, each
+axiom: associativity is $\mathrm{Int.add\_assoc}$, the identity laws are
+$0 + a = a = a + 0$, the inverse laws are $(-a) + a = 0 = a + (-a)$. This
+is the one-line textbook remark "$\mathbb{Z}$ under addition is an
+abelian group," with the underlying inductions on $\mathbb{Z}$ written
+out rather than assumed.
 
-**Mathlib equivalent.** Mathlib requires no `intGroup`-style bundle at
-all. `Int` is *already* registered as an [`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup) instance, and the
-five axioms above are available as free-standing lemmas that apply to
-every additive group, not just `Int`.
+**Mathlib equivalent.** Mathlib needs no `intGroup`-style bundle at all.
+`Int` is already an [`AddCommGroup`](https://loogle.lean-lang.org/?q=AddCommGroup) instance, and the five axioms above are
+free-standing lemmas applying to every additive group, not only `Int`.
 
 ```lean
 example : AddCommGroup Int := inferInstance
@@ -67,14 +65,12 @@ example (a : Int) : -a + a = 0 := neg_add_cancel a
 example (a : Int) : a + -a = 0 := add_neg_cancel a
 ```
 
-This is the same content as `intGroup`, the same five facts about
-$\mathbb{Z}$. But where the book *assembles* a `Group Int` term by hand,
-the Mathlib version has nothing to assemble. The instance already exists,
-found automatically by [`inferInstance`](https://loogle.lean-lang.org/?q=inferInstance). And [`add_assoc`](https://loogle.lean-lang.org/?q=add_assoc)/[`zero_add`](https://loogle.lean-lang.org/?q=zero_add)/etc.
-are generic lemmas about *any* `AddCommGroup`, so they read somewhat
-differently from `Int.add_assoc`. They apply equally well to the
-`perm3Group`-style examples of Chapter 7 once those are phrased in the
-`Group`/`AddCommGroup` classes of Mathlib (Chapter 7, Section 4 does exactly that next).
+Same five facts about $\mathbb{Z}$; where the book *assembles* a `Group
+Int` term by hand, the instance already exists, found automatically by
+[`inferInstance`](https://loogle.lean-lang.org/?q=inferInstance). [`add_assoc`](https://loogle.lean-lang.org/?q=add_assoc)/[`zero_add`](https://loogle.lean-lang.org/?q=zero_add)/etc.
+are generic over *any* `AddCommGroup`, so they apply equally to the
+`perm3Group`-style example of Section 4 once phrased in the
+`Group`/`AddCommGroup` classes of Mathlib, as that section does next.
 
 ---
 

@@ -11,16 +11,19 @@ graph itself, stripped to the bare minimum of data a "directed graph"
 requires. Everything from here through the checkpoint project is built on
 top of exactly this one definition.
 
-A **quiver** is a *directed graph*, a set of vertices and a set of
-directed edges (called **arrows**) between them. This is the same notion
-[`Quiver`](https://loogle.lean-lang.org/?q=Quiver) in Mathlib (built here from scratch, following the
-"no Mathlib" policy of Chapter 1, rather than reusing the Mathlib version). Formally, a
-quiver $Q$ consists of the following.
+A path is a sequence of arrows chained end to end, each one starting
+where the last one ended. Stating that requirement precisely, "where an
+arrow starts" and "where it ends," is already the whole definition
+needed: a set of things arrows can start and end at, call them vertices,
+and a set of arrows, each one tagged with which vertex it starts at and
+which it ends at. Nothing else is required to make sense of chaining two
+arrows together, so nothing else goes into the definition.
 
-- A set of vertices $Q_0$.
-- A set of arrows $Q_1$.
-- Two functions $s, t : Q_1 \to Q_0$ giving the **source** and
-  **target**.
+A **quiver** is exactly this: a set of vertices $Q_0$, a set of arrows
+$Q_1$, and two functions $s, t : Q_1 \to Q_0$ recording the
+**source** and **target** of each arrow. It is a *directed graph* under another name.
+This is the same notion as [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) in Mathlib (built here from scratch, following the
+"no Mathlib" policy of Chapter 1, rather than reusing the Mathlib version).
 
 Picture an arrow $\alpha : i \to j$ as a literal arrow drawn from vertex $i$
 to vertex $j$; $s(\alpha) = i$ and $t(\alpha) = j$.

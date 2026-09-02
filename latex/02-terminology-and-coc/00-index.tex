@@ -1,0 +1,28 @@
+\chapter{Chapter 2: Terminology and the calculus of constructions}\label{sec:02-terminology-and-coc:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Read \texttt{elaborate}, \texttt{reduce}, \texttt{bound variable}, \texttt{universal property}, and the other vocabulary used informally in Chapter 1, defined precisely.
+\item
+  Recognize β-reduction, the computational engine underneath \texttt{rfl} and \texttt{\#eval}.
+\item
+  State precisely how Π-types, Σ-types, and \texttt{Prop} irrelevance fit into the underlying calculus of Lean.
+\end{itemize}
+\end{learningobjectives}
+
+
+\section{What forces the terminology}\label{sec:02-terminology-and-coc:00-index:2}
+
+Chapter 1 built \texttt{Fin}/\texttt{Vec}, concrete dependent types, by example, and used words like \texttt{elaborate}, \texttt{reduce}, and \texttt{universal property} informally along the way, trusting context to carry the meaning. That trust runs out once the logic chapters begin, where loose use of these words would start hiding genuine distinctions instead of merely being informal shorthand. Fixing precise, working definitions for them, with pointers to where the full formal treatment lives, is the entire content of \hyperref[sec:02-terminology-and-coc:01-terminology:1]{Section 1}, a deliberate pause rather than a new topic.
+
+The dependent function of \texttt{Fin} and the dependent pair-like structure of \texttt{Vec} both appeared in Chapter 1 as two separate tricks. Are they related? \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Section 2} shows they are the same idea in two shapes: the Π-type (dependent function) and Σ-type (dependent pair) are dual generalizations of \texttt{→} and \texttt{×}, and together with the proof irrelevance of \texttt{Prop} they \emph{are} the calculus of constructions, the one formal system every example since the very first \texttt{\#check 3} of Chapter 1 has secretly been an instance of.
+
+By the end of the chapter, the informal phrase ``everything has a type'' from Chapter 1, Section 1 has turned into a precise, named formal system. Nothing along the way is optional scaffolding to be forgotten afterward. The \texttt{∀}/\texttt{∃} of Chapter 4, the \texttt{Group} structure of Chapter 7, and the \texttt{Path} type of Chapter 12 are all direct, unglamorous applications of exactly what gets built here.
+
+
+% Auto-appended: input every other section in order.
+\input{02-terminology-and-coc/01-terminology.tex}
+\input{02-terminology-and-coc/02-pi-sigma-and-coc.tex}
+\input{02-terminology-and-coc/03-exercises.tex}

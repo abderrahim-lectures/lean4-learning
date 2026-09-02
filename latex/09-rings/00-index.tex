@@ -1,0 +1,33 @@
+\chapter{Chapter 9: Rings --- adding a second operation}\label{sec:09-rings:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Translate the ring axioms into a Lean \texttt{structure} built on top of \texttt{CommGroup}.
+\item
+  Build both a commutative (\texttt{Int}, \texttt{Fin 3}) and a genuinely noncommutative (2×2 matrices) example from scratch.
+\item
+  Recognize when a finite carrier lets \texttt{decide} replace a hand-written proof.
+\end{itemize}
+\end{learningobjectives}
+
+
+\section{What a second operation forces}\label{sec:09-rings:00-index:2}
+
+Chapter 8 finished everything Part II had to say about a single operation. What changes, precisely, once a second operation is layered onto a group? The additive side must now be commutative, otherwise the distributive laws below cannot be stated symmetrically. A compatible multiplication is then added, tied to addition by distributivity. These are stated first as ordinary axioms (R1)--(R4) (\hyperref[sec:09-rings:01-definition:1]{Section 1}), the way Chapter 7 opened with the group axioms before any Lean. Axiom (R1) demands \emph{commutative} addition, but \texttt{Group} from Chapter 7 said nothing about commutativity, so that requirement has to be built in Lean before \texttt{Ring} itself can be: \texttt{CommGroup}, a small \texttt{extends Group G} with one extra field, \texttt{comm} (\hyperref[sec:09-rings:02-comm-group:1]{Section 2}), is the piece \texttt{Ring} bundles as its additive part. With that piece in hand, \texttt{CommGroup} supplies (R1) as a single nested field, and the remaining axioms (R2)--(R4), associativity of multiplication, its identity, and the two distributive laws, are added directly (\hyperref[sec:09-rings:03-ring:1]{Section 3}).
+
+A definition earns its keep only once it is shown non-vacuous. The most familiar witness is \((\mathbb{Z}, +, \times, 0, 1)\), reusing \texttt{intGroup} from Chapter 7 for the additive part and citing one core-library lemma per remaining axiom, exactly the pattern Chapter 7 used for \texttt{Group} (\hyperref[sec:09-rings:04-integers-example:1]{Section 4}). \texttt{intRing} is commutative and infinite; not every ring axiom needs to be proved that way, one library citation at a time. When the carrier is finite, the axioms of \(\mathbb{Z}/3\mathbb{Z}\) become decidable statements about only finitely many elements, and \texttt{decide} checks them by brute enumeration instead (\hyperref[sec:09-rings:05-finite-ring-example:1]{Section 5}). Once a \texttt{Ring} value nests a whole \texttt{CommGroup} inside it, its data is used exactly as before, by ordinary field projection, chained one level deeper than Chapter 7, \texttt{Rg.addGrp.op} rather than a single \texttt{Grp.op} (\hyperref[sec:09-rings:06-accessing-fields:1]{Section 6}).
+
+\texttt{intRing} is commutative, but nothing in the definition of \texttt{Ring} forces that, the same question permutations settled for \texttt{Group} in Chapter 7. \(2\times 2\) integer matrices settle it directly for rings, a concrete, genuinely noncommutative ring, built and verified field by field with no shortcuts available (\hyperref[sec:09-rings:07-matrices:1]{Section 7}). By the end of the chapter, \texttt{Ring} has the same shape \texttt{Group} did at the end of Chapter 7: a precise definition, both a commutative and a noncommutative witness that it is satisfiable, and, as Chapter 10 takes up next, theorems still waiting to be proved generically rather than per carrier.
+
+
+% Auto-appended: input every other section in order.
+\input{09-rings/01-definition.tex}
+\input{09-rings/02-comm-group.tex}
+\input{09-rings/03-ring.tex}
+\input{09-rings/04-integers-example.tex}
+\input{09-rings/05-finite-ring-example.tex}
+\input{09-rings/06-accessing-fields.tex}
+\input{09-rings/07-matrices.tex}
+\input{09-rings/08-exercises.tex}

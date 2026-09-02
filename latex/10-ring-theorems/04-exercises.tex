@@ -1,0 +1,15 @@
+\section{Exercises}\label{sec:10-ring-theorems:04-exercises:1}
+
+\textbf{Key points.} \(a\cdot 0=0\) and \((-1)\cdot a=-a\) are theorems, not axioms, both derived from distributivity plus additive cancellation, following the same ``pad with \(0=0+0\), then cancel'' pattern each time. A concrete numeral (\texttt{neg\_\allowbreak{}seven}) can close by \texttt{rfl} where the general statement about an unknown \texttt{a} genuinely cannot, mirroring the defeq-vs-propeq distinction of Chapter 6.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prove \texttt{theorem neg\_\allowbreak{}mul (a b : R) : Rg.mul (Rg.addGrp.toGroup.inv a) b = Rg.addGrp.toGroup.inv (Rg.mul a b)}. Uses the same idea as Theorem 2.
+\item
+  Instantiate \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 8) directly on the additive group of \texttt{intRing} to compute a concrete additive inverse, e.g.~prove \texttt{theorem neg\_\allowbreak{}seven : intRing.addGrp.toGroup.inv 7 = -\allowbreak{}7 := rfl} and, in a comment, state why \texttt{rfl} alone suffices here (compare to the proof of Theorem 2, which required real work precisely because \texttt{a} was an unknown variable rather than a concrete numeral).
+\end{enumerate}
+
+Solutions, \hyperref[sec:15-appendix-solutions:10-chapter-10:1]{Appendix, Chapter 10}.
+

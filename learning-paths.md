@@ -9,6 +9,15 @@ chapters actually depend on one another, and suggests a handful of named
 paths through the book for common starting points. All of them converge
 by Chapter 7, since the dependency structure only really branches in Part I.
 
+Each chapter derives its material from a question the previous chapter
+forces (see [Pedagogical approach](README.md#pedagogical-approach)), so a
+solid arrow below is not just "read this first for context," it is "the
+argument in the target chapter assumes the question of the source chapter
+was
+already answered." Skipping a chapter the graph marks as a hard
+prerequisite means arriving at a derivation with a step missing, not
+just an unfamiliar term.
+
 ## Chapter dependency graph
 
 ```mermaid
@@ -57,7 +66,7 @@ checkpoint projects included. This is the path the book is written to
 support directly, and every forward reference assumes it.
 
 **"I already know Lean, teach me the algebra."** Skim Chapter 0 (just
-confirm your toolchain matches `v4.32.2`), read Chapter 1 for the
+confirm your toolchain matches `v4.33.1`), read Chapter 1 for the
 specific `Fin`/`Vec` examples of this book, skip Chapter 2 (terminology
 and the calculus of constructions) and Chapter 6 (rigor check) entirely
 unless something later sends you back (the [Chapter 2, Section 1

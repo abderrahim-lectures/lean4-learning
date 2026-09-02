@@ -30,7 +30,7 @@ not just described."\par}
 
 \vspace{1.5cm}
 {\normalfont\normalsize \today\ --- \bookversion\par}
-{\normalfont\small Lean toolchain \texttt{v4.31.0}\par}
+{\normalfont\small Lean toolchain \texttt{v4.33.1}\par}
 \vspace{0.3cm}
 {\normalfont\small Source code:
 \url{https://github.com/abderrahim-lectures/lean4-learning}\par}
@@ -104,9 +104,44 @@ Claude wrote the chapter text, Lean code, and LaTeX. No additional,
 independent mathematician or Lean expert has reviewed the content beyond
 the author's own review and the automated checks described in the
 project's README and CHANGELOG (every code block compiled against a real
-Lean~4 toolchain, plus several AI-driven review passes). Treat it as an
-author-reviewed draft produced through human-directed AI authorship, not
-a traditionally peer-reviewed text.
+Lean~4 toolchain, plus several AI-driven review passes).
+
+A closing verification pass followed (see
+\texttt{reviews/2026-08-03/} in the repository), run as a single
+adversarial reviewer rather than a panel: it re-triaged every finding from
+the previous round, audited the bibliography against the literature via the
+Consensus research tool, swept the manuscript programmatically for broken
+links, mismatched cross-reference labels, and tactics used but absent from
+the reference tables, and --- following the project's
+adversarial-mathematics review protocol --- re-derived the worked examples
+and proofs by hand and tested the boundary and degenerate cases the earlier
+panel had not. That last step is what found the round's most serious defect:
+a false definition of the length-\(0\) path in Chapter~11, contradicted by
+the book's own later sections. Two further defects surfaced in the
+type-theory core --- a \texttt{rfl} example block in Chapter~5 that taught
+the inverse of the truth, and the Π-type universe rule stated with
+\(\max\) where Lean uses \(\mathrm{imax}\), which had made every
+\texttt{∀}-statement in Chapters~3--11 contradict the rule printed in
+Chapter~5. All are corrected in this release, along with several citation
+and cross-reference repairs. That reviewer also recorded two of its own
+predictions that testing against the real toolchain disproved; both are
+documented in the review file rather than quietly dropped.
+
+A second closing pass (see \texttt{reviews/2026-08-03/run-173410/} in the
+repository) ran the same multi-model panel-then-adjudication pipeline
+again --- six Phase-1 reviewers, four Phase-2 cross-critiques, five
+specialized reviewers (category theory, notation, proof search, Lean
+audit, typesetting), adjudicated into one fix-ready report. It confirmed
+26 findings (8 critical) and correctly dismissed 20 fabricated or
+contradicted ones, including a false "v1.5.0 regression" claim that three
+of five Phase-1 reports had independently manufactured. All confirmed
+findings were re-verified against the working tree before being applied,
+and two errors in the adjudicated report itself were caught and corrected
+in the process --- documented alongside the fixes in that report's
+\texttt{POST-HOC CORRECTIONS} section rather than applied blindly.
+
+Treat it as an author-reviewed draft produced through human-directed AI
+authorship, not a traditionally peer-reviewed text.
 
 % ===================================================================
 % How to read this book
@@ -121,7 +156,7 @@ start cover to cover.
 
 Each chapter is divided into short, numbered sections building on one
 another. Every code listing is valid Lean~4 (toolchain
-\texttt{v4.31.0}). Every code block in Chapters~1--11 has additionally
+\texttt{v4.33.1}). Every code block in Chapters~1--11 has additionally
 been ported into a companion Lean project and verified with
 \texttt{lake build} against the real compiler, not merely read over ---
 several bugs that only surfaced this way (a missing extensionality

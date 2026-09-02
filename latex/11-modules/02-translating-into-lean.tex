@@ -1,0 +1,75 @@
+\section{Translating into Lean}\label{sec:11-modules:02-translating-into-lean:1}
+
+Section 1 stated the module axioms on paper, as the same ``abelian group plus a compatible action'' pattern already used for \texttt{Group} and \texttt{Ring} throughout Chapters 7--10. A definition stated on paper is not yet a definition Lean can check against; it still has to be written down as a \texttt{structure}, field by field, exactly as \texttt{Group} and \texttt{Ring} were before it. That translation is what this section carries out.
+
+The same ``data, then axioms'' build used for \texttt{Group} and \texttt{Ring} applies here.
+
+\begin{lstlisting}
+structure Module (R : Type) (Rg : Ring R) (M : Type) where
+  addGrp : CommGroup M
+  smul : R (*$\rightarrow$*) M (*$\rightarrow$*) M
+  smul_add : (*$\forall$*) (r : R) (m n : M), smul r (addGrp.op m n) = addGrp.op (smul r m) (smul r n)
+  add_smul : (*$\forall$*) (r s : R) (m : M), smul (Rg.addGrp.op r s) m = addGrp.op (smul r m) (smul s m)
+  smul_smul : (*$\forall$*) (r s : R) (m : M), smul (Rg.mul r s) m = smul r (smul s m)
+  one_smul : (*$\forall$*) m : M, smul Rg.one m = m
+\end{lstlisting}
+
+Field by field.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{addGrp : CommGroup M} is the underlying abelian group of the module, exactly as \texttt{addGrp} played this role inside \texttt{Ring} (Chapter 9). Note that \texttt{Module} takes \texttt{Rg : Ring R} as an \emph{explicit argument}, not a field. A module is always a module \emph{over} a specific, already-given ring, so \texttt{Rg} is a parameter of the whole structure rather than data bundled inside it.
+\item
+  \texttt{smul : R → M → M} is the scalar action, \texttt{r • m} in ordinary notation.
+\item
+  \texttt{smul\_\allowbreak{}add}, \texttt{add\_\allowbreak{}smul} are the two distributivity laws (M1), (M2). Read them as ``scalar over module-sum'' and ``ring-sum over scalar.'' This is the same left/right split used for \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib} of \texttt{Ring}, but here the split is based on \emph{which} addition (\texttt{Rg.addGrp.op} vs. \texttt{addGrp.op}) is involved, not on which side \texttt{mul} is applied.
+\item
+  \texttt{smul\_\allowbreak{}smul} is (M3), compatibility of the multiplication of the ring with iterated scalar action.
+\item
+  \texttt{one\_\allowbreak{}smul} is (M4), the multiplicative identity of the ring acts as the identity scalar.
+\end{itemize}
+
+\begin{mathreading}
+
+\texttt{Module R Rg M} is the type of left \(R\)-module structures on the abelian group \(M\). The data is an action \(R \times M \to
+M\), \((r,m)\mapsto r\cdot m\). The four axioms say precisely that the curried map \(\rho(r)(m) = r\cdot m\) is a \textbf{ring homomorphism} from \(R\) into the ring of endomorphisms of \((M,+)\): the additive maps \(M \to M\), under pointwise addition and composition. \texttt{smul\_\allowbreak{}add} says each \(\rho(r)\) is itself additive (a homomorphism \(M \to M\) of abelian groups). \texttt{add\_\allowbreak{}smul} and \texttt{smul\_\allowbreak{}smul} say \(\rho\) preserves \(+\) and \(\times\). And \texttt{one\_\allowbreak{}smul} says \(\rho(1)\) is the identity map on \(M\). So a module over \(R\) is exactly an abelian group \(M\) equipped with a ring homomorphism from \(R\) into its own ring of endomorphisms. The ring \(R\) enters as an explicit \emph{parameter}, not as extra bundled data on \(M\), because a module is always a module \emph{over} some already-fixed ring.
+
+\end{mathreading}
+
+\begin{quote}
+Read more. \texttt{Module} in Mathlib (\href{https://loogle.lean-lang.org/?q=Module}{\texttt{Module}}, \texttt{Mathlib.Algebra.Module.Defs}) is much more general. It is universe-polymorphic, stated for \texttt{Semiring} rather than just \texttt{Ring}, and integrated with the whole \texttt{Mathlib.LinearAlgebra.*} hierarchy (bases, dimension, tensor products); see \hyperref[sec:14-next-steps:02-moving-to-mathlib:1]{Chapter 14}. For the classical theory, any standard module-theory or homological-algebra text (e.g.~the chapters on modules in Dummit \& Foote, or \emph{An Introduction to Homological Algebra} by Weibel for the deeper theory) covers the same axioms from the ground up.
+\end{quote}
+
+\begin{progcorner}
+
+\texttt{smul : R → M → M} fixes, once and for all, which type plays the role of scalars and which type plays the role of module elements. A Python library implementing the same ``scalar acts on a vector'' idea usually overloads \texttt{\_\allowbreak{}\_\allowbreak{}mul\_\allowbreak{}\_\allowbreak{}} or \texttt{\_\allowbreak{}\_\allowbreak{}rmul\_\allowbreak{}\_\allowbreak{}} instead.
+
+\end{progcorner}
+
+\begin{lstlisting}[language=Python,style=python]
+class Vector:
+    def __init__(self, xs):
+        self.xs = xs
+
+    def __rmul__(self, scalar):
+        return Vector([scalar * x for x in self.xs])
+
+v = Vector([1, 2, 3])
+w = 2 * v            # fine, Vector([2, 4, 6])
+broken = v * v       # TypeError, but only once this exact line runs
+\end{lstlisting}
+
+Whether \texttt{v * v} is even meaningful depends entirely on which dunder methods someone remembered to define, and the answer is only found out by running the offending line, possibly deep inside a call stack far from where \texttt{v} was first constructed. \texttt{smul} has no such ambiguity. Its type \texttt{R → M → M} states, before any theorem in this chapter is proved, that a scalar comes from \texttt{R} and a module element comes from \texttt{M}, and Lean rejects \texttt{smul v m} at the point it is written if \texttt{v : M} was passed where an \texttt{R} was expected, rather than accepting it and producing a wrong answer, or an exception, once the program actually runs.
+
+\subsection{Sources, quoted}\label{sec:11-modules:02-translating-into-lean:2}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Module.} ``A binary operation \(+\) on \(M\) under which \(M\) is an abelian group, and \ldots{} an action of \(R\) on \(M\) \ldots{} (a) \((r+s)m = rm+sm\) \ldots{} (b) \((rs)m = r(sm)\) \ldots{} (c) \(r(m+n) = rm+rn\) \ldots{} (d) \(1m = m\)'' (\cite{DummitFoote2003}, §10.1 ``Basic Definitions and Examples,'' p.~336).
+\item
+  Weibel (\cite{Weibel1994}) covers the deeper module/homological theory the ``Read more'' note of this section points toward.
+\end{itemize}

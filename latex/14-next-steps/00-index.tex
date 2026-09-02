@@ -1,0 +1,25 @@
+\chapter{Chapter 14: Where to go next}\label{sec:14-next-steps:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Describe what this book built entirely from scratch.
+\item
+  Translate that construction into the \texttt{class}-based idiom of Mathlib and see two genuinely new facts it delivers for free.
+\item
+  Pick a next project, from the five scaffolded here, or the Church-encodings aside, that extends material already in hand.
+\end{itemize}
+\end{learningobjectives}
+
+
+\section{What thirteen chapters of from-scratch construction leave to settle}\label{sec:14-next-steps:00-index:2}
+
+Thirteen chapters built every group, ring, module, and path algebra from scratch, no Mathlib, no \texttt{class}, no pre-packaged API, so that every definition and proof obligation was seen explicitly and nothing was trusted blindly. That from-scratch inventory is worth stating in full before anything else, since the rest of the chapter depends on knowing exactly what is, and is not, already in hand (\hyperref[sec:14-next-steps:01-what-we-built:1]{Section 1}). The \texttt{structure}s built are, field for field, the same objects Mathlib packages with \texttt{class}, so the translation from one to the other is mostly ergonomic, not mathematical, and it unlocks genuinely new facts, \texttt{ZMod 3} as a \texttt{Field}, the theorem of Lagrange applied to \texttt{perm3Group}, that a plain \texttt{structure} without Mathlib's surrounding machinery could not even state (\hyperref[sec:14-next-steps:02-moving-to-mathlib:1]{Section 2}). None of the thirteen chapters' constructions are dead ends; each extends into a genuinely open project, redoing \texttt{Group}/\texttt{Ring} as type classes, finishing the path-algebra construction, bounding path length in an acyclic quiver, comparing against Mathlib's own \texttt{Quiver}, or building a concrete \texttt{kQ}-module (\hyperref[sec:14-next-steps:03-next-projects:1]{Section 3}). The chapter closes with the solutions to the exercises of every earlier chapter (\hyperref[sec:14-next-steps:04-solutions:1]{Section 4}).
+
+
+% Auto-appended: input every other section in order.
+\input{14-next-steps/01-what-we-built.tex}
+\input{14-next-steps/02-moving-to-mathlib.tex}
+\input{14-next-steps/03-next-projects.tex}
+\input{14-next-steps/04-solutions.tex}

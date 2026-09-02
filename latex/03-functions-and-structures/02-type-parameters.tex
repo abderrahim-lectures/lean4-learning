@@ -1,0 +1,47 @@
+\section{Structures with type parameters}\label{sec:03-functions-and-structures:02-type-parameters:1}
+
+The previous section built \texttt{Point}, a structure with two fixed \texttt{Nat} fields. That works only because \texttt{Point} never needed to hold anything but numbers. A structure that should bundle a value of \emph{any} type, a pair of two arbitrary things, say, cannot be written once per type without repeating the same three lines endlessly. What is needed instead is a structure parameterized by the types themselves, the same implicit-argument idea from \texttt{identity} in Chapter 1, now applied to a \texttt{structure} rather than a \texttt{def}.
+
+\begin{lstlisting}
+structure Pair ((*$\alpha$*) (*$\beta$*) : Type) where
+  fst : (*$\alpha$*)
+  snd : (*$\beta$*)
+
+def p : Pair Nat String := { fst := 1, snd := "one" }
+
+#eval p.fst    -- 1
+#eval p.snd     -- "one"
+\end{lstlisting}
+
+This generalizes directly to how we will write, e.g., \texttt{structure Group (G : Type)}.
+
+\begin{mathreading}
+
+\texttt{Pair α β} is the ordinary binary Cartesian product, but taken \emph{uniformly}, as a functor of two arguments at once. Rather than fixing \(\alpha\) and \(\beta\) once, \texttt{structure Pair (α β : Type) where ...} defines the \emph{whole family} of products \(\alpha \times \beta\) at once, one for every choice of the two type arguments. \texttt{Pair Nat String} is then just this construction evaluated at the pair \((\mathbb{N},
+\mathrm{String})\), giving \(\mathbb{N} \times \mathrm{String}\). This is the same ``definition parameterized by objects of the category'' idea that lets us later write \texttt{Group (G : Type)}, not one group, but the functor sending a carrier type \(G\) to the type of group-structures on \(G\).
+
+\end{mathreading}
+
+\begin{progcorner}
+
+Python code like \texttt{def identity(x): return x} or \texttt{class Pair: def \_\allowbreak{}\_\allowbreak{}init\_\allowbreak{}\_\allowbreak{}(self, fst, snd): ...} is also ``generic,'' in the sense that it does not mention any particular type. But nothing checks that genericity until the code actually runs. Writing \texttt{identity(3) + "oops"} causes Python to happily run \texttt{identity}, hand back \texttt{3}, and only then break on \texttt{3 + "oops"} at runtime. Constructing a \texttt{Pair} and placing a \texttt{Group (Fin 3)} into its \texttt{fst} draws no complaint from Python either.
+
+\end{progcorner}
+
+The closer Python analogue is \texttt{typing.TypeVar}. \texttt{def identity(x: T) -\allowbreak{}> T: return x} documents the same universally quantified type that \texttt{identity} has in Lean. But that documentation is optional and erased at runtime. It is enforced only if a checker such as \texttt{mypy} is separately run, and a stray \texttt{\# type: ignore} comment silences it entirely.
+
+The type \texttt{\{α : Type\} → α → α} given by Lean is not documentation. It is \emph{proved}, once, that \texttt{identity} works for every type \texttt{α}, and that proof is checked before \texttt{identity} is ever called, not merely approximated by a linter that might never run.
+
+\subsection{Sources, quoted}\label{sec:03-functions-and-structures:02-type-parameters:2}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Type-parameterized structure.} The working statement used by this book: \texttt{structure Pair (α β : Type)} does not define one structure. It defines one structure \emph{per choice} of \texttt{α} and \texttt{β}, all at once. Categorically, this is a functor of the type parameters, not a single fixed structure.
+\item
+  \textbf{Parametric polymorphism.} The theoretical account of type polymorphism given by Milner (\cite{Milner1978}). Picture it like this. A car platform that gets crash-tested and certified once, before a single unit rolls off the line. Every car built on it inherits that guarantee automatically, rather than each driver just hoping their particular car turns out safe. Genericity that is \emph{proved} once for every type, checked before the generic code is ever called, is that certification. An optional, erased type annotation is closer to the hope of the driver. \texttt{TypeVar} in Python and \texttt{\{α : Type\} → ...} in Lean both implement this idea, to different degrees, as the Programmer note box above explains.
+\item
+  Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) cover the Python-side comparison used in the box in this section.
+\end{itemize}

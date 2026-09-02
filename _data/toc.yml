@@ -52,6 +52,9 @@ references:
   - dir: learning-paths
     title: "Learning Paths"
     url: "/learning-paths.html"
+  - dir: proof-strategy-guide
+    title: "Proof Strategy Guide"
+    url: "/proof-strategy-guide.html"
   - dir: notation-reference
     title: "Notation Reference"
     url: "/notation-reference.html"

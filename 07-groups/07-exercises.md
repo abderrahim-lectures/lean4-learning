@@ -6,46 +6,34 @@
 
 **Key points.** A group is data (`op`, `id`, `inv`) plus proof obligations
 (`assoc`, two-sided `id`/`inv` laws), bundled in one `structure`. The
-left/right split on `id`/`inv` is not overcaution. A genuinely
-non-abelian example (`perm3Group`) needs both. Any theorem proved once,
-generically, against `Grp : Group G` applies to every concrete group
-built afterward at no extra cost.
+left/right split on `id`/`inv` is not overcaution: `perm3Group` needs both
+directions, genuinely different. Any theorem proved once, generically,
+against `Grp : Group G` applies to every concrete group built afterward
+at no extra cost.
 
-**Socratic questions.**
+1. `GroupData` (`op`, `id`, `inv`, no axioms) type-checks for any choice
+   of the three fields, including nonsense ones. State which fields
+   `Group` adds to cut out the genuine groups. Then exhibit a
+   `GroupData Bool` whose operation is associative and has a left
+   identity, but no right identity, and prove it, showing that
+   `id_right` cannot be derived from the other four axioms and must
+   remain a field of its own.
 
-1. *`intGroup` never tests the difference between `id_left`/`id_right`
-   or `inv_left`/`inv_right`, since `Int` addition is commutative. Does
-   that mean the split is only there for the sake of generality, with no
-   concrete example that actually needs it?* No. `perm3Group` needs it
-   for real, composing permutations is genuinely non-commutative, so
-   `id_left` and `id_right` are two separate proof obligations there,
-   not a single fact proved twice.
-2. *`GroupData` (op, id, inv, no axioms) type-checks for any choice of
-   the three fields, including nonsense ones. What is the smallest change
-   that turns "any `GroupData`" into "only genuine groups"?* Nothing
-   about the *data* fields changes at all. Five more fields are added,
-   each a proof obligation. `Group` is exactly `GroupData` plus those
-   five proofs. The type of a term goes from "some operation and two
-   elements" to "an operation and two elements *together with evidence*
-   they behave correctly."
-3. *The three-line `#eval` computation in `perm3Group` showed
-   `swap01 ∘ cycle012 ≠ cycle012 ∘ swap01`. Why is that a complete proof
-   of non-commutativity, rather than just suggestive evidence?* Because
-   disproving a universal claim (`∀ f g, f ∘ g = g ∘ f`) needs only one
-   counterexample, and the two sides of that one inequality were
-   computed, not estimated. `#eval` is exact here, not approximate,
-   since `Perm3` composition is finite and decidable.
+2. Build `boolXorGroup : Group Bool` where `op` is boolean XOR
+   (`Bool.xor`), `id := false`, and `inv := fun a => a` (every element is
+   its own inverse). `by intro a; cases a <;> rfl` proves each field in
+   one line; instead use `cases a with | false => rfl | true => rfl` for
+   the fields that need a case split, to see which case does what.
 
-1. Build `boolXorGroup : Group Bool` where `op` is boolean XOR (`Bool.xor`),
-   `id := false`, and `inv := fun a => a` (every element is its own
-   inverse). Proving each field using `by intro a; cases a <;> rfl` is
-   tempting; instead, for practice, use `cases a with | false => rfl | true => rfl`
-   for the fields that need a case split, to see exactly which case does
-   what.
-2. Verify on paper that `inv_left` and `inv_right` are genuinely
-   different obligations. They coincide automatically only once the group has
-   been *proved* commutative. This is exactly the content of
-   the second theorem in Chapter 8 (left inverses equal right inverses).
+3. Prove: if `Grp : Group G` and `Grp.op` is commutative, then `id_left`
+   and `id_right` are logically equivalent, and likewise `inv_left` and
+   `inv_right`. Then exhibit, using `perm3Group`, why the two directions
+   cannot be collapsed into one axiom in general.
+
+4. State the general principle that lets a single computed inequality
+   $f(x) \neq g(x)$ at one point $x$ serve as a complete proof that
+   $f \neq g$ as functions, and prove it. Apply it to the two `#eval`s in
+   Section 4 to conclude `perm3Group` is non-abelian.
 
 Solutions, [Appendix, Chapter 7](../15-appendix-solutions/07-chapter-7.md).
 

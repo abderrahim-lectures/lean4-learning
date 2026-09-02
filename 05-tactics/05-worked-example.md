@@ -69,7 +69,7 @@ Each `rw` is one equational step in this chain. The whole proof is the
 standard textbook lemma, with the successor/zero cases spelled out in full,
 where written mathematics usually skips over them.
 
-**Programmer's corner (Python).** The two cases of [`induction b with |
+**Programmer note (Python).** The two cases of [`induction b with |
 zero => ... | succ k ih => ...`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) have exactly the shape of a recursive
 function over the same inductively-defined structure. Compare it to a
 hand-rolled Peano type in Python.

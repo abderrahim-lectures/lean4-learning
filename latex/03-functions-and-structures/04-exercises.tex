@@ -1,0 +1,21 @@
+\section{Exercises}\label{sec:03-functions-and-structures:04-exercises:1}
+
+\textbf{Key points.} A \texttt{structure} bundles data (and optionally proofs) under one name, built via the anonymous constructor \texttt{⟨...⟩} and read back out via field projection \texttt{.field}. \texttt{extends} builds a new structure containing everything an existing one has, plus more, generating a \texttt{.toX} forgetful projection for free, the exact mechanism \texttt{CommGroup} uses to add commutativity to \texttt{Group} in Chapter 7.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{⟨0, 0⟩} and \texttt{\{ x := 0, y := 0 \}} build the identical \texttt{Point}. State precisely what property of \texttt{def origin : Point := ⟨0, 0⟩} makes the anonymous form unambiguous, and give an example, in a sentence, of a context where that property fails and the named form is needed instead.
+\item
+  \texttt{Point3D extends Point} generates \texttt{.toPoint} automatically. Write out, by hand, the function that \texttt{extends} would otherwise require, and state precisely which categorical construction from the Mathematical reading box of Section 3 it implements.
+\item
+  A \texttt{structure} can bundle proofs as fields, not only data. Prove that this changes nothing about how Lean checks a term against its stated type, and explain why this is exactly what makes \texttt{Group} (Chapter 7) impossible to build carelessly.
+\item
+  Define \texttt{structure Rectangle} with two \texttt{Nat} fields, \texttt{width} and \texttt{height}. Then define \texttt{def area (r : Rectangle) : Nat}, computing the area, and confirm \texttt{\#eval area ⟨3, 4⟩} reports \texttt{12}.
+\item
+  \texttt{Pair α β} (Section 2) holds two values of two possibly different types. Define \texttt{structure Box (α : Type)} holding a single value of \emph{one} type parameter, plus \texttt{def unwrap \{α : Type\} (b : Box α) : α} reading it back out. Build one \texttt{Box Nat} and one \texttt{Box String}, and confirm \texttt{unwrap} recovers the original value in each case.
+\item
+  Define \texttt{structure ColoredRectangle extends Rectangle where color : String}, then a value \texttt{redSquare : ColoredRectangle} with \texttt{width := 5}, \texttt{height := 5}, \texttt{color := "red"}. Confirm \texttt{redSquare.toRectangle} has type \texttt{Rectangle}, and that \texttt{area redSquare.toRectangle} computes \texttt{25} using the \texttt{area} function from Exercise 4 unchanged, with no \texttt{ColoredRectangle}-specific code written. In a sentence or two, explain why this is exactly the ``forgetful functor'' pattern from the Mathematical reading box of this section, not a coincidence of naming.
+\end{enumerate}
+
+Solutions, \hyperref[sec:15-appendix-solutions:03-chapter-3:1]{Appendix, Chapter 3}.

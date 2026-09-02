@@ -1,0 +1,25 @@
+\section{Exercises}\label{sec:06-rigor-check:05-exercises:1}
+
+\textbf{Key points.} This book delays \texttt{class} for \texttt{structure} so every proof obligation stays explicit. \texttt{class} only changes \emph{how} Lean finds an instance, not what data it holds. The type of \texttt{Type} itself must live one universe up (\texttt{Type 1}), or \texttt{Type : Type} reintroduces the Russell paradox. \texttt{rfl} proves only \emph{definitional} equality, reduction to the same normal form, which is not every true propositional equality (an asymmetric recursion like that of \texttt{Nat.add} is exactly where the two can diverge).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{class} only changes how Lean finds an instance, not what data it holds. Explain why Mathlib bothers with the whole \texttt{class} hierarchy at all, instead of using plain \texttt{structure}s the way this book does, given that fact.
+\item
+  \texttt{Type : Type} would make the type system of Lean itself inconsistent. Explain why \texttt{Type 1 : Type 2}, \texttt{Type 2 : Type 3}, and so on, does not cause the exact same problem one level up.
+\item
+  \texttt{rfl} and \texttt{decide} both look like they ``just work'' with no argument supplied. State precisely what each one checks, and give an example of a true proposition that \texttt{decide} can settle but \texttt{rfl} cannot.
+\item
+  Predict, before running it, whether \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{example : (2 : Nat) * 3 = 3 + 3 := rfl}} type-checks. Then predict whether \texttt{example (n : Nat) : n * 2 = n + n := rfl} type-checks (hint, which argument does \texttt{Nat.mul} recurse on? Compare with the \texttt{Nat.add} recursion pattern from Chapter 5).
+\item
+  Rewrite \texttt{opTwice} (from the \texttt{structure} vs \texttt{class} section) as a type class version yourself, declare \texttt{class MyGroup (G : Type) where ...} with the same fields as \texttt{Group} in this book, register \texttt{instance : MyGroup Int where ...}, and write \texttt{def opTwiceTC [MyGroup G] (x : G) : G := MyGroup.op x x}. Confirm \texttt{\#eval opTwiceTC (3 : Int)} works with no explicit instance argument.
+\item
+  In one or two sentences, explain why \texttt{Type → Type} (the type of \texttt{Group} itself, before applying it to a carrier) must live in \texttt{Type 1} rather than \texttt{Type 0}. Tie the answer back to the Russell-paradox obstruction this chapter described.
+\item
+  Give an example (distinct from \texttt{my\_\allowbreak{}add\_\allowbreak{}comm}) of a true propositional equality between two \texttt{Nat} expressions that is \emph{not} provable by \texttt{rfl} alone, and identify which side has the recursive structure that is the obstruction.
+\end{enumerate}
+
+Solutions, \hyperref[sec:15-appendix-solutions:06-chapter-6:1]{Appendix, Chapter 6}.
+

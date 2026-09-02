@@ -1,0 +1,72 @@
+\section{Chapter 7: Groups}\label{sec:15-appendix-solutions:07-chapter-7:1}
+
+\textbf{1. Which fields cut \texttt{Group} out of \texttt{GroupData}, and a witness for \texttt{id\_\allowbreak{}right}}
+
+Nothing about the three data fields (\texttt{op}, \texttt{id}, \texttt{inv}) changes. Five proof-obligation fields are added: \texttt{assoc}, \texttt{id\_\allowbreak{}left}, \texttt{id\_\allowbreak{}right}, \texttt{inv\_\allowbreak{}left}, \texttt{inv\_\allowbreak{}right}. \texttt{Group} is exactly \texttt{GroupData} plus these five proofs. The type of a term goes from ``some operation and two elements'' to ``an operation and two elements \emph{together with evidence} they behave correctly.''
+
+Claim: \texttt{op : Bool → Bool → Bool := fun a b => b} (return the second argument) is associative, \texttt{id := false} is a left identity for \texttt{op}, but \texttt{false} is not a right identity.
+
+\emph{Proof.} Associativity: \texttt{op (op a b) c = op b c = c} and \texttt{op a (op b c) = op a c = c}, equal for all \texttt{a b c}. Left identity: \texttt{op e a = a} holds for every \texttt{a} and, in fact, for \emph{any} \texttt{e}, since \texttt{op} ignores its first argument entirely and returns the second. Not a right identity: \texttt{op a e = e} for every \texttt{a}, so \texttt{op a e = a} holds only when \texttt{a = e}; taking \texttt{a := true}, \texttt{e := false} gives \texttt{op true false = false ≠ true}. \(\blacksquare\)
+
+Hence a \texttt{GroupData Bool} built from this \texttt{op}, together with \texttt{id := false} and any \texttt{inv}, satisfies \texttt{assoc} and \texttt{id\_\allowbreak{}left} but not \texttt{id\_\allowbreak{}right}. If the \texttt{id\_\allowbreak{}right} field were removed from the definition of \texttt{Group}, this data would type-check as a ``group'' while manifestly lacking a two-sided identity. \texttt{id\_\allowbreak{}right} is not implied by the other four axioms and must remain a field of its own. The same style of argument (a witness satisfying every axiom but one) applies to each of the other four fields; deleting any of them admits a corresponding class of non-group data.
+
+\textbf{2. \texttt{boolXorGroup : Group Bool}}
+
+\begin{lstlisting}
+def boolXorGroup : Group Bool where
+  op := Bool.xor
+  id := false
+  inv := fun a => a
+  assoc := by
+    intro a b c
+    cases a with
+    | false => cases b with
+      | false => cases c with | false => rfl | true => rfl
+      | true => cases c with | false => rfl | true => rfl
+    | true => cases b with
+      | false => cases c with | false => rfl | true => rfl
+      | true => cases c with | false => rfl | true => rfl
+  id_left := by
+    intro a
+    cases a with
+    | false => rfl
+    | true => rfl
+  id_right := by
+    intro a
+    cases a with
+    | false => rfl
+    | true => rfl
+  inv_left := by
+    intro a
+    cases a with
+    | false => rfl
+    | true => rfl
+  inv_right := by
+    intro a
+    cases a with
+    | false => rfl
+    | true => rfl
+\end{lstlisting}
+
+Each field reduces to a finite check. \texttt{Bool.xor} on two or three concrete booleans always computes, so once every variable is replaced by a concrete constructor (\texttt{false}/\texttt{true}) via \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}, the resulting equation holds by definition and \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} closes it. \texttt{assoc} needs three nested \texttt{cases} since it quantifies over three booleans (\(2^3 = 8\) cases, matching \((a \oplus b) \oplus c = a \oplus (b \oplus c)\) over \(\mathbb{Z}/2\)). The others need only one.
+
+\textbf{3. \texttt{id\_\allowbreak{}left}/\texttt{id\_\allowbreak{}right} and \texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right} under commutativity}
+
+Claim: if \texttt{Grp.op} is commutative, \texttt{Grp.op id a = a} and \texttt{Grp.op a id = a} are logically equivalent, and likewise for \texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right}.
+
+\emph{Proof.} Suppose \texttt{Grp.op id a = a} holds for all \texttt{a}. By commutativity, \texttt{Grp.op a id = Grp.op id a = a}, which is exactly \texttt{id\_\allowbreak{}right}. The converse argument is identical with the roles exchanged. The same substitution proves \texttt{inv\_\allowbreak{}left ↔ inv\_\allowbreak{}right} under commutativity: \texttt{Grp.op (Grp.inv a) a = Grp.op a (Grp.inv a)} by commutativity, so one law holds for all \texttt{a} iff the other does. \(\blacksquare\)
+
+This is exactly why \texttt{intGroup} never distinguishes the two directions: \texttt{Int} addition is commutative, so the equivalence above collapses \texttt{id\_\allowbreak{}left}/\texttt{id\_\allowbreak{}right} into one fact proved twice.
+
+In \texttt{perm3Group}, \texttt{Perm3.comp} is not commutative (\texttt{swap01 ∘ cycle012 ≠ cycle012 ∘ swap01}, computed in Section 4), so the hypothesis of the claim fails, and no argument like the one above can derive \texttt{id\_\allowbreak{}right} from \texttt{id\_\allowbreak{}left} alone, or \texttt{inv\_\allowbreak{}right} from \texttt{inv\_\allowbreak{}left} alone. Both must be supplied and proved independently, which is exactly what the definition of \texttt{perm3Group} does.
+
+\textbf{4. A single computed inequality proves function inequality}
+
+Claim: for \(f, g : X \to Y\), if there exists one \(x_0 \in X\) with \(f(x_0) \neq g(x_0)\), then \(f \neq g\).
+
+\emph{Proof.} Suppose toward contradiction \(f = g\). Then \(f(x_0) = g(x_0)\) for every \(x_0\), including the witness above, contradicting \(f(x_0) \neq
+g(x_0)\). Hence \(f \neq g\). \(\blacksquare\)
+
+This is the contrapositive of function extensionality: \(f = g\) implies agreement everywhere, so disagreement at even one point refutes equality. No estimate or approximation is involved; a single point suffices because \(f = g\) is a \emph{universal} claim (\(\forall x, f(x) = g(x)\)), and refuting a universal claim needs only one counterexample.
+
+Applying this to Section 4's \texttt{\#eval}s: \texttt{(Perm3.comp swap01 cycle012).toFun 0} evaluates to \texttt{0} and \texttt{(Perm3.comp cycle012 swap01).toFun 0} evaluates to \texttt{2}, computed exactly (finite, decidable data, not approximated). Taking \(x_0 = 0\), \$f = \$ \texttt{(Perm3.comp swap01 cycle012).toFun}, \$g = \$ \texttt{(Perm3.comp cycle012 swap01).toFun} in the claim above gives \texttt{(Perm3.comp swap01 cycle012).toFun ≠ (Perm3.comp cycle012 swap01).toFun}. If two \texttt{Perm3} records were equal, their \texttt{toFun} fields would be equal by projection; contrapositively, unequal \texttt{toFun} fields force the records themselves apart, giving \texttt{Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01}: \texttt{perm3Group} is non-abelian.

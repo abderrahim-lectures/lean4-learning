@@ -10,20 +10,28 @@
 - Translate that construction into the `class`-based idiom of Mathlib and see two genuinely new facts it delivers for free.
 - Pick a next project, from the five scaffolded here, or the Church-encodings aside, that extends material already in hand.
 
-## The story of this chapter
+## What thirteen chapters of from-scratch construction leave to settle
 
-Thirteen chapters have built every group, ring, and path algebra from
-scratch, no Mathlib, no `class`, no pre-packaged API. That journey was
-the point, every definition and proof obligation was seen explicitly so
-that nothing is ever trusted blindly. This closing chapter asks four
-questions in turn. First, what has actually been constructed, end to end?
-Second, how does that from-scratch construction translate into the
-real `class`-based idiom of Mathlib, and what genuinely new conveniences does that
-translation unlock as a reward for the trip? Third, rather than stopping
-at the end of the chapter, what next project, drawn from the five scaffolded
-here, or sketched in the margins, extends the material already in hand?
-Fourth, the solutions to the exercises of the chapter, closing out the
-chapter.
+Thirteen chapters built every group, ring, module, and path algebra from
+scratch, no Mathlib, no `class`, no pre-packaged API, so that every
+definition and proof obligation was seen explicitly and nothing was
+trusted blindly. That from-scratch inventory is worth stating in full
+before anything else, since the rest of the chapter depends on knowing
+exactly what is, and is not, already in hand
+([Section 1](01-what-we-built.md)). The `structure`s built are, field for
+field, the same objects Mathlib packages with `class`, so the translation
+from one to the other is mostly ergonomic, not mathematical, and it
+unlocks genuinely new facts, `ZMod 3` as a `Field`, the theorem of
+Lagrange applied to `perm3Group`, that a plain `structure` without
+Mathlib's surrounding machinery could not even state
+([Section 2](02-moving-to-mathlib.md)). None of the thirteen chapters'
+constructions are dead ends; each extends into a genuinely open project,
+redoing `Group`/`Ring` as type classes, finishing the path-algebra
+construction, bounding path length in an acyclic quiver, comparing
+against Mathlib's own `Quiver`, or building a concrete `kQ`-module
+([Section 3](03-next-projects.md)). The chapter closes with the solutions
+to the exercises of every earlier chapter
+([Section 4](04-solutions.md)).
 
 ## Sections
 

@@ -40,6 +40,26 @@ The axioms already learned are the same axioms, merely packaged so
 the elaborator of Lean can find them without a `Grp` argument named in
 every theorem.
 
+Beyond Mathlib itself, the ecosystem now includes libraries built on
+top of it. One notable example is
+[TauCeti](https://github.com/TauCetiProject/TauCeti), a Lean library of
+formalized mathematics that depends on Mathlib's `master` branch and
+defers to its design decisions. TauCeti is directed by human-written
+roadmaps, while AI contributors implement and maintain the mathematics
+under adversarial review against open rubrics; the Lean FRO and the
+Mathlib Initiative incubate the project jointly. It does not replace
+Mathlib, which remains the gold standard for human-curated mathematics.
+TauCeti instead adopts Mathlib's design conventions and pursues a
+library of reusable results at AI scale. Two points connect it to this
+book. The `structure` versus `class` distinction of Chapter 6, Section 1
+is the exact mechanic such a library runs on. The roadmaps of TauCeti
+cover areas well past this book, such as the Jacobian challenge and
+reductive algebraic groups, so it shows where the subject is headed.
+Checking how far Mathlib (and TauCeti) have grown past the hand-built
+`Group` of Chapter 7 and `Ring` of Chapter 9 is a useful way to measure
+both the growth of the surrounding machinery and the stability of the
+core axioms.
+
 ### Two theorems for free
 
 Everything above is a promise that Mathlib is *more general*. Here are
@@ -64,8 +84,12 @@ example : ∀ a : ZMod 3, a ≠ 0 → ∃ b, a * b = 1 := by decide
 6-7.** `Equiv.Perm (Fin 3)` (the Mathlib analogue of `perm3Group` in Chapter 7, Section 4)
 never had subgroups defined for it. The book built one
 group, not the lattice of its subgroups. The `Subgroup` type in Mathlib
-already comes with the theorem of Lagrange attached, so applying it to a real
-subgroup costs nothing beyond naming the subgroup.
+already comes with the theorem of Lagrange, "the order of a subgroup
+divides the order of the group" ([DummitFoote2003], §3.2, Theorem 8),
+attached, so applying it to a real subgroup costs nothing beyond naming
+the subgroup.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
 ```lean
 -- Lagrange's theorem, fully generic: a subgroup's size divides the

@@ -7,7 +7,7 @@
 Lean is managed by **elan**, a **version manager**. This is a small tool
 that installs and switches between different versions of Lean itself, so
 each project can pin the exact version it needs. (Readers familiar with
-`uv`'s Python-version management (`uv python install`) will recognize
+the Python-version management of `uv` (`uv python install`) will recognize
 elan as playing the same role for Lean.)
 
 1. Install elan, following the instructions at the official Lean installation
@@ -29,7 +29,7 @@ elan as playing the same role for Lean.)
    configured with:
 
    ```text
-   lean-toolchain: leanprover/lean4:v4.32.2
+   lean-toolchain: leanprover/lean4:v4.33.1
    ```
 
    Running `lake build` inside `lean_project` causes elan to automatically

@@ -1,0 +1,34 @@
+\section{Chapter 1: First steps}\label{sec:15-appendix-solutions:01-chapter-1:1}
+
+\textbf{1. Is \texttt{Nat.succ : Nat → Nat} a Π-type?}
+
+Yes. \texttt{∀ n : Nat, Nat} is a Π-type whose body happens not to mention the bound variable. Every ordinary function type is a Π-type in the degenerate case where the codomain is constant. ``Dependent'' describes the \emph{interesting} instances, where the codomain does mention the bound variable, not a separate kind of arrow from the Π-type.
+
+\textbf{2. \texttt{Vec.toList : Vec α n → List α}}
+
+\begin{lstlisting}
+def Vec.toList : Vec (*$\alpha$*) n (*$\rightarrow$*) List (*$\alpha$*)
+  | Vec.nil => []
+  | Vec.cons a rest => a :: Vec.toList rest
+\end{lstlisting}
+
+The type of \texttt{Vec.replicate}, \texttt{(n : Nat) → Vec α n}, is genuinely dependent. The \emph{return} type \texttt{Vec α n} mentions \texttt{n}, the value just supplied as the argument. The type of \texttt{Vec.toList}, \texttt{Vec α n → List α}, is not. Its return type \texttt{List α} never mentions \texttt{n} at all, even though its \emph{argument} type happens to be dependent (\texttt{Vec α n}, one specific type per length). Taking a dependently-typed \emph{input} does not automatically make a function dependent; what matters is whether the \emph{output} type varies with the \emph{value} of the input. \texttt{Vec.toList} throws the length away on the way out, the same way the own length information of \texttt{Vec α n} disappears once converted to a plain \texttt{List α}.
+
+Unlike \texttt{Vec}, \texttt{List} does have a \texttt{Repr} instance for any printable \texttt{α}, so the recursion of \texttt{Vec.toList} can be watched directly with \texttt{dbg\_\allowbreak{}trace}, using \texttt{Vec.replicate} (Chapter 1, Section 3) to build a concrete input.
+
+\begin{lstlisting}
+def Vec.toList' : Vec (*$\alpha$*) n (*$\rightarrow$*) List (*$\alpha$*)
+  | Vec.nil => dbg_trace s!"toList: nil, base case, returning []"; []
+  | Vec.cons a rest =>
+      dbg_trace s!"toList: cons, prepending one element, recursing on the rest";
+      a :: Vec.toList' rest
+
+#eval Vec.toList' (Vec.replicate (7 : Int) 3)
+-- toList: cons, prepending one element, recursing on the rest
+-- toList: cons, prepending one element, recursing on the rest
+-- toList: cons, prepending one element, recursing on the rest
+-- toList: nil, base case, returning []
+-- [7, 7, 7]
+\end{lstlisting}
+
+Three \texttt{cons} lines print before the \texttt{nil} line, one per element of the length-3 vector, and only once the base case is reached does the fully assembled \texttt{[7, 7, 7]} print, the same ``peel off constructors, print on the way down, assemble the result on the way back up'' shape as every other traced recursion in this book.

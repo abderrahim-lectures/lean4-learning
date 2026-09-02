@@ -228,7 +228,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - Schiffler ([Schiffler2014]), **Definition 4.5** (Chapter 5, §4.2), covers the same construction. The unit is given explicitly as $1 = \sum_{i\in Q_0} e_i$ in a lemma nearby in that section.
 
 > **Numbering not independently verified.** An earlier draft of this box
-> reported the Schiffler unit as "Lemma 4.3 in that source's numbering,"
+> reported the Schiffler unit as "Lemma 4.3 in the numbering of that source,"
 > described as immediately following Definition 4.5, which cannot both be
 > true. The definition number is the one this section relies on; the lemma
 > number has been dropped rather than guessed. Check both against the printed

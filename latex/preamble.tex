@@ -15,7 +15,7 @@
 % to match the git tag each time a release is cut, so the compiled PDF
 % itself states which version a reader has, not just the GitHub release
 % page it came from.
-\newcommand{\bookversion}{v1.4.24}
+\newcommand{\bookversion}{v2.0.5}
 
 \usepackage{fontspec}
 % Consolas/Palatino Linotype (proprietary Microsoft fonts) replaced with
@@ -114,6 +114,9 @@
 
 \usepackage[colorlinks=true,linkcolor=Maroon,citecolor=Maroon,
   urlcolor=NavyBlue]{hyperref}
+\usepackage{xurl} % allow breaking long URLs (e.g. archive.org identifiers
+  % with no hyphen/slash break points) at any character, not just existing
+  % punctuation, so a bibliography link cannot overflow the page margin.
 \usepackage[capitalize]{cleveref}
 
 % ---------------------------------------------------------------------
@@ -144,6 +147,10 @@
 % Running headers/footers
 % ---------------------------------------------------------------------
 \usepackage{fancyhdr}
+% fancyhdr needs headheight >= the header's natural height, or it warns once
+% per page (238 identical warnings on a 280-page build). geometry's default
+% 12pt is short of the 13.6pt this header needs.
+\setlength{\headheight}{13.6pt}
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
@@ -182,10 +189,18 @@
 
 \newtcolorbox{progcornerbox}{
   colback=OliveGreen!5, colframe=OliveGreen!60!black, coltitle=white,
-  fonttitle=\bfseries, title=Programmer's Corner (Python), breakable,
+  fonttitle=\bfseries, title=Programmer Note (Python), breakable,
   boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
 }
 \newenvironment{progcorner}{\begin{progcornerbox}}{\end{progcornerbox}}
+
+% "Learning objectives" box at the start of every chapter (emitted by
+% build_latex.py from each 00-index.md's "## Learning objectives" section).
+\newtcolorbox{learningobjectives}{
+  colback=RoyalBlue!5, colframe=RoyalBlue!70!black, coltitle=white,
+  fonttitle=\bfseries, title=Learning objectives, breakable,
+  boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
 
 % Title is fixed to "Checkpoint Project N" (auto-numbered); the specific
 % project's own title is set as a bold first line inside the box body by

@@ -2,11 +2,11 @@
 \addcontentsline{toc}{chapter}{Notation reference}
 \setcounter{section}{0}\label{sec:root:notation-reference:1}
 
-A lookup table connecting the mathematical notation used in this book's prose to the corresponding Lean syntax used in its code. This page is a quick reference, not something to read start to finish --- every row is built up and explained properly the first time it is needed, at the chapter cited in the last column.
+A lookup table connecting the mathematical notation used in the prose of this book to the corresponding Lean syntax used in its code. This page is a quick reference, not something to read start to finish. Every row is \emph{earned}, not just introduced, at the chapter cited in the last column (see Pedagogical approach): the symbol appears here only as a shorthand for reasoning already carried out in full there.
 
-\textbf{Note:} \texttt{·} in mathematical prose maps to different Lean constructs depending on context --- see the two ``Group multiplication'' and ``Scalar action'' rows below, which share the same math notation but translate to different Lean operations (\texttt{Group.op} vs \texttt{SMul.smul}).
+\textbf{Note:} \texttt{·} in mathematical prose maps to different Lean constructs depending on context. See the two ``Group multiplication'' and ``Module scalar action'' rows below. They share the same math notation but translate to different Lean operations, \texttt{Group.op} versus \texttt{SMul.smul}.
 
-Two related pages cover notation this one deliberately leaves out: the \hyperref[sec:root:tactic-and-library-reference:1]{tactic and library reference} (tactics and Mathlib declaration names) and the \hyperref[sec:root:lambda-calculus-dictionary:1]{λ-calculus / type theory to Lean dictionary} (formal type-theory notation from the optional ``Mathematical reading'' boxes). This page is just the ordinary logic/algebra symbols used throughout the main text and code.
+Two related pages cover notation this one deliberately leaves out, the \hyperref[sec:root:tactic-and-library-reference:1]{tactic and library reference} (tactics and Mathlib declaration names) and the \hyperref[sec:root:lambda-calculus-dictionary:1]{λ-calculus / type theory to Lean dictionary} (formal type-theory notation from the optional ``Mathematical reading'' boxes). This page is just the ordinary logic/algebra symbols used throughout the main text and code.
 
 \section*{Logic and quantifiers}
 \addcontentsline{toc}{section}{Logic and quantifiers}\label{sec:root:notation-reference:2}
@@ -31,15 +31,15 @@ First appears
 \bottomrule\noalign{}
 \endlastfoot
 Function type / implication & \(A \to B\) & \texttt{A → B} & Chapter 1 \\
-Universal quantifier (``for all'') & \(\forall x, P\, x\) & \texttt{∀ x, P x} & Chapter 3 \\
-Existential quantifier (``there exists'') & \(\exists x, P\, x\) & \texttt{∃ x, P x} & Chapter 3 \\
-Unique existence (``there exists a unique'') & \(\exists!\, x, P\, x\) & no single token --- witnessed by supplying the value and a proof it is the only one & Chapter 1, Section 4 \\
-Set/type membership & \(x \in A\) & \texttt{x ∈ A} & Chapter 1 \\
-Negation & \(\neg P\) & \texttt{¬P} & Concept introduced Chapter 1 (terminology); formal use from Chapter 3 \\
-Conjunction (``and'') & \(P \wedge Q\) & \texttt{P ∧ Q} (\texttt{And}) & Chapter 3 \\
-Disjunction (``or'') & \(P \vee Q\) & \texttt{P ∨ Q} (\texttt{Or}) & Chapter 3 \\
-Not equal & \(a \neq b\) & \texttt{a ≠ b} & Chapter 3 \\
-Turnstile (``the goal to prove'') & \(\Gamma \vdash P\) & the goal-state display (not typed by the user) & Chapter 4 \\
+Universal quantifier (``for all'') & \(\forall x, P\, x\) & \texttt{∀ x, P x} & Chapter 4 \\
+Existential quantifier (``there exists'') & \(\exists x, P\, x\) & \texttt{∃ x, P x} & Chapter 4 \\
+Unique existence (``there exists a unique'') & \(\exists!\, x, P\, x\) & no single token, witnessed by supplying the value and a proof it is the only one & Chapter 2, Section 1 \\
+Set/type membership & \(x \in A\) & \texttt{x ∈ A} & Chapter 11, Section 4 (Chapter 1 only contrasts \(\in\) against Lean's \texttt{:} for term-has-type, never uses the \texttt{∈} operator itself) \\
+Negation & \(\neg P\) & \texttt{¬P} & Concept introduced Chapter 1 (terminology); formal use from Chapter 4 \\
+Conjunction (``and'') & \(P \wedge Q\) & \texttt{P ∧ Q} (\texttt{And}) & Chapter 4 \\
+Disjunction (``or'') & \(P \vee Q\) & \texttt{P ∨ Q} (\texttt{Or}) & Chapter 4 \\
+Not equal & \(a \neq b\) & \texttt{a ≠ b} & Chapter 4 \\
+Turnstile (``the goal to prove'') & \(\Gamma \vdash P\) & the goal-state display (not typed by the user) & Chapter 5 \\
 \end{longtable}
 
 \section*{Algebra, structure, and diagrams}
@@ -64,20 +64,20 @@ First appears
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Definitional equality & \(t \equiv t'\) & \texttt{rfl} closes the goal & Chapter 5, Section 4 \\
-Reflexivity / the \texttt{rfl} tactic and term & --- & \texttt{rfl} & Chapter 1 (tactic use, \texttt{\#eval}/\texttt{\#check}); Chapter 3 (as a proof term, e.g.~\texttt{2+2=4 := rfl}) \\
-Direct sum (modules) & \(M \oplus N\) & \texttt{DirectSum M N} (custom structure, no \texttt{⊕} operator in code) & Chapter 10 \\
-Isomorphism / equivalence & \(A \simeq B\) & \texttt{A ≃ B} (\texttt{Equiv}) & Chapter 10 \\
-Anonymous-constructor pairing & \(\langle a, b \rangle\) & \texttt{⟨a, b⟩} & Chapter 1, Section 4 \\
+Definitional equality & \(t \equiv t'\) & \texttt{rfl} closes the goal & Chapter 6, Section 4 \\
+Reflexivity / the \texttt{rfl} tactic and term & --- & \texttt{rfl} & Chapter 1 (tactic use, \texttt{\#eval}/\texttt{\#check}); Chapter 4 (as a proof term, e.g.~\texttt{2+2=4 := rfl}) \\
+Direct sum (modules) & \(M \oplus N\) & \texttt{DirectSum M N} (custom structure, no \texttt{⊕} operator in code) & Chapter 11 \\
+Isomorphism / equivalence & \(A \simeq B\) & \texttt{A ≃ B} (\texttt{Equiv}) & Chapter 7 (\texttt{Equiv.Perm}, Mathlib equivalent box) \\
+Anonymous-constructor pairing & \(\langle a, b \rangle\) & \texttt{⟨a, b⟩} & Chapter 2, Section 1 \\
 Coercion (embedding) & --- & \texttt{↑} (auto-coercion) & Chapter 1, Section 3 \\
 Function composition & \(g \circ f\) & \texttt{g ∘ f} & Chapter 1 \\
-Group multiplication (a \texttt{Group}'s binary operation) & \(a \cdot b\) & \texttt{op a b} (the \texttt{op} field of \texttt{Group G}) & Chapter 6 \\
-Scalar/group action & \(a \cdot b\) (or \(r \cdot m\)) & \texttt{a • b} (\texttt{SMul}) & Chapter 10 \\
-Inverse & \(a^{-1}\) & \texttt{a⁻¹} & Chapter 6 \\
+Group multiplication (the binary operation of a \texttt{Group}) & \(a \cdot b\) & \texttt{op a b} (the \texttt{op} field of \texttt{Group G}) & Chapter 7 \\
+Module scalar action (a ring element acting on a module element) & \(r \cdot m\) & \texttt{r • m} (\texttt{SMul}) & Chapter 11 \\
+Inverse & \(a^{-1}\) & \texttt{a⁻¹} & Chapter 7 \\
 Lambda abstraction (``sends to'') & \(x \mapsto e\) & \texttt{fun x => e} & Chapter 1 \\
-Divisibility & \(a \mid b\) & \texttt{a ∣ b} & Chapter 9 \\
-Subset & \(A \subseteq B\) & \texttt{A ⊆ B} & Chapter 10 \\
+Divisibility & \(a \mid b\) & \texttt{a ∣ b} & Chapter 10 \\
+Subset (subobject inclusion) & \(A \subseteq B\) & no infix operator; expressed via \texttt{extends} (\texttt{CommGroup} includes \texttt{Group}) or a \texttt{carrier : M → Prop} membership predicate (submodules) --- the book never uses a literal \texttt{⊆}/\texttt{≤} Lean token & Chapter 2, Section 1 (categorical use); Chapter 11, Section 4 (submodule use) \\
 Cartesian product & \(A \times B\) & \texttt{A × B} & Chapter 1 \\
-Long/derivation arrow (diagrams) & \(A \longrightarrow B\) & \texttt{⟶} (diagram labels only, not ordinary code) & Chapter 11, Sections 2--3 \\
-Projections out of a product & \(\pi_X, \pi_Y\) & \texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd} & Chapter 1, Section 4 \\
+Long/derivation arrow (diagrams) & \(A \longrightarrow B\) & \texttt{⟶} (diagram labels only, not ordinary code) & Chapter 12, Sections 2--3 \\
+Projections out of a product & \(\pi_X, \pi_Y\) & \texttt{.1}/\texttt{.2}, or \texttt{.fst}/\texttt{.snd} & Chapter 2, Section 1 \\
 \end{longtable}

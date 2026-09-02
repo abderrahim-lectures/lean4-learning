@@ -1,0 +1,66 @@
+\section{Chapter 2: Terminology and the calculus of constructions}\label{sec:15-appendix-solutions:02-chapter-2:1}
+
+\textbf{1. Why \texttt{Σ n : Nat, Fin n} type-checks but \texttt{Σ n : Nat, n > 0} does not}
+
+\texttt{Sigma} is declared as \texttt{structure Sigma \{α : Type u\} (β : α → Type v)}. The family \texttt{β} must land in some \texttt{Type v} (equivalently, \texttt{Sort (v+1)} for \texttt{v ≥ 0}). This is the rule: the second component of \texttt{Sigma} is always \texttt{Type}-valued, never \texttt{Prop}-valued, because \texttt{Prop} (\texttt{Sort 0}) is a strictly lower, separate universe from every \texttt{Type v}.
+
+\emph{Proof this rules out \texttt{Σ n : Nat, n > 0}.} \texttt{Fin n : Type} for every \texttt{n}, so \texttt{fun n => Fin n} has type \texttt{Nat → Type}, matching the required shape of \texttt{β} exactly, and \texttt{Σ n : Nat, Fin n} elaborates. \texttt{n > 0 : Prop}, so \texttt{fun n => n > 0} has type \texttt{Nat → Prop}, not \texttt{Nat → Type v} for any \texttt{v}; no instantiation of \texttt{β}'s codomain universe unifies \texttt{Prop} with a \texttt{Type v}, since they are different, non-overlapping sorts. Elaboration therefore rejects \texttt{Σ n : Nat, n > 0} outright, for the same reason it would reject supplying a \texttt{Prop}-valued family anywhere Lean expects a \texttt{Type}-valued one. \(\blacksquare\)
+
+\textbf{2. Witnesses of \texttt{∃} cannot be extracted computationally}
+
+Claim: given \texttt{h : ∃ x, P x}, there is no way to compute a term \texttt{w : α} with \texttt{P w} from \texttt{h} alone, whereas the same is possible from \texttt{h' : Σ x, P x}.
+
+\emph{Proof.} \texttt{Exists} is declared to land in \texttt{Prop}. By proof irrelevance, the kernel of Lean treats any two proofs of the same proposition as definitionally equal, so \texttt{h} carries no information beyond the bare fact that \emph{some} witness exists; every possible choice of witness gives a \texttt{Prop}-equal, indistinguishable proof term \texttt{h}. If a function could extract a witness from \texttt{h}, two \texttt{∃}-proofs built from different witnesses but proof-irrelevantly equal would have to be sent to the same output by that function, which is impossible in general, since the witnesses genuinely differ as data. The projection mechanism of Lean therefore refuses projections out of \texttt{Prop}-valued fields into \texttt{Type}-valued results, exactly the \texttt{lean.projNonPropFromProp} error. \texttt{Sigma}, landing in \texttt{Type}, carries no such irrelevance guarantee; \texttt{.fst} on \texttt{h' : Σ x, P x} is ordinary data extraction, no different from \texttt{.1} on any other pair. \(\blacksquare\)
+
+The fact this argument turns on is precisely proof irrelevance (\hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Section 2}): \texttt{∃} has the shape of a Σ-type but lives in the one universe where two inhabitants of the same type are indistinguishable, which is exactly what blocks extraction.
+
+\textbf{3. β-reduce \((\lambda x.\lambda y.\, y\, x)\, a\, b\) and compare to \(K\).}
+
+Application associates to the left, so this is \(((\lambda x.\lambda y.\, y\, x)\, a)\, b\). \[
+(\lambda x.\lambda y.\, y\, x)\, a\, b
+\;\longrightarrow_\beta\; (\lambda y.\, y\, a)\, b
+\;\longrightarrow_\beta\; b\, a
+\] Step 1 substitutes \(a\) for \(x\) in \(\lambda y.\, y\, x\), giving \(\lambda y.\, y\, a\). Step 2 substitutes \(b\) for \(y\) in \(y\, a\), giving \(b\, a\).
+
+The result is \textbf{not} simply one of the two inputs, the way the result of \(K\) always is. \(K\,a\,b \to_\beta a\). \(K\) \emph{discards} its second argument and returns the first, verbatim. Here, \((\lambda x.\lambda y.\, y\, x)\, a\, b
+\to_\beta b\, a\). Both arguments survive, but with the \emph{second} one applied to the \emph{first}. This term is sometimes called the ``Thrush'' combinator (\(T\), satisfying \(T\, x\, y = y\, x\)), it flips the order of application rather than discarding anything, which is genuinely different behavior from \(K\), not just a relabeling of it.
+
+\textbf{4. A second \texttt{Σ n : Nat, Fin n}, and why \texttt{Σ n : Nat, n > 0} fails}
+
+\begin{lstlisting}
+def anotherSigma : (*$\Sigma$*) n : Nat, Fin n := (*$\langle$*)5, (*$\langle$*)0, by decide(*$\rangle$*)(*$\rangle$*)
+\end{lstlisting}
+
+(\texttt{0 : Fin 5} is valid since \(0 < 5\); any pair \texttt{⟨k, ⟨i, h⟩⟩} with \texttt{i < k} works.) \texttt{Σ n : Nat, n > 0} fails to type-check because \texttt{n > 0 : Prop} (\texttt{Sort 0}), while \texttt{Sigma} in Lean is declared as \texttt{structure Sigma \{α : Type u\} (β : α → Type v)}. The \emph{family} of the second component must land in some \texttt{Type v} (\texttt{Sort (v+1)} for \texttt{v ≥ 0}), which \texttt{Prop} (\texttt{Sort 0}) is not. \texttt{Fin n : Type} clears that bar; \texttt{n > 0 : Prop} does not. This is exactly why \texttt{∃} exists as the \texttt{Prop}-restricted cousin of \texttt{Sigma} (Chapter 2, Section 2) rather than everyone just writing \texttt{Σ} everywhere.
+
+\textbf{5. The signature of \texttt{Path.append} as nested Π-types}
+
+\texttt{Path.append : \{u v w : V\} → Path Q u v → Path Q v w → Path Q u w}, treating the implicit binders as outer Π's, unfolds one binder at a time.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Level
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(A\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(B(\cdot)\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Dependent?
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 (binds \(u\)) & \(V\) & \(\prod_{v:V}\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)\) & Yes, mentions \(u\) \\
+2 (binds \(v\)) & \(V\) & \(\prod_{w:V} (\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w)\) & Yes, mentions \(v\) \\
+3 (binds \(w\)) & \(V\) & \(\mathrm{Path}_Q\,u\,v \to \mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w\) & Yes, mentions \(w\) \\
+4 (binds \(p\)) & \(\mathrm{Path}_Q\,u\,v\) & \(\mathrm{Path}_Q\,v\,w \to \mathrm{Path}_Q\,u\,w\) & No, constant in \(p\) \\
+5 (binds \(q\)) & \(\mathrm{Path}_Q\,v\,w\) & \(\mathrm{Path}_Q\,u\,w\) & No, constant in \(q\) \\
+\end{longtable}
+
+The first three levels are genuinely dependent Π-types, each \(B\) mentions the vertex just bound, since it appears as an index into \texttt{Path} later in the signature. The last two levels are Π-types that happen to collapse to ordinary arrows, once \(u, v, w\) are fixed, the \emph{type} of \texttt{Path Q u w} no longer depends on the specific \emph{proof term} \texttt{p} or \texttt{q} supplied, only on the vertices already bound, exactly the ``\(B(x)\) not depending on \(x\)'' collapse case from Chapter 2, Sections 1/2.

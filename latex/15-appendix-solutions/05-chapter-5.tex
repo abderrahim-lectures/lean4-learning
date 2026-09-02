@@ -1,0 +1,51 @@
+\section{Chapter 5: Tactics}\label{sec:15-appendix-solutions:05-chapter-5:1}
+
+\textbf{1. \texttt{theorem and\_\allowbreak{}comm\_\allowbreak{}tac \{P Q : Prop\} (h : P ∧ Q) : Q ∧ P}}
+
+\begin{lstlisting}
+theorem and_comm_tac {P Q : Prop} (h : P (*$\wedge$*) Q) : Q (*$\wedge$*) P := by
+  constructor
+  (*$\cdot$*) exact h.right
+  (*$\cdot$*) exact h.left
+\end{lstlisting}
+
+\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{constructor}} splits the goal \texttt{Q ∧ P} into two subgoals, \texttt{Q} and \texttt{P}, one for each field of \texttt{And}. \texttt{h.right : Q} closes the first, and \texttt{h.left : P} closes the second.
+
+\textbf{2. \texttt{theorem nat\_\allowbreak{}mul\_\allowbreak{}zero (n : Nat) : n * 0 = 0}}
+
+\begin{lstlisting}
+theorem nat_mul_zero (n : Nat) : n * 0 = 0 := by
+  rfl
+\end{lstlisting}
+
+\href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} does succeed here. \texttt{Nat.mul} is defined by recursion on its second argument, and \texttt{n * 0 = 0} is the base clause. Hence this holds by definition, with no induction required. Compare this with \texttt{0 * n = 0}, which is not a base clause and does require induction on \texttt{n}.
+
+\textbf{3. \texttt{modus\_\allowbreak{}ponens} in tactic mode}
+
+\begin{lstlisting}
+theorem modus_ponens_tac {P Q : Prop} (hpq : P (*$\rightarrow$*) Q) (hp : P) : Q := by
+  apply hpq
+  exact hp
+\end{lstlisting}
+
+\texttt{apply hpq} matches the goal \texttt{Q} against the conclusion of \texttt{hpq : P → Q}. This leaves a new goal \texttt{P}, which \texttt{exact hp} closes.
+
+\textbf{4. What changes between \texttt{rw} before and after induction}
+
+Nothing about \texttt{rw} itself changes between the two attempts. What changes is what is available to rewrite \emph{with}. Before \texttt{induction b} is invoked, there is no fact anywhere in context relating \texttt{a + b} and \texttt{b + a}, so \texttt{rw} has nothing to substitute toward that goal. After \texttt{induction b}, the \texttt{succ} case comes packaged with \texttt{ih : a + k = k + a}, an equation Lean generated automatically from the recursive structure of \texttt{Nat}, and \texttt{rw [ih]} uses exactly that fact. The tactic is the same in both cases; the hypothesis context is not.
+
+\textbf{5. \texttt{theorem nat\_\allowbreak{}zero\_\allowbreak{}mul (n : Nat) : 0 * n = 0}}
+
+\begin{lstlisting}
+theorem nat_zero_mul (n : Nat) : 0 * n = 0 := by
+  induction n with
+  | zero => rfl
+  | succ k ih =>
+    rw [Nat.mul_succ, ih]
+\end{lstlisting}
+
+\texttt{Nat.mul} recurses on its \emph{second} argument, exactly like \texttt{Nat.add}, so \texttt{n * 0 = 0} (\texttt{nat\_\allowbreak{}mul\_\allowbreak{}zero}) is the base clause and closes by \texttt{rfl} immediately, with no induction needed. \texttt{0 * n = 0} has the unknown \texttt{n} sitting in the position the recursion inspects, so it is stuck for a general \texttt{n} and needs an actual induction, mirroring the \texttt{0 + n = n} case from Chapter 4. The base case \texttt{0 * 0 = 0} is \texttt{rfl}. The inductive step rewrites \texttt{0 * (k+1)} to \texttt{0 * k + 0} via \texttt{Nat.mul\_\allowbreak{}succ}, then uses \texttt{ih : 0 * k = 0} to finish.
+
+\textbf{6. A tactic that leaves the goal open without erroring}
+
+Such a tactic is neither a success nor a failure; it is \emph{progress to inspect}. An error message says a tactic could not be applied at all. No error, but no ``No goals'' message either, means the tactic did something, rewrote, split, or simplified the goal, but did not finish it. The only way to know what remains is to look at the resulting goal state directly, in the editor or via a trailing \texttt{sorry}. This is exactly why the goal state is checked after \emph{every} tactic in this book, not only at the very end: the absence of a red error is not evidence that nothing is left to prove.

@@ -6,17 +6,14 @@ emitting `.tex`, per this project's Phase 5 plan (a Springer submission
 wants `.tex` source, not a pre-rendered PDF). This is the book's only
 build pipeline; the previous Pandoc-direct-to-PDF script has been retired.
 
-Run from anywhere: `python3 build/build_latex.py`. Requires `pandoc` on
+Run from anywhere: `python3 lean_book_latex/build/build_latex.py`, or via
+`lean_book_latex/build/build_pdf.sh` to go all the way to a PDF. Requires `pandoc` on
 PATH; does not require a LaTeX distribution to run (only to later compile
-what this script emits). This copy is maintained separately from the
-main repository's `lean_book_latex/build/build_latex.py` -- see that
-copy for the `build_pdf.sh` driver that also invokes `xelatex`/`biber`;
-this gh-pages checkout is self-contained and writes its LaTeX output to
-a local `latex/` directory instead of a sibling `lean_book_latex/`.
+what this script emits).
 
 Design, in short:
-- Every chapter directory becomes `latex/<chapter>/`
-  (a subdirectory of this checkout), containing one
+- Every chapter directory becomes `../lean_book_latex/<chapter>/`
+  (a sibling of `lean_book/`, not a subdirectory of it), containing one
   `.tex` per source `.md` (same stem) plus a `00-index.tex` driver that
   `\input`s them in order.
 - `lean-for-working-algebraists.tex` (the top-level driver) `\input`s
@@ -42,7 +39,7 @@ Design, in short:
 - Code fences convert via Pandoc's `--listings` flag to `\begin{lstlisting}`,
   styled by `lean-listings.tex` (Lean) and plain `language=Python`
   (Python), both `\input` from the top-level driver.
-- "**Mathematical reading.**"/"**Programmer's corner (Python).**"
+- "**Mathematical reading.**"/"**Programmer note (Python).**"
   lead-in paragraphs become `mathreading`/`progcorner` environments
   (single-paragraph scope -- a following code block or list is not
   absorbed into the box; documented simplification, same as above).
@@ -54,27 +51,28 @@ import subprocess
 import sys
 
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
-BOOK_DIR = os.path.dirname(BUILD_DIR)
-REPO_ROOT = os.path.dirname(BOOK_DIR)
-LATEX_DIR = os.path.join(BOOK_DIR, "latex")
+LATEX_DIR = os.path.dirname(BUILD_DIR)
+REPO_ROOT = os.path.dirname(LATEX_DIR)
+BOOK_DIR = os.path.join(REPO_ROOT, "lean_book")
 MAIN_TEX_NAME = "lean-for-working-algebraists.tex"
 
 CHAPTERS = [
     "00-setup",
     "01-basics",
-    "02-functions-and-structures",
-    "03-propositions-and-proofs",
-    "04-tactics",
-    "05-rigor-check",
-    "06-groups",
-    "07-group-theorems",
-    "08-rings",
-    "09-ring-theorems",
-    "10-modules",
-    "11-path-algebras",
-    "12-working-efficiently",
-    "13-next-steps",
-    "14-appendix-solutions",
+    "02-terminology-and-coc",
+    "03-functions-and-structures",
+    "04-propositions-and-proofs",
+    "05-tactics",
+    "06-rigor-check",
+    "07-groups",
+    "08-group-theorems",
+    "09-rings",
+    "10-ring-theorems",
+    "11-modules",
+    "12-path-algebras",
+    "13-working-efficiently",
+    "14-next-steps",
+    "15-appendix-solutions",
 ]
 
 # Root-level pages, converted the same way but with no sub-sections/chapter
@@ -96,8 +94,8 @@ ROOT_FILES = [
 # project per file, unlike Chapter 13 Sec.3's five-projects-in-one-file,
 # which is left as plain sections -- see module docstring).
 PBLPROJECT_FILES = {
-    "05-rigor-check/06-checkpoint-project.md",
-    "11-path-algebras/07-checkpoint-project.md",
+    "06-rigor-check/06-checkpoint-project.md",
+    "12-path-algebras/07-checkpoint-project.md",
 }
 
 # Mermaid fences, in file order, mapped to their hand-translated tikz-cd
@@ -108,27 +106,27 @@ DIAGRAM_MAP = {
     "01-basics/01-everything-has-a-type.md": [
         "f-algebra",
     ],
-    "02-functions-and-structures/01-structure-basics.md": [
+    "03-functions-and-structures/01-structure-basics.md": [
         "categorical-product",
     ],
-    "02-functions-and-structures/03-extending-structures.md": [
+    "03-functions-and-structures/03-extending-structures.md": [
         "multi-parent-forgetful",
     ],
-    "10-modules/06-direct-sums.md": [
+    "11-modules/06-direct-sums.md": [
         "biproduct",
     ],
-    "01-basics/04-terminology.md": [
+    "02-terminology-and-coc/01-terminology.md": [
         "universal-property",
         "free-monoid-universal-property",
         "initial-object",
         "forgetful-functor-chain",
         "subobject-commgroup",
     ],
-    "03-propositions-and-proofs/05-and-or-not.md": [
+    "04-propositions-and-proofs/05-and-or-not.md": [
         "and-product",
         "or-coproduct",
     ],
-    "11-path-algebras/03-defining-a-quiver.md": [
+    "12-path-algebras/03-defining-a-quiver.md": [
         "quiver-example",
     ],
     "learning-paths.md": [
@@ -384,7 +382,7 @@ def replace_bib_cites(text):
 
 def wrap_reading_boxes(text):
     """Wrap the single paragraph starting '**Mathematical reading.**' or
-    '**Programmer's corner (Python).**' in the matching custom environment.
+    '**Programmer note (Python).**' in the matching custom environment.
     Scope: one paragraph only (up to the next blank line) -- a following
     code block/list is not absorbed. See module docstring.
 
@@ -408,7 +406,7 @@ def wrap_reading_boxes(text):
         return f"\n```{{=latex}}\n\\begin{{progcorner}}\n```\n{body}\n```{{=latex}}\n\\end{{progcorner}}\n```\n"
 
     text = re.sub(r'\*\*Mathematical reading\.\*\*(.*?)(?=\n\n)', _mathreading, text, flags=re.DOTALL)
-    text = re.sub(r"\*\*Programmer's corner \(Python\)[^*]*\*\*(.*?)(?=\n\n)", _progcorner, text, flags=re.DOTALL)
+    text = re.sub(r"\*\*Programmer note \(Python\)[^*]*\*\*(.*?)(?=\n\n)", _progcorner, text, flags=re.DOTALL)
     return text
 
 
@@ -588,6 +586,15 @@ def fix_image_paths(tex, chapter):
         opts, path = m.group(1) or "", m.group(2)
         if path.startswith("http") or os.path.isabs(path):
             return m.group(0)
+        if not opts:
+            # Pandoc emits a bare \includegraphics{...} for a plain
+            # Markdown image with no {width=...} attribute in the source,
+            # so the image renders at its native pixel size converted to
+            # points. Screenshots sized for a screen are far wider than
+            # the page (confirmed: a couple hundred to 650pt overfull),
+            # so give every unconstrained image a safe default instead of
+            # requiring each Markdown source to opt in individually.
+            opts = "[width=\\linewidth,keepaspectratio]"
         return f"\\includegraphics{opts}{{../lean_book/{chapter}/{path}}}"
 
     return re.sub(r'\\includegraphics(\[[^\]]*\])?\{([^}]+)\}', _sub, tex)
@@ -913,7 +920,7 @@ def convert_file(chapter, name):
     tex = escape_lstlisting_unicode(tex)
     tex = renumber_labels(tex, chapter, stem)
     tex = strip_next_section(tex)
-    if not chapter or (chapter == "14-appendix-solutions" and name == "00-index.md"):
+    if not chapter or (chapter == "15-appendix-solutions" and name == "00-index.md"):
         tex = unnumber_chapter(tex)
         tex = unnumber_sections(tex)
     # listings' language names are case-sensitive; its built-in Python
@@ -1043,15 +1050,15 @@ def main():
             stem = convert_file(chapter, name)
             stems.append(stem)
             total += 1
-            print(f"  {chapter}/{name} -> latex/{chapter}/{stem}.tex")
+            print(f"  {chapter}/{name} -> lean_book_latex/{chapter}/{stem}.tex")
         write_chapter_driver(chapter, stems)
     for name in FRONT_MATTER_FILES + ROOT_FILES:
         convert_file("", name)
         total += 1
-        print(f"  {name} -> latex/{name[:-3]}.tex")
+        print(f"  {name} -> lean_book_latex/{name[:-3]}.tex")
     write_bibliography_chapter()
     write_main_driver()
-    print(f"Converted {total} section files. Wrote latex/{MAIN_TEX_NAME}.")
+    print(f"Converted {total} section files. Wrote lean_book_latex/{MAIN_TEX_NAME}.")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,17 @@
+\section{Exercises}\label{sec:12-path-algebras:06-exercises:1}
+
+\textbf{Key points.} A quiver is just vertices, arrows, and source/target functions; a path is an inductive type indexed by its own endpoints, so an ill-typed composition (arrow source ≠ current endpoint of the path) is rejected before any proof is attempted. \texttt{Path.append} composes two paths by recursion on the second, and the path algebra \(kQ\), sketched but not fully built here, is the free \(k\)-module on the set of paths, with multiplication by composition.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Add a third arrow \texttt{gamma : ExampleArrow} with \texttt{source gamma = 2} and \texttt{target gamma = 0}, creating a cycle \texttt{0 → 1 → 2 → 0}. Build the path \texttt{gamma ∘ beta ∘ alpha : Path exampleQuiver 0 0}.
+\item
+  Prove \texttt{theorem append\_\allowbreak{}nil\_\allowbreak{}left \{V A\} \{Q : Quiver V A\} \{u v\} (p : Path Q u v) : Path.append (Path.nil u) p = p} by induction on \texttt{p} (mirroring the structure of the recursion of \texttt{Path.append} itself), spelling out the base (\texttt{Path.nil}) and inductive (\texttt{Path.cons}) cases as in the \texttt{induction} examples of Chapter 5.
+\item
+  (Optional, harder) Sketch, in comments, no need to complete the Lean, what a \texttt{structure PathAlgebra (V A : Type) (Q : Quiver V A) (k : Type) (Rg : Ring k)} would need to contain to satisfy the fields of \texttt{Ring} from Chapter 9.
+\end{enumerate}
+
+Solutions, \hyperref[sec:15-appendix-solutions:12-chapter-12:1]{Appendix, Chapter 12}.
+

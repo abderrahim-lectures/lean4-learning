@@ -1,0 +1,15 @@
+\section{Exercises}\label{sec:01-basics:04-exercises:1}
+
+\textbf{Key points.} \texttt{\#check} reports a type without running anything. \texttt{\#eval} runs. A type is \emph{dependent} when a later type mentions an earlier \emph{value} (\texttt{Vec α n}, \texttt{Fin n}), not merely an earlier type.
+
+\textbf{Exercises.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The return type of \texttt{Vec.replicate} mentions the value of its \texttt{Nat} argument. A plain function like \texttt{Nat.succ} does not. Is the type of \texttt{Nat.succ}, \texttt{Nat → Nat}, therefore \emph{not} a Π-type? (The general Π-type pattern this question turns on gets its full formal treatment in \hyperref[sec:02-terminology-and-coc:00-index:1]{Chapter 2}.)
+\item
+  Write \texttt{Vec.toList : Vec α n → List α}, converting a length-indexed vector to an ordinary list by forgetting its length. Contrast its type with the type of \texttt{Vec.replicate} from Section 3. Which one is a genuinely \emph{dependent} function (its return type mentions the value of the argument), and which one is an ordinary function that merely happens to take a value of a dependent type as input?
+\end{enumerate}
+
+Solutions, \hyperref[sec:15-appendix-solutions:01-chapter-1:1]{Appendix, Chapter 1}.

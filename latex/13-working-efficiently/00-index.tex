@@ -1,0 +1,30 @@
+\chapter{Chapter 13: Working efficiently in Lean}\label{sec:13-working-efficiently:00-index:1}
+
+\begin{learningobjectives}
+\begin{itemize}
+\tightlist
+\item
+  Use \texttt{exact?}/\texttt{apply?} to search for a known lemma or proof.
+\item
+  Recognize when a goal falls inside the decidable fragment of \texttt{decide}/\texttt{omega}/\texttt{norm\_\allowbreak{}num} versus needing a genuine hand proof.
+\item
+  Know what \texttt{simp} trades away for speed.
+\item
+  Choose between term mode and tactic mode for a given proof.
+\item
+  Recognize when a sub-goal deserves its own named lemma.
+\end{itemize}
+\end{learningobjectives}
+
+
+\section{What efficiency means once the reasoning is understood}\label{sec:13-working-efficiently:00-index:2}
+
+Chapters 8 and 10 found proofs by hand, deliberately slowly, so the underlying reasoning was never hidden. Once the reason a proof works is understood, the same fact should not have to be re-derived, by hand, every time it recurs; the question left is how to write and find proofs faster without losing that understanding. ``Faster'' does not mean ``type less.'' A lemma that already exists in the environment should be looked up, not re-proved, hence the search tactics \texttt{exact?}/\texttt{apply?} (\hyperref[sec:13-working-efficiently:01-search-tactics:1]{Section 1}). A goal that reduces to a terminating computation, decidable equality or inequality on \texttt{Nat}/\texttt{Int}, a concrete numeral, should be settled by running that computation, \texttt{decide}, \texttt{omega}, \texttt{norm\_\allowbreak{}num}, rather than by a hand-built \texttt{rw} chain, exactly because a decision procedure exists precisely where hand-derivation adds nothing a human proof of the general case still needs (\hyperref[sec:13-working-efficiently:02-decision-procedures:1]{Section 2}). Once a family of rewrites is understood well enough to be trusted as a set, applying that whole set at once with \texttt{simp} is the efficient move, at the cost of not seeing which member of the set actually fired (\hyperref[sec:13-working-efficiently:03-simp:1]{Section 3}). A short proof reads better as a single term; a proof with several sequential steps or case splits reads (and is written) better as a tactic script, so the choice between term mode and tactic mode is about readability, not power (\hyperref[sec:13-working-efficiently:04-term-vs-tactic-mode:1]{Section 4}). And a sub-goal that already recurs, or that states an independent mathematical fact in its own right, should be pulled out and named once, so that every later proof of it is a lookup rather than a re-derivation (\hyperref[sec:13-working-efficiently:05-structuring-lemmas:1]{Section 5}). The proof strategy guide maps the reverse direction: given the \emph{shape} of a goal, hypothesis, or definition you are facing, which tactic from this chapter is the right first move, before the deeper reasoning of this chapter even starts.
+
+
+% Auto-appended: input every other section in order.
+\input{13-working-efficiently/01-search-tactics.tex}
+\input{13-working-efficiently/02-decision-procedures.tex}
+\input{13-working-efficiently/03-simp.tex}
+\input{13-working-efficiently/04-term-vs-tactic-mode.tex}
+\input{13-working-efficiently/05-structuring-lemmas.tex}

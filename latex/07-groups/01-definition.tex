@@ -1,0 +1,40 @@
+\section{The mathematical definition}\label{sec:07-groups:01-definition:1}
+
+A \texttt{Monoid} (Chapter 6) has an associative operation and a two-sided identity, nothing more; an element need not be undoable. What is the weakest extra requirement that makes every element undoable? Not ``some element cancels it'', since that already holds vacuously for the identity itself paired with \(e \cdot e = e\). The requirement has to hold for \emph{every} element, and it has to be witnessed, not merely asserted: for each \(a\) there must exist \(a^{-1}\) with \(a \cdot a^{-1} = a^{-1} \cdot a =
+e\). Adding exactly this to the data of a monoid is the entire content of this section, and it is what turns ``a set with an associative operation'' into a structure with cancellation.
+
+A \textbf{group} is a set \(G\) together with:
+
+\begin{itemize}
+\tightlist
+\item
+  a binary operation \(\cdot : G \times G \to G\),
+\item
+  a distinguished element \(e \in G\) (the identity),
+\item
+  an inverse function \((-)^{-1} : G \to G\),
+\end{itemize}
+
+satisfying three axioms, for all \(a, b, c \in G\):
+
+\[
+\begin{aligned}
+\text{(associativity)} &\quad (a \cdot b) \cdot c = a \cdot (b \cdot c) \\
+\text{(identity)} &\quad e \cdot a = a \quad\text{and}\quad a \cdot e = a \\
+\text{(inverse)} &\quad a^{-1} \cdot a = e \quad\text{and}\quad a \cdot a^{-1} = e
+\end{aligned}
+\]
+
+No further axiom is required; commutativity is not assumed (a group where \(a \cdot b = b \cdot a\) always holds is \textbf{abelian}, a strictly stronger condition defined separately). The identity and inverse laws are each stated in both a left and a right direction, and the two directions are kept as separate axioms rather than collapsed into one. In an abelian group the directions are logically equivalent, but with commutativity not assumed each must be supplied on its own. \hyperref[sec:07-groups:04-permutations-example:1]{Section 4} builds a non-abelian group, \(S_3\), where this split is put to work.
+
+\subsection{Sources, quoted}\label{sec:07-groups:01-definition:2}
+
+Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Group.} A set \(G\) with a binary operation, identity, and inverses satisfying associativity and the identity/inverse laws (below); consequences of these axioms, e.g.~``the identity of \(G\) is unique \ldots{} for each \(a \in G\), \(a^{-1}\) is uniquely determined'' (\cite{DummitFoote2003}, §1.1 ``Basic Axioms and Examples,'' p.~17, Proposition 1).
+\item
+  Aluffi (\cite{Aluffi2009}) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of the book itself, not quoted from a verified excerpt.
+\end{itemize}

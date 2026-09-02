@@ -1,0 +1,25 @@
+\section{What we built}\label{sec:14-next-steps:01-what-we-built:1}
+
+Starting from \texttt{\#eval} and \texttt{def}, this book built up, entirely from first principles (no external library), the following.
+
+\begin{itemize}
+\tightlist
+\item
+  A general \texttt{Group} structure, with theorems proved for an arbitrary group (uniqueness of identity, uniqueness of inverses, \((ab)^{-1} = b^{-1}a^{-1}\)).
+\item
+  A \texttt{CommGroup} extending \texttt{Group}.
+\item
+  A \texttt{Ring} structure built on top of \texttt{CommGroup}, with theorems for an arbitrary ring (\(a \cdot 0 = 0\), \((-1)\cdot a = -a\)), plus a genuinely noncommutative example (\(2\times 2\) matrices).
+\item
+  A \texttt{Module} over a ring, with submodules, linear maps, and direct sums.
+\item
+  A \texttt{Quiver} and an indexed inductive \texttt{Path} type, with path composition, as the combinatorial skeleton underlying a path algebra.
+\end{itemize}
+
+Nearly every proof in this book was written with explicit \texttt{rw}/\texttt{have}/\texttt{intro} steps, each one marked with the axiom or prior theorem that justified it, and no unexplained \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}}. \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{simp}} itself is used sparingly outside the discussion of it in Chapter 13, and only when a genuine technical obstacle makes the explicit alternative not worth the detour. \texttt{Perm3.ext} in Chapter 7 reaches for \texttt{simp only [mk.injEq]} because core Lean generates no field-wise extensionality lemma for a plain \texttt{structure}, and the checkpoint project of Chapter 12 reaches for \texttt{simp only [Path.append, Path.length]} because a match on an \emph{indexed} inductive type like \texttt{Path} reduces only through its equation lemmas, not plain \texttt{rfl}, once an abstract path is involved. Both name only the exact definitions being unfolded, standing in for a specific, known step rather than an unknown pile of lemmas. Every other proof avoids \texttt{simp} entirely, precisely to keep the discipline required for reading (or writing) a real Lean library, when something goes wrong, the exact lemma responsible should be identifiable.
+
+\begin{progcorner}
+
+Every Programmer note in this book made the same comparison, once per chapter, against one concrete Python failure mode, a \texttt{KeyError} from an untyped \texttt{dict}, an \texttt{assert} that only ever ran the inputs it happened to see, a \texttt{float} silently breaking associativity, a hand-checked graph invariant nobody remembered to enforce everywhere. None of those bugs are exotic. Each is a bug a working Python programmer has hit, or will hit. The pattern behind all of them is the same one, some invariant is true ``by convention,'' known to the author, documented in a comment or a docstring at best, and checked, if at all, only at the specific call sites someone thought to guard. \texttt{Group}, \texttt{Ring}, \texttt{Module}, and \texttt{Path} in this book took the opposite approach at every step, each invariant, associativity, the identity laws, connectivity of a path, was written as a \emph{type}, so that building a value of that type is the same act as proving the invariant holds. The habitual question a Python programmer has to ask, ``did I remember to check this everywhere it matters,'' simply does not arise for anything proved this way. It was checked once, by the type checker, at the one place the value was constructed, and every later use of it inherits that guarantee for free. This is the actual case for functional, statically typed languages like Lean, not that they make correct programs easier to write in the small, but that they make entire categories of bug, the ones coming from an invariant nobody remembered to check, structurally unable to compile in the first place.
+
+\end{progcorner}
