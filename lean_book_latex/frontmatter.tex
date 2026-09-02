@@ -93,55 +93,69 @@ derive by hand versus hand off to automation.
 % About this book
 % ===================================================================
 \chapter*{About this book}
-This book was written as an experiment in using Claude Code (Anthropic's
-AI coding agent) to produce a complete technical book: the author,
-Abderrahim Adrabi --- a mathematician (PhD) and techno-pedagogical
-engineer affiliated with the Faculty of Sciences, Rabat, and the Faculty
-of Educational Sciences, Rabat, Morocco --- directed the scope,
-structure, and audience, and has reviewed the mathematical and Lean
-content directly, chapter by chapter, across every round of revision;
-Claude wrote the chapter text, Lean code, and LaTeX. No additional,
-independent mathematician or Lean expert has reviewed the content beyond
-the author's own review and the automated checks described in the
-project's README and CHANGELOG (every code block compiled against a real
-Lean~4 toolchain, plus several AI-driven review passes).
+This is an introduction to Lean~4 for mathematicians, built from scratch.
+It presupposes no programming background and no previous contact with any
+proof assistant; it presupposes only the mathematical maturity of someone
+comfortable with abstract algebra and the basic language of category
+theory. The book builds up Lean~4 syntax and tactics only as far as needed
+to formalize groups, rings, modules, and quiver path algebras from
+scratch. The categorical viewpoint --- the path category of a quiver as the
+free category on a quiver, a ring as a one-object preadditive category ---
+is made explicit wherever it clarifies what the Lean code is really
+encoding, rather than bolted on as decorative commentary.
 
-A closing verification pass followed (see
-\texttt{reviews/2026-08-03/} in the repository), run as a single
-adversarial reviewer rather than a panel: it re-triaged every finding from
-the previous round, audited the bibliography against the literature via the
-Consensus research tool, swept the manuscript programmatically for broken
-links, mismatched cross-reference labels, and tactics used but absent from
-the reference tables, and --- following the project's
-adversarial-mathematics review protocol --- re-derived the worked examples
-and proofs by hand and tested the boundary and degenerate cases the earlier
-panel had not. That last step is what found the round's most serious defect:
-a false definition of the length-\(0\) path in Chapter~11, contradicted by
-the book's own later sections. Two further defects surfaced in the
-type-theory core --- a \texttt{rfl} example block in Chapter~5 that taught
-the inverse of the truth, and the Π-type universe rule stated with
-\(\max\) where Lean uses \(\mathrm{imax}\), which had made every
-\texttt{∀}-statement in Chapters~3--11 contradict the rule printed in
-Chapter~5. All are corrected in this release, along with several citation
-and cross-reference repairs. That reviewer also recorded two of its own
-predictions that testing against the real toolchain disproved; both are
-documented in the review file rather than quietly dropped.
+Every concept and every theorem in the book is derived in place, and every
+code block is verified against a real Lean~4 toolchain via a companion
+project that compiles it with \texttt{lake build}. The mathematics is
+presented as a process of derivation and discovery, not as a finished
+skeleton to memorize; see the Pedagogical approach section that follows.
 
-A second closing pass (see \texttt{reviews/2026-08-03/run-173410/} in the
-repository) ran the same multi-model panel-then-adjudication pipeline
-again --- six Phase-1 reviewers, four Phase-2 cross-critiques, five
-specialized reviewers (category theory, notation, proof search, Lean
-audit, typesetting), adjudicated into one fix-ready report. It confirmed
-26 findings (8 critical) and correctly dismissed 20 fabricated or
-contradicted ones, including a false "v1.5.0 regression" claim that three
-of five Phase-1 reports had independently manufactured. All confirmed
-findings were re-verified against the working tree before being applied,
-and two errors in the adjudicated report itself were caught and corrected
-in the process --- documented alongside the fixes in that report's
-\texttt{POST-HOC CORRECTIONS} section rather than applied blindly.
+\chapter*{Pedagogical approach}
+This book teaches by derivation, not by dispensation, in the tradition of
+the teaching of Arnold and Gelfand rather than that of Bourbaki.
+``It is impossible to understand an unmotivated definition'' (Arnold,
+\emph{On Teaching Mathematics}, 1997). Every definition and theorem in
+this book is \emph{earned}. A section poses the question or concrete
+problem that forces a concept, walks the reasoning that discovers it, and
+only then names and formalizes the result, mirroring the method of the
+Moscow seminar Gelfand ran, which finds the simplest example that
+captures a phenomenon before finding the language to state it generally.
+No fixed
+Definition--Theorem--Proof--Remark skeleton is imposed on that reasoning;
+structure follows the logic of the argument, not a template. Formulas and
+theorems are proved before they are used, never handed down as rules to
+memorize. Exercises favor fewer, harder, escalating, proof-heavy problems
+over repetitive drills, and do not give away their own answer; full
+solutions live in the appendix.
 
-Treat it as an author-reviewed draft produced through human-directed AI
-authorship, not a traditionally peer-reviewed text.
+% ===================================================================
+% A note on authorship
+% ===================================================================
+\chapter*{A note on authorship}
+This book was written as an experiment in using Claude Code, the AI
+coding agent built by Anthropic, to produce a complete technical book.
+The author, Abderrahim Adrabi --- a mathematician (PhD) and
+techno-pedagogical engineer affiliated with the Faculty of Sciences,
+Rabat, and the Faculty of Educational Sciences, Rabat, Morocco ---
+directed the scope, structure, and audience, and has reviewed the
+mathematical and Lean content directly, chapter by chapter, across every
+round of revision; Claude wrote the chapter text, Lean code, and LaTeX.
+No additional, independent mathematician or Lean expert has reviewed the
+content beyond direct review by the author and the automated checks
+described in the README and CHANGELOG of the project (every code block
+compiled against a real Lean~4 toolchain, plus several AI-driven review
+passes).
+
+Each release has gone through further closing verification passes,
+described in full in \texttt{reviews/} and in the project CHANGELOG.
+These passes re-triage prior findings, check citations against the
+literature, and re-derive worked examples and proofs by hand rather than
+accepting them as written. Confirmed issues are corrected before release
+and recorded in the changelog; unconfirmed predictions made by a
+reviewer are never applied without independent verification.
+
+Treat this book as an author-reviewed draft produced through
+human-directed AI authorship, not a traditionally peer-reviewed text.
 
 % ===================================================================
 % How to read this book

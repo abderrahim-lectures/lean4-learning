@@ -4,6 +4,7 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v2.0.6](v2.0.6.md) — Rewrite "About this book", add "Pedagogical approach" and "A note on authorship" chapters
 - [v2.0.5](v2.0.5.md) — Release the derivation-first book
 - [v2.0.4](v2.0.4.md) — New proof strategy guide
 - [v2.0.3](v2.0.3.md) — Exhaustive deep review, TauCeti mention, final prose fixes
