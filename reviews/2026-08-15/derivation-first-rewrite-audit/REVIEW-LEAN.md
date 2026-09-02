@@ -1,4 +1,4 @@
-# REVIEW-LEAN.md — russian-style-rewrite
+# REVIEW-LEAN.md — derivation-first-rewrite
 
 ## 1. Summary
 
@@ -15,7 +15,7 @@ and compiled as part of the same successful build (their `#eval`/proof
 output appears in the log). I grepped every fenced Lean code block in
 `lean_book/` (not just prose mentions) for `sorry`/`admit`/`axiom`/`unsafe`
 and found none, and confirmed `lean_project/LeanProject/*.lean` has none
-either. I diffed `russian-style-rewrite` against `master`
+either. I diffed `derivation-first-rewrite` against `master`
 (`git merge-base` = `master` HEAD, `0593f0c`) across all 54 changed `.md`
 files and the one changed `.lean` file, extracting every fenced code block
 on both sides, to confirm the prose-only rewrite left Lean/Python code
@@ -93,7 +93,7 @@ Build completed successfully (8681 jobs).
 - `nat_add_zero` / `nat_zero_mul`: present in both
   `lean_book/15-appendix-solutions/04-chapter-4.md` /
   `05-chapter-5.md` and `lean_project/LeanProject/Ch15AppendixSolutions.lean`
-  — confirmed via `git diff 0593f0c russian-style-rewrite --
+  — confirmed via `git diff 0593f0c derivation-first-rewrite --
   lean_project/LeanProject/Ch15AppendixSolutions.lean`, which shows only
   these two additions (+10 lines, purely additive, no other change to the
   file), and both compiled cleanly as part of the full build above.
@@ -101,7 +101,7 @@ Build completed successfully (8681 jobs).
   fences in `lean_book/`; zero hits anywhere in `lean_project/LeanProject/
   *.lean`. All prose hits are conceptual references (group/ring "axiom",
   `sorry` as a documented tactic) or changelog history, not live code.
-- Prose-only-rewrite check: `git merge-base russian-style-rewrite master`
+- Prose-only-rewrite check: `git merge-base derivation-first-rewrite master`
   = `0593f0c` (= `master` HEAD, this branch is 2 commits ahead). Diffed all
   54 changed `.md` files' fenced `lean`/`lean4`/`python`/unlabeled code
   blocks, base vs. head: only `04-chapter-4.md` and `05-chapter-5.md` gained

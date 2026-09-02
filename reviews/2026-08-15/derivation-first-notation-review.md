@@ -1,8 +1,8 @@
-# Notation Consistency Review — Post "Russian-Style" Rewrite
+# Notation Consistency Review — Post derivation-first Rewrite
 
 **Reviewer:** notation-consistency-reviewer skill (independent verification pass)
 **Scope:** `lean_book/notation-reference.md` as authority; full read of Chapters 01, 03, 05, 07, 09, 11, 13; targeted skim of Chapters 02, 04, 06, 08, 10, 12 for cross-references and terminology; book-wide grep sweeps for symbol/term drift.
-**Trigger for this review:** all 16 chapters were rewritten book-wide into a derivation-first ("Russian-style") prose style — definitions/theorems are now motivated by a question before being formally named. This kind of large-scale reordering is exactly the change most likely to break definition-before-use discipline or leave stale cross-references behind.
+**Trigger for this review:** all 16 chapters were rewritten book-wide into a derivation-first prose style — definitions/theorems are now motivated by a question before being formally named. This kind of large-scale reordering is exactly the change most likely to break definition-before-use discipline or leave stale cross-references behind.
 **Method:** Three personas — Symbol Census-Taker, Translation Watcher, Definition Enforcer — applied against the sample, then every finding re-verified independently by reading the cited file:line directly (not taken on trust from any single pass).
 
 ---
@@ -73,7 +73,7 @@ But `≃`/`Equiv` is used in "Mathlib equivalent" side-boxes well before Chapter
 
 ## 3. Checked and clean (explicitly verified, not just "not investigated")
 
-- **Definition-before-use**, chapters 1, 3, 5, 7, 9, 11, 13 (full read): no violations found. Every named Lean identifier is formally defined before substantive use. Forward mentions are explicitly flagged in the prose as forward pointers (e.g. "Chapter 9 will..."), which is legitimate under the Russian-style motivate-then-name structure and not a definition-before-use fault.
+- **Definition-before-use**, chapters 1, 3, 5, 7, 9, 11, 13 (full read): no violations found. Every named Lean identifier is formally defined before substantive use. Forward mentions are explicitly flagged in the prose as forward pointers (e.g. "Chapter 9 will..."), which is legitimate under the derivation-first motivate-then-name structure and not a definition-before-use fault.
 - **Lean syntax vs. `notation-reference.md` table**, in all seven fully-read chapters: every code-block usage matches the table exactly, including deliberate absence of `⊕`/`≃` as infix operators in the book's own (non-Mathlib) code.
 - **Cross-references** ("Chapter N, Section M" citations and relative markdown links) in live chapter content and chapter indices: checked via automated link resolution plus manual spot-checks; none found dangling or mis-numbered as a result of the rewrite.
 - **Theorem-name cross-references** other than the `neg_mul` case above (`left_inverse_unique`, `inv_op`, `mul_zero`, `mul_zero_left`, `neg_one_mul`, the Huet 1980 / Newman's-lemma citation): all verified genuine and correctly located.
@@ -82,4 +82,4 @@ But `≃`/`Equiv` is used in "Mathlib equivalent" side-boxes well before Chapter
 
 ## 4. Recommendation
 
-**Conditional accept.** Fix the CRITICAL `ring`-availability contradiction in `09-rings/07-matrices.md` before the next release — it is a direct, checkable falsehood sitting 30 lines from its own correction. Fix the HIGH `notation-reference.md` "First appears" scoping issue and the MEDIUM `neg_mul` attribution when convenient. No evidence of systemic notation drift from the Russian-style rewrite: the definition-before-use discipline the book advertises held up under an adversarial, independently-verified check across a broad chapter sample.
+**Conditional accept.** Fix the CRITICAL `ring`-availability contradiction in `09-rings/07-matrices.md` before the next release — it is a direct, checkable falsehood sitting 30 lines from its own correction. Fix the HIGH `notation-reference.md` "First appears" scoping issue and the MEDIUM `neg_mul` attribution when convenient. No evidence of systemic notation drift from the derivation-first rewrite: the definition-before-use discipline the book advertises held up under an adversarial, independently-verified check across a broad chapter sample.

@@ -1,4 +1,4 @@
-# Adversarial review: does the v2.0.0 "Russian-style" rewrite actually achieve derivation-first exposition?
+# Adversarial review: does the v2.0.0 rewrite actually achieve derivation-first exposition?
 
 Reviewer stance: adversarial, per `skills/adversarial-book-reviewer/SKILL.md`. The changelog's own claim of a
 prior "full skill-based adversarial audit" that returned no findings was explicitly *not* trusted; every
