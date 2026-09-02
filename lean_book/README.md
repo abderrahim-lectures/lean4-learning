@@ -176,6 +176,10 @@ See [changelog/](changelog/README.md) for the full, itemized history.
 - [Tactic and library reference](tactic-and-library-reference.md), every
   tactic used in the book, and every Mathlib name from the
   "Mathlib equivalent" boxes of Chapters 7-12, each linked to its official documentation.
+- [Proof strategy guide](proof-strategy-guide.md), the reverse of the
+  library reference: given the *shape* of a goal, hypothesis, or
+  definition, which tactic to reach for first, keyed to the exercise and
+  theorem patterns of the book itself.
 - [λ-calculus / type theory to Lean dictionary](lambda-calculus-dictionary.md),
   a lookup table connecting the formal notation in the
   "Mathematical reading" boxes of this book back to Lean syntax, term by term.

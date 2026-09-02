@@ -38,6 +38,10 @@ choice between term mode and tactic mode is about readability, not power
 recurs, or that states an independent mathematical fact in its own right,
 should be pulled out and named once, so that every later proof of it is a
 lookup rather than a re-derivation ([Section 5](05-structuring-lemmas.md)).
+The [proof strategy guide](../proof-strategy-guide.md) maps the reverse
+direction: given the *shape* of a goal, hypothesis, or definition you are
+facing, which tactic from this chapter is the right first move, before the
+deeper reasoning of this chapter even starts.
 
 ## Sections
 

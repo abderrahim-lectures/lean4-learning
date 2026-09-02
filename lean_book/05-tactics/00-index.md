@@ -21,7 +21,10 @@ write a proof on paper. The real subject of this chapter is not the list
 of tactics below, but **how to work a goal whose proof is not yet
 known**, since that is the skill the rest of the book practices. The
 tactic reference is secondary, read it once, then return to it as
-needed.
+needed. When a later exercise leaves you unsure which tactic to try,
+the [proof strategy guide](../proof-strategy-guide.md) maps the
+*shape* of a goal or hypothesis directly to a first move for just that
+case.
 
 The anatomy of a goal, and the habit of reading every hypothesis before
 trying anything, comes first ([Section 1](01-goal-state.md)). Four
