@@ -24,7 +24,7 @@ theorem prover. Mathematical definitions and statements are expressed as
 code, and every proof is a term whose type must match the statement
 exactly, checked by a small, fixed kernel. There is no step at which a
 silently-unhandled case can pass review, because there is no step at
-which a human reader's attention is the only thing standing between a
+which the attention of a human reader is the only thing standing between a
 gap and an accepted proof. A proof is correct if and only if it
 type-checks, and it either type-checks or it does not, regardless of
 how many regions the missing case would have involved.

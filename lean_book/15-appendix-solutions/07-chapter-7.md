@@ -9,7 +9,7 @@
 Nothing about the three data fields (`op`, `id`, `inv`) changes. Five
 proof-obligation fields are added: `assoc`, `id_left`, `id_right`,
 `inv_left`, `inv_right`. `Group` is exactly `GroupData` plus these five
-proofs — the type of a term goes from "some operation and two elements"
+proofs. The type of a term goes from "some operation and two elements"
 to "an operation and two elements *together with evidence* they behave
 correctly."
 
@@ -29,7 +29,7 @@ Hence a `GroupData Bool` built from this `op`, together with `id :=
 false` and any `inv`, satisfies `assoc` and `id_left` but not
 `id_right`. If the `id_right` field were removed from the definition of
 `Group`, this data would type-check as a "group" while manifestly
-lacking a two-sided identity — `id_right` is not implied by the other
+lacking a two-sided identity. `id_right` is not implied by the other
 four axioms and must remain a field of its own. The same style of
 argument (a witness satisfying every axiom but one) applies to each of
 the other four fields; deleting any of them admits a corresponding class
@@ -100,9 +100,9 @@ This is exactly why `intGroup` never distinguishes the two directions:
 In `perm3Group`, `Perm3.comp` is not commutative (`swap01 ∘ cycle012 ≠
 cycle012 ∘ swap01`, computed in Section 4), so the hypothesis of the
 claim fails, and no argument like the one above can derive `id_right`
-from `id_left` alone, or `inv_right` from `inv_left` alone — both must be
-supplied and proved independently, which is exactly what `perm3Group`'s
-definition does.
+from `id_left` alone, or `inv_right` from `inv_left` alone. Both must be
+supplied and proved independently, which is exactly what the definition
+of `perm3Group` does.
 
 **4. A single computed inequality proves function inequality**
 

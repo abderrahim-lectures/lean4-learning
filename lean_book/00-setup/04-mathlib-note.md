@@ -28,8 +28,8 @@ Chapter 14.
 
 **Three design choices, and why each one is forced.**
 
-Here is the concrete cost of importing Mathlib from page one. Mathlib's
-real `Group` is not one `structure` with the group axioms listed in it;
+Here is the concrete cost of importing Mathlib from page one. The real
+`Group` of Mathlib is not one `structure` with the group axioms listed in it;
 it is the bottom of a chain, `Group extends DivInvMonoid`, which
 `extends Monoid`, which `extends Semigroup` and `MulOneClass`, three
 layers deep, before a single group axiom is visible in the source the

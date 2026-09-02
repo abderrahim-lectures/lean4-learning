@@ -89,7 +89,7 @@ actually compiling it.
   problem as `h2` of Theorem 1 on the previous page. An earlier draft
   tried `conv_lhs => rw [...]` to target only the intended occurrence,
   but this failed with `unknown tactic`: `conv_lhs` is a Mathlib tactic
-  notation, and this book's `Ring` development never imports Mathlib
+  notation, and the `Ring` development of this book never imports Mathlib
   (see the [Mathlib note](../00-setup/04-mathlib-note.md)), so the
   tactic is simply not in scope here, not merely mis-targeted.
   `congrArg f h` needs no such tactic at all: it directly constructs

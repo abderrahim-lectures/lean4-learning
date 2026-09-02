@@ -52,8 +52,8 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   Definitions and Examples"). Dummit and Foote's own base definition
   does *not* require a multiplicative identity, calling that weaker
   structure a ring "not necessarily with 1" and reserving "ring" by
-  default for the identity-including case in most of the book's later
-  chapters, the same choice (R3) above makes explicit. This is a
+  default for the identity-including case in most of the later chapters
+  of this book, the same choice (R3) above makes explicit. This is a
   structural citation to the section and its numbered axioms, not a
   verified word-for-word excerpt.
 

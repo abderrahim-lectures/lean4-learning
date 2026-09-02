@@ -69,8 +69,8 @@ Same five facts about $\mathbb{Z}$; where the book *assembles* a `Group
 Int` term by hand, the instance already exists, found automatically by
 [`inferInstance`](https://loogle.lean-lang.org/?q=inferInstance). [`add_assoc`](https://loogle.lean-lang.org/?q=add_assoc)/[`zero_add`](https://loogle.lean-lang.org/?q=zero_add)/etc.
 are generic over *any* `AddCommGroup`, so they apply equally to the
-`perm3Group`-style example of Section 4 once phrased in Mathlib's
-`Group`/`AddCommGroup` classes, as that section does next.
+`perm3Group`-style example of Section 4 once phrased in the
+`Group`/`AddCommGroup` classes of Mathlib, as that section does next.
 
 ---
 

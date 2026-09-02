@@ -29,14 +29,14 @@ with `P w` from `h` alone, whereas the same is possible from `h' : Σ x,
 P x`.
 
 *Proof.* `Exists` is declared to land in `Prop`. By proof irrelevance,
-Lean's kernel treats any two proofs of the same proposition as
+the kernel of Lean treats any two proofs of the same proposition as
 definitionally equal, so `h` carries no information beyond the bare fact
 that *some* witness exists; every possible choice of witness gives a
 `Prop`-equal, indistinguishable proof term `h`. If a function could
 extract a witness from `h`, two `∃`-proofs built from different witnesses
 but proof-irrelevantly equal would have to be sent to the same output by
 that function, which is impossible in general, since the witnesses
-genuinely differ as data. Lean's projection mechanism therefore refuses
+genuinely differ as data. The projection mechanism of Lean therefore refuses
 projections out of `Prop`-valued fields into `Type`-valued results,
 exactly the `lean.projNonPropFromProp` error. `Sigma`, landing in `Type`,
 carries no such irrelevance guarantee; `.fst` on `h' : Σ x, P x` is

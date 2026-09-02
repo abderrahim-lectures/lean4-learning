@@ -17,7 +17,7 @@ theorem and_example (P Q : Prop) (hp : P) (hq : Q) : P ∧ Q := by
 ```
 
 [`constructor`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) is exactly the tactic for this: it invokes the
-introduction rule of the goal's type, splitting $P \wedge Q$ into the two
+introduction rule for the type of the goal, splitting $P \wedge Q$ into the two
 goals $P$ and $Q$ (the `·` focus dot addresses each one in turn), and more
 generally, for any `structure`, into one goal per field. This reflects the
 [universal

@@ -184,11 +184,11 @@ p1() {
   echo "[p1] -> $RUN/p1-reviews/"
 }
 
-math_files_1="$(ls "$BOOK"/03-propositions-and-proofs/*.md "$BOOK"/05-rigor-check/*.md "$BOOK"/06-groups/*.md "$BOOK"/07-group-theorems/*.md)"
-math_files_2="$(ls "$BOOK"/08-rings/*.md "$BOOK"/09-ring-theorems/*.md "$BOOK"/10-modules/*.md "$BOOK"/11-path-algebras/*.md)"
-code_files="$(ls "$BOOK"/01-basics/*.md "$BOOK"/02-functions-and-structures/*.md "$BOOK"/04-tactics/*.md "$BOOK"/12-working-efficiently/*.md "$BOOK"/tactic-and-library-reference.md)"
-sol_files="$(ls "$BOOK"/14-appendix-solutions/*.md)"
-prose_files="$(ls "$BOOK"/00-setup/*.md "$BOOK"/13-next-steps/*.md "$BOOK"/README.md "$BOOK"/lambda-calculus-dictionary.md "$BOOK"/notation-reference.md "$BOOK"/learning-paths.md "$BOOK"/bibliography.md)"
+math_files_1="$(ls "$BOOK"/04-propositions-and-proofs/*.md "$BOOK"/06-rigor-check/*.md "$BOOK"/07-groups/*.md "$BOOK"/08-group-theorems/*.md)"
+math_files_2="$(ls "$BOOK"/09-rings/*.md "$BOOK"/10-ring-theorems/*.md "$BOOK"/11-modules/*.md "$BOOK"/12-path-algebras/*.md)"
+code_files="$(ls "$BOOK"/01-basics/*.md "$BOOK"/02-terminology-and-coc/*.md "$BOOK"/05-tactics/*.md "$BOOK"/13-working-efficiently/*.md "$BOOK"/tactic-and-library-reference.md)"
+sol_files="$(ls "$BOOK"/15-appendix-solutions/*.md)"
+prose_files="$(ls "$BOOK"/00-setup/*.md "$BOOK"/14-next-steps/*.md "$BOOK"/README.md "$BOOK"/lambda-calculus-dictionary.md "$BOOK"/notation-reference.md "$BOOK"/learning-paths.md "$BOOK"/bibliography.md)"
 root_files="$(ls "$(pwd)/README.md" "$(pwd)/NOTICE.md" "$(pwd)/CONTRIBUTING.md" "$(pwd)/REPRODUCING.md")"
 
 # --- Phase 2: cross-critique -------------------------------------------
