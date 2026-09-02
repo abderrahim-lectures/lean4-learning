@@ -1,6 +1,14 @@
 \section{Chapter 8: Group examples and basic theorems}\label{sec:15-appendix-solutions:08-chapter-8:1}
 
-\textbf{1. \texttt{theorem inv\_\allowbreak{}inv (a : G) : Grp.inv (Grp.inv a) = a}}
+\textbf{1. Could \texttt{id\_\allowbreak{}unique} route through \texttt{Grp.op Grp.id e'} instead?}
+
+Not directly. \texttt{h} is the hypothesis that \texttt{e'} is a \emph{left} identity, so it only describes \texttt{Grp.op e' a} for arbitrary \texttt{a}; it says nothing about \texttt{Grp.op a e'}. The proof of \texttt{id\_\allowbreak{}unique} has to route through the one expression, \texttt{Grp.op e' Grp.id}, that both given facts (\texttt{h} and \texttt{Grp.id\_\allowbreak{}right}) actually describe, not any expression that happens to mention both sides.
+
+\textbf{2. Can \texttt{inv (a op b)} be computed directly from the axioms?}
+
+Not from the axioms alone. \texttt{Group} has no field that produces \texttt{inv} of a \emph{product} in closed form, only \texttt{inv} of a single element. Reducing ``compute this'' to ``verify this satisfies the defining property'' of Theorem 2 is not a shortcut taken for convenience; it is the only route the axioms actually offer, which is exactly why \texttt{inv\_\allowbreak{}op} is proved by characterization rather than direct computation.
+
+\textbf{3. \texttt{theorem inv\_\allowbreak{}inv (a : G) : Grp.inv (Grp.inv a) = a}}
 
 \begin{lstlisting}
 theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
@@ -12,7 +20,7 @@ theorem inv_inv (a : G) : Grp.inv (Grp.inv a) = a := by
 
 By \texttt{left\_\allowbreak{}inverse\_\allowbreak{}unique} (Chapter 8, Theorem 2), to show \texttt{a = Grp.inv (Grp.inv a)} it suffices to show \texttt{a} is a left inverse of \texttt{Grp.inv a}, i.e.~\texttt{Grp.op a (Grp.inv a) = Grp.id}, exactly \texttt{Grp.inv\_\allowbreak{}right a}.
 
-\textbf{2. \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}}
+\textbf{4. \texttt{theorem cancel\_\allowbreak{}left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c}}
 
 \begin{lstlisting}
 theorem cancel_left (a b c : G) (h : Grp.op a b = Grp.op a c) : b = c := by

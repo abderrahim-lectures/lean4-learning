@@ -65,7 +65,7 @@ data. This is exactly how a group will be defined later, a carrier type,
 an operation, and proofs that the operation satisfies the group axioms,
 all in one `structure`.
 
-**Programmer's corner (Python).** A Python programmer reaching for the
+**Programmer note (Python).** A Python programmer reaching for the
 same "bundle a couple of values together" idea usually writes a `dict`
 first.
 

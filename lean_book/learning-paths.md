@@ -9,6 +9,15 @@ chapters actually depend on one another, and suggests a handful of named
 paths through the book for common starting points. All of them converge
 by Chapter 7, since the dependency structure only really branches in Part I.
 
+Each chapter derives its material from a question the previous chapter
+forces (see [Pedagogical approach](README.md#pedagogical-approach)), so a
+solid arrow below is not just "read this first for context," it is "the
+argument in the target chapter assumes the question of the source chapter
+was
+already answered." Skipping a chapter the graph marks as a hard
+prerequisite means arriving at a derivation with a step missing, not
+just an unfamiliar term.
+
 ## Chapter dependency graph
 
 ```mermaid

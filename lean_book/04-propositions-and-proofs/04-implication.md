@@ -18,7 +18,8 @@ theorem modus_ponens {P Q : Prop} (hpq : P → Q) (hp : P) : Q :=
   hpq hp
 ```
 
-**Mathematical reading.** Under Curry–Howard, the implication $P \Rightarrow
+**Mathematical reading.** Under Curry–Howard (cited in full in
+[Section 1](01-prop.md#sources-quoted)), the implication $P \Rightarrow
 Q$ *is* the function space $P \to Q$ (the set of proofs of $Q$ parameterized
 by proofs of $P$). So modus ponens
 $$

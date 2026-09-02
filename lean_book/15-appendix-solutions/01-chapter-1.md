@@ -4,7 +4,15 @@
 
 ---
 
-**1. `Vec.toList : Vec α n → List α`**
+**1. Is `Nat.succ : Nat → Nat` a Π-type?**
+
+Yes. `∀ n : Nat, Nat` is a Π-type whose body happens not to mention the
+bound variable. Every ordinary function type is a Π-type in the
+degenerate case where the codomain is constant. "Dependent" describes
+the *interesting* instances, where the codomain does mention the bound
+variable, not a separate kind of arrow from the Π-type.
+
+**2. `Vec.toList : Vec α n → List α`**
 
 ```lean
 def Vec.toList : Vec α n → List α

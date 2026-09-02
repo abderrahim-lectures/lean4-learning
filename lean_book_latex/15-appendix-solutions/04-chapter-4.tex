@@ -28,3 +28,19 @@ theorem exists_gt_zero : (*$\exists$*) n : Nat, n > 0 :=
 \end{lstlisting}
 
 An \texttt{∃}-proof is a witness (\texttt{1}) paired with a proof that it satisfies the predicate (\texttt{1 > 0}). Here \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}} handles that proof, since \texttt{1 > 0} on \texttt{Nat} is a decidable, closed proposition. We could also write \texttt{⟨1, Nat.one\_\allowbreak{}pos⟩}. Note that \texttt{⟨1, rfl⟩} does \emph{not} work here: \texttt{1 > 0} unfolds to \texttt{0 < 1}, i.e.~the successor form of \texttt{Nat.le 1 1}, which is a \emph{propositional} fact proved by a constructor (\texttt{Nat.le.refl}), not something \texttt{rfl} can close by definitional unfolding alone. This is the same definitional-vs-propositional-equality distinction taught in Chapter 6.
+
+\textbf{4. Why \texttt{∧} needs one constructor and \texttt{∨} needs two}
+
+A proof of \texttt{P ∧ Q} must supply \emph{both} a proof of \texttt{P} and a proof of \texttt{Q} at once, so a single shape, the pair \texttt{⟨hp, hq⟩}, suffices, there is only one way to have both. A proof of \texttt{P ∨ Q} supplies \emph{only one} of the two, so the proof itself must record which side was chosen, else two genuinely different proofs (of \texttt{P} and of \texttt{Q}) would be indistinguishable from the outside. Hence two distinct constructors, \texttt{Or.inl} tagging a proof of \texttt{P}, \texttt{Or.inr} tagging a proof of \texttt{Q}, are required, one per possible choice.
+
+\textbf{5. \texttt{n + 0 = n} by \texttt{rfl}, but not \texttt{0 + n = n}}
+
+\begin{lstlisting}
+theorem nat_add_zero (n : Nat) : n + 0 = n := rfl
+\end{lstlisting}
+
+\texttt{Nat.add} recurses on its \emph{second} argument. \texttt{n + 0 = n} is exactly the base clause of that recursion, so both sides already reduce to the same term regardless of what \texttt{n} is, and \texttt{rfl} closes it immediately. \texttt{0 + n = n}, by contrast, has the unknown \texttt{n} in the position the recursion inspects. With \texttt{n} unevaluated, \texttt{0 + n} is stuck, it cannot unfold further without first knowing whether \texttt{n} is \texttt{0} or a successor, so no amount of definitional unfolding alone identifies it with \texttt{n}. This gap between ``true'' and ``reduces to the same term'' (definitional vs. propositional equality, discussed fully in Chapter 6) is exactly why \texttt{0 + n = n} needs an inductive proof, not \texttt{rfl}; Chapter 5 supplies the \texttt{induction} tactic that closes it.
+
+\textbf{6. Why no finite set of witnesses proves \texttt{∀ n, n > 0}}
+
+A witness-and-proof pair \texttt{⟨a, h⟩} establishes only that \emph{some} specific \texttt{a} satisfies the property, \texttt{∃}-statements ask for exactly one instance. \texttt{∀ n, n > 0} demands the property hold for \emph{every} \texttt{n}, and \texttt{Nat} is infinite, so no finite list of individually checked instances can rule out a counterexample among the infinitely many left unchecked. What is needed instead is an argument uniform in \texttt{n}, one that establishes the claim for an arbitrary, unconstrained \texttt{n} without inspecting each value separately. That is exactly what induction provides, and Chapter 5 introduces the \texttt{induction} tactic that carries out such arguments in Lean.

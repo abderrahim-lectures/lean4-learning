@@ -37,7 +37,7 @@ same "definition parameterized by objects of the category" idea that lets
 us later write `Group (G : Type)`, not one group, but the functor sending
 a carrier type $G$ to the type of group-structures on $G$.
 
-**Programmer's corner (Python).** Python code like `def identity(x): return
+**Programmer note (Python).** Python code like `def identity(x): return
 x` or `class Pair: def __init__(self, fst, snd): ...` is also "generic," in
 the sense that it does not mention any particular type. But nothing checks
 that genericity until the code actually runs. Writing `identity(3) +
@@ -74,7 +74,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   the generic code is ever called, is that certification. An optional,
   erased type annotation is closer to the hope of the driver. `TypeVar` in Python
   and `{α : Type} → ...` in Lean both implement this idea, to
-  different degrees, as the Programmer's corner box above explains.
+  different degrees, as the Programmer note box above explains.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the box in this section.
 
 [PythonTyping]: ../bibliography.md#pythontyping

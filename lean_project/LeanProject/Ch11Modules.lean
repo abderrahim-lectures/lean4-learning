@@ -1,12 +1,8 @@
 /-
 Code from Chapter 11 (Modules over a ring) of the book.
 
-NOTE: `evenSubmodule`'s definition in the book references `intZModule`
-only in a comment ("would package intSmul... constructed the same way
-intCommGroup packaged intGroup") without ever actually defining it — a
-real gap in the book. `intZModule` is supplied here so the example
-compiles; `ring` again flagged as a likely Mathlib-tactic issue, same as
-Chapter 9.
+`intZModule` is defined directly in the book at
+11-modules/04-submodules.md, ahead of `evenSubmodule`'s use of it.
 -/
 import LeanProject.Ch07Groups
 import LeanProject.Ch08GroupTheorems

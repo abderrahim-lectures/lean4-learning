@@ -2,6 +2,8 @@
 name: adversarial-book-reviewer
 description: Adversarial, brutally honest review of a book or long-form technical manuscript's prose, structure, pedagogy, and factual claims. Use when reviewing textbook or technical writing before publishing, when the author wants genuine criticism instead of praise, or when an ordinary "does this look right" pass already ran and residual risk remains. Hunts for what a hostile reader, a first-time reader, an editor, and a fact-checker would each attack.
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. Run `prose-style-reviewer` as a separate pass for sentence-level style, this skill does not check possessives, em-dashes, or comma pileups.
+
 
 # Adversarial Book Reviewer
 
@@ -50,7 +52,14 @@ caught by 2+ personas gets promoted one severity level.
    numbers that disagree, claims about external facts (versions, dates,
    API behavior, what Mathlib or Lean does) that are wrong or unverifiable,
    broken or dead links, internal inconsistency (two chapters state
-   conflicting versions of the same fact).
+   conflicting versions of the same fact). Includes **same-file**
+   contradictions, not only cross-chapter ones: a stated policy or
+   correction ("X is not available here", "an earlier draft's use of Y
+   was a mistake") followed later in the *same file* by prose that does
+   the exact thing just disclaimed (a "Mathematical reading" or similar
+   box invoking the disclaimed tool/claim a few paragraphs down) is a
+   CRITICAL finding, and is easy to miss because both halves individually
+   read as correct.
 5. **The Narrative Architect** — story arc and cognitive flow. Attacks:
    chapters where the "story of this chapter" section fails to implicitly
    guide the reader through the expected cognitive progression (remember →
@@ -101,6 +110,22 @@ Each finding must answer all four:
 - Calibrate to the audience promise: calling a math book "too hard for
   a layperson" when it promises an algebraist audience is noise, not a
   finding.
+
+## Scope: find every copy, not just the canonical one
+
+Before reviewing, `grep`/list for every file that describes the book's
+own conventions, pedagogy, or structure at a level above a single
+chapter — not just the book's own `README.md`, but any **repo
+root-level** file that duplicates or summarizes the same claims
+(top-level `README.md`, `CONTRIBUTING.md`, `NOTICE.md`, any
+"about"/"overview" doc). A root-level file that restates the book's
+pedagogical approach is a second copy of the same claim and drifts out
+of sync with the book itself exactly like a stale code comment does —
+review it with the same scrutiny as the primary source, not as a lower
+priority because it is "just" a README. Missing the root-level copy
+while auditing only the in-book copy is a known failure mode of this
+skill: a passing review of `lean_book/README.md` proves nothing about
+`/README.md`.
 
 ## Triage gate
 

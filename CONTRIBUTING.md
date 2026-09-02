@@ -43,11 +43,45 @@ examples of how past issues were scoped.
 
 The book aims for plain, direct academic language throughout: no
 metaphors, rhetorical questions used as a stylistic device, or casual
-asides. Every type-theory or category-theory term introduced gets a
-formal definition (ideally with a citation — see
-[`lean_book/bibliography.md`](lean_book/bibliography.md)) followed by a
-worked example. If a sentence needs two readings to parse, it's a
-candidate for splitting into two plain sentences.
+asides. If a sentence needs two readings to parse, it's a candidate for
+splitting into two plain sentences.
+
+New or rewritten sections follow a derivation-first exposition, in the
+tradition of Arnold's and Gelfand's teaching rather than Bourbaki's: a
+definition or theorem is not stated and then explained, it is *earned*.
+Pose the question or concrete problem that forces it, walk the chain of
+reasoning that discovers it, and only then name and formalize the result
+— proof and motivation are one continuous argument, not two separated
+blocks. There is no fixed Definition→Theorem→Proof→Remark skeleton to
+fill in; structure follows the logic of the argument. (Chapters 8 and 10
+are a deliberate exception: their theorem sections stand as a
+reference-style catalog, so each entry does follow a fixed six-box
+sequence, Claim → Finding the proof → Lean code → Mathematical reading →
+Programmer note → Mathlib equivalent, chosen because a reader
+consulting them wants a predictable layout, not fresh structure per
+theorem.) Do not open a
+section or chapter with a narrative "story" framing or a "Picture it like
+this" analogy box in place of doing the derivation. Every type-theory or
+category-theory term still gets a formal definition (ideally with a
+citation — see [`lean_book/bibliography.md`](lean_book/bibliography.md))
+and a worked example. Per Arnold's own account of this tradition ("On
+Teaching Mathematics," 1997) and the practice of the Gelfand seminar, the
+forcing question or problem that opens a section should itself be
+**concrete first**: a specific number, a specific small case, a specific
+broken computation, not the general phenomenon stated abstractly. Derive
+the general definition or theorem *from* that concrete case, rather than
+motivating it by structural analogy alone — "abstract or structural
+motivation is preferred over a contrived real-world scenario" no longer
+describes this book's convention; concrete motivation, worked in full
+before any generalization, does. A contrived scenario is still to be
+avoided, but a genuine concrete instance of the actual mathematical
+object under discussion (a specific ring, a specific group element, a
+specific failing proof attempt) is not contrived, it is the example the
+definition is trying to capture. Exercises favor fewer, escalating,
+proof-heavy problems ("Prove that...", "Show that...") over repetitive
+drills, and should not give away their own answer inline — solutions
+belong in `lean_book/15-appendix-solutions/`.
+This convention now applies to the whole book, from Chapter 0 onward.
 
 ## Lean code
 

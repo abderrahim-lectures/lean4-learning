@@ -12,29 +12,28 @@
 - State precisely how Π-types, Σ-types, and `Prop` irrelevance fit into
   the underlying calculus of Lean.
 
-## The story of this chapter
+## What forces the terminology
 
 Chapter 1 built `Fin`/`Vec`, concrete dependent types, by example, and
-used several words along the way (`elaborate`, `reduce`, `universal
-property`, ...) informally, trusting they were clear enough from context
-to keep moving. That trust gets repaid here, and the two questions this
-chapter answers are forced directly by what Chapter 1 left open.
+used words like `elaborate`, `reduce`, and `universal property` informally
+along the way, trusting context to carry the meaning. That trust runs out
+once the logic chapters begin, where loose use of these words would start
+hiding genuine distinctions instead of merely being informal shorthand.
+Fixing precise, working definitions for them, with pointers to where the
+full formal treatment lives, is the entire content of
+[Section 1](01-terminology.md), a deliberate pause rather than a new
+topic.
 
-1. **Several words just got used informally. What do they actually
-   mean?** ([Section 1](01-terminology.md)) This section is a deliberate
-   pause, not a new topic. It is a glossary of the vocabulary already in
-   use in Chapter 1 and needed again below, defined precisely once
-   instead of re-explained informally every time it recurs.
-2. **The dependent function of `Fin` and the dependent pair-like structure of `Vec`
-   both showed up in Chapter 1. Are they two unrelated tricks, or one
-   idea in two shapes?** ([Section 2](02-pi-sigma-and-coc.md)) One idea.
-   The Π-type (dependent function) and Σ-type (dependent pair) are dual
-   generalizations of `→` and `×`, and together with the proof
-   irrelevance of `Prop` they *are* the calculus of constructions, the one formal
-   system every example since the very first `#check 3` of Chapter 1 has
-   secretly been an instance of.
+The dependent function of `Fin` and the dependent pair-like structure of
+`Vec` both appeared in Chapter 1 as two separate tricks. Are they related?
+[Section 2](02-pi-sigma-and-coc.md) shows they are the same idea in two
+shapes: the Π-type (dependent function) and Σ-type (dependent pair) are
+dual generalizations of `→` and `×`, and together with the proof
+irrelevance of `Prop` they *are* the calculus of constructions, the one
+formal system every example since the very first `#check 3` of Chapter 1
+has secretly been an instance of.
 
-By the end of this chapter, the informal phrase "everything has a type"
+By the end of the chapter, the informal phrase "everything has a type"
 from Chapter 1, Section 1 has turned into a precise, named formal system.
 Nothing along the way is optional scaffolding to be forgotten afterward.
 The `∀`/`∃` of Chapter 4, the `Group` structure of Chapter 7, and the

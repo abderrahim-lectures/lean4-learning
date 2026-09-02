@@ -13,6 +13,27 @@ substantially, the path category of a quiver as the free category on a quiver
 in Chapter 12) is called out explicitly wherever it clarifies what the
 Lean code is really encoding.
 
+## Pedagogical approach
+
+This book teaches by derivation, not by dispensation, in the tradition
+of Arnold's and Gelfand's teaching rather than Bourbaki's. "It is
+impossible to understand an unmotivated definition" (Arnold, *On
+Teaching Mathematics*, 1997): every definition and theorem in this book
+is *earned*. A section poses the question or concrete problem that forces
+a concept, walks the reasoning that discovers it, and only then names
+and formalizes the result, mirroring Gelfand's Moscow seminar method of
+finding the simplest example that captures a phenomenon before finding
+the language to state it generally. There is no fixed
+Definition→Theorem→Proof→Remark skeleton imposed on that reasoning;
+structure follows the logic of the argument, not a template. Formulas
+and theorems are proved before they are used, never handed down as rules
+to memorize. Exercises favor fewer, harder, escalating, proof-heavy
+problems over repetitive drills, and do not give away their own answer;
+solutions live in [15-appendix-solutions/](15-appendix-solutions/00-index.md).
+See [CONTRIBUTING.md](../CONTRIBUTING.md#book-prose-conventions) for
+the convention as a checklist, and
+[Chapter 7](07-groups/00-index.md) for it applied in full.
+
 ## How to read this book
 
 Not every reader needs every chapter in order. See
@@ -80,7 +101,7 @@ promised background of the book (a shared glossary now lives at
 [Chapter 2, Section 1](02-terminology-and-coc/01-terminology.md), and
 [Chapter 4, Section 2](04-propositions-and-proofs/02-logic-recap.md) recaps
 standard logic from scratch for readers meeting it for the first time) and added
-optional "Programmer's corner (Python)" boxes alongside the "Mathematical
+optional "Programmer note (Python)" boxes alongside the "Mathematical
 reading" ones; and a third, readability-focused pass that put every worked
 example in its own block immediately followed by its own explanation
 (rather than several examples dumped together, explained afterward all at
@@ -100,6 +121,22 @@ like this:", rewriting all of them as plain-language explanations
 grounded in everyday analogies rather than a compressed technical
 restatement, while the quotes and citations themselves stay exactly as
 rigorous as before.
+
+A sixth pass reverses part of the fifth, book-wide: narrative chapter
+openers and bare "Picture it like this" analogy boxes are replaced with a
+derivation-first exposition in the tradition of Arnold's and Gelfand's
+teaching, "it is impossible to understand an unmotivated definition." A
+definition or theorem is no longer stated and then explained; each
+section poses the question that forces it and walks the reasoning that
+discovers it, naming the result once it has been earned, with no fixed
+Definition-Theorem-Proof template imposed on that reasoning. Exercises
+that gave away their own answer inline ("Socratic questions") were
+converted to stated problems, with solutions moved to
+[15-appendix-solutions/](15-appendix-solutions/00-index.md). Worked
+examples, citations, and the "Picture it like this" glosses inside
+"Sources, quoted" citation boxes (direct quotes) are unaffected.
+[Chapter 7](07-groups/00-index.md) was the pilot; the same treatment now
+covers every chapter.
 See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Table of contents
@@ -139,6 +176,10 @@ See [changelog/](changelog/README.md) for the full, itemized history.
 - [Tactic and library reference](tactic-and-library-reference.md), every
   tactic used in the book, and every Mathlib name from the
   "Mathlib equivalent" boxes of Chapters 7-12, each linked to its official documentation.
+- [Proof strategy guide](proof-strategy-guide.md), the reverse of the
+  library reference: given the *shape* of a goal, hypothesis, or
+  definition, which tactic to reach for first, keyed to the exercise and
+  theorem patterns of the book itself.
 - [λ-calculus / type theory to Lean dictionary](lambda-calculus-dictionary.md),
   a lookup table connecting the formal notation in the
   "Mathematical reading" boxes of this book back to Lean syntax, term by term.
@@ -149,7 +190,7 @@ See [changelog/](changelog/README.md) for the full, itemized history.
   "Sources, quoted" box of a section, consolidated into one list with one
   citation style; each section links back to the entries it uses.
 - [Python companion](python-companion/python_companion.ipynb), every
-  "Programmer's corner (Python)" snippet in the book, collected into one
+  "Programmer note (Python)" snippet in the book, collected into one
   runnable notebook that opens directly in Google Colab, no Lean
   installation required.
 
@@ -163,8 +204,8 @@ chapter, and a top-level
 `lean_book_latex/lean-for-working-algebraists.tex`. This
 is real, professional LaTeX, with proper `\chapter`/`\section` structure with
 styled headings and running headers, `amsthm`/`tcolorbox` environments
-for the recurring boxes of the book ("Mathematical reading," "Programmer's
-corner," checkpoint projects), every former Mermaid diagram hand-translated
+for the recurring boxes of the book ("Mathematical reading," "Programmer
+note," checkpoint projects), every former Mermaid diagram hand-translated
 to native `tikz-cd` (in
 [`../lean_book_latex/diagrams/`](../lean_book_latex/diagrams/), each with
 its own standalone compile smoke-test in

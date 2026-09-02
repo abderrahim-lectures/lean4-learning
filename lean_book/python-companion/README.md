@@ -1,7 +1,7 @@
 # Python companion
 
 [`python_companion.ipynb`](python_companion.ipynb) collects every
-"Programmer's corner (Python)" snippet from the book into one runnable,
+"Programmer note (Python)" snippet from the book into one runnable,
 editable notebook, in reading order. It requires no Lean installation and
 opens directly in Google Colab via the badge at the top of the notebook,
 or locally with Jupyter (`jupyter notebook python_companion.ipynb`).

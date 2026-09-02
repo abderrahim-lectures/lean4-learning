@@ -4,15 +4,16 @@
 
 ---
 
-The checkpoint project of Chapter 6 asked for a `Monoid`, a set with an
-associative operation and a two-sided identity, built entirely from the
-bundling techniques of Chapters 1–6, with no inverses required. A group is
-the natural next question a monoid forces, what happens once every
-element is also required to be *undoable*? Adding that one further axiom
-is the entire content of the opening definition of this chapter, and it is
-what turns "a set with an associative operation" into the richer
-structure, with cancellation, and eventually genuine theorems reusable
-across every group at once, that the rest of Part II builds on.
+A `Monoid` (Chapter 6) has an associative operation and a two-sided
+identity, nothing more; an element need not be undoable. What is the
+weakest extra requirement that makes every element undoable? Not "some
+element cancels it", since that already holds vacuously for the identity
+itself paired with $e \cdot e = e$. The requirement has to hold for
+*every* element, and it has to be witnessed, not merely asserted: for
+each $a$ there must exist $a^{-1}$ with $a \cdot a^{-1} = a^{-1} \cdot a =
+e$. Adding exactly this to the data of a monoid is the entire content of
+this section, and it is what turns "a set with an associative operation"
+into a structure with cancellation.
 
 A **group** is a set $G$ together with:
 
@@ -30,9 +31,14 @@ $$
 \end{aligned}
 $$
 
-No further axiom is required; in particular, commutativity is not assumed in general (a group where
-$a \cdot b = b \cdot a$ always holds is called **abelian** or
-**commutative**, defined separately below).
+No further axiom is required; commutativity is not assumed (a group where
+$a \cdot b = b \cdot a$ always holds is **abelian**, a strictly stronger
+condition defined separately). The identity and inverse laws are each
+stated in both a left and a right direction, and the two directions are
+kept as separate axioms rather than collapsed into one. In an abelian
+group the directions are logically equivalent, but with commutativity not
+assumed each must be supplied on its own. [Section 4](04-permutations-example.md)
+builds a non-abelian group, $S_3$, where this split is put to work.
 
 ---
 

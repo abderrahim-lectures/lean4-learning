@@ -35,7 +35,7 @@ types and arrows. There is not yet any way to quantify over *all* types
 the way `identity {α : Type} (x : α) : α := x` did in Chapter 1. That
 extra generality is exactly the Π-types of Chapter 2, Section 2, already covered.
 
-**Programmer's corner (Python), before the formal rules.** The
+**Programmer note (Python), before the formal rules.** The
 type hints of Python plus `mypy` are a light version of exactly this system, worth
 seeing first since this Python tooling runs today, without any Lean
 installation at all.
@@ -129,7 +129,7 @@ write `identity_Nat : Nat → Nat` and separately `identity_Bool : Bool → Bool
 one arrow-type definition per base type. But there is no single term of a
 single STLC type that captures "the identity function, at every type."
 
-**Programmer's corner (Python), on the same limitation.** Plain Python
+**Programmer note (Python), on the same limitation.** Plain Python
 never runs into this, because it has no static types to begin with. `def
 identity(x): return x` already works on anything, at runtime, with zero
 declarations. But the instant type hints are added, wanting `mypy` to
@@ -213,7 +213,7 @@ Had the rule been $\max$ throughout, the first of these would have landed in
 $n \ge 0 : \mathtt{Sort}\,0$ give $\max(1,0) = 1$), and every `∀`-statement in
 Chapters 3 through 11 would be a type rather than a theorem.
 
-**Programmer's corner (Python), on why this is genuinely a type-theory
+**Programmer note (Python), on why this is genuinely a type-theory
 concern and not a Python one.** In Python, `type(3)` is `int`, and
 `type(int)` is `type`, and, unlike the stratified hierarchy in Lean,
 `type(type)` is *also* `type`.
@@ -261,7 +261,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - Pierce ([Pierce2002]), Ch. 9 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10–11; Ch. 12 "Simple Extensions" actually covers pairs/tuples/records/sums, unrelated to the content of this section.
 - Milner ([Milner1978]) covers the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the boxes of this section.
-- Girard, see [the references of Chapter 6, Section 2](02-universes.md) for the full citation. The Girard paradox (the inconsistency of `Type : Type`) is due to the 1972 thesis of Girard, a different, later paper than [Girard1971] cited elsewhere in this book.
+- [Girard1972] is the Girard paradox (the inconsistency of `Type : Type`), a different, later thesis than [Girard1971] cited elsewhere in this book; see [Chapter 6, Section 2](02-universes.md) for the full citation and [Coquand1986] for the modern exposition.
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" is the Lean documentation on universes, matching the presentation here.
 
 [Pierce2002]: ../bibliography.md#pierce2002
@@ -270,6 +270,8 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 [MypyDocs]: ../bibliography.md#mypydocs
 [CoquandHuet1988]: ../bibliography.md#coquandhuet1988
 [Girard1971]: ../bibliography.md#girard1971
+[Girard1972]: ../bibliography.md#girard1972
+[Coquand1986]: ../bibliography.md#coquand1986
 [TPIL4]: ../bibliography.md#tpil4
 
 ---

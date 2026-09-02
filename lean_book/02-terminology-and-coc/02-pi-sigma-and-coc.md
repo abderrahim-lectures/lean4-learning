@@ -28,7 +28,7 @@ $\prod_{x:A} B(x)$, and `∀` is the same construct specialized to
 `B : A → Prop`, as Chapter 4 makes precise. Every `∀ n : Nat, P n` written
 from that point on is already a Π-type in exactly this sense.
 
-**Programmer's corner (Python), on what is genuinely missing.** Even
+**Programmer note (Python), on what is genuinely missing.** Even
 the `TypeVar` construct in Python (its own fix for generic functions like `identity`)
 cannot express the type of `Vec.replicate`:
 

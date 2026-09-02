@@ -65,7 +65,7 @@ some already-fixed ring.
 > to Homological Algebra* by Weibel for the deeper theory) covers the same axioms
 > from the ground up.
 
-**Programmer's corner (Python).** `smul : R → M → M` fixes, once and for
+**Programmer note (Python).** `smul : R → M → M` fixes, once and for
 all, which type plays the role of scalars and which type plays the role
 of module elements. A Python library implementing the same "scalar acts
 on a vector" idea usually overloads `__mul__` or `__rmul__` instead.

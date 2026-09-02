@@ -26,32 +26,44 @@ the from-scratch constructions of Chapter 12; Mathlib appears only in the
 "Mathlib equivalent" boxes from Chapter 7 onward, and in full starting
 Chapter 14.
 
-**Socratic questions.**
+**Three design choices, and why each one is forced.**
 
-1. *`lean_project` already has Mathlib installed as a dependency (it is
-   what powers the "Mathlib equivalent" boxes from Chapter 7 onward),
-   so why not just import it everywhere from page one, instead of
-   building `Group`/`Ring` from scratch first?* Because the point of this
-   book is not merely to *use* a group in Lean, but to see exactly what a
-   group *is* to Lean, namely every field, every proof obligation, with nothing
-   hidden behind the typeclass hierarchy of someone else. A library saves
-   effort by hiding that machinery, and the purpose of this book is for the
-   reader to see it on a first encounter, not have it hidden.
-2. *`elan` pins one exact Lean version per project via `lean-toolchain`.
-   What would go wrong without that pin, on a machine with several Lean
-   projects at once?* A later toolchain update to one project could
-   silently change how the code of another project elaborates or even fails
-   to compile. The entire point of `lean_project/lean-toolchain` reading
-   `leanprover/lean4:v4.32.2` is that every code block in this book stays
-   reproducible regardless of what else is installed system-wide.
-3. *If this book is Mathlib-free by design through Chapter 12, why does
-   Chapter 7 onward show Mathlib code at all?* Because "built from
-   scratch" and "never shown the real library" are different design
-   choices, and this book only commits to the first. Every hand-built
-   definition from Chapter 7 onward is paired with a labeled preview of
-   its Mathlib counterpart, so that the transition to Mathlib in
-   Chapter 14 is a recognition of material already seen, not a cold
-   start.
+Here is the concrete cost of importing Mathlib from page one. The real
+`Group` of Mathlib is not one `structure` with the group axioms listed in it;
+it is the bottom of a chain, `Group extends DivInvMonoid`, which
+`extends Monoid`, which `extends Semigroup` and `MulOneClass`, three
+layers deep, before a single group axiom is visible in the source the
+reader is looking at
+(`Mathlib/Algebra/Group/Defs.lean`, pinned toolchain). A learner who
+writes `example (G : Type) [Group G] (a : G) : a * a⁻¹ = 1 :=
+mul_inv_cancel a` gets a correct proof without ever having read where
+`mul_inv_cancel` is proved, or which of those three layers actually
+states it. `lean_project`
+already has Mathlib installed as a dependency; that is what powers the
+"Mathlib equivalent" boxes from Chapter 7 onward. Importing it everywhere
+from page one, rather than building `Group`/`Ring` from scratch first,
+would be strictly less work. It would also defeat the point. The goal is
+not merely to *use* a group in Lean, but to see exactly what a group *is*
+to Lean: every field, every proof obligation, in one `structure`, with
+nothing hidden behind the typeclass hierarchy of someone else. A library saves
+effort by hiding that machinery, and the purpose of this book is for the
+reader to see it on a first encounter, not have it hidden.
+
+`elan` pins one exact Lean version per project via `lean-toolchain`.
+Without that pin, on a machine with several Lean projects at once, a
+later toolchain update to one project could silently change how the code
+of another project elaborates, or stop it compiling at all. Pinning
+`lean_project/lean-toolchain` to `leanprover/lean4:v4.32.2` is what keeps
+every code block in this book reproducible regardless of what else is
+installed system-wide.
+
+Finally, if this book is Mathlib-free by design through Chapter 12, why
+does Chapter 7 onward show Mathlib code at all? Because "built from
+scratch" and "never shown the real library" are different design
+choices, and this book only commits to the first. Every hand-built
+definition from Chapter 7 onward is paired with a labeled preview of its
+Mathlib counterpart, so that the transition to Mathlib in Chapter 14 is a
+recognition of material already seen, not a cold start.
 
 ## Next
 

@@ -39,7 +39,7 @@ Design, in short:
 - Code fences convert via Pandoc's `--listings` flag to `\begin{lstlisting}`,
   styled by `lean-listings.tex` (Lean) and plain `language=Python`
   (Python), both `\input` from the top-level driver.
-- "**Mathematical reading.**"/"**Programmer's corner (Python).**"
+- "**Mathematical reading.**"/"**Programmer note (Python).**"
   lead-in paragraphs become `mathreading`/`progcorner` environments
   (single-paragraph scope -- a following code block or list is not
   absorbed into the box; documented simplification, same as above).
@@ -382,7 +382,7 @@ def replace_bib_cites(text):
 
 def wrap_reading_boxes(text):
     """Wrap the single paragraph starting '**Mathematical reading.**' or
-    '**Programmer's corner (Python).**' in the matching custom environment.
+    '**Programmer note (Python).**' in the matching custom environment.
     Scope: one paragraph only (up to the next blank line) -- a following
     code block/list is not absorbed. See module docstring.
 
@@ -406,7 +406,7 @@ def wrap_reading_boxes(text):
         return f"\n```{{=latex}}\n\\begin{{progcorner}}\n```\n{body}\n```{{=latex}}\n\\end{{progcorner}}\n```\n"
 
     text = re.sub(r'\*\*Mathematical reading\.\*\*(.*?)(?=\n\n)', _mathreading, text, flags=re.DOTALL)
-    text = re.sub(r"\*\*Programmer's corner \(Python\)[^*]*\*\*(.*?)(?=\n\n)", _progcorner, text, flags=re.DOTALL)
+    text = re.sub(r"\*\*Programmer note \(Python\)[^*]*\*\*(.*?)(?=\n\n)", _progcorner, text, flags=re.DOTALL)
     return text
 
 

@@ -1,10 +1,10 @@
 \section{A non-abelian example: permutations of three elements}\label{sec:07-groups:04-permutations-example:1}
 
-\texttt{intGroup} is abelian (\(a + b = b + a\)), so it never tests the distinction between \texttt{id\_\allowbreak{}left}/\texttt{id\_\allowbreak{}right} or \texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right}. In a commutative group these coincide, which might suggest that the left/right split in the definition of \texttt{Group} is merely overly careful. It is not. The following is a small, fully concrete, genuinely \textbf{non-abelian} group, built the same way \texttt{intGroup} was, field by field.
+\texttt{intGroup} is abelian, so \texttt{id\_\allowbreak{}left} never differs from \texttt{id\_\allowbreak{}right}, nor \texttt{inv\_\allowbreak{}left} from \texttt{inv\_\allowbreak{}right}, since in a commutative group these coincide. Does that mean the left/right split in the definition of \texttt{Group} is mere caution, with nothing forcing it? Settling this needs a group where \texttt{op} genuinely fails to commute, built the same way \texttt{intGroup} was, field by field, with both directions checked honestly.
 
 \subsection{The carrier: bijections of a 3-element set}\label{sec:07-groups:04-permutations-example:2}
 
-The symmetric group \(S_3\) consists of all bijections (permutations) of a 3-element set, under composition. We represent a permutation of \texttt{Fin 3 := \{0, 1, 2\}} as a bijective function bundled with its own inverse and the proofs that they cancel.
+The symmetric group \(S_3\) is all bijections of a 3-element set, under composition. Represent a permutation of \texttt{Fin 3 := \{0, 1, 2\}} as a bijective function bundled with its inverse and the proofs that they cancel, since an arbitrary \texttt{Fin 3 → Fin 3} need not be a bijection at all.
 
 \begin{lstlisting}
 structure Perm3 where
@@ -13,8 +13,6 @@ structure Perm3 where
   left_inv : (*$\forall$*) x, invFun (toFun x) = x
   right_inv : (*$\forall$*) x, toFun (invFun x) = x
 \end{lstlisting}
-
-This is the same ``bundle data with the proofs that make it well-behaved'' pattern as \texttt{Group} itself. \texttt{Perm3} carries not only a function but also the \emph{proof} that the function is invertible, since an arbitrary \texttt{Fin 3 → Fin 3} need not be a bijection at all.
 
 \subsection{The group operation: composition}\label{sec:07-groups:04-permutations-example:3}
 
@@ -34,7 +32,7 @@ def Perm3.comp (f g : Perm3) : Perm3 where
     exact f.right_inv x
 \end{lstlisting}
 
-\texttt{Perm3.comp f g} composes \texttt{f} \emph{after} \texttt{g} (apply \texttt{g.toFun} first, then \texttt{f.toFun}). This is the standard function-composition convention. Its inverse composes the two inverses in the \emph{opposite} order (\texttt{g.invFun ∘ f.invFun}), which is exactly \((fg)^{-1} = g^{-1}f^{-1}\), the same ``reverse the order'' fact Theorem 3 of Chapter 8 (\texttt{inv\_\allowbreak{}op}) proves abstractly for every group. This construction shows concretely why the fact holds, to undo ``first \(g\), then \(f\),'' one must first undo \(f\), then undo \(g\).
+\texttt{Perm3.comp f g} applies \texttt{g} first, then \texttt{f}, the standard convention. Its inverse composes the two inverses in the opposite order (\texttt{g.invFun ∘ f.invFun}): to undo ``first \(g\), then \(f\),'' first undo \(f\), then undo \(g\). This is \((fg)^{-1} = g^{-1}f^{-1}\), the fact Theorem 3 of Chapter 8 (\texttt{inv\_\allowbreak{}op}) proves abstractly for every group; here it is visible in the construction itself.
 
 \begin{lstlisting}
 def Perm3.identity : Perm3 where
@@ -44,8 +42,6 @@ def Perm3.identity : Perm3 where
   right_inv := fun _ => rfl
 \end{lstlisting}
 
-\texttt{Perm3.identity} is the identity permutation, it fixes every point, hence both of its proof fields are immediate by \texttt{rfl}.
-
 \begin{lstlisting}
 def Perm3.inv (f : Perm3) : Perm3 where
   toFun := f.invFun
@@ -54,7 +50,7 @@ def Perm3.inv (f : Perm3) : Perm3 where
   right_inv := f.left_inv
 \end{lstlisting}
 
-\texttt{Perm3.inv} inverts a permutation by swapping its \texttt{toFun} and \texttt{invFun}, and it correspondingly swaps which proof field (\texttt{left\_\allowbreak{}inv} or \texttt{right\_\allowbreak{}inv}) plays which role, since inverting a bijection simply swaps which direction counts as ``forward.''
+\texttt{Perm3.inv} swaps \texttt{toFun} with \texttt{invFun}, and correspondingly swaps which proof field plays which role: inverting a bijection swaps which direction counts as forward.
 
 \subsection{Two concrete permutations, and a computed proof they do not commute}\label{sec:07-groups:04-permutations-example:4}
 
@@ -69,8 +65,6 @@ def swap01 : Perm3 where
   right_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
 \end{lstlisting}
 
-\texttt{swap01} is the permutation that swaps \texttt{0} and \texttt{1} while leaving \texttt{2} fixed.
-
 \begin{lstlisting}
 -- The 3-cycle 0 (*$\rightarrow$*) 1 (*$\rightarrow$*) 2 (*$\rightarrow$*) 0.
 def cycle012 : Perm3 where
@@ -82,14 +76,12 @@ def cycle012 : Perm3 where
   right_inv := by intro x; match x with | 0 => rfl | 1 => rfl | 2 => rfl
 \end{lstlisting}
 
-\texttt{cycle012} is the 3-cycle sending \(0 \to 1 \to 2 \to 0\).
-
 \begin{lstlisting}
 #eval (Perm3.comp swap01 cycle012).toFun 0   -- 0
 #eval (Perm3.comp cycle012 swap01).toFun 0   -- 2
 \end{lstlisting}
 
-Both compositions send \texttt{0} somewhere, but to \emph{different} places, applying \texttt{cycle012} then \texttt{swap01} sends \(0 \to 1 \to 0\), while applying \texttt{swap01} then \texttt{cycle012} sends \(0 \to 1 \to 2\). Concretely, \texttt{\#eval} reports \texttt{0} for the first and \texttt{2} for the second. This is \textbf{directly computed evidence} that \texttt{Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01}. In other words, this group is genuinely non-abelian. This is exactly the kind of ``compute a counterexample'' move Chapter 9 uses again for matrices. It is cheaper than any hand-written non-commutativity proof, and it yields, for free, the specific pair of elements that fail to commute.
+Applying \texttt{cycle012} then \texttt{swap01} sends \(0 \to 1 \to 0\); applying \texttt{swap01} then \texttt{cycle012} sends \(0 \to 1 \to 2\). \texttt{\#eval} computes \texttt{0} and \texttt{2}. This is a computed proof, not suggestive evidence, that \texttt{Perm3.comp swap01 cycle012 ≠ Perm3.comp cycle012 swap01}: the group is non-abelian. Chapter 9, Section 7 uses the same compute-a-counterexample move for matrices.
 
 \subsection{\texorpdfstring{Assembling \texttt{Group\ Perm3}}{Assembling Group Perm3}}\label{sec:07-groups:04-permutations-example:5}
 
@@ -134,16 +126,15 @@ def perm3Group : Group Perm3 where
     (*$\cdot$*) intro x; exact f.right_inv x
 \end{lstlisting}
 
-\texttt{Perm3.ext} is a small helper (an \emph{extensionality} lemma, in the same spirit as the \texttt{Mat2.mk.injEq}-based reasoning of Chapter 9). Two \texttt{Perm3}s are equal exactly when their \texttt{toFun}s agree everywhere \emph{and} their \texttt{invFun}s agree everywhere, since those are the only two fields of \texttt{Perm3} (the proof fields do not matter, by proof irrelevance, Chapter 6). Each \texttt{Group} field is then proved by reducing to this extensionality check and confirming both functions involved agree pointwise. Most cases are \texttt{rfl} directly (both sides compute to the same function once unfolded), and \texttt{inv\_\allowbreak{}left}/ \texttt{inv\_\allowbreak{}right} cite exactly \texttt{f.left\_\allowbreak{}inv}/\texttt{f.right\_\allowbreak{}inv}, the proof obligations already bundled into \texttt{Perm3} itself.
+\texttt{Perm3.ext} is an extensionality lemma: two \texttt{Perm3}s are equal exactly when their \texttt{toFun}s and \texttt{invFun}s each agree everywhere, the only two fields that matter (proof fields do not, by proof irrelevance, Chapter 6). Each \texttt{Group} field reduces to this check; most cases are \texttt{rfl} directly, and \texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right} cite exactly the proof obligations already bundled into \texttt{Perm3}.
 
 \begin{mathreading}
 
-\texttt{Perm3} (with composition) is \(S_3\), the symmetric group on three letters. It is the smallest non-abelian group (order \(6\)) and the standard first example in any course covering non-commutative groups. \texttt{swap01} and \texttt{cycle012} here are, respectively, a transposition and a 3-cycle. Together they generate all of \(S_3\), exactly as in the usual presentation \(S_3 = \langle r, s \mid r^3 = s^2 = e,\ srs
-= r^{-1} \rangle\), with \(r\) = \texttt{cycle012} and \(s\) = \texttt{swap01}.
+\texttt{Perm3} with composition is \(S_3\), the symmetric group on three letters, order \(6\), the smallest non-abelian group. \texttt{swap01} and \texttt{cycle012} are a transposition and a 3-cycle; together they generate all of \(S_3\), as in the standard presentation \(S_3 = \langle r, s \mid r^3 = s^2 = e,\ srs = r^{-1} \rangle\), with \(r\) = \texttt{cycle012} and \(s\) = \texttt{swap01}.
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} All of \texttt{Perm3}/\texttt{Perm3.comp}/\texttt{Perm3.ext}/ \texttt{perm3Group} above exists to build one thing: ``the group of bijections of a 3-element set.'' The ready-made model of exactly that in Mathlib is \href{https://loogle.lean-lang.org/?q=Equiv.Perm}{\texttt{Equiv.Perm}}, already a \href{https://loogle.lean-lang.org/?q=Group}{\texttt{Group}} instance for \emph{any} type.
+\textbf{Mathlib equivalent.} All of \texttt{Perm3}/\texttt{Perm3.comp}/\texttt{Perm3.ext}/ \texttt{perm3Group} builds one thing: the group of bijections of a 3-element set. \href{https://loogle.lean-lang.org/?q=Equiv.Perm}{\texttt{Equiv.Perm}} is that model, ready-made, a \href{https://loogle.lean-lang.org/?q=Group}{\texttt{Group}} instance for any type.
 
 \begin{lstlisting}
 example : Group (Equiv.Perm (Fin 3)) := inferInstance
@@ -158,5 +149,5 @@ def cycle012' : Equiv.Perm (Fin 3) := finRotate 3
 #eval (cycle012' * swap01') 0    -- 2
 \end{lstlisting}
 
-No \texttt{Perm3} bundle, no hand-written extensionality lemma, and no field-by-field \texttt{Group} construction are needed. \texttt{Equiv.Perm (Fin 3)} (the type of bijections \texttt{Fin 3 ≃ Fin 3}) is already known to be a group, \href{https://loogle.lean-lang.org/?q=Equiv.swap}{\texttt{Equiv.swap}} and \href{https://loogle.lean-lang.org/?q=finRotate}{\texttt{finRotate}} are the constructors Mathlib provides for a transposition and a rotation, and \texttt{*} is the already-registered group operation (composition, matching the convention of \texttt{Perm3.comp}). The two \texttt{\#eval}s are the same ``compute a witness of non-commutativity'' move as \texttt{swap01}/\texttt{cycle012} above, now applied to the \(S_3\) of the library itself.
+No \texttt{Perm3} bundle, no hand-written extensionality lemma. \texttt{Equiv.Perm (Fin 3)}, the type of bijections \texttt{Fin 3 ≃ Fin 3}, is already a group; \href{https://loogle.lean-lang.org/?q=Equiv.swap}{\texttt{Equiv.swap}} and \href{https://loogle.lean-lang.org/?q=finRotate}{\texttt{finRotate}} construct a transposition and a rotation, \texttt{*} is the registered operation matching \texttt{Perm3.comp}'s convention. The two \texttt{\#eval}s are the same non-commutativity witness, now on the \(S_3\) of the library.
 

@@ -17,22 +17,9 @@
 \end{learningobjectives}
 
 
-Chapters 8 and 10 were about \emph{finding} a proof by hand, deliberately slowly, so the underlying reasoning is never hidden. This chapter addresses the other half, once the reason a proof works is understood, how is it written (and found) faster in day-to-day use? Efficient Lean does not mean ``type less.'' It means knowing which automation to trust, knowing when it is still worth being explicit, and knowing how to structure lemmas so that the same fact is not derived twice. Each section below asks one question about that trade-off.
+\section{What efficiency means once the reasoning is understood}\label{sec:13-working-efficiently:00-index:2}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  What if Lean already knows the lemma or the proof you need? Can it just find it for you?
-\item
-  When is a goal so mechanical that full automation (\texttt{decide}, \texttt{omega}, \texttt{norm\_\allowbreak{}num}) is the right call, and when does the search still need human hands?
-\item
-  \texttt{simp} rewrites thousands of steps at once. But what exactly does it trade away for that speed, and when should you decline the trade?
-\item
-  Should every proof be written as a tactic script, or are some of them clearer as a single term?
-\item
-  After a fact is proved once, how do you package it so the next proof that needs it is a lookup, not a re-derivation?
-\end{enumerate}
+Chapters 8 and 10 found proofs by hand, deliberately slowly, so the underlying reasoning was never hidden. Once the reason a proof works is understood, the same fact should not have to be re-derived, by hand, every time it recurs; the question left is how to write and find proofs faster without losing that understanding. ``Faster'' does not mean ``type less.'' A lemma that already exists in the environment should be looked up, not re-proved, hence the search tactics \texttt{exact?}/\texttt{apply?} (\hyperref[sec:13-working-efficiently:01-search-tactics:1]{Section 1}). A goal that reduces to a terminating computation, decidable equality or inequality on \texttt{Nat}/\texttt{Int}, a concrete numeral, should be settled by running that computation, \texttt{decide}, \texttt{omega}, \texttt{norm\_\allowbreak{}num}, rather than by a hand-built \texttt{rw} chain, exactly because a decision procedure exists precisely where hand-derivation adds nothing a human proof of the general case still needs (\hyperref[sec:13-working-efficiently:02-decision-procedures:1]{Section 2}). Once a family of rewrites is understood well enough to be trusted as a set, applying that whole set at once with \texttt{simp} is the efficient move, at the cost of not seeing which member of the set actually fired (\hyperref[sec:13-working-efficiently:03-simp:1]{Section 3}). A short proof reads better as a single term; a proof with several sequential steps or case splits reads (and is written) better as a tactic script, so the choice between term mode and tactic mode is about readability, not power (\hyperref[sec:13-working-efficiently:04-term-vs-tactic-mode:1]{Section 4}). And a sub-goal that already recurs, or that states an independent mathematical fact in its own right, should be pulled out and named once, so that every later proof of it is a lookup rather than a re-derivation (\hyperref[sec:13-working-efficiently:05-structuring-lemmas:1]{Section 5}).
 
 
 % Auto-appended: input every other section in order.

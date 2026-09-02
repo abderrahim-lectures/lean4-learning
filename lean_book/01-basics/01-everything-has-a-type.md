@@ -69,7 +69,7 @@ questions.
 - `#eval` is a **one-off fact**, the result of running this *particular*
   expression, right now.
 
-**Programmer's corner (Python).** For readers who have written Python but
+**Programmer note (Python).** For readers who have written Python but
 not Lean, `#check e` is *not* `type(e)`. The `type()` function in Python asks a running
 value what class it happens to belong to, after the fact. The `#check` command in Lean
 is closer to what a static type checker like `mypy` does with an

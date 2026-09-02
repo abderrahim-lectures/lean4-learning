@@ -165,7 +165,7 @@ The Lean elaborator performs this renaming automatically and silently, the
 same way it treats α-equivalent terms as identical. A book working example
 is the only place this step needs to be shown explicitly.
 
-**Programmer's corner (Python).** The `lambda` construct in Python really does
+**Programmer note (Python).** The `lambda` construct in Python really does
 β-reduce exactly like the calculus above on simple examples.
 `(lambda x: x + 1)(5)` reduces to `5 + 1` to `6`, the same substitution
 step as $(\lambda x.\, x + 1)\, 5 \to_\beta 5 + 1$. But the `lambda`

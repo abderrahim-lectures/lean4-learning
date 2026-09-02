@@ -60,20 +60,38 @@ equivalent.
 
 ## Pedagogical approach
 
+This book teaches by derivation, not by dispensation, in the tradition
+of Arnold's and Gelfand's teaching rather than Bourbaki's. "It is
+impossible to understand an unmotivated definition" (Arnold, *On
+Teaching Mathematics*, 1997): every definition and theorem in this book
+is *earned*. A section poses the question or concrete problem that forces
+a concept, walks the reasoning that discovers it, and only then names
+and formalizes the result, mirroring Gelfand's Moscow seminar method of
+finding the simplest example that captures a phenomenon before finding
+the language to state it generally. There is no fixed
+Definition→Theorem→Proof→Remark skeleton imposed on that reasoning;
+structure follows the logic of the argument, not a template. Formulas
+and theorems are proved before they are used, never handed down as rules
+to memorize. Exercises favor fewer, harder, escalating, proof-heavy
+problems over repetitive drills, and do not give away their own answer;
+solutions live in [15-appendix-solutions/](lean_book/15-appendix-solutions/00-index.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md#book-prose-conventions) for the
+convention as a checklist, and
+[Chapter 7](lean_book/07-groups/00-index.md) for it applied in full.
+
 The book uses several recurring devices, applied consistently across all
 15 chapters (Chapters 0–14):
 
-- **Chapter narratives.** Each chapter opens with a story framing the
-  cognitive journey ahead (remember → understand → apply → analyze →
-  evaluate → create) and a "Learning objectives" box naming the
-  concrete goals of that chapter, and closes with a key-points recap before its
-  exercises.
+- **Chapter openers.** Each chapter's `00-index.md` opens with the
+  derivation-first prose described above and a "Learning objectives"
+  box naming the concrete goals of that chapter, and closes with a
+  key-points recap before its exercises.
 - **Mathematical reading.** Most Lean code blocks are followed by a
   "Mathematical reading" box translating the code into the standard
   notation a working algebraist would recognize from a textbook,
   including the categorical reading (functors, universal properties,
   Hom-sets) where it clarifies what the code encodes.
-- **Programmer's corner (Python).** Nearly every chapter includes an
+- **Programmer note (Python).** Nearly every chapter includes an
   optional box grounding the value of Lean and functional programming
   in a concrete Python failure mode (an untyped `dict` `KeyError`, a
   runtime `assert`, a `float` silently breaking associativity, and the
@@ -91,13 +109,8 @@ The book uses several recurring devices, applied consistently across all
   tactic-mode proofs) has no such trace, since there is no multi-step
   computation to show.
 - **Sources, quoted.** Every formally cited term closes its section with
-  a verbatim quote, a precise citation, and a "Picture it like this:"
-  gloss explaining the idea through an everyday analogy, real-world,
-  not just mathematical, rather than a second compressed technical
-  restatement.
-- **Socratic questions.** Each chapter includes reflective "why X, not
-  Y?" questions with their answers, distinct from the recap and the
-  exercises.
+  a verbatim quote and a precise citation, tied directly into the
+  derivation rather than glossed through a separate analogy.
 - **Checkpoint projects.** Two projects, placed after Chapter 6 and
   after Chapter 12, apply material from all preceding chapters to a
   single self-contained construction, each with a self-verification step
@@ -122,7 +135,7 @@ The book uses several recurring devices, applied consistently across all
   [GitHub Codespace](https://codespaces.new/abderrahim-lectures/lean4-learning),
   toolchain and dependencies installed automatically.
 - [lean_book/python-companion/](lean_book/python-companion/), every
-  "Programmer's corner (Python)" snippet in the book, collected into one
+  "Programmer note (Python)" snippet in the book, collected into one
   notebook that opens directly in
   [Google Colab](https://colab.research.google.com/github/abderrahim-lectures/lean4-learning/blob/master/lean_book/python-companion/python_companion.ipynb)
   or [Binder](https://mybinder.org/v2/gh/abderrahim-lectures/lean4-learning/master?filepath=lean_book%2Fpython-companion%2Fpython_companion.ipynb),

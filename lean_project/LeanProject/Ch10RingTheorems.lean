@@ -1,8 +1,7 @@
 /-
-Code from Chapter 10 (Ring examples and basic theorems) of the book, plus
-`mul_zero_left` (from the Appendix's Chapter 10 exercise solutions), since
-the main chapter's `neg_one_mul` genuinely depends on it — a forward
-reference in the book from the main text to the appendix.
+Code from Chapter 10 (Ring examples and basic theorems) of the book.
+`mul_zero_left` is proved directly in the main chapter
+(10-ring-theorems/03-theorem-2.md), ahead of `neg_one_mul`'s use of it.
 -/
 import LeanProject.Ch07Groups
 import LeanProject.Ch08GroupTheorems
@@ -36,7 +35,7 @@ theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
   rw [Rg.addGrp.toGroup.id_left] at h2
   exact h2.symm
 
--- From the Appendix (Chapter 10 exercise 1): needed by `neg_one_mul` below.
+-- Needed by `neg_one_mul` below.
 theorem mul_zero_left (a : R) : Rg.mul Rg.addGrp.id a = Rg.addGrp.id := by
   have h0 : Rg.addGrp.op Rg.addGrp.id Rg.addGrp.id = Rg.addGrp.id :=
     Rg.addGrp.toGroup.id_left Rg.addGrp.id

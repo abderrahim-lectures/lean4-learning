@@ -13,7 +13,9 @@
 \end{learningobjectives}
 
 
-Before any theorem is stated, three questions must be answered: \emph{why} Lean, \emph{can} you run it, and \emph{why} this book builds everything by hand rather than trusting an existing library. Each section below addresses one of them in turn --- not as abstract philosophy, but as a concrete choice with concrete consequences for the rest of the book.
+\section{What forces the setup}\label{sec:00-setup:00-index:2}
+
+Before any theorem is stated, three questions need settling, each forcing the next. Why trust a proof to Lean specifically, rather than to pen and paper or to a different proof assistant? Given the answer, how does a reader actually get Lean running? And once it runs, why does this book build every structure by hand rather than importing an existing library that already has them? \hyperref[sec:00-setup:01-why-lean:1]{Section 1} answers the first question by fixing what ``verified'' means for the rest of the book: a proof is correct exactly when it type-checks against the kernel of Lean. \hyperref[sec:00-setup:02-installing-toolchain:1]{Section 2} and \hyperref[sec:00-setup:03-editor:1]{Section 3} answer the second, mechanically: install elan, pin a toolchain, add an editor that shows the goal state. \hyperref[sec:00-setup:04-mathlib-note:1]{Section 4} answers the third: building \texttt{Group}/\texttt{Ring} from scratch exposes every field and proof obligation Mathlib would otherwise hide behind its typeclass hierarchy, which is the entire point of a first encounter.
 
 
 % Auto-appended: input every other section in order.

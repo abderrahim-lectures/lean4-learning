@@ -2,14 +2,13 @@
 
 \textbf{Key points.} \texttt{Prop} is proof-irrelevant, which is exactly why \texttt{∃} (landing in \texttt{Prop}) cannot extract its witness the way \texttt{Sigma} (landing in \texttt{Type}) can. Both Π- and Σ-types, plus \texttt{Prop}, assemble into the calculus of constructions underlying every Lean declaration seen so far. β-reduction is the computational engine underneath \texttt{rfl}/\texttt{\#eval}, one substitution step at a time.
 
-\textbf{Socratic questions.}
-
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
-  \emph{\texttt{Σ n : Nat, Fin n} type-checks, but \texttt{Σ n : Nat, n > 0} does not, even though \texttt{n > 0} is a perfectly good proposition about \texttt{n}. What is the one-sentence reason, stated as a rule rather than an example?} The second component of \texttt{Sigma} must be \texttt{Type}-valued, and \texttt{Prop} is a different universe (\texttt{Sort 0}) from \texttt{Type} (\texttt{Sort 1} and up). No proposition, however true, is itself a \texttt{Type}.
+  State, as a general rule rather than by example, why \texttt{Σ n : Nat, Fin n} type-checks but \texttt{Σ n : Nat, n > 0} does not, even though \texttt{n > 0} is a perfectly good proposition about \texttt{n}. Prove the rule from the signature of \texttt{Sigma}.
 \item
-  \emph{\texttt{∃ x, P x} and \texttt{Σ x, P x} have exactly the same shape, a witness plus a proof. What is lost by writing the existential instead of the Sigma?} Extractability. \texttt{Exists} lives in \texttt{Prop}, and proof irrelevance means two proofs of the same proposition are indistinguishable to the kernel, so there is no way to pull the witness back out computationally, only to use it inside another proof. The witness of \texttt{Sigma}, landing in \texttt{Type}, has no such restriction.
+  \texttt{∃ x, P x} and \texttt{Σ x, P x} have exactly the same shape, a witness plus a proof. Prove that a witness cannot be extracted computationally from a proof of \texttt{∃ x, P x}, and identify exactly which fact about \texttt{Prop} the proof depends on.
 \item
   β-reduce \((\lambda x.\lambda y.\, y\, x)\, a\, b\) to normal form by hand, writing out each step. The untyped-λ-calculus recap in Section 1 named \(K = \lambda x.\lambda y.\, x\) (``take two arguments, return the first''). Which existing named term does \(\lambda x.\lambda y.\, y\, x\) resemble, and how does it differ?
 \item

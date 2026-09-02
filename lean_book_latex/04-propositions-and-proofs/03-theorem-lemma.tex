@@ -6,7 +6,7 @@ theorem two_plus_two : 2 + 2 = 4 := rfl
 theorem add_comm_example : 2 + 3 = 3 + 2 := rfl
 \end{lstlisting}
 
-\texttt{theorem} and \texttt{lemma} are the same thing syntactically. \texttt{lemma} is just a naming convention for ``small helper facts.''
+Chapter 3's \texttt{def} named an ordinary computation. Nothing about \texttt{def} lets that name assert \texttt{2 + 2 = 4} is \emph{true} rather than merely \emph{defined}, so the two blocks above use a different keyword, \texttt{theorem}, for exactly that purpose. \texttt{lemma} writes the identical keyword under a different name: \texttt{theorem} and \texttt{lemma} are the same thing syntactically, and \texttt{lemma} is just a naming convention for ``small helper facts.''
 
 \begin{mathreading}
 

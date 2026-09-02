@@ -16,6 +16,6 @@ A good habit is that the \emph{first} time a new kind of cancellation or identit
 
 \begin{mathreading}
 
-\texttt{simp} is \emph{normalization by rewriting}: it treats a chosen set of equations \(\{\ell_i = r_i\}\) (the simp set) as a left-to-right rewriting system and drives the goal to a normal form, closing it when both sides normalize to the same term. Both proofs of \(n + 0 = n\) use the same fact, \(n + 0 = n\) (the right-unit law for \(+\)). The explicit version cites it by name; \texttt{simp} finds it in the rewrite system. This is the everyday move of an algebraist to ``simplify using the obvious identities.'' It works exactly when the rewrite rules are valid equalities, and confluent enough to reach a canonical form.
+\texttt{simp} is \emph{normalization by rewriting}: it treats a chosen set of equations \(\{\ell_i = r_i\}\) (the simp set) as a left-to-right rewriting system and drives the goal to a normal form, closing it when both sides normalize to the same term. Both proofs of \(n + 0 = n\) use the same fact, \(n + 0 = n\) (the right-unit law for \(+\)). The explicit version cites it by name; \texttt{simp} finds it in the rewrite system. This is the everyday move of an algebraist to ``simplify using the obvious identities.'' It works exactly when the rewrite rules are valid equalities, and confluent enough to reach a canonical form, the same general confluence property (Newman's lemma and its extensions) already invoked for term rewriting in Chapter 2, Section 1 (\cite{Huet1980}).
 
 \end{mathreading}

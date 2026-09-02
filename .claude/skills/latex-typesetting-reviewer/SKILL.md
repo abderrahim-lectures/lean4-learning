@@ -2,6 +2,8 @@
 name: latex-typesetting-reviewer
 description: Adversarial review of LaTeX/PDF typesetting output — checks formatting consistency, equation rendering, diagram quality (tikz-cd), cross-reference integrity, code-block styling, and overall visual correctness against the source Markdown. Use after running the LaTeX build pipeline (build_latex.py -> xelatex -> biber) to verify the PDF is production-ready.
 ---
+> **See also:** `second-brain/SKILL.md` routes across this repo's review skills. Run after `lean_book_latex/build/build_pdf.sh`, not on the Markdown source directly.
+
 
 # LaTeX Typesetting Reviewer
 
@@ -33,7 +35,7 @@ clipping, and typography regressions.
 | **Code blocks** | `lstlisting` blocks for Lean and Python render with correct syntax styling (check against `lean-listings.tex` styles). No code block is clipped at page boundaries. Line numbers (if enabled) are consistent. |
 | **Boxes** | `mathreading`, `progcorner`, `pblproject`, `tcolorbox` environments render with correct titles, borders, and background. No box content overflows or is cut off. |
 | **Page layout** | Consistent margins, running headers (`fancyhdr`), chapter titles. No orphan/widow lines in key sections. Page numbers are sequential and correct. |
-| **Bibliography** | `biber`/`biblatex` resolves every `\cite{Key}` to a `references.bib` entry. No "References" section contains empty or `?` entries. Citation numbers/style is consistent. |
+| **Bibliography** | `biber`/`biblatex` resolves every `\cite{Key}` to a `references.bib` entry. No "References" section contains empty or `?` entries. Citation numbers/style is consistent. **Known recurring risk in this repo:** `lean_book/bibliography.md` (Markdown, human-facing) and `lean_book_latex/references.bib` (BibTeX) are two hand-maintained copies of the same source list that must be kept in sync manually — a citation added to one and not the other renders as "undefined" only in the PDF, never in the Markdown. Whenever any citation was added or changed, diff the key sets of both files directly (`grep -o '\[[A-Za-z0-9]*\]:' bibliography.md` vs `grep -o '@\w*{[A-Za-z0-9]*,' references.bib`) rather than relying solely on a clean `latexmk` log — this exact gap has recurred more than once in this project's history. |
 | **Index/table of contents** | TOC entries match the actual chapter/section structure. Page numbers in the TOC match the rendered pages. (If an index exists.) |
 
 ## Build verification

@@ -1,6 +1,6 @@
 \section{Accessing the fields}\label{sec:07-groups:05-accessing-fields:1}
 
-Because \texttt{intGroup} is a term of type \texttt{Group Int}, its fields can be projected out exactly as in Chapter 3.
+\texttt{intGroup : Group Int} is an ordinary term, so its fields project out exactly as in Chapter 3.
 
 \begin{lstlisting}
 #eval intGroup.op 3 4        -- 7
@@ -12,12 +12,13 @@ Because \texttt{intGroup} is a term of type \texttt{Group Int}, its fields can b
 
 \begin{mathreading}
 
-The projections recover the individual components of the structure. \texttt{intGroup.op} is the multiplication \(\cdot\) (so \texttt{intGroup.op 3 4} is \(3 + 4 = 7\) in \(\mathbb{Z}\)), \texttt{intGroup.id} is \(e = 0\), and \texttt{intGroup.inv} is \((-)^{-1} = -(-)\). The key point is that \texttt{intGroup.assoc} projects out a \emph{proof}. It is the element of \(\forall
-a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)\) that was supplied when building the group. Data-fields and proof-fields are accessed the same way because, in the dependent-pair view (a \texttt{structure} is, underneath, exactly this kind of dependent pair), both are just coordinates of the same tuple.
+\texttt{intGroup.op} is \(\cdot\) (\texttt{intGroup.op 3 4} is \(3 + 4 = 7\)), \texttt{intGroup.id} is \(e = 0\), \texttt{intGroup.inv} is \((-)^{-1} =
+-(-)\). \texttt{intGroup.assoc} projects a \emph{proof}: the element of \(\forall
+a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)\) supplied when the group was built. Data-fields and proof-fields are accessed the same way, since a \texttt{structure} is, underneath, a dependent pair and both are coordinates of the same tuple.
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent.} There is no \texttt{intGroup.op 3 4}-style field access to write at all. Once \texttt{Int} is known to be an \href{https://loogle.lean-lang.org/?q=AddCommGroup}{\texttt{AddCommGroup}}, the ordinary \texttt{+}/\texttt{0}/\texttt{-\allowbreak{}} notations already resolve to the operations of that instance directly.
+\textbf{Mathlib equivalent.} No field access to write at all. Once \texttt{Int} is an \href{https://loogle.lean-lang.org/?q=AddCommGroup}{\texttt{AddCommGroup}}, the ordinary \texttt{+}/\texttt{0}/\texttt{-\allowbreak{}} notations already resolve to the operations of that instance.
 
 \begin{lstlisting}
 #eval (3 : Int) + 4
@@ -26,4 +27,4 @@ a,b,c,\ (a\cdot b)\cdot c = a\cdot(b\cdot c)\) that was supplied when building t
 #check (add_assoc : (*$\forall$*) a b c : Int, (a + b) + c = a + (b + c))
 \end{lstlisting}
 
-This is the same contrast as Section 3. The \texttt{intGroup.op}/\texttt{.id}/\texttt{.inv} of the book are projections out of a bundle built by hand, while the \texttt{+}/\texttt{0}/ \texttt{-\allowbreak{}} of Mathlib are notation that the typeclass system has already wired to the right instance. The underlying ``which \texttt{AddCommGroup} instance is this?'' bookkeeping remains invisible unless sought out (for example, with \texttt{\#print}).
+Same contrast as Section 3: \texttt{intGroup.op}/\texttt{.id}/\texttt{.inv} are projections out of a hand-built bundle; \texttt{+}/\texttt{0}/\texttt{-\allowbreak{}} are notation the typeclass system has already wired to the right instance, with the underlying ``which \texttt{AddCommGroup} instance'' bookkeeping invisible unless sought (for instance, with \texttt{\#print}).

@@ -23,6 +23,8 @@ and are indexed separately in the
 
 <a id="chlipala2013"></a>**[Chlipala2013]** Adam Chlipala, *Certified Programming with Dependent Types*, MIT Press, 2013. [Free online edition](http://adam.chlipala.net/cpdt/).
 
+<a id="coquand1986"></a>**[Coquand1986]** Thierry Coquand, "[An Analysis of Girard's Paradox](https://doi.org/10.1109/LICS.1986.5928),"in *Proceedings of the First Annual IEEE Symposium on Logic in Computer Science (LICS)*, 1986, 227–236. The standard modern exposition of [Girard1972]'s inconsistency proof for a calculus with the rule `⊢ * : *`.
+
 <a id="coquand2021"></a>**[Coquand2021]** Thierry Coquand, "[Reduction Free Normalisation for a Proof Irrelevant Type of Propositions](https://doi.org/10.46298/lmcs-17(4:15)2021)," *Logical Methods in Computer Science*, 17(4), 2021. Proves normalisation and decidability of convertibility for a universe hierarchy with a proof-irrelevant type of propositions "close to the type system used in the proof assistant Lean" (abstract), corroborating this book's working description of `Prop`.
 
 <a id="church1941"></a>**[Church1941]** Alonzo Church, *[The Calculi of Lambda-Conversion](https://archive.org/details/AnnalsOfMathematicalStudies6ChurchAlonzoTheCalculiOfLambdaConversionPrincetonUniversityPress1941)*, Princeton University Press, 1941.
@@ -38,6 +40,10 @@ and are indexed separately in the
 <a id="godel1930"></a>**[Godel1930]** Kurt Gödel, "Die Vollständigkeit der Axiome des logischen Funktionenkalküls," 1930.
 
 <a id="girard1971"></a>**[Girard1971]** Jean-Yves Girard, "Une extension de l'interprétation de Gödel à l'analyse, et son application à l'élimination des coupures dans l'analyse et la théorie des types," in *Proceedings of the Second Scandinavian Logic Symposium*, Studies in Logic and the Foundations of Mathematics vol. 63, North-Holland, 1971, 63–92.
+
+<a id="girard1972"></a>**[Girard1972]** Jean-Yves Girard, "Interprétation fonctionnelle et élimination des coupures dans l'arithmétique d'ordre supérieure," Thèse d'État, Université Paris VII, 1972. The source of the `Type : Type` inconsistency (the paradox that a calculus with the rule `⊢ * : *` loses normalization), distinct from the earlier, unrelated [Girard1971].
+
+<a id="heawood1890"></a>**[Heawood1890]** P.J. Heawood, "Map-colour theorem," *Quarterly Journal of Pure and Applied Mathematics*, 24, 1890, 332–338. Identifies the gap in Alfred Kempe's 1879 published proof of the four-color theorem: a configuration of eleven regions for which Kempe's alternating-chain argument does not go through, undetected through eleven years of citation.
 
 <a id="huet1980"></a>**[Huet1980]** Gérard Huet, "[Confluent Reductions: Abstract Properties and Applications to Term Rewriting Systems](https://doi.org/10.1145/322217.322230)," *Journal of the ACM*, 27(4), 1980, 797–821. The general confluence result (Newman's lemma and its extensions) underlying the Church–Rosser property invoked in the terminology chapter, independent of the specific λ-calculus setting.
 
