@@ -57,7 +57,7 @@ def fin3Ring : Ring (Fin 3) where
 ```
 
 **Programmer note (Python).** `by decide` on a goal like `assoc` for
-`Fin 3` is not magic. It is exactly what one would get from
+`Fin 3` is exactly what one would get from
 
 ```python
 domain = range(3)

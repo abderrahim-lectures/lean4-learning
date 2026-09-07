@@ -1,6 +1,6 @@
 \section{\texorpdfstring{Decision procedures: \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{decide}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{omega}}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{norm\_num}}}{Decision procedures: decide, omega, norm\_num}}\label{sec:13-working-efficiently:02-decision-procedures:1}
 
-The \texttt{exact?}/\texttt{apply?} tactics of Section 1 search the library for a proof that already exists somewhere, then report it for inspection. Some goals need nothing of the kind, their truth value is not a fact to be looked up, it is a computation to be run. This section covers that second, disjoint case, tactics that settle a goal by evaluating an algorithm rather than searching for or constructing a term by hand.
+The \texttt{exact?}/\texttt{apply?} tactics of Section 1 search the library for a proof that already exists somewhere, then report it for inspection. Some goals need something different. Their truth value is a computation to be run, not a fact to be looked up. This section covers that second, disjoint case, tactics that settle a goal by evaluating an algorithm rather than searching for or constructing a term by hand.
 
 For goals that are \emph{decidable}, where ``true or false'' can be settled by a terminating algorithm instead of a hand-built argument, Lean has tactics that just run that algorithm.
 

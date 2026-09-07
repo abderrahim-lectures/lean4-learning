@@ -119,7 +119,7 @@ Here \(\mathrm{imax}(i, j) = j\) when \(j = 0\), and \(\max(i, j)\) otherwise, a
 
 For \(j > 0\), the case where \(B\) is genuinely a type rather than a proposition, \(\mathrm{imax}\) \emph{is} \(\max\), and the rule is exactly the \texttt{Group : Type → Type} computation of Section 2 spelled out generally, with \(A = \mathtt{Type}\) (itself living in \texttt{Type 1}) and \(B = \mathtt{Type}\) again, the rule gives \(\max(1, 1) = 1\), so \texttt{Type → Type} lands in \texttt{Type 1}, one level above \texttt{Type} itself.
 
-The \(j = 0\) case is not a footnote. It is what makes \texttt{∀} usable at all. When \(B\) lands in \texttt{Prop}, the whole Π-type is a \texttt{Prop} \emph{regardless of how large \(A\) is}. This is the \textbf{impredicativity of \texttt{Prop}}, and it is why \texttt{∀ n : Nat, n ≥ 0} is a proposition you can prove rather than an inhabitant of \texttt{Type 1}.
+The \(j = 0\) case is what makes \texttt{∀} usable at all, not a footnote. When \(B\) lands in \texttt{Prop}, the whole Π-type is a \texttt{Prop} \emph{regardless of how large \(A\) is}. This is the \textbf{impredicativity of \texttt{Prop}}, and it is why \texttt{∀ n : Nat, n ≥ 0} is a proposition you can prove rather than an inhabitant of \texttt{Type 1}.
 
 \begin{lstlisting}
 #check ((*$\forall$*) n : Nat, n (*$\geq$*) 0)   -- (*$\forall$*) (n : Nat), n (*$\geq$*) 0 : Prop

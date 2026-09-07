@@ -30,7 +30,7 @@ Python code like \texttt{def identity(x): return x} or \texttt{class Pair: def \
 
 The closer Python analogue is \texttt{typing.TypeVar}. \texttt{def identity(x: T) -\allowbreak{}> T: return x} documents the same universally quantified type that \texttt{identity} has in Lean. But that documentation is optional and erased at runtime. It is enforced only if a checker such as \texttt{mypy} is separately run, and a stray \texttt{\# type: ignore} comment silences it entirely.
 
-The type \texttt{\{α : Type\} → α → α} given by Lean is not documentation. It is \emph{proved}, once, that \texttt{identity} works for every type \texttt{α}, and that proof is checked before \texttt{identity} is ever called, not merely approximated by a linter that might never run.
+The type \texttt{\{α : Type\} → α → α} given by Lean is \emph{proved}, once, not merely documented, that \texttt{identity} works for every type \texttt{α}. That proof is checked before \texttt{identity} is ever called, rather than merely approximated by a linter that might never run.
 
 \subsection{Sources, quoted}\label{sec:03-functions-and-structures:02-type-parameters:2}
 

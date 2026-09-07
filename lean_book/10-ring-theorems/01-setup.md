@@ -24,7 +24,7 @@ abbreviate `Rg.addGrp.op` as `+`, `Rg.addGrp.id` as `0`,
 `Rg.addGrp.toGroup.inv` as unary `-`, `Rg.mul` as `*`, `Rg.one` as `1`.
 Performing that translation first, finding the proof in ordinary ring
 notation, and only then translating back to the fully-qualified names, is
-considerably more tractable than attempting to pattern-match on the
+considerably more workable than attempting to pattern-match on the
 qualified names directly.
 
 **Mathematical reading.** "Let $(R, +, \times, 0, 1)$ be a ring." The

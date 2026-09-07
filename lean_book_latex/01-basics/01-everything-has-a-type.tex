@@ -60,13 +60,13 @@ Lean refuses to even \emph{elaborate} this expression. It never runs it, never s
 
 \subsection{\texorpdfstring{\texttt{Nat}, concretely}{Nat, concretely}}\label{sec:01-basics:01-everything-has-a-type:3}
 
-\texttt{Nat} is not a built-in primitive the way \texttt{int} is in most languages. It is defined, in full, as an \textbf{inductive type}:
+In most languages, \texttt{int} is a built-in primitive. \texttt{Nat} instead is defined, in full, as an \textbf{inductive type}:
 
 \[
 \mathtt{Nat} ::= \mathtt{zero} \mid \mathtt{succ}\,(n : \mathtt{Nat})
 \]
 
-Read this as ``a \texttt{Nat} is built in exactly one of two ways. It is \texttt{zero}, or it is \texttt{succ n} for some already-built \texttt{Nat} called \texttt{n}.'' This is exactly the definition given by Peano, written out precisely. So \texttt{3} is not a primitive digit. It is shorthand for \texttt{succ (succ (succ zero))}. Confirm it directly:
+Read this as ``a \texttt{Nat} is built in exactly one of two ways. It is \texttt{zero}, or it is \texttt{succ n} for some already-built \texttt{Nat} called \texttt{n}.'' This is exactly the definition given by Peano, written out precisely. So \texttt{3} is shorthand for \texttt{succ (succ (succ zero))}, not a primitive digit. Confirm it directly:
 
 \begin{lstlisting}
 #eval Nat.succ (Nat.succ (Nat.succ Nat.zero))  -- 3

@@ -58,8 +58,8 @@ is the type of natural numbers *strictly less than* `n`:
 #check Fin 5   -- Fin 5 : Type
 ```
 
-`Fin` itself is not one type. It is a **recipe that produces a type once
-handed a number**. `Fin 3` and `Fin 5` are both genuine types, but they are
+`Fin` itself is a **recipe that produces a type once handed a number**,
+not a single type. `Fin 3` and `Fin 5` are both genuine types, but they are
 *different* types. `Fin 3` has exactly three inhabitants (the numbers
 `0`, `1`, `2`) and `Fin 5` has exactly five. Compare this to something
 already known not to be dependent, `List α`. `List Nat` and `List Bool`
@@ -322,7 +322,7 @@ This is cosmetic, but worth not being surprised by when reproducing this error
 directly.
 
 Nothing about "index out of range" happens at runtime, because the bad
-call is not a well-typed term in the first place. This is the same "ruled out
+call is not a well-typed term in the first place, the same "ruled out
 before running" guarantee from [Chapter 1, Section 1](01-everything-has-a-type.md), now
 enforced by an invariant (non-emptiness) that an ordinary, non-dependent
 type could not have expressed at all. `List α` has no way to say "and
