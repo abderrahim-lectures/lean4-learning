@@ -30,9 +30,9 @@ what is expected. When this book says an expression "elaborates to"
 something, it means that after Lean has finished this filling-in process, the
 result is that something. For example, `identity 5` *elaborates to*
 `@identity Nat 5` (Chapter 1), with `α := Nat` filled in silently.
-Elaboration is not guessing. It is **type inference for the calculus of
-constructions** ([Chapter 2, Section 2](02-pi-sigma-and-coc.md) makes this system precise),
-a deterministic algorithm driven by the typing rules of that calculus itself, not
+Elaboration is **type inference for the calculus of
+constructions**, not guesswork ([Chapter 2, Section 2](02-pi-sigma-and-coc.md) makes this system precise).
+It is a deterministic algorithm driven by the typing rules of that calculus itself, not
 black-box compiler behavior. Every "Lean figures it out from context"
 moment since the very first `identity 5` is this same algorithm at work.
 

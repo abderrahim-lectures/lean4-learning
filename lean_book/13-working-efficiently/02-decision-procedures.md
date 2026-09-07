@@ -5,9 +5,9 @@
 ---
 
 The `exact?`/`apply?` tactics of Section 1 search the library for a proof that already
-exists somewhere, then report it for inspection. Some goals need nothing
-of the kind, their truth value is not a fact to be looked up, it is a
-computation to be run. This section covers that second, disjoint case,
+exists somewhere, then report it for inspection. Some goals need something
+different. Their truth value is a computation to be run, not a fact to be
+looked up. This section covers that second, disjoint case,
 tactics that settle a goal by evaluating an algorithm rather than
 searching for or constructing a term by hand.
 

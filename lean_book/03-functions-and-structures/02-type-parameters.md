@@ -51,10 +51,10 @@ has in Lean. But that documentation is optional and erased at runtime. It
 is enforced only if a checker such as `mypy` is separately run, and a
 stray `# type: ignore` comment silences it entirely.
 
-The type `{α : Type} → α → α` given by Lean is not documentation. It is *proved*, once,
-that `identity` works for every type `α`, and that proof is checked before
-`identity` is ever called, not merely approximated by a linter that might
-never run.
+The type `{α : Type} → α → α` given by Lean is *proved*, once, not merely
+documented, that `identity` works for every type `α`. That proof is checked
+before `identity` is ever called, rather than merely approximated by a
+linter that might never run.
 
 ### Sources, quoted
 

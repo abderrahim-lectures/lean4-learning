@@ -124,7 +124,7 @@ term, on *every* input, not just the ones a test suite happened to run.
 
 ### `Nat`, concretely
 
-`Nat` is not a built-in primitive the way `int` is in most languages. It is
+In most languages, `int` is a built-in primitive. `Nat` instead is
 defined, in full, as an **inductive type**:
 
 $$
@@ -133,8 +133,8 @@ $$
 
 Read this as "a `Nat` is built in exactly one of two ways. It is `zero`,
 or it is `succ n` for some already-built `Nat` called `n`." This is exactly
-the definition given by Peano, written out precisely. So `3` is not a primitive digit. It is
-shorthand for `succ (succ (succ zero))`. Confirm it directly:
+the definition given by Peano, written out precisely. So `3` is shorthand
+for `succ (succ (succ zero))`, not a primitive digit. Confirm it directly:
 
 ```lean
 #eval Nat.succ (Nat.succ (Nat.succ Nat.zero))  -- 3

@@ -244,8 +244,8 @@ tactic in [Section 4 (And, Or, Not)](05-and-or-not.md)
 works because `1 = 2` happens to be *decidable*, not because excluded
 middle is assumed.)
 
-This is not just a side note. It is the precise reason Curry–Howard
-works as cleanly as it does. A type-theoretic proof term is a genuine,
+This is the precise reason Curry–Howard works as cleanly as it does,
+not a side note. A type-theoretic proof term is a genuine,
 *constructive* witness. A Lean proof of $\exists x, P\, x$ computes to an
 actual pair `⟨a, h⟩` that could be inspected via `#eval`, and that only
 makes sense for a logic where "true" means "constructible," which is

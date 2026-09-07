@@ -197,7 +197,7 @@ $A = \mathtt{Type}$ (itself living in `Type 1`) and $B = \mathtt{Type}$ again,
 the rule gives $\max(1, 1) = 1$, so `Type → Type` lands in `Type 1`, one level
 above `Type` itself.
 
-The $j = 0$ case is not a footnote. It is what makes `∀` usable at all. When
+The $j = 0$ case is what makes `∀` usable at all, not a footnote. When
 $B$ lands in `Prop`, the whole Π-type is a `Prop` *regardless of how large $A$
 is*. This is the **impredicativity of `Prop`**, and it is why
 `∀ n : Nat, n ≥ 0` is a proposition you can prove rather than an inhabitant of
