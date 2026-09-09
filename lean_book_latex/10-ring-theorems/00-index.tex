@@ -15,8 +15,6 @@
 
 As in Chapter 8, the point here is the search process for each proof, not just the final term. Ring proofs are a good test of that process, because the goals become visually noisy fast (nested \texttt{addGrp.toGroup.op} everywhere). The skill under development is avoiding getting lost in that noise, and instead tracking which algebraic fact is one step away from use.
 
-\section{Repeating the pattern for rings}\label{sec:10-ring-theorems:00-index:2}
-
 Chapter 9 built rings one concrete carrier at a time, \texttt{Int}, \texttt{Fin 3}, \(2\times 2\) matrices, reverifying the same axioms by hand for each. Chapter 8 already showed the way out of that repetition for groups: fix an arbitrary structure once, via \texttt{variable}, and prove theorems against it that apply to every later instance automatically. This chapter repeats exactly that move for rings, fixing an arbitrary \texttt{Rg : Ring R} the same way Chapter 8 fixed an arbitrary \texttt{Grp : Group G} (\hyperref[sec:10-ring-theorems:01-setup:1]{Section 1}), with the added complication that qualified field names now nest two structures deep (\texttt{Rg.addGrp.toGroup.inv}), so a mental dictionary back to ordinary \texttt{+}/\texttt{×}/\texttt{0}/\texttt{1} notation is worth keeping close at hand.
 
 The axioms of \texttt{Ring} say nothing directly about \texttt{0} and multiplication, so the first fact worth proving this way is not among them: \(a \cdot 0 =

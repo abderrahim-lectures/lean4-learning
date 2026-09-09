@@ -4,6 +4,7 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v2.0.8](v2.0.8.md) — Section-numbering fix, stale cross-references, and a "Why Lean?" motivation update
 - [v2.0.7](v2.0.7.md) — Antithesis-drumbeat pass and front-matter prose fixes
 - [v2.0.6](v2.0.6.md) — Rewrite "About this book", add "Pedagogical approach" and "A note on authorship" chapters
 - [v2.0.5](v2.0.5.md) — Release the derivation-first book

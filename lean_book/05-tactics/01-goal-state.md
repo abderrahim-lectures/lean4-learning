@@ -47,7 +47,7 @@ Lean proof and someone who can write one. Writing one requires constantly
 asking "what does the goal look like *now*, and what would make progress
 on *this exact shape*?"
 
-## A worked strategy session, before any new tactics
+### A worked strategy session, before any new tactics
 
 Suppose the task is to prove `(a b : Nat) → a + b = b + a`, with the proof
 not yet known. What follows is the actual thought process, not the
