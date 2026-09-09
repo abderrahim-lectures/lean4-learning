@@ -13,8 +13,6 @@
 \end{learningobjectives}
 
 
-\section{What forces the chapter}\label{sec:01-basics:00-index:2}
-
 Ordinary languages catch a type error, if at all, at the moment the bad line runs, possibly months after it shipped, on a rarely-hit branch. What would it take to catch it earlier, for every possible input at once, rather than one run at a time? Reading the expression once and deciding ``what kind of thing is this?'' before ever running it, exactly what \texttt{\#check} does and \texttt{\#eval} does not. \hyperref[sec:01-basics:01-everything-has-a-type:1]{Section 1} draws that line, \texttt{\#check} a static guarantee, \texttt{\#eval} a one-off fact, the foundation everything else in this book stands on.
 
 Types checked this strictly still need to be built, and reused, without rewriting a definition once per type. \texttt{def} and \texttt{let} are the two ways to name a term; implicit arguments (\texttt{\{α : Type\}}) are how a single definition like \texttt{identity} serves \emph{every} type at once, without being rewritten per type. \hyperref[sec:01-basics:02-def-let-implicit:1]{Section 2} covers this vocabulary, no new machinery yet, just what is needed to read and write ordinary Lean definitions fluently.

@@ -29,7 +29,7 @@ clipping, and typography regressions.
 
 | Category | Checks |
 |---|---|
-| **Cross-references** | Every `\ref`/`\hyperref` resolves to the correct target. No "??" placeholders. Section numbers match the reading order described in the prose. |
+| **Cross-references** | Every `\ref`/`\hyperref` resolves to the correct target. No "??" placeholders. Section numbers match the reading order described in the prose. **Verify this automatically, don't eyeball it**: run the `.aux`-diff script below against every `\hyperref[...]{Section N}` in the book. A prior version of this book had a book-wide off-by-one for years (`strip_story_and_sections_headings()` in `build_latex.py` matched a chapter-intro heading by literal text that had since been retitled per-chapter, silently stopped matching, and let 9 chapters' intro sections keep a numbered `\section` they weren't supposed to have) that a sentence-by-sentence read never caught, because each individual sentence read fine in isolation. |
 | **Equations** | No display-math overflows (`\overflow`). Inline math does not break across lines. `align`/`alignat` environments have matching `&` and `\\`. Matrix/table columns align. |
 | **Diagrams** | Every `tikz-cd` diagram compiles and matches its source `.tex` in `lean_book_latex/diagrams/`. No Mermaid source appears unrendered in the PDF. Diagrams are positioned at the point they are first referenced, not floating far away. |
 | **Code blocks** | `lstlisting` blocks for Lean and Python render with correct syntax styling (check against `lean-listings.tex` styles). No code block is clipped at page boundaries. Line numbers (if enabled) are consistent. |
@@ -56,6 +56,45 @@ Check `latexmk` output for:
 - **Package warnings** — `hyperref`, `cleveref`, `tcolorbox` configuration issues
 - **Citation warnings** — undefined citations (`There were undefined citations`)
 - **Reference warnings** — undefined references (`There were undefined references`)
+
+### "Section N" prose vs. actual rendered number
+
+After the build above produces `lean-for-working-algebraists.aux`, run this
+from `lean_book_latex/` to catch every `\hyperref[...]{Section N}` mention
+whose claimed number doesn't match what actually rendered (the `.aux`'s
+`\newlabel` entries hold the real, post-build `\thesection` value):
+
+```sh
+python3 - <<'EOF'
+import re, glob
+
+aux = open("lean-for-working-algebraists.aux", encoding="utf-8", errors="ignore").read()
+labels = dict(re.findall(r'\\newlabel\{(sec:[^}]+)\}\{\{([0-9.]+)\}', aux))
+
+files = glob.glob("*.tex") + glob.glob("*/*.tex")
+bad = []
+for f in files:
+    if "diagrams/" in f or "smoketest/" in f:
+        continue
+    txt = open(f, encoding="utf-8", errors="ignore").read()
+    for m in re.finditer(r'\\hyperref\[([^]]+)\]\{[^}]*?Section (\d+)\}', txt):
+        label, claimed = m.group(1), m.group(2)
+        actual = labels.get(label)
+        if actual is None:
+            continue
+        parts = actual.split(".")
+        actual_secnum = parts[-1] if len(parts) > 1 else parts[0]
+        if actual_secnum != claimed:
+            bad.append((f, label, claimed, actual))
+for f, label, claimed, actual in bad:
+    print(f"{f}: claims Section {claimed} -> {label} but rendered number is {actual}")
+print(f"checked, {len(bad)} mismatches")
+EOF
+```
+
+Any non-zero mismatch count is a real finding (`HIGH`, broken cross-ref
+category), not something to triage away — it means a reader following the
+book's own "Section N" pointer lands on the wrong section.
 
 ## Finding bar
 

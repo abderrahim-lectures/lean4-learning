@@ -801,21 +801,40 @@ def strip_hypertargets(tex):
 
 
 def strip_story_and_sections_headings(tex):
-    """Remove the \section{The story of this chapter} and \section{Sections}
-    headings from chapter 00-index files, but keep their body content.
-    The story text should flow directly under \chapter{}, and the Sections
-    enumerate is the chapter's TOC which should be REMOVED entirely (both
-    heading and body), since the story text already contains the section list."""
-    # Match \section{The story of this chapter}...body... up to next \section or \begin or \chapter or end
-    # Pattern: \section{The story of this chapter}\label{...} followed by body
-    # Remove the \section and \label, keep the body
-    story_pattern = re.compile(
-        r'(\\section\{The story of this chapter\}\s*\\label\{[^}]*\})\s*(.*?)(?=\\section\{|\n\\begin\{|\n\\chapter\{|\Z)',
-        re.DOTALL
-    )
-    def _strip_story(m):
-        return m.group(2).lstrip()
-    tex = story_pattern.sub(_strip_story, tex)
+    """Remove the chapter-intro heading (titled "What forces the chapter",
+    "What forces the setup", "What forces `structure`", etc. -- the title
+    text varies per chapter, always the first \section left in the file
+    once wrap_learning_objectives() has already consumed "Learning
+    objectives") and the \section{Sections} heading from chapter 00-index
+    files, but keep their body content. The intro text should flow
+    directly under \chapter{}, and the Sections enumerate is the chapter's
+    TOC which should be REMOVED entirely (both heading and body), since the
+    intro text already contains the section list.
+
+    Matching this heading by its literal title text used to work back when
+    every chapter shared the title "The story of this chapter"; chapters
+    were since given per-chapter titles, so that regex silently stopped
+    matching, the intro section kept its own numbered \section, and every
+    real section after it in the chapter was numbered one higher than the
+    "Section N" prose inside the intro claimed. Matching positionally (the
+    first \section in the file, whatever its title) instead of by literal
+    text survives future retitling."""
+    # Find the first \section{...} (brace-counted, since a title like "What
+    # forces `structure`" nests a \texttt{...} group inside its own braces
+    # and a naive \{.*?\} regex would stop at that inner closing brace),
+    # then its \label{...}, then drop both and keep the body up to the next
+    # \section or \begin or \chapter or end of file.
+    marker = "\\section{"
+    j = tex.find(marker)
+    if j != -1:
+        _, after_title = _read_braced_group(tex, j + len("\\section"))
+        label_match = re.match(r'\s*\\label\{[^}]*\}', tex[after_title:])
+        after_label = after_title + (label_match.end() if label_match else 0)
+        rest = tex[after_label:]
+        next_match = re.search(r'\\section\{|\n\\begin\{|\n\\chapter\{', rest)
+        body_end = next_match.start() if next_match else len(rest)
+        body = rest[:body_end].lstrip()
+        tex = tex[:j] + body + rest[body_end:]
 
     # Match \section{Sections}\label{...} followed by body (usually \begin{enumerate})
     # Remove the ENTIRE section (heading + body)

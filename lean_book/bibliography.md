@@ -17,9 +17,13 @@ and are indexed separately in the
 
 <a id="agore2023"></a>**[Agore2023]** Ana L. Agore, *[A First Course in Category Theory](https://doi.org/10.1007/978-3-031-42899-9)*, Universitext, Springer, 2023.
 
-<a id="aluffi2009"></a>**[Aluffi2009]** Paolo Aluffi, *[Algebra: Chapter 1](https://bookstore.ams.org/gsm-104)*, Graduate Studies in Mathematics vol. 104, American Mathematical Society, 2009.
+<a id="aluffi2009"></a>**[Aluffi2009]** Paolo Aluffi, *[Algebra: Chapter 0](https://bookstore.ams.org/gsm-104)*, Graduate Studies in Mathematics vol. 104, American Mathematical Society, 2009.
+
+<a id="anthropicflt2026"></a>**[AnthropicFLT2026]** Anthropic, "[Formalizing Fermat's Last Theorem](https://www.anthropic.com/research/formalizing-fermats-last-theorem)," September 2026. A complete, Lean-kernel-checked proof of Fermat's Last Theorem, roughly 13.5 million lines and 29,511 theorems, produced largely autonomously by Claude over 11 days, building on Kevin Buzzard's Imperial College FLT project, Mathlib, and Columbia's Prove2Me. Source at [github.com/anthropics/fermats-last-theorem](https://github.com/anthropics/fermats-last-theorem).
 
 <a id="assemsimsonskowronski2006"></a>**[AssemSimsonSkowronski2006]** Ibrahim Assem, Daniel Simson, and Andrzej Skowroński, *[Elements of the Representation Theory of Associative Algebras, Vol. 1: Techniques of Representation Theory](https://www.cambridge.org/us/academic/subjects/mathematics/algebra/elements-representation-theory-associative-algebras-techniques-representation-theory-volume-1)*, London Mathematical Society Student Texts 65, Cambridge University Press, 2006.
+
+<a id="buckmasteralpoge2026"></a>**[BuckmasterAlpoge2026]** Tristan Buckmaster and Levent Alpöge, "[Finite time blowup with smooth forcing for the incompressible porous medium, Boussinesq, and incompressible Euler equations](https://cims.nyu.edu/~tristanb/statement.pdf)," statement and preprints, September 2026. Lean-formalized finite-time-blowup proofs for three equations related to Navier–Stokes, using a variant of the Córdoba/Martínez-Zoroa method; the authors report a further hypo-dissipative Navier–Stokes blowup result whose Lean verification was not yet complete at time of writing. Called a "remarkable achievement" by Terence Tao, who saw no obvious obstacle to extending the method to Navier–Stokes itself, but the Navier–Stokes Millennium Problem remained open as of this writing.
 
 <a id="chlipala2013"></a>**[Chlipala2013]** Adam Chlipala, *Certified Programming with Dependent Types*, MIT Press, 2013. [Free online edition](http://adam.chlipala.net/cpdt/).
 
@@ -30,6 +34,8 @@ and are indexed separately in the
 <a id="church1941"></a>**[Church1941]** Alonzo Church, *[The Calculi of Lambda-Conversion](https://archive.org/details/AnnalsOfMathematicalStudies6ChurchAlonzoTheCalculiOfLambdaConversionPrincetonUniversityPress1941)*, Princeton University Press, 1941.
 
 <a id="coquandhuet1988"></a>**[CoquandHuet1988]** Thierry Coquand and Gérard Huet, "[The Calculus of Constructions](https://doi.org/10.1016/0890-5401(88)90005-3)," *Information and Computation*, 76(2–3), 1988, 95–120.
+
+<a id="demourullrich2021"></a>**[DeMouraUllrich2021]** Leonardo de Moura and Sebastian Ullrich, "[The Lean 4 Theorem Prover and Programming Language](https://lean-lang.org/papers/lean4.pdf)," in *Automated Deduction – CADE 28*, Lecture Notes in Computer Science vol. 12699, Springer, 2021, 625–635. The system description for Lean 4, led by Leonardo de Moura, who created the original Lean prover and now leads the Lean Focused Research Organization.
 
 <a id="dummitfoote2003"></a>**[DummitFoote2003]** David S. Dummit and Richard M. Foote, *[Abstract Algebra](https://www.wiley.com/en-us/Abstract+Algebra,+3rd+Edition-p-9780471433347)*, 3rd ed., Wiley, 2003.
 
@@ -77,6 +83,8 @@ and are indexed separately in the
 <a id="rojas2015"></a>**[Rojas2015]** Raúl Rojas, "[A Tutorial Introduction to the Lambda Calculus](https://arxiv.org/abs/1503.09060)," 2015.
 
 <a id="schiffler2014"></a>**[Schiffler2014]** Ralf Schiffler, *[Quiver Representations](https://link.springer.com/book/10.1007/978-3-319-09204-1)*, CMS Books in Mathematics, Springer, 2014.
+
+<a id="tauceti2026"></a>**[TauCeti2026]** The Tau Ceti Project, [github.com/TauCetiProject/TauCeti](https://github.com/TauCetiProject/TauCeti), 2026. An AI-authored Lean library downstream of Mathlib: human-written roadmaps and review rubrics, AI implementation and review, aiming at a reusable foundation layer that downstream projects can build on toward the research frontier.
 
 <a id="thompson1991"></a>**[Thompson1991]** Simon Thompson, *[Type Theory and Functional Programming](https://kar.kent.ac.uk/20998/1/ttfp.pdf)*, Addison-Wesley, 1991. Freely available from the institutional repository of the author. (⚠ Link check 2026-07-19, `kar.kent.ac.uk` failed to complete a TLS handshake while the parent `kent.ac.uk` domain and unrelated control sites responded normally, possibly a dead/misconfigured host for the Kent Academic Repository subdomain specifically. Worth a manual check before relying on this link.)
 

@@ -221,8 +221,8 @@ every rule stated in this section, is visible as a special case of one
 simple idea. Proofs are programs, and the specific shape of program a
 proof compiles to (pair, function, tagged choice, dependent function,
 dependent pair) is read off directly from the outermost connective or
-quantifier of the proposition being proved. [Chapter 1,
-Section 5](../02-terminology-and-coc/02-pi-sigma-and-coc.md) makes this fully rigorous for the
+quantifier of the proposition being proved. [Chapter 2,
+Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md) makes this fully rigorous for the
 dependent case, by showing $\Pi$ and $\Sigma$ inside the calculus of
 constructions itself, rather than only stating the correspondence
 informally as this table does.
