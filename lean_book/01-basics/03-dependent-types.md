@@ -459,7 +459,7 @@ in the application
   vecA.dot vecB
 ```
 
-the version of Python, `dot([17,-3,42], [99,8])`, silently returned `1659`, a wrong
+In the version of Python, `dot([17,-3,42], [99,8])`, silently returned `1659`, a wrong
 answer with no error at all. The Lean version does not even compile. The
 length-mismatch bug is not caught by a clever runtime check *added* to
 `Vec.dot`. There is no such check anywhere in its three-line definition.

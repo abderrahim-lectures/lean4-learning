@@ -45,8 +45,7 @@ the convention as a checklist, and
 Not every reader needs every chapter in order. See
 [Learning paths](learning-paths.md) for a chapter-dependency graph and a
 handful of named paths through the book (already know Lean? already know
-algebra? want the formal foundations first?) before committing to reading
-start to finish.
+algebra? want the formal foundations first?) before committing to a start-to-finish reading.
 
 Each chapter is its own folder (e.g. [07-groups/](07-groups/)) containing a
 `00-index.md` overview plus one small Markdown file per section. Open the
@@ -106,8 +105,7 @@ about this proof" and "how Lean needs to see it."
 This book is, and remains, Mathlib-free by design: every group, ring, and
 path algebra is built from scratch so you see every definition and proof
 obligation explicitly (see [the Mathlib note](00-setup/04-mathlib-note.md)).
-Starting in Chapter 7, though, each worked example is followed by a clearly
-labeled "Mathlib equivalent" box showing the same statement phrased against
+Starting in Chapter 7, though, each worked example is followed by a labeled "Mathlib equivalent" box showing the same statement phrased against
 the real `Group`/`Ring`/`Module` API of Mathlib. This isn't a contradiction of
 the from-scratch approach; it's a second, parallel track. Seeing the same
 idea twice, once built by hand and once as Mathlib already has it, is how

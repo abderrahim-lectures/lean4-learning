@@ -23,9 +23,9 @@ that just run that algorithm.
   reveals nothing.
 - **`omega`** is a decision procedure for *linear* arithmetic over `Nat`/`Int`
   (goals built from `+`, subtraction, `≤`, `<`, `=`, and multiplication by
-  *literal constants* only. `omega` handles `3 * n` fine, but not `n * m`
-  for two unknown variables `n`, `m`; multiplying two unknown variables
-  together falls outside what it can decide). For a goal that is "some
+*literal constants* only; `omega` handles `3 * n` fine, but not `n * m`
+   for two unknown variables `n`, `m`; multiplying two unknown variables
+   together falls outside what it can decide). For a goal that is "some
   linear inequality or equality about integers," `omega` should be
   reached for before deriving the fact by hand. This is exactly the kind of fact a decision
   procedure handles better than a custom [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain, and a hand-derived

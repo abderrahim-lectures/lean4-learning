@@ -25,7 +25,7 @@ re-proved, hence the search tactics `exact?`/`apply?`
 computation, decidable equality or inequality on `Nat`/`Int`, a concrete
 numeral, should be settled by running that computation, `decide`, `omega`,
 `norm_num`, rather than by a hand-built `rw` chain, exactly because a
-decision procedure exists precisely where hand-derivation adds nothing a
+decision procedure exists precisely where hand-derivation adds nothing that a
 human proof of the general case still needs
 ([Section 2](02-decision-procedures.md)). Once a family of rewrites is
 understood well enough to be trusted as a set, applying that whole set at

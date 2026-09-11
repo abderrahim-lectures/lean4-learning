@@ -124,8 +124,8 @@ def average (a b : Nat) : Nat :=
 - `sum / 2` is `Nat` division, which in Lean is *truncating*. `average 4 10`
   computes `sum = 14`, then `14 / 2 = 7` exactly. But `average 1 2` would
   compute `sum = 3`, then `3 / 2 = 1` (rounded down, since `Nat` has no
-  fractions). This should be noted before relying on this `average` for
-  anything where the rounding matters.
+   fractions). Note this before relying on this `average` for
+   anything where the rounding matters.
 
 **Mathematical reading.** The `let` is exactly a "let $s := a + b$ in
 $\ldots$" clause of the kind used constantly in written proofs to name an
@@ -211,16 +211,16 @@ Briefly, so meeting these elsewhere later is not a surprise:
   occasionally in Mathlib source), behaves like `{}` except that Lean
   defers solving it until an *explicit* argument after it is actually
   supplied. It is a Mathlib idiom for keeping partially applied functions
-  well behaved, and does not appear anywhere in the own code of this book. It
-  is named here only so it is recognizable, not mysterious, if
-  encountered while reading Mathlib source directly.
+  well behaved, and does not appear anywhere in this book's own code. It
+   is named here only so it is recognizable, not mysterious, if
+   encountered while reading Mathlib source directly.
 - `def` is not the only way to introduce a definition either. `abbrev` and
-  `opaque` exist alongside it, and differ not in what they let you write,
-  but in how transparent the result is to the own equality checker of Lean,
-  whether `unfold`ing it is ever needed, or ever even possible.
-  [Chapter 5](../05-tactics/04-more-tactics.md), once `unfold` itself is on
-  the table, is where this is worth actually seeing rather than taking on
-  faith.
+   `opaque` exist alongside it, and differ not in what they let you write,
+   but in how transparent the result is to the own equality checker of Lean,
+   whether `unfold`ing it is ever needed, or ever even possible.
+   [Chapter 5](../05-tactics/04-more-tactics.md), once `unfold` itself is on
+   the table, is where this is worth actually seeing rather than taking on
+   faith.
 
 None of this needs remembering yet. Only `()` and `{}` are needed for
 everything through the end of this chapter.
@@ -238,3 +238,5 @@ Lean a genuine proof assistant rather than an ordinary typed language.
 ---
 
 [← Everything has a type](01-everything-has-a-type.md) | [Index](00-index.md) | [Next: Dependent types, with examples →](03-dependent-types.md)
+
+[Pierce2002]: ../bibliography.md#pierce2002

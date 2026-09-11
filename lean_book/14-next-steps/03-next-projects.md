@@ -118,8 +118,7 @@ genuinely does not apply there, as it must not for a cyclic quiver.
 
 ### 4. Compare against `CategoryTheory.Quiver` of Mathlib
 
-**Learning objectives.** Reading real Mathlib source, and recognizing the
-own constructions of this book inside a more general, abstract presentation.
+**Learning objectives.** Reading real Mathlib source, and recognizing its own constructions of this book inside a more general, abstract presentation.
 
 **Prerequisites.** Chapter 12 (the `Quiver`/`Path` of this book), Project 1
 above (comfort with the type-class style Mathlib uses throughout).
@@ -132,15 +131,15 @@ above (comfort with the type-class style Mathlib uses throughout).
    composition, comparing field-for-field against the plain
    `Quiver`/`Path` of this book.
 2. Find `Prefunctor` in Mathlib (a quiver homomorphism) and, separately,
-   define a `structure QuiverHom` by hand for two of the own quivers of this book
-   (`exampleQuiver`, `cyclicQuiver` from the exercises of Chapter 12),
+    define a `structure QuiverHom` by hand for two of its own quivers of this book
+    (`exampleQuiver`, `cyclicQuiver` from the exercises of Chapter 12),
    mapping vertices to vertices and arrows to paths.
 3. Write the identity `QuiverHom` and composition of two `QuiverHom`s,
    noticing the parallel to the `LinearMap` exercises of Chapter 11 (identity
    and composition being exactly what make a class of structures into a
    category, Chapter 11 Exercise 2).
 
-**Deliverable.** A hand-written `QuiverHom` between two of the own quivers of
+**Deliverable.** A hand-written `QuiverHom` between two of its own quivers of
 this book, with its `Prefunctor` counterpart in Mathlib identified by name.
 
 **Self-verification.** `#check @Prefunctor` and compare its fields,
@@ -188,16 +187,20 @@ application, nothing else, is already expressive enough to build
 booleans, numbers, and arbitrary data by encoding them as functions.
 
 **Church booleans.** Define
+
 $$
 \mathrm{true} := \lambda x.\, \lambda y.\, x
 \qquad
 \mathrm{false} := \lambda x.\, \lambda y.\, y
 $$
+
 A boolean, in this encoding, *is* a choice function. To use one, apply it
 to the two branches of an if-expression.
+
 $$
 \mathrm{if}\; b \;\mathrm{then}\; t \;\mathrm{else}\; e \;:=\; b\, t\, e
 $$
+
 Check: $\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e
 \longrightarrow_\beta t$ (discarding $e$), and symmetrically
 $\mathrm{false}\, t\, e \longrightarrow_\beta e$. "If-then-else" is not a
@@ -208,6 +211,7 @@ boolean primitive to express conditional behavior.
 
 **Church numerals.** Represent the natural number $n$ as "apply a function
 $n$ times."
+
 $$
 \underline{0} := \lambda f.\, \lambda x.\, x
 \qquad
@@ -217,7 +221,8 @@ $$
 \qquad
 \underline{n} := \lambda f.\, \lambda x.\, f^n\, x
 $$
-Compare directly to the own Peano definition of `Nat`,
+
+Compare directly to its own Peano definition of `Nat`,
 $\mathtt{Nat} ::= \mathtt{zero} \mid \mathtt{succ}(n)$ (Chapter 1). A
 Church numeral $\underline{n}$ *is* "apply $\mathtt{succ}$, $n$ times, to
 $\mathtt{zero}$," the same inductive shape, represented not as data but

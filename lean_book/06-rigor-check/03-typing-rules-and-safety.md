@@ -7,7 +7,7 @@
 Section 2 showed *informally* why `Group : Type → Type` has to live one
 universe level up, by walking through that one specific case in prose.
 That argument leaned on a typing rule it never actually stated, and
-Chapters 1–5 have relied on the type checking of Lean constantly the same
+Chapters 1–5 have relied constantly on Lean's type checking the same
 way, without ever seeing its rules written down. This section makes two things precise.
 The actual rules the kernel of Lean checks a term against (using a small,
 representative fragment, the **simply typed λ-calculus**, STLC), and the
@@ -166,7 +166,7 @@ This is precisely the gap already closed by [Chapter 2, Section 2](../02-termino
 **Dependent types** let a type itself depend on a term
 (here, the type argument `α`). That is exactly the extra generality
 `identity {α : Type} (x : α) : α := x` uses, and it is unavailable in STLC
-(or in the `TypeVar` of Python, which is real but considerably less powerful.
+(or in the `TypeVar` of Python, which is real but considerably less powerful).
 It cannot let a *return type* depend on an ordinary *value* argument the
 way `Vec.replicate` does in Chapter 1, Section 3).
 

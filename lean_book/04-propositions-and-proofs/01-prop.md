@@ -152,7 +152,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   separate "proof of correctness" apart from having successfully built
   the machine, which is exactly why, in Lean, propositions are types
   and proofs are the terms (the "machines") that inhabit them.
-- Howard ([Howard1980]) is the original source of the correspondence this section is named for. Per Sørensen & Urzyczyn, *Lectures on the Curry-Howard Isomorphism*, Studies in Logic and the Foundations of Mathematics vol. 149, Elsevier, 2006 (a secondary source corroborating this history, not the paper by Howard itself), the manuscript by Howard was "privately circulated" from 1969 and not formally published until 1980, in a Festschrift for Curry. It develops the proofs-as-terms correspondence for implicational logic, extends it to the other propositional connectives, then to a term language for Heyting Arithmetic.
+- Howard ([Howard1980], pp. 479-490) is the original source of the correspondence this section is named for. Per Sørensen & Urzyczyn, *Lectures on the Curry-Howard Isomorphism*, Studies in Logic and the Foundations of Mathematics vol. 149, Elsevier, 2006 (a secondary source corroborating this history, not the paper by Howard itself), the manuscript by Howard was "privately circulated" from 1969 and not formally published until 1980, in a Festschrift for Curry. It develops the proofs-as-terms correspondence for implicational logic, extends it to the other propositional connectives, then to a term language for Heyting Arithmetic.
 
 [Howard1980]: ../bibliography.md#howard1980
 [TPIL4]: ../bibliography.md#tpil4

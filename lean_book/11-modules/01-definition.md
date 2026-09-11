@@ -51,7 +51,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   left-distributive, right-distributive, and associative-action axioms,
   plus unitality when $R$ has an identity
   ([DummitFoote2003], Ch. 10 "Introduction to Module Theory," §10.1
-  "Basic Definitions and Examples"). This is a structural citation to
+  "Basic Definitions and Examples," p. 336). This is a structural citation to
   the section and its numbered axioms, not a verified word-for-word
   excerpt.
 - Weibel ([Weibel1994]) is offered as further reading on modules in the

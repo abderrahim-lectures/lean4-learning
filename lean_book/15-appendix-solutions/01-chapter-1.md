@@ -30,7 +30,7 @@ Its return type `List α` never mentions `n` at all, even though its
 length). Taking a dependently-typed *input* does not automatically make a
 function dependent; what matters is whether the *output* type varies with
 the *value* of the input. `Vec.toList` throws the length away on the way out, the
-same way the own length information of `Vec α n` disappears once converted to
+same way its own length information of `Vec α n` disappears once converted to
 a plain `List α`.
 
 Unlike `Vec`, `List` does have a `Repr` instance for any printable `α`,

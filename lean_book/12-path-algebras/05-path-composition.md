@@ -106,7 +106,7 @@ separately, `Path.append (Path.nil u) p = p` (appending the trivial path
 `cons` case of the recursion is a *definitional* recursion lemma
 (`Path.append p (Path.cons a h h' q') = Path.cons a h h' (Path.append p q')`)
 that lets induction unfold `Path.append` one arrow at a time. It is not
-itself associativity. True associativity of composition,
+itself associativity. True associativity of composition is a separate statement:
 
 $$
 \mathrm{append}(\mathrm{append}(p, q), r) = \mathrm{append}(p, \mathrm{append}(q, r)),

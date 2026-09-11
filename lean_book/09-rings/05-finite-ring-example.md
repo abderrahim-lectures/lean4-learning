@@ -5,8 +5,7 @@
 ---
 
 `intRing` is commutative, infinite, and, being $\mathbb{Z}$ itself, the
-initial ring (Theorem 1/2 of Chapter 8 hold for it as easily as
-possible, since it has essentially the most immediate ring structure).
+initial ring. The group theorems of Chapter 8 also apply to its additive part with minimal effort, since $\mathbb{Z}$ has the most immediate group structure.
 [The matrix example of this chapter](07-matrices.md) shows a genuinely *noncommutative* ring. This
 section shows the other direction the axioms can specialize to, a
 **commutative, finite** ring, small enough to check every axiom by direct
@@ -95,7 +94,7 @@ instinct to build. See Chapter 13 for more on when `decide` is (and is not)
 the right tool.
 
 **Mathematical reading.** `fin3Ring` is $\mathbb{Z}/3\mathbb{Z}$, the
-finite field (a commutative ring where every nonzero element has a multiplicative inverse) with three elements. Only the `Ring` structure has been built
+finite field ([DummitFoote2003], §13.1) (a commutative ring where every nonzero element has a multiplicative inverse) with three elements. Only the `Ring` structure has been built
 here, though. A `Field` would additionally require every nonzero element
 to be invertible under multiplication, true for $\mathbb{Z}/3$ precisely
 because $3$ is prime, but this is not part of the axioms of `Ring` and not

@@ -297,7 +297,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   27; a French translation of Gentzen ([Gentzen1935])). Picture it
   like this. A Lego instruction booklet where every piece type gets
   exactly two entries, one showing how to snap it onto the model
-  (introduction), one showing what you're allowed to do once it's
+  (introduction), one showing what you are allowed to do once it's
   there (elimination). Introduction rules act as the "definition" of the connective,
   elimination rules as its consequence.
 - **Soundness.** "$\Gamma \vdash \varphi \Rightarrow \Gamma \models

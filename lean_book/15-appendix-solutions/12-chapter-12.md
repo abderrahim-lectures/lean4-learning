@@ -76,7 +76,7 @@ it.
 
 ![The Lean Infoview panel in VS Code, showing the tactic state for the `cons` case of the induction for `append_nil_left`: hypotheses `V A : Type`, `Q : Quiver V A`, `u v vt wt : V`, `a : A`, `h : Q.source a = v`, `h' : Q.target a = wt`, `q' : Path Q u vt`, `ih : (Path.nil u).append q' = q'`, and the goal `(Path.nil u).append (Path.cons a h h' q') = Path.cons a h h' q'`.](../12-path-algebras/images/append-nil-left-infoview.png)
 
-This mirrors the own recursion of `Path.append`, case for case. `Path.append`
+This mirrors Path.append's own recursion, case for case. `Path.append`
 was defined by matching on its second argument, so `induction p` (which
 splits into cases on exactly that argument, generating the matching
 induction hypothesis `ih` in the `cons` case) unfolds the definition
@@ -176,7 +176,7 @@ def Path.length' {V A : Type} {Q : Quiver V A} : {u v : V} → Path Q u v → Na
 `Path.length` recurses on the same two constructors as `Path.append`
 itself (Sections 4-5). `nil` contributes `0`, and each `cons` adds one to the
 length of the shorter path it extends. The proof of `append_length`
-mirrors the own recursion of `Path.append` case for case, exactly as the
+mirrors Path.append's own recursion case for case, exactly as the
 project asked, but with one genuine surprise if `rfl` is tried first in
 either case. It fails. `Path` is an *indexed inductive type* (an inductive
 type parameterized by extra indices, like `Path Q u v`), parameterized by both endpoints. Because of

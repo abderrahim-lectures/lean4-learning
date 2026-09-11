@@ -42,7 +42,7 @@ with a *variable* `n`. On closed numerals everything computes, so `0 + 2 = 2`
 and `2 + 0 = 2` are both `rfl` and neither reveals anything. Replace `n` by a
 literal and the commented-out line starts succeeding.
 
-One precise point worth noting is that "reduce to the same normal form" does not mean
+One precise point: "reduce to the same normal form" does not mean
 Lean necessarily unfolds a term *all the way down* before comparing.
 Lean does not fully normalize during type-checking (too expensive). It
 reduces only to the **weak head normal form** — far enough to see the

@@ -49,7 +49,7 @@ def composeLinearMap {R : Type} (Rg : Ring R) {M N P : Type}
 ```
 
 `g.toFun ∘ f.toFun` is ordinary function composition. The proof of each field
-first uses the own compatibility fact of `f` (`f.map_add`/`f.map_smul`) to push
+first uses f's own compatibility fact of `f` (`f.map_add`/`f.map_smul`) to push
 the additive-group operation or scalar action *through* `f`. This leaves a
 goal that is now exactly the compatibility fact of `g`, applied to the
 already-transformed points `f.toFun m`, `f.toFun n`. This, plus Exercise 1

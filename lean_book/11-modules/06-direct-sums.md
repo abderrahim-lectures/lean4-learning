@@ -115,7 +115,7 @@ carrier is the product $M \times N$, with all structure defined
 componentwise, $(m,n) + (m',n') = (m+m',\, n+n')$, $0 = (0,0)$, $-(m,n) =
 (-m,-n)$, and $r\cdot(m,n) = (r\cdot m,\, r\cdot n)$. Every axiom holds
 because it holds in each coordinate independently, which is exactly what
-`congr 1` exposes, an equation of pairs splits into one equation in $M$ and
+`congr 1` exposes: an equation of pairs splits into one equation in $M$ and
 one in $N$. For finitely many summands the direct sum $M \oplus N$ is both
 a product and a coproduct at once in $R\text{-}\mathbf{Mod}$, the
 projections $\pi_M, \pi_N$ and inclusions $\iota_M, \iota_N$ satisfy

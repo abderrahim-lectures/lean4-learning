@@ -28,7 +28,7 @@ the right everyday tool. Using `simp` from the start is how proofs end up
 compiling without anyone, including the author, being able to explain
 them a week later.
 
-**Mathematical reading.** `simp` is *normalization by rewriting*:
+**Mathematical reading.** `simp` is *normalization by rewriting* [Huet1980]:
 
 **Definition.** *Normalization by rewriting* is the process of applying
 rewrite rules until a normal form is reached.
@@ -46,7 +46,7 @@ the same term can be reconnected, guaranteeing a unique normal form)), the same
 general confluence property (Newman's lemma and its extensions) already
 invoked for term rewriting in
 [Chapter 2, Section 1](../02-terminology-and-coc/01-terminology.md#sources-quoted)
-([Huet1980]).
+([Huet1980], §4)
 
 [Huet1980]: ../bibliography.md#huet1980
 

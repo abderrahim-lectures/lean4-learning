@@ -107,7 +107,7 @@ seen through automatically.
 - **`def` (semi-reducible, the default).** Requires an explicit instruction
   to unfold, `unfold` by name in a tactic proof, exactly as above. This
   matches the traceability this book has been deliberately practicing
-  throughout this chapter, nothing unfolds silently, and every step names
+  throughout this chapter. Nothing unfolds silently, and every step names
   what justified it.
 - **`abbrev` (reducible).** Automatically marked `@[reducible, inline]` so
   that the elaborator sees through it, treating every occurrence as if the

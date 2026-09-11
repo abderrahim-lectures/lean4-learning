@@ -55,11 +55,13 @@ blocks extraction.
 
 Application associates to the left, so this is
 $((\lambda x.\lambda y.\, y\, x)\, a)\, b$.
+
 $$
 (\lambda x.\lambda y.\, y\, x)\, a\, b
 \;\longrightarrow_\beta\; (\lambda y.\, y\, a)\, b
 \;\longrightarrow_\beta\; b\, a
 $$
+
 Step 1 substitutes $a$ for $x$ in $\lambda y.\, y\, x$, giving
 $\lambda y.\, y\, a$. Step 2 substitutes $b$ for $y$ in $y\, a$, giving
 $b\, a$.

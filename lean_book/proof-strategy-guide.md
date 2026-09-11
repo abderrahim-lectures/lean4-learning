@@ -65,7 +65,7 @@ are unsure.
 | `h : ∃ x, P x` (an existential to use) | `cases h with \| intro x hx => ...` | Extract the witness and its proof into the context |
 | `h : f x = f y` and you want `x = y` (injectivity) | `rw [mk.injEq]` on `h` for a hand-built structure, or `cases` the equality and match constructors | Extraction is not automatic; the book tool of choice is `mk.injEq` (see `Mat2.mk.injEq` in Ch. 9), else prove injectivity directly by `cases` |
 | `h : a + b = b + c` and the goal mentions `b` | `rw [add_comm]` on `h`, then simplify both sides | Regroup the terms until the middle cancels, the "regroup, then cancel" pattern of [Chapter 8, Theorem 3](08-group-theorems/04-theorem-3.md) |
-| a goal needing a fact you have named, `h : P` with goal `P` | `exact h` | Completion; it is exactly satisfied |
+| a goal needing a fact you have named, `h : P` with goal `P` | `exact h` | Done; the goal is exactly satisfied |
 | a general fact `h : ∀ x, P x` and goal `P a` | `exact h a` | Instantiate the universal at `a` |
 | `h : a = b` and goal contains `b` | `rw [h]`, or `rw [← h]` if it contains `a` | Rewrite the known equality in the direction it collapses the goal |
 | `h : n + 0 = n` (a lemma over `Nat`) | `exact h` | Already in hand; `Nat.add` recurses on the second argument, so `n + 0 = n` is `rfl` when you need to prove it yourself |

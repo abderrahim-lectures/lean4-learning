@@ -85,7 +85,7 @@ in `Type 0`.
 > Read more. [Chapter 6, Section 3](03-typing-rules-and-safety.md) states the
 > universe-formation rules precisely, as part of the calculus of
 > constructions. Externally, the "Dependent Type Theory" chapter of
-> the *Theorem Proving in Lean 4* manual ([TPIL4]) covers universes at a
+> the *Theorem Proving in Lean 4* manual ([TPIL4], §2.2) covers universes at a
 > similar level of detail with more Lean-specific examples.
 
 ---

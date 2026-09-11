@@ -102,3 +102,5 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 ---
 
 [← Quantifiers](06-quantifiers.md) | [Index](00-index.md) | [Next: Exercises →](08-exercises.md)
+
+[TPIL4]: ../bibliography.md#tpil4

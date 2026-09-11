@@ -8,7 +8,7 @@
 
 **Finding the proof.** In ordinary notation, the standard trick is as
 follows. It is worth memorizing as a pattern applicable to any
-additive-identity argument, start from $0 = 0 + 0$, multiply through, and
+additive-identity argument: start from $0 = 0 + 0$, multiply through, and
 cancel.
 
 $$

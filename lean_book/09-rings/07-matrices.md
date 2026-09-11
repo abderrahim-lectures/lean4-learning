@@ -305,8 +305,6 @@ def mat2Ring : Ring Mat2 where
       rw [Int.add_mul, Int.add_mul, add4_reorder]
 ```
 
-Two points are worth noting.
-
 1. **Every proof obligation here is spelled out explicitly, with no
    automation**, matching the rest of the book. This book never imports
    Mathlib, so its `ring` tactic, a decision procedure for
@@ -320,7 +318,7 @@ Two points are worth noting.
    nothing here decides that automatically. `mul := Mat2.mul` is supplied
    directly, and the `mul_comm`-shaped fact is simply absent from the
    fields of `Ring`, exactly as the exercise on
-   `left_distrib`/`right_distrib` in Chapter 9 anticipated.
+   `left_distrib`/`right_distrib` in this chapter anticipated.
 2. **This is the general pattern for "ring of $n\times n$ matrices over a
    commutative ring $S$":** the entries live in $S$. Every `Ring Mat2`
    proof obligation reduces to a polynomial identity purely in $S$, by
@@ -371,8 +369,6 @@ book without Mathlib.
 example (A B C : Matrix (Fin 2) (Fin 2) Int) :
     A * (B + C) = A * B + A * C := by noncomm_ring
 ```
-
-[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
 ---
 

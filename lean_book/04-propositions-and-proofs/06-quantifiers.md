@@ -108,6 +108,7 @@ the product and sum seen for $\wedge$ and $\vee$ in the
 previous section. Instead of combining two fixed propositions $P$ and
 $Q$, they combine a whole *family* of propositions $P(x)$, one for each
 $x \in \alpha$. Universal quantification is the ($\Pi$-)type
+
 $$
 \forall x{:}\alpha,\ P(x) \;=\; \prod_{x : \alpha} P(x),
 $$
@@ -117,7 +118,9 @@ each $x$ a proof of $P(x)$, so `all_nats_ge_zero` is the map $n \mapsto (0
 \le n)$. This exactly generalizes how a proof of $P \wedge Q$ was a pair
 $(p, q)$, one component per conjunct, except now there is one component
 per element of $\alpha$ rather than just two. Existential quantification
+
 is the ($\Sigma$-)type
+
 $$
 \exists x{:}\alpha,\ P(x) \;=\; \sum_{x : \alpha} P(x),
 $$

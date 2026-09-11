@@ -23,8 +23,8 @@ factored out are as follows.
   reads as a short chain of named facts instead of one long
   undifferentiated block.
 
-This is the same judgment call made writing ordinary code,
-extract a helper when, and only when, real duplication or a
+This is the same judgment call made when writing ordinary code,
+   extract a helper when, and only when, real duplication or a
 genuinely separate sub-claim is present, not ahead of time "just in case."
 
 **Key points.** `exact?`/`apply?` search for a closing term but do not
