@@ -216,7 +216,7 @@ Briefly, so meeting these elsewhere later is not a surprise:
    encountered while reading Mathlib source directly.
 - `def` is not the only way to introduce a definition either. `abbrev` and
    `opaque` exist alongside it, and differ not in what they let you write,
-   but in how transparent the result is to the own equality checker of Lean,
+   but in how transparent the result is to Lean's own equality checker,
    whether `unfold`ing it is ever needed, or ever even possible.
    [Chapter 5](../05-tactics/04-more-tactics.md), once `unfold` itself is on
    the table, is where this is worth actually seeing rather than taking on

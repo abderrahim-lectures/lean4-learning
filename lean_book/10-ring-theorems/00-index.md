@@ -46,7 +46,6 @@ rather than reinventing it ([Section 3](03-theorem-2.md)).
 
 Two theorems, each reducing a ring-shaped goal to a group-shaped one
 already solved in Chapter 8, complete the abstract-algebra core of Part II: groups, then rings built on top of them, each with a small library of
-groups, then rings built on top of them, each with a small library of
 theorems proved once and inherited by every carrier built so far.
 
 ## Sections

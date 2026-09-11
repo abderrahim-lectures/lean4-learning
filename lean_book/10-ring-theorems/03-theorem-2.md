@@ -80,7 +80,7 @@ the common factor `a` out, giving $((-1)+1)\cdot a = 0$. The next
 `rw [Rg.addGrp.toGroup.inv_left]` collapses $(-1)+1$ to $0$, and
 `exact mul_zero_left Rg a` closes with $0 \cdot a = 0$.
 
-Two features of the shape of the proof are worth noting, both discovered by
+Two features of the proof's shape stand out, both discovered by
 actually compiling it.
 
 - **No `apply Eq.symm` at the start.** The goal

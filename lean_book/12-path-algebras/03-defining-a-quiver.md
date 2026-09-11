@@ -64,7 +64,7 @@ graph LR
 | $s, t : A \to V$ ("source, target") | `exampleQuiver.source`, `exampleQuiver.target` |
 
 The two-element inductive type is the finite set $A = \{\alpha,\beta\}$,
-and the `match`-defined `source`/`target` are the functions $s, t . A \to
+and the `match`-defined `source`/`target` are the functions $s, t : A \to
 V$ given by their value tables: `source alpha = 0`, `target alpha = 1`,
 `source beta = 1`, `target beta = 2`. This is exactly the arrowheads and
 tails drawn above.

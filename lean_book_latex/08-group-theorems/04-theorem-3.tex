@@ -1,6 +1,6 @@
 \section{Theorem 3: inverse of a product}\label{sec:08-group-theorems:04-theorem-3:1}
 
-\textbf{Claim.} \texttt{Grp.inv (Grp.op a b) = Grp.op (Grp.inv b) (Grp.inv a)}.
+\textbf{Claim.} (\cite{DummitFoote2003}, pp.~17-18) \texttt{Grp.inv (Grp.op a b) = Grp.op (Grp.inv b) (Grp.inv a)}.
 
 \textbf{Finding the proof.} This \emph{appears} to again call for a chain of equalities, but a shortcut emerges once the shape of the goal is recognized to match a theorem already in hand. The claim states that some element (\texttt{Grp.inv (Grp.op a b)}) equals some other expression built from \texttt{a}, \texttt{b}. Theorem 2 already establishes that \emph{to show \texttt{x = Grp.inv y}, it suffices to show \texttt{x} is a left inverse of \texttt{y}}. In other words, an inverse-computation goal reduces to a single equation \texttt{Grp.op x y = Grp.id}, which is usually easier to attack directly with \texttt{assoc}/\texttt{inv\_\allowbreak{}left}/\texttt{inv\_\allowbreak{}right} than \texttt{inv (...)} taken at face value. This is a general and reusable move. \textbf{Once a uniqueness/characterization lemma is proved, it can turn ``compute this thing'' goals into ``verify this thing satisfies the characterizing property'' goals}, almost always a simpler target.
 
@@ -63,7 +63,7 @@ Both sides agree on every input, exactly what the proof of \texttt{inv\_\allowbr
 example {G : Type*} [Group G] (a b : G) : (a * b)(*${}^-$*)(*\textsuperscript{1}*) = b(*${}^-$*)(*\textsuperscript{1}*) * a(*${}^-$*)(*\textsuperscript{1}*) := mul_inv_rev a b
 \end{lstlisting}
 
-And the same payoff Chapter 8 draws out concretely for \texttt{perm3Group} applies here too, against the own \(S_3\) of Mathlib from Chapter 7, Section 4. There is no new proof, only an application of \texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} at \texttt{Equiv.Perm (Fin 3)}.
+And the same payoff Chapter 8 draws out concretely for \texttt{perm3Group} applies here too, against its own \(S_3\) of Mathlib from Chapter 7, Section 4. There is no new proof, only an application of \texttt{mul\_\allowbreak{}inv\_\allowbreak{}rev} at \texttt{Equiv.Perm (Fin 3)}.
 
 \begin{lstlisting}
 example : (swap01' * cycle012')(*${}^-$*)(*\textsuperscript{1}*) = cycle012'(*${}^-$*)(*\textsuperscript{1}*) * swap01'(*${}^-$*)(*\textsuperscript{1}*) :=

@@ -29,9 +29,9 @@ class Group (G : Type) where
 ```
 
 Syntactically these look almost identical. `class` is very nearly a
-shorthand for `structure` plus one extra mechanism. Understanding exactly what that
-mechanism is, and why this book avoids it until the
-intuition `class` would otherwise hide has been built, is the point of this section.
+shorthand for `structure` plus one extra mechanism. This section explains
+exactly what that mechanism is, and why this book avoids `class` until
+the intuition it would otherwise hide has been built.
 
 ### What `class` actually adds: instance search
 

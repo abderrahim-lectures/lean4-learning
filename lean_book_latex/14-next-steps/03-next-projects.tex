@@ -77,7 +77,7 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 \subsection{\texorpdfstring{4. Compare against \texttt{CategoryTheory.Quiver} of Mathlib}{4. Compare against CategoryTheory.Quiver of Mathlib}}\label{sec:14-next-steps:03-next-projects:5}
 
-\textbf{Learning objectives.} Reading real Mathlib source, and recognizing the own constructions of this book inside a more general, abstract presentation.
+\textbf{Learning objectives.} Reading real Mathlib source, and recognizing its own constructions of this book inside a more general, abstract presentation.
 
 \textbf{Prerequisites.} Chapter 12 (the \texttt{Quiver}/\texttt{Path} of this book), Project 1 above (comfort with the type-class style Mathlib uses throughout).
 
@@ -89,12 +89,12 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \item
   Read the \texttt{Quiver} class of \texttt{Mathlib.Combinatorics.Quiver.Basic} (already introduced in the ``Mathlib equivalent'' box of Chapter 12, Section 3) and the extension of it by \texttt{Mathlib.CategoryTheory.Quiver} with identities and composition, comparing field-for-field against the plain \texttt{Quiver}/\texttt{Path} of this book.
 \item
-  Find \texttt{Prefunctor} in Mathlib (a quiver homomorphism) and, separately, define a \texttt{structure QuiverHom} by hand for two of the own quivers of this book (\texttt{exampleQuiver}, \texttt{cyclicQuiver} from the exercises of Chapter 12), mapping vertices to vertices and arrows to paths.
+  Find \texttt{Prefunctor} in Mathlib (a quiver homomorphism) and, separately, define a \texttt{structure QuiverHom} by hand for two of its own quivers of this book (\texttt{exampleQuiver}, \texttt{cyclicQuiver} from the exercises of Chapter 12), mapping vertices to vertices and arrows to paths.
 \item
   Write the identity \texttt{QuiverHom} and composition of two \texttt{QuiverHom}s, noticing the parallel to the \texttt{LinearMap} exercises of Chapter 11 (identity and composition being exactly what make a class of structures into a category, Chapter 11 Exercise 2).
 \end{enumerate}
 
-\textbf{Deliverable.} A hand-written \texttt{QuiverHom} between two of the own quivers of this book, with its \texttt{Prefunctor} counterpart in Mathlib identified by name.
+\textbf{Deliverable.} A hand-written \texttt{QuiverHom} between two of its own quivers of this book, with its \texttt{Prefunctor} counterpart in Mathlib identified by name.
 
 \textbf{Self-verification.} \texttt{\#check @Prefunctor} and compare its fields, one-by-one in a comment, against the fields of \texttt{QuiverHom} itself.
 
@@ -133,16 +133,26 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 
 Everything in this book is built from the \texttt{inductive} mechanism of Lean: \texttt{Nat}, \texttt{Bool}, \texttt{Path}, every \texttt{structure}. It is worth knowing, purely as a curiosity, that none of that machinery was ever strictly necessary. The untyped λ-calculus, variables, \texttt{fun x => t}-style abstraction, and application, nothing else, is already expressive enough to build booleans, numbers, and arbitrary data by encoding them as functions.
 
-\textbf{Church booleans.} Define \[
+\textbf{Church booleans.} Define
+
+\[
 \mathrm{true} := \lambda x.\, \lambda y.\, x
 \qquad
 \mathrm{false} := \lambda x.\, \lambda y.\, y
-\] A boolean, in this encoding, \emph{is} a choice function. To use one, apply it to the two branches of an if-expression. \[
-\mathrm{if}\; b \;\mathrm{then}\; t \;\mathrm{else}\; e \;:=\; b\, t\, e
-\] Check: \(\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e
-\longrightarrow_\beta t\) (discarding \(e\)), and symmetrically \(\mathrm{false}\, t\, e \longrightarrow_\beta e\). ``If-then-else'' is not a primitive at all. It is just \emph{application}, once booleans are represented this way. The actual \texttt{Bool} of Lean (an \texttt{inductive} with two constructors) is a \emph{convenience}, not a necessity. The calculus itself never needed a booleans primitive to express conditional behavior.
+\]
 
-\textbf{Church numerals.} Represent the natural number \(n\) as ``apply a function \(n\) times.'' \[
+A boolean, in this encoding, \emph{is} a choice function. To use one, apply it to the two branches of an if-expression.
+
+\[
+\mathrm{if}\; b \;\mathrm{then}\; t \;\mathrm{else}\; e \;:=\; b\, t\, e
+\]
+
+Check: \(\mathrm{true}\, t\, e = (\lambda x.\lambda y. x)\, t\, e
+\longrightarrow_\beta t\) (discarding \(e\)), and symmetrically \(\mathrm{false}\, t\, e \longrightarrow_\beta e\). ``If-then-else'' is not a primitive at all. It is just \emph{application}, once booleans are represented this way. The actual \texttt{Bool} of Lean (an \texttt{inductive} with two constructors) is a \emph{convenience}, not a necessity. The calculus itself never needed a boolean primitive to express conditional behavior.
+
+\textbf{Church numerals.} Represent the natural number \(n\) as ``apply a function \(n\) times.''
+
+\[
 \underline{0} := \lambda f.\, \lambda x.\, x
 \qquad
 \underline{1} := \lambda f.\, \lambda x.\, f\, x
@@ -150,7 +160,9 @@ Everything in this book is built from the \texttt{inductive} mechanism of Lean: 
 \underline{2} := \lambda f.\, \lambda x.\, f\,(f\, x)
 \qquad
 \underline{n} := \lambda f.\, \lambda x.\, f^n\, x
-\] Compare directly to the own Peano definition of \texttt{Nat}, \(\mathtt{Nat} ::= \mathtt{zero} \mid \mathtt{succ}(n)\) (Chapter 1). A Church numeral \(\underline{n}\) \emph{is} ``apply \(\mathtt{succ}\), \(n\) times, to \(\mathtt{zero}\),'' the same inductive shape, represented not as data but as a higher-order function that knows how to iterate.
+\]
+
+Compare directly to its own Peano definition of \texttt{Nat}, \(\mathtt{Nat} ::= \mathtt{zero} \mid \mathtt{succ}(n)\) (Chapter 1). A Church numeral \(\underline{n}\) \emph{is} ``apply \(\mathtt{succ}\), \(n\) times, to \(\mathtt{zero}\),'' the same inductive shape, represented not as data but as a higher-order function that knows how to iterate.
 
 \begin{itemize}
 \tightlist

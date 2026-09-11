@@ -16,6 +16,12 @@ def origin : Point := { x := 0, y := 0 }
 
 Key points.
 
+\textbf{Definition.} A \emph{constructor} of a \texttt{structure} is the function that builds an element from its fields.
+
+\textbf{Definition.} The \emph{anonymous constructor} \texttt{⟨e₁, e₂, ...⟩} applies the appropriate constructor without naming it.
+
+\textbf{Definition.} \emph{Field projection} \texttt{.field} is shorthand for \texttt{S.field s}.
+
 \begin{itemize}
 \tightlist
 \item
@@ -48,7 +54,7 @@ origin = {"x": 0, "y": 0}
 print(origin["z"])   # KeyError: 'z', but only once this line actually runs
 \end{lstlisting}
 
-Nothing about \texttt{origin} says which keys it is supposed to have. A typo in a key name, \texttt{origin["ix"]}, is caught the same way a missing key is, by crashing at run time, on whichever run happens to reach that line first. \texttt{Point.x} has no such failure mode. \texttt{origin.z} is rejected while reading the file, before \texttt{\#eval} or any test ever runs, because \texttt{z} is not a field \texttt{structure Point} declared. A \texttt{@dataclass} closes part of this gap, since \texttt{dataclass} at least fixes the field names in advance, but a plain Python \texttt{dataclass} is mutable by default. \texttt{origin.x = 99} silently overwrites the field in place, and any other code still holding a reference to \texttt{origin} sees the change too, whether it wanted to or not. \texttt{shift} above does not do this. It builds a brand new \texttt{Point} and returns it, leaving the \texttt{Point} passed in exactly as it was. Reasoning about \texttt{shift p 3 4} never requires asking who else might be holding onto \texttt{p} and whether they will be surprised by it changing underneath them, a question that has to be asked constantly about shared mutable Python objects.
+Nothing about \texttt{origin} says which keys it is supposed to have. A typo in a key name, \texttt{origin["ix"]}, is caught the same way a missing key is, by crashing at run time, on whichever run happens to reach that line first. \texttt{Point.x} has no such failure mode. \texttt{origin.z} is rejected while reading the file, before \texttt{\#eval} or any test ever runs, because \texttt{z} is not a field \texttt{structure Point} declares. A \texttt{@dataclass} closes part of this gap, since \texttt{dataclass} at least fixes the field names in advance, but a plain Python \texttt{dataclass} is mutable by default. \texttt{origin.x = 99} silently overwrites the field in place, and any other code still holding a reference to \texttt{origin} sees the change too, whether it wanted to or not. \texttt{shift} above does not do this. It builds a brand new \texttt{Point} and returns it, leaving the \texttt{Point} passed in exactly as it was. Reasoning about \texttt{shift p 3 4} never requires asking who else might be holding onto \texttt{p} and whether they will be surprised by it changing underneath them, a question that has to be asked constantly about shared mutable Python objects.
 
 \begin{mathreading}
 

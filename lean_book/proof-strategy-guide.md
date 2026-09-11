@@ -36,7 +36,7 @@ are unsure.
 
 | When the goal is ... | Try ... first | The idea, in one line |
 | --- | --- | --- |
-| literally the same term on both sides, `a = a`, or an obvious computation like `2 + 3 = 5` | `rfl` | Eat the definitional equality directly; nothing to prove |
+| literally the same term on both sides, `a = a`, or an obvious computation like `2 + 3 = 5` | `rfl` | Close by definitional equality directly; nothing to prove |
 | `n + 0 = n`, `x * 1 = x`, a perhaps-unobvious equality that is still definitional | `rfl`, then `simp` | These close by reduction when the recursion is on the right argument (see [Chapter 1](01-basics/01-everything-has-a-type.md), [Chapter 6, Section 4](06-rigor-check/04-defeq-vs-propeq.md)) |
 | an equality you have as a hypothesis, goal `P` and hypothesis `h : P` | `exact h` | No work; it is already in hand |
 | goal `P` after `intro`, with `h : P` and a function whose result is `P` | `exact`, `apply` | Supply the value explicitly, or let `apply` turn its conclusion into subgoals |

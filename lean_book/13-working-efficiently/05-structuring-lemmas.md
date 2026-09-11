@@ -28,7 +28,7 @@ This is the same judgment call made when writing ordinary code,
 genuinely separate sub-claim is present, not ahead of time "just in case."
 
 **Key points.** `exact?`/`apply?` search for a closing term but do not
-always find the shortest one, a correct but roundabout result is still
+always find the shortest one. A correct but roundabout result is still
 worth simplifying by hand afterward, and still cheaper to obtain that way
 than by deriving the whole term from nothing.
 `decide`/`omega`/`norm_num` replace a hand proof exactly on their

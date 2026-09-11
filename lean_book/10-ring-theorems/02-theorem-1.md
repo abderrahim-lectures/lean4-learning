@@ -7,7 +7,7 @@
 **Claim.** `Rg.mul a Rg.addGrp.id = Rg.addGrp.id`, i.e. $a \cdot 0 = 0$.
 
 **Finding the proof.** In ordinary notation, the standard trick is as
-follows. It is worth memorizing as a pattern applicable to any
+follows. Memorize this as a pattern applicable to any
 additive-identity argument: start from $0 = 0 + 0$, multiply through, and
 cancel.
 
@@ -94,7 +94,7 @@ $$
 using $0 = 0+0$ and `left_distrib`; adding $-x$ and cancelling gives $0 = x$.
 Conceptually this says the map $x \mapsto a\cdot x$ is a group homomorphism
 of $(R,+)$, and homomorphisms send the identity to the identity. $0$ absorbs
-because multiplication is additive in each argument.
+because multiplication distributes over addition in each argument.
 
 **Programmer note (Python).** `mul_zero` looks obvious enough that a
 Python codebase would never think to test it — `x * 0` is `0`.

@@ -112,7 +112,7 @@ $$
 \mathrm{append}(\mathrm{append}(p, q), r) = \mathrm{append}(p, \mathrm{append}(q, r)),
 $$
 
-is a separate statement, provable by induction on the *third* path
+This equation is provable by induction on the *third* path
 argument, `r`, the same argument `Path.append` itself recurses on (as
 the proof of `append_nil_left` already relies on, inducting on its second
 argument). In the `nil` case both sides reduce to `append p q` directly.

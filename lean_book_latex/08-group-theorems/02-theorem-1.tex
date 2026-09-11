@@ -1,6 +1,6 @@
 \section{Theorem 1: the identity is unique}\label{sec:08-group-theorems:02-theorem-1:1}
 
-\textbf{Claim.} If \texttt{e' : G} also satisfies \texttt{∀ a, Grp.op e' a = a}, then \texttt{e' = Grp.id}.
+\textbf{Claim.} (\cite{DummitFoote2003}, pp.~17-18) If \texttt{e' : G} also satisfies \texttt{∀ a, Grp.op e' a = a}, then \texttt{e' = Grp.id}.
 
 \textbf{Finding the proof.} We begin by stating the goal and examining what is available.
 
@@ -16,14 +16,6 @@ The goal is \texttt{e' = Grp.id}, an equality between two elements of \texttt{G}
 
 \texttt{h} lets us compute \texttt{Grp.op e' a} for \emph{any} \texttt{a}, in particular for \texttt{a := Grp.id}, giving \texttt{Grp.op e' Grp.id = Grp.id}. Separately, \texttt{Grp.id\_\allowbreak{}right} (a field of \texttt{Group}, so available for free) says \texttt{Grp.op e' Grp.id = e'} (instantiating its universal quantifier at \texttt{e'}). Both describe \texttt{Grp.op e' Grp.id}. That is the third expression. Once this is noticed, the proof is a matter of bookkeeping.
 
-\begin{lstlisting}
-theorem id_unique (e' : G) (h : (*$\forall$*) a : G, Grp.op e' a = a) : e' = Grp.id := by
-  have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
-  have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
-  rw [(*$\leftarrow$*) step2]
-  exact step1
-\end{lstlisting}
-
 Why \texttt{rw [← step2]} and not \texttt{rw [step2]}? The goal is \texttt{e' = Grp.id}, and \texttt{step2 : Grp.op e' Grp.id = e'} has \texttt{e'} on its \emph{right}. \texttt{rw [step2]} would rewrite the \texttt{Grp.op e' Grp.id} in the goal, but the goal does not yet contain that term. It contains \texttt{e'}. \texttt{rw [← step2]} rewrites right-to-left, replacing \texttt{e'} (which the goal \emph{does} contain) with \texttt{Grp.op e' Grp.id}. This right-to-left choice, ``which side of the \texttt{have} actually appears in the goal at present,'' is something to check every time \texttt{rw} is invoked, not something to guess. Put more sharply, \textbf{rewrite the side that actually appears in the current goal}, not whichever side happens to look more ``finished.'' The direction of \texttt{rw} is dictated by what is already there, not by where the proof is headed.
 
 \begin{mathreading}
@@ -35,6 +27,30 @@ e' \overset{\text{id\_right}}{=} e' \cdot e \overset{h}{=} e,
 e\), the standard ``two things equal to a common third are equal.'' (The same argument in mirror shows a right identity is also unique, so the identity of a group is unique, full stop.)
 
 \end{mathreading}
+
+\subsection{Informal vs.~formal: identity uniqueness}\label{sec:08-group-theorems:02-theorem-1:2}
+
+\begin{quote}
+\textbf{Informal proof.} ``Suppose \(e\) and \(e'\) are both identities. Then \(e' = e' \cdot e = e\).''
+\end{quote}
+
+\begin{quote}
+\textbf{Lean formalization.}
+
+\begin{lstlisting}
+theorem id_unique (e' : G) (h : (*$\forall$*) a : G, Grp.op e' a = a) : e' = Grp.id := by
+  have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
+  -- apply h at a := Grp.id to get e' (*$\cdot$*) e = e
+  have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
+  -- use the right-identity axiom to get e' (*$\cdot$*) e = e'
+  rw [(*$\leftarrow$*) step2]
+  -- rewrite right-to-left: replace e' with e' (*$\cdot$*) e in the goal
+  exact step1
+  -- the goal is now e' (*$\cdot$*) e = e, which is exactly step1
+\end{lstlisting}
+
+The informal proof is one sentence. The Lean version is four lines, but the logical shape is identical: both compute \(e' \cdot e\) two different ways and chain the two equalities. The difference is that Lean demands each step be a named \texttt{have} or a tactic, not a passing phrase.
+\end{quote}
 
 \begin{progcorner}
 

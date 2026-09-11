@@ -113,6 +113,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - The Lean 4 documentation ([LeanDocs]) covers the auto-generated `.toX` projection produced by `extends`, used above as `origin3D.x` and `.toPoint`.
 
 [MacLane1998]: ../bibliography.md#maclane1998
+[LeanDocs]: ../bibliography.md#leandocs
 
 ---
 

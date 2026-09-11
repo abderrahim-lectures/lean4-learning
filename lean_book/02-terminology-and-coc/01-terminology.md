@@ -64,7 +64,7 @@ unification equation could not be solved.
 A term **reduces** by repeatedly applying its computation rules,
 substituting the argument of an abstraction into its body (β-reduction),
 unfolding a `def`, or simplifying a `match` on a known constructor. A term
-with no more reductions available is in **normal form** ([Pierce2002]). `#eval`
+with no more reductions available is in **normal form** ([Pierce2002], §5.1). `#eval`
 (Chapter 1) computes the normal form of a term and prints it. `rfl` (Chapter 4)
 succeeds exactly when both sides of an equation share a normal form. In
 practice, the Lean kernel usually only reduces as far as it needs to
@@ -96,7 +96,7 @@ $$
 This is precisely the engine behind definitional equality. `(fun x => x * 2) 5` reduces,
 by exactly this rule, to `5 * 2`. Every abstraction takes exactly *one*
 argument. A "two-argument function" `fun x y => t` is really `fun x => fun
-y => t`, a function returning a function. This is **currying** ([Pierce2002]), and it is why
+y => t`, a function returning a function. This is **currying** ([Pierce2002], §5.2), and it is why
 `Nat → Nat → Nat` is genuinely `Nat → (Nat → Nat)`, one argument at a
 time, with no separate multi-argument mechanism underneath. Finally, the
 **Church–Rosser theorem** guarantees that if a term has several possible

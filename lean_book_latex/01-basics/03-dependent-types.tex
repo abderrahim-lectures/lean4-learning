@@ -51,7 +51,14 @@ inductive Vec ((*$\alpha$*) : Type) : Nat (*$\rightarrow$*) Type where
   | cons : (*$\alpha$*) (*$\rightarrow$*) Vec (*$\alpha$*) n (*$\rightarrow$*) Vec (*$\alpha$*) (n + 1)
 \end{lstlisting}
 
-Read this exactly like \texttt{Nat}'s two-constructor definition from the previous section, with one new ingredient. \texttt{Vec α} is not a single type, it is a \textbf{family of types indexed by a \texttt{Nat}}. \texttt{Vec α 0}, \texttt{Vec α 1}, \texttt{Vec α 2}, and so on, are all different types, one per length, and the length is tracked \emph{in the type itself}, not just at runtime. \texttt{nil} builds the unique length-\texttt{0} vector, and \texttt{cons} takes an element and a length-\texttt{n} vector and produces a length-\texttt{(n+1)} vector. The \texttt{n} used on both sides of the arrow in \texttt{cons} is the \emph{same} \texttt{n}, so the constructor itself enforces ``one longer than whatever it started with.''
+Read this exactly like \texttt{Nat}'s two-constructor definition from the previous section, with one new ingredient. \texttt{Vec α} is not a single type, it is a \textbf{family of types indexed by a \texttt{Nat}}.
+
+\begin{quote}
+\textbf{Definition.} A \emph{type family indexed by \(A\)} is a function \(B : A \to
+\mathrm{Type}\) assigning to each \(a : A\) a type \(B(a)\). (\cite{TPIL4}, §2.8)
+\end{quote}
+
+\texttt{Vec α 0}, \texttt{Vec α 1}, \texttt{Vec α 2}, and so on, are all different types, one per length, and the length is tracked \emph{in the type itself}, not just at runtime. \texttt{nil} builds the unique length-\texttt{0} vector, and \texttt{cons} takes an element and a length-\texttt{n} vector and produces a length-\texttt{(n+1)} vector. The \texttt{n} used on both sides of the arrow in \texttt{cons} is the \emph{same} \texttt{n}, so the constructor itself enforces ``one longer than whatever it started with.''
 
 One detail that the careful treatment in Section 2 of \texttt{\{α : Type\}} does not account for is that \texttt{n} is never bound anywhere in the \texttt{cons} line above, and yet the declaration elaborates. That is the \textbf{\texttt{autoImplicit}} setting of Lean, on by default, which turns an unbound lowercase identifier in the type of a declaration into an implicit argument automatically, here inserting \texttt{\{n : Nat\}} for you. The same thing happens with \texttt{α} in the definitions below, which is why \texttt{\#check @Vec.replicate} prints a \texttt{\{α : Type\}} binder that nothing in the source wrote. Mathlib and most substantial projects set \texttt{autoImplicit := false}, precisely so that a typo cannot silently become a new implicit argument. In such a project, write the binders out:
 
@@ -91,7 +98,7 @@ def vecLen' {(*$\alpha$*) : Type} {n : Nat} : Vec (*$\alpha$*) n (*$\rightarrow$
 \item
   \texttt{vecLen} is the familiar style. The \texttt{Vec α n} argument is bound by name (as \texttt{\_\allowbreak{}}, since the body never actually uses it, only its index \texttt{n}) inside \texttt{(...)}, and the body is one term, \texttt{n}, exactly like the body of \texttt{double} was one term, \texttt{n * 2}.
 \item
-  \texttt{vecLen'} binds nothing after the colon. Its signature is \texttt{Vec α n → Nat}, a bare arrow, precisely as if it were the \emph{statement} of a theorem rather than the header of a function. The argument is instead supplied by the single equation \texttt{| \_\allowbreak{} => n} below, matching against whatever term of \texttt{Vec α n} is eventually passed in. The \textbf{equation compiler} of Lean is what turns this \texttt{| pattern => term} block into an ordinary function, internally no different from writing \texttt{fun v => match v with | \_\allowbreak{} => n} inside a \texttt{:=} body. \texttt{vecLen} and \texttt{vecLen'} are, after elaboration, the same function under two different pieces of surface syntax, not two functions that happen to agree on every input.
+  \texttt{vecLen'} binds nothing after the colon. Its signature is \texttt{Vec α n → Nat}, a bare arrow, precisely as if it were the \emph{statement} of a theorem rather than the header of a function. The argument is instead supplied by the single equation \texttt{| \_\allowbreak{} => n} below, matching against whatever term of \texttt{Vec α n} is eventually passed in. The \textbf{equation compiler} (the Lean elaboration pass that translates \texttt{| pattern => term} blocks into \texttt{match} expressions; \cite{LeanDocs}) of Lean is what turns this \texttt{| pattern => term} block into an ordinary function, internally no different from writing \texttt{fun v => match v with | \_\allowbreak{} => n} inside a \texttt{:=} body. \texttt{vecLen} and \texttt{vecLen'} are, after elaboration, the same function under two different pieces of surface syntax, not two functions that happen to agree on every input.
 \item
   The two styles are not interchangeable in every situation, only equally valid where they overlap. Equation-style earns its keep exactly when the whole purpose of a definition is to case on the \emph{shape} of an inductive argument, one equation per constructor, which is why \texttt{Vec.replicate} above (and \texttt{Vec.head}, \texttt{Vec.dot} shortly) are written that way. Each genuinely has one case for \texttt{0}/\texttt{nil} and one for \texttt{n + 1}/\texttt{cons}. The named-binder \texttt{:=} style stays the natural choice once the argument is used as an ordinary value rather than taken apart, exactly as \texttt{vecLen} above never inspects \emph{which} vector it received, only its already-known length \texttt{n}.
 \end{itemize}
@@ -128,7 +135,33 @@ Real or complex numbers would make the distinction just as clear, but are not an
 
 Look closely at the type \texttt{(n : Nat) → Vec α n}. The \texttt{n} that appears on the \emph{left} of the arrow (the argument) reappears inside the type on the \emph{right} of the arrow (the result). Feed \texttt{Vec.replicate a} the number \texttt{3}, and the result has type \texttt{Vec α 3}, specifically. Feed it \texttt{5}, and the very same function returns something of type \texttt{Vec α 5} instead. This is categorically different from \texttt{double : Nat → Nat}, where the output type (\texttt{Nat}) is fixed in advance and never reads the input value at all. Here, the \emph{type itself} changes based on which number was passed in. That is exactly what ``the codomain depends on the argument'' means, made as concrete as possible.
 
-\subsection{Why bother: invariants become part of the type, not a side promise}\label{sec:01-basics:03-dependent-types:5}
+\subsection{Informal vs.~formal: what the type checker sees}\label{sec:01-basics:03-dependent-types:5}
+
+A mathematician looking at \texttt{Vec α n} says ``a list of length \(n\).'' Lean says something more precise, and the gap is worth seeing once.
+
+\begin{quote}
+\textbf{Informal proof.} ``The type \texttt{Vec α n} has exactly \texttt{n} elements. The proof is immediate from the definition: \texttt{nil} has length 0, and \texttt{cons} adds one.''
+\end{quote}
+
+\begin{quote}
+\textbf{Lean formalization.}
+
+\begin{lstlisting}
+inductive Vec ((*$\alpha$*) : Type) : Nat (*$\rightarrow$*) Type where
+  | nil  : Vec (*$\alpha$*) 0           -- base case: the empty vector has length 0
+  | cons : (*$\alpha$*) (*$\rightarrow$*) Vec (*$\alpha$*) n       -- inductive case: a vector of length n
+        (*$\rightarrow$*) Vec (*$\alpha$*) (n + 1)      -- becomes a vector of length n + 1
+
+def Vec.replicate (a : (*$\alpha$*)) : (n : Nat) (*$\rightarrow$*) Vec (*$\alpha$*) n
+  | 0     => Vec.nil                     -- length 0: return the empty vector
+  | n + 1 => Vec.cons a (Vec.replicate a n)
+  -- length n + 1: prepend a, recurse on n
+\end{lstlisting}
+
+The informal ``proof'' is a sentence. The Lean version is a definition with \emph{two constructors} and \emph{two equations}, one per case. The length \texttt{n} is not checked at runtime; it is baked into the type of the result. \texttt{Vec.replicate a 3} literally has type \texttt{Vec α 3} --- not \texttt{Vec α \_\allowbreak{}}, not ``some list whose length happens to be 3,'' but the specific type whose sole inhabitant is a three-element vector. The type checker enforces this at compile time, before anything runs.
+\end{quote}
+
+\subsection{Why bother: invariants become part of the type, not a side promise}\label{sec:01-basics:03-dependent-types:6}
 
 The payoff is not just bookkeeping. Because the length lives in the type, Lean can rule out a whole class of mistakes \emph{before running anything at all}. Define a function that reads the first element of a vector, which only makes sense for a \emph{non-empty} vector:
 
@@ -213,11 +246,11 @@ in the application
   vecA.dot vecB
 \end{lstlisting}
 
-the version of Python, \texttt{dot([17,-\allowbreak{}3,42], [99,8])}, silently returned \texttt{1659}, a wrong answer with no error at all. The Lean version does not even compile. The length-mismatch bug is not caught by a clever runtime check \emph{added} to \texttt{Vec.dot}. There is no such check anywhere in its three-line definition. It is caught because ``both arguments have the same length'' was stated once, in the type, and Lean enforces every type it is given, automatically, for every call site, without exception.
+In the version of Python, \texttt{dot([17,-\allowbreak{}3,42], [99,8])}, silently returned \texttt{1659}, a wrong answer with no error at all. The Lean version does not even compile. The length-mismatch bug is not caught by a clever runtime check \emph{added} to \texttt{Vec.dot}. There is no such check anywhere in its three-line definition. It is caught because ``both arguments have the same length'' was stated once, in the type, and Lean enforces every type it is given, automatically, for every call site, without exception.
 
 The actual, built-in \texttt{Vector α n} in Lean is distinct from the toy \texttt{Vec} built here. It is defined differently under the hood, as an \texttt{Array α} paired with a proof that its size equals \texttt{n}, for performance reasons, the same way the \emph{presentation} of \texttt{Nat} above as \texttt{zero}/\texttt{succ}, due to Peano, does not reflect how Lean actually stores numbers at runtime (as fast arbitrary-precision integers). The \texttt{Vec} built in this section is the traditional textbook definition, simpler to reason about and the one every type-theory reference uses first, while the real \texttt{Vector} in Lean is engineered for speed. Both are dependent types in exactly the sense described here.
 
-\subsection{The general pattern: Π-types}\label{sec:01-basics:03-dependent-types:6}
+\subsection{The general pattern: Π-types}\label{sec:01-basics:03-dependent-types:7}
 
 Both examples above are instances of one idea. A \textbf{dependent function type}, written with \(\Pi\) (``Pi,'' for ``dependent product''), generalizes the ordinary function-space \(A \to B\):
 
@@ -225,11 +258,11 @@ Both examples above are instances of one idea. A \textbf{dependent function type
 \prod_{x : A} B(x)
 \]
 
-Here \(B\) is not itself a type. \(B\) is a \textbf{family of types indexed by \(A\)}, formally a function \(B : A \to \mathrm{Type}\) (or into \texttt{Prop}, the type of propositions, a distinct universe of its own, formally named \texttt{Sort 0} in \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2}, as below). For each \(x : A\), \(B(x)\) is the specific type that family produces at \(x\), and different values of \(x\) may give genuinely different types. Read the whole expression as ``a function that, given any \(x : A\), returns a term of type \(B(x)\),'' a type allowed to mention \(x\), because \(B\) itself is allowed to vary with \(x\). When \(B(x)\) does not actually depend on \(x\) (i.e.~\(B\) is a \emph{constant} family), this collapses exactly to the ordinary function type \(A \to B\). Π-types \textbf{strictly generalize} function types. They do not replace them. The type of \texttt{Vec.replicate} above literally \emph{is} \(\prod_{n : \mathtt{Nat}} \mathrm{Vec}\,\alpha\,n\), with the surface syntax of Lean \texttt{(n : Nat) → Vec α n} spelling out the same thing without needing the \(\Pi\) symbol.
+Here \(B\) is not itself a type. \(B\) is a \textbf{family of types indexed by \(A\)}, formally a function \(B : A \to \mathrm{Type}\) (or into \texttt{Prop}, the type of propositions, a distinct universe of its own, formally named \texttt{Sort 0} (the universe hierarchy: \texttt{Sort 0 = Prop}, \texttt{Sort (n+1) = Type n}; \cite{TPIL4}, §3.1) in \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2}, as below). For each \(x : A\), \(B(x)\) is the specific type that family produces at \(x\), and different values of \(x\) may give genuinely different types. Read the whole expression as ``a function that, given any \(x : A\), returns a term of type \(B(x)\),'' a type allowed to mention \(x\), because \(B\) itself is allowed to vary with \(x\). When \(B(x)\) does not actually depend on \(x\) (i.e.~\(B\) is a \emph{constant} family), this collapses exactly to the ordinary function type \(A \to B\). Π-types \textbf{strictly generalize} function types. They do not replace them. The type of \texttt{Vec.replicate} above literally \emph{is} \(\prod_{n : \mathtt{Nat}} \mathrm{Vec}\,\alpha\,n\), with the surface syntax of Lean \texttt{(n : Nat) → Vec α n} spelling out the same thing without needing the \(\Pi\) symbol.
 
 This is also, not by coincidence, exactly what \texttt{∀} means. \texttt{∀ n : Nat, n ≥ 0} is a Π-type where \(B(n)\) happens to be a \emph{proposition} (\texttt{n ≥ 0 : Prop}) rather than a data type like \texttt{Vec α n}. It reads as ``for every \texttt{n}, produce a proof of the \texttt{n}-specific statement \texttt{n ≥ 0}.'' Chapter 4 introduces \texttt{∀} and propositional logic properly. Once it does, every \texttt{∀} written from that point on is already a dependent function in exactly this sense, whether or not this vocabulary is available yet when it is first met. Propositions are just the special case where the family \(B\) happens to land in \texttt{Prop} instead of \texttt{Type}.
 
-\subsection{Looking ahead}\label{sec:01-basics:03-dependent-types:7}
+\subsection{Looking ahead}\label{sec:01-basics:03-dependent-types:8}
 
 Chapter 12 builds a genuinely more elaborate dependent type, \texttt{Path Q : V → V → Type}, a family of types indexed by a \emph{pair} of vertices in a graph rather than by a single \texttt{Nat}. It is ``the type of paths from \texttt{u} to \texttt{w},'' which differs for each choice of endpoints exactly as \texttt{Vec α n} differs for each length. Its \texttt{cons}-like constructor is a dependent function for the same reason \texttt{Vec.replicate} is one here. Composing two paths is only accepted by the type-checker when their endpoints actually match, an invariant baked into the type rather than checked separately. Nothing new is needed to understand it once the \texttt{Fin}/\texttt{Vec} examples in this section make sense. It is the identical idea, with a richer index.
 
@@ -241,7 +274,7 @@ Chapter 12 builds a genuinely more elaborate dependent type, \texttt{Path Q : V 
 Read more. \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2} gives Π-types (and Σ-types) their formal typing rules, with more worked examples, rather than only the walkthrough given here.
 \end{quote}
 
-\subsection{Sources, quoted}\label{sec:01-basics:03-dependent-types:8}
+\subsection{Sources, quoted}\label{sec:01-basics:03-dependent-types:9}
 
 Formal definitions and citations for this section, gathered here for reference (full entries in the \hyperref[sec:root:bibliography:1]{Bibliography}):
 

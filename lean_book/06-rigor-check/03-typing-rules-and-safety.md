@@ -168,7 +168,7 @@ This is precisely the gap already closed by [Chapter 2, Section 2](../02-termino
 `identity {α : Type} (x : α) : α := x` uses, and it is unavailable in STLC
 (or in the `TypeVar` of Python, which is real but considerably less powerful).
 It cannot let a *return type* depend on an ordinary *value* argument the
-way `Vec.replicate` does in Chapter 1, Section 3).
+way `Vec.replicate` does in Chapter 1, Section 3.
 
 ### Universes, as a typing rule
 
@@ -262,14 +262,14 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - **Preservation (Theorem 9.3.9).** "If $\Gamma \vdash t : T$ and
   $t \to t'$, then $\Gamma \vdash t' : T$" ([Pierce2002], §9.3).
 - **Universe-formation rule.** The working statement used by this book, after
-  the calculus of constructions ([CoquandHuet1988]):
+  the calculus of constructions ([CoquandHuet1988], §1):
   $\mathtt{Type}\,i : \mathtt{Type}\,(i+1)$, and a Π-type built from
   $A : \mathtt{Sort}\,i$, $B : \mathtt{Sort}\,j$ lands in
   $\mathtt{Sort}\,(\mathrm{imax}(i,j))$. The $j = 0$ clause is the
   impredicativity of `Prop`, which the calculus of constructions is
   characterized by and which [TPIL4] §2.2 documents for Lean specifically.
 - Pierce ([Pierce2002]), Ch. 9 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10–11; Ch. 12 "Simple Extensions" actually covers pairs/tuples/records/sums, unrelated to the content of this section.
-- Milner ([Milner1978]) covers the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
+- Milner ([Milner1978], §2) covers the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the boxes of this section.
 - [Girard1972] is the Girard paradox (the inconsistency of `Type : Type`), a different, later thesis than [Girard1971] cited elsewhere in this book; see [Chapter 6, Section 2](02-universes.md) for the full citation and [Coquand1986] for the modern exposition.
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" is the Lean documentation on universes, matching the presentation here.

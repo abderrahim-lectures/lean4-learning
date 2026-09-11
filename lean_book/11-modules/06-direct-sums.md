@@ -93,8 +93,7 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
     · exact ModN.one_smul x.snd
 ```
 
-`congr 1` is a tactic worth noting, as this is its first
-appearance. Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
+`congr 1` makes its first appearance here. Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
 `congr 1` reduces it to the componentwise goals `a1 = b1` and `a2 = b2`.
 This is the categorical fact that the equality of a product is checked
 pairwise, turned into a one-line tactic instead of a hand-unfolded

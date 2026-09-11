@@ -106,8 +106,7 @@ This book is, and remains, Mathlib-free by design: every group, ring, and
 path algebra is built from scratch so you see every definition and proof
 obligation explicitly (see [the Mathlib note](00-setup/04-mathlib-note.md)).
 Starting in Chapter 7, though, each worked example is followed by a labeled "Mathlib equivalent" box showing the same statement phrased against
-the real `Group`/`Ring`/`Module` API of Mathlib. This isn't a contradiction of
-the from-scratch approach; it's a second, parallel track. Seeing the same
+the real `Group`/`Ring`/`Module` API of Mathlib. This is a second, parallel track that runs alongside the from-scratch approach. Seeing the same
 idea twice, once built by hand and once as Mathlib already has it, is how
 you learn both halves of working in Lean at once, the underlying
 mathematics *and* the shape of the library you'll actually use once you
@@ -116,8 +115,7 @@ leave this book. Chapter 14 then completes the handoff to Mathlib in full.
 The book has been through several editorial passes, a first pass checking
 for foundational terms used before they're explained, thin worked-example
 coverage, and outright factual errors; a second, accessibility-focused
-pass that caught "Mathematical reading" boxes drifting past its own
-promised background of the book (a shared glossary now lives at
+pass that caught "Mathematical reading" boxes drifting past the book's promised background (a shared glossary now lives at
 [Chapter 2, Section 1](02-terminology-and-coc/01-terminology.md), and
 [Chapter 4, Section 2](04-propositions-and-proofs/02-logic-recap.md) recaps
 standard logic from scratch for readers meeting it for the first time) and added

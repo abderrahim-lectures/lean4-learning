@@ -11,14 +11,14 @@ looked up. This section covers that second, disjoint case,
 tactics that settle a goal by evaluating an algorithm rather than
 searching for or constructing a term by hand.
 
-For goals that are *decidable* ([Chlipala2013], §6.2), where "true or false" can be settled by a
+For goals that are *decidable* ([Chlipala2013], §6.2, p. 110), where "true or false" can be settled by a
 terminating algorithm instead of a hand-built argument, Lean has tactics
 that just run that algorithm.
 
 - **`decide`** evaluates a `Decidable` proposition to `true`/`false`
   directly. It works well for small, closed (no free variables)
   propositions, for example `(7 : Nat) ∣ 21` or `¬ (3 = 5)`. `decide` should
-  not be used on propositions with free variables or unbounded search, it can
+  not be used on propositions with free variables or unbounded search. It can
   time out, or worse, produce a correct but useless proof term that
   reveals nothing.
 - **`omega`** is a decision procedure for *linear* arithmetic over `Nat`/`Int`

@@ -52,7 +52,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   unique ... for each $a \in G$, $a^{-1}$ is uniquely determined"
   ([DummitFoote2003], §1.1 "Basic Axioms and Examples," p. 17,
   Proposition 1).
-- Aluffi ([Aluffi2009]) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of the book itself, not quoted from a verified excerpt.
+- Aluffi ([Aluffi2009], §II.1) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of the book itself, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

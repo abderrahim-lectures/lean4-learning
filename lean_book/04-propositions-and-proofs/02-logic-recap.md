@@ -91,12 +91,7 @@ is the standard system of such rules. Each connective gets
 an **introduction rule** (how to *prove* a formula built with that
 connective) and an **elimination rule** (how to *use* one once you have
 it). Section 1 already showed this pattern concretely (`⟨_, _⟩` introduces `∧`,
-`.left` eliminates it) without naming it. Writing $\Gamma, \varphi$ for
-
-**Definition.** *Natural deduction* (Gentzen, 1935) is a proof system with introduction and elimination rules for each connective.
-
-**Definition.** An *introduction rule* constructs a proof of a compound formula; an *elimination rule* decomposes it.
-"$\Gamma$ together with the extra hypothesis $\varphi$," the rules are as follows.
+`.left` eliminates it) without naming it. Writing $\Gamma, \varphi$ for "$\Gamma$ together with the extra hypothesis $\varphi$," the rules are as follows.
 
 $$
 \text{($\wedge$-intro)}\ \ \frac{\Gamma \vdash \varphi \qquad \Gamma \vdash \psi}
@@ -195,8 +190,8 @@ $$
 \varphi ::= \cdots \;\mid\; \forall x.\, \varphi \;\mid\; \exists x.\, \varphi
 $$
 
-The natural deduction rules generalize the rules for $\wedge$/$\vee$ in the
-obvious way. $\forall$-intro requires proving $\varphi$ for an *arbitrary,
+The natural deduction rules for quantifiers generalize the rules for $\wedge$/$\vee$ in the
+same pattern. $\forall$-intro requires proving $\varphi$ for an *arbitrary,
 otherwise-unconstrained* $x$ (exactly "let $x$ be arbitrary; ...; therefore
 $\forall x, \varphi$" from ordinary proof-writing). $\exists$-intro
 requires exhibiting one specific witness $a$ and a proof of $\varphi(a)$.

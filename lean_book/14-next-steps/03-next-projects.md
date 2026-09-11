@@ -182,7 +182,7 @@ sequence by hand.
 Everything in this book is built from the `inductive` mechanism of Lean:
 `Nat`, `Bool`, `Path`, every `structure`. It is worth knowing, purely as a
 curiosity, that none of that machinery was ever strictly necessary. The
-untyped λ-calculus, variables, `fun x => t`-style abstraction, and
+untyped λ-calculus (the formal system of variables, abstraction, and application introduced by Church [Church1941]), variables, `fun x => t`-style abstraction, and
 application, nothing else, is already expressive enough to build
 booleans, numbers, and arbitrary data by encoding them as functions.
 

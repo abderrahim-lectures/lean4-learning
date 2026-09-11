@@ -167,7 +167,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   equal ... This is known as proof irrelevance" ([TPIL4],
   "Propositions and Proofs").
 - Pierce ([Pierce2002]), Ch. 4, 11–12 covers operational semantics and reduction, and the general distinction between checking equality by computation versus by proof that this section specializes to `rfl`/`=` in Lean.
-- Martin-Löf ([MartinLof1984]) is the original source distinguishing definitional (judgmental) equality from propositional equality, the exact distinction this section works through.
+- Martin-Löf ([MartinLof1984], Ch. 4) is the original source distinguishing definitional (judgmental) equality from propositional equality, the exact distinction this section works through.
 
 [Pierce2002]: ../bibliography.md#pierce2002
 [MartinLof1984]: ../bibliography.md#martinlof1984

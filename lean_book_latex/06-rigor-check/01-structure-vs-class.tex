@@ -26,7 +26,7 @@ Syntactically these look almost identical. \texttt{class} is very nearly a short
 
 \subsection{\texorpdfstring{What \texttt{class} actually adds: instance search}{What class actually adds: instance search}}\label{sec:06-rigor-check:01-structure-vs-class:2}
 
-A \texttt{class} is a \texttt{structure} whose \emph{inhabitants} Lean is willing to search for automatically, through a process called \textbf{typeclass resolution} (or ``instance search''). When you write \texttt{class Group (G : Type)}, and then register a particular group structure with the keyword \texttt{instance} instead of \texttt{def}:
+A \texttt{class} is a \texttt{structure} whose \emph{inhabitants} Lean is willing to search for automatically, through a process called \textbf{typeclass resolution} (or ``instance search'') (\cite{TPIL4}, ``Type Classes''). When you write \texttt{class Group (G : Type)}, and then register a particular group structure with the keyword \texttt{instance} instead of \texttt{def}:
 
 \begin{lstlisting}
 instance : Group Int where
@@ -66,7 +66,7 @@ Nothing about the \emph{mathematical content} changes between the two styles. Th
 
 \subsection{\texorpdfstring{A note on \texttt{.toGroup}, \texttt{.toPoint}, and coercion}{A note on .toGroup, .toPoint, and coercion}}\label{sec:06-rigor-check:01-structure-vs-class:5}
 
-Whenever a \texttt{structure} extends another (\texttt{Point3D extends Point} in Chapter 3, \texttt{CommGroup extends Group} in this book), Lean generates a field named \texttt{.toX} that projects back to the parent structure. \texttt{cg.toGroup} recovers the underlying \texttt{Group} from a \texttt{CommGroup cg}. Lean also permits \emph{dropping} the \texttt{.toGroup} and writing \texttt{cg.op} directly, silently inserting the projection. This automatic insertion of a ``translate from one type to another'' function is an instance of \textbf{coercion}, the general mechanism by which Lean lets a term of one type stand in for a term of a related type without the conversion being written explicitly. It is the same general idea, though a much simpler case, as coercing \texttt{Nat} values into \texttt{Int}. The literal projection differs, but ``insert a conversion function automatically so notation reads naturally'' is the shared mechanism.
+Whenever a \texttt{structure} extends another (\texttt{Point3D extends Point} in Chapter 3, \texttt{CommGroup extends Group} in this book), Lean generates a field named \texttt{.toX} that projects back to the parent structure. \texttt{cg.toGroup} recovers the underlying \texttt{Group} from a \texttt{CommGroup cg}. Lean also permits \emph{dropping} the \texttt{.toGroup} and writing \texttt{cg.op} directly, silently inserting the projection. This automatic insertion of a ``translate from one type to another'' function is an instance of \textbf{coercion}, a registered implicit conversion from one type to another that Lean inserts automatically. (\cite{TPIL4}, ``Coercions'') It is the same general idea, though a much simpler case, as coercing \texttt{Nat} values into \texttt{Int}. The literal projection differs, but ``insert a conversion function automatically so notation reads naturally'' is the shared mechanism.
 
 \begin{quote}
 Read more. The TPiL chapters ``Structures and Records'' and ``Type Classes'' cover both topics in this section directly, including coercions, in more depth and with additional worked examples than this book provides.

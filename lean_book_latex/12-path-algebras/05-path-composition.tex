@@ -50,7 +50,7 @@ That final \texttt{rfl} is not a weak or approximate check. It says the two cons
 
 \begin{mathreading}
 
-\texttt{Path.append} is \textbf{composition in the free category} \(\mathrm{Free}(Q)\), written throughout this section in \emph{path order}: ``\(p\) then \(q\),'' matching the argument order of \texttt{Path.append p q}. This is not the function-composition order \(q \circ p\) standard in category theory texts. The two conventions denote the same composite; only the order in which the symbols are written differs. Mixing them mid-explanation is a common source of confusion, so this book fixes path order throughout. In path order, \texttt{Path.append} is the map
+\texttt{Path.append} is \textbf{composition in the free category} \(\mathrm{Free}(Q)\) (the category whose objects are vertices and morphisms are paths), written throughout this section in \emph{path order}: ``\(p\) then \(q\),'' matching the argument order of \texttt{Path.append p q}. This is not the function-composition order \(q \circ p\) standard in category theory texts. The two conventions denote the same composite; only the order in which the symbols are written differs. Mixing them mid-explanation is a common source of confusion, so this book fixes path order throughout. In path order, \texttt{Path.append} is the map
 
 \end{mathreading}
 
@@ -59,7 +59,7 @@ That final \texttt{rfl} is not a weak or approximate check. It says the two cons
 \qquad (p, q) \longmapsto p\,;\,q
 \]
 
-(the semicolon ``\(;\)'' is a common notation for path-order composition, distinguishing it from function-order \(\circ\)). The identity laws, stated in path order, are \texttt{Path.append p (Path.nil v) = p} (appending the trivial path \emph{after} \texttt{p} changes nothing; this case is implemented directly by the \texttt{nil} branch of the \texttt{match} above, since recursion is on \texttt{q}), and, separately, \texttt{Path.append (Path.nil u) p = p} (appending the trivial path \emph{before} \texttt{p} also changes nothing; proved as Exercise 2 by induction on \texttt{p}, since the \texttt{nil} branch alone does not give this one for free). The \texttt{cons} case of the recursion is a \emph{definitional} recursion lemma (\texttt{Path.append p (Path.cons a h h' q') = Path.cons a h h' (Path.append p q')}) that lets induction unfold \texttt{Path.append} one arrow at a time. It is not itself associativity. True associativity of composition,
+(the semicolon ``\(;\)'' is a common notation for path-order composition, distinguishing it from function-order \(\circ\)). The identity laws, stated in path order, are \texttt{Path.append p (Path.nil v) = p} (appending the trivial path \emph{after} \texttt{p} changes nothing; this case is implemented directly by the \texttt{nil} branch of the \texttt{match} above, since recursion is on \texttt{q}), and, separately, \texttt{Path.append (Path.nil u) p = p} (appending the trivial path \emph{before} \texttt{p} also changes nothing; proved as Exercise 2 by induction on \texttt{p}, since the \texttt{nil} branch alone does not give this one for free). The \texttt{cons} case of the recursion is a \emph{definitional} recursion lemma (\texttt{Path.append p (Path.cons a h h' q') = Path.cons a h h' (Path.append p q')}) that lets induction unfold \texttt{Path.append} one arrow at a time. It is not itself associativity. True associativity of composition is a separate statement:
 
 \[
 \mathrm{append}(\mathrm{append}(p, q), r) = \mathrm{append}(p, \mathrm{append}(q, r)),
@@ -80,11 +80,11 @@ This is the same closing \texttt{rfl} as the \texttt{pathBetaAlphaViaAppend = pa
 
 \subsection{The path algebra}\label{sec:12-path-algebras:05-path-composition:3}
 
-The \textbf{path algebra} \(kQ\) of a quiver \(Q\) over a field (or ring) \(k\) is the ring whose elements are \(k\)-linear combinations of paths in \(Q\), with multiplication given by path composition (composing two paths whose endpoints do not match gives \(0\)). Formalizing \(kQ\) fully (as a \texttt{Ring}, per Chapter 9) requires ``formal sums of paths with ring coefficients,'' which is a genuinely bigger construction, essentially a finitely-supported function from paths to \(k\). It is a natural next project once the material above is well understood. This chapter stops at ``paths and their composition'' because that data (the \emph{category} of paths, really) is the essential content of the construction. Once it is in place, the ring structure on top is routine to add.
+\textbf{Definition} (Path algebra). The \emph{path algebra} \(kQ\) of a quiver \(Q\) over a field (or ring) \(k\) is the ring of \(k\)-linear combinations of paths in \(Q\), with multiplication given by path composition (composing two paths whose endpoints do not match gives \(0\)) (\cite{AssemSimsonSkowronski2006}, Definition 1.2). Formalizing \(kQ\) fully (as a \texttt{Ring}, per Chapter 9) requires ``formal sums of paths with ring coefficients,'' which is a genuinely bigger construction, essentially a finitely-supported function from paths to \(k\). It is a natural next project once the material above is well understood. This chapter stops at ``paths and their composition'' because that data (the \emph{category} of paths, really) is the essential content of the construction. Once it is in place, the ring structure on top is routine to add.
 
 \begin{mathreading}
 
-The \textbf{path algebra} \(kQ\) is the free \(k\)-module on the set of all paths, \(kQ = \bigoplus_{p\ \text{path}} k\cdot p\), with multiplication extending path composition \(k\)-bilinearly, written here in the same \textbf{path order} used throughout this section, so that it matches \texttt{Path.append} and the quoted source below. \[
+The \textbf{path algebra} \(kQ\) is the set of all finite \(k\)-linear combinations of paths, \(kQ = \bigoplus_{p\ \text{path}} k\cdot p\), with multiplication extending path composition \(k\)-bilinearly, written here in the same \textbf{path order} used throughout this section, so that it matches \texttt{Path.append} and the quoted source below. \[
 p \cdot q = \begin{cases} p\,;q & \text{if } t(p) = s(q),\\ 0 &
 \text{otherwise,}\end{cases}
 \] where \(p\,;q\) means ``first \(p\), then \(q\)''. (Sources that fix function-composition order instead write this product as \(q \cdot p = q \circ

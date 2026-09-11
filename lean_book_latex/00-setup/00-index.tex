@@ -17,6 +17,10 @@
 
 Before any theorem is stated, three questions need settling, each forcing the next. Why trust a proof to Lean specifically, rather than to pen and paper or to a different proof assistant? Given the answer, how does a reader actually get Lean running? And once it runs, why does this book build every structure by hand rather than importing an existing library that already has them? \hyperref[sec:00-setup:01-why-lean:1]{Section 1} answers the first question by fixing what ``verified'' means for the rest of the book: a proof is correct exactly when it type-checks against the kernel of Lean. \hyperref[sec:00-setup:02-installing-toolchain:1]{Section 2} and \hyperref[sec:00-setup:03-editor:1]{Section 3} answer the second, mechanically: install elan, pin a toolchain, add an editor that shows the goal state. \hyperref[sec:00-setup:04-mathlib-note:1]{Section 4} answers the third: building \texttt{Group}/\texttt{Ring} from scratch exposes every field and proof obligation Mathlib would otherwise hide behind its typeclass hierarchy, which is the entire point of a first encounter.
 
+\section{Conventions}\label{sec:00-setup:00-index:3}
+
+Every formal definition, theorem, and named concept in this book carries an inline citation \texttt{[Author Year, p.XX]} immediately after the Definition block or theorem statement. Bolded terms always have a corresponding \texttt{**Definition.**} block. This means a reader encountering a term for the first time sees the source without having to flip to a bibliography at the back.
+
 
 % Auto-appended: input every other section in order.
 \input{00-setup/01-why-lean.tex}

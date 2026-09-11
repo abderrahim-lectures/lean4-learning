@@ -11,7 +11,7 @@ obligation is made explicit. Chapter 14 points toward Mathlib for readers
 ready to use the "real" library instead of reinventing it.
 
 Starting in Chapter 7, most worked examples are followed by a small,
-clearly labeled "Mathlib equivalent" box, showing the same statement
+explicitly labeled "Mathlib equivalent" box, showing the same statement
 written against the actual `Group`/`Ring`/`Module` API of Mathlib. This does not
 replace the from-scratch approach; the hand-built version remains the main
 teaching path, and the Mathlib box is only a preview. Holding both versions

@@ -18,7 +18,7 @@ A \texttt{GroupData G} is an operation, an identity element, and an inverse func
 \texttt{GroupData G} is the \emph{signature} of a group on the carrier \(G\), the raw data \((\,\cdot : G\times G \to G,\ e \in G,\
 (-)^{-1} : G \to G\,)\) with no laws imposed, the product \[
 \mathrm{GroupData}(G) = (G^{G\times G}) \times G \times (G^{G}).
-\] It is a \emph{magma} signature, not yet a group; the axioms below cut out the genuine group structures as a subset.
+\] It is a \emph{magma} (a set with a binary operation and no axioms) signature, not yet a group; the axioms below cut out the genuine group structures as a subset.
 
 \end{mathreading}
 
@@ -37,6 +37,35 @@ structure Group (G : Type) where
 \end{lstlisting}
 
 \texttt{assoc} is a \emph{proof obligation}: whoever constructs a \texttt{Group G} must supply a term proving it for every \texttt{a b c}. The remaining four fields are the identity and inverse axioms, split left/right because commutativity has not been assumed. Collapsing them into one field each would silently assume it.
+
+\subsection{Informal vs.~formal: what ``a group'' means to each}\label{sec:07-groups:02-translating:2}
+
+\begin{quote}
+\textbf{Informal proof.} ``A group is a set \(G\) with \(\cdot\) satisfying associativity, identity, and inverses.''
+\end{quote}
+
+\begin{quote}
+\textbf{Lean formalization.}
+
+\begin{lstlisting}
+structure Group (G : Type) where
+  op : G (*$\rightarrow$*) G (*$\rightarrow$*) G              -- binary operation
+  id : G                      -- identity element
+  inv : G (*$\rightarrow$*) G                 -- inverse function
+  assoc : (*$\forall$*) a b c : G, op (op a b) c = op a (op b c)
+  -- associativity: (a (*$\cdot$*) b) (*$\cdot$*) c = a (*$\cdot$*) (b (*$\cdot$*) c) for all a, b, c
+  id_left : (*$\forall$*) a : G, op id a = a
+  -- left identity: e (*$\cdot$*) a = a for all a
+  id_right : (*$\forall$*) a : G, op a id = a
+  -- right identity: a (*$\cdot$*) e = a for all a
+  inv_left : (*$\forall$*) a : G, op (inv a) a = id
+  -- left inverse: a(*${}^-$*)(*\textsuperscript{1}*) (*$\cdot$*) a = e for all a
+  inv_right : (*$\forall$*) a : G, op a (inv a) = id
+  -- right inverse: a (*$\cdot$*) a(*${}^-$*)(*\textsuperscript{1}*) = e for all a
+\end{lstlisting}
+
+The informal version names three ingredients and three laws. The Lean version lists \emph{eight} fields: three pieces of data plus five proof obligations (identity is split into left/right, inverse is split into left/right). A term of type \texttt{Group G} cannot exist unless all five proofs are supplied, so every theorem later in the book that takes a \texttt{Group G} gets those five facts for free, checked once, rather than trusting each caller.
+\end{quote}
 
 \begin{mathreading}
 
@@ -70,4 +99,4 @@ class Group:
         self.inv = inv
 \end{lstlisting}
 
-\texttt{Group(op=lambda a, b: a -\allowbreak{} b, id=0, inv=lambda a: a)} type-checks and runs, and is not a group, since subtraction is not associative. The bug surfaces later, silently, wherever a theorem assuming associativity is applied to this \texttt{op} without re-checking the assumption. \texttt{GroupData} above has the identical defect. Values are bundled but nothing is checked, which is exactly why \texttt{Group} adds the five axiom fields: a term of type \texttt{Group G} cannot exist unless proofs of \texttt{assoc}, \texttt{id\_\allowbreak{}left}, \texttt{id\_\allowbreak{}right}, \texttt{inv\_\allowbreak{}left}, and \texttt{inv\_\allowbreak{}right} were actually supplied, so every theorem in the rest of the book taking a \texttt{Group G} gets those five facts for free, checked once, rather than trusting every caller to have built the underlying data correctly.
+\texttt{Group(op=lambda a, b: a -\allowbreak{} b, id=0, inv=lambda a: a)} type-checks and runs, and is not a group, since subtraction is not associative. The bug surfaces later, silently, wherever a theorem assuming associativity is applied to this \texttt{op} without re-checking the assumption. \texttt{GroupData} above has the identical defect. Values are bundled but nothing is checked, which is exactly why \texttt{Group} adds the five axiom fields. As the blockquote above notes, this means every theorem taking a \texttt{Group G} gets five facts for free, checked once.

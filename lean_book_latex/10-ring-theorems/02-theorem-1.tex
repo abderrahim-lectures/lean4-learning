@@ -2,7 +2,7 @@
 
 \textbf{Claim.} \texttt{Rg.mul a Rg.addGrp.id = Rg.addGrp.id}, i.e.~\(a \cdot 0 = 0\).
 
-\textbf{Finding the proof.} In ordinary notation, the standard trick is as follows. It is worth memorizing as a pattern applicable to any additive-identity argument, start from \(0 = 0 + 0\), multiply through, and cancel.
+\textbf{Finding the proof.} In ordinary notation, the standard trick is as follows. It is worth memorizing as a pattern applicable to any additive-identity argument: start from \(0 = 0 + 0\), multiply through, and cancel.
 
 \[
 a \cdot 0 \overset{?}{=} 0
@@ -37,6 +37,8 @@ theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
   exact h2.symm
 \end{lstlisting}
 
+The tactic steps in \texttt{mul\_\allowbreak{}zero} carry out exactly the paper derivation. \texttt{h0} states \texttt{0 + 0 = 0} (the identity padded with itself). \texttt{h1} applies \texttt{left\_\allowbreak{}distrib} to rewrite \texttt{a * (0 + 0)} as \texttt{a*0 + a*0}, then \texttt{rw [h0]} at \texttt{h1} collapses \texttt{a*(0+0)} to \texttt{a*0} on the left side, giving \texttt{a*0 = a*0 + a*0} (i.e.~\(x = x + x\)). \texttt{h2} adds \(-x\) to both sides of that equation using \texttt{congrArg}, then the four \texttt{rw} lines apply \texttt{inv\_\allowbreak{}left}, associativity, \texttt{inv\_\allowbreak{}left}, and \texttt{id\_\allowbreak{}left} in sequence to cancel \(-x + x\) and \(x + (-x)\) down to \(0\), leaving \(0 = a*0\). The final \texttt{exact h2.symm} flips the equality to match the goal.
+
 \texttt{h2} is proved with \texttt{congrArg}, not \texttt{by rw [h1]}. In an earlier draft, attempting to rewrite with \texttt{h1} at this intermediate \texttt{have} using plain \texttt{rw} caused occurrence-targeting problems. \texttt{rw [h1]} rewrites \emph{every} syntactic occurrence of the left-hand side of \texttt{h1} in the goal, including copies produced by the substitution itself, and hence does not land on the exact stated goal here. \texttt{congrArg f h1} avoids this problem entirely. It directly builds ``apply \texttt{f} to both sides of \texttt{h1},'' which is precisely ``add \(-x\) to both sides of \(x = x+x\)'' with no ambiguity about which occurrence is targeted.
 
 If progress is lost partway through, the recovery move is always the same, translate the \emph{current} hypothesis (\texttt{h1}, then \texttt{h2}) into ordinary \texttt{+}/\texttt{0} notation, check it against the paper derivation above, and identify exactly which line of the paper proof this corresponds to. The Lean proof is long only because each paper-proof line (``add \(-x\) to both sides'', ``regroup'', ``cancel'') corresponds to one \texttt{rw}. Nothing here is conceptually harder than the five-line sketch preceding it.
@@ -51,7 +53,7 @@ x = a\cdot 0 = a\cdot(0+0) = a\cdot 0 + a\cdot 0 = x + x,
 
 \begin{progcorner}
 
-\texttt{mul\_\allowbreak{}zero} looks obvious enough that a Python codebase would never think to test it, \texttt{x * 0} is \texttt{0}, of course. It genuinely is, for \texttt{int}. It is not, for every numeric type Python ships.
+\texttt{mul\_\allowbreak{}zero} looks obvious enough that a Python codebase would never think to test it --- \texttt{x * 0} is \texttt{0}. It genuinely is, for \texttt{int}. It is not, for every numeric type Python ships.
 
 \end{progcorner}
 

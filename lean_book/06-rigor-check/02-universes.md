@@ -16,7 +16,7 @@ contain-themselves paradox inside the type theory. Lean avoids this with a **hie
 
 **Definition.** The *universe hierarchy* is the sequence
 `Type : Type 1 : Type 2 : ...` where each `Type i : Type (i+1)`.
-([TPIL4], §2.2; [Girard1972])
+([TPIL4], §2.2; [Girard1972], thesis)
 
 ### The hierarchy
 

@@ -2,7 +2,7 @@
 
 \textbf{1. Why \texttt{⟨0, 0⟩} is unambiguous}
 
-\texttt{def origin : Point := ⟨0, 0⟩} type-checks unambiguously because the \emph{expected type} \texttt{Point} is already fixed by the \texttt{def}'s signature before the right-hand side is elaborated. Lean reads off \texttt{Point}'s constructor and field order from that expected type alone, so \texttt{⟨0, 0⟩} needs no further information to know it means \texttt{Point.mk 0 0} rather than, say, \texttt{Pair.mk 0 0}.
+\texttt{def origin : Point := ⟨0, 0⟩} type-checks unambiguously because the \emph{expected type} (the type Lean's elaborator anticipates, used to resolve ambiguities) \texttt{Point} is already fixed by the \texttt{def}'s signature before the right-hand side is elaborated. Lean reads off \texttt{Point}'s constructor and field order from that expected type alone, so \texttt{⟨0, 0⟩} needs no further information to know it means \texttt{Point.mk 0 0} rather than, say, \texttt{Pair.mk 0 0}.
 
 This property fails whenever no expected type is available, or several structures with the same field arity are simultaneously in scope with nothing to disambiguate them: \texttt{\#check (⟨0, 0⟩ : \_\allowbreak{})} with the placeholder left fully open. Lean cannot choose a constructor from field values alone, and reports an ``expected type'' error rather than a fabricated guess. The named form \texttt{\{ x := ..., y := ... \}} sidesteps this, since the field names themselves pin down the constructor regardless of context.
 
@@ -10,7 +10,7 @@ This property fails whenever no expected type is available, or several structure
 
 Without \texttt{extends}, the projection \texttt{extends Point} generates would have to be written explicitly, as \texttt{def Point3D.toPoint (p : Point3D) : Point := \{ x := p.x, y := p.y \}}.
 
-This is precisely a \textbf{forgetful functor} (\hyperref[sec:02-terminology-and-coc:01-terminology:1]{Chapter 2, Section 1}, and the Mathematical reading box of \hyperref[sec:03-functions-and-structures:03-extending-structures:1]{Section 3}): a map that keeps some of the data of a structure (here, \texttt{x} and \texttt{y}) and discards the rest (\texttt{z}). \texttt{extends} generates exactly this projection automatically, under the name \texttt{.toPoint}, rather than requiring it to be written by hand for every extension.
+This is precisely a \textbf{forgetful functor} (\hyperref[sec:02-terminology-and-coc:01-terminology:1]{Chapter 2, Section 1}, and the Mathematical reading box of \hyperref[sec:03-functions-and-structures:03-extending-structures:1]{Section 3}): (a functor that maps a structured category to a less-structured one by forgetting some fields): a map that keeps some of the data of a structure (here, \texttt{x} and \texttt{y}) and discards the rest (\texttt{z}). \texttt{extends} generates exactly this projection automatically, under the name \texttt{.toPoint}, rather than requiring it to be written by hand for every extension.
 
 \textbf{3. Proof fields change nothing about type-checking}
 

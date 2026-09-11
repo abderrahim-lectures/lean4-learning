@@ -64,7 +64,7 @@ of its own (`Type`), the same way `3` has a type (`Nat`). This is what
 deliberately two different commands, since they answer two different
 questions.
 
-- `#check` is a **static** guarantee ([Pierce2002]). It holds before any particular
+- `#check` is a **static** guarantee ([Pierce2002], §1.1). It holds before any particular
   input is supplied, for every possible run.
 - `#eval` is a **one-off fact**, the result of running this *particular*
   expression, right now.

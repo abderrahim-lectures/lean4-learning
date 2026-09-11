@@ -31,7 +31,7 @@ qualified names directly.
 `variable` fixes an arbitrary object of $\mathbf{Ring}$; every theorem below
 is a statement about all rings at once. The recommended mental
 dictionary is just the standard ring notation: `Rg.addGrp.op` $= +$,
-`Rg.addGrp.id` $= 0$, `Rg.addGrp.toGroup.inv` $= -(-)$, `Rg.mul` $= \times$,
+`Rg.addGrp.id` $= 0$, `Rg.addGrp.toGroup.inv` $= (-)$, `Rg.mul` $= \times$,
 `Rg.one` $= 1$. Each is recovered by projecting along the
 [forgetful functors](../02-terminology-and-coc/01-terminology.md#category-theory-terms-used-beyond-the-baseline),
 so a qualified name like `Rg.addGrp.toGroup.inv a` is literally "$-a$ in

@@ -1,6 +1,6 @@
 \section{Linear maps}\label{sec:11-modules:05-linear-maps:1}
 
-A \textbf{linear map} (module homomorphism) \(f : M \to N\) between \(R\)-modules satisfies \(f(m+n) = f(m) + f(n)\) and \(f(r \cdot m) = r \cdot f(m)\).
+\textbf{Definition} (Linear map). A linear map (module homomorphism, a structure-preserving map between modules) \(f : M \to N\) between \(R\)-modules satisfies \(f(m+n) = f(m) + f(n)\) and \(f(r \cdot m) = r \cdot f(m)\) (\cite{DummitFoote2003}, §10.2).
 
 \begin{lstlisting}
 structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
@@ -29,7 +29,36 @@ Formal definitions and citations for this section, gathered here for reference (
   \textbf{Module homomorphism.} An \(R\)-module homomorphism (or \(R\)-linear map) between \(R\)-modules \(M\) and \(N\) is a function \(\varphi : M \to N\) that is a homomorphism of the underlying abelian groups and additionally commutes with the scalar action, \(\varphi(rm) = r\varphi(m)\) for all \(r \in R\), \(m \in M\) (\cite{DummitFoote2003}, Ch. 10 ``Introduction to Module Theory,'' §10.2 ``Homomorphisms and Quotient Modules''). This is a structural citation to the section and its definition, not a verified word-for-word excerpt.
 \end{itemize}
 
-\subsection{A concrete linear map: multiplication by a fixed integer}\label{sec:11-modules:05-linear-maps:3}
+\subsection{Informal vs.~formal: what ``linear'' means to each}\label{sec:11-modules:05-linear-maps:3}
+
+\begin{quote}
+\textbf{Informal proof.} ``\(d \cdot (m + n) = d \cdot m + d \cdot n\) by distributivity. \(d \cdot (r \cdot m) = r \cdot (d \cdot m)\) by commutativity of multiplication.''
+\end{quote}
+
+\begin{quote}
+\textbf{Lean formalization.}
+
+\begin{lstlisting}
+def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
+  toFun := fun m => d * m
+  map_add := by
+    intro m n
+    show d * (m + n) = d * m + d * n
+    -- unfold toFun and module operations to get a plain Int equation
+    exact Int.mul_add d m n
+    -- Int.mul_add is the library lemma for a * (b + c) = a * b + a * c
+  map_smul := by
+    intro r m
+    show d * (r * m) = r * (d * m)
+    rw [(*$\leftarrow$*) Int.mul_assoc, Int.mul_comm d r, Int.mul_assoc]
+    -- rewrite: regroup (d * r) * m (*$\rightarrow$*) r * (d * m) using associativity
+    -- and commutativity of Int multiplication
+\end{lstlisting}
+
+The informal version names two principles (``distributivity,'' ``commutativity'') and considers the job done. The Lean version unfolds the module operations to bare \texttt{Int} arithmetic, then closes each goal with either a library lemma (\texttt{Int.mul\_\allowbreak{}add}) or a rewrite sequence (\texttt{rw} with associativity and commutativity). The mathematical content is the same; the formalization demands every algebraic step be explicit.
+\end{quote}
+
+\subsection{A concrete linear map: multiplication by a fixed integer}\label{sec:11-modules:05-linear-maps:4}
 
 The abstract definition is easier to trust once a single instance has been built by hand. Fix \(d \in \mathbb{Z}\); multiplication by \(d\) is \(\mathbb{Z}\)-linear as a map \(\mathbb{Z} \to \mathbb{Z}\).
 
