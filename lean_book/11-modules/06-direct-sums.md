@@ -11,8 +11,9 @@ objects out of old ones. The simplest such construction combines two
 modules into a third, with the morphisms tying them back to their pieces,
 exactly the direct sum below.
 
-Given two $R$-modules $M$, $N$, their direct sum $M \oplus N$ has carrier
-$M \times N$, componentwise addition, and componentwise scalar action.
+**Definition** (Direct sum). Given $R$-modules $M$, $N$, their direct sum
+$M \oplus N$ has carrier $M \times N$ with componentwise operations
+([DummitFoote2003], §10.3, p. 351).
 
 ```lean
 structure DirectSum (M N : Type) where

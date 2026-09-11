@@ -178,7 +178,8 @@ itself (Sections 4-5). `nil` contributes `0`, and each `cons` adds one to the
 length of the shorter path it extends. The proof of `append_length`
 mirrors the own recursion of `Path.append` case for case, exactly as the
 project asked, but with one genuine surprise if `rfl` is tried first in
-either case. It fails. `Path` is *indexed* by both endpoints. Because of
+either case. It fails. `Path` is an *indexed inductive type* (an inductive
+type parameterized by extra indices, like `Path Q u v`), parameterized by both endpoints. Because of
 this, Lean compiles a match on an indexed family so that its defining
 equations reduce only through their auto-generated equation lemmas, not
 through plain iota-reduction, once an abstract path (`p`, `q'`) is

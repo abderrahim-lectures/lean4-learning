@@ -11,7 +11,7 @@ looked up. This section covers that second, disjoint case,
 tactics that settle a goal by evaluating an algorithm rather than
 searching for or constructing a term by hand.
 
-For goals that are *decidable*, where "true or false" can be settled by a
+For goals that are *decidable* ([Chlipala2013], §6.2), where "true or false" can be settled by a
 terminating algorithm instead of a hand-built argument, Lean has tactics
 that just run that algorithm.
 
@@ -50,7 +50,9 @@ map $P \to \{\top, \bot\}$ whose two preimages are "proof of $P$" and
 \neg P$ holds *and* we can tell which one," available exactly on the
 decidable fragment (closed numeric claims like $7 \mid 21$). `omega`
 decides *Presburger arithmetic*, the first-order theory of $(\mathbb{Z},
-+, <)$, which is famously decidable, and `norm_num` evaluates concrete
++, <)$ (its language allows $+$, $<$, $=$, Boolean connectives, and
+quantification but *not* multiplication of two variables), is decidable
+(Presburger 1929), and `norm_num` evaluates concrete
 numerals. These apply only to statements with no free structure left to
 fill in. A theorem about an arbitrary group has no finite truth table to
 compute, and thus must be *proved* from the axioms instead of

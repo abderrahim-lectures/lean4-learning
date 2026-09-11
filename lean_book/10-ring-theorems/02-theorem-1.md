@@ -57,6 +57,16 @@ theorem mul_zero (a : R) : Rg.mul a Rg.addGrp.id = Rg.addGrp.id := by
   exact h2.symm
 ```
 
+The tactic steps in `mul_zero` carry out exactly the paper derivation.
+`h0` states `0 + 0 = 0` (the identity padded with itself). `h1` applies
+`left_distrib` to rewrite `a * (0 + 0)` as `a*0 + a*0`, then `rw [h0]`
+at `h1` collapses `a*(0+0)` to `a*0` on the left side, giving
+`a*0 = a*0 + a*0` (i.e. $x = x + x$). `h2` adds $-x$ to both sides of
+that equation using `congrArg`, then the four `rw` lines apply
+`inv_left`, associativity, `inv_left`, and `id_left` in sequence to
+cancel $-x + x$ and $x + (-x)$ down to $0$, leaving $0 = a*0$.
+The final `exact h2.symm` flips the equality to match the goal.
+
 `h2` is proved with `congrArg`, not `by rw [h1]`. In an earlier draft,
 attempting to rewrite with `h1` at this intermediate `have` using plain
 `rw` caused occurrence-targeting problems. `rw [h1]` rewrites *every*
@@ -87,8 +97,8 @@ of $(R,+)$, and homomorphisms send the identity to the identity. $0$ absorbs
 because multiplication is additive in each argument.
 
 **Programmer note (Python).** `mul_zero` looks obvious enough that a
-Python codebase would never think to test it, `x * 0` is `0`, of
-course. It genuinely is, for `int`. It is not, for every numeric type
+Python codebase would never think to test it — `x * 0` is `0`.
+It genuinely is, for `int`. It is not, for every numeric type
 Python ships.
 
 ```python

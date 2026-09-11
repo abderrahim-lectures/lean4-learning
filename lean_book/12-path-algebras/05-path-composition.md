@@ -82,7 +82,7 @@ because both ultimately unfold to the same sequence of `Path.cons`
 applications.
 
 **Mathematical reading.** `Path.append` is **composition in the free
-category** $\mathrm{Free}(Q)$, written throughout this section in *path
+category** $\mathrm{Free}(Q)$ (the category whose objects are vertices and morphisms are paths), written throughout this section in *path
 order*: "$p$ then $q$," matching the argument order of `Path.append p q`.
 This is not the function-composition order $q \circ p$ standard in
 category theory texts. The two conventions denote the same composite;
@@ -161,10 +161,11 @@ separate statements discussed above). It is reassurance that the concrete
 
 ### The path algebra
 
-The **path algebra** $kQ$ of a quiver $Q$ over a field (or ring) $k$ is the
-ring whose elements are $k$-linear combinations of paths in $Q$, with
-multiplication given by path composition (composing two paths whose
-endpoints do not match gives $0$). Formalizing $kQ$ fully (as a `Ring`, per
+**Definition** (Path algebra). The *path algebra* $kQ$ of a quiver $Q$ over
+a field (or ring) $k$ is the ring of $k$-linear combinations of paths in
+$Q$, with multiplication given by path composition (composing two paths whose
+endpoints do not match gives $0$)
+([AssemSimsonSkowronski2006], Definition 1.2). Formalizing $kQ$ fully (as a `Ring`, per
 Chapter 9) requires "formal sums of paths with ring coefficients," which is
 a genuinely bigger construction, essentially a finitely-supported function
 from paths to $k$. It is a natural next project once the material above is
@@ -173,8 +174,8 @@ because that data (the *category* of paths, really) is the essential
 content of the construction. Once it is in place, the ring structure on
 top is routine to add.
 
-**Mathematical reading.** The **path algebra** $kQ$ is the free $k$-module
-on the set of all paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with
+**Mathematical reading.** The **path algebra** $kQ$ is the set of all
+finite $k$-linear combinations of paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with
 multiplication extending path composition $k$-bilinearly, written here in the
 same **path order** used throughout this section, so that it matches
 `Path.append` and the quoted source below.

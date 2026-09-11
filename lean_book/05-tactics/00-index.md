@@ -14,6 +14,9 @@
 
 ## What forces tactic mode
 
+**Definition.** *Tactic mode* is a proof-writing mode entered with `by`
+where tactics transform goals.
+
 Writing proof *terms* directly (as in Chapter 4) quickly becomes hard to
 manage as a proof grows. The alternative is **tactic mode**, entered
 with `by`, in which a "goal" is worked step by step, much as one would

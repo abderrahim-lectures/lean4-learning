@@ -18,7 +18,7 @@ theorem modus_ponens {P Q : Prop} (hpq : P → Q) (hp : P) : Q :=
   hpq hp
 ```
 
-**Mathematical reading.** Under Curry–Howard (cited in full in
+**Mathematical reading.** Under Curry–Howard ([TPIL4], §3.2; [Howard1980], cited in full in
 [Section 1](01-prop.md#sources-quoted)), the implication $P \Rightarrow
 Q$ *is* the function space $P \to Q$ (the set of proofs of $Q$ parameterized
 by proofs of $P$). So modus ponens
@@ -28,5 +28,17 @@ $$
 is nothing but function application, given $f \in \mathrm{Hom}(P, Q)$ and
 $p \in P$, evaluate to get $f(p) \in Q$. The term `hpq hp` is precisely this
 evaluation $f(p)$.
+
+---
+
+### Sources, quoted
+
+- **Curry–Howard for implication.** "Under Curry–Howard, implication $P \Rightarrow Q$ is the function type $P \to Q$" ([TPIL4], §3.2; [Howard1980]).
+- Howard ([Howard1980]) is the original source of the propositions-as-types correspondence for implicational logic.
+
+[TPIL4]: ../bibliography.md#tpil4
+[Howard1980]: ../bibliography.md#howard1980
+
+---
 
 [← `theorem`/`lemma`](03-theorem-lemma.md) | [Index](00-index.md) | [Next: And, Or, Not →](05-and-or-not.md)

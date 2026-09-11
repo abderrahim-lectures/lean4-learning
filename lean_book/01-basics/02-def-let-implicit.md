@@ -152,8 +152,9 @@ def identity {α : Type} (x : α) : α := x
   of parentheses. The name `α` (conventionally a Greek letter for a type
   variable; again pure convention, `T` or `A` would work just as well) has
   type `Type`, meaning this argument is itself a *type*, not a value of
-  some fixed type. `identity` is thus **polymorphic**. It works uniformly
-  for every choice of `α`.
+  some fixed type. `identity` is thus **polymorphic** (a definition that
+   works uniformly for every type parameter; [Pierce2002], §16.2). It works uniformly
+   for every choice of `α`.
 - The crucial difference from `(n : Nat)` above is that `{α : Type}` is not
   supplied positionally at call sites. Writing `identity 5` does *not*
   mean "pass `5` as `α`." Lean instead **elaborates** (infers) `α` by

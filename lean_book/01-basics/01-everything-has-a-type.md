@@ -22,11 +22,11 @@ running anything, and it never lets a term of the wrong type slip through.
 ```
 
 **Mathematical reading.** The basic unit of assertion in type theory is the
-**judgment**, a statement made *about* an underlying formal system, called
+**judgment** ([MartinLof1984]), a statement made *about* an underlying formal system, called
 the **calculus**, from the outside, not a proposition proved *inside* it.
 For Lean, this calculus is made concrete a few sentences below as the
 $\lambda$-calculus, and named precisely as the **calculus of
-constructions** in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md). Nothing here
+constructions** ([CoquandHuet1988]) in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md). Nothing here
 depends on that name yet. Following Martin-Löf, the judgment used here has
 the form $e : \tau$, read "$e$ is a term of type $\tau$," adapted to
 the colon notation used by Lean. The original text by Martin-Löf writes the same judgment as
@@ -64,7 +64,7 @@ of its own (`Type`), the same way `3` has a type (`Nat`). This is what
 deliberately two different commands, since they answer two different
 questions.
 
-- `#check` is a **static** guarantee. It holds before any particular
+- `#check` is a **static** guarantee ([Pierce2002]). It holds before any particular
   input is supplied, for every possible run.
 - `#eval` is a **one-off fact**, the result of running this *particular*
   expression, right now.
@@ -170,7 +170,7 @@ ways a `Nat` can ever have been built.
 > statement with its particular instance.
 >
 > **1. The general statement, for an arbitrary type $X$.** Let
-> $F(X) = 1 + X$, an **endofunctor** on `Type` (here $1$ denotes a
+> $F(X) = 1 + X$, an **endofunctor** (a functor from a category to itself; [MacLane1998], Ch. I §1) on `Type` (here $1$ denotes a
 > one-element type and $+$ denotes *disjoint sum*. These correspond to
 > the Lean types
 > [`Unit`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Unit)
@@ -178,7 +178,7 @@ ways a `Nat` can ever have been built.
 > [`Sum`](https://leanprover-community.github.io/mathlib4_docs/Init/Core.html#Sum),
 > and this $+$ is distinct from the numeric $+$ introduced later in this
 > box, notation notwithstanding). For an arbitrary endofunctor $F$, an
-> **$F$-algebra** is a type $X$
+> **$F$-algebra** ([Jacobs1999]) is a type $X$
 > equipped with a map $F(X) \to X$. By the universal property of $+$, a
 > map $(1 + X) \to X$ is equivalent to a pair consisting of an element
 > $z : X$ and a self-map $s : X \to X$. Here $z$ stands for "zero component,"
@@ -188,7 +188,7 @@ ways a `Nat` can ever have been built.
 > function $f : X \to Y$ satisfying $f(z) = z'$ and $f(s(x)) = s'(f(x))$
 > for every $x$, i.e. a function compatible with both components of the
 > algebra structure. Among all $F$-algebras there is an
-> **initial object**, an algebra
+> **initial object** ([MacLane1998]), an algebra
 > $(X_0, z_0, s_0)$ such that, for every algebra $(X, z, s)$, there
 > exists exactly one algebra morphism from $(X_0, z_0, s_0)$ to
 > $(X, z, s)$. The algebra maps themselves are $\alpha_0 : F(X_0) \to X_0$
@@ -216,7 +216,7 @@ ways a `Nat` can ever have been built.
 > morphism from `Nat`, and defining a function on `Nat` (or proving a
 > statement about it) amounts to specifying such a morphism. This
 > construction is known in the literature under two equivalent names,
-> **initial algebra** and **natural numbers object** of `Type`.
+> **initial algebra** and **natural numbers object** ([Jacobs1999]) of `Type`.
 >
 > **A second, different fact, worth not conflating with the above.**
 > None of this is required to use `Nat`. It is offered only because,
@@ -308,6 +308,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 [Pierce2002]: ../bibliography.md#pierce2002
 [MacLane1998]: ../bibliography.md#maclane1998
 [Jacobs1999]: ../bibliography.md#jacobs1999
+[CoquandHuet1988]: ../bibliography.md#coquandhuet1988
 
 ---
 

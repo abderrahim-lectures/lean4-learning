@@ -28,7 +28,7 @@ the carrier $G$, the raw data $(\,\cdot : G\times G \to G,\ e \in G,\
 $$
 \mathrm{GroupData}(G) = (G^{G\times G}) \times G \times (G^{G}).
 $$
-It is a *magma* signature, not yet a group; the axioms below cut out the
+It is a *magma* (a set with a binary operation and no axioms) signature, not yet a group; the axioms below cut out the
 genuine group structures as a subset.
 
 **Step 2. Add the axioms as extra fields.** A proof can be a field of a
@@ -52,6 +52,37 @@ supply a term proving it for every `a b c`. The remaining four fields are
 the identity and inverse axioms, split left/right because commutativity
 has not been assumed. Collapsing them into one field each would
 silently assume it.
+
+### Informal vs. formal: what "a group" means to each
+
+> **Informal proof.** "A group is a set $G$ with $\cdot$ satisfying
+> associativity, identity, and inverses."
+
+> **Lean formalization.**
+> ```lean
+> structure Group (G : Type) where
+>   op : G → G → G              -- binary operation
+>   id : G                      -- identity element
+>   inv : G → G                 -- inverse function
+>   assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
+>   -- associativity: (a · b) · c = a · (b · c) for all a, b, c
+>   id_left : ∀ a : G, op id a = a
+>   -- left identity: e · a = a for all a
+>   id_right : ∀ a : G, op a id = a
+>   -- right identity: a · e = a for all a
+>   inv_left : ∀ a : G, op (inv a) a = id
+>   -- left inverse: a⁻¹ · a = e for all a
+>   inv_right : ∀ a : G, op a (inv a) = id
+>   -- right inverse: a · a⁻¹ = e for all a
+> ```
+>
+> The informal version names three ingredients and three laws. The Lean
+> version lists *eight* fields: three pieces of data plus five proof
+> obligations (identity is split into left/right, inverse is split into
+> left/right). A term of type `Group G` cannot exist unless all five
+> proofs are supplied, so every theorem later in the book that takes a
+> `Group G` gets those five facts for free, checked once, rather than
+> trusting each caller.
 
 **Mathematical reading.** `Group G` is the type of *group structures on
 the fixed carrier $G$*, a dependent tuple
@@ -98,12 +129,9 @@ runs, and is not a group, since subtraction is not associative. The bug
 surfaces later, silently, wherever a theorem assuming associativity is
 applied to this `op` without re-checking the assumption. `GroupData`
 above has the identical defect. Values are bundled but nothing is
-checked, which is exactly why `Group` adds the five axiom fields: a term of type `Group
-G` cannot exist unless proofs of `assoc`, `id_left`, `id_right`,
-`inv_left`, and `inv_right` were actually supplied, so every theorem in
-the rest of the book taking a `Group G` gets those five facts for free,
-checked once, rather than trusting every caller to have built the
-underlying data correctly.
+checked, which is exactly why `Group` adds the five axiom fields. As the
+blockquote above notes, this means every theorem taking a `Group G` gets
+five facts for free, checked once.
 
 ---
 

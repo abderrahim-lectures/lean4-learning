@@ -10,6 +10,60 @@
 - Write basic `def`s with implicit arguments.
 - Understand what makes a type *dependent* (via `Fin`/`Vec`).
 
+## What Lean demands of a proof
+
+A mathematician writes "the square root of 2 is irrational" and
+sketches a few sentences. Lean demands a term whose type *is* the
+statement, with every gap filled. Here is the contrast on three
+statements, from trivial to open, showing what "formalized" means before
+any machinery is learned.
+
+**Example 1. Reflexivity.** "$0 = 0$."
+
+> **Informal proof.** "Immediate."
+
+> **Lean formalization.**
+> ```lean
+> theorem zero_eq_zero : (0 : Nat) = 0 := rfl
+> -- rfl closes any goal of the form a = a by definition
+> ```
+
+The gap is small but already visible: even the trivial case needs a
+named declaration and a tactic. A human can leave it implicit; Lean
+cannot.
+
+**Example 2. Symmetry of equality.** "If $a = b$, then $b = a$."
+
+> **Informal proof.** "By symmetry of equality."
+
+> **Lean formalization.**
+> ```lean
+> theorem symm_example {a b : Nat} (h : a = b) : b = a := h.symm
+> -- h.symm is a built-in method on equality proofs,
+> -- directly reflecting the symmetry axiom of Leibniz equality
+> ```
+
+A single word in the informal version ("symmetry") becomes a term-level
+method call. The *structure* is the same — hypothesis in, conclusion out —
+but the gap between "by symmetry" and `h.symm` is exactly the gap this
+book teaches to close.
+
+**Example 3. An open problem.** "Every even number greater than 2 is the
+sum of two primes." (Goldbach's conjecture)
+
+> **Informal proof.** "Verified up to $4 \times 10^{18}$, but unproven."
+
+> **Lean formalization.** No term of type `∀ n, n > 2 → Even n → ∃ p q, Prime p ∧ Prime q ∧ n = p + q` exists
+> in any library. Lean cannot prove it because mathematics has not proved
+> it. A proof assistant does not guess; it checks. When a statement is
+> open, Lean has nothing to offer, and the honest answer is a `sorry` or
+> an absent file.
+
+These three examples — closed-but-trivial, closed-but-needing-structure,
+and open — set the range. Every proof in this book lives somewhere on
+that line. The rest of the chapters build the vocabulary to move from
+the first kind to the second, and to recognize the third for what it is.
+
 ## What forces the chapter
 
 Ordinary languages catch a type error, if at all, at the moment the bad

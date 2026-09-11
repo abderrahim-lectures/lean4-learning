@@ -38,7 +38,31 @@ theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
   exact ⟨h1, h2, h3, h4⟩
 ```
 
-**Mathematical reading.** `Mat2` is the free $\mathbb{Z}$-module
+### Informal vs. formal: when is a matrix equal to another?
+
+> **Informal proof.** "Two matrices are equal iff all four entries match.
+> This is immediate from the definition of equality for structures."
+
+> **Lean formalization.**
+> ```lean
+> theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
+>     (h3 : X.a21 = Y.a21) (h4 : X.a22 = Y.a22) : X = Y := by
+>   cases X          -- split X into its four components ⟨x1, x2, x3, x4⟩
+>   cases Y          -- split Y into its four components ⟨y1, y2, y3, y4⟩
+>   rw [Mat2.mk.injEq]
+>   -- mk.injEq reduces structure equality to componentwise equality:
+>   -- ⟨x1,x2,x3,x4⟩ = ⟨y1,y2,y3,y4⟩ iff x1=y1 ∧ x2=y2 ∧ x3=y3 ∧ x4=y4
+>   exact ⟨h1, h2, h3, h4⟩
+>   -- supply the four component equalities as a conjunction
+> ```
+>
+> "Immediate from the definition" in the informal version hides the fact
+> that Lean needs an explicit extensionality lemma, cases on both
+> matrices, and a rewrite to unpack the structure equality into four
+> separate `Int` equalities. The word "immediate" covers all of that; Lean
+> spells every step out.
+
+**Mathematical reading.** `Mat2` is the free abelian group $\mathbb{Z}^4$
 $M_2(\mathbb{Z}) \cong \mathbb{Z}^4$ on the four matrix entries. The
 extensionality lemma `Mat2.ext`, supplied by hand right alongside the
 structure, since almost every proof below needs it, says two `Mat2`
@@ -347,6 +371,8 @@ book without Mathlib.
 example (A B C : Matrix (Fin 2) (Fin 2) Int) :
     A * (B + C) = A * B + A * C := by noncomm_ring
 ```
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
 ---
 

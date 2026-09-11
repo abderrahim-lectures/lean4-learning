@@ -115,6 +115,28 @@ case analysis. The cheapest move that makes progress is almost always
 the right one, and the [goal-state discipline of Chapter 13](13-working-efficiently/00-index.md)
 is precisely to read what remains after that move.
 
+## Informal/formal proof comparisons
+
+When a worked proof appears in the book, it is often presented as a
+side-by-side comparison: an informal proof (1-3 sentences of human-readable
+argument) next to the Lean formalization with inline tactic-level comments.
+These blocks exist to build the mental bridge between mathematical reasoning
+and tactic execution. When reading them:
+
+- Start with the informal proof to understand *what* is being shown and *why*
+  the key step works.
+- Then read the Lean code to see *how* each mathematical step translates to
+  tactics. The inline comments explain which tactic handles which step.
+- If a tactic name is unfamiliar, look it up in the
+  [tactic and library reference](tactic-and-library-reference.md) or follow
+  the chapter link back to where it was introduced.
+
+The informal proof always captures the core idea; the Lean code may include
+additional bookkeeping steps (e.g. `rw [Grp.assoc]` to regroup before a
+cancellation) that the informal proof leaves implicit. This is expected —
+Lean needs the explicit rewriting path that a human reader fills in
+automatically.
+
 ---
 
 [Table of contents](README.md)

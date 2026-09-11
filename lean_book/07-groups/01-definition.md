@@ -15,7 +15,7 @@ e$. Adding exactly this to the data of a monoid is the entire content of
 this section, and it is what turns "a set with an associative operation"
 into a structure with cancellation.
 
-A **group** is a set $G$ together with:
+A **group** is a set $G$ together with (cf. [DummitFoote2003], p. 17):
 
 - a binary operation $\cdot : G \times G \to G$,
 - a distinguished element $e \in G$ (the identity),
@@ -32,8 +32,7 @@ $$
 $$
 
 No further axiom is required; commutativity is not assumed (a group where
-$a \cdot b = b \cdot a$ always holds is **abelian**, a strictly stronger
-condition defined separately). The identity and inverse laws are each
+$a \cdot b = b \cdot a$ always holds is **abelian**, a strictly stronger condition defined separately). The identity and inverse laws are each
 stated in both a left and a right direction, and the two directions are
 kept as separate axioms rather than collapsed into one. In an abelian
 group the directions are logically equivalent, but with commutativity not

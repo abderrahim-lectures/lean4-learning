@@ -61,7 +61,7 @@ already-known facts are assembled into the `Ring` bundle.
 an object of $\mathbf{Ring}$, in fact the
 [*initial* object](../02-terminology-and-coc/01-terminology.md#category-theory-terms-used-beyond-the-baseline),
 since there is a
-unique **ring homomorphism** $\mathbb{Z} \to R$ into any ring, a
+unique **ring homomorphism** (a structure-preserving map between rings; [DummitFoote2003], p. 239) $\mathbb{Z} \to R$ into any ring, a
 function preserving $+$, $\times$, $0$, and $1$.
 First
 `intCommGroup` upgrades the additive group $(\mathbb{Z},+)$ to an abelian

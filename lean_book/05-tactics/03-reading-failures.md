@@ -32,6 +32,9 @@ a diagnostic, not a dead end.
   [`sorry`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) in place of the rest of the proof, which type-checks with a
   warning and permits inspection of exactly what remains).
 
+**Definition.** `sorry` is a built-in term that closes any goal instantly
+but marks the theorem as unproved.
+
 `sorry` deserves a special mention, it is a placeholder that closes any
 goal instantly but marks the theorem as unproved. (Lean prints a warning,
 and any downstream proof depending on it inherits this unproved status.) It should be used

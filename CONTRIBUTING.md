@@ -12,7 +12,7 @@ Open a [GitHub issue](https://github.com/abderrahim-lectures/lean4-learning/issu
 describing:
 
 - **Where**: the file and, if possible, the line or section (e.g.
-  "`lean_book/06-groups/03-integers-example.md`, the Mathlib equivalent
+  "`lean_book/07-groups/03-integers-example.md`, the Mathlib equivalent
   box").
 - **What's wrong**: a short quote of the problematic text, or the exact
   error message if it's a build/tooling issue.
@@ -48,7 +48,7 @@ splitting into two plain sentences.
 
 New or rewritten sections follow a derivation-first exposition, in the
 tradition of Arnold's and Gelfand's teaching rather than Bourbaki's: a
-definition or theorem is not stated and then explained, it is *earned*.
+definition or theorem is *earned*.
 Pose the question or concrete problem that forces it, walk the chain of
 reasoning that discovers it, and only then name and formalize the result
 — proof and motivation are one continuous argument, not two separated
@@ -76,12 +76,28 @@ describes this book's convention; concrete motivation, worked in full
 before any generalization, does. A contrived scenario is still to be
 avoided, but a genuine concrete instance of the actual mathematical
 object under discussion (a specific ring, a specific group element, a
-specific failing proof attempt) is not contrived, it is the example the
-definition is trying to capture. Exercises favor fewer, escalating,
+specific failing proof attempt) is the genuine example the definition is trying to capture. Exercises favor fewer, escalating,
 proof-heavy problems ("Prove that...", "Show that...") over repetitive
 drills, and should not give away their own answer inline — solutions
 belong in `lean_book/15-appendix-solutions/`.
 This convention now applies to the whole book, from Chapter 0 onward.
+
+### Citation convention
+
+Every formal definition, theorem, and named concept must carry an inline
+citation `[Author Year, p.XX]` immediately after the Definition block or
+theorem statement. Citations must NOT appear only in the "Sources, quoted"
+box at the bottom — the inline citation is the primary location; the
+Sources box is a recap. Bolded terms always get a `**Definition.**` block.
+See any chapter in Part II (Chapters 7-12) for the pattern.
+
+### Side-by-side proof comparisons
+
+When adding a new worked proof, consider whether a side-by-side comparison
+block (informal proof vs Lean formalization) would help the reader bridge
+the gap. These blocks are placed after the worked example and show:
+1. The informal proof in 1-3 sentences
+2. The Lean code with inline tactic-level comments
 
 ## Lean code
 

@@ -30,9 +30,9 @@ It was already reused for `∧`
 `∃`-proof in one line instead of two. The pattern to remember is first
 the number, then why it works.
 
-- `2` is the **witness**, the specific number being claimed even. It is
+- `2` is the **witness**, the specific number being claimed to exist. It is
   the smallest one that actually makes the point (`0` technically works
-  too, but reads as a trick, "of course `0` is even").
+  too, but reads as a trick, "`0` is even by any standard definition").
 - [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) is the **proof**, filling in for `P 2`, i.e. for `2 % 2 = 0`. It
   works by `rfl` alone (no lemma needed) because `2 % 2` simply *computes*
   to `0`. Both sides of the equation are already the same term once
@@ -111,6 +111,7 @@ $x \in \alpha$. Universal quantification is the ($\Pi$-)type
 $$
 \forall x{:}\alpha,\ P(x) \;=\; \prod_{x : \alpha} P(x),
 $$
+
 literally an $\alpha$-indexed product. A proof is a function assigning to
 each $x$ a proof of $P(x)$, so `all_nats_ge_zero` is the map $n \mapsto (0
 \le n)$. This exactly generalizes how a proof of $P \wedge Q$ was a pair
@@ -120,6 +121,7 @@ is the ($\Sigma$-)type
 $$
 \exists x{:}\alpha,\ P(x) \;=\; \sum_{x : \alpha} P(x),
 $$
+
 an $\alpha$-indexed sum. A proof is a dependent pair $\langle a, h\rangle$
 with $a \in \alpha$ the witness and $h : P(a)$. Here $\langle 2,
 \mathrm{refl}\rangle$ witnesses $2 \bmod 2 = 0$. This is the
@@ -149,6 +151,9 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md)
   for the general Σ-type this specializes. Picture it like this.
   `⟨2, rfl⟩` is `t = 2`, `p t` proved by `rfl`, exactly that pair.
+
+[TPIL4]: ../bibliography.md#tpil4
+[HoTT2013]: ../bibliography.md#hott2013
 
 ---
 

@@ -19,10 +19,10 @@ needs division to make sense of "scaling." What is the general structure
 these four facts describe, once $\mathbb{Z}$ is replaced by an arbitrary
 ring $R$ and "integer scaling" by an arbitrary action $R \times M \to M$?
 
-Given a ring $R$ (Chapter 9), a (left) **$R$-module** is an abelian group
-$(M, +, 0, -(-))$ together with a scalar action $R \times M \to M$, written
-$r \cdot m$, satisfying exactly the four facts just observed for
-$\mathbb{Z}$-scaling, now required as axioms for an arbitrary $R$:
+**Definition** (Left $R$-module). Given a ring $R$ (Chapter 9), a left
+$R$-module is an abelian group $(M, +, 0, -(-))$ with a scalar action
+$R \times M \to M$, written $r \cdot m$, satisfying
+([DummitFoote2003], §10.1, p. 336):
 
 $$
 \begin{aligned}
@@ -58,6 +58,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   broader context of homological algebra, not an independently verified
   factual claim.
 
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Weibel1994]: ../bibliography.md#weibel1994
 
 ---

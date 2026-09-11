@@ -27,4 +27,10 @@ It has no logical content, just as in ordinary mathematical writing.
 
 ---
 
+### Sources, quoted
+
+- TPIL4 "Theorem Declarations" — `theorem` and `lemma` are syntactically identical in Lean 4.
+
+---
+
 [← A recap of standard logic](02-logic-recap.md) | [Index](00-index.md) | [Next: Implication →](04-implication.md)

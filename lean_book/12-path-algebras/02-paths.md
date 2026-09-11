@@ -12,10 +12,10 @@ chain makes sense, though. An arrow can only be appended if it starts
 where the previous one ended. This section names that notion precisely,
 a **path**.
 
-A **path** in $Q$ is a sequence of arrows that can be composed head-to-tail:
-$\alpha_1, \alpha_2, \dots, \alpha_n$ with $t(\alpha_i) = s(\alpha_{i+1})$ for
-each consecutive pair. In addition, for each vertex $i$, a **trivial path**
-$e_i$ of length $0$ is allowed, starting and ending at $i$. It composes with
+**Definition** (Path). A *path* in $Q$ is a sequence of composable arrows
+$\alpha_1, \dots, \alpha_n$ with $t(\alpha_i) = s(\alpha_{i+1})$
+([AssemSimsonSkowronski2006], Ch. II §1, p. 42). A *trivial path* $e_i$ at
+vertex $i$ has length $0$. It composes with
 any path that starts or ends at $i$, leaving it unchanged. $e_i$ is the
 *identity* at $i$, which is exactly what makes the length-$0$ paths the units
 of the path algebra in [Section 5](05-path-composition.md).

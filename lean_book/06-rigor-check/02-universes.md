@@ -12,8 +12,11 @@ should immediately ask *of what type?* If the answer were "`Type` is a
 term of type `Type`," the logic of Lean would be inconsistent. This is exactly
 the Russell paradox in type-theoretic form. The type of "all types," if it
 contained itself, would permit rebuilding the set-of-all-sets-that-do-not-
-contain-themselves paradox inside the type theory. Lean avoids this with
-a **hierarchy of universes**.
+contain-themselves paradox inside the type theory. Lean avoids this with a **hierarchy of universes**.
+
+**Definition.** The *universe hierarchy* is the sequence
+`Type : Type 1 : Type 2 : ...` where each `Type i : Type (i+1)`.
+([TPIL4], §2.2; [Girard1972])
 
 ### The hierarchy
 
@@ -65,10 +68,14 @@ like `Nat`.
 ### Universe polymorphism (a brief note)
 
 A definition is occasionally written with an explicit universe
-variable, e.g. `structure Group.{u} (G : Type u) where ...`. This makes
-the definition **universe polymorphic**, usable the same way whether `G`
-lives in `Type 0`, `Type 1`, or any level, rather than pinned to `Type 0`
-specifically. This book fixes everything at `Type` (that is, `Type 0`) for
+variable, e.g. `structure Group.{u} (G : Type u) where ...`. This makes the definition **universe polymorphic**, usable the same way
+whether `G` lives in `Type 0`, `Type 1`, or any level, rather than pinned
+to `Type 0` specifically.
+
+**Definition.** A definition is *universe polymorphic* if it takes an
+explicit universe variable and works at any level.
+
+This book fixes everything at `Type` (that is, `Type 0`) for
 simplicity, since none of the groups, rings, or modules built here need
 anything larger. The actual definitions in Mathlib are universe polymorphic
 throughout, exactly because they must accommodate constructions (such as

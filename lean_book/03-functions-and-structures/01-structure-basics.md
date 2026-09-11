@@ -30,6 +30,12 @@ def origin : Point := { x := 0, y := 0 }
 
 Key points.
 
+**Definition.** A *constructor* of a `structure` is the function that builds an element from its fields.
+
+**Definition.** The *anonymous constructor* `⟨e₁, e₂, ...⟩` applies the appropriate constructor without naming it.
+
+**Definition.** *Field projection* `.field` is shorthand for `S.field s`.
+
 - `Point.mk` is the automatically generated **constructor**. This is the
   function that actually builds a `Point` out of an `x` and a `y`. `{ x :=
   ..., y := ... }` is shorthand for `Point.mk ... ...`. It names each field
@@ -79,7 +85,7 @@ in a key name, `origin["ix"]`, is caught the same way a missing key is,
 by crashing at run time, on whichever run happens to reach that line
 first. `Point.x` has no such failure mode. `origin.z` is rejected while
 reading the file, before `#eval` or any test ever runs, because `z` is
-not a field `structure Point` declared. A `@dataclass` closes part of
+not a field `structure Point` declares. A `@dataclass` closes part of
 this gap, since `dataclass` at least fixes the field names in advance,
 but a plain Python `dataclass` is mutable by default. `origin.x = 99`
 silently overwrites the field in place, and any other code still

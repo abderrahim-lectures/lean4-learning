@@ -14,6 +14,10 @@ of type `P : Prop` is a **proof** of `P`. This is the **Curry–Howard
 correspondence**. Propositions are types, and
 proofs are programs.
 
+**Definition.** A *proof* of `P : Prop` is a term `p : P`. The proposition is true exactly when such a term exists.
+
+**Definition.** The *Curry–Howard correspondence* identifies propositions with types and proofs with terms.
+
 ### The Curry–Howard correspondence, in full
 
 That one-line slogan is easy to state, but its importance is easy to miss

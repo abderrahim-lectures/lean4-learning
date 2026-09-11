@@ -109,10 +109,9 @@ seen through automatically.
   matches the traceability this book has been deliberately practicing
   throughout this chapter, nothing unfolds silently, and every step names
   what justified it.
-- **`abbrev` (reducible, automatically `@[reducible, inline]`).** Declares
-  the definition *notational*, not merely equal, so the elaborator of Lean and
-  automated machinery treat every occurrence as if the body had been
-  written out directly, with no `unfold` step to ask for. The clean
+- **`abbrev` (reducible).** Automatically marked `@[reducible, inline]` so
+  that the elaborator sees through it, treating every occurrence as if the
+  body had been written out directly, with no `unfold` step to ask for. The clean
   demonstration of this has to wait for tools that actually *search*
   through definitions automatically. Typeclass resolution
   ([Chapter 6](../06-rigor-check/01-structure-vs-class.md)) searches at
@@ -121,8 +120,10 @@ seen through automatically.
   [Chapter 4](../04-propositions-and-proofs/06-quantifiers.md)) is visible
   to that search without being unfolded by hand first, while a
   plain `def` generally is not.
-- **`opaque`.** The opposite extreme, not unfoldable at all, by `unfold`
-  or anything else, even though it still has a definition somewhere. Useful
+- **`opaque`.** Declares a definition that Lean will never unfold, even if
+  explicitly asked. The opposite extreme from `abbrev`, not unfoldable at
+  all by `unfold` or anything else, even though it still has a definition
+  somewhere. Useful
   for genuinely hiding an implementation and exposing only the properties
   proved about it, the Lean equivalent of citing a chosen but unspecified
   witness ("let $c$ be *some* element of the nonempty set $S$") and
@@ -150,8 +151,9 @@ theorem simp_example (n : Nat) : n + 0 = n := by
   simp
 ```
 
-[`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) automates exactly this: it searches a library of known
-"simplification" lemmas and applies as many as fire, in one step. The cost
+[`simp`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) automates exactly this: it maintains a built-in list of
+equational lemmas (registered with `@[simp]`). It applies as many as match
+the goal, chaining them in one step. The cost
 is exactly the traceability just built up by hand: `simp` hides *which*
 facts were used and *why* the proof works, which is bad for learning
 something for the first time. **This book therefore avoids `simp` and

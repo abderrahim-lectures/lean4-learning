@@ -45,10 +45,9 @@ def identity(x: T) -> T:      # generic over a TYPE — fine, this is what TypeV
 # combination of ordinary hints or TypeVar.
 ```
 
-This is the honest answer to why Lean needs a whole extra concept here. It
-is not that the type hints in Python are missing a minor convenience. It is
-that *no* mainstream static type system, not in Python, Java, C#, nor
-TypeScript, has a construct for "the type mentions a specific runtime
+This is the honest answer to why Lean needs a whole extra concept here:
+mainstream static type systems (neither in Python, Java, C#, nor
+TypeScript) lack a construct for "the type mentions a specific runtime
 value," because none of them needed the level of precision a proof assistant requires. Π-types are precisely that missing construct, made rigorous.
 
 **A second worked example, where the codomain is a genuinely different

@@ -23,7 +23,13 @@ is called **currying**, and it is the type-theoretic form of the Hom-set
 isomorphism
 $\mathrm{Hom}(A\times B, C)\cong\mathrm{Hom}(A,\mathrm{Hom}(B,C))$: a
 two-argument map is the same data as a one-argument map into a space of
-maps. The interesting part of this chapter is `structure`, which is
+maps.
+
+**Definition.** *Currying* is the correspondence $A \times B \to C \cong A \to (B \to C)$ ([Pierce2002], §12.2).
+
+**Definition.** A *Hom-set* (the set $\mathrm{Hom}(A,B)$ of morphisms from $A$ to $B$) is the collection of structure-preserving maps between two objects in a category.
+
+The interesting part of this chapter is `structure`, which is
 how algebraic data will be packaged.
 
 ## What forces `structure`

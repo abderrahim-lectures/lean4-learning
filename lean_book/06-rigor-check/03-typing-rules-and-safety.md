@@ -9,7 +9,7 @@ universe level up, by walking through that one specific case in prose.
 That argument leaned on a typing rule it never actually stated, and
 Chapters 1–5 have relied on the type checking of Lean constantly the same
 way, without ever seeing its rules written down. This section makes two things precise.
-the actual rules the kernel of Lean checks a term against (using a small,
+The actual rules the kernel of Lean checks a term against (using a small,
 representative fragment, the **simply typed λ-calculus**, STLC), and the
 specific rule governing the universe hierarchy Section 2 just introduced
 informally.
@@ -66,6 +66,9 @@ STLC below is what is actually going on, underneath both.
 
 ### Typing judgments and rules
 
+**Definition.** A *typing judgment* $\Gamma \vdash t : \tau$ asserts that in
+context $\Gamma$, term $t$ has type $\tau$. ([Pierce2002], Ch. 9)
+
 A **typing judgment** $\Gamma \vdash t : \tau$ reads "in context $\Gamma$
 (a list of variable-type assignments $x_1:\tau_1, \ldots, x_n:\tau_n$), the
 term $t$ has type $\tau$." This is precisely what `#check` reports in Lean,
@@ -101,14 +104,17 @@ Each rule, read as a Lean fact already familiar from earlier chapters.
 Two theorems about STLC are the entire reason to bother with a type
 system at all.
 
-- **Progress**, a well-typed closed term (no free variables) is either
+**Definition.** A *value* in STLC is a term that cannot reduce further —
+an abstraction `fun x => t` or a base-type constant.
+
+- **Progress** [Pierce2002, Theorem 9.3.5], a well-typed closed term (no free variables) is either
   already a **value**, an abstraction, or (if base types come with their
   own constants, as `Nat`/`Bool` effectively do) a constant of a base type,
   or it can take a β-reduction step. It never "gets stuck" partway
   through evaluation. There is no well-typed analogue of "apply `3` to
   `true`," because the side condition of (App) would already have rejected
   such a term at elaboration time, before any reduction is attempted.
-- **Preservation** (subject reduction), if $\Gamma \vdash t : \tau$ and
+- **Preservation** (subject reduction) [Pierce2002, Theorem 9.3.9], if $\Gamma \vdash t : \tau$ and
   $t \longrightarrow_\beta t'$, then $\Gamma \vdash t' : \tau$. Reduction
   never changes the type of a term. This is *exactly* why the definitional
   equality of this chapter (Section 4, next) is trustworthy. Reducing a term to
@@ -197,11 +203,17 @@ $A = \mathtt{Type}$ (itself living in `Type 1`) and $B = \mathtt{Type}$ again,
 the rule gives $\max(1, 1) = 1$, so `Type → Type` lands in `Type 1`, one level
 above `Type` itself.
 
+Without this clause, universally quantified statements over infinite types
+would live in `Type 1` instead of `Prop`, breaking the framework.
+
 The $j = 0$ case is what makes `∀` usable at all, not a footnote. When
 $B$ lands in `Prop`, the whole Π-type is a `Prop` *regardless of how large $A$
 is*. This is the **impredicativity of `Prop`**, and it is why
 `∀ n : Nat, n ≥ 0` is a proposition you can prove rather than an inhabitant of
 `Type 1`.
+
+**Definition.** A sort is *impredicative* if quantifying over its
+inhabitants can produce an element of the same or smaller sort.
 
 ```lean
 #check (∀ n : Nat, n ≥ 0)   -- ∀ (n : Nat), n ≥ 0 : Prop
@@ -234,9 +246,7 @@ break. `Type` in Lean cannot self-apply this way (`Type : Type` is
 *inconsistent*. It allows encoding the Girard paradox and proving `False`),
 which is exactly why the infinite, strictly increasing hierarchy above is
 load-bearing rather than pedantry. This is one of the few places where the
-Python comparison genuinely runs out. It is not that Python does the same
-thing more simply, it is that Python does not need to solve this problem
-at all, because nothing checks proofs against it.
+Python comparison genuinely runs out. Python does not need to solve this problem, because nothing checks proofs against it.
 
 ---
 

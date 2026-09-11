@@ -106,7 +106,12 @@ inductive Vec (α : Type) : Nat → Type where
 
 Read this exactly like `Nat`'s two-constructor definition from the
 previous section, with one new ingredient. `Vec α` is not a single type,
-it is a **family of types indexed by a `Nat`**. `Vec α 0`, `Vec α 1`,
+it is a **family of types indexed by a `Nat`**.
+
+> **Definition.** A *type family indexed by $A$* is a function $B : A \to
+> \mathrm{Type}$ assigning to each $a : A$ a type $B(a)$. ([TPIL4], §2.8)
+
+`Vec α 0`, `Vec α 1`,
 `Vec α 2`, and so on, are all different types, one per length, and the length is
 tracked *in the type itself*, not just at runtime. `nil` builds the unique
 length-`0` vector, and `cons` takes an element and a length-`n` vector and
@@ -180,8 +185,9 @@ def vecLen' {α : Type} {n : Nat} : Vec α n → Nat
   `Vec α n → Nat`, a bare arrow, precisely as if it were the *statement* of
   a theorem rather than the header of a function. The argument is instead
   supplied by the single equation `| _ => n` below, matching against
-  whatever term of `Vec α n` is eventually passed in. The **equation
-  compiler** of Lean is what turns this `| pattern => term` block into an ordinary
+   whatever term of `Vec α n` is eventually passed in. The **equation
+   compiler** (the Lean elaboration pass that translates `| pattern => term`
+   blocks into `match` expressions; [LeanDocs]) of Lean is what turns this `| pattern => term` block into an ordinary
   function, internally no different from writing `fun v => match v with
   | _ => n` inside a `:=` body. `vecLen` and `vecLen'` are, after
   elaboration, the same function under two different pieces of surface
@@ -268,6 +274,36 @@ categorically different from `double : Nat → Nat`, where the output type
 the *type itself* changes based on which number was passed in. That is
 exactly what "the codomain depends on the argument" means, made as
 concrete as possible.
+
+### Informal vs. formal: what the type checker sees
+
+A mathematician looking at `Vec α n` says "a list of length $n$." Lean
+says something more precise, and the gap is worth seeing once.
+
+> **Informal proof.** "The type `Vec α n` has exactly `n` elements. The
+> proof is immediate from the definition: `nil` has length 0, and `cons`
+> adds one."
+
+> **Lean formalization.**
+> ```lean
+> inductive Vec (α : Type) : Nat → Type where
+>   | nil  : Vec α 0           -- base case: the empty vector has length 0
+>   | cons : α → Vec α n       -- inductive case: a vector of length n
+>         → Vec α (n + 1)      -- becomes a vector of length n + 1
+>
+> def Vec.replicate (a : α) : (n : Nat) → Vec α n
+>   | 0     => Vec.nil                     -- length 0: return the empty vector
+>   | n + 1 => Vec.cons a (Vec.replicate a n)
+>   -- length n + 1: prepend a, recurse on n
+> ```
+>
+> The informal "proof" is a sentence. The Lean version is a definition
+> with *two constructors* and *two equations*, one per case. The length
+> `n` is not checked at runtime; it is baked into the type of the result.
+> `Vec.replicate a 3` literally has type `Vec α 3` — not `Vec α _`, not
+> "some list whose length happens to be 3," but the specific type whose
+> sole inhabitant is a three-element vector. The type checker enforces
+> this at compile time, before anything runs.
 
 ### Why bother: invariants become part of the type, not a side promise
 
@@ -454,7 +490,8 @@ $$
 Here $B$ is not itself a type. $B$ is a **family of types indexed by
 $A$**, formally a function $B : A \to \mathrm{Type}$ (or into `Prop`, the
 type of propositions, a distinct universe of its own, formally named
-`Sort 0` in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md), as below). For
+`Sort 0` (the universe hierarchy: `Sort 0 = Prop`, `Sort (n+1) = Type n`;
+[TPIL4], §3.1) in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md), as below). For
 each $x : A$, $B(x)$ is the specific type that family
 produces at $x$, and different values of $x$ may give genuinely different
 types. Read the whole expression as "a function that, given any
@@ -535,6 +572,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - Chlipala ([Chlipala2013]), §8.1 "Length-Indexed Lists" and §9.1 "More Length-Indexed Lists". The length-indexed-vector idea in this book (`ilist : nat → Set`) is built and revisited there, not in Ch. 3–3 as an earlier draft of this section stated, verified verbatim (`Inductive ilist : nat → Set := | Nil : ilist O | Cons : ∀ n, A → ilist n → ilist (S n)`). This is a useful second angle on the identical concept, in Coq rather than Lean.
 
 [TPIL4]: ../bibliography.md#tpil4
+[LeanDocs]: ../bibliography.md#leandocs
 [Mathlib4Docs]: ../bibliography.md#mathlib4docs
 [Thompson1991]: ../bibliography.md#thompson1991
 [Chlipala2013]: ../bibliography.md#chlipala2013

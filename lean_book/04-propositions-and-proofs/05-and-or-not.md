@@ -70,8 +70,7 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2)
   proof that `P` is impossible. `anything_from_contradiction` shows this
   concretely. From `1 = 2` and `1 ≠ 2` (contradictory hypotheses that could
   never both hold, but which Lean happily accepts as *given*
-  hypotheses in a signature. Nothing prevents assuming something
-  false; it only prevents *proving* it from nothing), one may
+  hypotheses in a signature. Nothing prevents assuming something false, it only prevents *proving* it from nothing), one may
   conclude literally any proposition `P` whatsoever. This is the "ex falso
   quodlibet" principle made concrete. This is $\bot$-elimination from
   [Section 2](02-logic-recap.md), which is valid in both classical and
@@ -148,6 +147,8 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   is exactly one function out of it into anything, which is why
   `¬P := (P → False)` and `absurd` can conclude *any* `P` once a proof of
   `False` is in hand.
+
+[Agore2023]: ../bibliography.md#agore2023
 
 ---
 

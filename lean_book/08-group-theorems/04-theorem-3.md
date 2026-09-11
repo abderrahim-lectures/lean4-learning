@@ -4,7 +4,7 @@
 
 ---
 
-**Claim.** `Grp.inv (Grp.op a b) = Grp.op (Grp.inv b) (Grp.inv a)`.
+**Claim.** ([DummitFoote2003], pp. 17-18) `Grp.inv (Grp.op a b) = Grp.op (Grp.inv b) (Grp.inv a)`.
 
 **Finding the proof.** This *appears* to again call for a chain of
 equalities, but a shortcut emerges once the shape of the goal is recognized to
@@ -106,7 +106,7 @@ example {G : Type*} [Group G] (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := mul_
 ```
 
 And the same payoff Chapter 8 draws out concretely for `perm3Group` applies
-here too, against the own $S_3$ of Mathlib from Chapter 7, Section 4. There is no new
+here too, against its own $S_3$ of Mathlib from Chapter 7, Section 4. There is no new
 proof, only an application of `mul_inv_rev` at `Equiv.Perm (Fin 3)`.
 
 ```lean
@@ -131,3 +131,5 @@ over every `Group`.
 ---
 
 [← Theorem 2](03-theorem-2.md) | [Index](00-index.md) | [Next: Exercises →](05-exercises.md)
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003

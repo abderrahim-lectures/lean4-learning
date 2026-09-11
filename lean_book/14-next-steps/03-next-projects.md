@@ -204,7 +204,7 @@ $\mathrm{false}\, t\, e \longrightarrow_\beta e$. "If-then-else" is not a
 primitive at all. It is just *application*, once booleans are represented
 this way. The actual `Bool` of Lean (an `inductive` with two constructors) is a
 *convenience*, not a necessity. The calculus itself never needed a
-booleans primitive to express conditional behavior.
+boolean primitive to express conditional behavior.
 
 **Church numerals.** Represent the natural number $n$ as "apply a function
 $n$ times."

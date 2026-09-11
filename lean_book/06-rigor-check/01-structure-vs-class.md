@@ -37,7 +37,7 @@ intuition `class` would otherwise hide has been built, is the point of this sect
 
 A `class` is a `structure` whose *inhabitants* Lean is willing to search
 for automatically, through a process called **typeclass resolution** (or
-"instance search"). When you write `class Group (G : Type)`, and then
+"instance search") ([TPIL4], "Type Classes"). When you write `class Group (G : Type)`, and then
 register a particular group structure with the keyword `instance` instead
 of `def`:
 
@@ -124,9 +124,9 @@ Whenever a `structure` extends another (`Point3D extends Point` in Chapter 3,
 underlying `Group` from a `CommGroup cg`. Lean also permits *dropping* the
 `.toGroup` and writing `cg.op` directly, silently inserting the projection.
 This automatic insertion of a "translate from one type to
-another" function is an instance of **coercion**, the general mechanism by
-which Lean lets a term of one type stand in for a term of a related type
-without the conversion being written explicitly. It is the same general idea,
+another" function is an instance of **coercion**, a registered implicit
+conversion from one type to another that Lean inserts automatically.
+([TPIL4], "Coercions") It is the same general idea,
 though a much simpler case, as coercing `Nat` values into `Int`. The
 literal projection differs, but "insert a conversion function
 automatically so notation reads naturally" is the shared mechanism.
@@ -135,6 +135,8 @@ automatically so notation reads naturally" is the shared mechanism.
 > Classes" cover both topics in this section directly, including
 > coercions, in more depth and with additional worked examples than this
 > book provides.
+
+[TPIL4]: ../bibliography.md#tpil4
 
 ---
 

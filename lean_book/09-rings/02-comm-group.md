@@ -9,12 +9,14 @@ structure CommGroup (G : Type) extends Group G where
   comm : ∀ a b : G, op a b = op b a
 ```
 
+The definition of abelian group is standard ([DummitFoote2003], p. 17).
+
 Recall `extends` from Chapter 3. A `CommGroup G` *is* a `Group G` (it has
 every field `Group G` has, namely `op`, `id`, `inv`, `assoc`, etc.) plus one more
 field, `comm`. Anywhere Lean expects a `Group G`, a `CommGroup G` may be
 passed instead (via `.toGroup`).
 
-**Mathematical reading.** `CommGroup G` is an *abelian group* $(G, \cdot, e,
+**Mathematical reading.** `CommGroup G` is an *abelian group* ([DummitFoote2003], p. 17) $(G, \cdot, e,
 (-)^{-1})$ with the extra law $\forall a,b,\ a\cdot b = b\cdot a$. Structurally
 $\mathbf{Ab}$ is a
 [full subcategory / subobject](../02-terminology-and-coc/01-terminology.md#category-theory-terms-used-beyond-the-baseline)
@@ -22,6 +24,8 @@ of $\mathbf{Grp}$, cut out by the commutativity axiom, and `extends`
 builds exactly this inclusion: `.toGroup` is the
 [forgetful functor](../02-terminology-and-coc/01-terminology.md#category-theory-terms-used-beyond-the-baseline)
 $\mathbf{Ab} \hookrightarrow \mathbf{Grp}$, which forgets the `comm` axiom.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
 ---
 

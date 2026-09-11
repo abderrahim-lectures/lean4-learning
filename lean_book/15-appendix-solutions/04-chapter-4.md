@@ -42,7 +42,9 @@ predicate (`1 > 0`). Here [`decide`](https://lean-lang.org/doc/reference/latest/
 unfolds to `0 < 1`, i.e. the successor form of `Nat.le 1 1`, which is a
 *propositional* fact proved by a constructor (`Nat.le.refl`), not something
 `rfl` can close by definitional unfolding alone. This is the same
-definitional-vs-propositional-equality distinction taught in Chapter 6.
+definitional-vs-propositional-equality distinction (definitional: two terms
+that reduce to the same normal form; propositional: provably equal but not
+definitionally so) taught in Chapter 6.
 
 **4. Why `∧` needs one constructor and `∨` needs two**
 
