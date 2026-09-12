@@ -76,7 +76,7 @@ silently assume it.
 >   -- right inverse: a · a⁻¹ = e for all a
 > ```
 >
-> The informal version names three ingredients and three laws. The Lean
+> The informal version names three ingredients and three axioms. The Lean
 > version lists *eight* fields: three pieces of data plus five proof
 > obligations (identity is split into left/right, inverse is split into
 > left/right). A term of type `Group G` cannot exist unless all five

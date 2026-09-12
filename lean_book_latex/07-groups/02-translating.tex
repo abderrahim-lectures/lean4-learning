@@ -64,7 +64,7 @@ structure Group (G : Type) where
   -- right inverse: a (*$\cdot$*) a(*${}^-$*)(*\textsuperscript{1}*) = e for all a
 \end{lstlisting}
 
-The informal version names three ingredients and three laws. The Lean version lists \emph{eight} fields: three pieces of data plus five proof obligations (identity is split into left/right, inverse is split into left/right). A term of type \texttt{Group G} cannot exist unless all five proofs are supplied, so every theorem later in the book that takes a \texttt{Group G} gets those five facts for free, checked once, rather than trusting each caller.
+The informal version names three ingredients and three axioms. The Lean version lists \emph{eight} fields: three pieces of data plus five proof obligations (identity is split into left/right, inverse is split into left/right). A term of type \texttt{Group G} cannot exist unless all five proofs are supplied, so every theorem later in the book that takes a \texttt{Group G} gets those five facts for free, checked once, rather than trusting each caller.
 \end{quote}
 
 \begin{mathreading}

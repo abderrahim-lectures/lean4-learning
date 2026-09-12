@@ -53,7 +53,7 @@ x = a\cdot 0 = a\cdot(0+0) = a\cdot 0 + a\cdot 0 = x + x,
 
 \begin{progcorner}
 
-\texttt{mul\_\allowbreak{}zero} looks obvious enough that a Python codebase would never think to test it --- \texttt{x * 0} is \texttt{0}. It genuinely is, for \texttt{int}. It is not, for every numeric type Python ships.
+\texttt{mul\_\allowbreak{}zero} is the kind of fact a Python codebase would not test --- \texttt{x * 0} is \texttt{0}. It genuinely is, for \texttt{int}. It is not, for every numeric type Python ships.
 
 \end{progcorner}
 

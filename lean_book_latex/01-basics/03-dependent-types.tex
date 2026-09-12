@@ -84,7 +84,7 @@ def Vec.replicate (a : (*$\alpha$*)) : (n : Nat) (*$\rightarrow$*) Vec (*$\alpha
 -- Vec.cons (-42) (Vec.cons (-42) (Vec.cons (-42) (Vec.nil)))
 \end{lstlisting}
 
-\textbf{A third style of writing a \texttt{def} body, and why the signature ends in a bare \texttt{→}.} Every \texttt{def} up to this point (\texttt{double}, \texttt{average}, \texttt{identity}) named every argument inside \texttt{(...)} and gave one term after \texttt{:=}. \texttt{Vec.replicate} above does something visibly different for its last argument: \texttt{(n : Nat)} never appears to the left of \texttt{:=}, the signature itself ends in a plain \texttt{→} the way the statement of a \texttt{theorem} does, and the body is a list of \texttt{| pattern => term} equations instead of one term. This style of writing a function body, naming the \emph{shape} an argument must have rather than a name for the argument itself, is called \textbf{pattern matching}, a term used again from here on wherever a definition or proof picks apart a value by its constructor rather than by a bound name. This is not a new arrow meaning on top of the two flagged in \hyperref[sec:01-basics:02-def-let-implicit:1]{Section 2}, and it is not a different kind of function. It is a third \emph{writing style} for the exact same thing, worth seeing side by side on a smaller example before trusting it in \texttt{Vec.replicate}:
+\textbf{A third style of writing a \texttt{def} body, and why the signature ends in a bare \texttt{→}.} Every \texttt{def} up to this point (\texttt{double}, \texttt{average}, \texttt{identity}) named every argument inside \texttt{(...)} and gave one term after \texttt{:=}. \texttt{Vec.replicate} above does something visibly different for its last argument: \texttt{(n : Nat)} never appears to the left of \texttt{:=}, the signature itself ends in a plain \texttt{→} the way the statement of a \texttt{theorem} does, and the body is a list of \texttt{| pattern => term} equations instead of one term. This style of writing a function body, naming the \emph{shape} an argument must have rather than a name for the argument itself, is called \textbf{pattern matching}, a term used again from here on wherever a definition or proof picks apart a value by its constructor rather than by a bound name. This is the same arrow, written in a third style, worth seeing side by side on a smaller example before trusting it in \texttt{Vec.replicate}:
 
 \begin{lstlisting}
 def vecLen {(*$\alpha$*) : Type} {n : Nat} (_ : Vec (*$\alpha$*) n) : Nat := n
@@ -163,7 +163,7 @@ The informal ``proof'' is a sentence. The Lean version is a definition with \emp
 
 \subsection{Why bother: invariants become part of the type, not a side promise}\label{sec:01-basics:03-dependent-types:6}
 
-The payoff is not just bookkeeping. Because the length lives in the type, Lean can rule out a whole class of mistakes \emph{before running anything at all}. Define a function that reads the first element of a vector, which only makes sense for a \emph{non-empty} vector:
+The payoff goes beyond bookkeeping. Because the length lives in the type, Lean can rule out a whole class of mistakes \emph{before running anything at all}. Define a function that reads the first element of a vector, which only makes sense for a \emph{non-empty} vector:
 
 \begin{lstlisting}
 def Vec.head : Vec (*$\alpha$*) (n + 1) (*$\rightarrow$*) (*$\alpha$*)
@@ -246,7 +246,7 @@ in the application
   vecA.dot vecB
 \end{lstlisting}
 
-In the version of Python, \texttt{dot([17,-\allowbreak{}3,42], [99,8])}, silently returned \texttt{1659}, a wrong answer with no error at all. The Lean version does not even compile. The length-mismatch bug is not caught by a clever runtime check \emph{added} to \texttt{Vec.dot}. There is no such check anywhere in its three-line definition. It is caught because ``both arguments have the same length'' was stated once, in the type, and Lean enforces every type it is given, automatically, for every call site, without exception.
+In Python, \texttt{dot([17,-\allowbreak{}3,42], [99,8])} silently returned \texttt{1659}, a wrong answer with no error at all. The Lean version does not even compile. The length-mismatch bug is not caught by a clever runtime check \emph{added} to \texttt{Vec.dot}. There is no such check anywhere in its three-line definition. It is caught because ``both arguments have the same length'' was stated once, in the type, and Lean enforces every type it is given, automatically, for every call site, without exception.
 
 The actual, built-in \texttt{Vector α n} in Lean is distinct from the toy \texttt{Vec} built here. It is defined differently under the hood, as an \texttt{Array α} paired with a proof that its size equals \texttt{n}, for performance reasons, the same way the \emph{presentation} of \texttt{Nat} above as \texttt{zero}/\texttt{succ}, due to Peano, does not reflect how Lean actually stores numbers at runtime (as fast arbitrary-precision integers). The \texttt{Vec} built in this section is the traditional textbook definition, simpler to reason about and the one every type-theory reference uses first, while the real \texttt{Vector} in Lean is engineered for speed. Both are dependent types in exactly the sense described here.
 
@@ -267,8 +267,13 @@ This is also, not by coincidence, exactly what \texttt{∀} means. \texttt{∀ n
 Chapter 12 builds a genuinely more elaborate dependent type, \texttt{Path Q : V → V → Type}, a family of types indexed by a \emph{pair} of vertices in a graph rather than by a single \texttt{Nat}. It is ``the type of paths from \texttt{u} to \texttt{w},'' which differs for each choice of endpoints exactly as \texttt{Vec α n} differs for each length. Its \texttt{cons}-like constructor is a dependent function for the same reason \texttt{Vec.replicate} is one here. Composing two paths is only accepted by the type-checker when their endpoints actually match, an invariant baked into the type rather than checked separately. Nothing new is needed to understand it once the \texttt{Fin}/\texttt{Vec} examples in this section make sense. It is the identical idea, with a richer index.
 
 \begin{quote}
-\textbf{Mathematical reading (optional).} For readers who already think categorically, an indexed family \texttt{B : A → Type} is exactly a functor out of the discrete category on \texttt{A}, or, thinking of \texttt{A × A}-indexed families as in the \texttt{Path} example above, an assignment of a \(\mathrm{Hom}\)-set to every pair of objects in a category. A Π-type over such a family is a \textbf{dependent product}. A term of \(\sum_{x:A} B(x)\) (Σ-type, next covered formally in \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2}) is a \textbf{dependent sum}. Both are literal categorical limits/colimits in the appropriate indexed sense, not merely named after them by analogy.
 \end{quote}
+
+\begin{mathreading}
+
+For readers who already think categorically, an indexed family \texttt{B : A → Type} is exactly a functor out of the discrete category on \texttt{A}, or, thinking of \texttt{A × A}-indexed families as in the \texttt{Path} example above, an assignment of a \(\mathrm{Hom}\)-set to every pair of objects in a category. A Π-type over such a family is a \textbf{dependent product}. A term of \(\sum_{x:A} B(x)\) (Σ-type, next covered formally in \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2}) is a \textbf{dependent sum}. Both are literal categorical limits/colimits in the appropriate indexed sense, not merely named after them by analogy.
+
+\end{mathreading}
 
 \begin{quote}
 Read more. \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2} gives Π-types (and Σ-types) their formal typing rules, with more worked examples, rather than only the walkthrough given here.

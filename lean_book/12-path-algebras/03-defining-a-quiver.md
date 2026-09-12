@@ -85,10 +85,10 @@ instance : Quiver (Fin 3) := ⟨MyArrow⟩
 ```
 
 `MyArrow 0 1` has exactly the one constructor `alpha`. `MyArrow i j` for
-any other pair `(i, j)`, in particular the "backwards" or "no such arrow"
+any other pair `(i, j)`, in particular the "backward" or "no such arrow"
 cases, has no constructors at all, and is thus simply an empty type. There is
 no `source`/`target` to state or prove separately, and no `h : Q.source a = v`
-side-condition to discharge with `rfl` later (Chapter 12, Section 4). An
+side-condition to discharge with `rfl` later (the next section). An
 ill-typed composition is rejected by the type checker before a proof
 obligation is even reached, one step earlier than the encoding of the book
 catches the same mistake.

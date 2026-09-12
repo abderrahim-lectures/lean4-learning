@@ -119,7 +119,7 @@ actually differ.
 
 ### A note on structure eta
 
-**Definition.** *Structure eta* is the rule that
+**Definition.** *Structure eta* is the rule that ([TPIL4], §11.10)
 `x == S.mk x.field1 x.field2 ...` for any structure term `x`.
 
 This is a companion fact, relied on silently whenever this book (or the reader) writes

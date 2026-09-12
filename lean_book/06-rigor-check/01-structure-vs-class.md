@@ -103,7 +103,7 @@ difficult to debug the first time instance resolution picks the
 the *explicit* version first, the approach taken by this book, builds the
 mental model that makes debugging *silent* instance-resolution failures
 manageable later, since the data being
-threaded through remains known even once no longer visible in the source text.
+threaded through remains known even once it is no longer visible in the source text.
 
 ### The bridge to Mathlib
 

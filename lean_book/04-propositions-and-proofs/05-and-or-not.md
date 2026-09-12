@@ -68,10 +68,8 @@ theorem anything_from_contradiction {P : Prop} (h1 : 1 = 2) (h2 : (1:Nat) ≠ 2)
 - `absurd {P Q : Prop} (h1 : P) (h2 : ¬P) : Q` derives *anything at all*
   from a genuine contradiction, a direct proof of `P` together with a
   proof that `P` is impossible. `anything_from_contradiction` shows this
-  concretely. From `1 = 2` and `1 ≠ 2` (contradictory hypotheses that could
-  never both hold, but which Lean happily accepts as *given*
-  hypotheses in a signature. Nothing prevents assuming something false; it only prevents *proving* it from nothing), one may
-  conclude literally any proposition `P` whatsoever. This is the "ex falso
+  concretely. From `1 = 2` and `1 ≠ 2`, one may conclude literally any
+  proposition `P` whatsoever. This is the "ex falso
   quodlibet" principle made concrete. This is $\bot$-elimination from
   [Section 2](02-logic-recap.md), which is valid in both classical and
   intuitionistic logic, so nothing classical is being smuggled in here. Once a

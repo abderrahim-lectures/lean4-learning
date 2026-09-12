@@ -40,7 +40,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   definition immediately preceding Definition 1.2, which itself
   defines the *path algebra* built from these paths, not the path
   concept).
-- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Ch. II §1, pp. 42–43, unnumbered definition preceding Definition 1.2. The path definition itself is this unnumbered text. Definition 1.2, a few lines later, defines the *path algebra* $KQ$ built from these paths, not the path concept (an earlier draft of this book mislabeled the path definition itself as "Definition 1.2").
+- Assem, Simson, and Skowroński ([AssemSimsonSkowronski2006]), Ch. II §1, pp. 42–43, unnumbered definition preceding Definition 1.2. The path definition itself is this unnumbered text. Definition 1.2, a few lines later, defines the *path algebra* $KQ$ built from these paths, not the path concept.
 - Schiffler ([Schiffler2014]), **Definition 2.1 and Example 2.2** (Chapter 3, §2.1) covers the same notion, called the "constant path" (or "lazy path") $e_i$ at vertex $i$ for the length-$0$ case.
 
 [AssemSimsonSkowronski2006]: ../bibliography.md#assemsimsonskowronski2006

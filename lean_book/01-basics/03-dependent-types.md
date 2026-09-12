@@ -164,9 +164,7 @@ style of writing a function body, naming the *shape* an argument must
 have rather than a name for the argument itself, is called **pattern
 matching**, a term used again from here on wherever a definition or proof
 picks apart a value by its constructor rather than by a bound name. This
-is not a new arrow meaning on top of the two flagged in
-[Section 2](02-def-let-implicit.md), and it is not a different kind of
-function. It is a third *writing style* for the exact same thing, worth
+is the same arrow, written in a third style, worth
 seeing side by side on a smaller example before trusting it in
 `Vec.replicate`:
 
@@ -307,7 +305,7 @@ says something more precise, and the gap is worth seeing once.
 
 ### Why bother: invariants become part of the type, not a side promise
 
-The payoff is not just bookkeeping. Because the length lives in the type,
+The payoff goes beyond bookkeeping. Because the length lives in the type,
 Lean can rule out a whole class of mistakes *before running anything at
 all*. Define a function that reads the first element of a vector, which only
 makes sense for a *non-empty* vector:
@@ -459,7 +457,7 @@ in the application
   vecA.dot vecB
 ```
 
-In the version of Python, `dot([17,-3,42], [99,8])`, silently returned `1659`, a wrong
+In Python, `dot([17,-3,42], [99,8])` silently returned `1659`, a wrong
 answer with no error at all. The Lean version does not even compile. The
 length-mismatch bug is not caught by a clever runtime check *added* to
 `Vec.dot`. There is no such check anywhere in its three-line definition.

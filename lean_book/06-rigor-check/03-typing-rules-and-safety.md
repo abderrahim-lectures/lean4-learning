@@ -268,7 +268,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   $\mathtt{Sort}\,(\mathrm{imax}(i,j))$. The $j = 0$ clause is the
   impredicativity of `Prop`, which the calculus of constructions is
   characterized by and which [TPIL4] §2.2 documents for Lean specifically.
-- Pierce ([Pierce2002]), Ch. 9 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10–11; Ch. 12 "Simple Extensions" actually covers pairs/tuples/records/sums, unrelated to the content of this section.
+- Pierce ([Pierce2002]), Ch. 9 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim.
 - Milner ([Milner1978], §2) covers the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the boxes of this section.
 - [Girard1972] is the Girard paradox (the inconsistency of `Type : Type`), a different, later thesis than [Girard1971] cited elsewhere in this book; see [Chapter 6, Section 2](02-universes.md) for the full citation and [Coquand1986] for the modern exposition.

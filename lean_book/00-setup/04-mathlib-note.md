@@ -47,7 +47,7 @@ not merely to *use* a group in Lean, but to see exactly what a group *is*
 to Lean: every field, every proof obligation, in one `structure`, with
 nothing hidden behind the typeclass hierarchy of someone else. A library saves
 effort by hiding that machinery, and the purpose of this book is for the
-reader to see it on a first encounter, not have it hidden.
+reader to see that machinery on a first encounter.
 
 `elan` pins one exact Lean version per project via `lean-toolchain`.
 Without that pin, on a machine with several Lean projects at once, a
@@ -58,9 +58,8 @@ every code block in this book reproducible regardless of what else is
 installed system-wide.
 
 Finally, if this book is Mathlib-free by design through Chapter 12, why
-does Chapter 7 onward show Mathlib code at all? Because "built from
-scratch" and "never shown the real library" are different design
-choices, and this book only commits to the first. Every hand-built
+does Chapter 7 onward show Mathlib code at all? Because "'Built from scratch' and 'presented in isolation from the real library' are different design
+choices, and this book commits only to the first." Every hand-built
 definition from Chapter 7 onward is paired with a labeled preview of its
 Mathlib counterpart, so that the transition to Mathlib in Chapter 14 is a
 recognition of material already seen, not a cold start.

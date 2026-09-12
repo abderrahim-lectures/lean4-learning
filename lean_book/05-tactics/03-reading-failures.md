@@ -33,10 +33,7 @@ a diagnostic, not a dead end.
   warning and permits inspection of exactly what remains).
 
 **Definition.** `sorry` is a built-in term that closes any goal instantly
-but marks the theorem as unproved.
-
-`sorry` deserves a special mention. It is a placeholder that closes any
-goal instantly but marks the theorem as unproved. (Lean prints a warning,
+but marks the theorem as unproved. (Lean prints a warning,
 and any downstream proof depending on it inherits this unproved status.) It should be used
 constantly while exploring. Writing the skeleton of a multi-step proof with
 `sorry` at each unfinished branch, checking that the overall *shape* type-checks,

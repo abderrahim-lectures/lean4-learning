@@ -408,9 +408,7 @@ subcategory of all groups.
 These four are the ones worth fixing once. If a "Mathematical reading" box
 elsewhere uses a still-more-specialized term (adjunction, biproduct, a
 presheaf category, and the like), treat it as genuinely optional bonus
-content for readers who already know it. Nothing later in the book
-depends on it, and the surrounding plain-English explanation always stands
-on its own without it.
+content for readers who already know it. The surrounding plain-English explanation always stands on its own.
 
 ---
 

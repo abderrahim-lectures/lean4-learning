@@ -93,7 +93,7 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
     · exact ModN.one_smul x.snd
 ```
 
-`congr 1` makes its first appearance here. Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
+Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
 `congr 1` reduces it to the componentwise goals `a1 = b1` and `a2 = b2`.
 This is the categorical fact that the equality of a product is checked
 pairwise, turned into a one-line tactic instead of a hand-unfolded
@@ -118,8 +118,8 @@ because it holds in each coordinate independently, which is exactly what
 one in $N$. For finitely many summands the direct sum $M \oplus N$ is both
 a product and a coproduct at once in $R\text{-}\mathbf{Mod}$, the
 projections $\pi_M, \pi_N$ and inclusions $\iota_M, \iota_N$ satisfy
-$\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N =
-0$, and $\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$.
+Here juxtaposition denotes function composition: $\pi_M \circ \iota_M = \mathrm{id}$, $\pi_N \circ \iota_N = \mathrm{id}$, $\pi_M \circ \iota_N =
+0$, and $\iota_M \circ \pi_M + \iota_N \circ \pi_N = \mathrm{id}$.
 
 ```mermaid
 graph LR

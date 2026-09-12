@@ -24,10 +24,9 @@ that just run that algorithm.
 - **`omega`** is a decision procedure for *linear* arithmetic over `Nat`/`Int`
   (goals built from `+`, subtraction, `≤`, `<`, `=`, and multiplication by
 *literal constants* only; `omega` handles `3 * n` fine, but not `n * m`
-   for two unknown variables `n`, `m`; multiplying two unknown variables
-   together falls outside what it can decide). For a goal that is "some
+   for two unknown variables `n`, `m`). For a goal that is "some
   linear inequality or equality about integers," `omega` should be
-  reached for before deriving the fact by hand. This is exactly the kind of fact a decision
+  tried before deriving the fact by hand. This is exactly the kind of fact a decision
   procedure handles better than a custom [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain, and a hand-derived
   proof teaches nothing that the existence of `omega` does not already establish.
 - **`norm_num`** normalizes and evaluates numerical expressions
@@ -103,8 +102,7 @@ reference (full entry in the [Bibliography](../bibliography.md)):
   idea as data, run it and get back a definite "yes, and here's why" or
   "no, and here's why," a constructive "$P \vee \neg P$, and we can tell
   which." Chlipala is the actual source for `Decidable` as a
-  type-theoretic notion (an earlier draft of this book cited Pierce2002
-  instead, but TAPL does not discuss `Decidable` at all).
+  type-theoretic notion.
 
 [Chlipala2013]: ../bibliography.md#chlipala2013
 

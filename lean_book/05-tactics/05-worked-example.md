@@ -49,8 +49,7 @@ Walking through the inductive step slowly.
    inside the goal.
 4. `rw [Nat.succ_add]` uses the equation `succ k + a = succ (k + a)` to
    rewrite the right-hand side, so both sides now read `succ (k + a)`,
-   which are literally identical. `rw` closes the goal automatically once the two
-   sides match syntactically.
+    which are literally identical. Both sides now match; Lean's kernel closes the goal by reflexivity.
 
 This is the pattern, base case, inductive step, explicit `ih`, that
 recurs, slowly and explicitly, for every proof about groups and rings.
@@ -88,8 +87,7 @@ def add(a, b):
 The `if isinstance(b, Zero)` branch of `add` is the base case. Its recursive
 call `add(a, b.pred)` plays exactly the role `ih` plays in the `succ` branch,
 "assume it already works for the smaller case, build the answer for one
-`Succ` more." The proof is not merely *analogous* to recursion, it *is* a
-recursion, one producing a proof term instead of a `Succ` value. This is
+`Succ` more." The proof is not merely *analogous* to recursion; it *is* a recursion — one producing a proof term instead of a `Succ` value. This is
 why Lean can generate the two cases of `induction` automatically straight
 from the definition of `Nat`, the same way the `isinstance` cases in Python fall
 straight out of the two constructors of `Nat`.

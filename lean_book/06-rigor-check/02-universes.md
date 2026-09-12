@@ -39,8 +39,8 @@ universe containing "ordinary" types like `Nat`, `Bool`, `Int`, and the
 
 ### Why this matters for `Group`
 
-Recall `structure Group (G : Type) where ...` from Chapter 7. This
-signature commits to `G : Type`, meaning `G` lives in the universe `Type 0`.
+`structure Group (G : Type) where ...`, as will be defined in Chapter 7, commits to
+`G : Type`, meaning `G` lives in the universe `Type 0`.
 The natural question is whether `Group` itself has a `Group`-structure. Is `Group Int` an
 element of some `Group (Group Int)`? Setting aside whether that would even
 be meaningful, a more basic obstruction is evident. `Group Int` is a `Type`

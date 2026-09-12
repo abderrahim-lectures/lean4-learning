@@ -166,7 +166,7 @@ Formal definitions and citations for this section, gathered here for reference (
 \item
   \textbf{Universe-formation rule.} The working statement used by this book, after the calculus of constructions (\cite{CoquandHuet1988}, §1): \(\mathtt{Type}\,i : \mathtt{Type}\,(i+1)\), and a Π-type built from \(A : \mathtt{Sort}\,i\), \(B : \mathtt{Sort}\,j\) lands in \(\mathtt{Sort}\,(\mathrm{imax}(i,j))\). The \(j = 0\) clause is the impredicativity of \texttt{Prop}, which the calculus of constructions is characterized by and which \cite{TPIL4} §2.2 documents for Lean specifically.
 \item
-  Pierce (\cite{Pierce2002}), Ch. 9 ``Typed Arithmetic Expressions'' §8.3 ``Safety = Progress + Preservation'' (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 ``Simply Typed Lambda-Calculus'' §9.2 ``The Typing Relation'' (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 ``Properties of Typing'' (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10--11; Ch. 12 ``Simple Extensions'' actually covers pairs/tuples/records/sums, unrelated to the content of this section.
+  Pierce (\cite{Pierce2002}), Ch. 9 ``Typed Arithmetic Expressions'' §8.3 ``Safety = Progress + Preservation'' (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 ``Simply Typed Lambda-Calculus'' §9.2 ``The Typing Relation'' (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 ``Properties of Typing'' (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim.
 \item
   Milner (\cite{Milner1978}, §2) covers the theoretical background for why STLC alone cannot type polymorphic functions like \texttt{identity}.
 \item

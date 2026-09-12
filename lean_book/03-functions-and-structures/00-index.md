@@ -41,8 +41,8 @@ value instead of two arguments a caller must keep in sync by hand.
 [Section 1](01-structure-basics.md) answers this: `structure` bundles
 named fields under one type, built with the anonymous constructor `⟨...⟩`
 and read back out by field projection `.field`. This is the packaging
-mechanism every algebraic object from Chapter 7 onward, a group, later a
-ring, is built from.
+mechanism every algebraic object from Chapter 7 onward — first a group, later a
+ring — is built from.
 
 `Point` bundles two `Nat`s specifically. The same shape of bundling is
 needed for *any* pair of types, not just `Nat` and `Nat`.

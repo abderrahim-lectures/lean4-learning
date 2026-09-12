@@ -4,6 +4,7 @@ Notable changes to this book, most recent first, split one file per
 release. Each entry links back to the commit(s) it corresponds to
 where one exists.
 
+- [v2.0.9](v2.0.9.md) — Deep word-by-word review, skill ecosystem wiring, and section-numbering fix
 - [v2.0.8](v2.0.8.md) — Inline citations, proof comparison blocks, and editorial pass 7
 - [v2.0.7](v2.0.7.md) — Antithesis-drumbeat pass and front-matter prose fixes
 - [v2.0.6](v2.0.6.md) — Rewrite "About this book", add "Pedagogical approach" and "A note on authorship" chapters

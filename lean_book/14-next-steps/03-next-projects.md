@@ -131,7 +131,7 @@ above (comfort with the type-class style Mathlib uses throughout).
    composition, comparing field-for-field against the plain
    `Quiver`/`Path` of this book.
 2. Find `Prefunctor` in Mathlib (a quiver homomorphism) and, separately,
-    define a `structure QuiverHom` by hand for two of its own quivers of this book
+    define a `structure QuiverHom` by hand for two quivers from this book
     (`exampleQuiver`, `cyclicQuiver` from the exercises of Chapter 12),
    mapping vertices to vertices and arrows to paths.
 3. Write the identity `QuiverHom` and composition of two `QuiverHom`s,
@@ -139,8 +139,7 @@ above (comfort with the type-class style Mathlib uses throughout).
    and composition being exactly what make a class of structures into a
    category, Chapter 11 Exercise 2).
 
-**Deliverable.** A hand-written `QuiverHom` between two of its own quivers of
-this book, with its `Prefunctor` counterpart in Mathlib identified by name.
+**Deliverable.** A hand-written `QuiverHom` between two quivers from this book, with its `Prefunctor` counterpart in Mathlib identified by name.
 
 **Self-verification.** `#check @Prefunctor` and compare its fields,
 one-by-one in a comment, against the fields of `QuiverHom` itself.
@@ -238,7 +237,7 @@ as a higher-order function that knows how to iterate.
   \lambda n.\lambda f.\, m\,(n\, f)$, meaning "apply *'apply $f$, $n$ times'*, $m$
   times." Multiplication is literally function composition, iterated.
 
-None of this is meant to suggest that one should ever program this way. It
+Church encodings are a curiosity, not a practical programming technique. It
 shows, concretely, that a system with only variables, abstraction, and
 application already has the expressive power to build booleans, naturals,
 and (by pairing constructions along the same lines) arbitrary tree-shaped

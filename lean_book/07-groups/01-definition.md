@@ -13,7 +13,7 @@ itself paired with $e \cdot e = e$. The requirement has to hold for
 each $a$ there must exist $a^{-1}$ with $a \cdot a^{-1} = a^{-1} \cdot a =
 e$. Adding exactly this to the data of a monoid is the entire content of
 this section, and it is what turns "a set with an associative operation"
-into a structure with cancellation.
+into a group (a structure where every element has an inverse).
 
 A **group** is a set $G$ together with (cf. [DummitFoote2003], p. 17):
 

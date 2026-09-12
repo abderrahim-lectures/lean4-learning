@@ -50,7 +50,7 @@ theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
 
 \begin{mathreading}
 
-\texttt{Mat2} is the free abelian group \(\mathbb{Z}^4\) \(M_2(\mathbb{Z}) \cong \mathbb{Z}^4\) on the four matrix entries. The extensionality lemma \texttt{Mat2.ext}, supplied by hand right alongside the structure, since almost every proof below needs it, says two \texttt{Mat2} values are equal exactly when all four entries match.
+\texttt{Mat2} represents \(M_2(\mathbb{Z})\), which as an additive group is isomorphic to \(\mathbb{Z}^4\) on the four matrix entries. The extensionality lemma \texttt{Mat2.ext}, supplied by hand right alongside the structure, since almost every proof below needs it, says two \texttt{Mat2} values are equal exactly when all four entries match.
 
 \end{mathreading}
 
@@ -110,7 +110,7 @@ def Y : Mat2 := (*$\langle$*)1, 0, 1, 1(*$\rangle$*)
 #eval Mat2.mul Y X    -- (*$\langle$*)1, 1, 1, 2(*$\rangle$*)
 \end{lstlisting}
 
-\texttt{\#eval} here is doing real work, it is a two-line proof by computation that \texttt{mul} is not commutative. This is cheaper than any hand-written counterexample proof, and it is exactly the kind of thing to try before committing to a \texttt{theorem}. Should \texttt{¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X} be needed as a theorem, this computed pair \texttt{(X, Y)} serves as the witness.
+\texttt{\#eval} here is doing real work: it is a two-line proof by computation that \texttt{mul} is not commutative. This is cheaper than any hand-written counterexample proof, and it is exactly the kind of thing to try before committing to a \texttt{theorem}. Should \texttt{¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X} be needed as a theorem, this computed pair \texttt{(X, Y)} serves as the witness.
 
 \begin{mathreading}
 

@@ -123,7 +123,7 @@ same equation, which the inductive hypothesis closes.
 This book does not carry out that induction in Lean, but the argument above
 is enough to see that it goes through. Associativity together with `nil` as
 identities is what makes $\mathrm{Free}(Q)$ a genuine category, the
-smallest/most general category containing the arrows of $Q$, in the sense of a
+universal (initial) category containing the arrows of $Q$, in the sense of a
 **universal property**. Concretely, for any category $C$ and any quiver
 morphism $F : Q \to U(C)$ (a function on vertices and arrows into the
 objects and morphisms of $C$, where $U : \mathbf{Cat} \to \mathbf{Quiv}$ is the
@@ -156,7 +156,7 @@ paths) reduce to the identical term, because `Quiver.Path.comp` unfolds to
 exactly the same sequence of `cons` applications `Path.append` does. Note
 that this `rfl` only checks *this one concrete instance*. It is not a
 proof of associativity or the identity laws in general (those are the
-separate statements discussed above). It is reassurance that the concrete
+separate statements discussed above). It confirms that the concrete
 `Free(Q)` machinery behaves as expected on a worked example.
 
 ### The path algebra

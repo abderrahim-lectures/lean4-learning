@@ -4,9 +4,9 @@
 
 ---
 
-`fun hpq hp => hpq hp` proves $P\to Q\to Q$ (given a function $P\to Q$
+`fun hpq hp => hpq hp` proves $(P \to Q) \to P \to Q$ (given a function $P\to Q$
 and a proof of $P$, apply the one to the other) in one shot, because the
-whole term was already obvious before writing it. Most goals are not like
+term can be read off directly from the statement. Most goals are not like
 that: the term to write depends on the goal currently open, which itself
 changes as pieces of it get filled in. Writing a proof incrementally,
 goal by goal, is exactly what tactics do; term-mode is the destination,

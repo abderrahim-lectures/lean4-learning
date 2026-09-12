@@ -7,7 +7,7 @@
 The key idea for formalizing "paths compose head-to-tail" is to make `Path`
 an inductive type *indexed* by its own source and target vertex. Lean
 tracks, in the type itself, which vertex a path starts and ends at. This is
-the dependent-types idea previewed all the way back in
+the dependent-types idea previewed from
 [Chapter 1](../01-basics/03-dependent-types.md): `Path Q` is a family of
 types indexed by pairs of vertices, exactly the categorical
 $\mathrm{Hom}$-set family $\mathrm{Hom}_{\mathrm{Free}(Q)}(u,w)$ of the free

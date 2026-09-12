@@ -96,8 +96,7 @@ Conceptually this says the map $x \mapsto a\cdot x$ is a group homomorphism
 of $(R,+)$, and homomorphisms send the identity to the identity. $0$ absorbs
 because multiplication distributes over addition in each argument.
 
-**Programmer note (Python).** `mul_zero` looks obvious enough that a
-Python codebase would never think to test it — `x * 0` is `0`.
+**Programmer note (Python).** `mul_zero` is the kind of fact a Python codebase would not test — `x * 0` is `0`.
 It genuinely is, for `int`. It is not, for every numeric type
 Python ships.
 

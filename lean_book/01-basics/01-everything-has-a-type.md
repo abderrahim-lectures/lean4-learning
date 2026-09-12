@@ -22,8 +22,8 @@ running anything, and it never lets a term of the wrong type slip through.
 ```
 
 **Mathematical reading.** The basic unit of assertion in type theory is the
-**judgment** ([MartinLof1984]), a statement made *about* an underlying formal system, called
-the **calculus**, from the outside, not a proposition proved *inside* it.
+**judgment** ([MartinLof1984]), a statement made about an underlying formal system — called
+the **calculus** — from the outside, not a proposition proved inside it.
 For Lean, this calculus is made concrete a few sentences below as the
 $\lambda$-calculus, and named precisely as the **calculus of
 constructions** ([CoquandHuet1988]) in [Chapter 2, Section 2](../02-terminology-and-coc/02-pi-sigma-and-coc.md). Nothing here
@@ -54,8 +54,7 @@ simplifying/running the expression, nothing more exotic.
 Read `#check 3` as "Lean answers the question `3 : ?` with `Nat`." Read
 `#check Nat` as "even `Nat` itself, the type of natural numbers, is a
 term, and *its* type is `Type`." This is the first surprising fact worth
-sitting with. Types are not a separate kind of thing bolted onto a
-programming language. In Lean, a type is itself a term, and it has a type
+sitting with. In Lean, a type is itself a term, and it has a type
 of its own (`Type`), the same way `3` has a type (`Nat`). This is what
 "everything has a type" means literally, not just for ordinary values.
 

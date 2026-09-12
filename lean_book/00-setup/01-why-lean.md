@@ -13,8 +13,8 @@ silently broke down. That technique built two chains of alternating
 colors and relied on them staying disjoint. In Heawood's
 eleven-region configuration the two chains could interfere with each
 other instead, and Kempe's argument gave no way to detect that this had
-happened. No reader who checked Kempe's proof over those eleven years
-was careless. A single unhandled case, invisible unless a
+happened. Every reader who checked Kempe's proof over those eleven years
+was diligent. A single unhandled case, invisible unless a
 reader constructed exactly the right counterexample by hand, survived
 peer review, publication, and a decade of citation ([Heawood1890]).
 
@@ -22,10 +22,9 @@ A proof checker exists to make this specific failure mode structurally
 impossible. Lean 4 is a programming language with a built-in interactive
 theorem prover. Mathematical definitions and statements are expressed as
 code, and every proof is a term whose type must match the statement
-exactly, checked by a small, fixed kernel. There is no step at which a
-silently-unhandled case can pass review, because there is no step at
-which the attention of a human reader is the only thing standing between a
-gap and an accepted proof. A proof is correct if and only if it
+exactly, checked by a small, fixed kernel. A silently-unhandled case
+cannot pass review, because every step checks the proof mechanically,
+independent of human attention. A proof is correct if and only if it
 type-checks, and it either type-checks or it does not, regardless of
 how many regions the missing case would have involved.
 

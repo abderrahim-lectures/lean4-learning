@@ -21,8 +21,7 @@ arrows together, so nothing else goes into the definition.
 
 **Definition** (Quiver). A *quiver* $Q$ consists of vertices $Q_0$, arrows
 $Q_1$, and source/target functions $s, t : Q_1 \to Q_0$
-([AssemSimsonSkowronski2006], Definition 1.1). It is a *directed graph* under another name.
-This is the same notion as [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) in Mathlib (built here from scratch, following the
+([AssemSimsonSkowronski2006], Definition 1.1). This is the same notion as [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) in Mathlib (built here from scratch, following the
 "no Mathlib" policy of Chapter 1, rather than reusing the Mathlib version).
 
 Picture an arrow $\alpha : i \to j$ as a literal arrow drawn from vertex $i$

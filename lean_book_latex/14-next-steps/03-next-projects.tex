@@ -89,12 +89,12 @@ Each project below follows the same shape as the checkpoint projects after Chapt
 \item
   Read the \texttt{Quiver} class of \texttt{Mathlib.Combinatorics.Quiver.Basic} (already introduced in the ``Mathlib equivalent'' box of Chapter 12, Section 3) and the extension of it by \texttt{Mathlib.CategoryTheory.Quiver} with identities and composition, comparing field-for-field against the plain \texttt{Quiver}/\texttt{Path} of this book.
 \item
-  Find \texttt{Prefunctor} in Mathlib (a quiver homomorphism) and, separately, define a \texttt{structure QuiverHom} by hand for two of its own quivers of this book (\texttt{exampleQuiver}, \texttt{cyclicQuiver} from the exercises of Chapter 12), mapping vertices to vertices and arrows to paths.
+  Find \texttt{Prefunctor} in Mathlib (a quiver homomorphism) and, separately, define a \texttt{structure QuiverHom} by hand for two quivers from this book (\texttt{exampleQuiver}, \texttt{cyclicQuiver} from the exercises of Chapter 12), mapping vertices to vertices and arrows to paths.
 \item
   Write the identity \texttt{QuiverHom} and composition of two \texttt{QuiverHom}s, noticing the parallel to the \texttt{LinearMap} exercises of Chapter 11 (identity and composition being exactly what make a class of structures into a category, Chapter 11 Exercise 2).
 \end{enumerate}
 
-\textbf{Deliverable.} A hand-written \texttt{QuiverHom} between two of its own quivers of this book, with its \texttt{Prefunctor} counterpart in Mathlib identified by name.
+\textbf{Deliverable.} A hand-written \texttt{QuiverHom} between two quivers from this book, with its \texttt{Prefunctor} counterpart in Mathlib identified by name.
 
 \textbf{Self-verification.} \texttt{\#check @Prefunctor} and compare its fields, one-by-one in a comment, against the fields of \texttt{QuiverHom} itself.
 
@@ -177,7 +177,7 @@ Compare directly to its own Peano definition of \texttt{Nat}, \(\mathtt{Nat} ::=
   \lambda n.\lambda f.\, m\,(n\, f)\), meaning ``apply \emph{`apply \(f\), \(n\) times'}, \(m\) times.'' Multiplication is literally function composition, iterated.
 \end{itemize}
 
-None of this is meant to suggest that one should ever program this way. It shows, concretely, that a system with only variables, abstraction, and application already has the expressive power to build booleans, naturals, and (by pairing constructions along the same lines) arbitrary tree-shaped data, before any type system or \texttt{inductive} keyword enters the picture. The actual \texttt{Bool} and \texttt{Nat} of Lean use \texttt{inductive} instead, for efficiency and because pattern-matching (\texttt{match}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}) is far more convenient to write and reason about than repeated application. The \emph{expressiveness} was never in question. If this is interesting, a next step is to encode pairs the same way (\(\mathrm{pair} := \lambda a.\lambda b.\lambda f.\,
+Church encodings are a curiosity, not a practical programming technique. It shows, concretely, that a system with only variables, abstraction, and application already has the expressive power to build booleans, naturals, and (by pairing constructions along the same lines) arbitrary tree-shaped data, before any type system or \texttt{inductive} keyword enters the picture. The actual \texttt{Bool} and \texttt{Nat} of Lean use \texttt{inductive} instead, for efficiency and because pattern-matching (\texttt{match}, \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{cases}}) is far more convenient to write and reason about than repeated application. The \emph{expressiveness} was never in question. If this is interesting, a next step is to encode pairs the same way (\(\mathrm{pair} := \lambda a.\lambda b.\lambda f.\,
 f\, a\, b\)) and check by hand that projecting back out a component β-reduces correctly.
 
 \subsubsection{References}\label{sec:14-next-steps:03-next-projects:8}

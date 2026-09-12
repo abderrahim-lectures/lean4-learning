@@ -39,7 +39,7 @@ closing it when both sides normalize to the same term. Both proofs of
 $n + 0 = n$ use the same fact, $n + 0 = n$ (the right-unit law for $+$).
 The explicit version cites it by name; `simp` finds it in the rewrite
 system. This is the everyday move of an algebraist to "simplify using the
-obvious identities." It works exactly when the rewrite rules are valid
+standard identities." It works exactly when the rewrite rules are valid
 equalities, and confluent enough to reach a canonical form (a unique normal
 form, guaranteed by confluence (the property that any two rewrite paths from
 the same term can be reconnected, guaranteeing a unique normal form)), the same

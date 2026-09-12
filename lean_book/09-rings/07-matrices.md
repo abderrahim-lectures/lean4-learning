@@ -62,8 +62,7 @@ theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
 > separate `Int` equalities. The word "immediate" covers all of that; Lean
 > spells every step out.
 
-**Mathematical reading.** `Mat2` is the free abelian group $\mathbb{Z}^4$
-$M_2(\mathbb{Z}) \cong \mathbb{Z}^4$ on the four matrix entries. The
+**Mathematical reading.** `Mat2` represents $M_2(\mathbb{Z})$, which as an additive group is isomorphic to $\mathbb{Z}^4$ on the four matrix entries. The
 extensionality lemma `Mat2.ext`, supplied by hand right alongside the
 structure, since almost every proof below needs it, says two `Mat2`
 values are equal exactly when all four entries match.
@@ -128,7 +127,7 @@ def Y : Mat2 := ⟨1, 0, 1, 1⟩
 #eval Mat2.mul Y X    -- ⟨1, 1, 1, 2⟩
 ```
 
-`#eval` here is doing real work, it is a two-line proof by computation that
+`#eval` here is doing real work: it is a two-line proof by computation that
 `mul` is not commutative. This is cheaper than any hand-written counterexample
 proof, and it is exactly the kind of thing to try before committing to a
 `theorem`. Should `¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X` be needed as

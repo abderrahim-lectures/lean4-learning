@@ -28,7 +28,7 @@ def origin : Point := { x := 0, y := 0 }
 #eval origin.x        -- 0
 ```
 
-Key points.
+Key points:
 
 **Definition.** A *constructor* of a `structure` is the function that builds an element from its fields.
 

@@ -405,7 +405,7 @@ def wrap_reading_boxes(text):
         body = _strip_quote_markers(m.group(1))
         return f"\n```{{=latex}}\n\\begin{{progcorner}}\n```\n{body}\n```{{=latex}}\n\\end{{progcorner}}\n```\n"
 
-    text = re.sub(r'\*\*Mathematical reading\.\*\*(.*?)(?=\n\n)', _mathreading, text, flags=re.DOTALL)
+    text = re.sub(r'\*\*Mathematical reading[^*]*\*\*(.*?)(?=\n\n)', _mathreading, text, flags=re.DOTALL)
     text = re.sub(r"\*\*Programmer note \(Python\)[^*]*\*\*(.*?)(?=\n\n)", _progcorner, text, flags=re.DOTALL)
     return text
 
