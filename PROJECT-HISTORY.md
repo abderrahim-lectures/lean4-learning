@@ -195,6 +195,7 @@ As of this writing: **148 issues** (147 closed, 1 open) and
 | [#247](https://github.com/abderrahim-lectures/lean4-learning/pull/247) | v1.6.0: split Chapter 1, book-wide style pass, Python-comparison examples |
 | [#248](https://github.com/abderrahim-lectures/lean4-learning/pull/248) | v1.6.2: bibliography citations for Chapter 4, Ring, Module, and LinearMap |
 | [#261](https://github.com/abderrahim-lectures/lean4-learning/pull/261) | v2.0.x: rewrite the book in derivation-first prose, add the proof strategy guide (v2.0.5 release) |
+| [#266](https://github.com/abderrahim-lectures/lean4-learning/pull/266) | v2.0.9: deep word-by-word review, talent code framework, LaTeX warning fixes |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact
