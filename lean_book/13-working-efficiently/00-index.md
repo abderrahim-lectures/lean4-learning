@@ -50,6 +50,7 @@ deeper reasoning of this chapter even starts.
 3. [`simp`, in light of what it replaces](03-simp.md)
 4. [Term mode vs tactic mode](04-term-vs-tactic-mode.md)
 5. [Structuring lemmas for reuse](05-structuring-lemmas.md)
+6. [Exercises](06-exercises.md)
 
 ---
 

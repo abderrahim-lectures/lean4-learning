@@ -43,6 +43,29 @@ commutativity to `Group` in Chapter 7.
    Mathematical reading box of this section, not a coincidence of
    naming.
 
+**Deep practice.** The following exercises push to the edge of your
+ability. They build on each other — do them in order. If you're making
+no mistakes, you're not learning; if you're making more than 20%
+mistakes, reread the section first.
+
+7. Define `structure Vector (n : Nat) (α : Type)` with a field `data :
+   Fin n → α`. Write `def v3 : Vector 3 Nat` with values `[1, 2, 3]`
+   using `Fin.mk`. Then write `def head {n : Nat} {α : Type} (v : Vector
+   (n + 1) α) : α` that returns the first element. What happens if you
+   try to write `head` for `Vector 0 α`? (This is the dependent-type
+   constraint in action.)
+8. Define `structure Monoid where` with fields `α : Type`, `op : α → α → α`,
+   `id : α`. Then define `def natAddMonoid : Monoid` with `α := Nat`,
+   `op := Nat.add`, `id := 0`. Write `def fold {m : Monoid} : List m.α →
+   m.α` that folds a list using `m.op` and `m.id`. Confirm `#eval fold
+   natAddMonoid [1, 2, 3]` reports `6`.
+9. Define `structure Group where` with fields `α : Type`, `op : α → α → α`,
+   `id : α`, `inv : α → α`. Then define `structure CommGroup extends
+   Group` with an additional field `comm : ∀ a b : G.α, G.op a b = G.op b
+   a`. Build `natAddCommGroup : CommGroup` and confirm `#eval
+   natAddCommGroup.comm 2 3` proves `2 + 3 = 3 + 2`. (This is exactly
+   the pattern Chapter 7 uses.)
+
 Solutions, [Appendix, Chapter 3](../15-appendix-solutions/03-chapter-3.md).
 
 ---

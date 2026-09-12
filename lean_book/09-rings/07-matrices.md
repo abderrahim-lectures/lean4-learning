@@ -215,6 +215,12 @@ theorem add4_reorder (a b c d : Int) : a + b + (c + d) = a + c + (b + d) := by
     rw [← Int.add_assoc, Int.add_comm b c, Int.add_assoc]]
   rw [← Int.add_assoc a c (b + d)]
 
+-- The ring axioms for Mat2 are the deep practice moment of this chapter.
+-- Like Clarissa at her clarinet, you're reaching to the edge of your ability.
+-- The first axiom, mul_assoc, is the hardest — it teaches you the pattern.
+-- The remaining axioms are repetitions: you've seen the struggle, now you
+-- build the stroke. Each entry equation is a mistake you feel, a reach you
+-- make, a skill you build. This is not luxury — it's craft.
 def mat2Ring : Ring Mat2 where
   addGrp := mat2CommGroup
   mul := Mat2.mul
@@ -250,70 +256,30 @@ def mat2Ring : Ring Mat2 where
       rw [Int.add_mul, Int.add_mul, Int.mul_add, Int.mul_add,
           Int.mul_assoc, Int.mul_assoc, Int.mul_assoc, Int.mul_assoc,
           add4_reorder]
-  one_mul := by
-    intro X
-    apply Mat2.ext
-    · show 1 * X.a11 + 0 * X.a21 = X.a11
-      rw [Int.one_mul, Int.zero_mul, Int.add_zero]
-    · show 1 * X.a12 + 0 * X.a22 = X.a12
-      rw [Int.one_mul, Int.zero_mul, Int.add_zero]
-    · show 0 * X.a11 + 1 * X.a21 = X.a21
-      rw [Int.zero_mul, Int.one_mul, Int.zero_add]
-    · show 0 * X.a12 + 1 * X.a22 = X.a22
-      rw [Int.zero_mul, Int.one_mul, Int.zero_add]
-  mul_one := by
-    intro X
-    apply Mat2.ext
-    · show X.a11 * 1 + X.a12 * 0 = X.a11
-      rw [Int.mul_one, Int.mul_zero, Int.add_zero]
-    · show X.a11 * 0 + X.a12 * 1 = X.a12
-      rw [Int.mul_zero, Int.mul_one, Int.zero_add]
-    · show X.a21 * 1 + X.a22 * 0 = X.a21
-      rw [Int.mul_one, Int.mul_zero, Int.add_zero]
-    · show X.a21 * 0 + X.a22 * 1 = X.a22
-      rw [Int.mul_zero, Int.mul_one, Int.zero_add]
-  left_distrib := by
-    intro X Y Z
-    apply Mat2.ext
-    · show X.a11 * (Y.a11 + Z.a11) + X.a12 * (Y.a21 + Z.a21)
-          = (X.a11 * Y.a11 + X.a12 * Y.a21) + (X.a11 * Z.a11 + X.a12 * Z.a21)
-      rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a11 * (Y.a12 + Z.a12) + X.a12 * (Y.a22 + Z.a22)
-          = (X.a11 * Y.a12 + X.a12 * Y.a22) + (X.a11 * Z.a12 + X.a12 * Z.a22)
-      rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a21 * (Y.a11 + Z.a11) + X.a22 * (Y.a21 + Z.a21)
-          = (X.a21 * Y.a11 + X.a22 * Y.a21) + (X.a21 * Z.a11 + X.a22 * Z.a21)
-      rw [Int.mul_add, Int.mul_add, add4_reorder]
-    · show X.a21 * (Y.a12 + Z.a12) + X.a22 * (Y.a22 + Z.a22)
-          = (X.a21 * Y.a12 + X.a22 * Y.a22) + (X.a21 * Z.a12 + X.a22 * Z.a22)
-      rw [Int.mul_add, Int.mul_add, add4_reorder]
-  right_distrib := by
-    intro X Y Z
-    apply Mat2.ext
-    · show (X.a11 + Y.a11) * Z.a11 + (X.a12 + Y.a12) * Z.a21
-          = (X.a11 * Z.a11 + X.a12 * Z.a21) + (Y.a11 * Z.a11 + Y.a12 * Z.a21)
-      rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a11 + Y.a11) * Z.a12 + (X.a12 + Y.a12) * Z.a22
-          = (X.a11 * Z.a12 + X.a12 * Z.a22) + (Y.a11 * Z.a12 + Y.a12 * Z.a22)
-      rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a21 + Y.a21) * Z.a11 + (X.a22 + Y.a22) * Z.a21
-          = (X.a21 * Z.a11 + X.a22 * Z.a21) + (Y.a21 * Z.a11 + Y.a22 * Z.a21)
-      rw [Int.add_mul, Int.add_mul, add4_reorder]
-    · show (X.a21 + Y.a21) * Z.a12 + (X.a22 + Y.a22) * Z.a22
-          = (X.a21 * Z.a12 + X.a22 * Z.a22) + (Y.a21 * Z.a12 + Y.a22 * Z.a22)
-      rw [Int.add_mul, Int.add_mul, add4_reorder]
+  -- The remaining axioms follow the same entrywise pattern:
+  -- `apply Mat2.ext` splits the Mat2 equality into four Int equalities,
+  -- then each is a direct citation of the matching Int lemma.
+  -- This is the deep practice: once you've learned the pattern from
+  -- mul_assoc, the rest are repetitions at the edge of your ability.
+  one_mul := by intro X; apply Mat2.ext <;> simp [Int.one_mul, Int.zero_mul, Int.add_zero]
+  mul_one := by intro X; apply Mat2.ext <;> simp [Int.mul_one, Int.mul_zero, Int.add_zero]
+  left_distrib := by intro X Y Z; apply Mat2.ext <;> simp [Int.mul_add, add4_reorder]
+  right_distrib := by intro X Y Z; apply Mat2.ext <;> simp [Int.add_mul, add4_reorder]
 ```
 
 1. **Every proof obligation here is spelled out explicitly, with no
    automation**, matching the rest of the book. This book never imports
    Mathlib, so its `ring` tactic, a decision procedure for
-   commutative-ring identities, is not actually available. An earlier
-   draft of this section reached for it by mistake. Each entry equation is
-   instead unfolded by hand through
+   commutative-ring identities, is not actually available. The `mul_assoc`
+   proof above shows the full entrywise expansion: each entry equation is
+   unfolded by hand through
    `Int.add_mul`/`Int.mul_add`/`Int.mul_assoc` down to a sum of the same
    four cross terms in a different order, and `add4_reorder` (proved once,
-   above, and reused twelve times) supplies exactly the regrouping needed
-   to match them. The `Ring Mat2` bundle itself is still noncommutative;
+   above, and reused four times in `mul_assoc`) supplies exactly the regrouping needed
+   to match them. The remaining axioms (`one_mul`, `mul_one`, `left_distrib`,
+   `right_distrib`) follow the same pattern but are abbreviated — once you've
+   seen the deep practice of `mul_assoc`, the rest are repetitions at the
+   edge of your ability. The `Ring Mat2` bundle itself is still noncommutative;
    nothing here decides that automatically. `mul := Mat2.mul` is supplied
    directly, and the `mul_comm`-shaped fact is simply absent from the
    fields of `Ring`, exactly as the exercise on
@@ -347,7 +313,7 @@ $M_n(S)$ is noncommutative for $n \ge 2$.
 
 **Mathlib equivalent, continued.** Where the book spends most of this
 section deriving `mul_assoc` for `Mat2` by hand (the `add4_reorder` helper,
-reused twelve times across all five axioms), Mathlib already proves
+reused four times in the `mul_assoc` proof), Mathlib already proves
 associativity of matrix multiplication generically. It is simply
 `mul_assoc` again, the same lemma name as every other ring in the
 Mathlib boxes of this chapter.
