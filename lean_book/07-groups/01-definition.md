@@ -13,9 +13,9 @@ itself paired with $e \cdot e = e$. The requirement has to hold for
 each $a$ there must exist $a^{-1}$ with $a \cdot a^{-1} = a^{-1} \cdot a =
 e$. Adding exactly this to the data of a monoid is the entire content of
 this section, and it is what turns "a set with an associative operation"
-into a structure with cancellation.
+into a group (a structure where every element has an inverse).
 
-A **group** is a set $G$ together with:
+A **group** is a set $G$ together with (cf. [DummitFoote2003], p. 17):
 
 - a binary operation $\cdot : G \times G \to G$,
 - a distinguished element $e \in G$ (the identity),
@@ -32,8 +32,7 @@ $$
 $$
 
 No further axiom is required; commutativity is not assumed (a group where
-$a \cdot b = b \cdot a$ always holds is **abelian**, a strictly stronger
-condition defined separately). The identity and inverse laws are each
+$a \cdot b = b \cdot a$ always holds is **abelian**, a strictly stronger condition defined separately). The identity and inverse laws are each
 stated in both a left and a right direction, and the two directions are
 kept as separate axioms rather than collapsed into one. In an abelian
 group the directions are logically equivalent, but with commutativity not
@@ -53,7 +52,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   unique ... for each $a \in G$, $a^{-1}$ is uniquely determined"
   ([DummitFoote2003], §1.1 "Basic Axioms and Examples," p. 17,
   Proposition 1).
-- Aluffi ([Aluffi2009]) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of the book itself, not quoted from a verified excerpt.
+- Aluffi ([Aluffi2009], §II.1) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of the book itself, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

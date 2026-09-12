@@ -24,9 +24,33 @@ theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
   exact (*$\langle$*)h1, h2, h3, h4(*$\rangle$*)
 \end{lstlisting}
 
+\subsection{Informal vs.~formal: when is a matrix equal to another?}\label{sec:09-rings:07-matrices:2}
+
+\begin{quote}
+\textbf{Informal proof.} ``Two matrices are equal iff all four entries match. This is immediate from the definition of equality for structures.''
+\end{quote}
+
+\begin{quote}
+\textbf{Lean formalization.}
+
+\begin{lstlisting}
+theorem Mat2.ext {X Y : Mat2} (h1 : X.a11 = Y.a11) (h2 : X.a12 = Y.a12)
+    (h3 : X.a21 = Y.a21) (h4 : X.a22 = Y.a22) : X = Y := by
+  cases X          -- split X into its four components (*$\langle$*)x1, x2, x3, x4(*$\rangle$*)
+  cases Y          -- split Y into its four components (*$\langle$*)y1, y2, y3, y4(*$\rangle$*)
+  rw [Mat2.mk.injEq]
+  -- mk.injEq reduces structure equality to componentwise equality:
+  -- (*$\langle$*)x1,x2,x3,x4(*$\rangle$*) = (*$\langle$*)y1,y2,y3,y4(*$\rangle$*) iff x1=y1 (*$\wedge$*) x2=y2 (*$\wedge$*) x3=y3 (*$\wedge$*) x4=y4
+  exact (*$\langle$*)h1, h2, h3, h4(*$\rangle$*)
+  -- supply the four component equalities as a conjunction
+\end{lstlisting}
+
+``Immediate from the definition'' in the informal version hides the fact that Lean needs an explicit extensionality lemma, cases on both matrices, and a rewrite to unpack the structure equality into four separate \texttt{Int} equalities. The word ``immediate'' covers all of that; Lean spells every step out.
+\end{quote}
+
 \begin{mathreading}
 
-\texttt{Mat2} is the free \(\mathbb{Z}\)-module \(M_2(\mathbb{Z}) \cong \mathbb{Z}^4\) on the four matrix entries. The extensionality lemma \texttt{Mat2.ext}, supplied by hand right alongside the structure, since almost every proof below needs it, says two \texttt{Mat2} values are equal exactly when all four entries match.
+\texttt{Mat2} represents \(M_2(\mathbb{Z})\), which as an additive group is isomorphic to \(\mathbb{Z}^4\) on the four matrix entries. The extensionality lemma \texttt{Mat2.ext}, supplied by hand right alongside the structure, since almost every proof below needs it, says two \texttt{Mat2} values are equal exactly when all four entries match.
 
 \end{mathreading}
 
@@ -74,7 +98,7 @@ def Mat2.one : Mat2 := (*$\langle$*)1, 0, 0, 1(*$\rangle$*)
 
 \texttt{Mat2.one} is the identity \(I = \begin{psmallmatrix}1&0\\0&1\end{psmallmatrix}\). Together these five definitions are the operations of the matrix ring \(M_2(\mathbb{Z})\).
 
-\subsection{Why matrix multiplication is noncommutative: check it computationally first}\label{sec:09-rings:07-matrices:2}
+\subsection{Why matrix multiplication is noncommutative: check it computationally first}\label{sec:09-rings:07-matrices:3}
 
 Before building the \texttt{Ring Mat2} instance, consider the very fact that motivates this example.
 
@@ -86,7 +110,7 @@ def Y : Mat2 := (*$\langle$*)1, 0, 1, 1(*$\rangle$*)
 #eval Mat2.mul Y X    -- (*$\langle$*)1, 1, 1, 2(*$\rangle$*)
 \end{lstlisting}
 
-\texttt{\#eval} here is doing real work, it is a two-line proof by computation that \texttt{mul} is not commutative. This is cheaper than any hand-written counterexample proof, and it is exactly the kind of thing to try before committing to a \texttt{theorem}. Should \texttt{¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X} be needed as a theorem, this computed pair \texttt{(X, Y)} serves as the witness.
+\texttt{\#eval} here is doing real work: it is a two-line proof by computation that \texttt{mul} is not commutative. This is cheaper than any hand-written counterexample proof, and it is exactly the kind of thing to try before committing to a \texttt{theorem}. Should \texttt{¬ ∀ X Y, Mat2.mul X Y = Mat2.mul Y X} be needed as a theorem, this computed pair \texttt{(X, Y)} serves as the witness.
 
 \begin{mathreading}
 
@@ -110,7 +134,7 @@ def Y' : Matrix (Fin 2) (Fin 2) Int := !![1, 0; 1, 1]
 example : X' * Y' (*$\neq$*) Y' * X' := by decide
 \end{lstlisting}
 
-\subsection{The additive group and the ring}\label{sec:09-rings:07-matrices:3}
+\subsection{The additive group and the ring}\label{sec:09-rings:07-matrices:4}
 
 \begin{lstlisting}
 def mat2Group : Group Mat2 where
@@ -251,13 +275,11 @@ def mat2Ring : Ring Mat2 where
       rw [Int.add_mul, Int.add_mul, add4_reorder]
 \end{lstlisting}
 
-Two points are worth noting.
-
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Every proof obligation here is spelled out explicitly, with no automation}, matching the rest of the book. This book never imports Mathlib, so its \texttt{ring} tactic, a decision procedure for commutative-ring identities, is not actually available. An earlier draft of this section reached for it by mistake. Each entry equation is instead unfolded by hand through \texttt{Int.add\_\allowbreak{}mul}/\texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.mul\_\allowbreak{}assoc} down to a sum of the same four cross terms in a different order, and \texttt{add4\_\allowbreak{}reorder} (proved once, above, and reused twelve times) supplies exactly the regrouping needed to match them. The \texttt{Ring Mat2} bundle itself is still noncommutative; nothing here decides that automatically. \texttt{mul := Mat2.mul} is supplied directly, and the \texttt{mul\_\allowbreak{}comm}-shaped fact is simply absent from the fields of \texttt{Ring}, exactly as the exercise on \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib} in Chapter 9 anticipated.
+  \textbf{Every proof obligation here is spelled out explicitly, with no automation}, matching the rest of the book. This book never imports Mathlib, so its \texttt{ring} tactic, a decision procedure for commutative-ring identities, is not actually available. An earlier draft of this section reached for it by mistake. Each entry equation is instead unfolded by hand through \texttt{Int.add\_\allowbreak{}mul}/\texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.mul\_\allowbreak{}assoc} down to a sum of the same four cross terms in a different order, and \texttt{add4\_\allowbreak{}reorder} (proved once, above, and reused twelve times) supplies exactly the regrouping needed to match them. The \texttt{Ring Mat2} bundle itself is still noncommutative; nothing here decides that automatically. \texttt{mul := Mat2.mul} is supplied directly, and the \texttt{mul\_\allowbreak{}comm}-shaped fact is simply absent from the fields of \texttt{Ring}, exactly as the exercise on \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib} in this chapter anticipated.
 \item
   \textbf{This is the general pattern for ``ring of \(n\times n\) matrices over a commutative ring \(S\)'':} the entries live in \(S\). Every \texttt{Ring Mat2} proof obligation reduces to a polynomial identity purely in \(S\), by applying distributivity and associativity in \(S\) a bounded number of times depending on \(n\). And \(\text{Mat}_n(S)\) itself is noncommutative as soon as \(n \geq 2\), regardless of whether \(S\) is commutative. Matrix rings are the standard first example that any general ring theory, the theorems of Chapter 10, the \texttt{Ring} hierarchy of Mathlib, has to handle \emph{without} assuming commutativity, which is exactly why \texttt{Ring} does not bake in \texttt{mul\_\allowbreak{}comm}.
 \end{enumerate}

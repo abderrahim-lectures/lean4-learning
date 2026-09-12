@@ -71,7 +71,16 @@ theorem neg_one_mul (a : R) :
   exact mul_zero_left Rg a
 ```
 
-Two features of the shape of the proof are worth noting, both discovered by
+The tactic steps in `neg_one_mul` mirror the paper derivation. The
+`apply left_inverse_unique` reduces the goal to showing
+$(-1)\cdot a + a = 0$. The `step` line rewrites the trailing `a` as
+`1 * a` (using `one_mul`), so the goal becomes
+$(-1)\cdot a + 1\cdot a = 0$. Then `rw [← Rg.right_distrib]` pulls
+the common factor `a` out, giving $((-1)+1)\cdot a = 0$. The next
+`rw [Rg.addGrp.toGroup.inv_left]` collapses $(-1)+1$ to $0$, and
+`exact mul_zero_left Rg a` closes with $0 \cdot a = 0$.
+
+Two features of the proof's shape stand out, both discovered by
 actually compiling it.
 
 - **No `apply Eq.symm` at the start.** The goal

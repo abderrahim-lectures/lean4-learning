@@ -45,10 +45,9 @@ def identity(x: T) -> T:      # generic over a TYPE — fine, this is what TypeV
 # combination of ordinary hints or TypeVar.
 ```
 
-This is the honest answer to why Lean needs a whole extra concept here. It
-is not that the type hints in Python are missing a minor convenience. It is
-that *no* mainstream static type system, not in Python, Java, C#, nor
-TypeScript, has a construct for "the type mentions a specific runtime
+This is the honest answer to why Lean needs a whole extra concept here:
+mainstream static type systems (neither in Python, Java, C#, nor
+TypeScript) lack a construct for "the type mentions a specific runtime
 value," because none of them needed the level of precision a proof assistant requires. Π-types are precisely that missing construct, made rigorous.
 
 **A second worked example, where the codomain is a genuinely different
@@ -368,8 +367,8 @@ succ(succ(succ(succ(succ zero))))`, each showing the running total *before*
 the final `+ 2`. That total is `0`, then `2`, then `4`, then `6`, then `8`,
 then the returned `10`. Nothing about `Nat.rec` was changed to make this
 possible. The trace prints from inside the ordinary succ-case function
-supplied as the second argument of `Nat.rec`, the same function already
-described above.
+supplied as the second argument of `Nat.rec`\allowbreak{}, the same function
+already described above.
 
 **A second worked example, over a different inductive type.** The same
 pattern generalizes to any inductive type, not just `Nat`. Computing the

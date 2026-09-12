@@ -28,7 +28,8 @@ onto a universe classifying itself.
 
 **3. `rfl` versus `decide`**
 
-`rfl` checks that two terms reduce to an identical normal form by
+`rfl` checks that two terms reduce to an identical normal form (a term
+after all rewrites have been applied) by
 computation, unfolding definitions and beta-reducing. `decide` instead
 runs the algorithm supplied by a `Decidable` instance for the proposition
 and checks that it computes to `true`. They overlap on simple closed
@@ -65,7 +66,8 @@ as `rfl`** in general. Confirming this directly, [`rfl`](https://lean-lang.org/d
 this is `Nat.mul_two : n * 2 = n + n`, not `Nat.two_mul : 2 * n = n + n`,
 since the goal has `n` on the left of `*`. The
 lesson is that multiplying by a literal does not collapse to `rfl` for free once a
-general variable `n` sits on the "wrong" side of an asymmetric recursion.
+general variable `n` sits on the "wrong" side of an asymmetric recursion
+(where the two operands play different roles in the recursive definition).
 This is the same reason `0 + n = n` required real induction in Chapter 5.
 
 **5. `MyGroup` as a type class**
@@ -150,8 +152,7 @@ cannot close on its own. With the variable now on the *second* argument,
 `1 + n = Nat.succ n` has exactly the same left/right asymmetry as
 `0 + n = n` from Chapter 5. The recursion of `Nat.add` never touches a variable
 sitting in the first argument, so no amount of unfolding closes the goal
-without an actual induction on `n`, even though the statement is of
-course true. This is why the explicit `induction n with ...` above is
+without an actual induction on `n`, even though the statement is true. This is why the explicit `induction n with ...` above is
 required. Comparing it with the one-line `rfl` of `add_one_eq_succ` makes the asymmetry
 concrete.
 

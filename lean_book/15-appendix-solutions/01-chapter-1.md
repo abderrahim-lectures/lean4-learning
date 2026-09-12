@@ -6,7 +6,8 @@
 
 **1. Is `Nat.succ : Nat → Nat` a Π-type?**
 
-Yes. `∀ n : Nat, Nat` is a Π-type whose body happens not to mention the
+Yes. `∀ n : Nat, Nat` is a Π-type (the dependent function type, formally
+introduced in Chapter 2, Section 2) whose body happens not to mention the
 bound variable. Every ordinary function type is a Π-type in the
 degenerate case where the codomain is constant. "Dependent" describes
 the *interesting* instances, where the codomain does mention the bound
@@ -22,13 +23,14 @@ def Vec.toList : Vec α n → List α
 
 The type of `Vec.replicate`, `(n : Nat) → Vec α n`, is genuinely dependent. The
 *return* type `Vec α n` mentions `n`, the value just supplied as the
-argument. The type of `Vec.toList`, `Vec α n → List α`, is not. Its return
-type `List α` never mentions `n` at all, even though its *argument* type
-happens to be dependent (`Vec α n`, one specific type per length). Taking
-a dependently-typed *input* does not automatically make a function
-dependent; what matters is whether the *output* type varies with the
-*value* of the input. `Vec.toList` throws the length away on the way out, the
-same way the own length information of `Vec α n` disappears once converted to
+argument. A type like `Vec α n`, where the type itself depends on a value,
+is a dependent type. The type of `Vec.toList`, `Vec α n → List α`, is not.
+Its return type `List α` never mentions `n` at all, even though its
+*argument* type happens to be dependent (`Vec α n`, one specific type per
+length). Taking a dependently-typed *input* does not automatically make a
+function dependent; what matters is whether the *output* type varies with
+the *value* of the input. `Vec.toList` throws the length away on the way out, the
+same way its own length information of `Vec α n` disappears once converted to
 a plain `List α`.
 
 Unlike `Vec`, `List` does have a `Repr` instance for any printable `α`,

@@ -405,7 +405,7 @@ def wrap_reading_boxes(text):
         body = _strip_quote_markers(m.group(1))
         return f"\n```{{=latex}}\n\\begin{{progcorner}}\n```\n{body}\n```{{=latex}}\n\\end{{progcorner}}\n```\n"
 
-    text = re.sub(r'\*\*Mathematical reading\.\*\*(.*?)(?=\n\n)', _mathreading, text, flags=re.DOTALL)
+    text = re.sub(r'\*\*Mathematical reading[^*]*\*\*(.*?)(?=\n\n)', _mathreading, text, flags=re.DOTALL)
     text = re.sub(r"\*\*Programmer note \(Python\)[^*]*\*\*(.*?)(?=\n\n)", _progcorner, text, flags=re.DOTALL)
     return text
 
@@ -800,10 +800,70 @@ def strip_hypertargets(tex):
         pos = body_close + 1
 
 
+def unnumber_intro_sections(tex):
+    """Convert all \\section{...} that appear before the chapter's content
+    sections (marked by ``\\section{Sections}'' or the first
+    ``\\input{...}'') to \\section*{...} (unnumbered). These intro sections
+    (What forces the..., Conventions, Learning objectives, etc.) should not
+    consume numbered section slots, which offsets the actual content sections.
+    The label is preserved for cross-referencing."""
+    # Find the cutoff: first \section{Sections} heading (the chapter TOC),
+    # or the first \input{...} (fallback), or the auto-appended marker.
+    cutoff = None
+    for pat in [r'\\section\{Sections\}', r'\\input\{', '% Auto-appended']:
+        m = re.search(pat, tex)
+        if m:
+            cutoff = m.start()
+            break
+    if cutoff is None:
+        return tex
+
+    # Find all \section{...} before the first \input
+    result = []
+    pos = 0
+    for m in re.finditer(r'\\section\{', tex[:cutoff]):
+        # Find the closing brace of \section{...}
+        start = m.start()
+        brace_count = 0
+        i = start + len("\\section{")
+        while i < len(tex):
+            if tex[i] == '{':
+                brace_count += 1
+            elif tex[i] == '}':
+                if brace_count == 0:
+                    break
+                brace_count -= 1
+            i += 1
+        section_end = i + 1  # position after closing }
+
+        # Check if there's a \label{...} after the section heading
+        rest = tex[section_end:section_end + 200]
+        label_match = re.match(r'\s*\\label\{([^}]*)\}', rest)
+        if label_match:
+            label_end = section_end + label_match.end()
+            # Convert \section{...}\label{...} to \section*{...}\label{...}
+            result.append(tex[pos:start])
+            result.append("\\section*{")
+            result.append(tex[start + len("\\section{"):section_end - 1])
+            result.append("}")
+            result.append(label_match.group(0))  # keep the \label{...}
+            pos = label_end
+        else:
+            # Convert \section{...} to \section*{...}
+            result.append(tex[pos:start])
+            result.append("\\section*{")
+            result.append(tex[start + len("\\section{"):section_end - 1])
+            result.append("}")
+            pos = section_end
+
+    result.append(tex[pos:])
+    return "".join(result)
+
+
 def strip_story_and_sections_headings(tex):
-    """Remove the \section{The story of this chapter} and \section{Sections}
+    """Remove the \\section{The story of this chapter} and \\section{Sections}
     headings from chapter 00-index files, but keep their body content.
-    The story text should flow directly under \chapter{}, and the Sections
+    The story text should flow directly under \\chapter{}, and the Sections
     enumerate is the chapter's TOC which should be REMOVED entirely (both
     heading and body), since the story text already contains the section list."""
     # Match \section{The story of this chapter}...body... up to next \section or \begin or \chapter or end
@@ -912,6 +972,7 @@ def convert_file(chapter, name):
         # the next \section, which only still exists at this point (the strip
         # below removes those headings).
         tex = wrap_learning_objectives(tex)
+        tex = unnumber_intro_sections(tex)
         tex = strip_story_and_sections_headings(tex)
     tex = simplify_tables(tex)
     tex = fix_image_paths(tex, chapter)

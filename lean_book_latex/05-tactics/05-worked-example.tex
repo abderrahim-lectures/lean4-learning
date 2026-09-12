@@ -47,7 +47,7 @@ Walking through the inductive step slowly.
 \item
   \texttt{rw [ih]} uses the induction hypothesis to replace \texttt{a + k} with \texttt{k + a} inside the goal.
 \item
-  \texttt{rw [Nat.succ\_\allowbreak{}add]} uses the equation \texttt{succ k + a = succ (k + a)} to rewrite the right-hand side, so both sides now read \texttt{succ (k + a)}, which are literally identical. \texttt{rw} closes the goal automatically once the two sides match syntactically.
+  \texttt{rw [Nat.succ\_\allowbreak{}add]} uses the equation \texttt{succ k + a = succ (k + a)} to rewrite the right-hand side, so both sides now read \texttt{succ (k + a)}, which are literally identical. Both sides now match; Lean's kernel closes the goal by reflexivity.
 \end{enumerate}
 
 This is the pattern, base case, inductive step, explicit \texttt{ih}, that recurs, slowly and explicitly, for every proof about groups and rings.
@@ -79,4 +79,4 @@ def add(a, b):
     return Succ(add(a, b.pred))            # recursive call, like `| succ k ih =>`
 \end{lstlisting}
 
-The \texttt{if isinstance(b, Zero)} branch of \texttt{add} is the base case. Its recursive call \texttt{add(a, b.pred)} plays exactly the role \texttt{ih} plays in the \texttt{succ} branch, ``assume it already works for the smaller case, build the answer for one \texttt{Succ} more.'' The proof is not merely \emph{analogous} to recursion, it \emph{is} a recursion, one producing a proof term instead of a \texttt{Succ} value. This is why Lean can generate the two cases of \texttt{induction} automatically straight from the definition of \texttt{Nat}, the same way the \texttt{isinstance} cases in Python fall straight out of the two constructors of \texttt{Nat}.
+The \texttt{if isinstance(b, Zero)} branch of \texttt{add} is the base case. Its recursive call \texttt{add(a, b.pred)} plays exactly the role \texttt{ih} plays in the \texttt{succ} branch, ``assume it already works for the smaller case, build the answer for one \texttt{Succ} more.'' The proof is not merely \emph{analogous} to recursion; it \emph{is} a recursion --- one producing a proof term instead of a \texttt{Succ} value. This is why Lean can generate the two cases of \texttt{induction} automatically straight from the definition of \texttt{Nat}, the same way the \texttt{isinstance} cases in Python fall straight out of the two constructors of \texttt{Nat}.

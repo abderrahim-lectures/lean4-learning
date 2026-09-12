@@ -4,7 +4,7 @@
 
 ---
 
-**Claim.** If `e' : G` also satisfies `∀ a, Grp.op e' a = a`, then
+**Claim.** ([DummitFoote2003], pp. 17-18) If `e' : G` also satisfies `∀ a, Grp.op e' a = a`, then
 `e' = Grp.id`.
 
 **Finding the proof.** We begin by stating the goal and examining what is
@@ -32,14 +32,6 @@ there is anything both `e'` and `Grp.id` can be related to.
 `Grp.op e' Grp.id`. That is the third expression. Once this is noticed, the
 proof is a matter of bookkeeping.
 
-```lean
-theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
-  have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
-  have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
-  rw [← step2]
-  exact step1
-```
-
 Why `rw [← step2]` and not `rw [step2]`? The goal is `e' = Grp.id`, and
 `step2 : Grp.op e' Grp.id = e'` has `e'` on its *right*. `rw [step2]` would
 rewrite the `Grp.op e' Grp.id` in the goal, but the goal does not yet contain
@@ -64,6 +56,30 @@ equalities, and the `rw`/`exact` glue them at their common expression $e'\cdot
 e$, the standard "two things equal to a common third are equal." (The
 same argument in mirror shows a right identity is also unique, so the
 identity of a group is unique, full stop.)
+
+### Informal vs. formal: identity uniqueness
+
+> **Informal proof.** "Suppose $e$ and $e'$ are both identities. Then
+> $e' = e' \cdot e = e$."
+
+> **Lean formalization.**
+> ```lean
+> theorem id_unique (e' : G) (h : ∀ a : G, Grp.op e' a = a) : e' = Grp.id := by
+>   have step1 : Grp.op e' Grp.id = Grp.id := h Grp.id
+>   -- apply h at a := Grp.id to get e' · e = e
+>   have step2 : Grp.op e' Grp.id = e' := Grp.id_right e'
+>   -- use the right-identity axiom to get e' · e = e'
+>   rw [← step2]
+>   -- rewrite right-to-left: replace e' with e' · e in the goal
+>   exact step1
+>   -- the goal is now e' · e = e, which is exactly step1
+> ```
+>
+> The informal proof is one sentence. The Lean version is four lines,
+> but the logical shape is identical: both compute $e' \cdot e$ two
+> different ways and chain the two equalities. The difference is that
+> Lean demands each step be a named `have` or a tactic, not a passing
+> phrase.
 
 **Programmer note (Python).** A Python codebase that wants
 confidence in "the identity element is unique" reaches for a test.
@@ -106,3 +122,5 @@ field-projection to spell out, since `*`/`1` already mean "whatever the
 ---
 
 [← Setup](01-setup.md) | [Index](00-index.md) | [Next: Theorem 2 →](03-theorem-2.md)
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003

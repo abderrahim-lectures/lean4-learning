@@ -11,23 +11,22 @@ looked up. This section covers that second, disjoint case,
 tactics that settle a goal by evaluating an algorithm rather than
 searching for or constructing a term by hand.
 
-For goals that are *decidable*, where "true or false" can be settled by a
+For goals that are *decidable* ([Chlipala2013], §6.2, p. 110), where "true or false" can be settled by a
 terminating algorithm instead of a hand-built argument, Lean has tactics
 that just run that algorithm.
 
 - **`decide`** evaluates a `Decidable` proposition to `true`/`false`
   directly. It works well for small, closed (no free variables)
   propositions, for example `(7 : Nat) ∣ 21` or `¬ (3 = 5)`. `decide` should
-  not be used on propositions with free variables or unbounded search, it can
+  not be used on propositions with free variables or unbounded search. It can
   time out, or worse, produce a correct but useless proof term that
   reveals nothing.
 - **`omega`** is a decision procedure for *linear* arithmetic over `Nat`/`Int`
   (goals built from `+`, subtraction, `≤`, `<`, `=`, and multiplication by
-  *literal constants* only. `omega` handles `3 * n` fine, but not `n * m`
-  for two unknown variables `n`, `m`; multiplying two unknown variables
-  together falls outside what it can decide). For a goal that is "some
+*literal constants* only; `omega` handles `3 * n` fine, but not `n * m`
+   for two unknown variables `n`, `m`). For a goal that is "some
   linear inequality or equality about integers," `omega` should be
-  reached for before deriving the fact by hand. This is exactly the kind of fact a decision
+  tried before deriving the fact by hand. This is exactly the kind of fact a decision
   procedure handles better than a custom [`rw`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) chain, and a hand-derived
   proof teaches nothing that the existence of `omega` does not already establish.
 - **`norm_num`** normalizes and evaluates numerical expressions
@@ -50,7 +49,9 @@ map $P \to \{\top, \bot\}$ whose two preimages are "proof of $P$" and
 \neg P$ holds *and* we can tell which one," available exactly on the
 decidable fragment (closed numeric claims like $7 \mid 21$). `omega`
 decides *Presburger arithmetic*, the first-order theory of $(\mathbb{Z},
-+, <)$, which is famously decidable, and `norm_num` evaluates concrete
++, <)$ (its language allows $+$, $<$, $=$, Boolean connectives, and
+quantification but *not* multiplication of two variables), is decidable
+(Presburger 1929), and `norm_num` evaluates concrete
 numerals. These apply only to statements with no free structure left to
 fill in. A theorem about an arbitrary group has no finite truth table to
 compute, and thus must be *proved* from the axioms instead of
@@ -101,8 +102,7 @@ reference (full entry in the [Bibliography](../bibliography.md)):
   idea as data, run it and get back a definite "yes, and here's why" or
   "no, and here's why," a constructive "$P \vee \neg P$, and we can tell
   which." Chlipala is the actual source for `Decidable` as a
-  type-theoretic notion (an earlier draft of this book cited Pierce2002
-  instead, but TAPL does not discuss `Decidable` at all).
+  type-theoretic notion.
 
 [Chlipala2013]: ../bibliography.md#chlipala2013
 

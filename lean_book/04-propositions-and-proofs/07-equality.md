@@ -40,6 +40,43 @@ f(a) = f(b)$ for any function $f$ (here $f(x) = x + 1$). This is
 from here on. Nearly every proof from Chapter 5 onward reaches for it
 whenever an equality hypothesis needs to be used inside a larger goal.
 
+### Informal vs. formal: what the proof term looks like
+
+> **Informal proof.** "Symmetry: if $a = b$, then $b = a$. This follows
+> from the indiscernibility of identicals."
+
+> **Lean formalization.**
+> ```lean
+> theorem symm_example {a b : Nat} (h : a = b) : b = a := h.symm
+> -- h.symm is a built-in method on equality proofs
+> ```
+
+> **Informal proof.** "Transitivity: if $a = b$ and $b = c$, then
+> $a = c$. Chain the two equalities."
+
+> **Lean formalization.**
+> ```lean
+> theorem trans_example {a b c : Nat} (h1 : a = b) (h2 : b = c) : a = c :=
+>   h1.trans h2
+> -- h1.trans h2 chains two equality proofs end-to-end
+> ```
+
+> **Informal proof.** "Congruence: if $a = b$ then $a + 1 = b + 1$. Apply
+> $f(x) = x + 1$ to both sides."
+
+> **Lean formalization.**
+> ```lean
+> theorem congr_example {a b : Nat} (h : a = b) : a + 1 = b + 1 := by
+>   rw [h]
+>   -- rw [h] rewrites every occurrence of a in the goal to b,
+>   -- then closes the resulting reflexive equality automatically
+> ```
+
+The informal proofs use words like "symmetry," "chain," and "apply $f$."
+Each becomes a single tactic or method call. The *logical content* is
+identical; the difference is that Lean demands the step be explicit
+enough for a machine to check, not just for a human to nod along.
+
 ### Sources, quoted
 
 Formal definitions and citations for this section, gathered here for
@@ -65,3 +102,5 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 ---
 
 [← Quantifiers](06-quantifiers.md) | [Index](00-index.md) | [Next: Exercises →](08-exercises.md)
+
+[TPIL4]: ../bibliography.md#tpil4

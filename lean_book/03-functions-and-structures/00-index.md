@@ -23,7 +23,13 @@ is called **currying**, and it is the type-theoretic form of the Hom-set
 isomorphism
 $\mathrm{Hom}(A\times B, C)\cong\mathrm{Hom}(A,\mathrm{Hom}(B,C))$: a
 two-argument map is the same data as a one-argument map into a space of
-maps. The interesting part of this chapter is `structure`, which is
+maps.
+
+**Definition.** *Currying* is the correspondence $A \times B \to C \cong A \to (B \to C)$ ([Pierce2002], §12.2).
+
+**Definition.** A *Hom-set* (the set $\mathrm{Hom}(A,B)$ of morphisms from $A$ to $B$) is the collection of structure-preserving maps between two objects in a category.
+
+The interesting part of this chapter is `structure`, which is
 how algebraic data will be packaged.
 
 ## What forces `structure`
@@ -35,8 +41,8 @@ value instead of two arguments a caller must keep in sync by hand.
 [Section 1](01-structure-basics.md) answers this: `structure` bundles
 named fields under one type, built with the anonymous constructor `⟨...⟩`
 and read back out by field projection `.field`. This is the packaging
-mechanism every algebraic object from Chapter 7 onward, a group, later a
-ring, is built from.
+mechanism every algebraic object from Chapter 7 onward — first a group, later a
+ring — is built from.
 
 `Point` bundles two `Nat`s specifically. The same shape of bundling is
 needed for *any* pair of types, not just `Nat` and `Nat`.

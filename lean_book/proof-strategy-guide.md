@@ -36,7 +36,7 @@ are unsure.
 
 | When the goal is ... | Try ... first | The idea, in one line |
 | --- | --- | --- |
-| literally the same term on both sides, `a = a`, or an obvious computation like `2 + 3 = 5` | `rfl` | Eat the definitional equality directly; nothing to prove |
+| literally the same term on both sides, `a = a`, or an obvious computation like `2 + 3 = 5` | `rfl` | Close by definitional equality directly; nothing to prove |
 | `n + 0 = n`, `x * 1 = x`, a perhaps-unobvious equality that is still definitional | `rfl`, then `simp` | These close by reduction when the recursion is on the right argument (see [Chapter 1](01-basics/01-everything-has-a-type.md), [Chapter 6, Section 4](06-rigor-check/04-defeq-vs-propeq.md)) |
 | an equality you have as a hypothesis, goal `P` and hypothesis `h : P` | `exact h` | No work; it is already in hand |
 | goal `P` after `intro`, with `h : P` and a function whose result is `P` | `exact`, `apply` | Supply the value explicitly, or let `apply` turn its conclusion into subgoals |
@@ -65,7 +65,7 @@ are unsure.
 | `h : ∃ x, P x` (an existential to use) | `cases h with \| intro x hx => ...` | Extract the witness and its proof into the context |
 | `h : f x = f y` and you want `x = y` (injectivity) | `rw [mk.injEq]` on `h` for a hand-built structure, or `cases` the equality and match constructors | Extraction is not automatic; the book tool of choice is `mk.injEq` (see `Mat2.mk.injEq` in Ch. 9), else prove injectivity directly by `cases` |
 | `h : a + b = b + c` and the goal mentions `b` | `rw [add_comm]` on `h`, then simplify both sides | Regroup the terms until the middle cancels, the "regroup, then cancel" pattern of [Chapter 8, Theorem 3](08-group-theorems/04-theorem-3.md) |
-| a goal needing a fact you have named, `h : P` with goal `P` | `exact h` | Completion; it is exactly satisfied |
+| a goal needing a fact you have named, `h : P` with goal `P` | `exact h` | Done; the goal is exactly satisfied |
 | a general fact `h : ∀ x, P x` and goal `P a` | `exact h a` | Instantiate the universal at `a` |
 | `h : a = b` and goal contains `b` | `rw [h]`, or `rw [← h]` if it contains `a` | Rewrite the known equality in the direction it collapses the goal |
 | `h : n + 0 = n` (a lemma over `Nat`) | `exact h` | Already in hand; `Nat.add` recurses on the second argument, so `n + 0 = n` is `rfl` when you need to prove it yourself |
@@ -114,6 +114,28 @@ goal: `rfl` before `simp`, `exact` before `rw`, `constructor` before a
 case analysis. The cheapest move that makes progress is almost always
 the right one, and the [goal-state discipline of Chapter 13](13-working-efficiently/00-index.md)
 is precisely to read what remains after that move.
+
+## Informal/formal proof comparisons
+
+When a worked proof appears in the book, it is often presented as a
+side-by-side comparison: an informal proof (1-3 sentences of human-readable
+argument) next to the Lean formalization with inline tactic-level comments.
+These blocks exist to build the mental bridge between mathematical reasoning
+and tactic execution. When reading them:
+
+- Start with the informal proof to understand *what* is being shown and *why*
+  the key step works.
+- Then read the Lean code to see *how* each mathematical step translates to
+  tactics. The inline comments explain which tactic handles which step.
+- If a tactic name is unfamiliar, look it up in the
+  [tactic and library reference](tactic-and-library-reference.md) or follow
+  the chapter link back to where it was introduced.
+
+The informal proof always captures the core idea; the Lean code may include
+additional bookkeeping steps (e.g. `rw [Grp.assoc]` to regroup before a
+cancellation) that the informal proof leaves implicit. This is expected —
+Lean needs the explicit rewriting path that a human reader fills in
+automatically.
 
 ---
 

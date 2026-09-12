@@ -6,7 +6,7 @@
 
 The last three sections leaned on words like "elaborate," "reduce," and
 "bound variable" informally, trusting context to carry the meaning. That
-trust runs out here. From this point on, dependent types, then
+trust runs out here. From this point on, with dependent types, then
 the logic of Chapter 4, then real proofs, loose use of these words would
 start hiding genuine distinctions instead of merely being informal
 shorthand. So this section is a deliberate pause, not a new topic. Four
@@ -64,7 +64,7 @@ unification equation could not be solved.
 A term **reduces** by repeatedly applying its computation rules,
 substituting the argument of an abstraction into its body (β-reduction),
 unfolding a `def`, or simplifying a `match` on a known constructor. A term
-with no more reductions available is in **normal form**. `#eval`
+with no more reductions available is in **normal form** ([Pierce2002], §5.1). `#eval`
 (Chapter 1) computes the normal form of a term and prints it. `rfl` (Chapter 4)
 succeeds exactly when both sides of an equation share a normal form. In
 practice, the Lean kernel usually only reduces as far as it needs to
@@ -96,7 +96,7 @@ $$
 This is precisely the engine behind definitional equality. `(fun x => x * 2) 5` reduces,
 by exactly this rule, to `5 * 2`. Every abstraction takes exactly *one*
 argument. A "two-argument function" `fun x y => t` is really `fun x => fun
-y => t`, a function returning a function. This is **currying**, and it is why
+y => t`, a function returning a function. This is **currying** ([Pierce2002], §5.2), and it is why
 `Nat → Nat → Nat` is genuinely `Nat → (Nat → Nat)`, one argument at a
 time, with no separate multi-argument mechanism underneath. Finally, the
 **Church–Rosser theorem** guarantees that if a term has several possible
@@ -147,7 +147,7 @@ in is itself named $y$, the same name as the inner bound variable. Naive,
 purely textual substitution would replace $x$ with $y$ inside
 $\lambda y.\, x$ and get $\lambda y.\, y$, but that is *wrong*. It turns
 the free $y$ being substituted in into a variable *bound* by the inner
-$\lambda y$, silently changing which $y$ is meant (**variable capture**).
+$\lambda y$, silently changing which $y$ is meant (**variable capture**; [Pierce2002], §5.1).
 Correct, capture-avoiding substitution first α-converts the bound variable
 to a fresh name, say $z$, since $\lambda y.\, x$ and $\lambda z.\, x$ are
 the same term (α-conversion, as above):
@@ -182,7 +182,7 @@ universes) to reach the system the Lean kernel actually runs, the
 
 ### Motive
 
-This is the (possibly type-dependent) predicate or type family that a
+This is the (possibly type-dependent) predicate or type family ([TPIL4]) that a
 tactic like `induction` or `rw` is secretly generalizing the goal over
 before it operates. When `rw [h]` fails with **"motive is not type
 correct,"** the meaning is as follows. To replace one side of `h` with the
@@ -246,7 +246,7 @@ later use can simply point back to this entry instead of re-explaining
 
 #### Universal property
 
-This is a characterization of a construction not by what it is *made of*,
+This is a characterization ([MacLane1998]) of a construction not by what it is *made of*,
 but by what maps *uniquely factor through it*. "$X$ has property $U$"
 means "for every $Y$ with the relevant data, there is exactly one map
 $Y \to X$ compatible with that data." This is exactly how a category-theorist would say
@@ -314,13 +314,13 @@ Note that what is stated here is the *free monoid* on one generator. $M$
 ranges over all monoids, commutative or not. The phrase used in Section 1,
 "free *commutative* monoid on one generator," is the corresponding property
 with $M$ ranging over commutative monoids only. Both hold of $\mathbb{N}$,
-and for a reason worth seeing. the free monoid on one generator is already
+and for a reason worth seeing. The free monoid on one generator is already
 commutative (everything in it is a power of the single generator), so the
 weaker-looking commutative version comes for free from the stronger one.
 
 #### Initial object
 
-This is an object $I$ of a category with a *unique* morphism
+This is an object $I$ of a category ([MacLane1998]) with a *unique* morphism
 $I \to X$ out to every other object $X$. It is the universal property above,
 specialized to "the best possible source":
 
@@ -351,7 +351,7 @@ involved.
 
 #### Forgetful functor
 
-This is a functor that takes a structure and *keeps only
+This is a functor ([MacLane1998]) that takes a structure and *keeps only
 part of it*, discarding the rest. Examples are the map sending a group $G$ to
 its underlying set (forgetting the multiplication), or a `Ring` to its
 underlying `Group` under addition (forgetting multiplication and its
@@ -368,7 +368,7 @@ graph LR
 | --- | --- |
 | `Ring` $\to$ `CommGroup` ("forgets $\cdot$") | `r.addGrp` for `r : Ring R`. This is the field holding the additive structure. |
 | `CommGroup` $\to$ `Group` ("forgets commutativity") | `.toGroup`, generated by the `extends Group G` clause of `CommGroup`. The full `Ring` $\to$ `Group` chain is `r.addGrp.toGroup`. |
-| `Group` $\to$ `Set` ("forgets $+$") | No field projection is needed. the carrier of `Group G` *is* the type parameter `G` itself, not something extracted from a structure. |
+| `Group` $\to$ `Set` ("forgets $+$") | No field projection is needed. The carrier of `Group G` *is* the type parameter `G` itself, not something extracted from a structure. |
 
 Each arrow keeps *less* structure than the one before it. A `Ring`
 remembers both operations, the `Group` it maps to remembers only
@@ -382,7 +382,7 @@ and drops the rest.
 
 #### Subobject / full subcategory
 
-A subobject of $X$ is (informally) "a
+A subobject ([MacLane1998]) of $X$ is (informally) "a
 subset of $X$ cut out by some condition, remembered together with its
 inclusion into $X$." For example, `CommGroup` is a subobject of the data in `Group`,
 cut out by the extra commutativity axiom:
@@ -408,9 +408,7 @@ subcategory of all groups.
 These four are the ones worth fixing once. If a "Mathematical reading" box
 elsewhere uses a still-more-specialized term (adjunction, biproduct, a
 presheaf category, and the like), treat it as genuinely optional bonus
-content for readers who already know it. Nothing later in the book
-depends on it, and the surrounding plain-English explanation always stands
-on its own without it.
+content for readers who already know it. The surrounding plain-English explanation always stands on its own.
 
 ---
 
@@ -513,6 +511,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 [MacLane1998]: ../bibliography.md#maclane1998
 [Pareigis1970]: ../bibliography.md#pareigis1970
 [Huet1980]: ../bibliography.md#huet1980
+[TPIL4]: ../bibliography.md#tpil4
 
 ---
 

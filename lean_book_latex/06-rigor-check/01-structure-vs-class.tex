@@ -22,11 +22,11 @@ class Group (G : Type) where
   -- ...
 \end{lstlisting}
 
-Syntactically these look almost identical. \texttt{class} is very nearly a shorthand for \texttt{structure} plus one extra mechanism. Understanding exactly what that mechanism is, and why this book avoids it until the intuition \texttt{class} would otherwise hide has been built, is the point of this section.
+Syntactically these look almost identical. \texttt{class} is very nearly a shorthand for \texttt{structure} plus one extra mechanism. This section explains exactly what that mechanism is, and why this book avoids \texttt{class} until the intuition it would otherwise hide has been built.
 
 \subsection{\texorpdfstring{What \texttt{class} actually adds: instance search}{What class actually adds: instance search}}\label{sec:06-rigor-check:01-structure-vs-class:2}
 
-A \texttt{class} is a \texttt{structure} whose \emph{inhabitants} Lean is willing to search for automatically, through a process called \textbf{typeclass resolution} (or ``instance search''). When you write \texttt{class Group (G : Type)}, and then register a particular group structure with the keyword \texttt{instance} instead of \texttt{def}:
+A \texttt{class} is a \texttt{structure} whose \emph{inhabitants} Lean is willing to search for automatically, through a process called \textbf{typeclass resolution} (or ``instance search'') (\cite{TPIL4}, ``Type Classes''). When you write \texttt{class Group (G : Type)}, and then register a particular group structure with the keyword \texttt{instance} instead of \texttt{def}:
 
 \begin{lstlisting}
 instance : Group Int where
@@ -58,7 +58,7 @@ Mathematically, the difference is this. \texttt{class} + \texttt{instance} imple
 
 \subsection{\texorpdfstring{Why this book deliberately avoids \texttt{class}, for now}{Why this book deliberately avoids class, for now}}\label{sec:06-rigor-check:01-structure-vs-class:3}
 
-The automation in \texttt{class} is exactly what would make it harder to see, the first time through, what is actually happening. Every \texttt{Grp.op}, every \texttt{Grp.assoc} in the proofs of this book is a visible, traceable term. One can always ask ``where did this fact come from?'' and point at the specific argument it is a field of. With \texttt{class}, that same information is present but resolved silently by the elaborator, convenient once trusted, but difficult to debug the first time instance resolution picks the ``wrong'' (or an unexpected) instance, or fails to find one at all. Reading the \emph{explicit} version first, the approach taken by this book, builds the mental model that makes debugging \emph{silent} instance-resolution failures manageable later, since the data being threaded through remains known even once no longer visible in the source text.
+The automation in \texttt{class} is exactly what would make it harder to see, the first time through, what is actually happening. Every \texttt{Grp.op}, every \texttt{Grp.assoc} in the proofs of this book is a visible, traceable term. One can always ask ``where did this fact come from?'' and point at the specific argument it is a field of. With \texttt{class}, that same information is present but resolved silently by the elaborator, convenient once trusted, but difficult to debug the first time instance resolution picks the ``wrong'' (or an unexpected) instance, or fails to find one at all. Reading the \emph{explicit} version first, the approach taken by this book, builds the mental model that makes debugging \emph{silent} instance-resolution failures manageable later, since the data being threaded through remains known even once it is no longer visible in the source text.
 
 \subsection{The bridge to Mathlib}\label{sec:06-rigor-check:01-structure-vs-class:4}
 
@@ -66,7 +66,7 @@ Nothing about the \emph{mathematical content} changes between the two styles. Th
 
 \subsection{\texorpdfstring{A note on \texttt{.toGroup}, \texttt{.toPoint}, and coercion}{A note on .toGroup, .toPoint, and coercion}}\label{sec:06-rigor-check:01-structure-vs-class:5}
 
-Whenever a \texttt{structure} extends another (\texttt{Point3D extends Point} in Chapter 3, \texttt{CommGroup extends Group} in this book), Lean generates a field named \texttt{.toX} that projects back to the parent structure. \texttt{cg.toGroup} recovers the underlying \texttt{Group} from a \texttt{CommGroup cg}. Lean also permits \emph{dropping} the \texttt{.toGroup} and writing \texttt{cg.op} directly, silently inserting the projection. This automatic insertion of a ``translate from one type to another'' function is an instance of \textbf{coercion}, the general mechanism by which Lean lets a term of one type stand in for a term of a related type without the conversion being written explicitly. It is the same general idea, though a much simpler case, as coercing \texttt{Nat} values into \texttt{Int}. The literal projection differs, but ``insert a conversion function automatically so notation reads naturally'' is the shared mechanism.
+Whenever a \texttt{structure} extends another (\texttt{Point3D extends Point} in Chapter 3, \texttt{CommGroup extends Group} in this book), Lean generates a field named \texttt{.toX} that projects back to the parent structure. \texttt{cg.toGroup} recovers the underlying \texttt{Group} from a \texttt{CommGroup cg}. Lean also permits \emph{dropping} the \texttt{.toGroup} and writing \texttt{cg.op} directly, silently inserting the projection. This automatic insertion of a ``translate from one type to another'' function is an instance of \textbf{coercion}, a registered implicit conversion from one type to another that Lean inserts automatically. (\cite{TPIL4}, ``Coercions'') It is the same general idea, though a much simpler case, as coercing \texttt{Nat} values into \texttt{Int}. The literal projection differs, but ``insert a conversion function automatically so notation reads naturally'' is the shared mechanism.
 
 \begin{quote}
 Read more. The TPiL chapters ``Structures and Records'' and ``Type Classes'' cover both topics in this section directly, including coercions, in more depth and with additional worked examples than this book provides.

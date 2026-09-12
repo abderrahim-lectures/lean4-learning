@@ -4,7 +4,7 @@
 
 ---
 
-**Claim.** If `Grp.op b a = Grp.id` for some `a b : G`, then
+**Claim.** ([DummitFoote2003], pp. 17-18) If `Grp.op b a = Grp.id` for some `a b : G`, then
 `b = Grp.inv a`.
 
 **Finding the proof.** This has the same shape as Theorem 1: an equality
@@ -85,3 +85,5 @@ and so on.
 ---
 
 [← Theorem 1](02-theorem-1.md) | [Index](00-index.md) | [Next: Theorem 3 →](04-theorem-3.md)
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003

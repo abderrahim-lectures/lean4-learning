@@ -7,9 +7,9 @@
 Section 2 showed *informally* why `Group : Type → Type` has to live one
 universe level up, by walking through that one specific case in prose.
 That argument leaned on a typing rule it never actually stated, and
-Chapters 1–5 have relied on the type checking of Lean constantly the same
+Chapters 1–5 have relied constantly on Lean's type checking the same
 way, without ever seeing its rules written down. This section makes two things precise.
-the actual rules the kernel of Lean checks a term against (using a small,
+The actual rules the kernel of Lean checks a term against (using a small,
 representative fragment, the **simply typed λ-calculus**, STLC), and the
 specific rule governing the universe hierarchy Section 2 just introduced
 informally.
@@ -66,6 +66,9 @@ STLC below is what is actually going on, underneath both.
 
 ### Typing judgments and rules
 
+**Definition.** A *typing judgment* $\Gamma \vdash t : \tau$ asserts that in
+context $\Gamma$, term $t$ has type $\tau$. ([Pierce2002], Ch. 9)
+
 A **typing judgment** $\Gamma \vdash t : \tau$ reads "in context $\Gamma$
 (a list of variable-type assignments $x_1:\tau_1, \ldots, x_n:\tau_n$), the
 term $t$ has type $\tau$." This is precisely what `#check` reports in Lean,
@@ -101,14 +104,17 @@ Each rule, read as a Lean fact already familiar from earlier chapters.
 Two theorems about STLC are the entire reason to bother with a type
 system at all.
 
-- **Progress**, a well-typed closed term (no free variables) is either
+**Definition.** A *value* in STLC is a term that cannot reduce further —
+an abstraction `fun x => t` or a base-type constant.
+
+- **Progress** [Pierce2002, Theorem 9.3.5], a well-typed closed term (no free variables) is either
   already a **value**, an abstraction, or (if base types come with their
   own constants, as `Nat`/`Bool` effectively do) a constant of a base type,
   or it can take a β-reduction step. It never "gets stuck" partway
   through evaluation. There is no well-typed analogue of "apply `3` to
   `true`," because the side condition of (App) would already have rejected
   such a term at elaboration time, before any reduction is attempted.
-- **Preservation** (subject reduction), if $\Gamma \vdash t : \tau$ and
+- **Preservation** (subject reduction) [Pierce2002, Theorem 9.3.9], if $\Gamma \vdash t : \tau$ and
   $t \longrightarrow_\beta t'$, then $\Gamma \vdash t' : \tau$. Reduction
   never changes the type of a term. This is *exactly* why the definitional
   equality of this chapter (Section 4, next) is trustworthy. Reducing a term to
@@ -160,9 +166,9 @@ This is precisely the gap already closed by [Chapter 2, Section 2](../02-termino
 **Dependent types** let a type itself depend on a term
 (here, the type argument `α`). That is exactly the extra generality
 `identity {α : Type} (x : α) : α := x` uses, and it is unavailable in STLC
-(or in the `TypeVar` of Python, which is real but considerably less powerful.
+(or in the `TypeVar` of Python, which is real but considerably less powerful).
 It cannot let a *return type* depend on an ordinary *value* argument the
-way `Vec.replicate` does in Chapter 1, Section 3).
+way `Vec.replicate` does in Chapter 1, Section 3.
 
 ### Universes, as a typing rule
 
@@ -197,11 +203,17 @@ $A = \mathtt{Type}$ (itself living in `Type 1`) and $B = \mathtt{Type}$ again,
 the rule gives $\max(1, 1) = 1$, so `Type → Type` lands in `Type 1`, one level
 above `Type` itself.
 
+Without this clause, universally quantified statements over infinite types
+would live in `Type 1` instead of `Prop`, breaking the framework.
+
 The $j = 0$ case is what makes `∀` usable at all, not a footnote. When
 $B$ lands in `Prop`, the whole Π-type is a `Prop` *regardless of how large $A$
 is*. This is the **impredicativity of `Prop`**, and it is why
 `∀ n : Nat, n ≥ 0` is a proposition you can prove rather than an inhabitant of
 `Type 1`.
+
+**Definition.** A sort is *impredicative* if quantifying over its
+inhabitants can produce an element of the same or smaller sort.
 
 ```lean
 #check (∀ n : Nat, n ≥ 0)   -- ∀ (n : Nat), n ≥ 0 : Prop
@@ -234,9 +246,7 @@ break. `Type` in Lean cannot self-apply this way (`Type : Type` is
 *inconsistent*. It allows encoding the Girard paradox and proving `False`),
 which is exactly why the infinite, strictly increasing hierarchy above is
 load-bearing rather than pedantry. This is one of the few places where the
-Python comparison genuinely runs out. It is not that Python does the same
-thing more simply, it is that Python does not need to solve this problem
-at all, because nothing checks proofs against it.
+Python comparison genuinely runs out. Python does not need to solve this problem, because nothing checks proofs against it.
 
 ---
 
@@ -252,14 +262,14 @@ reference (full entries in the [Bibliography](../bibliography.md)):
 - **Preservation (Theorem 9.3.9).** "If $\Gamma \vdash t : T$ and
   $t \to t'$, then $\Gamma \vdash t' : T$" ([Pierce2002], §9.3).
 - **Universe-formation rule.** The working statement used by this book, after
-  the calculus of constructions ([CoquandHuet1988]):
+  the calculus of constructions ([CoquandHuet1988], §1):
   $\mathtt{Type}\,i : \mathtt{Type}\,(i+1)$, and a Π-type built from
   $A : \mathtt{Sort}\,i$, $B : \mathtt{Sort}\,j$ lands in
   $\mathtt{Sort}\,(\mathrm{imax}(i,j))$. The $j = 0$ clause is the
   impredicativity of `Prop`, which the calculus of constructions is
   characterized by and which [TPIL4] §2.2 documents for Lean specifically.
-- Pierce ([Pierce2002]), Ch. 9 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10–11; Ch. 12 "Simple Extensions" actually covers pairs/tuples/records/sums, unrelated to the content of this section.
-- Milner ([Milner1978]) covers the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
+- Pierce ([Pierce2002]), Ch. 9 "Typed Arithmetic Expressions" §8.3 "Safety = Progress + Preservation" (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 "Simply Typed Lambda-Calculus" §9.2 "The Typing Relation" (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 "Properties of Typing" (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim.
+- Milner ([Milner1978], §2) covers the theoretical background for why STLC alone cannot type polymorphic functions like `identity`.
 - Python `typing` module documentation and mypy documentation ([PythonTyping], [MypyDocs]) cover the Python-side comparison used in the boxes of this section.
 - [Girard1972] is the Girard paradox (the inconsistency of `Type : Type`), a different, later thesis than [Girard1971] cited elsewhere in this book; see [Chapter 6, Section 2](02-universes.md) for the full citation and [Coquand1986] for the modern exposition.
 - *Theorem Proving in Lean 4* ([TPIL4]), §2.2 "Types as objects" is the Lean documentation on universes, matching the presentation here.

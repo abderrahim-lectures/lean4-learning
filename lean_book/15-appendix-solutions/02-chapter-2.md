@@ -17,7 +17,8 @@ so `fun n => Fin n` has type `Nat → Type`, matching the required shape of
 `β` exactly, and `Σ n : Nat, Fin n` elaborates. `n > 0 : Prop`, so `fun n
 => n > 0` has type `Nat → Prop`, not `Nat → Type v` for any `v`; no
 instantiation of `β`'s codomain universe unifies `Prop` with a `Type v`,
-since they are different, non-overlapping sorts. Elaboration therefore
+since they are different, non-overlapping sorts. Elaboration (Lean's process
+of inferring implicit arguments and producing fully-typed core terms) therefore
 rejects `Σ n : Nat, n > 0` outright, for the same reason it would reject
 supplying a `Prop`-valued family anywhere Lean expects a `Type`-valued
 one. $\blacksquare$
@@ -28,7 +29,8 @@ Claim: given `h : ∃ x, P x`, there is no way to compute a term `w : α`
 with `P w` from `h` alone, whereas the same is possible from `h' : Σ x,
 P x`.
 
-*Proof.* `Exists` is declared to land in `Prop`. By proof irrelevance,
+*Proof.* `Exists` is declared to land in `Prop`. By proof irrelevance
+(any two inhabitants of the same `Prop` are definitionally equal),
 the kernel of Lean treats any two proofs of the same proposition as
 definitionally equal, so `h` carries no information beyond the bare fact
 that *some* witness exists; every possible choice of witness gives a
@@ -53,11 +55,13 @@ blocks extraction.
 
 Application associates to the left, so this is
 $((\lambda x.\lambda y.\, y\, x)\, a)\, b$.
+
 $$
 (\lambda x.\lambda y.\, y\, x)\, a\, b
 \;\longrightarrow_\beta\; (\lambda y.\, y\, a)\, b
 \;\longrightarrow_\beta\; b\, a
 $$
+
 Step 1 substitutes $a$ for $x$ in $\lambda y.\, y\, x$, giving
 $\lambda y.\, y\, a$. Step 2 substitutes $b$ for $y$ in $y\, a$, giving
 $b\, a$.
@@ -67,9 +71,12 @@ always is. $K\,a\,b \to_\beta a$. $K$ *discards* its second argument and
 returns the first, verbatim. Here, $(\lambda x.\lambda y.\, y\, x)\, a\, b
 \to_\beta b\, a$. Both arguments survive, but with the *second* one
 applied to the *first*. This term is sometimes called the "Thrush"
-combinator ($T$, satisfying $T\, x\, y = y\, x$), it flips the order of
-application rather than discarding anything, which is genuinely different
-behavior from $K$, not just a relabeling of it.
+combinator, it flips the order of application rather than discarding
+anything, which is genuinely different behavior from $K$, not just a
+relabeling of it.
+
+**Definition.** The *Thrush combinator* $T$ satisfies $T\,x\,y = y\,x$.
+It is a *combinator*: a closed $\lambda$-term with no free variables.
 
 **4. A second `Σ n : Nat, Fin n`, and why `Σ n : Nat, n > 0` fails**
 

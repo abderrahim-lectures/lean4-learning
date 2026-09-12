@@ -81,7 +81,7 @@ exactly the pattern "a $\mathrm{Point3D}$-structure is a $\mathrm{Point}$-struct
 plus one more piece of data." This is precisely how a `CommGroup` will
 later be "a `Group`-structure plus one more axiom ($ab = ba$)," a
 full subcategory of `Group` cut out by an extra condition, with the
-forgetful functor $\mathrm{CommGroup} \to \mathrm{Group}$ being exactly
+forgetful functor (a functor that forgets part of the structure; [MacLane1998], Ch. I §4) $\mathrm{CommGroup} \to \mathrm{Group}$ being exactly
 `.toGroup`.
 
 The multi-parent case above generates two independent forgetful
@@ -112,8 +112,8 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   "strip back down" projection (`.toX`) for free.
 - The Lean 4 documentation ([LeanDocs]) covers the auto-generated `.toX` projection produced by `extends`, used above as `origin3D.x` and `.toPoint`.
 
-[LeanDocs]: ../bibliography.md#leandocs
 [MacLane1998]: ../bibliography.md#maclane1998
+[LeanDocs]: ../bibliography.md#leandocs
 
 ---
 

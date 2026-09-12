@@ -2,6 +2,8 @@
 
 The previous section asked why this book delays the \texttt{class} mechanism in Lean in favor of plain \texttt{structure}. This section asks the second of the three questions the chapter introduction raised. Chapter 1 said \texttt{Type} is itself a term, of some type. A careful reader should immediately ask \emph{of what type?} If the answer were ``\texttt{Type} is a term of type \texttt{Type},'' the logic of Lean would be inconsistent. This is exactly the Russell paradox in type-theoretic form. The type of ``all types,'' if it contained itself, would permit rebuilding the set-of-all-sets-that-do-not- contain-themselves paradox inside the type theory. Lean avoids this with a \textbf{hierarchy of universes}.
 
+\textbf{Definition.} The \emph{universe hierarchy} is the sequence \texttt{Type : Type 1 : Type 2 : ...} where each \texttt{Type i : Type (i+1)}. (\cite{TPIL4}, §2.2; \cite{Girard1972}, thesis)
+
 \subsection{The hierarchy}\label{sec:06-rigor-check:02-universes:2}
 
 \begin{lstlisting}
@@ -18,16 +20,20 @@ Each \texttt{Type u} is itself a term of \texttt{Type (u+1)}, never of itself. T
 
 \subsection{\texorpdfstring{Why this matters for \texttt{Group}}{Why this matters for Group}}\label{sec:06-rigor-check:02-universes:3}
 
-Recall \texttt{structure Group (G : Type) where ...} from Chapter 7. This signature commits to \texttt{G : Type}, meaning \texttt{G} lives in the universe \texttt{Type 0}. The natural question is whether \texttt{Group} itself has a \texttt{Group}-structure. Is \texttt{Group Int} an element of some \texttt{Group (Group Int)}? Setting aside whether that would even be meaningful, a more basic obstruction is evident. \texttt{Group Int} is a \texttt{Type} (\texttt{\#check (Group Int : Type)} type-checks, since a \texttt{structure} applied to its parameters is itself a type), but \texttt{Group}, the type \emph{constructor} itself (before applying it to a carrier \texttt{G}), is not a \texttt{Type} at all. It is a function \texttt{Type → Type}, that is, a term of type \texttt{Type → Type}.
+\texttt{structure Group (G : Type) where ...}, as will be defined in Chapter 7, commits to \texttt{G : Type}, meaning \texttt{G} lives in the universe \texttt{Type 0}. The natural question is whether \texttt{Group} itself has a \texttt{Group}-structure. Is \texttt{Group Int} an element of some \texttt{Group (Group Int)}? Setting aside whether that would even be meaningful, a more basic obstruction is evident. \texttt{Group Int} is a \texttt{Type} (\texttt{\#check (Group Int : Type)} type-checks, since a \texttt{structure} applied to its parameters is itself a type), but \texttt{Group}, the type \emph{constructor} itself (before applying it to a carrier \texttt{G}), is not a \texttt{Type} at all. It is a function \texttt{Type → Type}, that is, a term of type \texttt{Type → Type}.
 
 \emph{Why} does \texttt{Type → Type} live in \texttt{Type 1} rather than back in \texttt{Type 0}? This is not merely a bookkeeping choice. It follows from the specific typing rule Lean uses for building function (Π-)types out of universes. Forming \texttt{A → B} when \texttt{A : Type i} and \texttt{B : Type j} produces a term of type \texttt{Type (max i j)}. Concretely here, \texttt{A := Type} (living in \texttt{Type 1}, since \texttt{Type : Type 1}) and \texttt{B := Type} again, so \texttt{Type → Type} itself lands in \texttt{Type (max 1 1) = Type 1}. \hyperref[sec:06-rigor-check:03-typing-rules-and-safety:1]{Chapter 6, Section 3} states this rule precisely as one line of the calculus of constructions, including the one case not covered by \texttt{max}, namely when \texttt{B} is a proposition. The short version is that \texttt{Group} is not even a candidate carrier type for its own construction. It sits one universe level too high, exactly because it is a function \emph{out of} \texttt{Type} itself, not out of some ordinary \texttt{Type 0} type like \texttt{Nat}.
 
 \subsection{Universe polymorphism (a brief note)}\label{sec:06-rigor-check:02-universes:4}
 
-A definition is occasionally written with an explicit universe variable, e.g.~\texttt{structure Group.\{u\} (G : Type u) where ...}. This makes the definition \textbf{universe polymorphic}, usable the same way whether \texttt{G} lives in \texttt{Type 0}, \texttt{Type 1}, or any level, rather than pinned to \texttt{Type 0} specifically. This book fixes everything at \texttt{Type} (that is, \texttt{Type 0}) for simplicity, since none of the groups, rings, or modules built here need anything larger. The actual definitions in Mathlib are universe polymorphic throughout, exactly because they must accommodate constructions (such as ``the group of automorphisms of a large category'') that genuinely do not fit in \texttt{Type 0}.
+A definition is occasionally written with an explicit universe variable, e.g.~\texttt{structure Group.\{u\} (G : Type u) where ...}. This makes the definition \textbf{universe polymorphic}, usable the same way whether \texttt{G} lives in \texttt{Type 0}, \texttt{Type 1}, or any level, rather than pinned to \texttt{Type 0} specifically.
+
+\textbf{Definition.} A definition is \emph{universe polymorphic} if it takes an explicit universe variable and works at any level.
+
+This book fixes everything at \texttt{Type} (that is, \texttt{Type 0}) for simplicity, since none of the groups, rings, or modules built here need anything larger. The actual definitions in Mathlib are universe polymorphic throughout, exactly because they must accommodate constructions (such as ``the group of automorphisms of a large category'') that genuinely do not fit in \texttt{Type 0}.
 
 \begin{quote}
-Read more. \hyperref[sec:06-rigor-check:03-typing-rules-and-safety:1]{Chapter 6, Section 3} states the universe-formation rules precisely, as part of the calculus of constructions. Externally, the ``Dependent Type Theory'' chapter of the \emph{Theorem Proving in Lean 4} manual (\cite{TPIL4}) covers universes at a similar level of detail with more Lean-specific examples.
+Read more. \hyperref[sec:06-rigor-check:03-typing-rules-and-safety:1]{Chapter 6, Section 3} states the universe-formation rules precisely, as part of the calculus of constructions. Externally, the ``Dependent Type Theory'' chapter of the \emph{Theorem Proving in Lean 4} manual (\cite{TPIL4}, §2.2) covers universes at a similar level of detail with more Lean-specific examples.
 \end{quote}
 
 \subsection{Sources, quoted}\label{sec:06-rigor-check:02-universes:5}

@@ -72,8 +72,7 @@ and the calculus of constructions) and Chapter 6 (rigor check) entirely
 unless something later sends you back (the [Chapter 2, Section 1
 glossary](02-terminology-and-coc/01-terminology.md) and [tactic and library
 reference](tactic-and-library-reference.md) work as pure lookup tables
-if a term is unfamiliar), then read Chapters 3–5 quickly for the own
-conventions of the book before Chapters 7–14 in full.
+if a term is unfamiliar), then read Chapters 3–5 quickly for the book's own conventions before Chapters 7–14 in full.
 
 **"I already know abstract algebra, teach me Lean."** Read Chapters 0–6
 in full, since this is the actual Lean-specific content, and none of it

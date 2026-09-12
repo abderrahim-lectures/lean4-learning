@@ -2,7 +2,7 @@
 
 Section 5 supplied the morphisms of \(R\text{-}\mathbf{Mod}\), linear maps between individual modules. With both objects (modules, Sections 2--4) and morphisms (linear maps) in hand, the next natural step is to build new objects out of old ones. The simplest such construction combines two modules into a third, with the morphisms tying them back to their pieces, exactly the direct sum below.
 
-Given two \(R\)-modules \(M\), \(N\), their direct sum \(M \oplus N\) has carrier \(M \times N\), componentwise addition, and componentwise scalar action.
+\textbf{Definition} (Direct sum). Given \(R\)-modules \(M\), \(N\), their direct sum \(M \oplus N\) has carrier \(M \times N\) with componentwise operations (\cite{DummitFoote2003}, §10.3, p.~351).
 
 \begin{lstlisting}
 structure DirectSum (M N : Type) where
@@ -82,13 +82,13 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
     (*$\cdot$*) exact ModN.one_smul x.snd
 \end{lstlisting}
 
-\texttt{congr 1} is a tactic worth noting, as this is its first appearance. Given a goal \texttt{f a1 a2 = f b1 b2} (here \texttt{f} is \texttt{DirectSum.mk}), \texttt{congr 1} reduces it to the componentwise goals \texttt{a1 = b1} and \texttt{a2 = b2}. This is the categorical fact that the equality of a product is checked pairwise, turned into a one-line tactic instead of a hand-unfolded \texttt{Prod.ext}-style lemma. Every proof obligation above genuinely \emph{is} two independent facts, one from \texttt{M} and one from \texttt{N}, glued together by the product structure of the direct sum. \texttt{congr 1} is the right tool exactly because it exposes that independence directly, instead of hiding it inside a single opaque equality on pairs. Note the \texttt{show DirectSum.mk \_\allowbreak{} \_\allowbreak{} = DirectSum.mk \_\allowbreak{} \_\allowbreak{}} line before each \texttt{congr 1}. Without it, the goal is stated in terms of the anonymous-constructor lambda (\texttt{op := fun x y => ⟨...⟩}) rather than the visible \texttt{DirectSum.mk} application. \texttt{congr 1} cannot reliably split a goal it does not recognize as ``one constructor applied to arguments on both sides,'' a real gap that the compiler catches immediately if the \texttt{show} line is left out.
+Given a goal \texttt{f a1 a2 = f b1 b2} (here \texttt{f} is \texttt{DirectSum.mk}), \texttt{congr 1} reduces it to the componentwise goals \texttt{a1 = b1} and \texttt{a2 = b2}. This is the categorical fact that the equality of a product is checked pairwise, turned into a one-line tactic instead of a hand-unfolded \texttt{Prod.ext}-style lemma. Every proof obligation above genuinely \emph{is} two independent facts, one from \texttt{M} and one from \texttt{N}, glued together by the product structure of the direct sum. \texttt{congr 1} is the right tool exactly because it exposes that independence directly, instead of hiding it inside a single opaque equality on pairs. Note the \texttt{show DirectSum.mk \_\allowbreak{} \_\allowbreak{} = DirectSum.mk \_\allowbreak{} \_\allowbreak{}} line before each \texttt{congr 1}. Without it, the goal is stated in terms of the anonymous-constructor lambda (\texttt{op := fun x y => ⟨...⟩}) rather than the visible \texttt{DirectSum.mk} application. \texttt{congr 1} cannot reliably split a goal it does not recognize as ``one constructor applied to arguments on both sides,'' a real gap that the compiler catches immediately if the \texttt{show} line is left out.
 
 \begin{mathreading}
 
 This builds the \textbf{direct sum} \(M \oplus N\), its carrier is the product \(M \times N\), with all structure defined componentwise, \((m,n) + (m',n') = (m+m',\, n+n')\), \(0 = (0,0)\), \(-(m,n) =
-(-m,-n)\), and \(r\cdot(m,n) = (r\cdot m,\, r\cdot n)\). Every axiom holds because it holds in each coordinate independently, which is exactly what \texttt{congr 1} exposes, an equation of pairs splits into one equation in \(M\) and one in \(N\). For finitely many summands the direct sum \(M \oplus N\) is both a product and a coproduct at once in \(R\text{-}\mathbf{Mod}\), the projections \(\pi_M, \pi_N\) and inclusions \(\iota_M, \iota_N\) satisfy \(\pi_M\iota_M = \mathrm{id}\), \(\pi_N\iota_N = \mathrm{id}\), \(\pi_M\iota_N =
-0\), and \(\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}\).
+(-m,-n)\), and \(r\cdot(m,n) = (r\cdot m,\, r\cdot n)\). Every axiom holds because it holds in each coordinate independently, which is exactly what \texttt{congr 1} exposes: an equation of pairs splits into one equation in \(M\) and one in \(N\). For finitely many summands the direct sum \(M \oplus N\) is both a product and a coproduct at once in \(R\text{-}\mathbf{Mod}\), the projections \(\pi_M, \pi_N\) and inclusions \(\iota_M, \iota_N\) satisfy Here juxtaposition denotes function composition: \(\pi_M \circ \iota_M = \mathrm{id}\), \(\pi_N \circ \iota_N = \mathrm{id}\), \(\pi_M \circ \iota_N =
+0\), and \(\iota_M \circ \pi_M + \iota_N \circ \pi_N = \mathrm{id}\).
 
 \end{mathreading}
 

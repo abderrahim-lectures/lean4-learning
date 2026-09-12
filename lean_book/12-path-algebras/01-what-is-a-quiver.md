@@ -19,10 +19,9 @@ and a set of arrows, each one tagged with which vertex it starts at and
 which it ends at. Nothing else is required to make sense of chaining two
 arrows together, so nothing else goes into the definition.
 
-A **quiver** is exactly this: a set of vertices $Q_0$, a set of arrows
-$Q_1$, and two functions $s, t : Q_1 \to Q_0$ recording the
-**source** and **target** of each arrow. It is a *directed graph* under another name.
-This is the same notion as [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) in Mathlib (built here from scratch, following the
+**Definition** (Quiver). A *quiver* $Q$ consists of vertices $Q_0$, arrows
+$Q_1$, and source/target functions $s, t : Q_1 \to Q_0$
+([AssemSimsonSkowronski2006], Definition 1.1). This is the same notion as [`Quiver`](https://loogle.lean-lang.org/?q=Quiver) in Mathlib (built here from scratch, following the
 "no Mathlib" policy of Chapter 1, rather than reusing the Mathlib version).
 
 Picture an arrow $\alpha : i \to j$ as a literal arrow drawn from vertex $i$

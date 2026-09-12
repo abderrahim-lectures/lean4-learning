@@ -20,7 +20,7 @@ multiplication is not assumed commutative, ties the two operations
 together. These three ingredients give the definition.
 
 A **ring** is a set $R$ with *two* binary operations, addition and
-multiplication, such that:
+multiplication, such that (cf. [DummitFoote2003], p. 222):
 
 $$
 \begin{aligned}
@@ -32,7 +32,7 @@ $$
 $$
 
 Some textbooks do not require a multiplicative identity. Such a structure
-is called a *rng*. The missing "i" stands for the missing identity. This
+is called a *rng* ([DummitFoote2003], §7.1). The missing "i" stands for the missing identity. This
 book includes the identity, since that is the more common convention.
 
 (R1) is exactly the strengthening argued for above: `Group` in Chapter 7
@@ -56,6 +56,8 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   of this book, the same choice (R3) above makes explicit. This is a
   structural citation to the section and its numbered axioms, not a
   verified word-for-word excerpt.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
 ---
 

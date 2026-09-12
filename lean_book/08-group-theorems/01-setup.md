@@ -22,7 +22,7 @@ variable {G : Type} (Grp : Group G)
 declaration that mentions `G` or `Grp`.
 
 **Mathematical reading.** This is the phrase "Let $G$ be a group" opening a
-section, we fix an arbitrary object $(G, \cdot, e, (-)^{-1})$ of
+section: we fix an arbitrary object $(G, \cdot, e, (-)^{-1})$ of
 $\mathbf{Grp}$ and reason generically about it. Everything proved under this
 `variable` is a statement quantified over *all* groups. A theorem about the
 group $\mathrm{Grp}$ is really $\forall (G : \mathrm{Type})\,(\mathrm{Grp} :

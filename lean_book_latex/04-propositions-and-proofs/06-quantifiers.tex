@@ -27,7 +27,7 @@ theorem exists_even : (*$\exists$*) n : Nat, n % 2 = 0 :=
 \begin{itemize}
 \tightlist
 \item
-  \texttt{2} is the \textbf{witness}, the specific number being claimed even. It is the smallest one that actually makes the point (\texttt{0} technically works too, but reads as a trick, ``of course \texttt{0} is even'').
+  \texttt{2} is the \textbf{witness}, the specific number being claimed to exist. It is the smallest one that actually makes the point (\texttt{0} technically works too, but reads as a trick, ``\texttt{0} is even by any standard definition'').
 \item
   \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rfl}} is the \textbf{proof}, filling in for \texttt{P 2}, i.e.~for \texttt{2 \% 2 = 0}. It works by \texttt{rfl} alone (no lemma needed) because \texttt{2 \% 2} simply \emph{computes} to \texttt{0}. Both sides of the equation are already the same term once evaluated, exactly like \texttt{2 + 2 = 4} back in \hyperref[sec:04-propositions-and-proofs:01-prop:1]{Chapter 4, Section 1}.
 \end{itemize}
@@ -66,15 +66,25 @@ This one example only shows \emph{a} prime past \texttt{3}. It does not yet show
 
 \begin{mathreading}
 
-The two quantifiers are the ``indexed'' versions of the product and sum seen for \(\wedge\) and \(\vee\) in the previous section. Instead of combining two fixed propositions \(P\) and \(Q\), they combine a whole \emph{family} of propositions \(P(x)\), one for each \(x \in \alpha\). Universal quantification is the (\(\Pi\)-)type \[
-\forall x{:}\alpha,\ P(x) \;=\; \prod_{x : \alpha} P(x),
-\] literally an \(\alpha\)-indexed product. A proof is a function assigning to each \(x\) a proof of \(P(x)\), so \texttt{all\_\allowbreak{}nats\_\allowbreak{}ge\_\allowbreak{}zero} is the map \(n \mapsto (0
-\le n)\). This exactly generalizes how a proof of \(P \wedge Q\) was a pair \((p, q)\), one component per conjunct, except now there is one component per element of \(\alpha\) rather than just two. Existential quantification is the (\(\Sigma\)-)type \[
-\exists x{:}\alpha,\ P(x) \;=\; \sum_{x : \alpha} P(x),
-\] an \(\alpha\)-indexed sum. A proof is a dependent pair \(\langle a, h\rangle\) with \(a \in \alpha\) the witness and \(h : P(a)\). Here \(\langle 2,
-\mathrm{refl}\rangle\) witnesses \(2 \bmod 2 = 0\). This is the \emph{constructive} reading of \(\exists\), asserting existence requires exhibiting an explicit witness \(a\) together with a proof \(h\) that it works. This exactly generalizes how a proof of \(P \vee Q\) was a tagged choice, except now the ``tag'' is which element of \(\alpha\) was chosen.
+The two quantifiers are the ``indexed'' versions of the product and sum seen for \(\wedge\) and \(\vee\) in the previous section. Instead of combining two fixed propositions \(P\) and \(Q\), they combine a whole \emph{family} of propositions \(P(x)\), one for each \(x \in \alpha\). Universal quantification is the (\(\Pi\)-)type
 
 \end{mathreading}
+
+\[
+\forall x{:}\alpha,\ P(x) \;=\; \prod_{x : \alpha} P(x),
+\]
+
+literally an \(\alpha\)-indexed product. A proof is a function assigning to each \(x\) a proof of \(P(x)\), so \texttt{all\_\allowbreak{}nats\_\allowbreak{}ge\_\allowbreak{}zero} is the map \(n \mapsto (0
+\le n)\). This exactly generalizes how a proof of \(P \wedge Q\) was a pair \((p, q)\), one component per conjunct, except now there is one component per element of \(\alpha\) rather than just two. Existential quantification
+
+is the (\(\Sigma\)-)type
+
+\[
+\exists x{:}\alpha,\ P(x) \;=\; \sum_{x : \alpha} P(x),
+\]
+
+an \(\alpha\)-indexed sum. A proof is a dependent pair \(\langle a, h\rangle\) with \(a \in \alpha\) the witness and \(h : P(a)\). Here \(\langle 2,
+\mathrm{refl}\rangle\) witnesses \(2 \bmod 2 = 0\). This is the \emph{constructive} reading of \(\exists\), asserting existence requires exhibiting an explicit witness \(a\) together with a proof \(h\) that it works. This exactly generalizes how a proof of \(P \vee Q\) was a tagged choice, except now the ``tag'' is which element of \(\alpha\) was chosen.
 
 \subsection{Sources, quoted}\label{sec:04-propositions-and-proofs:06-quantifiers:2}
 

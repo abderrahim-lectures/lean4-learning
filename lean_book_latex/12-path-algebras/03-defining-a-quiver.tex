@@ -66,7 +66,7 @@ Lean
 \(s, t : A \to V\) (``source, target'') & \texttt{exampleQuiver.source}, \texttt{exampleQuiver.target} \\
 \end{longtable}
 
-The two-element inductive type is the finite set \(A = \{\alpha,\beta\}\), and the \texttt{match}-defined \texttt{source}/\texttt{target} are the functions \(s, t . A \to
+The two-element inductive type is the finite set \(A = \{\alpha,\beta\}\), and the \texttt{match}-defined \texttt{source}/\texttt{target} are the functions \(s, t : A \to
 V\) given by their value tables: \texttt{source alpha = 0}, \texttt{target alpha = 1}, \texttt{source beta = 1}, \texttt{target beta = 2}. This is exactly the arrowheads and tails drawn above.
 
 \textbf{Mathlib equivalent.} The \href{https://loogle.lean-lang.org/?q=Quiver}{\texttt{Quiver}} class in Mathlib (the one the opening section of this chapter mentioned building from scratch instead of reusing) encodes arrows differently. Instead of one flat arrow type \texttt{A} plus separate \texttt{source}/\texttt{target : A → V} functions, it bakes the endpoints into the \emph{type} of the arrow directly, \texttt{Hom : V → V → Sort*} (with notation \texttt{a ⟶ b}). Thus an arrow from \texttt{i} to \texttt{j} simply \emph{has type} \texttt{i ⟶ j}.
@@ -79,4 +79,4 @@ inductive MyArrow : Fin 3 (*$\rightarrow$*) Fin 3 (*$\rightarrow$*) Type
 instance : Quiver (Fin 3) := (*$\langle$*)MyArrow(*$\rangle$*)
 \end{lstlisting}
 
-\texttt{MyArrow 0 1} has exactly the one constructor \texttt{alpha}. \texttt{MyArrow i j} for any other pair \texttt{(i, j)}, in particular the ``backwards'' or ``no such arrow'' cases, has no constructors at all, and is thus simply an empty type. There is no \texttt{source}/\texttt{target} to state or prove separately, and no \texttt{h : Q.source a = v} side-condition to discharge with \texttt{rfl} later (Chapter 12, Section 4). An ill-typed composition is rejected by the type checker before a proof obligation is even reached, one step earlier than the encoding of the book catches the same mistake.
+\texttt{MyArrow 0 1} has exactly the one constructor \texttt{alpha}. \texttt{MyArrow i j} for any other pair \texttt{(i, j)}, in particular the ``backward'' or ``no such arrow'' cases, has no constructors at all, and is thus simply an empty type. There is no \texttt{source}/\texttt{target} to state or prove separately, and no \texttt{h : Q.source a = v} side-condition to discharge with \texttt{rfl} later (the next section). An ill-typed composition is rejected by the type checker before a proof obligation is even reached, one step earlier than the encoding of the book catches the same mistake.
