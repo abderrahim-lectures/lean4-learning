@@ -40,7 +40,8 @@ commutativity to `Group` in Chapter 7.
    `25` using the `area` function from Exercise 4 unchanged, with no
    `ColoredRectangle`-specific code written. In a sentence or two,
    explain why this is exactly the "forgetful functor" pattern from the
-   Mathematical reading box of this section, not a coincidence of naming.
+   Mathematical reading box of this section, not a coincidence of
+   naming.
 
 Solutions, [Appendix, Chapter 3](../15-appendix-solutions/03-chapter-3.md).
 

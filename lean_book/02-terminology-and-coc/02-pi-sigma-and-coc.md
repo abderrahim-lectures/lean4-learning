@@ -367,8 +367,8 @@ succ(succ(succ(succ(succ zero))))`, each showing the running total *before*
 the final `+ 2`. That total is `0`, then `2`, then `4`, then `6`, then `8`,
 then the returned `10`. Nothing about `Nat.rec` was changed to make this
 possible. The trace prints from inside the ordinary succ-case function
-supplied as the second argument of `Nat.rec`, the same function already
-described above.
+supplied as the second argument of `Nat.rec`\allowbreak{}, the same function
+already described above.
 
 **A second worked example, over a different inductive type.** The same
 pattern generalizes to any inductive type, not just `Nat`. Computing the

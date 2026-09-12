@@ -239,7 +239,7 @@ def double' (n : Nat) : Nat :=
 -- 10
 \end{lstlisting}
 
-Five lines print, one per \texttt{succ} layer \texttt{Nat.rec} peels off \texttt{5 = succ(succ(succ(succ(succ zero))))}, each showing the running total \emph{before} the final \texttt{+ 2}. That total is \texttt{0}, then \texttt{2}, then \texttt{4}, then \texttt{6}, then \texttt{8}, then the returned \texttt{10}. Nothing about \texttt{Nat.rec} was changed to make this possible. The trace prints from inside the ordinary succ-case function supplied as the second argument of \texttt{Nat.rec}, the same function already described above.
+Five lines print, one per \texttt{succ} layer \texttt{Nat.rec} peels off \texttt{5 = succ(succ(succ(succ(succ zero))))}, each showing the running total \emph{before} the final \texttt{+ 2}. That total is \texttt{0}, then \texttt{2}, then \texttt{4}, then \texttt{6}, then \texttt{8}, then the returned \texttt{10}. Nothing about \texttt{Nat.rec} was changed to make this possible. The trace prints from inside the ordinary succ-case function supplied as the second argument of \texttt{Nat.rec}\allowbreak{}, the same function already described above.
 
 \textbf{A second worked example, over a different inductive type.} The same pattern generalizes to any inductive type, not just \texttt{Nat}. Computing the length of a list via \texttt{List.rec} directly, rather than via the built-in \texttt{List.length}:
 

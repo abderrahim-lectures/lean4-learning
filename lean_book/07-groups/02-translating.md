@@ -105,13 +105,14 @@ that" is a genuine
 [subobject](../02-terminology-and-coc/01-terminology.md#category-theory-terms-used-beyond-the-baseline)
 of the space of raw data.
 
-> Read more. The actual `Group` in Mathlib (`Mathlib.Algebra.Group.Defs`) is a
-> `class`, not the plain `structure` used in this book, inheriting from a chain of
-> smaller classes (`Mul`, `One`, `Inv`, `Monoid`, ...) instead of listing
-> all axioms in one place. See [Chapter 14](../14-next-steps/02-moving-to-mathlib.md)
+> Read more. The actual `Group` in Mathlib
+> (`Mathlib.Algebra.Group.Defs`) is a `class`, not the plain `structure`
+> used in this book, inheriting from a chain of smaller classes (`Mul`,
+> `One`, `Inv`, `Monoid`, ...) instead of listing all axioms in one
+> place. See [Chapter 14](../14-next-steps/02-moving-to-mathlib.md)
 > for the bridge between the two styles, and
-> [Chapter 6, Section 1](../06-rigor-check/01-structure-vs-class.md) for why this
-> book delays that mechanism.
+> [Chapter 6, Section 1](../06-rigor-check/01-structure-vs-class.md)
+> for why this book delays that mechanism.
 
 **Programmer note (Python).** An ordinary Python class checks none of
 this:

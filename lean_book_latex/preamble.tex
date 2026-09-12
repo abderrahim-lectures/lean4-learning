@@ -11,6 +11,14 @@
 \documentclass[12pt,twoside]{book}
 \usepackage[margin=1in,bindingoffset=0.3in]{geometry}
 
+% Allow more flexibility in line-breaking to reduce overfull hbox warnings.
+% \emergencystretch gives TeX extra room when normal stretching fails.
+% \tolerance allows more sloppy paragraph breaking before forcing badness.
+\emergencystretch=2em
+\tolerance=1000
+\hfuzz=0.5pt
+\vfuzz=0.5pt
+
 % Book version, shown on the title page (frontmatter.tex) -- update this
 % to match the git tag each time a release is cut, so the compiled PDF
 % itself states which version a reader has, not just the GitHub release
@@ -118,6 +126,10 @@
   % with no hyphen/slash break points) at any character, not just existing
   % punctuation, so a bibliography link cannot overflow the page margin.
 \usepackage[capitalize]{cleveref}
+
+% Constrain pandoc-generated images to text width to prevent float-too-large.
+\usepackage{graphicx}
+\renewcommand{\pandocbounded}[1]{\resizebox{\textwidth}{!}{#1}}
 
 % ---------------------------------------------------------------------
 % Chapter/section styling
