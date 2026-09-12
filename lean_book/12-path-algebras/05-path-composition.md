@@ -82,7 +82,7 @@ because both ultimately unfold to the same sequence of `Path.cons`
 applications.
 
 **Mathematical reading.** `Path.append` is **composition in the free
-category** $\mathrm{Free}(Q)$, written throughout this section in *path
+category** $\mathrm{Free}(Q)$ (the category whose objects are vertices and morphisms are paths), written throughout this section in *path
 order*: "$p$ then $q$," matching the argument order of `Path.append p q`.
 This is not the function-composition order $q \circ p$ standard in
 category theory texts. The two conventions denote the same composite;
@@ -106,13 +106,13 @@ separately, `Path.append (Path.nil u) p = p` (appending the trivial path
 `cons` case of the recursion is a *definitional* recursion lemma
 (`Path.append p (Path.cons a h h' q') = Path.cons a h h' (Path.append p q')`)
 that lets induction unfold `Path.append` one arrow at a time. It is not
-itself associativity. True associativity of composition,
+itself associativity. True associativity of composition is a separate statement:
 
 $$
 \mathrm{append}(\mathrm{append}(p, q), r) = \mathrm{append}(p, \mathrm{append}(q, r)),
 $$
 
-is a separate statement, provable by induction on the *third* path
+This equation is provable by induction on the *third* path
 argument, `r`, the same argument `Path.append` itself recurses on (as
 the proof of `append_nil_left` already relies on, inducting on its second
 argument). In the `nil` case both sides reduce to `append p q` directly.
@@ -123,7 +123,7 @@ same equation, which the inductive hypothesis closes.
 This book does not carry out that induction in Lean, but the argument above
 is enough to see that it goes through. Associativity together with `nil` as
 identities is what makes $\mathrm{Free}(Q)$ a genuine category, the
-smallest/most general category containing the arrows of $Q$, in the sense of a
+universal (initial) category containing the arrows of $Q$, in the sense of a
 **universal property**. Concretely, for any category $C$ and any quiver
 morphism $F : Q \to U(C)$ (a function on vertices and arrows into the
 objects and morphisms of $C$, where $U : \mathbf{Cat} \to \mathbf{Quiv}$ is the
@@ -156,15 +156,16 @@ paths) reduce to the identical term, because `Quiver.Path.comp` unfolds to
 exactly the same sequence of `cons` applications `Path.append` does. Note
 that this `rfl` only checks *this one concrete instance*. It is not a
 proof of associativity or the identity laws in general (those are the
-separate statements discussed above). It is reassurance that the concrete
+separate statements discussed above). It confirms that the concrete
 `Free(Q)` machinery behaves as expected on a worked example.
 
 ### The path algebra
 
-The **path algebra** $kQ$ of a quiver $Q$ over a field (or ring) $k$ is the
-ring whose elements are $k$-linear combinations of paths in $Q$, with
-multiplication given by path composition (composing two paths whose
-endpoints do not match gives $0$). Formalizing $kQ$ fully (as a `Ring`, per
+**Definition** (Path algebra). The *path algebra* $kQ$ of a quiver $Q$ over
+a field (or ring) $k$ is the ring of $k$-linear combinations of paths in
+$Q$, with multiplication given by path composition (composing two paths whose
+endpoints do not match gives $0$)
+([AssemSimsonSkowronski2006], Definition 1.2). Formalizing $kQ$ fully (as a `Ring`, per
 Chapter 9) requires "formal sums of paths with ring coefficients," which is
 a genuinely bigger construction, essentially a finitely-supported function
 from paths to $k$. It is a natural next project once the material above is
@@ -173,8 +174,8 @@ because that data (the *category* of paths, really) is the essential
 content of the construction. Once it is in place, the ring structure on
 top is routine to add.
 
-**Mathematical reading.** The **path algebra** $kQ$ is the free $k$-module
-on the set of all paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with
+**Mathematical reading.** The **path algebra** $kQ$ is the set of all
+finite $k$-linear combinations of paths, $kQ = \bigoplus_{p\ \text{path}} k\cdot p$, with
 multiplication extending path composition $k$-bilinearly, written here in the
 same **path order** used throughout this section, so that it matches
 `Path.append` and the quoted source below.

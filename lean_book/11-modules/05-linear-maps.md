@@ -4,8 +4,10 @@
 
 ---
 
-A **linear map** (module homomorphism) $f : M \to N$ between $R$-modules
-satisfies $f(m+n) = f(m) + f(n)$ and $f(r \cdot m) = r \cdot f(m)$.
+**Definition** (Linear map). A linear map (module homomorphism, a
+structure-preserving map between modules) $f : M \to N$ between
+$R$-modules satisfies $f(m+n) = f(m) + f(n)$ and $f(r \cdot m) = r \cdot f(m)$
+([DummitFoote2003], §10.2).
 
 ```lean
 structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
@@ -17,8 +19,7 @@ structure LinearMap {R : Type} (Rg : Ring R) {M N : Type}
 
 This is precisely the categorical picture: $R$-modules and $R$-linear maps
 form a category. Composition of linear maps is linear, and the identity
-function is linear, both easy to state and prove from the two fields
-above. The exercises of this chapter ask you to prove exactly these two facts
+function is linear, both follow directly from the two fields above. The exercises of this chapter ask you to prove exactly these two facts
 (`idLinearMap`, `composeLinearMap` in the appendix solutions), rather than
 proving them here in the main narrative. Everything in this chapter,
 including submodules and the direct sums below, is best understood as
@@ -50,6 +51,37 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   Module Theory," §10.2 "Homomorphisms and Quotient Modules"). This is a
   structural citation to the section and its definition, not a verified
   word-for-word excerpt.
+
+### Informal vs. formal: what "linear" means to each
+
+> **Informal proof.** "$d \cdot (m + n) = d \cdot m + d \cdot n$ by
+> distributivity. $d \cdot (r \cdot m) = r \cdot (d \cdot m)$ by
+> commutativity of multiplication."
+
+> **Lean formalization.**
+> ```lean
+> def mulByLinearMap (d : Int) : LinearMap intRing intZModule intZModule where
+>   toFun := fun m => d * m
+>   map_add := by
+>     intro m n
+>     show d * (m + n) = d * m + d * n
+>     -- unfold toFun and module operations to get a plain Int equation
+>     exact Int.mul_add d m n
+>     -- Int.mul_add is the library lemma for a * (b + c) = a * b + a * c
+>   map_smul := by
+>     intro r m
+>     show d * (r * m) = r * (d * m)
+>     rw [← Int.mul_assoc, Int.mul_comm d r, Int.mul_assoc]
+>     -- rewrite: regroup (d * r) * m → r * (d * m) using associativity
+>     -- and commutativity of Int multiplication
+> ```
+>
+> The informal version names two principles ("distributivity,"
+> "commutativity") and considers the job done. The Lean version unfolds
+> the module operations to bare `Int` arithmetic, then closes each goal
+> with either a library lemma (`Int.mul_add`) or a rewrite sequence
+> (`rw` with associativity and commutativity). The mathematical content is
+> the same; the formalization demands every algebraic step be explicit.
 
 ### A concrete linear map: multiplication by a fixed integer
 
@@ -100,6 +132,8 @@ obligations, with `map_add`/`map_smul` becoming the Mathlib names
 type the rest of Mathlib already knows how to compose, transport along
 isomorphisms, and package into matrices. `LinearMap intRing intZModule
 intZModule` gets none of that for free.
+
+[DummitFoote2003]: ../bibliography.md#dummitfoote2003
 
 ---
 

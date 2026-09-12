@@ -7,7 +7,8 @@
 **1. Why `⟨0, 0⟩` is unambiguous**
 
 `def origin : Point := ⟨0, 0⟩` type-checks unambiguously because the
-*expected type* `Point` is already fixed by the `def`'s signature before
+*expected type* (the type Lean's elaborator anticipates, used to resolve
+ambiguities) `Point` is already fixed by the `def`'s signature before
 the right-hand side is elaborated. Lean reads off `Point`'s constructor
 and field order from that expected type alone, so `⟨0, 0⟩` needs no
 further information to know it means `Point.mk 0 0` rather than, say,
@@ -31,7 +32,8 @@ This is precisely a **forgetful functor**
 ([Chapter 2, Section 1](../02-terminology-and-coc/01-terminology.md), and
 the Mathematical reading box of
 [Section 3](../03-functions-and-structures/03-extending-structures.md)):
-a map that keeps some of the data of a structure (here, `x` and `y`) and
+(a functor that maps a structured category to a less-structured one by
+forgetting some fields): a map that keeps some of the data of a structure (here, `x` and `y`) and
 discards the rest (`z`). `extends` generates exactly this projection
 automatically, under the name `.toPoint`, rather than requiring it to be
 written by hand for every extension.

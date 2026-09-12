@@ -16,8 +16,8 @@ The checkpoint project of Chapter 6 built a `Monoid`: an associative
 operation with a two-sided identity, no inverses. One question drives this
 chapter: what is the weakest extra condition that makes every element
 undoable? Requiring an inverse function $(-)^{-1}$ with $a \cdot a^{-1} =
-a^{-1} \cdot a = e$ is the smallest addition that does this, and it is
-exactly what a **group** is ([Section 1](01-definition.md)).
+a^{-1} \cdot a = e$ is the smallest addition that does this; [Section
+1](01-definition.md) makes this precise.
 
 A definition earns its keep only if it is realizable in Lean and
 non-vacuous. Realizing it means specifying the recipe: bundle the raw

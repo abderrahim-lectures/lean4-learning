@@ -32,10 +32,7 @@ this.
   good starting point once the type-class style is familiar.
 
 The jump from the `structure`-based definitions of this book to the
-`class`-based ones of Mathlib is mostly about **ergonomics**, automatic instance
-resolution, shared notation, and inheritance diamonds (the ambiguity that
-arises when a structure extends two parents with a common ancestor)
-already resolved. It is not really about mathematical content.
+`class`-based ones of Mathlib is mostly about **ergonomics**: automatic instance resolution, shared notation, and the resolution of inheritance diamonds (the ambiguity that arises when a structure extends two parents with a common ancestor) are all handled automatically. It is not really about mathematical content.
 The axioms already learned are the same axioms, merely packaged so
 the elaborator of Lean can find them without a `Grp` argument named in
 every theorem.

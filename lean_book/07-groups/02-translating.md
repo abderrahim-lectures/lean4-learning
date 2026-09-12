@@ -28,7 +28,7 @@ the carrier $G$, the raw data $(\,\cdot : G\times G \to G,\ e \in G,\
 $$
 \mathrm{GroupData}(G) = (G^{G\times G}) \times G \times (G^{G}).
 $$
-It is a *magma* signature, not yet a group; the axioms below cut out the
+It is a *magma* (a set with a binary operation and no axioms) signature, not yet a group; the axioms below cut out the
 genuine group structures as a subset.
 
 **Step 2. Add the axioms as extra fields.** A proof can be a field of a
@@ -53,6 +53,37 @@ the identity and inverse axioms, split left/right because commutativity
 has not been assumed. Collapsing them into one field each would
 silently assume it.
 
+### Informal vs. formal: what "a group" means to each
+
+> **Informal proof.** "A group is a set $G$ with $\cdot$ satisfying
+> associativity, identity, and inverses."
+
+> **Lean formalization.**
+> ```lean
+> structure Group (G : Type) where
+>   op : G → G → G              -- binary operation
+>   id : G                      -- identity element
+>   inv : G → G                 -- inverse function
+>   assoc : ∀ a b c : G, op (op a b) c = op a (op b c)
+>   -- associativity: (a · b) · c = a · (b · c) for all a, b, c
+>   id_left : ∀ a : G, op id a = a
+>   -- left identity: e · a = a for all a
+>   id_right : ∀ a : G, op a id = a
+>   -- right identity: a · e = a for all a
+>   inv_left : ∀ a : G, op (inv a) a = id
+>   -- left inverse: a⁻¹ · a = e for all a
+>   inv_right : ∀ a : G, op a (inv a) = id
+>   -- right inverse: a · a⁻¹ = e for all a
+> ```
+>
+> The informal version names three ingredients and three axioms. The Lean
+> version lists *eight* fields: three pieces of data plus five proof
+> obligations (identity is split into left/right, inverse is split into
+> left/right). A term of type `Group G` cannot exist unless all five
+> proofs are supplied, so every theorem later in the book that takes a
+> `Group G` gets those five facts for free, checked once, rather than
+> trusting each caller.
+
 **Mathematical reading.** `Group G` is the type of *group structures on
 the fixed carrier $G$*, a dependent tuple
 $$
@@ -74,13 +105,14 @@ that" is a genuine
 [subobject](../02-terminology-and-coc/01-terminology.md#category-theory-terms-used-beyond-the-baseline)
 of the space of raw data.
 
-> Read more. The actual `Group` in Mathlib (`Mathlib.Algebra.Group.Defs`) is a
-> `class`, not the plain `structure` used in this book, inheriting from a chain of
-> smaller classes (`Mul`, `One`, `Inv`, `Monoid`, ...) instead of listing
-> all axioms in one place. See [Chapter 14](../14-next-steps/02-moving-to-mathlib.md)
+> Read more. The actual `Group` in Mathlib
+> (`Mathlib.Algebra.Group.Defs`) is a `class`, not the plain `structure`
+> used in this book, inheriting from a chain of smaller classes (`Mul`,
+> `One`, `Inv`, `Monoid`, ...) instead of listing all axioms in one
+> place. See [Chapter 14](../14-next-steps/02-moving-to-mathlib.md)
 > for the bridge between the two styles, and
-> [Chapter 6, Section 1](../06-rigor-check/01-structure-vs-class.md) for why this
-> book delays that mechanism.
+> [Chapter 6, Section 1](../06-rigor-check/01-structure-vs-class.md)
+> for why this book delays that mechanism.
 
 **Programmer note (Python).** An ordinary Python class checks none of
 this:
@@ -98,12 +130,9 @@ runs, and is not a group, since subtraction is not associative. The bug
 surfaces later, silently, wherever a theorem assuming associativity is
 applied to this `op` without re-checking the assumption. `GroupData`
 above has the identical defect. Values are bundled but nothing is
-checked, which is exactly why `Group` adds the five axiom fields: a term of type `Group
-G` cannot exist unless proofs of `assoc`, `id_left`, `id_right`,
-`inv_left`, and `inv_right` were actually supplied, so every theorem in
-the rest of the book taking a `Group G` gets those five facts for free,
-checked once, rather than trusting every caller to have built the
-underlying data correctly.
+checked, which is exactly why `Group` adds the five axiom fields. As the
+blockquote above notes, this means every theorem taking a `Group G` gets
+five facts for free, checked once.
 
 ---
 

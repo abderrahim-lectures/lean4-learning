@@ -1,5 +1,7 @@
 \section{The goal state, and how to read it}\label{sec:05-tactics:01-goal-state:1}
 
+\textbf{Definition.} A \emph{goal} is a pair \((\Gamma, \varphi)\) where \(\Gamma\) is a list of hypotheses and \(\varphi\) is the statement to prove.
+
 Inside \texttt{by}, Lean displays a \textbf{goal}, hypotheses above a horizontal line (named, typed facts available for use), and the statement to prove below it. Each tactic changes the goal. Sometimes it closes the goal, sometimes it splits it into several smaller goals, and sometimes it merely rewrites it into an equivalent but easier-to-handle shape. Proving something in Lean is mostly the skill of examining the current goal and asking what tactic changes this into something closer to solved.
 
 \begin{lstlisting}
@@ -17,7 +19,7 @@ No hypotheses, one goal. After \href{https://lean-lang.org/doc/reference/latest/
 
 \begin{mathreading}
 
-A goal is what logicians call a \emph{sequent}, a list of hypotheses together with a statement to prove from them. A tactic is a \emph{backward inference rule}. It replaces the current goal with zero or more simpler goals whose proofs would be enough to prove it. This is exactly the habit of a mathematician saying ``it suffices to show\ldots{}''. Closing every goal means a complete chain of such steps has been built down to something already known. Here, that chain is just one step: \texttt{2 + 2 = 4} by plain computation.
+A goal is what logicians call a \emph{sequent} (a formal object \(\Gamma \vdash \varphi\); \cite{Pierce2002}, Ch. 5), a list of hypotheses together with a statement to prove from them. A tactic is a \emph{backward inference rule}. It replaces the current goal with zero or more simpler goals whose proofs would be enough to prove it. This is exactly the habit of a mathematician saying ``it suffices to show\ldots{}''. Closing every goal means a complete chain of such steps has been built down to something already known. Here, that chain is just one step: \texttt{2 + 2 = 4} by plain computation.
 
 \end{mathreading}
 

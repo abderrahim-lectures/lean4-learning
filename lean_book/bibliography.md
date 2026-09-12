@@ -23,7 +23,7 @@ and are indexed separately in the
 
 <a id="chlipala2013"></a>**[Chlipala2013]** Adam Chlipala, *Certified Programming with Dependent Types*, MIT Press, 2013. [Free online edition](http://adam.chlipala.net/cpdt/).
 
-<a id="coquand1986"></a>**[Coquand1986]** Thierry Coquand, "[An Analysis of Girard's Paradox](https://doi.org/10.1109/LICS.1986.5928),"in *Proceedings of the First Annual IEEE Symposium on Logic in Computer Science (LICS)*, 1986, 227–236. The standard modern exposition of [Girard1972]'s inconsistency proof for a calculus with the rule `⊢ * : *`.
+<a id="coquand1986"></a>**[Coquand1986]** Thierry Coquand, "[An Analysis of Girard's Paradox](https://doi.org/10.1109/LICS.1986.5928)," in *Proceedings of the First Annual IEEE Symposium on Logic in Computer Science (LICS)*, 1986, 227–236. The standard modern exposition of [Girard1972]'s inconsistency proof for a calculus with the rule `⊢ * : *`.
 
 <a id="coquand2021"></a>**[Coquand2021]** Thierry Coquand, "[Reduction Free Normalisation for a Proof Irrelevant Type of Propositions](https://doi.org/10.46298/lmcs-17(4:15)2021)," *Logical Methods in Computer Science*, 17(4), 2021. Proves normalisation and decidability of convertibility for a universe hierarchy with a proof-irrelevant type of propositions "close to the type system used in the proof assistant Lean" (abstract), corroborating this book's working description of `Prop`.
 
@@ -59,12 +59,13 @@ and are indexed separately in the
 
 <a id="maclane1998"></a>**[MacLane1998]** Saunders Mac Lane, *Categories for the Working Mathematician*, 2nd ed., Graduate Texts in Mathematics 5, Springer, 1998.
 
+<a id="coyle2009"></a>**[Coyle2009]** Daniel Coyle, *[The Talent Code: Unlocking the Secret of Why Some People Are Great and Others Aren't](https://danielcoyle.com/books/the-talent-code/)*, Bantam Books, 2009.
+
 <a id="martinlof1984"></a>**[MartinLof1984]** Per Martin-Löf, *Intuitionistic Type Theory*, Bibliopolis, 1984.
 
 <a id="milner1978"></a>**[Milner1978]** Robin Milner, "[A Theory of Type Polymorphism in Programming](https://doi.org/10.1016/0022-0000(78)90014-4)," *Journal of Computer and System Sciences*, 17(3), 1978, 348–375.
 
 <a id="mypydocs"></a>**[MypyDocs]** [mypy documentation](https://mypy.readthedocs.io/).
-
 
 <a id="pareigis1970"></a>**[Pareigis1970]** Bodo Pareigis, *Categories and Functors*, Pure and Applied Mathematics vol. 39, Academic Press, 1970.
 

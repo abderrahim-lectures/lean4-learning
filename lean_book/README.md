@@ -30,6 +30,12 @@ and theorems are proved before they are used, never handed down as rules
 to memorize. Exercises favor fewer, harder, escalating, proof-heavy
 problems over repetitive drills, and do not give away their own answer;
 solutions live in [15-appendix-solutions/](15-appendix-solutions/00-index.md).
+Every formal definition, theorem, and named concept carries an inline citation
+`[Author Year, p.XX]` next to it, not only in the "Sources, quoted" box at the
+bottom of each section. A reader encountering the term for the first time sees
+the source immediately. Bolded terms always have a corresponding `**Definition.**`
+block, so no technical term appears in bold without a formal stamp.
+
 See [CONTRIBUTING.md](../CONTRIBUTING.md#book-prose-conventions) for
 the convention as a checklist, and
 [Chapter 7](07-groups/00-index.md) for it applied in full.
@@ -39,8 +45,7 @@ the convention as a checklist, and
 Not every reader needs every chapter in order. See
 [Learning paths](learning-paths.md) for a chapter-dependency graph and a
 handful of named paths through the book (already know Lean? already know
-algebra? want the formal foundations first?) before committing to reading
-start to finish.
+algebra? want the formal foundations first?) before committing to a start-to-finish reading.
 
 Each chapter is its own folder (e.g. [07-groups/](07-groups/)) containing a
 `00-index.md` overview plus one small Markdown file per section. Open the
@@ -81,13 +86,27 @@ careful mathematician will already be asking by that point, namely `structure`
 versus `class`, universes, and definitional versus propositional equality,
 before committing to the definition of `Group` in Chapter 7.
 
-This book is, and remains, Mathlib-free by design, every group, ring, and
+## Proof comparison blocks
+
+Several chapters include **side-by-side comparison blocks** that show an
+informal mathematical proof next to its Lean formalization, visually
+demonstrating the level of detail Lean requires. These blocks appear after
+worked examples and follow the format:
+
+> **Informal proof.** [The human-readable argument]
+
+> **Lean formalization.** [The actual Lean code with tactic-level comments]
+
+The informal proof is always 1-3 sentences; the Lean code is always the
+actual book code (or close to it) with inline comments explaining each
+tactic step. The purpose is to build a mental bridge between "how I think
+about this proof" and "how Lean needs to see it."
+
+This book is, and remains, Mathlib-free by design: every group, ring, and
 path algebra is built from scratch so you see every definition and proof
 obligation explicitly (see [the Mathlib note](00-setup/04-mathlib-note.md)).
-Starting in Chapter 7, though, each worked example is followed by a clearly
-labeled "Mathlib equivalent" box showing the same statement phrased against
-the real `Group`/`Ring`/`Module` API of Mathlib. This isn't a contradiction of
-the from-scratch approach; it's a second, parallel track. Seeing the same
+Starting in Chapter 7, though, each worked example is followed by a labeled "Mathlib equivalent" box showing the same statement phrased against
+the real `Group`/`Ring`/`Module` API of Mathlib. This is a second, parallel track that runs alongside the from-scratch approach. Seeing the same
 idea twice, once built by hand and once as Mathlib already has it, is how
 you learn both halves of working in Lean at once, the underlying
 mathematics *and* the shape of the library you'll actually use once you
@@ -96,8 +115,7 @@ leave this book. Chapter 14 then completes the handoff to Mathlib in full.
 The book has been through several editorial passes, a first pass checking
 for foundational terms used before they're explained, thin worked-example
 coverage, and outright factual errors; a second, accessibility-focused
-pass that caught "Mathematical reading" boxes drifting past the own
-promised background of the book (a shared glossary now lives at
+pass that caught "Mathematical reading" boxes drifting past the book's promised background (a shared glossary now lives at
 [Chapter 2, Section 1](02-terminology-and-coc/01-terminology.md), and
 [Chapter 4, Section 2](04-propositions-and-proofs/02-logic-recap.md) recaps
 standard logic from scratch for readers meeting it for the first time) and added
@@ -137,6 +155,16 @@ examples, citations, and the "Picture it like this" glosses inside
 "Sources, quoted" citation boxes (direct quotes) are unaffected.
 [Chapter 7](07-groups/00-index.md) was the pilot; the same treatment now
 covers every chapter.
+
+A seventh pass added inline citations next to every Definition block and
+theorem statement (previously buried in "Sources, quoted" boxes only),
+added `**Definition.**` blocks for every bolded term that lacked one
+(~30 terms across all chapters), added tactic-level Lean code
+documentation to all undocumented code blocks, added side-by-side
+informal/formal proof comparison blocks to key chapters, fixed circular
+definitions in Chapter 5, and added parenthetical glosses for terms used
+before their formal definition.
+
 See [changelog/](changelog/README.md) for the full, itemized history.
 
 ## Table of contents

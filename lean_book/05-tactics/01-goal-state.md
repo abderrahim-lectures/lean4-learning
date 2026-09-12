@@ -4,6 +4,9 @@
 
 ---
 
+**Definition.** A *goal* is a pair $(\Gamma, \varphi)$ where $\Gamma$ is a
+list of hypotheses and $\varphi$ is the statement to prove.
+
 Inside `by`, Lean displays a **goal**, hypotheses above a horizontal line
 (named, typed facts available for use), and the statement to prove below
 it. Each tactic changes the goal. Sometimes it closes the goal, sometimes it
@@ -27,7 +30,8 @@ the goal.
 No hypotheses, one goal. After [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) closes it, the goal panel shows "No
 goals". The proof is complete.
 
-**Mathematical reading.** A goal is what logicians call a *sequent*, a
+**Mathematical reading.** A goal is what logicians call a *sequent* (a
+formal object $\Gamma \vdash \varphi$; [Pierce2002], Ch. 5), a
 list of hypotheses together with a statement to prove from them. A tactic
 is a *backward inference rule*. It replaces the current goal with zero or
 more simpler goals whose proofs would be enough to prove it. This is
@@ -95,6 +99,8 @@ structure to split on, locate the specific lemma matching the
 resulting shape, is the real content of "knowing Lean." The worked-out
 proof later in this chapter, and every proof in Chapters 6–10, is the
 *output* of this loop. What matters is the loop, not merely the output.
+
+[Pierce2002]: ../bibliography.md#pierce2002
 
 ---
 

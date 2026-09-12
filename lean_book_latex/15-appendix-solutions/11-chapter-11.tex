@@ -39,7 +39,7 @@ def composeLinearMap {R : Type} (Rg : Ring R) {M N P : Type}
     exact g.map_smul r (f.toFun m)
 \end{lstlisting}
 
-\texttt{g.toFun ∘ f.toFun} is ordinary function composition. The proof of each field first uses the own compatibility fact of \texttt{f} (\texttt{f.map\_\allowbreak{}add}/\texttt{f.map\_\allowbreak{}smul}) to push the additive-group operation or scalar action \emph{through} \texttt{f}. This leaves a goal that is now exactly the compatibility fact of \texttt{g}, applied to the already-transformed points \texttt{f.toFun m}, \texttt{f.toFun n}. This, plus Exercise 1 and the associativity of \texttt{∘} (both free from ordinary function composition), is exactly the data that makes \(R\)-modules and \(R\)-linear maps a category, as promised in the chapter text.
+\texttt{g.toFun ∘ f.toFun} is ordinary function composition. The proof of each field first uses f's own compatibility fact of \texttt{f} (\texttt{f.map\_\allowbreak{}add}/\texttt{f.map\_\allowbreak{}smul}) to push the additive-group operation or scalar action \emph{through} \texttt{f}. This leaves a goal that is now exactly the compatibility fact of \texttt{g}, applied to the already-transformed points \texttt{f.toFun m}, \texttt{f.toFun n}. This, plus Exercise 1 and the associativity of \texttt{∘} (both free from ordinary function composition), is exactly the data that makes \(R\)-modules and \(R\)-linear maps a category, as promised in the chapter text.
 
 \textbf{3. Verifying \texttt{intSmul} satisfies the axioms of \texttt{Module} (partial: \texttt{one\_\allowbreak{}smul}, \texttt{smul\_\allowbreak{}add})}
 

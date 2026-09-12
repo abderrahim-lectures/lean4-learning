@@ -40,7 +40,7 @@ Every proof obligation is again a one-line \texttt{exact} naming a specific core
 
 \begin{mathreading}
 
-This shows \((\mathbb{Z}, +, \times, 0, 1)\) as an object of \(\mathbf{Ring}\), in fact the \emph{initial} object, since there is a unique \textbf{ring homomorphism} \(\mathbb{Z} \to R\) into any ring, a function preserving \(+\), \(\times\), \(0\), and \(1\). First \texttt{intCommGroup} upgrades the additive group \((\mathbb{Z},+)\) to an abelian group by supplying commutativity (\(a + b = b + a\)); then \texttt{intRing} adds the multiplicative monoid \((\mathbb{Z}, \times, 1)\) and checks the distributive laws \(a(b+c) = ab + ac\) and \((a+b)c = ac + bc\). Each obligation is the named \(\mathbb{Z}\)-arithmetic fact, so the term is the formal counterpart of ``\(\mathbb{Z}\) is a commutative ring.''
+This shows \((\mathbb{Z}, +, \times, 0, 1)\) as an object of \(\mathbf{Ring}\), in fact the \emph{initial} object, since there is a unique \textbf{ring homomorphism} (a structure-preserving map between rings; \cite{DummitFoote2003}, p.~239) \(\mathbb{Z} \to R\) into any ring, a function preserving \(+\), \(\times\), \(0\), and \(1\). First \texttt{intCommGroup} upgrades the additive group \((\mathbb{Z},+)\) to an abelian group by supplying commutativity (\(a + b = b + a\)); then \texttt{intRing} adds the multiplicative monoid \((\mathbb{Z}, \times, 1)\) and checks the distributive laws \(a(b+c) = ab + ac\) and \((a+b)c = ac + bc\). Each obligation is the named \(\mathbb{Z}\)-arithmetic fact, so the term is the formal counterpart of ``\(\mathbb{Z}\) is a commutative ring.''
 
 \end{mathreading}
 
@@ -65,7 +65,7 @@ Formal definition and citation for this section, gathered here for reference (fu
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Ring homomorphism.} ``A ring homomorphism is a map \(\varphi . R
+  \textbf{Ring homomorphism.} ``A ring homomorphism is a map \(\varphi : R
   \to S\) satisfying (i) \(\varphi(a+b) = \varphi(a)+\varphi(b)\) \ldots{} and
 
   \begin{enumerate}

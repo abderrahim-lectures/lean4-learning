@@ -11,8 +11,9 @@ objects out of old ones. The simplest such construction combines two
 modules into a third, with the morphisms tying them back to their pieces,
 exactly the direct sum below.
 
-Given two $R$-modules $M$, $N$, their direct sum $M \oplus N$ has carrier
-$M \times N$, componentwise addition, and componentwise scalar action.
+**Definition** (Direct sum). Given $R$-modules $M$, $N$, their direct sum
+$M \oplus N$ has carrier $M \times N$ with componentwise operations
+([DummitFoote2003], §10.3, p. 351).
 
 ```lean
 structure DirectSum (M N : Type) where
@@ -92,8 +93,7 @@ def directSumModule {R : Type} (Rg : Ring R) {M N : Type}
     · exact ModN.one_smul x.snd
 ```
 
-`congr 1` is a tactic worth noting, as this is its first
-appearance. Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
+Given a goal `f a1 a2 = f b1 b2` (here `f` is `DirectSum.mk`),
 `congr 1` reduces it to the componentwise goals `a1 = b1` and `a2 = b2`.
 This is the categorical fact that the equality of a product is checked
 pairwise, turned into a one-line tactic instead of a hand-unfolded
@@ -114,12 +114,12 @@ carrier is the product $M \times N$, with all structure defined
 componentwise, $(m,n) + (m',n') = (m+m',\, n+n')$, $0 = (0,0)$, $-(m,n) =
 (-m,-n)$, and $r\cdot(m,n) = (r\cdot m,\, r\cdot n)$. Every axiom holds
 because it holds in each coordinate independently, which is exactly what
-`congr 1` exposes, an equation of pairs splits into one equation in $M$ and
+`congr 1` exposes: an equation of pairs splits into one equation in $M$ and
 one in $N$. For finitely many summands the direct sum $M \oplus N$ is both
 a product and a coproduct at once in $R\text{-}\mathbf{Mod}$, the
 projections $\pi_M, \pi_N$ and inclusions $\iota_M, \iota_N$ satisfy
-$\pi_M\iota_M = \mathrm{id}$, $\pi_N\iota_N = \mathrm{id}$, $\pi_M\iota_N =
-0$, and $\iota_M\pi_M + \iota_N\pi_N = \mathrm{id}$.
+Here juxtaposition denotes function composition: $\pi_M \circ \iota_M = \mathrm{id}$, $\pi_N \circ \iota_N = \mathrm{id}$, $\pi_M \circ \iota_N =
+0$, and $\iota_M \circ \pi_M + \iota_N \circ \pi_N = \mathrm{id}$.
 
 ```mermaid
 graph LR

@@ -27,6 +27,14 @@ answers the third: building `Group`/`Ring` from scratch exposes every
 field and proof obligation Mathlib would otherwise hide behind its
 typeclass hierarchy, which is the entire point of a first encounter.
 
+## Conventions
+
+Every formal definition, theorem, and named concept in this book carries an
+inline citation `[Author Year, p.XX]` immediately after the Definition block
+or theorem statement. Bolded terms always have a corresponding
+`**Definition.**` block. This means a reader encountering a term for the first
+time sees the source without having to flip to a bibliography at the back.
+
 ## Sections
 
 1. [Why Lean?](01-why-lean.md)

@@ -26,13 +26,19 @@ Fix a set of **propositional variables** (atomic statements) $p, q, r,
 analyzed, "it is raining," "$n$ is prime," anything with a definite truth
 value. **Formulas** are built from these using the **connectives**.
 
+**Definition.** A *propositional variable* is an atomic statement $p, q, r, \dots$ whose internal structure is not analyzed.
+
+**Definition.** A *formula* is built from propositional variables using connectives.
+
+**Definition.** The *connectives* $\neg, \land, \lor, \to, \leftrightarrow$ build complex formulas from simpler ones.
+
 $$
 \varphi ::= p \;\mid\; \top \;\mid\; \bot \;\mid\; \neg\varphi \;\mid\;
 \varphi \wedge \psi \;\mid\; \varphi \vee \psi \;\mid\;
 \varphi \Rightarrow \psi
 $$
 
-Here $\varphi$ and $\psi$ are **metavariables**. Each stands for "some
+Here $\varphi$ and $\psi$ are **metavariables** (symbols $\varphi, \psi$ standing for arbitrary formulas). Each stands for "some
 already-built formula," not for one fixed formula repeated twice, so
 $\varphi \wedge \psi$ permits any two formulas as its two sides (including,
 as one case among many, the same formula on both sides). Read the grammar
@@ -49,6 +55,8 @@ $v : \{\text{variables}\} \to \{0, 1\}$ (an assignment of true or false to
 each atom). Every valuation extends uniquely to all formulas by the
 familiar truth tables.
 
+**Definition.** A *valuation* $v$ assigns a truth value (True/False) to each propositional variable.
+
 | $\varphi$ | $\psi$ | $\varphi \wedge \psi$ | $\varphi \vee \psi$ | $\varphi \Rightarrow \psi$ | $\neg \varphi$ |
 | --- | --- | --- | --- | --- | --- |
 | 0 | 0 | 0 | 0 | 1 | 1 |
@@ -64,6 +72,8 @@ and the result is always 1. This is the "meaning-based" side of logic.
 Truth is defined by checking every possible case, with no notion of proof
 or derivation involved at all.
 
+**Definition.** A formula is a *tautology* (written $\models \varphi$) if it is true under every valuation.
+
 ### Proof theory: natural deduction
 
 **Provability**, by contrast, is a purely syntactic notion. A formula
@@ -71,14 +81,17 @@ $\varphi$ is **provable from hypotheses $\Gamma$** (a set of formulas),
 written $\Gamma \vdash \varphi$, if there is a finite derivation of
 $\varphi$ from $\Gamma$ built out of a fixed, finite list of allowed
 **inference rules**. These are mechanical, symbol-pushing steps, checkable
-by an algorithm with no appeal to "meaning" at all. **Natural deduction**
+by an algorithm with no appeal to "meaning" at all.
+
+**Definition.** A formula is *provable from hypotheses $\Gamma$* (written $\Gamma \vdash \varphi$) if it can be derived from $\Gamma$ using inference rules.
+
+**Definition.** An *inference rule* is a scheme for deriving new formulas from existing ones. **Natural deduction**
 (Gentzen, 1935; independently, and in a different notation, Jaśkowski 1934)
 is the standard system of such rules. Each connective gets
 an **introduction rule** (how to *prove* a formula built with that
 connective) and an **elimination rule** (how to *use* one once you have
 it). Section 1 already showed this pattern concretely (`⟨_, _⟩` introduces `∧`,
-`.left` eliminates it) without naming it. Writing $\Gamma, \varphi$ for
-"$\Gamma$ together with the extra hypothesis $\varphi$," the rules are as follows.
+`.left` eliminates it) without naming it. Writing $\Gamma, \varphi$ for "$\Gamma$ together with the extra hypothesis $\varphi$," the rules are as follows.
 
 $$
 \text{($\wedge$-intro)}\ \ \frac{\Gamma \vdash \varphi \qquad \Gamma \vdash \psi}
@@ -169,12 +182,16 @@ Propositional logic treats "$n$ is prime" as one indivisible atom.
 domain of individuals, **predicates** $P(x), Q(x, y), \dots$ ranging over
 it, and add two quantifiers to the grammar.
 
+**Definition.** *First-order logic* extends propositional logic with quantifiers $\forall, \exists$ over a domain of individuals.
+
+**Definition.** A *predicate* $P(x)$ is a formula with free variables ranging over a domain.
+
 $$
 \varphi ::= \cdots \;\mid\; \forall x.\, \varphi \;\mid\; \exists x.\, \varphi
 $$
 
-The natural deduction rules generalize the rules for $\wedge$/$\vee$ in the
-obvious way. $\forall$-intro requires proving $\varphi$ for an *arbitrary,
+The natural deduction rules for quantifiers generalize the rules for $\wedge$/$\vee$ in the
+same pattern. $\forall$-intro requires proving $\varphi$ for an *arbitrary,
 otherwise-unconstrained* $x$ (exactly "let $x$ be arbitrary; ...; therefore
 $\forall x, \varphi$" from ordinary proof-writing). $\exists$-intro
 requires exhibiting one specific witness $a$ and a proof of $\varphi(a)$.
@@ -275,7 +292,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   27; a French translation of Gentzen ([Gentzen1935])). Picture it
   like this. A Lego instruction booklet where every piece type gets
   exactly two entries, one showing how to snap it onto the model
-  (introduction), one showing what you're allowed to do once it's
+  (introduction), one showing what you are allowed to do once it's
   there (elimination). Introduction rules act as the "definition" of the connective,
   elimination rules as its consequence.
 - **Soundness.** "$\Gamma \vdash \varphi \Rightarrow \Gamma \models

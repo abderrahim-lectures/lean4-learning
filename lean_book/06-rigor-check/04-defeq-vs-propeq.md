@@ -11,15 +11,16 @@ That is the last of the three questions of the chapter, and the sharpest one.
 Chapter 5 introduced [`rfl`](https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/) as "the proof that both sides compute to the
 same thing," using it freely without asking exactly what "compute to
 the same thing" means, or whether it is the *only* notion of equality
-Lean has. It is not. Lean has (at least) two, and confusing them is a
+Lean has. Lean has (at least) two, and confusing them is a
 common source of real confusion once proofs get more intricate. They are
 worth separating out clearly now.
 
 ### Definitional equality
 
 Two terms are **definitionally equal** ($a \equiv b$, sometimes written
-$a \equiv_\beta b$ to stress that it is driven by reduction) if they reduce to
-the same normal form by unfolding definitions, beta-reduction
+$a \equiv_\beta b$ to stress that it is driven by reduction) ([TPIL4],
+"Dependent Types") if they reduce to
+the same normal form (a term that cannot reduce any further) by unfolding definitions, beta-reduction
 (substituting the argument of a lambda into its body), and the built-in
 computation rules of inductive types (a `match` on a constructor reduces
 immediately). This is a *judgment the type-checker computes*, not a
@@ -41,10 +42,12 @@ with a *variable* `n`. On closed numerals everything computes, so `0 + 2 = 2`
 and `2 + 0 = 2` are both `rfl` and neither reveals anything. Replace `n` by a
 literal and the commented-out line starts succeeding.
 
-One precise point worth noting is that "reduce to the same normal form" does not mean
+One precise point: "reduce to the same normal form" does not mean
 Lean necessarily unfolds a term *all the way down* before comparing.
-Checking `a ≡ b` typically only reduces each side as far as its **weak
-head normal form** (WHNF), far enough to see the outermost constructor
+Lean does not fully normalize during type-checking (too expensive). It
+reduces only to the **weak head normal form** — far enough to see the
+outermost constructor. Checking `a ≡ b` typically only reduces each side
+as far as this WHNF, far enough to see the outermost constructor
 or function head, no further than needed. It then compares heads,
 recursing into subterms only as required. This is exactly why "`Nat.add`
 recurses on its second argument" is a fact about *evaluation order*. To
@@ -55,9 +58,9 @@ and the goal is stuck at `0 + n`, exactly as Chapter 5 found.
 
 ### Propositional equality
 
-**Propositional equality**, written `a = b` (the `Eq` type from Chapter 4),
-is an ordinary proposition, a `Prop`, that must be *proved*, the way
-any other statement is proved. Definitional equality is only the easiest
+**Propositional equality**, written `a = b` (the `Eq` type from Chapter 4;
+[TPIL4], "Dependent Types"), is an ordinary proposition, a `Prop`, that
+must be *proved*, the way any other statement is proved. Definitional equality is only the easiest
 possible case (`rfl` is a proof of `a = b` precisely by showing that
 `a ≡ b`). But `a = b` can hold *propositionally* even when `a` and `b` are
 **not** definitionally equal. For instance, `my_add_comm : ∀ a b, a + b = b + a`
@@ -116,6 +119,9 @@ actually differ.
 
 ### A note on structure eta
 
+**Definition.** *Structure eta* is the rule that ([TPIL4], §11.10)
+`x == S.mk x.field1 x.field2 ...` for any structure term `x`.
+
 This is a companion fact, relied on silently whenever this book (or the reader) writes
 `⟨x.fst, x.snd⟩ = x` or splits a goal about a `structure`-typed equality
 into one goal per field. The kernel of Lean treats a term `x : S` (for `S` a
@@ -161,7 +167,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   equal ... This is known as proof irrelevance" ([TPIL4],
   "Propositions and Proofs").
 - Pierce ([Pierce2002]), Ch. 4, 11–12 covers operational semantics and reduction, and the general distinction between checking equality by computation versus by proof that this section specializes to `rfl`/`=` in Lean.
-- Martin-Löf ([MartinLof1984]) is the original source distinguishing definitional (judgmental) equality from propositional equality, the exact distinction this section works through.
+- Martin-Löf ([MartinLof1984], Ch. 4) is the original source distinguishing definitional (judgmental) equality from propositional equality, the exact distinction this section works through.
 
 [Pierce2002]: ../bibliography.md#pierce2002
 [MartinLof1984]: ../bibliography.md#martinlof1984

@@ -41,7 +41,7 @@ that only ever ran the inputs it happened to see, a `float` silently
 breaking associativity, a hand-checked graph invariant nobody remembered
 to enforce everywhere. None of those bugs are exotic. Each is a bug a
 working Python programmer has hit, or will hit. The pattern behind all
-of them is the same one, some invariant is true "by convention," known
+of them is the same one; some invariant is true "by convention," known
 to the author, documented in a comment or a docstring at best, and
 checked, if at all, only at the specific call sites someone thought to
 guard. `Group`, `Ring`, `Module`, and `Path` in this book took the

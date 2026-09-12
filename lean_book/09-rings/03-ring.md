@@ -106,7 +106,7 @@ reference (full entries in the [Bibliography](../bibliography.md)):
   §7.1 "Basic Definitions and Examples," pp. 222–223). A basic
   consequence: "$0a = a0 = 0$ for all $a \in R$" (p. 225, Proposition
   1).
-- Aluffi ([Aluffi2009]) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of that book, not quoted from a verified excerpt.
+- Aluffi ([Aluffi2009], §II.1) is offered as further reading, not an independently verified factual claim. The use of forgetful functors and universal properties by Aluffi is publicly documented in the table of contents of that book, not quoted from a verified excerpt.
 
 [DummitFoote2003]: ../bibliography.md#dummitfoote2003
 [Aluffi2009]: ../bibliography.md#aluffi2009

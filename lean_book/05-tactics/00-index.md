@@ -14,13 +14,16 @@
 
 ## What forces tactic mode
 
+**Definition.** *Tactic mode* is a proof-writing mode entered with `by`
+where tactics transform goals.
+
 Writing proof *terms* directly (as in Chapter 4) quickly becomes hard to
 manage as a proof grows. The alternative is **tactic mode**, entered
 with `by`, in which a "goal" is worked step by step, much as one would
 write a proof on paper. The real subject of this chapter is not the list
 of tactics below, but **how to work a goal whose proof is not yet
 known**, since that is the skill the rest of the book practices. The
-tactic reference is secondary, read it once, then return to it as
+tactic reference is secondary; read it once, then return to it as
 needed. When a later exercise leaves you unsure which tactic to try,
 the [proof strategy guide](../proof-strategy-guide.md) maps the
 *shape* of a goal or hypothesis directly to a first move for just that
@@ -31,7 +34,7 @@ trying anything, comes first ([Section 1](01-goal-state.md)). Four
 tactics carry the bulk of any proof, `intro`, `exact`, `apply`, `rw`,
 each mapped to the ordinary inference rule it realizes
 ([Section 2](02-core-tactics.md)). When a tactic fails, Lean does not
-whisper, it points; reading an error message as a debugging trace, and
+whisper; it points; reading an error message as a debugging trace, and
 telling apart a `sorry` that is a placeholder to be filled from one
 flagging that something deeper must change, comes next
 ([Section 3](03-reading-failures.md)). Reasoning by cases or by

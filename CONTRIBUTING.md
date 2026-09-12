@@ -12,7 +12,7 @@ Open a [GitHub issue](https://github.com/abderrahim-lectures/lean4-learning/issu
 describing:
 
 - **Where**: the file and, if possible, the line or section (e.g.
-  "`lean_book/06-groups/03-integers-example.md`, the Mathlib equivalent
+  "`lean_book/07-groups/03-integers-example.md`, the Mathlib equivalent
   box").
 - **What's wrong**: a short quote of the problematic text, or the exact
   error message if it's a build/tooling issue.
@@ -48,18 +48,16 @@ splitting into two plain sentences.
 
 New or rewritten sections follow a derivation-first exposition, in the
 tradition of Arnold's and Gelfand's teaching rather than Bourbaki's: a
-definition or theorem is not stated and then explained, it is *earned*.
+definition or theorem is *earned*.
 Pose the question or concrete problem that forces it, walk the chain of
 reasoning that discovers it, and only then name and formalize the result
-— proof and motivation are one continuous argument, not two separated
-blocks. There is no fixed Definition→Theorem→Proof→Remark skeleton to
+— proof and motivation are one continuous argument. There is no fixed Definition→Theorem→Proof→Remark skeleton to
 fill in; structure follows the logic of the argument. (Chapters 8 and 10
 are a deliberate exception: their theorem sections stand as a
 reference-style catalog, so each entry does follow a fixed six-box
 sequence, Claim → Finding the proof → Lean code → Mathematical reading →
 Programmer note → Mathlib equivalent, chosen because a reader
-consulting them wants a predictable layout, not fresh structure per
-theorem.) Do not open a
+consulting them wants a predictable layout.) Do not open a
 section or chapter with a narrative "story" framing or a "Picture it like
 this" analogy box in place of doing the derivation. Every type-theory or
 category-theory term still gets a formal definition (ideally with a
@@ -68,7 +66,7 @@ and a worked example. Per Arnold's own account of this tradition ("On
 Teaching Mathematics," 1997) and the practice of the Gelfand seminar, the
 forcing question or problem that opens a section should itself be
 **concrete first**: a specific number, a specific small case, a specific
-broken computation, not the general phenomenon stated abstractly. Derive
+broken computation. Derive
 the general definition or theorem *from* that concrete case, rather than
 motivating it by structural analogy alone — "abstract or structural
 motivation is preferred over a contrived real-world scenario" no longer
@@ -76,12 +74,28 @@ describes this book's convention; concrete motivation, worked in full
 before any generalization, does. A contrived scenario is still to be
 avoided, but a genuine concrete instance of the actual mathematical
 object under discussion (a specific ring, a specific group element, a
-specific failing proof attempt) is not contrived, it is the example the
-definition is trying to capture. Exercises favor fewer, escalating,
+specific failing proof attempt) is the genuine example the definition is trying to capture. Exercises favor fewer, escalating,
 proof-heavy problems ("Prove that...", "Show that...") over repetitive
 drills, and should not give away their own answer inline — solutions
 belong in `lean_book/15-appendix-solutions/`.
 This convention now applies to the whole book, from Chapter 0 onward.
+
+### Citation convention
+
+Every formal definition, theorem, and named concept must carry an inline
+citation `[Author Year, p.XX]` immediately after the Definition block or
+theorem statement. Citations must NOT appear only in the "Sources, quoted"
+box at the bottom — the inline citation is the primary location; the
+Sources box is a recap. Bolded terms always get a `**Definition.**` block.
+See any chapter in Part II (Chapters 7-12) for the pattern.
+
+### Side-by-side proof comparisons
+
+When adding a new worked proof, consider whether a side-by-side comparison
+block (informal proof vs Lean formalization) would help the reader bridge
+the gap. These blocks are placed after the worked example and show:
+1. The informal proof in 1-3 sentences
+2. The Lean code with inline tactic-level comments
 
 ## Lean code
 

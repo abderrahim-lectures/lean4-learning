@@ -11,8 +11,9 @@ which subsets of a module inherit its structure. This is the module
 analogue of a subgroup, a subset closed under the same operations the
 whole module is built from.
 
-A **submodule** of $M$ is a subset closed under $+$, containing $0$, and
-closed under the scalar action. In Lean, "a subset closed under some
+**Definition** (Submodule). A submodule of $M$ is a subset closed under
+$+$, containing $0$, and closed under the scalar action
+([DummitFoote2003], §10.1, p. 337). In Lean, "a subset closed under some
 operations" is naturally a `structure` bundling a *predicate* on `M`
 together with closure proofs. This is the same "data + proofs" idea as
 `Group`, just with the "data" being a property instead of an operation.
