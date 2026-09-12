@@ -1,6 +1,6 @@
 # Comprehensive Term, Citation, and Prose Audit
 
-**Book:** Lean for Working Algebraists (v2.0.8)
+**Book:** Lean for Working Algebraists (v2.0.9)
 **Date:** 2026-09-11
 **Branch:** `skills/comprehensive-term-audit`
 **Scope:** All 15 chapters + appendix, 15,880 lines of Markdown
