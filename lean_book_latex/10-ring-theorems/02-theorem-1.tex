@@ -2,7 +2,7 @@
 
 \textbf{Claim.} \texttt{Rg.mul a Rg.addGrp.id = Rg.addGrp.id}, i.e.~\(a \cdot 0 = 0\).
 
-\textbf{Finding the proof.} In ordinary notation, the standard trick is as follows. It is worth memorizing as a pattern applicable to any additive-identity argument: start from \(0 = 0 + 0\), multiply through, and cancel.
+\textbf{Finding the proof.} In ordinary notation, the standard trick is as follows. Memorize this as a pattern applicable to any additive-identity argument: start from \(0 = 0 + 0\), multiply through, and cancel.
 
 \[
 a \cdot 0 \overset{?}{=} 0
@@ -47,7 +47,7 @@ If progress is lost partway through, the recovery move is always the same, trans
 
 This is the absorbing law \(a\cdot 0 = 0\), which is \emph{not} an axiom but a consequence of distributivity plus additive cancellation. Writing \(x = a\cdot 0\): \[
 x = a\cdot 0 = a\cdot(0+0) = a\cdot 0 + a\cdot 0 = x + x,
-\] using \(0 = 0+0\) and \texttt{left\_\allowbreak{}distrib}; adding \(-x\) and cancelling gives \(0 = x\). Conceptually this says the map \(x \mapsto a\cdot x\) is a group homomorphism of \((R,+)\), and homomorphisms send the identity to the identity. \(0\) absorbs because multiplication is additive in each argument.
+\] using \(0 = 0+0\) and \texttt{left\_\allowbreak{}distrib}; adding \(-x\) and cancelling gives \(0 = x\). Conceptually this says the map \(x \mapsto a\cdot x\) is a group homomorphism of \((R,+)\), and homomorphisms send the identity to the identity. \(0\) absorbs because multiplication distributes over addition in each argument.
 
 \end{mathreading}
 

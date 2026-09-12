@@ -106,7 +106,7 @@ def identity {(*$\alpha$*) : Type} (x : (*$\alpha$*)) : (*$\alpha$*) := x
 \item
   A \textbf{fourth}, rarer kind, \textbf{strict implicit}, written \texttt{\{\{x : α\}\}} (Lean also accepts a Unicode spelling of the same double-brace pair, seen occasionally in Mathlib source), behaves like \texttt{\{\}} except that Lean defers solving it until an \emph{explicit} argument after it is actually supplied. It is a Mathlib idiom for keeping partially applied functions well behaved, and does not appear anywhere in this book's own code. It is named here only so it is recognizable, not mysterious, if encountered while reading Mathlib source directly.
 \item
-  \texttt{def} is not the only way to introduce a definition either. \texttt{abbrev} and \texttt{opaque} exist alongside it, and differ not in what they let you write, but in how transparent the result is to the own equality checker of Lean, whether \texttt{unfold}ing it is ever needed, or ever even possible. \hyperref[sec:05-tactics:04-more-tactics:1]{Chapter 5}, once \texttt{unfold} itself is on the table, is where this is worth actually seeing rather than taking on faith.
+  \texttt{def} is not the only way to introduce a definition either. \texttt{abbrev} and \texttt{opaque} exist alongside it, and differ not in what they let you write, but in how transparent the result is to Lean's own equality checker, whether \texttt{unfold}ing it is ever needed, or ever even possible. \hyperref[sec:05-tactics:04-more-tactics:1]{Chapter 5}, once \texttt{unfold} itself is on the table, is where this is worth actually seeing rather than taking on faith.
 \end{itemize}
 
 None of this needs remembering yet. Only \texttt{()} and \texttt{\{\}} are needed for everything through the end of this chapter.

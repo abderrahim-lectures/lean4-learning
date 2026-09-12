@@ -13,7 +13,7 @@
 \end{learningobjectives}
 
 
-\section{What Lean demands of a proof}\label{sec:01-basics:00-index:2}
+\section*{What Lean demands of a proof}\label{sec:01-basics:00-index:2}
 
 A mathematician writes ``the square root of 2 is irrational'' and sketches a few sentences. Lean demands a term whose type \emph{is} the statement, with every gap filled. Here is the contrast on three statements, from trivial to open, showing what ``formalized'' means before any machinery is learned.
 
@@ -64,7 +64,7 @@ A single word in the informal version (``symmetry'') becomes a term-level method
 
 These three examples --- closed-but-trivial, closed-but-needing-structure, and open --- set the range. Every proof in this book lives somewhere on that line. The rest of the chapters build the vocabulary to move from the first kind to the second, and to recognize the third for what it is.
 
-\section{What forces the chapter}\label{sec:01-basics:00-index:3}
+\section*{What forces the chapter}\label{sec:01-basics:00-index:3}
 
 Ordinary languages catch a type error, if at all, at the moment the bad line runs, possibly months after it shipped, on a rarely-hit branch. What would it take to catch it earlier, for every possible input at once, rather than one run at a time? Reading the expression once and deciding ``what kind of thing is this?'' before ever running it, exactly what \texttt{\#check} does and \texttt{\#eval} does not. \hyperref[sec:01-basics:01-everything-has-a-type:1]{Section 1} draws that line, \texttt{\#check} a static guarantee, \texttt{\#eval} a one-off fact, the foundation everything else in this book stands on.
 

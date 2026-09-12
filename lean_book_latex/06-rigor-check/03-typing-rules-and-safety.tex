@@ -101,7 +101,7 @@ identity("hello")  # T := str
 
 Without \texttt{TypeVar}, the only option would be writing \texttt{identity\_\allowbreak{}int(x: int) -\allowbreak{}> int} and \texttt{identity\_\allowbreak{}str(x: str) -\allowbreak{}> str} separately, exactly the one-arrow-type-per-base-type wall of STLC. \texttt{TypeVar} is the escape hatch in Python typing for this specific gap, and it is a useful anchor. It is a much lighter version of the same extra generality that \texttt{identity \{α : Type\} (x : α) : α := x} uses in Lean, where \texttt{α} is filled in silently every call, the same way \texttt{mypy} silently solves \texttt{T := int} above.
 
-This is precisely the gap already closed by \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2}. \textbf{Dependent types} let a type itself depend on a term (here, the type argument \texttt{α}). That is exactly the extra generality \texttt{identity \{α : Type\} (x : α) : α := x} uses, and it is unavailable in STLC (or in the \texttt{TypeVar} of Python, which is real but considerably less powerful). It cannot let a \emph{return type} depend on an ordinary \emph{value} argument the way \texttt{Vec.replicate} does in Chapter 1, Section 3).
+This is precisely the gap already closed by \hyperref[sec:02-terminology-and-coc:02-pi-sigma-and-coc:1]{Chapter 2, Section 2}. \textbf{Dependent types} let a type itself depend on a term (here, the type argument \texttt{α}). That is exactly the extra generality \texttt{identity \{α : Type\} (x : α) : α := x} uses, and it is unavailable in STLC (or in the \texttt{TypeVar} of Python, which is real but considerably less powerful). It cannot let a \emph{return type} depend on an ordinary \emph{value} argument the way \texttt{Vec.replicate} does in Chapter 1, Section 3.
 
 \subsection{Universes, as a typing rule}\label{sec:06-rigor-check:03-typing-rules-and-safety:6}
 
@@ -164,11 +164,11 @@ Formal definitions and citations for this section, gathered here for reference (
 \item
   \textbf{Preservation (Theorem 9.3.9).} ``If \(\Gamma \vdash t : T\) and \(t \to t'\), then \(\Gamma \vdash t' : T\)'' (\cite{Pierce2002}, §9.3).
 \item
-  \textbf{Universe-formation rule.} The working statement used by this book, after the calculus of constructions (\cite{CoquandHuet1988}): \(\mathtt{Type}\,i : \mathtt{Type}\,(i+1)\), and a Π-type built from \(A : \mathtt{Sort}\,i\), \(B : \mathtt{Sort}\,j\) lands in \(\mathtt{Sort}\,(\mathrm{imax}(i,j))\). The \(j = 0\) clause is the impredicativity of \texttt{Prop}, which the calculus of constructions is characterized by and which \cite{TPIL4} §2.2 documents for Lean specifically.
+  \textbf{Universe-formation rule.} The working statement used by this book, after the calculus of constructions (\cite{CoquandHuet1988}, §1): \(\mathtt{Type}\,i : \mathtt{Type}\,(i+1)\), and a Π-type built from \(A : \mathtt{Sort}\,i\), \(B : \mathtt{Sort}\,j\) lands in \(\mathtt{Sort}\,(\mathrm{imax}(i,j))\). The \(j = 0\) clause is the impredicativity of \texttt{Prop}, which the calculus of constructions is characterized by and which \cite{TPIL4} §2.2 documents for Lean specifically.
 \item
   Pierce (\cite{Pierce2002}), Ch. 9 ``Typed Arithmetic Expressions'' §8.3 ``Safety = Progress + Preservation'' (Theorems 8.3.2/8.3.3, first proved there for a smaller language) and Ch. 10 ``Simply Typed Lambda-Calculus'' §9.2 ``The Typing Relation'' (the (T-Var)/(T-Abs)/(T-App) rules) and §9.3 ``Properties of Typing'' (Theorems 9.3.5/9.3.9, progress/preservation restated for STLC), verified verbatim. An earlier draft of this section cited Ch. 10--11; Ch. 12 ``Simple Extensions'' actually covers pairs/tuples/records/sums, unrelated to the content of this section.
 \item
-  Milner (\cite{Milner1978}) covers the theoretical background for why STLC alone cannot type polymorphic functions like \texttt{identity}.
+  Milner (\cite{Milner1978}, §2) covers the theoretical background for why STLC alone cannot type polymorphic functions like \texttt{identity}.
 \item
   Python \texttt{typing} module documentation and mypy documentation (\cite{PythonTyping}, \cite{MypyDocs}) cover the Python-side comparison used in the boxes of this section.
 \item

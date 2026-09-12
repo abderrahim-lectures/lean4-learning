@@ -66,7 +66,7 @@ Lean
 \(s, t : A \to V\) (``source, target'') & \texttt{exampleQuiver.source}, \texttt{exampleQuiver.target} \\
 \end{longtable}
 
-The two-element inductive type is the finite set \(A = \{\alpha,\beta\}\), and the \texttt{match}-defined \texttt{source}/\texttt{target} are the functions \(s, t . A \to
+The two-element inductive type is the finite set \(A = \{\alpha,\beta\}\), and the \texttt{match}-defined \texttt{source}/\texttt{target} are the functions \(s, t : A \to
 V\) given by their value tables: \texttt{source alpha = 0}, \texttt{target alpha = 1}, \texttt{source beta = 1}, \texttt{target beta = 2}. This is exactly the arrowheads and tails drawn above.
 
 \textbf{Mathlib equivalent.} The \href{https://loogle.lean-lang.org/?q=Quiver}{\texttt{Quiver}} class in Mathlib (the one the opening section of this chapter mentioned building from scratch instead of reusing) encodes arrows differently. Instead of one flat arrow type \texttt{A} plus separate \texttt{source}/\texttt{target : A → V} functions, it bakes the endpoints into the \emph{type} of the arrow directly, \texttt{Hom : V → V → Sort*} (with notation \texttt{a ⟶ b}). Thus an arrow from \texttt{i} to \texttt{j} simply \emph{has type} \texttt{i ⟶ j}.

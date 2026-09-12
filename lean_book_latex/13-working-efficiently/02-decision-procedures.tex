@@ -2,12 +2,12 @@
 
 The \texttt{exact?}/\texttt{apply?} tactics of Section 1 search the library for a proof that already exists somewhere, then report it for inspection. Some goals need something different. Their truth value is a computation to be run, not a fact to be looked up. This section covers that second, disjoint case, tactics that settle a goal by evaluating an algorithm rather than searching for or constructing a term by hand.
 
-For goals that are \emph{decidable} (\cite{Chlipala2013}, §6.2), where ``true or false'' can be settled by a terminating algorithm instead of a hand-built argument, Lean has tactics that just run that algorithm.
+For goals that are \emph{decidable} (\cite{Chlipala2013}, §6.2, p.~110), where ``true or false'' can be settled by a terminating algorithm instead of a hand-built argument, Lean has tactics that just run that algorithm.
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{\texttt{decide}} evaluates a \texttt{Decidable} proposition to \texttt{true}/\texttt{false} directly. It works well for small, closed (no free variables) propositions, for example \texttt{(7 : Nat) ∣ 21} or \texttt{¬ (3 = 5)}. \texttt{decide} should not be used on propositions with free variables or unbounded search, it can time out, or worse, produce a correct but useless proof term that reveals nothing.
+  \textbf{\texttt{decide}} evaluates a \texttt{Decidable} proposition to \texttt{true}/\texttt{false} directly. It works well for small, closed (no free variables) propositions, for example \texttt{(7 : Nat) ∣ 21} or \texttt{¬ (3 = 5)}. \texttt{decide} should not be used on propositions with free variables or unbounded search. It can time out, or worse, produce a correct but useless proof term that reveals nothing.
 \item
   \textbf{\texttt{omega}} is a decision procedure for \emph{linear} arithmetic over \texttt{Nat}/\texttt{Int} (goals built from \texttt{+}, subtraction, \texttt{≤}, \texttt{<}, \texttt{=}, and multiplication by \emph{literal constants} only; \texttt{omega} handles \texttt{3 * n} fine, but not \texttt{n * m} for two unknown variables \texttt{n}, \texttt{m}; multiplying two unknown variables together falls outside what it can decide). For a goal that is ``some linear inequality or equality about integers,'' \texttt{omega} should be reached for before deriving the fact by hand. This is exactly the kind of fact a decision procedure handles better than a custom \href{https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/}{\texttt{rw}} chain, and a hand-derived proof teaches nothing that the existence of \texttt{omega} does not already establish.
 \item

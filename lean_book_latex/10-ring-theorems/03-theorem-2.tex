@@ -50,7 +50,7 @@ theorem neg_one_mul (a : R) :
 
 The tactic steps in \texttt{neg\_\allowbreak{}one\_\allowbreak{}mul} mirror the paper derivation. The \texttt{apply left\_\allowbreak{}inverse\_\allowbreak{}unique} reduces the goal to showing \((-1)\cdot a + a = 0\). The \texttt{step} line rewrites the trailing \texttt{a} as \texttt{1 * a} (using \texttt{one\_\allowbreak{}mul}), so the goal becomes \((-1)\cdot a + 1\cdot a = 0\). Then \texttt{rw [← Rg.right\_\allowbreak{}distrib]} pulls the common factor \texttt{a} out, giving \(((-1)+1)\cdot a = 0\). The next \texttt{rw [Rg.addGrp.toGroup.inv\_\allowbreak{}left]} collapses \((-1)+1\) to \(0\), and \texttt{exact mul\_\allowbreak{}zero\_\allowbreak{}left Rg a} closes with \(0 \cdot a = 0\).
 
-Two features of the shape of the proof are worth noting, both discovered by actually compiling it.
+Two features of the proof's shape stand out, both discovered by actually compiling it.
 
 \begin{itemize}
 \tightlist
