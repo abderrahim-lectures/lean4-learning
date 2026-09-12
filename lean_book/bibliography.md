@@ -59,6 +59,8 @@ and are indexed separately in the
 
 <a id="maclane1998"></a>**[MacLane1998]** Saunders Mac Lane, *Categories for the Working Mathematician*, 2nd ed., Graduate Texts in Mathematics 5, Springer, 1998.
 
+<a id="coyle2009"></a>**[Coyle2009]** Daniel Coyle, *[The Talent Code: Unlocking the Secret of Why Some People Are Great and Others Aren't](https://danielcoyle.com/books/the-talent-code/)*, Bantam Books, 2009.
+
 <a id="martinlof1984"></a>**[MartinLof1984]** Per Martin-Löf, *Intuitionistic Type Theory*, Bibliopolis, 1984.
 
 <a id="milner1978"></a>**[Milner1978]** Robin Milner, "[A Theory of Type Polymorphism in Programming](https://doi.org/10.1016/0022-0000(78)90014-4)," *Journal of Computer and System Sciences*, 17(3), 1978, 348–375.

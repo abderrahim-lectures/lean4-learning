@@ -216,11 +216,12 @@ theorem add4_reorder (a b c d : Int) : a + b + (c + d) = a + c + (b + d) := by
   rw [← Int.add_assoc a c (b + d)]
 
 -- The ring axioms for Mat2 are the deep practice moment of this chapter.
--- Like Clarissa at her clarinet, you're reaching to the edge of your ability.
--- The first axiom, mul_assoc, is the hardest — it teaches you the pattern.
--- The remaining axioms are repetitions: you've seen the struggle, now you
--- build the stroke. Each entry equation is a mistake you feel, a reach you
--- make, a skill you build. This is not luxury — it's craft.
+-- Like Clarissa at her clarinet [Coyle2009, Ch. 2], you're reaching to the
+-- edge of your ability. The first axiom, mul_assoc, is the hardest — it
+-- teaches you the pattern. The remaining axioms are repetitions: you've
+-- seen the struggle, now you build the stroke. Each entry equation is a
+-- mistake you feel, a reach you make, a skill you build. This is not
+-- luxury — it's craft.
 def mat2Ring : Ring Mat2 where
   addGrp := mat2CommGroup
   mul := Mat2.mul
