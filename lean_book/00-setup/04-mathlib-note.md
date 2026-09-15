@@ -53,7 +53,7 @@ reader to see that machinery on a first encounter.
 Without that pin, on a machine with several Lean projects at once, a
 later toolchain update to one project could silently change how the code
 of another project elaborates, or stop it compiling at all. Pinning
-`lean_project/lean-toolchain` to `leanprover/lean4:v4.33.1` is what keeps
+`lean_project/lean-toolchain` to `leanprover/lean4:v4.34.0` is what keeps
 every code block in this book reproducible regardless of what else is
 installed system-wide.
 

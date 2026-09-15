@@ -96,20 +96,20 @@ Conceptually this says the map $x \mapsto a\cdot x$ is a group homomorphism
 of $(R,+)$, and homomorphisms send the identity to the identity. $0$ absorbs
 because multiplication distributes over addition in each argument.
 
-**Programmer note (Python).** `mul_zero` is the kind of fact a Python codebase would not test — `x * 0` is `0`.
-It genuinely is, for `int`. It is not, for every numeric type
-Python ships.
+**Programmer note (`Float`).** `mul_zero` is the kind of fact code using
+floating-point numbers would not test. `x * 0` is `0` for `Int`, but
+`Float` multiplication by zero can produce `NaN`.
 
-```python
-float('nan') * 0.0   # nan, not 0.0
-float('inf') * 0.0   # nan, not 0.0
+```lean
+#eval Float.nan * 0.0   -- NaN
+#eval Float.inf * 0.0   -- NaN
 ```
 
-`nan` and `inf` are ordinary `float` values, reachable from perfectly
-normal-looking arithmetic (`1.0 / 0.0` under the right settings, or the
-result of an earlier overflow), and once one of them appears, "multiply
-anything by zero and get zero" quietly stops holding, with no exception
-raised anywhere to flag it. The theorem `mul_zero` proved above carries
+`Float.nan` and `Float.inf` are ordinary `Float` values, reachable from
+perfectly normal-looking arithmetic (`0.0 / 0.0`, or the result of an
+earlier overflow), and once one of them appears, "multiply anything by
+zero and get zero" quietly stops holding, with no exception raised
+anywhere to flag it. The theorem `mul_zero` proved above carries
 no such asterisk, because it is proved from the `Ring` axioms of
 Chapter 9 alone, and any `R` that can be given a genuine `Ring R` value
 must, by that same proof, actually satisfy it, no matter what `R` turns
