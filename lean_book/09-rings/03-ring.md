@@ -71,27 +71,29 @@ $\mathbf{Ring}\to\mathbf{Ab}$ sending a ring to its additive group.
 > *Algebra: Chapter 1* by Aluffi (the latter using the same categorical
 > framing this book uses) are standard references.
 
-**Programmer note (Python).** `mul_assoc` and `left_distrib`/
+**Programmer note (`Float`).** `mul_assoc` and `left_distrib`/
 `right_distrib` are not free assumptions here. Whoever builds a
 `Ring R` must supply an actual proof of each, for the specific `mul`
-and `addGrp.op` chosen. The built-in `float` of Python looks like it forms
+and `addGrp.op` chosen. The built-in `Float` of Lean looks like it forms
 a ring, `+`, `*`, `0.0`, `1.0` are all present, but the axioms above
 simply do not hold for it.
 
-```python
-a, b, c = 0.1, 0.2, 0.3
-print((a + b) + c == a + (b + c))   # False
+```lean
+#eval let a : Float := 0.1
+      let b : Float := 0.2
+      let c : Float := 0.3
+      (a + b) + c == a + (b + c)   -- false
 ```
 
-`(a + b) + c` and `a + (b + c)` are two different `float` values,
+`(a + b) + c` and `a + (b + c)` are two different `Float` values,
 differing in the last bit, because floating-point rounding depends on
 the order additions happen in. Associativity, the very first axiom
-listed above, silently fails, and nothing in Python raises an error
-about it, since `float` was never required to prove any such thing
-before being handed the `+` operator. Code that assumes
+listed above, silently fails, and nothing raises an error about it,
+since `Float` was never required to prove any such thing before being
+handed the `+` operator. Code that assumes
 `(a + b) + c == a + (b + c)`, to reorder a sum for performance or
-parallelize it across workers, is trusting a law that the numeric types
-of Python do not actually satisfy. `mul_assoc` above rules this
+parallelize it across workers, is trusting a law that `Float` does not
+actually satisfy. `mul_assoc` above rules this
 out completely for anything built as a `Ring`. If `R` were instantiated
 with a type where associativity genuinely failed, `mul_assoc` could not
 be proved, and no `Ring R` value could be constructed at all.

@@ -29,7 +29,7 @@ elan as playing the same role for Lean.)
    configured with:
 
    ```text
-   lean-toolchain: leanprover/lean4:v4.33.1
+   lean-toolchain: leanprover/lean4:v4.34.0
    ```
 
    Running `lake build` inside `lean_project` causes elan to automatically

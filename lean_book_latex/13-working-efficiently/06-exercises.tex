@@ -1,0 +1,63 @@
+\section{Exercises}\label{sec:13-working-efficiently:06-exercises:1}
+
+\textbf{Key points.} The tactics in this chapter are force multipliers. \texttt{exact?} and \texttt{apply?} search the library for you. \texttt{decide}, \texttt{omega}, and \texttt{norm\_\allowbreak{}num} decide arithmetic goals automatically. \texttt{simp} simplifies expressions but can hide the interesting step --- use it wisely. Term mode and tactic mode are two views of the same proof; knowing when to switch saves time.
+
+\textbf{Deep practice.} These exercises are designed to push you to the edge of your ability. Start with the search tactics, then move to the decision procedures. If you're making no mistakes, you're not learning; if you're making more than 20\% mistakes, reread the relevant section first.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Search tactics.} In a Lean file, write:
+
+\begin{lstlisting}
+#check @Nat.add_comm
+#check @Nat.mul_comm
+\end{lstlisting}
+
+  Now suppose you need to prove \texttt{a + b + c = c + b + a} for \texttt{a b c : Nat}. Use \texttt{exact?} or \texttt{apply?} to find the right lemma. Then prove it in term mode using the lemma you found.
+\item
+  \textbf{\texttt{decide} vs \texttt{omega}.} Prove the following three goals, choosing the right tactic for each:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{2 + 2 = 4 : Nat}
+  \item
+    \texttt{∀ n : Nat, n + 0 = n}
+  \item
+    \texttt{∀ n : Nat, n < n + 1} Explain why \texttt{decide} works for the first but not the second, and why \texttt{omega} works for the second but not the third.
+  \end{itemize}
+\item
+  \textbf{\texttt{simp} chains.} Write a proof of \texttt{(a + b) * (c + d) = a * c + a * d + b * c + b * d} for \texttt{a b c d : Nat} using only \texttt{simp} with appropriate lemmas. Then write the same proof using \texttt{ring}. Which is shorter? Which reveals more about the structure of the proof?
+\item
+  \textbf{Term vs tactic mode.} Write the proof of \texttt{Nat.add\_\allowbreak{}comm} (that \texttt{a + b = b + a} for all natural numbers) in three ways:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Term mode using \texttt{Nat.rec}
+  \item
+    Tactic mode using \texttt{induction a}
+  \item
+    Term mode using \texttt{omega} Compare the three. Which is most readable? Which is most general?
+  \end{itemize}
+\item
+  \textbf{Structuring lemmas.} Suppose you have proved:
+
+\begin{lstlisting}
+theorem add_zero' (a : Nat) : a + 0 = a := Nat.add_zero a
+theorem zero_add' (a : Nat) : 0 + a = a := Nat.zero_add a
+\end{lstlisting}
+
+  Now prove \texttt{a + 0 + 0 = a} using these lemmas. Then prove \texttt{0 + a + 0 = a}. Which lemmas did you need? Write a general lemma \texttt{add\_\allowbreak{}zeros (a : Nat) : a + 0 + 0 = a} that works for any \texttt{a}.
+\item
+  \textbf{Integration.} This exercise combines everything. Prove:
+
+\begin{lstlisting}
+theorem mul_add_eq (a b c : Nat) : a * (b + c) = a * b + a * c
+\end{lstlisting}
+
+  using at least three different approaches (e.g., \texttt{ring}, \texttt{simp} with \texttt{Int.mul\_\allowbreak{}add}, manual \texttt{rw}). Time yourself on each approach. Which was fastest to write? Which was most educational?
+\end{enumerate}
+
+Solutions, Appendix, Chapter 13.
