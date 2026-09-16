@@ -185,7 +185,11 @@ theorem add4_reorder (a b c d : Int) : a + b + (c + d) = a + c + (b + d) := by
   rw [show b + (c + d) = c + (b + d) from by
     rw [(*$\leftarrow$*) Int.add_assoc, Int.add_comm b c, Int.add_assoc]]
   rw [(*$\leftarrow$*) Int.add_assoc a c (b + d)]
+\end{lstlisting}
 
+The ring axioms for \texttt{Mat2} are the deep practice moment of this chapter. Like Clarissa at her clarinet {[}Coyle2009, Ch. 2{]}, the proof below reaches to the edge of what has been built so far. The first axiom, \texttt{mul\_\allowbreak{}assoc}, is the hardest: it establishes the pattern. The remaining axioms repeat that pattern against the same four cross terms, entry by entry.
+
+\begin{lstlisting}
 def mat2Ring : Ring Mat2 where
   addGrp := mat2CommGroup
   mul := Mat2.mul
@@ -279,7 +283,7 @@ def mat2Ring : Ring Mat2 where
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Every proof obligation here is spelled out explicitly, with no automation}, matching the rest of the book. This book never imports Mathlib, so its \texttt{ring} tactic, a decision procedure for commutative-ring identities, is not actually available. An earlier draft of this section reached for it by mistake. Each entry equation is instead unfolded by hand through \texttt{Int.add\_\allowbreak{}mul}/\texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.mul\_\allowbreak{}assoc} down to a sum of the same four cross terms in a different order, and \texttt{add4\_\allowbreak{}reorder} (proved once, above, and reused twelve times) supplies exactly the regrouping needed to match them. The \texttt{Ring Mat2} bundle itself is still noncommutative; nothing here decides that automatically. \texttt{mul := Mat2.mul} is supplied directly, and the \texttt{mul\_\allowbreak{}comm}-shaped fact is simply absent from the fields of \texttt{Ring}, exactly as the exercise on \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib} in this chapter anticipated.
+  \textbf{Every proof obligation here is spelled out explicitly, with no automation}, matching the rest of the book. This book never imports Mathlib, so its \texttt{ring} tactic, a decision procedure for commutative-ring identities, is not actually available. Each entry equation is instead unfolded by hand through \texttt{Int.add\_\allowbreak{}mul}/\texttt{Int.mul\_\allowbreak{}add}/\texttt{Int.mul\_\allowbreak{}assoc} down to a sum of the same four cross terms in a different order, and \texttt{add4\_\allowbreak{}reorder} (proved once, above, and reused twelve times) supplies exactly the regrouping needed to match them. This is the deep practice of the chapter: \texttt{mul\_\allowbreak{}assoc} is the hardest instance and teaches the pattern; \texttt{one\_\allowbreak{}mul}, \texttt{mul\_\allowbreak{}one}, \texttt{left\_\allowbreak{}distrib}, and \texttt{right\_\allowbreak{}distrib} are the same reach repeated against the same four cross terms. The \texttt{Ring Mat2} bundle itself is still noncommutative; nothing here decides that automatically. \texttt{mul := Mat2.mul} is supplied directly, and the \texttt{mul\_\allowbreak{}comm}-shaped fact is simply absent from the fields of \texttt{Ring}, exactly as the exercise on \texttt{left\_\allowbreak{}distrib}/\texttt{right\_\allowbreak{}distrib} in this chapter anticipated.
 \item
   \textbf{This is the general pattern for ``ring of \(n\times n\) matrices over a commutative ring \(S\)'':} the entries live in \(S\). Every \texttt{Ring Mat2} proof obligation reduces to a polynomial identity purely in \(S\), by applying distributivity and associativity in \(S\) a bounded number of times depending on \(n\). And \(\text{Mat}_n(S)\) itself is noncommutative as soon as \(n \geq 2\), regardless of whether \(S\) is commutative. Matrix rings are the standard first example that any general ring theory, the theorems of Chapter 10, the \texttt{Ring} hierarchy of Mathlib, has to handle \emph{without} assuming commutativity, which is exactly why \texttt{Ring} does not bake in \texttt{mul\_\allowbreak{}comm}.
 \end{enumerate}
@@ -292,7 +296,7 @@ def mat2Ring : Ring Mat2 where
 
 \end{mathreading}
 
-\textbf{Mathlib equivalent, continued.} Where the book spends most of this section deriving \texttt{mul\_\allowbreak{}assoc} for \texttt{Mat2} by hand (the \texttt{add4\_\allowbreak{}reorder} helper, reused twelve times across all five axioms), Mathlib already proves associativity of matrix multiplication generically. It is simply \texttt{mul\_\allowbreak{}assoc} again, the same lemma name as every other ring in the Mathlib boxes of this chapter.
+\textbf{Mathlib equivalent, continued.} Where the book spends most of this section deriving all five ring axioms for \texttt{Mat2} by hand (the \texttt{add4\_\allowbreak{}reorder} helper, reused twelve times across those axioms), Mathlib already proves associativity of matrix multiplication generically. It is simply \texttt{mul\_\allowbreak{}assoc} again, the same lemma name as every other ring in the Mathlib boxes of this chapter.
 
 \begin{lstlisting}
 example (A B C : Matrix (Fin 2) (Fin 2) Int) : (A * B) * C = A * (B * C) :=

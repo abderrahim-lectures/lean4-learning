@@ -18,4 +18,18 @@
   Define \texttt{structure ColoredRectangle extends Rectangle where color : String}, then a value \texttt{redSquare : ColoredRectangle} with \texttt{width := 5}, \texttt{height := 5}, \texttt{color := "red"}. Confirm \texttt{redSquare.toRectangle} has type \texttt{Rectangle}, and that \texttt{area redSquare.toRectangle} computes \texttt{25} using the \texttt{area} function from Exercise 4 unchanged, with no \texttt{ColoredRectangle}-specific code written. In a sentence or two, explain why this is exactly the ``forgetful functor'' pattern from the Mathematical reading box of this section, not a coincidence of naming.
 \end{enumerate}
 
+\textbf{Deep practice.} The following exercises push to the edge of your ability. They build on each other --- do them in order. If you're making no mistakes, you're not learning; if you're making more than 20\% mistakes, reread the section first.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Define \texttt{structure Vector (n : Nat) (α : Type)} with a field \texttt{data : Fin n → α}. Write \texttt{def v3 : Vector 3 Nat} with values \texttt{[1, 2, 3]} using \texttt{Fin.mk}. Then write \texttt{def head \{n : Nat\} \{α : Type\} (v : Vector (n + 1) α) : α} that returns the first element. What happens if you try to write \texttt{head} for \texttt{Vector 0 α}? (This is the dependent-type constraint in action.)
+\item
+  Define \texttt{structure Monoid where} with fields \texttt{α : Type}, \texttt{op : α → α → α}, \texttt{id : α}. Then define \texttt{def natAddMonoid : Monoid} with \texttt{α := Nat}, \texttt{op := Nat.add}, \texttt{id := 0}. Write \texttt{def fold \{m : Monoid\} : List m.α → m.α} that folds a list using \texttt{m.op} and \texttt{m.id}. Confirm \texttt{\#eval fold natAddMonoid [1, 2, 3]} reports \texttt{6}.
+\item
+  Define \texttt{structure Group where} with fields \texttt{α : Type}, \texttt{op : α → α → α}, \texttt{id : α}, \texttt{inv : α → α}. Then define \texttt{structure CommGroup extends Group} with an additional field \texttt{comm : ∀ a b : G.α, G.op a b = G.op b a}. Build \texttt{natAddCommGroup : CommGroup} and confirm \texttt{\#eval natAddCommGroup.comm 2 3} proves \texttt{2 + 3 = 3 + 2}. (This is exactly the pattern Chapter 7 uses.)
+\end{enumerate}
+
 Solutions, \hyperref[sec:15-appendix-solutions:03-chapter-3:1]{Appendix, Chapter 3}.
