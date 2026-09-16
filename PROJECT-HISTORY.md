@@ -196,6 +196,7 @@ As of this writing: **148 issues** (147 closed, 1 open) and
 | [#248](https://github.com/abderrahim-lectures/lean4-learning/pull/248) | v1.6.2: bibliography citations for Chapter 4, Ring, Module, and LinearMap |
 | [#261](https://github.com/abderrahim-lectures/lean4-learning/pull/261) | v2.0.x: rewrite the book in derivation-first prose, add the proof strategy guide (v2.0.5 release) |
 | [#266](https://github.com/abderrahim-lectures/lean4-learning/pull/266) | v2.0.9: deep word-by-word review, talent code framework, LaTeX warning fixes |
+| [#269](https://github.com/abderrahim-lectures/lean4-learning/pull/269) | v2.0.10: v4.34.0 docs bump, Lean Float examples, Mat2 ring axiom fix |
 
 Every PR above is linked, via GitHub's "Closes #N"/"Fixes #N" mechanism,
 to the specific issue(s) it addresses — see each PR's page for the exact
